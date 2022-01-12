@@ -1,0 +1,1675 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.fact.api.model.DAO">
+    <insert id="insertActuatorGreenhouseComplexGimje" parameterType="kr.or.fact.api.model.DTO.ActuatorGreenhouseComplexGimjeVO">
+        INSERT INTO "ACTUATOR_GREENHOUSE_COMPLEX_G"(
+            idx_actuator_gh_complex_g,
+            daqtime,
+            roofwindow_l1,
+            roofwindow_l2,
+            roofwindow_l3,
+            roofwindow_r1,
+            roofwindow_r2,
+            roofwindow_r3,
+            outcurtain,
+            incurtain,
+            idx_user
+        )
+        VALUES (
+                   ACTUATOR_GH_COMPLEX_G_SEQ.NEXTVAL,
+                   TO_DATE(#{daqtime},'YYYY-MM-DD hh24:mi:ss'),
+                   #{roofwindow_l1},
+                   #{roofwindow_l2},
+                   #{roofwindow_l3},
+                   #{roofwindow_r1},
+                   #{roofwindow_r2},
+                   #{roofwindow_r3},
+                   #{outcurtain},
+                   #{incurtain},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+               )
+
+    </insert>
+    <insert id="insertActuatorGreenhouseComplexSangju" parameterType="kr.or.fact.api.model.DTO.ActuatorGreenhouseComplexSangjuVO">
+        INSERT INTO "ACTUATOR_GREENHOUSE_COMPLEX_S"(
+            idx_actuator_gh_complex_s,
+            daqtime,
+            roofwindow_l,
+            roofwindow_r,
+            outcurtain,
+            incurtain,
+            idx_user
+
+        )
+        VALUES (
+                   ACTUATOR_GH_COMPLEX_S_SEQ.NEXTVAL,
+                   TO_DATE(#{daqtime},'YYYY-MM-DD hh24:mi:ss'),
+                   #{roofwindow_l},
+                   #{roofwindow_r},
+                   #{outcurtain},
+                   #{incurtain},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+               )
+    </insert>
+    <insert id="insertActuatorGreenhouseGlass" parameterType="kr.or.fact.api.model.DTO.ActuatorGreenhouseGlassVO">
+        INSERT INTO "ACTUATOR_GREENHOUSE_GLASS"(
+            idx_actuator_gh_glass,
+            daqtime,
+            roofwindow_l,
+            roofwindow_r,
+            outcurtain,
+            incurtain,
+            idx_user
+        )
+        VALUES (
+                   ACTUATOR_GH_GLASS_SEQ.NEXTVAL,
+                   TO_DATE(#{daqtime},'YYYY-MM-DD hh24:mi:ss'),
+                   #{roofwindow_l},
+                   #{roofwindow_r},
+                   #{outcurtain},
+                   #{incurtain},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+               )
+    </insert>
+    <insert id="insertActuatorGreenhouseSingleGimje" parameterType="kr.or.fact.api.model.DTO.ActuatorGreenhouseSingleGimjeVO">
+        INSERT INTO "ACTUATOR_GREENHOUSE_SINGLE_G"(
+            idx_actuator_gh_single_g,
+            daqtime,
+            outsidewindow_l,
+            outsidewindow_r,
+            insidewindow_l,
+            insidewindow_r,
+            curtain_l,
+            curtain_r,
+            sidescreen_l,
+            sidescreen_r,
+            idx_user
+        )
+        VALUES (
+                   ACTUATOR_GH_SINGLE_G_SEQ.NEXTVAL,
+                   TO_DATE(#{daqtime},'YYYY-MM-DD hh24:mi:ss'),
+                   #{outsidewindow_r},
+                   #{outsidewindow_l},
+                   #{insidewindow_l},
+                   #{insidewindow_r},
+                   #{curtain_l},
+                   #{curtain_r},
+                   #{sidescreen_l},
+                   #{sidescreen_r},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+               )
+    </insert>
+    <insert id="insertActuatorGreenhouseSingleSangju" parameterType="kr.or.fact.api.model.DTO.ActuatorGreenhouseSingleSangjuVO">
+        INSERT INTO "ACTUATOR_GREENHOUSE_SINGLE_S"(
+            idx_actuator_gh_single_s,
+            daqtime,
+            roofwindow_l,
+            roofwindow_r,
+            outcurtain,
+            incurtain,
+            idx_user
+
+        )
+        VALUES (
+                   ACTUATOR_GH_SINGLE_S_SEQ.NEXTVAL,
+                   TO_DATE(#{daqtime},'YYYY-MM-DD hh24:mi:ss'),
+                   #{roofwindow_l},
+                   #{roofwindow_r},
+                   #{outcurtain},
+                   #{incurtain},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+               )
+    </insert>
+    <insert id="insertEnvGreenhouseComplex" parameterType="kr.or.fact.api.model.DTO.EnvGreenhouseComplexVO">
+        INSERT INTO "ENV_GREENHOUSE_COMPLEX"(
+            idx_env_gh_complex,
+            daqtime,
+            temp,
+            hum,
+            light,
+            co2,
+            soiltension,
+            soilph,
+            soilmoisture,
+            soilec,
+            soiltemp,
+            idx_user
+
+        )
+        VALUES (
+                   ENV_GH_COMPLEX_SEQ.NEXTVAL,
+                   TO_DATE(#{daqtime},'YYYY-MM-DD hh24:mi:ss'),
+                   #{temp},
+                   #{hum},
+                   #{light},
+                   #{co2},
+                   #{soiltension},
+                   #{soilph},
+                   #{soilmoisture},
+                   #{soilec},
+                   #{soiltemp},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+               )
+    </insert>
+    <insert id="insertEnvGreenhouseGlass" parameterType="kr.or.fact.api.model.DTO.EnvGreenhouseGlassVO">
+        INSERT INTO "ENV_GREENHOUSE_GLASS"(
+            idx_env_gh_glass,
+            daqtime,
+            temp,
+            hum,
+            light,
+            co2,
+            soiltension,
+            soilph,
+            soilmoisture,
+            soilec,
+            soiltemp,
+            idx_user
+
+        )
+        VALUES (
+                   ENV_GH_GLASS_SEQ.NEXTVAL,
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{temp},
+                   #{hum},
+                   #{light},
+                   #{co2},
+                   #{soiltension},
+                   #{soilph},
+                   #{soilmoisture},
+                   #{soilec},
+                   #{soiltemp},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+               )
+    </insert>
+    <insert id="insertEnvWeather" parameterType="kr.or.fact.api.model.DTO.EnvWeatherVO">
+        INSERT INTO "ENV_WEATHER"(
+            idx_env_weather,
+            daqtime,
+            temp,
+            hum,
+            insolation,
+            winddirection,
+            windspeed,
+            raindetect,
+            idx_user
+
+        )
+        VALUES (
+                   ENV_WEATHER_SEQ.NEXTVAL,
+                   TO_DATE(#{daqtime},'YYYY-MM-DD hh24:mi:ss'),
+                   #{temp},
+                   #{hum},
+                   #{insolation},
+                   #{winddirection},
+                   #{windspeed},
+                   #{raindetect},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+               )
+
+    </insert>
+    <insert id="insertNowGreenhouseComplexGimje" parameterType="kr.or.fact.api.model.DTO.NowGreenhouseComplexGimjeVO">
+        INSERT INTO "NOW_GREENHOUSE_COMPLEX_G"(
+            idx_now_gh_complex_g,
+            temp,
+            hum,
+            light,
+            co2,
+            soiltension,
+            soilph,
+            soilmoisture,
+            soilec,
+            soiltemp,
+            pos_topwindow_l1,
+            pos_topwindow_l2,
+            pos_topwindow_l3,
+            pos_topwindow_r1,
+            pos_topwindow_r2,
+            pos_topwindow_r3,
+            pos_outcurtain,
+            pos_incurtain,
+            idx_user
+
+        )
+        VALUES (
+                   NOW_GH_COMPLEX_G_SEQ.NEXTVAL,
+                   #{temp},
+                   #{hum},
+                   #{light},
+                   #{co2},
+                   #{soiltension},
+                   #{soilph},
+                   #{soilmoisture},
+                   #{soilec},
+                   #{soiltemp},
+                   #{pos_topwindow_l1},
+                   #{pos_topwindow_l2},
+                   #{pos_topwindow_l3},
+                   #{pos_topwindow_r1},
+                   #{pos_topwindow_r2},
+                   #{pos_topwindow_r3},
+                   #{pos_outcurtain},
+                   #{pos_incurtain},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+               )
+
+    </insert>
+    <insert id="insertNowGreenhouseComplexSangju" parameterType="kr.or.fact.api.model.DTO.NowGreenhouseComplexSangjuVO">
+        INSERT INTO "NOW_GREENHOUSE_COMPLEX_S"(
+            idx_now_gh_complex_s,
+            temp,
+            hum,
+            light,
+            co2,
+            soiltension,
+            soilph,
+            soilmoisture,
+            soilec,
+            soiltemp,
+            pos_roofwindow_l,
+            pos_roofwindow_r,
+            pos_outcurtain,
+            pos_incurtain,
+            idx_user
+
+        )
+        VALUES (
+                   NOW_GH_COMPLEX_S_SEQ.NEXTVAL,
+                   #{temp},
+                   #{hum},
+                   #{light},
+                   #{co2},
+                   #{soiltension},
+                   #{soilph},
+                   #{soilmoisture},
+                   #{soilec},
+                   #{soiltemp},
+                   #{pos_roofwindow_l},
+                   #{pos_roofwindow_r},
+                   #{pos_outcurtain},
+                   #{pos_incurtain},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+               )
+    </insert>
+    <insert id="insertNowGreenhouseGlass" parameterType="kr.or.fact.api.model.DTO.NowGreenhouseGlassVO">
+        INSERT INTO "NOW_GREENHOUSE_GLASS"(
+            idx_now_gh_glass,
+            temp,
+            hum,
+            light,
+            co2,
+            soiltension,
+            soilph,
+            soilmoisture,
+            soilec,
+            soiltemp,
+            pos_roofwindow_l,
+            pos_roofwindow_r,
+            pos_outcurtain,
+            pos_incurtain,
+            idx_user
+        )
+        VALUES (
+                   NOW_GH_GLASS_SEQ.NEXTVAL,
+                   #{temp},
+                   #{hum},
+                   #{light},
+                   #{co2},
+                   #{soiltension},
+                   #{soilph},
+                   #{soilmoisture},
+                   #{soilec},
+                   #{soiltemp},
+                   #{pos_roofwindow_l},
+                   #{pos_roofwindow_r},
+                   #{pos_outcurtain},
+                   #{pos_incurtain},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+               )
+    </insert>
+    <insert id="insertNowGreenhouseSingleGimje" parameterType="kr.or.fact.api.model.DTO.NowGreenhouseSingleGimjeVO">
+        INSERT INTO "NOW_GREENHOUSE_SINGLE_G"(
+            idx_now_gh_single_g,
+            temp,
+            hum,
+            light,
+            co2,
+            soiltension,
+            soilph,
+            soilmoisture,
+            soilec,
+            soiltemp,
+            pos_outsidewindow_l,
+            pos_outsidewindow_r,
+            pos_insidewindow_l,
+            pos_insidewindow_r,
+            pos_curtain_l,
+            pos_curtain_r,
+            pos_sidescreen_l,
+            pos_sidescreen_r,
+            idx_user
+
+        )
+        VALUES (
+                   NOW_GH_SINGLE_G_SEQ.NEXTVAL,
+                   #{temp},
+                   #{hum},
+                   #{light},
+                   #{co2},
+                   #{soiltension},
+                   #{soilph},
+                   #{soilmoisture},
+                   #{soilec},
+                   #{soiltemp},
+                   #{pos_outsidewindow_l},
+                   #{pos_outsidewindow_r},
+                   #{pos_insidewindow_l},
+                   #{pos_insidewindow_r},
+                   #{pos_curtain_l},
+                   #{pos_curtain_r},
+                   #{pos_sidescreen_l},
+                   #{pos_sidescreen_r},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+               )
+    </insert>
+    <insert id="insertNowGreenhouseSingleSangju" parameterType="kr.or.fact.api.model.DTO.NowGreenhouseSingleSangjuVO">
+        INSERT INTO "NOW_GREENHOUSE_SINGLE_S"(
+            idx_now_gh_single_s,
+            temp,
+            hum,
+            light,
+            co2,
+            soiltension,
+            soilph,
+            soilmoisture,
+            soilec,
+            soiltemp,
+            pos_roofwindow_l,
+            pos_roofwindow_r,
+            pos_outcurtain,
+            pos_incurtain,
+            idx_user
+        )
+        VALUES (
+                   NOW_GH_SINGLE_S_SEQ.NEXTVAL,
+                   #{temp},
+                   #{hum},
+                   #{light},
+                   #{co2},
+                   #{soiltension},
+                   #{soilph},
+                   #{soilmoisture},
+                   #{soilec},
+                   #{soiltemp},
+                   #{pos_roofwindow_l},
+                   #{pos_roofwindow_r},
+                   #{pos_outcurtain},
+                   #{pos_incurtain},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+               )
+    </insert>
+    <insert id="insertNowWeather" parameterType="kr.or.fact.api.model.DTO.NowWeatherVO">
+        INSERT INTO "NOW_WEATHER"(
+            IDX_NOW_WEATHER,
+            TEMP,
+            HUM,
+            INSOLATION,
+            WINDDIRECTION,
+            WINDSPEED,
+            RAINDETECT,
+            idx_user
+        )
+        VALUES (
+                   NOW_WEATHER_SEQ.NEXTVAL,
+                   #{temp},
+                   #{hum},
+                   #{insolation},
+                   #{winddirection},
+                   #{windspeed},
+                   #{raindetect},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+               )
+    </insert>
+    <insert id="insertVerifyDataACMotor" parameterType="kr.or.fact.api.model.DTO.VerifyDataACMotorVO">
+        INSERT INTO "VERIFYDATA_ACMOTOR"(IDX_VERDATA_ACMOTOR,
+                                         VERIFYID,
+                                         DEVICEID,
+                                         DAQTIME,
+                                         AMPERE,
+                                         STANDARDTOUQUE,
+                                         TORQUE,
+                                         RPM,
+                                         idx_user
+
+
+
+        )
+        VALUES (
+                   VD_ACMOTOR_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{ampere},
+                   #{standardtouque},
+                   #{torque},
+                   #{rpm},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+               )
+    </insert>
+    <insert id="insertVerifyDataAirconAnalysis" parameterType="kr.or.fact.api.model.DTO.VerifyDataAirconAnalysisVO">
+        INSERT INTO "VERIFYDATA_AIRCON_ANALYSIS"(
+            IDX_VERDATA_AIRCON_ANALYSIS,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            TEMP1_1,
+            TEMP1_2,
+            TEMP1_3,
+            HUM1,
+            WINDDIRECTION1,
+            WINDSPEED1,
+            TEMP2_1,
+            TEMP2_2,
+            TEMP2_3,
+            HUM2,
+            WINDDIRECTION2,
+            WINDSPEED2,
+            TEMP3_1,
+            TEMP3_2,
+            TEMP3_3,
+            HUM3,
+            WINDDIRECTION3,
+            WINDSPEED3,
+            TEMP4_1,
+            TEMP4_2,
+            TEMP4_3,
+            HUM4,
+            WINDDIRECTION4,
+            WINDSPEED4,
+            TEMP5_1,
+            TEMP5_2,
+            TEMP5_3,
+            HUM5,
+            WINDDIRECTION5,
+            WINDSPEED5,
+            TEMP6_1,
+            TEMP6_2,
+            TEMP6_3,
+            HUM6,
+            WINDDIRECTION6,
+            WINDSPEED6,
+            TEMP7_1,
+            TEMP7_2,
+            TEMP7_3,
+            HUM7,
+            WINDDIRECTION7,
+            WINDSPEED7,
+            TEMP8_1,
+            TEMP8_2,
+            TEMP8_3,
+            HUM8,
+            WINDDIRECTION8,
+            WINDSPEED8,
+            TEMP9_1,
+            TEMP9_2,
+            TEMP9_3,
+            HUM9,
+            WINDDIRECTION9,
+            WINDSPEED9,
+            TEMP10_1,
+            TEMP10_2,
+            TEMP10_3,
+            HUM10,
+            WINDDIRECTION10,
+            WINDSPEED10,
+            TEMP11_1,
+            TEMP11_2,
+            TEMP11_3,
+            HUM11,
+            WINDDIRECTION11,
+            WINDSPEED11,
+            TEMP12_1,
+            TEMP12_2,
+            TEMP12_3,
+            HUM12,
+            WINDDIRECTION12,
+            WINDSPEED12,
+            idx_user
+
+        )
+        VALUES (
+                   VD_AIRCON_ANALYSIS_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{temp1_1},
+                   #{temp1_2},
+                   #{temp1_3},
+                   #{hum1},
+                   #{winddirection1},
+                   #{windspeed1},
+                   #{temp2_1},
+                   #{temp2_2},
+                   #{temp2_3},
+                   #{hum2},
+                   #{winddirection2},
+                   #{windspeed2},
+                   #{temp3_1},
+                   #{temp3_2},
+                   #{temp3_3},
+                   #{hum3},
+                   #{winddirection3},
+                   #{windspeed3},
+                   #{temp4_1},
+                   #{temp4_2},
+                   #{temp4_3},
+                   #{hum4},
+                   #{winddirection4},
+                   #{windspeed4},
+                   #{temp5_1},
+                   #{temp5_2},
+                   #{temp5_3},
+                   #{hum5},
+                   #{winddirection5},
+                   #{windspeed5},
+                   #{temp6_1},
+                   #{temp6_2},
+                   #{temp6_3},
+                   #{hum6},
+                   #{winddirection6},
+                   #{windspeed6},
+                   #{temp7_1},
+                   #{temp7_2},
+                   #{temp7_3},
+                   #{hum7},
+                   #{winddirection7},
+                   #{windspeed7},
+                   #{temp8_1},
+                   #{temp8_2},
+                   #{temp8_3},
+                   #{hum8},
+                   #{winddirection8},
+                   #{windspeed8},
+                   #{temp9_1},
+                   #{temp9_2},
+                   #{temp9_3},
+                   #{hum9},
+                   #{winddirection9},
+                   #{windspeed9},
+                   #{temp10_1},
+                   #{temp10_2},
+                   #{temp10_3},
+                   #{hum10},
+                   #{winddirection10},
+                   #{windspeed10},
+                   #{temp11_1},
+                   #{temp11_2},
+                   #{temp11_3},
+                   #{hum11},
+                   #{winddirection11},
+                   #{windspeed11},
+                   #{temp12_1},
+                   #{temp12_2},
+                   #{temp12_3},
+                   #{hum12},
+                   #{winddirection12},
+                   #{windspeed12},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+
+               )
+    </insert>
+    <insert id="insertVerifyDataAirconEffect" parameterType="kr.or.fact.api.model.DTO.VerifyDataAirconEffectVO">
+        INSERT INTO "VERIFYDATA_AIRCON_EFFECT"(idx_verdata_aircon_effect,
+                                               verifyid,
+                                               deviceid,
+                                               daqtime,
+                                               temp_evapolator_in,
+                                               temp_evapolator_out,
+                                               tempdiff_evapolator,
+                                               temp_evapolation_refrigerant,
+                                               temp_compressor_in,
+                                               superheat,
+                                               temp_condenser_in,
+                                               temp_condenser_out,
+                                               tempdiff_condenser,
+                                               temp_condensation_refrigerant,
+                                               supercooling,
+                                               temp_compressor_out,
+                                               effect_compressor_isentropy,
+                                               power_compressor,
+                                               cop_frozen,
+                                               capacity_frozen,
+                                               cop_radiation,
+                                               capacity_ratiation,
+                                               idx_user
+
+
+        )
+        VALUES (
+                   VD_AIRCON_EFFECT_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{temp_evapolator_in},
+                   #{temp_evapolator_out},
+                   #{tempdiff_evapolator},
+                   #{temp_evapolation_refrigerant},
+                   #{temp_compressor_in},
+                   #{superheat},
+                   #{temp_condenser_in},
+                   #{temp_condenser_out},
+                   #{tempdiff_condenser},
+                   #{temp_condensation_refrigerant},
+                   #{supercooling},
+                   #{temp_compressor_out},
+                   #{effect_compressor_isentropy},
+                   #{power_compressor},
+                   #{cop_frozen},
+                   #{capacity_frozen},
+                   #{cop_radiation},
+                   #{capacity_ratiation},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+
+               )
+    </insert>
+    <insert id="insertVerifyDataCO2" parameterType="kr.or.fact.api.model.DTO.VerifyDataCO2VO">
+        INSERT INTO "VERIFYDATA_CO2"(
+            IDX_VERDATA_CO2,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            F_TEMP,
+            F_HUM,
+            C_TEMP,
+            C_PRESSURE,
+            STANDARDVALUE,
+            VERIFYVALUE,
+            idx_user
+
+        )
+        VALUES (
+                   VD_CO2_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{f_temp},
+                   #{f_hum},
+                   #{c_temp},
+                   #{c_pressure},
+                   #{standardvalue},
+                   #{verifyvalue},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+
+
+               )
+    </insert>
+    <insert id="insertVerifyDataDCMotor" parameterType="kr.or.fact.api.model.DTO.VerifyDataDCMotorVO">
+        INSERT INTO "VERIFYDATA_DCMOTOR"(
+            IDX_VERDATA_DCMOTOR,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            AMPERE,
+            STANDARDTOUQUE,
+            TORQUE,
+            RPM,
+            idx_user
+        )
+        VALUES (
+                   VD_DCMOTOR_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{ampere},
+                   #{standardtouque},
+                   #{torque},
+                   #{rpm},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+
+
+               )
+    </insert>
+    <insert id="insertVerifyDataDust" parameterType="kr.or.fact.api.model.DTO.VerifyDataDustVO">
+        INSERT INTO "VERIFYDATA_DUST"(
+            IDX_VERDATA_DUST,
+            VERIFYID,
+            DEVICEID,
+            TESTTIME,
+            METHOD,
+            ONTIME,
+            OFFTIME,
+            REPEATCOUNT,
+            DURINGTIME,
+            idx_user
+
+        )
+        VALUES (
+                   VD_DUST_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{testtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{method},
+                   #{ontime},
+                   #{offtime},
+                   #{repeatcount},
+                   #{duringtime},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+               )
+    </insert>
+    <insert id="insertVerifyDataECSensor" parameterType="kr.or.fact.api.model.DTO.VerifyDataECSensorVO">
+        INSERT INTO "VERIFYDATA_ECSENSOR"(
+            IDX_VERDATA_ECSENSOR,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            F_TEMP,
+            F_HUM,
+            STANDARDVALUE,
+            VERIFYVALUE,
+            idx_user
+        )
+        VALUES (
+                   VD_ECSENSOR_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{f_temp},
+                   #{f_hum},
+                   #{standardvalue},
+                   #{verifyvalue},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+
+
+               )
+    </insert>
+    <insert id="insertVerifyDataHeatFlow" parameterType="kr.or.fact.api.model.DTO.VerifyDataHeatFlowVO">
+        INSERT INTO "VERIFYDATA_HEATFLOW"(
+            IDX_VERDATA_HEATFLOW,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            TEMP_A_MAIN,
+            HUM_A,
+            TEMP_A_HOTBOX_MAIN,
+            WINDSPEED_A_HOTBOX,
+            VOLT_A_HOTBOX_HEATER,
+            AMP_A_HOTBOX_HEATER,
+            VOLT_A_HOTBOX_FAN,
+            AMP_A_HOTBOX_FAN,
+            TEMP_B_MAIN,
+            WINDSPEED_B_COOLINGBOX,
+            TEMP_A_SUB1,
+            TEMP_A_SUB2,
+            TEMP_A_SUB3,
+            TEMP_A_SUB4,
+            TEMP_A_SUB5,
+            TEMP_A_SUB6,
+            TEMP_A_SUB7,
+            TEMP_A_SUB8,
+            TEMP_A_SUB9,
+            TEMP_A_SUB10,
+            TEMP_A_SUB11,
+            TEMP_A_SUB12,
+            TEMP_A_SUB13,
+            TEMP_A_SUB14,
+            TEMP_A_SUB15,
+            TEMP_A_SUB16,
+            TEMP_A_SUB17,
+            TEMP_A_SUB18,
+            TEMP_A_SUB19,
+            TEMP_A_SUB20,
+            TEMP_A_SUB21,
+            TEMP_A_SUB22,
+            TEMP_A_SUB23,
+            TEMP_A_SUB24,
+            TEMP_A_SUB25,
+            TEMP_A_SUB26,
+            TEMP_A_SUB27,
+            TEMP_A_SUB28,
+            TEMP_A_SUB29,
+            TEMP_A_SUB30,
+            TEMP_A_HOTBOX_SUB1,
+            TEMP_A_HOTBOX_SUB2,
+            TEMP_A_HOTBOX_SUB3,
+            TEMP_A_HOTBOX_SUB4,
+            TEMP_A_HOTBOX_SUB5,
+            TEMP_A_HOTBOX_SUB6,
+            TEMP_A_HOTBOX_SUB7,
+            TEMP_A_HOTBOX_SUB8,
+            TEMP_A_HOTBOX_SUB9,
+            TEMP_A_HOTBOX_SUB10,
+            TEMP_A_HOTBOX_SUB11,
+            TEMP_A_HOTBOX_SUB12,
+            TEMP_A_HOTBOX_SUB13,
+            TEMP_A_HOTBOX_SUB14,
+            TEMP_A_HOTBOX_SUB15,
+            TEMP_A_HOTBOX_SUB16,
+            TEMP_A_HOTBOX_SUB17,
+            TEMP_A_HOTBOX_SUB18,
+            TEMP_A_HOTBOX_SUB19,
+            TEMP_A_HOTBOX_SUB20,
+            TEMP_A_HOTBOX_SUB21,
+            TEMP_A_HOTBOX_SUB22,
+            TEMP_A_HOTBOX_SUB23,
+            TEMP_A_HOTBOX_SUB24,
+            TEMP_A_HOTBOX_SUB25,
+            TEMP_A_HOTBOX_SUB26,
+            TEMP_A_HOTBOX_SUB27,
+            TEMP_A_HOTBOX_SUB28,
+            TEMP_A_HOTBOX_SUB29,
+            TEMP_A_HOTBOX_SUB30,
+            TEMP_B_SUB1,
+            TEMP_B_SUB2,
+            TEMP_B_SUB3,
+            TEMP_B_SUB4,
+            TEMP_B_SUB5,
+            TEMP_B_SUB6,
+            TEMP_B_SUB7,
+            TEMP_B_SUB8,
+            TEMP_B_SUB9,
+            TEMP_B_SUB10,
+            TEMP_B_SUB11,
+            TEMP_B_SUB12,
+            TEMP_B_SUB13,
+            TEMP_B_SUB14,
+            TEMP_B_SUB15,
+            TEMP_B_SUB16,
+            TEMP_B_SUB17,
+            TEMP_B_SUB18,
+            TEMP_B_SUB19,
+            TEMP_B_SUB20,
+            TEMP_B_SUB21,
+            TEMP_B_SUB22,
+            TEMP_B_SUB23,
+            TEMP_B_SUB24,
+            TEMP_B_SUB25,
+            TEMP_B_SUB26,
+            TEMP_B_SUB27,
+            TEMP_B_SUB28,
+            TEMP_B_SUB29,
+            TEMP_B_SUB30,
+            idx_user
+
+        )
+        VALUES (
+                   VD_HEATFLOW_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{temp_a_main},
+                   #{hum_a},
+                   #{temp_a_hotbox_main},
+                   #{windspeed_a_hotbox},
+                   #{volt_a_hotbox_heater},
+                   #{amp_a_hotbox_heater},
+                   #{volt_a_hotbox_fan},
+                   #{amp_a_hotbox_fan},
+                   #{temp_b_main},
+                   #{windspeed_b_coolingbox},
+                   #{temp_a_sub1},
+                   #{temp_a_sub2},
+                   #{temp_a_sub3},
+                   #{temp_a_sub4},
+                   #{temp_a_sub5},
+                   #{temp_a_sub6},
+                   #{temp_a_sub7},
+                   #{temp_a_sub8},
+                   #{temp_a_sub9},
+                   #{temp_a_sub10},
+                   #{temp_a_sub11},
+                   #{temp_a_sub12},
+                   #{temp_a_sub13},
+                   #{temp_a_sub14},
+                   #{temp_a_sub15},
+                   #{temp_a_sub16},
+                   #{temp_a_sub17},
+                   #{temp_a_sub18},
+                   #{temp_a_sub19},
+                   #{temp_a_sub20},
+                   #{temp_a_sub21},
+                   #{temp_a_sub22},
+                   #{temp_a_sub23},
+                   #{temp_a_sub24},
+                   #{temp_a_sub25},
+                   #{temp_a_sub26},
+                   #{temp_a_sub27},
+                   #{temp_a_sub28},
+                   #{temp_a_sub29},
+                   #{temp_a_sub30},
+                   #{temp_a_hotbox_sub1},
+                   #{temp_a_hotbox_sub2},
+                   #{temp_a_hotbox_sub3},
+                   #{temp_a_hotbox_sub4},
+                   #{temp_a_hotbox_sub5},
+                   #{temp_a_hotbox_sub6},
+                   #{temp_a_hotbox_sub7},
+                   #{temp_a_hotbox_sub8},
+                   #{temp_a_hotbox_sub9},
+                   #{temp_a_hotbox_sub10},
+                   #{temp_a_hotbox_sub11},
+                   #{temp_a_hotbox_sub12},
+                   #{temp_a_hotbox_sub13},
+                   #{temp_a_hotbox_sub14},
+                   #{temp_a_hotbox_sub15},
+                   #{temp_a_hotbox_sub16},
+                   #{temp_a_hotbox_sub17},
+                   #{temp_a_hotbox_sub18},
+                   #{temp_a_hotbox_sub19},
+                   #{temp_a_hotbox_sub20},
+                   #{temp_a_hotbox_sub21},
+                   #{temp_a_hotbox_sub22},
+                   #{temp_a_hotbox_sub23},
+                   #{temp_a_hotbox_sub24},
+                   #{temp_a_hotbox_sub25},
+                   #{temp_a_hotbox_sub26},
+                   #{temp_a_hotbox_sub27},
+                   #{temp_a_hotbox_sub28},
+                   #{temp_a_hotbox_sub29},
+                   #{temp_a_hotbox_sub30},
+                   #{temp_b_sub1},
+                   #{temp_b_sub2},
+                   #{temp_b_sub3},
+                   #{temp_b_sub4},
+                   #{temp_b_sub5},
+                   #{temp_b_sub6},
+                   #{temp_b_sub7},
+                   #{temp_b_sub8},
+                   #{temp_b_sub9},
+                   #{temp_b_sub10},
+                   #{temp_b_sub11},
+                   #{temp_b_sub12},
+                   #{temp_b_sub13},
+                   #{temp_b_sub14},
+                   #{temp_b_sub15},
+                   #{temp_b_sub16},
+                   #{temp_b_sub17},
+                   #{temp_b_sub18},
+                   #{temp_b_sub19},
+                   #{temp_b_sub20},
+                   #{temp_b_sub21},
+                   #{temp_b_sub22},
+                   #{temp_b_sub23},
+                   #{temp_b_sub24},
+                   #{temp_b_sub25},
+                   #{temp_b_sub26},
+                   #{temp_b_sub27},
+                   #{temp_b_sub28},
+                   #{temp_b_sub29},
+                   #{temp_b_sub30},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+               )
+    </insert>
+    <insert id="insertVerifyDataHotShockRobot" parameterType="kr.or.fact.api.model.DTO.VerifyDataHotShockRobotVO">
+        INSERT INTO "VERIFYDATA_HOTSHOCK_ROBOT"(
+            IDX_VERDATA_HOTSHOCK_ROBOT,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            TEMP,
+            HUM,
+            idx_user
+        )
+        VALUES (
+                   VD_HOTSHOCK_ROBOT_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{temp},
+                   #{hum},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+
+
+               )
+    </insert>
+    <insert id="insertVerifyDataHotShock" parameterType="kr.or.fact.api.model.DTO.VerifyDataHotShockRobotVO">
+        INSERT INTO "VERIFYDATA_HOTSHOCK_ROBOT"(
+            IDX_VERDATA_HOTSHOCK,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            TEMP_HOT,
+            TEMP_TEST,
+            TEMP_COLD,
+            idx_user
+
+        )
+        VALUES (
+                   VD_HOTSHOCK_ROBOT_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{temp_hot},
+                   #{temp_test},
+                   #{temp_cold},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+               )
+    </insert>
+    <insert id="insertVerifyDataMaterialBig" parameterType="kr.or.fact.api.model.DTO.VerifyDataMaterialBigVO">
+        INSERT INTO "VERIFYDATA_MATERIAL_BIG"(
+            IDX_VERDATA_MATERIAL_BIG,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            WEIGHT,
+            STRENGTH,
+            DISPLACEMENT,
+            ELONGATION,
+            ELONGATIONRATE,
+            YIELDPOINT,
+            BREAKINGPOINT,
+            idx_user
+        )
+        VALUES (
+                   VD_MATERIAL_BIG_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{weight},
+                   #{strength},
+                   #{displacement},
+                   #{elongation},
+                   #{elongationrate},
+                   #{yieldpoint},
+                   #{breakingpoint},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+               )
+    </insert>
+    <insert id="insertVerifyDataMaterialSmall" parameterType="kr.or.fact.api.model.DTO.VerifyDataMaterialSmallVO">
+        INSERT INTO "VERIFYDATA_MATERIAL_SMALL"(
+            IDX_VERDATA_MATERIAL_SMALL,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            WEIGHT,
+            STRENGTH,
+            DISPLACEMENT,
+            ELONGATION,
+            ELONGATIONRATE,
+            YIELDPOINT,
+            BREAKINGPOINT,
+            idx_user
+
+        )
+        VALUES (
+                   VD_MATERIAL_SMALL_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{weight},
+                   #{strength},
+                   #{displacement},
+                   #{elongation},
+                   #{elongationrate},
+                   #{yieldpoint},
+                   #{breakingpoint},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+               )
+    </insert>
+    <insert id="insertVerifyDataMoisture" parameterType="kr.or.fact.api.model.DTO.VerifyDataMoistureVO">
+        INSERT INTO "VERIFYDATA_MOISTURE"(
+            IDX_VERDATA_MOISTURE,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            TEMP,
+            HUM,
+            idx_user
+
+        )
+        VALUES (
+                   VD_MOISTURE_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{temp},
+                   #{hum},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+
+               )
+    </insert>
+    <insert id="insertVerifyDataNetrientSupplier" parameterType="kr.or.fact.api.model.DTO.VerifyDataNetrientSupplierVO">
+        INSERT INTO "VERIFYDATA_NETRIENTSUPPLIER"(
+            IDX_VERDATA_NETRIENTSUPPLIER,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            PRESSURE1,
+            PRESSURE2,
+            FLOWQTY,
+            VALVEOPENRATE1,
+            VALVEOPENRATE2,
+            VALVEOPENRATE3,
+            VALVEOPENRATE4,
+            VALVEOPENRATE5,
+            idx_user
+
+        )
+        VALUES (
+                   VD_NETRIENTSUPPLIER_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{pressure1},
+                   #{pressure2},
+                   #{flowqty},
+                   #{valveopenrate1},
+                   #{valveopenrate2},
+                   #{valveopenrate3},
+                   #{valveopenrate4},
+                   #{valveopenrate5},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+
+               )
+    </insert>
+    <insert id="insertVerifyDataPH" parameterType="kr.or.fact.api.model.DTO.VerifyDataPHVO">
+        INSERT INTO "VERIFYDATA_PH"(
+            IDX_VERDATA_PH,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            F_TEMP,
+            F_HUM,
+            STANDARDVALUE,
+            VERIFYVALUE,
+            idx_user
+
+        )
+        VALUES (
+                   VD_PH_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{f_temp},
+                   #{f_hum},
+                   #{standardvalue},
+                   #{verifyvalue},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+
+               )
+    </insert>
+    <insert id="insertVerifyDataPosmeasure" parameterType="kr.or.fact.api.model.DTO.VerifyDataPosmeasureVO">
+        INSERT INTO "VERIFYDATA_POSMEASURE"(
+            IDX_VERDATA_POSMEASURE,
+            VERIFYID,
+            DEVICEID,
+            DEVICEKIND,
+            DAQTIME,
+            TAGID,
+            X_POS,
+            Y_POS,
+            DIRECTION,
+            idx_user
+
+        )
+        VALUES (
+                   VD_POSMEASURE_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   #{devicekind},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{tagid},
+                   #{x_pos},
+                   #{y_pos},
+                   #{direction},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+
+               )
+    </insert>
+    <insert id="insertVerifyDataSensorTest" parameterType="kr.or.fact.api.model.DTO.VerifyDataSensorTestVO">
+        INSERT INTO "VERIFYDATA_SENSORTEST"(
+            IDX_VERDATA_SENSORTEST,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            TEMP,
+            HUM,
+            VALUE1,
+            VALUE2,
+            VALUE3,
+            VALUE4,
+            VALUE5,
+            VALUE6,
+            VALUE7,
+            VALUE8,
+            VALUE9,
+            VALUE10,
+            VALUE11,
+            VALUE12,
+            DIVALUE1,
+            DIVALUE2,
+            DIVALUE3,
+            DIVALUE4,
+            DOVALUE1,
+            DOVALUE2,
+            AOVALUE1,
+            AOVALUE2,
+            VALUENAME1,
+            VALUENAME2,
+            VALUENAME3,
+            VALUENAME4,
+            VALUENAME5,
+            VALUENAME6,
+            VALUENAME7,
+            VALUENAME8,
+            VALUENAME9,
+            VALUENAME10,
+            VALUENAME11,
+            VALUENAME12,
+            VALUEUNIT1,
+            VALUEUNIT2,
+            VALUEUNIT3,
+            VALUEUNIT4,
+            VALUEUNIT5,
+            VALUEUNIT6,
+            VALUEUNIT7,
+            VALUEUNIT8,
+            VALUEUNIT9,
+            VALUEUNIT10,
+            VALUEUNIT11,
+            VALUEUNIT12,
+            DIVALUENAME1,
+            DIVALUENAME2,
+            DIVALUENAME3,
+            DIVALUENAME4,
+            DOVALUENAME1,
+            DOVALUENAME2,
+            AOVALUENAME1,
+            AOVALUENAME2,
+            AOVALUEUNIT1,
+            AOVALUEUNIT2,
+            idx_user
+
+        )
+        VALUES (
+                   VD_SENSORTEST_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{temp},
+                   #{hum},
+                   #{value1},
+                   #{value2},
+                   #{value3},
+                   #{value4},
+                   #{value5},
+                   #{value6},
+                   #{value7},
+                   #{value8},
+                   #{value9},
+                   #{value10},
+                   #{value11},
+                   #{value12},
+                   #{divalue1},
+                   #{divalue2},
+                   #{divalue3},
+                   #{divalue4},
+                   #{dovalue1},
+                   #{dovalue2},
+                   #{aovalue1},
+                   #{aovalue2},
+                   #{valuename1},
+                   #{valuename2},
+                   #{valuename3},
+                   #{valuename4},
+                   #{valuename5},
+                   #{valuename6},
+                   #{valuename7},
+                   #{valuename8},
+                   #{valuename9},
+                   #{valuename10},
+                   #{valuename11},
+                   #{valuename12},
+                   #{valueunit1},
+                   #{valueunit2},
+                   #{valueunit3},
+                   #{valueunit4},
+                   #{valueunit5},
+                   #{valueunit6},
+                   #{valueunit7},
+                   #{valueunit8},
+                   #{valueunit9},
+                   #{valueunit10},
+                   #{valueunit11},
+                   #{valueunit12},
+                   #{divaluename1},
+                   #{divaluename2},
+                   #{divaluename3},
+                   #{divaluename4},
+                   #{dovaluename1},
+                   #{dovaluename2},
+                   #{aovaluename1},
+                   #{aovaluename2},
+                   #{aovalueunit1},
+                   #{aovalueunit2},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+
+
+               )
+    </insert>
+    <insert id="insertVerifyDataSoilMoisture" parameterType="kr.or.fact.api.model.DTO.VerifyDataSoilMoistureVO">
+        INSERT INTO "VERIFYDATA_SOILMOISTURE"(
+            IDX_VERDATA_SOILMOISTURE,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            F_TEMP,
+            F_HUM,
+            STANDARDVALUE,
+            VERIFYVALUE,
+            idx_user
+
+
+        )
+        VALUES (
+                   VD_SOILMOISTURE_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{f_temp},
+                   #{f_hum},
+                   #{standardvalue},
+                   #{verifyvalue},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+
+
+               )
+    </insert>
+    <insert id="insertVerifyDataSunLightRawData" parameterType="kr.or.fact.api.model.DTO.VerifyDataSunLightRawDataVO">
+        INSERT INTO "VERIFYDATA_SUNLIGHT_RAWDATA"(
+            IDX_VERDATA_SOILMOISTURE,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            STANDARDVALUE,
+            VALUE,
+            UNIT,
+            FRONTREAR,
+            VERIFYSTEP,
+            idx_user
+
+
+        )
+        VALUES (
+                   VD_SUNLIGHT_RAWDATA_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{standardvalue},
+                   #{value},
+                   #{unit},
+                   #{frontrear},
+                   #{verifystep},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+
+
+               )
+    </insert>
+    <insert id="insertVerifyDataSunLight" parameterType="kr.or.fact.api.model.DTO.VerifyDataSunLightVO">
+        INSERT INTO "VERIFYDATA_SUNLIGHT"(
+            IDX_VERDATA_SUNLIGHT,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            CALCELLVALUE,
+            STANDARDVALUE,
+            VERIFYVALUE,
+            idx_user
+
+
+        )
+        VALUES (
+                   VD_SUNLIGHT_RAWDATA_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{calcellvalue},
+                   #{standardvalue},
+                   #{verifyvalue},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+
+               )
+    </insert>
+    <insert id="insertVerifyDataThermoHygrostat" parameterType="kr.or.fact.api.model.DTO.VerifyDataThermoHygrostatVO">
+        INSERT INTO "VERIFYDATA_THERMOHYGROSTAT"(
+            IDX_VERDATA_THERMOHYGROSTAT,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            TEMP,
+            HUM,
+            TEMP1,
+            TEMP2,
+            TEMP3,
+            TEMP4,
+            TEMP5,
+            TEMP6,
+            TEMP7,
+            TEMP8,
+            TEMP9,
+            TEMP10,
+            TORQUE,
+            RPM,
+            AMPERE,
+            idx_user
+
+
+        )
+        VALUES (
+                   VD_THERMOHYGROSTAT_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{temp},
+                   #{hum},
+                   #{temp1},
+                   #{temp2},
+                   #{temp3},
+                   #{temp4},
+                   #{temp5},
+                   #{temp6},
+                   #{temp7},
+                   #{temp8},
+                   #{temp9},
+                   #{temp10},
+                   #{torque},
+                   #{rpm},
+                   #{ampere},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+
+               )
+    </insert>
+    <insert id="insertVerifyDataVibration" parameterType="kr.or.fact.api.model.DTO.VerifyDataVibrationVO">
+        INSERT INTO "VERIFYDATA_VIBRATION"(
+            IDX_VERDATA_VIBRATION,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            DIRECTION,
+            TEMP,
+            HUM,
+            idx_user
+
+
+        )
+        VALUES (
+                   VD_VIBRATION_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{direction},
+                   #{temp},
+                   #{hum},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+
+
+               )
+    </insert>
+    <insert id="insertVerifyDataWaterProofRobot" parameterType="kr.or.fact.api.model.DTO.VerifyDataWaterProofRobotVO">
+        INSERT INTO "VERIFYDATA_WATERPROOF_ROBOT"(
+            IDX_VERDATA_WATERPROOF_ROBOT,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            WATERPRESSURE,
+            PLATESPEED,
+            NOZZLESWINGSPEED,
+            WATERSUPPLYMOTORSPEED,
+            WATERFLOWQUANTITY,
+            idx_user
+        )
+        VALUES (
+                   VD_WATERPROOF_ROBOT_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{waterpressure},
+                   #{platespeed},
+                   #{nozzleswingspeed},
+                   #{watersupplymotorspeed},
+                   #{waterflowquantity},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+               )
+    </insert>
+    <insert id="insertVerifyDataWaterProof" parameterType="kr.or.fact.api.model.DTO.VerifyDataWaterProofVO">
+        INSERT INTO "VERIFYDATA_WATERPROOF"(
+            IDX_VERDATA_WATERPROOF,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            WATERPRESSURE,
+            PLATESPEED,
+            NOZZLESWINGSPEED,
+            WATERSUPPLYMOTORSPEED,
+            idx_user
+        )
+        VALUES (
+                   VD_WATERPROOF_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{waterpressure},
+                   #{platespeed},
+                   #{nozzleswingspeed},
+                   #{watersupplymotorspeed},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+               )
+    </insert>
+    <insert id="insertVerifyDataWind" parameterType="kr.or.fact.api.model.DTO.VerifyDataWindVO">
+        INSERT INTO "VERIFYDATA_WIND"(
+            IDX_VERDATA_WIND,
+            VERIFYID,
+            DEVICEID,
+            DAQTIME,
+            STANDARDSPEED,
+            VERIFYSPEED,
+            idx_user
+        )
+        VALUES (
+                   VD_WIND_SEQ.NEXTVAL,
+                   #{verifyid},
+                   #{deviceid},
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{standardspeed},
+                   #{verifyspeed},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+               )
+    </insert>
+    <insert id="insertEnvGreenhouseSingle" parameterType="kr.or.fact.api.model.DTO.EnvGreenhouseSingleVO">
+        INSERT INTO "ENV_GREENHOUSE_SINGLE"(
+            idx_env_gh_single,
+            daqtime,
+            temp,
+            hum,
+            light,
+            co2,
+            soiltension,
+            soilph,
+            soilmoisture,
+            soilec,
+            soiltemp,
+            idx_user
+        )
+        VALUES (
+                   ENV_GH_SINGLE_SEQ.NEXTVAL,
+                   TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
+                   #{temp},
+                   #{hum},
+                   #{light},
+                   #{co2},
+                   #{soiltension},
+                   #{soilph},
+                   #{soilmoisture},
+                   #{soilec},
+                   #{soiltemp},
+                   (SELECT idx_user FROM TOKEN WHERE username = #{username})
+               )
+    </insert>
+    <insert id="insertKey" parameterType="kr.or.fact.api.model.DTO.TokenVO">
+        INSERT INTO "TOKEN"(
+            IDX_USER,
+            KEY,
+            USERNAME,
+            CREATED,
+            EXPIRED
+        )
+        VALUES (
+                   TOKEN_SEQ.NEXTVAL,
+                   #{key},
+                   #{username},
+                   #{created},
+                   #{expired}
+               )
+    </insert>
+
+    <select id="selectKey" resultType="kr.or.fact.api.model.DTO.TokenVO">
+        SELECT * FROM TOKEN WHERE key = #{key}
+    </select>
+
+    <select id="selectUserIdx" resultType="kr.or.fact.api.model.DTO.TokenVO">
+        SELECT * FROM TOKEN WHERE username = #{username}
+    </select>
+
+    <update id="updateUserKey" parameterType="kr.or.fact.api.model.DTO.TokenVO">
+        UPDATE TOKEN
+        SET
+            KEY = #{key},
+            created = #{created},
+            expired = #{expired}
+        WHERE idx_user = #{idx_user}
+    </update>
+
+</mapper>
