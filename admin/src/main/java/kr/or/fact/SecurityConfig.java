@@ -1,7 +1,7 @@
 package kr.or.fact;
 
-import kr.or.fact.admin.service.AdminService;
-import kr.or.fact.admin.service.MemberService;
+import kr.or.fact.core.service.AdminService;
+import kr.or.fact.core.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
