@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<!--[if IE 7]><html lang="ko" class="ie ie7"><![endif]-->
+<!--[if IE 8]><html lang="ko" class="ie ie8"><![endif]-->
+<!--[if IE 9]><html lang="ko" class="ie ie9"><![endif]-->
+<!--[if !IE]><!--><html lang="ko"><!--<![endif]-->
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>프로젝트</title>
+  <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css" />
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+  <style type="text/css">
+    html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, menu, nav, section, time, mark, audio, video, details, summary { margin: 0; padding: 0; border: 0; font-size: 100%; font-weight: normal; vertical-align: baseline; background: transparent; }
+    html { box-sizing: border-box; } body { line-height: 1.5; font-size: 14px; font-family: 'Malgun Gothic', '맑은 고딕','돋움', dotum, Helvetica, AppleSDGothicNeo, sans-serif; word-wrap: break-word; -webkit-text-size-adjust: none; } article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; } main, article, aside, figure, footer, header, nav, section, details, summary {display: block;} *, *:before, *:after { box-sizing: inherit; } html {overflow-y: scroll;} ul {list-style: none;} ol, ul { list-style: none; } blockquote, q {quotes: none;} blockquote:before, blockquote:after, q:before, q:after {content: ''; content: none;} a {margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent; text-decoration: none; } del {text-decoration: line-through;} abbr[title], dfn[title] {border-bottom: 1px dotted #000; cursor: help;} table {border-collapse: separate; border-spacing: 0;} th {font-weight: bold; vertical-align: bottom;} td {font-weight: normal; vertical-align: top;} hr {display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;} input, select {vertical-align: middle;} pre { white-space: pre; white-space: pre-wrap; white-space: pre-line; word-wrap: break-word; } img, object, embed {max-width: 100%;} input[type="radio"] {vertical-align: text-bottom;} input[type="checkbox"] {vertical-align: bottom;} .ie7 input[type="checkbox"] {vertical-align: baseline;} .ie6 input {vertical-align: text-bottom;} select, input, textarea {font: 99% sans-serif;} table {font-size: inherit; font: 100%; border-collapse: collapse; border-spacing: 0; } small {font-size: 85%;} strong {font-weight: bold;} td, td img {vertical-align: top;} img { vertical-align: top; border: none; } pre, code, kbd, samp {font-family: monospace, sans-serif;} .clickable, label, input[type=button], input[type=submit], input[type=file], button {cursor: pointer;} button, input, select, textarea {margin: 0;} button, input[type=button] {width: auto; overflow: visible;} .ie7 img {-ms-interpolation-mode: bicubic;} .clearfix:after { content: " "; display: block; clear: both; }
+    body { line-height: 1.4; font-size: 12px; font-family: 'Noto Sans KR', sans-serif; word-wrap: break-word; -webkit-text-size-adjust: none; -webkit-font-smoothing: antialiased; letter-spacing: 0.5px; } #viewport { position: relative; width: 100%; height: 100%; max-width: 1920px; } .sr-only { position: absolute; left: -9999px; top: -99999px; } header { position: fixed; left: 0; top: 0; width: 100%; height: 50px; border-bottom: 1px solid #e6e6e6; box-sizing: border-box; background-color: #fff; z-index: 999; } header h1 { position: relative;  padding:14px 10px; float:left; font-size: 20px; }  header .progress{position:relative; float:left; padding:20px 0; color:#999;} header .progress strong{color:#333;} header h2{position: absolute; right: 124px; top: 14px; font-size: 14px;} header nav { position: absolute; right: 0; top: 0; height: 50px; } header nav ul { font-size: 0; letter-spacing: 0; } header nav ul li { display: inline-block; height: 50px; border-left: 1px solid #e6e6e6; } header nav ul li a { display: block; font-family: 'Source Sans Pro', sans-serif; font-size: 14px; padding: 15px 16px 0; height: 50px; box-sizing: border-box; color: #333; transition: all 0.2s ease-in; } header nav ul li a:hover { background: #d6b161; color: #fff; } #contents {  padding: 70px 0; } #ia { padding: 0 10px 40px; } #comment { padding: 0 20px; min-height: 500px; } .accordion .subject { margin-bottom: 10px; text-transform: uppercase; font-size: 12px; font-weight: 400; } .accordion .notice { margin-bottom: 10px; padding: 10px 20px 20px; color: #777; font-size: 14px; line-height: 1.8; } .accordion .subject a, .accordion .subject a:after { -webkit-transition: all .27s cubic-bezier(0, 0, .58, 1); transition: all .27s cubic-bezier(0, 0, .58, 1); } .accordion { position: relative; } .accordion:before { position: absolute; z-index: 0; top: 25px; bottom: 10px; left: 15px; content: ""; border-left: 1px dashed #cecece; } .accordion .subject a { position: relative; display: block; padding: 14px 20px 14px 40px; text-decoration: none; color: #222; border: none; } .accordion .subject a:after { position: absolute; top: 50%; left: 0; width: 30px; height: 30px; margin-top: -15px; content: "+"; text-align: center; text-transform: none; color: #fff; background: #222; font-size: 20px; font-weight: bold; font-style: normal; font-variant: normal; line-height: 30px; vertical-align: middle; -webkit-font-smoothing: antialiased; } .accordion .list.selected .subject > a:after, .accordion .list .subject > a:hover:after { content: "-"; color: #fff; background: #d6b161; } .accordion .subject > a time { display: inline-block; margin-left: 8px; color: #888; } .accordion .notice { margin-bottom: 10px; padding: 10px 20px 20px 40px; color: #777; font-size: 14px; line-height: 1.8; } .accordion .notice { display: none; } .accordion .notice .btnDown { color: #d6b161; }
+    table { table-layout: fixed; border-collapse: collapse; width: 100%; }
+    table tr, table th, table td { border: 1px solid #eee; }
+    table th { padding: 10px 0; background-color: #333; font-weight: 400; color: #fff; }
+    table td { padding: 5px 0 5px 10px; text-align: left; vertical-align: middle; }
+    table tr.wait td { background: #fafafa; }
+    table td a { color: #1091d0; text-decoration: none; }
+    table td span.tip { color: #ff5843; }
+    table td:nth-child(2),
+    table td:nth-child(3),
+    table td:nth-child(4),
+    table td:nth-child(5),
+    table td:nth-child(6),
+    table td:nth-child(7),
+    table td:nth-child(10) {
+      text-align: left;
+      padding: 0 10px;
+    }
+
+    .checkbox { position: relative; width: 18px; height: 18px; margin: 0 auto; }
+    .checkbox:before { display: block;  content: "N"; position: absolute; left: 0; top: 0; width: 18px; height: 18px; background-color: #ddd;  color: #fff; text-align: center; }
+    .checkbox:after { display: none; content: "Y"; position: absolute; left: 0; top: 0; width: 18px; height: 18px; background-color: #ffa50b; color: #fff; text-align: center; }
+    .checkbox.selected:after { display: block; }
+    .checkbox.selected:before { display: none; }
+
+  </style>
+</head>
+<body id="start">
+<div id="viewport">
+  <header>
+    <div class="fixed">
+      <h1>프로젝트</h1>
+      <div class="progress">
+        <p>완료 : <span class="curr_n"></span>page / Total : <span class="total_n"></span> page / <strong>진행율 : <span class="per"></span></strong>
+        </p>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#ia">IA</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <!-- contents -->
+  <div id="contents">
+    <section id="ia">
+      <article>
+        <table class="codinglist">
+          <colgroup>
+            <col style="width:50px;"><!--NUM-->
+            <col style="width:100px;"><!--D1-->
+            <col style="width:120px;"><!--D2-->
+            <col style="width:140px;"><!--D3-->
+            <col style="width:180px;"><!--NAME-->
+            <col style="width:50px;"><!--TASK-->
+            <col style="width:100px;"><!--DATE-->
+            <col><!--MEMO-->
+          </colgroup>
+          <thead>
+          <tr>
+            <th></th>
+            <th>Depth1</th>
+            <th>Depth2</th>
+            <th>Depth3</th>
+            <th>Name</th>
+            <th>Task</th>
+            <th>Date</th>
+            <th>Memo</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td></td>
+            <td>메인</td>
+            <td></td>
+            <td></td>
+            <td>
+              <a href="main.html" target="_blank" class="link">main.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0813</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>로그인</td>
+            <td></td>
+            <td></td>
+            <td>
+              <a href="login.html" target="_blank" class="link">login.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0813</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>검색결과</td>
+            <td></td>
+            <td></td>
+            <td>
+              <a href="util_search.html" target="_blank" class="link">util_search.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0821</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>결과없음</td>
+            <td></td>
+            <td>
+              <a href="util_search_blank.html" target="_blank" class="link">util_search_blank.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0821</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>실증 안내/신청</td>
+            <td>실증 가능 분야</td>
+            <td></td>
+            <td>
+              <a href="prv_part.html" target="_blank" class="link">prv_part.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0820</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>실증 절차</td>
+            <td></td>
+            <td>
+              <a href="prv_step.html" target="_blank" class="link">prv_step.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0820</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>이용가능시설</td>
+            <td>온실 현황</td>
+            <td>
+              <a href="prv_use.html" target="_blank" class="link">prv_use.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0823</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>지역별 장비</td>
+            <td>
+              <a href="prv_location.html" target="_blank" class="link">prv_location.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0823</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>입주 사무실</td>
+            <td>
+              <a href="prv_office.html" target="_blank" class="link">prv_office.html</a>
+            </td>
+            <td>
+              <div class="checkbox "></div>
+            </td>
+            <td>0823</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>실증 이용료 안내</td>
+            <td>개요</td>
+            <td>
+              <a href="prv_fee.html" target="_blank" class="link">prv_fee.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0823</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>실증시설</td>
+            <td>
+              <a href="prv_facility.html" target="_blank" class="link">prv_facility.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0823</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>지원시설</td>
+            <td>
+              <a href="prv_support.html" target="_blank" class="link">prv_support.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0823</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>공과금</td>
+            <td>
+              <a href="prv_bill.html" target="_blank" class="link">prv_bill.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0823</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>보조금</td>
+            <td>
+              <a href="prv_subsidy.html" target="_blank" class="link">prv_subsidy.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0823</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>신청서 작성</td>
+            <td>절차안내 및 다운로드</td>
+            <td>
+              <a href="prv_application.html" target="_blank" class="link">prv_application.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0823</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>작성안내</td>
+            <td>
+              <a href="prv_prepare.html" target="_blank" class="link">prv_prepare.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0825</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>신청서 등록/보완<br>등록(popup)</td>
+            <td>
+              <a href="prv_register.html" target="_blank" class="link">prv_register.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0825</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>마이페이지</td>
+            <td>나의사업</td>
+            <td>신청현황<br>보완서류(popup)</td>
+            <td>
+              <a href="my_business1.html" target="_blank" class="link">my_business.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0821</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>내역없음</td>
+            <td>
+              <a href="my_business_blank.html" target="_blank" class="link">my_business_blank.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0828</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>협약현황</td>
+            <td>
+              <a href="my_agreement.html" target="_blank" class="link">my_agreement.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0821</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>위탁현황</td>
+            <td>
+              <a href="my_consignment.html" target="_blank" class="link">my_consignment.html</a>
+            </td>
+            <td>
+              <div class="checkbox "></div>
+            </td>
+            <td>0827</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>나의정보</td>
+            <td>개인</td>
+            <td>
+              <a href="my_info.html" target="_blank" class="link">my_info.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0827</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>나의 상담 및 정보</td>
+            <td>
+              <a href="my_group.html" target="_blank" class="link">my_group.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0827</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>센터소개</td>
+            <td>비전과 미션</td>
+            <td></td>
+            <td>
+              <a href="cnt_goal.html" target="_blank" class="link">cnt_goal.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0820</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>연혁</td>
+            <td></td>
+            <td>
+              <a href="cnt_history.html" target="_blank" class="link">cnt_history.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0825</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>조직과 직원</td>
+            <td></td>
+            <td>
+              <a href="cnt_organize.html" target="_blank" class="link">cnt_organize.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0831</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>찾아오시는 길</td>
+            <td></td>
+            <td>
+              <a href="cnt_map.html" target="_blank" class="link">cnt_map.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0825</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>열린마당</td>
+            <td>공지사항</td>
+            <td></td>
+            <td>
+              <a href="brd_notice.html" target="_blank" class="link">brd_notice.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0817</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>검색후</td>
+            <td>
+              <a href="brd_notice_search.html" target="_blank" class="link">brd_notice_search.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0827</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>검색결과없음</td>
+            <td>
+              <a href="brd_notice_blank.html" target="_blank" class="link">brd_notice_blank.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0827</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>상세</td>
+            <td>
+              <a href="brd_notice_detail.html" target="_blank" class="link">brd_notice_detail.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0817</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>사업공고</td>
+            <td></td>
+            <td>
+              <a href="brd_announce.html" target="_blank" class="link">brd_announce.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0825</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>행사안내</td>
+            <td></td>
+            <td>
+              <a href="brd_event.html" target="_blank" class="link">brd_event.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0825</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>홍보자료</td>
+            <td></td>
+            <td>
+              <a href="brd_promotion.html" target="_blank" class="link">brd_promotion.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0827</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>상세</td>
+            <td>
+              <a href="brd_promotion_detail.html" target="_blank" class="link">brd_promotion_detail.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0827</td>
+            <td></td>
+          </tr>
+         <!-- <tr>
+            <td></td>
+            <td></td>
+            <td>견학신청</td>
+            <td></td>
+            <td>
+              <a href="brd_visit.html" target="_blank" class="link">brd_visit.html</a>
+            </td>
+            <td>
+              <div class="checkbox "></div>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>-->
+          <tr class="" style="text-decoration:line-through;">
+            <td></td>
+            <td>자료실</td>
+            <td>실증단지 소개</td>
+            <td></td>
+            <td>
+              <a href="arc_center.html" target="_blank" class="link">arc_center.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0820</td>
+            <td>취소</td>
+          </tr>
+          <tr style="text-decoration:line-through;">
+            <td></td>
+            <td></td>
+            <td>서비스 이용료</td>
+            <td></td>
+            <td>
+              <a href="arc_pee.html" target="_blank" class="link">arc_pee.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0827</td>
+            <td>취소</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>관련 양식</td>
+            <td></td>
+            <td>
+              <a href="arc_form.html" target="_blank" class="link">arc_form.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0827</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>관련 규정</td>
+            <td></td>
+            <td>
+              <a href="arc_rule.html" target="_blank" class="link">arc_rule.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0827</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>고객지원</td>
+            <td>FAQ</td>
+            <td></td>
+            <td>
+              <a href="spt_faq.html" target="_blank" class="link">spt_faq.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0820</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>대면상담 신청</td>
+            <td>작성(popup)</td>
+            <td>
+              <a href="spt_prevent.html" target="_blank" class="link">spt_prevent.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0827</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>이메일 문의</td>
+            <td>작성/확인(popup)</td>
+            <td>
+              <a href="spt_email.html" target="_blank" class="link">spt_email.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0827</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>견학 신청</td>
+            <td>작성(popup)</td>
+            <td>
+              <a href="spt_visit.html" target="_blank" class="link">spt_visit.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0827</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>회원가입</td>
+            <td>개인</td>
+            <td></td>
+            <td>
+              <a href="join.html" target="_blank" class="link">join.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0904</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>개인-입력사항</td>
+            <td></td>
+            <td>
+              <a href="join_person.html" target="_blank" class="link">join_person.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0904</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>기업/단체</td>
+            <td></td>
+            <td>
+              <a href="join_2.html" target="_blank" class="link">join_2.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0904</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>기업/단체-입력사항</td>
+            <td></td>
+            <td>
+              <a href="join_group.html" target="_blank" class="link">join_group.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0904</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>회원가입완료</td>
+            <td></td>
+            <td>
+              <a href="join_welcome.html" target="_blank" class="link">join_welcome.html</a>
+            </td>
+            <td>
+              <div class="checkbox selected"></div>
+            </td>
+            <td>0904</td>
+            <td></td>
+          </tr>
+
+          </tbody>
+        </table>
+      </article>
+    </section>
+    <section id="comment">
+      <article>
+        <div class="accordion time-line">
+          <div class="list">
+            <div class="subject">
+              <a href="">
+                <strong>TITLE</strong>
+                <time>2020-xx-xx</time>
+              </a>
+            </div>
+            <div class="notice">
+              <p>
+                DESCRIPTION
+              </p>
+              <a href="/@download/.zip" class="btnDown">다운로드</a>
+            </div>
+          </div>
+          <!-- list//end -->
+        </div>
+      </article>
+    </section>
+  </div>
+  <!-- contents//end -->
+</div>
+<!-- #viewpoert//end -->
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+  function accordionOpener(e) {
+    e.preventDefault();
+    var chkSelected = $(this).parent(".list").hasClass("selected");
+    var clickedSub = $(this);
+    var clickedLi = $(this).parent(".list");
+    if(chkSelected) {
+      clickedLi.removeClass("selected");
+      clickedLi.children(".notice").slideUp("100");
+    } else {
+      clickedLi.addClass("selected");
+      clickedLi.children(".notice").slideDown("100");
+      clickedLi.siblings(".list").removeClass("selected");
+      clickedLi.siblings(".list").children(".notice").slideUp("100");
+    }
+  }
+
+  function chkList(){
+    var tatal_n = $(".codinglist tr").length-1;
+    var curr_n = 0;
+    $(".codinglist .checkbox").each(function() {
+      if($(this).hasClass("selected")){
+        curr_n++;
+      } else if ($(this).text().length > 0) {
+      }
+    });
+    $('.total_n').text(tatal_n);
+    $('.curr_n').text(curr_n);
+    $('.per').text(Math.floor((curr_n/tatal_n)*100) + '%');
+  }
+
+  $(document).ready(function(){
+    $(".accordion .list .subject").bind("click", accordionOpener);
+    $(".accordion .list:first-child").addClass("selected");
+    $(".accordion .list.selected .notice").slideDown("100");
+    $("table").eq(0).find(" tbody tr").each(function(idx, val) {
+      $(this).find("td").eq(0).text(idx+1);
+    });
+    chkList();
+  });
+</script>
+</body>
+</html>

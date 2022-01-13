@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<script type="text/javascript" src="http://127.0.0.1:8983/app/js/jquery-1.7.2.min.js"></script>
+
+<script type="text/javascript">
+	/**
+	 * 주소 검색 화면 호출(Basic)
+	 */
+	function fn_openUrlJusoSearchBasic() {
+		var pop = window.open("./JusoSearchBasic.html",	"pop_basic", 
+				"width=450,height=550,scrollbars=yes,resizable=yes");
+	}
+
+	/**
+	 * 주소 검색 화면 호출(Full)
+	 */
+	function fn_openUrlJusoSearchFull() {
+		var pop = window.open("./JusoSearchFull.html",	"pop_full", 
+				"width=450,height=550,scrollbars=yes,resizable=yes");
+	}
+
+	/**
+	 * 주소 검색 화면 호출(Skin)
+	 */
+	function fn_openUrlJusoSearchSkin(skinNo) {
+		var pop = window.open("./JusoSearchSkin" + skinNo + ".html",	"pop_basic", 
+				"width=450,height=550,scrollbars=yes,resizable=yes");
+	}
+
+	/** 
+	 * 결과 처리
+	 */
+	function fn_setJuso(data) {
+		$("#roadFullAddr").val(data["roadFullAddr"]);
+		$("#roadAddrPart1").val(data["roadAddrPart1"]);
+		$("#roadAddrPart2").val(data["roadAddrPart2"]);
+		$("#jibunAddr").val(data["jibunAddr"]);
+		$("#engAddr").val(data["engAddr"]);
+		$("#zipNo").val(data["zipNo"]);
+		$("#admCd").val(data["admCd"]);
+		$("#rnMgtSn").val(data["rnMgtSn"]);
+		$("#bdMgtSn").val(data["bdMgtSn"]);
+		
+		$("#bdNm").val(data["bdNm"]);
+		$("#bdKdcd").val(data["bdKdcd"]);
+		$("#siNm").val(data["siNm"]);
+		$("#sggNm").val(data["sggNm"]);
+		$("#emdNm").val(data["emdNm"]);
+		$("#liNm").val(data["liNm"]);
+		$("#rn").val(data["rn"]);
+		$("#udrtYn").val(data["udrtYn"]);
+		$("#buldMnnm").val(data["buldMnnm"]);
+		$("#buldSlno").val(data["buldSlno"]);
+		$("#mtYn").val(data["mtYn"]);
+		$("#lnbrMnnm").val(data["lnbrMnnm"]);
+		$("#lnbrSlno").val(data["lnbrSlno"]);
+	}
+</script>
+
+</head>
+<body>
+
+<p>
+<input type="button" value="주소조회(Basic)" onClick="javascript:fn_openUrlJusoSearchBasic()">
+<input type="button" value="주소조회(Full)" onClick="javascript:fn_openUrlJusoSearchFull()">
+<input type="button" value="주소조회(Skin1)" onClick="javascript:fn_openUrlJusoSearchSkin('1')">
+<input type="button" value="주소조회(Skin2)" onClick="javascript:fn_openUrlJusoSearchSkin('2')">
+<p>
+<table>
+	<tr><td>전체 도로명주소</td><td><input size="50" type="text" id="roadFullAddr"></td></tr>
+	<tr><td>도로명주소</td><td><input size="50" type="text" id="roadAddrPart1"></td></tr>
+	<tr><td>도로명주소 참고항목</td><td><input size="50" type="text" id="roadAddrPart2"></td></tr>
+	<tr><td>지번 정보</td><td><input size="50" type="text" id="jibunAddr"></td></tr>
+	<tr><td>도로명주소(영문)</td><td><input size="50" type="text" id="engAddr"></td></tr>
+	<tr><td>우편번호</td><td><input size="50" type="text" id="zipNo"></td></tr>
+	<tr><td>행정구역코드</td><td><input size="50" type="text" id="admCd"></td></tr>
+	<tr><td>도로명코드</td><td><input size="50" type="text" id="rnMgtSn"></td></tr>
+	<tr><td>건물관리번호</td><td><input size="50" type="text" id="bdMgtSn"></td></tr>
+	
+	<tr><td>건물명</td><td><input size="50" type="text" id="bdNm"></td></tr>
+	<tr><td>공동주택여부</td><td><input size="50" type="text" id="bdKdcd"></td></tr>
+	<tr><td>시도명</td><td><input size="50" type="text" id="siNm"></td></tr>
+	<tr><td>시군구명</td><td><input size="50" type="text" id="sggNm"></td></tr>
+	<tr><td>읍면동명</td><td><input size="50" type="text" id="emdNm"></td></tr>
+	<tr><td>법정리명</td><td><input size="50" type="text" id="liNm"></td></tr>
+	<tr><td>도로명</td><td><input size="50" type="text" id="rn"></td></tr>
+	<tr><td>지하여부</td><td><input size="50" type="text" id="udrtYn"></td></tr>
+	<tr><td>건물본번</td><td><input size="50" type="text" id="buldMnnm"></td></tr>
+	<tr><td>건물부번</td><td><input size="50" type="text" id="buldSlno"></td></tr>
+	<tr><td>산여부</td><td><input size="50" type="text" id="mtYn"></td></tr>
+	<tr><td>지번본번(번지)</td><td><input size="50" type="text" id="lnbrMnnm"></td></tr>
+	<tr><td>지번부번(호)</td><td><input size="50" type="text" id="lnbrSlno"></td></tr>
+</table>
+</body>
+</html>
