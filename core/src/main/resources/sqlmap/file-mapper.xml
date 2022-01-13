@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.fact.core.model.FileServiceDAO">
+    <insert id="storeFile" parameterType="org.springframework.web.multipart.MultipartFile">
+        insert into FILE (
+            idx_file_info,
+            file_name,
+            file_type,
+            file_status,
+            mime_type,
+            encoding,
+            extention,
+            file_secure_type,
+            file_path,
+            file_size,
+            checksum,
+            owner,
+            idx_user,
+            idx_admin,
+            reg_date
+        ) values (
+            #{idx_file_info},
+            #{file_name},
+            #{file_type},
+            #{file_status},
+            #{mime_type},
+            #{encoding},
+            #{extention},
+            #{file_secure_type},
+            #{file_path},
+            #{file_size},
+            #{checksum},
+            #{owner},
+            #{idx_user},
+            #{idx_admin},
+            #{reg_date}
+                         )
+    </insert>
+</mapper>

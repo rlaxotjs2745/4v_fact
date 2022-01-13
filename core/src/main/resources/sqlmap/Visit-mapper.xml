@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.fact.core.model.VisitDAO">
+
+    <select id="getUserVisitReqCount" parameterType="long" resultType="int">
+        SELECT COUNT(*) FROM TB_VISIT_REQ  WHERE IDX_USER = #{idx_user}
+    </select>
+
+    <select id="getVisitData" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.VisitDataVO">
+        SELECT * FROM TB_VISIT_DATA WHERE CUR_DATE BETWEEN TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-') || '01', 'YYYY-MM-DD') AND LAST_DAY(SYSDATE);
+    </select>
+
+    <select id="getVisitReq" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.VisitReqVO">
+        SELECT * FROM TB_VISIT_REQ WHERE CUR_DATE BETWEEN TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-') || '01', 'YYYY-MM-DD') AND LAST_DAY(SYSDATE);
+    </select>
+
+    <select id="getUserVisitReq" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.VisitReqVO">
+
+        SELECT
+            IDX_VISIT_REQ
+             ,VISITOR
+             ,RESULVATION_DATE
+             ,VISIT_GOAL
+             ,VISIT_REQ_STATUS
+             ,IS_GROUP
+
+        FROM (
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+        ,IDX_VISIT_REQ
+                      ,VISITOR
+                      ,RESULVATION_DATE
+                      ,VISIT_GOAL
+                      ,VISIT_REQ_STATUS
+                      ,IS_GROUP
+
+                 FROM (
+                          SELECT * FROM TB_VISIT_REQ  WHERE IDX_USER=#{idx_user}
+                      )
+
+                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+             )
+        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+
+    </select>
+
+</mapper>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.fact.core.model.UserDAO">
+
+    <select id="getUserInfoById" parameterType="String" resultType="kr.or.fact.core.model.DTO.UserVO">
+        SELECT * FROM TB_USER  WHERE user_id=#{user_id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getUserInfoByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.UserVO">
+        SELECT * FROM TB_USER  WHERE IDX_USER=#{idx_user}
+    </select>
+
+    <select id="getAuthUser" resultType="kr.or.fact.core.model.DTO.UserVO">
+        SELECT * FROM TB_USER WHERE user_id=#{user_id} AND user_pw=#{user_pw}
+    </select>
+
+    <select id="getUserInfoByNameAndMPhoneNum" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.UserVO">
+        SELECT * FROM TB_USER WHERE USER_NAME='#{user_name}' AND MPHONE_NUM='#{mphone_num}'
+    </select>
+
+    <select id="getAllUserList" resultType="kr.or.fact.core.model.DTO.UserVO">
+        SELECT * FROM  TB_USER;
+    </select>
+
+    <select id="getUserSpecialInfoPagingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.PagedUserListVO">
+        SELECT
+               user_id
+               ,user_name
+               ,mphone_num
+        FROM (
+            SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+              ,user_id
+              ,user_name
+              ,mphone_num
+            FROM TB_USER
+            WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+        )
+        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+    </select>
+    <select id="getUserPagingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.UserVO">
+        SELECT
+                *
+        FROM (
+            SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+                t.*
+            FROM TB_USER t
+            WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+            )
+        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+    </select>
+
+    <select id="getUserCount" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM  TB_USER
+        <if test='user_type != 99'> WHERE USER_TYPE = #{user_type}</if> ;
+    </select>
+
+    <select id="selectList" parameterType="kr.or.fact.core.model.DTO.UserVO" resultType="kr.or.fact.core.model.DTO.UserVO">
+        SELECT * FROM (
+                          SELECT t.*
+                          FROM C##FACT_USR.TB_USER t
+                      ) WHERE ROWNUM <![CDATA[ <= ]]> 501
+    </select>
+
+    <insert id="insertUserInfo" parameterType="kr.or.fact.core.model.DTO.UserVO">
+        INSERT INTO TB_USER (
+            IDX_USER,
+            USER_ID,
+            USER_PW,
+            USER_NAME,
+            ADDR,
+            TEL_NUM,
+            MPHONE_NUM,
+            EMAIL,
+            USER_TYPE,
+            BAN_MEMO,
+            IS_SERVICE_AGREE,
+            SERVICE_AGREE_VER,
+            IS_PRIVACY_AGREE,
+            PRIVACY_AGREE_VER,
+            IS_THIRD_PARTY_AGREE,
+            THIRD_PARTY_AGREE_VER,
+            IS_MAKETING_AGREE,
+            MAKETING_AGREE_VER,
+            AUTH_STATUS,
+            IS_APPLICANT,
+            IS_CORPORATE_MEMBER,
+            IDX_CORP_INFO,
+            SIGN_IN_TYPE,
+            REG_DATE,
+            LAST_UPD_DATE
+        ) VALUES (
+             SEQ_USER.NEXTVAL,
+             #{user_id},
+             #{user_pw},
+             #{user_name},
+             #{addr},
+             #{tel_num},
+             #{mphone_num},
+             #{email},
+             #{user_type},
+             #{ban_memo},
+             #{is_service_agree},
+             #{service_agree_ver},
+             #{is_privacy_agree},
+             #{privacy_agree_ver},
+             #{is_third_party_agree},
+             #{third_party_agree_ver},
+             #{is_maketing_agree},
+             #{maketing_agree_ver},
+             #{auth_status},
+             #{is_applicant},
+             #{is_corporate_member},
+             #{idx_corp_info},
+             #{sign_in_type},
+             TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS'),
+             TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+        )
+    </insert>
+
+
+    <update id="updateUserInfo" parameterType="kr.or.fact.core.model.DTO.UserVO">
+
+
+    </update>
+    <update id="updateUserInfoForLogout" parameterType="string">
+        UPDATE TB_USER
+        SET
+            LAST_UPD_DATE = SYSDATE
+        WHERE USER_ID='#{user_id}'
+    </update>
+
+    <delete id="deleteUserInfoByID" parameterType="string">
+        DELETE TB_USER WHERE  USER_ID = '#{user_id}'
+    </delete>
+
+    <delete id="deleteUserInfoByIdx" parameterType="long">
+        DELETE TB_USER WHERE  IDX_USER = #{idx_user}
+    </delete>
+
+
+</mapper>
