@@ -20,7 +20,7 @@
     </parent>
     <groupId>kr.or.fact</groupId>
     <artifactId>fact_multimodule</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <name>fact_multimodule</name>
     <description>fact_multimodule</description>
     <properties>
