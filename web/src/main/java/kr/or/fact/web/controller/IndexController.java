@@ -1,4 +1,4 @@
-package kr.or.fact.core.controller;
+package kr.or.fact.web.controller;
 
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.model.DemoBsDAO;
