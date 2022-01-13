@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SMART FARM</title>
+  <link rel="shortcut icon" href="../assets/image/favicon_16.ico">
+  <link rel="icon" href="../assets/image/favicon_16.png">
+  <link rel="apple-touch-icon-precomposed" href="../assets/image/favicon_152.png">
+  <link rel="stylesheet" type="text/css" href="../assets/css/jquery-ui.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+</head>
+<body>
+<div class="wrapper" id="wrapper">
+  <header class="header">
+    <h1><a href="main.html"><img src="../assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
+    <nav class="nav"><!--is-expanded-->
+      <ul class="nav--depth1">
+        <li><a href="#" class="is-selected">실증 안내/신청</a>
+          <ul class="nav--depth2">
+            <li><a href="prv_part.html">실증 분야</a></li>
+            <li><a href="prv_step.html">실증 절차</a></li>
+            <li><a href="prv_use.html">이용가능시설</a></li>
+            <li><a href="prv_fee.html">실증서비스 이용료</a></li>
+            <li><a href="prv_application.html">신청서 작성</a></li>
+          </ul>
+        </li>
+        <li><a href="#" class="">센터소개</a><!--is-selected-->
+          <ul class="nav--depth2">
+            <li><a href="cnt_goal.html">비전과 미션</a></li>
+            <li><a href="cnt_history.html">연혁</a></li>
+            <li><a href="cnt_organize.html">조직과 직원</a></li>
+            <li><a href="cnt_map.html">찾아오시는 길</a></li>
+          </ul>
+        </li>
+        <li><a href="#" class="">열린마당</a>
+          <ul class="nav--depth2">
+            <li><a href="brd_notice.html">공지사항</a></li>
+            <li><a href="brd_announce.html">사업공고</a></li>
+            <li><a href="brd_event.html">행사안내</a></li>
+            <li><a href="brd_promotion.html">홍보자료</a></li>
+          </ul>
+        </li>
+        <li><a href="#" class="">자료실</a>
+          <ul class="nav--depth2">
+            <!--<li><a href="arc_center.html">실증단지소개</a></li>
+            <li><a href="arc_pee.html">서비스 이용료</a></li>-->
+            <li><a href="arc_form.html">관련 양식</a></li>
+            <li><a href="arc_rule.html">관련 규정</a></li>
+          </ul>
+        </li>
+        <li><a href="#" class="">고객 지원</a>
+          <ul class="nav--depth2">
+            <li><a href="spt_faq.html">FAQ</a></li>
+            <li><a href="spt_prevent.html">대면상담 신청</a></li>
+            <li><a href="spt_email.html">이메일상담</a></li>
+            <li><a href="spt_visit.html">견학 신청</a></li>
+          </ul>
+        </li>
+        <li><a href="#" class="">마이 페이지</a>
+          <ul class="nav--depth2">
+            <li><a href="my_business1.html">나의 사업</a></li>
+            <li><a href="my_info.html">나의 정보</a></li>
+            <li><a href="my_group.html">나의 상담 및 정보</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <div class="common__control">
+      <div class="search__box"><a href="#search__box" class="js-search-box"><img src="../assets/image/ico_search.svg" alt="검색"></a></div>
+      <div class="menu__anchor"><a href="#"><img src="../assets/image/ico_menu.svg" alt="전체메뉴열기"></a></div>
+    </div>
+    <div class="common__login">
+      <div class="login__info">
+        홍길동 . 소속정보 <a href="#none" class="login__console">콘솔 가기</a>
+      </div>
+      <div class="login__anchor">
+        <a href="login.html"><img src="../assets/image/ico_exit.svg" alt="">로그아웃</a>
+        <a href="login.html"><img src="../assets/image/ico_login_n.svg" alt="">로그인</a>
+        <a href="login.html"><img src="../assets/image/ico_user.svg" alt="">회원가입</a>
+      </div>
+    </div>
+
+    <div class="search__box--full " id="search__box">
+      <div class="search__box--inner">
+        <input type="text" placeholder="검색어를 입력하세요" class="search__common">
+        <a href="#none" class="btn-close-search"><img src="../assets/image/ico_close.png" alt="레이어닫기"></a>
+        <div class="search__word--lists">
+          <span class="search__word--title">빠른링크</span>
+          <a href="#none" class="search__word">실증 신청 방법</a>
+          <a href="#none" class="search__word">실증 신청서 샘플</a>
+          <a href="#none" class="search__word">실증 센터란?</a>
+          <a href="#none" class="search__word">이용료</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav__full--box ">
+      <div class="nav_full--inner">
+        <a href="#none" class="btn-close-menu"><img src="../assets/image/ico_close.svg" alt="레이어닫기"></a>
+        <h2><img src="../assets/image/h1_logo@3x.png" alt="스마트팜 실증센터"></h2>
+        <nav class="nav__full">
+          <ul class="nav__full--depth1">
+            <li><a href="#">실증 안내/신청</a>
+              <ul class="nav__full--depth2">
+                <li><a href="prv_part.html">실증 분야</a></li>
+                <li><a href="prv_step.html">실증 절차</a></li>
+                <li><a href="prv_use.html">이용가능시설</a></li>
+                <li><a href="prv_fee.html">실증서비스 이용료</a></li>
+                <li><a href="prv_application.html">신청서 작성</a></li>
+                <li><a href="#">신청 결과 확인</a></li>
+                <li><a href="#">관계사이트</a></li>
+              </ul>
+            </li>
+            <li><a href="#" class="is-selected">센터소개</a>
+              <ul class="nav__full--depth2">
+                <li><a href="cnt_coal.html">실증센터 소개</a></li>
+                <li><a href="cnt_history.html">실증센터 연혁</a></li>
+                <li><a href="#">실증센터 목적</a></li>
+                <li><a href="cnt_organize.html">조직 및 직원 소개</a></li>
+                <li><a href="cnt_map.html">찾아오시는 길</a></li>
+              </ul>
+            </li>
+            <li><a href="#">열린마당</a>
+              <ul class="nav__full--depth2">
+                <li><a href="brd_notice.html">공지사항</a></li>
+                <li><a href="brd_announce.html">사업공고</a></li>
+                <li><a href="brd_event.html">행사안내</a></li>
+                <li><a href="brd_promotion.html">홍보자료</a></li>
+                <li><a href="brd_visit.html">견학신청</a></li>
+              </ul>
+            </li>
+            <li><a href="#">자료실</a>
+              <ul class="nav__full--depth2">
+                <!--<li><a href="arc_center.html">실증단지소개</a></li>
+                <li><a href="arc_pee.html">서비스 이용료</a></li>
+                <li><a href="#">실증기업 확인 데이터</a></li>-->
+                <li><a href="arc_form.html">관련양식</a></li>
+                <li><a href="arc_rule.html">관련규정</a></li>
+              </ul>
+            </li>
+            <li><a href="#">고객 지원</a>
+              <ul class="nav__full--depth2">
+                <li><a href="spt_faq.html">FAQ</a></li>
+                <li><a href="#">체험하기</a></li>
+                <li><a href="spt_prevent.html">시스템 개선 의견</a></li>
+              </ul>
+            </li>
+            <li><a href="#">마이 페이지</a>
+              <ul class="nav__full--depth2">
+                <li><a href="my_info.html">내 정보 관리</a></li>
+                <li><a href="my_agreement.html">기업 정보 관리</a></li>
+                <li><a href="my_prove.html">실증 신청 현황</a></li>
+                <li><a href="spt_prevent.html">사전 상담</a></li>
+                <li><a href="my_inquiry.html">1:1 문의</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="content" id="content">
+    <div class="page__body">
+      <div class="page__breadcrumbs--box">
+        <div class="page__breadcrumbs--inner">
+          <span>홈</span>
+          <span>실증 안내/신청</span>
+          <div class="under__depth">
+            <a href="#" class="under__depth--anchor">실증서비스 이용료</a>
+            <div class="under__depth--list">
+              <a href="prv_part.html">실증 분야</a>
+              <a href="prv_step.html">실증 절차</a>
+              <a href="prv_use.html">이용가능시설</a>
+              <a href="prv_fee.html">실증서비스 이용료</a>
+              <a href="prv_application.html">신청서 작성</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page__menu--box">
+        <div class="page__menu--inner">
+          <h2 class="page__title">실증서비스 이용료</h2>
+          <div class="page__location">
+            <div class="location__deco">텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트</div>
+            <div class="location__link">
+              <a href="prv_fee.html" class="location__link--anchor ">개요</a>
+              <a href="prv_facility.html" class="location__link--anchor is-selected">실증시설</a>
+              <a href="prv_support.html" class="location__link--anchor ">지원시설</a>
+              <a href="prv_bill.html" class="location__link--anchor ">공과금</a>
+              <a href="prv_subsidy.html" class="location__link--anchor ">보증금</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page__cnt">
+        <h3 class="page__subject">실증시설</h3>
+        <div class="page__comment">실증시설 이용료는 시설별 사용일수를 기준으로 부과됩니다.</div>
+
+        <div class="fee__container">
+
+          <div class="cnt__title">실증시설 이용료 산정기준 및 방법</div>
+
+          <div class="table__type">
+            <table class="table__type--normal">
+              <colgroup>
+                <col style="width:30%"></col>
+                <col style="width:70%"></col>
+              </colgroup>
+              <tbody>
+              <tr>
+                <th>부과대상</th>
+                <td>노지, 유리온실, 비닐온실</td>
+              </tr>
+              <tr>
+                <th>부과기준</th>
+                <td>사용승인 실증시설의 재산평정가격 1%</td>
+              </tr>
+              <tr>
+                <th>금액산출</th>
+                <td>사용승인 시설의 1일사용료×사용승인일수</td>
+              </tr>
+              <tr>
+                <td colspan="2">사용공과금은 별도 부과</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table__type">
+            <table class="table__type--normal">
+              <colgroup>
+                <col style="width:6%"></col>
+                <col style="width:6%"></col>
+                <col style="width:6%"></col>
+                <col style="width:8%"></col>
+                <col style="width:8%"></col>
+                <col style="width:8%"></col>
+                <col style="width:8%"></col>
+                <col style="width:14%"></col>
+                <col style="width:9%"></col>
+                <col style="width:9%"></col>
+                <col style="width:9%"></col>
+                <col style="width:9%"></col>
+              </colgroup>
+              <thead>
+              <tr>
+                <th rowspan="2">번호</th>
+                <th rowspan="2">실증<br>시설</th>
+                <th rowspan="2">세부<br>명칭</th>
+                <th colspan="2">사용승인 면적(㎡)</th>
+                <th colspan="2">면적당 재산평정가격(원)</th>
+                <th rowspan="2">대부료</th>
+                <th rowspan="2">기준<br>금액</th>
+                <th rowspan="2">1일<br>사용료</th>
+                <th rowspan="2">사용승인<br>일수</th>
+                <th rowspan="2">이용료</th>
+              </tr>
+              <tr>
+                <th>전용면적</th>
+                <th>공용면적</th>
+                <th>전용면적</th>
+                <th>공용면적</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td colspan="3">산출식</td>
+                <td>a</td>
+                <td>b</td>
+                <td>c</td>
+                <td>d</td>
+                <td>e=(a×c)+(b×d)</td>
+                <td>e*1%</td>
+                <td>f=e/365</td>
+                <td>g</td>
+                <td>h=f×g</td>
+              </tr>
+              <tr>
+                <td rowspan="2">1</td>
+                <td rowspan="2">토지</td>
+                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td rowspan="2">2</td>
+                <td rowspan="2">비닐<br>온실</td>
+                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td rowspan="2" class="last-child">3</td>
+                <td rowspan="2" class="last-child">유리<br>온실</td>
+                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!--//-->
+      </div>
+
+    </div>
+  </div>
+  <div class="btn_top"><a href="#wrapper">▲<br>TOP</a></div>
+  <div class="footer">
+    <div class="footer__box">
+      <ul class="footer__anchor">
+        <li><a href="#none">서비스이용약관</a></li>
+        <li><a href="#none">개인정보처리방침</a></li>
+        <li><a href="#none">부패신고바로하기</a></li>
+        <li><a href="#none">홈페이지 개선의견</a></li>
+        <li><a href="#none">사이트 맵</a></li>
+      </ul>
+      <div class="footer__info">
+        <h3 class="footer__logo"><img src="../assets/image/logo_footer.svg" alt=""></h3>
+        <div class="footer__address">54667 전라북도 익산시 평동로 457 (송학동 381) TEL 063-919-1000 FAX 063-919-1269</div>
+        <div class="footer__copyright">Copyright(c) 2010 The Foundation of AG. Tech, Commercialization and Transfer. All Rights Reserved.</div>
+      </div>
+      <div class="footer__site">
+        <span><img src="../assets/image/footer_mark.png" alt=""></span>
+        <select name="a" id="a">
+          <option value="1">관련부처 사이트</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="../assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+<script src="../assets/js/lib/swiper.min.js" type="text/javascript"></script>
+<script src="../assets/js/ui.common.js" type="text/javascript"></script>
+
+</body>
+</html>
