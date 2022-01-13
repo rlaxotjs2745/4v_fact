@@ -16,7 +16,38 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
-
+    <profiles>
+        <profile>
+            <id>application-local</id>
+            <properties>
+                <env>resources</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>application-dev</id>
+            <properties>
+                <env>resources</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>application</id>
+            <properties>
+                <env>resources</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>application-sangju-prod</id>
+            <properties>
+                <env>resources</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>application-gimje-prod</id>
+            <properties>
+                <env>resources</env>
+            </properties>
+        </profile>
+    </profiles>
     <dependencies>
         <dependency>
             <groupId>kr.or.fact</groupId>
