@@ -15,6 +15,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <mainClassPath>src/main/java/kr/or/fact/core/CoreApplication.java</mainClassPath>
     </properties>
 
     <build>
@@ -31,11 +32,14 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <!-- jar로 package 될 때 classpath 추가 옵션 -->
                             <addClasspath>true</addClasspath>
-                            <!-- 사용되는 라이브러리나 모듈들의 경로를 lib 디렉토리로 설정 -->
-                            <classpathPrefix>src</classpathPrefix>
+                            <mainClass>${mainClassPath}</mainClass>
                         </manifest>
+                        <!-- conf 폴더에 담은 설정 파일들을 classpath에 추가 -->
+                        <!-- 해당 옵션을 주지 않으면 core.jar를 실행 할 때 conf폴더에 있는 설정을 읽지 못함 -->
+                        <manifestEntries>
+                            <Class-Path>resources/</Class-Path>
+                        </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>
