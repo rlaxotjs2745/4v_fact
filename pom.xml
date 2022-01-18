@@ -27,6 +27,12 @@
         <java.version>1.8</java.version>
         <egovframework.rte.version>3.10.0</egovframework.rte.version>
         <log4j2.version>2.15.0</log4j2.version>
+<!--        <api-version>1.0-SNAPSHOT</api-version>-->
+<!--        <admin-version>1.0-SNAPSHOT</admin-version>-->
+<!--        <web-version>1.0-SNAPSHOT</web-version>-->
+<!--        <web-mobile-version>1.0-SNAPSHOT</web-mobile-version>-->
+<!--        <console-version>1.0-SNAPSHOT</console-version>-->
+<!--        <core-version>1.0-SNAPSHOT</core-version>-->
     </properties>
     <url>https://www.egovframe.go.kr</url>
 
