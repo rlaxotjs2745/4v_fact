@@ -15,34 +15,15 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <mainClassPath>src/main/java/kr/or/fact/core/CoreApplication.java</mainClassPath>
     </properties>
 
     <build>
-        <sourceDirectory>src/</sourceDirectory>
-        <!-- resource 경로는 다른 프로젝트에서 설명 -->
-        <resources></resources>
         <plugins>
             <plugin>
-                <!-- mavne jar plugin -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.3.2</version>
-                <!-- 설정 정보 -->
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>${mainClassPath}</mainClass>
-                        </manifest>
-                        <!-- conf 폴더에 담은 설정 파일들을 classpath에 추가 -->
-                        <!-- 해당 옵션을 주지 않으면 core.jar를 실행 할 때 conf폴더에 있는 설정을 읽지 못함 -->
-                        <manifestEntries>
-                            <Class-Path>resources/</Class-Path>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
         </plugins>
     </build>
 </project>
