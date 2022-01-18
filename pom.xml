@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>api</module>
         <module>admin</module>
         <module>console</module>
         <module>web</module>
         <module>web_mobile</module>
+        <module>api</module>
         <module>core</module>
     </modules>
     <parent>
