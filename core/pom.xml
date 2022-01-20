@@ -18,27 +18,12 @@
     </properties>
 
     <build>
-        <sourceDirectory>src/</sourceDirectory>
-        <!-- resource 경로는 다른 프로젝트에서 설명 -->
-        <resources></resources>
         <plugins>
             <plugin>
-                <!-- mavne jar plugin -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.3.2</version>
-                <!-- 설정 정보 -->
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <!-- jar로 package 될 때 classpath 추가 옵션 -->
-                            <addClasspath>true</addClasspath>
-                            <!-- 사용되는 라이브러리나 모듈들의 경로를 lib 디렉토리로 설정 -->
-                            <classpathPrefix>src</classpathPrefix>
-                        </manifest>
-                    </archive>
-                </configuration>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
         </plugins>
     </build>
 </project>
