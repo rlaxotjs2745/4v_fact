@@ -19,6 +19,7 @@
 <!--        <web-mobile-version>1.0-SNAPSHOT</web-mobile-version>-->
 <!--        <console-version>1.0-SNAPSHOT</console-version>-->
 <!--        <core-version>1.0-SNAPSHOT</core-version>-->
+        <start-class>kr.or.fact.admin.AdminApplication</start-class>
     </properties>
     <profiles>
         <profile>
