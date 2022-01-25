@@ -31,51 +31,38 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
 
-        String username = actuatorGreenhouseComplexGimjeVO.getUsername();
         String key = actuatorGreenhouseComplexGimjeVO.getKey();
 
-        if(key == null && username == null){
-            result.setResult_code("code_004");
-            result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
-            result.setKey(null);
-            return result;
-        } else if(key == null) {
+        if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
-            return result;
-        } else if(username == null) {
-            result.setResult_code("code_004");
-            result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
-            result.setKey(key);
             return result;
         }
 
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertActuatorGreenhouseComplexGimje(actuatorGreenhouseComplexGimjeVO) != 0){
+        if(!apiService.isValid(key, 1)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertActuatorGreenhouseComplexGimje(actuatorGreenhouseComplexGimjeVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
 
@@ -95,7 +82,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -106,19 +92,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -126,20 +109,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertActuatorGreenhouseComplexSangju(actuatorGreenhouseComplexSangjuVO) != 0){
+        if(!apiService.isValid(key, 2)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertActuatorGreenhouseComplexSangju(actuatorGreenhouseComplexSangjuVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -159,7 +144,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -170,19 +154,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -190,20 +171,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertActuatorGreenhouseGlass(actuatorGreenhouseGlassVO) != 0){
+        if(!apiService.isValid(key, 3)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertActuatorGreenhouseGlass(actuatorGreenhouseGlassVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -226,51 +209,38 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
 
-        String username = actuatorGreenhouseSingleGimjeVO.getUsername();
         String key = actuatorGreenhouseSingleGimjeVO.getKey();
 
-        if(key == null && username == null){
-            result.setResult_code("code_004");
-            result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
-            result.setKey(null);
-            return result;
-        } else if(key == null) {
+        if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
-            return result;
-        } else if(username == null) {
-            result.setResult_code("code_004");
-            result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
-            result.setKey(key);
             return result;
         }
 
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertActuatorGreenhouseSingleGimje(actuatorGreenhouseSingleGimjeVO) != 0){
+        if(!apiService.isValid(key, 4)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertActuatorGreenhouseSingleGimje(actuatorGreenhouseSingleGimjeVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -289,7 +259,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -300,19 +269,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -320,20 +286,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertActuatorGreenhouseSingleSangju(actuatorGreenhouseSingleSangjuVO) != 0){
+        if(!apiService.isValid(key, 5)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertActuatorGreenhouseSingleSangju(actuatorGreenhouseSingleSangjuVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -357,7 +325,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -368,19 +335,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -388,20 +352,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertEnvGreenhouseComplex(envGreenhouseComplexVO) != 0){
+        if(!apiService.isValid(key, 6)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertEnvGreenhouseComplex(envGreenhouseComplexVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -425,7 +391,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -436,19 +401,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -456,20 +418,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertEnvGreenhouseGlass(envGreenhouseGlassVO) != 0){
+        if(!apiService.isValid(key, 7)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertEnvGreenhouseGlass(envGreenhouseGlassVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -494,7 +458,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -505,19 +468,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -525,20 +485,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertEnvGreenhouseSingle(envGreenhouseSingleVO) != 0){
+        if(!apiService.isValid(key, 8)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertEnvGreenhouseSingle(envGreenhouseSingleVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -559,7 +521,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -570,19 +531,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -590,20 +548,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertEnvWeather(envWeatherVO) != 0){
+        if(!apiService.isValid(key, 9)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertEnvWeather(envWeatherVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -635,7 +595,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -646,19 +605,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -666,20 +622,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertNowGreenhouseComplexGimje(nowGreenhouseComplexGimjeVO) != 0){
+        if(!apiService.isValid(key, 10)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertNowGreenhouseComplexGimje(nowGreenhouseComplexGimjeVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -706,7 +664,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -717,19 +674,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -737,20 +691,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertNowGreenhouseComplexSangju(nowGreenhouseComplexSangjuVO) != 0){
+        if(!apiService.isValid(key, 11)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertNowGreenhouseComplexSangju(nowGreenhouseComplexSangjuVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -778,7 +734,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -789,19 +744,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -809,20 +761,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertNowGreenhouseGlass(nowGreenhouseGlassVO) != 0){
+        if(!apiService.isValid(key, 12)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertNowGreenhouseGlass(nowGreenhouseGlassVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -853,7 +807,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -864,19 +817,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -884,20 +834,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertNowGreenhouseSingleGimje(nowGreenhouseSingleGimjeVO) != 0){
+        if(!apiService.isValid(key, 13)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertNowGreenhouseSingleGimje(nowGreenhouseSingleGimjeVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -924,7 +876,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -935,19 +886,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -955,20 +903,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertNowGreenhouseSingleSangju(nowGreenhouseSingleSangjuVO) != 0){
+        if(!apiService.isValid(key, 14)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertNowGreenhouseSingleSangju(nowGreenhouseSingleSangjuVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -989,7 +939,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -1000,19 +949,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -1020,20 +966,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertNowWeather(nowWeatherVO) != 0){
+        if(!apiService.isValid(key, 15)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertNowWeather(nowWeatherVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -1054,7 +1002,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -1065,19 +1012,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -1085,20 +1029,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataACMotor(verifyDataACMotorVO) != 0){
+        if(!apiService.isValid(key, 16)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataACMotor(verifyDataACMotorVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -1187,7 +1133,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -1198,19 +1143,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -1218,20 +1160,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataAirconAnalysis(verifyDataAirconAnalysisVO) != 0){
+        if(!apiService.isValid(key, 17)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataAirconAnalysis(verifyDataAirconAnalysisVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -1266,7 +1210,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -1277,19 +1220,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -1297,20 +1237,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataAirconEffect(verifyDataAirconEffectVO) != 0){
+        if(!apiService.isValid(key, 18)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataAirconEffect(verifyDataAirconEffectVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -1333,7 +1275,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -1344,19 +1285,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -1364,20 +1302,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataCO2(verifyDataCO2VO) != 0){
+        if(!apiService.isValid(key, 19)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataCO2(verifyDataCO2VO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -1398,7 +1338,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -1409,19 +1348,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -1429,20 +1365,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataDCMotor(verifyDataDCMotorVO) != 0){
+        if(!apiService.isValid(key, 20)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataDCMotor(verifyDataDCMotorVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -1464,7 +1402,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -1475,19 +1412,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -1495,20 +1429,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataDust(verifyDataDustVO) != 0){
+        if(!apiService.isValid(key, 21)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataDust(verifyDataDustVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -1529,7 +1465,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -1540,19 +1475,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -1560,20 +1492,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataECSensor(verifyDataECSensorVO) != 0){
+        if(!apiService.isValid(key, 22)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataECSensor(verifyDataECSensorVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -1689,7 +1623,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -1700,19 +1633,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -1720,20 +1650,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataHeatFlow(verifyDataHeatFlowVO) != 0){
+        if(!apiService.isValid(key, 23)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataHeatFlow(verifyDataHeatFlowVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -1752,7 +1684,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -1763,19 +1694,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -1783,20 +1711,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataWind(verifyDataWindVO) != 0){
+        if(!apiService.isValid(key, 24)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataWind(verifyDataWindVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -1818,7 +1748,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -1829,19 +1758,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -1849,20 +1775,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataWaterProof(verifyDataWaterProofVO) != 0){
+        if(!apiService.isValid(key, 25)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataWaterProof(verifyDataWaterProofVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -1884,7 +1812,6 @@ public class ApiController {
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -1895,19 +1822,16 @@ public class ApiController {
         if(key == null && username == null){
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if(key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if(username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -1915,20 +1839,22 @@ public class ApiController {
         if(!apiService.selectKey(key)){
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataWaterProofRobot(verifyDataWaterProofRobotVO) != 0){
+        if(!apiService.isValid(key, 26)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataWaterProofRobot(verifyDataWaterProofRobotVO) != 0){
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
         return result;
@@ -1947,7 +1873,6 @@ public class ApiController {
         ) {
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -1958,19 +1883,16 @@ public class ApiController {
         if (key == null && username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if (key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if (username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -1978,20 +1900,22 @@ public class ApiController {
         if (!apiService.selectKey(key)) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataHotShockRobot(verifyDataHotShockRobotVO) != 0) {
+        if(!apiService.isValid(key, 27)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataHotShockRobot(verifyDataHotShockRobotVO) != 0) {
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
 
@@ -2012,7 +1936,6 @@ public class ApiController {
         ) {
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -2023,19 +1946,16 @@ public class ApiController {
         if (key == null && username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if (key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if (username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -2043,20 +1963,22 @@ public class ApiController {
         if (!apiService.selectKey(key)) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataHotShock(verifyDataHotShockVO) != 0) {
+        if(!apiService.isValid(key, 28)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataHotShock(verifyDataHotShockVO) != 0) {
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
 
@@ -2081,7 +2003,6 @@ public class ApiController {
         ) {
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -2092,19 +2013,16 @@ public class ApiController {
         if (key == null && username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if (key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if (username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -2112,20 +2030,22 @@ public class ApiController {
         if (!apiService.selectKey(key)) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataMaterialBig(verifyDataMaterialBigVO) != 0) {
+        if(!apiService.isValid(key, 29)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataMaterialBig(verifyDataMaterialBigVO) != 0) {
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
 
@@ -2149,7 +2069,6 @@ public class ApiController {
         ) {
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -2160,19 +2079,16 @@ public class ApiController {
         if (key == null && username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if (key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if (username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -2180,20 +2096,22 @@ public class ApiController {
         if (!apiService.selectKey(key)) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataMaterialSmall(verifyDataMaterialSmallVO) != 0) {
+        if(!apiService.isValid(key, 30)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataMaterialSmall(verifyDataMaterialSmallVO) != 0) {
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
 
@@ -2212,7 +2130,6 @@ public class ApiController {
         ) {
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -2223,19 +2140,16 @@ public class ApiController {
         if (key == null && username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if (key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if (username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -2243,20 +2157,22 @@ public class ApiController {
         if (!apiService.selectKey(key)) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataMoisture(verifyDataMoistureVO) != 0) {
+        if(!apiService.isValid(key, 31)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataMoisture(verifyDataMoistureVO) != 0) {
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
 
@@ -2281,7 +2197,6 @@ public class ApiController {
         ) {
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -2292,19 +2207,16 @@ public class ApiController {
         if (key == null && username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if (key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if (username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -2312,20 +2224,22 @@ public class ApiController {
         if (!apiService.selectKey(key)) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataNetrientSupplier(verifyDataNetrientSupplierVO) != 0) {
+        if(!apiService.isValid(key, 32)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataNetrientSupplier(verifyDataNetrientSupplierVO) != 0) {
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
 
@@ -2346,7 +2260,6 @@ public class ApiController {
         ) {
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -2357,19 +2270,16 @@ public class ApiController {
         if (key == null && username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if (key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if (username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -2377,20 +2287,22 @@ public class ApiController {
         if (!apiService.selectKey(key)) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataPH(verifyDataPHVO) != 0) {
+        if(!apiService.isValid(key, 33)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataPH(verifyDataPHVO) != 0) {
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
 
@@ -2412,7 +2324,6 @@ public class ApiController {
         ) {
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -2423,19 +2334,16 @@ public class ApiController {
         if (key == null && username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if (key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if (username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -2443,20 +2351,22 @@ public class ApiController {
         if (!apiService.selectKey(key)) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataPosmeasure(verifyDataPosmeasureVO) != 0) {
+        if(!apiService.isValid(key, 34)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataPosmeasure(verifyDataPosmeasureVO) != 0) {
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
 
@@ -2529,7 +2439,6 @@ public class ApiController {
         ) {
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -2540,19 +2449,16 @@ public class ApiController {
         if (key == null && username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if (key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if (username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -2560,20 +2466,22 @@ public class ApiController {
         if (!apiService.selectKey(key)) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataSensorTest(verifyDataSensorTestVO) != 0) {
+        if(!apiService.isValid(key, 35)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataSensorTest(verifyDataSensorTestVO) != 0) {
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
 
@@ -2595,7 +2503,6 @@ public class ApiController {
         ) {
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -2606,19 +2513,16 @@ public class ApiController {
         if (key == null && username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if (key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if (username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -2626,20 +2530,22 @@ public class ApiController {
         if (!apiService.selectKey(key)) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataSoilMoisture(verifyDataSoilMoistureVO) != 0) {
+        if(!apiService.isValid(key, 36)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataSoilMoisture(verifyDataSoilMoistureVO) != 0) {
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
 
@@ -2661,7 +2567,6 @@ public class ApiController {
         ) {
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -2672,19 +2577,16 @@ public class ApiController {
         if (key == null && username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if (key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if (username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -2692,20 +2594,22 @@ public class ApiController {
         if (!apiService.selectKey(key)) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataSunLightRawData(verifyDataSunLightRawDataVO) != 0) {
+        if(!apiService.isValid(key, 37)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataSunLightRawData(verifyDataSunLightRawDataVO) != 0) {
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
 
@@ -2726,7 +2630,6 @@ public class ApiController {
         ) {
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -2737,19 +2640,16 @@ public class ApiController {
         if (key == null && username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if (key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if (username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -2757,20 +2657,22 @@ public class ApiController {
         if (!apiService.selectKey(key)) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataSunLight(verifyDataSunLightVO) != 0) {
+        if(!apiService.isValid(key, 38)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataSunLight(verifyDataSunLightVO) != 0) {
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
 
@@ -2803,7 +2705,6 @@ public class ApiController {
         ) {
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -2814,19 +2715,16 @@ public class ApiController {
         if (key == null && username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if (key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if (username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -2834,20 +2732,22 @@ public class ApiController {
         if (!apiService.selectKey(key)) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataThermoHygrostat(verifyDataThermoHygrostatVO) != 0) {
+        if(!apiService.isValid(key, 39)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataThermoHygrostat(verifyDataThermoHygrostatVO) != 0) {
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
 
@@ -2868,7 +2768,6 @@ public class ApiController {
         ) {
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         }
@@ -2879,19 +2778,16 @@ public class ApiController {
         if (key == null && username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디와 인증 키가 없습니다.");
-            result.setUsername(null);
             result.setKey(null);
             return result;
         } else if (key == null) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 없습니다. 인증 키를 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         } else if (username == null) {
             result.setResult_code("code_004");
             result.setMessage("아이디를 입력해주세요.");
-            result.setUsername(null);
             result.setKey(key);
             return result;
         }
@@ -2899,20 +2795,22 @@ public class ApiController {
         if (!apiService.selectKey(key)) {
             result.setResult_code("code_004");
             result.setMessage("인증 키가 만료되었습니다. 새로 발급해주세요.");
-            result.setUsername(username);
             result.setKey(null);
             return result;
         }
 
-        if (apiService.insertVerifyDataVibration(verifyDataVibrationVO) != 0) {
+        if(!apiService.isValid(key, 40)){
+            result.setResult_code("code_004");
+            result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
+            result.setKey(key);
+        }
+        else if (apiService.insertVerifyDataVibration(verifyDataVibrationVO) != 0) {
             result.setResult_code("code_001");
             result.setMessage("데이터가 성공적으로 입력되었습니다.");
-            result.setUsername(username);
             result.setKey(key);
         } else {
             result.setResult_code("code_002");
             result.setMessage("데이터베이스 이상으로 입력에 실패했습니다.");
-            result.setUsername(username);
             result.setKey(key);
         }
 

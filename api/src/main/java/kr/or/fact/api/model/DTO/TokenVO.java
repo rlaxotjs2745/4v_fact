@@ -9,7 +9,6 @@ import java.util.Date;
 public class TokenVO {
     long idx_user;
     String key;
-    String username;
     String created;
     String expired;
 }

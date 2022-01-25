@@ -93,7 +93,9 @@ public interface DAO {
 
     public TokenVO selectKey(@Param("key") String key);
 
-    public TokenVO selectUserIdx(@Param("username") String username);
+    public TokenVO selectUserIdx(@Param("userId") String userId, @Param("password") String password);
 
     public TokenVO updateUserKey(TokenVO tokenVO);
+
+    public UserFacJoinVO isValid(@Param("key") String key, @Param("fac") long fac);
 }

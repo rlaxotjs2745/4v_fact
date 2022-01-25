@@ -6,10 +6,7 @@ import kr.or.fact.api.model.DTO.UserVO;
 import kr.or.fact.api.service.ApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.time.LocalDateTime;
@@ -22,18 +19,16 @@ public class GetKeyController {
     public ApiService apiService;
    @RequestMapping(value = "/get_key",method = RequestMethod.POST)
     public @ResponseBody
-   ResultVO getKey (@RequestBody UserVO userVO){
+   ResultVO getKey (@RequestParam("userId") String userId, @RequestParam("password") String password){
        ResultVO resultVO = new ResultVO();
-       String username = userVO.getUsername();
 
-       if(username == null){
+       if(userId == null){
            resultVO.setResult_code("code_003");
            resultVO.setMessage("아이디가 입력되지 않았습니다.");
            resultVO.setKey(null);
-           resultVO.setUsername(null);
            return resultVO;
        }
-       long idx = apiService.selectUserIdx(username);
+       long idx = apiService.selectUserIdx(userId, password);
 
        TokenVO tokenVO = new TokenVO();
 
@@ -41,7 +36,6 @@ public class GetKeyController {
        LocalDateTime now = LocalDateTime.now();
 
        tokenVO.setKey(uuid);
-       tokenVO.setUsername(username);
        tokenVO.setCreated(now.toString());
        tokenVO.setExpired(now.plusDays(1).toString());
 
@@ -52,13 +46,11 @@ public class GetKeyController {
            resultVO.setResult_code("code_002");
            resultVO.setMessage("키 생성을 실패했습니다.");
            resultVO.setKey(null);
-           resultVO.setUsername(username);
            return resultVO;
        }
        resultVO.setResult_code("code_001");
        resultVO.setMessage("키 생성을 성공했습니다.");
        resultVO.setKey(uuid);
-       resultVO.setUsername(username);
 
        return resultVO;
    }

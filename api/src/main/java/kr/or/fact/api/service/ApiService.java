@@ -88,8 +88,9 @@ public interface ApiService {
 
     public boolean selectKey (String key);
 
-    public long selectUserIdx (String username);
+    public long selectUserIdx (String userId, String password);
 
     public boolean updateUserKey (TokenVO tokenVO);
 
+    public boolean isValid(String key, long fac);
 }

@@ -680,8 +680,6 @@ public class ServiceImpl implements ApiService {
         boolean bool = true;
         try {
             TokenVO tokenVO = dao.selectKey(key);
-            System.out.println(key);
-            System.out.println(tokenVO);
             bool = LocalDateTime.now().isBefore(LocalDateTime.parse(tokenVO.getExpired()));
         }
         catch (Exception e){
@@ -691,10 +689,10 @@ public class ServiceImpl implements ApiService {
     }
 
     @Override
-    public long selectUserIdx (String username){
+    public long selectUserIdx (String userId, String password){
         long userIdx = 0;
         try{
-            TokenVO tokenVO = dao.selectUserIdx(username);
+            TokenVO tokenVO = dao.selectUserIdx(userId, password);
 
             userIdx = tokenVO.getIdx_user();
         } catch (Exception e){
@@ -708,6 +706,17 @@ public class ServiceImpl implements ApiService {
         boolean bool = true;
         try{
             dao.updateUserKey(tokenVO);
+        } catch (Exception e){
+            bool = false;
+        }
+        return bool;
+    }
+
+    public boolean isValid(String key, long fac){
+        boolean bool = true;
+        try{
+            UserFacJoinVO joinData = dao.isValid(key, fac);
+            bool = LocalDateTime.now().isBefore(LocalDateTime.parse(joinData.getEnd_date()));
         } catch (Exception e){
             bool = false;
         }

@@ -1660,7 +1660,7 @@
     </select>
 
     <select id="selectUserIdx" resultType="kr.or.fact.api.model.DTO.TokenVO">
-        SELECT * FROM TOKEN WHERE username = #{username}
+        SELECT * FROM TB_USER WHERE user_id = #{userId} AND user_pw = #{password}
     </select>
 
     <update id="updateUserKey" parameterType="kr.or.fact.api.model.DTO.TokenVO">
@@ -1671,5 +1671,10 @@
             expired = #{expired}
         WHERE idx_user = #{idx_user}
     </update>
+
+    <select id="isValid" resultType="kr.or.fact.api.model.DTO.UserFacJoinVO">
+        SELECT * FROM USER_FAC_JOIN
+        WHERE idx_user = (SELECT idx_user FROM TOKEN WHERE key = #{key}) AND idx_asset = #{fac}
+    </select>
 
 </mapper>
