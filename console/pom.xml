@@ -15,6 +15,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <start-class>kr.or.fact.console.ConsoleApplication</start-class>
     </properties>
     <profiles>
         <profile>
