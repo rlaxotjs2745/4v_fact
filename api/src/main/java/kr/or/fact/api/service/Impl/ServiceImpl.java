@@ -4,6 +4,7 @@ import kr.or.fact.api.model.DAO;
 import kr.or.fact.api.model.DTO.*;
 import kr.or.fact.api.service.ApiService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -717,6 +718,16 @@ public class ServiceImpl implements ApiService {
         try{
             UserFacJoinVO joinData = dao.isValid(key, fac);
             bool = LocalDateTime.now().isBefore(LocalDateTime.parse(joinData.getEnd_date()));
+        } catch (Exception e){
+            bool = false;
+        }
+        return bool;
+    }
+
+    public boolean isExistToken(long idx){
+        boolean bool = true;
+        try{
+            dao.isExistToken(idx);
         } catch (Exception e){
             bool = false;
         }

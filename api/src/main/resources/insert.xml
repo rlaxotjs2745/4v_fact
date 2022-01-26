@@ -1675,4 +1675,8 @@
         WHERE idx_asset = #{fac} AND idx_user = (SELECT idx_user FROM TOKEN WHERE key = #{key})
     </select>
 
+    <select id="isExistToken" resultType="kr.or.fact.api.model.DTO.TokenVO">
+        SELECT * FROM TOKEN WHERE idx_user = #{idx}
+    </select>
+
 </mapper>

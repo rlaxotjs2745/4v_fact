@@ -93,4 +93,6 @@ public interface ApiService {
     public boolean updateUserKey (TokenVO tokenVO);
 
     public boolean isValid(String key, long fac);
+
+    public boolean isExistToken(long idx);
 }

@@ -98,4 +98,6 @@ public interface DAO {
     public TokenVO updateUserKey(TokenVO tokenVO);
 
     public UserFacJoinVO isValid(@Param("key") String key, @Param("fac") long fac);
+
+    public TokenVO isExistToken(@Param("idx") long idx);
 }

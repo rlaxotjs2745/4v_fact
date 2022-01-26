@@ -47,7 +47,9 @@ public class GetKeyController {
        tokenVO.setKey(uuid);
        tokenVO.setCreated(now.toString());
        tokenVO.setExpired(now.plusDays(1).toString());
-       if(apiService.insertKey(tokenVO) == 0){
+       if(apiService.isExistToken(idx)){
+           apiService.updateUserKey(tokenVO);
+       } else if(apiService.insertKey(tokenVO) == 0){
            resultVO.setResult_code("code_002");
            resultVO.setMessage("키 생성을 실패했습니다.");
            resultVO.setKey(null);
