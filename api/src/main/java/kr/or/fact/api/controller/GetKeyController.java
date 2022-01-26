@@ -1,5 +1,6 @@
 package kr.or.fact.api.controller;
 
+import kr.or.fact.api.model.DTO.LoginVO;
 import kr.or.fact.api.model.DTO.ResultVO;
 import kr.or.fact.api.model.DTO.TokenVO;
 import kr.or.fact.api.model.DTO.UserVO;
@@ -19,8 +20,10 @@ public class GetKeyController {
     public ApiService apiService;
    @RequestMapping(value = "/get_key",method = RequestMethod.POST)
     public @ResponseBody
-   ResultVO getKey (@RequestParam("userId") String userId, @RequestParam("password") String password){
+   ResultVO getKey (@RequestBody LoginVO loginVO){
        ResultVO resultVO = new ResultVO();
+       String userId = loginVO.getUserId();
+       String password = loginVO.getPassword();
 
        if(userId == null){
            resultVO.setResult_code("code_003");
