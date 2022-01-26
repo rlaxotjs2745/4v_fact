@@ -1642,14 +1642,12 @@
         INSERT INTO "TOKEN"(
             IDX_USER,
             KEY,
-            USERNAME,
             CREATED,
             EXPIRED
         )
         VALUES (
                    #{idx_user},
                    #{key},
-
                    #{created},
                    #{expired}
                )
