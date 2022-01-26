@@ -692,9 +692,9 @@ public class ServiceImpl implements ApiService {
     public long selectUserIdx (String userId, String password){
         long userIdx = 0;
         try{
-            TokenVO tokenVO = dao.selectUserIdx(userId, password);
+            UserVO userVO = dao.selectUserIdx(userId, password);
 
-            userIdx = tokenVO.getIdx_user();
+            userIdx = userVO.getIdx_user();
         } catch (Exception e){
 
         }

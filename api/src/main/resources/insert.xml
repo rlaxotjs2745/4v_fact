@@ -1659,7 +1659,7 @@
         SELECT * FROM TOKEN WHERE key = #{key}
     </select>
 
-    <select id="selectUserIdx" resultType="kr.or.fact.api.model.DTO.TokenVO">
+    <select id="selectUserIdx" resultType="kr.or.fact.api.model.DTO.UserVO">
         SELECT * FROM TB_USER WHERE user_id = #{userId} AND user_pw = #{password}
     </select>
 

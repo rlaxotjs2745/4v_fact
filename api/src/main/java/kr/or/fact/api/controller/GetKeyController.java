@@ -42,9 +42,10 @@ public class GetKeyController {
        tokenVO.setCreated(now.toString());
        tokenVO.setExpired(now.plusDays(1).toString());
 
-       if(idx != 0){
-           tokenVO.setIdx_user(idx);
-           apiService.updateUserKey(tokenVO);
+       if(idx == 0){
+           resultVO.setResult_code("code_004");
+           resultVO.setMessage("계정 정보를 찾을 수 없습니다.");
+           resultVO.setKey(null);
        } else if(apiService.insertKey(tokenVO) == 0){
            resultVO.setResult_code("code_002");
            resultVO.setMessage("키 생성을 실패했습니다.");
