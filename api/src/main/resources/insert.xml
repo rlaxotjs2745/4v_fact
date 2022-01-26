@@ -1649,7 +1649,7 @@
         VALUES (
                    #{idx_user},
                    #{key},
-                   #{username},
+
                    #{created},
                    #{expired}
                )

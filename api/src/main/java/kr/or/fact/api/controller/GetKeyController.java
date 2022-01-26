@@ -33,20 +33,21 @@ public class GetKeyController {
        }
        long idx = apiService.selectUserIdx(userId, password);
 
-       TokenVO tokenVO = new TokenVO();
-
-       String uuid = UUID.randomUUID().toString();
-       LocalDateTime now = LocalDateTime.now();
-
-       tokenVO.setKey(uuid);
-       tokenVO.setCreated(now.toString());
-       tokenVO.setExpired(now.plusDays(1).toString());
-
        if(idx == 0){
            resultVO.setResult_code("code_004");
            resultVO.setMessage("계정 정보를 찾을 수 없습니다.");
            resultVO.setKey(null);
-       } else if(apiService.insertKey(tokenVO) == 0){
+       }
+
+       TokenVO tokenVO = new TokenVO();
+
+       String uuid = UUID.randomUUID().toString();
+       LocalDateTime now = LocalDateTime.now();
+       tokenVO.setIdx_user(idx);
+       tokenVO.setKey(uuid);
+       tokenVO.setCreated(now.toString());
+       tokenVO.setExpired(now.plusDays(1).toString());
+       if(apiService.insertKey(tokenVO) == 0){
            resultVO.setResult_code("code_002");
            resultVO.setMessage("키 생성을 실패했습니다.");
            resultVO.setKey(null);
