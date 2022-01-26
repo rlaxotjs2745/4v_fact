@@ -95,4 +95,6 @@ public interface ApiService {
     public boolean isValid(String key, long fac);
 
     public boolean isExistToken(long idx);
+
+    public boolean isValidUser(long idx, String fac);
 }

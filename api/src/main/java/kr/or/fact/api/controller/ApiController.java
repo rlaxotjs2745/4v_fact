@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
-@RequestMapping("/V1")
+@RequestMapping("/V2")
 @Controller
 public class ApiController {
     @Autowired

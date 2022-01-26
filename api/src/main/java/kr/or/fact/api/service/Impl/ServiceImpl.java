@@ -733,4 +733,14 @@ public class ServiceImpl implements ApiService {
         }
         return bool;
     }
+
+    public boolean isValidUser(long idx, String fac){
+        boolean bool = true;
+        try{
+            dao.isValidUser(idx, fac);
+        } catch (Exception e){
+            bool = false;
+        }
+        return bool;
+    }
 }

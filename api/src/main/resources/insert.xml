@@ -1679,4 +1679,9 @@
         SELECT * FROM TOKEN WHERE idx_user = #{idx}
     </select>
 
+    <select id="isValidUser" resultType="kr.or.fact.api.model.DTO.UserFacJoinVO">
+        SELECT * FROM USER_FAC_JOIN
+        WHERE idx_user = #{idx} AND idx_asset = (SELECT idx_asset FROM ASSET WHERE asset_name = #{fac})
+    </select>
+
 </mapper>
