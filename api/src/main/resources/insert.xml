@@ -1647,7 +1647,7 @@
             EXPIRED
         )
         VALUES (
-                   TOKEN_SEQ.NEXTVAL,
+                   #{idx_user},
                    #{key},
                    #{username},
                    #{created},
@@ -1674,7 +1674,7 @@
 
     <select id="isValid" resultType="kr.or.fact.api.model.DTO.UserFacJoinVO">
         SELECT * FROM USER_FAC_JOIN
-        WHERE idx_user = (SELECT idx_user FROM TOKEN WHERE key = #{key}) AND idx_asset = #{fac}
+        WHERE idx_asset = #{fac} AND idx_user = (SELECT idx_user FROM TOKEN WHERE key = #{key})
     </select>
 
 </mapper>
