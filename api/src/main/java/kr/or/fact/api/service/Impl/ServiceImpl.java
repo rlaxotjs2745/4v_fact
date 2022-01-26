@@ -690,10 +690,10 @@ public class ServiceImpl implements ApiService {
     }
 
     @Override
-    public long selectUserIdx (String userId, String password){
+    public long selectUserIdx (String userId){
         long userIdx = 0;
         try{
-            UserVO userVO = dao.selectUserIdx(userId, password);
+            UserVO userVO = dao.selectUserIdx(userId);
 
             userIdx = userVO.getIdx_user();
         } catch (Exception e){

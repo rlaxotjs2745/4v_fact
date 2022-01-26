@@ -1658,7 +1658,7 @@
     </select>
 
     <select id="selectUserIdx" resultType="kr.or.fact.api.model.DTO.UserVO">
-        SELECT * FROM TB_USER WHERE user_id = #{userId} AND user_pw = #{password}
+        SELECT * FROM TB_USER WHERE user_id = #{userId}
     </select>
 
     <update id="updateUserKey" parameterType="kr.or.fact.api.model.DTO.TokenVO">

@@ -31,7 +31,7 @@ public class GetKeyController {
            resultVO.setKey(null);
            return resultVO;
        }
-       long idx = apiService.selectUserIdx(userId, password);
+       long idx = apiService.selectUserIdx(userId);
 
        if(idx == 0){
            resultVO.setResult_code("code_004");
