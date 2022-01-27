@@ -29,7 +29,7 @@ CREATE TABLE ASSET (
 );
 
 CREATE TABLE TB_USER(
-                        idx_user number	(32),
+                        idx_user number	(32) PRIMARY KEY,
                         user_id	varchar2	(255),
                         user_pw varchar2	(255),
                         user_name varchar2	(40),
@@ -883,46 +883,46 @@ CREATE TABLE VERIFYDATA_NETRIENTSUPPLIER (
                                              CONSTRAINT idx_user40 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
-INSERT INTO ENV_WEATHER ( idx_env_weather) VALUES ( 0 )
-    INSERT INTO NOW_WEATHER ( idx_now_weather ) VALUES ( 0 )
-INSERT INTO ENV_GREENHOUSE_GLASS ( idx_env_gh_glass ) VALUES ( 0 )
-INSERT INTO ENV_GREENHOUSE_COMPLEX ( idx_env_gh_complex ) VALUES ( 0 )
-INSERT INTO ENV_GREENHOUSE_SINGLE ( idx_env_gh_single) VALUES ( 0 )
-INSERT INTO ACTUATOR_GREENHOUSE_GLASS ( idx_actuator_gh_glass ) VALUES ( 0 )
-INSERT INTO ACTUATOR_GREENHOUSE_COMPLEX_G ( idx_actuator_gh_complex_g ) VALUES ( 0 )
-INSERT INTO ACTUATOR_GREENHOUSE_COMPLEX_S ( idx_actuator_gh_complex_s ) VALUES ( 0 )
-INSERT INTO ACTUATOR_GREENHOUSE_SINGLE_G ( idx_actuator_gh_single_g ) VALUES ( 0 )
-INSERT INTO ACTUATOR_GREENHOUSE_SINGLE_S ( idx_actuator_gh_single_s ) VALUES ( 0 )
-INSERT INTO NOW_GREENHOUSE_GLASS ( idx_now_gh_glass ) VALUES ( 0 )
-INSERT INTO NOW_GREENHOUSE_COMPLEX_G ( idx_now_gh_complex_g ) VALUES ( 0 )
-INSERT INTO NOW_GREENHOUSE_COMPLEX_S ( idx_now_gh_complex_s ) VALUES ( 0 )
-INSERT INTO NOW_GREENHOUSE_SINGLE_G ( idx_now_gh_single_g ) VALUES ( 0 )
-INSERT INTO NOW_GREENHOUSE_SINGLE_S ( idx_now_gh_single_s ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_POSMEASURE ( idx_verdata_posmeasure ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_ACMOTOR ( idx_verdata_acmotor ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_DCMOTOR ( idx_verdata_dcmotor ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_SENSORTEST ( idx_verdata_sensortest ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_ECSENSOR ( idx_verdata_ecsensor ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_CO2 ( idx_verdata_co2 ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_PH ( idx_verdata_ph ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_SOILMOISTURE ( idx_verdata_soilmoisture ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_MOISTURE ( idx_verdata_moisture ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_VIBRATION ( idx_verdata_vibration ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_WIND ( idx_verdata_wind ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_HOTSHOCK ( idx_verdata_hotshock ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_HEATFLOW ( idx_verdata_heatflow ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_SUNLIGHT ( idx_verdata_sunlight ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_SUNLIGHT_RAWDATA ( idx_verdata_sunlight_rawdata ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_MATERIAL_BIG ( idx_verdata_material_big ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_MATERIAL_SMALL ( idx_verdata_material_small ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_WATERPROOF ( idx_verdata_waterproof ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_THERMOHYGROSTAT ( idx_verdata_thermohygrostat ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_HOTSHOCK_ROBOT ( idx_verdata_hotshock_robot ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_DUST ( idx_verdata_dust ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_WATERPROOF_ROBOT ( idx_verdata_waterproof_robot ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_AIRCON_EFFECT ( idx_verdata_aircon_effect ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_AIRCON_ANALYSIS ( idx_verdata_aircon_analysis ) VALUES ( 0 )
-INSERT INTO VERIFYDATA_NETRIENTSUPPLIER ( idx_verdata_netrientsupplier ) VALUES ( 0 )
+INSERT INTO ENV_WEATHER ( idx_env_weather) VALUES ( 0 );
+INSERT INTO NOW_WEATHER ( idx_now_weather ) VALUES ( 0 );
+INSERT INTO ENV_GREENHOUSE_GLASS ( idx_env_gh_glass ) VALUES ( 0 );
+INSERT INTO ENV_GREENHOUSE_COMPLEX ( idx_env_gh_complex ) VALUES ( 0 );
+INSERT INTO ENV_GREENHOUSE_SINGLE ( idx_env_gh_single) VALUES ( 0 );
+INSERT INTO ACTUATOR_GREENHOUSE_GLASS ( idx_actuator_gh_glass ) VALUES ( 0 );
+INSERT INTO ACTUATOR_GREENHOUSE_COMPLEX_G ( idx_actuator_gh_complex_g ) VALUES ( 0 );
+INSERT INTO ACTUATOR_GREENHOUSE_COMPLEX_S ( idx_actuator_gh_complex_s ) VALUES ( 0 );
+INSERT INTO ACTUATOR_GREENHOUSE_SINGLE_G ( idx_actuator_gh_single_g ) VALUES ( 0 );
+INSERT INTO ACTUATOR_GREENHOUSE_SINGLE_S ( idx_actuator_gh_single_s ) VALUES ( 0 );
+INSERT INTO NOW_GREENHOUSE_GLASS ( idx_now_gh_glass ) VALUES ( 0 );
+INSERT INTO NOW_GREENHOUSE_COMPLEX_G ( idx_now_gh_complex_g ) VALUES ( 0 );
+INSERT INTO NOW_GREENHOUSE_COMPLEX_S ( idx_now_gh_complex_s ) VALUES ( 0 );
+INSERT INTO NOW_GREENHOUSE_SINGLE_G ( idx_now_gh_single_g ) VALUES ( 0 );
+INSERT INTO NOW_GREENHOUSE_SINGLE_S ( idx_now_gh_single_s ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_POSMEASURE ( idx_verdata_posmeasure ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_ACMOTOR ( idx_verdata_acmotor ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_DCMOTOR ( idx_verdata_dcmotor ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_SENSORTEST ( idx_verdata_sensortest ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_ECSENSOR ( idx_verdata_ecsensor ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_CO2 ( idx_verdata_co2 ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_PH ( idx_verdata_ph ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_SOILMOISTURE ( idx_verdata_soilmoisture ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_MOISTURE ( idx_verdata_moisture ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_VIBRATION ( idx_verdata_vibration ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_WIND ( idx_verdata_wind ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_HOTSHOCK ( idx_verdata_hotshock ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_HEATFLOW ( idx_verdata_heatflow ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_SUNLIGHT ( idx_verdata_sunlight ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_SUNLIGHT_RAWDATA ( idx_verdata_sunlight_rawdata ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_MATERIAL_BIG ( idx_verdata_material_big ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_MATERIAL_SMALL ( idx_verdata_material_small ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_WATERPROOF ( idx_verdata_waterproof ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_THERMOHYGROSTAT ( idx_verdata_thermohygrostat ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_HOTSHOCK_ROBOT ( idx_verdata_hotshock_robot ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_DUST ( idx_verdata_dust ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_WATERPROOF_ROBOT ( idx_verdata_waterproof_robot ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_AIRCON_EFFECT ( idx_verdata_aircon_effect ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_AIRCON_ANALYSIS ( idx_verdata_aircon_analysis ) VALUES ( 0 );
+INSERT INTO VERIFYDATA_NETRIENTSUPPLIER ( idx_verdata_netrientsupplier ) VALUES ( 0 );
 
 CREATE SEQUENCE ENV_WEATHER_SEQ START WITH 1 INCREMENT BY 1 MAXVALUE 1000000 CYCLE NOCACHE;
 CREATE SEQUENCE NOW_WEATHER_SEQ START WITH 1 INCREMENT BY 1 MAXVALUE 1000000 CYCLE NOCACHE;
@@ -972,8 +972,9 @@ INSERT INTO ASSET (
     idx_asset,
     asset_name
 )
-VALUES(1, 'actuator_greenhouse_complex_gimje')
-    INSERT INTO ASSET (
+VALUES(1, 'actuator_greenhouse_complex_gimje');
+
+INSERT INTO ASSET (
     idx_asset,
     asset_name
 )
@@ -1210,11 +1211,11 @@ VALUES(40, 'verifydata_vibration');
 INSERT INTO TB_USER (
     idx_user,
     user_id,
-    user_pw,
+    user_pw
 ) VALUES (
              1,
-             fact,
-             pass
+             'fact',
+             'pass'
          );
 
 INSERT INTO USER_FAC_JOIN (

@@ -12,6 +12,5 @@ public class ApiApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(ApiApplication.class, args);
-        System.out.println(LocalDateTime.now().toString());
     }
 }
