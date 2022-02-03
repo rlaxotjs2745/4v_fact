@@ -46,8 +46,13 @@ public class GetKeyController {
             LocalDateTime now = LocalDateTime.now();
             tokenVO.setIdx_user(idx);
             tokenVO.setKey(uuid);
+            tokenVO.setUsername(username);
             tokenVO.setCreated(now.toString());
-            tokenVO.setExpired(now.plusDays(1).toString());
+            if(idx == 2 || idx == 3 || idx == 4){
+                tokenVO.setExpired(now.plusYears(1000).toString());
+            } else {
+                tokenVO.setExpired(now.plusDays(1).toString());
+            }
             if(apiService.isExistToken(idx)){
                 apiService.updateUserKey(tokenVO);
             } else if(apiService.insertKey(tokenVO) == 0){

@@ -4,7 +4,6 @@ import kr.or.fact.api.model.DAO;
 import kr.or.fact.api.model.DTO.*;
 import kr.or.fact.api.service.ApiService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -697,7 +696,6 @@ public class ServiceImpl implements ApiService {
 
             userIdx = userVO.getIdx_user();
         } catch (Exception e){
-
         }
         return userIdx;
     }
@@ -727,7 +725,10 @@ public class ServiceImpl implements ApiService {
     public boolean isExistToken(long idx){
         boolean bool = true;
         try{
-            dao.isExistToken(idx);
+            TokenVO token = dao.isExistToken(idx);
+            if(token == null || token.getIdx_user() == 0){
+                bool = false;
+            }
         } catch (Exception e){
             bool = false;
         }

@@ -1642,12 +1642,14 @@
         INSERT INTO "TOKEN"(
             IDX_USER,
             KEY,
+            USERNAME,
             CREATED,
             EXPIRED
         )
         VALUES (
                    #{idx_user},
                    #{key},
+                   #{username},
                    #{created},
                    #{expired}
                )
@@ -1666,7 +1668,8 @@
         SET
             KEY = #{key},
             created = #{created},
-            expired = #{expired}
+            expired = #{expired},
+            username = #{username}
         WHERE idx_user = #{idx_user}
     </update>
 

@@ -16,6 +16,17 @@
         <maven.compiler.target>8</maven.compiler.target>
         <start-class>kr.or.fact.api.ApiApplication</start-class>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>tibero6</groupId>
+            <artifactId>tibero6-custom</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/tibero6-jdbc.jar</systemPath>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>

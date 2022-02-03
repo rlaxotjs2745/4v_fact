@@ -137,7 +137,7 @@ public class ApiController {
             return result;
         }
 
-        if(!apiService.isValid(key, 2)){
+        if(!apiService.isValid(key, 1)){
             result.setResult_code("code_004");
             result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
             result.setUsername(username);
@@ -207,7 +207,7 @@ public class ApiController {
             return result;
         }
 
-        if(!apiService.isValid(key, 3)){
+        if(!apiService.isValid(key, 1)){
             result.setResult_code("code_004");
             result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
             result.setUsername(username);
@@ -280,7 +280,7 @@ public class ApiController {
             return result;
         }
 
-        if(!apiService.isValid(key, 4)){
+        if(!apiService.isValid(key, 1)){
             result.setResult_code("code_004");
             result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
             result.setUsername(username);
@@ -349,7 +349,7 @@ public class ApiController {
             return result;
         }
 
-        if(!apiService.isValid(key, 5)){
+        if(!apiService.isValid(key, 1)){
             result.setResult_code("code_004");
             result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
             result.setUsername(username);
@@ -423,7 +423,7 @@ public class ApiController {
             return result;
         }
 
-        if(!apiService.isValid(key, 6)){
+        if(!apiService.isValid(key, 1)){
             result.setResult_code("code_004");
             result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
             result.setUsername(username);
@@ -497,7 +497,7 @@ public class ApiController {
             return result;
         }
 
-        if(!apiService.isValid(key, 7)){
+        if(!apiService.isValid(key, 1)){
             result.setResult_code("code_004");
             result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
             result.setUsername(username);
@@ -572,7 +572,7 @@ public class ApiController {
             return result;
         }
 
-        if(!apiService.isValid(key, 8)){
+        if(!apiService.isValid(key, 1)){
             result.setResult_code("code_004");
             result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
             result.setUsername(username);
@@ -643,7 +643,7 @@ public class ApiController {
             return result;
         }
 
-        if(!apiService.isValid(key, 9)){
+        if(!apiService.isValid(key, 1)){
             result.setResult_code("code_004");
             result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
             result.setUsername(username);
@@ -725,7 +725,7 @@ public class ApiController {
             return result;
         }
 
-        if(!apiService.isValid(key, 10)){
+        if(!apiService.isValid(key, 1)){
             result.setResult_code("code_004");
             result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
             result.setUsername(username);
@@ -802,7 +802,7 @@ public class ApiController {
             return result;
         }
 
-        if(!apiService.isValid(key, 11)){
+        if(!apiService.isValid(key, 1)){
             result.setResult_code("code_004");
             result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
             result.setUsername(username);
@@ -880,7 +880,7 @@ public class ApiController {
             return result;
         }
 
-        if(!apiService.isValid(key, 12)){
+        if(!apiService.isValid(key, 1)){
             result.setResult_code("code_004");
             result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
             result.setUsername(username);
@@ -961,7 +961,7 @@ public class ApiController {
             return result;
         }
 
-        if(!apiService.isValid(key, 13)){
+        if(!apiService.isValid(key, 1)){
             result.setResult_code("code_004");
             result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
             result.setUsername(username);
@@ -1038,7 +1038,7 @@ public class ApiController {
             return result;
         }
 
-        if(!apiService.isValid(key, 14)){
+        if(!apiService.isValid(key, 1)){
             result.setResult_code("code_004");
             result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
             result.setUsername(username);
@@ -1109,7 +1109,7 @@ public class ApiController {
             return result;
         }
 
-        if(!apiService.isValid(key, 15)){
+        if(!apiService.isValid(key, 1)){
             result.setResult_code("code_004");
             result.setMessage("해당 장비에 대한 데이터 생성 권한이 만료되었거나 없습니다.");
             result.setUsername(username);
