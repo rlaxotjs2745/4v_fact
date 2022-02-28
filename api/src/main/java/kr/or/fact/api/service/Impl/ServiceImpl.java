@@ -696,6 +696,7 @@ public class ServiceImpl implements ApiService {
 
             userIdx = userVO.getIdx_user();
         } catch (Exception e){
+
         }
         return userIdx;
     }
@@ -737,11 +738,12 @@ public class ServiceImpl implements ApiService {
 
     public boolean isValidUser(long idx, String fac){
         boolean bool = true;
-        try{
-            dao.isValidUser(idx, fac);
-        } catch (Exception e){
-            bool = false;
-        }
+
+        UserFacJoinVO userFacJoinVO = dao.isValidUser(idx, fac);
+
+        if(userFacJoinVO==null)
+            bool=false;
+
         return bool;
     }
 }

@@ -1,5 +1,5 @@
 CREATE TABLE TOKEN (
-                       idx_user number(32) PRIMARY KEY,
+                       idx_user number(10,4) PRIMARY KEY,
                        key varchar(100),
                        username varchar(100),
                        created varchar(100),
@@ -30,7 +30,7 @@ CREATE TABLE ASSET (
 );
 
 CREATE TABLE TB_USER(
-                        idx_user number(32) PRIMARY KEY,
+                        idx_user number	(32) PRIMARY KEY,
                         user_id	varchar2	(255),
                         user_pw varchar2	(255),
                         user_name varchar2	(40),
@@ -61,9 +61,9 @@ CREATE TABLE TB_USER(
 
 
 CREATE TABLE USER_FAC_JOIN (
-                               idx_user_fac_join number(32) PRIMARY KEY,
-                               idx_user number(32),
-                               idx_asset number(32),
+                               idx_user_fac_join number(10,4) PRIMARY KEY,
+                               idx_user number(10,4),
+                               idx_asset number(10,4),
                                start_date varchar2(100),
                                end_date varchar2(100),
                                reg_date varchar2(100),
@@ -73,7 +73,7 @@ CREATE TABLE USER_FAC_JOIN (
 
 
 CREATE TABLE ENV_WEATHER (
-                             idx_env_weather number(32) PRIMARY KEY,
+                             idx_env_weather number(10,4) PRIMARY KEY,
                              daqtime date,
                              temp number(10,4),
                              hum number(10,4),
@@ -81,24 +81,24 @@ CREATE TABLE ENV_WEATHER (
                              winddirection number(10,4),
                              windspeed number(10,4),
                              raindetect number(10,4),
-                             idx_user number(32),
+                             idx_user number(10,4),
                              CONSTRAINT idx_user1 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE NOW_WEATHER (
-                             idx_now_weather number(32) PRIMARY KEY,
+                             idx_now_weather number(10,4) PRIMARY KEY,
                              temp number(10,4),
                              hum number(10,4),
                              insolation number(10,4),
                              winddirection number(10,4),
                              windspeed number(10,4),
                              raindetect char(1),
-                             idx_user number(32),
+                             idx_user number(10,4),
                              CONSTRAINT idx_user2 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE ENV_GREENHOUSE_GLASS (
-                                      idx_env_gh_glass number(32) PRIMARY KEY,
+                                      idx_env_gh_glass number(10,4) PRIMARY KEY,
                                       daqtime date,
                                       temp number(10,4),
                                       hum number(10,4),
@@ -109,12 +109,12 @@ CREATE TABLE ENV_GREENHOUSE_GLASS (
                                       soilmoisture number(10,4),
                                       soilec number(10,4),
                                       soiltemp number(10,4),
-                                      idx_user number(32),
+                                      idx_user number(10,4),
                                       CONSTRAINT idx_user3 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE ENV_GREENHOUSE_COMPLEX (
-                                        idx_env_gh_complex number(32) PRIMARY KEY,
+                                        idx_env_gh_complex number(10,4) PRIMARY KEY,
                                         daqtime date,
                                         temp number(10,4),
                                         hum number(10,4),
@@ -125,12 +125,12 @@ CREATE TABLE ENV_GREENHOUSE_COMPLEX (
                                         soilmoisture number(10,4),
                                         soilec number(10,4),
                                         soiltemp number(10,4),
-                                        idx_user number(32),
+                                        idx_user number(10,4),
                                         CONSTRAINT idx_user4 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE ENV_GREENHOUSE_SINGLE (
-                                       idx_env_gh_single number(32) PRIMARY KEY,
+                                       idx_env_gh_single number(10,4) PRIMARY KEY,
                                        daqtime date,
                                        temp number(10,4),
                                        hum number(10,4),
@@ -141,23 +141,23 @@ CREATE TABLE ENV_GREENHOUSE_SINGLE (
                                        soilmoisture number(10,4),
                                        soilec number(10,4),
                                        soiltemp number(10,4),
-                                       idx_user number(32),
+                                       idx_user number(10,4),
                                        CONSTRAINT idx_user5 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE ACTUATOR_GREENHOUSE_GLASS (
-                                           idx_actuator_gh_glass number(32) PRIMARY KEY,
+                                           idx_actuator_gh_glass number(10,4) PRIMARY KEY,
                                            daqtime date,
                                            roofwindow_l float(63),
                                            roofwindow_r float(63),
                                            outcurtain  float(63),
                                            incurtain  float(63),
-                                           idx_user number(32),
+                                           idx_user number(10,4),
                                            CONSTRAINT idx_user6 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE ACTUATOR_GREENHOUSE_COMPLEX_G (
-                                               idx_actuator_gh_complex_g number(32) PRIMARY KEY,
+                                               idx_actuator_gh_complex_g number(10,4) PRIMARY KEY,
                                                daqtime  date,
                                                roofwindow_l1  float(63),
                                                roofwindow_l2 float(63),
@@ -167,23 +167,23 @@ CREATE TABLE ACTUATOR_GREENHOUSE_COMPLEX_G (
                                                roofwindow_r3 float(63),
                                                outcurtain  float(63),
                                                incurtain  float(63),
-                                               idx_user number(32),
+                                               idx_user number(10,4),
                                                CONSTRAINT idx_user7 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE ACTUATOR_GREENHOUSE_COMPLEX_S (
-                                               idx_actuator_gh_complex_s number(32) PRIMARY KEY,
+                                               idx_actuator_gh_complex_s number(10,4) PRIMARY KEY,
                                                daqtime date,
                                                roofwindow_l float(63),
                                                roofwindow_r float(63),
                                                outcurtain  float(63),
                                                incurtain  float(63),
-                                               idx_user number(32),
+                                               idx_user number(10,4),
                                                CONSTRAINT idx_user8 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE ACTUATOR_GREENHOUSE_SINGLE_G (
-                                              idx_actuator_gh_single_g number(32) PRIMARY KEY,
+                                              idx_actuator_gh_single_g number(10,4) PRIMARY KEY,
                                               daqtime  date,
                                               outsidewindow_l float(63),
                                               outsidewindow_r float(63),
@@ -193,23 +193,23 @@ CREATE TABLE ACTUATOR_GREENHOUSE_SINGLE_G (
                                               curtain_r float(63),
                                               sidescreen_l float(63),
                                               sidescreen_r float(63),
-                                              idx_user number(32),
+                                              idx_user number(10,4),
                                               CONSTRAINT idx_user9 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE ACTUATOR_GREENHOUSE_SINGLE_S (
-                                              idx_actuator_gh_single_s number(32) PRIMARY KEY,
+                                              idx_actuator_gh_single_s number(10,4) PRIMARY KEY,
                                               daqtime  date,
                                               roofwindow_l float(63),
                                               roofwindow_r float(63),
                                               outcurtain  float(63),
                                               incurtain  float(63),
-                                              idx_user number(32),
+                                              idx_user number(10,4),
                                               CONSTRAINT idx_user10 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE NOW_GREENHOUSE_GLASS (
-                                      idx_now_gh_glass number(32) PRIMARY KEY,
+                                      idx_now_gh_glass number(10,4) PRIMARY KEY,
                                       temp number(10,4),
                                       hum number(10,4),
                                       light number(10,4),
@@ -223,12 +223,12 @@ CREATE TABLE NOW_GREENHOUSE_GLASS (
                                       pos_roofwindow_r float(63),
                                       pos_outcurtain  float(63),
                                       pos_incurtain  float(63),
-                                      idx_user number(32),
+                                      idx_user number(10,4),
                                       CONSTRAINT idx_user11 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE NOW_GREENHOUSE_COMPLEX_G (
-                                          idx_now_gh_complex_g number(32) PRIMARY KEY,
+                                          idx_now_gh_complex_g number(10,4) PRIMARY KEY,
                                           temp number(10,4),
                                           hum number(10,4),
                                           light number(10,4),
@@ -246,12 +246,12 @@ CREATE TABLE NOW_GREENHOUSE_COMPLEX_G (
                                           pos_topwindow_r3 float(63),
                                           pos_outcurtain  float(63),
                                           pos_incurtain  float(63),
-                                          idx_user number(32),
+                                          idx_user number(10,4),
                                           CONSTRAINT idx_user12 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE NOW_GREENHOUSE_COMPLEX_S (
-                                          idx_now_gh_complex_s number(32) PRIMARY KEY,
+                                          idx_now_gh_complex_s number(10,4) PRIMARY KEY,
                                           temp number(10,4),
                                           hum number(10,4),
                                           light number(10,4),
@@ -265,12 +265,12 @@ CREATE TABLE NOW_GREENHOUSE_COMPLEX_S (
                                           pos_roofwindow_r float(63),
                                           pos_outcurtain  float(63),
                                           pos_incurtain  float(63),
-                                          idx_user number(32),
+                                          idx_user number(10,4),
                                           CONSTRAINT idx_user13 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE NOW_GREENHOUSE_SINGLE_G (
-                                         idx_now_gh_single_g number(32) PRIMARY KEY,
+                                         idx_now_gh_single_g number(10,4) PRIMARY KEY,
                                          temp number(10,4),
                                          hum number(10,4),
                                          light number(10,4),
@@ -288,12 +288,12 @@ CREATE TABLE NOW_GREENHOUSE_SINGLE_G (
                                          pos_curtain_r float(63),
                                          pos_sidescreen_l float(63),
                                          pos_sidescreen_r float(63),
-                                         idx_user number(32),
+                                         idx_user number(10,4),
                                          CONSTRAINT idx_user14 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE NOW_GREENHOUSE_SINGLE_S (
-                                         idx_now_gh_single_s number(32) PRIMARY KEY,
+                                         idx_now_gh_single_s number(10,4) PRIMARY KEY,
                                          temp number(10,4),
                                          hum number(10,4),
                                          light number(10,4),
@@ -307,12 +307,12 @@ CREATE TABLE NOW_GREENHOUSE_SINGLE_S (
                                          pos_roofwindow_r  float(63),
                                          pos_outcurtain  float(63),
                                          pos_incurtain  float(63),
-                                         idx_user number(32),
+                                         idx_user number(10,4),
                                          CONSTRAINT idx_user15 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_POSMEASURE (
-                                       idx_verdata_posmeasure number(32) PRIMARY KEY,
+                                       idx_verdata_posmeasure number(10,4) PRIMARY KEY,
                                        verifyid  varchar(100),
                                        deviceid varchar(100),
                                        devicekind varchar(100),
@@ -321,12 +321,12 @@ CREATE TABLE VERIFYDATA_POSMEASURE (
                                        x_pos float(63),
                                        y_pos float(63),
                                        direction float(63),
-                                       idx_user number(32),
+                                       idx_user number(10,4),
                                        CONSTRAINT idx_user16 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_ACMOTOR (
-                                    idx_verdata_acmotor number(32) PRIMARY KEY,
+                                    idx_verdata_acmotor number(10,4) PRIMARY KEY,
                                     verifyid  varchar(100),
                                     deviceid varchar(100),
                                     daqtime  date ,
@@ -334,12 +334,12 @@ CREATE TABLE VERIFYDATA_ACMOTOR (
                                     standardtouque float(63),
                                     torque float(63),
                                     rpm float(63),
-                                    idx_user number(32),
+                                    idx_user number(10,4),
                                     CONSTRAINT idx_user17 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_DCMOTOR (
-                                    idx_verdata_dcmotor number(32) PRIMARY KEY,
+                                    idx_verdata_dcmotor number(10,4) PRIMARY KEY,
                                     verifyid  varchar(100),
                                     deviceid varchar(100),
                                     daqtime  date ,
@@ -347,12 +347,12 @@ CREATE TABLE VERIFYDATA_DCMOTOR (
                                     standardtouque float(63),
                                     torque float(63),
                                     rpm float(63),
-                                    idx_user number(32),
+                                    idx_user number(10,4),
                                     CONSTRAINT idx_user18 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_SENSORTEST (
-                                       idx_verdata_sensortest number(32) PRIMARY KEY,
+                                       idx_verdata_sensortest number(10,4) PRIMARY KEY,
                                        verifyid  varchar(100),
                                        deviceid varchar(100),
                                        daqtime  date ,
@@ -412,12 +412,12 @@ CREATE TABLE VERIFYDATA_SENSORTEST (
                                        aovaluename2 varchar(100),
                                        aovalueunit1 varchar(100),
                                        aovalueunit2 varchar(100),
-                                       idx_user number(32),
+                                       idx_user number(10,4),
                                        CONSTRAINT idx_user19 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_ECSENSOR (
-                                     idx_verdata_ecsensor number(32) PRIMARY KEY,
+                                     idx_verdata_ecsensor number(10,4) PRIMARY KEY,
                                      verifyid  varchar(100),
                                      deviceid varchar(100),
                                      daqtime  date ,
@@ -425,12 +425,12 @@ CREATE TABLE VERIFYDATA_ECSENSOR (
                                      f_hum number(10,4),
                                      standardvalue number(10,4),
                                      verifyvalue number(10,4),
-                                     idx_user number(32),
+                                     idx_user number(10,4),
                                      CONSTRAINT idx_user20 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_CO2 (
-                                idx_verdata_co2 number(32) PRIMARY KEY,
+                                idx_verdata_co2 number(10,4) PRIMARY KEY,
                                 verifyid  varchar(100),
                                 deviceid varchar(100),
                                 daqtime  date ,
@@ -440,12 +440,12 @@ CREATE TABLE VERIFYDATA_CO2 (
                                 c_pressure number(10,4),
                                 standardvalue number(10,4),
                                 verifyvalue number(10,4),
-                                idx_user number(32),
+                                idx_user number(10,4),
                                 CONSTRAINT idx_user21 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_PH (
-                               idx_verdata_ph number(32) PRIMARY KEY,
+                               idx_verdata_ph number(10,4) PRIMARY KEY,
                                verifyid  varchar(100),
                                deviceid varchar(100),
                                daqtime  date ,
@@ -453,12 +453,12 @@ CREATE TABLE VERIFYDATA_PH (
                                f_hum number(10,4),
                                standardvalue number(10,4),
                                verifyvalue number(10,4),
-                               idx_user number(32),
+                               idx_user number(10,4),
                                CONSTRAINT idx_user22 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_SOILMOISTURE (
-                                         idx_verdata_soilmoisture number(32) PRIMARY KEY,
+                                         idx_verdata_soilmoisture number(10,4) PRIMARY KEY,
                                          verifyid  varchar(100),
                                          deviceid varchar(100),
                                          daqtime  date ,
@@ -466,58 +466,58 @@ CREATE TABLE VERIFYDATA_SOILMOISTURE (
                                          f_hum number(10,4),
                                          standardvalue number(10,4),
                                          verifyvalue number(10,4),
-                                         idx_user number(32),
+                                         idx_user number(10,4),
                                          CONSTRAINT idx_user23 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_MOISTURE (
-                                     idx_verdata_moisture number(32) PRIMARY KEY,
+                                     idx_verdata_moisture number(10,4) PRIMARY KEY,
                                      verifyid  varchar(100),
                                      deviceid varchar(100),
                                      daqtime  date ,
                                      temp number(10,4),
                                      hum number(10,4),
-                                     idx_user number(32),
+                                     idx_user number(10,4),
                                      CONSTRAINT idx_user24 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_VIBRATION (
-                                      idx_verdata_vibration number(32) PRIMARY KEY,
+                                      idx_verdata_vibration number(10,4) PRIMARY KEY,
                                       verifyid  varchar(100),
                                       deviceid varchar(100),
                                       daqtime  date ,
                                       direction char,
                                       temp number(10,4),
                                       hum number(10,4),
-                                      idx_user number(32),
+                                      idx_user number(10,4),
                                       CONSTRAINT idx_user25 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_WIND (
-                                 idx_verdata_wind number(32) PRIMARY KEY,
+                                 idx_verdata_wind number(10,4) PRIMARY KEY,
                                  verifyid  varchar(100),
                                  deviceid varchar(100),
                                  daqtime  date ,
                                  standardspeed number(10,4),
                                  verifyspeed number(10,4),
-                                 idx_user number(32),
+                                 idx_user number(10,4),
                                  CONSTRAINT idx_user26 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_HOTSHOCK (
-                                     idx_verdata_hotshock number(32) PRIMARY KEY,
+                                     idx_verdata_hotshock number(10,4) PRIMARY KEY,
                                      verifyid  varchar(100),
                                      deviceid varchar(100),
                                      daqtime  date ,
                                      temp_hot number(10,4),
                                      temp_test number(10,4),
                                      temp_cold number(10,4),
-                                     idx_user number(32),
+                                     idx_user number(10,4),
                                      CONSTRAINT idx_user27 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_HEATFLOW (
-                                     idx_verdata_heatflow number(32) PRIMARY KEY,
+                                     idx_verdata_heatflow number(10,4) PRIMARY KEY,
                                      verifyid  varchar(100),
                                      deviceid varchar(100),
                                      daqtime  date ,
@@ -621,24 +621,24 @@ CREATE TABLE VERIFYDATA_HEATFLOW (
                                      temp_b_sub28 number(10,4),
                                      temp_b_sub29 number(10,4),
                                      temp_b_sub30 number(10,4),
-                                     idx_user number(32),
+                                     idx_user number(10,4),
                                      CONSTRAINT idx_user28 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_SUNLIGHT (
-                                     idx_verdata_sunlight number(32) PRIMARY KEY,
+                                     idx_verdata_sunlight number(10,4) PRIMARY KEY,
                                      verifyid  varchar(100),
                                      deviceid varchar(100),
                                      daqtime  date ,
                                      calcellvalue number(10,4),
                                      standardvalue number(10,4),
                                      verifyvalue number(10,4),
-                                     idx_user number(32),
+                                     idx_user number(10,4),
                                      CONSTRAINT idx_user29 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_SUNLIGHT_RAWDATA (
-                                             idx_verdata_sunlight_rawdata number(32) PRIMARY KEY,
+                                             idx_verdata_sunlight_rawdata number(10,4) PRIMARY KEY,
                                              verifyid  varchar(100),
                                              deviceid varchar(100),
                                              daqtime  date ,
@@ -647,12 +647,12 @@ CREATE TABLE VERIFYDATA_SUNLIGHT_RAWDATA (
                                              unit varchar(100),
                                              frontrear char,
                                              verifystep char,
-                                             idx_user number(32),
+                                             idx_user number(10,4),
                                              CONSTRAINT idx_user30 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_MATERIAL_BIG (
-                                         idx_verdata_material_big number(32) PRIMARY KEY,
+                                         idx_verdata_material_big number(10,4) PRIMARY KEY,
                                          verifyid  varchar(100),
                                          deviceid varchar(100),
                                          daqtime  date ,
@@ -663,12 +663,12 @@ CREATE TABLE VERIFYDATA_MATERIAL_BIG (
                                          elongationrate number(10,4),
                                          yieldpoint number(10,4),
                                          breakingpoint number(10,4),
-                                         idx_user number(32),
+                                         idx_user number(10,4),
                                          CONSTRAINT idx_user31 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_MATERIAL_SMALL (
-                                           idx_verdata_material_small number(32) PRIMARY KEY,
+                                           idx_verdata_material_small number(10,4) PRIMARY KEY,
                                            verifyid  varchar(100),
                                            deviceid varchar(100),
                                            daqtime  date ,
@@ -679,12 +679,12 @@ CREATE TABLE VERIFYDATA_MATERIAL_SMALL (
                                            elongationrate number(10,4),
                                            yieldpoint number(10,4),
                                            breakingpoint number(10,4),
-                                           idx_user number(32),
+                                           idx_user number(10,4),
                                            CONSTRAINT idx_user32 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_WATERPROOF (
-                                       idx_verdata_waterproof number(32) PRIMARY KEY,
+                                       idx_verdata_waterproof number(10,4) PRIMARY KEY,
                                        verifyid  varchar(100),
                                        deviceid varchar(100),
                                        daqtime  date ,
@@ -692,12 +692,12 @@ CREATE TABLE VERIFYDATA_WATERPROOF (
                                        platespeed number(10,4),
                                        nozzleswingspeed number(10,4),
                                        watersupplymotorspeed number(10,4),
-                                       idx_user number(32),
+                                       idx_user number(10,4),
                                        CONSTRAINT idx_user33 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_THERMOHYGROSTAT (
-                                            idx_verdata_thermohygrostat number(32) PRIMARY KEY,
+                                            idx_verdata_thermohygrostat number(10,4) PRIMARY KEY,
                                             verifyid  varchar(100),
                                             deviceid varchar(100),
                                             daqtime  date ,
@@ -716,23 +716,23 @@ CREATE TABLE VERIFYDATA_THERMOHYGROSTAT (
                                             torque number(10,4),
                                             rpm number(10,4),
                                             ampere number(10,4),
-                                            idx_user number(32),
+                                            idx_user number(10,4),
                                             CONSTRAINT idx_user34 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_HOTSHOCK_ROBOT (
-                                           idx_verdata_hotshock_robot number(32) PRIMARY KEY,
+                                           idx_verdata_hotshock_robot number(10,4) PRIMARY KEY,
                                            verifyid  varchar(100),
                                            deviceid varchar(100),
                                            daqtime  date ,
                                            temp number(10,4),
                                            hum number(10,4),
-                                           idx_user number(32),
+                                           idx_user number(10,4),
                                            CONSTRAINT idx_user35 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_DUST (
-                                 idx_verdata_dust number(32) PRIMARY KEY,
+                                 idx_verdata_dust number(10,4) PRIMARY KEY,
                                  verifyid  varchar(100),
                                  deviceid varchar(100),
                                  testtime  date ,
@@ -741,12 +741,12 @@ CREATE TABLE VERIFYDATA_DUST (
                                  offtime int,
                                  repeatcount int,
                                  duringtime int,
-                                 idx_user number(32),
+                                 idx_user number(10,4),
                                  CONSTRAINT idx_user36 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_WATERPROOF_ROBOT (
-                                             idx_verdata_waterproof_robot number(32) PRIMARY KEY,
+                                             idx_verdata_waterproof_robot number(10,4) PRIMARY KEY,
                                              verifyid  varchar(100),
                                              deviceid varchar(100),
                                              daqtime  date ,
@@ -755,12 +755,12 @@ CREATE TABLE VERIFYDATA_WATERPROOF_ROBOT (
                                              nozzleswingspeed number(10,4),
                                              watersupplymotorspeed number(10,4),
                                              waterflowquantity number(10,4),
-                                             idx_user number(32),
+                                             idx_user number(10,4),
                                              CONSTRAINT idx_user37 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_AIRCON_EFFECT (
-                                          idx_verdata_aircon_effect number(32) PRIMARY KEY,
+                                          idx_verdata_aircon_effect number(10,4) PRIMARY KEY,
                                           verifyid  varchar(100),
                                           deviceid varchar(100),
                                           daqtime  date ,
@@ -782,12 +782,12 @@ CREATE TABLE VERIFYDATA_AIRCON_EFFECT (
                                           capacity_frozen number(10,4),
                                           cop_radiation number(10,4),
                                           capacity_ratiation number(10,4),
-                                          idx_user number(32),
+                                          idx_user number(10,4),
                                           CONSTRAINT idx_user38 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_AIRCON_ANALYSIS (
-                                            idx_verdata_aircon_analysis number(32) PRIMARY KEY,
+                                            idx_verdata_aircon_analysis number(10,4) PRIMARY KEY,
                                             verifyid  varchar(100),
                                             deviceid varchar(100),
                                             daqtime  date ,
@@ -863,12 +863,12 @@ CREATE TABLE VERIFYDATA_AIRCON_ANALYSIS (
                                             hum12 number(10,4),
                                             winddirection12 number(10,4),
                                             windspeed12 number(10,4),
-                                            idx_user number(32),
+                                            idx_user number(10,4),
                                             CONSTRAINT idx_user39 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
 CREATE TABLE VERIFYDATA_NETRIENTSUPPLIER (
-                                             idx_verdata_netrientsupplier number(32) PRIMARY KEY,
+                                             idx_verdata_netrientsupplier number(10,4) PRIMARY KEY,
                                              verifyid  varchar(100),
                                              deviceid varchar(100),
                                              daqtime  date ,
@@ -880,7 +880,7 @@ CREATE TABLE VERIFYDATA_NETRIENTSUPPLIER (
                                              valveopenrate3 number(10,4),
                                              valveopenrate4 number(10,4),
                                              valveopenrate5 number(10,4),
-                                             idx_user number(32),
+                                             idx_user number(10,4),
                                              CONSTRAINT idx_user40 FOREIGN KEY (idx_user) REFERENCES TOKEN(idx_user)
 );
 
@@ -1201,7 +1201,160 @@ INSERT INTO USER_FAC_JOIN (
              1,
              '2023-01-26T11:13:09.056832'
          );
-\
+INSERT INTO USER_FAC_JOIN (
+    idx_user_fac_join,
+    idx_user,
+    idx_asset,
+    end_date
+) VALUES (
+             2,
+             1,
+             2,
+             '2023-01-26T11:13:09.056832'
+         );
+INSERT INTO USER_FAC_JOIN (
+    idx_user_fac_join,
+    idx_user,
+    idx_asset,
+    end_date
+) VALUES (
+             3,
+             1,
+             3,
+             '2023-01-26T11:13:09.056832'
+         );
+INSERT INTO USER_FAC_JOIN (
+    idx_user_fac_join,
+    idx_user,
+    idx_asset,
+    end_date
+) VALUES (
+             4,
+             1,
+             4,
+             '2023-01-26T11:13:09.056832'
+         );
+INSERT INTO USER_FAC_JOIN (
+    idx_user_fac_join,
+    idx_user,
+    idx_asset,
+    end_date
+) VALUES (
+             5,
+             1,
+             5,
+             '2023-01-26T11:13:09.056832'
+         );
+INSERT INTO USER_FAC_JOIN (
+    idx_user_fac_join,
+    idx_user,
+    idx_asset,
+    end_date
+) VALUES (
+             6,
+             1,
+             6,
+             '2023-01-26T11:13:09.056832'
+         );
+INSERT INTO USER_FAC_JOIN (
+    idx_user_fac_join,
+    idx_user,
+    idx_asset,
+    end_date
+) VALUES (
+             7,
+             1,
+             7,
+             '2023-01-26T11:13:09.056832'
+         );
+INSERT INTO USER_FAC_JOIN (
+    idx_user_fac_join,
+    idx_user,
+    idx_asset,
+    end_date
+) VALUES (
+             8,
+             1,
+             8,
+             '2023-01-26T11:13:09.056832'
+         );
+INSERT INTO USER_FAC_JOIN (
+    idx_user_fac_join,
+    idx_user,
+    idx_asset,
+    end_date
+) VALUES (
+             9,
+             1,
+             9,
+             '2023-01-26T11:13:09.056832'
+         );
+INSERT INTO USER_FAC_JOIN (
+    idx_user_fac_join,
+    idx_user,
+    idx_asset,
+    end_date
+) VALUES (
+             10,
+             1,
+             10,
+             '2023-01-26T11:13:09.056832'
+         );
+INSERT INTO USER_FAC_JOIN (
+    idx_user_fac_join,
+    idx_user,
+    idx_asset,
+    end_date
+) VALUES (
+             11,
+             1,
+             11,
+             '2023-01-26T11:13:09.056832'
+         );
+INSERT INTO USER_FAC_JOIN (
+    idx_user_fac_join,
+    idx_user,
+    idx_asset,
+    end_date
+) VALUES (
+             12,
+             1,
+             12,
+             '2023-01-26T11:13:09.056832'
+         );
+INSERT INTO USER_FAC_JOIN (
+    idx_user_fac_join,
+    idx_user,
+    idx_asset,
+    end_date
+) VALUES (
+             13,
+             1,
+             13,
+             '2023-01-26T11:13:09.056832'
+         );
+INSERT INTO USER_FAC_JOIN (
+    idx_user_fac_join,
+    idx_user,
+    idx_asset,
+    end_date
+) VALUES (
+             14,
+             1,
+             14,
+             '2023-01-26T11:13:09.056832'
+         );
+INSERT INTO USER_FAC_JOIN (
+    idx_user_fac_join,
+    idx_user,
+    idx_asset,
+    end_date
+) VALUES (
+             15,
+             1,
+             15,
+             '2023-01-26T11:13:09.056832'
+         );
 INSERT INTO USER_FAC_JOIN (
     idx_user_fac_join,
     idx_user,
