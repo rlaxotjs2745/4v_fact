@@ -1,7 +1,7 @@
 package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.DTO.PRContentVO;
-import kr.or.fact.core.model.PRContentDAO;
+import kr.or.fact.core.model.PRContentMapper;
 import kr.or.fact.core.service.PRContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import java.util.List;
 @Service("prContentService")
 public class PRContentServiceImpl implements PRContentService {
     @Autowired
-    PRContentDAO prContentDAO;
+    PRContentMapper prContentDAO;
 
     @Override
     public int getMainPRContentCount(){

@@ -1,6 +1,6 @@
 package kr.or.fact.core.service.impl;
 
-import kr.or.fact.core.model.AdminDAO;
+import kr.or.fact.core.model.AdminMapper;
 import kr.or.fact.core.model.DTO.AdminHistoryVO;
 import kr.or.fact.core.model.DTO.AdminVO;
 import kr.or.fact.core.service.MemberService;
@@ -20,7 +20,7 @@ import java.util.List;
 public class MemberServiceImpl implements MemberService {
 
     @Autowired
-    private AdminDAO adminDAO;
+    private AdminMapper adminDAO;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -1,6 +1,6 @@
 package kr.or.fact.core.service.impl;
 
-import kr.or.fact.core.model.BsAnnouncementDAO;
+import kr.or.fact.core.model.BsAnnouncementMapper;
 import kr.or.fact.core.model.DTO.BsAnnouncementVO;
 import kr.or.fact.core.service.BsAnnouncementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import java.util.List;
 @Service("bsAnnouncementService")
 public class BsAnnouncementServiceImpl implements BsAnnouncementService {
     @Autowired
-    BsAnnouncementDAO bsAnnouncementDAO;
+    BsAnnouncementMapper bsAnnouncementDAO;
 
     @Override
     public int getMainBsAnnouncementCount(){

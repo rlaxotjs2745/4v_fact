@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.fact.core.model.NoticeMapper">
+
+    <select id="getMainNoticeCount" resultType="int">
+        SELECT COUNT(*) FROM TB_NOTICE  WHERE IS_MAIN_PAGE=1
+    </select>
+    <select id="getWebpageNoticeCount" resultType="int">
+        SELECT COUNT(*) FROM TB_NOTICE  WHERE IS_SHOW=1 AND NOTICE_STATUS=1
+    </select>
+    <select id="getNoticeList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.NoticeVO">
+        SELECT
+            IDX_NOTICE
+             ,NOTICE_NUM
+             ,SUBJECT
+             ,IS_FILE
+             ,IS_NEW
+             ,AUTHOR
+             ,POSTING_START_DATE
+             ,VIEW_COUNT
+        FROM (
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+        ,IDX_NOTICE
+                      ,NOTICE_NUM
+                      ,SUBJECT
+                      ,IS_FILE
+                      ,IS_NEW
+                      ,AUTHOR
+                      ,POSTING_START_DATE
+                      ,VIEW_COUNT
+                 FROM (
+                          SELECT * FROM TB_NOTICE  WHERE IS_SHOW=1 AND NOTICE_STATUS=1
+                      )
+
+                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+             )
+        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+    </select>
+
+
+
+
+
+    <select id="getMainNoticeList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.NoticeVO">
+        SELECT * FROM TB_NOTICE  WHERE  IS_MAIN_PAGE=1;
+    </select>
+
+</mapper>

@@ -1,7 +1,7 @@
 package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.DTO.DemoBsQnaVO;
-import kr.or.fact.core.model.QnaDAO;
+import kr.or.fact.core.model.QnaMapper;
 import kr.or.fact.core.service.QnaService;
 import kr.or.fact.core.util.CONSTANT;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.List;
 public class QnaServiceImpl implements QnaService {
 
     @Autowired
-    QnaDAO qnaDAO;
+    QnaMapper qnaDAO;
 
     @Override
     public int getDemoBSQnaCount(int type,long idx){

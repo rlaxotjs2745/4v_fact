@@ -1,7 +1,7 @@
 package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.DTO.NoticeVO;
-import kr.or.fact.core.model.NoticeDAO;
+import kr.or.fact.core.model.NoticeMapper;
 import kr.or.fact.core.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import java.util.List;
 @Service("noticeService")
 public class NoticeServiceImpl implements NoticeService {
     @Autowired
-    NoticeDAO noticeDAO;
+    NoticeMapper noticeDAO;
 
     @Override
     public int getMainNoticeCount(){

@@ -1,7 +1,6 @@
 package kr.or.fact.web_mobile.controller;
 
 import kr.or.fact.core.model.DTO.*;
-import kr.or.fact.core.model.UserDAO;
 import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.CONSTANT;
 import org.apache.ibatis.annotations.Param;
@@ -11,10 +10,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.jms.Session;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package kr.or.fact.core.service.impl;
 
-import kr.or.fact.core.model.ConsultingDAO;
+import kr.or.fact.core.model.ConsultingMapper;
 import kr.or.fact.core.model.DTO.DemoBsConsultingVO;
 import kr.or.fact.core.service.ConsultingService;
 import kr.or.fact.core.util.CONSTANT;
@@ -12,7 +12,7 @@ import java.util.List;
 @Service("consultingService")
 public class ConsultingServiceImpl implements ConsultingService {
     @Autowired
-    ConsultingDAO consultingDAO;
+    ConsultingMapper consultingDAO;
 
     @Override
     public int getConsultingCount(int type,long idx){

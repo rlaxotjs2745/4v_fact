@@ -3,7 +3,7 @@ package kr.or.fact.core.service.impl;
 import kr.or.fact.core.model.DTO.ParamVO;
 import kr.or.fact.core.model.DTO.ResultVO;
 import kr.or.fact.core.model.DTO.UserVO;
-import kr.or.fact.core.model.UserDAO;
+import kr.or.fact.core.model.UserMapper;
 import kr.or.fact.core.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import kr.or.fact.core.util.CONSTANT;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserDAO userDAO;
+    UserMapper userDAO;
 
     @Override
     public UserVO getAuthUser(String user_id, String user_pw){

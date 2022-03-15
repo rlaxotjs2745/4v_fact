@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @SpringBootApplication
 @EnableConfigurationProperties({
-        WebFrontFileUploadProperties.class
+        AdminFileUploadProperties.class
 })
 public class AdminApplication extends SpringBootServletInitializer {
 

@@ -1,7 +1,6 @@
 package kr.or.fact.web.controller;
 
 import kr.or.fact.core.model.DTO.*;
-import kr.or.fact.core.model.DemoBsDAO;
 import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.CONSTANT;
 import org.apache.ibatis.annotations.Param;

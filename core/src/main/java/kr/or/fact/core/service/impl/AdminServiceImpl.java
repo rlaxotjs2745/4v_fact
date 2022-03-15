@@ -1,6 +1,6 @@
 package kr.or.fact.core.service.impl;
 
-import kr.or.fact.core.model.AdminDAO;
+import kr.or.fact.core.model.AdminMapper;
 import kr.or.fact.core.model.DTO.AdminVO;
 import kr.or.fact.core.model.DTO.ResultVO;
 import kr.or.fact.core.service.AdminService;
@@ -12,7 +12,7 @@ import kr.or.fact.core.util.CONSTANT;
 public class AdminServiceImpl implements AdminService {
 
     @Autowired
-    AdminDAO adminDAO;
+    AdminMapper adminDAO;
 
     @Override
     public AdminVO getAuthAdmin(String admin_id, String admin_pw){

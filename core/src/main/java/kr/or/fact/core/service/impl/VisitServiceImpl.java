@@ -2,7 +2,7 @@ package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.DTO.VisitDataVO;
 import kr.or.fact.core.model.DTO.VisitReqVO;
-import kr.or.fact.core.model.VisitDAO;
+import kr.or.fact.core.model.VisitMapper;
 import kr.or.fact.core.service.VisitService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.List;
 public class VisitServiceImpl implements VisitService {
 
     @Autowired
-    VisitDAO visitDAO;
+    VisitMapper visitDAO;
 
     @Override
     public int getUserVisitReqCount(@Param("idx_user") long idx_user){
