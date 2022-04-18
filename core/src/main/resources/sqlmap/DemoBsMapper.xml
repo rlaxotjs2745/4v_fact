@@ -5,4 +5,7 @@
     <select id="getAvailibleDemoBs" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
         SELECT * FROM TB_DEMO_BUSINESS  WHERE DEMO_BS_STATUS = 3
     </select>
+    <select id="getDemoBsByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
+        SELECT * FROM TB_DEMO_BUSINESS  WHERE IDX_DEMO_BUSINESS = #{idx}
+    </select>
 </mapper>

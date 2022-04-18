@@ -10,23 +10,24 @@ import java.util.List;
 
 @Service("eventContentService")
 public class EventContentServiceImpl implements EventContentService {
+    private final EventContentMapper eventContentMapper;
     @Autowired
-    EventContentMapper eventContentDAO;
+    public EventContentServiceImpl(EventContentMapper eventContentMapper){this.eventContentMapper = eventContentMapper;}
 
     @Override
     public int getMainEventContentCount(){
-        return eventContentDAO.getMainEventContentCount();
+        return eventContentMapper.getMainEventContentCount();
     }
     @Override
     public int getWebpageEventContentCount(){
-        return eventContentDAO.getWebpageEventContentCount();
+        return eventContentMapper.getWebpageEventContentCount();
     }
     @Override
     public List<EventContentVO> getEventContentList(int page, int count){
-        return eventContentDAO.getEventContentList(page,count,"ANNOUNCE_NUM");
+        return eventContentMapper.getEventContentList(page,count,"ANNOUNCE_NUM");
     }
     @Override
     public List<EventContentVO> getMainEventContentList(){
-        return eventContentDAO.getMainEventContentList();
+        return eventContentMapper.getMainEventContentList();
     }
 }

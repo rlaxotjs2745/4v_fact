@@ -11,7 +11,7 @@ public class AdminVO {
     String admin_id;//	varchar2	255					어드민 아이디	이메일 기본, 변경 가능
     String admin_pw;//	varchar2	255					어드민 패스워드	최소 8자리, 단방향 암호화
     String admin_name;//	varchar2	40					어드민  이름
-    int corporate;//	number	4		0			소속	0:재단(관리기관), 1:센터, 2:지자체, 99:기타
+    int corporate;//	number	4		0			소속	0:진흥원(관리기관), 1:센터, 2:지자체, 99:기타
     String corporate_name;//	varchar2	40					 소속기관 이름
     String department;//	varchar2	40					부서
     String job_title;//	varchar2	40					직위

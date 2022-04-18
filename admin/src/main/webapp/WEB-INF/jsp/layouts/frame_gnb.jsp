@@ -152,16 +152,16 @@
                             </a>
                         </div>
 
-                        <a href="javascript:void(0)" class="d-block text-center text-light small p-2 my-1">Show all notifications</a>
+                        <a href="javascript:void(0)" class="d-block text-center text-light small p-2 my-1">모든 알림 보기</a>
                     </div>
                 </div>
 
-                <div class="demo-navbar-notifications nav-item dropdown mr-lg-3">
-                    <a class="nav-link" href="#">
-                        <i class="ion ion-md-options navbar-icon align-middle"></i>
-                        <span class="d-lg-none align-middle">&nbsp; 정렬,필터</span>
-                    </a>
-                </div>
+<%--                <div class="demo-navbar-notifications nav-item dropdown mr-lg-3">--%>
+<%--                    <a class="nav-link" href="#">--%>
+<%--                        <i class="ion ion-md-options navbar-icon align-middle"></i>--%>
+<%--                        <span class="d-lg-none align-middle">&nbsp; 정렬,필터</span>--%>
+<%--                    </a>--%>
+<%--                </div>--%>
                 <!-- Divider -->
                 <div class="nav-item d-none d-lg-block text-big font-weight-light line-height-1 opacity-25 mr-3 ml-1">|</div>
 
@@ -173,14 +173,247 @@
                   </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="javascript:void(0)" class="dropdown-item"><i class="ion ion-ios-person text-lightest"></i> &nbsp; 프로필</a>
-                        <a href="javascript:void(0)" class="dropdown-item"><i class="ion ion-ios-mail text-lightest"></i> &nbsp; 메세지</a>
-                        <a href="javascript:void(0)" class="dropdown-item"><i class="ion ion-md-settings text-lightest"></i> &nbsp; 설정</a>
-                        <div class="dropdown-divider"></div>
+                        <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#modal-myinfo"><i class="ion ion-ios-person text-lightest"></i> &nbsp; 프로필</a>
+                        <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#modal-message"><i class="ion ion-ios-mail text-lightest"></i> &nbsp; 메세지</a>
+                        <div class="dropdown-divider" data-toggle="modal" data-target="#modal-logout"></div>
                         <a href="javascript:void(0)" class="dropdown-item"><i class="ion ion-ios-log-out text-danger"></i> &nbsp; 로그아웃</a>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
+<!-- Profile Modal -->
+<div class="modal fade" id="modal-myinfo">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title text-white font-weight-bold">
+                    내 정보
+                </h5>
+                <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="form-label form-label-lg font-weight-bold">스마트팜 혁신밸리 실증단지 통합운영시스템 계정</label>
+                    </div>
+                    <!-- 아이디 -->
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">아이디</label>
+
+                        <div class="col-md-10">
+                            <div class="form-control-plaintext">honggildong</div>
+                        </div>
+                    </div>
+                    <!-- 비밀번호 -->
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">비밀번호</label>
+                        <div class="col-md-10">
+                            <button id="btn_change_passwd" type="button" class="btn btn-md btn-outline-dark" data-dismiss="modal" data-toggle="modal" data-target="#modals-pw-edit">비밀번호 변경</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label class="form-label form-label-lg font-weight-bold">개인정보</label>
+                    </div>
+                    <!-- 이름 -->
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">이름</label>
+                        <div class="col-md-10">
+                            <div class="form-control-plaintext">홍길동</div>
+                        </div>
+                    </div>
+                    <!-- 집전화번호 -->
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">집전화번호</label>
+                        <div class="col-md-4">
+                            <div class="form-control-plaintext myinfo-view">02-1234-5678</div>
+                            <input type="text" class="form-control form-control-md myinfo-edit d-none" placeholder="000-0000-0000">
+                        </div>
+                    </div>
+                    <!-- 휴대폰 번호 -->
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">휴대폰 번호</label>
+                        <div class="col-md-4">
+                            <div class="form-control-plaintext myinfo-view">010-1234-5678</div>
+                            <input type="text" class="form-control form-control-md myinfo-edit d-none" placeholder="000-0000-0000">
+                        </div>
+                    </div>
+                    <!-- 집 주소 -->
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">집 주소</label>
+                        <div class="col-md-10">
+                            <div class="form-control-plaintext myinfo-view">(12345) 제주도 서귀포시 000로 xxxx xxx-xxx</div>
+
+                            <div class="input-group myinfo-edit d-none">
+                                <input type="text" class="form-control form-control-md" placeholder="집주소 찾기...">
+                                <span class="input-group-append">
+                                    <button id="btn_search_addr" class="btn btn-md btn-secondary" type="button">찾기</button>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control form-control-md mt-1 myinfo-edit" placeholder="상세 주소...">
+
+                        </div>
+                    </div>
+                    <!-- 이메일 -->
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">이메일</label>
+                        <div class="col-md-10">
+                            <div class="form-control-plaintext myinfo-view">honggildong@naver.com</div>
+                            <input type="text" class="form-control form-control-md myinfo-edit d-none" placeholder="xxxx@xxxxx.xxx">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label class="form-label form-label-lg font-weight-bold">소속정보</label>
+                    </div>
+                    <!-- 소속 -->
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">단체명</label>
+                        <div class="col-md-4">
+                            <div class="form-control-plaintext myinfo-view">한국농업기술진흥원</div>
+                            <input type="text" class="form-control form-control-md myinfo-edit d-none" placeholder="단체명...">
+                        </div>
+                    </div>
+                    <!-- 직위 -->
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">직위</label>
+                        <div class="col-md-4">
+                            <div class="form-control-plaintext myinfo-view">과장</div>
+                            <input type="text" class="form-control form-control-md myinfo-edit d-none" placeholder="직위명...">
+                        </div>
+                    </div>
+                    <!-- 전화번호 -->
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">전화 번호</label>
+                        <div class="col-md-4">
+                            <div class="form-control-plaintext myinfo-view">031-1234-5678</div>
+                            <input type="text" class="form-control form-control-md myinfo-edit d-none" placeholder="000-0000-0000">
+                        </div>
+                    </div>
+                    <!-- 저장 취소-->
+                    <div class="form-group rowbg-light text-right myinfo-view">
+                        <button id="btn_myinfo_edit" type="button" class="btn btn-outline-dark">수정</button>
+                    </div>
+                    <div class="form-group rowbg-light text-right myinfo-edit d-none">
+                        <button id="btn_myinfo_edit_cancel" type="button" class="btn btn-outline-dark">취소</button>
+                        <button id="btn_myinfo_edit_save" type="button" class="btn btn-success" >저장</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Password Modal -->
+<div class="modal fade" id="modals-pw-edit">
+    <div class="modal-dialog mb-1 border-success">
+        <form class="modal-content ">
+            <div class="modal-header bg-success-dark">
+                <h5 class="modal-title text-white font-weight-bold">
+                    비밀번호 변경
+                </h5>
+                <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label class="form-label font-weight-bold">기존 비밀번호</label>
+                        <input type="password" class="form-control">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label class="form-label font-weight-bold">변경할 비밀번호</label>
+                        <input type="password" class="form-control">
+                        <small class="form-text text-muted">
+                            8-20 길이의 문자, 숫자, 특수문자 조합
+                        </small>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label class="form-label font-weight-bold">변경할 비밀번호 확인</label>
+                        <input type="password" class="form-control">
+                        <small class="form-text text-muted">
+                            8-20 길이의 문자, 숫자, 특수문자 조합
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Message Modal -->
+<div class="modal fade" id="modal-message">
+    <div class="modal-dialog mb-1 border-success">
+        <form class="modal-content ">
+            <div class="modal-header bg-success-dark">
+                <h4 class="modal-title text-white font-weight-bold">
+                    메세지 전송
+                </h4>
+                <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label class="form-label font-weight-bold"> To : </label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label class="form-label font-weight-bold">내용 : </label>
+                        <textarea type="text" class="form-control"></textarea>
+                    </div>
+                    <small class="form-text text-muted">
+                        0/200
+                    </small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary">전송</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+    $('#btn_myinfo_edit_save').click( function(){
+
+        $('.myinfo-view').removeClass('d-none');
+        $('.myinfo-edit').addClass('d-none');
+
+    });
+
+    $('#btn_myinfo_edit').click( function(){
+        $('.myinfo-edit').removeClass('d-none');
+        $('.myinfo-view').addClass('d-none');
+    });
+
+    $('#btn_myinfo_edit_cancel').click( function(){
+        $('.myinfo-view').removeClass('d-none');
+        $('.myinfo-edit').addClass('d-none');
+    });
+
+    $('#btn_myinfo_edit_save').click( function(){
+
+        $('.myinfo-view').removeClass('d-none');
+        $('.myinfo-edit').addClass('d-none');
+
+    });
+
+
+</script>
+
     <!-- / Layout navbar -->

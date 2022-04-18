@@ -14,23 +14,24 @@ import kr.or.fact.core.util.CONSTANT;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
+    private final UserMapper userMapper;
     @Autowired
-    UserMapper userDAO;
+    public UserServiceImpl(UserMapper userMapper){this.userMapper = userMapper;}
 
     @Override
     public UserVO getAuthUser(String user_id, String user_pw){
-        UserVO findUser = userDAO.getAuthUser( user_id,user_pw);
+        UserVO findUser = userMapper.getAuthUser( user_id,user_pw);
         return findUser;
     }
 
     @Override
     public UserVO getUserInfo(long idx_user){
-        return userDAO.getUserInfoByIdx(idx_user);
+        return userMapper.getUserInfoByIdx(idx_user);
     }
 
     @Override
     public UserVO findUserById(String user_id){
-        UserVO findUser = userDAO.getUserInfoById( user_id);
+        UserVO findUser = userMapper.getUserInfoById( user_id);
         return findUser;
     }
 
@@ -45,7 +46,7 @@ public class UserServiceImpl implements UserService {
         paramVo.setUser_id(user_id);
         paramVo.setUser_pw(user_pw);
 
-        UserVO findUserVO =userDAO.getAuthUser(user_id,user_pw);
+        UserVO findUserVO =userMapper.getAuthUser(user_id,user_pw);
         return findUserVO;
     }
     @Override
@@ -55,7 +56,7 @@ public class UserServiceImpl implements UserService {
         resultVO.setResult_code(CONSTANT.Success);
         resultVO.setResult_str("로그아웃 되었습니다");
 
-        int upResult = userDAO.updateUserInfoForLogout(user_id);
+        int upResult = userMapper.updateUserInfoForLogout(user_id);
 
         if(upResult!=1)
         {
@@ -74,7 +75,7 @@ public class UserServiceImpl implements UserService {
         //UserVO findUser = userDAO.getUserInfoById(userVO.getUser_id());
 
         try {
-            ret_idx = userDAO.insertUserInfo(userVO);
+            ret_idx = userMapper.insertUserInfo(userVO);
         }
         catch (Exception e){
 
@@ -84,14 +85,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVO findUserID(String user_name, String mphone_number){
 
-        UserVO findUser = userDAO.getUserInfoByNameAndMPhoneNum(user_name,mphone_number);
+        UserVO findUser = userMapper.getUserInfoByNameAndMPhoneNum(user_name,mphone_number);
         return findUser;
     }
 
     @Override
     public UserVO findUserPW(String user_id){
 
-        UserVO findUser = userDAO.getUserInfoById("test04");
+        UserVO findUser = userMapper.getUserInfoById("test04");
         return findUser;
     }
 
@@ -101,7 +102,7 @@ public class UserServiceImpl implements UserService {
         resultVO.setResult_code(CONSTANT.Success);
         resultVO.setResult_str("사용가능합니다");
 
-        UserVO findUser = userDAO.getUserInfoById(user_id);
+        UserVO findUser = userMapper.getUserInfoById(user_id);
 
         if(findUser !=null)
         {

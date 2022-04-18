@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SMART FARM</title>
+  <link rel="shortcut icon" href="../assets/image/favicon_16.ico">
+  <link rel="icon" href="../assets/image/favicon_16.png">
+  <link rel="apple-touch-icon-precomposed" href="../assets/image/favicon_152.png">
+  <link rel="stylesheet" type="text/css" href="../assets/css/jquery-ui.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+</head>
+<body>
+<div class="wrapper" id="wrapper">
+  <header class="header">
+    <h1><a href="main.html"><img src="../assets/image/area_logo@3x.png" alt="전북김제"><img src="../assets/image/h1_logo@3x.png" alt="스마트팜 실증센터"></a></h1>
+    <div class="menu__anchor"><a href="#"><img src="../assets/image/ico_menu.svg" alt="전체메뉴열기"></a></div>
+
+    <nav class="nav "><!--is-expanded-->
+      <a href="#none" class="btn-close-menu"><img src="../assets/image/ico_close.png" alt="레이어닫기"></a>
+      <div class="common__search">
+        <div class="common__search--input">
+          <input type="text" value="" placeholder="검색어를 입력하세요.">
+          <a href="#none" class="btn btn-cancel d-none">취소</a>
+        </div>
+        <div class="search__word--lists">
+          <span class="search__word--title">빠른링크</span>
+          <a href="util_search.html" class="search__word">실증 신청 방법</a>
+          <a href="util_search.html" class="search__word">실증 신청서 샘플</a>
+          <a href="util_search.html" class="search__word">실증 센터란?</a>
+          <a href="util_search.html" class="search__word">이용료</a>
+        </div>
+      </div>
+      <!--로그인전-->
+      <div class="common__login">
+        <div class="login__message">로그인을 해주세요. <a href="#none" class="btn dark btn-lg"><img src="../assets/image/ico_login_n.svg" alt="">로그인</a></div>
+      </div>
+      <!--로그인후-->
+      <div class="common__login--in">
+        <div class="info__message"><em>안녕하세요.</em><strong>홍길동님</strong> <a href="#none" class="btn btn-login">로그아웃</a></div>
+      </div>
+      <ul class="nav--depth1">
+        <li class="link--home"><a href="main.html">홈</a></li>
+        <li><a href="#" class="">실증 안내/신청</a>
+          <ul class="nav--depth2">
+            <li><a href="prv_part.html">실증 분야</a></li>
+            <li><a href="prv_step.html">실증 절차</a></li>
+            <li><a href="prv_use.html">이용가능시설</a></li>
+            <li><a href="prv_fee.html">실증서비스 이용료</a></li>
+            <li><a href="prv_application.html">신청서 작성</a></li>
+          </ul>
+        </li>
+        <li><a href="#" class="">센터소개</a><!--is-selected-->
+          <ul class="nav--depth2">
+            <li><a href="cnt_goal.html">비전과 미션</a></li>
+            <li><a href="cnt_history.html">연혁</a></li>
+            <li><a href="cnt_organize.html">조직과 직원</a></li>
+            <li><a href="cnt_map.html">찾아오시는 길</a></li>
+          </ul>
+        </li>
+        <li><a href="#" class="">열린마당</a>
+          <ul class="nav--depth2">
+            <li><a href="brd_notice.html">공지사항</a></li>
+            <li><a href="brd_announce.html">사업공고</a></li>
+            <li><a href="brd_event.html">행사안내</a></li>
+            <li><a href="brd_promotion.html">홍보자료</a></li>
+          </ul>
+        </li>
+        <li><a href="#" class="">자료실</a>
+          <ul class="nav--depth2">
+            <li><a href="arc_center.html">실증단지소개</a></li>
+            <li><a href="arc_pee.html">서비스 이용료</a></li>
+            <li><a href="arc_form.html">관련 양식</a></li>
+            <li><a href="arc_rule.html">관련 규정</a></li>
+          </ul>
+        </li>
+        <li><a href="#" class="">고객 지원</a>
+          <ul class="nav--depth2">
+            <li><a href="spt_faq.html">FAQ</a></li>
+            <li><a href="spt_prevent.html">대면상담 신청</a></li>
+            <li><a href="spt_email.html">온라인 문의</a></li>
+            <li><a href="spt_visit.html">견학 신청</a></li>
+          </ul>
+        </li>
+        <li><a href="#" class="">마이 페이지</a>
+          <ul class="nav--depth2">
+            <li><a href="my_business.html">나의 사업</a></li>
+            <li><a href="my_info.html">나의 정보</a></li>
+            <li><a href="my_group.html">나의 상담 및 정보</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="content" id="content">
+    <div class="page__cnt">
+      <div class="main__keyvisual">
+        <div class="swiper-container swiper__main">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="../assets/image/img_keybrand_01.jpg" alt="스마트팜 혁신밸리 실증단지 / 대한민국의 농업의 새로울 내일을 열어갑니다.">
+            </div>
+            <!--//-->
+            <div class="swiper-slide">
+              <img src="../assets/image/img_keybrand_02.jpg" alt="스마트팜 혁신밸리 실증단지 / 대한민국의 농업의 새로울 내일을 열어갑니다.">
+            </div>
+            <!--//-->
+            <div class="swiper-slide">
+              <img src="../assets/image/img_keybrand_03.jpg" alt="스마트팜 혁신밸리 실증단지 / 대한민국의 농업의 새로울 내일을 열어갑니다.">
+            </div>
+            <!--//-->
+          </div>
+          <div class="action-controller">
+            <div class="swiper-button-play swiper-main-button-play" style="display:none;">play</div>
+            <div class="swiper-button-pause swiper-main-button-pause">stop</div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </div>
+      <!--//-->
+
+      <div class="main__quick">
+        <div class="quick__inner">
+          <a href="#" class="quick__anchor">
+            <img src="../assets/image/img_demonstration.svg" alt="">
+            <span>실증 분야</span>
+          </a>
+          <a href="#" class="quick__anchor">
+            <img src="../assets/image/img_application.svg" alt="">
+            <span>실증 신청</span>
+          </a>
+          <a href="#" class="quick__anchor">
+            <img src="../assets/image/img_management.svg" alt="">
+            <span>실증 신청 현황</span>
+          </a>
+          <a href="#" class="quick__anchor">
+            <img src="../assets/image/img_advance.svg" alt="">
+            <span>대면 상담</span>
+          </a>
+          <a href="#" class="quick__anchor">
+            <img src="../assets/image/img_inquire.svg" alt="">
+            <span>온라인 문의</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="main__board">
+        <div class="main__board--notice">
+          <a href="#">
+            <div class="board__badge">
+              <img src="../assets/image/ico_notice.svg" alt="">공지사항
+             </div>
+            <div class="board__text">12월31일까지<br>에너지 바우처 신청하세요</div>
+            <span class="board__anchor">보러가기</span>
+          </a>
+        </div>
+        <div class="main__board--business">
+          <a href="#">
+            <div class="board__badge">
+              <img src="../assets/image/ico_business.svg" alt="">사업공고
+            </div>
+            <div class="board__text">국제농업박람회 참여기업을 모집합니다. <br>서두르세요~</div>
+            <span class="board__anchor">보러가기</span>
+          </a>
+        </div>
+      </div>
+      <!--//-->
+
+      <div class="page__cnt--bg">
+        <div class="main__news">
+          <a href="#news-01" class="news__badge is-active">공지사항</a>
+          <a href="#news-02" class="news__badge">사업공고</a>
+          <a href="#news-03" class="news__badge">행사안내</a>
+          <div class="main__news--inner">
+            <div class="main__news--notice is-active" id="news-01">
+              <ul class="news__list">
+                <li>
+                  <a href="#"><span>공지사항 에너지 바우처 신청 12월31일까지 에너지 바우처 신청</span><em>07-06</em></a>
+                </li>
+                <li>
+                  <a href="#"><span>‘21년 제2차 농업기술실용화재단 농업기술실용화재단 </span><em>07-06</em></a>
+                </li>
+                <li>
+                  <a href="#"><span>공지사항 안내</span><em>07-06</em></a>
+                </li>
+                <li>
+                  <a href="#"><span>중국 스마트팜 기술 세미나</span><em>07-06</em></a>
+                </li>
+              </ul>
+              <div class="news__more"><a href="#" class="btn btn-more">+더보기</a></div>
+            </div>
+            <!--//-->
+            <div class="main__news--notice" id="news-02">
+              <ul class="news__list">
+                <li>
+                  <a href="#"><span>사업공고 사업공고 모집 국제농업박람회 참여기업 모집</span><em>07-06</em></a>
+                </li>
+                <li>
+                  <a href="#"><span>2021 사업공고 공공기관연계육성 스마트 공공기관연계육성 스마트 </span><em>07-06</em></a>
+                </li>
+                <li>
+                  <a href="#"><span>2021년 사업공고 벤처육성 지원사업</span><em>07-06</em></a>
+                </li>
+                <li>
+                  <a href="#"><span>한국형 농업기술 · 제품 해외마케팅 지원사업안내 설명회 개최</span><em>07-06</em></a>
+                </li>
+              </ul>
+              <div class="news__more"><a href="#" class="btn btn-more">+더보기</a></div>
+            </div>
+            <!--//-->
+            <div class="main__news--notice" id="news-03">
+              <ul class="news__list">
+                <li>
+                  <a href="#"><span>행사안내 공공빅데이터 활용 창업경진대회 공공빅데이터 활용 창업경진대회</span><em>07-06</em></a>
+                </li>
+                <li>
+                  <a href="#"><span>행사안내 전주한옥마을 ‘영농하게’ 전주한옥마을 ‘영농하게’ </span><em>07-06</em></a>
+                </li>
+                <li>
+                  <a href="#"><span>행사안내행사안내 청년벤처들 모여 불멍쇼!! 청년벤처들 모여 불멍쇼!!</span><em>07-06</em></a>
+                </li>
+                <li>
+                  <a href="#"><span>중국 스마트팜 기술 세미나</span><em>07-06</em></a>
+                </li>
+              </ul>
+              <div class="news__more"><a href="#" class="btn btn-more">+더보기</a></div>
+            </div>
+            <!--//-->
+          </div>
+        </div>
+
+        <div class="main__banner">
+          <div class="banner__01">
+            <a href="#" class="banner__anchor">
+              <div class="banner__title">실증단지 101</div>
+              <span class="banner__desc">실증단지에 궁금한 것을 <br>확인하세요.</span>
+            </a>
+          </div>
+          <div class="banner__02">
+            <a href="#" class="banner__anchor">
+              <div class="banner__title">실증단지 견학신청</div>
+              <span class="banner__desc">실증단지에 궁금한 것을 <br>확인하세요.</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+  <!--<div class="btn_top"><a href="#wrapper">▲<br>TOP</a></div>-->
+  <div class="footer">
+    <div class="footer__box">
+      <ul class="footer__anchor">
+        <li><a href="#none">서비스이용약관</a></li>
+        <li><a href="#none">개인정보처리방침</a></li>
+        <li><a href="#none">부패신고바로하기</a></li>
+        <li><a href="#none">홈페이지 개선의견</a></li>
+        <li><a href="#none">사이트 맵</a></li>
+      </ul>
+      <div class="footer__site">
+        <select name="a" id="a">
+          <option value="1">관련부처 사이트</option>
+        </select>
+        <div class="footer__bar">
+          <span><img src="../assets/image/footer_mark.png" alt=""></span>
+        </div>
+      </div>
+      <div class="footer__info">
+        <h3 class="footer__logo"><img src="../assets/image/logo_footer.png" alt=""></h3>
+        <div class="footer__address">54667 전라북도 익산시 평동로 457 (송학동 381) <br>TEL 063-919-1000 FAX 063-919-1269</div>
+        <div class="footer__copyright">Copyright(c) 2010 The Foundation of AG. Tech, Commercialization and Transfer. All Rights Reserved.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="../assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+<script src="../assets/js/lib/swiper.min.js" type="text/javascript"></script>
+<script src="../assets/js/ui.common.js" type="text/javascript"></script>
+<!-- Initialize Swiper -->
+<script>
+    var swiperMain = new Swiper(".swiper__main", {
+        centeredSlides: true,
+        loop: true,
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+    });
+    $(".swiper-main-button-pause").click(function(){
+        swiperMain.autoplay.stop();
+        $(".swiper-main-button-play").show();
+        $(".swiper-main-button-pause").hide();
+    });
+    $(".swiper-main-button-play").click(function(){
+        swiperMain.autoplay.start();
+        $(".swiper-main-button-pause").show();
+        $(".swiper-main-button-play").hide();
+    });
+
+
+</script>
+</body>
+</html>

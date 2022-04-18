@@ -7,4 +7,6 @@ import java.util.List;
 public interface DemoBsService {
 
     public List<DemoBusinessVO> getAvailibleDemoBs();
+    public DemoBusinessVO getDemoBsByIdx(long idx);
+
 }

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- Page content -->
     <div class="container-fluid flex-grow-1 container-p-y">
 
@@ -7,264 +8,73 @@
             <div>공지사항 관리</div>
         </h4>
 
-        <div class="card px-4 pt-4 mb-4">
-            <div class="form-row mb-4">
-                <div class="col-md-3 ">
-                    <label class="form-label text-muted">상담 구분</label>
-                    <div class="form-inline mt-2">
-                        <label class="custom-control custom-checkbox mr-2">
-                            <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-label">전체</span>
-                        </label>
-                        <label class="custom-control custom-checkbox mr-2">
-                            <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-label">사전상담</span>
-                        </label>
-                        <label class="custom-control custom-checkbox mr-2">
-                            <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-label">사용승인 후 상담</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-2 ">
-                    <label class="form-label text-muted">상담 접수</label>
-                    <div class="form-inline">
-                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio" checked="">전체
-                            </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio"> 신규
-                            </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 해결
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-5 ">
-                    <label class="form-label text-muted">상담 접수일</label>
-                    <div class="form-inline">
-                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio" checked="">오늘
-                            </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio"> 1주일
-                            </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 1개월
-                            </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 3개월
-                            </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 6개월
-                            </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 1년이상
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2 text-right">
-                    <label class="form-label d-none d-md-block">&nbsp;</label>
-                    <button type="button" class="btn btn-outline-default">초기화</button>
-                    <button type="button" class="btn btn-success">조회</button>
-                </div>
-            </div>
-        </div>
-
         <div class="card">
             <h6 class="card-header with-elements">
-                <div class="card-header-title">접수 목록</div>
+                <div class="card-header-title">포털 공지사항 목록</div>
+                <div class="card-header-elements ml-auto">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals-business" data-what="mode-new">+ 신규 공지사  작성</button>
+                </div>
             </h6>
             <div class="card-datatable table-responsive pt-0 pb-3">
                 <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                    <div class="row p-3">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="mr-3  mb-0">총 : <strong>999</strong>건</label><label class="mr-3  mb-0">신규 : <strong>70</strong>건</label><label class="mr-3  mb-0">추가 : <strong>70</strong>건</label><label class="mr-3  mb-0">해결 : <strong>70</strong>건</label>
-                        </div>
-                    </div>
+
                     <div class="row">
                         <div class="col-sm-12">
-                            <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
-                                <thead>
+                            <table id="" class="table table-bordered table-striped dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
+                                <thead class="bg-success text-white font-weight-bold">
                                 <tr role="row">
-                                    <th class="text-center px-2" style="width:60px">No</th>
-                                    <th class="text-center sorting" style="width:80px">상담일지</th>
-                                    <th class="text-center sorting" style="width:60px">구분</th>
-                                    <th class="text-center sorting" style="width:100px">신청자</th>
-                                    <th class="text-center sorting" style="width:100px">ID</th>
-                                    <th class="text-center sorting" style="width:150px">소속</th>
-                                    <th class="text-center px-2" style="width:80px">접수</th>
-                                    <th class="text-center px-2" style="width:120px">수신일</th>
-                                    <th class="text-center px-2" style="width:120px">요청일</th>
-                                    <th class="text-center px-2" style="width:120px">상담 방법</th>
-                                    <th class="text-center px-2" style="width:100px">상담 수</th>
-                                    <th class="text-center px-2" style="width:150px">마지막 상담일</th>
+                                    <th class="text-center" style="width:8%">No</th>
+                                    <th class="text-center" style="width:6%">중요</th>
+                                    <th class="text-center" style="width:12%">공지번호</th>
+                                    <th class="text-center" style="width:32%">제목</th>
+                                    <th class="text-center" style="width:8%">첨부파일</th>
+                                    <th class="text-center" style="width:8%">게시자</th>
+                                    <th class="text-center" style="width:16%">게시일</th>
+                                    <th class="text-center" style="width:10%">조회수</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+<c:forEach items="${noticeList}" var="notice" varStatus="status">
                                 <tr class="">
-                                    <td class="text-center">1</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록완료</a></td>
-                                    <td class="text-center">사전</td>
-                                    <td class="text-center">홍길동</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">추가</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">0</td>
-                                    <td class="text-center">이메일</td>
-                                    <td class="text-center">1회</td>
-                                    <td class="">2021.00/00 (0일전)</td>
+
+                                    <td class="text-center">${notice.notice_num}</td>
+                                    <td class="text-center"><c:if test="${notice.is_important eq 1}">중요</c:if> </td>
+                                    <td class="text-center">${notice.notice_code eq 1} </td>
+                                    <td class="text-left"><a href="#none" data-toggle="modal" data-target="#modals-notice" data-what="mode-view">${notice.subject}</a></td>
+                                    <td class="text-center"><c:if test="${notice.is_file eq 1}"><span class="fas fa-paperclip"></span></c:if> </td>
+                                    <td class="text-center">${notice.author}</td>
+                                    <td class="text-center"><fmt:formatDate value="${notice.posting_start_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                                    <td class="text-center">${notice.view_count}</td>
+
                                 </tr>
-                                <tr class="">
-                                    <td class="text-center">2</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view">등록하기</a></td>
-                                    <td class="text-center">사후</td>
-                                    <td class="text-center">홍길동</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">전화</td>
-                                    <td class="text-center">0회</td>
-                                    <td class="">없음</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">3</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">사전</td>
-                                    <td class="text-center">홍길동</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">센터방문</td>
-                                    <td class="text-center">1회</td>
-                                    <td class="">2021.00/00 (0일전)</td>
-                                </tr>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">4</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">센터방문</td>
-                                    <td class="text-center">0회</td>
-                                    <td class="">없음</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">5</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">해결</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">센터방문</td>
-                                    <td class="text-center">0회</td>
-                                    <td class="">없음</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">6</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">-</td>
-                                    <td class="text-center">1:1게시판</td>
-                                    <td class="text-center">0회</td>
-                                    <td class=""></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">7</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">-</td>
-                                    <td class="text-center">1:1게시판</td>
-                                    <td class="text-center">0회</td>
-                                    <td class=""></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">8</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">센터방문</td>
-                                    <td class="text-center">0회</td>
-                                    <td class="">없음</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">9</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">센터방문</td>
-                                    <td class="text-center">0회</td>
-                                    <td class="">없음</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">10</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">센터방문</td>
-                                    <td class="text-center">0회</td>
-                                    <td class="">없음</td>
-                                </tr>
+</c:forEach>
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
+                            <div class="dataTables_info" role="status" aria-live="polite">총 ${total_count}개 중 ${(cur_page-1)*list_amount+1}에서 ${cur_page*list_amount}까지</div>
                         </div>
                         <div class="col-sm-12 col-md-7">
                             <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                                 <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                    <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
+
+                                    <c:set var="name" value="${total_count/amount}" />
+
+
+<c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:load('c41_site_notice_mng?page=1','공지사항 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+<c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:load('c41_site_notice_mng?page=${cur_page-1}','공지사항 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+
+
+
+                                    <c:forEach var="i" begin="1" end="${page_amount}">
+                                    <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:load('c41_site_notice_mng?page=${(cur_sector-1)*page_amount+i}','공지사항 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
+                                    </c:forEach>
+
+<c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:load('c41_site_notice_mng?page=${cur_page+1}','공지사항 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:load('c41_site_notice_mng?page=${tot_page}','공지사항 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
                                 </ul>
                             </div>
                         </div>

@@ -1,6 +1,7 @@
 package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.AdminMapper;
+import kr.or.fact.core.model.MemberMapper;
 import kr.or.fact.core.model.DTO.AdminHistoryVO;
 import kr.or.fact.core.model.DTO.AdminVO;
 import kr.or.fact.core.service.MemberService;
@@ -19,12 +20,18 @@ import java.util.List;
 @Service("memberService")
 public class MemberServiceImpl implements MemberService {
 
+/*    @Autowired
+    private AdminMapper adminDAO;*/
+
+    private final AdminMapper adminMapper;
+
     @Autowired
-    private AdminMapper adminDAO;
+    public MemberServiceImpl(AdminMapper adminMapper){this.adminMapper = adminMapper;}
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AdminVO adminVO = adminDAO.getAdminInfoById(username);
+        AdminVO adminVO = adminMapper.getAdminInfoById(username);
         if(adminVO == null){
             adminVO = new AdminVO();
             adminVO.setAdmin_type(CONSTANT.ROLE_GUEST);
@@ -39,6 +46,6 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Integer saveAdminWorkHistory(AdminHistoryVO adminHistoryVo) {
 
-        return adminDAO.saveAdminWorkHistory(adminHistoryVo);
+        return adminMapper.saveAdminWorkHistory(adminHistoryVo);
     }
 }

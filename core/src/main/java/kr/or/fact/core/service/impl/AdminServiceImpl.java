@@ -11,23 +11,27 @@ import kr.or.fact.core.util.CONSTANT;
 @Service("adminService")
 public class AdminServiceImpl implements AdminService {
 
+    private final AdminMapper adminMapper;
+
     @Autowired
-    AdminMapper adminDAO;
+    public AdminServiceImpl(AdminMapper adminMapper){
+        this.adminMapper = adminMapper;
+    }
 
     @Override
     public AdminVO getAuthAdmin(String admin_id, String admin_pw){
-        AdminVO findAdmin = adminDAO.getAuthAdmin( admin_id,admin_pw);
+        AdminVO findAdmin = adminMapper.getAuthAdmin( admin_id,admin_pw);
         return findAdmin;
     }
 
     @Override
     public AdminVO getAdminInfo(long idx_admin){
-        return adminDAO.getAdminInfoByIdx(idx_admin);
+        return adminMapper.getAdminInfoByIdx(idx_admin);
     }
 
     @Override
     public AdminVO findAdminById(String admin_id){
-        AdminVO findAdmin = adminDAO.getAdminInfoById( admin_id);
+        AdminVO findAdmin = adminMapper.getAdminInfoById( admin_id);
         return findAdmin;
     }
 
@@ -35,7 +39,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public AdminVO login(String admin_id, String admin_pw){
 
-        AdminVO findAdminVO =adminDAO.getAuthAdmin(admin_id,admin_pw);
+        AdminVO findAdminVO =adminMapper.getAuthAdmin(admin_id,admin_pw);
         return findAdminVO;
     }
     @Override
@@ -45,7 +49,7 @@ public class AdminServiceImpl implements AdminService {
         resultVO.setResult_code(CONSTANT.Success);
         resultVO.setResult_str("로그아웃 되었습니다");
 
-        int upResult = adminDAO.updateAdminInfoForLogout(admin_id);
+        int upResult = adminMapper.updateAdminInfoForLogout(admin_id);
 
         if(upResult!=1)
         {
@@ -64,7 +68,7 @@ public class AdminServiceImpl implements AdminService {
         //AdminVO findAdmin = adminDAO.getAdminInfoById(adminVO.getAdmin_id());
 
         try {
-            ret_idx = adminDAO.insertAdminInfo(adminVO);
+            ret_idx = adminMapper.insertAdminInfo(adminVO);
         }
         catch (Exception e){
 
@@ -74,14 +78,14 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public AdminVO findAdminID(String admin_name, String mphone_number){
 
-        AdminVO findAdmin = adminDAO.getAdminInfoByNameAndMPhoneNum(admin_name,mphone_number);
+        AdminVO findAdmin = adminMapper.getAdminInfoByNameAndMPhoneNum(admin_name,mphone_number);
         return findAdmin;
     }
 
     @Override
     public AdminVO findAdminPW(String admin_id){
 
-        AdminVO findAdmin = adminDAO.getAdminInfoById("test04");
+        AdminVO findAdmin = adminMapper.getAdminInfoById("test04");
         return findAdmin;
     }
 
@@ -91,7 +95,7 @@ public class AdminServiceImpl implements AdminService {
         resultVO.setResult_code(CONSTANT.Success);
         resultVO.setResult_str("사용가능합니다");
 
-        AdminVO findAdmin = adminDAO.getAdminInfoById(admin_id);
+        AdminVO findAdmin = adminMapper.getAdminInfoById(admin_id);
 
         if(findAdmin !=null)
         {
@@ -103,6 +107,6 @@ public class AdminServiceImpl implements AdminService {
     }
     @Override
     public int updateAdminPassword(AdminVO adminVo){
-        return adminDAO.updateAdminPassword(adminVo);
+        return adminMapper.updateAdminPassword(adminVo);
     }
 }

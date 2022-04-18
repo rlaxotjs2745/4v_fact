@@ -10,23 +10,24 @@ import java.util.List;
 
 @Service("bsAnnouncementService")
 public class BsAnnouncementServiceImpl implements BsAnnouncementService {
+    private final BsAnnouncementMapper bsAnnouncementMapper;
     @Autowired
-    BsAnnouncementMapper bsAnnouncementDAO;
+    public BsAnnouncementServiceImpl(BsAnnouncementMapper bsAnnouncementMapper){this.bsAnnouncementMapper = bsAnnouncementMapper;}
 
     @Override
     public int getMainBsAnnouncementCount(){
-        return bsAnnouncementDAO.getMainBsAnnouncementCount();
+        return bsAnnouncementMapper.getMainBsAnnouncementCount();
     }
     @Override
     public int getWebpageBsAnnouncementCount(){
-        return bsAnnouncementDAO.getWebpageBsAnnouncementCount();
+        return bsAnnouncementMapper.getWebpageBsAnnouncementCount();
     }
     @Override
     public List<BsAnnouncementVO> getBsAnnouncementList(int page, int count){
-        return bsAnnouncementDAO.getBsAnnouncementList(page,count,"ANNOUNCE_NUM");
+        return bsAnnouncementMapper.getBsAnnouncementList(page,count,"ANNOUNCE_NUM");
     }
     @Override
     public List<BsAnnouncementVO> getMainBsAnnouncementList(){
-        return bsAnnouncementDAO.getMainBsAnnouncementList();
+        return bsAnnouncementMapper.getMainBsAnnouncementList();
     }
 }

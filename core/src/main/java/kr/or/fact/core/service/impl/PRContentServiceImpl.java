@@ -10,23 +10,24 @@ import java.util.List;
 
 @Service("prContentService")
 public class PRContentServiceImpl implements PRContentService {
+    private final PRContentMapper prContentMapper;
     @Autowired
-    PRContentMapper prContentDAO;
+    public PRContentServiceImpl(PRContentMapper prContentMapper){this.prContentMapper = prContentMapper;}
 
     @Override
     public int getMainPRContentCount(){
-        return prContentDAO.getMainPRContentCount();
+        return prContentMapper.getMainPRContentCount();
     }
     @Override
     public int getWebpagePRContentCount(){
-        return prContentDAO.getWebpagePRContentCount();
+        return prContentMapper.getWebpagePRContentCount();
     }
     @Override
     public List<PRContentVO> getPRContentList(int page, int count){
-        return prContentDAO.getPRContentList(page,count,"ANNOUNCE_NUM");
+        return prContentMapper.getPRContentList(page,count,"ANNOUNCE_NUM");
     }
     @Override
     public List<PRContentVO> getMainPRContentList(){
-        return prContentDAO.getMainPRContentList();
+        return prContentMapper.getMainPRContentList();
     }
 }

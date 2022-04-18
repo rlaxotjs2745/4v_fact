@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.fact.core.model.CoWorkerNMapper">
+
+
+
+    <select id="getCoWorkerList" resultType="kr.or.fact.core.model.DTO.CoWorkerVO">
+        SELECT * FROM TB_CO_WORKER ORDER BY CO_WORKER_ODER ASC
+    </select>
+
+    <select id="getCoWorkerInfo" resultType="kr.or.fact.core.model.DTO.CoWorkerVO">
+        SELECT * FROM TB_CO_WORKER WHERE IDX_CO_WORKER = #{idx_co_worker}
+    </select>
+
+    <insert id="insertCoWorkerInfo" parameterType="kr.or.fact.core.model.DTO.CoWorkerVO">
+        INSERT INTO TB_CO_WORKER(
+            IDX_CO_WORKER,
+            CO_WORKER_ODER,
+            COWORKER_NAME,
+            DEVISION,
+            DEPARTMENT,
+            DEPARTMENT_SUB,
+            JOB_TITLE,
+            JOB_ROLE,
+            TEL_NUM,
+            MPHONE_NUM,
+            EMAIL,
+            IS_SHOW,
+            REG_DATE,
+            VALUES (
+                SEQ_CO_WORKER.NEXTVAL,
+                #{co_worker_oder},
+                #{coworker_name},
+                #{devision},
+                #{department},
+                #{department_sub},
+                #{job_title},
+                #{job_role},
+                #{tel_num},
+                #{mphone_num},
+                #{email},
+                #{is_show},
+                TO_DATE(sysdate,'YYYY-MM-DD HH24:mi:SS')
+                );
+    </insert>
+
+    <update id="updateCoWorkerInfo" parameterType="kr.or.fact.core.model.DTO.CoWorkerVO">
+        UPDATE TB_CO_WORKER SET
+                                CO_WORKER_ODER = #{co_worker_oder},
+                                COWORKER_NAME = #{coworker_name},
+                                DEVISION = #{devision},
+                                DEPARTMENT = #{department},
+                                DEPARTMENT_SUB = #{department_sub},
+                                JOB_TITLE = #{job_title},
+                                JOB_ROLE = #{job_role},
+                                TEL_NUM = #{tel_num},
+                                MPHONE_NUM = #{mphone_num},
+                                EMAIL = #{email},
+                                IS_SHOW = #{is_show},
+                                REG_DATE = TO_DATE(sysdate,'YYYY-MM-DD HH24:mi:SS'),
+                                WHERE IDX_CO_WORKER = #{idx_co_worker}
+
+    </update>
+    <delete id="deleteCoWorkerInfo" parameterType="long">
+        DELETE FROM TB_CO_WORKER WHERE IDX_CO_WORKER = #{idx_co_worker}
+    </delete>
+
+
+</mapper>

@@ -124,10 +124,16 @@
 
                     <ul class="sidenav-menu">
                         <li class="sidenav-item">
+                            <a href="javascript:load('c00_site_mng','사이트 정보관리');" class="sidenav-link">
+                                <div>사이트 정보 관리</div>
+                            </a>
+                        </li>
+                        <li class="sidenav-item">
                             <a href="javascript:load('c10_site_mng_consult_mng','자산현황');" class="sidenav-link">
                                 <div>상담신청 관리</div>
                             </a>
                         </li>
+
                         <li class="sidenav-item">
                             <a href="javascript:void(0);" class="sidenav-link sidenav-toggle">
                                 <div>견학신청 관리</div>
@@ -156,17 +162,17 @@
                             </a>
                             <ul class="sidenav-menu">
                                 <li class="sidenav-item">
-                                    <a href="javascript:load('c41_site_notice_mng','상담');" class="sidenav-link">
+                                    <a href="javascript:load('c41_site_notice_mng?page=1','공지사항 관리');" class="sidenav-link">
                                         <div>공지사항 관리</div>
                                     </a>
                                 </li>
                                 <li class="sidenav-item">
-                                    <a href="javascript:load('c42_site_event_mng','1:1문의');" class="sidenav-link">
+                                    <a href="javascript:load('c42_site_event_mng','행사 관리');" class="sidenav-link">
                                         <div>행사 관리</div>
                                     </a>
                                 </li>
                                 <li class="sidenav-item">
-                                    <a href="javascript:load('c43_site_adver_mng.jsp','1:1문의');" class="sidenav-link">
+                                    <a href="javascript:load('c43_site_adver_mng.jsp','홍보자료 관리');" class="sidenav-link">
                                         <div>홍보자료 관리</div>
                                     </a>
                                 </li>

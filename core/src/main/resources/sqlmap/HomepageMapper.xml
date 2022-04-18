@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.fact.core.model.HomepageMapper">
+    <select id="getHomepageInfo" resultType="kr.or.fact.core.model.DTO.HomepageInfoVO">
+        SELECT * FROM TB_HOMEPAGE_INFO  WHERE IS_CURRENT=1
+    </select>
+    <insert id="insertHomepageInfo" parameterType="kr.or.fact.core.model.DTO.HomepageInfoVO">
+        INSERT INTO TB_HOMEPAGE_INFO(
+            IDX_HOMEPAGE_INFO,
+            HOMEPAGE_ADMIN,
+            HOMEPAGE_ADMIN_PNUM,
+            IS_CURRENT,
+            REG_DATE,
+            VALUES (
+                SEQ_HOMEPAGE_INFO.NEXTVAL,
+                #{homepage_admin},
+                #{homepage_admin_pnum},
+                #{is_current},
+                TO_DATE(sysdate,'YYYY-MM-DD HH24:mi:SS')
+                );
+
+    </insert>
+    <update id="updateHomepageInfo" parameterType="kr.or.fact.core.model.DTO.HomepageInfoVO">
+        UPDATE TB_HOMEPAGE_INFO SET
+            HOMEPAGE_ADMIN = #{homepage_admin},
+            HOMEPAGE_ADMIN_PNUM = #{homepage_admin_pnum},
+            IS_CURRENT = 1,
+            REG_DATE = TO_DATE(sysdate,'YYYY-MM-DD HH24:mi:SS')
+        WHERE IDX_HOMEPAGE_INFO = #{idx_homepage_info}
+
+    </update>
+    <delete id="deleteHomepageInfo" parameterType="long">
+        DELETE FROM TB_HOMEPAGE_INFO WHERE IDX_HOMEPAGE_INFO = #{idx_homepage_info}
+    </delete>
+
+
+
+
+</mapper>

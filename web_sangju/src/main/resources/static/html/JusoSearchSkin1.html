@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<script type="text/javascript" src="http://127.0.0.1:8983/app/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:8983/app/js/jquery-ui-1.12.1.min.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:8983/app/js/rns.search-1.0.min.js"></script>
+
+<title>Juso Search Sample - Basic</title>
+
+<script>
+var rnsSearch = new rnsSearch({
+	searchServerUrl : "http://127.0.0.1:8983",
+	width : 475,
+	height : 300,
+	oncomplete : function(data) {
+		$(opener.location).attr("href", "javascript:fn_setJuso(" + JSON.stringify(data) + ");");
+	},
+	theme : {
+		bgColor : "#162525",					// 바탕 배경색
+		searchBgColor : "#162525",	// 검색창 배경색
+		contentBgColor : "#162525",		// 본문 배경색
+		pageBgColor : "#162525",			// 페이지 배경색
+		textColor : "#FFFFFF",					// 기본 글자색
+		queryTextColor : "#FFFFFF",		// 검색창 글자색
+		postcodeTextColor : "#FA4256",// 우편번호 글자색
+		emphTextColor : "#008BD3", 		// 강조 글자색
+		outlineColor : "#444444",				// 테두리
+		logoTextColor : "#FBF5F5"				// 로고 글자색
+	}
+}).open({
+});
+</script>
+</head>
+<body>
+</body>
+</html>

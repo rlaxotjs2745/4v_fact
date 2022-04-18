@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SMART FARM</title>
+  <link rel="shortcut icon" href="../assets/image/favicon_16.ico">
+  <link rel="icon" href="../assets/image/favicon_16.png">
+  <link rel="apple-touch-icon-precomposed" href="../assets/image/favicon_152.png">
+  <link rel="stylesheet" type="text/css" href="../assets/css/jquery-ui.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+</head>
+<body>
+<div class="wrapper" id="wrapper">
+  <header class="header">
+    <h1><a href="main.html"><img src="../assets/image/area_logo@3x.png" alt="전북김제"></a></h1>
+    <div class="menu__anchor"><a href="#"><img src="../assets/image/ico_menu.svg" alt="전체메뉴열기"></a></div>
+
+    <nav class="nav "><!--is-expanded-->
+      <a href="#none" class="btn-close-menu"><img src="../assets/image/ico_close.png" alt="레이어닫기"></a>
+      <div class="common__search">
+        <div class="common__search--input">
+          <input type="text" value="" placeholder="검색어를 입력하세요.">
+        </div>
+        <div class="search__word--lists">
+          <span class="search__word--title">빠른링크</span>
+          <a href="util_search.html" class="search__word">실증 신청 방법</a>
+          <a href="util_search.html" class="search__word">실증 신청서 샘플</a>
+          <a href="util_search.html" class="search__word">실증 센터란?</a>
+          <a href="util_search.html" class="search__word">이용료</a>
+        </div>
+      </div>
+      <a href="#none" class="btn btn-search-cancel d-none">취소</a>
+
+      <!--로그인전-->
+      <div class="common__login">
+        <div class="login__message">로그인을 해주세요. <a href="#none" class="btn dark btn-lg"><img src="../assets/image/ico_login_n.svg" alt="">로그인</a></div>
+      </div>
+      <!--로그인후-->
+      <div class="common__login--in">
+        <div class="info__message"><em>안녕하세요.</em><strong>홍길동님</strong> <a href="#none" class="btn btn-login">로그아웃</a></div>
+      </div>
+      <ul class="nav--depth1">
+        <li class="link--home"><a href="main.html">홈</a></li>
+        <li><a href="#" class="">실증 안내/신청</a>
+          <ul class="nav--depth2">
+            <li><a href="prv_part.html">실증 분야</a></li>
+            <li><a href="prv_step.html">실증 절차</a></li>
+            <li><a href="prv_use.html">이용가능시설</a></li>
+            <li><a href="prv_fee.html">실증서비스 이용료</a></li>
+            <li><a href="prv_application.html">신청서 작성</a></li>
+          </ul>
+        </li>
+        <li><a href="#" class="is-selected">센터소개</a><!--is-selected-->
+          <ul class="nav--depth2">
+            <li><a href="cnt_goal.html">비전과 미션</a></li>
+            <li><a href="cnt_history.html">연혁</a></li>
+            <li><a href="cnt_organize.html">조직과 직원</a></li>
+            <li><a href="cnt_map.html">찾아오시는 길</a></li>
+          </ul>
+        </li>
+        <li><a href="#" class="">열린마당</a>
+          <ul class="nav--depth2">
+            <li><a href="brd_notice.html">공지사항</a></li>
+            <li><a href="brd_announce.html">사업공고</a></li>
+            <li><a href="brd_event.html">행사안내</a></li>
+            <li><a href="brd_promotion.html">홍보자료</a></li>
+          </ul>
+        </li>
+        <li><a href="#" class="">자료실</a>
+          <ul class="nav--depth2">
+            <!--<li><a href="arc_center.html">실증단지소개</a></li>
+            <li><a href="arc_pee.html">서비스 이용료</a></li>-->
+            <li><a href="arc_form.html">관련 양식</a></li>
+            <li><a href="arc_rule.html">관련 규정</a></li>
+          </ul>
+        </li>
+        <li><a href="#" class="">고객 지원</a>
+          <ul class="nav--depth2">
+            <li><a href="spt_faq.html">FAQ</a></li>
+            <li><a href="spt_prevent.html">대면상담 신청</a></li>
+            <li><a href="spt_email.html">온라인 문의</a></li>
+            <li><a href="spt_visit.html">견학 신청</a></li>
+          </ul>
+        </li>
+        <li><a href="#" class="">마이 페이지</a>
+          <ul class="nav--depth2">
+            <li><a href="my_business.html">나의 사업</a></li>
+            <li><a href="my_info.html">나의 정보</a></li>
+            <li><a href="my_group.html">나의 상담 및 정보</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+
+    <div class="page__h1">연혁</div>
+  </header>
+  <div class="content" id="content">
+    <div class="page__body">
+
+      <div class="page__cnt">
+        <div class="history__container">
+
+          <div class="history__list">
+            <div class="history__list--inner">
+              <ul class="timeline">
+                <li class="timeline-inverted">
+                  <div class="timeline-badge info"></div>
+                  <div class="timeline-panel info">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title">2021</h4>
+                    </div>
+                    <div class="timeline-body">
+                      <ul>
+                        <li><span class="timeline-date">07.01</span><span class="timeline-text">치유농업지원팀 신설</span></li>
+                        <li><span class="timeline-date">06.01</span><span class="timeline-text">디지털농업본부, 디지털농업확산팀 개편</span></li>
+                        <li><span class="timeline-date">03.01</span><span class="timeline-text">창업육성팀, 청년창업지원센터 신설</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="timeline-badge "></div>
+                  <div class="timeline-panel">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title">2020</h4>
+                    </div>
+                    <div class="timeline-body">
+                      <ul>
+                        <li><span class="timeline-date">11.01</span><span class="timeline-text">안전관리센터 신설</span></li>
+                        <li><span class="timeline-date">08.01</span><span class="timeline-text">기술창출전략팀 신설, 기술성과확산팀 개편, 종자생산팀 신설, 종자사업팀 개편</span></li>
+                        <li><span class="timeline-date">07.01</span><span class="timeline-text">농산업활력지원센터 신설</span></li>
+                        <li><span class="timeline-date">01.01</span><span class="timeline-text">회계관리센터 신설</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="timeline-inverted">
+                  <div class="timeline-badge "></div>
+                  <div class="timeline-panel">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title">2019</h4>
+                    </div>
+                    <div class="timeline-body">
+                      <ul>
+                        <li><span class="timeline-date">07.01</span><span class="timeline-text">사회가치전략실 신설</span></li>
+                        <li><span class="timeline-date">04.26</span><span class="timeline-text">부산, 경기 농식품벤처창업센터 신설</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="timeline-badge "></div>
+                  <div class="timeline-panel">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title">2018</h4>
+                    </div>
+                    <div class="timeline-body">
+                      <ul>
+                        <li><span class="timeline-date">12.01</span><span class="timeline-text">스마트농업본부 신설</span></li>
+                        <li><span class="timeline-date">06.28</span><span class="timeline-text">지방이전 완료 * 신청사 준공식 (’18.8.1)</span></li>
+                        <li><span class="timeline-date">05.01</span><span class="timeline-text">사회가치창출팀 확대 개편 ( 구 , 일자리센터 )</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="timeline-inverted">
+                  <div class="timeline-badge "></div>
+                  <div class="timeline-panel">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title">2017</h4>
+                    </div>
+                    <div class="timeline-body">
+                      <ul>
+                        <li><span class="timeline-date">07.20</span><span class="timeline-text">농업기술실용화재단 주사무동 이전(수원 ⇒ 익산)</span></li>
+                        <li><span class="timeline-date">07.01</span><span class="timeline-text">일자리센터 신설, 농생명ICT사업팀 확대개편</span></li>
+                        <li><span class="timeline-date">03.08</span><span class="timeline-text">서울/세종 농식품벤처 · 창업지원센터 설치</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="timeline-badge "></div>
+                  <div class="timeline-panel">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title">2016</h4>
+                    </div>
+                    <div class="timeline-body">
+                      <ul>
+                        <li><span class="timeline-date">07.07</span><span class="timeline-text">노사문화 우수기관 지정(고용노동부)</span></li>
+                        <li><span class="timeline-date">06.01</span><span class="timeline-text">농식품분야 배출권거래제 운영(녹색성장법 시행령 제26조제3항)</span></li>
+                        <li><span class="timeline-date">01.01</span><span class="timeline-text">종자사업단을 본부로 확대개편, 바이오자원팀 신설, 성과관리팀 신설</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="timeline-inverted">
+                  <div class="timeline-badge "></div>
+                  <div class="timeline-panel">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title">2015</h4>
+                    </div>
+                    <div class="timeline-body">
+                      <ul>
+                        <li><span class="timeline-date">11.26</span><span class="timeline-text">가족친화인증(여성가족부)</span></li>
+                        <li><span class="timeline-date">06.17</span><span class="timeline-text">농식품 벤처ㆍ창업지원 특화센터 운영</span></li>
+                        <li><span class="timeline-date">01.01</span><span class="timeline-text">해양환경측정분석능력인증기관 지정(해양수산부)</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="timeline-badge "></div>
+                  <div class="timeline-panel">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title">2014</h4>
+                    </div>
+                    <div class="timeline-body">
+                      <ul>
+                        <li><span class="timeline-date">10.28</span><span class="timeline-text">종자산업진흥센터 지정(농림축산식품부)</span></li>
+                        <li><span class="timeline-date">08.22</span><span class="timeline-text">농림축산검역본부 창출 국유특허 처분관리 위탁(특허청)</span></li>
+                        <li><span class="timeline-date">09.12</span><span class="timeline-text">수질측정 대행기관 지정(경기도청)</span></li>
+                        <li><span class="timeline-date">03.14</span><span class="timeline-text">저탄소 농축산물 인증기관 지정 (농림축산식품부)</span></li>
+                        <li><span class="timeline-date">01.13</span><span class="timeline-text">사료검정인정기관 지정 (농림축산식품부)</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="timeline-inverted">
+                  <div class="timeline-badge "></div>
+                  <div class="timeline-panel">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title">2013</h4>
+                    </div>
+                    <div class="timeline-body">
+                      <ul>
+                        <li><span class="timeline-date">08.19</span><span class="timeline-text">코스닥시장 상장지원을 위한 전문 평가기관 지정(한국거래소)</span></li>
+                        <li><span class="timeline-date">06.20</span><span class="timeline-text">농촌사회공헌인증기관선정(농림축산식품부)</span></li>
+                        <li><span class="timeline-date">04.26</span><span class="timeline-text">기술관리신탁기관 지정(산업통상자원부)</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="timeline-badge "></div>
+                  <div class="timeline-panel">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title">2012</h4>
+                    </div>
+                    <div class="timeline-body">
+                      <ul>
+                        <li><span class="timeline-date">11.15</span><span class="timeline-text">농식품부문 온실가스 배출권거래제 적합성 평가기관 지정</span></li>
+                        <li><span class="timeline-date">10.05</span><span class="timeline-text">쌀현미품종검정기관 지정(국립농산물품질관리원)</span></li>
+                        <li><span class="timeline-date">08.01</span><span class="timeline-text">발명의 평가기관 지정(특허청)</span></li>
+                        <li><span class="timeline-date">06.07</span><span class="timeline-text">축산물위생검사기관(한우확인시험분야)지정(농림수산검역검사본부)</span></li>
+                        <li><span class="timeline-date">03.26</span><span class="timeline-text">친환경 유기농자재 제품의 공시 및 품질 인증기관 지정(농촌진흥청)</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="timeline-inverted">
+                  <div class="timeline-badge "></div>
+                  <div class="timeline-panel">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title">2011</h4>
+                    </div>
+                    <div class="timeline-body">
+                      <ul>
+                        <li><span class="timeline-date">12.02</span><span class="timeline-text">농촌진흥청 국유특허권 처분·관리업무 위탁(특허청)</span></li>
+                        <li><span class="timeline-date">10.30</span><span class="timeline-text">종자사업단 신설</span></li>
+                        <li><span class="timeline-date">10.13</span><span class="timeline-text">농업자원ㆍ농업환경실태조사기관(농림축산식품부)</span></li>
+                        <li><span class="timeline-date">07.11</span><span class="timeline-text">조달물품 전문검사기관 지정(조달청)</span></li>
+                        <li><span class="timeline-date">01.21</span><span class="timeline-text">국제공인시험기관(KOLAS) 8개분야 추가획득(총 9분야)(한국국제시험기관 인정사무국)</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="timeline-badge "></div>
+                  <div class="timeline-panel">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title">2010</h4>
+                    </div>
+                    <div class="timeline-body">
+                      <ul>
+                        <li><span class="timeline-date">07.05</span><span class="timeline-text">농림수산식품분야 최초의 기술거래기관ㆍ기술평가기관 지정(농림축산식품부)</span></li>
+                        <li><span class="timeline-date">02.24</span><span class="timeline-text">OECD농임업용트랙터 공인시험기관(OECD 사무국)</span></li>
+                        <li><span class="timeline-date">01.29</span><span class="timeline-text">위탁집행형 준 정부기관 지정(기획재정부)</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="timeline-inverted">
+                  <div class="timeline-badge "></div>
+                  <div class="timeline-panel">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title">2009</h4>
+                    </div>
+                    <div class="timeline-body">
+                      <ul>
+                        <li><span class="timeline-date">09.07</span><span class="timeline-text">설립등기 및 재단 업무 공식 개시(초대 이사장 : 전운성)</span></li>
+                        <li><span class="timeline-date">03.05</span><span class="timeline-text">농촌진흥법 개정, 농업기술실용화재단 설립근거 마련</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!--<div class="btn_top"><a href="#wrapper">▲<br>TOP</a></div>-->
+  <div class="footer">
+    <div class="footer__box">
+      <ul class="footer__anchor">
+        <li><a href="#none">서비스이용약관</a></li>
+        <li><a href="#none">개인정보처리방침</a></li>
+        <li><a href="#none">부패신고바로하기</a></li>
+        <li><a href="#none">홈페이지 개선의견</a></li>
+        <li><a href="#none">사이트 맵</a></li>
+      </ul>
+      <div class="footer__site">
+        <select name="a" id="a">
+          <option value="1">관련부처 사이트</option>
+        </select>
+        <div class="footer__bar">
+          <span><img src="../assets/image/footer_mark.png" alt=""></span>
+        </div>
+      </div>
+      <div class="footer__info">
+        <h3 class="footer__logo"><img src="../assets/image/logo_footer.png" alt=""></h3>
+        <div class="footer__address">54667 전라북도 익산시 평동로 457 (송학동 381) <br>TEL 063-919-1000 FAX 063-919-1269</div>
+        <div class="footer__copyright">Copyright(c) 2010 The Foundation of AG. Tech, Commercialization and Transfer. All Rights Reserved.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="../assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+<script src="../assets/js/lib/swiper.min.js" type="text/javascript"></script>
+<script src="../assets/js/ui.common.js" type="text/javascript"></script>
+</body>
+</html>

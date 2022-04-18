@@ -13,23 +13,24 @@ import java.util.List;
 @Service("visitService")
 public class VisitServiceImpl implements VisitService {
 
+    private final VisitMapper visitMapper;
     @Autowired
-    VisitMapper visitDAO;
+    public VisitServiceImpl(VisitMapper visitMapper){this.visitMapper = visitMapper;}
 
     @Override
     public int getUserVisitReqCount(@Param("idx_user") long idx_user){
-        return visitDAO.getUserVisitReqCount(idx_user);
+        return visitMapper.getUserVisitReqCount(idx_user);
     }
     @Override
     public List<VisitDataVO> getVisitData(){
-        return visitDAO.getVisitData();
+        return visitMapper.getVisitData();
     }
     @Override
     public List<VisitReqVO> getVisitReq(){
-        return visitDAO.getVisitReq();
+        return visitMapper.getVisitReq();
     }
     @Override
     public List<VisitReqVO> getUserVisitReq(long idx_user,int page,int list_amount){
-        return visitDAO.getUserVisitReq(idx_user,page,list_amount,"VISIT_REQ_NUM");
+        return visitMapper.getUserVisitReq(idx_user,page,list_amount,"VISIT_REQ_NUM");
     }
 }

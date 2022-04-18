@@ -11,15 +11,16 @@ import java.util.List;
 
 @Service("corpService")
 public class CorpServiceImpl implements CorpService {
+    private final CorpMapper corpMapper;
     @Autowired
-    CorpMapper corpDAO;
+    public CorpServiceImpl(CorpMapper corpMapper){this.corpMapper = corpMapper;}
 
     public CorpInfoVO getCorpInfo(long idx_corp_info){
-        CorpInfoVO findCorpVO = corpDAO.getCorpInfoByIdx(idx_corp_info);
+        CorpInfoVO findCorpVO = corpMapper.getCorpInfoByIdx(idx_corp_info);
         return findCorpVO;
     }
     public List<SimpleCorpInfoVO> getSimpleCorpInfoList(String corp_name_kor){
-        List<SimpleCorpInfoVO> simpleCorpInfoVOList= corpDAO.getSimpleCorpInfoList(corp_name_kor);
+        List<SimpleCorpInfoVO> simpleCorpInfoVOList= corpMapper.getSimpleCorpInfoList(corp_name_kor);
         return simpleCorpInfoVOList;
     }
 

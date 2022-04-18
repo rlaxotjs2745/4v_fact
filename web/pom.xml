@@ -3,8 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>fact_project</artifactId>
         <groupId>kr.or.fact</groupId>
+        <artifactId>fact_project</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -16,49 +16,29 @@
         <maven.compiler.target>8</maven.compiler.target>
         <start-class>kr.or.fact.web.WebFrontApplication</start-class>
     </properties>
-    <profiles>
-        <profile>
-            <id>application-local</id>
-            <properties>
-                <env>resources</env>
-            </properties>
-        </profile>
-        <profile>
-            <id>application-dev</id>
-            <properties>
-                <env>resources</env>
-            </properties>
-        </profile>
-        <profile>
-            <id>application</id>
-            <properties>
-                <env>resources</env>
-            </properties>
-        </profile>
-        <profile>
-            <id>application-sangju-prod</id>
-            <properties>
-                <env>resources</env>
-            </properties>
-        </profile>
-        <profile>
-            <id>application-gimje-prod</id>
-            <properties>
-                <env>resources</env>
-            </properties>
-        </profile>
-    </profiles>
+
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+        </dependency>
+        <!--배포 시 뺄것-->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+        </dependency>
+        <!--배포 시 뺄것-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>kr.or.fact</groupId>
             <artifactId>core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-<!--        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-            <scope>compile</scope>
-        </dependency>-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
@@ -73,7 +53,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-
     </build>
 
 </project>

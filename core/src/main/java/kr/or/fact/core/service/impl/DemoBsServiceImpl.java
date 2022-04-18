@@ -10,10 +10,15 @@ import java.util.List;
 
 @Service("demoBsService")
 public class DemoBsServiceImpl implements DemoBsService {
+    private final DemoBsMapper demoBsMapper;
     @Autowired
-    DemoBsMapper demoBsDAO;
+    public DemoBsServiceImpl(DemoBsMapper demoBsMapper){this.demoBsMapper=demoBsMapper;}
+
     public List<DemoBusinessVO> getAvailibleDemoBs(){
-        return demoBsDAO.getAvailibleDemoBs();
+        return demoBsMapper.getAvailibleDemoBs();
+    }
+    public DemoBusinessVO getDemoBsByIdx(long idx){
+        return demoBsMapper.getDemoBsByIdx(idx);
     }
 
 }

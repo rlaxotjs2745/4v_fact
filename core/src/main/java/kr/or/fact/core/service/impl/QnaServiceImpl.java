@@ -12,8 +12,9 @@ import java.util.List;
 @Service("qnaService")
 public class QnaServiceImpl implements QnaService {
 
+    private final QnaMapper qnaMapper;
     @Autowired
-    QnaMapper qnaDAO;
+    public QnaServiceImpl(QnaMapper qnaMapper){this.qnaMapper = qnaMapper;}
 
     @Override
     public int getDemoBSQnaCount(int type,long idx){
@@ -21,11 +22,11 @@ public class QnaServiceImpl implements QnaService {
         int tot_count = 0;
 
         if(type == CONSTANT.user_idx){
-            tot_count = qnaDAO.getWebpageMyQnaCount(idx);
+            tot_count = qnaMapper.getWebpageMyQnaCount(idx);
         }
         else if(type == CONSTANT.admin_idx)
         {
-            tot_count = qnaDAO.getAdminQnaCount(idx);
+            tot_count = qnaMapper.getAdminQnaCount(idx);
         }
 
         return tot_count;
@@ -35,11 +36,11 @@ public class QnaServiceImpl implements QnaService {
 
         List<DemoBsQnaVO> demoBsQnaVOList = null;
         if(type == CONSTANT.user_idx){
-            demoBsQnaVOList = qnaDAO.getUserQnaList(idx,page,count,"BS_QNA_NUM");
+            demoBsQnaVOList = qnaMapper.getUserQnaList(idx,page,count,"BS_QNA_NUM");
         }
         else if(type == CONSTANT.admin_idx)
         {
-            demoBsQnaVOList = qnaDAO.getAdminQnaList(idx,page,count,"BS_QNA_NUM");
+            demoBsQnaVOList = qnaMapper.getAdminQnaList(idx,page,count,"BS_QNA_NUM");
         }
         return demoBsQnaVOList;
     }

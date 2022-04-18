@@ -22,4 +22,136 @@
     </select>
 
 
+    <select id="getUserDemoBs" parameterType="kr.or.fact.core.model.DTO.UserDemoBsCheckVO" resultType="kr.or.fact.core.model.DTO.UserDemoBsVO">
+        SELECT
+            *
+        FROM TB_USER_DEMO_BS
+        WHERE IDX_DEMO_BUSINESS = #{idx_demo_business} AND IDX_USER=#{idx_user}
+    </select>
+
+
+
+
+
+    <insert id="saveUserDemoBs" parameterType="kr.or.fact.core.model.DTO.UserDemoBsVO">
+        INSERT INTO TB_USER_DEMO_BS (
+            IDX_USER_DEMO_BS,
+            IDX_DEMO_BUSINESS,
+            USER_DEMOBS_STATUS,
+            IDX_USER,
+            USER_DEMO_BS_APP_CODE,
+            APP_STEP,
+            USER_DEMO_BS_TYPE,
+            IDX_CORP_INFO,
+            CORP_NAME,
+            CORP_BIRTH,
+            CORP_NUM,
+            CORP_REG_NUM,
+            CORP_ADDR,
+            CORP_RND_ADDR,
+            CORP_SALES_AMOUNT,
+            CORP_ER,
+            EMPLOYEES_COUNT,
+            BS_TYPE1,
+            BS_TYPE2,
+            MAIN_PRODUCT,
+            DEMOBS_TECH_PLAN,
+            CEO_NAME,
+            CEO_MNUMBER,
+            CEO_PNUMBER,
+            CEO_EMAIL,
+            CEO_ADDRESS,
+            MAN_NAME,
+            MAN_MNUMBER,
+            MAN_PNUMBER,
+            MAN_EMAIL,
+            USER_DEMO_TYPE,
+            USER_DEMO_FACILITY,
+            USER_DEMO_WAY,
+            USER_DEMO_REPEAT,
+            USER_DEMO_GOAL,
+            USER_DEMO_OPTION,
+            USER_DEMO_CROPS,
+            CULTURE_SOIL,
+            DEMO_TYPE,
+            DEMO_START_DATE,
+            DEMO_END_DATE,
+            RESIDENT_TYPE,
+            RESIDENT_ETC,
+            STAFF_NUM,
+            IS_CHANGE,
+            IS_CONFIRM,
+            IS_SHARE,
+            REG_DATE,
+            LAST_UPD_DATE
+        ) VALUES (
+                     #{idx_user_demo_bs},
+                     #{idx_demo_business},
+                     #{user_demobs_status},
+                     #{idx_user},
+                     #{user_demo_bs_app_code},
+                     #{app_step},
+                     #{user_demo_bs_type},
+                     #{idx_corp_info},
+                     #{corp_name},
+                     #{corp_birth},
+                     #{corp_num},
+                     #{corp_reg_num},
+                     #{corp_addr},
+                     #{corp_rnd_addr},
+                     #{corp_sales_amount},
+                     #{corp_er},
+                     #{employees_count},
+                     #{bs_type1},
+                     #{bs_type2},
+                     #{main_product},
+                     #{demobs_tech_plan},
+                     #{ceo_name},
+                     #{ceo_mnumber},
+                     #{ceo_pnumber},
+                     #{ceo_email},
+                     #{ceo_address},
+                     #{man_name},
+                     #{man_mnumber},
+                     #{man_pnumber},
+                     #{man_email},
+                     #{user_demo_type},
+                     #{user_demo_facility},
+                     #{user_demo_way},
+                     #{user_demo_repeat},
+                     #{user_demo_goal},
+                     #{user_demo_option},
+                     #{user_demo_crops},
+                     #{culture_soil},
+                     #{demo_type},
+                     #{demo_start_date},
+                     #{demo_end_date},
+                     #{resident_type},
+                     #{resident_etc},
+                     #{staff_num},
+                     #{is_change},
+                     #{is_confirm},
+                     #{is_share},
+                     #{reg_date},
+                     #{last_upd_date}
+                 );
+
+    </insert>
+
+    <insert id="saveUserDemoBsNew" parameterType="kr.or.fact.core.model.DTO.UserDemoBsVO">
+        INSERT INTO TB_USER_DEMO_BS (
+            IDX_USER_DEMO_BS,
+            IDX_DEMO_BUSINESS,
+            USER_DEMOBS_STATUS,
+            IDX_USER,
+            APP_STEP
+        ) VALUES (
+                     SEQ_USER_DEMO_BS.NEXTVAL,
+                     #{idx_demo_business},
+                     #{user_demobs_status},
+                     #{idx_user},
+                     #{app_step}
+                 )
+    </insert>
+
 </mapper>

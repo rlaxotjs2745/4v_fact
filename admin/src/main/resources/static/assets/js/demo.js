@@ -38,3 +38,4 @@ $(function() {
     $('#layout-navbar .dropdown-menu').toggleClass('dropdown-menu-right');
   }
 });
+

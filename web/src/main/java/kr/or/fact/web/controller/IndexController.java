@@ -51,17 +51,28 @@ public class IndexController {
     @Resource(name = "demoBsService")
     DemoBsService demoBsService;
 
+    @Resource(name = "homepageInfoService")
+    HomepageInfoService homepageInfoService;
+
+    @Resource(name = "coWorkerNService")
+    CoWorkerNService coWorkerNService;
+
+
     @RequestMapping("/")
     public String home(Model model){
 
         //List<UserVO> userList = userService.selectList();
         //model.addAttribute("test_data",userList.get(0).getCreat_co());
+
+        getHomepageInfo(model);
         return "index";
     }
 
     @RequestMapping("/index")
-    public String index(){
+    public String index(HttpSession session
+            ,Model model){
 
+        getHomepageInfo(model);
         return "index";
     }
 
@@ -128,15 +139,16 @@ public class IndexController {
         model.addAttribute("user",findUser);
 
         List<DemoBusinessVO> demoBusinessVOs = demoBsService.getAvailibleDemoBs();
+        model.addAttribute("demoBusinessVOs",demoBusinessVOs);
 
-
-
+        getHomepageInfo(model);
 
         return "app_step1";
     }
 
     @RequestMapping("/app_step2")
     public String app_step2(HttpSession session
+            ,@RequestParam(value="demobs") long demobs
             ,Model model){
         if(session==null
                 || session.getAttribute("loginCheck")==null
@@ -154,7 +166,30 @@ public class IndexController {
         }
         model.addAttribute("user",findUser);
 
+        DemoBusinessVO demoBusinessVo = demoBsService.getDemoBsByIdx(demobs);
 
+        if(demoBusinessVo==null){//해당 사업 없음, 에러페이지로 보내야 한다...
+
+            session.removeAttribute("loginCheck");
+            clearSessionAndRedirect(session);
+            return "index";
+        }
+
+        model.addAttribute("demoBs",demoBusinessVo);
+
+        UserDemoBsCheckVO userDemoBsCheckVo = new UserDemoBsCheckVO();
+        userDemoBsCheckVo.setIdx_user(findUser.getIdx_user());
+        userDemoBsCheckVo.setIdx_demo_business(demoBusinessVo.getIdx_demo_business());
+
+        UserDemoBsVO userDemoBsVo = userDemoBsService.getUserDemoBs(userDemoBsCheckVo);
+        if(userDemoBsVo==null){//이전에 저장한게 없다, 에러페이지로 보내야 한다...
+
+            session.removeAttribute("loginCheck");
+            clearSessionAndRedirect(session);
+            return "index";
+        }
+        model.addAttribute("userDemoBs",userDemoBsVo);
+        getHomepageInfo(model);
         return "app_step2";
     }
 
@@ -177,7 +212,7 @@ public class IndexController {
         }
         model.addAttribute("user",findUser);
 
-
+        getHomepageInfo(model);
         return "app_step3";
     }
 
@@ -200,7 +235,7 @@ public class IndexController {
         }
         model.addAttribute("user",findUser);
 
-
+        getHomepageInfo(model);
         return "app_step4";
     }
 
@@ -223,7 +258,7 @@ public class IndexController {
         }
         model.addAttribute("user",findUser);
 
-
+        getHomepageInfo(model);
         return "app_step5";
     }
 
@@ -246,36 +281,36 @@ public class IndexController {
         }
         model.addAttribute("user",findUser);
 
-
+        getHomepageInfo(model);
         return "app_step6";
     }
 
 
     @RequestMapping("/arc_center")
-    public String arc_center(){
+    public String arc_center(Model model){
+
+        getHomepageInfo(model);
         return "arc_center";
     }
 
-
-
-
-
-
-
-
-
     @RequestMapping("/arc_form")
-    public String arc_form(){
+    public String arc_form(Model model){
+
+        getHomepageInfo(model);
         return "arc_form";
     }
 
     @RequestMapping("/arc_pee")
-    public String arc_pee(){
+    public String arc_pee(Model model){
+
+        getHomepageInfo(model);
         return "arc_pee";
     }
 
     @RequestMapping("/arc_rule")
-    public String arc_rule(){
+    public String arc_rule(Model model){
+
+        getHomepageInfo(model);
         return "arc_rule";
     }
 
@@ -334,33 +369,36 @@ public class IndexController {
         model.addAttribute("is_last",is_last);
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
+        getHomepageInfo(model);
         return "brd_announce";
     }
     @RequestMapping("/brd_announce_detail")
     public String brd_announce_detail(@RequestParam("idx") int idx,
                                       Model model){
+
+        getHomepageInfo(model);
         return "brd_announce_detail";
     }
 
 
 
     @RequestMapping("/brd_announce_blank")
-    public String brd_announce_blank() {
+    public String brd_announce_blank(Model model) {
 
-
+        getHomepageInfo(model);
         return "brd_announce_blank";
     }
     @RequestMapping("/brd_announce_search")
     public String brd_announce_search(@RequestParam("page") int page,
                                      Model model) {
 
-
+        getHomepageInfo(model);
         return "brd_announce_search";
     }
     @RequestMapping("/brd_announce_search_blank")
-    public String brd_announce_search_blank() {
+    public String brd_announce_search_blank(Model model) {
 
-
+        getHomepageInfo(model);
         return "brd_announce_search_blank";
     }
 
@@ -420,25 +458,35 @@ public class IndexController {
         model.addAttribute("is_last",is_last);
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
+
+        getHomepageInfo(model);
         return "brd_event";
     }
     @RequestMapping("/brd_event_detail")
     public String brd_event_detail(@RequestParam("idx") int idx,
                                       Model model){
+
+        getHomepageInfo(model);
         return "brd_event_detail";
     }
     @RequestMapping("/brd_event_blank")
-    public String brd_event_blank(){
+    public String brd_event_blank(Model model){
+
+        getHomepageInfo(model);
         return "brd_event_blank";
     }
 
     @RequestMapping("/brd_event_search")
     public String brd_event_search(@RequestParam("page") int page,
                             Model model){
+
+        getHomepageInfo(model);
         return "brd_event_search";
     }
     @RequestMapping("/brd_event_search_blank")
-    public String brd_event_search_blank(){
+    public String brd_event_search_blank(Model model){
+
+        getHomepageInfo(model);
         return "brd_event_search_blank";
     }
 
@@ -499,24 +547,43 @@ public class IndexController {
         model.addAttribute("is_last",is_last);
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
+
+        getHomepageInfo(model);
         return "brd_notice";
     }
     @RequestMapping("/brd_notice_detail")
     public String brd_notice_detail(@RequestParam("idx") int idx,
                                    Model model){
+
+
+
+
+
+
+
+
+
+
+        getHomepageInfo(model);
         return "brd_notice_detail";
     }
     @RequestMapping("/brd_notice_blank")
-    public String brd_notice_blank(){
+    public String brd_notice_blank(Model model){
+
+        getHomepageInfo(model);
         return "brd_notice_blank";
     }
     @RequestMapping("/brd_notice_search")
     public String brd_notice_search(@RequestParam("page") int page,
                                    Model model){
+
+        getHomepageInfo(model);
         return "brd_notice_search";
     }
     @RequestMapping("/brd_notice_search_blank")
-    public String brd_notice_search_blank(){
+    public String brd_notice_search_blank(Model model){
+
+        getHomepageInfo(model);
         return "brd_notice_search_blank";
     }
 
@@ -575,44 +642,65 @@ public class IndexController {
         model.addAttribute("is_last",is_last);
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
+
+        getHomepageInfo(model);
         return "brd_promotion";
     }
     @RequestMapping("/brd_promotion_detail")
     public String brd_promotion_detail(@RequestParam("idx") int idx,
                                     Model model){
+
+        getHomepageInfo(model);
         return "brd_promotion_detail";
     }
     @RequestMapping("/brd_promotion_blank")
-    public String brd_promotion_blank(){
+    public String brd_promotion_blank(Model model){
+
+        getHomepageInfo(model);
         return "brd_promotion_blank";
     }
     @RequestMapping("/brd_promotion_search")
     public String brd_promotion_search(@RequestParam("page") int page,
                                     Model model){
+
+        getHomepageInfo(model);
         return "brd_promotion_search";
     }
     @RequestMapping("/brd_promotion_search_blank")
-    public String brd_promotion_search_blank(){
+    public String brd_promotion_search_blank(Model model){
+
+        getHomepageInfo(model);
         return "brd_promotion_search_blank";
     }
 
 
     @RequestMapping("/cnt_goal")
-    public String cnt_goal(){
+    public String cnt_goal(Model model){
+
+        getHomepageInfo(model);
         return "cnt_goal";
     }
     @RequestMapping("/cnt_history")
-    public String cnt_history(){
+    public String cnt_history(Model model){
+
+        getHomepageInfo(model);
         return "cnt_history";
     }
 
     @RequestMapping("/cnt_map")
-    public String cnt_map(){
+    public String cnt_map(Model model){
+
+        getHomepageInfo(model);
         return "cnt_map";
     }
 
     @RequestMapping("/cnt_organize")
-    public String cnt_organize(){
+    public String cnt_organize(Model model){
+        //조직도, 직원 정보
+        List<CoWorkerVO> coWorkerVOList = coWorkerNService.getCoWorkerList();
+        model.addAttribute("coWorkerVOList",coWorkerVOList);
+
+        getHomepageInfo(model);
         return "cnt_organize";
     }
 
@@ -686,7 +774,9 @@ public class IndexController {
     }
 
     @RequestMapping("/my_agreement")
-    public String my_agreement(){
+    public String my_agreement(Model model){
+
+        getHomepageInfo(model);
         return "my_agreement";
     }
 
@@ -700,6 +790,7 @@ public class IndexController {
                 || (session.getAttribute("userid")==null)) {//로그인 필요
 
             clearSessionAndRedirect(session);
+
             return "index";
         }
         UserVO findUser = userService.findUserById(String.valueOf(session.getAttribute("userid")));
@@ -724,25 +815,34 @@ public class IndexController {
 
         for(int i=0;i<userDemoBsVOs.size();i++)
         {
-            List<DemoBsMsgVO> demoBsMsgVOS = userDemoBsService.getDemoBsMsgByUserDemoBSIdx(userDemoBsVOs.get(i).getIdx_user_demo_bs());
-            userDemoBsVOs.get(i).setDemoBsMsgVo(demoBsMsgVOS.get(0));
+            List<DemoBsMsgVO> demoBsMsgVOs = userDemoBsService.getDemoBsMsgByUserDemoBSIdx(userDemoBsVOs.get(i).getIdx_user_demo_bs());
+            userDemoBsVOs.get(i).setDemoBsMsgVo(demoBsMsgVOs.get(0));
         }
         model.addAttribute("demoList",userDemoBsVOs);
+
+        getHomepageInfo(model);
         return "my_business";
     }
 
     @RequestMapping("/my_business_blank")
-    public String my_business_blank(){
+    public String my_business_blank(Model model){
+
+        getHomepageInfo(model);
         return "my_business_blank";
     }
 
     @RequestMapping("/my_consignment")
-    public String my_consignment(){
+    public String my_consignment(Model model){
+
+
+        getHomepageInfo(model);
         return "my_consignment";
     }
 
     @RequestMapping("/my_group")
-    public String my_group(){
+    public String my_group(Model model){
+
+        getHomepageInfo(model);
         return "my_group";
     }
 
@@ -779,46 +879,63 @@ public class IndexController {
 
         }
 
+        getHomepageInfo(model);
         return "my_info";
     }
 
     @RequestMapping("/prv_application")
-    public String prv_application(){
+    public String prv_application(Model model){
+
+        getHomepageInfo(model);
         return "prv_application";
     }
 
     @RequestMapping("/prv_bill")
-    public String prv_bill(){
+    public String prv_bill(Model model){
+
+        getHomepageInfo(model);
         return "prv_bill";
     }
 
     @RequestMapping("/prv_facility")
-    public String prv_facility(){
+    public String prv_facility(Model model){
+
+        getHomepageInfo(model);
         return "prv_facility";
     }
 
     @RequestMapping("/prv_fee")
-    public String prv_fee(){
+    public String prv_fee(Model model){
+
+        getHomepageInfo(model);
         return "prv_fee";
     }
 
     @RequestMapping("/prv_location")
-    public String prv_location(){
+    public String prv_location(Model model){
+
+        getHomepageInfo(model);
         return "prv_location";
     }
 
     @RequestMapping("/prv_office")
-    public String prv_office(){
+    public String prv_office(Model model){
+
+        getHomepageInfo(model);
         return "prv_office";
     }
 
     @RequestMapping("/prv_part")
-    public String prv_part(){
+    public String prv_part(Model model){
+
+        getHomepageInfo(model);
         return "prv_part";
     }
 
     @RequestMapping("/prv_prepare")
-    public String prv_prepare(){
+    public String prv_prepare(Model model){
+
+        getHomepageInfo(model);
         return "prv_prepare";
     }
 
@@ -851,27 +968,36 @@ public class IndexController {
         }
 
 
-
+        getHomepageInfo(model);
         return "prv_register";
     }
 
     @RequestMapping("/prv_step")
-    public String prv_step(){
+    public String prv_step(Model model){
+
+        getHomepageInfo(model);
         return "prv_step";
     }
 
     @RequestMapping("/prv_subsidy")
-    public String prv_subsidy(){
+    public String prv_subsidy(Model model){
+
+
+        getHomepageInfo(model);
         return "prv_subsidy";
     }
 
     @RequestMapping("/prv_support")
-    public String prv_support(){
+    public String prv_support(Model model){
+
+        getHomepageInfo(model);
         return "prv_support";
     }
 
     @RequestMapping("/prv_use")
-    public String prv_use(){
+    public String prv_use(Model model){
+
+        getHomepageInfo(model);
         return "prv_use";
     }
 
@@ -960,11 +1086,15 @@ public class IndexController {
         else {
             model.addAttribute("is_login",false);
         }
+
+        getHomepageInfo(model);
         return "spt_email";
     }
 
     @RequestMapping("/spt_faq")
-    public String spt_faq(){
+    public String spt_faq(Model model){
+
+        getHomepageInfo(model);
         return "spt_faq";
     }
 
@@ -1056,6 +1186,8 @@ public class IndexController {
         else {
             model.addAttribute("is_login",false);
         }
+
+        getHomepageInfo(model);
         return "spt_prevent";
     }
 
@@ -1149,21 +1281,29 @@ public class IndexController {
             model.addAttribute("is_login",false);
         }
 
+        getHomepageInfo(model);
         return "spt_visit";
     }
 
     @RequestMapping("/template")
-    public String template(){
+    public String template(Model model){
+
+        getHomepageInfo(model);
         return "template";
     }
 
     @RequestMapping("/util_search")
-    public String util_search(){
+    public String util_search(Model model){
+
+        getHomepageInfo(model);
         return "util_search";
     }
 
     @RequestMapping("/util_search_blant")
-    public String util_search_blant(){
+    public String util_search_blant(Model model){
+
+
+        getHomepageInfo(model);
         return "util_search_blant";
     }
 
@@ -1183,5 +1323,17 @@ public class IndexController {
 
     //===========================================
 
+
+
+    @RequestMapping("/denied")
+    public String denied(){
+        return "util_search_blant";
+    }
+
+    public void getHomepageInfo(Model model){
+        HomepageInfoVO homepageInfoVO = homepageInfoService.getHomepageInfo();
+        model.addAttribute("homepageInfo",homepageInfoVO);
+
+    }
 
 }

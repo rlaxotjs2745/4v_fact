@@ -11,8 +11,9 @@ import java.util.List;
 
 @Service("consultingService")
 public class ConsultingServiceImpl implements ConsultingService {
+    private final ConsultingMapper consultingMapper;
     @Autowired
-    ConsultingMapper consultingDAO;
+    public ConsultingServiceImpl(ConsultingMapper consultingMapper){this.consultingMapper = consultingMapper;}
 
     @Override
     public int getConsultingCount(int type,long idx){
@@ -20,11 +21,11 @@ public class ConsultingServiceImpl implements ConsultingService {
         int tot_count = 0;
 
         if(type == CONSTANT.user_idx){
-            tot_count = consultingDAO.getWebpageMyConsultingCount(idx);
+            tot_count = consultingMapper.getWebpageMyConsultingCount(idx);
         }
         else if(type == CONSTANT.admin_idx)
         {
-            tot_count = consultingDAO.getAdminConsultingCount(idx);
+            tot_count = consultingMapper.getAdminConsultingCount(idx);
         }
 
         return tot_count;
@@ -34,11 +35,11 @@ public class ConsultingServiceImpl implements ConsultingService {
 
         List<DemoBsConsultingVO> demoBsConsultingVOList = null;
         if(type == CONSTANT.user_idx){
-            demoBsConsultingVOList = consultingDAO.getUserConsultingList(idx,page,count,"CONSULTING_NUM");
+            demoBsConsultingVOList = consultingMapper.getUserConsultingList(idx,page,count,"CONSULTING_NUM");
         }
         else if(type == CONSTANT.admin_idx)
         {
-            demoBsConsultingVOList = consultingDAO.getAdminConsultingList(idx,page,count,"CONSULTING_NUM");
+            demoBsConsultingVOList = consultingMapper.getAdminConsultingList(idx,page,count,"CONSULTING_NUM");
         }
         return demoBsConsultingVOList;
     }

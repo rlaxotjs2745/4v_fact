@@ -29,7 +29,6 @@
     <link rel="stylesheet" href="/static/assets/vendor/css/rtl/theme-corporate.css" class="theme-settings-theme-css">
     <link rel="stylesheet" href="/static/assets/vendor/css/rtl/colors.css" class="theme-settings-colors-css">
     <link rel="stylesheet" href="/static/assets/vendor/css/rtl/uikit.css">
-    <link rel="stylesheet" href="/static/assets/css/demo.css">
 
     <!-- Load polyfills -->
     <script src="/static/assets/vendor/js/polyfills.js"></script>
@@ -46,8 +45,15 @@
     <link rel="stylesheet" href="/static/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="/static/assets/vendor/libs/datatables/datatables.css">
     <link rel="stylesheet" href="/static/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="/static/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+    <link rel="stylesheet" href="/static/assets/vendor/libs/flatpickr/flatpickr.css">
     <link rel="stylesheet" href="/static/assets/vendor/libs/fullcalendar/fullcalendar.css">
+    <!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js) -->
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/assets/css/demo.css">
+    <link rel="stylesheet" type="text/css" href="/static/assets/vendor/libs/summernote/summernote.css">
+
 </head>
 
 <body>
@@ -94,11 +100,18 @@
 
 <!-- Libs -->
 <script src="/static/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="/static/assets/vendor/libs/moment/moment.js"></script>
+<script src="/static/assets/vendor/libs/moment/moment-ko.js"></script>
+
 <script src="/static/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+<script src="/static/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.ko.js"></script>
+<script src="/static/assets/vendor/libs/flatpickr/flatpickr.js"></script>
 <script src="/static/assets/vendor/libs/fullcalendar/fullcalendar.js"></script>
 
 <!-- Demo -->
+<script src="/static/assets/vendor/libs/summernote/summernote.js"></script>
 <script src="/static/assets/js/demo.js"></script>
+
 
 <script>
 
@@ -199,7 +212,12 @@
     $(document).ready(function() {
         //ajax로 호출되는 첫번째 페이지
         load("a10_dashboard","대시보드");
+
     });
+
+
+
+
 
 </script>
 </body>

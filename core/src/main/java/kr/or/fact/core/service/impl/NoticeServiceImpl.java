@@ -10,23 +10,24 @@ import java.util.List;
 
 @Service("noticeService")
 public class NoticeServiceImpl implements NoticeService {
+    private final NoticeMapper noticeMapper;
     @Autowired
-    NoticeMapper noticeDAO;
+    public NoticeServiceImpl(NoticeMapper noticeMapper){this.noticeMapper = noticeMapper;}
 
     @Override
     public int getMainNoticeCount(){
-        return noticeDAO.getMainNoticeCount();
+        return noticeMapper.getMainNoticeCount();
     }
     @Override
     public int getWebpageNoticeCount(){
-        return noticeDAO.getWebpageNoticeCount();
+        return noticeMapper.getWebpageNoticeCount();
     }
     @Override
     public List<NoticeVO> getNoticeList(int page, int count){
-        return noticeDAO.getNoticeList(page,count,"ANNOUNCE_NUM");
+        return noticeMapper.getNoticeList(page,count,"ANNOUNCE_NUM");
     }
     @Override
     public List<NoticeVO> getMainNoticeList(){
-        return noticeDAO.getMainNoticeList();
+        return noticeMapper.getMainNoticeList();
     }
 }

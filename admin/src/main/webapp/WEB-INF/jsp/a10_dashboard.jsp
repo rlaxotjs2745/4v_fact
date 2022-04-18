@@ -8,7 +8,7 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <div class="display-4"><img src="/static/assets/img/img_business_all.png" alt=""></div>
+                        <div class="display-4"><img src="${pageContext.request.contextPath}/static/assets/img/img_business_all.png" alt=""></div>
                         <div class="ml-3">
                             <div class="text-muted small">대면기업 신청 수</div>
                             <div class="text-large">42</div>
@@ -298,19 +298,16 @@
         </div>
     </div>
 </div>
+
+
 <!-- / Page content -->
 <script>
-
-
-
-
 
     $(function() {
         var isRtl = $('html').attr('dir') === 'rtl';
         $('.datepickers').datepicker({
             orientation: isRtl ? 'auto right' : 'auto left'
         });
-
 
         var today = new Date();
         var y = today.getFullYear();
@@ -496,7 +493,7 @@
             dayMaxEventRows: false, // allow "more" link when too many events
             events: eventList,
             aspectRatio: 2.0,
-            minHeight:'500px',
+            /*minHeight:'500px',*/
             height:'500px',
             locale: 'ko',
             views: {
