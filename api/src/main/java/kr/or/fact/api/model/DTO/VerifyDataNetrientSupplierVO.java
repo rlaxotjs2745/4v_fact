@@ -2,8 +2,6 @@ package kr.or.fact.api.model.DTO;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class VerifyDataNetrientSupplierVO {
     long idx_verdata_netrientsupplier;// number(10,4) PRIMARY KEY,

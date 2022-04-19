@@ -2,8 +2,6 @@ package kr.or.fact.api.model.DTO;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class VerifyDataSunLightVO {
     long idx_verdata_sunlight;// number(10,4) PRIMARY KEY,

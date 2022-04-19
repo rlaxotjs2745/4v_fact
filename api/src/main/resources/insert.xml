@@ -2,7 +2,7 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.or.fact.api.model.DAO">
+<mapper namespace="kr.or.fact.api.model.ApiMapper">
     <insert id="insertActuatorGreenhouseComplexGimje" parameterType="kr.or.fact.api.model.DTO.ActuatorGreenhouseComplexGimjeVO">
         INSERT INTO "ACTUATOR_GREENHOUSE_COMPLEX_G"(
             idx_actuator_gh_complex_g,
@@ -1043,8 +1043,8 @@
 
                )
     </insert>
-    <insert id="insertVerifyDataHotShock" parameterType="kr.or.fact.api.model.DTO.VerifyDataHotShockRobotVO">
-        INSERT INTO "VERIFYDATA_HOTSHOCK_ROBOT"(
+    <insert id="insertVerifyDataHotShock" parameterType="kr.or.fact.api.model.DTO.VerifyDataHotShockVO">
+        INSERT INTO "VERIFYDATA_HOTSHOCK"(
             IDX_VERDATA_HOTSHOCK,
             VERIFYID,
             DEVICEID,
@@ -1056,7 +1056,7 @@
 
         )
         VALUES (
-                   VD_HOTSHOCK_ROBOT_SEQ.NEXTVAL,
+                   VD_HOTSHOCK_SEQ.NEXTVAL,
                    #{verifyid},
                    #{deviceid},
                    TO_DATE(#{daqtime}, 'YYYY-MM-DD hh24:mi:ss'),
@@ -1686,5 +1686,56 @@
         SELECT * FROM USER_FAC_JOIN
         WHERE idx_user = #{idx} AND idx_asset = (SELECT idx_asset FROM ASSET WHERE asset_name = #{fac})
     </select>
+
+
+    <select id="selectPagebyIdx" resultType="kr.or.fact.api.model.DTO.IdxModifyVO">
+        SELECT * FROM (
+                          SELECT A.*, FLOOR((ROWNUM - 1)/#{count} + 1) PAGE, (
+                              SELECT MAX(FLOOR((ROWNUM - 1)/#{count} + 1)) FROM SHINHAN_DATA
+                              WHERE IDX_SHINHANDATA >= #{startNum}) MAXVALUE FROM (
+                                                                                      SELECT SHINHAN_DATA.* FROM SHINHAN_DATA
+                                                                                      WHERE IDX_SHINHANDATA >= #{startNum} ORDER BY IDX_SHINHANDATA ASC
+                                                                                  )
+                                                                                      A)
+        WHERE PAGE = #{pageNum}
+    </select>
+    <select id="selectbyTime" resultType="kr.or.fact.api.model.DTO.DataVO">
+        SELECT * FROM SHINHAN_DATA
+        WHERE REG_DT
+                  BETWEEN TO_DATE(#{fromTime}, 'YYYY.MM.DD HH24:MI:SS')
+                  AND TO_DATE(#{toTime}, 'YYYY.MM.DD HH24:MI:SS')
+        ORDER BY IDX_SHINHANDATA ASC
+    </select>
+
+    <!--<resultMap id="InternalEnvVO" type="kr.or.fact.api.model.DTO.InternalEnvVO">-->
+    <!--    <result column="xintemp1" property="xintemp1" />-->
+    <!--    <result column="xintemp2" property="xintemp2"/>-->
+    <!--    <result column="xintemp3" property="xintemp3"/>-->
+    <!--    <result column="xabhum" property="xabhum"/>-->
+    <!--    <result column="xinhum1" property="xinhum1"/>-->
+    <!--    <result column="xinhum2" property="xinhum2"/>-->
+    <!--    <result column="xinhum3" property="xinhum3"/>-->
+    <!--    <result column="xco2" property="xco2" />-->
+    <!--     <result column="xsunvol" property="xsunvol" />-->
+    <!--    <result column="xdhum" property="xdhum" />-->
+    <!-- </resultMap>-->
+
+    <!--    <resultMap id="ExternalEnvVO" type="kr.or.fact.api.model.DTO.ExternalEnvVO">-->
+    <!--    <result column="xouttemp" property="xouttemp"/>-->
+    <!--        <result column="xwinddirec" property="xwinddirec"/>-->
+    <!--        <result column="xrain" property="xrain"/>-->
+    <!--    </resultMap>-->
+    <!--    <resultMap id="RootZoneEnvVO" type="RootZoneEnvVO">-->
+    <!--        <result column="xgndtemp" property="xgndtemp"/>-->
+    <!--        <result column="xgndhum" property="xgndhum"/>-->
+    <!--        <result column="xph1" property="xph1"/>-->
+    <!--        <result column="xph2" property="xph2"/>-->
+    <!--        <result column="xec1" property="xec1"/>-->
+    <!--        <result column="xec2" property="xec2"/>-->
+    <!--    </resultMap>-->
+    <select id="selectbyGuyokEnv" resultType="kr.or.fact.api.model.DTO.MetaDataVO">
+        SELECT * FROM TB_ENV_DATA WHERE guyok = #{guyok} AND farm_cd = #{farm_cd}
+    </select>
+
 
 </mapper>

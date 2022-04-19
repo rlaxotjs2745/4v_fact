@@ -2,6 +2,8 @@ package kr.or.fact.api.service;
 
 import kr.or.fact.api.model.DTO.*;
 
+import java.util.ArrayList;
+
 public interface ApiService {
     //add어쩌구
     public long insertActuatorGreenhouseComplexGimje(ActuatorGreenhouseComplexGimjeVO actuatorGreenhouseComplexGimjeVO);
@@ -97,4 +99,12 @@ public interface ApiService {
     public boolean isExistToken(long idx);
 
     public boolean isValidUser(long idx, String fac);
+
+    public IdxResultVO selectPagebyIdx(long startNum, long count, long pageNum);
+
+    public ArrayList<DataVO> selectbyTime(String fromTime, String toTime);
+
+    public ArrayList<EnvInfoVO>  selectbyGuyokEnv(long guyok,String farm_cd);
+
+    public ArrayList<ControlInfoVO> selectbyGuyokContol(long guyok, String farm_cd);
 }

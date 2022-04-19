@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/V2")
 @Controller
-public class ApiController {
+public class PostAPIController {
     @Autowired
     public ApiService  apiService;
 

@@ -4,8 +4,10 @@ import kr.or.fact.api.model.DTO.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.ArrayList;
+
 @Mapper
-public interface DAO {
+public interface ApiMapper {
 
     public long insertActuatorGreenhouseComplexGimje(ActuatorGreenhouseComplexGimjeVO actuatorGreenhouseComplexGimjeVO);
 
@@ -102,4 +104,11 @@ public interface DAO {
     public TokenVO isExistToken(@Param("idx") long idx);
 
     public UserFacJoinVO isValidUser(@Param("idx") long idx, @Param("fac") String fac);
+
+    public ArrayList<IdxModifyVO> selectPagebyIdx(@Param("startNum") long startNum, @Param("count") long count, @Param("pageNum") long pageNum);
+
+    public ArrayList<DataVO> selectbyTime(@Param("fromTime") String fromTime, @Param("toTime") String toTime);
+
+    public ArrayList<MetaDataVO> selectbyGuyokEnv(@Param("guyok") long guyok, @Param("farm_cd") String farm_cd);
+
 }

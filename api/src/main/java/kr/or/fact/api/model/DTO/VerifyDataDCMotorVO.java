@@ -2,8 +2,6 @@ package kr.or.fact.api.model.DTO;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class VerifyDataDCMotorVO {
     long idx_verdata_dcmotor;// number(10,4) PRIMARY KEY,

@@ -2,8 +2,6 @@ package kr.or.fact.api.model.DTO;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class VerifyDataAirconEffectVO {
     long idx_verdata_aircon_effect;// number(10,4) PRIMARY KEY,

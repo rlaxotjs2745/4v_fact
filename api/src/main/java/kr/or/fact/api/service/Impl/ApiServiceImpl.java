@@ -1,18 +1,24 @@
 package kr.or.fact.api.service.Impl;
 
-import kr.or.fact.api.model.DAO;
+import kr.or.fact.api.model.ApiMapper;
 import kr.or.fact.api.model.DTO.*;
 import kr.or.fact.api.service.ApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 
-@Service
-public class ServiceImpl implements ApiService {
+@Service("apiService")
+public class ApiServiceImpl implements ApiService {
+
+    private final ApiMapper apiMapper;
+
     @Autowired
-    DAO dao;
+    public ApiServiceImpl(ApiMapper apiMapper){
+        this.apiMapper = apiMapper;
+    }
 
     @Override
     public long insertActuatorGreenhouseComplexGimje(ActuatorGreenhouseComplexGimjeVO actuatorGreenhouseComplexGimjeVO){
@@ -20,7 +26,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertActuatorGreenhouseComplexGimje(actuatorGreenhouseComplexGimjeVO);
+            apiMapper.insertActuatorGreenhouseComplexGimje(actuatorGreenhouseComplexGimjeVO);
         }
         catch (Exception e) {
             idx_actuator_gh_complex_g = 0;
@@ -34,7 +40,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertActuatorGreenhouseComplexSangju(actuatorGreenhouseComplexSangjuVO);
+            apiMapper.insertActuatorGreenhouseComplexSangju(actuatorGreenhouseComplexSangjuVO);
         }
         catch (Exception e){
             idx_actuator_gh_complex_s = 0;
@@ -48,7 +54,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertActuatorGreenhouseGlass(actuatorGreenhouseGlassVO);
+            apiMapper.insertActuatorGreenhouseGlass(actuatorGreenhouseGlassVO);
         }
         catch (Exception e){
             idx_actuator_gh_glass = 0;
@@ -64,7 +70,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertActuatorGreenhouseSingleGimje(actuatorGreenhouseSingleGimjeVO);
+            apiMapper.insertActuatorGreenhouseSingleGimje(actuatorGreenhouseSingleGimjeVO);
         }
         catch (Exception e){
             idx_actuator_gh_single_g = 0;
@@ -80,7 +86,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertActuatorGreenhouseSingleSangju(actuatorGreenhouseSingleSangjuVO);
+            apiMapper.insertActuatorGreenhouseSingleSangju(actuatorGreenhouseSingleSangjuVO);
         }
         catch (Exception e){
             idx_actuator_gh_single_s = 0;
@@ -97,7 +103,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertEnvGreenhouseComplex(envGreenhouseComplexVO);
+            apiMapper.insertEnvGreenhouseComplex(envGreenhouseComplexVO);
         }
         catch (Exception e){
             idx_env_gh_complex = 0;
@@ -113,7 +119,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertEnvGreenhouseGlass(envGreenhouseGlassVO);
+            apiMapper.insertEnvGreenhouseGlass(envGreenhouseGlassVO);
         }
         catch (Exception e){
             idx_env_gh_glass = 0;
@@ -130,7 +136,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertEnvGreenhouseSingle(envGreenhouseSingleVO);
+            apiMapper.insertEnvGreenhouseSingle(envGreenhouseSingleVO);
         }
         catch (Exception e){
             idx_env_gh_single = 0;
@@ -146,7 +152,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertEnvWeather(envWeatherVO);
+            apiMapper.insertEnvWeather(envWeatherVO);
         }
         catch (Exception e){
             idx_env_weather = 0;
@@ -162,7 +168,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertNowGreenhouseComplexGimje(nowGreenhouseComplexGimjeVO);
+            apiMapper.insertNowGreenhouseComplexGimje(nowGreenhouseComplexGimjeVO);
         }
         catch (Exception e){
             idx_now_gh_complex_g = 0;
@@ -178,7 +184,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertNowGreenhouseComplexSangju(nowGreenhouseComplexSangjuVO);
+            apiMapper.insertNowGreenhouseComplexSangju(nowGreenhouseComplexSangjuVO);
         }
         catch (Exception e){
             idx_now_gh_complex_s = 0;
@@ -194,7 +200,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertNowGreenhouseGlass(nowGreenhouseGlassVO);
+            apiMapper.insertNowGreenhouseGlass(nowGreenhouseGlassVO);
         }
         catch (Exception e){
             idx_now_gh_glass = 0;
@@ -210,7 +216,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertNowGreenhouseSingleGimje(nowGreenhouseSingleGimjeVO);
+            apiMapper.insertNowGreenhouseSingleGimje(nowGreenhouseSingleGimjeVO);
         }
         catch (Exception e){
             idx_now_gh_single_g = 0;
@@ -226,7 +232,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertNowGreenhouseSingleSangju(nowGreenhouseSingleSangjuVO);
+            apiMapper.insertNowGreenhouseSingleSangju(nowGreenhouseSingleSangjuVO);
         }
         catch (Exception e){
             idx_now_gh_single_s = 0;
@@ -242,7 +248,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertNowWeather(nowWeatherVO);
+            apiMapper.insertNowWeather(nowWeatherVO);
         }
         catch (Exception e){
             idx_now_weather = 0;
@@ -258,7 +264,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataACMotor(verifyDataACMotorVO);
+            apiMapper.insertVerifyDataACMotor(verifyDataACMotorVO);
         }
         catch (Exception e){
             idx_verdata_acmotor = 0;
@@ -274,7 +280,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataAirconAnalysis(verifyDataAirconAnalysisVO);
+            apiMapper.insertVerifyDataAirconAnalysis(verifyDataAirconAnalysisVO);
         }
         catch (Exception e){
             idx_verdata_aircon_analysis = 0;
@@ -291,7 +297,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataAirconEffect(verifyDataAirconEffectVO);
+            apiMapper.insertVerifyDataAirconEffect(verifyDataAirconEffectVO);
         }
         catch (Exception e){
             idx_verdata_aircon_effect = 0;
@@ -308,7 +314,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataCO2(verifyDataCO2VO);
+            apiMapper.insertVerifyDataCO2(verifyDataCO2VO);
         }
         catch (Exception e){
             idx_verdata_co2 = 0;
@@ -325,7 +331,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataDCMotor(verifyDataDCMotorVO);
+            apiMapper.insertVerifyDataDCMotor(verifyDataDCMotorVO);
         }
         catch (Exception e){
             idx_verdata_dcmotor = 0;
@@ -342,7 +348,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataDust(verifyDataDustVO);
+            apiMapper.insertVerifyDataDust(verifyDataDustVO);
         }
         catch (Exception e){
             idx_verdata_dust = 0;
@@ -359,7 +365,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataECSensor(verifyDataECSensorVO);
+            apiMapper.insertVerifyDataECSensor(verifyDataECSensorVO);
         }
         catch (Exception e){
             idx_verdata_ecsensor = 0;
@@ -376,7 +382,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataHeatFlow(verifyDataHeatFlowVO);
+            apiMapper.insertVerifyDataHeatFlow(verifyDataHeatFlowVO);
         }
         catch (Exception e){
             idx_verdata_heatflow = 0;
@@ -393,7 +399,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataWind(verifyDataWindVO);
+            apiMapper.insertVerifyDataWind(verifyDataWindVO);
         }
         catch (Exception e){
             idx_verdata_wind = 0;
@@ -410,7 +416,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataWaterProof(verifyDataWaterProofVO);
+            apiMapper.insertVerifyDataWaterProof(verifyDataWaterProofVO);
         }
         catch (Exception e){
             idx_verdata_waterproof = 0;
@@ -427,7 +433,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataWaterProofRobot(verifyDataWaterProofRobotVO);
+            apiMapper.insertVerifyDataWaterProofRobot(verifyDataWaterProofRobotVO);
         }
         catch (Exception e){
             idx_verdata_waterproof_robot = 0;
@@ -444,7 +450,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataVibration(verifyDataVibrationVO);
+            apiMapper.insertVerifyDataVibration(verifyDataVibrationVO);
         }
         catch (Exception e){
             idx_verdata_vibration = 0;
@@ -461,7 +467,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataThermoHygrostat(verifyDataThermoHygrostatVO);
+            apiMapper.insertVerifyDataThermoHygrostat(verifyDataThermoHygrostatVO);
         }
         catch (Exception e){
             idx_verdata_thermohygrostat = 0;
@@ -478,7 +484,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataSunLight(verifyDataSunLightVO);
+            apiMapper.insertVerifyDataSunLight(verifyDataSunLightVO);
         }
         catch (Exception e){
             idx_verdata_sunlight = 0;
@@ -494,7 +500,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataSunLightRawData(verifyDataSunLightRawDataVO);
+            apiMapper.insertVerifyDataSunLightRawData(verifyDataSunLightRawDataVO);
         }
         catch (Exception e){
             idx_verdata_sunlight_rawdata = 0;
@@ -510,7 +516,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataSoilMoisture(verifyDataSoilMoistureVO);
+            apiMapper.insertVerifyDataSoilMoisture(verifyDataSoilMoistureVO);
         }
         catch (Exception e){
             idx_verdata_soilmoisture = 0;
@@ -526,7 +532,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataSensorTest(verifyDataSensorTestVO);
+            apiMapper.insertVerifyDataSensorTest(verifyDataSensorTestVO);
         }
         catch (Exception e){
             idx_verdata_sensortest = 0;
@@ -542,7 +548,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataPosmeasure(verifyDataPosmeasureVO);
+            apiMapper.insertVerifyDataPosmeasure(verifyDataPosmeasureVO);
         }
         catch (Exception e){
             idx_verdata_posmeasure = 0;
@@ -558,7 +564,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataPH(verifyDataPHVO);
+            apiMapper.insertVerifyDataPH(verifyDataPHVO);
         }
         catch (Exception e){
             idx_verdata_ph = 0;
@@ -574,7 +580,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataNetrientSupplier(verifyDataNetrientSupplierVO);
+            apiMapper.insertVerifyDataNetrientSupplier(verifyDataNetrientSupplierVO);
         }
         catch (Exception e){
             idx_verdata_netrientsupplier = 0;
@@ -590,7 +596,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataMoisture(verifyDataMoistureVO);
+            apiMapper.insertVerifyDataMoisture(verifyDataMoistureVO);
         }
         catch (Exception e){
             idx_verdata_moisture = 0;
@@ -606,7 +612,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataMaterialSmall(verifyDataMaterialSmallVO);
+            apiMapper.insertVerifyDataMaterialSmall(verifyDataMaterialSmallVO);
         }
         catch (Exception e){
             idx_verdata_material_small = 0;
@@ -622,7 +628,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataMaterialBig(verifyDataMaterialBigVO);
+            apiMapper.insertVerifyDataMaterialBig(verifyDataMaterialBigVO);
         }
         catch (Exception e){
             idx_verdata_material_big = 0;
@@ -638,7 +644,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataHotShock(verifyDataHotShockVO);
+            apiMapper.insertVerifyDataHotShock(verifyDataHotShockVO);
         }
         catch (Exception e){
             idx_verdata_hotshock = 0;
@@ -654,7 +660,7 @@ public class ServiceImpl implements ApiService {
 
 
         try {
-            dao.insertVerifyDataHotShockRobot(verifyDataHotShockRobotVO);
+            apiMapper.insertVerifyDataHotShockRobot(verifyDataHotShockRobotVO);
         }
         catch (Exception e){
             idx_verdata_hotshock_robot = 0;
@@ -668,7 +674,7 @@ public class ServiceImpl implements ApiService {
     public long insertKey (TokenVO tokenVO){
         long bool= 1;
         try {
-            dao.insertKey(tokenVO);
+            apiMapper.insertKey(tokenVO);
         }
         catch (Exception e){
             bool =0;
@@ -679,7 +685,7 @@ public class ServiceImpl implements ApiService {
     public boolean selectKey (String key){
         boolean bool = true;
         try {
-            TokenVO tokenVO = dao.selectKey(key);
+            TokenVO tokenVO =apiMapper.selectKey(key);
             bool = LocalDateTime.now().isBefore(LocalDateTime.parse(tokenVO.getExpired()));
         }
         catch (Exception e){
@@ -692,7 +698,7 @@ public class ServiceImpl implements ApiService {
     public long selectUserIdx (String userId){
         long userIdx = 0;
         try{
-            UserVO userVO = dao.selectUserIdx(userId);
+            UserVO userVO =apiMapper.selectUserIdx(userId);
 
             userIdx = userVO.getIdx_user();
         } catch (Exception e){
@@ -705,7 +711,7 @@ public class ServiceImpl implements ApiService {
     public boolean updateUserKey(TokenVO tokenVO){
         boolean bool = true;
         try{
-            dao.updateUserKey(tokenVO);
+            apiMapper.updateUserKey(tokenVO);
         } catch (Exception e){
             bool = false;
         }
@@ -715,7 +721,7 @@ public class ServiceImpl implements ApiService {
     public boolean isValid(String key, long fac){
         boolean bool = true;
         try{
-            UserFacJoinVO joinData = dao.isValid(key, fac);
+            UserFacJoinVO joinData =apiMapper.isValid(key, fac);
             bool = LocalDateTime.now().isBefore(LocalDateTime.parse(joinData.getEnd_date()));
         } catch (Exception e){
             bool = false;
@@ -726,7 +732,7 @@ public class ServiceImpl implements ApiService {
     public boolean isExistToken(long idx){
         boolean bool = true;
         try{
-            TokenVO token = dao.isExistToken(idx);
+            TokenVO token =apiMapper.isExistToken(idx);
             if(token == null || token.getIdx_user() == 0){
                 bool = false;
             }
@@ -739,11 +745,163 @@ public class ServiceImpl implements ApiService {
     public boolean isValidUser(long idx, String fac){
         boolean bool = true;
 
-        UserFacJoinVO userFacJoinVO = dao.isValidUser(idx, fac);
+        UserFacJoinVO userFacJoinVO =apiMapper.isValidUser(idx, fac);
 
         if(userFacJoinVO==null)
             bool=false;
 
         return bool;
+    }
+
+
+    public IdxResultVO selectPagebyIdx(long startNum, long count, long pageNum){
+        IdxResultVO idxResultVO = new IdxResultVO();
+        ArrayList<DataVO> resultEntitys = new ArrayList<>();
+        ArrayList<IdxModifyVO> resultArr = apiMapper.selectPagebyIdx(startNum, count, pageNum);
+        for (int i = 0; i <= resultArr.size() -1; i++){
+            DataVO dataVO = new DataVO();
+            if(i == 0){
+                idxResultVO.setTotalPageNum(resultArr.get(i).getMaxvalue());
+            }
+            dataVO.setIdx_shinhandata(resultArr.get(i).getIdx_shinhandata());
+            dataVO.setRec_data(resultArr.get(i).getRec_data());
+            dataVO.setRec_reg_dt(resultArr.get(i).getRec_reg_dt());
+            dataVO.setReg_dt(resultArr.get(i).getReg_dt());
+
+            resultEntitys.add(dataVO);
+        }
+        idxResultVO.setDataArr(resultEntitys);
+
+        return idxResultVO;
+    }
+
+    public ArrayList<DataVO> selectbyTime(String fromTime, String toTime){
+        ArrayList<DataVO> result = apiMapper.selectbyTime(fromTime, toTime);
+        System.out.println("ㄹㅇㄹㅇ");
+        return result;
+    }
+
+    public ArrayList<EnvInfoVO> selectbyGuyokEnv(long guyok, String farm_cd){
+        System.out.println(guyok);
+        ArrayList<MetaDataVO> metaDataVO = apiMapper.selectbyGuyokEnv(guyok, farm_cd);
+        System.out.println(metaDataVO);
+        ArrayList<EnvInfoVO> result = new ArrayList<>();
+
+        for(int i = 0; i < metaDataVO.size(); i++){
+            EnvInfoVO envInfoVO = new EnvInfoVO();
+            InternalEnvVO internalEnvVO = new InternalEnvVO();
+            ExternalEnvVO externalEnvVO = new ExternalEnvVO();
+            RootZoneEnvVO rootZoneEnvVO = new RootZoneEnvVO();
+
+            internalEnvVO.setXabhum(metaDataVO.get(i).getXabhum());
+            internalEnvVO.setXco2(metaDataVO.get(i).getXco2());
+            internalEnvVO.setXdhum(metaDataVO.get(i).getXdhum());
+            internalEnvVO.setXinhum1(metaDataVO.get(i).getXinhum1());
+            internalEnvVO.setXinhum2(metaDataVO.get(i).getXinhum2());
+            internalEnvVO.setXinhum3(metaDataVO.get(i).getXinhum3());
+            internalEnvVO.setXsunvol(metaDataVO.get(i).getXsunvol());
+            internalEnvVO.setXintemp1(metaDataVO.get(i).getXintemp1());
+            internalEnvVO.setXintemp2(metaDataVO.get(i).getXintemp2());
+            internalEnvVO.setXintemp3(metaDataVO.get(i).getXintemp3());
+
+            externalEnvVO.setXouttemp(metaDataVO.get(i).getXouttemp());
+            externalEnvVO.setXrain(metaDataVO.get(i).getXrain());
+            externalEnvVO.setXwinddirec(metaDataVO.get(i).getXwinddirec());
+
+            rootZoneEnvVO.setXec1(metaDataVO.get(i).getXec1());
+            rootZoneEnvVO.setXec2(metaDataVO.get(i).getXec2());
+            rootZoneEnvVO.setXgndhum(metaDataVO.get(i).getXgndhum());
+            rootZoneEnvVO.setXgndtemp(metaDataVO.get(i).getXgndtemp());
+            rootZoneEnvVO.setXph1(metaDataVO.get(i).getXph1());
+            rootZoneEnvVO.setXph2(metaDataVO.get(i).getXph2());
+
+            envInfoVO.setInternalEnvVO(internalEnvVO);
+            envInfoVO.setExternalEnvVO(externalEnvVO);
+            envInfoVO.setRootZoneEnvVO(rootZoneEnvVO);
+
+            result.add(envInfoVO);
+        }
+
+        return result;
+    }
+    public ArrayList<ControlInfoVO> selectbyGuyokContol (long guyok,String farm_cd){
+
+
+        ArrayList<MetaDataVO> metaDataVO = apiMapper.selectbyGuyokEnv(guyok,farm_cd);
+        ArrayList<ControlInfoVO> result = new ArrayList<>();
+        for(int i = 0; i < metaDataVO.size(); i++) {
+            ControlInfoVO controlInfoVO = new ControlInfoVO();
+            TopWindowVO topWindowVO = new TopWindowVO();
+            SideWindowVO sideWindowVO = new SideWindowVO();
+            Curtain1VO curtain1VO = new Curtain1VO();
+            Curtain2VO curtain2VO = new Curtain2VO();
+            Curtain3VO curtain3VO = new Curtain3VO();
+            Curtain4VO curtain4VO = new Curtain4VO();
+            Fan1VO fan1VO = new Fan1VO();
+            Fan2VO fan2VO = new Fan2VO();
+            LightVO lightVO = new LightVO();
+            ThreeWayVO threeWayVO = new ThreeWayVO();
+            WsoVO wsoVO = new WsoVO();
+            HeaterVO heaterVO = new HeaterVO();
+            HunVO hunVO = new HunVO();
+            Co2VO co2VO = new Co2VO();
+            SprayVO sprayVO = new SprayVO();
+            BoilerVO boilerVO = new BoilerVO();
+
+
+            topWindowVO.setXskyauto(metaDataVO.get(i).getXskyauto());
+            topWindowVO.setXskyvol1(metaDataVO.get(i).getXskyvol1());
+            topWindowVO.setXskyvol2(metaDataVO.get(i).getXskyvol2());
+            sideWindowVO.setXsideauto(metaDataVO.get(i).getXsideauto());
+            sideWindowVO.setXsidevol1(metaDataVO.get(i).getXsidevol1());
+            sideWindowVO.setXsidevol2(metaDataVO.get(i).getXsidevol2());
+            curtain1VO.setXcur1auto(metaDataVO.get(i).getXcur1auto());
+            curtain1VO.setXcur1vol(metaDataVO.get(i).getXcur1vol());
+            curtain2VO.setXcur2auto(metaDataVO.get(i).getXcur2auto());
+            curtain2VO.setXcur2vol(metaDataVO.get(i).getXcur2vol());
+            curtain3VO.setXcur3auto(metaDataVO.get(i).getXcur3auto());
+            curtain3VO.setXcur3vol(metaDataVO.get(i).getXcur3vol());
+            curtain4VO.setXcur4auto(metaDataVO.get(i).getXcur4auto());
+            curtain4VO.setXcur4vol(metaDataVO.get(i).getXcur4vol());
+            fan1VO.setXfan1run(metaDataVO.get(i).getXfan1run());
+            fan1VO.setXfan1auto(metaDataVO.get(i).getXfan1auto());
+            fan2VO.setXfan2auto(metaDataVO.get(i).getXfan2auto());
+            fan2VO.setXfan2run(metaDataVO.get(i).getXfan2run());
+            lightVO.setXlightauto(metaDataVO.get(i).getXlightauto());
+            lightVO.setXlightrun(metaDataVO.get(i).getXlightrun());
+            threeWayVO.setX3way1auto(metaDataVO.get(i).getX3way1auto());
+            threeWayVO.setX3way2auto(metaDataVO.get(i).getX3way2auto());
+            threeWayVO.setXwatertemp2(metaDataVO.get(i).getXwatertemp2());
+            wsoVO.setXspauto(metaDataVO.get(i).getXspauto());
+            wsoVO.setXsprun(metaDataVO.get(i).getXsprun());
+            heaterVO.setXheaterauto(metaDataVO.get(i).getXheaterauto());
+            heaterVO.setXheaterrun(metaDataVO.get(i).getXheaterrun());
+            hunVO.setXhunauto(metaDataVO.get(i).getXhunauto());
+            hunVO.setXhunrun(metaDataVO.get(i).getXhunrun());
+            co2VO.setXco2auto(metaDataVO.get(i).getXco2auto());
+            co2VO.setXco2run(metaDataVO.get(i).getXco2run());
+            sprayVO.setXsprayrun(metaDataVO.get(i).getXsprayrun());
+            boilerVO.setXborun(metaDataVO.get(i).getXborun());
+
+            controlInfoVO.setBoilerVO(boilerVO);
+            controlInfoVO.setCo2VO(co2VO);
+            controlInfoVO.setCurtain1VO(curtain1VO);
+            controlInfoVO.setCurtain2VO(curtain2VO);
+            controlInfoVO.setCurtain3VO(curtain3VO);
+            controlInfoVO.setCurtain4VO(curtain4VO);
+            controlInfoVO.setFan1VO(fan1VO);
+            controlInfoVO.setFan2VO(fan2VO);
+            controlInfoVO.setLightVO(lightVO);
+            controlInfoVO.setThreeWayVO(threeWayVO);
+            controlInfoVO.setWsoVO(wsoVO);
+            controlInfoVO.setHeaterVO(heaterVO);
+            controlInfoVO.setHunVO(hunVO);
+            controlInfoVO.setSprayVO(sprayVO);
+            controlInfoVO.setTopWindowVO(topWindowVO);
+            controlInfoVO.setSideWindowVO(sideWindowVO);
+            result.add(controlInfoVO);
+        }
+        return result;
+
     }
 }
