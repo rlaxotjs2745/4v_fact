@@ -1,6 +1,6 @@
 package kr.or.fact;
 
-import kr.or.fact.core.WebFrontFileUploadProperties;
+import kr.or.fact.core.config.FACTConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @SpringBootApplication
 @EnableConfigurationProperties({
-        WebFrontFileUploadProperties.class
+        FACTConfig.class
 })
 public class SangjuWebFrontApplication extends SpringBootServletInitializer {
 

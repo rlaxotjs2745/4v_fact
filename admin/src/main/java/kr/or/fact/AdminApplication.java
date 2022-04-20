@@ -1,6 +1,5 @@
 package kr.or.fact;
 
-import kr.or.fact.core.WebFrontFileUploadProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;

@@ -22,10 +22,8 @@ import java.net.URLEncoder;
 @RestController
 public class FileController {
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
-    @Autowired
+
     private FileService fileService;
-
-
 
     public FileUploadResponseVO storeFile(@RequestParam("file") MultipartFile file) {
         String fileName = fileService.storeFile(file);

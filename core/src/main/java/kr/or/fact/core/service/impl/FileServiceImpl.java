@@ -1,6 +1,6 @@
 package kr.or.fact.core.service.impl;
 
-import kr.or.fact.core.WebFrontFileUploadProperties;
+import kr.or.fact.core.config.FACTConfig;
 import kr.or.fact.core.service.FileService;
 import kr.or.fact.core.util.FileDownloadException;
 import kr.or.fact.core.util.FileUploadException;
@@ -23,7 +23,7 @@ public class FileServiceImpl implements FileService {
     private final Path fileLocation;
 
     @Autowired
-    public FileServiceImpl(WebFrontFileUploadProperties prop) {
+    public FileServiceImpl(FACTConfig prop) {
         this.fileLocation = Paths.get(prop.getUploadDir())
                 .toAbsolutePath().normalize();
 

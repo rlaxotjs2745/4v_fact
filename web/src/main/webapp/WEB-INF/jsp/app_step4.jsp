@@ -112,8 +112,8 @@
     <div class="footer_app">
         <div class="footer__btn">
             <a href="#" class="btn dark btn-lg fl-left">임시저장</a>
-            <a href="app_step3.html" class="btn info btn-lg ">이전</a>
-            <a href="app_step5.html" class="btn submit btn-lg ">다음</a>
+            <a href="app_step3" class="btn info btn-lg ">이전</a>
+            <a href="app_step5" class="btn submit btn-lg ">다음</a>
         </div>
     </div>
 </div>

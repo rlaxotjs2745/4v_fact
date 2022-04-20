@@ -34,7 +34,7 @@ public class MobileIndexController {
     NoticeService noticeService;
 
     @Resource(name = "prContentService")
-    PRContentService prContentService;
+    PRContentsService prContentService;
 
     @Resource(name = "consultingService")
     ConsultingService consultingService;

@@ -5,6 +5,9 @@ import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 
+
+import java.util.List;
+
 @Data
 public class RecieveFilesVO {
 

@@ -34,7 +34,7 @@ public class IndexController {
     NoticeService noticeService;
 
     @Resource(name = "prContentService")
-    PRContentService prContentService;
+    PRContentsService prContentService;
 
     @Resource(name = "consultingService")
     ConsultingService consultingService;
@@ -57,6 +57,8 @@ public class IndexController {
     @Resource(name = "coWorkerNService")
     CoWorkerNService coWorkerNService;
 
+    @Resource(name = "jusoService")
+    JusoService jusoService;
 
     @RequestMapping("/")
     public String home(Model model){
@@ -555,6 +557,15 @@ public class IndexController {
     public String brd_notice_detail(@RequestParam("idx") int idx,
                                    Model model){
 
+
+
+
+
+
+
+
+
+
         getHomepageInfo(model);
         return "brd_notice_detail";
     }
@@ -747,7 +758,9 @@ public class IndexController {
     }
 
     @RequestMapping("/juso_search")
-    public String juso_search(){
+    public String juso_search(Model model){
+
+        model.addAttribute("searchSeverUrl",jusoService.getSearchServerUrl());
         return "juso_search";
     }
 

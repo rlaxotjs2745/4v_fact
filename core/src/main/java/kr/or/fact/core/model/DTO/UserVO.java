@@ -30,7 +30,7 @@ public class UserVO {
     int is_applicant;//	number	4		0			지원사업 신청자	0:신청자 아님, 1:신청자
     int is_corporate_member;//	number	4		0			기업회원 여부	0:일반회원, 1:기업회원
     long idx_corp_info;//	number	32					기업회원
-    int sign_in_type;//	number	4		0			가입 형태	0:웹가입, 1:모바일웹가입, 2:관리기관(센터) 가입, 3:한국농업기술진흥원 가입, 4:관계기관 가입(지자체)
+    int sign_in_type;//	number	4		0			가입 형태	0:웹가입, 1:모바일웹가입, 2:관리기관(센터) 가입, 3:재단 가입, 4:관계기관 가입(지자체)
     int is_sms_agree;//	number	4		0			홍보성 sms 수신여부	0:동의안함, 1:동의
     int is_email_agree;//	number	4		0			홍보성email 성 수신여부	0:동의안함, 1:동의
     Date reg_date;//	date						최초 등록 일시

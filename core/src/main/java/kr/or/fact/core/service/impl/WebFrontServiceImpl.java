@@ -5,6 +5,7 @@ import kr.or.fact.core.service.WebFrontService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@Service("webFrontService")
 public class WebFrontServiceImpl implements WebFrontService {
 
     private final WebFrontMapper webFrontMapper;

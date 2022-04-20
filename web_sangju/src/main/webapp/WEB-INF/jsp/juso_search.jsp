@@ -19,7 +19,7 @@
 
     <script>
         var rnsSearch = new rnsSearch({
-            searchServerUrl : "http://192.168.0.253:8983",
+            searchServerUrl : ${searchSeverUrl},
             width : 500,
             height : 500,
             oncomplete : function(data) {
