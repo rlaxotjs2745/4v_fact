@@ -23,6 +23,7 @@
 </head>
 <body>
 <div class="wrapper" id="wrapper">
+
     <header class="header_app">
         <a href="#none" class="close_window" onclick="javascript:window.close();"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.svg" alt=""></a>
         <h1><a href="main.html"><img src="<%=request.getContextPath()%>/static/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
@@ -60,17 +61,11 @@
                 <c:forEach items="${demoBusinessVOs}" var="demoBs" varStatus="status">
                     <option value="${demoBs.idx_demo_business}">${demoBs.demo_subject}</option>
                 </c:forEach>
-
-
-<%--                <option value="">사업공고명</option>
-                <option value="">사업공고명</option>
-                <option value="">사업공고명</option>
-                <option value="">사업공고명</option>
-                <option value="">사업공고명</option>--%>
-
             </select>
         </div>
     </header>
+
+
     <div class="content_app" id="content_app">
         <!--//-->
         <div class="app__body">
@@ -83,9 +78,9 @@
                 <div class="cnt__title">사업 개요</div>
                 <div class="application__document">
                     <ol>
-                        <li>[서식 1호]실증단지 이용신청서 1부(필수)</li>
-                        <li>[서식 2호]실증계획서 1부 (필수)</li>
-                        <li>[서식 3호]개인정보 수집·이용·제공에 관한 동의서 1부(필수)</li>
+                        <li>실증단지 이용신청서 1부(필수)</li>
+                        <li>실증계획서 1부 (필수)</li>
+                        <li>개인정보 수집·이용·제공에 관한 동의서 1부(필수)</li>
                         <li>사업자등록증 사본1부(해당자에 한함)</li>
                         <li>법인등기부등본 1부(해당자에 한함)</li>
                         <li>법인인감증명서 1부(해당자에 한함)</li>
@@ -98,9 +93,9 @@
                 <div class="cnt__text">사업별로 제출 서류는 일부 다를 수 있습니다.</div>
                 <div class="application__document">
                     <ol>
-                        <li>[서식 1호]실증단지 이용신청서 1부(필수)</li>
-                        <li>[서식 2호]실증계획서 1부 (필수)</li>
-                        <li>[서식 3호]개인정보 수집·이용·제공에 관한 동의서 1부(필수)</li>
+                        <li>실증단지 이용신청서 1부(필수)</li>
+                        <li>실증계획서 1부 (필수)</li>
+                        <li>개인정보 수집·이용·제공에 관한 동의서 1부(필수)</li>
                         <li>사업자등록증 사본1부(해당자에 한함)</li>
                         <li>법인등기부등본 1부(해당자에 한함)</li>
                         <li>법인인감증명서 1부(해당자에 한함)</li>
@@ -115,9 +110,9 @@
     </div>
     <div class="footer_app">
         <div class="footer__btn">
-            <button href="btn_app_step1_save_new" class="btn dark btn-lg fl-left" disabled>신규작성</button>
+            <button id="btn_app_step1_save_new" class="btn submit btn-lg fl-left" disabled>신규작성</button>
             <%--<a href="#" class="btn info btn-lg ">이전</a>--%>
-            <button id="btn_app_step2" class="btn submit btn-lg " disabled >다음</button>
+            <button id="btn_app_step2" class="btn submit btn-lg " disabled>다음</button>
         </div>
     </div>
 </div>
@@ -128,7 +123,16 @@
 <script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>
 
 <script>
-    $("#btn_app_step2").click(function(){
+
+    let mode = 'mode_none';
+
+    $("#btn_app_step1_save_new").click(function(){
+
+/*        if (!confirm("")) {
+            // 취소(아니오) 버튼 클릭 시 이벤트
+        } else {
+            // 확인(예) 버튼 클릭 시 이벤트
+        }*/
 
         var param  = {
             "idx_user":${user.idx_user},
@@ -144,9 +148,12 @@
                 dataType:'json',//받는 데이터 타입
                 success: function(result){
                     //작업이 성공적으로 발생했을 경우
-                    if(result.result_code!="SUCCESS"){
+                    if(result.result_code=="SUCCESS"){
                         //alert("신청할 수 있습니다");
                         alert(result.result_str);
+                        $('#btn_app_step2').attr('disabled', false);
+                        $('#btn_app_step1_save_new').attr('disabled', true);
+
                         return;
                     }
                 },
@@ -156,15 +163,80 @@
                 }
             });
         }
-        location.href='app_step2?demobs='+$("#select-business option:selected").val();
+        //location.href='app_step2?demobs='+$("#select-business option:selected").val();
     });
 
+
+    $("#btn_app_step2").click(function(){
+
+        var param  = {
+            "idx_user":${user.idx_user},
+            "idx_demo_business":$("#select-business option:selected").val()
+        };
+        goNextStep(param);
+/*
+        if($("#select-business option:selected").val()!=0){
+            $.ajax({
+                type: 'post',
+                url :'app_step1_save_new', //데이터를 주고받을 파일 주소 입력
+                data: JSON.stringify(param),//보내는 데이터
+                contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+                dataType:'json',//받는 데이터 타입
+                success: function(result){
+                    //작업이 성공적으로 발생했을 경우
+                    if(result.result_code=="SUCCESS"){
+                        //alert("신청할 수 있습니다");
+                        alert(result.result_str);
+
+                        goNextStep(param);
+                        return;
+                    }
+                },
+                error:function(){
+                    //에러가 났을 경우 실행시킬 코드
+                    return;
+                }
+            });
+        }*/
+        //location.href='app_step2?demobs='+$("#select-business option:selected").val();
+    });
+
+    function goNextStep(param){
+        let f = document.createElement('form');
+
+        let input_idx_user;
+        input_idx_user = document.createElement('input');
+        input_idx_user.setAttribute('type', 'hidden');
+        input_idx_user.setAttribute('name', 'idx_user');
+        input_idx_user.setAttribute('value', param.idx_user);
+
+        f.appendChild(input_idx_user);
+
+        let input_idx_demo_business;
+        input_idx_demo_business = document.createElement('input');
+        input_idx_demo_business.setAttribute('type', 'hidden');
+        input_idx_demo_business.setAttribute('name', 'idx_demo_business');
+        input_idx_demo_business.setAttribute('value', param.idx_demo_business);
+
+        f.appendChild(input_idx_demo_business);
+
+
+        f.setAttribute('method', 'post');
+        f.setAttribute('action', 'app_step2');
+        document.body.appendChild(f);
+        f.submit();
+    }
+
     $("#select-business").change(function (){
+
+        $('#btn_app_step2').attr('disabled', true);
+        $('#btn_app_step1_save_new').attr('disabled', true);
+
         console.log($(this).val());
 
         var param  = {
             "idx_user":${user.idx_user},
-            "idx_user_demo_bs":$(this).val()
+            "idx_demo_business":$(this).val()
         };
 
         if($(this).val()!=0){
@@ -175,26 +247,42 @@
                 contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
                 dataType:'json',//받는 데이터 타입
                 success: function(result){
-                    //작업이 성공적으로 발생했을 경우
+                    //정상적 응답
                     if(result.result_code=="STATUS_001"){
+                        alert(result.result_str);
+                        $('#btn_app_step1_save_new').attr('disabled', false);
+                    }
+                    else if(result.result_code=="STATUS_002"){
                         //alert("신청할 수 있습니다");
+                        alert("이미 작성중인 지원사업이 있습니다.");
+                        $('#btn_app_step2').attr('disabled', false);
+                        $('#btn_app_step1_save_new').attr('disabled', true);
+                    }
+                    else if(result.result_code=="STATUS_003"){
+                        //alert("신청할 수 있습니다");
+                        alert("보완 요청 사항이 있습니다. 자세한 내용은 보완요청서를 참조하세요");
                         $('#btn_app_step2').attr('disabled', false);
                     }
                     else {
                         alert(result.result_str);
                     }
+
                     //STATUS_001 : 신청한 사업 없음 -> 신규신청 가능
                     //STATUS_002 : 신청을 위해 저장한 사업 있고 신청하지는 않음  -> 변경 가능/신규 생성 가능(기존것 삭제)
                     //STATUS_003 : 신청을 완료한 상태이지만 수정 변경을 요청한 경우 -> 변경 가능/신규 생성 불가
                     //STATUS_004 : 이미 신청완료 되었고 내용 수정 완료됨, 협약 체결 단계-> 변경, 삭제 불가/신규 불가
                 },
                 error:function(){
-                    //에러가 났을 경우 실행시킬 코드
+                    //에러가 났을 경우
                 }
             });
         }
-        else
+        else{
             $('#btn_app_step2').attr('disabled', true);
+            $('#btn_app_step1_save_new').attr('disabled', true);
+
+        }
+
     });
 
 </script>

@@ -19,22 +19,28 @@ public class UserDemoBsVO {
     String corp_birth;//		varchar2	20					회사 설립일
     String corp_num;//		varchar2	20					사업자등록번호
     String corp_reg_num;//		varchar2	20					법인등록번호
-    String corp_addr;//		varchar2	200					본사 소재지
-    String corp_rnd_addr;//		varchar2	200					본사 소재지
+    String corp_addr;//		varchar2	1000					본사 소재지
+    String corp_addr2;//		varchar2	1000					본사 소재지 상세
+    String corp_rnd_addr;//		varchar2	1000					본사 연구소 소재지
+    String corp_rnd_addr2;//		varchar2	1000					본사 연구소 소재지 상세
     int corp_sales_amount;//		number	10					매출액
     int corp_er;//	number	10					자기자본비율
     int employees_count;//	number	10					직원수
     String bs_type1;//	varchar2	20					업태 종목
     String bs_type2;//	varchar2	20					업태 종목
     String main_product;//	varchar2	200					주생산품목
-    int req_facility;
+    int req_facility;//     이용 실증시설
+    String	req_etc;//	VARCHAR2	400					이용 실증시설 기타
     String demobs_tech_plan;//	varchar2	100					개발예정품목
     String ceo_name;//	varchar2	100					대표자 이름
     String ceo_mnumber;//	varchar2	20					대표자 모바일번호
     String ceo_pnumber;//	varchar2	20					대표자 사무실 번호
     String ceo_email;//	varchar2	400					대표자 이메일
     String ceo_address;//	varchar2	1000					대표자 주소
+    String ceo_address2;//
     String man_name;//	varchar2	100					담당자 이름
+    String man_dpart;// varchar2(100),부서
+    String man_role;// varchar2(200),직위
     String man_mnumber;//	varchar2	20					담당자 모바일 번호
     String man_pnumber;//	varchar2	20					담당자 사무실 번호
     String man_email;//	varchar2	400					담당자 이메일

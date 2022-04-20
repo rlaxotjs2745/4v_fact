@@ -132,6 +132,7 @@ public class WebAPIController {
         resultVO.setResult_code("STATUS_001");
 
         if(userDemoBsCheckVo.getIdx_user() !=0){
+
             UserDemoBsVO userDemoBsVo = userDemoBsService.getUserDemoBs(userDemoBsCheckVo);
 
             if(userDemoBsVo==null){
@@ -160,29 +161,41 @@ public class WebAPIController {
     @RequestMapping(value = "/app_step1_save_new",method = RequestMethod.POST)
     public @ResponseBody
     ResultVO app_step1_save(HttpSession session,
-                                @RequestBody UserDemoBsVO userDemoBsVo){
+                                @RequestBody UserDemoBsCheckVO userDemoBsCheckVo){
 
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("SUCCESS");
         resultVO.setResult_str("저장했습니다");
 
         //1.신청자 파악
-        UserVO userVo = userService.getUserInfo(userDemoBsVo.getIdx_user());
+        UserVO userVo = userService.getUserInfo(userDemoBsCheckVo.getIdx_user());
         if(userVo ==null){
             resultVO.setResult_str("신청자를 찾을 수 없습니다");
             resultVO.setResult_code("ERROR_1001");
             return resultVO;
         }
         //2.신청 Demo BS 파악
-        DemoBusinessVO demoBusinessVo = demoBsService.getDemoBsByIdx(userDemoBsVo.getIdx_demo_business());
+        DemoBusinessVO demoBusinessVo = demoBsService.getDemoBsByIdx(userDemoBsCheckVo.getIdx_demo_business());
 
         if(demoBusinessVo == null){
-            resultVO.setResult_str("신청자를 찾을 수 없습니다");
+            resultVO.setResult_str("지원사업을 찾을 수 없습니다");
             resultVO.setResult_code("ERROR_1001");
             return resultVO;
         }
 
-        //3.신청단계 파악
+        //3.기 신청이 있는지 체크
+        UserDemoBsVO userDemoBsVo = userDemoBsService.getUserDemoBs(userDemoBsCheckVo);
+        //DemoBusinessVO demoBusinessVo = demoBsService.getDemoBsByIdx(userDemoBsVo.getIdx_demo_business());
+
+        if(userDemoBsVo != null){
+            resultVO.setResult_str("이미 신청한 정보가 있습니다.");
+            resultVO.setResult_code("ERROR_1001");
+            return resultVO;
+        }
+
+        userDemoBsVo = new UserDemoBsVO();
+        userDemoBsVo.setIdx_user(userDemoBsCheckVo.getIdx_user());
+        userDemoBsVo.setIdx_demo_business(userDemoBsCheckVo.getIdx_demo_business());
         userDemoBsVo.setApp_step(0);
         userDemoBsVo.setUser_demobs_status(0);
         userDemoBsService.saveUserDemoBsNew(userDemoBsVo);
