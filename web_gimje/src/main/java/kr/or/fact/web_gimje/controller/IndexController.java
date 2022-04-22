@@ -7,10 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -149,9 +146,9 @@ public class IndexController {
         return "app_step1";
     }
 
-    @RequestMapping("/app_step2")
+    @PostMapping(value = "/app_step2")
     public String app_step2(HttpSession session
-            ,@RequestBody UserDemoBsVO userDemoBsVo
+            ,UserDemoBsCheckVO userDemoBsCheckVO
             ,Model model){
         if(session==null
                 || session.getAttribute("loginCheck")==null
@@ -162,15 +159,17 @@ public class IndexController {
             return "index";
         }
 
-        UserVO findUser = userService.findUserById(String.valueOf(session.getAttribute("userid")));
-        if(findUser==null){
+        UserVO findUser = userService.getUserInfo(userDemoBsCheckVO.getIdx_user());
+
+        if(findUser==null
+        || !findUser.getUser_id().equals(String.valueOf(session.getAttribute("userid")))){
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
             return "index";
         }
         model.addAttribute("user",findUser);
 
-        DemoBusinessVO demoBusinessVo = demoBsService.getDemoBsByIdx(userDemoBsVo.getIdx_demo_business());
+        DemoBusinessVO demoBusinessVo = demoBsService.getDemoBsByIdx(userDemoBsCheckVO.getIdx_demo_business());
 
         if(demoBusinessVo==null){//해당 사업 없음, 에러페이지로 보내야 한다...
 
@@ -185,15 +184,16 @@ public class IndexController {
         //userDemoBsCheckVo.setIdx_user(findUser.getIdx_user());
         //userDemoBsCheckVo.setIdx_demo_business(demoBusinessVo.getIdx_demo_business());
 
-        UserDemoBsVO new_userDemoBsVo = userDemoBsService.getUserDemoBs(userDemoBsVo);
-        if(new_userDemoBsVo==null){//이전에 저장한게 없다, 에러페이지로 보내야 한다...
-
+        UserDemoBsVO userDemoBsVo = userDemoBsService.getUserDemoBs(userDemoBsCheckVO);
+        if(userDemoBsVo==null){//이전에 저장한게 없다, 에러페이지로 보내야 한다...
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
             return "index";
         }
-        model.addAttribute("userDemoBs",new_userDemoBsVo);
+        model.addAttribute("userDemoBs",userDemoBsVo);
         getHomepageInfo(model);
+
+
         return "app_step2";
     }
 
