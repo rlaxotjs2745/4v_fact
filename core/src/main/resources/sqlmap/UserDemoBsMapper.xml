@@ -29,10 +29,6 @@
         WHERE IDX_DEMO_BUSINESS = #{idx_demo_business} AND IDX_USER=#{idx_user}
     </select>
 
-
-
-
-
     <insert id="saveUserDemoBs" parameterType="kr.or.fact.core.model.DTO.UserDemoBsVO">
         INSERT INTO TB_USER_DEMO_BS (
             IDX_USER_DEMO_BS,
@@ -153,5 +149,61 @@
                      #{app_step}
                  )
     </insert>
+
+
+    <update id="updateUserDemoBs" parameterType="kr.or.fact.core.model.DTO.UserDemoBsVO">
+        UPDATE TB_USER_DEMO_BS SET
+            IDX_USER_DEMO_BS = #{idx_user_demo_bs},
+            IDX_DEMO_BUSINESS = #{idx_user_demo_bs},
+            USER_DEMOBS_STATUS = #{user_demobs_status},
+            IDX_USER = #{idx_user},
+            USER_DEMO_BS_APP_CODE = #{user_demo_bs_app_code},
+            APP_STEP = #{app_step},
+            USER_DEMO_BS_TYPE = #{user_demo_bs_type},
+            IDX_CORP_INFO = #{idx_corp_info},
+            CORP_NAME = #{corp_name},
+            CORP_BIRTH = #{corp_birth},
+            CORP_NUM = #{corp_num},
+            CORP_REG_NUM = #{corp_reg_num},
+            CORP_ADDR = #{corp_addr},
+            CORP_RND_ADDR = #{corp_rnd_addr},
+            CORP_SALES_AMOUNT = #{corp_sales_amount},
+            CORP_ER = #{corp_er},
+            EMPLOYEES_COUNT = #{employees_count},
+            BS_TYPE1 = #{bs_type1},
+            BS_TYPE2 = #{bs_type2},
+            MAIN_PRODUCT = #{main_product},
+            DEMOBS_TECH_PLAN = #{demobs_tech_plan},
+            CEO_NAME = #{ceo_name},
+            CEO_MNUMBER = #{ceo_mnumber},
+            CEO_PNUMBER = #{ceo_pnumber},
+            CEO_EMAIL = #{ceo_email},
+            CEO_ADDRESS = #{ceo_address},
+            MAN_NAME = #{man_name},
+            MAN_MNUMBER = #{man_mnumber},
+            MAN_PNUMBER = #{man_pnumber},
+            MAN_EMAIL = #{man_email},
+            USER_DEMO_TYPE = #{user_demo_type},
+            USER_DEMO_FACILITY = #{user_demo_facility},
+            USER_DEMO_WAY = #{user_demo_way},
+            USER_DEMO_REPEAT = #{user_demo_repeat},
+            USER_DEMO_GOAL = #{user_demo_goal},
+            USER_DEMO_OPTION = #{user_demo_option},
+            USER_DEMO_CROPS = #{user_demo_crops},
+            CULTURE_SOIL = #{culture_soil},
+            DEMO_TYPE = #{demo_type},
+            DEMO_START_DATE = #{demo_start_date},
+            DEMO_END_DATE = #{demo_end_date},
+            RESIDENT_TYPE = #{resident_type},
+            RESIDENT_ETC = #{resident_etc},
+            STAFF_NUM = #{staff_num},
+            IS_CHANGE = #{is_change},
+            IS_CONFIRM = #{is_confirm},
+            IS_SHARE = #{is_share},
+            REG_DATE = #{reg_date},
+            LAST_UPD_DATE = #{last_upd_date},
+          WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs};
+
+    </update>
 
 </mapper>

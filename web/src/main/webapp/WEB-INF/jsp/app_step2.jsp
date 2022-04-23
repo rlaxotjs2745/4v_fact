@@ -473,9 +473,9 @@
     </div>
     <div class="footer_app">
         <div class="footer__btn">
-            <button id="btn_save" class="btn dark btn-lg fl-left">임시저장</button>
-            <button id="btn_app_step1" class="btn info btn-lg ">이전</button>
-            <button id="btn_app_step3" class="btn submit btn-lg ">다음</button>
+            <button id="btn_app_step1" class="btn info btn-lg fl-left">이전</button>
+            <button id="btn_save" class="btn dark btn-lg ">임시저장</button>
+            <button id="btn_app_step3" class="btn submit btn-lg disabled">다음</button>
         </div>
     </div>
 </div>
@@ -569,20 +569,44 @@
     });
 
     $("#btn_app_step1").click(function(){
-        location.href='app_step1';
+        if (!confirm("변경한 내용 저장여부를 확인해 주세요. 뒤로 이동하시겠습니까.")) {
+            // 취소(아니오) 버튼 클릭 시 이벤트
+
+        } else {
+            location.href='app_step1';
+            // 확인(예) 버튼 클릭 시 이벤트
+        }
     });
 
     $("#btn_app_step3").click(function(){
+
+
+
         location.href='app_step3';
+    });
+
+    $("#btn_save").click(function(){
+
+        if (!confirm("저장하시겠습니까.")) {
+            // 취소(아니오) 버튼 클릭 시 이벤트
+
+        } else {
+            // 확인(예) 버튼 클릭 시 이벤트
+            save_temp();
+
+
+        }
+
+
     });
 
     $("#select-business").change(function (){
         console.log($(this).val());
+    });
 
 
 
-
-
+/*
         if($(this).val()!=0){
             $.ajax({
                 type: 'post',
@@ -609,24 +633,26 @@
                 }
             });
         }
-    });
+    });*/
 
     function save_temp(){
         let param = {
             "idx_user_demo_bs":${userDemoBs.idx_user_demo_bs},//		number	32		0		◯	지원사업
+            "idx_demo_business":${userDemoBs.idx_demo_business},//		number	32		0		◯	지원사업
+            "idx_user":${userDemoBs.idx_user},
 
-            "app_step":<c:if test="${userDemoBs.app_step eq null}">0</c:if> <c:if test="${userDemoBs.app_step ne null}">${userDemoBs.app_step}</c:if>,//		number	4		1			신청서 작성 단계	"신청 단계, 최종 저장 단계             1:이용 신청서 작성, 2: 실증계획서 작성, 3:개인수집 동의서 작성, 4: 기타서류 등록, 5: 신청서 확인, 6: 신청함"
+           // "app_step":<c:if test="${userDemoBs.app_step eq null}">0</c:if> <c:if test="${userDemoBs.app_step ne null}">${userDemoBs.app_step}</c:if>,//		number	4		1			신청서 작성 단계	"신청 단계, 최종 저장 단계             1:이용 신청서 작성, 2: 실증계획서 작성, 3:개인수집 동의서 작성, 4: 기타서류 등록, 5: 신청서 확인, 6: 신청함"
 
             "user_demo_bs_type":$('input[name="user_type"]:checked').val(), //		number	4		1			사업 진행 주체 타입	0:개인, 1:일반기업, 2:미등록기업(설립전), 3: 농업진흥기관, 4:선도기업, 5:외국연구기관, 6:특정연구기관, 7:정부출연연구기관, 8:스마트팜 관련 기업부설연구소 보유기업, 9: 대학교, 99:기타 단체
 
 
 
-            //long idx_corp_info;//		number	32		0		◯	지원회사
+            //#//long idx_corp_info;//		number	32		0		◯	지원회사
             corp_name:$('#corp_name').val(),//		varchar2	100					회사이름
             corp_birth: $('#corp_birth').val(),//		varchar2	20					회사 설립일
             corp_num: $('#corp_num').val(),//		varchar2	20					사업자등록번호
             corp_reg_num: $('#corp_reg_num').val(),//		varchar2	20					법인등록번호
-            corp_addr: $('#corp_addr').val(),//		varchar2	200					본사 소재지
+            //*//corp_addr: $('#corp_addr').val(),//		varchar2	200					본사 소재지
             corp_addr2: $('#corp_addr2').val(),//		varchar2	200					본사 소재지
             corp_rnd_addr: $('#corp_rnd_addr').val(),//		varchar2	200					본사 소재지
             corp_rnd_addr2: $('#corp_rnd_addr2').val(),//		varchar2	200					본사 소재지
@@ -668,7 +694,7 @@
             //demo_end_date: $('#demo_end_date').val(),//	date						입주 종료 날짜
             resident_type: $('#resident_type1').val()|$('#resident_type2').val()|$('#resident_type3').val()|$('#resident_type4').val(),//	number	4		0			상주 타입	0:해당없음, 1:r&d연구실, 2:스타트업사무실, 512:기타
             resident_etc: $('#resident_etc').val(),//	varchar2	100					이용 실증시설 기타	이용 신청시설 기타 내용
-            staff_num: $('#staff_num').val()*1,//	number	10					상주인원
+            staff_num: $('#staff_num').val()*1//	number	10					상주인원
             //is_change: $('#is_change').val()*1,//	number	4		0			실증계획 변경	0:최초등록 동일, 1:심사후 협약전 변경, 2:협약 후 진행 시 변경,
             //is_confirm: $('#is_confirm').val()*1,//	number	4		0			실증계획 승인 여부	0:승인전, 1:승인
             //is_share: $('#is_share').val()*1,//	number	4		0			실증계획 승인 통보 여부	0:통보전, 1:통보
@@ -676,33 +702,31 @@
             //last_upd_date: $('#last_upd_date').val(),//	date						최종 수정 일시
         };
 
-
-        if($(this).val()!=0){
-            $.ajax({
-                type: 'post',
-                url :'user_demo_bs_check', //데이터를 주고받을 파일 주소 입력
-                data: JSON.stringify(param),//보내는 데이터
-                contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
-                dataType:'json',//받는 데이터 타입
-                success: function(result){
-                    //작업이 성공적으로 발생했을 경우
-                    if(result.result_code=="STATUS_001"){
-                        //alert("신청할 수 있습니다");
-                        $('#btn_app_step2').attr('disabled', false);
-                    }
-                    else {
-                        alert(result.result_str);
-                    }
-                    //STATUS_001 : 신청한 사업 없음 -> 신규신청 가능
-                    //STATUS_002 : 신청을 위해 저장한 사업 있고 신청하지는 않음  -> 변경 가능/신규 생성 가능(기존것 삭제)
-                    //STATUS_003 : 신청을 완료한 상태이지만 수정 변경을 요청한 경우 -> 변경 가능/신규 생성 불가
-                    //STATUS_004 : 이미 신청완료 되었고 내용 수정 완료됨, 협약 체결 단계-> 변경, 삭제 불가/신규 불가
-                },
-                error:function(){
-                    //에러가 났을 경우 실행시킬 코드
+        $.ajax({
+            type: 'post',
+            url :'app_step2_save_temp', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(param),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'json',//받는 데이터 타입
+            success: function(result){
+                //작업이 성공적으로 발생했을 경우
+                if(result.result_code=="STATUS_001"){
+                    //alert("신청할 수 있습니다");
+                    alert(result.result_str);
+                    $('#btn_app_step2').attr('disabled', false);
                 }
-            });
-        }
+                else {
+                    alert(result.result_str);
+                }
+                //STATUS_001 : 신청한 사업 없음 -> 신규신청 가능
+                //STATUS_002 : 신청을 위해 저장한 사업 있고 신청하지는 않음  -> 변경 가능/신규 생성 가능(기존것 삭제)
+                //STATUS_003 : 신청을 완료한 상태이지만 수정 변경을 요청한 경우 -> 변경 가능/신규 생성 불가
+                //STATUS_004 : 이미 신청완료 되었고 내용 수정 완료됨, 협약 체결 단계-> 변경, 삭제 불가/신규 불가
+            },
+            error:function(){
+                //에러가 났을 경우 실행시킬 코드
+            }
+        });
     }
 
 </script>

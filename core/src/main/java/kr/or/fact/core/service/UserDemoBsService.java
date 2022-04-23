@@ -15,6 +15,8 @@ public interface UserDemoBsService {
 
     public long saveUserDemoBs(UserDemoBsVO userDemoBsVO);
     public long saveUserDemoBsNew(UserDemoBsVO userDemoBsVO);
+
+    public void updateUserDemoBs(UserDemoBsVO userDemoBsVO);
 }
 
 

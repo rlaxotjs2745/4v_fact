@@ -24,4 +24,8 @@ public interface UserDemoBsMapper {
 
     public long saveUserDemoBsNew(UserDemoBsVO userDemoBsVO);
 
+    public void updateUserDemoBs(UserDemoBsVO userDemoBsVO);
+
+
+
 }

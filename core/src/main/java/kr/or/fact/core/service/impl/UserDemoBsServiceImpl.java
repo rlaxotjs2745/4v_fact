@@ -21,24 +21,34 @@ public class UserDemoBsServiceImpl implements UserDemoBsService {
     public List<ApplicantDemoBsJoinVO> getUserDemoBsFromJoin(long idx_user){
         return userDemoBsMapper.getUserDemoBsFromJoin(idx_user);
     }
+
     @Override
     public List<UserDemoBsVO> getUserDemoBsListByUserIdx(long idx_user){
         return userDemoBsMapper.getUserDemoBsListByUserIdx(idx_user);
     }
+
     @Override
     public List<DemoBsMsgVO> getDemoBsMsgByUserDemoBSIdx(long idx_user_demo_bs){
         return userDemoBsMapper.getDemoBsMsgByUserDemoBSIdx(idx_user_demo_bs);
     }
+
     @Override
     public UserDemoBsVO getUserDemoBs(UserDemoBsCheckVO userDemoBsCheckVo){
         return userDemoBsMapper.getUserDemoBs(userDemoBsCheckVo);
     }
+
     @Override
     public long saveUserDemoBs(UserDemoBsVO userDemoBsVO){
         return userDemoBsMapper.saveUserDemoBs(userDemoBsVO);
     }
+
     @Override
     public long saveUserDemoBsNew(UserDemoBsVO userDemoBsVO){
         return userDemoBsMapper.saveUserDemoBsNew(userDemoBsVO);
+    }
+
+    @Override
+    public void updateUserDemoBs(UserDemoBsVO userDemoBsVO){
+        userDemoBsMapper.updateUserDemoBs(userDemoBsVO);
     }
 }

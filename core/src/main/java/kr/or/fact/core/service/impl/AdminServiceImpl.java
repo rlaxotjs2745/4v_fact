@@ -1,12 +1,21 @@
 package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.AdminMapper;
+import kr.or.fact.core.model.DTO.AdminHistoryVO;
 import kr.or.fact.core.model.DTO.AdminVO;
 import kr.or.fact.core.model.DTO.ResultVO;
 import kr.or.fact.core.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import kr.or.fact.core.util.CONSTANT;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service("adminService")
 public class AdminServiceImpl implements AdminService {
@@ -108,5 +117,25 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public int updateAdminPassword(AdminVO adminVo){
         return adminMapper.updateAdminPassword(adminVo);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        AdminVO adminVO = adminMapper.getAdminInfoById(username);
+        if(adminVO == null){
+            adminVO = new AdminVO();
+            adminVO.setAdmin_type(CONSTANT.ROLE_GUEST);
+        }
+
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_MEMBER"/*CONSTANT.getRoleString(adminVO.getAdmin_type())*/));
+
+        return new User(adminVO.getAdmin_id(), adminVO.getAdmin_pw(), authorities);
+    }
+
+    @Override
+    public Integer saveAdminWorkHistory(AdminHistoryVO adminHistoryVo) {
+
+        return adminMapper.saveAdminWorkHistory(adminHistoryVo);
     }
 }
