@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -55,7 +58,7 @@ public class WebAPIController {
                                       @RequestParam(value="corp_name") String corp_name){
         if(corp_name !=null){
             List<SimpleCorpInfoVO> simpleCorpInfoVOList = corpService.getSimpleCorpInfoList( corp_name);
-            if(simpleCorpInfoVOList==null || simpleCorpInfoVOList.isEmpty()){
+            if(simpleCorpInfoVOList==null || simpleCorpInfoVOList==null){
                 model.addAttribute("count",0);
             }
             else {
@@ -196,9 +199,69 @@ public class WebAPIController {
         userDemoBsVo = new UserDemoBsVO();
         userDemoBsVo.setIdx_user(userDemoBsCheckVo.getIdx_user());
         userDemoBsVo.setIdx_demo_business(userDemoBsCheckVo.getIdx_demo_business());
-        userDemoBsVo.setApp_step(0);
         userDemoBsVo.setUser_demobs_status(0);
-        userDemoBsService.saveUserDemoBsNew(userDemoBsVo);
+
+        userDemoBsVo.setUser_demo_bs_app_code("");//		varchar2	20	n				신청번호	"자동 생성     app+사업번호(000000)+신청번호(000000)     사업번호:idx_demo_bs     신청번호:seq_user_demo_bs"
+        userDemoBsVo.setApp_step(0);//		number	4		1			신청서 작성 단계	"신청 단계, 최종 저장 단계             1:이용 신청서 작성, 2: 실증계획서 작성, 3:개인수집 동의서 작성, 4: 기타서류 등록, 5: 신청서 확인, 6: 신청함"
+        userDemoBsVo.setUser_demo_bs_type(0);//		number	4		1			사업 진행 주체 타입	0:개인, 1:일반기업, 2:미등록기업(설립전), 3: 농업진흥기관, 4:선도기업, 5:외국연구기관, 6:특정연구기관, 7:정부출연연구기관, 8:스마트팜 관련 기업부설연구소 보유기업, 9: 대학교, 99:기타 단체
+        userDemoBsVo.setIdx_corp_info(0);//		number	32		0		◯	지원회사
+        userDemoBsVo.setCorp_name("");//		varchar2	100					회사이름
+        userDemoBsVo.setCorp_birth("");//		varchar2	20					회사 설립일
+        userDemoBsVo.setCorp_num("");//		varchar2	20					사업자등록번호
+        userDemoBsVo.setCorp_reg_num("");//		varchar2	20					법인등록번호
+        userDemoBsVo.setCorp_addr("");//		varchar2	1000					본사 소재지
+        userDemoBsVo.setCorp_addr2("");//		varchar2	1000					본사 소재지 상세
+        userDemoBsVo.setCorp_rnd_addr("");//		varchar2	1000					본사 연구소 소재지
+        userDemoBsVo.setCorp_rnd_addr2("");//		varchar2	1000					본사 연구소 소재지 상세
+        userDemoBsVo.setCorp_sales_amount(0);//		number	10					매출액
+        userDemoBsVo.setCorp_er(0);//	number	10					자기자본비율
+        userDemoBsVo.setEmployees_count(0);//	number	10					직원수
+        userDemoBsVo.setBs_type1("");//	varchar2	20					업태 종목
+        userDemoBsVo.setBs_type2("");//	varchar2	20					업태 종목
+        userDemoBsVo.setMain_product("");//	varchar2	200					주생산품목
+        userDemoBsVo.setReq_facility(0);//     이용 실증시설
+        userDemoBsVo.setReq_etc("");//	VARCHAR2	400					이용 실증시설 기타
+        userDemoBsVo.setDemobs_tech_plan("");//	varchar2	100					개발예정품목
+        userDemoBsVo.setCeo_name("");//	varchar2	100					대표자 이름
+        userDemoBsVo.setCeo_mnumber("");//	varchar2	20					대표자 모바일번호
+        userDemoBsVo.setCeo_pnumber("");//	varchar2	20					대표자 사무실 번호
+        userDemoBsVo.setCeo_email("");//	varchar2	400					대표자 이메일
+        userDemoBsVo.setCeo_address("");//	varchar2	1000					대표자 주소
+        userDemoBsVo.setCeo_address2("");//
+        userDemoBsVo.setMan_name("");//	varchar2	100					담당자 이름
+        userDemoBsVo.setMan_dpart("");// varchar2(100),부서
+        userDemoBsVo.setMan_role("");// varchar2(200),직위
+        userDemoBsVo.setMan_mnumber("");//	varchar2	20					담당자 모바일 번호
+        userDemoBsVo.setMan_pnumber("");//	varchar2	20					담당자 사무실 번호
+        userDemoBsVo.setMan_email("");//	varchar2	400					담당자 이메일
+        userDemoBsVo.setUser_demo_type(0);//	number	4		0			실증 주체	0:자율, 1:위탁
+        userDemoBsVo.setUser_demo_facility(0);//	number	4		1			실증 시설	1:단동, 2:연동, 4:육묘장, 8:노지, 16:단동유리, 32:연동유리, 64:식물공장
+        userDemoBsVo.setUser_demo_way(0);//	number	4		0			실증 방법	0: 단순, 1:비교
+        userDemoBsVo.setUser_demo_repeat(0);//	number	4		0			실증횟수	0:반복 없음, 1:반복실증
+        userDemoBsVo.setUser_demo_goal(0);//	number	4		0			실증 목표	0::성능확인, 1:자체평가
+        userDemoBsVo.setUser_demo_option(0);//	number	4		0			실증 조건	0: 일반환경, 1:특수환경
+        userDemoBsVo.setUser_demo_crops("");//	varchar2	100					실증작물
+        userDemoBsVo.setCulture_soil(0);//	number	4		0			생육토양	0: 토경재배, 1:수경재배, 2:고형배지재배
+        userDemoBsVo.setDemo_type(0);//	number	4		0			실증 대상	0:해당없음, 1:시설자재, 2:ict기자재, 4:작물보호제/비료, 8:스마트팜sw, 16:생육모델, 32:로봇, 512:기타
+
+        //DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date nowD = new Date();
+
+        userDemoBsVo.setDemo_start_date(nowD);//	date						입주 시작 날짜
+        userDemoBsVo.setDemo_end_date(nowD);//	date						입주 종료 날짜
+
+        userDemoBsVo.setResident_type(0);//	number	4		0			상주 타입	0:해당없음, 1:r&d연구실, 2:스타트업사무실, 512:기타
+        userDemoBsVo.setResident_etc("");//	varchar2	100					이용 실증시설 기타	이용 신청시설 기타 내용
+        userDemoBsVo.setStaff_num(0);//	number	10					상주인원
+        userDemoBsVo.setIs_change(0);//	number	4		0			실증계획 변경	0:최초등록 동일, 1:심사후 협약전 변경, 2:협약 후 진행 시 변경,
+        userDemoBsVo.setIs_confirm(0);//	number	4		0			실증계획 승인 여부	0:승인전, 1:승인
+        userDemoBsVo.setIs_share(0);//	number	4		0			실증계획 승인 통보 여부	0:통보전, 1:통보
+
+        userDemoBsVo.setIs_change(0);
+        userDemoBsVo.setIs_confirm(0);
+        userDemoBsVo.setUser_demobs_status(0);
+
+        userDemoBsService.saveUserDemoBs(userDemoBsVo);
         //4.예외처리
 
         return resultVO;
@@ -244,18 +307,80 @@ public class WebAPIController {
 
         // 기 신청이 있으면 저장하면 안됨
         if(findUserDemoBsVo.getApp_step()==5){
-            resultVO.setResult_str("신청이 완료되었습니다");
+            resultVO.setResult_str("신청이 완료되어 저장할 수 없습니다");
             resultVO.setResult_code("ERROR_1001");
             return resultVO;
         }
         // 저장단계 변경
-/*        if(userDemoBsVo.getApp_step()==0){
-            userDemoBsVo.setApp_step(1);
-        }*/
+        findUserDemoBsVo.setUser_demobs_status(0);
 
-        userDemoBsVO.setIdx_user_demo_bs(findUserDemoBsVo.getIdx_user_demo_bs());
+        findUserDemoBsVo.setUser_demo_bs_type(userDemoBsVO.getUser_demo_bs_type());//		number	4		1			사업 진행 주체 타입	0:개인, 1:일반기업, 2:미등록기업(설립전), 3: 농업진흥기관, 4:선도기업, 5:외국연구기관, 6:특정연구기관, 7:정부출연연구기관, 8:스마트팜 관련 기업부설연구소 보유기업, 9: 대학교, 99:기타 단체
+        findUserDemoBsVo.setIdx_corp_info(userDemoBsVO.getIdx_corp_info());//		number	32		0		◯	지원회사
+        findUserDemoBsVo.setCorp_name(userDemoBsVO.getCorp_name()==null?"":userDemoBsVO.getCorp_name());//		varchar2	100					회사이름
+        findUserDemoBsVo.setCorp_birth(userDemoBsVO.getCorp_birth()==null?"":userDemoBsVO.getCorp_birth());//		varchar2	20					회사 설립일
+        findUserDemoBsVo.setCorp_num(userDemoBsVO.getCorp_num()==null?"":userDemoBsVO.getCorp_num());//		varchar2	20					사업자등록번호
+        findUserDemoBsVo.setCorp_reg_num(userDemoBsVO.getCorp_reg_num()==null?"":userDemoBsVO.getCorp_reg_num());//		varchar2	20					법인등록번호
+        findUserDemoBsVo.setCorp_addr(userDemoBsVO.getCorp_addr()==null?"":userDemoBsVO.getCorp_addr());//		varchar2	1000					본사 소재지
+        findUserDemoBsVo.setCorp_addr2(userDemoBsVO.getCorp_addr2()==null?"":userDemoBsVO.getCorp_addr2());//		varchar2	1000					본사 소재지 상세
+        findUserDemoBsVo.setCorp_rnd_addr(userDemoBsVO.getCorp_rnd_addr()==null?"":userDemoBsVO.getCorp_rnd_addr());//		varchar2	1000					본사 연구소 소재지
+        findUserDemoBsVo.setCorp_rnd_addr2(userDemoBsVO.getCorp_rnd_addr2()==null?"":userDemoBsVO.getCorp_rnd_addr2());//		varchar2	1000					본사 연구소 소재지 상세
+        findUserDemoBsVo.setCapital_amount(userDemoBsVO.getCapital_amount());//		number	20					자본금
+        findUserDemoBsVo.setCorp_sales_amount(userDemoBsVO.getCorp_sales_amount());//		number	10					매출액
+        findUserDemoBsVo.setCorp_er(userDemoBsVO.getCorp_er());//	number	10					자기자본비율
+        findUserDemoBsVo.setEmployees_count(userDemoBsVO.getEmployees_count());//	number	10					직원수
+        findUserDemoBsVo.setBs_type1(userDemoBsVO.getBs_type1()==null?"":userDemoBsVO.getBs_type1());//	varchar2	20					업태 종목
+        findUserDemoBsVo.setBs_type2(userDemoBsVO.getBs_type2()==null?"":userDemoBsVO.getBs_type2());//	varchar2	20					업태 종목
+        findUserDemoBsVo.setMain_product(userDemoBsVO.getMain_product()==null?"":userDemoBsVO.getMain_product());//	varchar2	200					주생산품목
 
-        userDemoBsService.saveUserDemoBs(userDemoBsVO);
+        findUserDemoBsVo.setReq_facility(userDemoBsVO.getReq_facility());//     이용 실증시설
+        findUserDemoBsVo.setReq_etc(userDemoBsVO.getReq_etc()==null?"":userDemoBsVO.getReq_etc());//	VARCHAR2	400					이용 실증시설 기타
+        findUserDemoBsVo.setDemobs_tech_plan(userDemoBsVO.getDemobs_tech_plan()==null?"":userDemoBsVO.getDemobs_tech_plan());//	varchar2	100					개발예정품목
+        findUserDemoBsVo.setCeo_name(userDemoBsVO.getCeo_name()==null?"":userDemoBsVO.getCeo_name());//	varchar2	100					대표자 이름
+        findUserDemoBsVo.setCeo_mnumber(userDemoBsVO.getCeo_mnumber()==null?"":userDemoBsVO.getCeo_mnumber());//	varchar2	20					대표자 모바일번호
+        findUserDemoBsVo.setCeo_pnumber(userDemoBsVO.getCeo_pnumber()==null?"":userDemoBsVO.getCeo_pnumber());//	varchar2	20					대표자 사무실 번호
+        findUserDemoBsVo.setCeo_email(userDemoBsVO.getCeo_email()==null?"":userDemoBsVO.getCeo_email());//	varchar2	400					대표자 이메일
+        findUserDemoBsVo.setCeo_address(userDemoBsVO.getCeo_address()==null?"":userDemoBsVO.getCeo_address());//	varchar2	1000					대표자 주소
+        findUserDemoBsVo.setCeo_address2(userDemoBsVO.getCeo_address2()==null?"":userDemoBsVO.getCeo_address2());//
+        findUserDemoBsVo.setMan_name(userDemoBsVO.getMan_name()==null?"":userDemoBsVO.getMan_name());//	varchar2	100					담당자 이름
+        findUserDemoBsVo.setMan_dpart(userDemoBsVO.getMan_dpart()==null?"":userDemoBsVO.getMan_dpart());// varchar2(100),부서
+        findUserDemoBsVo.setMan_role(userDemoBsVO.getMan_role()==null?"":userDemoBsVO.getMan_role());// varchar2(200),직위
+        findUserDemoBsVo.setMan_mnumber(userDemoBsVO.getMan_mnumber()==null?"":userDemoBsVO.getMan_mnumber());//	varchar2	20					담당자 모바일 번호
+        findUserDemoBsVo.setMan_pnumber(userDemoBsVO.getMan_pnumber()==null?"":userDemoBsVO.getMan_pnumber());//	varchar2	20					담당자 사무실 번호
+        findUserDemoBsVo.setMan_email(userDemoBsVO.getMan_email()==null?"":userDemoBsVO.getMan_email());//	varchar2	400					담당자 이메일
+        findUserDemoBsVo.setUser_demo_type(userDemoBsVO.getUser_demo_type());//	number	4		0			실증 주체	0:자율, 1:위탁
+        findUserDemoBsVo.setUser_demo_facility(userDemoBsVO.getUser_demo_facility());//	number	4		1			실증 시설	1:단동, 2:연동, 4:육묘장, 8:노지, 16:단동유리, 32:연동유리, 64:식물공장
+        findUserDemoBsVo.setUser_demo_way(userDemoBsVO.getUser_demo_way());//	number	4		0			실증 방법	0: 단순, 1:비교
+        findUserDemoBsVo.setUser_demo_repeat(userDemoBsVO.getUser_demo_repeat());//	number	4		0			실증횟수	0:반복 없음, 1:반복실증
+        findUserDemoBsVo.setUser_demo_goal(userDemoBsVO.getUser_demo_goal());//	number	4		0			실증 목표	0::성능확인, 1:자체평가
+        findUserDemoBsVo.setUser_demo_option(userDemoBsVO.getUser_demo_option());//	number	4		0			실증 조건	0: 일반환경, 1:특수환경
+        findUserDemoBsVo.setUser_demo_crops(userDemoBsVO.getUser_demo_crops()==null?"":userDemoBsVO.getUser_demo_crops());//	varchar2	100					실증작물
+        findUserDemoBsVo.setCulture_soil(userDemoBsVO.getCulture_soil());//	number	4		0			생육토양	0: 토경재배, 1:수경재배, 2:고형배지재배
+        findUserDemoBsVo.setDemo_type(userDemoBsVO.getDemo_type());//	number	4		0			실증 대상	0:해당없음, 1:시설자재, 2:ict기자재, 4:작물보호제/비료, 8:스마트팜sw, 16:생육모델, 32:로봇, 512:기타
+
+        Date nowD = new Date();
+
+        findUserDemoBsVo.setDemo_start_date(userDemoBsVO.getDemo_start_date()==null?nowD:userDemoBsVO.getDemo_start_date());//	date						입주 시작 날짜
+        findUserDemoBsVo.setDemo_end_date(userDemoBsVO.getDemo_end_date()==null?nowD:userDemoBsVO.getDemo_end_date());//	date						입주 종료 날짜
+
+        findUserDemoBsVo.setResident_type(userDemoBsVO.getResident_type());//	number	4		0			상주 타입	0:해당없음, 1:r&d연구실, 2:스타트업사무실, 512:기타
+        findUserDemoBsVo.setResident_etc(userDemoBsVO.getResident_etc()==null?"":userDemoBsVO.getResident_etc());//	varchar2	100					이용 실증시설 기타	이용 신청시설 기타 내용
+        findUserDemoBsVo.setStaff_num(userDemoBsVO.getStaff_num());//	number	10					상주인원
+
+        findUserDemoBsVo.setCostat_code(userDemoBsVO.getCostat_code());//	 varchar2	20					표준산업분류코드	네자리
+        findUserDemoBsVo.setIs_office_ower(userDemoBsVO.getIs_office_ower());//	 number	4		0			본사 자가여부	0:임차, 1:자가
+        findUserDemoBsVo.setIs_lab_ower(userDemoBsVO.getIs_lab_ower());//	 number	4		0			연구소 자가여부	0:임차, 1:자가
+        findUserDemoBsVo.setMan_total(userDemoBsVO.getMan_total());//number	4		0			총임직원 수
+        findUserDemoBsVo.setMan_officer_count(userDemoBsVO.getMan_officer_count());//number	4		0			사무직원 수
+        findUserDemoBsVo.setMan_lab_count(userDemoBsVO.getMan_lab_count());//number	4		0			연구직원 수
+        findUserDemoBsVo.setMan_etc_count(userDemoBsVO.getMan_etc_count());//number	4		0			키타지원 수
+
+
+
+        //findUserDemoBsVo.setIs_change(userDemoBsVO.getIs_change());//	number	4		0			실증계획 변경	0:최초등록 동일, 1:심사후 협약전 변경, 2:협약 후 진행 시 변경,
+        //findUserDemoBsVo.setIs_confirm(userDemoBsVO.getIs_confirm());//	number	4		0			실증계획 승인 여부	0:승인전, 1:승인
+        //findUserDemoBsVo.setIs_share(userDemoBsVO.getIs_share());//	number	4		0			실증계획 승인 통보 여부	0:통보전, 1:통보
+
+        userDemoBsService.updateUserDemoBs(findUserDemoBsVo);
         //4.예외처리
 
         return resultVO;

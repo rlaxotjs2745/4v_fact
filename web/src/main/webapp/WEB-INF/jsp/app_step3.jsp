@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="ko" class="html-popup">
 <head>
@@ -53,13 +56,8 @@
         </div>
         <div class="app__business">
             <label for="select-business">지원사업 선택</label>
-            <select name="business" id="select-business">
-                <option value="">사업공고명</option>
-                <option value="">사업공고명</option>
-                <option value="">사업공고명</option>
-                <option value="">사업공고명</option>
-                <option value="">사업공고명</option>
-                <option value="">사업공고명</option>
+            <select name="business" id="select-business" disabled>
+                <option value="">${demoBs.demo_subject}</option>
             </select>
         </div>
     </header>
@@ -68,12 +66,17 @@
         <div class="app__body">
             <div class="app__cnt">
                 <h3>실증계획서</h3>
+
                 <div class="table__agree"><strong>*유의사항</strong>
                     본 사업계획서의 내용은 실증단지이용자 선정 심의에 중요한 자료이므로 사실에 입각하여 정확히 기재해 주시기 바랍니다.(기재사항과 실제내용이 다를 경우에는 이용심사에 불이익을 받을 수 있습니다)
                     제출하신 자료는 반환되지 않으며 대외비로 관리됩니다.
                 </div>
-                <div class="table__signature">
-                    이용신청인 : <input type="text" value="홍길동" disabled style="width:200px;"><br>
+               <div class="table__signature">
+                   <div class="app__fileupload">
+                       <div class="fileupload__title">실증계획서 원본 업로드</div>
+                       <input type="file" class="fileupload">
+                   </div>
+<%--                     이용신청인 : <input id="signature_name" type="text" value="홍길동" disabled style="width:200px;"><br>
                     <div class="checkbox checkbox--inline">
                         <input type="checkbox" id="signature-1" name="signature">
                         <label for="signature-1">동의</label>
@@ -82,7 +85,7 @@
                         본 포탈에서 작성 후, 등록한 실증계획서는 수기로 작성시 날인한 것과 동일한 효과가 있습니다.<br>
                         만약, 서명 대체에 동의하지 않는 경우는 사업공고의 담당자에게 문의 후 우편이나 이메일로 접수해 주십시오.
                     </p>
-                    <span class="cl-red">위 안내에 동의시, 계획서 입력이 가능합니다.</span>
+                    <span class="cl-red">위 안내에 동의시, 계획서 입력이 가능합니다.</span>--%>
                 </div>
 
                 <div class="table__caption">1.기업현황</div>
@@ -99,9 +102,15 @@
                         </colgroup>
                         <tbody>
                         <tr>
-                            <th class="th__left">신청업체명</th>
-                            <td class="td__left" colspan="2"><input type="text"></td>
+                            <th class="th__left">신청기업명</th>
+                            <td class="td__left" colspan="2"><input type="text" value="${userDemoBs.corp_name}" disabled></td>
                             <th class="th__left">대표자</th>
+                            <td class="td__left" colspan="2"><input type="text" value="${userDemoBs.ceo_name}" disabled></td>
+                        </tr>
+                        <tr>
+                            <th class="th__left">법인등록번호</th>
+                            <td class="td__left" colspan="2"><input type="text"></td>
+                            <th class="th__left">사업자등록번호</th>
                             <td class="td__left" colspan="2"><input type="text"></td>
                         </tr>
                         <tr>
@@ -110,12 +119,7 @@
                             <th class="th__left">상시근로자수</th>
                             <td class="td__left" colspan="2"><div class="input--group"><input type="text" placeholder="" style="width:100%;" class="user__input"><span class="user__text">명</span></div></td>
                         </tr>
-                        <tr>
-                            <th class="th__left">법인등록번호</th>
-                            <td class="td__left" colspan="2"><input type="text"></td>
-                            <th class="th__left">사업자등록번호</th>
-                            <td class="td__left" colspan="2"><input type="text"></td>
-                        </tr>
+
                         <tr>
                             <th class="th__left">자본금</th>
                             <td class="td__left" colspan="2"><div class="input--group"><input type="text" placeholder="" style="width:100%; padding-right:60px;" class="user__input"><span class="user__text">백만원</span></div></td>
@@ -1891,6 +1895,22 @@
 <script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>
+<script>
+    $("#signature-1").change(function(){
+        if($("#signature-1").is(":checked")){
+            //alert("체크박스 체크했음!");
+            $('#signature_name').attr('disabled', false);
+
+        }else{
+            $('#signature_name').attr('disabled', true);
+            //alert("체크박스 체크 해제!");
+
+        }
+    });
+
+</script>
+
+
 
 </body>
 </html>
