@@ -23,12 +23,14 @@ public class UserDemoBsVO {
     String corp_addr2;//		varchar2	1000					본사 소재지 상세
     String corp_rnd_addr;//		varchar2	1000					본사 연구소 소재지
     String corp_rnd_addr2;//		varchar2	1000					본사 연구소 소재지 상세
+    int capital_amount;	//NUMBER	20					자본금
     int corp_sales_amount;//		number	10					매출액
     int corp_er;//	number	10					자기자본비율
     int employees_count;//	number	10					직원수
     String bs_type1;//	varchar2	20					업태 종목
     String bs_type2;//	varchar2	20					업태 종목
     String main_product;//	varchar2	200					주생산품목
+
     int req_facility;//     이용 실증시설
     String	req_etc;//	VARCHAR2	400					이용 실증시설 기타
     String demobs_tech_plan;//	varchar2	100					개발예정품목
@@ -54,14 +56,36 @@ public class UserDemoBsVO {
     int culture_soil;//	number	4		0			생육토양	0: 토경재배, 1:수경재배, 2:고형배지재배
     int demo_type;//	number	4		0			실증 대상	0:해당없음, 1:시설자재, 2:ict기자재, 4:작물보호제/비료, 8:스마트팜sw, 16:생육모델, 32:로봇, 512:기타
     Date demo_start_date;//	date						입주 시작 날짜
+    String demo_start_date_s;//	date						입주 시작 날짜
     Date demo_end_date;//	date						입주 종료 날짜
+    String demo_end_date_s;//	date						입주 종료 날짜
+
     int resident_type;//	number	4		0			상주 타입	0:해당없음, 1:r&d연구실, 2:스타트업사무실, 512:기타
     String resident_etc;//	varchar2	100					이용 실증시설 기타	이용 신청시설 기타 내용
     int staff_num;//	number	10					상주인원
     int is_change;//	number	4		0			실증계획 변경	0:최초등록 동일, 1:심사후 협약전 변경, 2:협약 후 진행 시 변경,
     int is_confirm;//	number	4		0			실증계획 승인 여부	0:승인전, 1:승인
     int is_share;//	number	4		0			실증계획 승인 통보 여부	0:통보전, 1:통보
+
+    String costat_code;//	varchar2	20					표준산업분류코드	네자리
+    int is_office_ower;//	number	4		0			본사 자가여부	0:임차, 1:자가
+    int is_lab_ower;//	number	4		0			연구소 자가여부	0:임차, 1:자가
+    int man_total;//	number	4		0			총임직원 수
+    int man_officer_count;//	number	4		0			사무직원 수
+    int man_lab_count;//	number	4		0			연구직원 수
+    int man_etc_count;//	number	4		0			키타지원 수
+
+
+
+
+
+
     Date reg_date;//	date						최초 등록 일시
+    String reg_date_s;//	date						최초 등록 일시
     Date last_upd_date;//	date						최종 수정 일시
+    String last_upd_date_s;//	date						최종 수정 일시
+
+
+
     DemoBsMsgVO demoBsMsgVo;
 }

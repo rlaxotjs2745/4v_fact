@@ -180,10 +180,6 @@ public class IndexController {
 
         model.addAttribute("demoBs",demoBusinessVo);
 
-        //UserDemoBsCheckVO userDemoBsCheckVo = new UserDemoBsCheckVO();
-        //userDemoBsCheckVo.setIdx_user(findUser.getIdx_user());
-        //userDemoBsCheckVo.setIdx_demo_business(demoBusinessVo.getIdx_demo_business());
-
         UserDemoBsVO userDemoBsVo = userDemoBsService.getUserDemoBs(userDemoBsCheckVO);
         if(userDemoBsVo==null){//이전에 저장한게 없다, 에러페이지로 보내야 한다...
             session.removeAttribute("loginCheck");
@@ -197,8 +193,9 @@ public class IndexController {
         return "app_step2";
     }
 
-    @RequestMapping("/app_step3")
+    @PostMapping(value = "/app_step3")
     public String app_step3(HttpSession session
+            ,UserDemoBsCheckVO userDemoBsCheckVO
             ,Model model){
         if(session==null
                 || session.getAttribute("loginCheck")==null
@@ -208,13 +205,34 @@ public class IndexController {
             clearSessionAndRedirect(session);
             return "index";
         }
-        UserVO findUser = userService.findUserById(String.valueOf(session.getAttribute("userid")));
-        if(findUser==null){
+        UserVO findUser = userService.getUserInfo(userDemoBsCheckVO.getIdx_user());
+
+        if(findUser==null
+                || !findUser.getUser_id().equals(String.valueOf(session.getAttribute("userid")))){
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
             return "index";
         }
         model.addAttribute("user",findUser);
+
+        DemoBusinessVO demoBusinessVo = demoBsService.getDemoBsByIdx(userDemoBsCheckVO.getIdx_demo_business());
+
+        if(demoBusinessVo==null){//해당 사업 없음, 에러페이지로 보내야 한다...
+
+            session.removeAttribute("loginCheck");
+            clearSessionAndRedirect(session);
+            return "index";
+        }
+
+        model.addAttribute("demoBs",demoBusinessVo);
+
+        UserDemoBsVO userDemoBsVo = userDemoBsService.getUserDemoBs(userDemoBsCheckVO);
+        if(userDemoBsVo==null){//이전에 저장한게 없다, 에러페이지로 보내야 한다...
+            session.removeAttribute("loginCheck");
+            clearSessionAndRedirect(session);
+            return "index";
+        }
+        model.addAttribute("userDemoBs",userDemoBsVo);
 
         getHomepageInfo(model);
         return "app_step3";

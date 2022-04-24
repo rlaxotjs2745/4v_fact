@@ -173,35 +173,10 @@
             "idx_user":${user.idx_user},
             "idx_demo_business":$("#select-business option:selected").val()
         };
-        goNextStep(param);
-/*
-        if($("#select-business option:selected").val()!=0){
-            $.ajax({
-                type: 'post',
-                url :'app_step1_save_new', //데이터를 주고받을 파일 주소 입력
-                data: JSON.stringify(param),//보내는 데이터
-                contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
-                dataType:'json',//받는 데이터 타입
-                success: function(result){
-                    //작업이 성공적으로 발생했을 경우
-                    if(result.result_code=="SUCCESS"){
-                        //alert("신청할 수 있습니다");
-                        alert(result.result_str);
-
-                        goNextStep(param);
-                        return;
-                    }
-                },
-                error:function(){
-                    //에러가 났을 경우 실행시킬 코드
-                    return;
-                }
-            });
-        }*/
-        //location.href='app_step2?demobs='+$("#select-business option:selected").val();
+        goNextStep(param,'app_step2');
     });
 
-    function goNextStep(param){
+    function goNextStep(param,location){
         let f = document.createElement('form');
 
         let input_idx_user;
@@ -222,7 +197,7 @@
 
 
         f.setAttribute('method', 'post');
-        f.setAttribute('action', 'app_step2');
+        f.setAttribute('action', location);
         document.body.appendChild(f);
         f.submit();
     }

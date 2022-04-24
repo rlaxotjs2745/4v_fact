@@ -1,6 +1,7 @@
 package kr.or.fact.web_gimje.config;
 
-import kr.or.fact.core.service.MemberService;
+
+import kr.or.fact.core.service.AdminService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -19,8 +20,8 @@ import javax.annotation.Resource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Resource(name="memberService")
-    MemberService memberService;
+    @Resource(name="adminService")
+    AdminService adminService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -54,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(adminService).passwordEncoder(passwordEncoder());
     }
 
 }

@@ -29,10 +29,6 @@
         WHERE IDX_DEMO_BUSINESS = #{idx_demo_business} AND IDX_USER=#{idx_user}
     </select>
 
-
-
-
-
     <insert id="saveUserDemoBs" parameterType="kr.or.fact.core.model.DTO.UserDemoBsVO">
         INSERT INTO TB_USER_DEMO_BS (
             IDX_USER_DEMO_BS,
@@ -49,6 +45,7 @@
             CORP_REG_NUM,
             CORP_ADDR,
             CORP_RND_ADDR,
+            CAPITAL_AMOUNT,
             CORP_SALES_AMOUNT,
             CORP_ER,
             EMPLOYEES_COUNT,
@@ -82,10 +79,17 @@
             IS_CHANGE,
             IS_CONFIRM,
             IS_SHARE,
+            COSTAT_CODE,
+            IS_OFFICE_OWER,
+            IS_LAB_OWER,
+            MAN_TOTAL,
+            MAN_OFFICER_COUNT,
+            MAN_LAB_COUNT,
+            MAN_ETC_COUNT,
             REG_DATE,
             LAST_UPD_DATE
         ) VALUES (
-                     #{idx_user_demo_bs},
+                      SEQ_USER_DEMO_BS.NEXTVAL,
                      #{idx_demo_business},
                      #{user_demobs_status},
                      #{idx_user},
@@ -99,6 +103,7 @@
                      #{corp_reg_num},
                      #{corp_addr},
                      #{corp_rnd_addr},
+                     #{capital_amount},
                      #{corp_sales_amount},
                      #{corp_er},
                      #{employees_count},
@@ -132,9 +137,16 @@
                      #{is_change},
                      #{is_confirm},
                      #{is_share},
-                     #{reg_date},
-                     #{last_upd_date}
-                 );
+                     #{costat_code},
+                     #{is_office_ower},
+                     #{is_lab_ower},
+                     #{man_total},
+                     #{man_officer_count},
+                     #{man_lab_count},
+                     #{man_etc_count},
+                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS'),
+                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+                 )
 
     </insert>
 
@@ -144,14 +156,95 @@
             IDX_DEMO_BUSINESS,
             USER_DEMOBS_STATUS,
             IDX_USER,
-            APP_STEP
+            APP_STEP,
+             IS_CHANGE,
+             IS_CONFIRM,
+             REG_DATE,
+             LAST_UPD_DATE
+
         ) VALUES (
-                     SEQ_USER_DEMO_BS.NEXTVAL,
-                     #{idx_demo_business},
-                     #{user_demobs_status},
-                     #{idx_user},
-                     #{app_step}
-                 )
+             SEQ_USER_DEMO_BS.NEXTVAL,
+             #{idx_demo_business},
+             #{user_demobs_status},
+             #{idx_user},
+             #{app_step},
+             #{is_change},
+             #{is_confirm},
+             TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS'),
+             TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+         )
+
     </insert>
+
+
+    <update id="updateUserDemoBs" parameterType="kr.or.fact.core.model.DTO.UserDemoBsVO">
+        UPDATE TB_USER_DEMO_BS SET
+            IDX_DEMO_BUSINESS = #{idx_demo_business},
+            USER_DEMOBS_STATUS = #{user_demobs_status},
+            IDX_USER = #{idx_user},
+            USER_DEMO_BS_APP_CODE = #{user_demo_bs_app_code},
+            APP_STEP = #{app_step},
+            USER_DEMO_BS_TYPE = #{user_demo_bs_type},
+            REQ_FACILITY= #{req_facility},
+            REQ_ETC= #{req_etc},
+            IDX_CORP_INFO = #{idx_corp_info},
+            CORP_NAME = #{corp_name},
+            CORP_BIRTH = #{corp_birth},
+            CORP_NUM = #{corp_num},
+            CORP_REG_NUM = #{corp_reg_num},
+            CORP_ADDR = #{corp_addr},
+            CORP_ADDR2 = #{corp_addr2},
+            CORP_RND_ADDR = #{corp_rnd_addr},
+            CORP_RND_ADDR2 = #{corp_rnd_addr2},
+            CAPITAL_AMOUNT = #{capital_amount},
+            CORP_SALES_AMOUNT = #{corp_sales_amount},
+            CORP_ER = #{corp_er},
+            EMPLOYEES_COUNT = #{employees_count},
+            BS_TYPE1 = #{bs_type1},
+            BS_TYPE2 = #{bs_type2},
+            MAIN_PRODUCT = #{main_product},
+            DEMOBS_TECH_PLAN = #{demobs_tech_plan},
+            CEO_NAME = #{ceo_name},
+            CEO_MNUMBER = #{ceo_mnumber},
+            CEO_PNUMBER = #{ceo_pnumber},
+            CEO_EMAIL = #{ceo_email},
+            CEO_ADDRESS = #{ceo_address},
+            CEO_ADDRESS2 = #{ceo_address2},
+            MAN_NAME = #{man_name},
+            MAN_MNUMBER = #{man_mnumber},
+            MAN_PNUMBER = #{man_pnumber},
+            MAN_EMAIL = #{man_email},
+            MAN_DPART = #{man_dpart},
+            MAN_ROLE = #{man_role},
+            USER_DEMO_TYPE = #{user_demo_type},
+            USER_DEMO_FACILITY = #{user_demo_facility},
+            USER_DEMO_WAY = #{user_demo_way},
+            USER_DEMO_REPEAT = #{user_demo_repeat},
+            USER_DEMO_GOAL = #{user_demo_goal},
+            USER_DEMO_OPTION = #{user_demo_option},
+            USER_DEMO_CROPS = #{user_demo_crops},
+            CULTURE_SOIL = #{culture_soil},
+            DEMO_TYPE = #{demo_type},
+            DEMO_START_DATE = #{demo_start_date},
+            DEMO_END_DATE = #{demo_end_date},
+            RESIDENT_TYPE = #{resident_type},
+            RESIDENT_ETC = #{resident_etc},
+            STAFF_NUM = #{staff_num},
+            IS_CHANGE = #{is_change},
+            IS_CONFIRM = #{is_confirm},
+            IS_SHARE = #{is_share},
+            COSTAT_CODE	= #{costat_code},
+            IS_OFFICE_OWER	= #{is_office_ower},
+            IS_LAB_OWER	= #{is_lab_ower},
+            MAN_TOTAL	= #{man_total},
+            MAN_OFFICER_COUNT	= #{man_officer_count},
+            MAN_LAB_COUNT	= #{man_lab_count},
+            MAN_ETC_COUNT	= #{man_etc_count},
+
+
+
+            LAST_UPD_DATE = TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+          WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
+    </update>
 
 </mapper>
