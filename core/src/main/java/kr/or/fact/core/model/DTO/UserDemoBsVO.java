@@ -23,6 +23,11 @@ public class UserDemoBsVO {
     String corp_addr2;//		varchar2	1000					본사 소재지 상세
     String corp_rnd_addr;//		varchar2	1000					본사 연구소 소재지
     String corp_rnd_addr2;//		varchar2	1000					본사 연구소 소재지 상세
+
+    String corp_phone;//	VARCHAR2	40					사무실 전화 번호
+    String lab_phone;//	VARCHAR2	40					연구소 전화 번호
+
+
     int capital_amount;	//NUMBER	20					자본금
     int corp_sales_amount;//		number	10					매출액
     int corp_er;//	number	10					자기자본비율
@@ -60,6 +65,10 @@ public class UserDemoBsVO {
     Date demo_end_date;//	date						입주 종료 날짜
     String demo_end_date_s;//	date						입주 종료 날짜
 
+    Date farming_start_date;// date, 경작시작
+    Date farming_end_date;// date, 경작종료
+    int farming_repeat;// number(4),경작 주기
+
     int resident_type;//	number	4		0			상주 타입	0:해당없음, 1:r&d연구실, 2:스타트업사무실, 512:기타
     String resident_etc;//	varchar2	100					이용 실증시설 기타	이용 신청시설 기타 내용
     int staff_num;//	number	10					상주인원
@@ -75,8 +84,29 @@ public class UserDemoBsVO {
     int man_lab_count;//	number	4		0			연구직원 수
     int man_etc_count;//	number	4		0			키타지원 수
 
+    String lab_est_date;//	VARCHAR2	20					연구소 설립일수
+    int rnd_rate;//	NUMBER	4					연구개발투자비율
+    String consolidated_company;//	VARCHAR2	100 연결회사
 
 
+    String history1;//	varchar2	100					주요연혁 1
+    String history1_date;//	varchar2	20					주요연혁 1 날짜
+    String history2;//	varchar2	100					주요연혁 2
+    String history2_date;//	varchar2	20					주요연혁 2 날짜
+    String history3;//	varchar2	100					주요연혁 3
+    String history3_date;//	varchar2	20					주요연혁 3 날짜
+    String prize1;//	varchar2	100					포상현황1
+    String prize1_date;//	varchar2	20					포상날자1
+    String prize1_org;//	varchar2	100					포상기관1
+    String prize1_etc;//	varchar2	100					포상 비고1
+    String prize2;//	varchar2	100					포상현황2
+    String prize2_date;//	varchar2	20					포상날자2
+    String prize2_org;//	varchar2	100					포상기관2
+    String prize2_etc;//	varchar2	100					포상 비고2
+    String prize3;//	varchar2	100					포상현황3
+    String prize3_date;//	varchar2	20					포상날자3
+    String prize3_org;//	varchar2	100					포상기관3
+    String prize3_etc;//	varchar2	100					포상 비고3
 
 
 

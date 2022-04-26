@@ -195,12 +195,13 @@
 
         f.appendChild(input_idx_demo_business);
 
-
         f.setAttribute('method', 'post');
         f.setAttribute('action', location);
         document.body.appendChild(f);
         f.submit();
     }
+
+
 
     $("#select-business").change(function (){
 

@@ -1,9 +1,6 @@
 package kr.or.fact.core.model;
 
-import kr.or.fact.core.model.DTO.ApplicantDemoBsJoinVO;
-import kr.or.fact.core.model.DTO.DemoBsMsgVO;
-import kr.or.fact.core.model.DTO.UserDemoBsCheckVO;
-import kr.or.fact.core.model.DTO.UserDemoBsVO;
+import kr.or.fact.core.model.DTO.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -18,13 +15,23 @@ public interface UserDemoBsMapper {
 
     List<DemoBsMsgVO>  getDemoBsMsgByUserDemoBSIdx(@Param("idx_user_demo_bs") long idx_user_demo_bs);
 
-    public UserDemoBsVO getUserDemoBs(UserDemoBsCheckVO userDemoBsCheckVo);
+    UserDemoBsVO getUserDemoBs(UserDemoBsCheckVO userDemoBsCheckVo);
 
-    public long saveUserDemoBs(UserDemoBsVO userDemoBsVO);
+    long saveUserDemoBs(UserDemoBsVO userDemoBsVO);
 
-    public long saveUserDemoBsNew(UserDemoBsVO userDemoBsVO);
+    long saveUserDemoBsNew(UserDemoBsVO userDemoBsVO);
 
-    public void updateUserDemoBs(UserDemoBsVO userDemoBsVO);
+    void updateUserDemoBs(UserDemoBsVO userDemoBsVO);
+
+    void updateUserDemoBsWebStep2(UserDemoBsVO userDemoBsVO);
+    void updateUserDemoBsWebStep3(UserDemoBsVO userDemoBsVO);
+
+    UserDemoBsDetailVO getUserDemoBsDetail(long idx_user_demo_bs);
+    void saveUserDemoBsDetail(UserDemoBsDetailVO userDemoBsDetailVO);
+    void updateUserDemoBsDetail(UserDemoBsDetailVO userDemoBsDetailVO);
+
+
+
 
 
 

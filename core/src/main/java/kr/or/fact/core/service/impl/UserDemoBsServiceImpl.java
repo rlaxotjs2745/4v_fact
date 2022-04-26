@@ -1,9 +1,6 @@
 package kr.or.fact.core.service.impl;
 
-import kr.or.fact.core.model.DTO.ApplicantDemoBsJoinVO;
-import kr.or.fact.core.model.DTO.DemoBsMsgVO;
-import kr.or.fact.core.model.DTO.UserDemoBsCheckVO;
-import kr.or.fact.core.model.DTO.UserDemoBsVO;
+import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.model.UserDemoBsMapper;
 import kr.or.fact.core.service.UserDemoBsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +47,29 @@ public class UserDemoBsServiceImpl implements UserDemoBsService {
     @Override
     public void updateUserDemoBs(UserDemoBsVO userDemoBsVO){
         userDemoBsMapper.updateUserDemoBs(userDemoBsVO);
+    }
+
+    @Override
+    public void updateUserDemoBsWebStep2(UserDemoBsVO userDemoBsVO){
+        userDemoBsMapper.updateUserDemoBsWebStep2(userDemoBsVO);
+    }
+
+    @Override
+    public void updateUserDemoBsWebStep3(UserDemoBsVO userDemoBsVO){
+        userDemoBsMapper.updateUserDemoBsWebStep3(userDemoBsVO);
+    }
+    @Override
+    public UserDemoBsDetailVO getUserDemoBsDetail(long idx_user_demo_bs){
+        return userDemoBsMapper.getUserDemoBsDetail(idx_user_demo_bs);
+    }
+
+    @Override
+    public void saveUserDemoBsDetail(UserDemoBsDetailVO userDemoBsDetailVO){
+        userDemoBsMapper.saveUserDemoBsDetail(userDemoBsDetailVO);
+    }
+
+    @Override
+    public void updateUserDemoBsDetail(UserDemoBsDetailVO userDemoBsDetailVO){
+        userDemoBsMapper.updateUserDemoBsDetail(userDemoBsDetailVO);
     }
 }
