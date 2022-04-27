@@ -452,7 +452,7 @@ public class WebAPIController {
 
 
     //실증단지 이용 신청 프로세스
-    //app_step2 save
+    //app_step3 save
     @RequestMapping(value = "/app_step3_save_temp",method = RequestMethod.POST)
     public @ResponseBody
     ResultVO app_step3_save_temp(HttpSession session,
@@ -542,6 +542,58 @@ public class WebAPIController {
 
         userDemoBsService.updateUserDemoBsWebStep3(findUserDemoBsVo);
         //4.예외처리
+
+        return resultVO;
+    }
+
+    //실증단지 이용 신청 프로세스
+    //app_step3 detail save
+    @RequestMapping(value = "/app_step3_detail_save_temp",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO app_step3_detail_save_temp(HttpSession session,
+                                 @RequestBody UserDemoBsDetailVO userDemoBsDetailVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("저장했습니다");
+
+        //1.신청 Usser nDemo BS 파악
+        UserDemoBsVO userDemoBsVO = userDemoBsService.getUserDemoBsByIdx(userDemoBsDetailVO.getIdx_user_demo_bs());
+
+        if(userDemoBsVO == null){
+            resultVO.setResult_str("저장이 정상적으로 이루어지지 않았습니다1");
+            resultVO.setResult_code("ERROR_1001");
+            return resultVO;
+        }
+        //2.기 신청이 있는지 체크
+        UserDemoBsDetailVO findUserDemoBsDetailVO = userDemoBsService.getUserDemoBsDetail(userDemoBsDetailVO.getIdx_user_demo_bs());
+
+        if(findUserDemoBsDetailVO==null){//저장한게 없다, 에러페이지로 보내야 한다...
+            resultVO.setResult_str("저장이 정상적으로 이루어지지 않았습니다2");
+            resultVO.setResult_code("ERROR_1001");
+            return resultVO;
+        }
+        //3.받은 데이터값 확인
+        if(userDemoBsDetailVO.getUserBsHumanResourceVOList()==null || userDemoBsDetailVO.getUserBsHumanResourceVOList().isEmpty()){
+            resultVO.setResult_str("저장이 정상적으로 이루어지지 않았습니다3");
+            resultVO.setResult_code("ERROR_1001");
+            return resultVO;
+        }
+
+        if(findUserDemoBsDetailVO.getIdx_user_demo_bs() == userDemoBsDetailVO.getIdx_user_demo_bs()){
+            userDemoBsService.updateUserDemoBsDetail(userDemoBsDetailVO);
+            userDemoBsService.deleteUserDemoBsHumanResource(userDemoBsDetailVO.getIdx_user_demo_bs());
+
+            for(int i=0;i<userDemoBsDetailVO.getUserBsHumanResourceVOList().size();i++){
+                userDemoBsService.saveUserDemoBsHumanResource(userDemoBsDetailVO.getUserBsHumanResourceVOList().get(i));
+            }
+
+        }
+        else {
+            resultVO.setResult_str("저장이 정상적으로 이루어지지 않았습니다4");
+            resultVO.setResult_code("ERROR_1001");
+            return resultVO;
+        }
 
         return resultVO;
     }

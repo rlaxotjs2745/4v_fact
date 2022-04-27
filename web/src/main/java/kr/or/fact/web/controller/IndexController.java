@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -235,6 +237,9 @@ public class IndexController {
         model.addAttribute("userDemoBs",userDemoBsVo);
 
         UserDemoBsDetailVO userDemoBsDetailVO = userDemoBsService.getUserDemoBsDetail(userDemoBsVo.getIdx_user_demo_bs());
+
+        List<UserBsHumanResourceVO> userBsHumanResourceVOList = userDemoBsService.getUserDemoBsHumanResourceList(userDemoBsVo.getIdx_user_demo_bs());
+
         if(userDemoBsDetailVO==null){
             userDemoBsDetailVO = new UserDemoBsDetailVO();
 
@@ -409,10 +414,40 @@ public class IndexController {
             userDemoBsDetailVO.setFacil_pw3_w("");//varchar2	10					소요전력 장비 소비전력
 
             userDemoBsService.saveUserDemoBsDetail(userDemoBsDetailVO);
+
+            if(userBsHumanResourceVOList != null && !userBsHumanResourceVOList.isEmpty()){
+                userDemoBsService.deleteUserDemoBsHumanResource(userDemoBsVo.getIdx_user_demo_bs());
+            }
+            else {
+                userBsHumanResourceVOList = new ArrayList<UserBsHumanResourceVO>();
+            }
+
+            for(int i=1;i<4;i++){
+                UserBsHumanResourceVO userBsHumanResourceVO = new UserBsHumanResourceVO();
+
+                userBsHumanResourceVO.setIdx_user_demo_bs(userDemoBsVo.getIdx_user_demo_bs());//	number	32
+                userBsHumanResourceVO.setRnd_user_order(i);//	number	4
+                userBsHumanResourceVO.setRnd_user_name("");//	varchar2	20
+                userBsHumanResourceVO.setRnd_user_role("");//	varchar2	20
+                userBsHumanResourceVO.setRnd_user_code("");//	varchar2	40
+                userBsHumanResourceVO.setRnd_user_birth("");//	varchar2	20
+                userBsHumanResourceVO.setRnd_user_grad("");//	varchar2	40
+                userBsHumanResourceVO.setRnd_user_col("");//	varchar2	40
+                userBsHumanResourceVO.setRnd_user_school("");//	varchar2	40
+                userBsHumanResourceVO.setRnd_user_col_date("");//	varchar2	20
+                userBsHumanResourceVO.setRnd_user_col_part("");//	varchar2	20
+                userBsHumanResourceVO.setRnd_user_6t("");//	varchar2	40
+                userBsHumanResourceVO.setRnd_user_result("");//	varchar2	100
+
+                userBsHumanResourceVOList.add(userBsHumanResourceVO);
+            }
+        }
+        else {
+
         }
         model.addAttribute("userDemoBsDetailVO",userDemoBsDetailVO);
 
-
+        model.addAttribute("userBsHumanResourceVOList",userBsHumanResourceVOList);
 
         getHomepageInfo(model);
         return "app_step3";

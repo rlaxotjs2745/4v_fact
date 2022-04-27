@@ -55,8 +55,10 @@ public class UserDemoBsVO {
     int user_demo_facility;//	number	4		1			실증 시설	1:단동, 2:연동, 4:육묘장, 8:노지, 16:단동유리, 32:연동유리, 64:식물공장
     int user_demo_way;//	number	4		0			실증 방법	0: 단순, 1:비교
     int user_demo_repeat;//	number	4		0			실증횟수	0:반복 없음, 1:반복실증
+    int user_demo_repeat_count;//	NUMBER	4		0			실증횟수
     int user_demo_goal;//	number	4		0			실증 목표	0::성능확인, 1:자체평가
     int user_demo_option;//	number	4		0			실증 조건	0: 일반환경, 1:특수환경
+    int user_demo_is_crops;//NUMBER	4		1			실증작물 여부	0:해당없음 1:비작물실증, 2: 작물대상실증
     String user_demo_crops;//	varchar2	100					실증작물
     int culture_soil;//	number	4		0			생육토양	0: 토경재배, 1:수경재배, 2:고형배지재배
     int demo_type;//	number	4		0			실증 대상	0:해당없음, 1:시설자재, 2:ict기자재, 4:작물보호제/비료, 8:스마트팜sw, 16:생육모델, 32:로봇, 512:기타

@@ -3,6 +3,7 @@ package kr.or.fact.core.model.DTO;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class UserDemoBsDetailVO {
@@ -179,4 +180,6 @@ public class UserDemoBsDetailVO {
 
     Date reg_date;//	date						최초 등록 일시
     Date last_upd_date;//	date						최종 수정 일시
+
+    List<UserBsHumanResourceVO> userBsHumanResourceVOList;
 }

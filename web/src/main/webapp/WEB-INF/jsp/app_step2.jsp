@@ -136,25 +136,25 @@
                         </tr>
                         <tr>
                             <th class="th__left">신청기업명</th>
-                            <td class="td__left" colspan="2"><input id = "corp_name" type="text" placeholder="사업자 등록증과 동일하게 입력" value="${userDemoBs.corp_name}"></td>
+                            <td class="td__left" colspan="2"><input id="corp_name" type="text" placeholder="사업자 등록증과 동일하게 입력" value="${userDemoBs.corp_name}"></td>
                             <th class="th__left">법인등록번호</th>
-                            <td class="td__left" colspan="2"><input id = "corp_reg_num" type="text" placeholder="1234567-123456789" value="${userDemoBs.corp_reg_num}"></td>
+                            <td class="td__left" colspan="2"><input id="corp_reg_num" type="text" placeholder="1234567-123456789" value="${userDemoBs.corp_reg_num}"></td>
 
 
                         </tr>
                         <tr>
                             <th class="th__left">사업자등록번호</th>
-                            <td class="td__left" colspan="2"><input id = "corp_num" type="text" placeholder="123-12-1234567" value="${userDemoBs.corp_num}"></td>
+                            <td class="td__left" colspan="2"><input id="corp_num" type="text" placeholder="123-12-1234567" value="${userDemoBs.corp_num}"></td>
                             <th class="th__left">설립일</th>
-                            <td class="td__left" colspan="2"><input id = "corp_birth" type="text" placeholder="2000-05-01" value="${userDemoBs.corp_birth}"></td>
+                            <td class="td__left" colspan="2"><input id="corp_birth" type="text" placeholder="2000-05-01" value="${userDemoBs.corp_birth}"></td>
                         </tr>
                         <tr>
                             <th class="th__left" rowspan="2">본사</th>
                             <td class="td__left" colspan="5">
                                 <span>주소</span>
                                 <a href="#" class="btn modify btn-lg">찾기</a>
-                                <input id = "corp_addr" type="text" style="width: calc(70% - 70px);" value="${userDemoBs.corp_addr}">
-                                <input id = "corp_addr2" type="text" style="width: 25%;margin-left:4px !important;margin-top: 0px!important;" value="${userDemoBs.corp_addr2}" placeholder="상세주소">
+                                <input id="corp_addr" type="text" style="width: calc(70% - 70px);" value="${userDemoBs.corp_addr}">
+                                <input id="corp_addr2" type="text" style="width: 25%;margin-left:4px !important;margin-top: 0px!important;" value="${userDemoBs.corp_addr2}" placeholder="상세주소">
                             </td>
                         </tr>
                         <tr>
@@ -177,8 +177,8 @@
                             <td class="td__left" colspan="5">
                                 <span>주소</span>
                                 <a href="#" class="btn modify btn-lg">찾기</a>
-                                <input id = "corp_rnd_addr" type="text" style="width: calc(70% - 70px);" value="${userDemoBs.corp_rnd_addr}">
-                                <input id = "corp_rnd_addr2" type="text" style="width: 25%;margin-left:4px !important;margin-top: 0px!important;" value="${userDemoBs.corp_rnd_addr2}" placeholder="상세주소">
+                                <input id="corp_rnd_addr" type="text" style="width: calc(70% - 70px);" value="${userDemoBs.corp_rnd_addr}">
+                                <input id="corp_rnd_addr2" type="text" style="width: 25%;margin-left:4px !important;margin-top: 0px!important;" value="${userDemoBs.corp_rnd_addr2}" placeholder="상세주소">
                             </td>
                         </tr>
                         <tr>
@@ -209,26 +209,26 @@
                         </tr>
                         <tr>
                             <th class="th__left">자본금</th>
-                            <td class="td__left"><div class="input--group"><input id = "capital_amount" type="text" placeholder="" style="width:180px; padding-right:60px;" class="user__input" value="${userDemoBs.capital_amount}"><span class="user__text">백만원</span></div></td>
+                            <td class="td__left"><div class="input--group"><input id="capital_amount" type="text" placeholder="" style="width:180px; padding-right:60px;" class="user__input" value="${userDemoBs.capital_amount}"><span class="user__text">백만원</span></div></td>
                             <th class="th__left">자기자본비율</th>
-                            <td class="td__left"><div class="input--group"><input id = "corp_er" type="text" placeholder="" style="width:130px;" class="user__input" value="${userDemoBs.corp_er}"><span class="user__text">%</span></div></td>
+                            <td class="td__left"><div class="input--group"><input id="corp_er" type="text" placeholder="" style="width:130px;" class="user__input" value="${userDemoBs.corp_er}"><span class="user__text">%</span></div></td>
                             <th class="th__left">전년도 매출액</th>
-                            <td class="td__left"><div class="input--group"><input id = "corp_sales_amount" type="text" placeholder="" style="width:180px;padding-right:60px;" class="user__input" value="${userDemoBs.corp_sales_amount}"><span class="user__text">백만원</span></div></td>
+                            <td class="td__left"><div class="input--group"><input id="corp_sales_amount" type="text" placeholder="" style="width:180px;padding-right:60px;" class="user__input" value="${userDemoBs.corp_sales_amount}"><span class="user__text">백만원</span></div></td>
                         </tr>
                         <tr>
                             <th class="th__left" rowspan="2">업태, 종목</th>
-                            <td class="th__left"><input id = "bs_type1" type="text" value="${userDemoBs.bs_type1}"></td>
+                            <td class="th__left"><input id="bs_type1" type="text" value="${userDemoBs.bs_type1}"></td>
                             <th class="th__left" rowspan="2">주 생산 품목</th>
                             <td class="th__left" rowspan="2" colspan="3">
                                 <textarea name="main_product" id="main_product" cols="10" rows="4">${userDemoBs.main_product}</textarea>
                             </td>
                         </tr>
                         <tr>
-                            <td class="th__left"><input id = "bs_type2" type="text" value="${userDemoBs.bs_type2}"></td>
+                            <td class="th__left"><input id="bs_type2" type="text" value="${userDemoBs.bs_type2}"></td>
                         </tr>
                         <tr>
                             <th class="th__left">개발예정품목<br>(핵심기술)</th>
-                            <td class="th__left" colspan="5"><input id = "demobs_tech_plan" type="text" value="${userDemoBs.demobs_tech_plan}"></td>
+                            <td class="th__left" colspan="5"><input id="demobs_tech_plan" type="text" value="${userDemoBs.demobs_tech_plan}"></td>
                         </tr>
                         <tr>
                             <th class="th__left">이용신청시설</th>
@@ -259,9 +259,9 @@
                     <table class="table__type--app">
                         <colgroup>
                             <col style="width:3%">
-                            <col style="width:11.5%">
-                            <col style="width:28.5%">
-                            <col style="width:13%">
+                            <col style="width:10%">
+                            <col style="width:33%">
+                            <col style="width:10%">
                             <col style="width:44%">
                         </colgroup>
                         <tbody>
@@ -302,7 +302,7 @@
                                 </div>
                                 <div class="checkbox checkbox--inline">
                                     <input type="checkbox" id="user_demo_facility6" name="user_demo_facility" value="32">
-                                    <label for="user_demo_facility6">연동비닐 연동유리</label>
+                                    <label for="user_demo_facility6">연동유리</label>
                                 </div>
                                 <div class="checkbox checkbox--inline">
                                     <input type="checkbox" id="user_demo_facility7" name="user_demo_facility" value="64">
@@ -345,8 +345,17 @@
                                     <input type="checkbox" id="user_demo_repeat2" name="user_demo_repeat" value="2">
                                     <label for="user_demo_repeat2">반복실증</label>
                                 </div>
+                                (반복횟수: <input id="user_demo_repeat_count" type="text" style="width:100px;" value="${userDemoBs.user_demo_repeat_count}"> 회)
                             </td>
                             <th class="th__left">실증작물</th>
+                            <div class="checkbox checkbox--inline">
+                                <input type="checkbox" id="user_demo_is_crops1" name="user_demo_is_crops" value="1">
+                                <label for="user_demo_is_crops1">작물대상실증</label>
+                            </div>
+                            <div class="checkbox checkbox--inline">
+                                <input type="checkbox" id="user_demo_is_crops2" name="user_demo_is_crops" value="2">
+                                <label for="user_demo_is_crops2">비작물대상실증</label>
+                            </div>
                             <td class="td__left">
                                 <input id="user_demo_crops" type="text" value="${userDemoBs.user_demo_crops}">
                             </td>
@@ -429,7 +438,7 @@
                                 </div>
                                 <br>
                                 2.상주인력:
-                                <div class="input--group"><input id = "resident_etc" type="text" placeholder="" style="width:130px;" class="user__input" value="${userDemoBs.resident_etc}"><span class="user__text">명</span></div>
+                                <div class="input--group"><input id="resident_etc" type="text" placeholder="" style="width:130px;" class="user__input" value="${userDemoBs.resident_etc}"><span class="user__text">명</span></div>
                             </td>
                         </tr>
                         </tbody>
@@ -611,6 +620,13 @@
             $("#resident_type"+i).prop('checked', ($(this).val()&resident_type)>0?true:false);
             i++;
         });
+        i=1;
+        let user_demo_is_crops = ${userDemoBs.user_demo_is_crops};
+        $('input:checkbox[name="user_demo_is_crops"]').each(function() {
+            $("#user_demo_is_crops"+i).prop('checked', ($(this).val()&user_demo_is_crops)>0?true:false);
+            i++;
+        });
+
     });
 
     $("#btn_app_step1").click(function(){
@@ -736,6 +752,11 @@
         $('input:checkbox[name="resident_type"]:checked').each(function() {
             resident_type|=$(this).val();
         });
+
+        let user_demo_is_crops = 0;
+        $('input:checkbox[name="user_demo_is_crops"]:checked').each(function() {
+            user_demo_is_crops|=$(this).val();
+        });
         console.log(resident_type);
 
 
@@ -794,9 +815,11 @@
             user_demo_facility: user_demo_facility,//	number	4		1			실증 시설	1:단동, 2:연동, 4:육묘장, 8:노지, 16:단동유리, 32:연동유리, 64:식물공장
             user_demo_way: user_demo_way,//	number	4		0			실증 방법	0: 단순, 1:비교
             user_demo_repeat: user_demo_repeat,//	number	4		0			실증횟수	0:반복 없음, 1:반복실증
+            user_demo_repeat_count:$('#user_demo_repeat_count').val()*1,
             user_demo_goal: user_demo_goal,//	number	4		0			실증 목표	0::성능확인, 1:자체평가
             user_demo_option: user_demo_option,//	number	4		0			실증 조건	0: 일반환경, 1:특수환경
             user_demo_crops: $('#user_demo_crops').val(),//	varchar2	100					실증작물
+            user_demo_crops:user_demo_crops,
             culture_soil: culture_soil,//	number	4		0			생육토양	0: 토경재배, 1:수경재배, 2:고형배지재배
             demo_type: demo_type,//	number	4		0			실증 대상	0:해당없음, 1:시설자재, 2:ict기자재, 4:작물보호제/비료, 8:스마트팜sw, 16:생육모델, 32:로봇, 512:기타
             demo_start_date: $('#demo_start_date').val(),//	date						입주 시작 날짜

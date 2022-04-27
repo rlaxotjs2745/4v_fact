@@ -28,6 +28,14 @@
         FROM TB_USER_DEMO_BS
         WHERE IDX_DEMO_BUSINESS = #{idx_demo_business} AND IDX_USER=#{idx_user}
     </select>
+    <select id="getUserDemoBsByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.UserDemoBsVO">
+        SELECT
+            *
+        FROM TB_USER_DEMO_BS
+        WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
+    </select>
+
+
 
     <insert id="saveUserDemoBs" parameterType="kr.or.fact.core.model.DTO.UserDemoBsVO">
         INSERT INTO TB_USER_DEMO_BS (
@@ -72,8 +80,10 @@
             USER_DEMO_FACILITY,
             USER_DEMO_WAY,
             USER_DEMO_REPEAT,
+            USER_DEMO_REPEAT_COUNT,
             USER_DEMO_GOAL,
             USER_DEMO_OPTION,
+            USER_DEMO_IS_CROPS,
             USER_DEMO_CROPS,
             CULTURE_SOIL,
             DEMO_TYPE,
@@ -172,8 +182,11 @@
                      #{user_demo_facility},
                      #{user_demo_way},
                      #{user_demo_repeat},
+                     #{user_demo_repeat_count},
+
                      #{user_demo_goal},
                      #{user_demo_option},
+                     #{user_demo_is_crops},
                      #{user_demo_crops},
                      #{culture_soil},
                      #{demo_type},
@@ -296,8 +309,11 @@
             USER_DEMO_FACILITY = #{user_demo_facility},
             USER_DEMO_WAY = #{user_demo_way},
             USER_DEMO_REPEAT = #{user_demo_repeat},
+            USER_DEMO_REPEAT_COUNT = #{user_demo_repeat_count},
+
             USER_DEMO_GOAL = #{user_demo_goal},
             USER_DEMO_OPTION = #{user_demo_option},
+            USER_DEMO_IS_CROPS = #{user_demo_is_crops},
             USER_DEMO_CROPS = #{user_demo_crops},
             CULTURE_SOIL = #{culture_soil},
             DEMO_TYPE = #{demo_type},
@@ -372,8 +388,10 @@
                USER_DEMO_FACILITY = #{user_demo_facility},
                USER_DEMO_WAY = #{user_demo_way},
                USER_DEMO_REPEAT = #{user_demo_repeat},
+               USER_DEMO_REPEAT_COUNT = #{user_demo_repeat_count},
                USER_DEMO_GOAL = #{user_demo_goal},
                USER_DEMO_OPTION = #{user_demo_option},
+               USER_DEMO_IS_CROPS= #{user_demo_is_crops},
                USER_DEMO_CROPS = #{user_demo_crops},
                CULTURE_SOIL = #{culture_soil},
                DEMO_TYPE = #{demo_type},
@@ -785,7 +803,7 @@
 
 
 
-    <update id="updateUserDemoBsDetail" parameterType="kr.or.fact.core.model.DTO.UserDemoBsVO">
+    <update id="updateUserDemoBsDetail" parameterType="kr.or.fact.core.model.DTO.UserDemoBsDetailVO">
         UPDATE TB_USER_DEMO_BS_DETAIL SET
           CEO_RND_RESULT1 =#{ceo_rnd_result1},
           CEO_RND_RESULT1_ORG =#{ceo_rnd_result1_org},
@@ -956,10 +974,53 @@
           FACIL_PW3_V =#{facil_pw3_v},
           FACIL_PW3_W =#{facil_pw3_w},
           UPD_DATE = TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
-        WHERE IDX_USER_DEMO_BS_DETAIL = #{idx_user_demo_bs_detail}
+        WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
     </update>
 
+    <select id="getUserDemoBsHumanResourceList" parameterType="long" resultType="kr.or.fact.core.model.DTO.UserBsHumanResourceVO">
+        SELECT
+            *
+        FROM TB_USER_BS_HUMAN_RESOURCE
+        WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
+    </select>
 
+    <insert id="saveUserDemoBsHumanResource" parameterType="kr.or.fact.core.model.DTO.UserBsHumanResourceVO">
+    INSERT INTO TB_USER_BS_HUMAN_RESOURCE (
+    IDX_USER_BS_HUMAN_RESOURCE,
+    IDX_USER_DEMO_BS,
+    RND_USER_ORDER,
+    RND_USER_NAME,
+    RND_USER_ROLE,
+    RND_USER_CODE,
+    RND_USER_BIRTH,
+    RND_USER_GRAD,
+    RND_USER_COL,
+    RND_USER_SCHOOL,
+    RND_USER_COL_DATE,
+    RND_USER_COL_PART,
+    RND_USER_6T,
+    RND_USER_RESULT,
+    REG_DATE
+    ) VALUES (
+    SEQ_USER_BS_HUMAN_RESOURCE.NEXTVAL,
+    #{idx_user_demo_bs},
+    #{rnd_user_order},
+    #{rnd_user_name},
+    #{rnd_user_role},
+    #{rnd_user_code},
+    #{rnd_user_birth},
+    #{rnd_user_grad},
+    #{rnd_user_col},
+    #{rnd_user_school},
+    #{rnd_user_col_date},
+    #{rnd_user_col_part},
+    #{rnd_user_6t},
+    #{rnd_user_result},
+    TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+    )
+    </insert>
 
-
+    <delete id="deleteUserDemoBsHumanResource" parameterType="long">
+        DELETE FROM TB_USER_BS_HUMAN_RESOURCE WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
+    </delete>
 </mapper>

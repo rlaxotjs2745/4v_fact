@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html lang="ko" class="html-popup">
@@ -397,16 +398,16 @@
                                 <input id="ceo_rnd_result1" type="text" value="${userDemoBsDetailVO.ceo_rnd_result1}">
                             </td>
                             <td class="td__left">
-                                <input type="text" value="${userDemoBsDetailVO.ceo_rnd_result1_org}">
+                                <input id="ceo_rnd_result1_org" type="text" value="${userDemoBsDetailVO.ceo_rnd_result1_org}">
                             </td>
                             <td class="td__left">
-                                <input type="text" value="${userDemoBsDetailVO.ceo_rnd_result1_dur}">
+                                <input id="ceo_rnd_result1_dur" type="text" value="${userDemoBsDetailVO.ceo_rnd_result1_dur}">
                             </td>
                             <td class="td__left">
-                                <input type="text" value="${userDemoBsDetailVO.ceo_rnd_result1_role}">
+                                <input id="ceo_rnd_result1_role" type="text" value="${userDemoBsDetailVO.ceo_rnd_result1_role}">
                             </td>
                             <td class="td__left">
-                                <input type="text" value="${userDemoBsDetailVO.ceo_rnd_result1_result}">
+                                <input id="ceo_rnd_result1_result" type="text" value="${userDemoBsDetailVO.ceo_rnd_result1_result}">
                             </td>
                         </tr>
                         <tr>
@@ -432,254 +433,6 @@
                         <span class="btn__desc">*중요한 내용 위주로 작성해주시고 자세한 내용은 실증계획서에 상세하게 작성해 주십시오.</span>
                     </div>
                 </div>
-<%--
-                <div class="cnt__title">금융거래 현황</div>
-                <div class="table__unit">
-                    (단위:백만원)
-                </div>
-                <div class="table__type no--border">
-                    <table class="table__type--app">
-                        <colgroup>
-                            <col style="width:18%">
-                            <col style="width:16%">
-                            <col style="width:16%">
-                            <col style="width:16%">
-                            <col style="width:16%">
-                            <col style="width:18%">
-                        </colgroup>
-                        <tbody>
-                        <tr>
-                            <th>대출기관</th>
-                            <th>자금용도<br>(운전/시설)</th>
-                            <th>대출금액</th>
-                            <th>대출금리</th>
-                            <th>대출만기일</th>
-                            <th>담보형태<br>(신용,기업,개인)</th>
-                        </tr>
-                        <tr>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class="app__btn">
-                        <a href="#none" class="btn default fl-right" title="행추가">┼</a>
-                    </div>
-                </div>
-                <!--//-->
-
-                <div class="cnt__title">정책자금 사용현황(최근 3년)</div>
-                <div class="table__unit">
-                    (단위:백만원)
-                </div>
-                <div class="table__type no--border">
-                    <table class="table__type--app">
-                        <colgroup>
-                            <col style="width:10%">
-                            <col style="width:16%">
-                            <col style="width:18%">
-                            <col style="width:14%">
-                            <col style="width:14%">
-                            <col style="width:14%">
-                            <col style="width:14%">
-                        </colgroup>
-                        <tbody>
-                        <tr>
-                            <th>구분</th>
-                            <th>사업명</th>
-                            <th>과제명</th>
-                            <th>자원기관</th>
-                            <th>금액</th>
-                            <th>신청일</th>
-                            <th>진행상황<br>(완료/예정일)</th>
-                        </tr>
-                        <tr>
-                            <td rowspan="3">중앙 정부
-                                <a href="#none" class="btn default fl-right pos-bottom" title="행추가">┼</a>
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td rowspan="3">지자체
-                                <a href="#none" class="btn default fl-right pos-bottom" title="행추가">┼</a>
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!--//-->--%>
-
                 <div class="cnt__title">연구개발 추진 현황</div>
                 <div class="table__type no--border">
                     <table class="table__type--app">
@@ -697,51 +450,51 @@
                         <tr>
                             <td rowspan="3">자체개발</td>
                             <td class="td__left">
-                                <input id="rnd_effort1" type="text" val="${userDemoBsDetailVO.rnd_effort1}">
+                                <input id="rnd_effort1" type="text" value="${userDemoBsDetailVO.rnd_effort1}">
                             </td>
                             <td class="td__left">
-                                <input id="rnd_effort1_etc" type="text" val="${userDemoBsDetailVO.rnd_effort1_etc}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="td__left">
-                                <input id="rnd_effort2" type="text" val="${userDemoBsDetailVO.rnd_effort2}">
-                            </td>
-                            <td class="td__left">
-                                <input id="rnd_effort2_etc" type="text" val="${userDemoBsDetailVO.rnd_effort2_etc}">
+                                <input id="rnd_effort1_etc" type="text" value="${userDemoBsDetailVO.rnd_effort1_etc}">
                             </td>
                         </tr>
                         <tr>
                             <td class="td__left">
-                                <input id="rnd_effort3" type="text" val="${userDemoBsDetailVO.rnd_effort3}">
+                                <input id="rnd_effort2" type="text" value="${userDemoBsDetailVO.rnd_effort2}">
                             </td>
                             <td class="td__left">
-                                <input id="rnd_effort3_etc" type="text" val="${userDemoBsDetailVO.rnd_effort3_etc}">
+                                <input id="rnd_effort2_etc" type="text" value="${userDemoBsDetailVO.rnd_effort2_etc}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td__left">
+                                <input id="rnd_effort3" type="text" value="${userDemoBsDetailVO.rnd_effort3}">
+                            </td>
+                            <td class="td__left">
+                                <input id="rnd_effort3_etc" type="text" value="${userDemoBsDetailVO.rnd_effort3_etc}">
                             </td>
                         </tr>
                         <tr>
                             <td rowspan="3">국가과제</td>
                             <td class="td__left">
-                                <input id="rnd_effort4" type="text" val="${userDemoBsDetailVO.rnd_effort4}">
+                                <input id="rnd_effort4" type="text" value="${userDemoBsDetailVO.rnd_effort4}">
                             </td>
                             <td class="td__left">
-                                <input id="rnd_effort4_etc" type="text" val="${userDemoBsDetailVO.rnd_effort4_etc}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="td__left">
-                                <input id="rnd_effort5" type="text" val="${userDemoBsDetailVO.rnd_effort5}">
-                            </td>
-                            <td class="td__left">
-                                <input id="rnd_effort5_etc" type="text" val="${userDemoBsDetailVO.rnd_effort5_etc}">
+                                <input id="rnd_effort4_etc" type="text" value="${userDemoBsDetailVO.rnd_effort4_etc}">
                             </td>
                         </tr>
                         <tr>
                             <td class="td__left">
-                                <input id="rnd_effort6" type="text" val="${userDemoBsDetailVO.rnd_effort6}">
+                                <input id="rnd_effort5" type="text" value="${userDemoBsDetailVO.rnd_effort5}">
                             </td>
                             <td class="td__left">
-                                <input id="rnd_effort6_etc" type="text" val="${userDemoBsDetailVO.rnd_effort6_etc}">
+                                <input id="rnd_effort5_etc" type="text" value="${userDemoBsDetailVO.rnd_effort5_etc}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td__left">
+                                <input id="rnd_effort6" type="text" value="${userDemoBsDetailVO.rnd_effort6}">
+                            </td>
+                            <td class="td__left">
+                                <input id="rnd_effort6_etc" type="text" value="${userDemoBsDetailVO.rnd_effort6_etc}">
                             </td>
                         </tr>
                         </tbody>
@@ -771,62 +524,62 @@
                         </tr>
                         <tr>
                             <td class="td__left">
-                                <input id="own_ip1_type" type="text" val="${userDemoBsDetailVO.own_ip1_type}">
+                                <input id="own_ip1_type" type="text" value="${userDemoBsDetailVO.own_ip1_type}">
                             </td>
                             <td class="td__left">
-                                <input id="own_ip1_code" type="text" val="${userDemoBsDetailVO.own_ip1_code}">
+                                <input id="own_ip1_code" type="text" value="${userDemoBsDetailVO.own_ip1_code}">
                             </td>
                             <td class="td__left">
-                                <input id="own_ip1" type="text" val="${userDemoBsDetailVO.own_ip1}">
+                                <input id="own_ip1" type="text" value="${userDemoBsDetailVO.own_ip1}">
                             </td>
                             <td class="td__left">
-                                <input id="own_ip1_date" type="text" val="${userDemoBsDetailVO.own_ip1_date}">
+                                <input id="own_ip1_date" type="text" value="${userDemoBsDetailVO.own_ip1_date}">
                             </td>
                             <td class="td__left">
-                                <input id="own_ip1_org" type="text" val="${userDemoBsDetailVO.own_ip1_org}">
+                                <input id="own_ip1_org" type="text" value="${userDemoBsDetailVO.own_ip1_org}">
                             </td>
                             <td class="td__left">
-                                <input id="own_ip1_etc" type="text" val="${userDemoBsDetailVO.own_ip1_etc}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="td__left">
-                                <input id="own_ip2_type" type="text" val="${userDemoBsDetailVO.own_ip2_type}">
-                            </td>
-                            <td class="td__left">
-                                <input id="own_ip2_code" type="text" val="${userDemoBsDetailVO.own_ip2_code}">
-                            </td>
-                            <td class="td__left">
-                                <input id="own_ip2" type="text" val="${userDemoBsDetailVO.own_ip2}">
-                            </td>
-                            <td class="td__left">
-                                <input id="own_ip2_date" type="text" val="${userDemoBsDetailVO.own_ip2_date}">
-                            </td>
-                            <td class="td__left">
-                                <input id="own_ip2_org" type="text" val="${userDemoBsDetailVO.own_ip2_org}">
-                            </td>
-                            <td class="td__left">
-                                <input id="own_ip2_etc" type="text" val="${userDemoBsDetailVO.own_ip2_etc}">
+                                <input id="own_ip1_etc" type="text" value="${userDemoBsDetailVO.own_ip1_etc}">
                             </td>
                         </tr>
                         <tr>
                             <td class="td__left">
-                                <input id="own_ip3_type" type="text" val="${userDemoBsDetailVO.own_ip3_type}">
+                                <input id="own_ip2_type" type="text" value="${userDemoBsDetailVO.own_ip2_type}">
                             </td>
                             <td class="td__left">
-                                <input id="own_ip3_code" type="text" val="${userDemoBsDetailVO.own_ip3_code}">
+                                <input id="own_ip2_code" type="text" value="${userDemoBsDetailVO.own_ip2_code}">
                             </td>
                             <td class="td__left">
-                                <input id="own_ip3" type="text" val="${userDemoBsDetailVO.own_ip3}">
+                                <input id="own_ip2" type="text" value="${userDemoBsDetailVO.own_ip2}">
                             </td>
                             <td class="td__left">
-                                <input id="own_ip3_date" type="text" val="${userDemoBsDetailVO.own_ip3_date}">
+                                <input id="own_ip2_date" type="text" value="${userDemoBsDetailVO.own_ip2_date}">
                             </td>
                             <td class="td__left">
-                                <input id="own_ip3_org" type="text" val="${userDemoBsDetailVO.own_ip3_org}">
+                                <input id="own_ip2_org" type="text" value="${userDemoBsDetailVO.own_ip2_org}">
                             </td>
                             <td class="td__left">
-                                <input id="own_ip3_etc" type="text" val="${userDemoBsDetailVO.own_ip3_etc}">
+                                <input id="own_ip2_etc" type="text" value="${userDemoBsDetailVO.own_ip2_etc}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td__left">
+                                <input id="own_ip3_type" type="text" value="${userDemoBsDetailVO.own_ip3_type}">
+                            </td>
+                            <td class="td__left">
+                                <input id="own_ip3_code" type="text" value="${userDemoBsDetailVO.own_ip3_code}">
+                            </td>
+                            <td class="td__left">
+                                <input id="own_ip3" type="text" value="${userDemoBsDetailVO.own_ip3}">
+                            </td>
+                            <td class="td__left">
+                                <input id="own_ip3_date" type="text" value="${userDemoBsDetailVO.own_ip3_date}">
+                            </td>
+                            <td class="td__left">
+                                <input id="own_ip3_org" type="text" value="${userDemoBsDetailVO.own_ip3_org}">
+                            </td>
+                            <td class="td__left">
+                                <input id="own_ip3_etc" type="text" value="${userDemoBsDetailVO.own_ip3_etc}">
                             </td>
                         </tr>
                         </tbody>
@@ -852,44 +605,44 @@
                         </tr>
                         <tr>
                             <td class="td__left">
-                                <input id="own_cert1_type" type="text" val="${userDemoBsDetailVO.own_cert1_type}">
+                                <input id="own_cert1_type" type="text" value="${userDemoBsDetailVO.own_cert1_type}">
                             </td>
                             <td class="td__left">
-                                <input id="own_cert1_code" type="text" val="${userDemoBsDetailVO.own_cert1_code}">
+                                <input id="own_cert1_code" type="text" value="${userDemoBsDetailVO.own_cert1_code}">
                             </td>
                             <td class="td__left">
-                                <input id="own_cert1" type="text" val="${userDemoBsDetailVO.own_cert1}">
+                                <input id="own_cert1" type="text" value="${userDemoBsDetailVO.own_cert1}">
                             </td>
                             <td class="td__left">
-                                <input id="own_cert1_date" type="text" val="${userDemoBsDetailVO.own_cert1_date}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="td__left">
-                                <input id="own_cert2_type" type="text" val="${userDemoBsDetailVO.own_cert2_type}">
-                            </td>
-                            <td class="td__left">
-                                <input id="own_cert2_code" type="text" val="${userDemoBsDetailVO.own_cert2_code}">
-                            </td>
-                            <td class="td__left">
-                                <input id="own_cert2" type="text" val="${userDemoBsDetailVO.own_cert2}">
-                            </td>
-                            <td class="td__left">
-                                <input id="own_cert2_date" type="text" val="${userDemoBsDetailVO.own_cert2_date}">
+                                <input id="own_cert1_date" type="text" value="${userDemoBsDetailVO.own_cert1_date}">
                             </td>
                         </tr>
                         <tr>
                             <td class="td__left">
-                                <input id="own_cert3_type" type="text" val="${userDemoBsDetailVO.own_cert3_type}">
+                                <input id="own_cert2_type" type="text" value="${userDemoBsDetailVO.own_cert2_type}">
                             </td>
                             <td class="td__left">
-                                <input id="own_cert3_code" type="text" val="${userDemoBsDetailVO.own_cert3_code}">
+                                <input id="own_cert2_code" type="text" value="${userDemoBsDetailVO.own_cert2_code}">
                             </td>
                             <td class="td__left">
-                                <input id="own_cert3" type="text" val="${userDemoBsDetailVO.own_cert3}">
+                                <input id="own_cert2" type="text" value="${userDemoBsDetailVO.own_cert2}">
                             </td>
                             <td class="td__left">
-                                <input id="own_cert3_date" type="text" val="${userDemoBsDetailVO.own_cert3_date}">
+                                <input id="own_cert2_date" type="text" value="${userDemoBsDetailVO.own_cert2_date}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td__left">
+                                <input id="own_cert3_type" type="text" value="${userDemoBsDetailVO.own_cert3_type}">
+                            </td>
+                            <td class="td__left">
+                                <input id="own_cert3_code" type="text" value="${userDemoBsDetailVO.own_cert3_code}">
+                            </td>
+                            <td class="td__left">
+                                <input id="own_cert3" type="text" value="${userDemoBsDetailVO.own_cert3}">
+                            </td>
+                            <td class="td__left">
+                                <input id="own_cert3_date" type="text" value="${userDemoBsDetailVO.own_cert3_date}">
                             </td>
                         </tr>
                         </tbody>
@@ -910,7 +663,7 @@
                             <col style="width:15%">
                             <col style="width:25%">
                         </colgroup>
-                        <tbody>
+                        <tbody id="human_table">
                         <tr>
                             <th rowspan="2">번호</th>
                             <th>성명</th>
@@ -923,128 +676,55 @@
                             <th>직위</th>
                             <th>생년월일</th>
                             <th>학교</th>
-                            <th>학교(학위)</th>
+                            <th>학력(학위)</th>
                             <th>취득년도</th>
                             <th>6T관련<br>기술분류</th>
                         </tr>
-                        <tr>
-                            <td rowspan="2">1</td>
+                        <c:forEach items="${userBsHumanResourceVOList}" var="humanR" varStatus="status">
+                        <tr id="human1_t${status.count}">
+
+                            <td rowspan="2">${status.count}</td>
                             <td class="td__left">
-                                <input id="" type="text" val="">
+                                <input id="rnd_user_name${status.count}" type="text" value="${humanR.rnd_user_name}">
                             </td>
                             <td class="td__left">
-                                <input id="" type="text" val="">
+                                <input id="rnd_user_code${status.count}" type="text" value="${humanR.rnd_user_code}">
                             </td>
                             <td class="td__left" rowspan="2">
-                                <input id="" type="text" val="">
+                                <input id="rnd_user_school${status.count}" type="text" value="${humanR.rnd_user_school}">
                             </td>
                             <td class="td__left" rowspan="2">
-                                <input id="" type="text" val="">
+                                <input id="rnd_user_grad${status.count}" type="text" value="${humanR.rnd_user_grad}">
                             </td>
                             <td class="td__left" rowspan="2">
-                                <input id="" type="text" val="">
+                                <input id="rnd_user_col_date${status.count}" type="text" value="${humanR.rnd_user_col_date}">
                             </td>
                             <td class="td__left">
-                                <input id="" type="text" val="">
+                                <input id="rnd_user_col_part${status.count}" type="text" value="${humanR.rnd_user_col_part}">
                             </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
+                            <td class="td__left" rowspan="2">
+                                <input id="rnd_user_result${status.count}" type="text" value="${humanR.rnd_user_result}">
                             </td>
                         </tr>
-                        <tr>
+                        <tr id="human2_t${status.count}">
                             <td class="td__left">
-                                <input id="" type="text" val="">
+                                <input id="rnd_user_role${status.count}" type="text" value="${humanR.rnd_user_role}">
                             </td>
                             <td class="td__left">
-                                <input id="" type="text" val="">
+                                <input id="rnd_user_birth${status.count}" type="text" value="${humanR.rnd_user_birth}">
                             </td>
                             <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
+                                <input id="rnd_user_6t${status.count}" type="text" value="${humanR.rnd_user_6t}">
                             </td>
                         </tr>
-                        <tr>
-                            <td rowspan="2">2</td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left" rowspan="2">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left" rowspan="2">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left" rowspan="2">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td rowspan="2">3</td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left" rowspan="2">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left" rowspan="2">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left" rowspan="2">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                            <td class="td__left">
-                                <input id="" type="text" val="">
-                            </td>
-                        </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                     <div class="app__btn">
-                        <a href="#none" class="btn default fl-right" title="행추가">┼</a>
+                        <button id="human_delete" class="btn default fl-right" title="행추가">-</button>
+                    </div>
+                    <div class="app__btn">
+                        <button id="human_add" class="btn default fl-right" title="행추가">┼</button>
                     </div>
                 </div>
                 <!--//-->
@@ -1076,73 +756,73 @@
                         <tr>
                             <th>1</th>
                             <td class="td__left">
-                                <input id="own_device1" type="text" val="${userDemoBsDetailVO.own_device1}">
+                                <input id="own_device1" type="text" value="${userDemoBsDetailVO.own_device1}">
                             </td>
                             <td class="td__left">
-                                <input id="own_device1_weight" type="text" val="${userDemoBsDetailVO.own_device1_weight}">
+                                <input id="own_device1_weight" type="text" value="${userDemoBsDetailVO.own_device1_weight}">
                             </td>
                             <td class="td__left">
-                                <input id="own_device1_size" type="text" val="${userDemoBsDetailVO.own_device1_size}">
+                                <input id="own_device1_size" type="text" value="${userDemoBsDetailVO.own_device1_size}">
                             </td>
                             <td class="td__left">
-                                <input id="own_device1_pw" type="text" val="${userDemoBsDetailVO.own_device1_pw}">
+                                <input id="own_device1_pw" type="text" value="${userDemoBsDetailVO.own_device1_pw}">
                             </td>
                             <td class="td__left">
-                                <input id="own_device1_wat" type="text" val="${userDemoBsDetailVO.own_device1_wat}">
+                                <input id="own_device1_wat" type="text" value="${userDemoBsDetailVO.own_device1_wat}">
                             </td>
                             <td class="td__left">
-                                <input id="own_device1_type" type="text" val="${userDemoBsDetailVO.own_device1_type}">
+                                <input id="own_device1_type" type="text" value="${userDemoBsDetailVO.own_device1_type}">
                             </td>
                             <td class="td__left">
-                                <input id="is_in_own_device1" type="text" val="${userDemoBsDetailVO.is_in_own_device1}">
+                                <input id="is_in_own_device1" type="text" value="${userDemoBsDetailVO.is_in_own_device1}">
                             </td>
                         </tr>
                         <tr>
                             <th>2</th>
                             <td class="td__left">
-                                <input id="own_device2" type="text" val="${userDemoBsDetailVO.own_device2}">
+                                <input id="own_device2" type="text" value="${userDemoBsDetailVO.own_device2}">
                             </td>
                             <td class="td__left">
-                                <input id="own_device2_weight" type="text" val="${userDemoBsDetailVO.own_device2_weight}">
+                                <input id="own_device2_weight" type="text" value="${userDemoBsDetailVO.own_device2_weight}">
                             </td>
                             <td class="td__left">
-                                <input id="own_device2_size" type="text" val="${userDemoBsDetailVO.own_device2_size}">
+                                <input id="own_device2_size" type="text" value="${userDemoBsDetailVO.own_device2_size}">
                             </td>
                             <td class="td__left">
-                                <input id="own_device2_pw" type="text" val="${userDemoBsDetailVO.own_device2_pw}">
+                                <input id="own_device2_pw" type="text" value="${userDemoBsDetailVO.own_device2_pw}">
                             </td>
                             <td class="td__left">
-                                <input id="own_device2_wat" type="text" val="${userDemoBsDetailVO.own_device2_wat}">
+                                <input id="own_device2_wat" type="text" value="${userDemoBsDetailVO.own_device2_wat}">
                             </td>
                             <td class="td__left">
-                                <input id="own_device2_type" type="text" val="${userDemoBsDetailVO.own_device2_type}">
+                                <input id="own_device2_type" type="text" value="${userDemoBsDetailVO.own_device2_type}">
                             </td>
                             <td class="td__left">
-                                <input id="is_in_own_device2" type="text" val="${userDemoBsDetailVO.is_in_own_device2}">
+                                <input id="is_in_own_device2" type="text" value="${userDemoBsDetailVO.is_in_own_device2}">
                             </td>
                         </tr>
                         <tr>
                             <th>3</th>
                             <td class="td__left">
-                                <input id="own_device3" type="text" val="${userDemoBsDetailVO.own_device3}">
+                                <input id="own_device3" type="text" value="${userDemoBsDetailVO.own_device3}">
                             </td>
                             <td class="td__left">
-                                <input id="own_device3_weight" type="text" val="${userDemoBsDetailVO.own_device3_weight}">
+                                <input id="own_device3_weight" type="text" value="${userDemoBsDetailVO.own_device3_weight}">
                             </td>
                             <td class="td__left">
-                                <input id="own_device3_size" type="text" val="${userDemoBsDetailVO.own_device3_size}">
+                                <input id="own_device3_size" type="text" value="${userDemoBsDetailVO.own_device3_size}">
                             </td>
                             <td class="td__left">
-                                <input id="own_device3_pw" type="text" val="${userDemoBsDetailVO.own_device3_pw}">
+                                <input id="own_device3_pw" type="text" value="${userDemoBsDetailVO.own_device3_pw}">
                             </td>
                             <td class="td__left">
-                                <input id="own_device3_wat" type="text" val="${userDemoBsDetailVO.own_device3_wat}">
+                                <input id="own_device3_wat" type="text" value="${userDemoBsDetailVO.own_device3_wat}">
                             </td>
                             <td class="td__left">
-                                <input id="own_device3_type" type="text" val="${userDemoBsDetailVO.own_device3_type}">
+                                <input id="own_device3_type" type="text" value="${userDemoBsDetailVO.own_device3_type}">
                             </td>
                             <td class="td__left">
-                                <input id="is_in_own_device3" type="text" val="${userDemoBsDetailVO.is_in_own_device3}">
+                                <input id="is_in_own_device3" type="text" value="${userDemoBsDetailVO.is_in_own_device3}">
                             </td>
                         </tr>
                         </tbody>
@@ -1159,25 +839,19 @@
                 <div class="editor__title">
                     <strong>실증배경, 필요성, 목표</strong> (실증을 해야하는 이유가 잘 설명되도록 작성)
                 </div>
-                <textarea id="demo_needs" class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">
-                    ${userDemoBsDetailVO.demo_needs}
-                </textarea>
+                <textarea id="demo_needs" class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">${userDemoBsDetailVO.demo_needs}</textarea>
                 <!--//-->
 
                 <div class="editor__title">
                     <strong>실증관리 핵심요소</strong> (실증과정에서 가장 중요하게 관리/유지되어야 하는 사항)
                 </div>
-                <textarea id="demo_main_point" class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">
-                    ${userDemoBsDetailVO.demo_main_point}
-                </textarea>
+                <textarea id="demo_main_point" class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">${userDemoBsDetailVO.demo_main_point}</textarea>
                 <!--//-->
 
                 <div class="editor__title">
                     <strong>실증결과의 활용계획</strong> (실증결과의 활용계획)
                 </div>
-                <textarea id="demo_use_plan" class="editor__box" style="border: 1px solid #e8e8e8;" rows="">
-                    ${userDemoBsDetailVO.demo_use_plan}
-                </textarea>
+                <textarea id="demo_use_plan" class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">${userDemoBsDetailVO.demo_use_plan}</textarea>
                 <!--//-->
 
                 <div class="cnt__title">실증기간</div>
@@ -1237,7 +911,7 @@
                                 - 기타자재 : 베드, 거터 등
                             </td>
                             <td>
-                                <textarea name="" id="demo_facil_mat" cols="10" rows="3">${userDemoBsDetailVO.demo_facil_mat}</textarea>
+                                <textarea id="demo_facil_mat" cols="10" rows="3">${userDemoBsDetailVO.demo_facil_mat}</textarea>
                             </td>
                         </tr>
                         <tr>
@@ -1248,7 +922,7 @@
                                 - 구동기류 : 천창, 측창, 환풍기, 냉/낭방기, 양액/관수기 등
                             </td>
                             <td>
-                                <textarea name="" id="demo_facil_ict" cols="10" rows="2">${userDemoBsDetailVO.demo_facil_ict}</textarea>
+                                <textarea id="demo_facil_ict" cols="10" rows="3">${userDemoBsDetailVO.demo_facil_ict}</textarea>
                             </td>
                         </tr>
                         <tr>
@@ -1257,7 +931,7 @@
                                 - 작불보호제, 영양제, 비료,  양액 등
                             </td>
                             <td>
-                                <textarea name="" id="demo_facil_fer" cols="10" rows="1">${userDemoBsDetailVO.demo_facil_fer}</textarea>
+                                <textarea id="demo_facil_fer" cols="10" rows="1">${userDemoBsDetailVO.demo_facil_fer}</textarea>
                             </td>
                         </tr>
                         <tr>
@@ -1267,7 +941,7 @@
                                 - 관제SW : 스마트팜 통합관리용
                             </td>
                             <td>
-                                <textarea name="" id="demo_facil_sw" cols="10" rows="1">${userDemoBsDetailVO.demo_facil_sw}</textarea>
+                                <textarea id="demo_facil_sw" cols="10" rows="1">${userDemoBsDetailVO.demo_facil_sw}</textarea>
                             </td>
                         </tr>
                         <tr>
@@ -1277,7 +951,7 @@
                                 - 수확기, 선별기, 운반기 등
                             </td>
                             <td>
-                                <textarea name="" id="demo_facil_robot" cols="10" rows="1">${userDemoBsDetailVO.demo_facil_robot}</textarea>
+                                <textarea id="demo_facil_robot" cols="10" rows="1">${userDemoBsDetailVO.demo_facil_robot}</textarea>
                             </td>
                         </tr>
                         <tr>
@@ -1286,7 +960,7 @@
                                 - 육모모델 생장모델, 기능성모델
                             </td>
                             <td>
-                                <textarea name="" id="demo_facil_model" cols="10" rows="1">${userDemoBsDetailVO.demo_facil_model}</textarea>
+                                <textarea id="demo_facil_model" cols="10" rows="1">${userDemoBsDetailVO.demo_facil_model}</textarea>
                             </td>
                         </tr>
                         </tbody>
@@ -1310,12 +984,12 @@
                             <td>실증 주체</td>
                             <td class="td__left">
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증주체-1" name="실증주체">
-                                    <label for="실증주체-1">자율실증</label>
+                                    <input id="user_demo_type1" type="checkbox" name="user_demo_type" onClick="return false;" value="1">
+                                    <label for="user_demo_type1">자율실증</label>
                                 </div>
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증주체-2" name="실증주체">
-                                    <label for="실증주체-2">위탁실증</label>
+                                    <input id="user_demo_type2" type="checkbox" name="user_demo_type" onClick="return false;" value="2">
+                                    <label for="user_demo_type2">위탁실증</label>
                                 </div>
                             </td>
                         </tr>
@@ -1323,32 +997,32 @@
                             <td>실증 시설</td>
                             <td class="td__left">
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증시설-1" name="실증시설">
-                                    <label for="실증시설-1">단동유리온실</label>
+                                    <input id="user_demo_facility5" type="checkbox" name="user_demo_facility" onClick="return false;" value="16">
+                                    <label for="user_demo_facility5">단동유리온실</label>
                                 </div>
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증시설-2" name="실증시설">
-                                    <label for="실증시설-2">연동유리온실</label>
+                                    <input id="user_demo_facility6" type="checkbox" name="user_demo_facility" onClick="return false;" value="32">
+                                    <label for="user_demo_facility6">연동유리온실</label>
                                 </div>
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증시설-3" name="실증시설">
-                                    <label for="실증시설-3">단동비닐온실</label>
+                                    <input id="user_demo_facility1" type="checkbox" name="user_demo_facility" onClick="return false;" value="1">
+                                    <label for="user_demo_facility1">단동비닐온실</label>
                                 </div>
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증시설-4" name="실증시설">
-                                    <label for="실증시설-4">연동비닐온실</label>
+                                    <input id="user_demo_facility2" type="checkbox" name="user_demo_facility" onClick="return false;" value="2">
+                                    <label for="user_demo_facility2">연동비닐온실</label>
                                 </div>
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증시설-5" name="실증시설">
-                                    <label for="실증시설-5">노지</label>
+                                    <input id="user_demo_facility4" type="checkbox" name="user_demo_facility" onClick="return false;" value="8">
+                                    <label for="user_demo_facility4">노지</label>
                                 </div>
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증시설-6" name="실증시설">
-                                    <label for="실증시설-6">식물공장</label>
+                                    <input id="user_demo_facility7" type="checkbox" name="user_demo_facility" onClick="return false;" value="64">
+                                    <label for="user_demo_facility7">식물공장</label>
                                 </div>
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증시설-7" name="실증시설">
-                                    <label for="실증시설-7">육묘장</label>
+                                    <input id="user_demo_facility3" type="checkbox" name="user_demo_facility" onClick="return false;" value="4">
+                                    <label for="user_demo_facility3">육묘장</label>
                                 </div>
                             </td>
                         </tr>
@@ -1356,12 +1030,12 @@
                             <td>실증 방법</td>
                             <td class="td__left">
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증방법-1" name="실증방법">
-                                    <label for="실증방법-1">비교실증</label>
+                                    <input id="user_demo_way1" type="checkbox" name="user_demo_way" onClick="return false;" value="1">
+                                    <label for="user_demo_way1">비교실증</label>
                                 </div>
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증방법-2" name="실증방법">
-                                    <label for="실증방법-2">단순실증</label>
+                                    <input id="user_demo_way2" type="checkbox" name="user_demo_way" onClick="return false;" value="2">
+                                    <label for="user_demo_way2">단순실증</label>
                                 </div>
                             </td>
                         </tr>
@@ -1369,12 +1043,12 @@
                             <td>실증 목적</td>
                             <td class="td__left">
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증목적-1" name="실증목적">
-                                    <label for="실증목적-1">성능확인실증</label>
+                                    <input id="user_demo_goal1" type="checkbox" name="user_demo_goal" onClick="return false;" value="1">
+                                    <label for="user_demo_goal1">성능확인실증</label>
                                 </div>
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증목적-2" name="실증목적">
-                                    <label for="실증목적-2">자체평가실증</label>
+                                    <input id="user_demo_goal2" type="checkbox" name="user_demo_goal" onClick="return false;" value="2">
+                                    <label for="user_demo_goal2">자체평가실증</label>
                                 </div>
                             </td>
                         </tr>
@@ -1382,44 +1056,44 @@
                             <td>실증 횟수</td>
                             <td class="td__left">
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증횟수-1" name="실증횟수">
-                                    <label for="실증횟수-1">1회성실증</label>
+                                    <input id="user_demo_repeat1" type="checkbox" name="user_demo_repeat" onClick="return false;" value="1">
+                                    <label for="user_demo_repeat1">1회성실증</label>
                                 </div>
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증횟수-2" name="실증횟수">
-                                    <label for="실증횟수-2">반복실증</label>
+                                    <input id="user_demo_repeat2" type="checkbox"name="user_demo_repeat" onClick="return false;" value="2">
+                                    <label for="user_demo_repeat2">반복실증</label>
                                 </div>
-                                (반복횟수: <input id="" type="text" style="width:100px;"> 회)
+                                (반복횟수: <input id="user_demo_repeat_count" type="text" style="width:100px;" value="${userDemoBs.user_demo_repeat_count}" disabled> 회)
                             </td>
                         </tr>
                         <tr>
                             <td>실증 작물</td>
                             <td class="td__left">
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증작물-1" name="실증작물">
-                                    <label for="실증횟수-1">비작물실증</label>
+                                    <input id="user_demo_is_crops1" type="checkbox" name="user_demo_is_crops" onClick="return false;" value="2">
+                                    <label for="user_demo_is_crops1">비작물실증</label>
                                 </div>
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증작물-2" name="실증작물">
-                                    <label for="실증횟수-2">작물대상실증</label>
+                                    <input id="user_demo_is_crops2" type="checkbox" name="user_demo_is_crops" onClick="return false;" value="1">
+                                    <label for="user_demo_is_crops2">작물대상실증</label>
                                 </div>
-                                (실증대상 작물명: <input id="" type="text" style="width:200px;">)
+                                (실증대상 작물명: <input id="user_demo_crops" type="text" style="width:200px;" value="${userDemoBs.user_demo_crops}" disabled>)
                             </td>
                         </tr>
                         <tr>
                             <td>생육 토양</td>
                             <td class="td__left">
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="생육토양-1" name="생육토양">
-                                    <label for="생육토양-1">토경재배실증</label>
+                                    <input id="culture_soil1" type="checkbox" name="culture_soil" onClick="return false;" value="1">
+                                    <label for="culture_soil1">토경재배실증</label>
                                 </div>
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="생육토양-2" name="생육토양">
-                                    <label for="생육토양-2">수경재배실증</label>
+                                    <input id="culture_soil2" type="checkbox" name="culture_soil" onClick="return false;" value="2">
+                                    <label for="culture_soil2">수경재배실증</label>
                                 </div>
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="생육토양-3" name="생육토양">
-                                    <label for="생육토양-3">고형배지재배실증</label>
+                                    <input id="culture_soil3" type="checkbox" name="culture_soil" onClick="return false;" value="4">
+                                    <label for="culture_soil3">고형배지재배실증</label>
                                 </div>
                             </td>
                         </tr>
@@ -1427,17 +1101,17 @@
                             <td>실증 조건</td>
                             <td class="td__left">
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증조건-1" name="실증조건">
-                                    <label for="실증조건-1">일반환경실증</label>
+                                    <input id="user_demo_option1" type="checkbox" name="user_demo_option" onClick="return false;" value="1">
+                                    <label for="user_demo_option1">일반환경실증</label>
                                 </div>
                                 <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증조건-2" name="실증조건">
-                                    <label for="실증조건-2">특수환경실증</label>
+                                    <input id="user_demo_option2" type="checkbox" name="user_demo_option" onClick="return false;" value="2">
+                                    <label for="user_demo_option2">특수환경실증</label>
                                 </div>
-                                <div class="checkbox checkbox--inline">
-                                    <input id="" type="checkbox" id="실증조건-3" name="실증조건">
+<%--                                <div class="checkbox checkbox--inline">
+                                    <input id="user_demo_option2" type="checkbox" id="실증조건-3" name="실증조건">
                                     <label for="실증조건-3">특수기후실증</label>
-                                </div>
+                                </div>--%>
                             </td>
                         </tr>
                         </tbody>
@@ -1454,9 +1128,7 @@
                         <li>- 비교실증인 경우 실험군과 대조군의 특성을 알 수 있게 설명</li>
                     </ul>
                 </div>
-                <textarea class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">
-                    ${userDemoBsDetailVO.demo_paln_gh}
-                </textarea>
+                <textarea id="demo_paln_gh" class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">${userDemoBsDetailVO.demo_paln_gh}</textarea>
                 <!--//-->
                 <div class="editor__title">
                     <strong>2)기자재설치</strong>
@@ -1466,9 +1138,7 @@
                         <li>- 비교실증인 경우 실험군과 대조군의 특성을 알 수 있게 설명</li>
                     </ul>
                 </div>
-                <textarea class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">
-                    ${userDemoBsDetailVO.demo_paln_facil}
-                </textarea>
+                <textarea id="demo_paln_facil" class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">${userDemoBsDetailVO.demo_paln_facil}</textarea>
                 <!--//-->
                 <div class="editor__title">
                     <strong>3)실험,시험 분석</strong>
@@ -1477,9 +1147,7 @@
                         <li>- 시험분석 : 기자재나 장비에 대한 검사 분석 계획 </li>
                     </ul>
                 </div>
-                <textarea class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">
-                    ${userDemoBsDetailVO.demo_paln_exper}
-                </textarea>
+                <textarea id="demo_paln_exper" class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">${userDemoBsDetailVO.demo_paln_exper}</textarea>
                 <!--//-->
                 <div class="editor__title">
                     <strong>4)실증관리</strong>
@@ -1488,9 +1156,7 @@
                         <li>- 인전관리 : 실증과정중 예상되는 위험상황과 대응계획</li>
                     </ul>
                 </div>
-                <textarea class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">
-                    ${userDemoBsDetailVO.demo_paln_mng}
-                </textarea>
+                <textarea id="demo_paln_mng" class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">${userDemoBsDetailVO.demo_paln_mng}</textarea>
                 <!--//-->
 
                 <div class="table__caption">3.사업과 계획</div>
@@ -1502,9 +1168,7 @@
                         <li>- 실증대상의 사업화에 필요한 인증과 인증확보 계획</li>
                     </ul>
                 </div>
-                <textarea class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">
-                    ${userDemoBsDetailVO.demo_plan_ip}
-                </textarea>
+                <textarea id="demo_plan_ip" class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">${userDemoBsDetailVO.demo_plan_ip}</textarea>
                 <!--//-->
 
                 <div class="cnt__title">국내외 시장성</div>
@@ -1514,9 +1178,7 @@
                         <li>- 실증대상과 관련한 국내외 시장현황과 전망(상세자료 별첨가능, 기타 서류 등록 단계에서 첨부해 주세요.)</li>
                     </ul>
                 </div>
-                <textarea class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">
-                    ${userDemoBsDetailVO.demo_plan_target}
-                </textarea>
+                <textarea id="demo_plan_target" class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">${userDemoBsDetailVO.demo_plan_target}</textarea>
                 <!--//-->
 
                 <div class="cnt__title">판매계획</div>
@@ -1526,9 +1188,7 @@
                         <li>- 실증완료 후 실증대상의 국내외 판매전략과 매출전망(실증완료후 3년)</li>
                     </ul>
                 </div>
-                <textarea class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">
-                    ${userDemoBsDetailVO.demo_plan_sales}
-                </textarea>
+                <textarea id="demo_plan_sales" class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">${userDemoBsDetailVO.demo_plan_sales}</textarea>
                 <!--//-->
 
                 <div class="cnt__title">후속 연구개발 계획</div>
@@ -1538,9 +1198,7 @@
                         <li>- 실증결과의 활용을 위한 후속 연구계획(있을 경우에 한함)</li>
                     </ul>
                 </div>
-                <textarea class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">
-                    ${userDemoBsDetailVO.demo_plan_post}
-                </textarea>
+                <textarea id="demo_plan_post" class="editor__box" style="border: 1px solid #e8e8e8;" rows="10">${userDemoBsDetailVO.demo_plan_post}</textarea>
                 <!--//-->
 
                 <div class="table__caption">4.안전성 검토</div>
@@ -1571,44 +1229,44 @@
                             <td>시설자재</a>
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_mat" type="text" val="${userDemoBsDetailVO.in_facil_mat}">
+                                <input id="in_facil_mat" type="text" value="${userDemoBsDetailVO.in_facil_mat}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_mat_type" type="text" val="${userDemoBsDetailVO.in_facil_mat_type}">
+                                <input id="in_facil_mat_type" type="text" value="${userDemoBsDetailVO.in_facil_mat_type}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_mat_stnrd" type="text" val="${userDemoBsDetailVO.in_facil_mat_stnrd}">
+                                <input id="in_facil_mat_stnrd" type="text" value="${userDemoBsDetailVO.in_facil_mat_stnrd}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_mat_amount" type="text" val="${userDemoBsDetailVO.in_facil_mat_amount}">
+                                <input id="in_facil_mat_amount" type="text" value="${userDemoBsDetailVO.in_facil_mat_amount}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_mat_val" type="text" val="${userDemoBsDetailVO.in_facil_mat_val}">
+                                <input id="in_facil_mat_val" type="text" value="${userDemoBsDetailVO.in_facil_mat_val}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_mat_price" type="text" val="${userDemoBsDetailVO.in_facil_mat_price}">
+                                <input id="in_facil_mat_price" type="text" value="${userDemoBsDetailVO.in_facil_mat_price}">
                             </td>
                         </tr>
                         <tr>
                             <td>ICT기자재</a>
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_ict" type="text" val="${userDemoBsDetailVO.in_facil_ict}">
+                                <input id="in_facil_ict" type="text" value="${userDemoBsDetailVO.in_facil_ict}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_ict_type" type="text" val="${userDemoBsDetailVO.in_facil_ict_type}">
+                                <input id="in_facil_ict_type" type="text" value="${userDemoBsDetailVO.in_facil_ict_type}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_ict_stnrd" type="text" val="${userDemoBsDetailVO.in_facil_ict_stnrd}">
+                                <input id="in_facil_ict_stnrd" type="text" value="${userDemoBsDetailVO.in_facil_ict_stnrd}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_ict_amount" type="text" val="${userDemoBsDetailVO.in_facil_ict_amount}">
+                                <input id="in_facil_ict_amount" type="text" value="${userDemoBsDetailVO.in_facil_ict_amount}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_ict_val" type="text" val="${userDemoBsDetailVO.in_facil_ict_val}">
+                                <input id="in_facil_ict_val" type="text" value="${userDemoBsDetailVO.in_facil_ict_val}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_ict_price" type="text" val="${userDemoBsDetailVO.in_facil_ict_price}">
+                                <input id="in_facil_ict_price" type="text" value="${userDemoBsDetailVO.in_facil_ict_price}">
                             </td>
                         </tr>
 
@@ -1617,22 +1275,22 @@
                             <td>작물보호제/비료</a>
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_fer" type="text" val="${userDemoBsDetailVO.in_facil_fer}">
+                                <input id="in_facil_fer" type="text" value="${userDemoBsDetailVO.in_facil_fer}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_fer_type" type="text" val="${userDemoBsDetailVO.in_facil_fer_type}">
+                                <input id="in_facil_fer_type" type="text" value="${userDemoBsDetailVO.in_facil_fer_type}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_fer_stnrd" type="text" val="${userDemoBsDetailVO.in_facil_fer_stnrd}">
+                                <input id="in_facil_fer_stnrd" type="text" value="${userDemoBsDetailVO.in_facil_fer_stnrd}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_fer_amount" type="text" val="${userDemoBsDetailVO.in_facil_fer_amount}">
+                                <input id="in_facil_fer_amount" type="text" value="${userDemoBsDetailVO.in_facil_fer_amount}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_fer_val" type="text" val="${userDemoBsDetailVO.in_facil_fer_val}">
+                                <input id="in_facil_fer_val" type="text" value="${userDemoBsDetailVO.in_facil_fer_val}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_fer_price" type="text" val="${userDemoBsDetailVO.in_facil_fer_price}">
+                                <input id="in_facil_fer_price" type="text" value="${userDemoBsDetailVO.in_facil_fer_price}">
                             </td>
                         </tr>
 
@@ -1641,66 +1299,66 @@
                             <td>스마트팜SW</a>
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_sw" type="text" val="${userDemoBsDetailVO.in_facil_sw}">
+                                <input id="in_facil_sw" type="text" value="${userDemoBsDetailVO.in_facil_sw}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_sw_type" type="text" val="${userDemoBsDetailVO.in_facil_sw_type}">
+                                <input id="in_facil_sw_type" type="text" value="${userDemoBsDetailVO.in_facil_sw_type}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_sw_stnrd" type="text" val="${userDemoBsDetailVO.in_facil_sw_stnrd}">
+                                <input id="in_facil_sw_stnrd" type="text" value="${userDemoBsDetailVO.in_facil_sw_stnrd}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_sw_amount" type="text" val="${userDemoBsDetailVO.in_facil_sw_amount}">
+                                <input id="in_facil_sw_amount" type="text" value="${userDemoBsDetailVO.in_facil_sw_amount}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_sw_val" type="text" val="${userDemoBsDetailVO.in_facil_sw_val}">
+                                <input id="in_facil_sw_val" type="text" value="${userDemoBsDetailVO.in_facil_sw_val}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_sw_price" type="text" val="${userDemoBsDetailVO.in_facil_sw_price}">
+                                <input id="in_facil_sw_price" type="text" value="${userDemoBsDetailVO.in_facil_sw_price}">
                             </td>
                         </tr>
                        <tr>
                             <td>종자/종묘</a>
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_seeding" type="text" val="${userDemoBsDetailVO.in_facil_seeding}">
+                                <input id="in_facil_seeding" type="text" value="${userDemoBsDetailVO.in_facil_seeding}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_seedingtype" type="text" val="${userDemoBsDetailVO.in_facil_seedingtype}">
+                                <input id="in_facil_seedingtype" type="text" value="${userDemoBsDetailVO.in_facil_seedingtype}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_seeding_stnrd" type="text" val="${userDemoBsDetailVO.in_facil_seeding_stnrd}">
+                                <input id="in_facil_seeding_stnrd" type="text" value="${userDemoBsDetailVO.in_facil_seeding_stnrd}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_seeding_amount" type="text" val="${userDemoBsDetailVO.in_facil_seeding_amount}">
+                                <input id="in_facil_seeding_amount" type="text" value="${userDemoBsDetailVO.in_facil_seeding_amount}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_seeding_val" type="text" val="${userDemoBsDetailVO.in_facil_seeding_val}">
+                                <input id="in_facil_seeding_val" type="text" value="${userDemoBsDetailVO.in_facil_seeding_val}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_seeding_price" type="text" val="${userDemoBsDetailVO.in_facil_seeding_price}">
+                                <input id="in_facil_seeding_price" type="text" value="${userDemoBsDetailVO.in_facil_seeding_price}">
                             </td>
                         </tr>
                         <tr>
                             <td>로봇</a>
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_robot" type="text" val="${userDemoBsDetailVO.in_facil_robot}">
+                                <input id="in_facil_robot" type="text" value="${userDemoBsDetailVO.in_facil_robot}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_robot_type" type="text" val="${userDemoBsDetailVO.in_facil_robot_type}">
+                                <input id="in_facil_robot_type" type="text" value="${userDemoBsDetailVO.in_facil_robot_type}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_robot_stnrd" type="text" val="${userDemoBsDetailVO.in_facil_robot_stnrd}">
+                                <input id="in_facil_robot_stnrd" type="text" value="${userDemoBsDetailVO.in_facil_robot_stnrd}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_robot_amount" type="text" val="${userDemoBsDetailVO.in_facil_robot_amount}">
+                                <input id="in_facil_robot_amount" type="text" value="${userDemoBsDetailVO.in_facil_robot_amount}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_robot_val" type="text" val="${userDemoBsDetailVO.in_facil_robot_val}">
+                                <input id="in_facil_robot_val" type="text" value="${userDemoBsDetailVO.in_facil_robot_val}">
                             </td>
                             <td class="td__left">
-                                <input id="in_facil_robot_price" type="text" val="${userDemoBsDetailVO.in_facil_robot_price}">
+                                <input id="in_facil_robot_price" type="text" value="${userDemoBsDetailVO.in_facil_robot_price}">
                             </td>
                         </tr>
                         </tbody>
@@ -1733,64 +1391,64 @@
                         <tr>
                             <th>1</th>
                             <td class="td__left">
-                                <input id="in_hazd_chemical1" type="text" val="${userDemoBsDetailVO.in_hazd_chemical1}">
+                                <input id="in_hazd_chemical1" type="text" value="${userDemoBsDetailVO.in_hazd_chemical1}">
                             </td>
                             <td class="td__left">
-                                <input id="in_hazd_chemical1_form" type="text" val="${userDemoBsDetailVO.in_hazd_chemical1_form}">
+                                <input id="in_hazd_chemical1_form" type="text" value="${userDemoBsDetailVO.in_hazd_chemical1_form}">
                             </td>
                             <td class="td__left">
-                                <input id="in_hazd_chemical1_amount" type="text" val="${userDemoBsDetailVO.in_hazd_chemical1_amount}">
+                                <input id="in_hazd_chemical1_amount" type="text" value="${userDemoBsDetailVO.in_hazd_chemical1_amount}">
                             </td>
                             <td class="td__left">
-                                <input id="in_hazd_chemical1_case" type="text" val="${userDemoBsDetailVO.in_hazd_chemical1_case}">
+                                <input id="in_hazd_chemical1_case" type="text" value="${userDemoBsDetailVO.in_hazd_chemical1_case}">
                             </td>
                             <td class="td__left">
-                                <input id="in_hazd_chemical1_loc" type="text" val="${userDemoBsDetailVO.in_hazd_chemical1_loc}">
+                                <input id="in_hazd_chemical1_loc" type="text" value="${userDemoBsDetailVO.in_hazd_chemical1_loc}">
                             </td>
                             <td class="td__left">
-                                <input id="in_hazd_chemical1_etc" type="text" val="${userDemoBsDetailVO.in_hazd_chemical1_etc}">
+                                <input id="in_hazd_chemical1_etc" type="text" value="${userDemoBsDetailVO.in_hazd_chemical1_etc}">
                             </td>
                         </tr>
                         <tr>
                             <th>2</th>
                             <td class="td__left">
-                                <input id="in_hazd_chemical2" type="text" val="${userDemoBsDetailVO.in_hazd_chemical2}">
+                                <input id="in_hazd_chemical2" type="text" value="${userDemoBsDetailVO.in_hazd_chemical2}">
                             </td>
                             <td class="td__left">
-                                <input id="in_hazd_chemical2_form" type="text" val="${userDemoBsDetailVO.in_hazd_chemical2_form}">
+                                <input id="in_hazd_chemical2_form" type="text" value="${userDemoBsDetailVO.in_hazd_chemical2_form}">
                             </td>
                             <td class="td__left">
-                                <input id="in_hazd_chemical2_amount" type="text" val="${userDemoBsDetailVO.in_hazd_chemical2_amount}">
+                                <input id="in_hazd_chemical2_amount" type="text" value="${userDemoBsDetailVO.in_hazd_chemical2_amount}">
                             </td>
                             <td class="td__left">
-                                <input id="in_hazd_chemical2_case" type="text" val="${userDemoBsDetailVO.in_hazd_chemical2_case}">
+                                <input id="in_hazd_chemical2_case" type="text" value="${userDemoBsDetailVO.in_hazd_chemical2_case}">
                             </td>
                             <td class="td__left">
-                                <input id="in_hazd_chemical2_loc" type="text" val="${userDemoBsDetailVO.in_hazd_chemical2_loc}">
+                                <input id="in_hazd_chemical2_loc" type="text" value="${userDemoBsDetailVO.in_hazd_chemical2_loc}">
                             </td>
                             <td class="td__left">
-                                <input id="in_hazd_chemical2_etc" type="text" val="${userDemoBsDetailVO.in_hazd_chemical2_etc}">
+                                <input id="in_hazd_chemical2_etc" type="text" value="${userDemoBsDetailVO.in_hazd_chemical2_etc}">
                             </td>
                         </tr>
                         <tr>
                             <th>3</th>
                             <td class="td__left">
-                                <input id="in_hazd_chemical3" type="text" val="${userDemoBsDetailVO.in_hazd_chemical3}">
+                                <input id="in_hazd_chemical3" type="text" value="${userDemoBsDetailVO.in_hazd_chemical3}">
                             </td>
                             <td class="td__left">
-                                <input id="in_hazd_chemical3_form" type="text" val="${userDemoBsDetailVO.in_hazd_chemical3_form}">
+                                <input id="in_hazd_chemical3_form" type="text" value="${userDemoBsDetailVO.in_hazd_chemical3_form}">
                             </td>
                             <td class="td__left">
-                                <input id="in_hazd_chemical3_amount" type="text" val="${userDemoBsDetailVO.in_hazd_chemical3_amount}">
+                                <input id="in_hazd_chemical3_amount" type="text" value="${userDemoBsDetailVO.in_hazd_chemical3_amount}">
                             </td>
                             <td class="td__left">
-                                <input id="in_hazd_chemical3_case" type="text" val="${userDemoBsDetailVO.in_hazd_chemical3_case}">
+                                <input id="in_hazd_chemical3_case" type="text" value="${userDemoBsDetailVO.in_hazd_chemical3_case}">
                             </td>
                             <td class="td__left">
-                                <input id="in_hazd_chemical3_loc" type="text" val="${userDemoBsDetailVO.in_hazd_chemical3_loc}">
+                                <input id="in_hazd_chemical3_loc" type="text" value="${userDemoBsDetailVO.in_hazd_chemical3_loc}">
                             </td>
                             <td class="td__left">
-                                <input id="in_hazd_chemical3_etc" type="text" val="${userDemoBsDetailVO.in_hazd_chemical3_etc}">
+                                <input id="in_hazd_chemical3_etc" type="text" value="${userDemoBsDetailVO.in_hazd_chemical3_etc}">
                             </td>
                         </tr>
                         </tbody>
@@ -1817,25 +1475,25 @@
                         <tr>
                             <td>오염수</td>
                             <td class="td__left">
-                                <input id="waste_water_amount" type="text" val="${userDemoBsDetailVO.waste_water_amount}">
+                                <input id="waste_water_amount" type="text" value="${userDemoBsDetailVO.waste_water_amount}">
                             </td>
                             <td class="td__left">
-                                <input id="waste_water_case" type="text" val="${userDemoBsDetailVO.waste_water_case}">
+                                <input id="waste_water_case" type="text" value="${userDemoBsDetailVO.waste_water_case}">
                             </td>
                             <td class="td__left">
-                                <input id="waste_water_ext_plan" type="text" val="${userDemoBsDetailVO.waste_water_ext_plan}">
+                                <input id="waste_water_ext_plan" type="text" value="${userDemoBsDetailVO.waste_water_ext_plan}">
                             </td>
                         </tr>
                         <tr>
                             <td>폐기토양/배지</td>
                             <td class="td__left">
-                                <input id="waste_soil_amount" type="text" val="${userDemoBsDetailVO.waste_soil_amount}">
+                                <input id="waste_soil_amount" type="text" value="${userDemoBsDetailVO.waste_soil_amount}">
                             </td>
                             <td class="td__left">
-                                <input id="waste_soil_case" type="text" val="${userDemoBsDetailVO.waste_soil_case}">
+                                <input id="waste_soil_case" type="text" value="${userDemoBsDetailVO.waste_soil_case}">
                             </td>
                             <td class="td__left">
-                                <input id="waste_soil_ext_plan" type="text" val="${userDemoBsDetailVO.waste_soil_ext_plan}">
+                                <input id="waste_soil_ext_plan" type="text" value="${userDemoBsDetailVO.waste_soil_ext_plan}">
                             </td>
                         </tr>
                         </tbody>
@@ -1864,46 +1522,46 @@
                         <tr>
                             <th>1</th>
                             <td class="td__left">
-                                <input id="facil_pw1" type="text" val="${userDemoBsDetailVO.facil_pw1}">
+                                <input id="facil_pw1" type="text" value="${userDemoBsDetailVO.facil_pw1}">
                             </td>
                             <td class="td__left">
-                                <input id="facil_pw1_type" type="text" val="${userDemoBsDetailVO.facil_pw1_type}">
+                                <input id="facil_pw1_type" type="text" value="${userDemoBsDetailVO.facil_pw1_type}">
                             </td>
                             <td class="td__left">
-                                <input id="facil_pw1_v" type="text" val="${userDemoBsDetailVO.facil_pw1_v}">
+                                <input id="facil_pw1_v" type="text" value="${userDemoBsDetailVO.facil_pw1_v}">
                             </td>
                             <td class="td__left">
-                                <input id="facil_pw1_w" type="text" val="${userDemoBsDetailVO.facil_pw1_w}">
+                                <input id="facil_pw1_w" type="text" value="${userDemoBsDetailVO.facil_pw1_w}">
                             </td>
                         </tr>
                         <tr>
                             <th>2</th>
                             <td class="td__left">
-                                <input id="facil_pw2" type="text" val="${userDemoBsDetailVO.facil_pw2}">
+                                <input id="facil_pw2" type="text" value="${userDemoBsDetailVO.facil_pw2}">
                             </td>
                             <td class="td__left">
-                                <input id="facil_pw2_type" type="text" val="${userDemoBsDetailVO.facil_pw2_type}">
+                                <input id="facil_pw2_type" type="text" value="${userDemoBsDetailVO.facil_pw2_type}">
                             </td>
                             <td class="td__left">
-                                <input id="facil_pw2_v" type="text" val="${userDemoBsDetailVO.facil_pw2_v}">
+                                <input id="facil_pw2_v" type="text" value="${userDemoBsDetailVO.facil_pw2_v}">
                             </td>
                             <td class="td__left">
-                                <input id="facil_pw2_w" type="text" val="${userDemoBsDetailVO.facil_pw2_w}">
+                                <input id="facil_pw2_w" type="text" value="${userDemoBsDetailVO.facil_pw2_w}">
                             </td>
                         </tr>
                         <tr>
                             <th>3</th>
                             <td class="td__left">
-                                <input id="facil_pw3" type="text" val="${userDemoBsDetailVO.facil_pw3}">
+                                <input id="facil_pw3" type="text" value="${userDemoBsDetailVO.facil_pw3}">
                             </td>
                             <td class="td__left">
-                                <input id="facil_pw3_type" type="text" val="${userDemoBsDetailVO.facil_pw3_type}">
+                                <input id="facil_pw3_type" type="text" value="${userDemoBsDetailVO.facil_pw3_type}">
                             </td>
                             <td class="td__left">
-                                <input id="facil_pw3_v" type="text" val="${userDemoBsDetailVO.facil_pw3_v}">
+                                <input id="facil_pw3_v" type="text" value="${userDemoBsDetailVO.facil_pw3_v}">
                             </td>
                             <td class="td__left">
-                                <input id="facil_pw3_w" type="text" val="${userDemoBsDetailVO.facil_pw3_w}">
+                                <input id="facil_pw3_w" type="text" value="${userDemoBsDetailVO.facil_pw3_w}">
                             </td>
                         </tr>
 
@@ -1929,6 +1587,134 @@
 <script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>
 <script>
+
+
+    $( document ).ready(function() {
+        let i=1;
+        let req_facility = ${userDemoBs.req_facility};
+        $('input:checkbox[name="req_facility"]').each(function() {
+            $("#req_facility"+i).prop('checked', ($(this).val()&req_facility)>0?true:false);
+            i++;
+        });
+
+        i=1;
+        let user_demo_type = ${userDemoBs.user_demo_type};
+        $('input:checkbox[name="user_demo_type"]').each(function() {
+            $("#user_demo_type"+i).prop('checked', ($(this).val()&user_demo_type)>0?true:false);
+            i++;
+        });
+        i=1;
+        let user_demo_facility = ${userDemoBs.user_demo_facility};
+        $('input:checkbox[name="user_demo_facility"]').each(function() {
+            $("#user_demo_facility"+i).prop('checked', ($(this).val()&user_demo_facility)>0?true:false);
+            i++;
+        });
+        i=1;
+        let user_demo_way = ${userDemoBs.user_demo_way};
+        $('input:checkbox[name="user_demo_way"]').each(function() {
+            $("#user_demo_way"+i).prop('checked', ($(this).val()&user_demo_way)>0?true:false);
+            i++;
+        });
+        i=1;
+        let user_demo_repeat = ${userDemoBs.user_demo_repeat};
+        $('input:checkbox[name="user_demo_repeat"]').each(function() {
+            $("#user_demo_repeat"+i).prop('checked', ($(this).val()&user_demo_repeat)>0?true:false);
+            i++;
+        });
+        i=1;
+        let user_demo_goal = ${userDemoBs.user_demo_goal};
+        $('input:checkbox[name="user_demo_goal"]').each(function() {
+            $("#user_demo_goal"+i).prop('checked', ($(this).val()&user_demo_goal)>0?true:false);
+            i++;
+        });
+        i=1;
+        let user_demo_option = ${userDemoBs.user_demo_option};
+        $('input:checkbox[name="user_demo_option"]').each(function() {
+            $("#user_demo_option"+i).prop('checked', ($(this).val()&user_demo_option)>0?true:false);
+            i++;
+        });
+        i=1;
+        let culture_soil = ${userDemoBs.culture_soil};
+        $('input:checkbox[name="culture_soil"]').each(function() {
+            $("#culture_soil"+i).prop('checked', ($(this).val()&culture_soil)>0?true:false);
+            i++;
+        });
+        i=1;
+        let demo_type = ${userDemoBs.demo_type};
+        $('input:checkbox[name="demo_type"]').each(function() {
+            $("#demo_type"+i).prop('checked', ($(this).val()&demo_type)>0?true:false);
+            i++;
+        });
+        i=1;
+        let resident_type = ${userDemoBs.resident_type};
+        $('input:checkbox[name="resident_type"]').each(function() {
+            $("#resident_type"+i).prop('checked', ($(this).val()&resident_type)>0?true:false);
+            i++;
+        });
+        i=1;
+        let user_demo_is_crops = ${userDemoBs.user_demo_is_crops};
+        $('input:checkbox[name="user_demo_is_crops"]').each(function() {
+            $("#user_demo_is_crops"+i).prop('checked', ($(this).val()&user_demo_is_crops)>0?true:false);
+            i++;
+        });
+    });
+
+    let human_count = ${userBsHumanResourceVOList.size()};
+
+    $("#human_add").click(function(){
+
+        let order = human_count+1;
+
+        var html = "<tr id='human1_t"+order+"'>"
+
+            +"<td rowspan='2'>"+order+"</td>"
+            +"<td class='td__left'>"
+            +"<input id='rnd_user_name"+order+"' type='text'>"
+            +"</td>"
+            +"<td class='td__left'>"
+            +"<input id='rnd_user_code"+order+"' type='text'>"
+            +"</td>"
+            +"<td class='td__left' rowspan='2'>"
+            +"<input id= 'rnd_user_school"+order+"' type='text'>"
+            +"</td>"
+            +"<td class='td__left' rowspan='2'>"
+            +"<input id='rnd_user_grad"+order+"' type='text'>"
+            +"</td>"
+            +"<td class='td__left' rowspan='2'>"
+            +"<input id='rnd_user_col_date"+order+"' type='text'>"
+            +"</td>"
+            +"<td class='td__left'>"
+            +"<input id='rnd_user_col_part"+order+"' type='text'>"
+            +"</td>"
+            +"<td class='td__left' rowspan='2'>"
+            +"<input id='rnd_user_result"+order+"' type='text'>"
+            +"</td>"
+            +"</tr>"
+            +"<tr id='human2_t"+order+"'>"
+            +"<td class='td__left'>"
+            +"<input id='rnd_user_role"+order+"' type='text'>"
+            +"</td>"
+            +"<td class='td__left'>"
+            +"<input id='rnd_user_birth"+order+"' type='text'>"
+            +"</td>"
+            +"<td class='td__left'>"
+            +"<input id='rnd_user_6t"+order+"' type='text'>"
+            +"</td>"
+            +"</tr>";
+        $("#human_table").append(html);
+        human_count++;
+
+    });
+
+    $("#human_delete").click(function(){
+        let order = human_count;
+        if(human_count>3){
+            $('#human1_t'+order).remove();
+            $('#human2_t'+order).remove();
+            human_count--;
+        }
+    });
+
 
     $("#btn_app_step2").click(function(){
         if (!confirm("변경한 내용 저장여부를 확인해 주세요. 뒤로 이동하시겠습니까.")) {
@@ -2088,10 +1874,232 @@ function save_temp(){
 
     };
 
+
     $.ajax({
         type: 'post',
         url :'app_step3_save_temp', //데이터를 주고받을 파일 주소 입력
         data: JSON.stringify(param),//보내는 데이터
+        contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+        dataType:'json',//받는 데이터 타입
+        success: function(result){
+            //작업이 성공적으로 발생했을 경우
+            if(result.result_code=="SUCCESS"){
+                alert(result.result_str);
+
+            }
+            else {
+                alert(result.result_str);
+            }
+            //STATUS_001 :
+        },
+        error:function(){
+            //에러가 났을 경우 실행시킬 코드
+        }
+
+
+    });
+
+
+    let userBsHumanResourceVOList = new Array();
+    for(let j=1;j<human_count+1;j++){
+        let param_human = {
+            idx_user_demo_bs:${userDemoBs.idx_user_demo_bs},
+            rnd_user_name:$("#rnd_user_name"+j+"").val(),
+            rnd_user_role:$("#rnd_user_role"+j+"").val(),
+            rnd_user_code:$("#rnd_user_code"+j+"").val(),
+            rnd_user_birth:$("#rnd_user_birth"+j+"").val(),
+            rnd_user_grad:$("#rnd_user_grad"+j+"").val(),
+            rnd_user_col:$("#rnd_user_col"+j+"").val(),
+            rnd_user_school:$("#rnd_user_school"+j+"").val(),
+            rnd_user_col_date:$("#rnd_user_col_date"+j+"").val(),
+            rnd_user_col_part:$("#rnd_user_col_part"+j+"").val(),
+            rnd_user_6t:$("#rnd_user_6t"+j+"").val(),
+            rnd_user_result:$("#rnd_user_result"+j+"").val()
+        }
+        userBsHumanResourceVOList.push(param_human);
+    }
+
+    let param_detail = {
+        idx_user_demo_bs_detail:${userDemoBsDetailVO.idx_user_demo_bs_detail},//number	32	n		◯		인덱스	auto increase
+        idx_user_demo_bs:${userDemoBsDetailVO.idx_user_demo_bs},//		number	32		0		◯	지원사업
+
+        ceo_rnd_result1:$('#ceo_rnd_result1').val(),//varchar2	100					대표자의 연구개발 과제, 논문명
+        ceo_rnd_result1_org:$('#ceo_rnd_result1_org').val(),//varchar2	40					연구개발 기관
+        ceo_rnd_result1_dur:$('#ceo_rnd_result1_dur').val(),//varchar2	40					연구개발 기간
+        ceo_rnd_result1_role:$('#ceo_rnd_result1_role').val(),//varchar2	40					연구개발 역할
+        ceo_rnd_result1_result:$('#ceo_rnd_result1_result').val(),//varchar2	100					연구개발 주요성과
+        ceo_rnd_result2:$('#ceo_rnd_result2').val(),//varchar2	100					대표자의 연구개발 과제, 논문명
+        ceo_rnd_result2_org:$('#ceo_rnd_result2_org').val(),//varchar2	40					연구개발 기관
+        ceo_rnd_result2_dur:$('#ceo_rnd_result2_dur').val(),//varchar2	40					연구개발 기간
+        ceo_rnd_result2_role:$('#ceo_rnd_result2_role').val(),//varchar2	40					연구개발 역할
+        ceo_rnd_result2_result:$('#ceo_rnd_result2_result').val(),//varchar2	100					연구개발 주요성과
+        rnd_effort1:$('#rnd_effort1').val(),//varchar2	200					연구개발추진현황
+        rnd_effort1_type:$('#rnd_effort1_type').val()*1,//number	4					연구개발 타입	0:자체개발, 1:국가과제
+        rnd_effort1_etc:$('#rnd_effort1_etc').val(),//varchar2	40					연구개발 비고, 특허, 인증
+        rnd_effort2:$('#rnd_effort2').val(),//varchar2	200					연구개발추진현황
+        rnd_effort2_type:$('#rnd_effort2_type').val()*1,//number	4					연구개발 타입	0:자체개발, 1:국가과제
+        rnd_effort2_etc:$('#rnd_effort2_etc').val(),//varchar2	40					연구개발 비고, 특허, 인증
+        rnd_effort3:$('#rnd_effort3').val(),//varchar2	200					연구개발추진현황
+        rnd_effort3_type:$('#rnd_effort3_type').val()*1,//number	4					연구개발 타입	0:자체개발, 1:국가과제
+        rnd_effort3_etc:$('#rnd_effort3_etc').val(),//varchar2	40					연구개발 비고, 특허, 인증
+        rnd_effort4:$('#rnd_effort4').val(),//varchar2	200					연구개발추진현황
+        rnd_effort4_type:$('#rnd_effort4_type').val()*1,//number	4					연구개발 타입	0:자체개발, 1:국가과제
+        rnd_effort4_etc:$('#rnd_effort4_etc').val(),//varchar2	40					연구개발 비고, 특허, 인증
+        rnd_effort5:$('#rnd_effort5').val(),//varchar2	200					연구개발추진현황
+        rnd_effort5_type:$('#rnd_effort5_type').val()*1,//number	4					연구개발 타입	0:자체개발, 1:국가과제
+        rnd_effort5_etc:$('#rnd_effort5_etc').val(),//varchar2	40					연구개발 비고, 특허, 인증
+        rnd_effort6:$('#rnd_effort6').val(),//varchar2	200					연구개발추진현황
+        rnd_effort6_type:$('#rnd_effort6_type').val()*1,//number	4					연구개발 타입	0:자체개발, 1:국가과제
+        rnd_effort6_etc:$('#rnd_effort6_etc').val(),//varchar2	40					연구개발 비고, 특허, 인증
+        own_ip1:$('#own_ip1').val(),//varchar2	100					지재권보유 명칭
+        own_ip1_type:$('#own_ip1_type').val(),//varchar2	40					지재권 타입
+        own_ip1_code:$('#own_ip1_code').val(),//varchar2	40					지재권 출원번호
+        own_ip1_date:$('#own_ip1_date').val(),//varchar2	40					지재권 출원날짜
+        own_ip1_org:$('#own_ip1_org').val(),//varchar2	40					지재권 담당기관
+        own_ip1_etc:$('#own_ip1_etc').val(),//varchar2	40					지재권 비고
+        own_ip2:$('#own_ip2').val(),//varchar2	100					지재권보유 명칭
+        own_ip2_type:$('#own_ip2_type').val(),//varchar2	40					지재권 타입
+        own_ip2_code:$('#own_ip2_code').val(),//varchar2	40					지재권 출원번호
+        own_ip2_date:$('#own_ip2_date').val(),//varchar2	40					지재권 출원날짜
+        own_ip2_org:$('#own_ip2_org').val(),//varchar2	40					지재권 담당기관
+        own_ip2_etc:$('#own_ip2_etc').val(),//varchar2	40					지재권 비고
+        own_ip3:$('#own_ip3').val(),//varchar2	100					지재권보유 명칭
+        own_ip3_type:$('#own_ip3_type').val(),//varchar2	40					지재권 타입
+        own_ip3_code:$('#own_ip3_code').val(),//varchar2	40					지재권 출원번호
+        own_ip3_date:$('#own_ip3_date').val(),//varchar2	40					지재권 출원날짜
+        own_ip3_org:$('#own_ip3_org').val(),//varchar2	40					지재권 담당기관
+        own_ip3_etc:$('#own_ip3_etc').val(),//varchar2	40					지재권 비고
+        own_cert1:$('#own_cert1').val(),//varchar2	100					인증보유 명칭
+        own_cert1_type:$('#own_cert1_type').val(),//varchar2	40					인증 타입
+        own_cert1_code:$('#own_cert1_code').val(),//varchar2	40					인증등록번호
+        own_cert1_date:$('#own_cert1_date').val(),//varchar2	40					인증 출원날짜
+        own_cert2:$('#own_cert2').val(),//varchar2	100					인증보유 명칭
+        own_cert2_type:$('#own_cert2_type').val(),//varchar2	40					인증 타입
+        own_cert2_code:$('#own_cert2_code').val(),//varchar2	40					인증등록번호
+        own_cert2_date:$('#own_cert2_date').val(),//varchar2	40					인증 출원날짜
+        own_cert3:$('#own_cert3').val(),//varchar2	100					인증보유 명칭
+        own_cert3_type:$('#own_cert3_type').val(),//varchar2	40					인증 타입
+        own_cert3_code:$('#own_cert3_code').val(),//varchar2	40					인증등록번호
+        own_cert3_date:$('#own_cert3_date').val(),//varchar2	40					인증 출원날짜
+        own_device1:$('#own_device1').val(),//varchar2	100					보유장비명
+        own_device1_weight:$('#own_device1_weight').val(),//varchar2	40					무게
+        own_device1_size:$('#own_device1_size').val(),//varchar2	40					크기(wxdxh)
+        own_device1_pw:$('#own_device1_pw').val(),//varchar2	10					사용전원
+        own_device1_wat:$('#own_device1_wat').val(),//varchar2	10					소비전력
+        own_device1_type:$('#own_device1_type').val(),//varchar2	10					용도
+        is_in_own_device1:$('#is_in_own_device1').val()*1,//number	4					설치여부	0:n, 1:y
+        own_device2:$('#own_device2').val(),//varchar2	100					보유장비명
+        own_device2_weight:$('#own_device2_weight').val(),//varchar2	40					무게
+        own_device2_size:$('#own_device2_size').val(),//varchar2	40					크기(wxdxh)
+        own_device2_pw:$('#own_device2_pw').val(),//varchar2	10					사용전원
+        own_device2_wat:$('#own_device2_wat').val(),//varchar2	10					소비전력
+        own_device2_type:$('#own_device2_type').val(),//varchar2	10					용도
+        is_in_own_device2:$('#is_in_own_device2').val()*1,//number	4					설치여부	0:n, 1:y
+        own_device3:$('#own_device3').val(),//varchar2	100					보유장비명
+        own_device3_weight:$('#own_device3_weight').val(),//varchar2	40					무게
+        own_device3_size:$('#own_device3_size').val(),//varchar2	40					크기(wxdxh)
+        own_device3_pw:$('#own_device3_pw').val(),//varchar2	10					사용전원
+        own_device3_wat:$('#own_device3_wat').val(),//varchar2	10					소비전력
+        own_device3_type:$('#own_device3_type').val(),//varchar2	10					용도
+        is_in_own_device3:$('#is_in_own_device3').val()*1,//number	4					설치여부	0:n, 1:y
+        demo_needs:$('#demo_needs').val(),//varchar2	3000					실증배경, 필요성, 목표
+        demo_main_point:$('#demo_main_point').val(),//varchar2	3000					실증관리 핵심요소
+        demo_use_plan:$('#demo_use_plan').val(),//varchar2	3000					실증결과 활용계획
+        demo_facil_mat:$('#demo_facil_mat').val(),//varchar2	200					실증대상 기자재 시설자재
+        demo_facil_ict:$('#demo_facil_ict').val(),//varchar2	200					실증대상 ict 기자재
+        demo_facil_fer:$('#demo_facil_fer').val(),//varchar2	200					실증대상 작물보호제 및 비료
+        demo_facil_sw:$('#demo_facil_sw').val(),//varchar2	200					실증대상 sw
+        demo_facil_robot:$('#demo_facil_robot').val(),//varchar2	200					실증대상 로봇
+        demo_facil_model:$('#demo_facil_model').val(),//varchar2	200					실증대상 생육모델
+        demo_paln_gh:$('#demo_paln_gh').val(),//varchar2	3000					실증설계 온실설치
+        demo_paln_facil:$('#demo_paln_facil').val(),//varchar2	3000					실증설계 기자재 설치
+        demo_paln_exper:$('#demo_paln_exper').val(),//varchar2	3000					실증설계 실험분석
+        demo_paln_mng:$('#demo_paln_mng').val(),//varchar2	3000					실증관리
+        demo_plan_ip:$('#demo_plan_ip').val(),//varchar2	3000					사업계획 지자재, 인증
+        demo_plan_target:$('#demo_plan_target').val(),//varchar2	3000					사업계획 국내외 시장
+        demo_plan_sales:$('#demo_plan_sales').val(),//varchar2	3000					사업계획 판매계획
+        demo_plan_post:$('#demo_plan_post').val(),//varchar2	3000					사업계획 향후
+        in_facil_mat:$('#in_facil_mat').val(),//varchar2	40					반입기자재 시설자재명칭
+        in_facil_mat_type:$('#in_facil_mat_type').val(),//varchar2	10					반입기자재 용도
+        in_facil_mat_stnrd:$('#in_facil_mat_stnrd').val(),//varchar2	10					반입기자재 단위,규격
+        in_facil_mat_amount:$('#in_facil_mat_amount').val()*1,//number	4					 반입기자재 수량
+        in_facil_mat_val:$('#in_facil_mat_val').val()*1,//number	4					반입기자재 단가
+        in_facil_mat_price:$('#in_facil_mat_price').val()*1,//number	10					반입기자재 가격
+        in_facil_ict:$('#in_facil_ict').val(),//varchar2	40					ict 반입기자재 시설자재명칭
+        in_facil_ict_type:$('#in_facil_ict_type').val(),//varchar2	10					반입기자재 용도
+        in_facil_ict_stnrd:$('#in_facil_ict_stnrd').val(),//varchar2	10					반입기자재 단위,규격
+        in_facil_ict_amount:$('#in_facil_ict_amount').val()*1,//number	4					 반입기자재 수량
+        in_facil_ict_val:$('#in_facil_ict_val').val()*1,//number	4					반입기자재 단가
+        in_facil_ict_price:$('#in_facil_ict_price').val()*1,//number	10					반입기자재 가격
+        in_facil_fer:$('#in_facil_fer').val(),//varchar2	40					fer 반입기자재 시설자재명칭
+        in_facil_fer_type:$('#in_facil_fer_type').val(),//varchar2	10					반입기자재 용도
+        in_facil_fer_stnrd:$('#in_facil_fer_stnrd').val(),//varchar2	10					반입기자재 단위,규격
+        in_facil_fer_amount:$('#in_facil_fer_amount').val()*1,//number	4					 반입기자재 수량
+        in_facil_fer_val:$('#in_facil_fer_val').val()*1,//number	4					반입기자재 단가
+        in_facil_fer_price:$('#in_facil_fer_price').val()*1,//number	10					반입기자재 가격
+        in_facil_sw:$('#in_facil_sw').val(),//varchar2	40					sw 반입기자재 시설자재명칭
+        in_facil_sw_type:$('#in_facil_sw_type').val(),//varchar2	10					반입기자재 용도
+        in_facil_sw_stnrd:$('#in_facil_sw_stnrd').val(),//varchar2	10					반입기자재 단위,규격
+        in_facil_sw_amount:$('#in_facil_sw_amount').val()*1,//number	4					 반입기자재 수량
+        in_facil_sw_val:$('#in_facil_sw_val').val()*1,//number	4					반입기자재 단가
+        in_facil_sw_price:$('#in_facil_sw_price').val()*1,//number	10					반입기자재 가격
+        in_facil_seeding:$('#in_facil_seeding').val(),//varchar2	40					seed 반입기자재 시설자재명칭
+        in_facil_seedingtype:$('#in_facil_seedingtype').val(),//varchar2	10					반입기자재 용도
+        in_facil_seeding_stnrd:$('#in_facil_seeding_stnrd').val(),//varchar2	10					반입기자재 단위,규격
+        in_facil_seeding_amount:$('#in_facil_seeding_amount').val()*1,//number	4					 반입기자재 수량
+        in_facil_seeding_val:$('#in_facil_seeding_val').val()*1,//number	4					반입기자재 단가
+        in_facil_seeding_price:$('#in_facil_seeding_price').val()*1,//number	10					반입기자재 가격
+        in_facil_robot:$('#in_facil_robot').val(),//varchar2	40					robot 반입기자재 시설자재명칭
+        in_facil_robot_type:$('#in_facil_robot_type').val(),//varchar2	10					반입기자재 용도
+        in_facil_robot_stnrd:$('#in_facil_robot_stnrd').val(),//varchar2	10					반입기자재 단위,규격
+        in_facil_robot_amount:$('#in_facil_robot_amount').val()*1,//number	4					 반입기자재 수량
+        in_facil_robot_val:$('#in_facil_robot_val').val()*1,//number	4					반입기자재 단가
+        in_facil_robot_price:$('#in_facil_robot_price').val()*1,//number	10					반입기자재 가격
+        in_hazd_chemical1:$('#in_hazd_chemical1').val()*1,//varchar2	40					반입 유해화학물질 명
+        in_hazd_chemical1_form:$('#in_hazd_chemical1_form').val(),//varchar2	20					반입 유해화학물질 화학식
+        in_hazd_chemical1_amount:$('#in_hazd_chemical1_amount').val(),//varchar2	20					반입 유해화학물질 예상사용량
+        in_hazd_chemical1_case:$('#in_hazd_chemical1_case').val(),//varchar2	20					반입 유해화학물질 보관함
+        in_hazd_chemical1_loc:$('#in_hazd_chemical1_loc').val(),//varchar2	20					반입 유해화학물질 보관장소
+        in_hazd_chemical1_etc:$('#in_hazd_chemical1_etc').val(),//varchar2	40					반입 유해화학물질 특이사항
+        in_hazd_chemical2:$('#in_hazd_chemical2').val(),//varchar2	40					반입 유해화학물질 명
+        in_hazd_chemical2_form:$('#in_hazd_chemical2_form').val(),//varchar2	20					반입 유해화학물질 화학식
+        in_hazd_chemical2_amount:$('#in_hazd_chemical2_amount').val(),//varchar2	20					반입 유해화학물질 예상사용량
+        in_hazd_chemical2_case:$('#in_hazd_chemical2_case').val(),//varchar2	20					반입 유해화학물질 보관함
+        in_hazd_chemical2_loc:$('#in_hazd_chemical2_loc').val(),//varchar2	20					반입 유해화학물질 보관장소
+        in_hazd_chemical2_etc:$('#in_hazd_chemical2_etc').val(),//varchar2	40					반입 유해화학물질 특이사항
+        in_hazd_chemical3:$('#in_hazd_chemical3').val(),//varchar2	40					반입 유해화학물질 명
+        in_hazd_chemical3_form:$('#in_hazd_chemical3_form').val(),//varchar2	20					반입 유해화학물질 화학식
+        in_hazd_chemical3_amount:$('#in_hazd_chemical3_amount').val(),//varchar2	20					반입 유해화학물질 예상사용량
+        in_hazd_chemical3_case:$('#in_hazd_chemical3_case').val(),//varchar2	20					반입 유해화학물질 보관함
+        in_hazd_chemical3_loc:$('#in_hazd_chemical3_loc').val(),//varchar2	20					반입 유해화학물질 보관장소
+        in_hazd_chemical3_etc:$('#in_hazd_chemical3_etc').val(),//varchar2	40					반입 유해화학물질 특이사항
+        waste_water_amount:$('#waste_water_amount').val(),//varchar2	20					폐기물 오염수 발생량
+        waste_water_case:$('#waste_water_case').val(),//varchar2	20					폐기물 오염수보관장소
+        waste_water_ext_plan:$('#waste_water_ext_plan').val(),//varchar2	100					폐기물 오염수 방출계획
+        waste_soil_amount:$('#waste_soil_amount').val(),//varchar2	20					폐기물 토양 발생량
+        waste_soil_case:$('#waste_soil_case').val(),//varchar2	20					폐기물 토양 보관장소
+        waste_soil_ext_plan:$('#waste_soil_ext_plan').val(),//varchar2	100					폐기물 토양 방출계획
+        facil_pw1:$('#facil_pw1').val(),//varchar2	100					소요전력 장비명
+        facil_pw1_type:$('#facil_pw1_type').val(),//varchar2	20					소요전력 장비 용도
+        facil_pw1_v:$('#facil_pw1_v').val(),//varchar2	10					소요전력 장비 사용전원
+        facil_pw1_w:$('#facil_pw1_w').val(),//varchar2	10					소요전력 장비 소비전력
+        facil_pw2:$('#facil_pw2').val(),//varchar2	100					소요전력 장비명
+        facil_pw2_type:$('#facil_pw2_type').val(),//varchar2	20					소요전력 장비 용도
+        facil_pw2_v:$('#facil_pw2_v').val(),//varchar2	10					소요전력 장비 사용전원
+        facil_pw2_w:$('#facil_pw2_w').val(),//varchar2	10					소요전력 장비 소비전력
+        facil_pw3:$('#facil_pw3').val(),//varchar2	100					소요전력 장비명
+        facil_pw3_type:$('#facil_pw3_type').val(),//varchar2	20					소요전력 장비 용도
+        facil_pw3_v:$('#facil_pw3_v').val(),//varchar2	10					소요전력 장비 사용전원
+        facil_pw3_w:$('#facil_pw3_w').val(),//varchar2	10					소요전력 장비 소비전력
+        userBsHumanResourceVOList:userBsHumanResourceVOList
+    }
+
+    console.log(JSON.stringify(param_detail));
+
+    $.ajax({
+        type: 'post',
+        url :'app_step3_detail_save_temp', //데이터를 주고받을 파일 주소 입력
+        data: JSON.stringify(param_detail),//보내는 데이터
         contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
         dataType:'json',//받는 데이터 타입
         success: function(result){
