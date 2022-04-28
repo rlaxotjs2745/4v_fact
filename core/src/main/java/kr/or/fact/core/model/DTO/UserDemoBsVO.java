@@ -23,6 +23,11 @@ public class UserDemoBsVO {
     String corp_addr2;//		varchar2	1000					본사 소재지 상세
     String corp_rnd_addr;//		varchar2	1000					본사 연구소 소재지
     String corp_rnd_addr2;//		varchar2	1000					본사 연구소 소재지 상세
+
+    String corp_phone;//	VARCHAR2	40					사무실 전화 번호
+    String lab_phone;//	VARCHAR2	40					연구소 전화 번호
+
+
     int capital_amount;	//NUMBER	20					자본금
     int corp_sales_amount;//		number	10					매출액
     int corp_er;//	number	10					자기자본비율
@@ -50,8 +55,10 @@ public class UserDemoBsVO {
     int user_demo_facility;//	number	4		1			실증 시설	1:단동, 2:연동, 4:육묘장, 8:노지, 16:단동유리, 32:연동유리, 64:식물공장
     int user_demo_way;//	number	4		0			실증 방법	0: 단순, 1:비교
     int user_demo_repeat;//	number	4		0			실증횟수	0:반복 없음, 1:반복실증
+    int user_demo_repeat_count;//	NUMBER	4		0			실증횟수
     int user_demo_goal;//	number	4		0			실증 목표	0::성능확인, 1:자체평가
     int user_demo_option;//	number	4		0			실증 조건	0: 일반환경, 1:특수환경
+    int user_demo_is_crops;//NUMBER	4		1			실증작물 여부	0:해당없음 1:비작물실증, 2: 작물대상실증
     String user_demo_crops;//	varchar2	100					실증작물
     int culture_soil;//	number	4		0			생육토양	0: 토경재배, 1:수경재배, 2:고형배지재배
     int demo_type;//	number	4		0			실증 대상	0:해당없음, 1:시설자재, 2:ict기자재, 4:작물보호제/비료, 8:스마트팜sw, 16:생육모델, 32:로봇, 512:기타
@@ -59,6 +66,10 @@ public class UserDemoBsVO {
     String demo_start_date_s;//	date						입주 시작 날짜
     Date demo_end_date;//	date						입주 종료 날짜
     String demo_end_date_s;//	date						입주 종료 날짜
+
+    Date farming_start_date;// date, 경작시작
+    Date farming_end_date;// date, 경작종료
+    int farming_repeat;// number(4),경작 주기
 
     int resident_type;//	number	4		0			상주 타입	0:해당없음, 1:r&d연구실, 2:스타트업사무실, 512:기타
     String resident_etc;//	varchar2	100					이용 실증시설 기타	이용 신청시설 기타 내용
@@ -75,8 +86,29 @@ public class UserDemoBsVO {
     int man_lab_count;//	number	4		0			연구직원 수
     int man_etc_count;//	number	4		0			키타지원 수
 
+    String lab_est_date;//	VARCHAR2	20					연구소 설립일수
+    int rnd_rate;//	NUMBER	4					연구개발투자비율
+    String consolidated_company;//	VARCHAR2	100 연결회사
 
 
+    String history1;//	varchar2	100					주요연혁 1
+    String history1_date;//	varchar2	20					주요연혁 1 날짜
+    String history2;//	varchar2	100					주요연혁 2
+    String history2_date;//	varchar2	20					주요연혁 2 날짜
+    String history3;//	varchar2	100					주요연혁 3
+    String history3_date;//	varchar2	20					주요연혁 3 날짜
+    String prize1;//	varchar2	100					포상현황1
+    String prize1_date;//	varchar2	20					포상날자1
+    String prize1_org;//	varchar2	100					포상기관1
+    String prize1_etc;//	varchar2	100					포상 비고1
+    String prize2;//	varchar2	100					포상현황2
+    String prize2_date;//	varchar2	20					포상날자2
+    String prize2_org;//	varchar2	100					포상기관2
+    String prize2_etc;//	varchar2	100					포상 비고2
+    String prize3;//	varchar2	100					포상현황3
+    String prize3_date;//	varchar2	20					포상날자3
+    String prize3_org;//	varchar2	100					포상기관3
+    String prize3_etc;//	varchar2	100					포상 비고3
 
 
 

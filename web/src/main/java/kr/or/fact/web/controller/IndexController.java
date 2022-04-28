@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -139,6 +141,7 @@ public class IndexController {
         model.addAttribute("user",findUser);
 
         List<DemoBusinessVO> demoBusinessVOs = demoBsService.getAvailibleDemoBs();
+
         model.addAttribute("demoBusinessVOs",demoBusinessVOs);
 
         getHomepageInfo(model);
@@ -234,12 +237,226 @@ public class IndexController {
         }
         model.addAttribute("userDemoBs",userDemoBsVo);
 
+        UserDemoBsDetailVO userDemoBsDetailVO = userDemoBsService.getUserDemoBsDetail(userDemoBsVo.getIdx_user_demo_bs());
+
+        List<UserBsHumanResourceVO> userBsHumanResourceVOList = userDemoBsService.getUserDemoBsHumanResourceList(userDemoBsVo.getIdx_user_demo_bs());
+
+        if(userDemoBsDetailVO==null){
+            userDemoBsDetailVO = new UserDemoBsDetailVO();
+
+            userDemoBsDetailVO.setIdx_user_demo_bs(userDemoBsVo.getIdx_user_demo_bs());//number	32	n			◯	지원사업 상세
+            userDemoBsDetailVO.setCeo_rnd_result1("");//varchar2	100					대표자의 연구개발 과제, 논문명
+            userDemoBsDetailVO.setCeo_rnd_result1_org("");//varchar2	40					연구개발 기관
+            userDemoBsDetailVO.setCeo_rnd_result1_dur("");//varchar2	40					연구개발 기간
+            userDemoBsDetailVO.setCeo_rnd_result1_role("");//varchar2	40					연구개발 역할
+            userDemoBsDetailVO.setCeo_rnd_result1_result("");//varchar2	100					연구개발 주요성과
+            userDemoBsDetailVO.setCeo_rnd_result2("");//varchar2	100					대표자의 연구개발 과제, 논문명
+            userDemoBsDetailVO.setCeo_rnd_result2_org("");//varchar2	40					연구개발 기관
+            userDemoBsDetailVO.setCeo_rnd_result2_dur("");//varchar2	40					연구개발 기간
+            userDemoBsDetailVO.setCeo_rnd_result2_role("");//varchar2	40					연구개발 역할
+            userDemoBsDetailVO.setCeo_rnd_result2_result("");//varchar2	100					연구개발 주요성과
+            userDemoBsDetailVO.setRnd_effort1("");//varchar2	200					연구개발추진현황
+            userDemoBsDetailVO.setRnd_effort1_type(0);//number	4					연구개발 타입	0:자체개발, 1:국가과제
+            userDemoBsDetailVO.setRnd_effort1_etc("");//varchar2	40					연구개발 비고, 특허, 인증
+            userDemoBsDetailVO.setRnd_effort2("");//varchar2	200					연구개발추진현황
+            userDemoBsDetailVO.setRnd_effort2_type(0);//number	4					연구개발 타입	0:자체개발, 1:국가과제
+            userDemoBsDetailVO.setRnd_effort2_etc("");//varchar2	40					연구개발 비고, 특허, 인증
+            userDemoBsDetailVO.setRnd_effort3("");//varchar2	200					연구개발추진현황
+            userDemoBsDetailVO.setRnd_effort3_type(0);//number	4					연구개발 타입	0:자체개발, 1:국가과제
+            userDemoBsDetailVO.setRnd_effort3_etc("");//varchar2	40					연구개발 비고, 특허, 인증
+            userDemoBsDetailVO.setRnd_effort4("");//varchar2	200					연구개발추진현황
+            userDemoBsDetailVO.setRnd_effort4_type(0);//number	4					연구개발 타입	0:자체개발, 1:국가과제
+            userDemoBsDetailVO.setRnd_effort4_etc("");//varchar2	40					연구개발 비고, 특허, 인증
+            userDemoBsDetailVO.setRnd_effort5("");//varchar2	200					연구개발추진현황
+            userDemoBsDetailVO.setRnd_effort5_type(0);//number	4					연구개발 타입	0:자체개발, 1:국가과제
+            userDemoBsDetailVO.setRnd_effort5_etc("");//varchar2	40					연구개발 비고, 특허, 인증
+            userDemoBsDetailVO.setRnd_effort6("");//varchar2	200					연구개발추진현황
+            userDemoBsDetailVO.setRnd_effort6_type(0);//number	4					연구개발 타입	0:자체개발, 1:국가과제
+            userDemoBsDetailVO.setRnd_effort6_etc("");//varchar2	40					연구개발 비고, 특허, 인증
+            userDemoBsDetailVO.setOwn_ip1("");//varchar2	100					지재권보유 명칭
+            userDemoBsDetailVO.setOwn_ip1_type("");//varchar2	40					지재권 타입
+            userDemoBsDetailVO.setOwn_ip1_code("");//varchar2	40					지재권 출원번호
+            userDemoBsDetailVO.setOwn_ip1_date("");//varchar2	40					지재권 출원날짜
+            userDemoBsDetailVO.setOwn_ip1_org("");//varchar2	40					지재권 담당기관
+            userDemoBsDetailVO.setOwn_ip1_etc("");//varchar2	40					지재권 비고
+            userDemoBsDetailVO.setOwn_ip2("");//varchar2	100					지재권보유 명칭
+            userDemoBsDetailVO.setOwn_ip2_type("");//varchar2	40					지재권 타입
+            userDemoBsDetailVO.setOwn_ip2_code("");//varchar2	40					지재권 출원번호
+            userDemoBsDetailVO.setOwn_ip2_date("");//varchar2	40					지재권 출원날짜
+            userDemoBsDetailVO.setOwn_ip2_org("");//varchar2	40					지재권 담당기관
+            userDemoBsDetailVO.setOwn_ip2_etc("");//varchar2	40					지재권 비고
+            userDemoBsDetailVO.setOwn_ip3("");//varchar2	100					지재권보유 명칭
+            userDemoBsDetailVO.setOwn_ip3_type("");//varchar2	40					지재권 타입
+            userDemoBsDetailVO.setOwn_ip3_code("");//varchar2	40					지재권 출원번호
+            userDemoBsDetailVO.setOwn_ip3_date("");//varchar2	40					지재권 출원날짜
+            userDemoBsDetailVO.setOwn_ip3_org("");//varchar2	40					지재권 담당기관
+            userDemoBsDetailVO.setOwn_ip3_etc("");//varchar2	40					지재권 비고
+            userDemoBsDetailVO.setOwn_cert1("");//varchar2	100					인증보유 명칭
+            userDemoBsDetailVO.setOwn_cert1_type("");//varchar2	40					인증 타입
+            userDemoBsDetailVO.setOwn_cert1_code("");//varchar2	40					인증등록번호
+            userDemoBsDetailVO.setOwn_cert1_date("");//varchar2	40					인증 출원날짜
+            userDemoBsDetailVO.setOwn_cert2("");//varchar2	100					인증보유 명칭
+            userDemoBsDetailVO.setOwn_cert2_type("");//varchar2	40					인증 타입
+            userDemoBsDetailVO.setOwn_cert2_code("");//varchar2	40					인증등록번호
+            userDemoBsDetailVO.setOwn_cert2_date("");//varchar2	40					인증 출원날짜
+            userDemoBsDetailVO.setOwn_cert3("");//varchar2	100					인증보유 명칭
+            userDemoBsDetailVO.setOwn_cert3_type("");//varchar2	40					인증 타입
+            userDemoBsDetailVO.setOwn_cert3_code("");//varchar2	40					인증등록번호
+            userDemoBsDetailVO.setOwn_cert3_date("");//varchar2	40					인증 출원날짜
+            userDemoBsDetailVO.setOwn_device1("");//varchar2	100					보유장비명
+            userDemoBsDetailVO.setOwn_device1_weight("");//varchar2	40					무게
+            userDemoBsDetailVO.setOwn_device1_size("");//varchar2	40					크기(wxdxh)
+            userDemoBsDetailVO.setOwn_device1_pw("");//varchar2	10					사용전원
+            userDemoBsDetailVO.setOwn_device1_wat("");//varchar2	10					소비전력
+            userDemoBsDetailVO.setOwn_device1_type("");//varchar2	10					용도
+            userDemoBsDetailVO.setIs_in_own_device1(0);//number	4					설치여부	0:n, 1:y
+            userDemoBsDetailVO.setOwn_device2("");//varchar2	100					보유장비명
+            userDemoBsDetailVO.setOwn_device2_weight("");//varchar2	40					무게
+            userDemoBsDetailVO.setOwn_device2_size("");//varchar2	40					크기(wxdxh)
+            userDemoBsDetailVO.setOwn_device2_pw("");//varchar2	10					사용전원
+            userDemoBsDetailVO.setOwn_device2_wat("");//varchar2	10					소비전력
+            userDemoBsDetailVO.setOwn_device2_type("");//varchar2	10					용도
+            userDemoBsDetailVO.setIs_in_own_device2(0);//number	4					설치여부	0:n, 1:y
+            userDemoBsDetailVO.setOwn_device3("");//varchar2	100					보유장비명
+            userDemoBsDetailVO.setOwn_device3_weight("");//varchar2	40					무게
+            userDemoBsDetailVO.setOwn_device3_size("");//varchar2	40					크기(wxdxh)
+            userDemoBsDetailVO.setOwn_device3_pw("");//varchar2	10					사용전원
+            userDemoBsDetailVO.setOwn_device3_wat("");//varchar2	10					소비전력
+            userDemoBsDetailVO.setOwn_device3_type("");//varchar2	10					용도
+            userDemoBsDetailVO.setIs_in_own_device3(0);//number	4					설치여부	0:n, 1:y
+            userDemoBsDetailVO.setDemo_needs("");//varchar2	3000					실증배경, 필요성, 목표
+            userDemoBsDetailVO.setDemo_main_point("");//varchar2	3000					실증관리 핵심요소
+            userDemoBsDetailVO.setDemo_use_plan("");//varchar2	3000					실증결과 활용계획
+            userDemoBsDetailVO.setDemo_facil_mat("");//varchar2	200					실증대상 기자재 시설자재
+            userDemoBsDetailVO.setDemo_facil_ict("");//varchar2	200					실증대상 ict 기자재
+            userDemoBsDetailVO.setDemo_facil_fer("");//varchar2	200					실증대상 작물보호제 및 비료
+            userDemoBsDetailVO.setDemo_facil_sw("");//varchar2	200					실증대상 sw
+            userDemoBsDetailVO.setDemo_facil_robot("");//varchar2	200					실증대상 로봇
+            userDemoBsDetailVO.setDemo_facil_model("");//varchar2	200					실증대상 생육모델
+            userDemoBsDetailVO.setDemo_paln_gh("");//varchar2	3000					실증설계 온실설치
+            userDemoBsDetailVO.setDemo_paln_facil("");//varchar2	3000					실증설계 기자재 설치
+            userDemoBsDetailVO.setDemo_paln_exper("");//varchar2	3000					실증설계 실험분석
+            userDemoBsDetailVO.setDemo_paln_mng("");//varchar2	3000					실증관리
+            userDemoBsDetailVO.setDemo_plan_ip("");//varchar2	3000					사업계획 지자재, 인증
+            userDemoBsDetailVO.setDemo_plan_target("");//varchar2	3000					사업계획 국내외 시장
+            userDemoBsDetailVO.setDemo_plan_sales("");//varchar2	3000					사업계획 판매계획
+            userDemoBsDetailVO.setDemo_plan_post("");//varchar2	3000					사업계획 향후
+            userDemoBsDetailVO.setIn_facil_mat("");//varchar2	40					반입기자재 시설자재명칭
+            userDemoBsDetailVO.setIn_facil_mat_type("");//varchar2	10					반입기자재 용도
+            userDemoBsDetailVO.setIn_facil_mat_stnrd("");//varchar2	10					반입기자재 단위,규격
+            userDemoBsDetailVO.setIn_facil_mat_amount(0);//number	4					 반입기자재 수량
+            userDemoBsDetailVO.setIn_facil_mat_val(0);//number	4					반입기자재 단가
+            userDemoBsDetailVO.setIn_facil_mat_price(0);//number	10					반입기자재 가격
+            userDemoBsDetailVO.setIn_facil_ict("");//varchar2	40					ict 반입기자재 시설자재명칭
+            userDemoBsDetailVO.setIn_facil_ict_type("");//varchar2	10					반입기자재 용도
+            userDemoBsDetailVO.setIn_facil_ict_stnrd("");//varchar2	10					반입기자재 단위,규격
+            userDemoBsDetailVO.setIn_facil_ict_amount(0);//number	4					 반입기자재 수량
+            userDemoBsDetailVO.setIn_facil_ict_val(0);//number	4					반입기자재 단가
+            userDemoBsDetailVO.setIn_facil_ict_price(0);//number	10					반입기자재 가격
+            userDemoBsDetailVO.setIn_facil_fer("");//varchar2	40					fer 반입기자재 시설자재명칭
+            userDemoBsDetailVO.setIn_facil_fer_type("");//varchar2	10					반입기자재 용도
+            userDemoBsDetailVO.setIn_facil_fer_stnrd("");//varchar2	10					반입기자재 단위,규격
+            userDemoBsDetailVO.setIn_facil_fer_amount(0);//number	4					 반입기자재 수량
+            userDemoBsDetailVO.setIn_facil_fer_val(0);//number	4					반입기자재 단가
+            userDemoBsDetailVO.setIn_facil_fer_price(0);//number	10					반입기자재 가격
+            userDemoBsDetailVO.setIn_facil_sw("");//varchar2	40					sw 반입기자재 시설자재명칭
+            userDemoBsDetailVO.setIn_facil_sw_type("");//varchar2	10					반입기자재 용도
+            userDemoBsDetailVO.setIn_facil_sw_stnrd("");//varchar2	10					반입기자재 단위,규격
+            userDemoBsDetailVO.setIn_facil_sw_amount(0);//number	4					 반입기자재 수량
+            userDemoBsDetailVO.setIn_facil_sw_val(0);//number	4					반입기자재 단가
+            userDemoBsDetailVO.setIn_facil_sw_price(0);//number	10					반입기자재 가격
+            userDemoBsDetailVO.setIn_facil_seeding("");//varchar2	40					seed 반입기자재 시설자재명칭
+            userDemoBsDetailVO.setIn_facil_seedingtype("");//varchar2	10					반입기자재 용도
+            userDemoBsDetailVO.setIn_facil_seeding_stnrd("");//varchar2	10					반입기자재 단위,규격
+            userDemoBsDetailVO.setIn_facil_seeding_amount(0);//number	4					 반입기자재 수량
+            userDemoBsDetailVO.setIn_facil_seeding_val(0);//number	4					반입기자재 단가
+            userDemoBsDetailVO.setIn_facil_seeding_price(0);//number	10					반입기자재 가격
+            userDemoBsDetailVO.setIn_facil_robot("");//varchar2	40					robot 반입기자재 시설자재명칭
+            userDemoBsDetailVO.setIn_facil_robot_type("");//varchar2	10					반입기자재 용도
+            userDemoBsDetailVO.setIn_facil_robot_stnrd("");//varchar2	10					반입기자재 단위,규격
+            userDemoBsDetailVO.setIn_facil_robot_amount(0);//number	4					 반입기자재 수량
+            userDemoBsDetailVO.setIn_facil_robot_val(0);//number	4					반입기자재 단가
+            userDemoBsDetailVO.setIn_facil_robot_price(0);//number	10					반입기자재 가격
+            userDemoBsDetailVO.setIn_hazd_chemical1("");//varchar2	40					반입 유해화학물질 명
+            userDemoBsDetailVO.setIn_hazd_chemical1_form("");//varchar2	20					반입 유해화학물질 화학식
+            userDemoBsDetailVO.setIn_hazd_chemical1_amount("");//varchar2	20					반입 유해화학물질 예상사용량
+            userDemoBsDetailVO.setIn_hazd_chemical1_case("");//varchar2	20					반입 유해화학물질 보관함
+            userDemoBsDetailVO.setIn_hazd_chemical1_loc("");//varchar2	20					반입 유해화학물질 보관장소
+            userDemoBsDetailVO.setIn_hazd_chemical1_etc("");//varchar2	40					반입 유해화학물질 특이사항
+            userDemoBsDetailVO.setIn_hazd_chemical2("");//varchar2	40					반입 유해화학물질 명
+            userDemoBsDetailVO.setIn_hazd_chemical2_form("");//varchar2	20					반입 유해화학물질 화학식
+            userDemoBsDetailVO.setIn_hazd_chemical2_amount("");//varchar2	20					반입 유해화학물질 예상사용량
+            userDemoBsDetailVO.setIn_hazd_chemical2_case("");//varchar2	20					반입 유해화학물질 보관함
+            userDemoBsDetailVO.setIn_hazd_chemical2_loc("");//varchar2	20					반입 유해화학물질 보관장소
+            userDemoBsDetailVO.setIn_hazd_chemical2_etc("");//varchar2	40					반입 유해화학물질 특이사항
+            userDemoBsDetailVO.setIn_hazd_chemical3("");//varchar2	40					반입 유해화학물질 명
+            userDemoBsDetailVO.setIn_hazd_chemical3_form("");//varchar2	20					반입 유해화학물질 화학식
+            userDemoBsDetailVO.setIn_hazd_chemical3_amount("");//varchar2	20					반입 유해화학물질 예상사용량
+            userDemoBsDetailVO.setIn_hazd_chemical3_case("");//varchar2	20					반입 유해화학물질 보관함
+            userDemoBsDetailVO.setIn_hazd_chemical3_loc("");//varchar2	20					반입 유해화학물질 보관장소
+            userDemoBsDetailVO.setIn_hazd_chemical3_etc("");//varchar2	40					반입 유해화학물질 특이사항
+            userDemoBsDetailVO.setWaste_water_amount("");//varchar2	20					폐기물 오염수 발생량
+            userDemoBsDetailVO.setWaste_water_case("");//varchar2	20					폐기물 오염수보관장소
+            userDemoBsDetailVO.setWaste_water_ext_plan("");//varchar2	100					폐기물 오염수 방출계획
+            userDemoBsDetailVO.setWaste_soil_amount("");//varchar2	20					폐기물 토양 발생량
+            userDemoBsDetailVO.setWaste_soil_case("");//varchar2	20					폐기물 토양 보관장소
+            userDemoBsDetailVO.setWaste_soil_ext_plan("");//varchar2	100					폐기물 토양 방출계획
+            userDemoBsDetailVO.setFacil_pw1("");//varchar2	100					소요전력 장비명
+            userDemoBsDetailVO.setFacil_pw1_type("");//varchar2	20					소요전력 장비 용도
+            userDemoBsDetailVO.setFacil_pw1_v("");//varchar2	10					소요전력 장비 사용전원
+            userDemoBsDetailVO.setFacil_pw1_w("");//varchar2	10					소요전력 장비 소비전력
+            userDemoBsDetailVO.setFacil_pw2("");//varchar2	100					소요전력 장비명
+            userDemoBsDetailVO.setFacil_pw2_type("");//varchar2	20					소요전력 장비 용도
+            userDemoBsDetailVO.setFacil_pw2_v("");//varchar2	10					소요전력 장비 사용전원
+            userDemoBsDetailVO.setFacil_pw2_w("");//varchar2	10					소요전력 장비 소비전력
+            userDemoBsDetailVO.setFacil_pw3("");//varchar2	100					소요전력 장비명
+            userDemoBsDetailVO.setFacil_pw3_type("");//varchar2	20					소요전력 장비 용도
+            userDemoBsDetailVO.setFacil_pw3_v("");//varchar2	10					소요전력 장비 사용전원
+            userDemoBsDetailVO.setFacil_pw3_w("");//varchar2	10					소요전력 장비 소비전력
+
+            userDemoBsService.saveUserDemoBsDetail(userDemoBsDetailVO);
+
+            if(userBsHumanResourceVOList != null && !userBsHumanResourceVOList.isEmpty()){
+                userDemoBsService.deleteUserDemoBsHumanResource(userDemoBsVo.getIdx_user_demo_bs());
+            }
+            else {
+                userBsHumanResourceVOList = new ArrayList<UserBsHumanResourceVO>();
+            }
+
+            for(int i=1;i<4;i++){
+                UserBsHumanResourceVO userBsHumanResourceVO = new UserBsHumanResourceVO();
+
+                userBsHumanResourceVO.setIdx_user_demo_bs(userDemoBsVo.getIdx_user_demo_bs());//	number	32
+                userBsHumanResourceVO.setRnd_user_order(i);//	number	4
+                userBsHumanResourceVO.setRnd_user_name("");//	varchar2	20
+                userBsHumanResourceVO.setRnd_user_role("");//	varchar2	20
+                userBsHumanResourceVO.setRnd_user_code("");//	varchar2	40
+                userBsHumanResourceVO.setRnd_user_birth("");//	varchar2	20
+                userBsHumanResourceVO.setRnd_user_grad("");//	varchar2	40
+                userBsHumanResourceVO.setRnd_user_col("");//	varchar2	40
+                userBsHumanResourceVO.setRnd_user_school("");//	varchar2	40
+                userBsHumanResourceVO.setRnd_user_col_date("");//	varchar2	20
+                userBsHumanResourceVO.setRnd_user_col_part("");//	varchar2	20
+                userBsHumanResourceVO.setRnd_user_6t("");//	varchar2	40
+                userBsHumanResourceVO.setRnd_user_result("");//	varchar2	100
+
+                userBsHumanResourceVOList.add(userBsHumanResourceVO);
+            }
+        }
+        else {
+
+        }
+        model.addAttribute("userDemoBsDetailVO",userDemoBsDetailVO);
+
+        model.addAttribute("userBsHumanResourceVOList",userBsHumanResourceVOList);
+
         getHomepageInfo(model);
         return "app_step3";
     }
 
     @RequestMapping("/app_step4")
     public String app_step4(HttpSession session
+            ,UserDemoBsCheckVO userDemoBsCheckVO
             ,Model model){
         if(session==null
                 || session.getAttribute("loginCheck")==null
@@ -256,6 +473,38 @@ public class IndexController {
             return "index";
         }
         model.addAttribute("user",findUser);
+        DemoBusinessVO demoBusinessVo = demoBsService.getDemoBsByIdx(userDemoBsCheckVO.getIdx_demo_business());
+
+        if(demoBusinessVo==null){//해당 사업 없음, 에러페이지로 보내야 한다...
+
+            session.removeAttribute("loginCheck");
+            clearSessionAndRedirect(session);
+            return "index";
+        }
+
+        model.addAttribute("demoBs",demoBusinessVo);
+
+        UserDemoBsVO userDemoBsVo = userDemoBsService.getUserDemoBs(userDemoBsCheckVO);
+        if(userDemoBsVo==null){//이전에 저장한게 없다, 에러페이지로 보내야 한다...
+            session.removeAttribute("loginCheck");
+            clearSessionAndRedirect(session);
+            return "index";
+        }
+        model.addAttribute("userDemoBs",userDemoBsVo);
+
+        UserDemoBsDetailVO userDemoBsDetailVO = userDemoBsService.getUserDemoBsDetail(userDemoBsVo.getIdx_user_demo_bs());
+
+        List<UserBsHumanResourceVO> userBsHumanResourceVOList = userDemoBsService.getUserDemoBsHumanResourceList(userDemoBsVo.getIdx_user_demo_bs());
+
+        if(userDemoBsDetailVO==null || userBsHumanResourceVOList==null || userBsHumanResourceVOList.isEmpty()){
+            session.removeAttribute("loginCheck");
+            clearSessionAndRedirect(session);
+            return "index";
+        }
+
+        model.addAttribute("userDemoBsDetailVO",userDemoBsDetailVO);
+
+        model.addAttribute("userBsHumanResourceVOList",userBsHumanResourceVOList);
 
         getHomepageInfo(model);
         return "app_step4";
@@ -263,6 +512,7 @@ public class IndexController {
 
     @RequestMapping("/app_step5")
     public String app_step5(HttpSession session
+            ,UserDemoBsCheckVO userDemoBsCheckVO
             ,Model model){
         if(session==null
                 || session.getAttribute("loginCheck")==null
@@ -347,7 +597,7 @@ public class IndexController {
             return "brd_announce_blank";
         }
         model.addAttribute("total_count",annouceCount);
-        List<BsAnnouncementVO> announcementVOList = bsAnnouncementService.getBsAnnouncementList(page,list_amount);
+        List<BsAnnouncementVO> announcementVOList = bsAnnouncementService.getBsAnnouncementWebList(page,list_amount);
         model.addAttribute("announceList",announcementVOList);
 
         model.addAttribute("cur_page",page);
@@ -525,7 +775,7 @@ public class IndexController {
             return "brd_notice_blank";
         }
         model.addAttribute("total_count",noticeCount);
-        List<NoticeVO> noticeList = noticeService.getNoticeList(page,list_amount);
+        List<NoticeVO> noticeList = noticeService.getNoticeWebList(page,list_amount);
         model.addAttribute("noticeList",noticeList);
 
         model.addAttribute("cur_page",page);
@@ -778,9 +1028,11 @@ public class IndexController {
     }
 
     @RequestMapping("/juso_search")
-    public String juso_search(Model model){
+    public String juso_search(@RequestParam(value="juso_type") String juso_type,
+                              Model model){
 
         model.addAttribute("searchSeverUrl",jusoService.getSearchServerUrl());
+        model.addAttribute("juso_type",juso_type);
         return "juso_search";
     }
 

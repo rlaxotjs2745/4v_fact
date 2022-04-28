@@ -2,10 +2,145 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.fact.core.model.DemoBsMapper">
-    <select id="getAvailibleDemoBs" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
-        SELECT * FROM TB_DEMO_BUSINESS  WHERE DEMO_BS_STATUS = 3
+
+    <select id="getDemoBsTotalCount" resultType="int">
+        SELECT COUNT (*) FROM TB_DEMO_BUSINESS
     </select>
+
+    <select id="getDemoBsList" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
+        SELECT * FROM TB_DEMO_BUSINESS ORDER BY START_DATE DESC
+    </select>
+    <select id="getDemoBsListLimit" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
+        SELECT
+            IDX_DEMO_BUSINESS
+             ,DEMO_BS_STATUS
+             ,DEMO_BS_CODE
+             ,DEMO_SUBJECT
+             ,RECRUIT_COUNT_LIMIT
+             ,START_DATE
+             ,END_DATE
+             ,IS_ANNOUNCE
+        FROM (
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+        ,IDX_DEMO_BUSINESS
+                      ,DEMO_BS_STATUS
+                      ,DEMO_BS_CODE
+                      ,DEMO_SUBJECT
+                      ,RECRUIT_COUNT_LIMIT
+                      ,START_DATE
+                      ,END_DATE
+                      ,IS_ANNOUNCE
+                 FROM (
+                          SELECT * FROM TB_DEMO_BUSINESS
+                      )
+
+                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+             )
+        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+    </select>
+
+
+
+
+    <select id="getDemoBsListByFilter" parameterType="int" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
+        SELECT * FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS = #{type} ORDER BY START_DATE DESC
+    </select>
+
     <select id="getDemoBsByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
         SELECT * FROM TB_DEMO_BUSINESS  WHERE IDX_DEMO_BUSINESS = #{idx}
     </select>
+
+    <insert id="saveDemoBs" parameterType="kr.or.fact.core.model.DTO.DemoBusinessVO">
+        INSERT INTO TB_DEMO_BUSINESS (
+            IDX_DEMO_BUSINESS,
+            DEMO_BS_CODE,
+            DEMO_SUBJECT,
+            DEMO_BS_CONTENTS,
+            DEMO_BS_MAIN_TYPE,
+            DEMO_BS_SUB_TYPE,
+            DEMO_BS_DETAIL_TYPE,
+            DEMO_BS_STATUS,
+            APPLICANT_COUNT,
+            APPLICANT_COUNT_LIMIT,
+            START_DATE,
+            END_DATE,
+            RECRUIT_START_DATE,
+            RECRUIT_END_DATE,
+            RECRUIT_COUNT_LIMIT,
+            MEMO,
+            IDX_ADMIN,
+            IDX_CONFORM_ADMIN,
+            IS_ANNOUNCE,
+            REG_DATE,
+            LAST_UPD_DATE,
+        ) VALUES (
+                     SEQ_DEMO_BUSINESS.NEXTVAL,
+                     #{demo_bs_code},
+                     #{demo_subject},
+                     #{demo_bs_contents},
+                     #{demo_bs_main_type},
+                     #{demo_bs_sub_type},
+                     #{demo_bs_detail_type},
+                     #{demo_bs_status},
+                     #{applicant_count},
+                     #{applicant_count_limit},
+                     #{start_date},
+                     #{end_date},
+                     #{recruit_start_date},
+                     #{recruit_end_date},
+                     #{recruit_count_limit},
+                     #{memo},
+                     #{idx_admin},
+                     #{idx_conform_admin},
+                     #{is_announce},
+                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS'),
+                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+                 )
+
+    </insert>
+
+    <update id="updateDemoBs" parameterType="kr.or.fact.core.model.DTO.DemoBusinessVO">
+        UPDATE TB_DEMO_BUSINESS SET
+               DEMO_BS_CODE=#{demo_bs_code},
+               DEMO_SUBJECT=#{demo_subject},
+               DEMO_BS_CONTENTS=#{demo_bs_contents},
+               DEMO_BS_MAIN_TYPE=#{demo_bs_main_type},
+               DEMO_BS_SUB_TYPE=#{demo_bs_sub_type},
+               DEMO_BS_DETAIL_TYPE=#{demo_bs_detail_type},
+               DEMO_BS_STATUS=#{demo_bs_status},
+               APPLICANT_COUNT=#{applicant_count},
+               APPLICANT_COUNT_LIMIT=#{applicant_count_limit},
+               START_DATE=#{start_date},
+               END_DATE=#{end_date},
+               RECRUIT_START_DATE=#{recruit_start_date},
+               RECRUIT_END_DATE=#{recruit_end_date},
+               RECRUIT_COUNT_LIMIT=#{recruit_count_limit},
+               MEMO=#{memo},
+               IDX_ADMIN=#{idx_admin},
+               IDX_CONFORM_ADMIN=#{idx_conform_admin},
+               IS_ANNOUNCE=#{is_announce},
+               LAST_UPD_DATE = TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+        WHERE IDX_DEMO_BUSINESS = #{idx_demo_business}
+    </update>
+
+
+    <delete id="deleteDemoBs" parameterType="long">
+        DELETE FROM TB_DEMO_BUSINESS WHERE IDX_DEMO_BUSINESS = #{idx_demo_business}
+    </delete>
+
+    <select id="getAdminDemoBsFilter" resultType="kr.or.fact.core.model.DTO.AdminDemoBSFilterVO">
+        SELECT (SELECT COUNT(*) FROM TB_DEMO_BUSINESS ) AS TOT_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS = 3) AS APPL_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS = 9) AS APPL_COUNTBS_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS > 9) AS DONE_COUNT
+        FROM TB_DEMO_BUSINESS WHERE ROWNUM = 1
+    </select>
+
+
+
+    <select id="getAvailibleDemoBs" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
+        SELECT * FROM TB_DEMO_BUSINESS  WHERE DEMO_BS_STATUS = 3
+    </select>
+
+
 </mapper>

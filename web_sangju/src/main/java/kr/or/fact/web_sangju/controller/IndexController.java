@@ -327,7 +327,7 @@ public class IndexController {
             return "brd_announce_blank";
         }
         model.addAttribute("total_count",annouceCount);
-        List<BsAnnouncementVO> announcementVOList = bsAnnouncementService.getBsAnnouncementList(page,list_amount);
+        List<BsAnnouncementVO> announcementVOList = bsAnnouncementService.getBsAnnouncementWebList(page,list_amount);
         model.addAttribute("announceList",announcementVOList);
 
         model.addAttribute("cur_page",page);
@@ -505,7 +505,7 @@ public class IndexController {
             return "brd_notice_blank";
         }
         model.addAttribute("total_count",noticeCount);
-        List<NoticeVO> noticeList = noticeService.getNoticeList(page,list_amount);
+        List<NoticeVO> noticeList = noticeService.getNoticeWebList(page,list_amount);
         model.addAttribute("noticeList",noticeList);
 
         model.addAttribute("cur_page",page);

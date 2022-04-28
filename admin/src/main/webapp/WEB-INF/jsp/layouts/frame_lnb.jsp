@@ -32,7 +32,12 @@
 
                     <ul class="sidenav-menu">
                         <li class="sidenav-item">
-                            <a href="javascript:load('b10_demo_bs_announce_doc_mng','사업공고문 관리');" class="sidenav-link">
+                            <a href="javascript:load('b00_demo_bs_mng?page=1','실증사업 관리');" class="sidenav-link">
+                                <div>실증사업 관리</div>
+                            </a>
+                        </li>
+                        <li class="sidenav-item">
+                            <a href="javascript:load('b10_demo_bs_announce_doc_mng?page=1','사업공고문 관리');" class="sidenav-link">
                                 <div>사업공고문 관리</div>
                             </a>
                         </li>
@@ -59,11 +64,11 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="sidenav-item">
+<%--                        <li class="sidenav-item">
                             <a href="javascript:load('b30_demo_bs_usage_ext_mng','연장 신청 접수');" class="sidenav-link">
                                 <div>연장 신청 접수</div>
                             </a>
-                        </li>
+                        </li>--%>
                         <li class="sidenav-item">
                             <a href="javascript:load('b40_demo_bs_contract_mng','협약관리');" class="sidenav-link">
                                 <div>협약관리</div>
