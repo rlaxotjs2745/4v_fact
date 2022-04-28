@@ -94,13 +94,14 @@
             dataType:'json',//받는 데이터 타입
             enctype: 'multipart/form-data',
             success: function(result){
-
+                console.log(result)
+                // alert()
             },
             error:function(){
 
             }
         });
-        event.preventDefault();
+        // event.preventDefault();
     }
     $('.summernote').summernote({
         toolbar: [

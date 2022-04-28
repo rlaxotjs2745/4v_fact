@@ -169,7 +169,7 @@ public class APIController {
 //    }
 
     @RequestMapping(value = "/send_mail",method = RequestMethod.POST)
-    public String send_mail(@ModelAttribute MailVO mailVO, HttpServletRequest request) throws Exception, IOException {
+    public void send_mail(@ModelAttribute MailVO mailVO, HttpServletRequest request) throws Exception, IOException {
         String title = mailVO.getTitle();
         String content = mailVO.getContent();
         String receiver = mailVO.getReceiver();
@@ -202,21 +202,20 @@ public class APIController {
             mailHelper.setText(content != null ? content : "", true);
             for(int i = 0; i < fileLength; i++){
                 FileSystemResource file = new FileSystemResource(files[i]);
-                System.out.println(file.getPath());
                 mailHelper.addAttachment(file.getFilename(),files[i]);
-//                mailHelper.addAttachment(files[i].getName(), files[i]);
             }
-
-//            System.out.println("filename: " + mail.get());
-
             mailSender.send(mail);
 
+
             System.out.println("전송 완료");
-            return "메일이 정상적으로 전송되었습니다.";
+//            return "메일이 정상적으로 전송되었습니다.";
         } catch (Exception e){
             System.out.println("전송 실패");
             System.out.println(e);
-            return "전송이 실패했습니다.";
+//            return "전송이 실패했습니다.";
+        }
+        for(int i = 0; i < fileLength; i++){
+            files[i].delete();
         }
     }
 
