@@ -29,6 +29,7 @@ public interface UserDemoBsMapper {
 
     void updateUserDemoBsWebStep2(UserDemoBsVO userDemoBsVO);
     void updateUserDemoBsWebStep3(UserDemoBsVO userDemoBsVO);
+    void updateUserDemoBsWebStep4(UserDemoBsVO userDemoBsVO);
 
     List<UserBsHumanResourceVO> getUserDemoBsHumanResourceList(long idx_user_demo_bs);
     void saveUserDemoBsHumanResource(UserBsHumanResourceVO userBsHumanResourceVO);

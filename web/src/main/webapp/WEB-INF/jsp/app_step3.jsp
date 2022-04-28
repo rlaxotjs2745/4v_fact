@@ -58,7 +58,7 @@
         <div class="app__business">
             <label for="select-business">지원사업 선택</label>
             <select name="business" id="select-business" disabled>
-                <option value="${demoBs.demo_subject}"></option>
+                <option value="">${demoBs.demo_subject}</option>
             </select>
         </div>
     </header>
@@ -1884,7 +1884,7 @@ function save_temp(){
         success: function(result){
             //작업이 성공적으로 발생했을 경우
             if(result.result_code=="SUCCESS"){
-                alert(result.result_str);
+                //alert(result.result_str);
 
             }
             else {
@@ -2094,7 +2094,7 @@ function save_temp(){
         userBsHumanResourceVOList:userBsHumanResourceVOList
     }
 
-    console.log(JSON.stringify(param_detail));
+    //console.log(JSON.stringify(param_detail));
 
     $.ajax({
         type: 'post',

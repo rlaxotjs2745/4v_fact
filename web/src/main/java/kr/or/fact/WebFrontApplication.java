@@ -10,9 +10,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @SpringBootApplication
 @EnableConfigurationProperties({
-        FACTConfig.class
+    FACTConfig.class
 })
-
 public class WebFrontApplication extends SpringBootServletInitializer {
 
     @Override

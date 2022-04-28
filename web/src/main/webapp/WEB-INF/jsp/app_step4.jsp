@@ -54,7 +54,7 @@
         <div class="app__business">
             <label for="select-business">지원사업 선택</label>
             <select name="business" id="select-business" disabled>
-                <option value="${demoBs.demo_subject}"></option>
+                <option value="">${demoBs.demo_subject}</option>
             </select>
         </div>
     </header>
@@ -65,8 +65,8 @@
                 <h3>개인정보 수집·이용·제공에 관한 동의서</h3>
                 <div class="app__agree">
                     <div class="checkbox">
-                        <input type="checkbox" id="app-1" class="each_check" name="appgroup">
-                        <label for="app-1">실증단지 이용약관 동의(필수)</label>
+                        <input type="checkbox" id="is_use_agree" class="each_check" name="is_agree">
+                        <label for="is_use_agree">실증단지 이용약관 동의(필수)</label>
                     </div>
                     <div class="app__terms">제1장 총 칙
                         제 1조 (목적)
@@ -75,8 +75,8 @@
                 </div>
                 <div class="app__agree">
                     <div class="checkbox">
-                        <input type="checkbox" id="app-2" class="each_check" name="appgroup">
-                        <label for="app-2">개인정보 수집 및 이용 동의(필수)</label>
+                        <input type="checkbox" id="is_indi_use_agree" class="each_check" name="is_agree">
+                        <label for="is_indi_use_agree">개인정보 수집 및 이용 동의(필수)</label>
                     </div>
                     <div class="app__terms">제1장 총 칙
                         제 1조 (목적)
@@ -85,8 +85,8 @@
                 </div>
                 <div class="app__agree">
                     <div class="checkbox">
-                        <input type="checkbox" id="app-3" class="each_check" name="appgroup">
-                        <label for="app-3">개인정보처리 위탁에 관한 사항 동의(필수)</label>
+                        <input type="checkbox" id="is_indi_info_agree" class="each_check" name="is_agree">
+                        <label for="is_indi_info_agree">개인정보처리 위탁에 관한 사항 동의(필수)</label>
                     </div>
                     <div class="app__terms">제1장 총 칙
                         제 1조 (목적)
@@ -95,8 +95,8 @@
                 </div>
                 <div class="app__agree--all">
                     <div class="checkbox">
-                        <input type="checkbox" id="app-4" name="appgroup">
-                        <label for="app-4">전체동의</label>
+                        <input type="checkbox" id="is_all_agree" name="is_agree">
+                        <label for="is_all_agree">전체동의</label>
                         <span class="cl-red">* “개인정보 수집·이용·제공에 관한 동의서”를 전체 동의하지 않을 경우는 신청서 등록을 하실 수 없습니다.</span>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
 <script>
 
     // 체크박스 전체 선택
-    $(".app__agree").on("click", "#join-1", function () {
+    $(".app__agree").on("click", "#is_all_agree", function () {
         $(this).parents(".app__agree").find('input').prop("checked", $(this).is(":checked"));
     });
 
@@ -132,7 +132,7 @@
             is_checked = is_checked && $(this).is(":checked");
         });
 
-        $("#app-4").prop("checked", is_checked);
+        $("#is_all_agree").prop("checked", is_checked);
     });
 
 
@@ -177,6 +177,57 @@
         f.setAttribute('action', location);
         document.body.appendChild(f);
         f.submit();
+    }
+
+    $("#btn_save").click(function(){
+
+        if (!confirm("저장하시겠습니까.")) {
+            // 취소(아니오) 버튼 클릭 시 이벤트
+
+        } else {
+            // 확인(예) 버튼 클릭 시 이벤트
+            save_temp();
+            $('#btn_app_step5').attr('disabled', false);
+
+        }
+
+
+    });
+
+    function save_temp(){
+
+        let param = {
+            idx_user_demo_bs:${userDemoBs.idx_user_demo_bs},//		number	32		0		◯	지원사업
+            idx_demo_business:${userDemoBs.idx_demo_business},//		number	32		0		◯	지원사업
+            idx_user:${userDemoBs.idx_user},
+
+            user_demo_bs_type:$('#is_use_agree').is(":checked")?1:0, //		number	4		1			사업 진행 주체 타입	0:개인, 1:일반기업, 2:미등록기업(설립전), 3: 농업진흥기관, 4:선도기업, 5:외국연구기관, 6:특정연구기관, 7:정부출연연구기관, 8:스마트팜 관련 기업부설연구소 보유기업, 9: 대학교, 99:기타 단체
+            user_demo_bs_type:$('#is_indi_use_agree').is(":checked")?1:0,
+            user_demo_bs_type:$('#is_indi_info_agree').is(":checked")?1:0,
+
+        };
+
+        $.ajax({
+            type: 'post',
+            url :'app_step4_save_temp', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(param),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'json',//받는 데이터 타입
+            success: function(result){
+                //작업이 성공적으로 발생했을 경우
+                if(result.result_code=="SUCCESS"){
+                    alert(result.result_str);
+
+                }
+                else {
+                    alert(result.result_str);
+                }
+                //STATUS_001 :
+            },
+            error:function(){
+                //에러가 났을 경우 실행시킬 코드
+            }
+        });
     }
 
 </script>

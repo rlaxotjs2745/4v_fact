@@ -72,6 +72,10 @@ public class UserDemoBsServiceImpl implements UserDemoBsService {
     public void updateUserDemoBsWebStep3(UserDemoBsVO userDemoBsVO){
         userDemoBsMapper.updateUserDemoBsWebStep3(userDemoBsVO);
     }
+    @Override
+    public void updateUserDemoBsWebStep4(UserDemoBsVO userDemoBsVO){
+        userDemoBsMapper.updateUserDemoBsWebStep4(userDemoBsVO);
+    }
 
 
     @Override

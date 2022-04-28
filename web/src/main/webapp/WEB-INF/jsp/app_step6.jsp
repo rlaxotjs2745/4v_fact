@@ -53,13 +53,8 @@
         </div>
         <div class="app__business">
             <label for="select-business">지원사업 선택</label>
-            <select name="business" id="select-business">
-                <option value="">사업공고명</option>
-                <option value="">사업공고명</option>
-                <option value="">사업공고명</option>
-                <option value="">사업공고명</option>
-                <option value="">사업공고명</option>
-                <option value="">사업공고명</option>
+            <select name="business" id="select-business" disabled>
+                <option value="">${demoBs.demo_subject}</option>
             </select>
         </div>
     </header>

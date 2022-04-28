@@ -110,7 +110,9 @@ public class UserDemoBsVO {
     String prize3_org;//	varchar2	100					포상기관3
     String prize3_etc;//	varchar2	100					포상 비고3
 
-
+    int is_use_agree;//	NUMBER	4		0			실증단지 이용약관 동의	0:동의 안함, 1:동의
+    int is_indi_use_agree;//	NUMBER	4		0			개인정보 수집 및 이용동의	0:동의 안함, 1:동의
+    int is_indi_info_agree;//	NUMBER	4		0			개인정보처리 위탁에관한 동의	0:동의 안함, 1:동의
 
     Date reg_date;//	date						최초 등록 일시
     String reg_date_s;//	date						최초 등록 일시

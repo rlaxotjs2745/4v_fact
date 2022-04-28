@@ -530,6 +530,39 @@ public class IndexController {
         }
         model.addAttribute("user",findUser);
 
+        DemoBusinessVO demoBusinessVo = demoBsService.getDemoBsByIdx(userDemoBsCheckVO.getIdx_demo_business());
+
+        if(demoBusinessVo==null){//해당 사업 없음, 에러페이지로 보내야 한다...
+
+            session.removeAttribute("loginCheck");
+            clearSessionAndRedirect(session);
+            return "index";
+        }
+
+        model.addAttribute("demoBs",demoBusinessVo);
+
+        UserDemoBsVO userDemoBsVo = userDemoBsService.getUserDemoBs(userDemoBsCheckVO);
+        if(userDemoBsVo==null){//이전에 저장한게 없다, 에러페이지로 보내야 한다...
+            session.removeAttribute("loginCheck");
+            clearSessionAndRedirect(session);
+            return "index";
+        }
+        model.addAttribute("userDemoBs",userDemoBsVo);
+
+        UserDemoBsDetailVO userDemoBsDetailVO = userDemoBsService.getUserDemoBsDetail(userDemoBsVo.getIdx_user_demo_bs());
+
+        List<UserBsHumanResourceVO> userBsHumanResourceVOList = userDemoBsService.getUserDemoBsHumanResourceList(userDemoBsVo.getIdx_user_demo_bs());
+
+        if(userDemoBsDetailVO==null || userBsHumanResourceVOList==null || userBsHumanResourceVOList.isEmpty()){
+            session.removeAttribute("loginCheck");
+            clearSessionAndRedirect(session);
+            return "index";
+        }
+
+        model.addAttribute("userDemoBsDetailVO",userDemoBsDetailVO);
+
+        model.addAttribute("userBsHumanResourceVOList",userBsHumanResourceVOList);
+
         getHomepageInfo(model);
         return "app_step5";
     }

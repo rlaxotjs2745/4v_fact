@@ -19,6 +19,9 @@ public interface UserDemoBsService {
 
     public void updateUserDemoBsWebStep2(UserDemoBsVO userDemoBsVO);
     public void updateUserDemoBsWebStep3(UserDemoBsVO userDemoBsVO);
+    public void updateUserDemoBsWebStep4(UserDemoBsVO userDemoBsVO);
+
+
 
     List<UserBsHumanResourceVO> getUserDemoBsHumanResourceList(long idx_user_demo_bs);
     void saveUserDemoBsHumanResource(UserBsHumanResourceVO userBsHumanResourceVO);

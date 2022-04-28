@@ -437,7 +437,16 @@
               PRIZE3_ORG = #{prize3_org},
               PRIZE3_ETC = #{prize3_etc},
 
+
                LAST_UPD_DATE = TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+        WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
+    </update>
+
+    <update id="updateUserDemoBsWebStep4" parameterType="kr.or.fact.core.model.DTO.UserDemoBsVO">
+        UPDATE TB_USER_DEMO_BS SET
+                                   IS_USE_AGREE	= #{is_use_agree},
+                                   IS_INDI_USE_AGREE	= #{is_indi_use_agree},
+                                   IS_INDI_INFO_AGREE	= #{is_indi_info_agree}
         WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
     </update>
 
@@ -800,8 +809,6 @@
                  )
 
     </insert>
-
-
 
     <update id="updateUserDemoBsDetail" parameterType="kr.or.fact.core.model.DTO.UserDemoBsDetailVO">
         UPDATE TB_USER_DEMO_BS_DETAIL SET

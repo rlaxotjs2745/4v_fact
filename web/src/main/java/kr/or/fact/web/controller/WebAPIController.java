@@ -502,7 +502,7 @@ public class WebAPIController {
         }
         // 저장단계 변경
 
-        if(findUserDemoBsVo.getApp_step()==0){
+        if(findUserDemoBsVo.getApp_step()<1){
             findUserDemoBsVo.setApp_step(1);
         }
         findUserDemoBsVo.setLab_est_date(userDemoBsVO.getLab_est_date()==null?"":userDemoBsVO.getLab_est_date());//
@@ -595,6 +595,67 @@ public class WebAPIController {
             return resultVO;
         }
 
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/app_step4_save_temp",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO app_step4_save_temp(HttpSession session,
+                                        @RequestBody UserDemoBsVO userDemoBsVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("저장했습니다");
+
+        //1.신청자 파악
+        UserVO userVo = userService.getUserInfo(userDemoBsVO.getIdx_user());
+        if(userVo ==null){
+            resultVO.setResult_str("신청자를 찾을 수 없습니다");
+            resultVO.setResult_code("ERROR_1001");
+            return resultVO;
+        }
+        //2.신청 Demo BS 파악
+        DemoBusinessVO demoBusinessVo = demoBsService.getDemoBsByIdx(userDemoBsVO.getIdx_demo_business());
+
+        if(demoBusinessVo == null){
+            resultVO.setResult_str("지원사업을 찾을 수 없습니다");
+            resultVO.setResult_code("ERROR_1001");
+            return resultVO;
+        }
+        //3.기 신청이 있는지 체크
+        UserDemoBsCheckVO userDemoBsCheckVo = new UserDemoBsCheckVO();
+        userDemoBsCheckVo.setIdx_user(userDemoBsVO.getIdx_user());
+        userDemoBsCheckVo.setIdx_demo_business(userDemoBsVO.getIdx_demo_business());
+
+        UserDemoBsVO findUserDemoBsVo = userDemoBsService.getUserDemoBs(userDemoBsCheckVo);
+        if(findUserDemoBsVo==null){//저장한게 없다, 에러페이지로 보내야 한다...
+            resultVO.setResult_str("신청정보가 없습니다");
+            resultVO.setResult_code("ERROR_1001");
+            return resultVO;
+        }
+
+        // 기 신청이 있으면 저장하면 안됨
+        if(findUserDemoBsVo.getApp_step()==5){
+            resultVO.setResult_str("신청이 완료되어 저장할 수 없습니다");
+            resultVO.setResult_code("ERROR_1001");
+            return resultVO;
+        }
+        if(findUserDemoBsVo.getUser_demobs_status()>1){
+            resultVO.setResult_str("변경이 불가능한 상태입니다");
+            resultVO.setResult_code("ERROR_1001");
+            return resultVO;
+        }
+        // 저장단계 변경
+
+        if(findUserDemoBsVo.getApp_step()<2){
+            findUserDemoBsVo.setApp_step(2);
+        }
+
+        findUserDemoBsVo.setIs_use_agree(userDemoBsVO.getIs_use_agree());//
+        findUserDemoBsVo.setIs_indi_use_agree(userDemoBsVO.getIs_indi_use_agree());//
+        findUserDemoBsVo.setIs_indi_info_agree(userDemoBsVO.getIs_indi_info_agree());//
+
+        userDemoBsService.updateUserDemoBsWebStep4(findUserDemoBsVo);
         return resultVO;
     }
 }
