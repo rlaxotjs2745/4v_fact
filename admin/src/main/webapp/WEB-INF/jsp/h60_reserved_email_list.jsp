@@ -28,6 +28,17 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <c:forEach items="${reservedMails}" var="mail">
+                                <tr class="">
+                                    <td class=""><input class="text-center" type="checkbox" value=""></td>
+                                    <td class="text-center">${mail}</td>
+                                    <td class="">${mail.receiver}</td>
+                                    <td class="text-center">${mail.status}</td>
+                                    <td class="text-left">${mail.sendTime}</td>
+                                    <td class="text-center"><a href="#none" data-toggle="modal" data-target="#modals-business" data-what="mode-view">${mail.title}</a></td>
+                                    <td class="text-center">${mail.content.substring(0,20) + "..."}</td>
+                                </tr>
+                            </c:forEach>
                             <tr class="">
                                 <td class=""><input class="text-center" type="checkbox" value=""></td>
                                 <td class="text-center">1</td>
@@ -161,15 +172,32 @@
 </div>
 <%@include file ="layouts/frame_footer.jsp" %>
 <script>
-    fetch('/get_reserved_mail_list', {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: {
-            message: $("#textbox").val()
-        }
-    })
+    <%--console.log([${reservedMails}])--%>
+    // $(document).ready(() => {
+    //     $.ajax({
+    //         type: 'get',
+    //         url :'/reserved_mail', //데이터를 주고받을 파일 주소 입력
+    //         dataType:'json',//받는 데이터 타입
+    //         success: function(result){
+    //             console.log(result);
+    //             // alert("메일 전송이 완료되었습니다.", () => window.redirect("/"))
+    //         },
+    //         error:function(err){
+    //             console.log(err);
+    //         }
+    //     });
+    // })
+    <%--$('tbody').append(--%>
+    <%--    $('tr')--%>
+    <%--        .append($('td').append($('input').addClass('text-center').attr("type", "checkbox").attr("value", "")))--%>
+    <%--        .append($('td').addClass("text-center")).append(i+1) //번호--%>
+    <%--        .append($('td')).append(${reservedMails}[i].receiver) //받는 사람--%>
+    <%--        .append($('td').addClass("text-center")).append(${reservedMails}[i].status) // 상태--%>
+    <%--        .append($('td').addClass("text-left")).append(${reservedMails}[i].sendTime) // 보낸 시간--%>
+    <%--        .append($('td').addClass("text-center").append($('a').attr("href", "#none").attr("data-toggle", "modal").attr("data-target", "#modals-business").attr("data-what", "mode-view").append(${reservedMails}[i].title))) //제목--%>
+    <%--        .append($('td').addClass("text-center")).append(${reservedMails}[i].constent) //내용--%>
+    <%--)--%>
+
 
 
 
