@@ -1,13 +1,7 @@
 package kr.or.fact.admin.controller;
 
-import kr.or.fact.core.model.DTO.AdminVO;
-import kr.or.fact.core.model.DTO.CoWorkerVO;
-import kr.or.fact.core.model.DTO.HomepageInfoVO;
-import kr.or.fact.core.model.DTO.NoticeVO;
-import kr.or.fact.core.service.AdminService;
-import kr.or.fact.core.service.CoWorkerNService;
-import kr.or.fact.core.service.HomepageInfoService;
-import kr.or.fact.core.service.NoticeService;
+import kr.or.fact.core.model.DTO.*;
+import kr.or.fact.core.service.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -36,6 +30,10 @@ public class IndexController {
 
     @Resource(name = "noticeService")
     NoticeService noticeService;
+
+    @Resource(name = "demoBsService")
+    DemoBsService demoBsService;
+
 
     @PreAuthorize("hasRole('ROLE_MEMBER')")
     @RequestMapping("/")
@@ -133,9 +131,130 @@ public class IndexController {
     }
 
     //사업공고문 관리
+    @RequestMapping(value = "/b00_demo_bs_mng",method = RequestMethod.POST)
+    public String b00_demo_bs_mng(@RequestParam(value = "tag", required = false) String tagValue,
+                                  @RequestParam("page") int page,
+                                               ModelMap model){
+
+        int list_amount = 10;
+        int page_amount = 10;
+
+        AdminDemoBSFilterVO adminDemoBSFilterVO = demoBsService.getAdminDemoBsFilter();
+        model.addAttribute("adminDemoBsFilter",adminDemoBSFilterVO);
+
+        int demoBsCount = demoBsService.getDemoBsTotalCount();
+
+        model.addAttribute("total_count",demoBsCount);
+        List<DemoBusinessVO>  demoBusinessVOList = demoBsService.getDemoBsListLimit(page,list_amount);
+        model.addAttribute("demoBusinessVOList",demoBusinessVOList);
+
+        model.addAttribute("cur_page",page);
+        model.addAttribute("amount",list_amount);
+
+        int tot_page = demoBsCount/list_amount+1;
+        if(demoBsCount%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+        boolean is_active = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("page_amount",page_amount);
+
+        return "b00_demo_bs_mng";
+    }
+
+    //사업공고문 관리
     @RequestMapping(value = "/b10_demo_bs_announce_doc_mng",method = RequestMethod.POST)
     public String b10_demo_bs_announce_doc_mng(@RequestParam(value = "tag", required = false) String tagValue,
+                                               @RequestParam("page") int page,
                                                ModelMap model){
+
+        int list_amount = 10;
+        int page_amount = 10;
+
+        AdminDemoBSFilterVO adminDemoBSFilterVO = demoBsService.getAdminDemoBsFilter();
+        model.addAttribute("adminDemoBsFilter",adminDemoBSFilterVO);
+
+        int demoBsCount = demoBsService.getDemoBsTotalCount();
+
+        model.addAttribute("total_count",demoBsCount);
+        List<DemoBusinessVO>  demoBusinessVOList = demoBsService.getDemoBsListLimit(page,list_amount);
+        model.addAttribute("demoBusinessVOList",demoBusinessVOList);
+
+        model.addAttribute("cur_page",page);
+        model.addAttribute("amount",list_amount);
+
+        int tot_page = demoBsCount/list_amount+1;
+        if(demoBsCount%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+        boolean is_active = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("page_amount",page_amount);
+
+
+
 
         return "b10_demo_bs_announce_doc_mng";
     }
@@ -295,7 +414,7 @@ public class IndexController {
             return "brd_notice_blank";
         }
         model.addAttribute("total_count",noticeCount);
-        List<NoticeVO> noticeList = noticeService.getNoticeList(page,list_amount);
+        List<NoticeVO> noticeList = noticeService.getNoticeWebList(page,list_amount);
         model.addAttribute("noticeList",noticeList);
 
         model.addAttribute("cur_page",page);

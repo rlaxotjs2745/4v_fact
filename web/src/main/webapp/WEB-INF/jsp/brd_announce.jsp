@@ -76,10 +76,10 @@
                     <tr>
                         <td>${ann.announce_num}</td>
                         <td>
-                            <c:if test="${ann.bs_status eq 0}"> 대기</c:if>
-                            <c:if test="${ann.bs_status eq 1}"> 신청중</c:if>
-                            <c:if test="${ann.bs_status eq 2}"> 신청완료</c:if>
-                            <c:if test="${ann.bs_status eq 3}"> 사업종료</c:if>
+                            <c:if test="${ann.bs_status eq 2}"> 대기</c:if>
+                            <c:if test="${ann.bs_status eq 3}"> 신청중</c:if>
+                            <c:if test="${ann.bs_status eq 4}"> 신청완료</c:if>
+                            <c:if test="${ann.bs_status eq 10}"> 사업종료</c:if>
                         </td>
                         <td class="td__left"><a href="/brd_annouce_detail?idx=${ann.idx_bs_announcement}" class="td__link">${ann.subject}<c:if test="${ann.is_new eq 1}"> <img src="<%=request.getContextPath()%>/static/assets/image/ico_new.png" alt="NEW" class="board__badge"></c:if></a></td>
                         <td class="td__data"><img src="<%=request.getContextPath()%>/static/assets/image/ico_doc.png" alt=""></td>

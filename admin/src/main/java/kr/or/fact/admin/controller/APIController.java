@@ -3,6 +3,7 @@ package kr.or.fact.admin.controller;
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.AdminService;
 import kr.or.fact.core.service.CorpService;
+import kr.or.fact.core.service.DemoBsService;
 import kr.or.fact.core.service.UserService;
 import kr.or.fact.core.util.CONSTANT;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,10 @@ public class APIController {
 
     @Resource(name = "adminService")
     AdminService adminService;
+
+    @Resource(name = "demoBsService")
+    DemoBsService demoBsService;
+
 
 
     @RequestMapping(value = "/admin_login",method = RequestMethod.POST)
@@ -140,5 +145,15 @@ public class APIController {
             }
         }//필수 데이터 체크 if
         return resultVO;
+    }
+    @RequestMapping(value = "/demo_bs_list_by_filter",method = RequestMethod.POST)
+    public String demo_bs_list_by_filter(HttpSession session,
+                           @RequestBody SingPramVO sing){
+
+        int filterType = sing.getInt_param();
+
+        demoBsService.getAdminDemoBsFilter();
+
+        return "pages/demoBsListByFilter";
     }
 }

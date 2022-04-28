@@ -9,17 +9,18 @@
     <select id="getWebpageBsAnnouncementCount" resultType="int">
         SELECT COUNT(*) FROM TB_BS_ANNOUNCEMENT  WHERE IS_SHOW=1 AND ANNOUNCE_STATUS=1
     </select>
-    <select id="getBsAnnouncementList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
+     
+    <select id="getBsAnnouncementWebList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
     SELECT
         IDX_BS_ANNOUNCEMENT
         ,ANNOUNCE_NUM
-    ,SUBJECT
-         ,BS_STATUS
-    ,IS_FILE
-    ,IS_NEW
-    ,AUTHOR
-    ,POSTING_START_DATE
-    ,VIEW_COUNT
+        ,SUBJECT
+        ,BS_STATUS
+        ,IS_FILE
+        ,IS_NEW
+        ,AUTHOR
+        ,POSTING_START_DATE
+        ,VIEW_COUNT
     FROM (
     SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
         ,IDX_BS_ANNOUNCEMENT
@@ -40,12 +41,161 @@
     WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
     </select>
 
-
-
-
-
     <select id="getMainBsAnnouncementList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
         SELECT * FROM TB_BS_ANNOUNCEMENT  WHERE  IS_MAIN_PAGE=1;
     </select>
+
+
+    <select id="getBsAnnouncementTotalCount" resultType="int">
+        SELECT COUNT (*) FROM TB_BS_ANNOUNCEMENT
+    </select>
+
+    <select id="getBsAnnouncementList" resultType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
+        SELECT * FROM TB_BS_ANNOUNCEMENT ORDER BY POSTING_START_DATE DESC
+    </select>
+
+    <select id="getBsAnnouncementListLimit" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
+        SELECT
+            IDX_BS_ANNOUNCEMENT
+             ,ANNOUNCE_NUM
+             ,SUBJECT
+             ,BS_STATUS
+             ,IS_FILE
+             ,IS_NEW
+             ,AUTHOR
+             ,POSTING_START_DATE
+             ,VIEW_COUNT
+        FROM (
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+        ,IDX_BS_ANNOUNCEMENT
+                      ,ANNOUNCE_NUM
+                      ,SUBJECT
+                      ,BS_STATUS
+                      ,IS_FILE
+                      ,IS_NEW
+                      ,AUTHOR
+                      ,POSTING_START_DATE
+                      ,VIEW_COUNT
+                 FROM (
+                          SELECT * FROM TB_BS_ANNOUNCEMENT
+                      )
+
+                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+             )
+        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+    </select>
+
+    <select id="getBsAnnouncementListByFilter" parameterType="int" resultType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
+        SELECT * FROM TB_BS_ANNOUNCEMENT WHERE BS_STATUS = #{type} ORDER BY START_DATE DESC
+    </select>
+
+    <select id="getBsAnnouncementByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
+        SELECT * FROM TB_BS_ANNOUNCEMENT  WHERE IDX_BS_ANNOUNCEMENT = #{idx_bs_announcement}
+    </select>
+
+    <insert id="saveBsAnnouncement" parameterType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
+        INSERT INTO TB_BS_ANNOUNCEMENT (
+            IDX_BS_ANNOUNCEMENT,
+            BS_ANNOUNCEMENT_CODE,
+            ANNOUNCE_NUM,
+            IS_FILE,
+            SUBJECT,
+            ANNOUNCE_CONTENTS,
+            BS_STATUS,
+            IS_NEW,
+            IS_MAIN_PAGE,
+            IS_IMPORTANT,
+            IS_SHOW,
+            VIEW_COUNT,
+            ANNOUNCE_STATUS,
+            POSTING_START_DATE,
+            POSTING_END_DATE,
+            DOC_VERSION,
+            MEMO,
+            SEARCH_TAG,
+            AUTHOR,
+            IDX_DEMO_BUSINESS,
+            CONFIRM_ADMIN_IDX,
+            IDX_ADMIN,
+            REG_DATE,
+            LAST_UPD_DATE
+        ) VALUES (
+                     SEQ_BS_ANNOUNCEMENT.NEXTVAL,
+                     #{bs_announcement_code},
+                     #{announce_num},
+                     #{is_file},
+                     #{subject},
+                     #{announce_contents},
+                     #{bs_status},
+                     #{is_new},
+                     #{is_main_page},
+                     #{is_important},
+                     #{is_show},
+                     #{view_count},
+                     #{announce_status},
+                     #{posting_start_date},
+                     #{posting_end_date},
+                     #{doc_version},
+                     #{memo},
+                     #{search_tag},
+                     #{author},
+                     #{idx_demo_business},
+                     #{confirm_admin_idx},
+                     #{idx_admin},
+                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS'),
+                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+                 )
+
+    </insert>
+
+    <update id="updateBsAnnouncement" parameterType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
+        UPDATE TB_BS_ANNOUNCEMENT SET
+                                      BS_ANNOUNCEMENT_CODE=#{bs_announcement_code},
+                                      ANNOUNCE_NUM=#{announce_num},
+                                      IS_FILE=#{is_file},
+                                      SUBJECT=#{subject},
+                                      ANNOUNCE_CONTENTS=#{announce_contents},
+                                      BS_STATUS=#{bs_status},
+                                      IS_NEW=#{is_new},
+                                      IS_MAIN_PAGE=#{is_main_page},
+                                      IS_IMPORTANT=#{is_important},
+                                      IS_SHOW=#{is_show},
+                                      VIEW_COUNT=#{view_count},
+                                      ANNOUNCE_STATUS=#{announce_status},
+                                      POSTING_START_DATE=#{posting_start_date},
+                                      POSTING_END_DATE=#{posting_end_date},
+                                      DOC_VERSION=#{doc_version},
+                                      MEMO=#{memo},
+                                      SEARCH_TAG=#{search_tag},
+                                      AUTHOR=#{author},
+                                      IDX_DEMO_BUSINESS=#{idx_demo_business},
+                                      CONFIRM_ADMIN_IDX=#{confirm_admin_idx},
+                                      IDX_ADMIN=#{idx_admin},
+                                    LAST_UPD_DATE = TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+        WHERE IDX_DEMO_BUSINESS = #{idx_demo_business}
+    </update>
+
+
+    <delete id="deleteBsAnnouncement" parameterType="long">
+        DELETE FROM TB_BS_ANNOUNCEMENT WHERE IDX_DEMO_BUSINESS = #{idx_demo_business}
+    </delete>
+
+    <select id="getAdminBsAnnouncementFilter" resultType="kr.or.fact.core.model.DTO.AdminDemoBSFilterVO">
+        SELECT (SELECT COUNT(*) FROM TB_BS_ANNOUNCEMENT ) AS TOT_COUNT,
+               (SELECT COUNT(*) FROM TB_BS_ANNOUNCEMENT WHERE BS_STATUS = 3) AS APPL_COUNT,
+               (SELECT COUNT(*) FROM TB_BS_ANNOUNCEMENT WHERE BS_STATUS = 9) AS APPL_COUNTBS_COUNT,
+               (SELECT COUNT(*) FROM TB_BS_ANNOUNCEMENT WHERE BS_STATUS > 9) AS DONE_COUNT
+        FROM TB_BS_ANNOUNCEMENT WHERE ROWNUM = 1
+    </select>
+
+
+
+
+
+
+
+
+
+
 
 </mapper>

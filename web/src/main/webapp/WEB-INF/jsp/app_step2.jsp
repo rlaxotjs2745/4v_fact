@@ -25,8 +25,8 @@
 <body>
 <div class="wrapper" id="wrapper">
     <header class="header_app">
-        <a href="#none" class="close_window" onclick="javascript:window.close();"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.svg" alt=""></a>
-        <h1><a href="main.html"><img src="<%=request.getContextPath()%>/static/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
+        <a href="/prv_application" class="close_window" onclick="javascript:window.close();"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.svg" alt=""></a>
+        <h1><a href="/"><img src="<%=request.getContextPath()%>/static/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
         <h2>신청서 작성</h2>
         <div class="app__step">
             <div class="step is-passed">
@@ -152,7 +152,7 @@
                             <th class="th__left" rowspan="2">본사</th>
                             <td class="td__left" colspan="5">
                                 <span>주소</span>
-                                <a href="#" class="btn modify btn-lg">찾기</a>
+                                <button id="juso_corp_search" class="btn modify btn-lg">찾기</button>
                                 <input id="corp_addr" type="text" style="width: calc(70% - 70px);" value="${userDemoBs.corp_addr}">
                                 <input id="corp_addr2" type="text" style="width: 25%;margin-left:4px !important;margin-top: 0px!important;" value="${userDemoBs.corp_addr2}" placeholder="상세주소">
                             </td>
@@ -176,7 +176,7 @@
                             <th class="th__left" rowspan="2">연구소</th>
                             <td class="td__left" colspan="5">
                                 <span>주소</span>
-                                <a href="#" class="btn modify btn-lg">찾기</a>
+                                <button id="juso_lab_search" class="btn modify btn-lg">찾기</button>
                                 <input id="corp_rnd_addr" type="text" style="width: calc(70% - 70px);" value="${userDemoBs.corp_rnd_addr}">
                                 <input id="corp_rnd_addr2" type="text" style="width: 25%;margin-left:4px !important;margin-top: 0px!important;" value="${userDemoBs.corp_rnd_addr2}" placeholder="상세주소">
                             </td>
@@ -478,7 +478,7 @@
                                 <tr>
                                     <th class="th__left">주소</th>
                                     <td colspan="3" class="td__left">
-                                        <a href="#" class="btn modify btn-lg">찾기</a>
+                                        <button id="juso_ceo_search" class="btn modify btn-lg">찾기</button>
                                         <input id="ceo_address" type="text" style="width: calc(70% - 70px);" value="${userDemoBs.ceo_address}">
                                         <input id="ceo_address2" type="text" style="width: 29%;margin-left:4px !important;margin-top: 0px!important;" value="${userDemoBs.ceo_address2}" placeholder="상세주소">
                                     </td>
@@ -819,7 +819,7 @@
             user_demo_goal: user_demo_goal,//	number	4		0			실증 목표	0::성능확인, 1:자체평가
             user_demo_option: user_demo_option,//	number	4		0			실증 조건	0: 일반환경, 1:특수환경
             user_demo_crops: $('#user_demo_crops').val(),//	varchar2	100					실증작물
-            user_demo_crops:user_demo_crops,
+            user_demo_is_crops:user_demo_is_crops,
             culture_soil: culture_soil,//	number	4		0			생육토양	0: 토경재배, 1:수경재배, 2:고형배지재배
             demo_type: demo_type,//	number	4		0			실증 대상	0:해당없음, 1:시설자재, 2:ict기자재, 4:작물보호제/비료, 8:스마트팜sw, 16:생육모델, 32:로봇, 512:기타
             demo_start_date: $('#demo_start_date').val(),//	date						입주 시작 날짜
@@ -858,6 +858,57 @@
         });
     }
 
+    var new_popup;
+    $("#juso_corp_search").click(function(){
+        juso_popup('corp_search');
+    });
+    $("#juso_lab_search").click(function(){
+        juso_popup('lab_search');
+    });
+    $("#juso_ceo_search").click(function(){
+        juso_popup('ceo_search');
+    });
+    /**
+     * 주소검색창 호출
+     */
+    function juso_popup(juso_type) {
+        var cw=screen.availWidth;     //화면 넓이
+        var ch=screen.availHeight;    //화면 높이
+        var sw=640;    //띄울 창의 넓이
+        var sh=480;    //띄울 창의 높이
+        var ml=(cw-sw)/2;        //가운데 띄우기위한 창의 x위치
+        var mt=(ch-sh)/2;         //가운데 띄우기위한 창의 y위치
+
+        new_popup = window.open('juso_search?juso_type='+juso_type, '주소검색','width='+sw+',height='+sh+',top='+mt+',left='+ml+', resizable=no');
+    }
+
+    /**
+     * 주소검색 결과 처리
+     */
+    function fn_setJuso(data) {
+        var juso_type = data["juso_type"];
+        console.log(juso_type);
+        switch (juso_type){
+            case "corp_search":
+                $('#corp_addr').val("("+data["zipNo"]+")"+data["roadFullAddr"]);
+
+                break;
+            case "lab_search":
+                $("#corp_rnd_addr").val("("+data["zipNo"]+")"+data["roadFullAddr"]);
+                break;
+            case "ceo_search":
+                $('#ceo_address').val("("+data["zipNo"]+")"+data["roadFullAddr"]);
+                break;
+            case "join":
+                $("#juso_find").val(data["roadFullAddr"]);
+                $("#zip_code").val(data["zipNo"]);
+                break;
+            default:alert(juso_type);
+                break;
+        }
+
+        new_popup.close();
+    }
 
 </script>
 

@@ -141,6 +141,7 @@ public class IndexController {
         model.addAttribute("user",findUser);
 
         List<DemoBusinessVO> demoBusinessVOs = demoBsService.getAvailibleDemoBs();
+
         model.addAttribute("demoBusinessVOs",demoBusinessVOs);
 
         getHomepageInfo(model);
@@ -455,6 +456,7 @@ public class IndexController {
 
     @RequestMapping("/app_step4")
     public String app_step4(HttpSession session
+            ,UserDemoBsCheckVO userDemoBsCheckVO
             ,Model model){
         if(session==null
                 || session.getAttribute("loginCheck")==null
@@ -471,6 +473,38 @@ public class IndexController {
             return "index";
         }
         model.addAttribute("user",findUser);
+        DemoBusinessVO demoBusinessVo = demoBsService.getDemoBsByIdx(userDemoBsCheckVO.getIdx_demo_business());
+
+        if(demoBusinessVo==null){//해당 사업 없음, 에러페이지로 보내야 한다...
+
+            session.removeAttribute("loginCheck");
+            clearSessionAndRedirect(session);
+            return "index";
+        }
+
+        model.addAttribute("demoBs",demoBusinessVo);
+
+        UserDemoBsVO userDemoBsVo = userDemoBsService.getUserDemoBs(userDemoBsCheckVO);
+        if(userDemoBsVo==null){//이전에 저장한게 없다, 에러페이지로 보내야 한다...
+            session.removeAttribute("loginCheck");
+            clearSessionAndRedirect(session);
+            return "index";
+        }
+        model.addAttribute("userDemoBs",userDemoBsVo);
+
+        UserDemoBsDetailVO userDemoBsDetailVO = userDemoBsService.getUserDemoBsDetail(userDemoBsVo.getIdx_user_demo_bs());
+
+        List<UserBsHumanResourceVO> userBsHumanResourceVOList = userDemoBsService.getUserDemoBsHumanResourceList(userDemoBsVo.getIdx_user_demo_bs());
+
+        if(userDemoBsDetailVO==null || userBsHumanResourceVOList==null || userBsHumanResourceVOList.isEmpty()){
+            session.removeAttribute("loginCheck");
+            clearSessionAndRedirect(session);
+            return "index";
+        }
+
+        model.addAttribute("userDemoBsDetailVO",userDemoBsDetailVO);
+
+        model.addAttribute("userBsHumanResourceVOList",userBsHumanResourceVOList);
 
         getHomepageInfo(model);
         return "app_step4";
@@ -478,6 +512,7 @@ public class IndexController {
 
     @RequestMapping("/app_step5")
     public String app_step5(HttpSession session
+            ,UserDemoBsCheckVO userDemoBsCheckVO
             ,Model model){
         if(session==null
                 || session.getAttribute("loginCheck")==null
@@ -562,7 +597,7 @@ public class IndexController {
             return "brd_announce_blank";
         }
         model.addAttribute("total_count",annouceCount);
-        List<BsAnnouncementVO> announcementVOList = bsAnnouncementService.getBsAnnouncementList(page,list_amount);
+        List<BsAnnouncementVO> announcementVOList = bsAnnouncementService.getBsAnnouncementWebList(page,list_amount);
         model.addAttribute("announceList",announcementVOList);
 
         model.addAttribute("cur_page",page);
@@ -740,7 +775,7 @@ public class IndexController {
             return "brd_notice_blank";
         }
         model.addAttribute("total_count",noticeCount);
-        List<NoticeVO> noticeList = noticeService.getNoticeList(page,list_amount);
+        List<NoticeVO> noticeList = noticeService.getNoticeWebList(page,list_amount);
         model.addAttribute("noticeList",noticeList);
 
         model.addAttribute("cur_page",page);
@@ -993,9 +1028,11 @@ public class IndexController {
     }
 
     @RequestMapping("/juso_search")
-    public String juso_search(Model model){
+    public String juso_search(@RequestParam(value="juso_type") String juso_type,
+                              Model model){
 
         model.addAttribute("searchSeverUrl",jusoService.getSearchServerUrl());
+        model.addAttribute("juso_type",juso_type);
         return "juso_search";
     }
 

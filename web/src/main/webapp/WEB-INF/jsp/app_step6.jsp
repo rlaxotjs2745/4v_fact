@@ -22,8 +22,8 @@
 <body>
 <div class="wrapper" id="wrapper">
     <header class="header_app">
-        <a href="#none" class="close_window" onclick="javascript:window.close();"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.svg" alt=""></a>
-        <h1><a href="main.html"><img src="<%=request.getContextPath()%>/static/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
+        <a href="/prv_application" class="close_window" onclick="javascript:window.close();"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.svg" alt=""></a>
+        <h1><a href="/"><img src="<%=request.getContextPath()%>/static/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
         <h2>신청서 작성</h2>
         <div class="app__step">
             <div class="step is-passed">
