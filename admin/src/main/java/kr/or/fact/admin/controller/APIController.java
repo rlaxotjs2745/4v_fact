@@ -3,15 +3,25 @@ package kr.or.fact.admin.controller;
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.AdminService;
 import kr.or.fact.core.service.CorpService;
+import kr.or.fact.core.service.MailService;
 import kr.or.fact.core.service.UserService;
 import kr.or.fact.core.util.CONSTANT;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -25,6 +35,15 @@ public class APIController {
     @Resource(name = "adminService")
     AdminService adminService;
 
+    @Resource(name = "mailService")
+    MailService mailService;
+
+    @Autowired
+    private JavaMailSender mailSender;
+
+//    public void setMailSender(JavaMailSender mailSender) {
+//        this.mailSender = mailSender;
+//    }
 
     @RequestMapping(value = "/admin_login",method = RequestMethod.POST)
     public @ResponseBody ResultVO admin_login(HttpSession session
@@ -141,4 +160,64 @@ public class APIController {
         }//필수 데이터 체크 if
         return resultVO;
     }
+
+//    @RequestMapping(value = "/get_reserved_mail_list",method = RequestMethod.GET)
+//    public String get_reserved_mail_list(HttpSession session,
+//                                   Model model,
+//                                   @RequestParam(value="corp_name") String corp_name){
+//
+//    }
+
+    @RequestMapping(value = "/send_mail",method = RequestMethod.POST)
+    public String send_mail(@ModelAttribute MailVO mailVO, HttpServletRequest request) throws Exception, IOException {
+        String title = mailVO.getTitle();
+        String content = mailVO.getContent();
+        String receiver = mailVO.getReceiver();
+        int fileLength = Integer.parseInt(mailVO.getFileLength());
+        File[] files = new File[5];
+        if(fileLength > 0){
+            files[0] = mailService.convertMultipartToFile(mailVO.getFiles1());
+            if(fileLength >= 2){
+                files[1] = mailService.convertMultipartToFile(mailVO.getFiles2());
+                if(fileLength >= 3){
+                    files[2] = mailService.convertMultipartToFile(mailVO.getFiles3());
+                    if(fileLength >= 4){
+                        files[3] = mailService.convertMultipartToFile(mailVO.getFiles4());
+                        if(fileLength == 5){
+                            files[4] = mailService.convertMultipartToFile(mailVO.getFiles5());
+
+                        }
+                    }
+                }
+            }
+        }
+//        System.out.println(files[0]);
+        try {
+            MimeMessage mail = mailSender.createMimeMessage();
+            MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+
+            mailHelper.setFrom("김태선 <taeseon@4thevision.com>"); // 보내는 사람 정보도 와야함
+            mailHelper.setTo(receiver);
+            mailHelper.setSubject(title != null ? content : "제목없는 이메일");
+            mailHelper.setText(content != null ? content : "", true);
+            for(int i = 0; i < fileLength; i++){
+                FileSystemResource file = new FileSystemResource(files[i]);
+                System.out.println(file.getPath());
+                mailHelper.addAttachment(file.getFilename(),files[i]);
+//                mailHelper.addAttachment(files[i].getName(), files[i]);
+            }
+
+//            System.out.println("filename: " + mail.get());
+
+            mailSender.send(mail);
+
+            System.out.println("전송 완료");
+            return "메일이 정상적으로 전송되었습니다.";
+        } catch (Exception e){
+            System.out.println("전송 실패");
+            System.out.println(e);
+            return "전송이 실패했습니다.";
+        }
+    }
+
 }

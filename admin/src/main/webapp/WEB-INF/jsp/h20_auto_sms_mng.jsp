@@ -4,6 +4,7 @@
 <div class="container-fluid flex-grow-1 container-p-y">
     <h4 class="font-weight-bold py-3 mb-4">자동 SMS 관리</h4>
 </div>
+
 <!-- Layout footer -->
 <%@include file ="layouts/frame_footer.jsp" %>
 <!-- / Layout footer -->

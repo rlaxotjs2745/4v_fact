@@ -104,7 +104,6 @@ public class IndexController {
 
     @RequestMapping("/login")
     public String login(HttpSession session){
-
         session.setAttribute("CSRF_TOKEN", UUID.randomUUID().toString());
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -568,6 +567,13 @@ public class IndexController {
 
 
         return "h70_sent_email_list";
+    }
+    @RequestMapping(value = "/h71_write_mail",method = RequestMethod.POST)
+    public String h71_write_mail(@RequestParam(value = "tag", required = false) String tagValue,
+                                      ModelMap model){
+
+
+        return "h71_write_mail";
     }
     //시스템 코드 관리
     @RequestMapping(value = "/i10_user_mng",method = RequestMethod.POST)

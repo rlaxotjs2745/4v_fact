@@ -328,6 +328,11 @@
                             </a>
                             <ul class="sidenav-menu">
                                 <li class="sidenav-item">
+                                    <a href="javascript:load('h71_write_mail','이메일 발송');" class="sidenav-link">
+                                        <div>이메일 발송</div>
+                                    </a>
+                                </li>
+                                <li class="sidenav-item">
                                     <a href="javascript:load('h50_auto_email_mng','자동 이메일 관리');" class="sidenav-link">
                                         <div>자동 이메일 관리</div>
                                     </a>
