@@ -291,11 +291,6 @@
                                 <div id="datepicker-show" class="input-daterange input-group mode-edit mode-new">
                                     <input type="text" class="form-control mr-1" name="start">
                                     <input type="text" class="form-control" placeholder="9:00 AM" id="flatpickr-time-start">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">~</span>
-                                    </div>
-                                    <input type="text" class="form-control mr-1" name="end">
-                                    <input type="text" class="form-control" placeholder="6:00 PM" id="flatpickr-time-end">
                                 </div>
                             </div>
                         </div>

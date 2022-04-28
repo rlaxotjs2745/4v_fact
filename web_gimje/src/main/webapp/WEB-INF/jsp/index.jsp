@@ -257,29 +257,12 @@
         </div>
     </div>--%>
 </div>
-<button id="pdfBtn" type="button" onClick="">pdf</button>
 <%--<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>--%>
-<script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
 <!-- Initialize Swiper -->
 <%@include file ="script.jsp" %>
-<script>
-   var clickEnt = () => {
-       console.log("dgfsdfsfsdfsdfsdfsdfsdf")
-       var previewer = new paged.Previewer();
-       previewer
-           .preview(document.querySelector("#root").innerHTML, [], document.querySelector("#preview"))
-       return () => {
-           document.head
-               .querySelectorAll(('[data-pagedjs-inserted-styles]'))
-               .forEach((e) => {
-                   e.parentNode?.removeChild(e)
-               })
-       }
-   };
-</script>
 
 <script>
     var swiperMain = new Swiper(".swiper__main", {

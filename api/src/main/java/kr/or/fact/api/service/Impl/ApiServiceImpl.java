@@ -777,7 +777,6 @@ public class ApiServiceImpl implements ApiService {
 
     public ArrayList<DataVO> selectbyTime(String fromTime, String toTime){
         ArrayList<DataVO> result = apiMapper.selectbyTime(fromTime, toTime);
-        System.out.println("ㄹㅇㄹㅇ");
         return result;
     }
 

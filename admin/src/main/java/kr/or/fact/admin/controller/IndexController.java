@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,6 +34,9 @@ public class IndexController {
 
     @Resource(name = "demoBsService")
     DemoBsService demoBsService;
+
+    @Resource(name = "mailService")
+    MailService mailService;
 
 
     @PreAuthorize("hasRole('ROLE_MEMBER')")
@@ -102,7 +106,6 @@ public class IndexController {
 
     @RequestMapping("/login")
     public String login(HttpSession session){
-
         session.setAttribute("CSRF_TOKEN", UUID.randomUUID().toString());
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -676,8 +679,9 @@ public class IndexController {
     @RequestMapping(value = "/h60_reserved_email_list",method = RequestMethod.POST)
     public String h60_reserved_email_list(@RequestParam(value = "tag", required = false) String tagValue,
                                           ModelMap model){
+        ArrayList<ReservedMailVO> resultArr = mailService.getReservedMail();
 
-
+        model.addAttribute("reservedMails", resultArr);
         return "h60_reserved_email_list";
     }
     //시스템 코드 관리
@@ -687,6 +691,13 @@ public class IndexController {
 
 
         return "h70_sent_email_list";
+    }
+    @RequestMapping(value = "/h71_write_mail",method = RequestMethod.POST)
+    public String h71_write_mail(@RequestParam(value = "tag", required = false) String tagValue,
+                                      ModelMap model){
+
+
+        return "h71_write_mail";
     }
     //시스템 코드 관리
     @RequestMapping(value = "/i10_user_mng",method = RequestMethod.POST)
