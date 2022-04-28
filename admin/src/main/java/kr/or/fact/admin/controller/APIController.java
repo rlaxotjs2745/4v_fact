@@ -169,7 +169,7 @@ public class APIController {
 //    }
 
     @RequestMapping(value = "/send_mail",method = RequestMethod.POST)
-    public void send_mail(@ModelAttribute MailVO mailVO, HttpServletRequest request) throws Exception, IOException {
+    public String send_mail(@ModelAttribute MailVO mailVO, HttpServletRequest request) throws Exception, IOException {
         String title = mailVO.getTitle();
         String content = mailVO.getContent();
         String receiver = mailVO.getReceiver();
@@ -207,15 +207,18 @@ public class APIController {
             mailSender.send(mail);
 
 
+            for(int i = 0; i < fileLength; i++){
+                files[i].delete();
+            }
             System.out.println("전송 완료");
-//            return "메일이 정상적으로 전송되었습니다.";
+            return "메일이 정상적으로 전송되었습니다.";
         } catch (Exception e){
             System.out.println("전송 실패");
             System.out.println(e);
-//            return "전송이 실패했습니다.";
-        }
-        for(int i = 0; i < fileLength; i++){
-            files[i].delete();
+            for(int i = 0; i < fileLength; i++){
+                files[i].delete();
+            }
+            return "전송이 실패했습니다.";
         }
     }
 

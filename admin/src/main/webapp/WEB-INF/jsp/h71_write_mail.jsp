@@ -72,7 +72,7 @@
     sendMailBtn.forEach(btn=>btn.addEventListener('click', sendMailNow));
 
     function sendMailNow(){
-        event.preventDefault();
+        // event.preventDefault();
         var fileForm = new FormData();
         fileForm.append("receiver",document.querySelector('#email_receiver').value);
         fileForm.append("title",document.querySelector('#email_title').value);
@@ -94,11 +94,11 @@
             dataType:'json',//받는 데이터 타입
             enctype: 'multipart/form-data',
             success: function(result){
-                console.log(result)
-                // alert()
+                // console.log(result);
+                alert("메일 전송이 완료되었습니다.", () => window.redirect("/"))
             },
-            error:function(){
-
+            error:function(err){
+                console.log(err);
             }
         });
         // event.preventDefault();
