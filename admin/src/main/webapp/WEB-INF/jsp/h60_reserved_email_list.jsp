@@ -31,12 +31,12 @@
                             <c:forEach items="${reservedMails}" var="mail">
                                 <tr class="">
                                     <td class=""><input class="text-center" type="checkbox" value=""></td>
-                                    <td class="text-center">${mail}</td>
+                                    <td class="text-center"></td>
                                     <td class="">${mail.receiver}</td>
                                     <td class="text-center">${mail.status}</td>
                                     <td class="text-left">${mail.sendTime}</td>
                                     <td class="text-center"><a href="#none" data-toggle="modal" data-target="#modals-business" data-what="mode-view">${mail.title}</a></td>
-                                    <td class="text-center">${mail.content.substring(0,20) + "..."}</td>
+                                    <td class="text-center">${mail.content.length() > 20 ? mail.content.substring(0,20) + "..." : mail.content}</td>
                                 </tr>
                             </c:forEach>
                             <tr class="">
@@ -172,7 +172,7 @@
 </div>
 <%@include file ="layouts/frame_footer.jsp" %>
 <script>
-    <%--console.log([${reservedMails}])--%>
+    console.log("${reservedMails}")
     // $(document).ready(() => {
     //     $.ajax({
     //         type: 'get',

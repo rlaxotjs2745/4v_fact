@@ -38,6 +38,7 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public ArrayList<ReservedMailVO> getReservedMail() {
+        System.out.println(mailMapper.getReservedMail());
         return mailMapper.getReservedMail();
     }
 

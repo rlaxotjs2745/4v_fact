@@ -5,6 +5,6 @@
 <mapper namespace="kr.or.fact.core.model.MailMapper">
 
     <select id="getReservedMail" resultType="kr.or.fact.core.model.DTO.ReservedMailVO">
-        SELECT * FROM TB_MAIL_RESERVED;
+        SELECT * FROM TB_MAIL_RESERVED
     </select>
 </mapper>
