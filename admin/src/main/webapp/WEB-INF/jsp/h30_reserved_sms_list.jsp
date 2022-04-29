@@ -30,14 +30,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${reserveSms}" var="sms">
+                                <c:forEach items="${reserveSms}" var="reserveSms" varStatus="status">
                                     <tr class="">
-                                        <td class="text-center">${msg_id}</td>
-                                        <td class="text-center">${callback}</td>
-                                        <td class="text-center">${send_date}</td>
-                                        <td class="text-center"><span class="text-truncate d-inline-block" style="width:200px;">${dest_info}</span></td>
-                                        <td class="text-center">${subject}</td>
-                                        <td class=""><span class="text-truncate d-inline-block" style="width:300px;">${sms_msg}</span></td>
+                                        <td class="text-center">${status.count}</td>
+                                        <td class="text-center">${reserveSms.callback}</td>
+                                        <td class="text-center">${reserveSms.send_date}</td>
+                                        <td class="text-center"><span class="text-truncate d-inline-block" style="width:200px;">${reserveSms.dest_info}</span></td>
+                                        <td class="text-center">${reserveSms.subject}</td>
+                                        <td class=""><span class="text-truncate d-inline-block" style="width:300px;">${reserveSms.sms_msg}</span></td>
                                     </tr>
                                 </c:forEach>
                                 <tr class="">

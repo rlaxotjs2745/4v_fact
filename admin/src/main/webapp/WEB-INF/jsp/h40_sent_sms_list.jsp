@@ -31,6 +31,16 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <c:forEach items="${sentSms}" var="smsSent" varStatus="status">
+                                    <tr class="">
+                                        <td class="text-center">${status.count}</td>
+                                        <td class="text-center">${smsSent.callback}</td>
+                                        <td class="text-center">${smsSent.send_date}</td>
+                                        <td class="text-center"><span class="text-truncate d-inline-block" style="width:200px;">${smsSent.dest_info}</span></td>
+                                        <td class="text-center">${smsSent.subject}</td>
+                                        <td class=""><span class="text-truncate d-inline-block" style="width:300px;">${smsSent.sms_msg}</span></td>
+                                    </tr>
+                                </c:forEach>
                                 <tr class="">
                                     <td class="text-center">1</td>
                                     <td class="text-center">010-0000-0000</td>
