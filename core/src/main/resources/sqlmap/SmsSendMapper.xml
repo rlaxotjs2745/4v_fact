@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.fact.core.model.SmsSendMapper">
+    <insert id="insertSendmessage" parameterType="kr.or.fact.core.model.DTO.SmsSendVO">
+        INSERT INTO "SDK_SMS_SEND"(
+            msg_id,
+            user_id,
+            subject,
+            sms_msg,
+            now_date,
+            send_date,
+            callback,
+            dest_info
+
+        ) VALUES(
+                SDK_SMS_SEQ.NEXTVAL,
+                #{user_id},
+                #{subject},
+                #{sms_msg},
+                #{now_date},
+                #{send_date},
+                #{callback},
+                #{dest_info}
+
+
+                        )
+    </insert>
+    <select id="selectSentmeesage1" resultType="kr.or.fact.admin.model.DTO.SmsSentVO">
+        SELECT * FROM SDK_SMS_REPORT ORDER BY msg_id DESC
+    </select>
+    <select id="selectReserveMessage" resultType="kr.or.fact.admin.model.DTO.SmsSendVO">
+        SELECT * FROM SDK_SMS_SEND ORDER BY msg_id DESC
+    </select>
+</mapper>

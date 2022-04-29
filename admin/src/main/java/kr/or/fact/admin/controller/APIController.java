@@ -18,6 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -36,6 +39,9 @@ public class APIController {
 
     @Resource(name = "mailService")
     MailService mailService;
+
+    @Resource(name = "smsService")
+    public SmsSendService smsSendService;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -223,5 +229,23 @@ public class APIController {
             return "전송이 실패했습니다.";
         }
     }
+    @RequestMapping(value = "/sms",method = RequestMethod.POST)
+    public @ResponseBody
+    long insertSmsMessage(@RequestBody SmsSendVO smsSendVO) {
+        System.out.println(smsSendVO);
+        smsSendVO.setNow_date(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddhhmm")));
+        return smsSendService.insertSmsMessage(smsSendVO);
+    }
 
+    @RequestMapping(value = "/sent_sms", method = RequestMethod.GET)
+    public @ResponseBody
+    ArrayList<SmsSentVO> selectSentmeesage1(SmsSentVO smsSentVO){
+        return smsSendService.selectSentmeesage1(smsSentVO);
+    }
+
+    @RequestMapping(value = "/reserve_sms", method = RequestMethod.GET)
+    public @ResponseBody
+    ArrayList<SmsSendVO> selectReserveMessage(SmsSendVO smsSendVO){
+        return smsSendService.selectReserveMessage(smsSendVO);
+    }
 }
