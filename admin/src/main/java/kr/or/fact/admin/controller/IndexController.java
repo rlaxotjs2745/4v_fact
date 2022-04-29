@@ -38,6 +38,9 @@ public class IndexController {
     @Resource(name = "mailService")
     MailService mailService;
 
+    @Resource(name = "smsService")
+    public SmsSendService smsSendService;
+
 
     @PreAuthorize("hasRole('ROLE_MEMBER')")
     @RequestMapping("/")
@@ -656,7 +659,8 @@ public class IndexController {
     public String h30_reserved_sms_list(@RequestParam(value = "tag", required = false) String tagValue,
                                         ModelMap model){
 
-
+        ArrayList<SmsSendVO> smsReservearr = smsSendService.selectReserveMessage();
+        model.addAttribute("reserveSms",smsReservearr);
         return "h30_reserved_sms_list";
     }
     //시스템 코드 관리
@@ -664,7 +668,8 @@ public class IndexController {
     public String h40_sent_sms_list(@RequestParam(value = "tag", required = false) String tagValue,
                                     ModelMap model){
 
-
+        ArrayList<SmsSentVO> smsarr = smsSendService.selectSentmeesage1();
+        model.addAttribute("sentSms",smsarr);
         return "h40_sent_sms_list";
     }
     //시스템 코드 관리

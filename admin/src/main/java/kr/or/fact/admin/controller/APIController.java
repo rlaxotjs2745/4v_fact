@@ -239,13 +239,13 @@ public class APIController {
 
     @RequestMapping(value = "/sent_sms", method = RequestMethod.GET)
     public @ResponseBody
-    ArrayList<SmsSentVO> selectSentmeesage1(SmsSentVO smsSentVO){
-        return smsSendService.selectSentmeesage1(smsSentVO);
+    ArrayList<SmsSentVO> selectSentmeesage1(){
+        return smsSendService.selectSentmeesage1();
     }
 
     @RequestMapping(value = "/reserve_sms", method = RequestMethod.GET)
     public @ResponseBody
-    ArrayList<SmsSendVO> selectReserveMessage(SmsSendVO smsSendVO){
-        return smsSendService.selectReserveMessage(smsSendVO);
+    ArrayList<SmsSendVO> selectReserveMessage(){
+        return smsSendService.selectReserveMessage();
     }
 }

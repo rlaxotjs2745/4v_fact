@@ -30,6 +30,16 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <c:forEach items="${reserveSms}" var="sms">
+                                    <tr class="">
+                                        <td class="text-center">${msg_id}</td>
+                                        <td class="text-center">${callback}</td>
+                                        <td class="text-center">${send_date}</td>
+                                        <td class="text-center"><span class="text-truncate d-inline-block" style="width:200px;">${dest_info}</span></td>
+                                        <td class="text-center">${subject}</td>
+                                        <td class=""><span class="text-truncate d-inline-block" style="width:300px;">${sms_msg}</span></td>
+                                    </tr>
+                                </c:forEach>
                                 <tr class="">
                                     <td class="text-center">1</td>
                                     <td class="text-center">010-0000-0000</td>

@@ -31,8 +31,8 @@ public class SmsSendServiceImpl implements SmsSendService {
         return msg_id;
     }
     @Override
-    public ArrayList<SmsSentVO> selectSentmeesage1(SmsSentVO smsSentVO) {
-        ArrayList<SmsSentVO> result = smsSendMapper.selectSentmeesage1(smsSentVO);
+    public ArrayList<SmsSentVO> selectSentmeesage1() {
+        ArrayList<SmsSentVO> result = smsSendMapper.selectSentmeesage1();
 
 
         //ArrayList<SmsSentVO> result = smsSendMapper.selectSentmeesage1();
@@ -41,8 +41,8 @@ public class SmsSendServiceImpl implements SmsSendService {
     }
 
     @Override
-    public ArrayList<SmsSendVO> selectReserveMessage(SmsSendVO smsSendVO) {
-        ArrayList<SmsSendVO> result = smsSendMapper.selectReserveMessage(smsSendVO);
+    public ArrayList<SmsSendVO> selectReserveMessage() {
+        ArrayList<SmsSendVO> result = smsSendMapper.selectReserveMessage();
         return result;
     }
 }

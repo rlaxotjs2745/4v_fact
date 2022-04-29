@@ -7,6 +7,6 @@ import java.util.ArrayList;
 
 public interface SmsSendService {
     public long insertSmsMessage(SmsSendVO smsSendVO);
-    public ArrayList<SmsSentVO> selectSentmeesage1(SmsSentVO smsSentVO);
-    public ArrayList<SmsSendVO> selectReserveMessage(SmsSendVO smsSendVO);
+    public ArrayList<SmsSentVO> selectSentmeesage1();
+    public ArrayList<SmsSendVO> selectReserveMessage();
 }

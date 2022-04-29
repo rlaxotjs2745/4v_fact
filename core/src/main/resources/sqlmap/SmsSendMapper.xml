@@ -27,10 +27,10 @@
 
                         )
     </insert>
-    <select id="selectSentmeesage1" resultType="kr.or.fact.admin.model.DTO.SmsSentVO">
+    <select id="selectSentmeesage1" resultType="kr.or.fact.core.model.DTO.SmsSentVO">
         SELECT * FROM SDK_SMS_REPORT ORDER BY msg_id DESC
     </select>
-    <select id="selectReserveMessage" resultType="kr.or.fact.admin.model.DTO.SmsSendVO">
+    <select id="selectReserveMessage" resultType="kr.or.fact.core.model.DTO.SmsSendVO">
         SELECT * FROM SDK_SMS_SEND ORDER BY msg_id DESC
     </select>
 </mapper>
