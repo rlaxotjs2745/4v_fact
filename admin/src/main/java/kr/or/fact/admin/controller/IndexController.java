@@ -2,6 +2,8 @@ package kr.or.fact.admin.controller;
 
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.*;
+import kr.or.fact.core.util.*;
+import lombok.SneakyThrows;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -548,8 +550,8 @@ public class IndexController {
         model.addAttribute("total_count",noticeCount);
         List<NoticeVO> noticeList = noticeService.getNoticeWebList(page,list_amount);
         model.addAttribute("noticeList",noticeList);
-        model.addAttribute("filter1",filter1);
-        model.addAttribute("filter2",filter2);
+        //model.addAttribute("filter1",filter1);
+        //model.addAttribute("filter2",filter2);
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
 
