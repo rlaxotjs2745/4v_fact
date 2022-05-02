@@ -1,5 +1,6 @@
 package kr.or.fact;
 
+import kr.or.fact.core.config.FACTConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -13,6 +14,9 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import java.util.Properties;
 
 @SpringBootApplication
+@EnableConfigurationProperties({
+        FACTConfig.class
+})
 public class AdminApplication extends SpringBootServletInitializer {
 
     @Override

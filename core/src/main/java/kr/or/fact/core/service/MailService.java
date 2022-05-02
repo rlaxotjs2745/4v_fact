@@ -12,5 +12,6 @@ public interface MailService {
 
     public File convertMultipartToFile(MultipartFile file) throws IOException;
 
-    public ArrayList<ReservedMailVO> getReservedMail();
+    public ArrayList<ReservedMailVO> getReservedMail(String tagValue);
+
 }

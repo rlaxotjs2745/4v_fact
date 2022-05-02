@@ -2,7 +2,6 @@ package kr.or.fact.admin.controller;
 
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.*;
-import kr.or.fact.core.util.CONSTANT;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.io.BufferedReader;
+import java.io.IOException;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -135,10 +142,19 @@ public class IndexController {
         return "password_reset";
     }
     //대시보드
+    @SneakyThrows
     @RequestMapping(value = "/a10_dashboard",method = RequestMethod.POST)
     public String a10_dashboard(@RequestParam(value = "tag", required = false) String tagValue,
                                  ModelMap model
                                 ){
+
+        String urlGimje = "http://api.openweathermap.org/data/2.5/weather?q=gimje&appid=53adfc8e9ffcbf891a9be91b9e312c01";
+
+        String urlSangju = "http://api.openweathermap.org/data/2.5/weather?q=sangju&appid=53adfc8e9ffcbf891a9be91b9e312c01";
+
+
+        URL url = new URL(urlGimje);
+
 
         return "a10_dashboard";
     }
@@ -182,8 +198,6 @@ public class IndexController {
         List<DemoBusinessVO>  demoBusinessVOList = demoBsService.getDemoBsPagingList(listPagingParamVO);
 
         model.addAttribute("demoBusinessVOList",demoBusinessVOList);
-        model.addAttribute("filter1",filter1);
-        model.addAttribute("filter2",filter2);
 
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
@@ -308,6 +322,9 @@ public class IndexController {
         model.addAttribute("is_last",is_last);
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
+
+
+
 
         return "b10_demo_bs_announce_doc_mng";
     }
@@ -456,7 +473,7 @@ public class IndexController {
         return "b80_demo_bs_corp_cur_report_write";
     }
 
-    //실증 성적서
+    //상담
     @RequestMapping(value = "/b90_demo_bs_cert_mng",method = RequestMethod.POST)
     public String b90_demo_bs_cert_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                        ModelMap model){
@@ -519,8 +536,6 @@ public class IndexController {
     @RequestMapping(value = "/c41_site_notice_mng",method = RequestMethod.POST)
     public String c41_site_notice_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                       @RequestParam("page") int page,
-                                      @RequestParam("filter1") int filter1,
-                                      @RequestParam("filter2") int filter2,
                                       ModelMap model){
 
         int list_amount = 10;
@@ -796,7 +811,13 @@ public class IndexController {
     @RequestMapping(value = "/h60_reserved_email_list",method = RequestMethod.POST)
     public String h60_reserved_email_list(@RequestParam(value = "tag", required = false) String tagValue,
                                           ModelMap model){
-        ArrayList<ReservedMailVO> resultArr = mailService.getReservedMail();
+
+        ArrayList<ReservedMailVO> resultArr;
+        if(tagValue == null){
+            resultArr = mailService.getReservedMail("1");
+        } else {
+            resultArr = mailService.getReservedMail(tagValue);
+        }
 
         model.addAttribute("reservedMails", resultArr);
         return "h60_reserved_email_list";
