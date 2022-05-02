@@ -16,8 +16,13 @@ import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -248,4 +253,41 @@ public class APIController {
     ArrayList<SmsSendVO> selectReserveMessage(){
         return smsSendService.selectReserveMessage();
     }
+    @RequestMapping(value = "/air", method = RequestMethod.GET)
+    public StringBuilder callAirApi() {
+        StringBuffer result = new StringBuffer();
+        StringBuilder sb2 = null;
+        try {
+            String urlBuilder = "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMinuDustFrcstDspth" + "?" + URLEncoder.encode("serviceKey", "UTF-8") + "=QxTJL53E1mGWSyu1Nv5sCKPR4w9LlH1Zcv7QDbjv9Cp9%2B9WiUk%2BzD8yRj%2BeClbZ%2BffbOGqyXtzOsIklLmRM%2FPg%3D%3D" +
+                    "&returnType=json" +
+                    //   sb.append("&" + URLEncoder.encode("returnType", "UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*xml 또는 json*/
+                    "&" + URLEncoder.encode("searchDate", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))), "UTF-8");
+            //    System.out.println(urlBuilder);
+            URL url = new URL(urlBuilder);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            BufferedReader rd;
+            if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+                rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            } else {
+                rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+
+            }
+            sb2 = new StringBuilder();
+            String line;
+            while ((line = rd.readLine()) != null) {
+                sb2.append(line);
+            }
+            rd.close();
+            conn.disconnect();
+            //   System.out.println(sb2);
+            //   airReturnVO.setDuste(sb2.substring(String informGrage));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(sb2);
+
+        return sb2;
+    }
+
 }
