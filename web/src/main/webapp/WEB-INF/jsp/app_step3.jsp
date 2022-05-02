@@ -1847,7 +1847,6 @@ function save_temp(){
         idx_user:${userDemoBs.idx_user},
 
 
-        //app_step:<c:if test="${userDemoBs.app_step eq null}">0</c:if> <c:if test="${userDemoBs.app_step ne null}">${userDemoBs.app_step}</c:if>,//		number	4		1			신청서 작성 단계	"신청 단계, 최종 저장 단계             1:이용 신청서 작성, 2: 실증계획서 작성, 3:개인수집 동의서 작성, 4: 기타서류 등록, 5: 신청서 확인, 6: 신청함"
 
         lab_est_date : $('#lab_est_date').val(),//	VARCHAR2	20					연구소 설립일수
         rnd_rate : $('#rnd_rate').val(),//	NUMBER	4					연구개발투자비율

@@ -2,6 +2,7 @@ package kr.or.fact.admin.controller;
 
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.*;
+import kr.or.fact.core.util.CONSTANT;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,12 @@ public class IndexController {
 
     @Resource(name = "smsService")
     public SmsSendService smsSendService;
+
+    @Resource(name = "bsAnnouncementService")
+    public BsAnnouncementService bsAnnouncementService;
+
+    @Resource(name = "demoBsApplicationService")
+    public DemoBsApplicationService demoBsApplicationService;
 
 
     @PreAuthorize("hasRole('ROLE_MEMBER')")
@@ -138,27 +145,51 @@ public class IndexController {
 
     //사업공고문 관리
     @RequestMapping(value = "/b00_demo_bs_mng",method = RequestMethod.POST)
-    public String b00_demo_bs_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                  @RequestParam("page") int page,
-                                               ModelMap model){
+    public String b00_demo_bs_mng(
+            @RequestParam("page") int page,
+            @RequestParam("filter1") int filter1,
+            @RequestParam("filter2") int filter2,
+            ModelMap model){
 
         int list_amount = 10;
         int page_amount = 10;
 
         AdminDemoBSFilterVO adminDemoBSFilterVO = demoBsService.getAdminDemoBsFilter();
+        //리스트 총갯수를 이때 빼야 함
+        int filtered_item_total = adminDemoBSFilterVO.getTot_count();
+        if(filter1==CONSTANT.DEMOBS_FILTER_APPL)
+            filtered_item_total = adminDemoBSFilterVO.getAppl_count();
+        else if(filter1==CONSTANT.DEMOBS_FILTER_REVUIEW)
+            filtered_item_total = adminDemoBSFilterVO.getRevuiew_count();
+        else if(filter1==CONSTANT.DEMOBS_FILTER_AGREE)
+            filtered_item_total = adminDemoBSFilterVO.getAgree_count();
+        else if(filter1==CONSTANT.DEMOBS_FILTER_DEMO)
+            filtered_item_total = adminDemoBSFilterVO.getDemo_count();
+        else if(filter1==CONSTANT.DEMOBS_FILTER_RESULT)
+            filtered_item_total = adminDemoBSFilterVO.getResult_count();
+
+        model.addAttribute("total_count",filtered_item_total);
         model.addAttribute("adminDemoBsFilter",adminDemoBSFilterVO);
 
-        int demoBsCount = demoBsService.getDemoBsTotalCount();
+        ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
+        listPagingParamVO.setPage_num(page);
+        listPagingParamVO.setAmount(list_amount);
+        listPagingParamVO.setFilter1(filter1);
+        listPagingParamVO.setFilter2(filter2);
+        listPagingParamVO.setOrder_field("IDX_DEMO_BUSINESS");
 
-        model.addAttribute("total_count",demoBsCount);
-        List<DemoBusinessVO>  demoBusinessVOList = demoBsService.getDemoBsListLimit(page,list_amount);
+
+        List<DemoBusinessVO>  demoBusinessVOList = demoBsService.getDemoBsPagingList(listPagingParamVO);
+
         model.addAttribute("demoBusinessVOList",demoBusinessVOList);
+        model.addAttribute("filter1",filter1);
+        model.addAttribute("filter2",filter2);
 
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
 
-        int tot_page = demoBsCount/list_amount+1;
-        if(demoBsCount%list_amount==0) tot_page-=1;
+        int tot_page = filtered_item_total/list_amount+1;
+        if(filtered_item_total%list_amount==0) tot_page-=1;
 
         int tot_sector = tot_page/page_amount+1;
         if(tot_page%page_amount==0) tot_sector-=1;
@@ -201,27 +232,46 @@ public class IndexController {
 
     //사업공고문 관리
     @RequestMapping(value = "/b10_demo_bs_announce_doc_mng",method = RequestMethod.POST)
-    public String b10_demo_bs_announce_doc_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                               @RequestParam("page") int page,
+    public String b10_demo_bs_announce_doc_mng(@RequestParam("page") int page,
+                                               @RequestParam("filter1") int filter1,
+                                               @RequestParam("filter2") int filter2,
                                                ModelMap model){
 
         int list_amount = 10;
         int page_amount = 10;
 
-        AdminDemoBSFilterVO adminDemoBSFilterVO = demoBsService.getAdminDemoBsFilter();
-        model.addAttribute("adminDemoBsFilter",adminDemoBSFilterVO);
+        AdminAnnounceFilterVO adminAnnounceFilterVO = bsAnnouncementService.getAdminBsAnnouncementFilter();
+        //리스트 총갯수를 이때 빼야 함
+        int filtered_item_total = adminAnnounceFilterVO.getAnnounce_tot();
+        if(filter1==CONSTANT.ANN_STATUS_ON_COUNT)
+            filtered_item_total = adminAnnounceFilterVO.getStatus_on_count();
+        else if(filter1==CONSTANT.ANN_WAIT_COUNT)
+            filtered_item_total = adminAnnounceFilterVO.getWait_count();
+        else if(filter1==CONSTANT.ANN_PAUSE_COUNT)
+            filtered_item_total = adminAnnounceFilterVO.getPause_count();
 
-        int demoBsCount = demoBsService.getDemoBsTotalCount();
 
-        model.addAttribute("total_count",demoBsCount);
-        List<DemoBusinessVO>  demoBusinessVOList = demoBsService.getDemoBsListLimit(page,list_amount);
-        model.addAttribute("demoBusinessVOList",demoBusinessVOList);
+        model.addAttribute("total_count",filtered_item_total);
+        model.addAttribute("adminAnnounceFilterVO",adminAnnounceFilterVO);
+
+        ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
+        listPagingParamVO.setPage_num(page);
+        listPagingParamVO.setAmount(list_amount);
+        listPagingParamVO.setFilter1(filter1);
+        listPagingParamVO.setFilter2(filter2);
+        listPagingParamVO.setOrder_field("IDX_BS_ANNOUNCEMENT");
+
+        List<BsAnnounceHeaderVO> bsAnnounceHeaderVOList = bsAnnouncementService.getBsAnnounceHeaderVOPagingList(listPagingParamVO);
+
+        model.addAttribute("bsAnnounceHeaderVOList",bsAnnounceHeaderVOList);
+        model.addAttribute("filter1",filter1);
+        model.addAttribute("filter2",filter2);
 
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
 
-        int tot_page = demoBsCount/list_amount+1;
-        if(demoBsCount%list_amount==0) tot_page-=1;
+        int tot_page = filtered_item_total/list_amount+1;
+        if(filtered_item_total%list_amount==0) tot_page-=1;
 
         int tot_sector = tot_page/page_amount+1;
         if(tot_page%page_amount==0) tot_sector-=1;
@@ -259,17 +309,76 @@ public class IndexController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-
-
-
         return "b10_demo_bs_announce_doc_mng";
     }
 
-    //신규 신청 접수
+    //신청접수 관리
     @RequestMapping(value = "/b21_demo_bs_appl_mng",method = RequestMethod.POST)
-    public String b21_demo_bs_appl_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String b21_demo_bs_appl_mng(@RequestParam("page") int page,
                                        ModelMap model){
 
+
+        //사업 기준
+        int list_amount = 5;
+        int page_amount = 10;
+
+
+        int filtered_item_total = demoBsApplicationService.getAvailableDemoBsTotalCount();
+        model.addAttribute("total_count",filtered_item_total);
+
+        ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
+        listPagingParamVO.setPage_num(page);
+        listPagingParamVO.setAmount(list_amount);
+        listPagingParamVO.setFilter1(CONSTANT.FILTER_NOT_USED);
+        listPagingParamVO.setFilter2(CONSTANT.FILTER_NOT_USED);
+        listPagingParamVO.setOrder_field("IDX_DEMO_BUSINESS");
+
+
+        List<AdminApplDemoBsHeaderListVO>  adminApplHeaderListVOS = demoBsApplicationService.getAvailableDemoBsPagingList(listPagingParamVO);
+
+        model.addAttribute("adminApplHeaderListVOS",adminApplHeaderListVOS);
+
+        model.addAttribute("cur_page",page);
+        model.addAttribute("amount",list_amount);
+
+        int tot_page = filtered_item_total/list_amount+1;
+        if(filtered_item_total%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+        boolean is_active = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("page_amount",page_amount);
 
         return "b21_demo_bs_appl_mng";
     }
@@ -347,7 +456,7 @@ public class IndexController {
         return "b80_demo_bs_corp_cur_report_write";
     }
 
-    //상담
+    //실증 성적서
     @RequestMapping(value = "/b90_demo_bs_cert_mng",method = RequestMethod.POST)
     public String b90_demo_bs_cert_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                        ModelMap model){
@@ -410,6 +519,8 @@ public class IndexController {
     @RequestMapping(value = "/c41_site_notice_mng",method = RequestMethod.POST)
     public String c41_site_notice_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                       @RequestParam("page") int page,
+                                      @RequestParam("filter1") int filter1,
+                                      @RequestParam("filter2") int filter2,
                                       ModelMap model){
 
         int list_amount = 10;
@@ -422,7 +533,8 @@ public class IndexController {
         model.addAttribute("total_count",noticeCount);
         List<NoticeVO> noticeList = noticeService.getNoticeWebList(page,list_amount);
         model.addAttribute("noticeList",noticeList);
-
+        model.addAttribute("filter1",filter1);
+        model.addAttribute("filter2",filter2);
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
 

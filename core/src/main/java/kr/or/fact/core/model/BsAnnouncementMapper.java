@@ -1,7 +1,6 @@
 package kr.or.fact.core.model;
 
-import kr.or.fact.core.model.DTO.AdminDemoBSFilterVO;
-import kr.or.fact.core.model.DTO.BsAnnouncementVO;
+import kr.or.fact.core.model.DTO.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,7 +15,7 @@ public interface BsAnnouncementMapper {
 
     int getBsAnnouncementTotalCount();
     List<BsAnnouncementVO> getBsAnnouncementList();
-    List<BsAnnouncementVO> getBsAnnouncementListLimit(@Param("page_num") int page_num, @Param("amount") int amount,@Param("order_field") String order_field);
+    //List<BsAnnouncementVO> getBsAnnouncementListLimit(@Param("page_num") int page_num, @Param("amount") int amount,@Param("order_field") String order_field);
     List<BsAnnouncementVO> getBsAnnouncementListByFilter(int type);
 
     BsAnnouncementVO getBsAnnouncementByIdx(long idx);
@@ -26,7 +25,9 @@ public interface BsAnnouncementMapper {
     void deleteBsAnnouncement(long idx_demo_business);
 
 
-    AdminDemoBSFilterVO getAdminBsAnnouncementFilter();
+    AdminAnnounceFilterVO getAdminBsAnnouncementFilter();
 
     List<BsAnnouncementVO> getAvailibleBsAnnouncement();
+
+    List<BsAnnounceHeaderVO> getBsAnnounceHeaderVOPagingList(ListPagingParamVO listPagingParamVO);
 }

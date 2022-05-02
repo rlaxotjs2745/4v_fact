@@ -183,7 +183,6 @@ public class WebAPIController {
         }
 
         //3.신청단계 파악
-        userDemoBsVo.setApp_step(0);
         userDemoBsVo.setUser_demobs_status(0);
         userDemoBsService.saveUserDemoBsNew(userDemoBsVo);
         //4.예외처리

@@ -8,9 +8,9 @@
         </h4>
 
         <div class="row">
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-4 col-xl-2">
                 <div class="card mb-3">
-                    <button id="btn_filter1" class="card-body btn btn-white">
+                    <button id="btn_filter1" class="card-body btn btn-white" onclick="javascript:load('b00_demo_bs_mng?page=1&filter1=9999&filter2=9998','실증사업 목록');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="/static/assets/img/img_business_all.png" alt=""></div>
                             <div class="ml-3">
@@ -21,40 +21,66 @@
                     </button>
                 </div>
             </div>
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-4 col-xl-2">
                 <div class="card mb-3">
-                    <button id="btn_filter2" class="card-body  btn btn-white">
+                    <button id="btn_filter2" class="card-body  btn btn-white" onclick="javascript:load('b00_demo_bs_mng?page=1&filter1=3&filter2=4','실증사업 목록');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="/static/assets/img/img_business_on.png" alt=""></div>
                             <div class="ml-3">
-                                <div class="text-muted small">모집중</div>
+                                <div class="text-muted small">모집중 & 모집종료</div>
                                 <div class="text-large">${adminDemoBsFilter.appl_count}</div>
                             </div>
                         </div>
                     </button>
                 </div>
             </div>
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-4 col-xl-2">
                 <div class="card mb-3">
-                    <button id="btn_filter3" class="card-body btn btn-white">
+                    <button id="btn_filter3" class="card-body btn btn-white" onclick="javascript:load('b00_demo_bs_mng?page=1&filter1=5&filter2=6','실증사업 목록');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="/static/assets/img/img_business_week.png" alt=""></div>
                             <div class="ml-3">
-                                <div class="text-muted small">사업중</div>
-                                <div class="text-large">${adminDemoBsFilter.bs_count}</div>
+                                <div class="text-muted small">심사중 & 심사종료</div>
+                                <div class="text-large">${adminDemoBsFilter.revuiew_count}</div>
                             </div>
                         </div>
                     </button>
                 </div>
             </div>
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-4 col-xl-2">
                 <div class="card mb-3">
-                    <button id="btn_filter4" class="card-body btn btn-white">
+                    <button id="btn_filter4" class="card-body btn btn-white" onclick="javascript:load('b00_demo_bs_mng?page=1&filter1=7&filter2=8','실증사업 목록');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="/static/assets/img/img_business_off.png" alt=""></div>
                             <div class="ml-3">
-                                <div class="text-muted small">사업 종료</div>
-                                <div class="text-large">${adminDemoBsFilter.done_count}</div>
+                                <div class="text-muted small">이용계획 조정</div>
+                                <div class="text-large">${adminDemoBsFilter.agree_count}</div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xl-2">
+                <div class="card mb-3">
+                    <button id="btn_filter5" class="card-body btn btn-white" onclick="javascript:load('b00_demo_bs_mng?page=1&filter1=9&filter2=10','실증사업 목록');">
+                        <div class="d-flex align-items-center">
+                            <div class="display-4"><img src="/static/assets/img/img_business_off.png" alt=""></div>
+                            <div class="ml-3">
+                                <div class="text-muted small">협약중 & 협약완료</div>
+                                <div class="text-large">${adminDemoBsFilter.demo_count}</div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xl-2">
+                <div class="card mb-3">
+                    <button id="btn_filter6" class="card-body btn btn-white" onclick="javascript:load('b00_demo_bs_mng?page=1&filter1=11&filter2=12','실증사업 목록');">
+                        <div class="d-flex align-items-center">
+                            <div class="display-4"><img src="/static/assets/img/img_business_off.png" alt=""></div>
+                            <div class="ml-3">
+                                <div class="text-muted small">사업중 & 사업종료</div>
+                                <div class="text-large">${adminDemoBsFilter.result_count}</div>
                             </div>
                         </div>
                     </button>
@@ -88,6 +114,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+<c:if test="${total_count eq 0}">
+                                    <tr class="">
+                                        <td class="text-center" colspan="7" rowspan="3">내용이 없습니다</td>
+                                    </tr>
+                                    <tr class="">
+                                    </tr>
+                                    <tr class="">
+                                    </tr>
+                                    <tr class="">
+                                    </tr>
+</c:if>
+<c:if test="${total_count ne 0}">
                                 <c:forEach items="${demoBusinessVOList}" var="demoBs" varStatus="status">
                                     <tr class="">
                                         <td class="text-center">
@@ -99,12 +137,14 @@
                                                 <c:when test="${demoBs.demo_bs_status eq 4}">모집종료</c:when>
                                                 <c:when test="${demoBs.demo_bs_status eq 5}">심사중</c:when>
                                                 <c:when test="${demoBs.demo_bs_status eq 6}">심사완료</c:when>
-                                                <c:when test="${demoBs.demo_bs_status eq 7}">협약중</c:when>
-                                                <c:when test="${demoBs.demo_bs_status eq 8}">협약완료</c:when>
-                                                <c:when test="${demoBs.demo_bs_status eq 9}">사업시작</c:when>
-                                                <c:when test="${demoBs.demo_bs_status eq 10}">사업종료</c:when>
-                                                <c:when test="${demoBs.demo_bs_status eq 11}">결산중</c:when>
-                                                <c:when test="${demoBs.demo_bs_status eq 12}">결산완료</c:when>
+                                                <c:when test="${demoBs.demo_bs_status eq 7}">이용계획조정</c:when>
+                                                <c:when test="${demoBs.demo_bs_status eq 8}">이용계획확정</c:when>
+                                                <c:when test="${demoBs.demo_bs_status eq 9}">협약중</c:when>
+                                                <c:when test="${demoBs.demo_bs_status eq 10}">협약완료</c:when>
+                                                <c:when test="${demoBs.demo_bs_status eq 11}">사업시작</c:when>
+                                                <c:when test="${demoBs.demo_bs_status eq 12}">사업종료</c:when>
+                                                <c:when test="${demoBs.demo_bs_status eq 13}">결산중</c:when>
+                                                <c:when test="${demoBs.demo_bs_status eq 14}">결산완료</c:when>
                                              </c:choose>
                                         </td>
                                         <td class="text-center">${demoBs.demo_bs_code}</td>
@@ -120,13 +160,17 @@
                                         </td>
                                     </tr>
                                 </c:forEach>
+</c:if>
+
+
                                </tbody>
                             </table>
                         </div>
                     </div>
+<c:if test="${total_count ne 0}">
                     <div class="row">
                         <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="article-list_info" role="status" aria-live="polite">총 ${total_count}개 중 ${(cur_sector-1)*page_amount+1}에서 ${(cur_sector-1)*(page_amount+1)}까지</div>
+                            <div class="dataTables_info" id="article-list_info" role="status" aria-live="polite">총 ${total_count}개 중 ${list_amount*(cur_page-1)+1}에서 ${list_amount*page_amount}까지까지</div>
                         </div>
                         <div class="col-sm-12 col-md-7">
                             <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
@@ -135,21 +179,22 @@
                                     <c:set var="name" value="${total_count/amount}" />
 
 
-                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:load('b00_demo_bs_mng?page=1','실증사업 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
-                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:load('b00_demo_bs_mng?page=${cur_page-1}','실증사업 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:load('b00_demo_bs_mng?page=1&filter1=${filter1}&filter2=${filter2}','실증사업 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:load('b00_demo_bs_mng?page=${cur_page-1}&filter1=${filter1}&filter2=${filter2}','실증사업 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
 
 
 
                                     <c:forEach var="i" begin="1" end="${page_amount}">
-                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:load('b00_demo_bs_mng?page=${(cur_sector-1)*page_amount+i}','실증사업 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
+                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:load('b00_demo_bs_mng?page=${(cur_sector-1)*page_amount+i}&filter1=${filter1}&filter2=${filter2}','실증사업 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
                                     </c:forEach>
 
-                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:load('b00_demo_bs_mng?page=${cur_page+1}','실증사업 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
-                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:load('b00_demo_bs_mng?page=${tot_page}','실증사업 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:load('b00_demo_bs_mng?page=${cur_page+1}&filter1=${filter1}&filter2=${filter2}','실증사업 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:load('b00_demo_bs_mng?page=${tot_page}&filter1=${filter1}&filter2=${filter2}','실증사업 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
                                 </ul>
                             </div>
                         </div>
                     </div>
+</c:if>
                 </div>
             </div>
 
@@ -470,11 +515,16 @@
         });
 
         //Filter
-        $('#btn_filter1').on('click', function() {
+        //$('#btn_filter1').on('click', function() {
 
+            //load('b00_demo_bs_mng?page=1&filter1=9999&filter2=9998','실증사업 목록');
+            /*
             let param = {
-                int_param:1,
-                str_param:""
+                page_num:1,
+                amount:10,
+                order_field:"IDX_DEMO_BUSINESS",
+                filter1:9999,
+                filter2:9998,
             }
             $.ajax({
                 type: 'post',
@@ -493,17 +543,9 @@
                 error:function(){
                     //에러가 났을 경우 실행시킬 코드
                 }
-            });
-        });
-        $('#btn_filter2').on('click', function() {
+            });*/
+        //});
 
-        });
-        $('#btn_filter3').on('click', function() {
-
-        });
-        $('#btn_filter4').on('click', function() {
-
-        });
 
         $(function() {
 

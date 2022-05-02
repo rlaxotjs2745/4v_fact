@@ -43,6 +43,12 @@ public class APIController {
     @Resource(name = "smsService")
     public SmsSendService smsSendService;
 
+    @Resource(name = "demoBsApplicationService")
+    public DemoBsApplicationService demoBsApplicationService;
+
+    @Resource(name = "userDemoBsService")
+    public UserDemoBsService userDemoBsService;
+
     @Autowired
     private JavaMailSender mailSender;
 
@@ -174,7 +180,94 @@ public class APIController {
         return "pages/demoBsListByFilter";
     }
 
+    @RequestMapping(value = "/appl_list_by_b21_filtered",method = RequestMethod.POST)
+    public String demo_bs_list_by_filter(HttpSession session,
+                                         @RequestBody ParamPageListFilteredVO param,
+                                         Model model){
+        int page = param.getPage_num();
+        int filter1 = param.getFilter1();
+        int filter2 = param.getFilter2();
 
+        int list_amount = 10;
+        int page_amount = 10;
+
+        AdminDemoBSFilterVO adminDemoBSFilterVO = demoBsService.getAdminDemoBsFilter();
+        //리스트 총갯수를 이때 빼야 함
+        int filtered_item_total = adminDemoBSFilterVO.getTot_count();
+        if(filter1==CONSTANT.DEMOBS_FILTER_APPL)
+            filtered_item_total = adminDemoBSFilterVO.getAppl_count();
+        else if(filter1==CONSTANT.DEMOBS_FILTER_REVUIEW)
+            filtered_item_total = adminDemoBSFilterVO.getRevuiew_count();
+        else if(filter1==CONSTANT.DEMOBS_FILTER_AGREE)
+            filtered_item_total = adminDemoBSFilterVO.getAgree_count();
+        else if(filter1==CONSTANT.DEMOBS_FILTER_DEMO)
+            filtered_item_total = adminDemoBSFilterVO.getDemo_count();
+        else if(filter1==CONSTANT.DEMOBS_FILTER_RESULT)
+            filtered_item_total = adminDemoBSFilterVO.getResult_count();
+
+        model.addAttribute("total_count",filtered_item_total);
+        model.addAttribute("adminDemoBsFilter",adminDemoBSFilterVO);
+        model.addAttribute("idx_demo_business",param.getIdx());
+
+        ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
+        listPagingParamVO.setPage_num(page);
+        listPagingParamVO.setAmount(list_amount);
+        listPagingParamVO.setFilter1(filter1);
+        listPagingParamVO.setFilter2(filter2);
+        listPagingParamVO.setOrder_field("IDX_DEMO_BUSINESS");
+        listPagingParamVO.setIdx(param.getIdx());
+
+        List<AdminApplHeaderListVO> adminApplHeaderListVOS =  demoBsApplicationService.getApplPagingFilteredList(listPagingParamVO);
+        //List<DemoBusinessVO>  demoBusinessVOList = demoBsService.getDemoBsPagingList(listPagingParamVO);
+
+        model.addAttribute("adminApplHeaderListVOS",adminApplHeaderListVOS);
+        model.addAttribute("filter1",filter1);
+        model.addAttribute("filter2",filter2);
+
+        model.addAttribute("cur_page",page);
+        model.addAttribute("amount",list_amount);
+
+        int tot_page = filtered_item_total/list_amount+1;
+        if(filtered_item_total%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+        boolean is_active = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("page_amount",page_amount);
+
+        return "pages/appl_list_by_b21_filtered";
+    }
 
     @RequestMapping(value = "/send_mail",method = RequestMethod.POST)
     public String send_mail(@ModelAttribute MailVO mailVO, HttpSession session, HttpServletRequest request) throws Exception, IOException {
@@ -247,5 +340,24 @@ public class APIController {
     public @ResponseBody
     ArrayList<SmsSendVO> selectReserveMessage(){
         return smsSendService.selectReserveMessage();
+    }
+
+
+    @RequestMapping(value = "/get_user_demo_bs_info",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  join_confirm(HttpSession session,
+                           @RequestBody ParamUserDemoBSInfoVO userDemoBSInfoVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("성공");
+        resultVO.setResult_code("SUCCESS");
+        UserDemoBsVO userDemoBsVO = userDemoBsService.getUserDemoBsByIdx(userDemoBSInfoVO.getIdx_user_demo_bs());
+
+        if(userDemoBsVO==null){
+            resultVO.setResult_str("해당 신청정보를 찾을수 없습니다");
+            resultVO.setResult_code("ERROR_1001");
+            return resultVO;
+        }
+        resultVO.setUserDemoBsVO(userDemoBsVO);
+        return  resultVO;
     }
 }

@@ -1,25 +1,26 @@
 package kr.or.fact.core.service;
 
 import kr.or.fact.core.model.DTO.*;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface UserDemoBsService {
-    public List<ApplicantDemoBsJoinVO> getUserDemoBsFromJoin(long idx_user);
-    public List<UserDemoBsVO> getUserDemoBsListByUserIdx(long idx_user);
-    public List<DemoBsMsgVO> getDemoBsMsgByUserDemoBSIdx(long idx_user_demo_bs);
+    List<ApplicantDemoBsJoinVO> getUserDemoBsFromJoin(long idx_user);
+    List<UserDemoBsVO> getUserDemoBsListByUserIdx(long idx_user);
+    List<DemoBsMsgVO> getDemoBsMsgByUserDemoBSIdx(long idx_user_demo_bs);
 
-    public UserDemoBsVO getUserDemoBs(UserDemoBsCheckVO userDemoBsCheckVo);
-    public UserDemoBsVO getUserDemoBsByIdx(long idx_user_demo_bs);
+    UserDemoBsVO getUserDemoBs(UserDemoBsCheckVO userDemoBsCheckVo);
+    UserDemoBsVO getUserDemoBsByIdx(long idx_user_demo_bs);
 
-    public long saveUserDemoBs(UserDemoBsVO userDemoBsVO);
-    public long saveUserDemoBsNew(UserDemoBsVO userDemoBsVO);
+    long saveUserDemoBs(UserDemoBsVO userDemoBsVO);
+    long saveUserDemoBsNew(UserDemoBsVO userDemoBsVO);
 
-    public void updateUserDemoBs(UserDemoBsVO userDemoBsVO);
+    void updateUserDemoBs(UserDemoBsVO userDemoBsVO);
 
-    public void updateUserDemoBsWebStep2(UserDemoBsVO userDemoBsVO);
-    public void updateUserDemoBsWebStep3(UserDemoBsVO userDemoBsVO);
-    public void updateUserDemoBsWebStep4(UserDemoBsVO userDemoBsVO);
+    void updateUserDemoBsWebStep2(UserDemoBsVO userDemoBsVO);
+    void updateUserDemoBsWebStep3(UserDemoBsVO userDemoBsVO);
+    void updateUserDemoBsWebStep4(UserDemoBsVO userDemoBsVO);
 
 
 
@@ -27,9 +28,11 @@ public interface UserDemoBsService {
     void saveUserDemoBsHumanResource(UserBsHumanResourceVO userBsHumanResourceVO);
     void deleteUserDemoBsHumanResource(long idx_user_demo_bs);
 
-    public UserDemoBsDetailVO getUserDemoBsDetail(long idx_user_demo_bs);
-    public void saveUserDemoBsDetail(UserDemoBsDetailVO userDemoBsDetailVO);
-    public void updateUserDemoBsDetail(UserDemoBsDetailVO userDemoBsDetailVO);
+    UserDemoBsDetailVO getUserDemoBsDetail(long idx_user_demo_bs);
+    void saveUserDemoBsDetail(UserDemoBsDetailVO userDemoBsDetailVO);
+    void updateUserDemoBsDetail(UserDemoBsDetailVO userDemoBsDetailVO);
+
+    List<UserDemoBsVO> getUserDemoBsPagingList(int page_num, int amount, String order_field, int filter1, int filter2);
 }
 
 

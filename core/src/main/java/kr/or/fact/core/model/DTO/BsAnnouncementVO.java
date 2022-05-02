@@ -20,7 +20,7 @@ public class BsAnnouncementVO {
     int is_important;//	number	4		0			공지사항 제일 처음부분에 고정	0:고정안함 1:고정
     int is_show;//	number	4		0			노출여부	0:노출안함 1:노출
     int view_count;//	number	20					조회수
-    int announce_status;//	number	4		0			공지사항 게시 프로세스 상태	0:임시저장, 1:허락, 2:수정 발행, 3:게시 종료, 99:기타
+    int announce_status;//	number	4		0			공지사항 게시 프로세스 상태	0:임시저장, 1:게시전 수동게시, 2:게시전 자동게시, 3:게시중, 4:게시 일지 중지, 5:게시 기간 종료
 
     Date posting_start_date;//	date						게시 시작 일시분초
     Date posting_end_date;//	date						게시 종료 일시분초

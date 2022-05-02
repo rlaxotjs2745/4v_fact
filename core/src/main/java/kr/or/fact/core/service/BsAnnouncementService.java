@@ -1,8 +1,8 @@
 package kr.or.fact.core.service;
 
-import kr.or.fact.core.model.DTO.AdminDemoBSFilterVO;
+import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.model.DTO.BsAnnouncementVO;
-import kr.or.fact.core.model.DTO.BsAnnouncementVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public interface BsAnnouncementService {
 
     int getBsAnnouncementTotalCount();
     List<BsAnnouncementVO> getBsAnnouncementList();
-    List<BsAnnouncementVO> getBsAnnouncementListLimit(int page, int count);
+    //List<BsAnnouncementVO> getBsAnnouncementListLimit(int page, int count);
     List<BsAnnouncementVO> getBsAnnouncementListByFilter(int type);
 
     BsAnnouncementVO getBsAnnouncementByIdx(long idx);
@@ -27,8 +27,12 @@ public interface BsAnnouncementService {
     void deleteBsAnnouncement(long idx_demo_business);
 
 
-    AdminDemoBSFilterVO getAdminBsAnnouncementFilter();
+
+
 
     List<BsAnnouncementVO> getAvailibleBsAnnouncement();
+    //admin
+    AdminAnnounceFilterVO getAdminBsAnnouncementFilter();
+    List<BsAnnounceHeaderVO> getBsAnnounceHeaderVOPagingList(ListPagingParamVO listPagingParamVO);
 
 }

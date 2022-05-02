@@ -1,8 +1,7 @@
 package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.BsAnnouncementMapper;
-import kr.or.fact.core.model.DTO.AdminDemoBSFilterVO;
-import kr.or.fact.core.model.DTO.BsAnnouncementVO;
+import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.BsAnnouncementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,10 +39,10 @@ public class BsAnnouncementServiceImpl implements BsAnnouncementService {
     public List<BsAnnouncementVO> getBsAnnouncementList(){
         return bsAnnouncementMapper.getBsAnnouncementList();
     }
-    @Override
+    /*@Override
     public List<BsAnnouncementVO> getBsAnnouncementListLimit(int page, int count){
         return bsAnnouncementMapper.getBsAnnouncementListLimit(page,count,"POSTING_START_DATE");
-    }
+    }*/
     @Override
     public List<BsAnnouncementVO> getBsAnnouncementListByFilter(int type){
         return bsAnnouncementMapper.getBsAnnouncementListByFilter(type);
@@ -69,7 +68,7 @@ public class BsAnnouncementServiceImpl implements BsAnnouncementService {
 
 
     @Override
-    public AdminDemoBSFilterVO getAdminBsAnnouncementFilter(){
+    public AdminAnnounceFilterVO getAdminBsAnnouncementFilter(){
         return bsAnnouncementMapper.getAdminBsAnnouncementFilter();
     }
 
@@ -77,8 +76,10 @@ public class BsAnnouncementServiceImpl implements BsAnnouncementService {
     public List<BsAnnouncementVO> getAvailibleBsAnnouncement(){
         return bsAnnouncementMapper.getAvailibleBsAnnouncement();
     }
-
-
+    @Override
+    public List<BsAnnounceHeaderVO> getBsAnnounceHeaderVOPagingList(ListPagingParamVO listPagingParamVO){
+        return bsAnnouncementMapper.getBsAnnounceHeaderVOPagingList(listPagingParamVO);
+    }
 
 
 

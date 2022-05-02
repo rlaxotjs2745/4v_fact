@@ -2,6 +2,7 @@ package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.DTO.AdminDemoBSFilterVO;
 import kr.or.fact.core.model.DTO.DemoBusinessVO;
+import kr.or.fact.core.model.DTO.ListPagingParamVO;
 import kr.or.fact.core.model.DemoBsMapper;
 import kr.or.fact.core.service.DemoBsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,10 @@ public class DemoBsServiceImpl implements DemoBsService {
         return demoBsMapper.getDemoBsList();
     }
     @Override
-    public List<DemoBusinessVO> getDemoBsListLimit(int page, int count){
-        return demoBsMapper.getDemoBsListLimit(page, count,"START_DATE");
+    public List<DemoBusinessVO> getDemoBsPagingList(ListPagingParamVO listPagingParamVO){
+        return demoBsMapper.getDemoBsPagingList(listPagingParamVO);
     }
+
 
     @Override
     public List<DemoBusinessVO> getDemoBsListByFilter(int type){

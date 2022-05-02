@@ -12,6 +12,19 @@ public class CONSTANT {
     public static int yes = 1;
     public static int no = 0;
 
+    public static int DEMOBS_FILTER_APPL = 3;
+    public static int DEMOBS_FILTER_REVUIEW = 5;
+    public static int DEMOBS_FILTER_AGREE = 7;
+    public static int DEMOBS_FILTER_DEMO = 9;
+    public static int DEMOBS_FILTER_RESULT = 11;
+
+
+    public static int ANN_STATUS_ON_COUNT = 3;
+    public static int ANN_WAIT_COUNT = 1;
+    public static int ANN_PAUSE_COUNT = 4;
+
+    public static int FILTER_TOTAL = 9999;
+    public static int FILTER_NOT_USED = 9998;
 
 
     public static int ROLE_GUEST = 0; //비인증 유저

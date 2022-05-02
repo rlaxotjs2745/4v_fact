@@ -139,8 +139,6 @@
                             <td class="td__left" colspan="2"><input id="corp_name" type="text" placeholder="사업자 등록증과 동일하게 입력" value="${userDemoBs.corp_name}"></td>
                             <th class="th__left">법인등록번호</th>
                             <td class="td__left" colspan="2"><input id="corp_reg_num" type="text" placeholder="1234567-123456789" value="${userDemoBs.corp_reg_num}"></td>
-
-
                         </tr>
                         <tr>
                             <th class="th__left">사업자등록번호</th>
@@ -181,6 +179,7 @@
                                 <input id="corp_rnd_addr2" type="text" style="width: 25%;margin-left:4px !important;margin-top: 0px!important;" value="${userDemoBs.corp_rnd_addr2}" placeholder="상세주소">
                             </td>
                         </tr>
+
                         <tr>
                             <th class="th__left">연락처 </th>
                             <td class="td__left"><input id="lab_phone" type="text" value="${userDemoBs.lab_phone}"></td>
@@ -199,6 +198,12 @@
                                     <label for="lab_ower3">임차</label>
                                 </div>
                             </td>
+                        </tr>
+                        <tr>
+                            <th class="th__left">대표 이메일</th>
+                            <td class="td__left" colspan="2"><input id="email" type="text" placeholder="사업자 등록증과 동일하게 입력" value="${userDemoBs.corp_name}"></td>
+                            <th class="th__left">홈페이지</th>
+                            <td class="td__left" colspan="2"><input id="homepage" type="text" placeholder="1234567-123456789" value="${userDemoBs.corp_reg_num}"></td>
                         </tr>
                         <tr>
                             <th class="th__left">인력현황</th>
@@ -345,18 +350,19 @@
                                     <input type="checkbox" id="user_demo_repeat2" name="user_demo_repeat" value="2">
                                     <label for="user_demo_repeat2">반복실증</label>
                                 </div>
-                                (반복횟수: <input id="user_demo_repeat_count" type="text" style="width:100px;" value="${userDemoBs.user_demo_repeat_count}"> 회)
+                                <span>(반복횟수: <input id="user_demo_repeat_count" type="text" style="width:100px;" value="${userDemoBs.user_demo_repeat_count}"> 회)</span>
                             </td>
                             <th class="th__left">실증작물</th>
-                            <div class="checkbox checkbox--inline">
-                                <input type="checkbox" id="user_demo_is_crops1" name="user_demo_is_crops" value="1">
-                                <label for="user_demo_is_crops1">작물대상실증</label>
-                            </div>
-                            <div class="checkbox checkbox--inline">
-                                <input type="checkbox" id="user_demo_is_crops2" name="user_demo_is_crops" value="2">
-                                <label for="user_demo_is_crops2">비작물대상실증</label>
-                            </div>
+
                             <td class="td__left">
+                                <div class="checkbox checkbox--inline">
+                                    <input type="checkbox" id="user_demo_is_crops1" name="user_demo_is_crops" value="1">
+                                    <label for="user_demo_is_crops1">작물대상실증</label>
+                                </div>
+                                <div class="checkbox checkbox--inline">
+                                    <input type="checkbox" id="user_demo_is_crops2" name="user_demo_is_crops" value="2">
+                                    <label for="user_demo_is_crops2">비작물대상실증</label>
+                                </div>
                                 <input id="user_demo_crops" type="text" value="${userDemoBs.user_demo_crops}">
                             </td>
                         </tr>
@@ -763,9 +769,7 @@
         let param = {
             idx_user_demo_bs:${userDemoBs.idx_user_demo_bs},//		number	32		0		◯	지원사업
             idx_demo_business:${userDemoBs.idx_demo_business},//		number	32		0		◯	지원사업
-//            user_demobs_status:${userDemoBs.user_demobs_status},//									0:지원서 작성중, 1: 신청함, 2: 서류 검토 중, 3:서류 보완요청,  4:서류검토완료, 5:서류 부적격, 10:심사 중 11:심사통과, 12:심사보류, 13:심사 부적격, 20:이의신청, 21:이의 검토중, 22:이의 기각, 23:이의 인용, 30:협약중, 31:협약보완요청, 32:협약완료, 33:협약보류, 34:협약 실패,  40:사업 시작, 50:사업 종료, 60:결산중, 61:결산 완료, 99:최종 탈락
             idx_user:${userDemoBs.idx_user},
-//            app_step:${userDemoBs.app_step},//		number	4		1			신청서 작성 단계	"신청 단계, 최종 저장 단계             1:이용 신청서 작성, 2: 실증계획서 작성, 3:개인수집 동의서 작성, 4: 기타서류 등록, 5: 신청서 확인, 6: 신청함"
 
             user_demo_bs_type:$('input[name="user_type"]:checked').val(), //		number	4		1			사업 진행 주체 타입	0:개인, 1:일반기업, 2:미등록기업(설립전), 3: 농업진흥기관, 4:선도기업, 5:외국연구기관, 6:특정연구기관, 7:정부출연연구기관, 8:스마트팜 관련 기업부설연구소 보유기업, 9: 대학교, 99:기타 단체
 
@@ -782,6 +786,9 @@
             corp_rnd_addr: $('#corp_rnd_addr').val(),//		varchar2	200					본사 소재지
             corp_rnd_addr2: $('#corp_rnd_addr2').val(),//		varchar2	200					본사 소재지
             lab_phone: $('#corp_phone').val(),//		varchar2	200					본사 소재지
+            email: $('#email').val(),//	varchar2	320					대표 이메일
+            homepage: $('#homepage').val(),//	varchar2	255					회사 홈페이지
+
             is_lab_ower:$('input[name="lab_ower"]:checked').val(),
 
             capital_amount: $('#capital_amount').val()*1,//		number	20					자본금

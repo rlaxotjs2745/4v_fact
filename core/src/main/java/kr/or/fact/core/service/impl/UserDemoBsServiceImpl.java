@@ -3,6 +3,7 @@ package kr.or.fact.core.service.impl;
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.model.UserDemoBsMapper;
 import kr.or.fact.core.service.UserDemoBsService;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -109,5 +110,10 @@ public class UserDemoBsServiceImpl implements UserDemoBsService {
     @Override
     public void updateUserDemoBsDetail(UserDemoBsDetailVO userDemoBsDetailVO){
         userDemoBsMapper.updateUserDemoBsDetail(userDemoBsDetailVO);
+    }
+
+    @Override
+    public List<UserDemoBsVO> getUserDemoBsPagingList(int page_num,int amount,String order_field, int filter1, int filter2){
+        return userDemoBsMapper.getUserDemoBsPagingList(page_num, amount, order_field,filter1,filter2);
     }
 }

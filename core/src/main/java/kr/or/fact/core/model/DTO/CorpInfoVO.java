@@ -15,6 +15,7 @@ public class CorpInfoVO {
     String email;//	varchar2	320					대표 이메일
     String homepage;//	varchar2	255					회사 홈페이지
     String corp_addr;//	varchar2	200					본사 소재지
+    String corp_addr2;//	VARCHAR2	200					본사 소재지 상세
     int is_other_addr;//	number	4		0			공장 혹은 농장 소유 여부	0:없음, 1:공장, 2:농장, 99:기타
     String other_addr;//	varchar2	200					공장 혹은 농장 주소
     long sales_in_prev;//	number	38					전년도 매출액

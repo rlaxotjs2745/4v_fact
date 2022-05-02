@@ -32,29 +32,29 @@
 
                     <ul class="sidenav-menu">
                         <li class="sidenav-item">
-                            <a href="javascript:load('b00_demo_bs_mng?page=1','실증사업 관리');" class="sidenav-link">
+                            <a href="javascript:load('b00_demo_bs_mng?page=1&filter1=9999&filter2=9998','실증사업 관리');" class="sidenav-link">
                                 <div>실증사업 관리</div>
                             </a>
                         </li>
                         <li class="sidenav-item">
-                            <a href="javascript:load('b10_demo_bs_announce_doc_mng?page=1','사업공고문 관리');" class="sidenav-link">
+                            <a href="javascript:load('b10_demo_bs_announce_doc_mng?page=1&filter1=9999&filter2=9998','사업공고문 관리');" class="sidenav-link">
                                 <div>사업공고문 관리</div>
                             </a>
                         </li>
 
                         <li class="sidenav-item" style="">
                             <a href="javascript:void(0);" class="sidenav-link sidenav-toggle">
-                                <div>신청서평가</div>
+                                <div>선정업무 관리</div>
                             </a>
                             <ul class="sidenav-menu">
                                 <li class="sidenav-item">
-                                    <a href="javascript:load('b21_demo_bs_appl_mng','신규신청 접수');" class="sidenav-link">
-                                        <div>신규신청 접수</div>
+                                    <a href="javascript:load('b21_demo_bs_appl_mng?page=1','신규신청 접수');" class="sidenav-link">
+                                        <div>신청접수 관리</div>
                                     </a>
                                 </li>
                                 <li class="sidenav-item">
                                     <a href="javascript:load('b22_demo_bs_doc_eval_result_mng','심사결과 관리');" class="sidenav-link">
-                                        <div>심사결과 관리</div>
+                                        <div>심사업무 관리</div>
                                     </a>
                                 </li>
                                 <li class="sidenav-item">
@@ -90,13 +90,13 @@
                                 <div>이용료 관리</div>
                             </a>
                         </li>
-                        <li class="sidenav-item">
+<%--                        <li class="sidenav-item">
                             <a href="javascript:load('b80_demo_bs_corp_cur_report_write','현황보고서 작성');" class="sidenav-link">
                                 <div>현황보고서 작성</div>
                             </a>
-                        </li>
+                        </li>--%>
                         <li class="sidenav-item">
-                            <a href="javascript:load('b90_demo_bs_cert_mng.jsp','실증성적서');" class="sidenav-link">
+                            <a href="javascript:load('b90_demo_bs_cert_mng','실증성적서');" class="sidenav-link">
                                 <div>실증성적서</div>
                             </a>
                         </li>
@@ -167,7 +167,7 @@
                             </a>
                             <ul class="sidenav-menu">
                                 <li class="sidenav-item">
-                                    <a href="javascript:load('c41_site_notice_mng?page=1','공지사항 관리');" class="sidenav-link">
+                                    <a href="javascript:load('c41_site_notice_mng?page=1&filter1=9999&filter2=9998','공지사항 관리');" class="sidenav-link">
                                         <div>공지사항 관리</div>
                                     </a>
                                 </li>

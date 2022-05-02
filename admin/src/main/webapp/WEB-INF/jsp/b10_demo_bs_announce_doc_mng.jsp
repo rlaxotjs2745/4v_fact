@@ -10,54 +10,54 @@
         <div class="row">
             <div class="col-sm-6 col-xl-3">
                 <div class="card mb-3">
-                    <div class="card-body">
+                    <button id="btn_filter1" class="card-body btn btn-white" onclick="javascript:load('b10_demo_bs_announce_doc_mng?page=1&filter1=9999&filter2=9998','사업공고문 관리');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="/static/assets/img/img_business_all.png" alt=""></div>
                             <div class="ml-3">
                                 <div class="text-muted small">전체</div>
-                                <div class="text-large">123</div>
+                                <div class="text-large">${adminAnnounceFilterVO.announce_tot}</div>
                             </div>
                         </div>
-                    </div>
+                    </button>
                 </div>
             </div>
             <div class="col-sm-6 col-xl-3">
                 <div class="card mb-3">
-                    <div class="card-body">
+                    <button id="btn_filter2" class="card-body btn btn-white" onclick="javascript:load('b10_demo_bs_announce_doc_mng?page=1&filter1=3&filter2=9998','사업공고문 관리');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="/static/assets/img/img_business_on.png" alt=""></div>
                             <div class="ml-3">
                                 <div class="text-muted small">전시중</div>
-                                <div class="text-large">456</div>
+                                <div class="text-large">${adminAnnounceFilterVO.status_on_count}</div>
                             </div>
                         </div>
-                    </div>
+                    </button>
                 </div>
             </div>
             <div class="col-sm-6 col-xl-3">
                 <div class="card mb-3">
-                    <div class="card-body">
+                    <button id="btn_filter3" class="card-body btn btn-white" onclick="javascript:load('b10_demo_bs_announce_doc_mng?page=1&filter1=1&filter2=2','사업공고문 관리');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="/static/assets/img/img_business_week.png" alt=""></div>
                             <div class="ml-3">
-                                <div class="text-muted small">1주일 이내 완료</div>
-                                <div class="text-large">78</div>
+                                <div class="text-muted small">대기중</div>
+                                <div class="text-large">${adminAnnounceFilterVO.wait_count}</div>
                             </div>
                         </div>
-                    </div>
+                    </button>
                 </div>
             </div>
             <div class="col-sm-6 col-xl-3">
                 <div class="card mb-3">
-                    <div class="card-body">
+                    <button id="btn_filter4" class="card-body btn btn-white" onclick="javascript:load('b10_demo_bs_announce_doc_mng?page=1&filter1=4&filter2=9998','사업공고문 관리');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="/static/assets/img/img_business_off.png" alt=""></div>
                             <div class="ml-3">
-                                <div class="text-muted small">전시 종료</div>
-                                <div class="text-large">910</div>
+                                <div class="text-muted small">일시 중지 중</div>
+                                <div class="text-large">${adminAnnounceFilterVO.pause_count}</div>
                             </div>
                         </div>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -89,131 +89,72 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+<c:if test="${total_count eq 0}">
+    <tr class="">
+        <td class="text-center" colspan="7" rowspan="3">내용이 없습니다</td>
+    </tr>
+    <tr class="">
+    </tr>
+    <tr class="">
+    </tr>
+    <tr class="">
+    </tr>
+</c:if>
+<c:if test="${total_count ne 0}">
+                                <c:forEach items="${bsAnnounceHeaderVOList}" var="item" varStatus="status">
                                 <tr class="">
-                                    <td class="text-center">전시전</td>
-                                    <td class="text-center">12345678901</td>
-                                    <td class=""><a href="#none" data-toggle="modal" data-target="#modals-business" data-what="mode-view">공고문제목 제목 공고문 공고문제목 제목 공고문</a></td>
-                                    <td class="text-right">1,234</td>
-                                    <td class="text-right">58</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">홍길동</td>
+                                    <td class="text-center">
+                                    <c:choose>
+                                        <c:when test="${item.announce_status eq 0}">임시저장</c:when>
+                                        <c:when test="${item.announce_status eq 1}">게시전 수동게시</c:when>
+                                        <c:when test="${item.announce_status eq 2}">게시전 자동게시</c:when>
+                                        <c:when test="${item.announce_status eq 3}">게시중</c:when>
+                                        <c:when test="${item.announce_status eq 4}">게시 일지 중지</c:when>
+                                        <c:when test="${item.announce_status eq 5}">게시 기간 종료</c:when>
+                                    </c:choose>
+                                    </td>
+                                    <td class="text-center">${item.bs_announcement_code}</td>
+                                    <td class=""><a href="#none" data-toggle="modal" data-target="#modals-business" data-what="mode-view">${item.subject}</a></td>
+                                    <td class="text-right">${item.view_count}</td>
+                                    <td class="text-right">${item.applicant_count}</td>
+                                    <td class="text-center">${item.posting_start_date}</td>
+                                    <td class="text-center">${item.posting_end_date}</td>
+                                    <td class="text-center">${item.author}</td>
                                 </tr>
-                                <tr class="">
-                                    <td class="text-center">임시저장</td>
-                                    <td class="text-center">12345678901</td>
-                                    <td class="">공고문제목 제목 공고문 공고문제목 제목 공고문</td>
-                                    <td class="text-right">1,234</td>
-                                    <td class="text-right">58</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">홍길동</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">전시중단</td>
-                                    <td class="text-center">12345678901</td>
-                                    <td class="">공고문제목 제목 공고문 공고문제목 제목 공고문</td>
-                                    <td class="text-right">1,234</td>
-                                    <td class="text-right">58</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">홍길동</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">전시중</td>
-                                    <td class="text-center">12345678901</td>
-                                    <td class="">공고문제목 제목 공고문 공고문제목 제목 공고문</td>
-                                    <td class="text-right">1,234</td>
-                                    <td class="text-right">58</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">홍길동</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">전시중</td>
-                                    <td class="text-center">12345678901</td>
-                                    <td class="">공고문제목 제목 공고문 공고문제목 제목 공고문</td>
-                                    <td class="text-right">1,234</td>
-                                    <td class="text-right">58</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">홍길동</td>
-                                </tr>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">전시중</td>
-                                    <td class="text-center">12345678901</td>
-                                    <td class="">공고문제목 제목 공고문 공고문제목 제목 공고문</td>
-                                    <td class="text-right">1,234</td>
-                                    <td class="text-right">58</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">홍길동</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">전시중</td>
-                                    <td class="text-center">12345678901</td>
-                                    <td class="">공고문제목 제목 공고문 공고문제목 제목 공고문</td>
-                                    <td class="text-right">1,234</td>
-                                    <td class="text-right">58</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">홍길동</td>
-                                </tr>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">전시중</td>
-                                    <td class="text-center">12345678901</td>
-                                    <td class="">공고문제목 제목 공고문 공고문제목 제목 공고문</td>
-                                    <td class="text-right">1,234</td>
-                                    <td class="text-right">58</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">홍길동</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">전시중</td>
-                                    <td class="text-center">12345678901</td>
-                                    <td class="">공고문제목 제목 공고문 공고문제목 제목 공고문</td>
-                                    <td class="text-right">1,234</td>
-                                    <td class="text-right">58</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">홍길동</td>
-                                </tr>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">전시중</td>
-                                    <td class="text-center">12345678901</td>
-                                    <td class="">공고문제목 제목 공고문 공고문제목 제목 공고문</td>
-                                    <td class="text-right">1,234</td>
-                                    <td class="text-right">58</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">홍길동</td>
-                                </tr>
+                                </c:forEach>
+</c:if>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+<c:if test="${total_count ne 0}">
                     <div class="row">
                         <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="article-list_info" role="status" aria-live="polite">총 50개 중 1에서 10까지</div>
+                            <div class="dataTables_info" id="article-list_info" role="status" aria-live="polite">총 ${total_count}개 중 ${list_amount*(cur_page-1)+1}에서 ${list_amount*page_amount}까지</div>
                         </div>
                         <div class="col-sm-12 col-md-7">
                             <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                                 <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                    <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
+
+                                    <c:set var="name" value="${total_count/amount}" />
+
+
+                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:load('b10_demo_bs_announce_doc_mng?page=1&filter1=${filter1}&filter2=${filter2}','사업공고문 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:load('b10_demo_bs_announce_doc_mng?page=${cur_page-1}&filter1=${filter1}&filter2=${filter2}','사업공고문 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+
+
+
+                                    <c:forEach var="i" begin="1" end="${page_amount}">
+                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:load('b10_demo_bs_announce_doc_mng?page=${(cur_sector-1)*page_amount+i}&filter1=${filter1}&filter2=${filter2}','사업공고문 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
+                                    </c:forEach>
+
+                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:load('b10_demo_bs_announce_doc_mng?page=${cur_page+1}&filter1=${filter1}&filter2=${filter2}','사업공고문 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:load('b10_demo_bs_announce_doc_mng?page=${tot_page}&filter1=${filter1}&filter2=${filter2}','사업공고문 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
                                 </ul>
                             </div>
                         </div>
                     </div>
+</c:if>
                 </div>
             </div>
 

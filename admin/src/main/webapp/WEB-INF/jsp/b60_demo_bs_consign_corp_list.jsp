@@ -58,7 +58,7 @@
                             <label class="form-label"><span class="text-muted">기업명</span> 맛있는 농부(주)</label>
 
                             <table class="table table-bordered mt-3 ">
-                                <thead>
+                                <thead class="bg-success text-white font-weight-bold">
                                 <tr>
                                     <th class="text-center" style="width:120px">단계</th>
                                     <th class="text-center" >항목</th>

@@ -201,7 +201,7 @@ public class WebAPIController {
 
         userDemoBsVo.setIdx_demo_business(userDemoBsCheckVo.getIdx_demo_business());
         userDemoBsVo.setUser_demobs_status(0);
-        userDemoBsVo.setApp_step(0);//		number	4		1			신청서 작성 단계	"신청 단계, 최종 저장 단계             1:이용 신청서 작성, 2: 실증계획서 작성, 3:개인수집 동의서 작성, 4: 기타서류 등록, 5: 신청서 확인, 6: 신청함"
+        //userDemoBsVo.setApp_step(0);//		number	4		1			신청서 작성 단계	"신청 단계, 최종 저장 단계             1:이용 신청서 작성, 2: 실증계획서 작성, 3:개인수집 동의서 작성, 4: 기타서류 등록, 5: 신청서 확인, 6: 신청함"
         userDemoBsVo.setIdx_corp_info(userVo.getIdx_corp_info());//		number	32		0		◯	지원회사
 
         userDemoBsVo.setUser_demo_bs_app_code("");//		varchar2	20	n				신청번호	"자동 생성     app+사업번호(000000)+신청번호(000000)     사업번호:idx_demo_bs     신청번호:seq_user_demo_bs"
@@ -350,7 +350,7 @@ public class WebAPIController {
         }
 
         // 기 신청이 있으면 저장하면 안됨
-        if(findUserDemoBsVo.getApp_step()==5){
+        if(findUserDemoBsVo.getUser_demobs_status()>=4){
             resultVO.setResult_str("신청이 완료되어 저장할 수 없습니다");
             resultVO.setResult_code("ERROR_1001");
             return resultVO;
@@ -490,20 +490,15 @@ public class WebAPIController {
         }
 
         // 기 신청이 있으면 저장하면 안됨
-        if(findUserDemoBsVo.getApp_step()==5){
+        if(findUserDemoBsVo.getUser_demobs_status()>=4){
             resultVO.setResult_str("신청이 완료되어 저장할 수 없습니다");
-            resultVO.setResult_code("ERROR_1001");
-            return resultVO;
-        }
-        if(findUserDemoBsVo.getUser_demobs_status()>1){
-            resultVO.setResult_str("변경이 불가능한 상태입니다");
             resultVO.setResult_code("ERROR_1001");
             return resultVO;
         }
         // 저장단계 변경
 
-        if(findUserDemoBsVo.getApp_step()<1){
-            findUserDemoBsVo.setApp_step(1);
+        if(findUserDemoBsVo.getUser_demobs_status()<1){
+            findUserDemoBsVo.setUser_demobs_status(1);
         }
         findUserDemoBsVo.setLab_est_date(userDemoBsVO.getLab_est_date()==null?"":userDemoBsVO.getLab_est_date());//
         findUserDemoBsVo.setRnd_rate(userDemoBsVO.getRnd_rate());
@@ -635,20 +630,16 @@ public class WebAPIController {
         }
 
         // 기 신청이 있으면 저장하면 안됨
-        if(findUserDemoBsVo.getApp_step()==5){
+        if(findUserDemoBsVo.getUser_demobs_status()>=4){
             resultVO.setResult_str("신청이 완료되어 저장할 수 없습니다");
             resultVO.setResult_code("ERROR_1001");
             return resultVO;
         }
-        if(findUserDemoBsVo.getUser_demobs_status()>1){
-            resultVO.setResult_str("변경이 불가능한 상태입니다");
-            resultVO.setResult_code("ERROR_1001");
-            return resultVO;
-        }
+
         // 저장단계 변경
 
-        if(findUserDemoBsVo.getApp_step()<2){
-            findUserDemoBsVo.setApp_step(2);
+        if(findUserDemoBsVo.getUser_demobs_status()<2){
+            findUserDemoBsVo.setUser_demobs_status(2);
         }
 
         findUserDemoBsVo.setIs_use_agree(userDemoBsVO.getIs_use_agree());//

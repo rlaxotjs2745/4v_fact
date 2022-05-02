@@ -12,7 +12,7 @@ public class UserDemoBsVO {
     int user_demobs_status;//									0:최초저장, 1:등록검토중,
     long idx_user;//		number	32	n			◯	인덱스	신청서 작성자
     String user_demo_bs_app_code;//		varchar2	20	n				신청번호	"자동 생성     app+사업번호(000000)+신청번호(000000)     사업번호:idx_demo_bs     신청번호:seq_user_demo_bs"
-    int app_step;//		number	4		1			신청서 작성 단계	"신청 단계, 최종 저장 단계             1:이용 신청서 작성, 2: 실증계획서 작성, 3:개인수집 동의서 작성, 4: 기타서류 등록, 5: 신청서 확인, 6: 신청함"
+    //int app_step;//사용안함		number	4		1			신청서 작성 단계	"신청 단계, 최종 저장 단계             1:이용 신청서 작성, 2: 실증계획서 작성, 3:개인수집 동의서 작성, 4: 기타서류 등록, 5: 신청서 확인, 6: 신청함"
     int user_demo_bs_type;//		number	4		1			사업 진행 주체 타입	0:개인, 1:일반기업, 2:미등록기업(설립전), 3: 농업진흥기관, 4:선도기업, 5:외국연구기관, 6:특정연구기관, 7:정부출연연구기관, 8:스마트팜 관련 기업부설연구소 보유기업, 9: 대학교, 99:기타 단체
     long idx_corp_info;//		number	32		0		◯	지원회사
     String corp_name;//		varchar2	100					회사이름
@@ -26,7 +26,8 @@ public class UserDemoBsVO {
 
     String corp_phone;//	VARCHAR2	40					사무실 전화 번호
     String lab_phone;//	VARCHAR2	40					연구소 전화 번호
-
+    String email;//	varchar2	320					대표 이메일
+    String homepage;//	VARCHAR2	255					회사 홈페이지
 
     int capital_amount;	//NUMBER	20					자본금
     int corp_sales_amount;//		number	10					매출액

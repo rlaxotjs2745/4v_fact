@@ -44,7 +44,6 @@
             USER_DEMOBS_STATUS,
             IDX_USER,
             USER_DEMO_BS_APP_CODE,
-            APP_STEP,
             USER_DEMO_BS_TYPE,
             IDX_CORP_INFO,
             CORP_NAME,
@@ -58,7 +57,8 @@
             CORP_RND_ADDR2,
             CORP_PHONE,
             LAB_PHONE,
-
+            EMAIL,
+            HOMEPAGE,
             CAPITAL_AMOUNT,
             CORP_SALES_AMOUNT,
             CORP_ER,
@@ -145,7 +145,6 @@
                      #{user_demobs_status},
                      #{idx_user},
                      #{user_demo_bs_app_code},
-                     #{app_step},
                      #{user_demo_bs_type},
                      #{idx_corp_info},
                      #{corp_name},
@@ -161,6 +160,8 @@
 
                       #{corp_phone},
                       #{lab_phone},
+                      #{email},
+                      #{homepage},
                      #{capital_amount},
                      #{corp_sales_amount},
                      #{corp_er},
@@ -242,7 +243,6 @@
             IDX_DEMO_BUSINESS,
             USER_DEMOBS_STATUS,
             IDX_USER,
-            APP_STEP,
              IS_CHANGE,
              IS_CONFIRM,
              REG_DATE,
@@ -253,7 +253,6 @@
              #{idx_demo_business},
              #{user_demobs_status},
              #{idx_user},
-             #{app_step},
              #{is_change},
              #{is_confirm},
              TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS'),
@@ -269,7 +268,6 @@
             USER_DEMOBS_STATUS = #{user_demobs_status},
             IDX_USER = #{idx_user},
             USER_DEMO_BS_APP_CODE = #{user_demo_bs_app_code},
-            APP_STEP = #{app_step},
             USER_DEMO_BS_TYPE = #{user_demo_bs_type},
             REQ_FACILITY= #{req_facility},
             REQ_ETC= #{req_etc},
@@ -284,7 +282,8 @@
             CORP_RND_ADDR2 = #{corp_rnd_addr2},
             CORP_PHONE = #{corp_phone},
             LAB_PHONE = #{lab_phone},
-
+            EMAIL= #{email},
+            HOMEPAGE= #{homepage},
             CAPITAL_AMOUNT = #{capital_amount},
             CORP_SALES_AMOUNT = #{corp_sales_amount},
             CORP_ER = #{corp_er},
@@ -357,6 +356,8 @@
                CORP_RND_ADDR = #{corp_rnd_addr},
                CORP_RND_ADDR2 = #{corp_rnd_addr2},
                LAB_PHONE = #{lab_phone},
+               EMAIL= #{email},
+                HOMEPAGE= #{homepage},
                IS_LAB_OWER	= #{is_lab_ower},
 
                CAPITAL_AMOUNT = #{capital_amount},
@@ -412,7 +413,7 @@
 
     <update id="updateUserDemoBsWebStep3" parameterType="kr.or.fact.core.model.DTO.UserDemoBsVO">
         UPDATE TB_USER_DEMO_BS SET
-              APP_STEP = #{app_step},
+
               LAB_EST_DATE = #{lab_est_date},
               RND_RATE = #{rnd_rate},
               CONSOLIDATED_COMPANY = #{consolidated_company},
@@ -1030,4 +1031,43 @@
     <delete id="deleteUserDemoBsHumanResource" parameterType="long">
         DELETE FROM TB_USER_BS_HUMAN_RESOURCE WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
     </delete>
+
+    <select id="getUserDemoBsPagingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.UserDemoBsVO">
+        SELECT
+            IDX_USER_DEMO_BS
+             ,ANNOUNCE_NUM
+             ,SUBJECT
+             ,BS_STATUS
+             ,IS_FILE
+             ,IS_NEW
+             ,AUTHOR
+             ,POSTING_START_DATE
+             ,VIEW_COUNT
+        FROM (
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+        ,IDX_BS_ANNOUNCEMENT
+                      ,ANNOUNCE_NUM
+                      ,SUBJECT
+                      ,BS_STATUS
+                      ,IS_FILE
+                      ,IS_NEW
+                      ,AUTHOR
+                      ,POSTING_START_DATE
+                      ,VIEW_COUNT
+                 FROM (
+                          SELECT * FROM TB_BS_ANNOUNCEMENT
+                        <if test="filter1 != 9999">
+                            WHERE DEMO_BS_STATUS = #{filter1}
+
+                        </if>
+                        <if test="filter2 != 9998">
+                            OR DEMO_BS_STATUS = #{filter2}
+                        </if>
+                     )
+
+                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+             )
+        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+    </select>
+
 </mapper>

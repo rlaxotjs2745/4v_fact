@@ -10,7 +10,9 @@
     <select id="getDemoBsList" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
         SELECT * FROM TB_DEMO_BUSINESS ORDER BY START_DATE DESC
     </select>
-    <select id="getDemoBsListLimit" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
+
+
+    <select id="getDemoBsPagingList" parameterType="kr.or.fact.core.model.DTO.ListPagingParamVO" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
         SELECT
             IDX_DEMO_BUSINESS
              ,DEMO_BS_STATUS
@@ -32,14 +34,18 @@
                       ,IS_ANNOUNCE
                  FROM (
                           SELECT * FROM TB_DEMO_BUSINESS
+                        <if test="filter1 != 9999">
+                            WHERE DEMO_BS_STATUS = #{filter1}
+                        </if>
+                        <if test="filter2 != 9998">
+                            OR DEMO_BS_STATUS = #{filter2}
+                        </if>
                       )
 
                  WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
              )
         WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
     </select>
-
-
 
 
     <select id="getDemoBsListByFilter" parameterType="int" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
@@ -130,9 +136,11 @@
 
     <select id="getAdminDemoBsFilter" resultType="kr.or.fact.core.model.DTO.AdminDemoBSFilterVO">
         SELECT (SELECT COUNT(*) FROM TB_DEMO_BUSINESS ) AS TOT_COUNT,
-               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS = 3) AS APPL_COUNT,
-               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS = 9) AS APPL_COUNTBS_COUNT,
-               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS > 9) AS DONE_COUNT
+               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS = 3 OR DEMO_BS_STATUS = 4) AS APPL_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS = 5 OR DEMO_BS_STATUS = 6)  AS REVUIEW_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS = 7 OR DEMO_BS_STATUS = 8) AS AGREE_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS = 9 OR DEMO_BS_STATUS = 10) AS DEMO_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS = 11 OR DEMO_BS_STATUS = 12) AS RESULT_COUNT
         FROM TB_DEMO_BUSINESS WHERE ROWNUM = 1
     </select>
 

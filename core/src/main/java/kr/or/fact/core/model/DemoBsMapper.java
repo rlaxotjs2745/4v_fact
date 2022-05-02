@@ -2,6 +2,7 @@ package kr.or.fact.core.model;
 
 import kr.or.fact.core.model.DTO.AdminDemoBSFilterVO;
 import kr.or.fact.core.model.DTO.DemoBusinessVO;
+import kr.or.fact.core.model.DTO.ListPagingParamVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,7 +13,8 @@ public interface DemoBsMapper {
 
     int getDemoBsTotalCount();
     List<DemoBusinessVO> getDemoBsList();
-    List<DemoBusinessVO> getDemoBsListLimit(@Param("page_num") int page_num, @Param("amount") int amount, @Param("order_field") String order_field);
+    List<DemoBusinessVO> getDemoBsPagingList(ListPagingParamVO listPagingParamVO);
+
 
     DemoBusinessVO getDemoBsByIdx(long idx);
 
