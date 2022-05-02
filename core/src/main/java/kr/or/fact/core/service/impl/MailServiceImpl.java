@@ -37,9 +37,9 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public ArrayList<ReservedMailVO> getReservedMail() {
-        System.out.println(mailMapper.getReservedMail());
-        return mailMapper.getReservedMail();
+    public ArrayList<ReservedMailVO> getReservedMail(String tagValue) {
+        int tag = Integer.parseInt(tagValue);
+        return mailMapper.getReservedMail(tag);
     }
 
 

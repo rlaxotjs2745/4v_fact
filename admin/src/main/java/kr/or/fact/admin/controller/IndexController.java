@@ -2,6 +2,7 @@ package kr.or.fact.admin.controller;
 
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.*;
+import lombok.SneakyThrows;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.io.BufferedReader;
+import java.io.IOException;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -128,10 +137,19 @@ public class IndexController {
         return "password_reset";
     }
     //대시보드
+    @SneakyThrows
     @RequestMapping(value = "/a10_dashboard",method = RequestMethod.POST)
     public String a10_dashboard(@RequestParam(value = "tag", required = false) String tagValue,
                                  ModelMap model
                                 ){
+
+        String urlGimje = "http://api.openweathermap.org/data/2.5/weather?q=gimje&appid=53adfc8e9ffcbf891a9be91b9e312c01";
+
+        String urlSangju = "http://api.openweathermap.org/data/2.5/weather?q=sangju&appid=53adfc8e9ffcbf891a9be91b9e312c01";
+
+
+        URL url = new URL(urlGimje);
+
 
         return "a10_dashboard";
     }
@@ -684,7 +702,13 @@ public class IndexController {
     @RequestMapping(value = "/h60_reserved_email_list",method = RequestMethod.POST)
     public String h60_reserved_email_list(@RequestParam(value = "tag", required = false) String tagValue,
                                           ModelMap model){
-        ArrayList<ReservedMailVO> resultArr = mailService.getReservedMail();
+
+        ArrayList<ReservedMailVO> resultArr;
+        if(tagValue == null){
+            resultArr = mailService.getReservedMail("1");
+        } else {
+            resultArr = mailService.getReservedMail(tagValue);
+        }
 
         model.addAttribute("reservedMails", resultArr);
         return "h60_reserved_email_list";
