@@ -157,6 +157,22 @@
                 $("#ceo_email").val(data["userDemoBsVO"].ceo_email);
                 $("#man_name").val(data["userDemoBsVO"].man_name);
                 $("#man_mnumber").val(data["userDemoBsVO"].man_mnumber);
+                $("#demo_subject").val(data["userDemoBsVO"].demo_subject);
+                $("#demo_bs_applicaion_code").val(data["userDemoBsVO"].demo_bs_applicaion_code);
+                $("#applicaion_reg_date").val(data["userDemoBsVO"].applicaion_reg_date);
+
+
+                //let corpInfoVO = data["userDemoBsVO"].corpInfoVO;
+
+                console.log(data["userDemoBsVO"]["corpInfoVO"].idx_corp_info);
+
+                $("#idx_corp_info").val(data["userDemoBsVO"]["corpInfoVO"].idx_corp_info);
+                $("#is_saved").val(data["userDemoBsVO"]["corpInfoVO"].is_saved);
+
+                if($("#is_saved").val()!=0)
+                {
+                    $("#btn_corp_save").html("기업 정보 수정");
+                }
 
 
                 $('#modals-application-view').modal('show');

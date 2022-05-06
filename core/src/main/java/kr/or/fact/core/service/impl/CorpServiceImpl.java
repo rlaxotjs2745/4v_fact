@@ -15,14 +15,26 @@ public class CorpServiceImpl implements CorpService {
     @Autowired
     public CorpServiceImpl(CorpMapper corpMapper){this.corpMapper = corpMapper;}
 
+
+    @Override
     public CorpInfoVO getCorpInfo(long idx_corp_info){
         CorpInfoVO findCorpVO = corpMapper.getCorpInfoByIdx(idx_corp_info);
         return findCorpVO;
     }
+    @Override
+
     public List<SimpleCorpInfoVO> getSimpleCorpInfoList(String corp_name_kor){
         List<SimpleCorpInfoVO> simpleCorpInfoVOList= corpMapper.getSimpleCorpInfoList(corp_name_kor);
         return simpleCorpInfoVOList;
     }
+    @Override
+    public long saveCorpInfo(CorpInfoVO corpInfoVO){
+        return corpMapper.saveCorpInfo(corpInfoVO);
+    }
 
+    @Override
+    public void updateCorpInfo(CorpInfoVO corpInfoVO){
+        corpMapper.updateCorpInfo(corpInfoVO);
+    }
 
 }

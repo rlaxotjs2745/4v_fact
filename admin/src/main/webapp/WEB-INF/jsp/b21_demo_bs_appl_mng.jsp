@@ -167,39 +167,41 @@
                             <li class="nav-item btn-outline-primary"><a class="nav-link font-weight-bold" data-toggle="tab" href="#navs-tap4">수집 동의서 및 제출자료</a></li>
                         </ul>
                         <div class="tab-content">
+                            <input id="idx_corp_info" value="0" hidden>
+                            <input id="is_saved" value="0" hidden>
                             <div class="tab-pane fade active" id="navs-tap1">
                                 <div class="card-body">
                                     <div class="card-body">
                                         <div class="form-row">
                                             <div class="form-group col col-md-6">
-                                                <label class="form-label text-primary d-block">지원사업 명</label>
-                                                <span id=""></span>
+                                                <label class="form-label text-success-custom font-weight-bold d-block">지원사업 명</label>
+                                                <span id="demo_subject"></span>
+                                           </div>
+                                            <div class="form-group col col-md-3">
+                                                <label class="form-label text-success-custom font-weight-bold d-block">접수번호</label>
+                                                <span id="demo_bs_applicaion_code"></span>
                                             </div>
                                             <div class="form-group col col-md-3">
-                                                <label class="form-label text-primary d-block">접수번호</label>
-                                                <span></span>
-                                            </div>
-                                            <div class="form-group col col-md-3">
-                                                <label class="form-label text-primary d-block">접수일시</label>
-                                                <span></span>
+                                                <label class="form-label text-success-custom font-weight-bold d-block">접수일시</label>
+                                                <span id="applicaion_reg_date"></span>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col col-md-3">
-                                                <label class="form-label text-primary d-block">기업명</label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block">기업명</label>
                                                 <input id="corp_name" type="text" class="form-control form-control-md">
                                             </div>
                                             <div class="form-group col col-md-3">
-                                                <label class="form-label text-primary d-block">법인 등록번호</label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block">법인 등록번호</label>
                                                 <input id="corp_reg_num" type="text" class="form-control form-control-md">
                                             </div>
                                             <div class="form-group col col-md-3">
-                                                <label class="form-label text-primary d-block">사업자 등록번호</label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block">사업자 등록번호</label>
                                                 <input id="corp_num" type="text" class="form-control form-control-md">
                                             </div>
 
                                             <div class="form-group col col-md-3">
-                                                <label class="form-label text-primary d-block">기업 형태</label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block">기업 형태</label>
                                                 <select id="user_demo_bs_type" class="custom-select">
                                                     <option value="1">개인</option>
                                                     <option value="2">일반기업</option>
@@ -223,29 +225,29 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col col-md-8">
-                                                <label class="form-label text-primary d-block">주소</label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block">주소</label>
                                                 <input id="corp_addr" type="text" class="form-control form-control-md">
                                             </div>
                                             <div class="form-group col col-md-4">
-                                                <label class="form-label text-primary d-block">주소 상세</label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block">주소 상세</label>
                                                 <input id="corp_addr2" type="text" class="form-control form-control-md">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col col-md-3">
-                                                <label class="form-label text-primary d-block">연락처</label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block">연락처</label>
                                                 <input id="corp_phone" type="text" class="form-control form-control-md">
                                             </div>
                                             <div class="form-group col col-md-3">
-                                                <label class="form-label text-primary d-block">이메일</label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block">이메일</label>
                                                 <input id="email" type="text" class="form-control form-control-md">
                                             </div>
                                             <div class="form-group col col-md-3" style="float: none; margin:0 auto;">
-                                                <label class="form-label text-primary d-block">홈페이지</label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block">홈페이지</label>
                                                 <input id="homepage" type="text" class="form-control form-control-md">
                                             </div>
                                             <div class="form-group col col-md-3">
-                                                <label class="form-label text-primary d-block text-muted">연구소 보유<span class="text__essential">*</span></label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block text-muted">연구소 보유<span class="text__essential">*</span></label>
                                                 <label class="custom-control custom-radio d-inline-block">
                                                     <input name="is_lab_ower" type="radio" class="custom-control-input" value="0" checked>
                                                     <span class="custom-control-label">없음</span>
@@ -262,31 +264,31 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col col-md-3">
-                                                <label class="form-label text-primary d-block">대표자 성명</label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block">대표자 성명</label>
                                                 <input id="ceo_name" type="text" class="form-control form-control-md">
                                             </div>
                                             <div class="form-group col col-md-3">
-                                                <label class="form-label text-primary d-block">대표자 연락처</label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block">대표자 연락처</label>
                                                 <input id="ceo_pnumber" type="text" class="form-control form-control-md">
                                             </div>
                                             <div class="form-group col col-md-3">
-                                                <label class="form-label text-primary d-block">대표자 휴대폰</label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block">대표자 휴대폰</label>
                                                 <input id="ceo_mnumber" type="text" class="form-control form-control-md">
                                             </div>
                                             <div class="form-group col col-md-3">
-                                                <label class="form-label text-primary d-block">대표자 이메일</label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block">대표자 이메일</label>
                                                 <input id="ceo_email" type="text" class="form-control form-control-md">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="d-flex justify-content-end align-items-end ">
-                                                <button class="btn btn-outline-primary ">기업 정보 등록</button>
+                                                <button id="btn_corp_save" class="btn btn-outline-primary ">기업 정보 등록</button>
                                             </div>
                                         </div>
                                         <hr>
                                         <div class="form-row">
                                             <div class="form-group col col-md-4">
-                                                <label class="form-label text-primary d-block text-muted">사업 주체<span class="text__essential">*</span></label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block text-muted">사업 주체<span class="text__essential">*</span></label>
                                                 <label class="custom-control custom-radio d-inline-block">
                                                     <input name="user_demo_type" type="radio" class="custom-control-input" checked="">
                                                     <span class="custom-control-label">위탁</span>
@@ -297,17 +299,17 @@
                                                 </label>
                                             </div>
                                             <div class="form-group col col-md-4">
-                                                <label class="form-label text-primary d-block">담당자 이름</label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block">담당자 이름</label>
                                                 <input id="man_name" type="text" class="form-control form-control-md">
                                             </div>
                                             <div class="form-group col col-md-4">
-                                                <label class="form-label text-primary d-block">담당자 연락처</label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block">담당자 연락처</label>
                                                 <input id="man_mnumber" type="text" class="form-control form-control-md">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col col-md-12">
-                                                <label class="form-label text-primary d-block text-muted">신청서</label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block text-muted">신청서</label>
                                                 <span class="text-muted mr-2">1차</span>
                                                 <button type="button" class="btn btn-sm  btn-outline-default"><i
                                                         class="lnr lnr-download"></i> 내려받기
@@ -317,7 +319,7 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col col-md-8">
-                                                <label class="form-label text-primary d-block text-muted">검토 결과<span
+                                                <label class="form-label text-success-custom font-weight-bold d-block text-muted">검토 결과<span
                                                         class="text__essential">*</span></label>
                                                 <span class="mb-2 d-inline-block">신청서 접수 완료 &gt; </span><span
                                                     class="text-hero"> 보완(신청서 보완 요청)</span>
@@ -325,7 +327,7 @@
                                                 <small class="form-text mb-2 text-muted">신청서 보완 요청서 등록이 필요합니다.</small>
                                             </div>
                                             <div class="form-group col col-md-4 text-right">
-                                                <label class="form-label text-primary d-block text-muted">&nbsp;</label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block text-muted">&nbsp;</label>
                                                 <a href="#none" class="btn btn-underline">보완 요청서 다운로드</a>
                                             </div>
                                         </div>
@@ -339,7 +341,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group col col-md-4">
-                                                <label class="form-label text-primary d-block text-muted align-items-md-end"></label>
+                                                <label class="form-label text-success-custom font-weight-bold d-block text-muted align-items-md-end"></label>
                                                 <button id="btn_save_change" class="btn btn-outline-primary ">서류검토상태 변경</button>
                                             </div>
                                         </div>
@@ -381,36 +383,102 @@
     </div>
 
 <script>
-function getUserApplList(index,page_num,filter){
-
-    let param = {
-        page_num: page_num,
-        amount: 5,
-        order_field: "IDX_DEMO_BUSINESS",
-        filter1: filter,
-        filter2: 9998,
-        idx: index
-    }
-    $.ajax({
-        type: 'post',
-        url: 'appl_list_by_b21_filtered', //데이터를 주고받을 파일 주소 입력
-        data: JSON.stringify(param),//보내는 데이터
-        contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
-        dataType: 'text',//받는 데이터 타입
-        success: function (result) {
-//작업이 성공적으로 발생했을 경우
-
-
-            $("#appl_list").html(result);
-
-//STATUS_001 :
-        },
-        error: function () {
-//에러가 났을 경우 실행시킬 코드
+    $("#btn_corp_save").on('click', function() {
+        let confirm_t ="저장하시겠습니까";
+        if($("#is_saved").val()!=0)
+        {
+            confirm_t ="기존 정보를 수정하시겠습니까";
         }
+        if (!confirm(confirm_t)) {
+            // 취소(아니오) 버튼 클릭 시 이벤트
+            return;
+        }
+
+        let param = {
+            idx_corp_info:$("#idx_corp_info").val()*0.0,//	number	32			◯		인덱스	auto increase
+            corp_name_kor:$("#corp_name").val(),//	varchar2	40					법인 이름
+            company_num:$("#corp_num").val(),//	varchar2	20					사업자등록번호
+            corp_reg_num:$("#corp_reg_num").val(),//	varchar2	20					법인등록번호
+            tel_num:$("#corp_phone").val(),//	varchar2	20					본사 전화번호
+            fax_num:$("#corp_phone").val(),//	varchar2	20					fax 번호
+            email:$("#email").val(),//	varchar2	320					대표 이메일
+            homepage:$("#homepage").val(),//	varchar2	255					회사 홈페이지
+            corp_addr:$("#corp_addr").val(),//	varchar2	200					본사 소재지
+            corp_addr2:$("#corp_addr2").val(),//	VARCHAR2	200					본사 소재지 상세
+            is_other_addr:$("#is_lab_ower").val()*0,//	number	4		0			공장 혹은 농장 소유 여부	0:없음, 1:자가, 2:임차, 99:기타
+            other_addr:$("#corp_rnd_addr").val(),//	varchar2	200					공장 혹은 농장 주소
+            sales_in_prev:$("#idx_corp_info").val()*0,//	number	38					전년도 매출액
+            ca_ratio:$("#corp_er").val()*0,//	number	4					자기자본비율(capital adequacy ratio)
+            emploee_num:$("#employees_count").val()*0,//	number						직원수
+            bs_sector:$("#bs_type1").val(),//	varchar2	100					업태, 종목(businness sectors)
+            product:$("#main_product").val(),//	varchar2	100					주생산품목
+            corp_type:$("#user_demo_bs_type").val()*0,//	number	4		1			법인 종류	0:미등록기업(설립전), 1:일반기업, 2: 농업진흥기관, 3:선도기업, 4:외국연구기관, 5:특정연구기관, 6:정부출연연구기관, 7:스마트팜 관련 기업부설연구소 보유기업, 8: 대학교, 99:기타 단체
+            is_benture:$("#is_benture").val(),//	NUMBER	4		0			벤처 여부	0:해당없음, 1:창업한지 7년 이하의 창업벤처기업
+            bs_plan:$("#demobs_tech_plan").val(),//	varchar2	100					개발예정품목(기술)
+            is_applicant:1,//	number	4					콘솔 사용 여부	0:콘솔사용 안함, 1:콘솔사용
+            demo_facility_type:$("#req_facility").val()*0,//	number	4		0			이용신청 시설	0:해당없음, 1:온실, 2:r&d연구실, 4:스타트업 사무실, 512: 기타
+            demo_facility_etc:$("#demo_facility_etc").val(),//	varchar2	20					이용신청 시설 기타 내용
+            founding_date:new Date($("#corp_birth").val()),//	date						설립일
+            ceo_name_kor:$("#ceo_name").val(),
+            ceo_addr:$("#ceo_address").val(),
+            ceo_tel_num:$("#ceo_pnumber").val(),
+            ceo_mphone_num:$("#ceo_mnumber").val(),
+            ceo_email:$("#ceo_email").val()
+        }
+        $.ajax({
+            type: 'post',
+            url: 'save_corp_info', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(param),//보내는 데이터
+            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType: 'text',//받는 데이터 타입
+            success: function (result) {
+                //작업이 성공적으로 발생했을 경우
+
+console.log(result);
+                alert(result.result_str);
+                $("#btn_corp_save").html("기업 정보 수정");
+                $("#idx_corp_info").val(result.result_idx);
+                $("#is_saved").val(1);
+
+                //STATUS_001 :
+            },
+            error: function () {
+                //에러가 났을 경우 실행시킬 코드
+            }
+        });
     });
-//});
-}
+
+
+    function getUserApplList(idx,page_num,filter){
+
+        let param = {
+            page_num: page_num,
+            amount: 5,
+            order_field: "IDX_DEMO_BUSINESS",
+            filter1: filter,
+            filter2: 9998,
+            idx: idx
+        }
+        $.ajax({
+            type: 'post',
+            url: 'appl_list_by_b21_filtered', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(param),//보내는 데이터
+            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType: 'text',//받는 데이터 타입
+            success: function (result) {
+    //작업이 성공적으로 발생했을 경우
+
+
+                $("#appl_list").html(result);
+
+    //STATUS_001 :
+            },
+            error: function () {
+    //에러가 났을 경우 실행시킬 코드
+            }
+        });
+    //});
+    }
 </script>
 
 <!-- Layout footer -->

@@ -3,6 +3,10 @@
 
 <mapper namespace="kr.or.fact.core.model.DemoBsApplicationMapper">
 
+    <select id="getDemoBsApplByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.DemoBSApplicationVO">
+        SELECT * FROM TB_DEMO_BS_APPLICAION WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
+    </select>
+
     <select id="getAvailableDemoBsTotalCount" resultType="int">
         SELECT COUNT (*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS > 2
     </select>

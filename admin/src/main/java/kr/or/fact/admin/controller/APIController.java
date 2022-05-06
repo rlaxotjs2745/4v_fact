@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.crypto.Data;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -23,9 +24,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -362,9 +365,112 @@ public class APIController {
             resultVO.setResult_code("ERROR_1001");
             return resultVO;
         }
+
+        DemoBusinessVO demoBusinessVO = demoBsService.getDemoBsByIdx(userDemoBsVO.getIdx_demo_business());
+        userDemoBsVO.setDemo_subject(demoBusinessVO.getDemo_subject());
+
+        DemoBSApplicationVO demoBSApplicationVO = demoBsApplicationService.getDemoBsApplByIdx( userDemoBsVO.getIdx_user_demo_bs());
+        userDemoBsVO.setDemo_bs_applicaion_code(demoBSApplicationVO.getDemo_bs_applicaion_code()==null?"":demoBSApplicationVO.getDemo_bs_applicaion_code());
+        if(demoBSApplicationVO.getApplicaion_reg_date()==null)
+        {
+            Date date = new Date();
+            demoBSApplicationVO.setApplicaion_reg_date(date);
+        }
+        userDemoBsVO.setApplicaion_reg_date(demoBSApplicationVO.getApplicaion_reg_date());
+
+        CorpInfoVO corpInfoVO = corpService.getCorpInfo(userDemoBsVO.getIdx_corp_info());
+        if(corpInfoVO==null){
+            corpInfoVO = new CorpInfoVO();
+            corpInfoVO.setIdx_corp_info(0);
+            corpInfoVO.setIs_saved(0);
+        }
+        userDemoBsVO.setCorpInfoVO(corpInfoVO);
+
         resultVO.setUserDemoBsVO(userDemoBsVO);
+
         return  resultVO;
     }
+
+    @RequestMapping(value = "/save_corp_info",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  save_corp_info(HttpSession session,
+                           @RequestBody CorpInfoVO corpInfoVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("성공");
+        resultVO.setResult_code("SUCCESS");
+
+
+        CorpInfoVO newCorpInfoVO = null;
+
+        if(corpInfoVO.getIs_saved()==1){
+            newCorpInfoVO = corpService.getCorpInfo(corpInfoVO.getIdx_corp_info());
+            if(newCorpInfoVO!=null){
+                if(corpInfoVO.getCorp_name_kor()!=null && !corpInfoVO.getCorp_name_kor().isEmpty()) newCorpInfoVO.setCorp_name_kor(corpInfoVO.getCorp_name_kor());//	varchar2	20					사업자등록번호
+                if(corpInfoVO.getCompany_num()!=null && !corpInfoVO.getCompany_num().isEmpty()) newCorpInfoVO.setCompany_num(corpInfoVO.getCompany_num());//	varchar2	20					사업자등록번호
+                if(corpInfoVO.getCorp_reg_num()!=null && !corpInfoVO.getCorp_reg_num().isEmpty()) newCorpInfoVO.setCorp_reg_num(corpInfoVO.getCorp_reg_num());//	varchar2	20					법인등록번호
+                if(corpInfoVO.getTel_num()!=null && !corpInfoVO.getTel_num().isEmpty()) newCorpInfoVO.setTel_num(corpInfoVO.getTel_num());//	varchar2	20					본사 전화번호
+                if(corpInfoVO.getFax_num()!=null && !corpInfoVO.getFax_num().isEmpty()) newCorpInfoVO.setFax_num(corpInfoVO.getFax_num());//	varchar2	20					fax 번호
+                if(corpInfoVO.getEmail()!=null && !corpInfoVO.getEmail().isEmpty()) newCorpInfoVO.setEmail(corpInfoVO.getEmail());//	varchar2	320					대표 이메일
+                if(corpInfoVO.getHomepage()!=null && !corpInfoVO.getHomepage().isEmpty()) newCorpInfoVO.setHomepage(corpInfoVO.getHomepage());//	varchar2	255					회사 홈페이지
+                if(corpInfoVO.getCorp_addr()!=null && !corpInfoVO.getCorp_addr().isEmpty()) newCorpInfoVO.setCorp_addr(corpInfoVO.getCorp_addr());//	varchar2	200					본사 소재지
+                if(corpInfoVO.getCorp_addr2()!=null && !corpInfoVO.getCorp_addr2().isEmpty()) newCorpInfoVO.setCorp_addr2(corpInfoVO.getCorp_addr2());//	VARCHAR2	200					본사 소재지 상세
+                newCorpInfoVO.setOther_addr(corpInfoVO.getOther_addr());//	number	4		0			공장 혹은 농장 소유 여부	0:없음, 1:공장, 2:농장, 99:기타
+                if(corpInfoVO.getOther_addr()!=null && !corpInfoVO.getOther_addr().isEmpty()) newCorpInfoVO.setOther_addr(corpInfoVO.getOther_addr());//	varchar2	200					공장 혹은 농장 주소
+                newCorpInfoVO.setSales_in_prev(corpInfoVO.getSales_in_prev());//	number	38					전년도 매출액
+                newCorpInfoVO.setCa_ratio(corpInfoVO.getCa_ratio());//	number	4					자기자본비율(capital adequacy ratio)
+                newCorpInfoVO.setEmploee_num(corpInfoVO.getEmploee_num());//	number						직원수
+                if(corpInfoVO.getBs_sector()!=null && !corpInfoVO.getBs_sector().isEmpty()) newCorpInfoVO.setBs_sector(corpInfoVO.getBs_sector());//	varchar2	100					업태, 종목(businness sectors)
+                if(corpInfoVO.getProduct()!=null && !corpInfoVO.getProduct().isEmpty()) newCorpInfoVO.setProduct(corpInfoVO.getProduct());//	varchar2	100					주생산품목
+                newCorpInfoVO.setCorp_type(corpInfoVO.getCorp_type());//	number	4		1			법인 종류	0:미등록기업(설립전), 1:일반기업, 2: 농업진흥기관, 3:선도기업, 4:외국연구기관, 5:특정연구기관, 6:정부출연연구기관, 7:스마트팜 관련 기업부설연구소 보유기업, 8: 대학교, 99:기타 단체
+                newCorpInfoVO.setIs_benture(corpInfoVO.getIs_benture());//	NUMBER	4		0			벤처 여부	0:해당없음, 1:창업한지 7년 이하의 창업벤처기업
+                if(corpInfoVO.getBs_plan()!=null && !corpInfoVO.getBs_plan().isEmpty()) newCorpInfoVO.setBs_plan(corpInfoVO.getBs_plan());//	varchar2	100					개발예정품목(기술)
+                newCorpInfoVO.setIs_applicant(corpInfoVO.getIs_applicant());//	number	4					콘솔 사용 여부	0:콘솔사용 안함, 1:콘솔사용
+                newCorpInfoVO.setDemo_facility_type(corpInfoVO.getDemo_facility_type());//	number	4		0			이용신청 시설	0:해당없음, 1:온실, 2:r&d연구실, 4:스타트업 사무실, 512: 기타
+                if(corpInfoVO.getDemo_facility_etc()!=null && !corpInfoVO.getDemo_facility_etc().isEmpty()) newCorpInfoVO.setDemo_facility_etc(corpInfoVO.getDemo_facility_etc());//	varchar2	20					이용신청 시설 기타 내용
+                if(corpInfoVO.getFounding_date()!=null) newCorpInfoVO.setFounding_date(corpInfoVO.getFounding_date());//	date						설립일
+
+                corpService.updateCorpInfo(newCorpInfoVO);
+            }
+            else {
+                resultVO.setResult_str("저장된 회사 정보가 없습니다");
+                resultVO.setResult_code("ERROR_1001");
+            }
+        }
+        else {
+            newCorpInfoVO = new CorpInfoVO();
+            if(corpInfoVO.getCompany_num()!=null)newCorpInfoVO.setCompany_num(corpInfoVO.getCompany_num());
+
+            if(corpInfoVO.getCorp_reg_num()!=null ) newCorpInfoVO.setCorp_reg_num(corpInfoVO.getCorp_reg_num());//	varchar2	20					법인등록번호
+            if(corpInfoVO.getTel_num()!=null ) newCorpInfoVO.setTel_num(corpInfoVO.getTel_num());//	varchar2	20					본사 전화번호
+            if(corpInfoVO.getFax_num()!=null ) newCorpInfoVO.setFax_num(corpInfoVO.getFax_num());//	varchar2	20					fax 번호
+            if(corpInfoVO.getEmail()!=null ) newCorpInfoVO.setEmail(corpInfoVO.getEmail());//	varchar2	320					대표 이메일
+            if(corpInfoVO.getHomepage()!=null ) newCorpInfoVO.setHomepage(corpInfoVO.getHomepage());//	varchar2	255					회사 홈페이지
+            if(corpInfoVO.getCorp_addr()!=null ) newCorpInfoVO.setCorp_addr(corpInfoVO.getCorp_addr());//	varchar2	200					본사 소재지
+            if(corpInfoVO.getCorp_addr2()!=null ) newCorpInfoVO.setCorp_addr2(corpInfoVO.getCorp_addr2());//	VARCHAR2	200					본사 소재지 상세
+            newCorpInfoVO.setOther_addr(corpInfoVO.getOther_addr());//	number	4		0			공장 혹은 농장 소유 여부	0:없음, 1:공장, 2:농장, 99:기타
+            if(corpInfoVO.getOther_addr()!=null ) newCorpInfoVO.setOther_addr(corpInfoVO.getOther_addr());//	varchar2	200					공장 혹은 농장 주소
+            newCorpInfoVO.setSales_in_prev(corpInfoVO.getSales_in_prev());//	number	38					전년도 매출액
+            newCorpInfoVO.setCa_ratio(corpInfoVO.getCa_ratio());//	number	4					자기자본비율(capital adequacy ratio)
+            newCorpInfoVO.setEmploee_num(corpInfoVO.getEmploee_num());//	number						직원수
+            if(corpInfoVO.getBs_sector()!=null ) newCorpInfoVO.setBs_sector(corpInfoVO.getBs_sector());//	varchar2	100					업태, 종목(businness sectors)
+            if(corpInfoVO.getProduct()!=null ) newCorpInfoVO.setProduct(corpInfoVO.getProduct());//	varchar2	100					주생산품목
+            newCorpInfoVO.setCorp_type(corpInfoVO.getCorp_type());//	number	4		1			법인 종류	0:미등록기업(설립전), 1:일반기업, 2: 농업진흥기관, 3:선도기업, 4:외국연구기관, 5:특정연구기관, 6:정부출연연구기관, 7:스마트팜 관련 기업부설연구소 보유기업, 8: 대학교, 99:기타 단체
+            newCorpInfoVO.setIs_benture(corpInfoVO.getIs_benture());//	NUMBER	4		0			벤처 여부	0:해당없음, 1:창업한지 7년 이하의 창업벤처기업
+            if(corpInfoVO.getBs_plan()!=null ) newCorpInfoVO.setBs_plan(corpInfoVO.getBs_plan());//	varchar2	100					개발예정품목(기술)
+            newCorpInfoVO.setIs_applicant(corpInfoVO.getIs_applicant());//	number	4					콘솔 사용 여부	0:콘솔사용 안함, 1:콘솔사용
+            newCorpInfoVO.setDemo_facility_type  (corpInfoVO.getDemo_facility_type());//	number	4		0			이용신청 시설	0:해당없음, 1:온실, 2:r&d연구실, 4:스타트업 사무실, 512: 기타
+            if(corpInfoVO.getDemo_facility_etc()!=null ) newCorpInfoVO.setDemo_facility_etc(corpInfoVO.getDemo_facility_etc());//	varchar2	20					이용신청 시설 기타 내용
+            if(corpInfoVO.getFounding_date()!=null ) newCorpInfoVO.setFounding_date(corpInfoVO.getFounding_date());//	date						설립일
+            newCorpInfoVO.setIs_saved(1);
+            long result_idx = corpService.saveCorpInfo(newCorpInfoVO);
+            resultVO.setResult_idx(result_idx);
+
+
+        }
+
+        return  resultVO;
+    }
+
 
     @RequestMapping(value = "/air", method = RequestMethod.GET)
     public StringBuilder callAirApi() {
@@ -373,7 +479,7 @@ public class APIController {
         try {
             String urlBuilder = "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMinuDustFrcstDspth" + "?" + URLEncoder.encode("serviceKey", "UTF-8") + "=QxTJL53E1mGWSyu1Nv5sCKPR4w9LlH1Zcv7QDbjv9Cp9%2B9WiUk%2BzD8yRj%2BeClbZ%2BffbOGqyXtzOsIklLmRM%2FPg%3D%3D" +
                     "&returnType=json" +
-                    //   sb.append("&" + URLEncoder.encode("returnType", "UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*xml 또는 json*/
+                    //   sb.append("&" + URLEncoder.encode("returnType", "UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")):$("#idx_corp_info").value(), /*xml 또는 json*/
                     "&" + URLEncoder.encode("searchDate", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))), "UTF-8");
             //    System.out.println(urlBuilder);
             URL url = new URL(urlBuilder);

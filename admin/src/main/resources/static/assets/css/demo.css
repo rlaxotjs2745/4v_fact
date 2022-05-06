@@ -351,3 +351,5 @@ html:not(.material-style) .material-style-only {
   background-color : #0a9f0a;
 }
 
+.text-success-custom {
+  color: #008956 !important;}

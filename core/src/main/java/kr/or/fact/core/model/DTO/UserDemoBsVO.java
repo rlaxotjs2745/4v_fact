@@ -120,7 +120,9 @@ public class UserDemoBsVO {
     Date last_upd_date;//	date						최종 수정 일시
     String last_upd_date_s;//	date						최종 수정 일시
 
-
-
+    String demo_subject;//	varchar2	100					사업 제목
+    String demo_bs_applicaion_code;//	varchar2	40					지원번호
+    Date applicaion_reg_date;
     DemoBsMsgVO demoBsMsgVo;
+    CorpInfoVO corpInfoVO;
 }

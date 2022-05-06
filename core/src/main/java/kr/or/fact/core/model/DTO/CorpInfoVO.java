@@ -6,6 +6,7 @@ import java.util.Date;
 
 @Data
 public class CorpInfoVO {
+
     long idx_corp_info;//	number	32			◯		인덱스	auto increase
     String corp_name_kor;//	varchar2	40					법인 이름
     String company_num;//	varchar2	20					사업자등록번호
@@ -32,5 +33,12 @@ public class CorpInfoVO {
     Date founding_date;//	date						설립일
     Date reg_date;//	date						최초 등록 일시
     Date last_upd_date;//	date						최종 수정 일시
+    int is_saved;//
+
+    String ceo_name_kor;
+    String ceo_addr;
+    String ceo_tel_num;
+    String ceo_mphone_num;
+    String ceo_email;
 
 }

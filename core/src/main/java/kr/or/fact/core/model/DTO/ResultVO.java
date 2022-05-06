@@ -8,5 +8,6 @@ import java.util.HashMap;
 public class ResultVO{
     String result_code;
     String result_str;
+    long result_idx;
     UserDemoBsVO userDemoBsVO;
 }

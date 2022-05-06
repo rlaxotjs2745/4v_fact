@@ -78,7 +78,7 @@
             IDX_CONFORM_ADMIN,
             IS_ANNOUNCE,
             REG_DATE,
-            LAST_UPD_DATE,
+            LAST_UPD_DATE
         ) VALUES (
                      SEQ_DEMO_BUSINESS.NEXTVAL,
                      #{demo_bs_code},

@@ -2,6 +2,7 @@ package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.DTO.AdminApplDemoBsHeaderListVO;
 import kr.or.fact.core.model.DTO.AdminApplHeaderListVO;
+import kr.or.fact.core.model.DTO.DemoBSApplicationVO;
 import kr.or.fact.core.model.DTO.ListPagingParamVO;
 import kr.or.fact.core.model.DemoBsApplicationMapper;
 import kr.or.fact.core.service.DemoBsApplicationService;
@@ -16,6 +17,11 @@ public class DemoBsApplicationServiceImpl implements DemoBsApplicationService {
 
     @Autowired
     public DemoBsApplicationServiceImpl(DemoBsApplicationMapper demoBsApplicationMapper){this.demoBsApplicationMapper=demoBsApplicationMapper;}
+
+    @Override
+    public DemoBSApplicationVO getDemoBsApplByIdx(long idx_user_demo_bs){
+        return demoBsApplicationMapper.getDemoBsApplByIdx(idx_user_demo_bs);
+    }
 
     @Override
     public int getAvailableDemoBsTotalCount(){

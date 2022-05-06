@@ -7,15 +7,12 @@ import java.util.List;
 
 public interface CorpService {
 
-    public CorpInfoVO getCorpInfo(long idx_corp_info);
+    CorpInfoVO getCorpInfo(long idx_corp_info);
 
-    public List<SimpleCorpInfoVO> getSimpleCorpInfoList(String corp_name_kor);
+    List<SimpleCorpInfoVO> getSimpleCorpInfoList(String corp_name_kor);
 
-    //public CorpVO login(String user_id, String user_pw);
-    //public ResultVO logout(String user_id);
-    //public ResultVO join(UserVO userVO);
-    //public CorpVO findUserID(String user_name, String mphone_number);
-    //public CorpVO findUserPW(String user_id);
+    long saveCorpInfo(CorpInfoVO corpInfoVO);
 
-    //public ResultVO checkIdDuplicate(String user_id);
+    void updateCorpInfo(CorpInfoVO corpInfoVO);
+
 }

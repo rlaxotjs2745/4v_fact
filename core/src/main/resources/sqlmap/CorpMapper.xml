@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.fact.core.model.CorpMapper">
+
     <select id="getCorpInfoByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.CorpInfoVO">
         SELECT * FROM TB_CORP_INFO  WHERE IDX_CORP_INFO=#{idx_corp_info}
     </select>
@@ -9,5 +10,114 @@
         SELECT * FROM TB_CORP_INFO  WHERE CORP_NAME_KOR LIKE '%' ||  #{corp_name_kor} || '%'
     </select>
 
+
+    <insert id="saveCorpInfo" parameterType="kr.or.fact.core.model.DTO.CorpInfoVO">
+        INSERT INTO TB_CORP_INFO (
+            IDX_CORP_INFO,
+            CORP_NAME_KOR,
+            COMPANY_NUM,
+            CORP_REG_NUM,
+            TEL_NUM,
+            FAX_NUM,
+            EMAIL,
+            HOMEPAGE,
+            CORP_ADDR,
+            CORP_ADDR2,
+            IS_OTHER_ADDR,
+            OTHER_ADDR,
+            SALES_IN_PREV,
+            CA_RATIO,
+            EMPLOEE_NUM,
+            BS_SECTOR,
+            PRODUCT,
+            CORP_TYPE,
+            IS_BENTURE,
+            BS_PLAN,
+            IS_APPLICANT,
+            DEMO_FACILITY_TYPE,
+            DEMO_FACILITY_ETC,
+            FOUNDING_DATE,
+            CEO_NAME_KOR,
+            CEO_ADDR,
+            CEO_TEL_NUM,
+            CEO_MPHONE_NUM,
+            CEO_EMAIL,
+            REG_DATE,
+            LAST_UPD_DATE
+        ) VALUES (
+             SEQ_CORP_INFO.NEXTVAL,
+             #{corp_name_kor},
+             #{company_num},
+             #{corp_reg_num},
+             #{tel_num},
+             #{fax_num},
+             #{email},
+             #{homepage},
+             #{corp_addr},
+             #{corp_addr2},
+             #{is_other_addr},
+             #{other_addr},
+             #{sales_in_prev},
+             #{ca_ratio},
+             #{emploee_num},
+             #{bs_sector},
+             #{product},
+             #{corp_type},
+             #{is_benture},
+             #{bs_plan},
+             #{is_applicant},
+             #{demo_facility_type},
+             #{demo_facility_etc},
+             #{founding_date},
+             #{ceo_name_kor},
+             #{ceo_addr},
+             #{ceo_tel_num},
+             #{ceo_mphone_num},
+             #{ceo_email},
+
+             TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS'),
+             TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+         )
+        <selectKey keyProperty="idx_corp_info" resultType="long" order="AFTER">
+         SELECT SEQ_CORP_INFO.CURRVAL FROM DUAL
+        </selectKey>
+
+    </insert>
+
+
+
+    <update id="updateCorpInfo" parameterType="kr.or.fact.core.model.DTO.CorpInfoVO">
+        UPDATE TB_CORP_INFO SET
+                                CORP_NAME_KOR   = #{corp_name_kor},
+                                COMPANY_NUM     = #{company_num},
+                                CORP_REG_NUM    = #{corp_reg_num},
+                                TEL_NUM         = #{tel_num},
+                                FAX_NUM         = #{fax_num},
+                                EMAIL           = #{email},
+                                HOMEPAGE        = #{homepage},
+                                CORP_ADDR       = #{corp_addr},
+                                CORP_ADDR2      = #{corp_addr2},
+                                IS_OTHER_ADDR   = #{is_other_addr},
+                                OTHER_ADDR      = #{other_addr},
+                                SALES_IN_PREV   = #{sales_in_prev},
+                                CA_RATIO        = #{ca_ratio},
+                                EMPLOEE_NUM     = #{emploee_num},
+                                BS_SECTOR       = #{bs_sector},
+                                PRODUCT         = #{product},
+                                CORP_TYPE       = #{corp_type},
+                                IS_BENTURE      = #{is_benture},
+                                BS_PLAN         = #{bs_plan},
+                                IS_APPLICANT    = #{is_applicant},
+                                DEMO_FACILITY_TYPE = #{demo_facility_type},
+                                DEMO_FACILITY_ETC = #{demo_facility_etc},
+                                FOUNDING_DATE   = #{founding_date},
+                                CEO_NAME_KOR    = #{ceo_name_kor},
+                                CEO_ADDR        = #{ceo_addr},
+                                CEO_TEL_NUM     = #{ceo_tel_num},
+                                CEO_MPHONE_NUM  = #{ceo_mphone_num},
+                                CEO_EMAIL       = #{ceo_email},
+                                LAST_UPD_DATE = TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+        WHERE IDX_CORP_INFO = #{idx_corp_info}
+    </update>
 
 </mapper>

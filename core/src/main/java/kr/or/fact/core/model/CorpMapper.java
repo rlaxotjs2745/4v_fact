@@ -9,7 +9,12 @@ import java.util.List;
 
 @Mapper
 public interface CorpMapper {
+
     CorpInfoVO getCorpInfoByIdx(@Param("idx_corp_info") long idx_corp_info);
 
     List<SimpleCorpInfoVO> getSimpleCorpInfoList(@Param("corp_name_kor") String corp_name_kor);
+
+    long saveCorpInfo(CorpInfoVO corpInfoVO);
+
+    void updateCorpInfo(CorpInfoVO corpInfoVO);
 }

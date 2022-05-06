@@ -19,7 +19,7 @@ public class DemoBSApplicationVO {
     int is_improve;//	number	4		0			보완 여부	0:필요 없음, 1:보완필요
     int is_improve_file;//	number	4		0			보완 파일 상태	0:해당없음, 1:보완파일 요청 전송, 2:보완파일 수령
     Date applicaion_reg_date;//	date						등록 일시분초
-    int improve_recomm_date;//	date						보완요청 일시분초
+    Date improve_recomm_date;//	date						보완요청 일시분초
     String memo;//	varchar2	1000					메모
     long idx_admin;//	number	32				◯	작성자	idx_admin index pk
     Date reg_date;//	date						최초 등록 일시
