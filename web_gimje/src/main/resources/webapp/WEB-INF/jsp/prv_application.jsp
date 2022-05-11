@@ -42,7 +42,7 @@
         </div>
         <div class="page__cnt">
             <h3 class="page__subject">절차 안내 및 내려받기</h3>
-            <div class="page__comment">실증시설이용료, 장비이용료 및 실증서비스료의 90일에 해당하는 금액입니다. </div>
+            <%--<div class="page__comment">실증시설이용료, 장비이용료 및 실증서비스료의 90일에 해당하는 금액입니다. </div>--%>
 
             <div class="fee__container">
 
@@ -65,7 +65,7 @@
                         </ul>
                     </div>
                     <div class="application__autonomous--box box--02">
-                        <span>이용신청자가 많아 선택적으로 사용승인을 해야 하는 경우는 선정평가를 통해 사용을 승인합니다. </span>
+                        <%--<span>이용신청자가 많아 선택적으로 사용승인을 해야 하는 경우는 선정평가를 통해 사용을 승인합니다. </span>--%>
                     </div>
                 </div>
 
@@ -78,7 +78,7 @@
                         <li>중견기업 이상의 경우 실증시설을 이용하는 다른 실증단지이용자를 선도 또는 지원할 수 있는 기업</li>
                         <li>국내의 기관이나 단체 또는 사업자와 공동으로 연구개발 및 기술이전을 주목적으로 설립한 외국연구기관</li>
                         <li>「특정연구기관 육성법」의 적용을 받는 연구기관</li>
-                        <li>「정부출연연구기관 등의 설립·운영 및 육성에 관한 법률」에 따라 설립된 정부출연연구기관 또는「과학기술분야 정부출연연구기관 등의 설립·운영 및 육성에 관한 법률」에 따라 설립된 과학기술분야 정부출연연구기관</li>
+                        <li style="word-spacing: -1px">「정부출연연구기관 등의 설립·운영 및 육성에 관한 법률」에 따라 설립된 정부출연연구기관 또는 「과학기술분야 정부출연연구기관 등의 설립·운영 및 육성에 관한 법률」에 따라 설립된 과학기술분야 정부출연연구기관</li>
                         <li>「기초연구진흥 및 기술개발지원에 관한 법률」제14조제1항제2호에 따른 기업 부설연구소 중 스마트팜 관련 기업부설연구소 보유기업 </li>
                         <li>스마트팜 관련 자재, 장비, 시설공법, 영농기술 등을 개발하는 사업자 또는 대학 </li>
                         <li>농업 및 스마트팜 관련 서비스 분야의 7년 이내 창업·벤처기업</li>
@@ -94,9 +94,9 @@
                 <div class="cnt__title">실증단지 이용 신청서 제출 서류</div>
                 <div class="application__document">
                     <ol>
-                        <li>[서식 1호] 실증단지 이용신청서 1부 (필수)</li>
-                        <li>[서식 2호] 실증계획서 1부 (필수)</li>
-                        <li>[서식 3호] 개인정보 수집ᆞ이용ᆞ제공에 관한 동의서 1부 (필수)</li>
+                        <li>실증단지 이용신청서 1부 (필수)</li>
+                        <li>실증계획서 1부 (필수)</li>
+                        <li>개인정보 수집ᆞ이용ᆞ제공에 관한 동의서 1부 (필수)</li>
                         <li>사업자등록증 1부 (해당 시)</li>
                         <li>법인등기부등본 1부 (해당 시)</li>
                         <li>법인인감증명서 1부 (해당 시)</li>
@@ -107,6 +107,7 @@
                 </div>
 
                 <div class="cnt__title">선정평가 기준</div>
+
                 <div class="table__type">
                     <table class="table__type--normal">
                         <colgroup>
@@ -164,15 +165,77 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="cnt__effect">
+                    <ul class="">
+                        <li>추후 실증단지 운영 및 상황에 따라 해당 기준 및 배점은 변경 될 수 있음</li>
+                    </ul>
+                </div>
 
                 <div class="cnt__title">선정평가 점수산출</div>
                 <div class="cnt__text">최고점수와 최저점수를 제외한 위원의 평균점수에 가점을 부여하여 최종점수를 산정하며, 최종점수가 높은 이용 신청자를 선정.</div>
                 <div class="application__counseling">
                     <ul>
                         <li>가점사항 : 가점사항에 따라 최대 5점까지 가점</li>
-                        <li>다음 각 호의 하나에 해당하는 경우 사용불승인 가능</li>
                     </ul>
                 </div>
+
+                <div class="table__type">
+                    <table class="table__type--normal">
+                        <colgroup>
+                            <col style="width:20%"></col>
+                            <col style="width:60%"></col>
+                            <col style="width:20%"></col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>가점항목</th>
+                            <th>가점</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>농업 및 스마트팜 관련 신기술(인증,검증) 보유기업(접수일 기준)</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>국가 연구개발사업 성공 종료기업 또는 수행중인 기업(접수일 기준 유효)<br>
+                            - 농업 및 바이오분야 한함</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>친환경인증, 농림식품신기술(NET) 인증, 기타 다른 법률에 의한 기술분야 인증</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>지역혁신기업, 후계농업 경영인(접수일 기준 유효)</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>「사회적기업 육성법」에 따른 사회적기업 인증 기업(접수일 기준)</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>전라북도에 본사를 둔 기업</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>전라북도 김제시에 실증참여의향서를 기 제출한 기업</td>
+                            <td>1</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+<%--
+
+
                 <div class="cnt__list">
                     <ol>
                         <li>실증시설 또는 실증장비 등을 파손하고 멸실시킬 위험이 있다고 인정되는 경우 </li>
@@ -184,10 +247,31 @@
                         <li>과거 실증시설시 이용료를 2개월 이상 연체한 이력이 있는 경우 </li>
                         <li>기타 실증센터장이 부적합하다고 인정하는 자</li>
                     </ol>
-                    <p class="cnt__appendix">※ 이외에 자세한 사항은 스마트팜 혁신벨리 실증단지 입주대상 모집 공고문 참조</p>
-                    <p class="cnt__appendix">※ 신청 가능 사업 공고는 열린마당 > <a href="brd_announce?page=1">사업공고</a> 참조</p>
-                </div>
+                </div>--%>
 
+
+                <div class="cnt__title">사용 불승인</div>
+                <div class="cnt__text">다음 각호에 하나에 해당하는 경우 상용불승인 가능</div>
+<%--                <div class="application__counseling">
+                    <ul>
+                        <li>가점사항 : 가점사항에 따라 최대 5점까지 가점</li>
+                        <li>다음 각 호의 하나에 해당하는 경우 사용불승인 가능</li>
+                    </ul>
+                </div>--%>
+                <div class="cnt__list">
+                    <ol>
+                        <li>실증시설 또는 실증장비 등을 파손하고 멸실시킬 위험이 있다고 인정되는 경우 </li>
+                        <li>실증시설의 관리 운용상 지장이 있다고 인정되는 경우</li>
+                        <li>휴·폐업 중인 사업자</li>
+                        <li>국가연구개발사업 참여 제한을 받고 있는 자</li>
+                        <li>국세 및 지방세 체납, 부도 등으로 인한 강제집행, 파산, 화의개시, 회사정리 절차 개시 또는 경매절차개시 통지를 받은 자</li>
+                        <li>금융기관으로부터 불량거래자로 규제 중인 자</li>
+                        <li>과거 실증시설시 이용료를 2개월 이상 연체한 이력이 있는 경우 </li>
+                        <li>기타 실증센터장이 부적합하다고 인정하는 자</li>
+                    </ol>
+                </div>
+                <p class="cnt__appendix">※ 이외에 자세한 사항은 스마트팜 혁신벨리 실증단지 입주대상 모집 공고문 참조</p>
+                <p class="cnt__appendix">※ 신청 가능 사업 공고는 열린마당 > <a href="brd_announce?page=1">사업공고</a> 참조</p>
 
                 <div class="cnt__btn type--topborder">
                     <div class="btn__group">

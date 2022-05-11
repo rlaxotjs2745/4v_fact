@@ -22,8 +22,8 @@
 <body>
 <div class="wrapper" id="wrapper">
     <header class="header_app">
-        <a href="#none" class="close_window" onclick="javascript:window.close();"><img src="resources/assets/image/ico_close.svg" alt=""></a>
-        <h1><a href="main.html"><img src="resources/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
+        <a href="/prv_application" class="close_window" onclick="javascript:window.close();"><img src="resources/assets/image/ico_close.svg" alt=""></a>
+        <h1><a href="/"><img src="resources/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
         <h2>신청서 작성</h2>
         <div class="app__step">
             <div class="step is-passed">
@@ -53,13 +53,8 @@
         </div>
         <div class="app__business">
             <label for="select-business">지원사업 선택</label>
-            <select name="business" id="select-business">
-                <option value="">사업공고명</option>
-                <option value="">사업공고명</option>
-                <option value="">사업공고명</option>
-                <option value="">사업공고명</option>
-                <option value="">사업공고명</option>
-                <option value="">사업공고명</option>
+            <select name="business" id="select-business" disabled>
+                <option value="">${demoBs.demo_subject}</option>
             </select>
         </div>
     </header>

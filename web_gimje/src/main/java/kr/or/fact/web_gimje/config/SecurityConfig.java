@@ -1,6 +1,5 @@
 package kr.or.fact.web_gimje.config;
 
-
 import kr.or.fact.core.service.AdminService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

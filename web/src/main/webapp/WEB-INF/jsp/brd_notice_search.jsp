@@ -78,7 +78,7 @@
                     </tr>
                     <tr>
                         <td>671</td>
-                        <td class="td__left"><a href="brd_notice_detail" class="td__link">농업기술실용화재단 <em class="search">실증단지</em>규제개선 현황(`21.6월)</a></td>
+                        <td class="td__left"><a href="brd_notice_detail" class="td__link">한국농업기술진흥원 <em class="search">실증단지</em>규제개선 현황(`21.6월)</a></td>
                         <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_jpg.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
@@ -86,7 +86,7 @@
                     </tr>
                     <tr>
                         <td>672</td>
-                        <td class="td__left"><a href="brd_notice_detail" class="td__link">농업기술실용화재단 <em class="search">실증단지</em>정보보안 및 개인정보처리방침 변경 알림</a></td>
+                        <td class="td__left"><a href="brd_notice_detail" class="td__link">한국농업기술진흥원 <em class="search">실증단지</em>정보보안 및 개인정보처리방침 변경 알림</a></td>
                         <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>

@@ -8549,7 +8549,7 @@ button.danger:disabled {
     z-index: 820;
     width: 100%;
     min-width: 1020px;
-    height: 344px;
+    height: 295px;
     padding: 0;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -8653,12 +8653,12 @@ button.danger:disabled {
 }
 
 .app__step .step+.step {
-    margin: 0 0 0 22px
+    margin: 0 0 0 20px
 }
 
 .app__step .step+.step:after {
     content: "";
-    background: url(../image/ico-arrow-right.png) no-repeat 0 0;
+    background: url(../image/ico_arrow_right.png) no-repeat 0 0;
     background-size: 16px 16px;
     position: absolute;
     left: -20px;
@@ -8749,7 +8749,7 @@ button.danger:disabled {
 
 .my__step .step+.step:after {
     content: "";
-    background: url(../image/ico_drop.png) no-repeat 0 0;
+    background: url(../image/ico_arrow_right.png) no-repeat 0 0;
     background-size: 16px 16px;
     position: absolute;
     left: -20px;

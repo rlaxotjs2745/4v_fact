@@ -314,12 +314,6 @@
         }
     });
 
-    //var defaultTheme = getRandom(4);
-
-
-
-
-
     function getWeeksInMonth(a, b) {
         var c = [], d = new Date(b, a, 1), e = new Date(b, a + 1, 0), f = e.getDate();
         var g = 1;

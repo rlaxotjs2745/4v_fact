@@ -181,9 +181,6 @@
             data: JSON.stringify(param),//보내는 데이터
             contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
             dataType:'json',//받는 데이터 타입
-/*            beforeSend : function(xhr){
-                xhr.setRequestHeader(header, token);
-            },*/
             success: function(result){
                 //작업이 성공적으로 발생했을 경우
                 console.log(result);

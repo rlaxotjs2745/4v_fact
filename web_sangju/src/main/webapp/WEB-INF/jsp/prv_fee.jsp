@@ -58,7 +58,7 @@
                 <!--//-->
 
                 <div class="cnt__title">이용료 산출 기준 및 방법</div>
-                <div class="cnt__text">실증서비스 이용료와 보증금은 실증단지 위탁자(실증단지를 소유한 지방자치단체)가 정한 기준과 방법을 따라 실증센터가 산출합니다. </div>
+                <div class="cnt__text">실증서비스 이용료는 실증단지 위탁자(실증단지를 소유한 지방자치단체)가 정한 기준과 방법을 따라 실증센터가 산출합니다. </div>
 
 
                 <div class="cnt__title">실증 비용 예시</div>
@@ -116,16 +116,6 @@
                             <col style="width:25%"></col>
                         </colgroup>
                         <tbody>
-<%--                        <tr>
-                            <th>납부액</th>
-                            <td colspan="3"><strong>8,789,130원</strong></td>
-                        </tr>
-                        <tr>
-                            <th>총 금액</th>
-                            <td class="td__won"><strong>17,578,260원</strong></td>
-                            <th>납부액</th>
-                            <td>50% <strong>8,789,130원</strong></td>
-                        </tr>--%>
                         <tr>
                             <th>납부액</th>
                             <td colspan="3"><strong>17,578,260원</strong></td>

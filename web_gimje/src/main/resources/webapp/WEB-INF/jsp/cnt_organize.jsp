@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@include file ="header.jsp" %>
 
 <div class="content" id="content">
@@ -36,7 +37,7 @@
             </div>
         </div>
         <div class="page__cnt">
-            <h3 class="page__subject">조직도</h3>
+            <%--<h3 class="page__subject">조직도</h3>
             <div class="organize__container">
                 <div class="organize__diagram">
                     <div class="diagram__header">
@@ -132,9 +133,9 @@
                             <!--//-->
                         </ul>
                     </div>
-                </div>
+                </div>--%>
 
-                <h3 class="page__subject">직원소개</h3>
+                <h3 class="page__subject">전북 김제 스마트팜 혁신밸리 실증단지 조직 및 직원</h3>
                 <div class="table__type team--table is-active" id="team-01">
                     <table class="table__type--normal">
                         <colgroup>
@@ -156,6 +157,26 @@
                         </tr>
                         </thead>
                         <tbody>
+                            <c:choose>
+                            <c:when test="${fn:length(coWorkerVOList)>0}">
+                            <c:forEach items = "${coWorkerVOList}" var ="coworker">
+                        <tr class="">
+                            <td class="text-center">${coworker.devision}</td>
+                            <td class="text-center">${coworker.coworker_name}</td>
+                            <td class="text-center">${coworker.job_role}</td>
+                            <td class="text-center">${coworker.job_title}</td>
+                            <td class="text-center">${coworker.tel_num}</td>
+                            <td class="text-center">${coworker.email}</td>
+                        </tr>
+                        </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <tr class="">
+                                <td colspan="8" class="text-center">아이템이 없어요</td>
+                            </tr>
+                        </c:otherwise>
+                        </c:choose>
+                        <%--
                         <tr>
                             <td>기획예산실</td>
                             <td>홍길동</td>
@@ -195,418 +216,11 @@
                             <td>차장</td>
                             <td>063-1234-5678</td>
                             <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>기획예산실</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
+                        </tr>--%>
                         </tbody>
                     </table>
                 </div>
-                <div class="table__type team--table" id="team-02">
-                    <table class="table__type--normal">
-                        <colgroup>
-                            <col style="width:15%"></col>
-                            <col style="width:15%"></col>
-                            <col style="width:30%"></col>
-                            <col style="width:15%"></col>
-                            <col style="width:15%"></col>
-                            <col style="width:30%"></col>
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th>소속</th>
-                            <th>성명</th>
-                            <th>담당업무</th>
-                            <th>직위</th>
-                            <th>전화번호</th>
-                            <th>이메일</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>사회가치전략실</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>사회가치전략실</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>사회가치전략실</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>사회가치전략실</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table__type team--table" id="team-03">
-                    <table class="table__type--normal">
-                        <colgroup>
-                            <col style="width:15%"></col>
-                            <col style="width:15%"></col>
-                            <col style="width:30%"></col>
-                            <col style="width:15%"></col>
-                            <col style="width:15%"></col>
-                            <col style="width:30%"></col>
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th>소속</th>
-                            <th>성명</th>
-                            <th>담당업무</th>
-                            <th>직위</th>
-                            <th>전화번호</th>
-                            <th>이메일</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>기술창출전략팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>기술창출전략팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>기술창출전략팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>기술창출전략팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>기술창출전략팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>기술창출전략팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table__type team--table" id="team-04">
-                    <table class="table__type--normal">
-                        <colgroup>
-                            <col style="width:15%"></col>
-                            <col style="width:15%"></col>
-                            <col style="width:30%"></col>
-                            <col style="width:15%"></col>
-                            <col style="width:15%"></col>
-                            <col style="width:30%"></col>
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th>소속</th>
-                            <th>성명</th>
-                            <th>담당업무</th>
-                            <th>직위</th>
-                            <th>전화번호</th>
-                            <th>이메일</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>벤처기획팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>벤처기획팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>벤처기획팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table__type team--table" id="team-05">
-                    <table class="table__type--normal">
-                        <colgroup>
-                            <col style="width:15%"></col>
-                            <col style="width:15%"></col>
-                            <col style="width:30%"></col>
-                            <col style="width:15%"></col>
-                            <col style="width:15%"></col>
-                            <col style="width:30%"></col>
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th>소속</th>
-                            <th>성명</th>
-                            <th>담당업무</th>
-                            <th>직위</th>
-                            <th>전화번호</th>
-                            <th>이메일</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>종자사업팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>종자사업팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>종자사업팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>종자사업팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>종자사업팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>종자사업팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>종자사업팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>종자사업팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>종자사업팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table__type team--table" id="team-06">
-                    <table class="table__type--normal">
-                        <colgroup>
-                            <col style="width:15%"></col>
-                            <col style="width:15%"></col>
-                            <col style="width:30%"></col>
-                            <col style="width:15%"></col>
-                            <col style="width:15%"></col>
-                            <col style="width:30%"></col>
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th>소속</th>
-                            <th>성명</th>
-                            <th>담당업무</th>
-                            <th>직위</th>
-                            <th>전화번호</th>
-                            <th>이메일</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>디지털농업확산팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>디지털농업확산팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>디지털농업확산팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>디지털농업확산팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>디지털농업확산팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table__type team--table" id="team-07">
-                    <table class="table__type--normal">
-                        <colgroup>
-                            <col style="width:15%"></col>
-                            <col style="width:15%"></col>
-                            <col style="width:30%"></col>
-                            <col style="width:15%"></col>
-                            <col style="width:15%"></col>
-                            <col style="width:30%"></col>
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th>소속</th>
-                            <th>성명</th>
-                            <th>담당업무</th>
-                            <th>직위</th>
-                            <th>전화번호</th>
-                            <th>이메일</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>농자재분석팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>농자재분석팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>농자재분석팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>농자재분석팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        <tr>
-                            <td>농자재분석팀</td>
-                            <td>홍길동</td>
-                            <td>가나다라도레미파솔라시도</td>
-                            <td>차장</td>
-                            <td>063-1234-5678</td>
-                            <td>asfdasfd@fdsafdsa.com</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+
             </div>
         </div>
 

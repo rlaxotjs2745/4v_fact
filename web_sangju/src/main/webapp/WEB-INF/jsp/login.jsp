@@ -19,7 +19,6 @@
     <link rel="apple-touch-icon-precomposed" href="resources/assets/image/favicon_152.png">
     <link rel="stylesheet" type="text/css" href="resources/assets/css/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="resources/assets/css/style.css">
-
 </head>
 <body>
 <div class="wrapper" id="wrapper">
@@ -51,10 +50,7 @@
                                     <label for="login-2">로그인 상태 유지</label>
                                 </div>
                             </div>
-
                             <button type="submit" class="btn btn-login">로그인</button>
-
-
                             <div class="login__util">
                                 <a href="#popup_find_id" class="js-modal-detail">아이디 찾기</a>
                                 <a href="#popup_find_pw" class="js-modal-detail">비밀번호 찾기</a>
@@ -199,7 +195,6 @@
 
         </div>
     </div>
-
     <script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
     <script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
     <script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>

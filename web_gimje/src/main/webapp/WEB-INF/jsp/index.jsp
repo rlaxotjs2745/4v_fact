@@ -257,13 +257,13 @@
         </div>
     </div>--%>
 </div>
+
 <%--<script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
 <script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
 <script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
 <script src="resources/assets/js/ui.common.js" type="text/javascript"></script>--%>
 <!-- Initialize Swiper -->
 <%@include file ="script.jsp" %>
-
 <script>
     var swiperMain = new Swiper(".swiper__main", {
         centeredSlides: true,

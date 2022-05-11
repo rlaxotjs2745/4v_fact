@@ -20,6 +20,7 @@
     <link rel="stylesheet" type="text/css" href="resources/assets/css/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="resources/assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="resources/assets/css/pace-theme-center-simple.css" />
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/evo-calendar.css">
 </head>
 <body>
 <div class="wrapper" id="wrapper">

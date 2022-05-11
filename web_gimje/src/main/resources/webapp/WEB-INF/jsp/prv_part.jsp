@@ -41,14 +41,14 @@
             <div class="part__container">
                 <div class="part__service bg--free">
                     <div class="part__service--title">자율형</div>
-                    <div class="part__service--desc">의뢰인이 부지, 온실, 장비 등을 임대하여 자체적으로 실증 추진 <br>고객 요청 시, 실증확인서(농업기술실용화재단) 발급 가능</div>
-                    <div class="part__service__appendix">부지, 온실, 장비 임대 가능. 이용에 따른 별도 비용을 부과  </div>
+                    <div class="part__service--desc">의뢰인이 부지, 온실, 장비 등을 임대하여 자체적으로 실증 추진 <br>고객 요청 시, 실증확인서(한국농업기술진흥원) 발급 가능</div>
+                    <div class="part__service__appendix">실비성 재료(육묘, 양액 등) 자체 수급</div>
                 </div>
                 <div class="part__service bg--lent">
                     <div class="part__service--title">위탁형</div>
                     <div class="part__service--desc">의뢰인이 제품의 성능, 품질, 내구성, 호환성 등 R&D결과물에 대한 <br>
-                        실증 요청 시, 일련의 절차를 거쳐 실증결과서(농업기술실용화재단) <br>까지 발급 </div>
-                    <div class="part__service__appendix">부지, 온실, 장비 임대 불가능</div>
+                        실증 요청 시, 일련의 절차를 거쳐 실증결과서(한국농업기술진흥원) <br>까지 발급 </div>
+                    <div class="part__service__appendix">실비성 재료(육묘, 양액 등) 비용 별도 부과</div>
                 </div>
             </div>
             <!--//-->

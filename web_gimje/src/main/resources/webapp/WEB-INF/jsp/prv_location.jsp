@@ -49,10 +49,10 @@
                 <div class="table__type">
                     <table class="table__type--normal">
                         <colgroup>
-                            <col style="width:10%"></col>
+                            <col style="width:12%"></col>
                             <col style="width:25%"></col>
                             <col style="width:19%"></col>
-                            <col style="width:9%"></col>
+                            <col style="width:7%"></col>
                             <col style="width:9%"></col>
                             <col style="width:9%"></col>
                             <col style="width:9%"></col>
@@ -66,7 +66,7 @@
                             <th>수량</th>
                             <th>제조사</th>
                             <th>모델명</th>
-                            <th>제워</th>
+                            <th>제위</th>
                             <th>비고</th>
                         </tr>
                         </thead>

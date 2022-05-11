@@ -165,6 +165,7 @@
 
 <!-- Initialize Swiper -->
 <script>
+
     $(document).ready(function(){
         $(".search__none").hide();
         $(".search__find").hide();
@@ -243,12 +244,13 @@
         var ml=(cw-sw)/2;        //가운데 띄우기위한 창의 x위치
         var mt=(ch-sh)/2;         //가운데 띄우기위한 창의 y위치
 
-        new_popup = window.open('juso_search', '주소검색','width='+sw+',height='+sh+',top='+mt+',left='+ml+', resizable=no');
+        new_popup = window.open("juso_search?juso_type=join", '주소검색','width='+sw+',height='+sh+',top='+mt+',left='+ml+', resizable=no');
     });
     /**
      * 주소검색 결과 처리
      */
     function fn_setJuso(data) {
+        //alert(data["type"]);
         $("#juso_find").val(data["roadFullAddr"]);
         $("#zip_code").val(data["zipNo"]);
         new_popup.close();

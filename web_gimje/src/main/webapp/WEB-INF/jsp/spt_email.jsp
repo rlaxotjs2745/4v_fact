@@ -19,7 +19,7 @@
                     <a href="#" class="under__depth--anchor">고객 지원</a>
                     <div class="under__depth--list">
                         <a href="spt_faq">FAQ</a>
-                        <a href="spt_consulting">상담 신청</a>
+                        <a href="spt_consultilg">상담 신청</a>
                         <%--<a href="spt_email?page=1">온라인 문의</a>--%>
                         <a href="spt_visit">견학 신청</a>
                     </div>

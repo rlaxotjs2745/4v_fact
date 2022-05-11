@@ -62,8 +62,8 @@
                         <dt><img src="resources/assets/image/img_bus.png" alt=""></dt>
                         <dd><p class="map__type">고속/시외버스</p>
                             <ul>
-                                <li><strong>택시이용</strong>익산고속(공용)버스터미널 → 농업기술실용화재단 (약 2km)</li>
-                                <li><strong>도보</strong>익산고속(공용)버스터미널 → 농업기술실용화재단 (약 2km)</li>
+                                <li><strong>택시이용</strong>익산고속(공용)버스터미널 → 한국농업기술진흥원 (약 2km)</li>
+                                <li><strong>도보</strong>익산고속(공용)버스터미널 → 한국농업기술진흥원 (약 2km)</li>
                             </ul>
                         </dd>
                     </dl>
@@ -71,9 +71,9 @@
                         <dt><img src="resources/assets/image/img_ktx.png" alt=""></dt>
                         <dd><p class="map__type">기차(KTX)</p>
                             <ul>
-                                <li><strong>택시이용</strong>익산역(KTX) 동부광장 → 농업기술실용화재단 (약 2km)</li>
-                                <li><strong>버스이용</strong>익산역(KTX) 서부광장(도보 300m) → “송학동”정거장 300번 버스 탑숭(2개 정류장)  → “송학지안리즈아파트” 정류장 하차 → 농업기술실용화재단(도보 200m)</li>
-                                <li><strong>도보</strong>익산역(KTX) 서부광장 → 농업기술실용화재단 (약 1.5km)</li>
+                                <li><strong>택시이용</strong>익산역(KTX) 동부광장 → 한국농업기술진흥원 (약 2km)</li>
+                                <li><strong>버스이용</strong>익산역(KTX) 서부광장(도보 300m) → “송학동”정거장 300번 버스 탑숭(2개 정류장)  → “송학지안리즈아파트” 정류장 하차 → 한국농업기술진흥원(도보 200m)</li>
+                                <li><strong>도보</strong>익산역(KTX) 서부광장 → 한국농업기술진흥원 (약 1.5km)</li>
                             </ul>
                         </dd>
                     </dl>--%>

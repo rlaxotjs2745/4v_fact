@@ -56,11 +56,11 @@
                     <img src="resources/assets/image/img_management.svg" alt="">
                     <span>실증 신청 현황</span>
                 </a>
-<%--                <a href="spt_consultilg" class="quick__anchor">
+<%--                <a href="spt_consulting" class="quick__anchor">
                     <img src="resources/assets/image/img_advance.svg" alt="">
                     <span>대면 상담</span>
                 </a>--%>
-                <a href="spt_consultilg" class="quick__anchor">
+                <a href="spt_consulting" class="quick__anchor">
                     <img src="resources/assets/image/img_inquire.svg" alt="">
                     <span>상담 신청</span>
                 </a>
@@ -100,7 +100,7 @@
                                 <a href="#"><span>12월31일까지 에너지 바우처 신청 12월31일까지 에너지 바우처 신청</span><em>07-06</em></a>
                             </li>
                             <li>
-                                <a href="#"><span>‘21년 제2차 농업기술실용화재단 농업기술실용화재단 </span><em>07-06</em></a>
+                                <a href="#"><span>‘21년 제2차 한국농업기술진흥원' </span><em>07-06</em></a>
                             </li>
                             <li>
                                 <a href="#"><span>공동구매 안내</span><em>07-06</em></a>

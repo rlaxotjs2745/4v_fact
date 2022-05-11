@@ -37,15 +37,15 @@
         <div class="page__cnt">
             <div class="map__container">
                 <div class="map__floor">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25845.04885890132!2d126.92339840468988!3d35.93152847826453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3570406760f8b2e3%3A0xc4267ee9c1608835!2z64aN7JeF6riw7Iig7Iuk7Jqp7ZmU7J6s64uo!5e0!3m2!1sko!2skr!4v1629892696095!5m2!1sko!2skr" width="100%" height="540" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <%--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25845.04885890132!2d126.92339840468988!3d35.93152847826453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3570406760f8b2e3%3A0xc4267ee9c1608835!2z64aN7JeF6riw7Iig7Iuk7Jqp7ZmU7J6s64uo!5e0!3m2!1sko!2skr!4v1629892696095!5m2!1sko!2skr" width="100%" height="540" style="border:0;" allowfullscreen="" loading="lazy"></iframe>--%>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m19!1m8!1m3!1d2135.798107933143!2d126.95888977957975!3d35.88348276432381!3m2!1i1024!2i768!4f13.1!4m8!3e0!4m0!4m5!1s0x357038ac78a65607%3A0x743416b5c8cec676!2z7Zmp7Yag66GcIOyghOudvOu2geuPhCDquYDsoJzsi5wg67Cx6rWs66m0!3m2!1d35.883898099999996!2d126.9599899!5e0!3m2!1sko!2skr!4v1650202695968!5m2!1sko!2skr" width="100%" height="540" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
 
-                <h3 class="page__subject">기관 주소</h3>
+                <h3 class="page__subject">실증단지 주소</h3>
                 <div class="map__address">
                     <ul>
-                        <li><strong>후문 주차장 주소</strong>(54667) 전라북도 익산시 학곤로 133 (송학동 389-1)</li>
-                        <li><strong>정문 주소</strong>(54667) 전라북도 익산시 평동로 457 (송학동 381)</li>
-                        <li><strong>대표 전화</strong>063-919-1000</li>
+                        <li><strong>주소</strong>(54331) 전라북도 김제시 백구면 황토로 1079</li>
+                        <li><strong>대표 전화</strong>063-540-3600</li>
                     </ul>
                 </div>
 
@@ -54,17 +54,16 @@
                         <dt><img src="resources/assets/image/img_car.png" alt=""></dt>
                         <dd><p class="map__type">자가운전</p>
                             <ul>
-                                <li><strong>익산IC</strong>호남고속 → 신금로(1.4km) → 평동로(11.5km) → 농업기술실용화재단 ((구)국립식량과학원 벼맥류부)</li>
-                                <li><strong>군산IC</strong>서해안고속도로 → 군익로(16.8km) → 농업기술실용화재단</li>
+                                <li><strong>전주IC</strong>전주IC에서 익산방면 10km 또는 익산역에서 김제방면 11.6km</li>
                             </ul>
                         </dd>
                     </dl>
-                    <dl>
+                    <%--<dl>
                         <dt><img src="resources/assets/image/img_bus.png" alt=""></dt>
                         <dd><p class="map__type">고속/시외버스</p>
                             <ul>
-                                <li><strong>택시이용</strong>익산고속(공용)버스터미널 → 농업기술실용화재단 (약 2km)</li>
-                                <li><strong>도보</strong>익산고속(공용)버스터미널 → 농업기술실용화재단 (약 2km)</li>
+                                <li><strong>택시이용</strong>익산고속(공용)버스터미널 → 한국농업기술진흥원 (약 2km)</li>
+                                <li><strong>도보</strong>익산고속(공용)버스터미널 → 한국농업기술진흥원 (약 2km)</li>
                             </ul>
                         </dd>
                     </dl>
@@ -72,12 +71,12 @@
                         <dt><img src="resources/assets/image/img_ktx.png" alt=""></dt>
                         <dd><p class="map__type">기차(KTX)</p>
                             <ul>
-                                <li><strong>택시이용</strong>익산역(KTX) 동부광장 → 농업기술실용화재단 (약 2km)</li>
-                                <li><strong>버스이용</strong>익산역(KTX) 서부광장(도보 300m) → “송학동”정거장 300번 버스 탑숭(2개 정류장)  → “송학지안리즈아파트” 정류장 하차 → 농업기술실용화재단(도보 200m)</li>
-                                <li><strong>도보</strong>익산역(KTX) 서부광장 → 농업기술실용화재단 (약 1.5km)</li>
+                                <li><strong>택시이용</strong>익산역(KTX) 동부광장 → 한국농업기술진흥원 (약 2km)</li>
+                                <li><strong>버스이용</strong>익산역(KTX) 서부광장(도보 300m) → “송학동”정거장 300번 버스 탑숭(2개 정류장)  → “송학지안리즈아파트” 정류장 하차 → 한국농업기술진흥원(도보 200m)</li>
+                                <li><strong>도보</strong>익산역(KTX) 서부광장 → 한국농업기술진흥원 (약 1.5km)</li>
                             </ul>
                         </dd>
-                    </dl>
+                    </dl>--%>
                 </div>
                 <!--//-->
             </div>

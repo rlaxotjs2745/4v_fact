@@ -30,7 +30,7 @@
             <div class="page__menu--inner">
                 <h2 class="page__title">비전과 미션</h2>
                 <div class="page__location">
-                    <div class="location__deco">농업기술실용화재단은 1차 지역(전북 김제, 경북 상주)스마트팜 혁신밸리 실증단지 운영을 하고 있습니다.</div>
+                    <div class="location__deco">한국농업기술진흥원은 1차 지역(전북 김제, 경북 상주)스마트팜 혁신밸리 실증단지 운영을 하고 있습니다.</div>
 
                 </div>
             </div>

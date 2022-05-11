@@ -54,14 +54,14 @@
                         <thead>
                         <tr>
                             <th>구분</th>
-                            <th>전북 김제</th>
+                            <th class="highlight">전북 김제</th>
                             <th>경북 상주</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>실증특화분야</td>
-                            <td><strong>주력분야 : ICT 기자재</strong><br>
+                            <td class="highlight"><strong>주력분야 : ICT 기자재</strong><br>
                                 ① ICT기자재      ② 신품종(아열대 제외)<br>
                                 ③ 기능성 물질    ④ 약용작물</td>
                             <td><strong>주력분야 : 농업용 로봇</strong><br>
@@ -82,160 +82,258 @@
                     <table class="table__type--normal">
                         <colgroup>
                             <col style="width:5%"></col>
+                            <col style="width:15%"></col>
                             <col style="width:20%"></col>
-                            <col style="width:25%"></col>
-                            <col style="width:25%"></col>
-                            <col style="width:25%"></col>
+                            <col style="width:15%"></col>
+                            <col style="width:15%"></col>
+                            <col style="width:15%"></col>
+                            <col style="width:15%"></col>
                         </colgroup>
                         <thead>
                         <tr>
                             <th>번호</th>
+                            <th>위치</th>
+                            <th>명칭</th>
                             <th>형태</th>
                             <th>시설</th>
-                            <th>규격(평)</th>
+                            <th>전용면적m²(평)</th>
                             <th>임대료(원/월)</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>1</td>
+                            <td>실증온실</td>
+                            <td>수경엽채류A</td>
                             <td>비닐</td>
-                            <td>벤치</td>
+                            <td>EDD배드 9Line(30m)</td>
                             <td>840m²(254)</td>
-                            <td>923,905</td>
+                            <td>742,867</td>
                         </tr>
                         <tr>
                             <td>2</td>
+                            <td>실증온실</td>
+                            <td>기본형엽채류A</td>
                             <td>유리</td>
-                            <td>벤치</td>
+                            <td>H배드 12Line(30m)</td>
                             <td>840m²(254)</td>
-                            <td>923,905</td>
+                            <td>970,939</td>
                         </tr>
                         <tr>
                             <td>3</td>
+                            <td>실증온실</td>
+                            <td>수경엽채류B</td>
                             <td>유리</td>
-                            <td>벤치</td>
+                            <td>H배드 12Line(30m)</td>
                             <td>840m²(254)</td>
-                            <td>923,905</td>
+                            <td>970,939</td>
                         </tr>
                         <tr>
                             <td>4</td>
+                            <td>실증온실</td>
+                            <td>육묘장</td>
                             <td>유리</td>
-                            <td>육모장</td>
+                            <td> - </td>
                             <td>1,260m²(381)</td>
-                            <td>923,905</td>
+                            <td>1,427,904</td>
                         </tr>
                         <tr>
                             <td>5</td>
+                            <td>실증온실</td>
+                            <td>기본형과채류G</td>
                             <td>비닐</td>
-                            <td>벤치</td>
+                            <td>행잉거터 15Line(30m)</td>
                             <td>840m²(254)</td>
-                            <td>923,905</td>
+                            <td>742,867</td>
                         </tr>
                         <tr>
                             <td>6</td>
+                            <td>실증온실</td>
+                            <td>기본형엽채류B</td>
                             <td>유리</td>
-                            <td>벤치</td>
+                            <td>H배드 6Line(30m)</td>
                             <td>420m²(127)</td>
-                            <td>923,905</td>
+                            <td>487,583</td>
                         </tr>
                         <tr>
                             <td>7</td>
+                            <td>실증온실</td>
+                            <td>기본형엽채류C</td>
                             <td>유리</td>
-                            <td>벤치</td>
+                            <td>H배드 6Line(30m)</td>
                             <td>420m²(127)</td>
-                            <td>923,905</td>
+                            <td>487,583</td>
                         </tr>
                         <tr>
                             <td>8</td>
+                            <td>실증온실</td>
+                            <td>기본형과채류A</td>
                             <td>유리</td>
-                            <td>행인거터</td>
+                            <td>행잉거터 9Line(30m)</td>
                             <td>420m²(127)</td>
-                            <td>923,905</td>
+                            <td>487,583</td>
                         </tr>
                         <tr>
                             <td>9</td>
+                            <td>실증온실</td>
+                            <td>기본형과채류B</td>
                             <td>유리</td>
-                            <td>행인거터</td>
+                            <td>행잉거터 9Line(30m)</td>
                             <td>420m²(127)</td>
-                            <td>923,905</td>
+                            <td>487,583</td>
                         </tr>
                         <tr>
                             <td>10</td>
+                            <td>실증온실</td>
+                            <td>기본형과채류C</td>
                             <td>유리</td>
-                            <td>행인거터</td>
+                            <td>행잉거터 9Line(30m)</td>
                             <td>420m²(127)</td>
-                            <td>923,905</td>
+                            <td>487,583</td>
                         </tr>
                         <tr>
                             <td>11</td>
+                            <td>실증온실</td>
+                            <td>기본형과채류D</td>
                             <td>비닐</td>
-                            <td>행인거터</td>
+                            <td>행잉거터 15Line(30m)</td>
                             <td>840m²(254)</td>
-                            <td>923,905</td>
+                            <td>742,867</td>
                         </tr>
                         <tr>
                             <td>12</td>
+                            <td>실증온실</td>
+                            <td>기본형과채류E</td>
                             <td>유리</td>
-                            <td>행인거터</td>
+                            <td>행잉거터 24Line(30m)</td>
                             <td>1,260m²(381)</td>
-                            <td>923,905</td>
+                            <td>1,462,749</td>
                         </tr>
                         <tr>
                             <td>13</td>
+                            <td>실증온실</td>
+                            <td>기본형과채류F</td>
                             <td>유리</td>
-                            <td>행인거터</td>
+                            <td>행잉거터 24Line(30m)</td>
                             <td>1,260m²(381)</td>
-                            <td>923,905</td>
+                            <td>1,462,749</td>
                         </tr>
                         <tr>
                             <td>14</td>
-                            <td>유리</td>
-                            <td>식물공장</td>
-                            <td>40×2m²(12×2)</td>
-                            <td>923,905</td>
+                            <td>단동온실</td>
+                            <td>단동온실</td>
+                            <td>비닐</td>
+                            <td>고설배드 5Line(24m)</td>
+                            <td>217m²(12×2)</td>
+                            <td>180,722</td>
                         </tr>
                         <tr>
                             <td>15</td>
+                            <td>단동온실</td>
+                            <td>단동온실</td>
                             <td>비닐</td>
-                            <td>단동비닐온실</td>
-                            <td>186m²(56)</td>
-                            <td>923,905</td>
+                            <td>고설배드 5Line(24m)</td>
+                            <td>217m²(56)</td>
+                            <td>180,722</td>
                         </tr>
                         <tr>
                             <td>16</td>
+                            <td>단동온실</td>
+                            <td>단동온실</td>
                             <td>비닐</td>
                             <td>단동비닐온실</td>
-                            <td>186m²(56)</td>
-                            <td>923,905</td>
+                            <td>217m²(56)</td>
+                            <td>164,853</td>
                         </tr>
                         <tr>
                             <td>17</td>
+                            <td>단동온실</td>
+                            <td>단동온실</td>
                             <td>비닐</td>
                             <td>단동비닐온실</td>
-                            <td>217m²(65)</td>
-                            <td>923,905</td>
+                            <td>185m²(65)</td>
+                            <td>132,426</td>
                         </tr>
                         <tr>
                             <td>18</td>
+                            <td>단동온실</td>
+                            <td>단동온실</td>
                             <td>비닐</td>
                             <td>단동비닐온실</td>
-                            <td>217m²(65)</td>
-                            <td>923,905</td>
+                            <td>185m²(65)</td>
+                            <td>132,426</td>
                         </tr>
                         <tr>
                             <td>19</td>
-                            <td>비닐</td>
-                            <td>단동비닐온실</td>
-                            <td>217m²(65)</td>
-                            <td>923,905</td>
+                            <td>지원센터</td>
+                            <td>식물 연구실1</td>
+                            <td>-</td>
+                            <td>다단배드</td>
+                            <td>51m²</td>
+                            <td>164,045</td>
                         </tr>
                         <tr>
+                            <td>20</td>
+                            <td>지원센터</td>
+                            <td>식물 연구실2</td>
                             <td>-</td>
+                            <td>다단배드</td>
+                            <td>51m²</td>
+                            <td>164,045</td>
+                        </tr>
+                        <tr>
+                            <td>21</td>
+                            <td>저수지옆</td>
                             <td>나대지</td>
-                            <td>단동비닐온실</td>
-                            <td>4,360m²(1,319)</td>
-                            <td>923,905</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>(500평)</td>
+                            <td>37,124</td>
+                        </tr>
+                        <tr>
+                            <td>22</td>
+                            <td>연동옆</td>
+                            <td>나대지</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>(600평)</td>
+                            <td>41,263</td>
+                        </tr>
+                        <tr>
+                            <td>23</td>
+                            <td>연동옆</td>
+                            <td>나대지</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>(100평)</td>
+                            <td>6,867</td>
+                        </tr>
+                        <tr>
+                            <td>24</td>
+                            <td>연동옆</td>
+                            <td>나대지</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>(300평)</td>
+                            <td>20,642</td>
+                        </tr>
+                        <tr>
+                            <td>25</td>
+                            <td>연동옆</td>
+                            <td>나대지</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>(100평)</td>
+                            <td>6,867</td>
+                        </tr>
+                        <tr>
+                            <td>26</td>
+                            <td>단동옆</td>
+                            <td>나대지</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>(500평)</td>
+                            <td>34,396</td>
                         </tr>
                         </tbody>
                     </table>

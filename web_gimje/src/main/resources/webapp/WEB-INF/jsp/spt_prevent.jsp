@@ -185,7 +185,7 @@
                         <div class="table__paging">
                             <c:set var="name" value="${total_count/amount}" />
 
-                            <c:if test="${is_past eq true}"><a href="spt_prevent?page=1" class="paging__prev2"><img src="resources/assets/image/ico_paging_prev_02.png" alt=""></a></c:if>
+                            <c:if test="${is_past eq true}"><a href="spt_prevent" class="paging__prev2"><img src="resources/assets/image/ico_paging_prev_02.png" alt=""></a></c:if>
                             <c:if test="${is_prev eq true}"><a href="spt_prevent?page=${cur_page-1}" class="paging__prev"><img src="resources/assets/image/ico_paging_prev.png" alt=""></a></c:if>
                             <c:forEach var="i" begin="1" end="${page_amount}">
                                 <a href="spt_prevent?page=${(cur_sector-1)*page_amount+i}" <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">class="is-active"</c:if>>${(cur_sector-1)*page_amount+i}</a>

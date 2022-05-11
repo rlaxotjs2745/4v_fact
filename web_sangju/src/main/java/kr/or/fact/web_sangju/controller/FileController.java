@@ -89,7 +89,7 @@ public class FileController {
         // Try to determine file's content type
         String contentType = null;
         try {
-            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+            contentType = request.getSession().getServletContext().getMimeType(resource.getFile().getAbsolutePath());
         } catch (IOException ex) {
             logger.info("Could not determine file type.");
         }

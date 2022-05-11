@@ -36,8 +36,8 @@
                         <a href="prv_fee" class="location__link--anchor ">개요</a>
                         <a href="prv_facility" class="location__link--anchor ">실증시설</a>
                         <a href="prv_support" class="location__link--anchor ">지원시설</a>
-                        <a href="prv_bill" class="location__link--anchor is-selected">공과금</a>
-                        <a href="prv_subsidy" class="location__link--anchor ">보증금</a>
+<%--                        <a href="prv_bill" class="location__link--anchor is-selected">공과금</a>
+                        <a href="prv_subsidy" class="location__link--anchor ">보증금</a>--%>
                     </div>
                 </div>
             </div>

@@ -96,7 +96,7 @@
                                 <c:when test="${user.sign_in_type eq 0}">웹가입</c:when>
                                 <c:when test="${user.sign_in_type eq 1}">모바일 웹가입</c:when>
                                 <c:when test="${user.sign_in_type eq 2}">관리기관 가입</c:when>
-                                <c:when test="${user.sign_in_type eq 3}">재단 가입</c:when>
+                                <c:when test="${user.sign_in_type eq 3}">한국농업기술진흥원 가입</c:when>
                                 <c:when test="${user.sign_in_type eq 4}">관계기간 가입</c:when>
                                 </c:choose>
                             </td>

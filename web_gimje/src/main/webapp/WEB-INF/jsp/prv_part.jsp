@@ -42,7 +42,7 @@
                 <div class="part__service bg--free">
                     <div class="part__service--title">자율형</div>
                     <div class="part__service--desc">의뢰인이 부지, 온실, 장비 등을 임대하여 자체적으로 실증 추진 <br>고객 요청 시, 실증확인서(한국농업기술진흥원) 발급 가능</div>
-                    <div class="part__service__appendix">실비성 재료(육묘, 양액 등)자체 수급</div>
+                    <div class="part__service__appendix">실비성 재료(육묘, 양액 등) 자체 수급</div>
                 </div>
                 <div class="part__service bg--lent">
                     <div class="part__service--title">위탁형</div>

@@ -20,6 +20,7 @@
     <link rel="stylesheet" type="text/css" href="resources/assets/css/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="resources/assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="resources/assets/css/pace-theme-center-simple.css" />
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/evo-calendar.css">
 </head>
 <body>
 <div class="wrapper" id="wrapper">
@@ -63,7 +64,7 @@
                 <li><a href="#" class="">고객 지원</a>
                     <ul class="nav--depth2">
                         <li><a href="spt_faq">FAQ</a></li>
-                        <li><a href="spt_consultilg">상담 신청</a></li>
+                        <li><a href="spt_consulting">상담 신청</a></li>
                         <%--<li><a href="spt_email?page=1">상담 신청</a></li>--%>
                         <li><a href="spt_visit">견학 신청</a></li>
                     </ul>
@@ -178,7 +179,7 @@
 <%--                                <li><a href="my_info">나의 정보</a></li>
                                 <li><a href="my_agreement">기업 정보 관리</a></li>
                                 <li><a href="my_prove">실증 신청 현황</a></li>
-                                <li><a href="spt_consultilg">사전 상담</a></li>
+                                <li><a href="spt_consulting">사전 상담</a></li>
                                 <li><a href="my_inquiry">1:1 문의</a></li>--%>
 
 

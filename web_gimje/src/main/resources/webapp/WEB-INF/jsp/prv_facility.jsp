@@ -36,15 +36,15 @@
                         <a href="prv_fee" class="location__link--anchor ">개요</a>
                         <a href="prv_facility" class="location__link--anchor is-selected">실증시설</a>
                         <a href="prv_support" class="location__link--anchor ">지원시설</a>
-                        <a href="prv_bill" class="location__link--anchor ">공과금</a>
-                        <a href="prv_subsidy" class="location__link--anchor ">보증금</a>
+<%--                        <a href="prv_bill" class="location__link--anchor ">공과금</a>
+                        <a href="prv_subsidy" class="location__link--anchor ">보증금</a>--%>
                     </div>
                 </div>
             </div>
         </div>
         <div class="page__cnt">
             <h3 class="page__subject">실증시설</h3>
-            <div class="page__comment">실증시설 이용료는 시설별 사용일수를 기준으로 부과됩니다.</div>
+            <div class="page__comment">실증시설 이용료는 월별 단위로 부과됩니다(이용계약서의 이용기간에 따름)</div>
 
             <div class="fee__container">
 
@@ -67,7 +67,7 @@
                         </tr>
                         <tr>
                             <th>금액산출</th>
-                            <td>사용승인 시설의 1일사용료×사용승인일수</td>
+                            <td>사용승인 시설의 월사용료×사용승인월 월수</td>
                         </tr>
                         <tr>
                             <td colspan="2">사용공과금은 별도 부과</td>

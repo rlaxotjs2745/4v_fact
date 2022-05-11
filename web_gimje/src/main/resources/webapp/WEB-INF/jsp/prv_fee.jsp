@@ -36,15 +36,15 @@
                         <a href="prv_fee" class="location__link--anchor is-selected">개요</a>
                         <a href="prv_facility" class="location__link--anchor ">실증시설</a>
                         <a href="prv_support" class="location__link--anchor ">지원시설</a>
-                        <a href="prv_bill" class="location__link--anchor ">공과금</a>
-                        <a href="prv_subsidy" class="location__link--anchor ">보증금</a>
+<%--                        <a href="prv_bill" class="location__link--anchor ">공과금</a>
+                        <a href="prv_subsidy" class="location__link--anchor ">보증금</a>--%>
                     </div>
                 </div>
             </div>
         </div>
         <div class="page__cnt">
             <h3 class="page__subject">이용료 구분</h3>
-            <div class="page__comment">실증센터는 실증단지이용자에게 ‘실증시설 이용료, 지원시설 이용료, 사용공과금, 시설이용 보증금’을 받을 수 있습니다.</div>
+            <div class="cnt__text">농진원은 실증단지 이용자에게 ‘실증시설 이용료, 지원시설 이용료, 사용공과금, 시설이용 보증금’을 받을 수 있습니다.</div>
 
             <div class="fee__container">
                 <div class="fee__diagram">
@@ -52,13 +52,13 @@
                         <li>실증시설<br>이용료</li>
                         <li>지원시설<br>이용료</li>
                         <li>사용<br>공과금</li>
-                        <li>시설이용<br>보증금</li>
+                        <%--<li>시설이용<br>보증금</li>--%>
                     </ul>
                 </div>
                 <!--//-->
 
                 <div class="cnt__title">이용료 산출 기준 및 방법</div>
-                <div class="cnt__text">실증서비스 이용료와 보증금은 실증단지 위탁자(실증단지를 소유한 지방자치단체)가 정한 기준과 방법을 따라 실증센터가 산출합니다. </div>
+                <div class="cnt__text">실증서비스 이용료는 실증단지 위탁자(실증단지를 소유한 지방자치단체)가 정한 기준과 방법을 따라 실증센터가 산출합니다. </div>
 
 
                 <div class="cnt__title">실증 비용 예시</div>
@@ -118,13 +118,7 @@
                         <tbody>
                         <tr>
                             <th>납부액</th>
-                            <td colspan="3"><strong>8,789,130원</strong></td>
-                        </tr>
-                        <tr>
-                            <th>총 금액</th>
-                            <td class="td__won"><strong>17,578,260원</strong></td>
-                            <th>납부액</th>
-                            <td>50% <strong>8,789,130원</strong></td>
+                            <td colspan="3"><strong>17,578,260원</strong></td>
                         </tr>
                         <tr>
                             <th>온실 사용료</th>
@@ -151,7 +145,8 @@
                 </div>
                 <div class="cnt__effect">
                     <ul class="">
-                        <li>바우처 지원 시 할인율 50% (단, 예산 조기 소진 때는 할인이 불가능합니다.)</li>
+                        <li>상기 비용은 가산된 금액으로 단순 참조만 해주시기 바라며 실제 납부비용과 다름</li>
+                        <li>실제 납부비용은 계약 시 한국농업기술진흥원의 담당자에게 확인 필요</li>
                     </ul>
                 </div>
             </div>
