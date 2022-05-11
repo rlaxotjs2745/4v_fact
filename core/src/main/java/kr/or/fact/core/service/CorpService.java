@@ -15,4 +15,6 @@ public interface CorpService {
 
     void updateCorpInfo(CorpInfoVO corpInfoVO);
 
+    CorpInfoVO getUserCorp(long idx_user);
+
 }

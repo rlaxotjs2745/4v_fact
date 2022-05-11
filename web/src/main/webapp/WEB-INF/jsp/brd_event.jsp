@@ -53,7 +53,7 @@
 <c:forEach items="${eventContentVOList}" var="event" varStatus="status">
                     <li>
                         <a href="brd_event_detail?idx=${event.idx_event_content}">
-                            <figure><img src="<%=request.getContextPath()%>/static/assets/image/@list_01.png" alt=""></figure>
+                            <figure><img src="resources/assets/image/@list_01.png" alt=""></figure>
                             <span class="list__title">${event.subject}</span>
                             <span class="list__duedate">${event.event_start_date}~${event.event_end_date}</span>
                         </a>
@@ -62,49 +62,49 @@
                     <%--
                     <li>
                         <a href="#none">
-                            <figure><img src="<%=request.getContextPath()%>/static/assets/image/@list_02.png" alt=""></figure>
+                            <figure><img src="resources/assets/image/@list_02.png" alt=""></figure>
                             <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
                             <span class="list__duedate">2021.06.25~2021.07.25</span>
                         </a>
                     </li>
                     <li>
                         <a href="#none">
-                            <figure><img src="<%=request.getContextPath()%>/static/assets/image/@list_03.png" alt=""></figure>
+                            <figure><img src="resources/assets/image/@list_03.png" alt=""></figure>
                             <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
                             <span class="list__duedate">2021.06.25~2021.07.25</span>
                         </a>
                     </li>
                     <li>
                         <a href="#none">
-                            <figure><img src="<%=request.getContextPath()%>/static/assets/image/@list_04.png" alt=""></figure>
+                            <figure><img src="resources/assets/image/@list_04.png" alt=""></figure>
                             <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
                             <span class="list__duedate">2021.06.25~2021.07.25</span>
                         </a>
                     </li>
                     <li>
                         <a href="#none">
-                            <figure><img src="<%=request.getContextPath()%>/static/assets/image/@list_02.png" alt=""></figure>
+                            <figure><img src="resources/assets/image/@list_02.png" alt=""></figure>
                             <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
                             <span class="list__duedate">2021.06.25~2021.07.25</span>
                         </a>
                     </li>
                     <li>
                         <a href="#none">
-                            <figure><img src="<%=request.getContextPath()%>/static/assets/image/@list_03.png" alt=""></figure>
+                            <figure><img src="resources/assets/image/@list_03.png" alt=""></figure>
                             <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
                             <span class="list__duedate">2021.06.25~2021.07.25</span>
                         </a>
                     </li>
                     <li>
                         <a href="#none">
-                            <figure><img src="<%=request.getContextPath()%>/static/assets/image/@list_04.png" alt=""></figure>
+                            <figure><img src="resources/assets/image/@list_04.png" alt=""></figure>
                             <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
                             <span class="list__duedate">2021.06.25~2021.07.25</span>
                         </a>
                     </li>
                     <li>
                         <a href="#none">
-                            <figure><img src="<%=request.getContextPath()%>/static/assets/image/@list_01.png" alt=""></figure>
+                            <figure><img src="resources/assets/image/@list_01.png" alt=""></figure>
                             <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
                             <span class="list__duedate">2021.06.25~2021.07.25</span>
                         </a>

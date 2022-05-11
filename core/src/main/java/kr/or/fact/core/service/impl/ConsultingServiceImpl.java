@@ -45,7 +45,10 @@ public class ConsultingServiceImpl implements ConsultingService {
     }
 
 
-
+    @Override
+    public void saveDemoBsConsulting(DemoBsConsultingVO demoBsConsultingVO){
+        consultingMapper.saveDemoBsConsulting(demoBsConsultingVO);
+    }
 
 
 

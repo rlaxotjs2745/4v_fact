@@ -23,7 +23,7 @@ public class VisitReqVO {
     int is_cancel;//	number	4		0			취소 여부	0:취소안함, 1:취소함
     int is_manager;//	number	4		0			담당자 배정 여부	0:배정안됨, 1:배정됨
     long idx_manager;//	number	32		0		◯	담당자
-    int is_duration;//	number	4		0			여러날 여부	0:하루, 1:여러날
+    int is_duration;//	number	4		0			1:오전, 2:오후, 3:종일, 4, 여러날
     int duration_amount;//	number	10					해당일 포함 기간
     String memo;//	varchar2	1000					메모
     long idx_visit_data;//	number	32		0		◯	관리를 위한 연결

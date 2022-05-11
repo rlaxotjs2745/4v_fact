@@ -19,9 +19,9 @@
                     <a href="#" class="under__depth--anchor">견학 신청</a>
                     <div class="under__depth--list">
                         <a href="spt_faq">FAQ</a>
-                        <a href="spt_prevent?page=1">상담 신청</a>
+                        <a href="spt_consulting">상담 신청</a>
                         <%--<a href="spt_email?page=1">온라인 문의</a>--%>
-                        <a href="spt_visit?page=1">견학 신청</a>
+                        <a href="spt_visit">견학 신청</a>
                     </div>
                 </div>
             </div>
@@ -200,7 +200,7 @@
 
         <div id="popup_visit" class="pop__detail">
             <div class="section">
-                <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+                <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
                 <div class="popup__cnt">
                     <h5 class="popup__title">견학신청서 작성</h5>
 
@@ -319,7 +319,7 @@
 
         <div id="popup_visit_view" class="pop__detail">
             <div class="section">
-                <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+                <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
                 <div class="popup__cnt">
                     <h5 class="popup__title">견학신청 내용</h5>
 
@@ -389,7 +389,7 @@
 
         <div id="popup_visit_cancel" class="pop__mini ">
             <div class="section">
-                <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+                <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
                 <div class="popup__cnt">
                     <h5 class="popup__title">전북 김제 스마트팜 혁신밸리<br>실증단지</h5>
                     <span class="popup__message">견학신청을 취소하겠습니까?</span>
@@ -403,7 +403,7 @@
 
         <div id="popup_cancel_ok" class="pop__mini ">
             <div class="section">
-                <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+                <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
                 <div class="popup__cnt">
                     <h5 class="popup__title">전북 김제 스마트팜 혁신밸리<br>실증단지</h5>
                     <span class="popup__message">견학신청이 취소되었습니다.</span>

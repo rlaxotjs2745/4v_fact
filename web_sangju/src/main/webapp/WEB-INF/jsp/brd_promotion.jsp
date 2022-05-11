@@ -52,12 +52,12 @@
 <c:forEach items="${prContentList}" var="promotion" varStatus="status">
                     <li>
                         <a href="brd_promotion_detail?idx=${promotion.idx_pr_content}">
-                            <figure><img src="<%=request.getContextPath()%>/static/assets/image/@promo_01.png" alt=""></figure>
+                            <figure><img src="resources/assets/image/@promo_01.png" alt=""></figure>
                             <div class="caption">
                                 <span class="list__title">${promotion.subject}</span>
                                 <div class="list__file">
-                                    <img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt="hwp">
-                                    <img src="<%=request.getContextPath()%>/static/assets/image/ico_pdf.png" alt="pdf">
+                                    <img src="resources/assets/image/ico_hwp.png" alt="hwp">
+                                    <img src="resources/assets/image/ico_pdf.png" alt="pdf">
                                 </div>
                             </div>
                         </a>
@@ -66,84 +66,84 @@
                     <%--
                     <li>
                         <a href="brd_promotion_detail">
-                            <figure><img src="<%=request.getContextPath()%>/static/assets/image/@promo_02.png" alt=""></figure>
+                            <figure><img src="resources/assets/image/@promo_02.png" alt=""></figure>
                             <div class="caption">
                                 <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
                                 <div class="list__file">
-                                    <a href="#"><img src="<%=request.getContextPath()%>/static/assets/image/ico_png.png" alt="png"></a>
-                                    <a href="#"><img src="<%=request.getContextPath()%>/static/assets/image/ico_jpg.png" alt="jpg"></a>
+                                    <a href="#"><img src="resources/assets/image/ico_png.png" alt="png"></a>
+                                    <a href="#"><img src="resources/assets/image/ico_jpg.png" alt="jpg"></a>
                                 </div>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="brd_promotion_detail">
-                            <figure><img src="<%=request.getContextPath()%>/static/assets/image/@promo_03.png" alt=""></figure>
+                            <figure><img src="resources/assets/image/@promo_03.png" alt=""></figure>
                             <div class="caption">
                                 <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
                                 <div class="list__file">
-                                    <a href="#"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt="hwp"></a>
-                                    <a href="#"><img src="<%=request.getContextPath()%>/static/assets/image/ico_pdf.png" alt="pdf"></a>
+                                    <a href="#"><img src="resources/assets/image/ico_hwp.png" alt="hwp"></a>
+                                    <a href="#"><img src="resources/assets/image/ico_pdf.png" alt="pdf"></a>
                                 </div>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="brd_promotion_detail">
-                            <figure><img src="<%=request.getContextPath()%>/static/assets/image/@promo_04.png" alt=""></figure>
+                            <figure><img src="resources/assets/image/@promo_04.png" alt=""></figure>
                             <div class="caption">
                                 <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
                                 <div class="list__file">
-                                    <a href="#"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt="hwp"></a>
-                                    <a href="#"><img src="<%=request.getContextPath()%>/static/assets/image/ico_pdf.png" alt="pdf"></a>
+                                    <a href="#"><img src="resources/assets/image/ico_hwp.png" alt="hwp"></a>
+                                    <a href="#"><img src="resources/assets/image/ico_pdf.png" alt="pdf"></a>
                                 </div>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="brd_promotion_detail">
-                            <figure><img src="<%=request.getContextPath()%>/static/assets/image/@promo_02.png" alt=""></figure>
+                            <figure><img src="resources/assets/image/@promo_02.png" alt=""></figure>
                             <div class="caption">
                                 <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
                                 <div class="list__file">
-                                    <a href="#"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt="hwp"></a>
-                                    <a href="#"><img src="<%=request.getContextPath()%>/static/assets/image/ico_pdf.png" alt="pdf"></a>
+                                    <a href="#"><img src="resources/assets/image/ico_hwp.png" alt="hwp"></a>
+                                    <a href="#"><img src="resources/assets/image/ico_pdf.png" alt="pdf"></a>
                                 </div>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="brd_promotion_detail">
-                            <figure><img src="<%=request.getContextPath()%>/static/assets/image/@promo_03.png" alt=""></figure>
+                            <figure><img src="resources/assets/image/@promo_03.png" alt=""></figure>
                             <div class="caption">
                                 <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
                                 <div class="list__file">
-                                    <a href="#"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt="hwp"></a>
-                                    <a href="#"><img src="<%=request.getContextPath()%>/static/assets/image/ico_pdf.png" alt="pdf"></a>
+                                    <a href="#"><img src="resources/assets/image/ico_hwp.png" alt="hwp"></a>
+                                    <a href="#"><img src="resources/assets/image/ico_pdf.png" alt="pdf"></a>
                                 </div>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="brd_promotion_detail">
-                            <figure><img src="<%=request.getContextPath()%>/static/assets/image/@promo_04.png" alt=""></figure>
+                            <figure><img src="resources/assets/image/@promo_04.png" alt=""></figure>
                             <div class="caption">
                                 <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
                                 <div class="list__file">
-                                    <a href="#"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt="hwp"></a>
-                                    <a href="#"><img src="<%=request.getContextPath()%>/static/assets/image/ico_pdf.png" alt="pdf"></a>
+                                    <a href="#"><img src="resources/assets/image/ico_hwp.png" alt="hwp"></a>
+                                    <a href="#"><img src="resources/assets/image/ico_pdf.png" alt="pdf"></a>
                                 </div>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="brd_promotion_detail">
-                            <figure><img src="<%=request.getContextPath()%>/static/assets/image/@promo_01.png" alt=""></figure>
+                            <figure><img src="resources/assets/image/@promo_01.png" alt=""></figure>
                             <div class="caption">
                                 <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
                                 <div class="list__file">
-                                    <a href="#"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt="hwp"></a>
-                                    <a href="#"><img src="<%=request.getContextPath()%>/static/assets/image/ico_pdf.png" alt="pdf"></a>
+                                    <a href="#"><img src="resources/assets/image/ico_hwp.png" alt="hwp"></a>
+                                    <a href="#"><img src="resources/assets/image/ico_pdf.png" alt="pdf"></a>
                                 </div>
                             </div>
                         </a>

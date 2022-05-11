@@ -81,8 +81,8 @@
                             <c:if test="${ann.bs_status eq 2}"> 신청완료</c:if>
                             <c:if test="${ann.bs_status eq 3}"> 사업종료</c:if>
                         </td>
-                        <td class="td__left"><a href="/brd_annouce_detail?idx=${ann.idx_bs_announcement}" class="td__link">${ann.subject}<c:if test="${ann.is_new eq 1}"> <img src="<%=request.getContextPath()%>/static/assets/image/ico_new.png" alt="NEW" class="board__badge"></c:if></a></td>
-                        <td class="td__data"><img src="<%=request.getContextPath()%>/static/assets/image/ico_doc.png" alt=""></td>
+                        <td class="td__left"><a href="/brd_annouce_detail?idx=${ann.idx_bs_announcement}" class="td__link">${ann.subject}<c:if test="${ann.is_new eq 1}"> <img src="resources/assets/image/ico_new.png" alt="NEW" class="board__badge"></c:if></a></td>
+                        <td class="td__data"><img src="resources/assets/image/ico_doc.png" alt=""></td>
                         <td class="td__data">${ann.author}</td>
                         <td class="td__data"><fmt:formatDate value="${ann.posting_start_date}" pattern="yyyy-MM-dd" /></td>
                         <td class="td__data">${ann.view_count}</td>
@@ -92,7 +92,7 @@
                         <td>671</td>
                         <td>진행중</td>
                         <td class="td__left"><a href="#none" class="td__link">농업기술실용화재단 규제개선 현황(`21.6월)</a></td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_jpg.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_jpg.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
                         <td class="td__data">0,000</td>
@@ -101,7 +101,7 @@
                         <td>672</td>
                         <td>완료</td>
                         <td class="td__left"><a href="#none" class="td__link">농업기술실용화재단 정보보안 및 개인정보처리방침 변경 알림</a></td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
                         <td class="td__data">0,000</td>
@@ -110,7 +110,7 @@
                         <td>673</td>
                         <td>진행중</td>
                         <td class="td__left"><a href="#none" class="td__link">종자생명산업 맞춤형 인력양성_교육훈련생_신청</a></td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_pdf.png" alt=""></a><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_png.png" alt=""></a><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_pdf.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_png.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
                         <td class="td__data">0,000</td>
@@ -119,7 +119,7 @@
                         <td>674</td>
                         <td>진행중</td>
                         <td class="td__left"><a href="#none" class="td__link">2021년 종자생명산업 맞춤형 인력양성」 교육훈련생 선정 결과 알림</a></td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_ppt.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_ppt.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
                         <td class="td__data">0,000</td>
@@ -128,7 +128,7 @@
                         <td>675</td>
                         <td>진행중</td>
                         <td class="td__left"><a href="#none" class="td__link">창업기업제품 공공기관 우선구매제도 안내</a></td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_xls.png" alt=""></a><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_xls.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
                         <td class="td__data">0,000</td>
@@ -137,7 +137,7 @@
                         <td>676</td>
                         <td>진행중</td>
                         <td class="td__left"><a href="#none" class="td__link">2021년 혁신도시 공공기관연계육성 스마트팜 기업지원사업(비R&D) 온라인 신청 2021년 혁신도시 공공기관연계육성 스마트팜 기업지원사업(비R&D) </a></td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
                         <td class="td__data">0,000</td>
@@ -146,7 +146,7 @@
                         <td>677</td>
                         <td>진행중</td>
                         <td class="td__left"><a href="#none" class="td__link">농업기술실용화재단 규제개선 현황(`21.6월)</a></td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
                         <td class="td__data">0,000</td>
@@ -155,7 +155,7 @@
                         <td>678</td>
                         <td>진행중</td>
                         <td class="td__left"><a href="#none" class="td__link">2021년 종자생명산업 맞춤형 인력양성」 교육훈련생 선정 결과 알림</a></td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
                         <td class="td__data">0,000</td>
@@ -164,7 +164,7 @@
                         <td>679</td>
                         <td>진행중</td>
                         <td class="td__left"><a href="#none" class="td__link">종자생명산업 맞춤형 인력양성_교육훈련생_신청</a></td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
                         <td class="td__data">0,000</td>
@@ -175,13 +175,13 @@
                 <div class="table__paging">
                     <c:set var="name" value="${total_count/amount}" />
 
-                    <c:if test="${is_past eq true}"><a href="brd_announce?page=1" class="paging__prev2"><img src="<%=request.getContextPath()%>/static/assets/image/ico_paging_prev_02.png" alt=""></a></c:if>
-                    <c:if test="${is_prev eq true}"><a href="brd_announce?page=${cur_page-1}" class="paging__prev"><img src="<%=request.getContextPath()%>/static/assets/image/ico_paging_prev.png" alt=""></a></c:if>
+                    <c:if test="${is_past eq true}"><a href="brd_announce?page=1" class="paging__prev2"><img src="resources/assets/image/ico_paging_prev_02.png" alt=""></a></c:if>
+                    <c:if test="${is_prev eq true}"><a href="brd_announce?page=${cur_page-1}" class="paging__prev"><img src="resources/assets/image/ico_paging_prev.png" alt=""></a></c:if>
 <c:forEach var="i" begin="1" end="${page_amount}">
                     <a href="brd_announce?page=${(cur_sector-1)*page_amount+i}" <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">class="is-active"</c:if>>${(cur_sector-1)*page_amount+i}</a>
 </c:forEach>
-                    <c:if test="${is_next eq true}"><a href="brd_announce?page=${cur_page+1}" class="paging__next"><img src="<%=request.getContextPath()%>/static/assets/image/ico_paging_next.png" alt=""></a></c:if>
-                    <c:if test="${is_last eq true}"><a href="brd_announce?page=${tot_page}" class="paging__next2"><img src="<%=request.getContextPath()%>/static/assets/image/ico_paging_next_02.png" alt=""></a></c:if>
+                    <c:if test="${is_next eq true}"><a href="brd_announce?page=${cur_page+1}" class="paging__next"><img src="resources/assets/image/ico_paging_next.png" alt=""></a></c:if>
+                    <c:if test="${is_last eq true}"><a href="brd_announce?page=${tot_page}" class="paging__next2"><img src="resources/assets/image/ico_paging_next_02.png" alt=""></a></c:if>
                 </div>
             </div>
             <!--//-->

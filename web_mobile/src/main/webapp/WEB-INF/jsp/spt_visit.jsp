@@ -167,7 +167,7 @@
 
 <div id="popup_visit" class="pop__detail">
     <div class="section">
-        <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+        <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
         <div class="popup__cnt">
             <h5 class="popup__title">견학신청서 작성</h5>
 
@@ -300,7 +300,7 @@
 
 <div id="popup_visit_view" class="pop__detail">
     <div class="section">
-        <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+        <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
         <div class="popup__cnt">
             <h5 class="popup__title">견학신청 내용</h5>
 
@@ -383,7 +383,7 @@
 
 <div id="popup_cancel" class="pop__mini ">
     <div class="section">
-        <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+        <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
         <div class="popup__cnt">
             <h5 class="popup__title">전북 김제 스마트팜 혁신밸리<br>실증단지 </h5>
             <span class="popup__message">견학신청을 취소하겠습니까?</span>
@@ -397,7 +397,7 @@
 
 <div id="popup_cancel_ok" class="pop__mini ">
     <div class="section">
-        <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+        <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
         <div class="popup__cnt">
             <h5 class="popup__title">전북 김제 스마트팜 혁신밸리<br>실증단지 </h5>
             <span class="popup__message">견학신청이 취소되었습니다.</span>
@@ -408,9 +408,9 @@
     </div>
 </div>
 
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 
 <%@include file ="footer.jsp" %>

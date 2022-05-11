@@ -1,5 +1,6 @@
 package kr.or.fact.core.service.impl;
 
+import kr.or.fact.core.model.DTO.CorpInfoVO;
 import kr.or.fact.core.model.DTO.ParamVO;
 import kr.or.fact.core.model.DTO.ResultVO;
 import kr.or.fact.core.model.DTO.UserVO;

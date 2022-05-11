@@ -53,8 +53,8 @@
                     <tr>
                         <td>670</td>
                         <td>대기</td>
-                        <td class="td__left"><a href="#none" class="td__link">2021년 종자생명산업 맞춤형 인력양성」 교육훈련생 선정 결과 알림 <img src="<%=request.getContextPath()%>/static/assets/image/ico_new.png" alt="NEW" class="board__badge"></a></td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_doc.png" alt=""></a></td>
+                        <td class="td__left"><a href="#none" class="td__link">2021년 종자생명산업 맞춤형 인력양성」 교육훈련생 선정 결과 알림 <img src="resources/assets/image/ico_new.png" alt="NEW" class="board__badge"></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_doc.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
                         <td class="td__data">0,000</td>
@@ -63,7 +63,7 @@
                         <td>671</td>
                         <td>진행중</td>
                         <td class="td__left"><a href="#none" class="td__link">농업기술실용화재단 규제개선 현황(`21.6월)</a></td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_jpg.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_jpg.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
                         <td class="td__data">0,000</td>
@@ -72,7 +72,7 @@
                         <td>672</td>
                         <td>완료</td>
                         <td class="td__left"><a href="#none" class="td__link">농업기술실용화재단 정보보안 및 개인정보처리방침 변경 알림</a></td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
                         <td class="td__data">0,000</td>
@@ -81,7 +81,7 @@
                         <td>673</td>
                         <td>진행중</td>
                         <td class="td__left"><a href="#none" class="td__link">종자생명산업 맞춤형 인력양성_교육훈련생_신청</a></td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_pdf.png" alt=""></a><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_png.png" alt=""></a><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_pdf.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_png.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
                         <td class="td__data">0,000</td>
@@ -90,7 +90,7 @@
                         <td>674</td>
                         <td>진행중</td>
                         <td class="td__left"><a href="#none" class="td__link">2021년 종자생명산업 맞춤형 인력양성」 교육훈련생 선정 결과 알림</a></td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_ppt.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_ppt.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
                         <td class="td__data">0,000</td>
@@ -99,7 +99,7 @@
                         <td>675</td>
                         <td>진행중</td>
                         <td class="td__left"><a href="#none" class="td__link">창업기업제품 공공기관 우선구매제도 안내</a></td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_xls.png" alt=""></a><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_xls.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
                         <td class="td__data">0,000</td>
@@ -108,7 +108,7 @@
                         <td>676</td>
                         <td>진행중</td>
                         <td class="td__left"><a href="#none" class="td__link">2021년 혁신도시 공공기관연계육성 스마트팜 기업지원사업(비R&D) 온라인 신청 2021년 혁신도시 공공기관연계육성 스마트팜 기업지원사업(비R&D) </a></td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
                         <td class="td__data">0,000</td>
@@ -117,7 +117,7 @@
                         <td>677</td>
                         <td>진행중</td>
                         <td class="td__left"><a href="#none" class="td__link">농업기술실용화재단 규제개선 현황(`21.6월)</a></td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
                         <td class="td__data">0,000</td>
@@ -126,7 +126,7 @@
                         <td>678</td>
                         <td>진행중</td>
                         <td class="td__left"><a href="#none" class="td__link">2021년 종자생명산업 맞춤형 인력양성」 교육훈련생 선정 결과 알림</a></td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
                         <td class="td__data">0,000</td>
@@ -135,7 +135,7 @@
                         <td>679</td>
                         <td>진행중</td>
                         <td class="td__left"><a href="#none" class="td__link">종자생명산업 맞춤형 인력양성_교육훈련생_신청</a></td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
                         <td class="td__data">XXXX</td>
                         <td class="td__data">2021-00-00</td>
                         <td class="td__data">0,000</td>
@@ -144,13 +144,13 @@
                 </table>
                 <!--//-->
                 <div class="table__paging">
-                    <a href="#none" class="paging__prev2 disabled"><img src="<%=request.getContextPath()%>/static/assets/image/ico_paging_prev_02.png" alt=""></a>
-                    <a href="#none" class="paging__prev disabled"><img src="<%=request.getContextPath()%>/static/assets/image/ico_paging_prev.png" alt=""></a>
+                    <a href="#none" class="paging__prev2 disabled"><img src="resources/assets/image/ico_paging_prev_02.png" alt=""></a>
+                    <a href="#none" class="paging__prev disabled"><img src="resources/assets/image/ico_paging_prev.png" alt=""></a>
                     <a href="#none" class="is-active">1</a>
                     <a href="#none">2</a>
                     <a href="#none">3</a>
-                    <a href="#none" class="paging__next"><img src="<%=request.getContextPath()%>/static/assets/image/ico_paging_next.png" alt=""></a>
-                    <a href="#none" class="paging__next2"><img src="<%=request.getContextPath()%>/static/assets/image/ico_paging_next_02.png" alt=""></a>
+                    <a href="#none" class="paging__next"><img src="resources/assets/image/ico_paging_next.png" alt=""></a>
+                    <a href="#none" class="paging__next2"><img src="resources/assets/image/ico_paging_next_02.png" alt=""></a>
                 </div>
             </div>
             <!--//-->
@@ -173,19 +173,19 @@
                 <option value="1">관련부처 사이트</option>
             </select>
             <div class="footer__bar">
-                <span><img src="<%=request.getContextPath()%>/static/assets/image/footer_mark.png" alt=""></span>
+                <span><img src="resources/assets/image/footer_mark.png" alt=""></span>
             </div>
         </div>
         <div class="footer__info">
-            <h3 class="footer__logo"><img src="<%=request.getContextPath()%>/static/assets/image/logo_footer.png" alt=""></h3>
+            <h3 class="footer__logo"><img src="resources/assets/image/logo_footer.png" alt=""></h3>
             <div class="footer__address">54667 전라북도 익산시 평동로 457 (송학동 381) <br>TEL 063-919-1000 FAX 063-919-1269</div>
             <div class="footer__copyright">Copyright(c) 2010 The Foundation of AG. Tech, Commercialization and Transfer. All Rights Reserved.</div>
         </div>
     </div>
 </div>
 </div>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 <%@include file ="footer.jsp" %>

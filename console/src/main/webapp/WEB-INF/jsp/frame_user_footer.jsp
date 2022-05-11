@@ -15,31 +15,31 @@
 <!-- / Layout wrapper -->
 
 <!-- Core scripts -->
-<script src="<%=request.getContextPath()%>/static/assets/vendor/libs/popper/popper.js"></script>
-<script src="<%=request.getContextPath()%>/static/assets/vendor/js/bootstrap.js"></script>
-<script src="<%=request.getContextPath()%>/static/assets/vendor/js/sidenav.js"></script>
+<script src="resources/assets/vendor/libs/popper/popper.js"></script>
+<script src="resources/assets/vendor/js/bootstrap.js"></script>
+<script src="resources/assets/vendor/js/sidenav.js"></script>
 
 <!-- Libs -->
-<script src="<%=request.getContextPath()%>/static/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
 
-<script src="<%=request.getContextPath()%>/static/assets/vendor/libs/chartjs/chartjs.js"></script>
+<script src="resources/assets/vendor/libs/chartjs/chartjs.js"></script>
 
 
-<script src="<%=request.getContextPath()%>/static/assets/vendor/libs/moment/moment.js"></script>
+<script src="resources/assets/vendor/libs/moment/moment.js"></script>
 
 
-<script src="<%=request.getContextPath()%>/static/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+<script src="resources/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
 
 <!-- Demo -->
-<script src="<%=request.getContextPath()%>/static/assets/vendor/libs/flot/flot.js"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/demo.js"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/charts_flot.js"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/dashboards_dashboard-2.js"></script>
+<script src="resources/assets/vendor/libs/flot/flot.js"></script>
+<script src="resources/assets/js/demo.js"></script>
+<script src="resources/assets/js/charts_flot.js"></script>
+<script src="resources/assets/js/dashboards_dashboard-2.js"></script>
 
-<script src="<%=request.getContextPath()%>/static/assets/js/pages_articles_list.js"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/forms_pickers.js"></script>
-<script src="<%=request.getContextPath()%>/static/assets/vendor/libs/fullcalendar/fullcalendar.js"></script>
+<script src="resources/assets/js/pages_articles_list.js"></script>
+<script src="resources/assets/js/forms_pickers.js"></script>
+<script src="resources/assets/vendor/libs/fullcalendar/fullcalendar.js"></script>
 <script>
     $(function() {
         var isRtl = $('html').attr('dir') === 'rtl';

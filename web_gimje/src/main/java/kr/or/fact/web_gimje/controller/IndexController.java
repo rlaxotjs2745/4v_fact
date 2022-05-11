@@ -1104,9 +1104,8 @@ public class IndexController {
         return "spt_faq";
     }
 
-    @RequestMapping("/spt_prevent")
-    public String spt_prevent(HttpSession session
-                              ,@Param("page") int page
+    @RequestMapping("/spt_consulting")
+    public String spt_consulting(HttpSession session
             , Model model){
 
 
@@ -1131,7 +1130,7 @@ public class IndexController {
 
                 if(consultingCount==0){ //컨설팅한게 업다
 
-                    return "spt_prevent";
+                    return "spt_consulting";
                 }
 
                 List<DemoBsConsultingVO> demoBsConsultingVOList = consultingService.getConsultingList(CONSTANT.user_idx,findUser.getIdx_user(),page,list_amount);
@@ -1185,7 +1184,7 @@ public class IndexController {
             else {//세션 만료 혹은 부정 접근
                 model.addAttribute("is_login",false);
                 clearSessionAndRedirect(session);
-                return "spt_prevent";
+                return "spt_consulting";
             }
 
         }
@@ -1194,12 +1193,11 @@ public class IndexController {
         }
 
         getHomepageInfo(model);
-        return "spt_prevent";
+        return "spt_consulting";
     }
 
     @RequestMapping("/spt_visit")
     public String spt_visit(HttpSession session
-            ,@Param("page") int page
             , Model model){
 
 

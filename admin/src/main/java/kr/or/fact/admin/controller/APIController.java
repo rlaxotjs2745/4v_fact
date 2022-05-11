@@ -57,6 +57,11 @@ public class APIController {
     @Resource(name = "userDemoBsService")
     public UserDemoBsService userDemoBsService;
 
+    @Resource(name = "visitService")
+    public VisitService visitService;
+
+
+
     @Autowired
     private JavaMailSender mailSender;
 
@@ -467,6 +472,74 @@ public class APIController {
 
 
         }
+
+        return  resultVO;
+    }
+
+    @RequestMapping(value = "/get_visit_data",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  get_visit_data(HttpSession session,
+                              @RequestBody VisitDateVO visitDateVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("성공");
+        resultVO.setResult_code("SUCCESS");
+
+        List<VisitDataVO> visitDataVOList = visitService.getDurationVisitData(visitDateVO);
+        resultVO.setVisitDataVOList(visitDataVOList);
+        return  resultVO;
+    }
+
+    @RequestMapping(value = "/get_monthly_visit_data",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  get_monthly_visit_data(HttpSession session,
+                             @RequestBody VisitDateVO visitDateVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("성공");
+        resultVO.setResult_code("SUCCESS");
+
+        List<VisitDataVO> visitDataVOList = visitService.getMonthlyVisitData(visitDateVO.getStart_date());
+        resultVO.setVisitDataVOList(visitDataVOList);
+        return  resultVO;
+    }
+
+    @RequestMapping(value = "/save_visit_date",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  save_visit_date(HttpSession session,
+                             @RequestBody List<VisitDataVO> visitDataVOList){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("성공");
+        resultVO.setResult_code("SUCCESS");
+
+        if(visitDataVOList == null || visitDataVOList.isEmpty()){
+            resultVO.setResult_str("저장할 데이터가 없습니다");
+            resultVO.setResult_code("ERROR_1001");
+            return resultVO;
+        }
+
+        visitService.saveOrUpdateHugeVisitData(visitDataVOList);
+
+        return  resultVO;
+    }
+
+    @RequestMapping(value = "/delete_visit_date",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  delete_visit_date(HttpSession session,
+                              @RequestBody List<VisitDataVO> visitDataVOList){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("성공");
+        resultVO.setResult_code("SUCCESS");
+
+        if(visitDataVOList == null || visitDataVOList.isEmpty()){
+            resultVO.setResult_str("삭제할 데이터가 없습니다");
+            resultVO.setResult_code("ERROR_1001");
+            return resultVO;
+        }
+
+        visitService.deleteHugeVisitData(visitDataVOList);
 
         return  resultVO;
     }

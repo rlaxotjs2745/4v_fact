@@ -84,7 +84,7 @@
 
         <div id="popup_fileupload" class="pop__detail">
             <div class="section">
-                <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+                <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
 
 
                 <div class="popup__cnt">
@@ -177,7 +177,7 @@
 
 <%@include file ="footer.jsp" %>
 <%@include file ="script.jsp" %>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/pace.min.js"></script>
+<script src="resources/assets/js/lib/pace.min.js"></script>
 <script>
     $("#btn_fileupload").click(function() {
         var result = confirm('신청하려면 로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까');

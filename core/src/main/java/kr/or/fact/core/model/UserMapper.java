@@ -1,6 +1,7 @@
 package kr.or.fact.core.model;
 
 
+import kr.or.fact.core.model.DTO.CorpInfoVO;
 import kr.or.fact.core.model.DTO.PagedUserListVO;
 import kr.or.fact.core.model.DTO.UserVO;
 import org.apache.ibatis.annotations.Mapper;

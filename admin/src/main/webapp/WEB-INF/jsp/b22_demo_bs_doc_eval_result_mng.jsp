@@ -31,87 +31,71 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="">
-                                    <td class="text-center">1</td>
-                                    <td class="text-center">2021.04.26</td>
-                                    <td class="">12345678901</td>
-                                    <td class="">도레미파솔라시도도시라솔파미라도</td>
-                                    <td class="text-right">540 / 60</td>
-                                    <td class="text-right">2 : 1</td>
-                                    <td class="text-right">2,510</td>
-                                    <td class="text-right">241</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-underline" data-toggle="modal" data-target="#modals-result-view">보기</a></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">2</td>
-                                    <td class="text-center">오늘까지</td>
-                                    <td class="">12345678901</td>
-                                    <td class="">도레미파솔라시도도시라솔파미라도</td>
-                                    <td class="text-right">540 / 60</td>
-                                    <td class="text-right">2 : 1</td>
-                                    <td class="text-right">2,510</td>
-                                    <td class="text-right">241</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-underline" data-toggle="modal" data-target="#modals-result-view">보기</a></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">3</td>
-                                    <td class="text-center">2021.04.26</td>
-                                    <td class="">12345678901</td>
-                                    <td class="">도레미파솔라시도도시라솔파미라도</td>
-                                    <td class="text-right">540 / 60</td>
-                                    <td class="text-right">2 : 1</td>
-                                    <td class="text-right">2,510</td>
-                                    <td class="text-right">241</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-underline" data-toggle="modal" data-target="#modals-result-view">보기</a></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">4</td>
-                                    <td class="text-center">2021.04.26</td>
-                                    <td class="">12345678901</td>
-                                    <td class="">도레미파솔라시도도시라솔파미라도</td>
-                                    <td class="text-right">540 / 60</td>
-                                    <td class="text-right">2 : 1</td>
-                                    <td class="text-right">2,510</td>
-                                    <td class="text-right">241</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-underline" data-toggle="modal" data-target="#modals-result-view">보기</a></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">5</td>
-                                    <td class="text-center">2021.04.26</td>
-                                    <td class="">12345678901</td>
-                                    <td class="">도레미파솔라시도도시라솔파미라도</td>
-                                    <td class="text-right">540 / 60</td>
-                                    <td class="text-right">2 : 1</td>
-                                    <td class="text-right">2,510</td>
-                                    <td class="text-right">241</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-underline" data-toggle="modal" data-target="#modals-result-view">보기</a></td>
-                                </tr>
+                                <c:if test="${total_count eq 0}">
+                                    <tr class="">
+                                        <td class="text-center" colspan="7" rowspan="3">내용이 없습니다</td>
+                                    </tr>
+                                    <tr class="">
+                                    </tr>
+                                    <tr class="">
+                                    </tr>
+                                    <tr class="">
+                                    </tr>
+                                </c:if>
+                                <c:if test="${total_count ne 0}">
+                                    <c:forEach items="${adminApplHeaderListVOS}" var="item" varStatus="status">
+
+
+                                        <tr class="" onClick="getUserApplList(${item.idx_demo_business},1,9999)">
+                                            <td class="text-center">${item.idx_demo_business}</td>
+                                            <td class="text-center">${item.exam_end}</td>
+                                            <td class="">${item.demo_bs_code}</td>
+                                            <td class="">${item.demo_subject}</td>
+                                            <td class="text-right">${item.applicant_count} / ${item.recruit_count_limit}</td>
+                                            <td class="text-right"><fmt:formatNumber value="${item.applicant_count / item.recruit_count_limit}" pattern="#.##"/>  : 1</td>
+                                            <td class="text-right">${item.appl_recomm}</td>
+                                            <td class="text-right">${item.appl_review_done}</td>
+                                            <td class="text-center"><a href="#none" class="btn btn-underline" data-toggle="modal" data-target="#modals-result-view">보기</a></td>
+                                        </tr>
+
+                                    </c:forEach>
+                                </c:if>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
-                        </div>
-                        <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                    <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
-                                </ul>
+                    <c:if test="${total_count ne 0}">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${total_count}개 중 ${list_amount*(cur_page-1)+1}에서 ${list_amount*page_amount}까지</div>
+                            </div>
+                            <div class="col-sm-12 col-md-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="">
+                                    <ul class="pagination">
+
+                                        <c:set var="name" value="${total_count/amount}" />
+
+
+                                        <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:load('b21_demo_bs_appl_mng?page=1','신청접수 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                        <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:load('b21_demo_bs_appl_mng?page=${cur_page-1}','신청접수 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+
+
+
+                                        <c:forEach var="i" begin="1" end="${page_amount}">
+                                            <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:load('b21_demo_bs_appl_mng?page=${(cur_sector-1)*page_amount+i}','신청접수 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
+                                        </c:forEach>
+
+                                        <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:load('b21_demo_bs_appl_mng?page=${cur_page+1}','신청접수 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                        <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:load('b21_demo_bs_appl_mng?page=${tot_page}','신청접수 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </c:if>
+
                 </div>
             </div>
         </div>
-
         <hr>
 
         <div class="row">
@@ -157,139 +141,12 @@
             </div>
         </div>
 
-        <div class="card">
-            <h6 class="card-header with-elements">
-                <div class="card-header-title">총 XXX개 신청 <span class="normal">사용승인 : <strong>70</strong>건</span><span>사용불가 : <strong>70</strong>건</span><span>미 심사 : <strong>70</strong>건</span></div>
-                <div class="card-header-elements ml-auto">
-                    <div class="btn-group btn-group-sm btn-group-toggle ml-2" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="btn-radio" checked="">전체
-                        </label>
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="btn-radio"> 미 심사
-                        </label>
-                        <label class="btn btn-secondary ">
-                            <input type="radio" name="btn-radio"> 심사 완료
-                        </label>
-                    </div>
-                </div>
-            </h6>
-            <div class="card-datatable table-responsive pt-0 pb-3">
-                <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
+        <div id="eval_list" class="card">
 
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table id="" class="table table-bordered table-hover  no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
-                                <thead>
-                                <tr role="row">
-                                    <th class="text-center " style="width:60px">No</th>
-                                    <th class="text-center " style="width:80px">신청서</th>
-                                    <th class="text-center " style="width:80px">신청서 검토</th>
-                                    <th class="text-center " style="width:60px">구분</th>
-                                    <th class="text-center " style="width:200px">신청자이름</th>
-                                    <th class="text-center " style="width:300px">기업정보</th>
-                                    <th class="text-center " style="width:100px">심의종류</th>
-                                    <th class="text-center " style="width:100px">사전상담</th>
-                                    <th class="text-center " style="width:100px">실증책임자</th>
-                                    <th class="text-center " style="width:100px">선정평가서</th>
-                                    <th class="text-center " style="width:100px">종합의견서</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="">
-                                    <td class="text-center">1</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm" data-toggle="modal" data-target="#modals-application-write">입력하기</a></td>
-                                    <td class="text-center">미발송</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">행복한 농장(주)</td>
-                                    <td class="text-center">대표자 홍길동, 02-0000-0000</td>
-                                    <td class="text-center">서면심사</td>
-                                    <td class="text-center">김상담</td>
-                                    <td class="text-center">미지정</td>
-                                    <td class="text-center">미등록</td>
-                                    <td class="text-center">미등록</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">2</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">사용하기</a></td>
-                                    <td class="text-center">미발송</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">데이터 중심 농업(주)</td>
-                                    <td class="text-center">대표자 홍길동, 02-0000-0000</td>
-                                    <td class="text-center">서면심사</td>
-                                    <td class="text-center">김상담</td>
-                                    <td class="text-center">미지정</td>
-                                    <td class="text-center">등록완료</td>
-                                    <td class="text-center">등록완료</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">3</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">내려받기</a></td>
-                                    <td class="text-center">발송</td>
-                                    <td class="text-center">추가</td>
-                                    <td class="text-center">기관명</td>
-                                    <td class="text-center">대표자 홍길동, 02-0000-0000</td>
-                                    <td class="text-center">서면심사</td>
-                                    <td class="text-center">-</td>
-                                    <td class="text-center">-</td>
-                                    <td class="text-center">등록완료</td>
-                                    <td class="text-center">등록완료</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">4</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">내려받기</a></td>
-                                    <td class="text-center">발송</td>
-                                    <td class="text-center">추가</td>
-                                    <td class="text-center">기관명</td>
-                                    <td class="text-center">대표자 홍길동, 02-0000-0000</td>
-                                    <td class="text-center">서면심사</td>
-                                    <td class="text-center">김상담</td>
-                                    <td class="text-center">미지정</td>
-                                    <td class="text-center">등록완료</td>
-                                    <td class="text-center">등록완료</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">5</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">내려받기</a></td>
-                                    <td class="text-center">발송</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">기관명</td>
-                                    <td class="text-center">대표자 홍길동, 02-0000-0000</td>
-                                    <td class="text-center">서면심사</td>
-                                    <td class="text-center">김상담</td>
-                                    <td class="text-center">미지정</td>
-                                    <td class="text-center">등록완료</td>
-                                    <td class="text-center">등록완료</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
-                        </div>
-                        <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                    <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- Modal template -->
-        <div class="modal fade" id="modals-application-write">
+        <div class="modal fade" id="modals-evaluation-write">
             <div class="modal-dialog modal-lg">
                 <form class="modal-content">
                     <div class="modal-header">
@@ -419,6 +276,105 @@
         </div>
 
     </div>
+
+<script>
+    $("#btn_corp_save").on('click', function() {
+        let confirm_t ="저장하시겠습니까";
+        if($("#is_saved").val()!=0)
+        {
+            confirm_t ="기존 정보를 수정하시겠습니까";
+        }
+        if (!confirm(confirm_t)) {
+            // 취소(아니오) 버튼 클릭 시 이벤트
+            return;
+        }
+
+        let param = {
+            idx_corp_info:$("#idx_corp_info").val()*0.0,//	number	32			◯		인덱스	auto increase
+            corp_name_kor:$("#corp_name").val(),//	varchar2	40					법인 이름
+            company_num:$("#corp_num").val(),//	varchar2	20					사업자등록번호
+            corp_reg_num:$("#corp_reg_num").val(),//	varchar2	20					법인등록번호
+            tel_num:$("#corp_phone").val(),//	varchar2	20					본사 전화번호
+            fax_num:$("#corp_phone").val(),//	varchar2	20					fax 번호
+            email:$("#email").val(),//	varchar2	320					대표 이메일
+            homepage:$("#homepage").val(),//	varchar2	255					회사 홈페이지
+            corp_addr:$("#corp_addr").val(),//	varchar2	200					본사 소재지
+            corp_addr2:$("#corp_addr2").val(),//	VARCHAR2	200					본사 소재지 상세
+            is_other_addr:$("#is_lab_ower").val()*0,//	number	4		0			공장 혹은 농장 소유 여부	0:없음, 1:자가, 2:임차, 99:기타
+            other_addr:$("#corp_rnd_addr").val(),//	varchar2	200					공장 혹은 농장 주소
+            sales_in_prev:$("#idx_corp_info").val()*0,//	number	38					전년도 매출액
+            ca_ratio:$("#corp_er").val()*0,//	number	4					자기자본비율(capital adequacy ratio)
+            emploee_num:$("#employees_count").val()*0,//	number						직원수
+            bs_sector:$("#bs_type1").val(),//	varchar2	100					업태, 종목(businness sectors)
+            product:$("#main_product").val(),//	varchar2	100					주생산품목
+            corp_type:$("#user_demo_bs_type").val()*0,//	number	4		1			법인 종류	0:미등록기업(설립전), 1:일반기업, 2: 농업진흥기관, 3:선도기업, 4:외국연구기관, 5:특정연구기관, 6:정부출연연구기관, 7:스마트팜 관련 기업부설연구소 보유기업, 8: 대학교, 99:기타 단체
+            is_benture:$("#is_benture").val(),//	NUMBER	4		0			벤처 여부	0:해당없음, 1:창업한지 7년 이하의 창업벤처기업
+            bs_plan:$("#demobs_tech_plan").val(),//	varchar2	100					개발예정품목(기술)
+            is_applicant:1,//	number	4					콘솔 사용 여부	0:콘솔사용 안함, 1:콘솔사용
+            demo_facility_type:$("#req_facility").val()*0,//	number	4		0			이용신청 시설	0:해당없음, 1:온실, 2:r&d연구실, 4:스타트업 사무실, 512: 기타
+            demo_facility_etc:$("#demo_facility_etc").val(),//	varchar2	20					이용신청 시설 기타 내용
+            founding_date:new Date($("#corp_birth").val()),//	date						설립일
+            ceo_name_kor:$("#ceo_name").val(),
+            ceo_addr:$("#ceo_address").val(),
+            ceo_tel_num:$("#ceo_pnumber").val(),
+            ceo_mphone_num:$("#ceo_mnumber").val(),
+            ceo_email:$("#ceo_email").val()
+        }
+        $.ajax({
+            type: 'post',
+            url: 'save_corp_info', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(param),//보내는 데이터
+            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType: 'text',//받는 데이터 타입
+            success: function (result) {
+                //작업이 성공적으로 발생했을 경우
+
+                console.log(result);
+                alert(result.result_str);
+                $("#btn_corp_save").html("기업 정보 수정");
+                $("#idx_corp_info").val(result.result_idx);
+                $("#is_saved").val(1);
+
+                //STATUS_001 :
+            },
+            error: function () {
+                //에러가 났을 경우 실행시킬 코드
+            }
+        });
+    });
+
+
+    function getUserApplList(idx,page_num,filter){
+
+        let param = {
+            page_num: page_num,
+            amount: 5,
+            order_field: "IDX_DEMO_BUSINESS",
+            filter1: filter,
+            filter2: 9998,
+            idx: idx
+        }
+        $.ajax({
+            type: 'post',
+            url: 'appl_list_by_b21_filtered', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(param),//보내는 데이터
+            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType: 'text',//받는 데이터 타입
+            success: function (result) {
+                //작업이 성공적으로 발생했을 경우
+
+
+                $("#appl_list").html(result);
+
+                //STATUS_001 :
+            },
+            error: function () {
+                //에러가 났을 경우 실행시킬 코드
+            }
+        });
+        //});
+    }
+</script>
 
 <!-- Layout footer -->
 <%@include file ="layouts/frame_footer.jsp" %>

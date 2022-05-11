@@ -1,10 +1,7 @@
 package kr.or.fact.web.controller;
 
 import kr.or.fact.core.model.DTO.*;
-import kr.or.fact.core.service.CorpService;
-import kr.or.fact.core.service.DemoBsService;
-import kr.or.fact.core.service.UserDemoBsService;
-import kr.or.fact.core.service.UserService;
+import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.CONSTANT;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +25,13 @@ public class WebAPIController {
 
     @Resource(name = "userDemoBsService")
     UserDemoBsService userDemoBsService;
+
+    @Resource(name = "visitService")
+    VisitService visitService;
+
+    @Resource(name = "consultingService")
+    ConsultingService consultingService;
+
 
     @RequestMapping(value = "/user_id_check",method = RequestMethod.POST)
     public @ResponseBody
@@ -52,6 +54,7 @@ public class WebAPIController {
         }
         return resultVO;
     }
+
     @RequestMapping(value = "/search_corp_list",method = RequestMethod.POST)
     public String search_corp_list(HttpSession session,
                                       Model model,
@@ -68,6 +71,7 @@ public class WebAPIController {
         }
         return "include/corp_list";
     }
+
     @RequestMapping(value = "/join_confirm",method = RequestMethod.POST)
     public @ResponseBody
     ResultVO  join_confirm(HttpSession session,
@@ -649,4 +653,298 @@ public class WebAPIController {
         userDemoBsService.updateUserDemoBsWebStep4(findUserDemoBsVo);
         return resultVO;
     }
+
+
+    @RequestMapping(value = "/get_monthly_visit_data",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  get_monthly_visit_data(HttpSession session,
+                                     @RequestBody VisitDateVO visitDateVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("성공");
+        resultVO.setResult_code("SUCCESS");
+
+        List<VisitDataVO> visitDataVOList = visitService.getMonthlyVisitData(visitDateVO.getStart_date());
+        resultVO.setVisitDataVOList(visitDataVOList);
+        return  resultVO;
+    }
+
+
+    @RequestMapping(value = "/get_user_visit_req",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  get_user_visit_req(HttpSession session,
+                                     @RequestBody ParamVisitReqVO paramVisitReqVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("성공");
+        resultVO.setResult_code("SUCCESS");
+
+        VisitReqVO visitReqVO = visitService.getVisitReqByIdx(paramVisitReqVO.getIdx_visit_req());
+
+        resultVO.setVisitReqVO(visitReqVO);
+        return  resultVO;
+    }
+    @RequestMapping(value = "/cancel_user_visit_req",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  cancel_user_visit_req(HttpSession session,
+                                 @RequestBody ParamVisitReqVO paramVisitReqVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("삭제하였습니다");
+        resultVO.setResult_code("SUCCESS");
+
+        VisitReqVO visitReqVO = visitService.getVisitReqByIdx(paramVisitReqVO.getIdx_visit_req());
+
+        if(visitReqVO==null){
+            resultVO.setResult_str("아이템을 찾을 수 없습니다");
+            resultVO.setResult_code("ERROR_1001");
+            return resultVO;
+        }
+        visitService.deleteVisitReq(paramVisitReqVO.getIdx_visit_req());
+
+        return  resultVO;
+    }
+
+    //방문예약 저장
+    @RequestMapping(value = "/save_visit_req",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO save_visit_req(HttpSession session,
+                                        @RequestBody VisitReqVO visitReqVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("신청했습니다");
+
+        //1.신청 Usser 파악
+
+
+        //2.기 신청이 있는지 체크
+        VisitDataVO visitDataVO = visitService.getVisitData(visitReqVO.getResulvation_date());
+        if(visitDataVO==null){
+            resultVO.setResult_str("예약가능한 날이 아닙니다");
+            resultVO.setResult_code("ERROR_1001");
+            return resultVO;
+        }
+
+        if((visitReqVO.getIs_duration()==1 && (visitDataVO.getVisit_data_type()==5 || visitDataVO.getVisit_data_type()==7 ) )||
+                (visitReqVO.getIs_duration()==2 && (visitDataVO.getVisit_data_type()==6|| visitDataVO.getVisit_data_type()==8))||
+                visitDataVO.getVisit_data_type()==9){
+            resultVO.setResult_str("이미 예약이 꽉차있습니다.별도 문의 바랍니다");
+            resultVO.setResult_code("ERROR_1001");
+            return resultVO;
+        }
+
+        //3.받은 데이터값 확인
+        visitReqVO.setVisit_req_status(0);
+        visitReqVO.setIs_cancel(0);
+        visitReqVO.setIs_manager(0);
+        visitReqVO.setMemo("");
+        visitReqVO.setIdx_visit_req(visitDataVO.getIdx_visit_data());
+        //visitReqVO.setIdx_user(visitDataVO.getidx);
+        visitReqVO.setIdx_admin(0);
+        if(visitReqVO.getVisit_goal()==null || visitReqVO.getVisit_goal().isEmpty())
+        {
+            visitReqVO.setVisit_goal("목적 없음");
+        }
+
+        visitService.saveVisitReq(visitReqVO);
+
+        //저장후 예약관련 데이터 변경해야 함
+
+        if(visitReqVO.getIs_duration()==1){
+            if(visitDataVO.getVisit_data_type()==1){
+                visitDataVO.setVisit_data_type(5);
+            }
+            else if(visitDataVO.getVisit_data_type()==3){
+                visitDataVO.setVisit_data_type(7);
+            }
+            else if(visitDataVO.getVisit_data_type()==8){
+                visitDataVO.setVisit_data_type(9);
+            }
+        }
+        else if(visitReqVO.getIs_duration()==2){
+            if(visitDataVO.getVisit_data_type()==2){
+                visitDataVO.setVisit_data_type(6);
+            }
+            else if(visitDataVO.getVisit_data_type()==3){
+                visitDataVO.setVisit_data_type(8);
+            }
+            else if(visitDataVO.getVisit_data_type()==7){
+                visitDataVO.setVisit_data_type(9);
+            }
+        }
+
+
+        visitService.updateStatusInVisitData(visitDataVO);
+
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/visit_req_list",method = RequestMethod.POST)
+    public String visit_req_list(HttpSession session
+            ,@RequestParam(value="idx_user") long idx_user
+            ,@RequestParam(value="page") int page
+            , Model model){
+
+        if(idx_user!=0) {
+
+            int list_amount = 10;
+            int page_amount = 10;
+            //int page = paramVisitReqVO.getVisit_req_list_page();
+
+            int visitReqCount = visitService.getUserVisitReqCount(idx_user);
+            model.addAttribute("total_count",visitReqCount);
+
+            if(visitReqCount==0){ //컨설팅한게 업다
+
+                return "include/visit_req_list";
+            }
+
+            //model.addAttribute("idx_user",paramVisitReqVO.getIdx_user());
+            List<VisitReqVO> visitReqVOS = visitService.getUserVisitReq(idx_user,page,list_amount);
+
+            model.addAttribute("visitReqVOS",visitReqVOS);
+            model.addAttribute("cur_page",page);
+            model.addAttribute("amount",list_amount);
+
+            int tot_page = visitReqCount/list_amount+1;
+            if(visitReqCount%list_amount==0) tot_page-=1;
+
+            int tot_sector = tot_page/page_amount+1;
+            if(tot_page%page_amount==0) tot_sector-=1;
+
+            int cur_sector = page/page_amount+1;
+            if(page%page_amount==0) cur_sector-=1;
+
+            boolean is_past = false;
+            boolean is_prev = false;
+            boolean is_next = false;
+            boolean is_last = false;
+            boolean is_active = false;
+
+            if(page!=tot_page && tot_page>1) is_next = true;
+
+            if(page!=1 && tot_page>1) is_prev = true;
+
+            if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+            if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+            if(tot_page<=page_amount){
+                is_past = false;
+                is_last = false;
+                page_amount = tot_page;
+            }
+
+            model.addAttribute("tot_page",tot_page);
+            model.addAttribute("tot_sector",tot_sector);
+            model.addAttribute("cur_sector",cur_sector);
+            model.addAttribute("is_past",is_past);
+            model.addAttribute("is_prev",is_prev);
+            model.addAttribute("is_next",is_next);
+            model.addAttribute("is_last",is_last);
+            model.addAttribute("list_amount",list_amount);
+            model.addAttribute("page_amount",page_amount);
+
+        }
+
+        return "include/visit_req_list";
+    }
+
+
+    @RequestMapping(value = "/user_consulting_list",method = RequestMethod.POST)
+    public String user_consulting_list(HttpSession session
+            ,@RequestParam(value="idx_user") long idx_user
+            ,@RequestParam(value="page") int page
+            , Model model){
+
+        if(idx_user!=0) {
+
+            int list_amount = 10;
+            int page_amount = 10;
+            //int page = paramVisitReqVO.getVisit_req_list_page();
+
+            int visitReqCount = visitService.getUserVisitReqCount(idx_user);
+            model.addAttribute("total_count",visitReqCount);
+
+            if(visitReqCount==0){ //컨설팅한게 업다
+
+                return "include/visit_req_list";
+            }
+
+            //model.addAttribute("idx_user",paramVisitReqVO.getIdx_user());
+            List<DemoBsConsultingVO> demoBsConsultingVOList = consultingService.getConsultingList(CONSTANT.user_idx,idx_user,page,list_amount);
+
+            model.addAttribute("demoBsConsultingVOList",demoBsConsultingVOList);
+            model.addAttribute("cur_page",page);
+            model.addAttribute("amount",list_amount);
+
+            int tot_page = visitReqCount/list_amount+1;
+            if(visitReqCount%list_amount==0) tot_page-=1;
+
+            int tot_sector = tot_page/page_amount+1;
+            if(tot_page%page_amount==0) tot_sector-=1;
+
+            int cur_sector = page/page_amount+1;
+            if(page%page_amount==0) cur_sector-=1;
+
+            boolean is_past = false;
+            boolean is_prev = false;
+            boolean is_next = false;
+            boolean is_last = false;
+            boolean is_active = false;
+
+            if(page!=tot_page && tot_page>1) is_next = true;
+
+            if(page!=1 && tot_page>1) is_prev = true;
+
+            if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+            if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+            if(tot_page<=page_amount){
+                is_past = false;
+                is_last = false;
+                page_amount = tot_page;
+            }
+
+            model.addAttribute("tot_page",tot_page);
+            model.addAttribute("tot_sector",tot_sector);
+            model.addAttribute("cur_sector",cur_sector);
+            model.addAttribute("is_past",is_past);
+            model.addAttribute("is_prev",is_prev);
+            model.addAttribute("is_next",is_next);
+            model.addAttribute("is_last",is_last);
+            model.addAttribute("list_amount",list_amount);
+            model.addAttribute("page_amount",page_amount);
+
+        }
+
+        return "include/user_consulting_list";
+    }
+
+    //상담신청 저장
+    @RequestMapping(value = "/save_user_consulting_req",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO save_user_consulting_req(HttpSession session,
+                            @RequestBody DemoBsConsultingVO demoBsConsultingVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("신청했습니다");
+
+        //1.신청 Usser 파악
+
+
+
+        //3.받은 데이터값 확인
+        demoBsConsultingVO.setConsulting_num(1);
+
+        consultingService.saveDemoBsConsulting(demoBsConsultingVO);
+
+        //저장후 예약관련 데이터 변경해야 함
+
+        return resultVO;
+    }
+
 }

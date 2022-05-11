@@ -14,17 +14,17 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SMART FARM</title>
-    <link rel="shortcut icon" href="<%=request.getContextPath()%>/static/assets/image/favicon_16.ico">
-    <link rel="icon" href="<%=request.getContextPath()%>/static/assets/image/favicon_16.png">
-    <link rel="apple-touch-icon-precomposed" href="<%=request.getContextPath()%>/static/assets/image/favicon_152.png">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/static/assets/css/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/static/assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/static/assets/css/pace-theme-center-simple.css" />
+    <link rel="shortcut icon" href="resources/assets/image/favicon_16.ico">
+    <link rel="icon" href="resources/assets/image/favicon_16.png">
+    <link rel="apple-touch-icon-precomposed" href="resources/assets/image/favicon_152.png">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/pace-theme-center-simple.css" />
 </head>
 <body>
 <div class="wrapper" id="wrapper">
     <header class="header">
-        <h1><a href="index"><img src="<%=request.getContextPath()%>/static/assets/image/img-logo-s.png" alt="스마트팜 실증센터"></a></h1>
+        <h1><a href="index"><img src="resources/assets/image/img-logo-s.png" alt="스마트팜 실증센터"></a></h1>
         <nav class="nav"><!--is-expanded-->
             <ul class="nav--depth1">
                 <li><a href="#" class="">실증 안내/신청</a>
@@ -63,9 +63,9 @@
                 <li><a href="#" class="">고객 지원</a>
                     <ul class="nav--depth2">
                         <li><a href="spt_faq">FAQ</a></li>
-                        <li><a href="spt_prevent?page=1">상담 신청</a></li>
+                        <li><a href="spt_consultilg">상담 신청</a></li>
                         <%--<li><a href="spt_email?page=1">상담 신청</a></li>--%>
-                        <li><a href="spt_visit?page=1">견학 신청</a></li>
+                        <li><a href="spt_visit">견학 신청</a></li>
                     </ul>
                 </li>
                 <c:if test="${sessionScope.userid ne null}">
@@ -82,8 +82,8 @@
             </ul>
         </nav>
         <div class="common__control">
-            <div class="search__box"><a href="#search__box" class="js-search-box"><img src="<%=request.getContextPath()%>/static/assets/image/ico_search.svg" alt="검색"></a></div>
-            <div class="menu__anchor"><a href="#"><img src="<%=request.getContextPath()%>/static/assets/image/ico_menu.svg" alt="전체메뉴열기"></a></div>
+            <div class="search__box"><a href="#search__box" class="js-search-box"><img src="resources/assets/image/ico_search.svg" alt="검색"></a></div>
+            <div class="menu__anchor"><a href="#"><img src="resources/assets/image/ico_menu.svg" alt="전체메뉴열기"></a></div>
         </div>
         <div class="common__login">
             <div class="login__info">
@@ -100,11 +100,11 @@
             <div class="login__anchor">
                 <c:choose>
                     <c:when test="${sessionScope.userid ne null}">
-                <a href="login"><img src="<%=request.getContextPath()%>/static/assets/image/ico_exit.svg" alt="">로그아웃</a>
+                <a href="login"><img src="resources/assets/image/ico_exit.svg" alt="">로그아웃</a>
                     </c:when>
                     <c:when test="${sessionScope.userid eq null}">
-                <a href="login"><img src="<%=request.getContextPath()%>/static/assets/image/ico_login_n.svg" alt="">로그인</a>
-                <a href="login"><img src="<%=request.getContextPath()%>/static/assets/image/ico_user.svg" alt="">회원가입</a>
+                <a href="login"><img src="resources/assets/image/ico_login_n.svg" alt="">로그인</a>
+                <a href="login"><img src="resources/assets/image/ico_user.svg" alt="">회원가입</a>
                     </c:when>
                 </c:choose>
             </div>
@@ -113,7 +113,7 @@
         <div class="search__box--full " id="search__box">
             <div class="search__box--inner">
                 <input type="text" placeholder="검색어를 입력하세요" class="search__common">
-                <a href="#none" class="btn-close-search"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="레이어닫기"></a>
+                <a href="#none" class="btn-close-search"><img src="resources/assets/image/ico_close.png" alt="레이어닫기"></a>
                 <div class="search__word--lists">
                     <span class="search__word--title">빠른링크</span>
                     <a href="#none" class="search__word">실증 신청 방법</a>
@@ -126,8 +126,8 @@
 
         <div class="nav__full--box ">
             <div class="nav_full--inner">
-                <a href="#none" class="btn-close-menu"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.svg" alt="레이어닫기"></a>
-                <h2><img src="<%=request.getContextPath()%>/static/assets/image/h1_logo@3x.png" alt="스마트팜 실증센터"></h2>
+                <a href="#none" class="btn-close-menu"><img src="resources/assets/image/ico_close.svg" alt="레이어닫기"></a>
+                <h2><img src="resources/assets/image/h1_logo@3x.png" alt="스마트팜 실증센터"></h2>
                 <nav class="nav__full">
                     <ul class="nav__full--depth1">
                         <li><a href="#">실증 안내/신청</a>
@@ -167,9 +167,9 @@
                         <li><a href="#">고객 지원</a>
                             <ul class="nav__full--depth2">
                                 <li><a href="spt_faq">FAQ</a></li>
-                                <li><a href="spt_prevent?page=1">상담 신청</a></li>
+                                <li><a href="spt_consultilg">상담 신청</a></li>
                                 <%--<li><a href="spt_email?page=1">상담 신청</a></li>--%>
-                                <li><a href="spt_visit?page=1">견학 신청</a></li>
+                                <li><a href="spt_visit">견학 신청</a></li>
                             </ul>
                         </li>
                     <c:if test="${sessionScope.userid ne null}">
@@ -178,7 +178,7 @@
 <%--                                <li><a href="my_info">나의 정보</a></li>
                                 <li><a href="my_agreement">기업 정보 관리</a></li>
                                 <li><a href="my_prove">실증 신청 현황</a></li>
-                                <li><a href="spt_prevent">사전 상담</a></li>
+                                <li><a href="spt_consultilg">사전 상담</a></li>
                                 <li><a href="my_inquiry">1:1 문의</a></li>--%>
 
 

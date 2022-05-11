@@ -14,4 +14,5 @@ public interface ConsultingMapper {
 
     List<DemoBsConsultingVO> getUserConsultingList(@Param("idx_user") long idx_user,@Param("page_num") int page_num, @Param("amount") int amount,@Param("order_field") String order_field);
     List<DemoBsConsultingVO> getAdminConsultingList(@Param("idx_admin") long idx_admin,@Param("page_num") int page_num, @Param("amount") int amount,@Param("order_field") String order_field);
+    void saveDemoBsConsulting(DemoBsConsultingVO demoBsConsultingVO);
 }

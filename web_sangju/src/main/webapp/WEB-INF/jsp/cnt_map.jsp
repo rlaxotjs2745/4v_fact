@@ -51,7 +51,7 @@
 
                 <div class="map__traffic">
                     <dl>
-                        <dt><img src="<%=request.getContextPath()%>/static/assets/image/img_car.png" alt=""></dt>
+                        <dt><img src="resources/assets/image/img_car.png" alt=""></dt>
                         <dd><p class="map__type">자가운전</p>
                             <ul>
                                 <li><strong>상주IC</strong>상주IC 우회전 → 시내방향(3km) → 사벌국면방향(우회전, 계룡교) → 사벌국면행정복지센터방면(7.5km)</li>
@@ -59,7 +59,7 @@
                         </dd>
                     </dl>
                     <%--<dl>
-                        <dt><img src="<%=request.getContextPath()%>/static/assets/image/img_bus.png" alt=""></dt>
+                        <dt><img src="resources/assets/image/img_bus.png" alt=""></dt>
                         <dd><p class="map__type">고속/시외버스</p>
                             <ul>
                                 <li><strong>택시이용</strong>익산고속(공용)버스터미널 → 한국농업기술진흥원 (약 2km)</li>
@@ -68,7 +68,7 @@
                         </dd>
                     </dl>
                     <dl>
-                        <dt><img src="<%=request.getContextPath()%>/static/assets/image/img_ktx.png" alt=""></dt>
+                        <dt><img src="resources/assets/image/img_ktx.png" alt=""></dt>
                         <dd><p class="map__type">기차(KTX)</p>
                             <ul>
                                 <li><strong>택시이용</strong>익산역(KTX) 동부광장 → 한국농업기술진흥원 (약 2km)</li>

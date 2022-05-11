@@ -52,10 +52,10 @@
                 <div class="exam__layout">
                     <div class="cnt__title">'실증단지 이용신청서' 작성 예시</div>
                     <div class="exam__figure">
-                        <img src="<%=request.getContextPath()%>/static/assets/image/img_sample01.png" alt="">
+                        <img src="resources/assets/image/img_sample01.png" alt="">
 
                         <div class="cnt__title">‘실증계획서’ 작성 예시</div>
-                        <img src="<%=request.getContextPath()%>/static/assets/image/img_sample02.png" alt="">
+                        <img src="resources/assets/image/img_sample02.png" alt="">
                     </div>
                     <div class="exam__note">
                         <span class="exam__title">아래 조건 중 1가지 이상 해당되는 기업인지 확인 必</span>

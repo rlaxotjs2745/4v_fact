@@ -13,17 +13,17 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SMART FARM</title>
-    <link rel="shortcut icon" href="<%=request.getContextPath()%>/static/assets/image/favicon_16.ico">
-    <link rel="icon" href="<%=request.getContextPath()%>/static/assets/image/favicon_16.png">
-    <link rel="apple-touch-icon-precomposed" href="<%=request.getContextPath()%>/static/assets/image/favicon_152.png">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/static/assets/css/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/static/assets/css/style.css">
+    <link rel="shortcut icon" href="resources/assets/image/favicon_16.ico">
+    <link rel="icon" href="resources/assets/image/favicon_16.png">
+    <link rel="apple-touch-icon-precomposed" href="resources/assets/image/favicon_152.png">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/style.css">
 </head>
 <body>
 <div class="wrapper" id="wrapper">
     <header class="header_app">
-        <a href="#none" class="close_window" onclick="javascript:window.close();"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.svg" alt=""></a>
-        <h1><a href="main.html"><img src="<%=request.getContextPath()%>/static/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
+        <a href="#none" class="close_window" onclick="javascript:window.close();"><img src="resources/assets/image/ico_close.svg" alt=""></a>
+        <h1><a href="main.html"><img src="resources/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
         <h2>신청서 작성</h2>
         <div class="app__step">
             <div class="step is-passed">
@@ -450,10 +450,10 @@
     </div>
 </div>
 
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 
 </body>
 </html>

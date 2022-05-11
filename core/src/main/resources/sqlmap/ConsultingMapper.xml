@@ -24,16 +24,16 @@
                 ,CONSULTING_GOAL
         FROM (
                  SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
-        ,IDX_DEMO_BS_CONSULTING
-                      ,CONSULTING_NUM
-          ,IS_CONSULTANT
-          ,CONSULTANT_IDX
-          ,REQ_DATE
-                      ,CONSULTING_STATUS
-                      ,RESULVATION_DATE
-                      ,CONSULTING_DATE
-                     ,CONSULT_ANSWER_TYPE
-                      ,CONSULTING_GOAL
+                    ,IDX_DEMO_BS_CONSULTING
+                    ,CONSULTING_NUM
+                    ,IS_CONSULTANT
+                    ,CONSULTANT_IDX
+                    ,REQ_DATE
+                    ,CONSULTING_STATUS
+                    ,RESULVATION_DATE
+                    ,CONSULTING_DATE
+                    ,CONSULT_ANSWER_TYPE
+                    ,CONSULTING_GOAL
                  FROM (
                           SELECT * FROM TB_DEMO_BS_CONSULTING  WHERE IDX_USER=#{idx_user}
                       )
@@ -77,5 +77,57 @@
     </select>
 
 
+    <insert id="saveDemoBsConsulting" parameterType="kr.or.fact.core.model.DTO.DemoBsConsultingVO">
+        INSERT INTO TB_DEMO_BS_CONSULTING (
+            IDX_DEMO_BS_CONSULTING,
+            CONSULTING_NUM,
+            IDX_DEMO_BS_APPLICAION,
+            IDX_DEMO_BUSINESS,
+            IDX_CORP_INFO,
+            IDX_USER,
+            CONSULTING_TYPE,
+            CONSULT_TYPE_ETC_STR,
+            CONSULTING_STATUS,
+            CONSULTING_GOAL,
+            REQ_DATE,
+            RESULVATION_DATE,
+            CONSULTING_DATE,
+            CONSULTANT_IDX,
+            IS_CONSULTING_FILE,
+            IS_RESULT_FILE,
+            IS_CONSULTANT,
+            CONSULT_ANSWER_TYPE,
+            IS_SHARE,
+            IS_PRIVACY_ACCEPT,
+            MEMO,
+            IDX_ADMIN,
+            REG_DATE
+        ) VALUES (
+                     SEQ_DEMO_BS_CONSULTING.NEXTVAL,
+                     #{consulting_num},
+                     #{idx_demo_bs_applicaion},
+                     #{idx_demo_business},
+                     #{idx_corp_info},
+                     #{idx_user},
+                     #{consulting_type},
+                     #{consult_type_etc_str},
+                     #{consulting_status},
+                     #{consulting_goal},
+                     #{req_date},
+                     #{resulvation_date},
+                     #{consulting_date},
+                     #{consultant_idx},
+                     #{is_consulting_file},
+                     #{is_result_file},
+                     #{is_consultant},
+                     #{consult_answer_type},
+                     #{is_share},
+                     #{is_privacy_accept},
+                     #{memo},
+                     #{idx_admin},
+                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+                 )
+
+    </insert>
 
 </mapper>

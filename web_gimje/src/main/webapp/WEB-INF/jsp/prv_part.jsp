@@ -99,7 +99,7 @@
             <h3 class="page__subject">지역별 특화분야</h3>
             <!--김제-->
             <div class="part__area">
-                <img src="<%=request.getContextPath()%>/static/assets/image/img_area_gimje.png" alt="">
+                <img src="resources/assets/image/img_area_gimje.png" alt="">
             </div>
             <div class="part__area--subscript">
                 <strong class="subscript--title">주요특징</strong>
@@ -109,7 +109,7 @@
             <!--//-->
             <!--상주-->
             <div class="part__area">
-                <img src="<%=request.getContextPath()%>/static/assets/image/img_area_sangju.png" alt="">
+                <img src="resources/assets/image/img_area_sangju.png" alt="">
             </div>
             <div class="part__area--subscript">
                 <strong class="subscript--title">주요특징</strong>
@@ -197,7 +197,7 @@
                 <p class="table__subscript--board">R&D, 표준화, 검정서비스, 분석, 사업화 등 연계 추진</p>
             </div>
             <div class="part__area--feedback">
-                <img src="<%=request.getContextPath()%>/static/assets/image/img_connect_feedback.png" alt="농산업체 R&D - 시제품시작 - 스마트팜 기자재,장비 실증 / 소프트웨어,시스템 실증 - 미표준 기자재.장비 실증 - 검인증, 품질인증 - 스마트팜 확산 사업">
+                <img src="resources/assets/image/img_connect_feedback.png" alt="농산업체 R&D - 시제품시작 - 스마트팜 기자재,장비 실증 / 소프트웨어,시스템 실증 - 미표준 기자재.장비 실증 - 검인증, 품질인증 - 스마트팜 확산 사업">
             </div>
             <!--//-->
         </div>
@@ -208,8 +208,8 @@
                 <a href="spt_email" class="btn btn-jumbo submit">상담 신청</a>
             </div>
 <%--            <div class="btn__group">
-                <a href="spt_email" class="btn__part bg--qa"><img src="<%=request.getContextPath()%>/static/assets/image/img_question.png" alt="">온라인 문의<em>바로가기</em></a>
-                <a href="spt_prevent" class="btn__part bg--cs"><img src="<%=request.getContextPath()%>/static/assets/image/img_consultation.png" alt="">대면상담 신청<em>바로가기</em></a>
+                <a href="spt_email" class="btn__part bg--qa"><img src="resources/assets/image/img_question.png" alt="">온라인 문의<em>바로가기</em></a>
+                <a href="spt_consulting" class="btn__part bg--cs"><img src="resources/assets/image/img_consultation.png" alt="">대면상담 신청<em>바로가기</em></a>
             </div>--%>
         </div>
     </div>

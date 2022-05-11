@@ -75,8 +75,8 @@
 
                 <div class="cnt__title">실증온실 세부 소개</div>
                 <div class="use__image">
-                    <%--<figure><img src="<%=request.getContextPath()%>/static/assets/image/img_greenhouse_gimje.png" alt="김제 실증온실 세부"></figure>--%>
-                    <figure><img src="<%=request.getContextPath()%>/static/assets/image/img_greenhouse_sangju.png" alt="상주 실증온실 세부"></figure>
+                    <%--<figure><img src="resources/assets/image/img_greenhouse_gimje.png" alt="김제 실증온실 세부"></figure>--%>
+                    <figure><img src="resources/assets/image/img_greenhouse_sangju.png" alt="상주 실증온실 세부"></figure>
                 </div>
                 <div class="table__type">
                     <table class="table__type--normal">
@@ -397,12 +397,12 @@
                 <div class="cnt__title">실증온실 시설 사진 예시</div>
                 <div class="use__house">
                     <ul>
-                        <li><figure><img src="<%=request.getContextPath()%>/static/assets/image/img_use_house_01.jpg" alt=""></figure><span>벤로형 온실</span></li>
-                        <li><figure><img src="<%=request.getContextPath()%>/static/assets/image/img_use_house_02.jpg" alt=""></figure><span>행잉거터</span></li>
-                        <li><figure><img src="<%=request.getContextPath()%>/static/assets/image/img_use_house_03.jpg" alt=""></figure><span>육묘 벤치</span></li>
-                        <li><figure><img src="<%=request.getContextPath()%>/static/assets/image/img_use_house_04.jpg" alt=""></figure><span>단동온실</span></li>
-                        <li><figure><img src="<%=request.getContextPath()%>/static/assets/image/img_use_house_05.jpg" alt=""></figure><span>EBB베드(저면관수베드)</span></li>
-                        <li><figure><img src="<%=request.getContextPath()%>/static/assets/image/img_use_house_06.jpg" alt=""></figure><span>포그(fog) 설비</span></li>
+                        <li><figure><img src="resources/assets/image/img_use_house_01.jpg" alt=""></figure><span>벤로형 온실</span></li>
+                        <li><figure><img src="resources/assets/image/img_use_house_02.jpg" alt=""></figure><span>행잉거터</span></li>
+                        <li><figure><img src="resources/assets/image/img_use_house_03.jpg" alt=""></figure><span>육묘 벤치</span></li>
+                        <li><figure><img src="resources/assets/image/img_use_house_04.jpg" alt=""></figure><span>단동온실</span></li>
+                        <li><figure><img src="resources/assets/image/img_use_house_05.jpg" alt=""></figure><span>EBB베드(저면관수베드)</span></li>
+                        <li><figure><img src="resources/assets/image/img_use_house_06.jpg" alt=""></figure><span>포그(fog) 설비</span></li>
                     </ul>
                 </div>
             </div>

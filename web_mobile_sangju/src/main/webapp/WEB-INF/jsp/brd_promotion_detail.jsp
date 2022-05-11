@@ -29,7 +29,7 @@
                                 <div class="edit--type"><em>게시자</em><span>이동우</span></div>
                                 <div class="edit--type"><em>등록일</em><span>2021.00.00</span></div>
                                 <div class="edit--type"><em>조회수</em><span>125</span></div>
-                                <div class="edit--print"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_print.png" alt="인쇄하기"></a></div>
+                                <div class="edit--print"><a href="#none"><img src="resources/assets/image/ico_print.png" alt="인쇄하기"></a></div>
                             </div>
                         </th>
                     </tr>
@@ -134,7 +134,7 @@
                             </style>
                             <div class="edit__templete">
                                 <div class="temp__title">경기도 내 3개 유관기관 GreenBio 연합IR 개최</div>
-                                <div class="tem__photo"><img src="<%=request.getContextPath()%>/static/assets/image/img-temp-01.png" alt=""></div>
+                                <div class="tem__photo"><img src="resources/assets/image/img-temp-01.png" alt=""></div>
                                 <div class="temp__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                     Doloribus, explicabo, sint. Aperiam aspernatur consectetur fugit harum in ipsum, quis quod vero.
                                     Cupiditate distinctio
@@ -152,9 +152,9 @@
                                 </div>
                                 <div class="temp__download--box"><strong>첨부파일</strong>
                                     <ul>
-                                        <li><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt=""><a href="#none">파일명 파일명.hwp</a></li>
-                                        <li><img src="<%=request.getContextPath()%>/static/assets/image/ico_pdf.png" alt=""><a href="#none">파일명 파일명.png</a></li>
-                                        <li><img src="<%=request.getContextPath()%>/static/assets/image/ico_jpg.png" alt=""><a href="#none">파일명 파일명.jpg</a></li>
+                                        <li><img src="resources/assets/image/ico_hwp.png" alt=""><a href="#none">파일명 파일명.hwp</a></li>
+                                        <li><img src="resources/assets/image/ico_pdf.png" alt=""><a href="#none">파일명 파일명.png</a></li>
+                                        <li><img src="resources/assets/image/ico_jpg.png" alt=""><a href="#none">파일명 파일명.jpg</a></li>
                                     </ul>
                                 </div>
 
@@ -168,12 +168,12 @@
                 <!--//-->
                 <div class="detail__nav">
                     <a href="#none" class="detail__anchor anchor--back">
-                        <img src="<%=request.getContextPath()%>/static/assets/image/ico_back.png" alt="이전글"> 이전글
+                        <img src="resources/assets/image/ico_back.png" alt="이전글"> 이전글
                     </a>
                     <a href="#none" class="detail__anchor anchor__foword">
-                        다음글 <img src="<%=request.getContextPath()%>/static/assets/image/ico_foword.png" alt="다음글">
+                        다음글 <img src="resources/assets/image/ico_foword.png" alt="다음글">
                     </a>
-                    <a href="#none" class="detail__anchor anchor__list"><img src="<%=request.getContextPath()%>/static/assets/image/ico_list.png" alt="리스트"></a>
+                    <a href="#none" class="detail__anchor anchor__list"><img src="resources/assets/image/ico_list.png" alt="리스트"></a>
                 </div>
             </div>
             <!--//-->
@@ -181,8 +181,8 @@
 
     </div>
 </div>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 <%@include file ="footer.jsp" %>

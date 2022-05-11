@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -59,6 +58,8 @@ public class IndexController {
 
     @Resource(name = "jusoService")
     JusoService jusoService;
+
+
 
     @RequestMapping("/")
     public String home(Model model){
@@ -1407,106 +1408,59 @@ public class IndexController {
         return "spt_faq";
     }
 
-    @RequestMapping("/spt_prevent")
-    public String spt_prevent(HttpSession session
-                              ,@Param("page") int page
+    @RequestMapping("/spt_consulting")
+    public String spt_consulting(HttpSession session
             , Model model){
 
 
-        UserVO findUser = null;
-        //model.addAttribute("is_login",false);
+        UserVO findUserVO = null;
+
 
 
         if(session!=null
                 &&(session.getAttribute("loginCheck")!=null&&(Boolean)session.getAttribute("loginCheck")==true)
                 && (session.getAttribute("userid")!=null&&session.getAttribute("userid") !=null)){//로그인 유저
 
-            findUser = userService.findUserById(String.valueOf(session.getAttribute("userid")));
+            findUserVO = userService.findUserById(String.valueOf(session.getAttribute("userid")));
 
-            if(findUser!=null) {
+            if(findUserVO!=null) {
                 //session.setAttribute("loginCheck", true);
                 model.addAttribute("is_login",true);
-                int list_amount = 10;
-                int page_amount = 10;
 
-                int consultingCount = consultingService.getConsultingCount(CONSTANT.user_idx,findUser.getIdx_user());
+
+                model.addAttribute("findUserVO",findUserVO);
+                model.addAttribute("idx_user",findUserVO.getIdx_user());
+                CorpInfoVO corpInfoVO = corpService.getCorpInfo(findUserVO.getIdx_corp_info());
+                model.addAttribute("corpInfoVO",corpInfoVO);
+
+                int consultingCount = consultingService.getConsultingCount(CONSTANT.user_idx,findUserVO.getIdx_user());
                 model.addAttribute("total_count",consultingCount);
 
                 if(consultingCount==0){ //컨설팅한게 업다
 
-                    return "spt_prevent";
+                    return "spt_consulting";
                 }
-
-                List<DemoBsConsultingVO> demoBsConsultingVOList = consultingService.getConsultingList(CONSTANT.user_idx,findUser.getIdx_user(),page,list_amount);
-
-
-
-                model.addAttribute("demoBsConsultingVOList",demoBsConsultingVOList);
-                model.addAttribute("cur_page",page);
-                model.addAttribute("amount",list_amount);
-
-                int tot_page = consultingCount/list_amount+1;
-                if(consultingCount%list_amount==0) tot_page-=1;
-
-                int tot_sector = tot_page/page_amount+1;
-                if(tot_page%page_amount==0) tot_sector-=1;
-
-                int cur_sector = page/page_amount+1;
-                if(page%page_amount==0) cur_sector-=1;
-
-                boolean is_past = false;
-                boolean is_prev = false;
-                boolean is_next = false;
-                boolean is_last = false;
-                boolean is_active = false;
-
-                if(page!=tot_page && tot_page>1) is_next = true;
-
-                if(page!=1 && tot_page>1) is_prev = true;
-
-                if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
-
-                if(cur_sector!=1 && tot_sector>1 ) is_past = true;
-
-                if(tot_page<=page_amount){
-                    is_past = false;
-                    is_last = false;
-                    page_amount = tot_page;
-                }
-
-                model.addAttribute("tot_page",tot_page);
-                model.addAttribute("tot_sector",tot_sector);
-                model.addAttribute("cur_sector",cur_sector);
-                model.addAttribute("is_past",is_past);
-                model.addAttribute("is_prev",is_prev);
-                model.addAttribute("is_next",is_next);
-                model.addAttribute("is_last",is_last);
-                model.addAttribute("list_amount",list_amount);
-                model.addAttribute("page_amount",page_amount);
 
             }
             else {//세션 만료 혹은 부정 접근
                 model.addAttribute("is_login",false);
                 clearSessionAndRedirect(session);
-                return "spt_prevent";
+                return "spt_consulting";
             }
 
         }
         else {
+            model.addAttribute("idx_user",0);
             model.addAttribute("is_login",false);
         }
 
         getHomepageInfo(model);
-        return "spt_prevent";
+        return "spt_consulting";
     }
 
     @RequestMapping("/spt_visit")
     public String spt_visit(HttpSession session
-            ,@Param("page") int page
             , Model model){
-
-
-
         UserVO findUser = null;
         //model.addAttribute("is_login",false);
 
@@ -1519,64 +1473,24 @@ public class IndexController {
 
             if(findUser!=null) {
                 //session.setAttribute("loginCheck", true);
+
                 model.addAttribute("is_login",true);
-                int list_amount = 10;
-                int page_amount = 10;
+                //int list_amount = 10;
+                //int page_amount = 10;
 
-                int visitReqCount = visitService.getUserVisitReqCount(findUser.getIdx_user());
-                model.addAttribute("total_count",visitReqCount);
+                //int visitReqCount = visitService.getUserVisitReqCount(findUser.getIdx_user());
+                //model.addAttribute("total_count",visitReqCount);
 
-                if(visitReqCount==0){ //컨설팅한게 업다
+                /*if(visitReqCount==0){ //컨설팅한게 업다
 
                     return "spt_visit";
-                }
+                }*/
 
-                List<VisitReqVO> visitReqVOS = visitService.getUserVisitReq(findUser.getIdx_user(),page,list_amount);
+                model.addAttribute("idx_user",findUser.getIdx_user());
+
+                //List<VisitReqVO> visitReqVOS = visitService.getUserVisitReq(findUser.getIdx_user(),page,list_amount);
 
 
-
-                model.addAttribute("visitReqVOS",visitReqVOS);
-                model.addAttribute("cur_page",page);
-                model.addAttribute("amount",list_amount);
-
-                int tot_page = visitReqCount/list_amount+1;
-                if(visitReqCount%list_amount==0) tot_page-=1;
-
-                int tot_sector = tot_page/page_amount+1;
-                if(tot_page%page_amount==0) tot_sector-=1;
-
-                int cur_sector = page/page_amount+1;
-                if(page%page_amount==0) cur_sector-=1;
-
-                boolean is_past = false;
-                boolean is_prev = false;
-                boolean is_next = false;
-                boolean is_last = false;
-                boolean is_active = false;
-
-                if(page!=tot_page && tot_page>1) is_next = true;
-
-                if(page!=1 && tot_page>1) is_prev = true;
-
-                if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
-
-                if(cur_sector!=1 && tot_sector>1 ) is_past = true;
-
-                if(tot_page<=page_amount){
-                    is_past = false;
-                    is_last = false;
-                    page_amount = tot_page;
-                }
-
-                model.addAttribute("tot_page",tot_page);
-                model.addAttribute("tot_sector",tot_sector);
-                model.addAttribute("cur_sector",cur_sector);
-                model.addAttribute("is_past",is_past);
-                model.addAttribute("is_prev",is_prev);
-                model.addAttribute("is_next",is_next);
-                model.addAttribute("is_last",is_last);
-                model.addAttribute("list_amount",list_amount);
-                model.addAttribute("page_amount",page_amount);
 
             }
             else {//세션 만료 혹은 부정 접근
@@ -1587,6 +1501,7 @@ public class IndexController {
 
         }
         else {
+            model.addAttribute("idx_user",0);
             model.addAttribute("is_login",false);
         }
 

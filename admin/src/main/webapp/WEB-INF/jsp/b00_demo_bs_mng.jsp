@@ -217,39 +217,91 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <!-- 문서버전 / 중요 -->
+                        <!-- 사업번호 / 사업 상태-->
                         <div class="form-group row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">문서버전</label>
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">사업번호</label>
+                            <div class="form-control-plaintext col-md-4 mode-edit mode-view">${demobs.demo_bs_code}</div>
+                            <div class="input-group col-md-4 mode-new">
+                                <input id="demo_bs_code" type="text" class="form-control form-control-md" placeholder="사업번호를 입력해 주세요..." value="${demobs.demo_bs_code}">
+                                <span class="input-group-append">
+                                        <button id="btn_bs_code_dupl_check" class="btn btn-md btn-outline-dark" type="button">중복체크</button>
+                                </span>
+                            </div>
 
-                            <div class="col-md-2">
-                                <div class="form-control-plaintext">1</div>
-                            </div>
-                            <div class="col-md-2 mode-view">
-                                <div class="form-control-plaintext">전시전</div>
-                            </div>
-                            <div class="col-md-4 mode-new mode-edit">
-                                <label class="col-form-label form-check">
-                                    <input class="form-check-input" type="checkbox" value>
-                                    <div class="form-check-label">
-                                        중요
-                                    </div>
-                                </label>
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">사업상태</label>
+                            <div class="input-group col-md-4 mode-new">
+                                <select id="demo_bs_status" class="custom-select form-control" style="width: 100%;">
+                                    <option value="0">임시 작성</option>
+                                    <option value="1">작성완료</option>
+                                    <option value="2">승인완료</option>
+                                    <option value="3">모집중</option>
+                                    <option value="4">모집 종료</option>
+                                    <option value="5">심사중</option>
+                                    <option value="6">심사완료</option>
+                                    <option value="7">이용계획 조정</option>
+                                    <option value="8">이용계획 확정</option>
+                                    <option value="9">협약중</option>
+                                    <option value="10">협약완료</option>
+                                    <option value="11">사업 시작</option>
+                                    <option value="12">사업 종료</option>
+                                    <option value="13">결산중</option>
+                                    <option value="14">결산 완료</option>
+                                </select>
                             </div>
                         </div>
 
+                        <!-- 사업 분류-->
                         <div class="form-group row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">문서번호</label>
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">대분류</label>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="대분류..." value="${demobs.demo_subject}">
+                                <div class="form-control-plaintext mode-view">${demobs.demo_bs_main_type}</div>
+                            </div>
+                            <label class="col-form-label col-form-label-md col-md-1 text-md-right font-weight-bold">중분류</label>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="중분류..." value="${demobs.demo_bs_sub_type}">
+                                <div class="form-control-plaintext mode-view">${demobs.demo_bs_sub_type}</div>
+                            </div>
+                            <label class="col-form-label col-form-label-md col-md-1 text-md-right font-weight-bold">소분류</label>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="소분류..." value="${demobs.demo_bs_detail_type}">
+                                <div class="form-control-plaintext mode-view">${demobs.demo_bs_detail_type}</div>
+                            </div>
+                        </div>
+                        <!-- 사업 제목-->
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">사업제목</label>
                             <div class="col-md-10">
-                                <div class="form-control-plaintext mode-edit mode-view">12345678901234</div>
-                                <div class="input-group mode-new">
-                                    <input type="text" class="form-control form-control-md" placeholder="문서번호를 입력해 주세요...">
-                                    <span class="input-group-append">
-                                        <button id="btn_demobs_code_dupl_check" class="btn btn-md btn-outline-dark" type="button">번호 중복체크</button>
-                                    </span>
+                                <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" value="${demobs.demo_subject}">
+                                <div class="form-control-plaintext mode-view">${demobs.demo_subject}</div>
+                            </div>
+                        </div>
+
+<%--                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">사업내용</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" value="${demobs.demo_subject}">
+                                <div class="form-control-plaintext mode-view">${demobs.demo_subject}</div>
+                            </div>
+                        </div>--%>
+
+                        <hr>
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">사업 기간</label>
+                            <div class="col-md-10">
+                                <div class="form-control-plaintext mode-view">${demobs.start_date} - ${demobs.end_date}</div>
+
+                                <div id="datepicker-open" class="input-daterange input-group mode-edit mode-new">
+                                    <input type="text" class="form-control" name="start">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">~</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="end">
                                 </div>
                             </div>
                         </div>
-                        <hr>
+
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">모집 기간</label>
                             <div class="col-md-10">
@@ -264,60 +316,73 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">게시 기간</label>
-                            <div class="col-md-10">
-                                <div class="form-control-plaintext mode-view">2022-01-01 9:00 AM - 2022-02-01 6:00 PM</div>
 
-                                <div id="datepicker-show" class="input-daterange input-group mode-edit mode-new">
-                                    <input type="text" class="form-control mr-1" name="start">
-                                    <input type="text" class="form-control" placeholder="9:00 AM" id="flatpickr-time-start">
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">심사 기간</label>
+                            <div class="col-md-10">
+                                <div class="form-control-plaintext mode-view">2022-01-01 - 2022-02-01</div>
+
+                                <div id="datepicker-open" class="input-daterange input-group mode-edit mode-new">
+                                    <input type="text" class="form-control" name="start">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">~</span>
                                     </div>
-                                    <input type="text" class="form-control mr-1" name="end">
-                                    <input type="text" class="form-control" placeholder="6:00 PM" id="flatpickr-time-end">
+                                    <input type="text" class="form-control" name="end">
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">이용계획 조정기간</label>
+                            <div class="col-md-10">
+                                <div class="form-control-plaintext mode-view">2022-01-01 - 2022-02-01</div>
+
+                                <div id="datepicker-open" class="input-daterange input-group mode-edit mode-new">
+                                    <input type="text" class="form-control" name="start">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">~</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="end">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">협약 기간</label>
+                            <div class="col-md-10">
+                                <div class="form-control-plaintext mode-view">2022-01-01 - 2022-02-01</div>
+
+                                <div id="datepicker-open" class="input-daterange input-group mode-edit mode-new">
+                                    <input type="text" class="form-control" name="start">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">~</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="end">
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">모집 수</label>
-                            <div class="col-md-6 mode-edit mode-new">
-                                <input type="text" class="form-control form-control-md text-md-right" placeholder="0">
-                                <p class="form-control-plaintext">명(기업)</p>
+                            <div class="form-inline col-md-4 mode-edit mode-new">
+                                <input type="text" class="form-control form-control-md text-md-right" style="width: 50%;" placeholder="0" value="${demobs.recruit_count_limit}">
+                                <small class="form-text text-muted">
+                                    명(기업)
+                                </small>
+                            </div>
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">게시여부</label>
+                            <div class="col-md-4 mode-edit mode-new">
+                                <div class="form-control-plaintext mode-view">아니오</div>
                             </div>
 
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-view">지원 현황</label>
-                            <div class="col-md-10 mode-view">
-                                <div class="col-md-2">
-                                    <div class="form-control-plaintext">모집 수 200 명(기업)</div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-control-plaintext">지원 수 540 명(기업)</div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-control-plaintext">경쟁율 2.7:1</div>
-                                </div>
-                            </div>
                         </div>
 
                         <hr>
-                        <!-- 제목 -->
-                        <div class="form-group row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">제목</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요">
-                                <div class="form-control-plaintext mode-view">공고문 제목제목제목제목 1</div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">본문</label>
-                            <div class="col-md-10 mode-edit mode-new">
-                                <div class="summernote"></div>
-                            </div>
-                            <div class="col-md-10 mode-view">
-                                <div class="form-control-plaintext mode-view">자세히 보기</div>
+                        <div class="form-row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메모</label>
+                            <div class="form-group col col-md-10">
+                                <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
+                                <textarea class="form-control mode-view" readonly rows="5"></textarea>
                             </div>
                         </div>
 
@@ -333,46 +398,44 @@
                             </div>
                         </div>
 
-                        <div class="form-row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">키워드</label>
-                            <div class="form-group col col-md-10">
-                                <input type="text" class="form-control mode-edit mode-new" value="#스마트팜,#사업공고" data-role="tagsinput">
-                                <div class="form-control-plaintext mode-view">#스마트팜,#사업공고</div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">등록자</label>
+                            <div class="col-md-4 mode-edit mode-new">
+                                <div class="form-control-plaintext mode-view">${demobs.author_name}</div>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메모</label>
-                            <div class="form-group col col-md-10">
-                                <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
-                                <textarea class="form-control mode-view" readonly rows="5"></textarea>
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit">승인여부</label>
+                            <div class="col-md-2 mode-edit">
+                                <div class="form-control-plaintext mode-edit">아니오</div>
                             </div>
+                            <div class="col-md-2 mode-edit">
+                                <button type="button" class="btn btn-primary">승인하기</button>
+                            </div>
+
                         </div>
+
 
                         <div class="modal-footer justify-content-between mode-new">
                             <div>
                                 <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
-                                <button type="button" class="btn btn-secondary">미리보기</button>
                             </div>
                             <div>
                                 <button type="button" class="btn btn-outline-primary mr-2">임시저장</button>
-                                <button type="button" class="btn btn-primary">게시&저장</button>
+                                <button type="button" class="btn btn-primary">작성완료</button>
                             </div>
                         </div>
 
                         <div class="modal-footer justify-content-between mode-edit d-none">
                             <div>
                                 <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
-                                <button type="button" class="btn btn-secondary">미리보기</button>
                             </div>
                             <div>
-                                <button type="button" class="btn btn-primary">게시&저장</button>
+                                <button type="button" class="btn btn-primary">저장</button>
                             </div>
                         </div>
 
                         <div class="modal-footer justify-content-between mode-view">
                             <div>
                                 <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">닫기</button>
-                                <button type="button" class="btn btn-secondary">미리보기</button>
                             </div>
 
                             <div>

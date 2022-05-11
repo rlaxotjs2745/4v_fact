@@ -169,6 +169,9 @@ public class IndexController {
             @RequestParam("filter2") int filter2,
             ModelMap model){
 
+
+
+
         int list_amount = 10;
         int page_amount = 10;
 
@@ -342,7 +345,7 @@ public class IndexController {
         int page_amount = 10;
 
 
-        int filtered_item_total = demoBsApplicationService.getAvailableDemoBsTotalCount();
+        int filtered_item_total = demoBsApplicationService.getAvailableDemoBsApplTotalCount();
         model.addAttribute("total_count",filtered_item_total);
 
         ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
@@ -353,7 +356,7 @@ public class IndexController {
         listPagingParamVO.setOrder_field("IDX_DEMO_BUSINESS");
 
 
-        List<AdminApplDemoBsHeaderListVO>  adminApplHeaderListVOS = demoBsApplicationService.getAvailableDemoBsPagingList(listPagingParamVO);
+        List<AdminApplDemoBsHeaderListVO>  adminApplHeaderListVOS = demoBsApplicationService.getAvailableDemoBsApplPagingList(listPagingParamVO);
 
         model.addAttribute("adminApplHeaderListVOS",adminApplHeaderListVOS);
 
@@ -404,10 +407,70 @@ public class IndexController {
 
     //심사결과 관리
     @RequestMapping(value = "/b22_demo_bs_doc_eval_result_mng",method = RequestMethod.POST)
-    public String b22_demo_bs_doc_eval_result_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String b22_demo_bs_doc_eval_result_mng(@RequestParam("page") int page,
                                                   ModelMap model){
 
+        //사업 기준
+        int list_amount = 5;
+        int page_amount = 10;
 
+
+        int filtered_item_total = demoBsApplicationService.getAvailableDemoBsEvalTotalCount();
+        model.addAttribute("total_count",filtered_item_total);
+
+        ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
+        listPagingParamVO.setPage_num(page);
+        listPagingParamVO.setAmount(list_amount);
+        listPagingParamVO.setFilter1(CONSTANT.FILTER_NOT_USED);
+        listPagingParamVO.setFilter2(CONSTANT.FILTER_NOT_USED);
+        listPagingParamVO.setOrder_field("IDX_DEMO_BUSINESS");
+
+
+        List<AdminApplDemoBsHeaderListVO>  adminApplHeaderListVOS = demoBsApplicationService.getAvailableDemoBsEvalPagingList(listPagingParamVO);
+
+        model.addAttribute("adminApplHeaderListVOS",adminApplHeaderListVOS);
+
+        model.addAttribute("cur_page",page);
+        model.addAttribute("amount",list_amount);
+
+        int tot_page = filtered_item_total/list_amount+1;
+        if(filtered_item_total%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+        boolean is_active = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("page_amount",page_amount);
         return "b22_demo_bs_doc_eval_result_mng";
     }
 

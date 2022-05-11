@@ -193,6 +193,7 @@
         var m = today.getMonth();
         var d = today.getDate();
 
+
         var eventList = [{
             title: '일정관리',
             start: new Date(y, m, d - 12)

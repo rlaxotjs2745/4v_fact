@@ -13,20 +13,20 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SMART FARM</title>
-    <link rel="shortcut icon" href="<%=request.getContextPath()%>/static/assets/image/favicon_16.ico">
-    <link rel="icon" href="<%=request.getContextPath()%>/static/assets/image/favicon_16.png">
-    <link rel="apple-touch-icon-precomposed" href="<%=request.getContextPath()%>/static/assets/image/favicon_152.png">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/static/assets/css/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/static/assets/css/style.css">
+    <link rel="shortcut icon" href="resources/assets/image/favicon_16.ico">
+    <link rel="icon" href="resources/assets/image/favicon_16.png">
+    <link rel="apple-touch-icon-precomposed" href="resources/assets/image/favicon_152.png">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/style.css">
 </head>
 <body>
     <div class="wrapper" id="wrapper">
         <header class="header">
-            <h1><a href="index"><img src="<%=request.getContextPath()%>/static/assets/image/area_logo@3x.png" alt="전북김제"><img src="<%=request.getContextPath()%>/static/assets/image/h1_logo@3x.png" alt="스마트팜 실증센터"></a></h1>
-            <div class="menu__anchor"><a href="#"><img src="<%=request.getContextPath()%>/static/assets/image/ico_menu.svg" alt="전체메뉴열기"></a></div>
+            <h1><a href="index"><img src="resources/assets/image/area_logo@3x.png" alt="전북김제"><img src="resources/assets/image/h1_logo@3x.png" alt="스마트팜 실증센터"></a></h1>
+            <div class="menu__anchor"><a href="#"><img src="resources/assets/image/ico_menu.svg" alt="전체메뉴열기"></a></div>
 
             <nav class="nav "><!--is-expanded-->
-                <a href="#none" class="btn-close-menu"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="레이어닫기"></a>
+                <a href="#none" class="btn-close-menu"><img src="resources/assets/image/ico_close.png" alt="레이어닫기"></a>
                 <div class="common__search">
                     <div class="common__search--input">
                         <input type="text" value="" placeholder="검색어를 입력하세요.">
@@ -44,7 +44,7 @@
                     <c:when test="${sessionScope.userid eq null}">
                         <!--로그인전-->
                         <div class="common__login">
-                            <div class="login__message">로그인을 해주세요. <a href="login" class="btn dark btn-lg"><img src="<%=request.getContextPath()%>/static/assets/image/ico_login_n.svg" alt="">로그인</a>
+                            <div class="login__message">로그인을 해주세요. <a href="login" class="btn dark btn-lg"><img src="resources/assets/image/ico_login_n.svg" alt="">로그인</a>
                             </div>
                         </div>
                     </c:when>
@@ -91,9 +91,9 @@
                     <li><a href="#" class="">고객 지원</a>
                         <ul class="nav--depth2">
                             <li><a href="spt_faq">FAQ</a></li>
-                            <li><a href="spt_prevent?page=1">대면상담 신청</a></li>
+                            <li><a href="spt_consulting">대면상담 신청</a></li>
                             <li><a href="spt_email?page=1">온라인 문의</a></li>
-                            <li><a href="spt_visit?page=1">견학 신청</a></li>
+                            <li><a href="spt_visit">견학 신청</a></li>
                         </ul>
                     </li>
                     <c:if test="${sessionScope.userid ne null}">

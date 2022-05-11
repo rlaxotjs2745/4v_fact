@@ -31,7 +31,7 @@
 
                 <div class="map__traffic">
                     <dl>
-                        <dt><img src="<%=request.getContextPath()%>/static/assets/image/img_car.png" alt=""></dt>
+                        <dt><img src="resources/assets/image/img_car.png" alt=""></dt>
                         <dd><p class="map__type">자가운전</p>
                             <ul>
                                 <li><strong>익산IC</strong>호남고속 → 신금로(1.4km) → 평동로(11.5km) → 농업기술실용화재단 ((구)국립식량과학원 벼맥류부)</li>
@@ -40,7 +40,7 @@
                         </dd>
                     </dl>
                     <dl>
-                        <dt><img src="<%=request.getContextPath()%>/static/assets/image/img_bus.png" alt=""></dt>
+                        <dt><img src="resources/assets/image/img_bus.png" alt=""></dt>
                         <dd><p class="map__type">고속/시외버스</p>
                             <ul>
                                 <li><strong>택시이용</strong>익산고속(공용)버스터미널 → 농업기술실용화재단 (약 2km)</li>
@@ -49,7 +49,7 @@
                         </dd>
                     </dl>
                     <dl>
-                        <dt><img src="<%=request.getContextPath()%>/static/assets/image/img_ktx.png" alt=""></dt>
+                        <dt><img src="resources/assets/image/img_ktx.png" alt=""></dt>
                         <dd><p class="map__type">기차(KTX)</p>
                             <ul>
                                 <li><strong>택시이용</strong>익산역(KTX) 동부광장 → 농업기술실용화재단 (약 2km)</li>
@@ -65,8 +65,8 @@
 
     </div>
 </div>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 <%@include file ="footer.jsp" %>

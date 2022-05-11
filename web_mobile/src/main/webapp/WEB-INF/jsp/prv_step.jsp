@@ -104,15 +104,15 @@
         <div class="page__btn">
             <div class="btn__desc">실증 분야에 궁금한 것이 있나요? 상담을 신청하시거나 1:1로 문의해 주시면 상세히 안내를 드리겠습니다.</div>
             <div class="btn__group">
-                <a href="#" class="btn__part bg--qa"><img src="<%=request.getContextPath()%>/static/assets/image/img_question.png" alt="">1:1문의<em>바로가기</em></a>
-                <a href="#" class="btn__part bg--cs"><img src="<%=request.getContextPath()%>/static/assets/image/img_consultation.png" alt="">상담 신청<em>바로가기</em></a>
+                <a href="#" class="btn__part bg--qa"><img src="resources/assets/image/img_question.png" alt="">1:1문의<em>바로가기</em></a>
+                <a href="#" class="btn__part bg--cs"><img src="resources/assets/image/img_consultation.png" alt="">상담 신청<em>바로가기</em></a>
             </div>
         </div>
     </div>
 </div>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 
 <%@include file ="footer.jsp" %>

@@ -13,11 +13,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SMART FARM</title>
-    <link rel="shortcut icon" href="<%=request.getContextPath()%>/static/assets/image/favicon_16.ico">
-    <link rel="icon" href="<%=request.getContextPath()%>/static/assets/image/favicon_16.png">
-    <link rel="apple-touch-icon-precomposed" href="<%=request.getContextPath()%>/static/assets/image/favicon_152.png">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/static/assets/css/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/static/assets/css/style.css">
+    <link rel="shortcut icon" href="resources/assets/image/favicon_16.ico">
+    <link rel="icon" href="resources/assets/image/favicon_16.png">
+    <link rel="apple-touch-icon-precomposed" href="resources/assets/image/favicon_152.png">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/style.css">
 </head>
 <body>
 <div class="wrapper" id="wrapper">
@@ -25,8 +25,8 @@
         <!--//-->
         <div class="page__full">
             <div class="page__floating">
-                <div class="tb__logo"><img src="<%=request.getContextPath()%>/static/assets/image/img_loginLogo@3x.png" alt="">
-                    <a href="javascript:history.back();" class="btn-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="취소"></a>
+                <div class="tb__logo"><img src="resources/assets/image/img_loginLogo@3x.png" alt="">
+                    <a href="javascript:history.back();" class="btn-close"><img src="resources/assets/image/ico_close.png" alt="취소"></a>
                 </div>
 
                 <div class="tb__join">
@@ -99,10 +99,10 @@
             </div>
         </div>
     </div>
-    <script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
-    <script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
-    <script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
-    <script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>
+    <script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+    <script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+    <script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
+    <script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
     <!-- Initialize Swiper -->
 </body>
 </html>

@@ -14,11 +14,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SMART FARM</title>
-    <link rel="shortcut icon" href="<%=request.getContextPath()%>/static/assets/image/favicon_16.ico">
-    <link rel="icon" href="<%=request.getContextPath()%>/static/assets/image/favicon_16.png">
-    <link rel="apple-touch-icon-precomposed" href="<%=request.getContextPath()%>/static/assets/image/favicon_152.png">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/static/assets/css/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/static/assets/css/style.css">
+    <link rel="shortcut icon" href="resources/assets/image/favicon_16.ico">
+    <link rel="icon" href="resources/assets/image/favicon_16.png">
+    <link rel="apple-touch-icon-precomposed" href="resources/assets/image/favicon_152.png">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/style.css">
 
 </head>
 <body>
@@ -28,12 +28,12 @@
         <div class="page__full">
             <div class="page__floating">
 
-                <div class="tb__logo"><img src="<%=request.getContextPath()%>/static/assets/image/img_loginLogo.png" alt="SMART FARM POTAL"></div>
+                <div class="tb__logo"><img src="resources/assets/image/img_loginLogo.png" alt="SMART FARM POTAL"></div>
                 <form id="loginForm" action="api_post_login" method="post">
                 <div class="tb__login">
                     <div class="td__cell--float">
                         <div class="login__field">
-                            <a href="index" class="btn-login-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.svg" alt="레이어닫기"></a>
+                            <a href="index" class="btn-login-close"><img src="resources/assets/image/ico_close.svg" alt="레이어닫기"></a>
                             <div class="login__title">LOGIN</div>
                             <div class="login__input">
                                 <input name="id" type="text" class="text" placeholder="아이디를 입력해주세요">
@@ -69,7 +69,7 @@
             <!--popup / in popup-->
             <div id="popup_find_id" class="pop__mini ">
                 <div class="section">
-                    <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+                    <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
                     <div class="popup__cnt">
                         <h5 class="popup__title">아이디 찾기</h5>
                         <div class="popup__tabs">
@@ -99,7 +99,7 @@
 
             <div id="popup_find_id_result" class="pop__mini ">
                 <div class="section">
-                    <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+                    <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
                     <div class="popup__cnt">
                         <h5 class="popup__title">아이디 찾기 결과</h5>
                         <p class="popup__text">XXXX님의 아이디는</p>
@@ -113,7 +113,7 @@
 
             <div id="popup_find_pw" class="pop__mini ">
                 <div class="section">
-                    <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+                    <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
                     <div class="popup__cnt">
                         <h5 class="popup__title">비밀번호 찾기</h5>
                         <p class="popup__text">비밀번호를 찾고자 하는 아이디를 입력해 주세요.</p>
@@ -130,7 +130,7 @@
 
             <div id="popup_find_pw_next" class="pop__mini ">
                 <div class="section">
-                    <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+                    <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
                     <div class="popup__cnt">
                         <h5 class="popup__title">비밀번호 찾기</h5>
                         <p class="popup__text">비밀번호를 찾을 방법을 선택하세요.</p>
@@ -156,7 +156,7 @@
 
             <div id="popup_find_pw_change" class="pop__mini ">
                 <div class="section">
-                    <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+                    <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
                     <div class="popup__cnt">
                         <h5 class="popup__title">비밀번호 찾기</h5>
                         <p class="popup__text">변경할 비밀번호를 입력해 주세요.</p>
@@ -186,7 +186,7 @@
 
             <div id="popup_find_pw_complete" class="pop__mini ">
                 <div class="section">
-                    <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+                    <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
                     <div class="popup__cnt">
                         <h5 class="popup__title">비밀번호 찾기</h5>
                         <p class="popup__text">비밀번호가 변경되었습니다.</p>
@@ -200,10 +200,10 @@
         </div>
     </div>
 
-    <script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
-    <script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
-    <script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
-    <script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>
+    <script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+    <script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+    <script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
+    <script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
     <!-- Initialize Swiper -->
 </body>
 </html>

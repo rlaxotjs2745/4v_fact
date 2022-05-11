@@ -29,12 +29,12 @@
                 <li><a href="#none">사이트 맵</a></li>
             </ul>
             <div class="footer__info">
-                <h3 class="footer__logo"><img src="<%=request.getContextPath()%>/static/assets/image/logo_footer.svg" alt=""></h3>
+                <h3 class="footer__logo"><img src="resources/assets/image/logo_footer.svg" alt=""></h3>
                 <div class="footer__address">54667 전라북도 익산시 평동로 457 (송학동 381) TEL 063-919-1000 FAX 063-919-1269</div>
                 <div class="footer__copyright">Copyright(c) 2010 The Foundation of AG. Tech, Commercialization and Transfer. All Rights Reserved.</div>
             </div>
             <div class="footer__site">
-                <span><img src="<%=request.getContextPath()%>/static/assets/image/footer_mark.png" alt=""></span>
+                <span><img src="resources/assets/image/footer_mark.png" alt=""></span>
                 <select name="a" id="a">
                     <option value="1">관련부처 사이트</option>
                 </select>

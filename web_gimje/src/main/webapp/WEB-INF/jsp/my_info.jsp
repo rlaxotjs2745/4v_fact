@@ -131,7 +131,7 @@
         <!--개인일 경우-->
         <div id="popup_info" class="pop__detail ">
             <div class="section">
-                <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+                <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
                 <div class="popup__cnt">
                     <h5 class="popup__title">정보변경</h5>
                     <div class="popup__scroll--area">
@@ -231,7 +231,7 @@
         <!--popup / in popup-->
         <div id="popup_company" class="pop__mini ">
             <div class="section">
-                <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+                <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
                 <div class="popup__cnt">
                     <h5 class="popup__title">기업 검색</h5>
                     <div class="popup__search">

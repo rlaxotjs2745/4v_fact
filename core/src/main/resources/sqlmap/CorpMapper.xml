@@ -6,6 +6,11 @@
     <select id="getCorpInfoByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.CorpInfoVO">
         SELECT * FROM TB_CORP_INFO  WHERE IDX_CORP_INFO=#{idx_corp_info}
     </select>
+
+    <select id="getUserCorp" parameterType="long" resultType="kr.or.fact.core.model.DTO.CorpInfoVO">
+        SELECT * FROM TB_CORP_INFO  WHERE IDX_USER=#{idx_user}
+    </select>
+
     <select id="getSimpleCorpInfoList" parameterType="String" resultType="kr.or.fact.core.model.DTO.SimpleCorpInfoVO">
         SELECT * FROM TB_CORP_INFO  WHERE CORP_NAME_KOR LIKE '%' ||  #{corp_name_kor} || '%'
     </select>

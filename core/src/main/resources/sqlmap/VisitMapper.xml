@@ -7,32 +7,57 @@
         SELECT COUNT(*) FROM TB_VISIT_REQ  WHERE IDX_USER = #{idx_user}
     </select>
 
-    <select id="getVisitData" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.VisitDataVO">
-        SELECT * FROM TB_VISIT_DATA WHERE CUR_DATE BETWEEN TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-') || '01', 'YYYY-MM-DD') AND LAST_DAY(SYSDATE);
+    <select id="getVisitData" parameterType="Date" resultType="kr.or.fact.core.model.DTO.VisitDataVO">
+        SELECT * FROM TB_VISIT_DATA WHERE TO_CHAR(CUR_DATE , 'YYYYMMDD' ) = TO_CHAR( #{cur_date}, 'YYYYMMDD')
     </select>
 
-    <select id="getVisitReq" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.VisitReqVO">
-        SELECT * FROM TB_VISIT_REQ WHERE CUR_DATE BETWEEN TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-') || '01', 'YYYY-MM-DD') AND LAST_DAY(SYSDATE);
+    <select id="getMonthlyVisitData" parameterType="Date" resultType="kr.or.fact.core.model.DTO.VisitDataVO">
+        SELECT * FROM TB_VISIT_DATA WHERE CUR_DATE BETWEEN TO_DATE(TO_CHAR(#{cur_date}, 'YYYY-MM-') || '01', 'YYYY-MM-DD') AND LAST_DAY(#{cur_date})
+    </select>
+
+    <select id="getDurationVisitData" parameterType="kr.or.fact.core.model.DTO.VisitDateVO" resultType="kr.or.fact.core.model.DTO.VisitDataVO">
+        SELECT * FROM TB_VISIT_DATA WHERE CUR_DATE BETWEEN #{start_date} AND #{end_date}
+    </select>
+
+    <select id="getMonthlyVisitReq" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.VisitReqVO">
+        SELECT * FROM TB_VISIT_REQ WHERE CUR_DATE BETWEEN TO_DATE(TO_CHAR(SYSDATE, 'YYYY-MM-') || '01', 'YYYY-MM-DD') AND LAST_DAY(SYSDATE)
+    </select>
+
+    <select id="getVisitReqByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.VisitReqVO">
+        SELECT * FROM TB_VISIT_REQ WHERE IDX_VISIT_REQ=#{idx_visit_req}
     </select>
 
     <select id="getUserVisitReq" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.VisitReqVO">
 
         SELECT
-            IDX_VISIT_REQ
-             ,VISITOR
-             ,RESULVATION_DATE
-             ,VISIT_GOAL
-             ,VISIT_REQ_STATUS
-             ,IS_GROUP
+            *
 
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
-        ,IDX_VISIT_REQ
-                      ,VISITOR
-                      ,RESULVATION_DATE
-                      ,VISIT_GOAL
-                      ,VISIT_REQ_STATUS
-                      ,IS_GROUP
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num,
+                         IDX_VISIT_REQ,
+                             VISIT_REQ_NUM,
+                     GROUP_NAME,
+                     VISITOR,
+                     RESULVATION_DATE,
+                     VISITOR_COUNT,
+                     VISITOR_MPHONE_NUM,
+                     VISITOR_EMAIL,
+                     VISITOR_ADRESS,
+                     VISIT_GOAL,
+                     QUESTION,
+                     VISIT_REQ_STATUS,
+                     IS_PRIVACY_ACCEPT,
+                     IS_GROUP,
+                     IS_CANCEL,
+                     IS_MANAGER,
+                     IDX_MANAGER,
+                     IS_DURATION,
+                     DURATION_AMOUNT,
+                     MEMO,
+                     IDX_VISIT_DATA,
+                     IDX_USER,
+                     IDX_ADMIN,
+                     REG_DATE
 
                  FROM (
                           SELECT * FROM TB_VISIT_REQ  WHERE IDX_USER=#{idx_user}
@@ -43,5 +68,120 @@
         WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
 
     </select>
+
+
+    <delete id="deleteVisitReq" parameterType="long">
+        DELETE FROM TB_VISIT_REQ WHERE IDX_VISIT_REQ = #{idx_visit_req}
+    </delete>
+
+    <insert id="saveVisitData" parameterType="kr.or.fact.core.model.DTO.VisitDataVO">
+        INSERT INTO TB_VISIT_DATA (
+            IDX_VISIT_DATA,
+            CUR_DATE,
+            POSSIBLE_COUNT,
+            RESULVATION_COUNT,
+            IS_ADMIN_CANCEL,
+            IMPOSSIBLE_REASON,
+            VISIT_DATA_TYPE,
+            MEMO,
+            GROUP_IDX,
+            IDX_ADMIN,
+            REG_DATE
+        ) VALUES (
+                     SEQ_VISIT_DATA.NEXTVAL,
+                     #{cur_date},
+                     #{possible_count},
+                     #{resulvation_count},
+                     #{is_admin_cancel},
+                     #{impossible_reason},
+                     #{visit_data_type},
+                     #{memo},
+                     #{group_idx},
+                     #{idx_admin},
+                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+                 )
+
+    </insert>
+
+    <update id="updateVisitData" parameterType="kr.or.fact.core.model.DTO.DemoBusinessVO">
+        UPDATE TB_VISIT_DATA SET
+             CUR_DATE = #{cur_date},
+             POSSIBLE_COUNT = #{possible_count},
+             RESULVATION_COUNT = #{resulvation_count},
+             IS_ADMIN_CANCEL = #{is_admin_cancel},
+             IMPOSSIBLE_REASON = #{impossible_reason},
+             VISIT_DATA_TYPE = #{visit_data_type},
+             MEMO = #{memo},
+             GROUP_IDX = #{group_idx},
+             IDX_ADMIN = #{idx_admin}
+        WHERE IDX_VISIT_DATA = #{idx_visit_data}
+    </update>
+
+    <update id="updateStatusInVisitData" parameterType="kr.or.fact.core.model.DTO.DemoBusinessVO">
+        UPDATE TB_VISIT_DATA SET
+                                 VISIT_DATA_TYPE = #{visit_data_type}
+        WHERE IDX_VISIT_DATA = #{idx_visit_data}
+    </update>
+
+    <delete id="deleteVisitData" parameterType="long" >
+        DELETE FROM TB_VISIT_DATA WHERE IDX_VISIT_DATA = #{idx_visit_data}
+    </delete>
+
+
+    <insert id="saveVisitReq" parameterType="kr.or.fact.core.model.DTO.VisitReqVO">
+        INSERT INTO TB_VISIT_REQ (
+            IDX_VISIT_REQ,
+            VISIT_REQ_NUM,
+            GROUP_NAME,
+            VISITOR,
+            RESULVATION_DATE,
+            VISITOR_COUNT,
+            VISITOR_MPHONE_NUM,
+            VISITOR_EMAIL,
+            VISITOR_ADRESS,
+            VISIT_GOAL,
+            QUESTION,
+            VISIT_REQ_STATUS,
+            IS_PRIVACY_ACCEPT,
+            IS_GROUP,
+            IS_CANCEL,
+            IS_MANAGER,
+            IDX_MANAGER,
+            IS_DURATION,
+            DURATION_AMOUNT,
+            MEMO,
+            IDX_VISIT_DATA,
+            IDX_USER,
+            IDX_ADMIN,
+            REG_DATE
+        ) VALUES (
+                     SEQ_VISIT_REQ.NEXTVAL,
+                     #{visit_req_num},
+                     #{group_name},
+                     #{visitor},
+                     #{resulvation_date},
+                     #{visitor_count},
+                     #{visitor_mphone_num},
+                     #{visitor_email},
+                     #{visitor_adress},
+                     #{visit_goal},
+                     #{question},
+                     #{visit_req_status},
+                     #{is_privacy_accept},
+                     #{is_group},
+                     #{is_cancel},
+                     #{is_manager},
+                     #{idx_manager},
+                     #{is_duration},
+                     #{duration_amount},
+                     #{memo},
+                     #{idx_visit_data},
+                     #{idx_user},
+                     #{idx_admin},
+
+                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+                 )
+    </insert>
+
 
 </mapper>

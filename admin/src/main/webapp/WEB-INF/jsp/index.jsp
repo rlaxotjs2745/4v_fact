@@ -116,10 +116,10 @@
 <script>
 
 
-    $(".sidenav-item").on('click',function(){
-        if( $(".sidenav-item").has('a')!=null){
-            $(".sidenav-item").removeClass('active');
-            $(this).addClass('active');
+    $("li.sidenav-item").on('click',function(){
+        if( $("li.sidenav-item").has('a')!=null){
+            $(this).addClass("active");
+
         }
     });
     $(function(){
@@ -128,7 +128,9 @@
             sBtn.removeClass("active");     // sBtn 속에 (active) 클래스를 삭제 한다.
             $(this).parent().addClass("active"); // 클릭한 a에 (active)클래스를 넣는다.
         });
+
     });
+
     var csrfParameter = $("meta[name='_csrf_parameter']").attr("content");
     var csrfHeader = $("meta[name='_csrf_header']").attr("content");
     var csrfToken = $("meta[name='_csrf']").attr("content");

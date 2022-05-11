@@ -79,7 +79,7 @@
 <!--개인일 경우-->
 <div id="popup_info" class="pop__detail ">
     <div class="section">
-        <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+        <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
         <div class="popup__cnt">
             <h5 class="popup__title">정보변경</h5>
             <div class="popup__scroll--area">
@@ -198,7 +198,7 @@
 <!--popup / in popup-->
 <div id="popup_company" class="pop__mini ">
     <div class="section">
-        <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+        <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
         <div class="popup__cnt">
             <h5 class="popup__title">기업 검색</h5>
             <div class="popup__search">
@@ -253,9 +253,9 @@
     </div>
 </div>
 
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 
 <%@include file ="footer.jsp" %>

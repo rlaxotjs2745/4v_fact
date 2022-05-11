@@ -19,9 +19,9 @@
                     <a href="#" class="under__depth--anchor">FAQ</a>
                     <div class="under__depth--list">
                         <a href="spt_faq">FAQ</a>
-                        <a href="spt_prevent?page=1">상담 신청</a>
+                        <a href="spt_consulting">상담 신청</a>
                         <%--<a href="spt_email?page=1">온라인 문의</a>--%>
-                        <a href="spt_visit?page=1">견학 신청</a>
+                        <a href="spt_visit">견학 신청</a>
                     </div>
                 </div>
             </div>
@@ -90,13 +90,13 @@
 
                 <div class="page__btn">
                     <div class="btn__group">
-                        <a href="#" class="btn__part bg--cs"><img src="<%=request.getContextPath()%>/static/assets/image/img_consultation.png" alt=""><strong>상세한 내용을 상담받고 싶으세요?</strong> 사전상담에서 알려드리겠습니다.<em>1:1 상담 바로가기</em></a>
+                        <a href="#" class="btn__part bg--cs"><img src="resources/assets/image/img_consultation.png" alt=""><strong>상세한 내용을 상담받고 싶으세요?</strong> 사전상담에서 알려드리겠습니다.<em>1:1 상담 바로가기</em></a>
                     </div>
                 </div>
                 <!--//-->
 
                 <div class="faq__notice">
-                    <img src="<%=request.getContextPath()%>/static/assets/image/img_faq_notice_02.png" alt="서로를 존중하는 말로 상담 부탁드립니다. 한국농업기술진흥원 고객지원센터는 산업안전보건법에 따라 상담원 보호조치를 시행 중입니다.">
+                    <img src="resources/assets/image/img_faq_notice_02.png" alt="서로를 존중하는 말로 상담 부탁드립니다. 한국농업기술진흥원 고객지원센터는 산업안전보건법에 따라 상담원 보호조치를 시행 중입니다.">
                     <a href="#none" class="btn default">산업안전보건법 및 시행령</a>
                 </div>
 

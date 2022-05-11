@@ -37,7 +37,7 @@
                         <td class="td__dic">용어집</td>
                         <td class="td__list"></td>
                         <td class="">도레미부서</td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_doc.png" alt=""></a><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_pdf.png" alt=""></a><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_doc.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_pdf.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
                     </tr>
                     <tr>
                         <td class="td__dic">스마트팜 실증단지 운영 규정</td>
@@ -59,7 +59,7 @@
                             </ul>
                         </td>
                         <td class="">솔솔라라솔솔미부서</td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_ppt.png" alt=""></a><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_xls.png" alt=""></a><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_png.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_ppt.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_xls.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_png.png" alt=""></a></td>
                     </tr>
                     <tr>
                         <td class="td__dic">실증단지 시설 관리 편람 </td>
@@ -70,7 +70,7 @@
                             </ul>
                         </td>
                         <td class="">솔솔미미레부서</td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_png.png" alt=""></a><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_hwp.png" alt=""></a><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_ppt.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_png.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_ppt.png" alt=""></a></td>
                     </tr>
                     <tr>
                         <td class="td__dic">실증서비스 이용료 편람 </td>
@@ -80,7 +80,7 @@
                             </ul>
                         </td>
                         <td class="">도미솔도미솔부서</td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_pdf.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_pdf.png" alt=""></a></td>
                     </tr>
                     <tr>
                         <td class="td__dic">기술·제품 성능확인 편람 </td>
@@ -90,7 +90,7 @@
                             </ul>
                         </td>
                         <td class="">도미솔도미솔부서</td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_pdf.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_pdf.png" alt=""></a></td>
                     </tr>
                     <tr>
                         <td class="td__dic">시험분석 업무 관리 편람 </td>
@@ -100,7 +100,7 @@
                             </ul>
                         </td>
                         <td class="">도미솔도미솔부서</td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_pdf.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_pdf.png" alt=""></a></td>
                     </tr>
                     <tr>
                         <td class="td__dic">실증장비 및 시험분석기기 관리편람 </td>
@@ -110,7 +110,7 @@
                             </ul>
                         </td>
                         <td class="">도미솔도미솔부서</td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_pdf.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_pdf.png" alt=""></a></td>
                     </tr>
                     <tr>
                         <td class="td__dic">민원처리 편람 </td>
@@ -120,25 +120,25 @@
                             </ul>
                         </td>
                         <td class="">도미솔도미솔부서</td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_pdf.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_pdf.png" alt=""></a></td>
                     </tr>
                     <tr>
                         <td class="td__dic">편람 편람 편람</td>
                         <td class="td__list"></td>
                         <td class="">도미솔도미솔부서</td>
-                        <td class="td__data"><a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_pdf.png" alt=""></a></td>
+                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_pdf.png" alt=""></a></td>
                     </tr>
                     </tbody>
                 </table>
                 <!--//-->
                 <div class="table__paging">
-                    <a href="#none" class="paging__prev2 disabled"><img src="<%=request.getContextPath()%>/static/assets/image/ico_paging_prev_02.png" alt=""></a>
-                    <a href="#none" class="paging__prev disabled"><img src="<%=request.getContextPath()%>/static/assets/image/ico_paging_prev.png" alt=""></a>
+                    <a href="#none" class="paging__prev2 disabled"><img src="resources/assets/image/ico_paging_prev_02.png" alt=""></a>
+                    <a href="#none" class="paging__prev disabled"><img src="resources/assets/image/ico_paging_prev.png" alt=""></a>
                     <a href="#none" class="is-active">1</a>
                     <a href="#none">2</a>
                     <a href="#none">3</a>
-                    <a href="#none" class="paging__next"><img src="<%=request.getContextPath()%>/static/assets/image/ico_paging_next.png" alt=""></a>
-                    <a href="#none" class="paging__next2"><img src="<%=request.getContextPath()%>/static/assets/image/ico_paging_next_02.png" alt=""></a>
+                    <a href="#none" class="paging__next"><img src="resources/assets/image/ico_paging_next.png" alt=""></a>
+                    <a href="#none" class="paging__next2"><img src="resources/assets/image/ico_paging_next_02.png" alt=""></a>
                 </div>
             </div>
             <!--//-->
@@ -146,8 +146,8 @@
 
     </div>
 </div>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 <%@include file ="footer.jsp" %>

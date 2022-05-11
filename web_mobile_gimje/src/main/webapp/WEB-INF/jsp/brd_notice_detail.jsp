@@ -182,12 +182,12 @@
                 <!--//-->
                 <div class="detail__nav">
                     <a href="#none" class="detail__anchor anchor--back">
-                        <img src="<%=request.getContextPath()%>/static/assets/image/ico_back.png" alt="이전글"> 이전글
+                        <img src="resources/assets/image/ico_back.png" alt="이전글"> 이전글
                     </a>
                     <a href="#none" class="detail__anchor anchor__foword">
-                        다음글 <img src="<%=request.getContextPath()%>/static/assets/image/ico_foword.png" alt="다음글">
+                        다음글 <img src="resources/assets/image/ico_foword.png" alt="다음글">
                     </a>
-                    <a href="brd_notice" class="detail__anchor anchor__list"><img src="<%=request.getContextPath()%>/static/assets/image/ico_list.png" alt="리스트"></a>
+                    <a href="brd_notice" class="detail__anchor anchor__list"><img src="resources/assets/image/ico_list.png" alt="리스트"></a>
                 </div>
             </div>
             <!--//-->
@@ -195,8 +195,8 @@
 
     </div>
 </div>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 <%@include file ="footer.jsp" %>

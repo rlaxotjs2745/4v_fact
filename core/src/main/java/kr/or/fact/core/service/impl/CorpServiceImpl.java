@@ -4,6 +4,7 @@ import kr.or.fact.core.model.CorpMapper;
 import kr.or.fact.core.model.DTO.CorpInfoVO;
 import kr.or.fact.core.model.DTO.SimpleCorpInfoVO;
 import kr.or.fact.core.service.CorpService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,12 @@ public class CorpServiceImpl implements CorpService {
     @Override
     public void updateCorpInfo(CorpInfoVO corpInfoVO){
         corpMapper.updateCorpInfo(corpInfoVO);
+    }
+
+
+    @Override
+    public CorpInfoVO getUserCorp(@Param("idx_user") long idx_user){
+        return corpMapper.getUserCorp(idx_user);
     }
 
 }

@@ -78,7 +78,7 @@
             <h3 class="page__subject">지역별 특화분야</h3>
             <!--김제-->
             <div class="part__area">
-                <img src="<%=request.getContextPath()%>/static/assets/image/img_area_gimje.png" alt="">
+                <img src="resources/assets/image/img_area_gimje.png" alt="">
             </div>
             <div class="part__area--subscript">
                 <strong class="subscript--title">주요특징</strong>
@@ -88,7 +88,7 @@
             <!--//-->
             <!--상주-->
             <div class="part__area">
-                <img src="<%=request.getContextPath()%>/static/assets/image/img_area_sangju.png" alt="">
+                <img src="resources/assets/image/img_area_sangju.png" alt="">
             </div>
             <div class="part__area--subscript">
                 <strong class="subscript--title">주요특징</strong>
@@ -176,7 +176,7 @@
                 <p class="table__subscript--board">R&D, 표준화, 검정서비스, 분석, 사업화 등 연계 추진</p>
             </div>
             <div class="part__area--feedback">
-                <img src="<%=request.getContextPath()%>/static/assets/image/img_connect_feedback.png" alt="농산업체 R&D - 시제품시작 - 스마트팜 기자재,장비 실증 / 소프트웨어,시스템 실증 - 미표준 기자재.장비 실증 - 검인증, 품질인증 - 스마트팜 확산 사업">
+                <img src="resources/assets/image/img_connect_feedback.png" alt="농산업체 R&D - 시제품시작 - 스마트팜 기자재,장비 실증 / 소프트웨어,시스템 실증 - 미표준 기자재.장비 실증 - 검인증, 품질인증 - 스마트팜 확산 사업">
             </div>
             <!--//-->
         </div>
@@ -184,15 +184,15 @@
         <div class="page__btn">
             <div class="btn__desc">실증 분야에 궁금한 것이 있나요? <br>상담을 신청하시거나 1:1로 문의해 주시면 <br>상세히 안내를 드리겠습니다.</div>
             <div class="btn__group">
-                <a href="#" class="btn__part bg--qa"><img src="<%=request.getContextPath()%>/static/assets/image/img_question.png" alt="">1:1문의<em>바로가기</em></a>
-                <a href="#" class="btn__part bg--cs"><img src="<%=request.getContextPath()%>/static/assets/image/img_consultation.png" alt="">상담 신청<em>바로가기</em></a>
+                <a href="#" class="btn__part bg--qa"><img src="resources/assets/image/img_question.png" alt="">1:1문의<em>바로가기</em></a>
+                <a href="#" class="btn__part bg--cs"><img src="resources/assets/image/img_consultation.png" alt="">상담 신청<em>바로가기</em></a>
             </div>
         </div>
     </div>
 </div>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 
 <%@include file ="footer.jsp" %>

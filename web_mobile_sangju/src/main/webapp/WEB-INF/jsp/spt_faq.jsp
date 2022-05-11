@@ -71,13 +71,13 @@
 
                 <div class="page__btn">
                     <div class="btn__group">
-                        <a href="#" class="btn__part bg--cs"><img src="<%=request.getContextPath()%>/static/assets/image/img_consultation.png" alt=""><strong>상세한 내용을 상담받고 싶으세요?</strong> 사전상담에서 알려드리겠습니다.<em>1:1 상담 바로가기</em></a>
+                        <a href="#" class="btn__part bg--cs"><img src="resources/assets/image/img_consultation.png" alt=""><strong>상세한 내용을 상담받고 싶으세요?</strong> 사전상담에서 알려드리겠습니다.<em>1:1 상담 바로가기</em></a>
                     </div>
                 </div>
                 <!--//-->
 
                 <div class="faq__notice">
-                    <img src="<%=request.getContextPath()%>/static/assets/image/img_faq_notice_02.png" alt="서로를 존중하는 말로 상담 부탁드립니다. PCMS 고객지원센터는 산업안전보건법에 따라 상담원 보호조치를 시행 중입니다.">
+                    <img src="resources/assets/image/img_faq_notice_02.png" alt="서로를 존중하는 말로 상담 부탁드립니다. PCMS 고객지원센터는 산업안전보건법에 따라 상담원 보호조치를 시행 중입니다.">
                     <a href="#none" class="btn default">산업안전보건법 및 시행령</a>
                 </div>
 
@@ -87,10 +87,10 @@
 
     </div>
 </div>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 
 
 <%@include file ="footer.jsp" %>

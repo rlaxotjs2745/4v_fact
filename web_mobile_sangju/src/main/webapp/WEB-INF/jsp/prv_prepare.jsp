@@ -36,14 +36,14 @@
                 <div class="cnt__title">'실증단지 이용신청서' 작성 예시</div>
                 <div class="exam__layout">
                     <div class="exam__figure">
-                        <img src="<%=request.getContextPath()%>/static/assets/image/img_sample01.png" alt="">
+                        <img src="resources/assets/image/img_sample01.png" alt="">
                     </div>
                 </div>
 
                 <div class="cnt__title">‘실증계획서’ 작성 예시</div>
                 <div class="exam__layout">
                     <div class="exam__figure">
-                        <img src="<%=request.getContextPath()%>/static/assets/image/img_sample02.png" alt="">
+                        <img src="resources/assets/image/img_sample02.png" alt="">
                     </div>
                     <div class="exam__btn">
                         <a href="#" class="btn submit"><i class="ico ico-download"></i>예시 파일 내려받기</a>
@@ -81,9 +81,9 @@
     </div>
 </div>
 
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 
 <%@include file ="footer.jsp" %>

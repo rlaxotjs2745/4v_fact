@@ -119,6 +119,7 @@ public class AdminServiceImpl implements AdminService {
         return adminMapper.updateAdminPassword(adminVo);
     }
 
+    //어드민 테이블에서 역할과 롤을 가져와 콘트롤러에게 검증 후 콘트롤러에게 준다
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AdminVO adminVO = adminMapper.getAdminInfoById(username);

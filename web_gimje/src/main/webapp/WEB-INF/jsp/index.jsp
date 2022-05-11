@@ -16,19 +16,19 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <a href="#" class="quick__anchor">
-                        <img src="<%=request.getContextPath()%>/static/assets/image/img_keybrand_01.png" alt="스마트팜 혁신밸리 실증단지 / 대한민국의 농업의 새로울 내일을 열어갑니다.">
+                        <img src="resources/assets/image/img_keybrand_01.png" alt="스마트팜 혁신밸리 실증단지 / 대한민국의 농업의 새로울 내일을 열어갑니다.">
                         </a>
                     </div>
                     <!--//-->
                     <div class="swiper-slide">
                         <a href="#" class="quick__anchor">
-                        <img src="<%=request.getContextPath()%>/static/assets/image/img_keybrand_02.png" alt="스마트팜 혁신밸리 실증단지 / 대한민국의 농업의 새로울 내일을 열어갑니다.">
+                        <img src="resources/assets/image/img_keybrand_02.png" alt="스마트팜 혁신밸리 실증단지 / 대한민국의 농업의 새로울 내일을 열어갑니다.">
                         </a>
                     </div>
                     <!--//-->
                     <div class="swiper-slide">
                         <a href="#" class="quick__anchor">
-                        <img src="<%=request.getContextPath()%>/static/assets/image/img_keybrand_03.png" alt="스마트팜 혁신밸리 실증단지 / 대한민국의 농업의 새로울 내일을 열어갑니다.">
+                        <img src="resources/assets/image/img_keybrand_03.png" alt="스마트팜 혁신밸리 실증단지 / 대한민국의 농업의 새로울 내일을 열어갑니다.">
                         </a>
                     </div>
                     <!--//-->
@@ -45,23 +45,23 @@
         <div class="main__quick">
             <div class="quick__inner">
                 <a href="prv_part" class="quick__anchor">
-                    <img src="<%=request.getContextPath()%>/static/assets/image/img_demonstration.svg" alt="">
+                    <img src="resources/assets/image/img_demonstration.svg" alt="">
                     <span>실증 분야</span>
                 </a>
                 <a href="prv_application" class="quick__anchor">
-                    <img src="<%=request.getContextPath()%>/static/assets/image/img_application.svg" alt="">
+                    <img src="resources/assets/image/img_application.svg" alt="">
                     <span>실증 신청</span>
                 </a>
                 <a href="brd_announce" class="quick__anchor">
-                    <img src="<%=request.getContextPath()%>/static/assets/image/img_management.svg" alt="">
+                    <img src="resources/assets/image/img_management.svg" alt="">
                     <span>실증 신청 현황</span>
                 </a>
-<%--                <a href="spt_prevent?page=1" class="quick__anchor">
-                    <img src="<%=request.getContextPath()%>/static/assets/image/img_advance.svg" alt="">
+<%--                <a href="spt_consulting" class="quick__anchor">
+                    <img src="resources/assets/image/img_advance.svg" alt="">
                     <span>대면 상담</span>
                 </a>--%>
-                <a href="spt_prevent?page=1" class="quick__anchor">
-                    <img src="<%=request.getContextPath()%>/static/assets/image/img_inquire.svg" alt="">
+                <a href="spt_consulting" class="quick__anchor">
+                    <img src="resources/assets/image/img_inquire.svg" alt="">
                     <span>상담 신청</span>
                 </a>
             </div>
@@ -72,7 +72,7 @@
                 <div class="main__board--notice">
                     <a href="brd_notice_detail?idx=4">
                         <div class="board__badge">
-                            <img src="<%=request.getContextPath()%>/static/assets/image/ico_notice.svg" alt="">공지사항
+                            <img src="resources/assets/image/ico_notice.svg" alt="">공지사항
                         </div>
                         <div class="board__text">12월31일까지<br>에너지 바우처 신청하세요</div>
                         <span class="board__anchor">보러가기</span>
@@ -81,7 +81,7 @@
                 <div class="main__board--business">
                     <a href="brd_notice_detail?idx=4">
                         <div class="board__badge">
-                            <img src="<%=request.getContextPath()%>/static/assets/image/ico_business.svg" alt="">사업공고
+                            <img src="resources/assets/image/ico_business.svg" alt="">사업공고
                         </div>
                         <div class="board__text">국제농업박람회 참여기업을 모집합니다. <br>서두르세요~</div>
                         <span class="board__anchor">보러가기</span>
@@ -93,7 +93,7 @@
             <div class="main__news">
                 <div class="main__news--inner">
                     <div class="main__news--notice">
-                        <div class="news__badge"><img src="<%=request.getContextPath()%>/static/assets/image/ico_notice.svg" alt="">공지사항</div>
+                        <div class="news__badge"><img src="resources/assets/image/ico_notice.svg" alt="">공지사항</div>
                         <div class="news__more"><a href="brd_notice" class="btn btn-more">+더보기</a></div>
                         <ul class="news__list">
                             <li>
@@ -112,7 +112,7 @@
                     </div>
                     <!--//-->
                     <div class="main__news--notice">
-                        <div class="news__badge"><img src="<%=request.getContextPath()%>/static/assets/image/ico_business.svg" alt="">사업공고</div>
+                        <div class="news__badge"><img src="resources/assets/image/ico_business.svg" alt="">사업공고</div>
                         <div class="news__more"><a href="brd_announce" class="btn btn-more">+더보기</a></div>
                         <ul class="news__list">
                             <li>
@@ -131,7 +131,7 @@
                     </div>
                     <!--//-->
                     <div class="main__news--notice">
-                        <div class="news__badge"><img src="<%=request.getContextPath()%>/static/assets/image/ico_event.svg" alt="">행사안내</div>
+                        <div class="news__badge"><img src="resources/assets/image/ico_event.svg" alt="">행사안내</div>
                         <div class="news__more"><a href="brd_event" class="btn btn-more">+더보기</a></div>
                         <ul class="news__list">
                             <li>
@@ -160,7 +160,7 @@
                     </a>
                 </div>
                 <div class="banner__02">
-                    <a href="spt_visit?page=1" class="banner__anchor">
+                    <a href="spt_visit" class="banner__anchor">
                         <div class="banner__title">실증단지 견학신청</div>
                         <span class="banner__desc">실증단지에 궁금한 것을 확인하세요.</span>
                     </a>
@@ -171,7 +171,7 @@
 
     <div id="popup_main1" class="pop__main is-on" style="margin:-220px 0 0 -240px">
         <div class="section">
-            <a href="#none" class="js-main-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+            <a href="#none" class="js-main-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
             <div class="popup__cnt">
                 <h5 class="popup__title">XXXX 공지</h5>
                 <div class="popup__main">
@@ -196,7 +196,7 @@
     <%--
     <div id="popup_main2" class="pop__main is-on" style="margin:-220px 0 0 240px">
         <div class="section">
-            <a href="#none" class="js-main-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+            <a href="#none" class="js-main-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
             <div class="popup__cnt">
                 <h5 class="popup__title">XXXX 공지</h5>
                 <div class="popup__main">
@@ -218,7 +218,7 @@
     </div>
     <div id="popup_main3" class="pop__main is-on" style="margin:220px 0 0 -240px">
         <div class="section">
-            <a href="#none" class="js-main-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+            <a href="#none" class="js-main-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
             <div class="popup__cnt">
                 <h5 class="popup__title">XXXX 공지</h5>
                 <div class="popup__main">
@@ -238,7 +238,7 @@
     </div>
     <div id="popup_main4" class="pop__main is-on" style="margin:220px 0 0 240px">
         <div class="section">
-            <a href="#none" class="js-main-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+            <a href="#none" class="js-main-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
             <div class="popup__cnt">
                 <h5 class="popup__title">XXXX 공지</h5>
                 <div class="popup__main">
@@ -257,10 +257,10 @@
         </div>
     </div>--%>
 </div>
-<%--<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>--%>
+<%--<script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/ui.common.js" type="text/javascript"></script>--%>
 <!-- Initialize Swiper -->
 <%@include file ="script.jsp" %>
 

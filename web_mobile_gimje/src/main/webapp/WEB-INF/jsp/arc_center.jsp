@@ -16,10 +16,10 @@
         <div class="page__cnt">
             <div class="arc__container">
                 <div class="center__banner">
-                    <img src="<%=request.getContextPath()%>/static/assets/image/img_topimg_introduction.jpg" alt="전북 김제 실증단지 소개">
+                    <img src="resources/assets/image/img_topimg_introduction.jpg" alt="전북 김제 실증단지 소개">
                 </div>
                 <div class="center__banner--download">
-                    <a href="#" class="btn info btn-lg text-bold"><img src="<%=request.getContextPath()%>/static/assets/image/ico_pdf.png" alt="">소개 자료 내려 받기</a>
+                    <a href="#" class="btn info btn-lg text-bold"><img src="resources/assets/image/ico_pdf.png" alt="">소개 자료 내려 받기</a>
                 </div>
 
                 <h3 class="page__subject">추진 배경</h3>
@@ -273,10 +273,10 @@
 
     </div>
 </div>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 
 
 

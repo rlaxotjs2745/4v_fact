@@ -51,22 +51,22 @@
 
                 <div class="cnt__title">비전</div>
                 <div class="goal__mission">
-                    <img src="<%=request.getContextPath()%>/static/assets/image/img_vision.png" alt="">
+                    <img src="resources/assets/image/img_vision.png" alt="">
                     <span class="goal__mission--text">농업기술혁신으로 국민의 삻의 질 향상 견인</span>
                 </div>
                 <!--//-->
 
                 <div class="cnt__title">미션</div>
                 <div class="goal__mission">
-                    <img src="<%=request.getContextPath()%>/static/assets/image/img_mission01.png" alt="">
+                    <img src="resources/assets/image/img_mission01.png" alt="">
                     <span class="goal__mission--text">농업과학기술의 연구개발·보급·교육훈련 및 국제기술협력</span>
                 </div>
                 <div class="goal__mission">
-                    <img src="<%=request.getContextPath()%>/static/assets/image/img_mission02.png" alt="">
+                    <img src="resources/assets/image/img_mission02.png" alt="">
                     <span class="goal__mission--text">국민식량의 안정적 공급, 농식품 산업의 경쟁력 향상</span>
                 </div>
                 <div class="goal__mission">
-                    <img src="<%=request.getContextPath()%>/static/assets/image/img_mission03.png" alt="">
+                    <img src="resources/assets/image/img_mission03.png" alt="">
                     <span class="goal__mission--text">농업인 복지·농촌 활력 증진 등 농촌진흥에 관한 사무</span>
                 </div>
                 <!--//-->

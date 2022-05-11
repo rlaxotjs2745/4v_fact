@@ -124,7 +124,7 @@
                         </colgroup>
                         <tbody>
                         <tr>
-                            <td class="td__left">최종서류 <a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_info.png" alt=""></a></td>
+                            <td class="td__left">최종서류 <a href="#none"><img src="resources/assets/image/ico_info.png" alt=""></a></td>
                             <td class="td__left" colspan="3"><a href="#none" class="btn btn-download">이용신청서</a><em class="recode--time">(YYYY.MM.DD. HH:MM 수정)</em>
                                 <a href="#none" class="btn btn-download">실증계획서</a><em class="recode--time">(YYYY.MM.DD. HH:MM 수정)</em>
                                 <a href="#none" class="btn btn-download">이용료산출서</a><em class="recode--time">(YYYY.MM.DD. HH:MM 수정)</em>
@@ -271,7 +271,7 @@
                                 <a href="#none" class="btn btn-download">5. 인감증명서</a></td>
                         </tr>
                         <!--<tr>
-                          <th class="th__left">최종서류 <a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_info.png" alt=""></a></th>
+                          <th class="th__left">최종서류 <a href="#none"><img src="resources/assets/image/ico_info.png" alt=""></a></th>
                           <td class="td__left" colspan="3"><a href="#none" class="btn btn-download">이용신청서</a><em class="recode&#45;&#45;time">(YYYY.MM.DD. HH:MM 수정)</em>
                             <a href="#none" class="btn btn-download">실증계획서</a><em class="recode&#45;&#45;time">(YYYY.MM.DD. HH:MM 수정)</em>
                             <a href="#none" class="btn btn-download">이용료산출서</a><em class="recode&#45;&#45;time">(YYYY.MM.DD. HH:MM 수정)</em>
@@ -291,13 +291,13 @@
 
 <div id="popup_supply" class="pop__detail ">
     <div class="section">
-        <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+        <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
         <div class="popup__cnt">
             <h5 class="popup__title">보완요청서</h5>
 
             <div class="popup__scroll--area">
                 <div class="table__headline">이용신청서 및 사업계획서 보완 요청서
-                    <a class="btn btn-util" href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_print.png" alt="인쇄하기"></a>
+                    <a class="btn btn-util" href="#none"><img src="resources/assets/image/ico_print.png" alt="인쇄하기"></a>
                 </div>
                 <div class="table__type">
                     <table class="table__type--normal table__fixed">
@@ -415,8 +415,8 @@
         </div>
     </div>
 </div>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/lib/swiper.min.js" type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/static/assets/js/ui.common.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 <%@include file ="footer.jsp" %>

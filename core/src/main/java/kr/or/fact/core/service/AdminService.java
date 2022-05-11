@@ -7,9 +7,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface AdminService extends UserDetailsService {
+
     public AdminVO getAuthAdmin(String admin_id, String admin_pw);
     public AdminVO getAdminInfo(long idx_admin);
-
 
     public AdminVO login(String admin_id, String user_pw);
     public ResultVO logout(String admin_id);

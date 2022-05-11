@@ -20,9 +20,9 @@
                     <a href="#" class="under__depth--anchor">상담 신청</a>
                     <div class="under__depth--list">
                         <a href="spt_faq">FAQ</a>
-                        <a href="spt_prevent?page=1">상담 신청</a>
+                        <a href="spt_consultilg">상담 신청</a>
                         <%--<a href="spt_email?page=1">온라인 문의</a>--%>
-                        <a href="spt_visit?page=1">견학 신청</a>
+                        <a href="spt_visit">견학 신청</a>
                     </div>
                 </div>
             </div>
@@ -185,13 +185,13 @@
                         <div class="table__paging">
                             <c:set var="name" value="${total_count/amount}" />
 
-                            <c:if test="${is_past eq true}"><a href="spt_prevent?page=1" class="paging__prev2"><img src="<%=request.getContextPath()%>/static/assets/image/ico_paging_prev_02.png" alt=""></a></c:if>
-                            <c:if test="${is_prev eq true}"><a href="spt_prevent?page=${cur_page-1}" class="paging__prev"><img src="<%=request.getContextPath()%>/static/assets/image/ico_paging_prev.png" alt=""></a></c:if>
+                            <c:if test="${is_past eq true}"><a href="spt_prevent" class="paging__prev2"><img src="resources/assets/image/ico_paging_prev_02.png" alt=""></a></c:if>
+                            <c:if test="${is_prev eq true}"><a href="spt_prevent?page=${cur_page-1}" class="paging__prev"><img src="resources/assets/image/ico_paging_prev.png" alt=""></a></c:if>
                             <c:forEach var="i" begin="1" end="${page_amount}">
                                 <a href="spt_prevent?page=${(cur_sector-1)*page_amount+i}" <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">class="is-active"</c:if>>${(cur_sector-1)*page_amount+i}</a>
                             </c:forEach>
-                            <c:if test="${is_next eq true}"><a href="spt_prevent?page=${cur_page+1}" class="paging__next"><img src="<%=request.getContextPath()%>/static/assets/image/ico_paging_next.png" alt=""></a></c:if>
-                            <c:if test="${is_last eq true}"><a href="spt_prevent?page=${tot_page}" class="paging__next2"><img src="<%=request.getContextPath()%>/static/assets/image/ico_paging_next_02.png" alt=""></a></c:if>
+                            <c:if test="${is_next eq true}"><a href="spt_prevent?page=${cur_page+1}" class="paging__next"><img src="resources/assets/image/ico_paging_next.png" alt=""></a></c:if>
+                            <c:if test="${is_last eq true}"><a href="spt_prevent?page=${tot_page}" class="paging__next2"><img src="resources/assets/image/ico_paging_next_02.png" alt=""></a></c:if>
                         </div>
                     </div>
                 </div>
@@ -201,7 +201,7 @@
 
         <div id="popup_councelling" class="pop__detail">
             <div class="section">
-                <a href="#none" class="js-modal-close"><img src="<%=request.getContextPath()%>/static/assets/image/ico_close.png" alt="닫기"></a>
+                <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
                 <div class="popup__cnt">
                     <h5 class="popup__title">상담 신청</h5>
 

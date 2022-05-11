@@ -21,38 +21,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&family=Roboto&display=swap" rel="stylesheet">
 
     <!-- Icon fonts -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/assets/vendor/fonts/fontawesome.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/assets/vendor/fonts/ionicons.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/assets/vendor/fonts/linearicons.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/assets/vendor/fonts/open-iconic.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/assets/vendor/fonts/pe-icon-7-stroke.css">
+    <link rel="stylesheet" href="resources/assets/vendor/fonts/fontawesome.css">
+    <link rel="stylesheet" href="resources/assets/vendor/fonts/ionicons.css">
+    <link rel="stylesheet" href="resources/assets/vendor/fonts/linearicons.css">
+    <link rel="stylesheet" href="resources/assets/vendor/fonts/open-iconic.css">
+    <link rel="stylesheet" href="resources/assets/vendor/fonts/pe-icon-7-stroke.css">
 
     <!-- Core stylesheets -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/assets/vendor/css/rtl/bootstrap-dark.css" class="theme-settings-bootstrap-css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/assets/vendor/css/rtl/appwork-dark.css" class="theme-settings-appwork-css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/assets/vendor/css/rtl/theme-corporate-dark.css" class="theme-settings-theme-css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/assets/vendor/css/rtl/colors-dark.css" class="theme-settings-colors-css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/assets/vendor/css/rtl/uikit.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/assets/css/demo.css">
+    <link rel="stylesheet" href="resources/assets/vendor/css/rtl/bootstrap-dark.css" class="theme-settings-bootstrap-css">
+    <link rel="stylesheet" href="resources/assets/vendor/css/rtl/appwork-dark.css" class="theme-settings-appwork-css">
+    <link rel="stylesheet" href="resources/assets/vendor/css/rtl/theme-corporate-dark.css" class="theme-settings-theme-css">
+    <link rel="stylesheet" href="resources/assets/vendor/css/rtl/colors-dark.css" class="theme-settings-colors-css">
+    <link rel="stylesheet" href="resources/assets/vendor/css/rtl/uikit.css">
+    <link rel="stylesheet" href="resources/assets/css/demo.css">
 
     <!-- Load polyfills -->
-    <script src="<%=request.getContextPath()%>/static/assets/vendor/js/polyfills.js"></script>
+    <script src="resources/assets/vendor/js/polyfills.js"></script>
     <script>document['documentMode']===10&&document.write('<script src="https://polyfill.io/v3/polyfill.min.js?features=Intl.~locale.en"><\/script>')</script>
 
-    <script src="<%=request.getContextPath()%>/static/assets/vendor/js/material-ripple.js"></script>
-    <script src="<%=request.getContextPath()%>/static/assets/vendor/js/layout-helpers.js"></script>
+    <script src="resources/assets/vendor/js/material-ripple.js"></script>
+    <script src="resources/assets/vendor/js/layout-helpers.js"></script>
     <!-- Core scripts -->
-    <script src="<%=request.getContextPath()%>/static/assets/vendor/js/pace.js"></script>
+    <script src="resources/assets/vendor/js/pace.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- Libs -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css">
     <!-- 동적 로딩시 사용-->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/assets/vendor/libs/datatables/datatables.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/assets/vendor/libs/fullcalendar/fullcalendar.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/static/assets/vendor/libs/flot/flot.css">
+    <link rel="stylesheet" href="resources/assets/vendor/libs/datatables/datatables.css">
+    <link rel="stylesheet" href="resources/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="resources/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+    <link rel="stylesheet" href="resources/assets/vendor/libs/fullcalendar/fullcalendar.css">
+    <link rel="stylesheet" href="resources/assets/vendor/libs/flot/flot.css">
 
 </head>
 
@@ -70,8 +70,8 @@
 
             <!-- Brand demo (see assets/css/demo/demo.css) -->
             <div class="app-brand demo">
-                <a href="index" class="app-brand-text demo sidenav-text font-weight-normal ml-2 default"><img src="<%=request.getContextPath()%>/static/assets/img/h1-logo.png" alt="스마트팜"></a>
-                <a href="index" class="app-brand-text demo sidenav-text font-weight-normal ml-2 mini"><img src="<%=request.getContextPath()%>/static/assets/img/logo.png" alt="김제"></a>
+                <a href="index" class="app-brand-text demo sidenav-text font-weight-normal ml-2 default"><img src="resources/assets/img/h1-logo.png" alt="스마트팜"></a>
+                <a href="index" class="app-brand-text demo sidenav-text font-weight-normal ml-2 mini"><img src="resources/assets/img/logo.png" alt="김제"></a>
                 <a href="javascript:void(0)" class="layout-sidenav-toggle sidenav-link text-large ml-auto">
                     <i class="ion ion-md-menu align-middle"></i>
                 </a>

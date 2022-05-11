@@ -144,7 +144,7 @@
                             <td class="td__left" colspan="3">체결전, 체결 (계약서)</td>
                         </tr>
                         <tr>
-                            <th class="th__left">최종서류 <a href="#none"><img src="<%=request.getContextPath()%>/static/assets/image/ico_info.png" alt=""></a></th>
+                            <th class="th__left">최종서류 <a href="#none"><img src="resources/assets/image/ico_info.png" alt=""></a></th>
                             <td class="td__left" colspan="3"><a href="#none" class="btn btn-download">이용신청서</a><em class="recode--time">(YYYY.MM.DD. HH:MM 수정)</em>
                                 <a href="#none" class="btn btn-download">실증계획서</a><em class="recode--time">(YYYY.MM.DD. HH:MM 수정)</em>
                                 <a href="#none" class="btn btn-download">이용료산출서</a><em class="recode--time">(YYYY.MM.DD. HH:MM 수정)</em>
