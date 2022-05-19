@@ -21,7 +21,7 @@
                     <div class="under__depth--list">
                         <a href="spt_faq">FAQ</a>
                         <a href="spt_consulting">상담 신청</a>
-                        <%--<a href="spt_email?page=1">온라인 문의</a>--%>
+
                         <a href="spt_visit">견학 신청</a>
                     </div>
                 </div>
@@ -656,8 +656,8 @@
                 var ampm = visitReqVo.is_duration=0?" 오전":" 오후";
 
                 $("#resulvation_date_text").text(resulvation_date.yyyymmdd() + ampm);//	date						예약일
-                $("#visitor_count_text").text(visitReqVo.visitor_count),//	number	10					방문자 수
-                    $("#visitor_mphone_num_text").text(visitReqVo.visitor_mphone_num);//	varchar2	20					연락처
+                $("#visitor_count_text").text(visitReqVo.visitor_count);//	number	10					방문자 수
+                $("#visitor_mphone_num_text").text(visitReqVo.visitor_mphone_num);//	varchar2	20					연락처
                 $("#visitor_email_text").text(visitReqVo.visitor_email);//	varchar2	250					방문자 이메일
                 $("#visitor_adress_text").text(visitReqVo.visitor_adress);//	varchar2	250					방문자 주소	0:상담요청등록, 1:상담자 지정, 2:상담 계획 보냄, 3: 상담계획 변경, 4:상담완료, 99:상담불가
                 $("#visit_goal_text").text(visitReqVo.visit_goal);//	varchar2	400					방문목표

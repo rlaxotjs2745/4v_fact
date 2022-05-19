@@ -1315,9 +1315,9 @@ public class IndexController {
         getHomepageInfo(model);
         return "prv_use";
     }
-
-    @RequestMapping("/spt_email")
-    public String spt_email(HttpSession session
+/*
+    @RequestMapping("/spt_consulting")
+    public String spt_consulting(HttpSession session
             ,@Param("page") int page
             , Model model){
 
@@ -1342,7 +1342,7 @@ public class IndexController {
 
                 if(qnaCount==0){ //컨설팅한게 업다
 
-                    return "spt_email";
+                    return "spt_consulting";
                 }
 
                 List<DemoBsQnaVO> demoBsQnaVOList = qnaService.getDemoBsQnaList(CONSTANT.user_idx,findUser.getIdx_user(),page,list_amount);
@@ -1394,7 +1394,7 @@ public class IndexController {
             else {//세션 만료 혹은 부정 접근
                 model.addAttribute("is_login",false);
                 clearSessionAndRedirect(session);
-                return "spt_email";
+                return "spt_consulting";
             }
 
         }
@@ -1403,8 +1403,8 @@ public class IndexController {
         }
 
         getHomepageInfo(model);
-        return "spt_email";
-    }
+        return "spt_consulting";
+    }*/
 
     @RequestMapping("/spt_faq")
     public String spt_faq(Model model){

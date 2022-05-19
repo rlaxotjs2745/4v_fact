@@ -136,10 +136,10 @@
                                 }
                             </style>
                             <div class="edit__templete">
-                                <div class="temp__cover">농업기술실용화재단 공고 제2021-121호</div>
+                                <div class="temp__cover">한국농업기술진흥원 공고 제2021-121호</div>
                                 <div class="temp__title">2021년 종자생명산업 맞춤형 인력양성 교육훈련생 선정 결과 알림</div>
                                 <div class="temp__desc"> [2021년 종자생명산업 맞춤형 인력양성] 교육과정 별 교육훈련생 선정결과를 첨부와 같이 알려드리며, <br>선정된 교육생들은 향후 일정이 원활히 진행될 수 있도록 협조하여 주시기 바랍니다.</div>
-                                <div class="temp__signature">2021년 6월 22일<br>농업기술실용화재단 이사장</div>
+                                <div class="temp__signature">2021년 6월 22일<br>한국농업기술진흥원 원장</div>
                                 <div class="temp__table">
                                     <table>
                                         <colgroup>
@@ -185,7 +185,7 @@
                                     ○ 등록대상 : 과정별 최종선발 교육생
                                     ○ 등록일시 : 해당 과정 개강일 8시 50분까지 입실
                                     ○ 준비물 : 신분증 지참
-                                    □ 문의사항 : 농업기술실용화재단 종자산업진흥센터(☎ 063-219-8816)
+                                    □ 문의사항 : 한국농업기술진흥원 종자산업진흥센터(☎ 063-219-8816)
                                 </div>
                                 <div class="temp__goal">- 본 교육과정에 관심을 가지고 지원하신 모든 분들께 감사드립니다. -</div>
                                 <div class="temp__notice--box"> ※ 코로나19 지역발생 상황에 따라 교육과정이 연기·변동될 수 있음을 알려드리며,
@@ -201,10 +201,10 @@
                 <!--//-->
                 <div class="detail__nav">
                     <a href="#none" class="detail__anchor anchor--back">
-                        <img src="resources/assets/image/ico_back.png" alt="이전글"> 이전글 <span>농업기술실용화재단 공고 제2021-121호</span>
+                        <img src="resources/assets/image/ico_back.png" alt="이전글"> 이전글 <span>한국농업기술진흥원 공고 제2021-121호</span>
                     </a>
                     <a href="#none" class="detail__anchor anchor__foword">
-                        <span>농업기술실용화재단 공고 제2021-121호</span> 다음글 <img src="resources/assets/image/ico_foword.png" alt="다음글">
+                        <span>한국농업기술진흥원 공고 제2021-121호</span> 다음글 <img src="resources/assets/image/ico_foword.png" alt="다음글">
                     </a>
                     <a href="#none" class="detail__anchor anchor__list"><img src="resources/assets/image/ico_list.png" alt="리스트"></a>
                 </div>

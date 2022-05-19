@@ -127,10 +127,7 @@
             <div class="btn__application">
                 <a href="spt_consulting" class="btn btn-jumbo submit">상담 신청</a>
             </div>
-<%--            <div class="btn__group">
-                <a href="spt_email" class="btn__part bg--qa"><img src="resources/assets/image/img_question.png" alt="">온라인 문의<em>바로가기</em></a>
-                <a href="spt_consulting" class="btn__part bg--cs"><img src="resources/assets/image/img_consultation.png" alt="">대면상담 신청<em>바로가기</em></a>
-            </div>--%>
+
         </div>
     </div>
 </div>

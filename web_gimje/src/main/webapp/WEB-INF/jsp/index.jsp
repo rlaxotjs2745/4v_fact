@@ -100,7 +100,7 @@
                                 <a href="#"><span>12월31일까지 에너지 바우처 신청 12월31일까지 에너지 바우처 신청</span><em>07-06</em></a>
                             </li>
                             <li>
-                                <a href="#"><span>‘21년 제2차 농업기술실용화재단 농업기술실용화재단 </span><em>07-06</em></a>
+                                <a href="#"><span>‘21년 제2차 한국농업기술진흥원' </span><em>07-06</em></a>
                             </li>
                             <li>
                                 <a href="#"><span>공동구매 안내</span><em>07-06</em></a>
@@ -169,7 +169,7 @@
         </div>
     </div>
 
-    <div id="popup_main1" class="pop__main is-on" style="margin:-220px 0 0 -240px">
+    <%--<div id="popup_main1" class="pop__main is-on" style="margin:-220px 0 0 -240px">
         <div class="section">
             <a href="#none" class="js-main-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
             <div class="popup__cnt">
@@ -188,7 +188,7 @@
             </div>
 
         </div>
-    </div>
+    </div>--%>
 
 
 

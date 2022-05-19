@@ -21,7 +21,7 @@
                     <div class="under__depth--list">
                         <a href="spt_faq">FAQ</a>
                         <a href="spt_consulting">상담 신청</a>
-                        <%--<a href="spt_consulting?page=1">온라인 문의</a>--%>
+
                         <a href="spt_visit">견학 신청</a>
                     </div>
                 </div>

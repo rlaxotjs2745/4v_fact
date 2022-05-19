@@ -4,6 +4,8 @@ import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.CONSTANT;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -59,8 +61,6 @@ public class IndexController {
     @Resource(name = "jusoService")
     JusoService jusoService;
 
-
-
     @RequestMapping("/")
     public String home(Model model){
 
@@ -94,9 +94,14 @@ public class IndexController {
         }
         //UserVO findUser = userService.getAuthUser(id,pw);
         //UserVO findUser = userService.getUserInfo(3);
-        UserVO findUser = userService.login(user_id,user_pw);
 
-        if(findUser!=null){
+
+
+
+        UserVO findUser = userService.getUserInfoById(user_id);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        if(findUser!=null && passwordEncoder.matches(user_pw,findUser.getUser_pw())){
             model.addAttribute("userVo",findUser);
             session.setAttribute("loginCheck",true);
             session.setAttribute("userid",user_id);
@@ -1076,10 +1081,10 @@ public class IndexController {
     }
 
     @RequestMapping("/login")
-    public String login(HttpSession session){
+    public String login(HttpSession session,Model model){
 
         clearSessionAndRedirect(session);
-
+        getHomepageInfo(model);
         return "login";
     }
 
@@ -1310,9 +1315,9 @@ public class IndexController {
         getHomepageInfo(model);
         return "prv_use";
     }
-
-    @RequestMapping("/spt_email")
-    public String spt_email(HttpSession session
+/*
+    @RequestMapping("/spt_consulting")
+    public String spt_consulting(HttpSession session
             ,@Param("page") int page
             , Model model){
 
@@ -1337,7 +1342,7 @@ public class IndexController {
 
                 if(qnaCount==0){ //컨설팅한게 업다
 
-                    return "/WEB-INF/jsp/spt_consulting.jsp";
+                    return "spt_consulting";
                 }
 
                 List<DemoBsQnaVO> demoBsQnaVOList = qnaService.getDemoBsQnaList(CONSTANT.user_idx,findUser.getIdx_user(),page,list_amount);
@@ -1389,7 +1394,7 @@ public class IndexController {
             else {//세션 만료 혹은 부정 접근
                 model.addAttribute("is_login",false);
                 clearSessionAndRedirect(session);
-                return "/WEB-INF/jsp/spt_consulting.jsp";
+                return "spt_consulting";
             }
 
         }
@@ -1398,8 +1403,8 @@ public class IndexController {
         }
 
         getHomepageInfo(model);
-        return "/WEB-INF/jsp/spt_consulting.jsp";
-    }
+        return "spt_consulting";
+    }*/
 
     @RequestMapping("/spt_faq")
     public String spt_faq(Model model){

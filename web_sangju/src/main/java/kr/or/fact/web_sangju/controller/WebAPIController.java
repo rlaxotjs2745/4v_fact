@@ -4,12 +4,21 @@ import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.CONSTANT;
 import kr.or.fact.web_sangju.utils.Utils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +42,8 @@ public class WebAPIController {
     @Resource(name = "consultingService")
     ConsultingService consultingService;
 
+    @Resource(name = "smsService")
+    SmsSendService smsSendService;
 
     @RequestMapping(value = "/user_id_check",method = RequestMethod.POST)
     public @ResponseBody
@@ -43,10 +54,16 @@ public class WebAPIController {
         resultVO.setResult_code("ERROR_1000");
 
         if(userVo!=null && userVo.getUser_id() !=null){
-            UserVO userVO = userService.findUserById(userVo.getUser_id());
-            if(userVO !=null){
+            UserVO resultUserVO = userService.findUserById(userVo.getUser_id());
+            if(resultUserVO !=null){
                 resultVO.setResult_str("아이디를 사용할 수 없습니다");
                 resultVO.setResult_code("ERROR_1001");
+
+                String mphone_num = Utils.asHiddenPNumber(resultUserVO.getMphone_num());
+                String email = Utils.asHiddenEmail(resultUserVO.getUser_id());
+                userVo.setMphone_num(mphone_num);
+                userVo.setEmail(email);
+                resultVO.setUserVO(userVo);
             }
             else {
                 resultVO.setResult_str("아이디를 사용할 수 있습니다");
@@ -55,11 +72,10 @@ public class WebAPIController {
         }
         return resultVO;
     }
-
     @RequestMapping(value = "/user_id_find",method = RequestMethod.POST)
     public @ResponseBody
     ResultVO user_id_find(HttpSession session,
-                           @RequestBody UserVO userVo){
+                          @RequestBody UserVO userVo){
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("아이디 형식을 확인해 주세요");
         resultVO.setResult_code("ERROR_1000");
@@ -77,8 +93,141 @@ public class WebAPIController {
                 resultVO.setUserVO(uVo);
             }
             else {
-                resultVO.setResult_str("아이디를 사용할 수 있습니다");
+                resultVO.setResult_str("아이디를 찾을 수 없습니다");
+                resultVO.setResult_code("ERROR_1000");
+            }
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/send_imsi_code",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO send_imsi_code(HttpSession session,
+                          @RequestBody ParamUserNCodeVO paramUserNCodeVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("아이디를 확인해주세요");
+        resultVO.setResult_code("ERROR_1000");
+
+        if(paramUserNCodeVO.getUser_id()!=null){
+
+            UserVO resultUserVO = userService.getUserInfoById(paramUserNCodeVO.getUser_id());
+            if(resultUserVO !=null){
+
+                if(paramUserNCodeVO.getCode_type()==1){
+                    String secure_code=Utils.generateAuthNo();
+                    String smsMessage = "["+secure_code+"]비밀번호 초기화를 위한 인증번호. 타인누설금지";
+
+                    SmsSendVO smsSendVO = new SmsSendVO();
+                    smsSendVO.setUser_id("농업기술진흥원");
+                    smsSendVO.setSubject("[농업기술진흥원]본인확인");
+                    smsSendVO.setSms_msg(smsMessage);
+
+                    DateFormat fm = new SimpleDateFormat("yyyyMMddHHmmss");
+                    String now_date = fm.format( new Date());
+
+                    smsSendVO.setNow_date(now_date);
+                    smsSendVO.setSend_date(now_date);
+                    smsSendVO.setCallback(resultUserVO.getMphone_num());
+                    smsSendVO.setDest_info(resultUserVO.getUser_name()+"^"+resultUserVO.getMphone_num());
+
+
+                    //smsSendVO.setNow_date(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddhhmmss")));
+                    smsSendService.insertSmsMessage(smsSendVO);
+
+                    UserSecretCodeVO userSecretCodeVO = new UserSecretCodeVO();
+                    userSecretCodeVO.setIdx_user(resultUserVO.getIdx_user());
+                    userSecretCodeVO.setSecret_code_type(1);
+                    userSecretCodeVO.setSecret_code(secure_code);
+                    userSecretCodeVO.setIs_confirm(0);
+                    userSecretCodeVO.setIs_use(0);
+                    Calendar cal = Calendar.getInstance();
+                    cal.add(Calendar.MINUTE, 5);
+                    Date expired_dt = cal.getTime();
+                    userSecretCodeVO.setExpire_date(expired_dt);
+                    userService.insertUserSecretCode(userSecretCodeVO);
+                }
+                else if(paramUserNCodeVO.getCode_type()==2){
+
+                }
+
+                resultVO.setResult_str("임시코드 전송함");
                 resultVO.setResult_code("SUCCESS");
+
+            }
+            else {
+                resultVO.setResult_str("아이디를 찾을 수 없습니다");
+                resultVO.setResult_code("ERROR_1000");
+            }
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/confirm_code",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO confirm_code(HttpSession session,
+                            @RequestBody ParamUserNCodeVO paramUserNCodeVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("인증번호가 틀립니다");
+        resultVO.setResult_code("ERROR_1000");
+
+        if(paramUserNCodeVO.getUser_id()!=null &&
+                paramUserNCodeVO.getSecret_code()!=null){
+
+            UserVO resultUserVO = userService.getUserInfoById(paramUserNCodeVO.getUser_id());
+            if(resultUserVO !=null){
+                paramUserNCodeVO.setIdx_user(resultUserVO.getIdx_user());
+                UserSecretCodeVO userSecretCodeVO = userService.getUserSecretCodeByIdx(paramUserNCodeVO);
+                if(userSecretCodeVO !=null) {
+                    userSecretCodeVO.setIs_confirm(1);
+                    userSecretCodeVO.setIs_use(0);
+                    userService.updateUserSecretCode(userSecretCodeVO);
+                    resultVO.setResult_str("인증되었습니다.");
+                    resultVO.setResult_code("SUCCESS");
+                }
+            }
+            else {
+                resultVO.setResult_str("인증번호가 틀립니다.");
+                resultVO.setResult_code("ERROR_1000");
+            }
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/change_password",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO change_password(HttpSession session,
+                          @RequestBody ParamUserNCodeVO paramUserNCodeVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("변경할 정보를 확인할 수 없습니다");
+        resultVO.setResult_code("ERROR_1000");
+
+        if(paramUserNCodeVO.getUser_id()!=null &&
+                paramUserNCodeVO.getSecret_code()!=null &&
+        paramUserNCodeVO.getUser_pw()!=null){
+
+            UserVO resultUserVO = userService.getUserInfoById(paramUserNCodeVO.getUser_id());
+
+            if(resultUserVO !=null){
+                paramUserNCodeVO.setIdx_user(resultUserVO.getIdx_user());
+                UserSecretCodeVO userSecretCodeVO = userService.getUserSecretCodeForPwUpdate(paramUserNCodeVO);
+                if(userSecretCodeVO !=null) {
+
+                    //userSecretCodeVO.setIs_confirm(1);
+                    userSecretCodeVO.setIs_use(1);
+                    userService.updateUserSecretCode(userSecretCodeVO);
+
+                    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                    String hashedPassword = passwordEncoder.encode(paramUserNCodeVO.getUser_pw());
+                    resultUserVO.setUser_pw(hashedPassword);
+                    userService.updateUserInfo(resultUserVO);
+
+                    resultVO.setResult_str("변경했습니다.");
+                    resultVO.setResult_code("SUCCESS");
+                }
+            }
+            else {
+                resultVO.setResult_str("인증번호가 틀립니다.");
+                resultVO.setResult_code("ERROR_1000");
             }
         }
         return resultVO;
@@ -143,6 +292,9 @@ public class WebAPIController {
                 }
                 userVo.setSign_in_type(0);
 
+                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                String hashedPassword = passwordEncoder.encode(userVo.getUser_pw());
+                userVo.setUser_pw(hashedPassword);
                 long idx_user = userService.join(userVo);
                 if(idx_user>0){
                     resultVO.setResult_str("가입되었습니다");
