@@ -99,8 +99,8 @@
                      #{idx_admin},
                      #{idx_conform_admin},
                      #{is_announce},
-                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS'),
-                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+                     SYSDATE,
+                     SYSDATE
                  )
 
     </insert>
@@ -125,7 +125,7 @@
                IDX_ADMIN=#{idx_admin},
                IDX_CONFORM_ADMIN=#{idx_conform_admin},
                IS_ANNOUNCE=#{is_announce},
-               LAST_UPD_DATE = TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+               LAST_UPD_DATE = SYSDATE
         WHERE IDX_DEMO_BUSINESS = #{idx_demo_business}
     </update>
 

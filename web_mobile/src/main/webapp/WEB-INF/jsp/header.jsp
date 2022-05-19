@@ -92,7 +92,7 @@
                         <ul class="nav--depth2">
                             <li><a href="spt_faq">FAQ</a></li>
                             <li><a href="spt_consulting">대면상담 신청</a></li>
-                            <li><a href="spt_email?page=1">온라인 문의</a></li>
+                            <%--<li><a href="spt_email?page=1">온라인 문의</a></li>--%>
                             <li><a href="spt_visit">견학 신청</a></li>
                         </ul>
                     </li>

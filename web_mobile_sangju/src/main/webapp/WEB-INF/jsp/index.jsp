@@ -55,7 +55,7 @@
                     <img src="resources/assets/image/img_advance.svg" alt="">
                     <span>대면 상담</span>
                 </a>
-                <a href="spt_email?page=1" class="quick__anchor">
+                <a href="spt_consulting?page=1" class="quick__anchor">
                     <img src="resources/assets/image/img_inquire.svg" alt="">
                     <span>온라인 문의</span>
                 </a>

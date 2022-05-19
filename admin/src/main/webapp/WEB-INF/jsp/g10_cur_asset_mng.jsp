@@ -11,7 +11,7 @@
                 <div class="card mb-3">
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center">
-                            <div class="display-4 "><img src="../assets/img/img_smartfarm.png" alt=""></div>
+                            <div class="display-4 "><img src="resources/assets/img/img_smartfarm.png" alt=""></div>
                             <div class="w-lg-100 ml-3">
                                 <div class=" d-flex justify-content-between">
                                     <div class="text-muted small mt-1">스마트팜</div>
@@ -34,7 +34,7 @@
                 <div class="card mb-3">
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center">
-                            <div class="display-4 "><img src="../assets/img/img_greenhouse.png" alt=""></div>
+                            <div class="display-4 "><img src="resources/assets/img/img_greenhouse.png" alt=""></div>
                             <div class="w-lg-100 ml-3">
                                 <div class=" d-flex justify-content-between">
                                     <div class="text-muted small mt-1">온실 구조자재</div>
@@ -57,7 +57,7 @@
                 <div class="card mb-3">
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center">
-                            <div class="display-4 "><img src="../assets/img/img_robot.png" alt=""></div>
+                            <div class="display-4 "><img src="resources/assets/img/img_robot.png" alt=""></div>
                             <div class="w-lg-100 ml-3">
                                 <div class=" d-flex justify-content-between">
                                     <div class="text-muted small mt-1">농업용 로봇</div>
@@ -80,7 +80,7 @@
                 <div class="card mb-3">
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center">
-                            <div class="display-4 "><img src="../assets/img/img_disease.png" alt=""></div>
+                            <div class="display-4 "><img src="resources/assets/img/img_disease.png" alt=""></div>
                             <div class="w-lg-100 ml-3">
                                 <div class=" d-flex justify-content-between">
                                     <div class="text-muted small mt-1">병해충</div>
@@ -103,7 +103,7 @@
                 <div class="card mb-3">
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center">
-                            <div class="display-4 "><img src="../assets/img/img_plant.png" alt=""></div>
+                            <div class="display-4 "><img src="resources/assets/img/img_plant.png" alt=""></div>
                             <div class="w-lg-100 ml-3">
                                 <div class=" d-flex justify-content-between">
                                     <div class="text-muted small mt-1">수출플랜트</div>
@@ -126,7 +126,7 @@
                 <div class="card mb-3">
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center">
-                            <div class="display-4 "><img src="../assets/img/img_ict.png" alt=""></div>
+                            <div class="display-4 "><img src="resources/assets/img/img_ict.png" alt=""></div>
                             <div class="w-lg-100 ml-3">
                                 <div class=" d-flex justify-content-between">
                                     <div class="text-muted small mt-1">ICT 기자재</div>
@@ -417,7 +417,7 @@
                                 <label class="form-label d-block text-muted">자산 사진</label>
 
                                 <div class="media align-items-center">
-                                    <img src="../../static/assets/img/bg/1.jpg" alt="" class="d-block ui-w-140">
+                                    <img src="../..resources/assets/img/bg/1.jpg" alt="" class="d-block ui-w-140">
                                     <div class="media-body ml-4">
                                         <div class="text-light small mt-1">- 신청서 보완 요청서 등록이 필요 합니다.<br>
                                             - 파일 형식 : JPG, PNG</div>

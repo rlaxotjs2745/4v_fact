@@ -12,7 +12,7 @@
                 <div class="card mb-3">
                     <button id="btn_filter1" class="card-body btn btn-white" onclick="javascript:load('b10_demo_bs_announce_doc_mng?page=1&filter1=9999&filter2=9998','사업공고문 관리');">
                         <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="/static/assets/img/img_business_all.png" alt=""></div>
+                            <div class="display-4"><img src="resources/assets/img/img_business_all.png" alt=""></div>
                             <div class="ml-3">
                                 <div class="text-muted small">전체</div>
                                 <div class="text-large">${adminAnnounceFilterVO.announce_tot}</div>
@@ -25,7 +25,7 @@
                 <div class="card mb-3">
                     <button id="btn_filter2" class="card-body btn btn-white" onclick="javascript:load('b10_demo_bs_announce_doc_mng?page=1&filter1=3&filter2=9998','사업공고문 관리');">
                         <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="/static/assets/img/img_business_on.png" alt=""></div>
+                            <div class="display-4"><img src="resources/assets/img/img_business_on.png" alt=""></div>
                             <div class="ml-3">
                                 <div class="text-muted small">전시중</div>
                                 <div class="text-large">${adminAnnounceFilterVO.status_on_count}</div>
@@ -38,7 +38,7 @@
                 <div class="card mb-3">
                     <button id="btn_filter3" class="card-body btn btn-white" onclick="javascript:load('b10_demo_bs_announce_doc_mng?page=1&filter1=1&filter2=2','사업공고문 관리');">
                         <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="/static/assets/img/img_business_week.png" alt=""></div>
+                            <div class="display-4"><img src="resources/assets/img/img_business_week.png" alt=""></div>
                             <div class="ml-3">
                                 <div class="text-muted small">대기중</div>
                                 <div class="text-large">${adminAnnounceFilterVO.wait_count}</div>
@@ -51,7 +51,7 @@
                 <div class="card mb-3">
                     <button id="btn_filter4" class="card-body btn btn-white" onclick="javascript:load('b10_demo_bs_announce_doc_mng?page=1&filter1=4&filter2=9998','사업공고문 관리');">
                         <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="/static/assets/img/img_business_off.png" alt=""></div>
+                            <div class="display-4"><img src="resources/assets/img/img_business_off.png" alt=""></div>
                             <div class="ml-3">
                                 <div class="text-muted small">일시 중지 중</div>
                                 <div class="text-large">${adminAnnounceFilterVO.pause_count}</div>
@@ -172,7 +172,7 @@
                 <div class="modal-header bg-success">
                     <h5 class="modal-title text-white font-weight-bold mode-new">사업 공고문 작성</h5>
                     <h5 class="modal-title text-white font-weight-bold mode-edit d-none">사업 공고문 수정</h5>
-                    <h5 class="modal-title text-white font-weight-bold mode-view">사업 공고 현황</h5>
+                    <h5 class="modal-title text-white font-weight-bold mode-view d-none">사업 공고 현황</h5>
                     <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
                 </div>
                 <div class="modal-body">

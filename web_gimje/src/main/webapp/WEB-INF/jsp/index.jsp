@@ -52,7 +52,7 @@
                     <img src="resources/assets/image/img_application.svg" alt="">
                     <span>실증 신청</span>
                 </a>
-                <a href="brd_announce" class="quick__anchor">
+                <a href="brd_announce?page=1" class="quick__anchor">
                     <img src="resources/assets/image/img_management.svg" alt="">
                     <span>실증 신청 현황</span>
                 </a>
@@ -94,7 +94,7 @@
                 <div class="main__news--inner">
                     <div class="main__news--notice">
                         <div class="news__badge"><img src="resources/assets/image/ico_notice.svg" alt="">공지사항</div>
-                        <div class="news__more"><a href="brd_notice" class="btn btn-more">+더보기</a></div>
+                        <div class="news__more"><a href="brd_notice?page=1" class="btn btn-more">+더보기</a></div>
                         <ul class="news__list">
                             <li>
                                 <a href="#"><span>12월31일까지 에너지 바우처 신청 12월31일까지 에너지 바우처 신청</span><em>07-06</em></a>
@@ -113,7 +113,7 @@
                     <!--//-->
                     <div class="main__news--notice">
                         <div class="news__badge"><img src="resources/assets/image/ico_business.svg" alt="">사업공고</div>
-                        <div class="news__more"><a href="brd_announce" class="btn btn-more">+더보기</a></div>
+                        <div class="news__more"><a href="brd_announce?page=1" class="btn btn-more">+더보기</a></div>
                         <ul class="news__list">
                             <li>
                                 <a href="#"><span>국제농업박람회 참여기업 모집 국제농업박람회 참여기업 모집</span><em>07-06</em></a>
@@ -132,7 +132,7 @@
                     <!--//-->
                     <div class="main__news--notice">
                         <div class="news__badge"><img src="resources/assets/image/ico_event.svg" alt="">행사안내</div>
-                        <div class="news__more"><a href="brd_event" class="btn btn-more">+더보기</a></div>
+                        <div class="news__more"><a href="brd_event?page=1" class="btn btn-more">+더보기</a></div>
                         <ul class="news__list">
                             <li>
                                 <a href="#"><span>공공빅데이터 활용 창업경진대회 공공빅데이터 활용 창업경진대회</span><em>07-06</em></a>

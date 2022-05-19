@@ -17,6 +17,6 @@ INSERT INTO TB_USER_DEMO_BS (
              0,
              0,
              0,
-             TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS'),
-             TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+             SYSDATE,
+             SYSDATE
          );

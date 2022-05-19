@@ -10,7 +10,7 @@
         SELECT COUNT(*) FROM TB_DEMO_BS_CONSULTING  WHERE CONSULTANT_IDX = #{idx_admin}
     </select>
 
-    <select id="getUserConsultingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.DemoBsConsultingVO">
+    <select id="getUserConsultingList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.DemoBsConsultingVO">
         SELECT
                 IDX_DEMO_BS_CONSULTING
                 ,CONSULTING_NUM
@@ -35,7 +35,7 @@
                     ,CONSULT_ANSWER_TYPE
                     ,CONSULTING_GOAL
                  FROM (
-                          SELECT * FROM TB_DEMO_BS_CONSULTING  WHERE IDX_USER=#{idx_user}
+                          SELECT * FROM TB_DEMO_BS_CONSULTING  WHERE IDX_USER=#{idx}
                       )
 
                  WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
@@ -43,7 +43,7 @@
         WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
     </select>
 
-    <select id="getAdminConsultingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.DemoBsConsultingVO">
+    <select id="getAdminConsultingList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.DemoBsConsultingVO">
         SELECT
                 IDX_DEMO_BS_CONSULTING
                 ,CONSULTING_NUM
@@ -68,7 +68,7 @@
                 ,CONSULT_ANSWER_TYPE
                 ,CONSULTING_GOAL
             FROM (
-            SELECT * FROM TB_DEMO_BS_CONSULTING  WHERE CONSULTANT_IDX=#{consultant_idx}
+            SELECT * FROM TB_DEMO_BS_CONSULTING  WHERE CONSULTANT_IDX=#{idx}
             )
 
             WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
@@ -125,7 +125,7 @@
                      #{is_privacy_accept},
                      #{memo},
                      #{idx_admin},
-                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+                     SYSDATE
                  )
 
     </insert>

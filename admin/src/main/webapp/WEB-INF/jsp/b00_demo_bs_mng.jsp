@@ -12,7 +12,7 @@
                 <div class="card mb-3">
                     <button id="btn_filter1" class="card-body btn btn-white" onclick="javascript:load('b00_demo_bs_mng?page=1&filter1=9999&filter2=9998','실증사업 목록');">
                         <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="/static/assets/img/img_business_all.png" alt=""></div>
+                            <div class="display-4"><img src="resources/assets/img/img_business_all.png" alt=""></div>
                             <div class="ml-3">
                                 <div class="text-muted small">전체</div>
                                 <div class="text-large">${adminDemoBsFilter.tot_count}</div>
@@ -25,7 +25,7 @@
                 <div class="card mb-3">
                     <button id="btn_filter2" class="card-body  btn btn-white" onclick="javascript:load('b00_demo_bs_mng?page=1&filter1=3&filter2=4','실증사업 목록');">
                         <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="/static/assets/img/img_business_on.png" alt=""></div>
+                            <div class="display-4"><img src="resources/assets/img/img_business_on.png" alt=""></div>
                             <div class="ml-3">
                                 <div class="text-muted small">모집중 & 모집종료</div>
                                 <div class="text-large">${adminDemoBsFilter.appl_count}</div>
@@ -38,7 +38,7 @@
                 <div class="card mb-3">
                     <button id="btn_filter3" class="card-body btn btn-white" onclick="javascript:load('b00_demo_bs_mng?page=1&filter1=5&filter2=6','실증사업 목록');">
                         <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="/static/assets/img/img_business_week.png" alt=""></div>
+                            <div class="display-4"><img src="resources/assets/img/img_business_week.png" alt=""></div>
                             <div class="ml-3">
                                 <div class="text-muted small">심사중 & 심사종료</div>
                                 <div class="text-large">${adminDemoBsFilter.revuiew_count}</div>
@@ -51,7 +51,7 @@
                 <div class="card mb-3">
                     <button id="btn_filter4" class="card-body btn btn-white" onclick="javascript:load('b00_demo_bs_mng?page=1&filter1=7&filter2=8','실증사업 목록');">
                         <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="/static/assets/img/img_business_off.png" alt=""></div>
+                            <div class="display-4"><img src="resources/assets/img/img_business_off.png" alt=""></div>
                             <div class="ml-3">
                                 <div class="text-muted small">이용계획 조정</div>
                                 <div class="text-large">${adminDemoBsFilter.agree_count}</div>
@@ -64,7 +64,7 @@
                 <div class="card mb-3">
                     <button id="btn_filter5" class="card-body btn btn-white" onclick="javascript:load('b00_demo_bs_mng?page=1&filter1=9&filter2=10','실증사업 목록');">
                         <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="/static/assets/img/img_business_off.png" alt=""></div>
+                            <div class="display-4"><img src="resources/assets/img/img_business_off.png" alt=""></div>
                             <div class="ml-3">
                                 <div class="text-muted small">협약중 & 협약완료</div>
                                 <div class="text-large">${adminDemoBsFilter.demo_count}</div>
@@ -77,7 +77,7 @@
                 <div class="card mb-3">
                     <button id="btn_filter6" class="card-body btn btn-white" onclick="javascript:load('b00_demo_bs_mng?page=1&filter1=11&filter2=12','실증사업 목록');">
                         <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="/static/assets/img/img_business_off.png" alt=""></div>
+                            <div class="display-4"><img src="resources/assets/img/img_business_off.png" alt=""></div>
                             <div class="ml-3">
                                 <div class="text-muted small">사업중 & 사업종료</div>
                                 <div class="text-large">${adminDemoBsFilter.result_count}</div>

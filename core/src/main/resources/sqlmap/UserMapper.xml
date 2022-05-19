@@ -17,7 +17,7 @@
     </select>
 
     <select id="getUserInfoByNameAndMPhoneNum" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.UserVO">
-        SELECT * FROM TB_USER WHERE USER_NAME='#{user_name}' AND MPHONE_NUM='#{mphone_num}'
+        SELECT * FROM TB_USER WHERE USER_NAME=#{user_name} AND MPHONE_NUM=#{mphone_num}
     </select>
 
     <select id="getAllUserList" resultType="kr.or.fact.core.model.DTO.UserVO">
@@ -59,7 +59,7 @@
     <select id="selectList" parameterType="kr.or.fact.core.model.DTO.UserVO" resultType="kr.or.fact.core.model.DTO.UserVO">
         SELECT * FROM (
                           SELECT t.*
-                          FROM C##FACT_USR.TB_USER t
+                          FROM TB_USER t
                       ) WHERE ROWNUM <![CDATA[ <= ]]> 501
     </select>
 
@@ -114,29 +114,94 @@
              #{is_corporate_member},
              #{idx_corp_info},
              #{sign_in_type},
-             TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS'),
-             TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+             SYSDATE,
+             SYSDATE
         )
     </insert>
 
 
     <update id="updateUserInfo" parameterType="kr.or.fact.core.model.DTO.UserVO">
-
+        UPDATE TB_USER
+        SET
+            USER_PW =  #{user_pw}
+        WHERE USER_ID=#{user_id}
 
     </update>
     <update id="updateUserInfoForLogout" parameterType="string">
         UPDATE TB_USER
         SET
             LAST_UPD_DATE = SYSDATE
-        WHERE USER_ID='#{user_id}'
+        WHERE USER_ID=#{user_id}
     </update>
 
     <delete id="deleteUserInfoByID" parameterType="string">
-        DELETE TB_USER WHERE  USER_ID = '#{user_id}'
+        DELETE TB_USER WHERE  USER_ID = #{user_id}
     </delete>
 
     <delete id="deleteUserInfoByIdx" parameterType="long">
         DELETE TB_USER WHERE  IDX_USER = #{idx_user}
     </delete>
+
+
+    <insert id="insertUserSecretCode" parameterType="kr.or.fact.core.model.DTO.UserSecretCodeVO">
+        INSERT INTO TB_USER_SECRET_CODE (
+            IDX_USER_SECRET_CODE,
+            IDX_USER,
+            SECRET_CODE_TYPE,
+            SECRET_CODE,
+            EXPIRE_DATE,
+            IS_CONFIRM,
+            IS_USE,
+            REG_DATE
+        ) VALUES (
+                     SEQ_USER_SECRET_CODE.NEXTVAL,
+                     #{idx_user},
+                     #{secret_code_type},
+                     #{secret_code},
+                     #{expire_date},
+                     #{is_confirm},
+                     #{is_use},
+                     SYSDATE
+                 )
+    </insert>
+
+    <select id="getUserSecretCodeByIdx" parameterType="kr.or.fact.core.model.DTO.ParamUserNCodeVO" resultType="kr.or.fact.core.model.DTO.UserSecretCodeVO">
+
+      SELECT A.IDX_USER_SECRET_CODE,
+             A.IDX_USER,
+             A.SECRET_CODE_TYPE,
+             A.SECRET_CODE,
+             A.EXPIRE_DATE,
+             A.IS_CONFIRM,
+             A.REG_DATE
+      FROM TB_USER_SECRET_CODE A
+        JOIN TB_USER B
+        ON A.IDX_USER = B.IDX_USER AND B.IDX_USER=#{idx_user} AND A.IS_CONFIRM = 0 AND SECRET_CODE=#{secret_code} AND SYSDATE BETWEEN A.REG_DATE AND A.EXPIRE_DATE
+
+    </select>
+
+    <select id="getUserSecretCodeForPwUpdate" parameterType="kr.or.fact.core.model.DTO.ParamUserNCodeVO" resultType="kr.or.fact.core.model.DTO.UserSecretCodeVO">
+
+        SELECT A.IDX_USER_SECRET_CODE,
+               A.IDX_USER,
+               A.SECRET_CODE_TYPE,
+               A.SECRET_CODE,
+               A.EXPIRE_DATE,
+               A.IS_CONFIRM,
+               A.REG_DATE
+        FROM TB_USER_SECRET_CODE A
+                 JOIN TB_USER B
+                      ON A.IDX_USER = B.IDX_USER AND B.IDX_USER=#{idx_user} AND A.IS_USE = 0 AND SECRET_CODE=#{secret_code}
+
+    </select>
+
+    <update id="updateUserSecretCode" parameterType="kr.or.fact.core.model.DTO.UserSecretCodeVO">
+        UPDATE TB_USER_SECRET_CODE SET
+        IS_CONFIRM = #{is_confirm},
+        IS_USE=#{is_use},
+        EXPIRE_DATE=SYSDATE
+        WHERE IDX_USER_SECRET_CODE = #{idx_user_secret_code}
+
+    </update>
 
 </mapper>

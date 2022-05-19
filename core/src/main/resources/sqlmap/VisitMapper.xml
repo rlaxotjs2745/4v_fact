@@ -98,7 +98,7 @@
                      #{memo},
                      #{group_idx},
                      #{idx_admin},
-                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+                     SYSDATE
                  )
 
     </insert>
@@ -179,7 +179,7 @@
                      #{idx_user},
                      #{idx_admin},
 
-                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+                     SYSDATE
                  )
     </insert>
 

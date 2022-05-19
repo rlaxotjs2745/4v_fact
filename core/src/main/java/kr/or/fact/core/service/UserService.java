@@ -1,8 +1,6 @@
 package kr.or.fact.core.service;
 
-import kr.or.fact.core.model.DTO.CorpInfoVO;
-import kr.or.fact.core.model.DTO.ResultVO;
-import kr.or.fact.core.model.DTO.UserVO;
+import kr.or.fact.core.model.DTO.*;
 
 public interface UserService {
 
@@ -16,11 +14,18 @@ public interface UserService {
     UserVO findUserById(String user_id);
 
 
-    public UserVO findUserID(String user_name, String mphone_number);
+    public UserVO getUserInfoByNameAndMPhoneNum(String user_name, String mphone_number);
     public UserVO findUserPW(String user_id);
+    UserVO getUserInfoById(String user_id);
 
     public ResultVO checkIdDuplicate(String user_id);
 
+    void insertUserSecretCode(UserSecretCodeVO userSecretCodeVO);
+    void updateUserSecretCode(UserSecretCodeVO userSecretCodeVO);
+    UserSecretCodeVO getUserSecretCodeByIdx(ParamUserNCodeVO paramUserNCodeVO);
+    UserSecretCodeVO getUserSecretCodeForPwUpdate(ParamUserNCodeVO paramUserNCodeVO);
+
+    void updateUserInfo(UserVO userVO);
 
 
 

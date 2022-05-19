@@ -52,15 +52,15 @@
                                     </tr>
                                     <tr>
                                         <th class="th__left">아이디<span class="text__essential">*</span></th>
-                                        <td class="td__modify"><input id = "user_id" name="user_id" type="text" style="width:230px;"><span class="text__dash"><button id="id_check" href="#" class="btn modify btn-lg">중복확인</button></span>
+                                        <td class="td__modify"><input id = "user_id" name="user_id" type="text" style="width:230px;" placeholder="abcde@xxxxxxx.co.kr"><span class="text__dash"><button id="id_check" href="#" class="btn modify btn-lg">중복확인</button></span>
                                             <span id="text_guide_id" class="text--guide"></span></td>
                                     </tr>
                                     <tr>
                                         <th class="th__left">비밀번호<span class="text__essential">*</span></th>
-                                        <td class="td__modify is-alert"><input id="user_pw" name = "user_pw" type="password"> <span class="text--guide is-alert" style="display: none">비밀번호 규칙에 맞지 않습니다. 다시 입력해 주세요.</span>
+                                        <td class="td__modify"><input id="user_pw" name = "user_pw" type="password"> <span class="text--guide is-alert" style="display: none">비밀번호 규칙에 맞지 않습니다. 다시 입력해 주세요.</span>
                                             <div class="text__message">
                                                 <ul>
-                                                    <li>비밀번호는 10~15 자 입력 가능합니다.</li>
+                                                    <li>비밀번호는 8~15 자 입력 가능합니다.</li>
                                                     <li>영문소문자 / 숫자 / 특수문자 필수 혼합 입력</li>
                                                     <li>비밀번호는 동일한 문자열을 3 회 이상 반복할 수 없습니다.</li>
                                                     <li>비밀번호는 연속된 문자열을 3 회 이상 사용할 수 없습니다.</li>
@@ -75,7 +75,7 @@
                                     <tr>
                                         <th class="th__left">주소</th>
                                         <td class="td__modify"><input id="zip_code" name = "zip_code" type="text" placeholder="우편번호" style="width:180px;"> <span class="text__zipcode"><button id="juso_search" class="btn modify btn-lg">주소검색</button></span>
-                                            <input id="juso_find" type="text" placeholder="상세주소">
+                                            <input id="juso_find" type="text" placeholder="주소">
                                             <input id="juso_detail" type="text" placeholder="나머지 주소">
                                         </td>
                                     </tr>
@@ -174,6 +174,12 @@
         $("#text_guide_id").removeClass("is-alert");
         var user_id = $("#user_id").val();
         var param = {"user_id":user_id};
+
+        if(!CheckEmail(user_id)){
+            alert("아이디는 이메일형식입니다");
+            return;
+        }
+
         console.log(param);
         $.ajax({
             type: 'post',
@@ -202,9 +208,22 @@
     });
 
     $("#join_confirm").click(function(){
+
+        var user_id = $("#user_id").val();
+        var user_pw = $("#user_pw").val();
+
+        if(!CheckEmail(user_id)){
+            alert("아이디는 이메일형식이어야 합니다.");
+            return;
+        }
+        if(user_pw<8){
+            alert("비밀번호는 8자 이상이어야합니다.");
+            return;
+        }
+
         var param = {
-            "user_id":$("#user_id").val(),
-            "user_pw":$("#user_pw").val(),
+            "user_id":user_id,
+            "user_pw":user_pw,
             "user_name":$("#user_name").val(),
             "addr":"("+ $("#zip_code").val()+") "+$("#juso_find").val() +" "+$("#juso_detail").val(),
             "mphone_num":$("#mphone_num1").val()+"-"+$("#mphone_num2").val()+"-"+$("#mphone_num3").val(),
@@ -236,7 +255,7 @@
     });
 
     var new_popup;
-    $("#juso_search").click(function(){
+    $("#juso_search,#zip_code,#juso_find").click(function(){
         var cw=screen.availWidth;     //화면 넓이
         var ch=screen.availHeight;    //화면 높이
         var sw=640;    //띄울 창의 넓이
@@ -254,6 +273,16 @@
         $("#juso_find").val(data["roadFullAddr"]);
         $("#zip_code").val(data["zipNo"]);
         new_popup.close();
+    }
+    function CheckEmail(str)
+    {
+        var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+        if(!reg_email.test(str)) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
 </script>

@@ -20,7 +20,7 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="../assets/img/img_business_all.png" alt=""></div>
+                            <div class="display-4"><img src="resources/assets/img/img_business_all.png" alt=""></div>
                             <div class="ml-3">
                                 <div class="text-muted small">전체</div>
                                 <div class="text-large">123</div>
@@ -33,7 +33,7 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="../assets/img/img_business_on.png" alt=""></div>
+                            <div class="display-4"><img src="resources/assets/img/img_business_on.png" alt=""></div>
                             <div class="ml-3">
                                 <div class="text-muted small">전시중</div>
                                 <div class="text-large">456</div>
@@ -46,7 +46,7 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="../assets/img/img_business_week.png" alt=""></div>
+                            <div class="display-4"><img src="resources/assets/img/img_business_week.png" alt=""></div>
                             <div class="ml-3">
                                 <div class="text-muted small">1주일 이내 완료</div>
                                 <div class="text-large">78</div>
@@ -59,7 +59,7 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="../assets/img/img_business_off.png" alt=""></div>
+                            <div class="display-4"><img src="resources/assets/img/img_business_off.png" alt=""></div>
                             <div class="ml-3">
                                 <div class="text-muted small">전시 종료</div>
                                 <div class="text-large">910</div>

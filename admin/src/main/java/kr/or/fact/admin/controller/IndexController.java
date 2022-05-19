@@ -12,15 +12,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.util.UriComponents;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.io.BufferedReader;
-import java.io.IOException;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -85,6 +78,7 @@ public class IndexController {
         }
         //UserVO findUser = userService.getAuthUser(id,pw);
         //UserVO findUser = userService.getUserInfo(3);
+
         AdminVO findAdmin = adminService.login(admin_id,admin_pw);
 
         if(findAdmin!=null){
@@ -138,11 +132,7 @@ public class IndexController {
 
         return "login";
     }
-    @RequestMapping("/password_reset")
-    public String password_reset(){
 
-        return "password_reset";
-    }
     //대시보드
     @SneakyThrows
     @RequestMapping(value = "/a10_dashboard",method = RequestMethod.POST)
@@ -548,21 +538,6 @@ public class IndexController {
     }
 
     //문의
-    @RequestMapping(value = "/c00_site_mng",method = RequestMethod.POST)
-    public String c00_site_mng(@RequestParam(value = "tag", required = false) String tagValue
-    , Model model){
-
-        //푸터 정보
-        HomepageInfoVO homepageInfoVO = homepageInfoService.getHomepageInfo();
-        model.addAttribute("homepageInfo",homepageInfoVO);
-
-        //조직도, 직원 정보
-        List<CoWorkerVO> coWorkerVOList = coWorkerNService.getCoWorkerList();
-        model.addAttribute("coWorkerVOList",coWorkerVOList);
-        return "c00_site_mng";
-    }
-
-    //문의
     @RequestMapping(value = "/c10_site_mng_consult_mng",method = RequestMethod.POST)
     public String c10_site_mng_consult_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                            ModelMap model){
@@ -717,6 +692,21 @@ public class IndexController {
 
 
         return "c72_site_rule_doc_mng";
+    }
+
+    //사이트 정보관리
+    @RequestMapping(value = "/c80_site_mng",method = RequestMethod.POST)
+    public String c80_site_mng(@RequestParam(value = "tag", required = false) String tagValue
+            , Model model){
+
+        //푸터 정보
+        HomepageInfoVO homepageInfoVO = homepageInfoService.getHomepageInfo();
+        model.addAttribute("homepageInfo",homepageInfoVO);
+
+        //조직도, 직원 정보
+        List<CoWorkerVO> coWorkerVOList = coWorkerNService.getCoWorkerList();
+        model.addAttribute("coWorkerVOList",coWorkerVOList);
+        return "c80_site_mng";
     }
 
     //자동 sms 관리

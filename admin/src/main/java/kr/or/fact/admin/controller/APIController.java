@@ -60,6 +60,9 @@ public class APIController {
     @Resource(name = "visitService")
     public VisitService visitService;
 
+    @Resource(name = "homepageInfoService")
+    public HomepageInfoService homepageInfoService;
+
 
 
     @Autowired
@@ -543,7 +546,36 @@ public class APIController {
 
         return  resultVO;
     }
+    @RequestMapping(value = "/save_homepage_info",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  save_homepage_info(HttpSession session,
+                                @RequestBody HomepageInfoVO homepageInfoVO){
 
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("저장했습니다");
+        resultVO.setResult_code("SUCCESS");
+
+        if(homepageInfoVO.getHomepage_admin() != null &&
+                homepageInfoVO.getHomepage_admin_pnum()!= null &&
+                homepageInfoVO.getEmail()!= null
+        ){
+            HomepageInfoVO resultHomepageInfo = homepageInfoService.getHomepageInfo();
+            resultHomepageInfo.setHomepage_admin(homepageInfoVO.getHomepage_admin());
+            resultHomepageInfo.setHomepage_admin_pnum(homepageInfoVO.getHomepage_admin_pnum());
+            resultHomepageInfo.setEmail(homepageInfoVO.getEmail());
+
+            homepageInfoService.updateHomepageInfo(resultHomepageInfo);
+
+        }
+        else {
+            resultVO.setResult_str("필수 데이터가 없습니다.");
+            resultVO.setResult_code("ERROR001");
+        }
+
+
+
+        return  resultVO;
+    }
 
     @RequestMapping(value = "/air", method = RequestMethod.GET)
     public StringBuilder callAirApi() {

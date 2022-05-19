@@ -27,7 +27,7 @@
         <div class="page__full">
             <div class="page__floating">
 
-                <div class="tb__logo"><img src="resources/assets/image/img_loginLogo.png" alt="SMART FARM POTAL"></div>
+                <%--<div class="tb__logo"><img src="resources/assets/image/img_loginLogo.png" alt="SMART FARM POTAL"></div>--%>
                 <form id="loginForm" action="api_post_login" method="post">
                 <div class="tb__login">
                     <div class="td__cell--float">

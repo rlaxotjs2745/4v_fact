@@ -1335,7 +1335,7 @@ public class IndexController {
 
                 if(qnaCount==0){ //컨설팅한게 업다
 
-                    return "spt_email";
+                    return "spt_consulting";
                 }
 
                 List<DemoBsQnaVO> demoBsQnaVOList = qnaService.getDemoBsQnaList(CONSTANT.user_idx,findUser.getIdx_user(),page,list_amount);
@@ -1387,7 +1387,7 @@ public class IndexController {
             else {//세션 만료 혹은 부정 접근
                 model.addAttribute("is_login",false);
                 clearSessionAndRedirect(session);
-                return "spt_email";
+                return "spt_consulting";
             }
 
         }
@@ -1396,7 +1396,7 @@ public class IndexController {
         }
 
         getHomepageInfo(model);
-        return "spt_email";
+        return "spt_consulting";
     }
 
     @RequestMapping("/spt_faq")
@@ -1428,17 +1428,8 @@ public class IndexController {
 
                 model.addAttribute("findUserVO",findUserVO);
                 model.addAttribute("idx_user",findUserVO.getIdx_user());
-                CorpInfoVO corpInfoVO = corpService.getCorpInfo(findUserVO.getIdx_corp_info());
-                model.addAttribute("corpInfoVO",corpInfoVO);
-
-                int consultingCount = consultingService.getConsultingCount(CONSTANT.user_idx,findUserVO.getIdx_user());
-                model.addAttribute("total_count",consultingCount);
-
-                if(consultingCount==0){ //컨설팅한게 업다
-
-                    return "spt_consulting";
-                }
-
+                //CorpInfoVO corpInfoVO = corpService.getCorpInfo(findUserVO.getIdx_corp_info());
+                //model.addAttribute("corpInfoVO",corpInfoVO);
             }
             else {//세션 만료 혹은 부정 접근
                 model.addAttribute("is_login",false);

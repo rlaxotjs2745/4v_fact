@@ -125,10 +125,10 @@
         <div class="page__btn">
             <div class="btn__desc">실증 분야에 궁금한 것이 있나요? 상담을 신청하시거나 온라인으로 문의해 주시면 상세히 안내를 드리겠습니다.</div>
             <div class="btn__application">
-                <a href="spt_email" class="btn btn-jumbo submit">상담 신청</a>
+                <a href="spt_consulting" class="btn btn-jumbo submit">상담 신청</a>
             </div>
 <%--            <div class="btn__group">
-                <a href="spt_email" class="btn__part bg--qa"><img src="resources/assets/image/img_question.png" alt="">온라인 문의<em>바로가기</em></a>
+                <a href="spt_consulting" class="btn__part bg--qa"><img src="resources/assets/image/img_question.png" alt="">온라인 문의<em>바로가기</em></a>
                 <a href="spt_consulting" class="btn__part bg--cs"><img src="resources/assets/image/img_consultation.png" alt="">대면상담 신청<em>바로가기</em></a>
             </div>--%>
         </div>

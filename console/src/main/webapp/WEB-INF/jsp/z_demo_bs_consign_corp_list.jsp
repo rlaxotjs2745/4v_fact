@@ -60,7 +60,7 @@
                     <form class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">실증진도 계획 구성</h5>
-                            <button type="button" class="btn d-inline-block"><img src="../assets/img/ico_print.png" alt="인쇄"></button>
+                            <button type="button" class="btn d-inline-block"><img src="resources/assets/img/ico_print.png" alt="인쇄"></button>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                         </div>
                         <div class="modal-body">
@@ -246,7 +246,7 @@
                     <form class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">실증진도 입력</h5>
-                            <button type="button" class="btn d-inline-block"><img src="../assets/img/ico_print.png" alt="인쇄"></button>
+                            <button type="button" class="btn d-inline-block"><img src="resources/assets/img/ico_print.png" alt="인쇄"></button>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                         </div>
                         <div class="modal-body">

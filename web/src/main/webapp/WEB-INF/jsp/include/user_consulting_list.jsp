@@ -43,9 +43,10 @@
                 <c:if test="${consult.is_consultant eq 1}">홍순이</c:if>
             </td>
             <td>
-                <c:if test="${consult.consult_answer_type eq 0}">전화</c:if>
-                <c:if test="${consult.consult_answer_type eq 1}">이메일</c:if>
-                <c:if test="${consult.consult_answer_type eq 2}">방문</c:if>
+                <c:if test="${consult.consult_answer_type eq 0}"></c:if>
+                <c:if test="${consult.consult_answer_type eq 1}">전화</c:if>
+                <c:if test="${consult.consult_answer_type eq 2}">이메일</c:if>
+                <c:if test="${consult.consult_answer_type eq 3}">방문</c:if>
             </td>
         </tr>
     </c:forEach>

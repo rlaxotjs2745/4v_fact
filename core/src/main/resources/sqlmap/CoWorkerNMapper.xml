@@ -42,7 +42,7 @@
                 #{mphone_num},
                 #{email},
                 #{is_show},
-                TO_DATE(sysdate,'YYYY-MM-DD HH24:mi:SS')
+                SYSDATE
                 );
     </insert>
 
@@ -59,7 +59,7 @@
                                 MPHONE_NUM = #{mphone_num},
                                 EMAIL = #{email},
                                 IS_SHOW = #{is_show},
-                                REG_DATE = TO_DATE(sysdate,'YYYY-MM-DD HH24:mi:SS'),
+                                REG_DATE = SYSDATE,
                                 WHERE IDX_CO_WORKER = #{idx_co_worker}
 
     </update>

@@ -3,6 +3,7 @@ package kr.or.fact.web_sangju.controller;
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.CONSTANT;
+import kr.or.fact.web_sangju.utils.Utils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,34 @@ public class WebAPIController {
             if(userVO !=null){
                 resultVO.setResult_str("아이디를 사용할 수 없습니다");
                 resultVO.setResult_code("ERROR_1001");
+            }
+            else {
+                resultVO.setResult_str("아이디를 사용할 수 있습니다");
+                resultVO.setResult_code("SUCCESS");
+            }
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/user_id_find",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO user_id_find(HttpSession session,
+                           @RequestBody UserVO userVo){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("아이디 형식을 확인해 주세요");
+        resultVO.setResult_code("ERROR_1000");
+
+        if(userVo!=null && userVo.getUser_name() !=null && userVo.getMphone_num()!=null){
+
+            UserVO resultUserVO = userService.getUserInfoByNameAndMPhoneNum(userVo.getUser_name(),userVo.getMphone_num());
+            if(resultUserVO !=null){
+                resultVO.setResult_str("찾기 성공");
+                resultVO.setResult_code("SUCCESS");
+                UserVO uVo = new UserVO();
+                String user_id = Utils.asHiddenEmail(resultUserVO.getUser_id());
+                uVo.setUser_id(user_id);
+                uVo.setUser_name(resultUserVO.getUser_name());
+                resultVO.setUserVO(uVo);
             }
             else {
                 resultVO.setResult_str("아이디를 사용할 수 있습니다");
@@ -864,23 +893,31 @@ public class WebAPIController {
             int page_amount = 10;
             //int page = paramVisitReqVO.getVisit_req_list_page();
 
-            int visitReqCount = visitService.getUserVisitReqCount(idx_user);
-            model.addAttribute("total_count",visitReqCount);
+            ParamPageListFilteredVO paramPageListFilteredVO = new ParamPageListFilteredVO();
+            paramPageListFilteredVO.setPage_num(1);
+            paramPageListFilteredVO.setIdx(idx_user);
+            paramPageListFilteredVO.setAmount(5);
+            paramPageListFilteredVO.setOrder_field("");
 
-            if(visitReqCount==0){ //컨설팅한게 업다
+            int myConsultCount = consultingService.getConsultingCount(CONSTANT.user_idx,idx_user);
+            model.addAttribute("total_count",myConsultCount);
+
+            if(myConsultCount==0){ //컨설팅한게 업다
 
                 return "include/visit_req_list";
             }
 
             //model.addAttribute("idx_user",paramVisitReqVO.getIdx_user());
-            List<DemoBsConsultingVO> demoBsConsultingVOList = consultingService.getConsultingList(CONSTANT.user_idx,idx_user,page,list_amount);
+            List<DemoBsConsultingVO> demoBsConsultingVOList = consultingService.getConsultingList(CONSTANT.user_idx,paramPageListFilteredVO);
 
             model.addAttribute("demoBsConsultingVOList",demoBsConsultingVOList);
+
+
             model.addAttribute("cur_page",page);
             model.addAttribute("amount",list_amount);
 
-            int tot_page = visitReqCount/list_amount+1;
-            if(visitReqCount%list_amount==0) tot_page-=1;
+            int tot_page = myConsultCount/list_amount+1;
+            if(myConsultCount%list_amount==0) tot_page-=1;
 
             int tot_sector = tot_page/page_amount+1;
             if(tot_page%page_amount==0) tot_sector-=1;
@@ -938,7 +975,8 @@ public class WebAPIController {
 
 
         //3.받은 데이터값 확인
-        demoBsConsultingVO.setConsulting_num(1);
+        demoBsConsultingVO.setConsulting_num(0);
+        demoBsConsultingVO.setConsulting_status(0);
 
         consultingService.saveDemoBsConsulting(demoBsConsultingVO);
 

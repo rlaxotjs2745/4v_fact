@@ -257,7 +257,7 @@
         <!-- 회원탈퇴 -->
         <div id="popup_withdrawal" class="pop__detail ">
             <div class="section">
-                <a href="#none" class="js-modal-close"><img src="../assets/image/ico_close.png" alt="닫기"></a>
+                <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
                 <div class="popup__cnt">
                     <h5 class="popup__title">회원탈퇴</h5>
                     <div class="popup__scroll--area">
@@ -346,7 +346,7 @@
         <!--popup / in popup-->
         <div id="popup_withdrawal_1" class="pop__mini ">
             <div class="section">
-                <a href="#none" class="js-modal-close"><img src="../assets/image/ico_close.png" alt="닫기"></a>
+                <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
                 <div class="popup__cnt">
                     <h5 class="popup__title">스마트팜 혁신밸리 실증단지</h5>
                     <p class="popup__text">회원 탈퇴를 하겠습니까?</p>
@@ -361,7 +361,7 @@
         <!--popup / in popup-->
         <div id="popup_withdrawal_2" class="pop__mini ">
             <div class="section">
-                <a href="#none" class="js-modal-close"><img src="../assets/image/ico_close.png" alt="닫기"></a>
+                <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
                 <div class="popup__cnt">
                     <h5 class="popup__title">스마트팜 혁신밸리 실증단지</h5>
                     <p class="popup__text">YYYY년 MM월 DD일 HH:MM에 <br>탈퇴되었습니다.</p>

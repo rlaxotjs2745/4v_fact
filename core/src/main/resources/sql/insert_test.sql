@@ -8,7 +8,7 @@ INSERT INTO TB_HOMEPAGE_INFO(IDX_HOMEPAGE_INFO,
                        '이아백(관리팀)',
                        '031-7345-0239',
                 0,
-                TO_DATE(sysdate,'YYYY-MM-DD HH24:mi:SS'));
+                SYSDATE);
 
 
 INSERT INTO TB_USER_DEMO_BS (

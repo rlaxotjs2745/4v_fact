@@ -18,7 +18,7 @@
                 <div class="card mb-3">
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center">
-                            <div class="display-4 "><img src="../assets/img/img_smartfarm.png" alt=""></div>
+                            <div class="display-4 "><img src="resources/assets/img/img_smartfarm.png" alt=""></div>
                             <div class="w-lg-100 ml-3">
                                 <div class=" d-flex justify-content-between">
                                     <div class="text-muted small mt-1">스마트팜</div>
@@ -41,7 +41,7 @@
                 <div class="card mb-3">
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center">
-                            <div class="display-4 "><img src="../assets/img/img_greenhouse.png" alt=""></div>
+                            <div class="display-4 "><img src="resources/assets/img/img_greenhouse.png" alt=""></div>
                             <div class="w-lg-100 ml-3">
                                 <div class=" d-flex justify-content-between">
                                     <div class="text-muted small mt-1">온실 구조자재</div>
@@ -64,7 +64,7 @@
                 <div class="card mb-3">
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center">
-                            <div class="display-4 "><img src="../assets/img/img_robot.png" alt=""></div>
+                            <div class="display-4 "><img src="resources/assets/img/img_robot.png" alt=""></div>
                             <div class="w-lg-100 ml-3">
                                 <div class=" d-flex justify-content-between">
                                     <div class="text-muted small mt-1">농업용 로봇</div>
@@ -87,7 +87,7 @@
                 <div class="card mb-3">
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center">
-                            <div class="display-4 "><img src="../assets/img/img_disease.png" alt=""></div>
+                            <div class="display-4 "><img src="resources/assets/img/img_disease.png" alt=""></div>
                             <div class="w-lg-100 ml-3">
                                 <div class=" d-flex justify-content-between">
                                     <div class="text-muted small mt-1">병해충</div>
@@ -110,7 +110,7 @@
                 <div class="card mb-3">
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center">
-                            <div class="display-4 "><img src="../assets/img/img_plant.png" alt=""></div>
+                            <div class="display-4 "><img src="resources/assets/img/img_plant.png" alt=""></div>
                             <div class="w-lg-100 ml-3">
                                 <div class=" d-flex justify-content-between">
                                     <div class="text-muted small mt-1">수출플랜트</div>
@@ -133,7 +133,7 @@
                 <div class="card mb-3">
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center">
-                            <div class="display-4 "><img src="../assets/img/img_ict.png" alt=""></div>
+                            <div class="display-4 "><img src="resources/assets/img/img_ict.png" alt=""></div>
                             <div class="w-lg-100 ml-3">
                                 <div class=" d-flex justify-content-between">
                                     <div class="text-muted small mt-1">ICT 기자재</div>

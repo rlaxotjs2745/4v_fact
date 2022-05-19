@@ -864,23 +864,31 @@ public class WebAPIController {
             int page_amount = 10;
             //int page = paramVisitReqVO.getVisit_req_list_page();
 
-            int visitReqCount = visitService.getUserVisitReqCount(idx_user);
-            model.addAttribute("total_count",visitReqCount);
+            ParamPageListFilteredVO paramPageListFilteredVO = new ParamPageListFilteredVO();
+            paramPageListFilteredVO.setPage_num(1);
+            paramPageListFilteredVO.setIdx(idx_user);
+            paramPageListFilteredVO.setAmount(5);
+            paramPageListFilteredVO.setOrder_field("");
 
-            if(visitReqCount==0){ //컨설팅한게 업다
+            int myConsultCount = consultingService.getConsultingCount(CONSTANT.user_idx,idx_user);
+            model.addAttribute("total_count",myConsultCount);
+
+            if(myConsultCount==0){ //컨설팅한게 업다
 
                 return "include/visit_req_list";
             }
 
             //model.addAttribute("idx_user",paramVisitReqVO.getIdx_user());
-            List<DemoBsConsultingVO> demoBsConsultingVOList = consultingService.getConsultingList(CONSTANT.user_idx,idx_user,page,list_amount);
+            List<DemoBsConsultingVO> demoBsConsultingVOList = consultingService.getConsultingList(CONSTANT.user_idx,paramPageListFilteredVO);
 
             model.addAttribute("demoBsConsultingVOList",demoBsConsultingVOList);
+
+
             model.addAttribute("cur_page",page);
             model.addAttribute("amount",list_amount);
 
-            int tot_page = visitReqCount/list_amount+1;
-            if(visitReqCount%list_amount==0) tot_page-=1;
+            int tot_page = myConsultCount/list_amount+1;
+            if(myConsultCount%list_amount==0) tot_page-=1;
 
             int tot_sector = tot_page/page_amount+1;
             if(tot_page%page_amount==0) tot_sector-=1;
@@ -938,7 +946,8 @@ public class WebAPIController {
 
 
         //3.받은 데이터값 확인
-        demoBsConsultingVO.setConsulting_num(1);
+        demoBsConsultingVO.setConsulting_num(0);
+        demoBsConsultingVO.setConsulting_status(0);
 
         consultingService.saveDemoBsConsulting(demoBsConsultingVO);
 

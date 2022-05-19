@@ -4,6 +4,8 @@ import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.CONSTANT;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -59,8 +61,6 @@ public class IndexController {
     @Resource(name = "jusoService")
     JusoService jusoService;
 
-
-
     @RequestMapping("/")
     public String home(Model model){
 
@@ -94,9 +94,14 @@ public class IndexController {
         }
         //UserVO findUser = userService.getAuthUser(id,pw);
         //UserVO findUser = userService.getUserInfo(3);
-        UserVO findUser = userService.login(user_id,user_pw);
 
-        if(findUser!=null){
+
+
+
+        UserVO findUser = userService.getUserInfoById(user_id);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        if(findUser!=null && passwordEncoder.matches(user_pw,findUser.getUser_pw())){
             model.addAttribute("userVo",findUser);
             session.setAttribute("loginCheck",true);
             session.setAttribute("userid",user_id);
@@ -1076,10 +1081,10 @@ public class IndexController {
     }
 
     @RequestMapping("/login")
-    public String login(HttpSession session){
+    public String login(HttpSession session,Model model){
 
         clearSessionAndRedirect(session);
-
+        getHomepageInfo(model);
         return "login";
     }
 
@@ -1430,17 +1435,8 @@ public class IndexController {
 
                 model.addAttribute("findUserVO",findUserVO);
                 model.addAttribute("idx_user",findUserVO.getIdx_user());
-                CorpInfoVO corpInfoVO = corpService.getCorpInfo(findUserVO.getIdx_corp_info());
-                model.addAttribute("corpInfoVO",corpInfoVO);
-
-                int consultingCount = consultingService.getConsultingCount(CONSTANT.user_idx,findUserVO.getIdx_user());
-                model.addAttribute("total_count",consultingCount);
-
-                if(consultingCount==0){ //컨설팅한게 업다
-
-                    return "spt_consulting";
-                }
-
+                //CorpInfoVO corpInfoVO = corpService.getCorpInfo(findUserVO.getIdx_corp_info());
+                //model.addAttribute("corpInfoVO",corpInfoVO);
             }
             else {//세션 만료 혹은 부정 접근
                 model.addAttribute("is_login",false);

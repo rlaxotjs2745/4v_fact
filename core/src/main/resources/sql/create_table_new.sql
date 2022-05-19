@@ -1470,7 +1470,102 @@ CREATE SEQUENCE SEQ_ADMIN_HISTORY INCREMENT BY 1 START WITH 10000;
 
 
 
+create table SDK_SMS_SEND
+(
+    MSG_ID         NUMBER           not null,
+    USER_ID        VARCHAR2(20)     not null,
+    SCHEDULE_TYPE  NUMBER default 0 not null,
+    NOW_DATE       VARCHAR2(20),
+    SEND_DATE      VARCHAR2(20)     not null,
+    DEST_TYPE      NUMBER default 0 not null,
+    DEST_COUNT     NUMBER default 0 not null,
+    DEST_INFO      VARCHAR2(4000)   not null,
+    CALLBACK       VARCHAR2(20),
+    SUBJECT        VARCHAR2(64),
+    SMS_MSG        VARCHAR2(200),
+    CALLBACK_URL   VARCHAR2(200),
+    KT_OFFICE_CODE VARCHAR2(20),
+    CDR_ID         VARCHAR2(20),
+    RESERVED1      VARCHAR2(64),
+    RESERVED2      VARCHAR2(50),
+    RESERVED3      VARCHAR2(50),
+    RESERVED4      VARCHAR2(50),
+    RESERVED5      VARCHAR2(50),
+    RESERVED6      VARCHAR2(50),
+    RESERVED7      VARCHAR2(50),
+    RESERVED8      VARCHAR2(50),
+    RESERVED9      VARCHAR2(50),
+    SEND_STATUS    NUMBER default 0 not null,
+    SEND_COUNT     NUMBER default 0 not null,
+    SEND_RESULT    NUMBER default 0 not null,
+    SEND_PROC_TIME VARCHAR2(20),
+    STD_ID         VARCHAR2(50),
+    CONSTRAINT PK_SDK_S_S PRIMARY KEY(MSG_ID)
+);
 
+CREATE SEQUENCE SEQ_MSG_ID INCREMENT BY 1 START WITH 1;
+create index IDX_SDK_S_S_0 on SDK_SMS_SEND (SEND_STATUS, SCHEDULE_TYPE, SEND_DATE);
+
+
+create table SDK_SMS_REPORT
+(
+    MSG_ID           NUMBER           not null,
+    JOB_ID           NUMBER default 0 not null,
+    USER_ID          VARCHAR2(20)     not null,
+    SCHEDULE_TYPE    NUMBER default 0 not null,
+    NOW_DATE         VARCHAR2(20),
+    SEND_DATE        VARCHAR2(20)     not null,
+    DEST_TYPE        NUMBER default 0 not null,
+    DEST_COUNT       NUMBER default 0 not null,
+    DEST_INFO        VARCHAR2(4000)   not null,
+    CALLBACK         VARCHAR2(20),
+    SUBJECT          VARCHAR2(64),
+    SMS_MSG          VARCHAR2(200),
+    CALLBACK_URL     VARCHAR2(200),
+    KT_OFFICE_CODE   VARCHAR2(20),
+    CDR_ID           VARCHAR2(20),
+    RESERVED1        VARCHAR2(64),
+    RESERVED2        VARCHAR2(50),
+    RESERVED3        VARCHAR2(50),
+    RESERVED4        VARCHAR2(50),
+    RESERVED5        VARCHAR2(50),
+    RESERVED6        VARCHAR2(50),
+    RESERVED7        VARCHAR2(50),
+    RESERVED8        VARCHAR2(50),
+    RESERVED9        VARCHAR2(50),
+    SUCC_COUNT       NUMBER default 0 not null,
+    FAIL_COUNT       NUMBER default 0 not null,
+    CANCEL_STATUS    NUMBER default 0 not null,
+    CANCEL_COUNT     NUMBER default 0 not null,
+    CANCEL_REQ_DATE  VARCHAR2(20),
+    CANCEL_RESULT    NUMBER default 0 not null,
+    DELIVER_STATUS   NUMBER default 0 not null,
+    DELIVER_COUNT    NUMBER default 0 not null,
+    DELIVER_REQ_DATE VARCHAR2(20),
+    DELIVER_RESULT   NUMBER default 0 not null,
+    STD_ID           VARCHAR2(50),
+    CONSTRAINT PK_SDK_S_R PRIMARY KEY(MSG_ID)
+);
+
+CREATE TABLE TB_USER_SECRET_CODE
+(
+
+    IDX_USER_SECRET_CODE	NUMBER(32),
+        IDX_USER	NUMBER(32),
+        SECRET_CODE_TYPE	NUMBER(4) DEFAULT 0,
+        SECRET_CODE	VARCHAR2(16),
+        EXPIRE_DATE	DATE,
+        IS_CONFIRM	NUMBER(4) DEFAULT 0,
+    IS_USE	NUMBER(4) DEFAULT 0,
+        REG_DATE	DATE,
+    CONSTRAINT USER_SECRET_CODE_PK PRIMARY KEY (IDX_USER_SECRET_CODE)
+)
+    LOGGING
+    NOCOMPRESS
+    NOCACHE
+    NOPARALLEL
+    MONITORING;
+CREATE SEQUENCE SEQ_USER_SECRET_CODE INCREMENT BY 1 START WITH 10000;
 
 
 

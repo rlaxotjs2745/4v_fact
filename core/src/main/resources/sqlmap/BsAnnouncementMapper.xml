@@ -142,8 +142,8 @@
                      #{idx_demo_business},
                      #{confirm_admin_idx},
                      #{idx_admin},
-                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS'),
-                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+                     SYSDATE,
+                     SYSDATE
                  )
 
     </insert>
@@ -171,7 +171,7 @@
                                       IDX_DEMO_BUSINESS=#{idx_demo_business},
                                       CONFIRM_ADMIN_IDX=#{confirm_admin_idx},
                                       IDX_ADMIN=#{idx_admin},
-                                    LAST_UPD_DATE = TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+                                    LAST_UPD_DATE = SYSDATE
         WHERE IDX_DEMO_BUSINESS = #{idx_demo_business}
     </update>
 

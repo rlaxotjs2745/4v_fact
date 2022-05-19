@@ -15,4 +15,5 @@ public class ResultVO{
     List<VisitDataVO> visitDataVOList;
 
     VisitReqVO visitReqVO;
+    UserVO userVO;
 }

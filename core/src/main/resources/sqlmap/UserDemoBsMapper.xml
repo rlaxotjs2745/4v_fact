@@ -231,8 +231,8 @@
                       #{prize3_org},
                       #{prize3_etc},
 
-                      TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS'),
-                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+                      SYSDATE,
+                     SYSDATE
                  )
 
     </insert>
@@ -255,8 +255,8 @@
              #{idx_user},
              #{is_change},
              #{is_confirm},
-             TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS'),
-             TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+             SYSDATE,
+             SYSDATE
          )
 
     </insert>
@@ -334,7 +334,7 @@
 
 
 
-            LAST_UPD_DATE = TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+            LAST_UPD_DATE = SYSDATE
           WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
     </update>
 
@@ -407,7 +407,7 @@
                 MAN_ETC_COUNT = #{man_etc_count},
 
 
-               LAST_UPD_DATE = TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+               LAST_UPD_DATE = SYSDATE
         WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
     </update>
 
@@ -439,7 +439,7 @@
               PRIZE3_ETC = #{prize3_etc},
 
 
-               LAST_UPD_DATE = TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+               LAST_UPD_DATE = SYSDATE
         WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
     </update>
 
@@ -805,8 +805,8 @@
                      #{facil_pw3_v},
                      #{facil_pw3_w},
 
-                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS'),
-                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+                     SYSDATE,
+                     SYSDATE
                  )
 
     </insert>
@@ -981,7 +981,7 @@
           FACIL_PW3_TYPE =#{facil_pw3_type},
           FACIL_PW3_V =#{facil_pw3_v},
           FACIL_PW3_W =#{facil_pw3_w},
-          UPD_DATE = TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+          UPD_DATE = SYSDATE
         WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
     </update>
 
@@ -1024,7 +1024,7 @@
     #{rnd_user_col_part},
     #{rnd_user_6t},
     #{rnd_user_result},
-    TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+    SYSDATE
     )
     </insert>
 

@@ -7734,7 +7734,7 @@ html {
     height: 100%;
     overflow: scroll;
     overflow-X: hidden;
-    background: url(../image/img_bglogo.jpg) no-repeat 50% 50%;
+    background: url(../image/img_bglogo.png) no-repeat 50% 50%;
     background-size: cover;
     position: fixed;
     left: 0;
@@ -7746,11 +7746,12 @@ html {
 }
 
 .login .page__floating {
-    width: 1100px;
-    height: calc(100% - 100px);
+    float: right;
+    width: 800px;
+    height: calc(100% - 570px);
     display: table;
     margin: 0 auto;
-    padding: 50px 0;
+    padding: 270px 0;
     vertical-align: middle
 }
 

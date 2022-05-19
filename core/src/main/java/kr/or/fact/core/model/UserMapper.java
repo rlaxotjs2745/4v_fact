@@ -1,9 +1,7 @@
 package kr.or.fact.core.model;
 
 
-import kr.or.fact.core.model.DTO.CorpInfoVO;
-import kr.or.fact.core.model.DTO.PagedUserListVO;
-import kr.or.fact.core.model.DTO.UserVO;
+import kr.or.fact.core.model.DTO.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -32,6 +30,12 @@ public  interface UserMapper {
 
     int deleteUserInfoByID(@Param("user_id") String user_id);
     int deleteUserInfoByIdx(@Param("idx_user") long idx_user);
+
+    void insertUserSecretCode(UserSecretCodeVO userSecretCodeVO);
+    void updateUserSecretCode(UserSecretCodeVO userSecretCodeVO);
+    UserSecretCodeVO getUserSecretCodeByIdx(ParamUserNCodeVO paramUserNCodeVO);
+    UserSecretCodeVO getUserSecretCodeForPwUpdate(ParamUserNCodeVO paramUserNCodeVO);
+
 
 
 

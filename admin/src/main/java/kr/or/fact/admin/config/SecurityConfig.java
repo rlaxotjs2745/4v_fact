@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/static/assets/**");
+        web.ignoring().antMatchers("/resources/assets/**");
     }
 
     @Override
@@ -52,6 +52,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.exceptionHandling()
                 .accessDeniedPage("/denied");
+
+        http
+                .sessionManagement()
+                .invalidSessionUrl("/login");
     }
 
     @Override

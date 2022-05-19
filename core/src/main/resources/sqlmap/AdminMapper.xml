@@ -58,7 +58,7 @@
     <select id="selectList" parameterType="kr.or.fact.core.model.DTO.AdminVO" resultType="kr.or.fact.core.model.DTO.AdminVO">
         SELECT * FROM (
                           SELECT t.*
-                          FROM C##FACT_USR.TB_ADMIN t
+                          FROM TB_ADMIN t
                       ) WHERE ROWNUM <![CDATA[ <= ]]> 501
     </select>
 
@@ -99,8 +99,8 @@
                      #{sign_in_type},
                      #{reg_date},
                      #{last_upd_date},
-                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS'),
-                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+                     SYSDATE,
+                     SYSDATE
                  )
     </insert>
 
@@ -140,7 +140,7 @@
                      #{admin_name},
                      #{work_type},
                      #{work_detail},
-                     TO_DATE(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+                     SYSDATE
                  )
     </insert>
 

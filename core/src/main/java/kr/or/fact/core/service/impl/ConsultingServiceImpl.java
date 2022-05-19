@@ -2,8 +2,10 @@ package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.ConsultingMapper;
 import kr.or.fact.core.model.DTO.DemoBsConsultingVO;
+import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 import kr.or.fact.core.service.ConsultingService;
 import kr.or.fact.core.util.CONSTANT;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,16 +32,17 @@ public class ConsultingServiceImpl implements ConsultingService {
 
         return tot_count;
     }
+
     @Override
-    public List<DemoBsConsultingVO> getConsultingList(int type,long idx,int page, int count){
+    public List<DemoBsConsultingVO> getConsultingList(int type,ParamPageListFilteredVO paramPageListFilteredVO){
 
         List<DemoBsConsultingVO> demoBsConsultingVOList = null;
         if(type == CONSTANT.user_idx){
-            demoBsConsultingVOList = consultingMapper.getUserConsultingList(idx,page,count,"CONSULTING_NUM");
+            demoBsConsultingVOList = consultingMapper.getUserConsultingList(paramPageListFilteredVO);
         }
         else if(type == CONSTANT.admin_idx)
         {
-            demoBsConsultingVOList = consultingMapper.getAdminConsultingList(idx,page,count,"CONSULTING_NUM");
+            demoBsConsultingVOList = consultingMapper.getAdminConsultingList(paramPageListFilteredVO);
         }
         return demoBsConsultingVOList;
     }
@@ -49,7 +52,6 @@ public class ConsultingServiceImpl implements ConsultingService {
     public void saveDemoBsConsulting(DemoBsConsultingVO demoBsConsultingVO){
         consultingMapper.saveDemoBsConsulting(demoBsConsultingVO);
     }
-
 
 
 

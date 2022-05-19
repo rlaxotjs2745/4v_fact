@@ -52,7 +52,7 @@
                     <img src="resources/assets/image/img_application.svg" alt="">
                     <span>실증 신청</span>
                 </a>
-                <a href="brd_announce" class="quick__anchor">
+                <a href="brd_announce?page=1" class="quick__anchor">
                     <img src="resources/assets/image/img_management.svg" alt="">
                     <span>실증 신청 현황</span>
                 </a>
@@ -169,7 +169,7 @@
         </div>
     </div>
 
-    <div id="popup_main1" class="pop__main is-on" style="margin:-220px 0 0 -240px">
+    <%--<div id="popup_main1" class="pop__main is-on" style="margin:-220px 0 0 -240px">
         <div class="section">
             <a href="#none" class="js-main-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
             <div class="popup__cnt">
@@ -188,7 +188,7 @@
             </div>
 
         </div>
-    </div>
+    </div>--%>
 
 
 

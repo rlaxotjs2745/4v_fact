@@ -12,14 +12,16 @@
             HOMEPAGE_ADMIN,
             HOMEPAGE_ADMIN_PNUM,
             IS_CURRENT,
+            EMAIL,
             REG_DATE,
             VALUES (
                 SEQ_HOMEPAGE_INFO.NEXTVAL,
                 #{homepage_admin},
                 #{homepage_admin_pnum},
                 #{is_current},
-                TO_DATE(sysdate,'YYYY-MM-DD HH24:mi:SS')
-                );
+                #{email},
+                SYSDATE
+                )
 
     </insert>
     <update id="updateHomepageInfo" parameterType="kr.or.fact.core.model.DTO.HomepageInfoVO">
@@ -27,7 +29,8 @@
             HOMEPAGE_ADMIN = #{homepage_admin},
             HOMEPAGE_ADMIN_PNUM = #{homepage_admin_pnum},
             IS_CURRENT = 1,
-            REG_DATE = TO_DATE(sysdate,'YYYY-MM-DD HH24:mi:SS')
+                                    EMAIL=#{email},
+            REG_DATE = SYSDATE
         WHERE IDX_HOMEPAGE_INFO = #{idx_homepage_info}
 
     </update>

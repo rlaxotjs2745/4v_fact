@@ -6,8 +6,8 @@
 
             <!-- Brand demo (see assets/css/demo/demo.css) -->
             <div class="app-brand demo">
-                <a href="home" class="app-brand-text demo sidenav-text font-weight-normal ml-2 default"><img src="/static/assets/img/h1-logo.png" alt="스마트팜"></a>
-                <a href="home" class="app-brand-text demo sidenav-text font-weight-normal ml-2 mini"><img src="/static/assets/img/logo.png" alt="김제"></a>
+                <a href="home" class="app-brand-text demo sidenav-text font-weight-normal ml-2 default"><img src="resources/assets/img/h1-logo.png" alt="스마트팜"></a>
+                <a href="home" class="app-brand-text demo sidenav-text font-weight-normal ml-2 mini"><img src="resources/assets/img/logo.png" alt="김제"></a>
                 <a href="javascript:void(0)" class="layout-sidenav-toggle sidenav-link text-large ml-auto">
                     <i class="ion ion-md-menu align-middle"></i>
                 </a>
@@ -129,11 +129,6 @@
 
                     <ul class="sidenav-menu">
                         <li class="sidenav-item">
-                            <a href="javascript:load('c00_site_mng','사이트 정보관리');" class="sidenav-link">
-                                <div>사이트 정보 관리</div>
-                            </a>
-                        </li>
-                        <li class="sidenav-item">
                             <a href="javascript:load('c10_site_mng_consult_mng','자산현황');" class="sidenav-link">
                                 <div>상담신청 관리</div>
                             </a>
@@ -156,11 +151,11 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="sidenav-item">
+<%--                        <li class="sidenav-item">
                             <a href="javascript:load('c30_site_faq_mng.jsp','자원예약');" class="sidenav-link">
                                 <div>포털 FAQ 관리</div>
                             </a>
-                        </li>
+                        </li>--%>
                         <li class="sidenav-item">
                             <a href="javascript:void(0);" class="sidenav-link sidenav-toggle">
                                 <div>포털 게시판 관리</div>
@@ -184,11 +179,11 @@
                             </ul>
                         </li>
 
-                        <li class="sidenav-item">
+<%--                        <li class="sidenav-item">
                             <a href="javascript:load('c50_site_banner_mng','자원예약관리');" class="sidenav-link">
                                 <div>포털 배너관리</div>
                             </a>
-                        </li>
+                        </li>--%>
                         <li class="sidenav-item">
                             <a href="javascript:load('c60_site_popup_mng','자원예약관리');" class="sidenav-link">
                                 <div>포털 팝업 관리</div>
@@ -210,6 +205,11 @@
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li class="sidenav-item">
+                            <a href="javascript:load('c80_site_mng','사이트 정보관리');" class="sidenav-link">
+                                <div>사이트 정보 관리</div>
+                            </a>
                         </li>
                     </ul>
                 </li>

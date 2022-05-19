@@ -1,23 +1,38 @@
 package kr.or.fact.core.service.impl;
 
-import kr.or.fact.core.model.DTO.CorpInfoVO;
-import kr.or.fact.core.model.DTO.ParamVO;
-import kr.or.fact.core.model.DTO.ResultVO;
-import kr.or.fact.core.model.DTO.UserVO;
+import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.model.UserMapper;
 import kr.or.fact.core.service.UserService;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kr.or.fact.core.util.CONSTANT;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
+
+import java.util.Date;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
+
+
+
     @Autowired
     public UserServiceImpl(UserMapper userMapper){this.userMapper = userMapper;}
+
+    @Autowired
+    private SqlSession sqlsession;
+
+    @Autowired
+    private DataSourceTransactionManager dataSourceTransactionManager;
 
     @Override
     public UserVO getAuthUser(String user_id, String user_pw){
@@ -43,6 +58,9 @@ public class UserServiceImpl implements UserService {
 /*        Map<String,Object> paramMap = new HashMap<String,Object>();
         paramMap.put("user_id",user_id);
         paramMap.put("user_pw",user_pw);*/
+
+
+
         ParamVO paramVo = new ParamVO();
         paramVo.setUser_id(user_id);
         paramVo.setUser_pw(user_pw);
@@ -84,7 +102,7 @@ public class UserServiceImpl implements UserService {
         return ret_idx;
     }
     @Override
-    public UserVO findUserID(String user_name, String mphone_number){
+    public UserVO getUserInfoByNameAndMPhoneNum(String user_name, String mphone_number){
 
         UserVO findUser = userMapper.getUserInfoByNameAndMPhoneNum(user_name,mphone_number);
         return findUser;
@@ -93,7 +111,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVO findUserPW(String user_id){
 
-        UserVO findUser = userMapper.getUserInfoById("test04");
+        UserVO findUser = userMapper.getUserInfoById(user_id);
+        return findUser;
+    }
+
+    @Override
+    public UserVO getUserInfoById(String user_id){
+
+        UserVO findUser = userMapper.getUserInfoById(user_id);
         return findUser;
     }
 
@@ -112,6 +137,37 @@ public class UserServiceImpl implements UserService {
         }
 
         return resultVO;
+    }
+
+    @Override
+    public void insertUserSecretCode(UserSecretCodeVO userSecretCodeVO){
+        userMapper.insertUserSecretCode(userSecretCodeVO);
+    }
+    @Override
+    public void updateUserSecretCode(UserSecretCodeVO userSecretCodeVO){
+
+        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+        this.sqlsession.update("kr.or.fact.core.model.UserMapper.updateUserSecretCode",userSecretCodeVO);
+        dataSourceTransactionManager.commit(status);
+    }
+
+    @Override
+    public UserSecretCodeVO getUserSecretCodeByIdx(ParamUserNCodeVO paramUserNCodeVO){
+        return userMapper.getUserSecretCodeByIdx(paramUserNCodeVO);
+    }
+
+    @Override
+    public UserSecretCodeVO getUserSecretCodeForPwUpdate(ParamUserNCodeVO paramUserNCodeVO){
+        return userMapper.getUserSecretCodeForPwUpdate(paramUserNCodeVO);
+    }
+
+    @Override
+    public void updateUserInfo(UserVO userVO){
+        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+        this.sqlsession.update("kr.or.fact.core.model.UserMapper.updateUserInfo",userVO);
+        dataSourceTransactionManager.commit(status);
     }
 
 }

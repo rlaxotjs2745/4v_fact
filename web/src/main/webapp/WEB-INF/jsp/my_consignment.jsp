@@ -42,8 +42,8 @@
         <div class="page__cnt">
             <h3 class="page__subject">위탁 현황</h3>
 
-            <div style="padding:200px 0; height:100px; font-size: 100px;text-align: center;">
-                콘텐츠
+            <div style="padding:200px 0; height:100px; font-size: 30px;text-align: center;">
+                위탁내용이 없습니다
             </div>
         </div>
 

@@ -21,7 +21,7 @@
                     <div class="under__depth--list">
                         <a href="spt_faq">FAQ</a>
                         <a href="spt_consulting">상담 신청</a>
-                        <%--<a href="spt_email?page=1">온라인 문의</a>--%>
+                        <%--<a href="spt_consulting?page=1">온라인 문의</a>--%>
                         <a href="spt_visit">견학 신청</a>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
 
         <div id="popup_councelling" class="pop__detail">
             <div class="section">
-                <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
+                <button id="popup_councelling_close" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></button>
                 <div class="popup__cnt">
                     <h5 class="popup__title">상담 신청</h5>
 
@@ -192,7 +192,7 @@
                             <label for="agree-1">개인정보 수집 및 이용에 동의합니다.</label>
                         </div>
                     </div>
-                    <input id="idx_user" hidden value="${findUserVO.idx_user}}">
+                    <input id="idx_user" hidden value="${findUserVO.idx_user}">
                 </div>
                 <div class="popup__btn">
                     <a href="#" class="btn light btn-lg  js-btn-close">취소</a>
@@ -225,10 +225,12 @@
 
     $('#save_consulting_req').on("click", function(a) {
 
+        var forLabel = $("input:radio[name='prevent']:checked").attr("id");
+        var consulting_goal = $("label[for='" + forLabel + "']").text();
         let param={
             idx_user:$("#idx_user").val()*1.0,
             consulting_type:$("input:radio[name='prevent']:checked").val(),
-
+            consulting_goal:$("input:radio[name='prevent']:checked").val()==7?$("#consult_type_etc_str").val():consulting_goal,
             req_date:new Date($("#req_date").val()),
 
             is_privacy_accept:$("input[name='agree']:checked").val( )*1//	number	4		0			1:오전, 2:오후, 3:종일, 4, 여러날
@@ -245,7 +247,8 @@
                 if(result.result_code=="SUCCESS"){
                     alert(result.result_str);
 
-                    $('#popup_councelling').click();
+                    $('#popup_councelling_close').click();
+
                     getUserConsultingList(1);
 
                 }
