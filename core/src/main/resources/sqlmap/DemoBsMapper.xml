@@ -12,7 +12,7 @@
     </select>
 
 
-    <select id="getDemoBsPagingList" parameterType="kr.or.fact.core.model.DTO.ListPagingParamVO" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
+    <select id="getDemoBsPagingList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
         SELECT
             IDX_DEMO_BUSINESS
              ,DEMO_BS_STATUS

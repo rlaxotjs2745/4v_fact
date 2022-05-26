@@ -54,7 +54,7 @@
         SELECT * FROM TB_BS_ANNOUNCEMENT ORDER BY POSTING_START_DATE DESC
     </select>
 
-    <select id="getBsAnnouncementListLimit" parameterType="kr.or.fact.core.model.DTO.ListPagingParamVO" resultType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
+    <select id="getBsAnnouncementListLimit" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
         SELECT
             IDX_BS_ANNOUNCEMENT
              ,ANNOUNCE_NUM

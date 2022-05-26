@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-sm-4 col-xl-2">
                 <div class="card mb-3">
-                    <button id="btn_filter1" class="card-body btn btn-white" onclick="javascript:load('b00_demo_bs_mng?page=1&filter1=9999&filter2=9998','실증사업 목록');">
+                    <button id="btn_filter1" class="card-body btn btn-white" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:9999,filter2:9998},'실증사업 목록');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="resources/assets/img/img_business_all.png" alt=""></div>
                             <div class="ml-3">
@@ -23,7 +23,7 @@
             </div>
             <div class="col-sm-4 col-xl-2">
                 <div class="card mb-3">
-                    <button id="btn_filter2" class="card-body  btn btn-white" onclick="javascript:load('b00_demo_bs_mng?page=1&filter1=3&filter2=4','실증사업 목록');">
+                    <button id="btn_filter2" class="card-body  btn btn-white" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:3,filter2:4},'실증사업 목록');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="resources/assets/img/img_business_on.png" alt=""></div>
                             <div class="ml-3">
@@ -36,7 +36,7 @@
             </div>
             <div class="col-sm-4 col-xl-2">
                 <div class="card mb-3">
-                    <button id="btn_filter3" class="card-body btn btn-white" onclick="javascript:load('b00_demo_bs_mng?page=1&filter1=5&filter2=6','실증사업 목록');">
+                    <button id="btn_filter3" class="card-body btn btn-white" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:5,filter2:6},'실증사업 목록');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="resources/assets/img/img_business_week.png" alt=""></div>
                             <div class="ml-3">
@@ -49,7 +49,7 @@
             </div>
             <div class="col-sm-4 col-xl-2">
                 <div class="card mb-3">
-                    <button id="btn_filter4" class="card-body btn btn-white" onclick="javascript:load('b00_demo_bs_mng?page=1&filter1=7&filter2=8','실증사업 목록');">
+                    <button id="btn_filter4" class="card-body btn btn-white" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:7,filter2:8},'실증사업 목록');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="resources/assets/img/img_business_off.png" alt=""></div>
                             <div class="ml-3">
@@ -62,7 +62,7 @@
             </div>
             <div class="col-sm-4 col-xl-2">
                 <div class="card mb-3">
-                    <button id="btn_filter5" class="card-body btn btn-white" onclick="javascript:load('b00_demo_bs_mng?page=1&filter1=9&filter2=10','실증사업 목록');">
+                    <button id="btn_filter5" class="card-body btn btn-white" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:9,filter2:10},'실증사업 목록');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="resources/assets/img/img_business_off.png" alt=""></div>
                             <div class="ml-3">
@@ -75,7 +75,7 @@
             </div>
             <div class="col-sm-4 col-xl-2">
                 <div class="card mb-3">
-                    <button id="btn_filter6" class="card-body btn btn-white" onclick="javascript:load('b00_demo_bs_mng?page=1&filter1=11&filter2=12','실증사업 목록');">
+                    <button id="btn_filter6" class="card-body btn btn-white" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:11,filter2:12},'실증사업 목록');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="resources/assets/img/img_business_off.png" alt=""></div>
                             <div class="ml-3">
@@ -179,17 +179,17 @@
                                     <c:set var="name" value="${total_count/amount}" />
 
 
-                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:load('b00_demo_bs_mng?page=1&filter1=${filter1}&filter2=${filter2}','실증사업 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
-                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:load('b00_demo_bs_mng?page=${cur_page-1}&filter1=${filter1}&filter2=${filter2}','실증사업 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:${filter1},filter2:${filter2}},'실증사업 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('b00_demo_bs_mng',{page_num:${cur_page-1},filter1:${filter1},filter2:${filter2}},'실증사업 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
 
 
 
                                     <c:forEach var="i" begin="1" end="${page_amount}">
-                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:load('b00_demo_bs_mng?page=${(cur_sector-1)*page_amount+i}&filter1=${filter1}&filter2=${filter2}','실증사업 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
+                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('b00_demo_bs_mng?page=${(cur_sector-1)*page_amount+i}&filter1=${filter1}&filter2=${filter2}','실증사업 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
                                     </c:forEach>
 
-                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:load('b00_demo_bs_mng?page=${cur_page+1}&filter1=${filter1}&filter2=${filter2}','실증사업 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
-                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:load('b00_demo_bs_mng?page=${tot_page}&filter1=${filter1}&filter2=${filter2}','실증사업 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('b00_demo_bs_mng',{page_num:${cur_page+1},filter1:${filter1},filter2:${filter2}},'실증사업 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('b00_demo_bs_mng',{page_num:${tot_page},filter1:${filter1},filter2:${filter2}},'실증사업 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
                                 </ul>
                             </div>
                         </div>

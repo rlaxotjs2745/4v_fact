@@ -83,7 +83,7 @@
             <ul class="sidenav-inner">
 
                 <li class="sidenav-item active">
-                    <a href="javascript:load('a10_dashboard','대시보드');" class="sidenav-link"><i class="sidenav-icon oi oi-grid-two-up"></i>
+                    <a href="javascript:pageLoad('a10_dashboard','대시보드');" class="sidenav-link"><i class="sidenav-icon oi oi-grid-two-up"></i>
                         <div>대시보드</div>
                     </a>
                 </li>
@@ -96,12 +96,12 @@
 
                     <ul class="sidenav-menu">
                         <li class="sidenav-item">
-                            <a href="javascript:load('b21_gh_glass','유리온실 현황');" class="sidenav-link">
+                            <a href="javascript:pageLoad('b21_gh_glass','유리온실 현황');" class="sidenav-link">
                                 <div>유리온실</div>
                             </a>
                         </li>
                         <li class="sidenav-item">
-                            <a href="javascript:load('b22_gh_vinyl','비닐온실 현황');" class="sidenav-link">
+                            <a href="javascript:pageLoad('b22_gh_vinyl','비닐온실 현황');" class="sidenav-link">
                                 <div>비닐온실</div>
                             </a>
                         </li>
@@ -120,12 +120,12 @@
                             </a>
                             <ul class="sidenav-menu">
                                 <li class="sidenav-item">
-                                    <a href="javascript:load('d11_gh_data','온실 생성 데이터');" class="sidenav-link">
+                                    <a href="javascript:pageLoad('d11_gh_data','온실 생성 데이터');" class="sidenav-link">
                                         <div>온실 데이터</div>
                                     </a>
                                 </li>
                                 <li class="sidenav-item">
-                                    <a href="javascript:load('d12_facility_data','장비 생성 데이터');" class="sidenav-link">
+                                    <a href="javascript:pageLoad('d12_facility_data','장비 생성 데이터');" class="sidenav-link">
                                         <div>장비 데이터</div>
                                     </a>
                                 </li>
@@ -137,7 +137,7 @@
                             </a>
                             <ul class="sidenav-menu">
                                 <li class="sidenav-item">
-                                    <a href="javascript:load('d21_consign_data','위탁사업 데이터');" class="sidenav-link">
+                                    <a href="javascript:pageLoad('d21_consign_data','위탁사업 데이터');" class="sidenav-link">
                                         <div>위탁사업 데이터</div>
                                     </a>
                                 </li>

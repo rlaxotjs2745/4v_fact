@@ -28,16 +28,9 @@ public class FileController {
     private FileService fileService;
 
 
-
-
-
-
-
-
-
     @PostMapping("/uploadFile")
     public FileUploadResponseVO uploadFile(@RequestParam("file") MultipartFile file) {
-        String fileName = fileService.storeFile(file);
+        String fileName = fileService.storeFileInfo(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")

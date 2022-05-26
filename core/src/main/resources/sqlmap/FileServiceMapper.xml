@@ -2,25 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.fact.core.model.FileServiceMapper">
-    <insert id="storeFile" parameterType="org.springframework.web.multipart.MultipartFile">
-        insert into FILE (
-            idx_file_info,
-            file_name,
-            file_type,
-            file_status,
-            mime_type,
-            encoding,
-            extention,
-            file_secure_type,
-            file_path,
-            file_size,
-            checksum,
-            owner,
-            idx_user,
-            idx_admin,
-            reg_date
-        ) values (
-            #{idx_file_info},
+    <insert id="storeFileInfo" parameterType="org.springframework.web.multipart.MultipartFile">
+        INSERT INTO TB_FILE_INFO (
+            IDX_FILE_INFO,
+            FILE_NAME,
+            FILE_TYPE,
+            FILE_STATUS,
+            MIME_TYPE,
+            ENCODING,
+            EXTENTION,
+            FILE_SECURE_TYPE,
+            FILE_PATH,
+            FILE_SIZE,
+            CHECKSUM,
+            OWNER,
+            IDX_USER,
+            IDX_ADMIN,
+            REG_DATE
+        ) VALUES (
+            SEQ_FILE_INFO.NEXTVAL,
             #{file_name},
             #{file_type},
             #{file_status},
@@ -34,9 +34,205 @@
             #{owner},
             #{idx_user},
             #{idx_admin},
-            #{reg_date}
-                         )
+            SYSDATE
+        )
     </insert>
 
+    <update id="updateFileInfo" parameterType="kr.or.fact.core.model.DTO.FileInfoVO">
+        UPDATE TB_FILE_INFO SET
+                                FILE_NAME=#{file_name},
+                                FILE_TYPE=#{file_type},
+                                FILE_STATUS=#{file_status},
+                                MIME_TYPE=#{mime_type},
+        WHERE IDX_FILE_INFO = #{idx_file_info}
+    </update>
+
+    <delete id="deleteFileInfo" parameterType="long">
+
+        DELETE FROM TB_FILE_INFO WHERE IDX_FILE_INFO = #{idx_file_info}
+    </delete>
+
+    <select id="getFileInfo" parameterType="long" resultType="kr.or.fact.core.model.DTO.FileInfoVO">
+
+        SELECT * FROM TB_FILE_INFO WHERE IDX_FILE_INFO = #{idx_file_info}
+    </select>
+
+    <select id="getFormFileInfoList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.FormFileInfoVO">
+    SELECT * FROM (
+        SELECT
+                ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM,
+                IDX_FORM_FILE_INFO,
+                SUBJECT,
+                USAGE_DETAIL,
+                IDX_ADMIN,
+                ORDER_NUM,
+                IDX_FILE_INFO,
+                REG_DATE,
+                FILE_NAME,
+                FILE_TYPE,
+                EXTENTION,
+                FILE_PATH
+                FROM (
+                    SELECT
+                        A.IDX_FORM_FILE_INFO,
+                        A.SUBJECT,
+                        A.USAGE_DETAIL,
+                        A.IDX_ADMIN,
+                        A.ORDER_NUM,
+                        A.IDX_FILE_INFO,
+                        A.REG_DATE,
+                        B.FILE_NAME,
+                        B.FILE_TYPE,
+                        B.EXTENTION,
+                        B.FILE_PATH
+                    FROM TB_FORM_FILE_INFO A
+                    JOIN TB_FILE_INFO B
+                        ON A.IDX_FILE_INFO = B.IDX_FILE_INFO AND B.FILE_TYPE = 3 AND B.FILE_STATUS=0
+                     )
+                WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+                )
+        WHERE ROW_NUM <![CDATA[>]]> (#{page_num} -1)*#{amount}
+
+    </select>
+
+    <insert id="insertFormFileInfo" parameterType="kr.or.fact.core.model.DTO.FormFileInfoVO">
+        INSERT INTO TB_FORM_FILE_INFO (
+            IDX_FORM_FILE_INFO,
+            SUBJECT,
+            USAGE_DETAIL,
+            IDX_ADMIN,
+            ORDER_NUM,
+            IDX_FILE_INFO,
+            REG_DATE
+        ) VALUES (
+                     SEQ_FORM_FILE_INFO.NEXTVAL,
+                     #{subject},
+                     #{usage_detail},
+                     #{idx_admin},
+                     #{order_num},
+                     #{idx_file_info},
+                     SYSDATE
+                 )
+    </insert>
+    <select id="getFormFileInfo" parameterType="long" resultType="kr.or.fact.core.model.DTO.FormFileInfoVO">
+
+       SELECT
+           A.IDX_FORM_FILE_INFO,
+           A.SUBJECT,
+           A.USAGE_DETAIL,
+           A.IDX_ADMIN,
+           A.ORDER_NUM,
+           A.IDX_FILE_INFO,
+           A.REG_DATE,
+           B.FILE_NAME,
+           B.FILE_TYPE,
+           B.EXTENTION,
+           B.FILE_PATH
+       FROM TB_FORM_FILE_INFO A
+                JOIN TB_FILE_INFO B
+                     ON A.IDX_FILE_INFO = B.IDX_FILE_INFO AND B.FILE_TYPE = 3 AND B.FILE_STATUS=0 AND A.IDX_FORM_FILE_INFO=#{idx_form_file_info}
+
+
+    </select>
+
+
+    <select id="getRuleFileInfoList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.RuleFileInfoVO">
+        SELECT * FROM (
+                          SELECT
+                              ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM,
+                              IDX_RULE_FILE_INFO,
+                              SUBJECT,
+                              USAGE_DETAIL,
+                              DEPART_NAME,
+                              IDX_ADMIN,
+                              ORDER_NUM,
+                              IDX_FILE_INFO,
+                              REG_DATE,
+                              FILE_NAME,
+                              FILE_TYPE,
+                              EXTENTION,
+                              FILE_PATH
+                          FROM (
+                                   SELECT
+                                       A.IDX_RULE_FILE_INFO,
+                                       A.SUBJECT,
+                                       A.USAGE_DETAIL,
+                                       A.DEPART_NAME,
+                                       A.IDX_ADMIN,
+                                       A.ORDER_NUM,
+                                       A.IDX_FILE_INFO,
+                                       A.REG_DATE,
+                                       B.FILE_NAME,
+                                       B.FILE_TYPE,
+                                       B.EXTENTION,
+                                       B.FILE_PATH
+                                   FROM TB_RULE_FILE_INFO A
+                                            JOIN TB_FILE_INFO B
+                                                 ON A.IDX_FILE_INFO = B.IDX_FILE_INFO AND B.FILE_TYPE = 4 AND B.FILE_STATUS=0
+                               )
+                          WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+                      )
+        WHERE ROW_NUM <![CDATA[>]]> (#{page_num} -1)*#{amount}
+
+    </select>
+
+    <insert id="insertRuleFileInfo" parameterType="kr.or.fact.core.model.DTO.RuleFileInfoVO">
+        INSERT INTO TB_RULE_FILE_INFO (
+            IDX_RULE_FILE_INFO,
+            SUBJECT,
+            USAGE_DETAIL,
+            DEPART_NAME,
+            IDX_ADMIN,
+            ORDER_NUM,
+            IDX_FILE_INFO,
+            REG_DATE
+        ) VALUES (
+                     SEQ_RULE_FILE_INFO.NEXTVAL,
+                     #{subject},
+                     #{usage_detail},
+                     #{depart_name},
+                     #{idx_admin},
+                     #{order_num},
+                     #{idx_file_info},
+                     SYSDATE
+                 )
+    </insert>
+    <select id="getRuleFileInfo" parameterType="long" resultType="kr.or.fact.core.model.DTO.RuleFileInfoVO">
+
+        SELECT
+            A.IDX_RULE_FILE_INFO,
+            A.SUBJECT,
+            A.USAGE_DETAIL,
+            A.DEPART_NAME,
+            A.IDX_ADMIN,
+            A.ORDER_NUM,
+            A.IDX_FILE_INFO,
+            A.REG_DATE,
+            B.FILE_NAME,
+            B.FILE_TYPE,
+            B.EXTENTION,
+            B.FILE_PATH
+        FROM TB_RULE_FILE_INFO A
+                 JOIN TB_FILE_INFO B
+                      ON A.IDX_FILE_INFO = B.IDX_FILE_INFO AND B.FILE_TYPE = 4 AND B.FILE_STATUS=0 AND A.IDX_RULE_FILE_INFO=#{idx_rule_file_info}
+
+
+    </select>
+
+    <select id="getFormFileTotalCount" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM TB_FORM_FILE_INFO A
+                 JOIN TB_FILE_INFO B
+                      ON A.IDX_FILE_INFO = B.IDX_FILE_INFO AND B.FILE_TYPE = 4 AND B.FILE_STATUS=0
+    </select>
+
+    <select id="getRuleFileTotalCount" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM TB_RULE_FILE_INFO A
+                 JOIN TB_FILE_INFO B
+                      ON A.IDX_FILE_INFO = B.IDX_FILE_INFO AND B.FILE_TYPE = 4 AND B.FILE_STATUS=0
+    </select>
 
 </mapper>

@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-sm-6 col-xl-3">
                 <div class="card mb-3">
-                    <button id="btn_filter1" class="card-body btn btn-white" onclick="javascript:load('b10_demo_bs_announce_doc_mng?page=1&filter1=9999&filter2=9998','사업공고문 관리');">
+                    <button id="btn_filter1" class="card-body btn btn-white" onclick="javascript:pageLoad('b10_demo_bs_announce_doc_mng?page=1&filter1=9999&filter2=9998','사업공고문 관리');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="resources/assets/img/img_business_all.png" alt=""></div>
                             <div class="ml-3">
@@ -23,7 +23,7 @@
             </div>
             <div class="col-sm-6 col-xl-3">
                 <div class="card mb-3">
-                    <button id="btn_filter2" class="card-body btn btn-white" onclick="javascript:load('b10_demo_bs_announce_doc_mng?page=1&filter1=3&filter2=9998','사업공고문 관리');">
+                    <button id="btn_filter2" class="card-body btn btn-white" onclick="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{page_num:1,filter1:3,filter2:9998},'사업공고문 관리');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="resources/assets/img/img_business_on.png" alt=""></div>
                             <div class="ml-3">
@@ -36,7 +36,7 @@
             </div>
             <div class="col-sm-6 col-xl-3">
                 <div class="card mb-3">
-                    <button id="btn_filter3" class="card-body btn btn-white" onclick="javascript:load('b10_demo_bs_announce_doc_mng?page=1&filter1=1&filter2=2','사업공고문 관리');">
+                    <button id="btn_filter3" class="card-body btn btn-white" onclick="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{page_num:1,filter1:1,filter2:2},'사업공고문 관리');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="resources/assets/img/img_business_week.png" alt=""></div>
                             <div class="ml-3">
@@ -49,7 +49,7 @@
             </div>
             <div class="col-sm-6 col-xl-3">
                 <div class="card mb-3">
-                    <button id="btn_filter4" class="card-body btn btn-white" onclick="javascript:load('b10_demo_bs_announce_doc_mng?page=1&filter1=4&filter2=9998','사업공고문 관리');">
+                    <button id="btn_filter4" class="card-body btn btn-white" onclick="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{page_num:1,filter1:4,filter2:9998},'사업공고문 관리');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="resources/assets/img/img_business_off.png" alt=""></div>
                             <div class="ml-3">
@@ -139,17 +139,17 @@
                                     <c:set var="name" value="${total_count/amount}" />
 
 
-                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:load('b10_demo_bs_announce_doc_mng?page=1&filter1=${filter1}&filter2=${filter2}','사업공고문 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
-                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:load('b10_demo_bs_announce_doc_mng?page=${cur_page-1}&filter1=${filter1}&filter2=${filter2}','사업공고문 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{page_num:1,filter1:${filter1},filter2:${filter2}},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{page_num:${cur_page-1},filter1:${filter1},filter2:${filter2}},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
 
 
 
                                     <c:forEach var="i" begin="1" end="${page_amount}">
-                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:load('b10_demo_bs_announce_doc_mng?page=${(cur_sector-1)*page_amount+i}&filter1=${filter1}&filter2=${filter2}','사업공고문 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
+                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{page_num:${(cur_sector-1)*page_amount+i},filter1:${filter1},filter2:${filter2}},'사업공고문 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
                                     </c:forEach>
 
-                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:load('b10_demo_bs_announce_doc_mng?page=${cur_page+1}&filter1=${filter1}&filter2=${filter2}','사업공고문 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
-                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:load('b10_demo_bs_announce_doc_mng?page=${tot_page}&filter1=${filter1}&filter2=${filter2}','사업공고문 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{page_num:${cur_page+1},filter1:${filter1},filter2:${filter2}},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{page_num:${tot_page},filter1:${filter1},filter2:${filter2}},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
                                 </ul>
                             </div>
                         </div>

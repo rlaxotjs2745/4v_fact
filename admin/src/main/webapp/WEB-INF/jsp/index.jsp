@@ -114,12 +114,9 @@
 
 
 <script>
-
-
     $("li.sidenav-item").on('click',function(){
         if( $("li.sidenav-item").has('a')!=null){
             $(this).addClass("active");
-
         }
     });
     $(function(){
@@ -136,23 +133,40 @@
     var csrfToken = $("meta[name='_csrf']").attr("content");
     //최초 진입시 호출되는 ajax 페이지 초기값
     var cur = "";
-    function load(a,b){
-        console.log("cur = "+cur + "   load="+a);
 
-        if(cur!=a){
-            cur = a;
-            var state = {'url':a,'title':b};
-            var title = b;
-            //var url = a;
-            history.pushState(state, title);
-            var param = {"tag":a};
+
+
+
+
+    //int page_num;
+    //int filter1;
+    //int filter2;
+    //long idx;
+    //int amount;
+    //String order_field;
+
+    function pageLoad(url,param,title){
+        console.log("cur = "+cur);
+/*      State : 브라우저 이동 시 넘겨줄 데이터 (popstate 에서 받아서 원하는 처리를 해줄 수 있음)
+        Title : 변경할 브라우저 제목 (변경 원치 않으면 null)
+        Url : 변경할 주소*/
+
+        if(param==null)
+            param={page_num:1};
+
+        if(cur!=url+param.page_num){
+            cur = url+param.page;
+            history.pushState(param, title,url);
+
             $.ajaxSetup({
                 headers:
                     { 'X-CSRF-TOKEN': csrfToken }
             });
+
             var request = $.ajax({
-                url: a,
+                url: url,
                 method: 'post',
+                data: JSON.stringify(param),//보내는 데이터
                 contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
                 dataType:'html',//받는 데이터 타입
                 success:function(result){
@@ -213,7 +227,7 @@
     })();
     $(document).ready(function() {
         //ajax로 호출되는 첫번째 페이지
-        load("a10_dashboard","대시보드");
+        pageLoad('a10_dashboard','{tag:1}','대시보드');
 
     });
 

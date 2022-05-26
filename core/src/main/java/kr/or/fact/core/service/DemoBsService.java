@@ -2,7 +2,7 @@ package kr.or.fact.core.service;
 
 import kr.or.fact.core.model.DTO.AdminDemoBSFilterVO;
 import kr.or.fact.core.model.DTO.DemoBusinessVO;
-import kr.or.fact.core.model.DTO.ListPagingParamVO;
+import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface DemoBsService {
     int getDemoBsTotalCount();
     List<DemoBusinessVO> getDemoBsList();
 
-    List<DemoBusinessVO> getDemoBsPagingList(ListPagingParamVO listPagingParamVO);
+    List<DemoBusinessVO> getDemoBsPagingList(ParamPageListFilteredVO paramPageListFilteredVO);
 
     //int getAvailableDemoBsTotalCount();
     //List<AdminApplListVO> getAvailableDemoBsPagingList(ListPagingParamVO listPagingParamVO);

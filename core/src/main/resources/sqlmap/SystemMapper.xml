@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.fact.core.model.SystemMapper">
+    <select id="getSystemCodeList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.SystemCodeVO">
+        SELECT * FROM (
+                          SELECT
+                              ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM,
+                            IDX_SYSTEM_CODE,
+                            CODE_NAME,
+                              CODE_VALUE,
+                              DETAIL,
+                              ORDER_NUM,
+                              REG_DATE
+                          FROM (
+                                   SELECT *
+                                   FROM TB_SYSTEM_CODE
+                               )
+                          WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+                      )
+        WHERE ROW_NUM <![CDATA[>]]> (#{page_num} -1)*#{amount}
+
+    </select>
+
+    <insert id="insertSystemCode" parameterType="kr.or.fact.core.model.DTO.SystemCodeVO">
+        INSERT INTO TB_SYSTEM_CODE (
+            IDX_SYSTEM_CODE,
+            CODE_NAME,
+            CODE_VALUE,
+            DETAIL,
+            ORDER_NUM,
+            REG_DATE
+        ) VALUES (
+                     SEQ_SYSTEM_CODE.NEXTVAL,
+                     #{code_name},
+                     #{code_value},
+                     #{detail},
+                     #{order_num},
+                     SYSDATE
+                 )
+    </insert>
+
+    <select id="getSystemCode" parameterType="long" resultType="kr.or.fact.core.model.DTO.SystemCodeVO">
+
+        SELECT
+            IDX_SYSTEM_CODE,
+            CODE_NAME,
+            CODE_VALUE,
+            DETAIL,
+            ORDER_NUM,
+            REG_DATE
+        FROM TB_SYSTEM_CODE
+            WHERE IDX_SYSTEM_CODE=#{idx_system_code}
+    </select>
+
+    <select id="getSystemTotalCount" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM TB_SYSTEM_CODE
+    </select>
+</mapper>

@@ -277,7 +277,7 @@
                     <div class="btn__group">
                         <%--<a href="#" class="btn dark btn-jumbo">제공 양식 내려 받기</a>--%>
 
-                        <a href="/fileStore/실증신청서식.zip" class="btn submit btn-jumbo">실증단지 입주대상 모집 공고문 내려받기</a>
+                        <a href="brd_announce?page=1" class="btn submit btn-jumbo">실증단지 입주대상 모집 공고문 내려받기</a>
                         <a href="prv_register" class="btn submit btn-jumbo">신청서 작성과 등록하기</a>
                     </div>
                 </div>

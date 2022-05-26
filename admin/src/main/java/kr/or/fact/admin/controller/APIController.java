@@ -63,6 +63,11 @@ public class APIController {
     @Resource(name = "homepageInfoService")
     public HomepageInfoService homepageInfoService;
 
+    @Resource(name = "systemService")
+    public SystemService systemService;
+
+    @Resource(name = "fileService")
+    public FileService fileService;
 
 
     @Autowired
@@ -204,8 +209,9 @@ public class APIController {
         int filter1 = param.getFilter1();
         int filter2 = param.getFilter2();
 
-        int list_amount = 10;
-        int page_amount = 10;
+        int list_amount = param.getAmount();;
+        int page_amount = param.getAmount();
+
 
         AdminDemoBSFilterVO adminDemoBSFilterVO = demoBsService.getAdminDemoBsFilter();
         //리스트 총갯수를 이때 빼야 함
@@ -225,15 +231,16 @@ public class APIController {
         model.addAttribute("adminDemoBsFilter",adminDemoBSFilterVO);
         model.addAttribute("idx_demo_business",param.getIdx());
 
-        ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
+        param.setOrder_field("IDX_DEMO_BUSINESS");
+/*        ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
         listPagingParamVO.setPage_num(page);
         listPagingParamVO.setAmount(list_amount);
         listPagingParamVO.setFilter1(filter1);
         listPagingParamVO.setFilter2(filter2);
         listPagingParamVO.setOrder_field("IDX_DEMO_BUSINESS");
-        listPagingParamVO.setIdx(param.getIdx());
+        listPagingParamVO.setIdx(param.getIdx());*/
 
-        List<AdminApplHeaderListVO> adminApplHeaderListVOS =  demoBsApplicationService.getApplPagingFilteredList(listPagingParamVO);
+        List<AdminApplHeaderListVO> adminApplHeaderListVOS =  demoBsApplicationService.getApplPagingFilteredList(param);
         //List<DemoBusinessVO>  demoBusinessVOList = demoBsService.getDemoBsPagingList(listPagingParamVO);
 
         model.addAttribute("adminApplHeaderListVOS",adminApplHeaderListVOS);
@@ -576,6 +583,50 @@ public class APIController {
 
         return  resultVO;
     }
+    @RequestMapping(value = "/save_system_code",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  save_system_code(HttpSession session,
+                                 @RequestBody SystemCodeVO systemCodeVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("저장했습니다");
+        resultVO.setResult_code("SUCCESS");
+
+        if(systemCodeVO.getCode_name() != null &&
+                systemCodeVO.getCode_value()!= null &&
+                systemCodeVO.getDetail()!= null
+        ){
+            systemService.insertSystemCode(systemCodeVO);
+        }
+        else {
+            resultVO.setResult_str("필수 데이터가 없습니다.");
+            resultVO.setResult_code("ERROR001");
+        }
+        return  resultVO;
+    }
+
+    @RequestMapping(value = "/save_rule_file_info",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  save_rule_file_info(HttpSession session,
+                               @RequestBody RuleFileInfoVO ruleFileInfoVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("저장했습니다");
+        resultVO.setResult_code("SUCCESS");
+
+        if(ruleFileInfoVO.getSubject() != null &&
+                ruleFileInfoVO.getUsage_detail()!= null &&
+                ruleFileInfoVO.getIdx_file_info()!= 0
+        ){
+            fileService.insertRuleFileInfo(ruleFileInfoVO);
+        }
+        else {
+            resultVO.setResult_str("필수 데이터가 없습니다.");
+            resultVO.setResult_code("ERROR001");
+        }
+        return  resultVO;
+    }
+
 
     @RequestMapping(value = "/air", method = RequestMethod.GET)
     public StringBuilder callAirApi() {

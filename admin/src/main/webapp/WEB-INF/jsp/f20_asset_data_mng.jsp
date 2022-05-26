@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Page content -->
 <div class="container-fluid flex-grow-1 container-p-y">
-    <h4 class="font-weight-bold py-3 mb-4">온실데이터 내려받기</h4>
+    <h4 class="font-weight-bold py-3 mb-4">장비관련 데이터 내려받기</h4>
 </div>
 <!-- Layout footer -->
 <%@include file ="layouts/frame_footer.jsp" %>

@@ -4,7 +4,7 @@
 <div class="container-fluid flex-grow-1 container-p-y">
 
     <h4 class="d-flex justify-content-between align-items-center w-100 mt-4">
-        <div>일정관리</div>
+        <div>일정 관리</div>
     </h4>
 
     <!-- Event modal -->

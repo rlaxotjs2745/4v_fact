@@ -52,7 +52,7 @@
 
     </select>
 
-    <select id="getApplPagingFilteredList" parameterType="kr.or.fact.core.model.DTO.ListPagingParamVO" resultType="kr.or.fact.core.model.DTO.AdminApplHeaderListVO">
+    <select id="getApplPagingFilteredList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.AdminApplHeaderListVO">
         SELECT
             *
             FROM (
@@ -163,7 +163,7 @@
 
     </select>
 
-    <select id="getEvalPagingFilteredList" parameterType="kr.or.fact.core.model.DTO.ListPagingParamVO" resultType="kr.or.fact.core.model.DTO.AdminApplHeaderListVO">
+    <select id="getEvalPagingFilteredList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.AdminApplHeaderListVO">
         SELECT
         *
         FROM (
@@ -273,7 +273,7 @@
 
     </select>
 
-    <select id="getConsultPagingFilteredList" parameterType="kr.or.fact.core.model.DTO.ListPagingParamVO" resultType="kr.or.fact.core.model.DTO.AdminApplHeaderListVO">
+    <select id="getConsultPagingFilteredList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.AdminApplHeaderListVO">
         SELECT
         *
         FROM (

@@ -27,7 +27,7 @@ public interface BsAnnouncementMapper {
 
     AdminAnnounceFilterVO getAdminBsAnnouncementFilter();
 
-    List<BsAnnouncementVO> getAvailibleBsAnnouncement();
+    //List<BsAnnouncementVO> getAvailibleBsAnnouncement();
 
-    List<BsAnnounceHeaderVO> getBsAnnounceHeaderVOPagingList(ListPagingParamVO listPagingParamVO);
+    List<BsAnnounceHeaderVO> getBsAnnounceHeaderVOPagingList(ParamPageListFilteredVO paramPageListFilteredVO);
 }

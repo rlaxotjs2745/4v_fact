@@ -1,9 +1,16 @@
 package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.config.FACTConfig;
+import kr.or.fact.core.model.DTO.FileInfoVO;
+import kr.or.fact.core.model.DTO.FormFileInfoVO;
+import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
+import kr.or.fact.core.model.DTO.RuleFileInfoVO;
+import kr.or.fact.core.model.FileServiceMapper;
+import kr.or.fact.core.model.HomepageMapper;
 import kr.or.fact.core.service.FileService;
 import kr.or.fact.core.util.FileDownloadException;
 import kr.or.fact.core.util.FileUploadException;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -16,14 +23,20 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 @Service("fileService")
 public class FileServiceImpl implements FileService {
 
     private final Path fileLocation;
 
+    private final FileServiceMapper fileServiceMapper;
+
     @Autowired
-    public FileServiceImpl(FACTConfig prop) {
+    public FileServiceImpl(FACTConfig prop,FileServiceMapper fileServiceMapper) {
+
+        this.fileServiceMapper = fileServiceMapper;
+
         this.fileLocation = Paths.get(prop.getUploadDir())
                 .toAbsolutePath().normalize();
 
@@ -34,7 +47,8 @@ public class FileServiceImpl implements FileService {
         }
     }
 
-    public String storeFile(MultipartFile file) {
+    @Override
+    public String storeFileInfo(MultipartFile file) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {
@@ -52,6 +66,7 @@ public class FileServiceImpl implements FileService {
         }
     }
 
+    @Override
     public Resource loadFileAsResource(String fileName) {
         try {
             Path filePath = this.fileLocation.resolve(fileName).normalize();
@@ -67,5 +82,51 @@ public class FileServiceImpl implements FileService {
         }
     }
 
+    @Override
+    public void updateFileInfo(FileInfoVO fileInfoVO){
+        fileServiceMapper.updateFileInfo(fileInfoVO);
+    }
+    @Override
+    public void deleteFileInfo(@Param("idx_file_info") long idx_file_info){
+        fileServiceMapper.deleteFileInfo(idx_file_info);
+    }
+    @Override
+    public FileInfoVO getFileInfo(@Param("idx_file_info") long idx_file_info){
+        return fileServiceMapper.getFileInfo(idx_file_info);
+    }
 
+    @Override
+    public List<FormFileInfoVO> getFormFileInfoList(ParamPageListFilteredVO paramPageListFilteredVO){
+        return fileServiceMapper.getFormFileInfoList(paramPageListFilteredVO);
+    }
+    @Override
+    public void insertFormFileInfo(FormFileInfoVO formFileInfoVO){
+        fileServiceMapper.insertFormFileInfo(formFileInfoVO);
+    }
+    @Override
+    public FormFileInfoVO getFormFileInfo(long idx_form_file_info){
+        return fileServiceMapper.getFormFileInfo(idx_form_file_info);
+    }
+
+    @Override
+    public int getFormFileTotalCount(){
+        return fileServiceMapper.getFormFileTotalCount();
+    }
+
+    @Override
+    public List<RuleFileInfoVO> getRuleFileInfoList(ParamPageListFilteredVO paramPageListFilteredVO){
+        return fileServiceMapper.getRuleFileInfoList(paramPageListFilteredVO);
+    }
+    @Override
+    public void insertRuleFileInfo(RuleFileInfoVO ruleFileInfoVO){
+        fileServiceMapper.insertRuleFileInfo(ruleFileInfoVO);
+    }
+    @Override
+    public RuleFileInfoVO getRuleFileInfo(long idx_rule_file_info){
+        return fileServiceMapper.getRuleFileInfo(idx_rule_file_info);
+    }
+    @Override
+    public int getRuleFileTotalCount(){
+        return fileServiceMapper.getRuleFileTotalCount();
+    }
 }

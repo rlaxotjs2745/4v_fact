@@ -3,7 +3,7 @@ package kr.or.fact.core.service.impl;
 import kr.or.fact.core.model.DTO.AdminApplDemoBsHeaderListVO;
 import kr.or.fact.core.model.DTO.AdminApplHeaderListVO;
 import kr.or.fact.core.model.DTO.DemoBSApplicationVO;
-import kr.or.fact.core.model.DTO.ListPagingParamVO;
+import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 import kr.or.fact.core.model.DemoBsApplicationMapper;
 import kr.or.fact.core.service.DemoBsApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +28,13 @@ public class DemoBsApplicationServiceImpl implements DemoBsApplicationService {
         return demoBsApplicationMapper.getAvailableDemoBsApplTotalCount();
     }
     @Override
-    public List<AdminApplDemoBsHeaderListVO> getAvailableDemoBsApplPagingList(ListPagingParamVO listPagingParamVO) {
-        return demoBsApplicationMapper.getAvailableDemoBsApplPagingList(listPagingParamVO);
+    public List<AdminApplDemoBsHeaderListVO> getAvailableDemoBsApplPagingList(ParamPageListFilteredVO paramPageListFilteredVO) {
+        return demoBsApplicationMapper.getAvailableDemoBsApplPagingList(paramPageListFilteredVO);
     }
 
     @Override
-    public List<AdminApplHeaderListVO> getApplPagingFilteredList(ListPagingParamVO listPagingParamVO){
-        return demoBsApplicationMapper.getApplPagingFilteredList(listPagingParamVO);
+    public List<AdminApplHeaderListVO> getApplPagingFilteredList(ParamPageListFilteredVO paramPageListFilteredVO){
+        return demoBsApplicationMapper.getApplPagingFilteredList(paramPageListFilteredVO);
     }
 
 
@@ -49,13 +49,13 @@ public class DemoBsApplicationServiceImpl implements DemoBsApplicationService {
         return demoBsApplicationMapper.getAvailableDemoBsEvalTotalCount();
     }
     @Override
-    public List<AdminApplDemoBsHeaderListVO> getAvailableDemoBsEvalPagingList(ListPagingParamVO listPagingParamVO) {
-        return demoBsApplicationMapper.getAvailableDemoBsEvalPagingList(listPagingParamVO);
+    public List<AdminApplDemoBsHeaderListVO> getAvailableDemoBsEvalPagingList(ParamPageListFilteredVO paramPageListFilteredVO) {
+        return demoBsApplicationMapper.getAvailableDemoBsEvalPagingList(paramPageListFilteredVO);
     }
 
     @Override
-    public List<AdminApplHeaderListVO> getEvalPagingFilteredList(ListPagingParamVO listPagingParamVO){
-        return demoBsApplicationMapper.getEvalPagingFilteredList(listPagingParamVO);
+    public List<AdminApplHeaderListVO> getEvalPagingFilteredList(ParamPageListFilteredVO paramPageListFilteredVO){
+        return demoBsApplicationMapper.getEvalPagingFilteredList(paramPageListFilteredVO);
     }
 
 
@@ -70,12 +70,12 @@ public class DemoBsApplicationServiceImpl implements DemoBsApplicationService {
         return demoBsApplicationMapper.getAvailableDemoBsConsultTotalCount();
     }
     @Override
-    public List<AdminApplDemoBsHeaderListVO> getAvailableDemoBsConsultPagingList(ListPagingParamVO listPagingParamVO) {
-        return demoBsApplicationMapper.getAvailableDemoBsConsultPagingList(listPagingParamVO);
+    public List<AdminApplDemoBsHeaderListVO> getAvailableDemoBsConsultPagingList(ParamPageListFilteredVO paramPageListFilteredVO) {
+        return demoBsApplicationMapper.getAvailableDemoBsConsultPagingList(paramPageListFilteredVO);
     }
 
     @Override
-    public List<AdminApplHeaderListVO> getConsultPagingFilteredList(ListPagingParamVO listPagingParamVO){
-        return demoBsApplicationMapper.getConsultPagingFilteredList(listPagingParamVO);
+    public List<AdminApplHeaderListVO> getConsultPagingFilteredList(ParamPageListFilteredVO paramPageListFilteredVO){
+        return demoBsApplicationMapper.getConsultPagingFilteredList(paramPageListFilteredVO);
     }
 }

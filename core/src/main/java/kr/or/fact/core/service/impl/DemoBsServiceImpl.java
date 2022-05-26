@@ -2,7 +2,7 @@ package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.DTO.AdminDemoBSFilterVO;
 import kr.or.fact.core.model.DTO.DemoBusinessVO;
-import kr.or.fact.core.model.DTO.ListPagingParamVO;
+import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 import kr.or.fact.core.model.DemoBsMapper;
 import kr.or.fact.core.service.DemoBsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +26,8 @@ public class DemoBsServiceImpl implements DemoBsService {
         return demoBsMapper.getDemoBsList();
     }
     @Override
-    public List<DemoBusinessVO> getDemoBsPagingList(ListPagingParamVO listPagingParamVO){
-        return demoBsMapper.getDemoBsPagingList(listPagingParamVO);
+    public List<DemoBusinessVO> getDemoBsPagingList(ParamPageListFilteredVO paramPageListFilteredVO){
+        return demoBsMapper.getDemoBsPagingList(paramPageListFilteredVO);
     }
 
 

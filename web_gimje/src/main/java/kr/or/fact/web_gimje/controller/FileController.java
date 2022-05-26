@@ -25,8 +25,8 @@ public class FileController {
 
     private FileService fileService;
 
-    public FileUploadResponseVO storeFile(@RequestParam("file") MultipartFile file) {
-        String fileName = fileService.storeFile(file);
+    public FileUploadResponseVO storeFileInfo(@RequestParam("file") MultipartFile file) {
+        String fileName = fileService.storeFileInfo(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/fileStore/")
@@ -42,7 +42,7 @@ public class FileController {
 
         //DB 저장해야 한다
 
-        return storeFile(file);
+        return storeFileInfo(file);
         /*String fileName = fileService.storeFile(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -63,15 +63,15 @@ public class FileController {
         {
             //DB 저장
 
-            if(recieveFilesVo.getFile1()!=null && !recieveFilesVo.getFile1().isEmpty()) storeFile(recieveFilesVo.getFile1());
-            if(recieveFilesVo.getFile2()!=null && !recieveFilesVo.getFile2().isEmpty()) storeFile(recieveFilesVo.getFile2());
-            if(recieveFilesVo.getFile3()!=null && !recieveFilesVo.getFile3().isEmpty()) storeFile(recieveFilesVo.getFile3());
-            if(recieveFilesVo.getFile4()!=null && !recieveFilesVo.getFile4().isEmpty()) storeFile(recieveFilesVo.getFile4());
-            if(recieveFilesVo.getFile5()!=null && !recieveFilesVo.getFile5().isEmpty()) storeFile(recieveFilesVo.getFile5());
-            if(recieveFilesVo.getFile6()!=null && !recieveFilesVo.getFile6().isEmpty()) storeFile(recieveFilesVo.getFile6());
-            if(recieveFilesVo.getFile7()!=null && !recieveFilesVo.getFile7().isEmpty()) storeFile(recieveFilesVo.getFile7());
-            if(recieveFilesVo.getFile8()!=null && !recieveFilesVo.getFile8().isEmpty()) storeFile(recieveFilesVo.getFile8());
-            if(recieveFilesVo.getFile9()!=null && !recieveFilesVo.getFile9().isEmpty()) storeFile(recieveFilesVo.getFile9());
+            if(recieveFilesVo.getFile1()!=null && !recieveFilesVo.getFile1().isEmpty()) storeFileInfo(recieveFilesVo.getFile1());
+            if(recieveFilesVo.getFile2()!=null && !recieveFilesVo.getFile2().isEmpty()) storeFileInfo(recieveFilesVo.getFile2());
+            if(recieveFilesVo.getFile3()!=null && !recieveFilesVo.getFile3().isEmpty()) storeFileInfo(recieveFilesVo.getFile3());
+            if(recieveFilesVo.getFile4()!=null && !recieveFilesVo.getFile4().isEmpty()) storeFileInfo(recieveFilesVo.getFile4());
+            if(recieveFilesVo.getFile5()!=null && !recieveFilesVo.getFile5().isEmpty()) storeFileInfo(recieveFilesVo.getFile5());
+            if(recieveFilesVo.getFile6()!=null && !recieveFilesVo.getFile6().isEmpty()) storeFileInfo(recieveFilesVo.getFile6());
+            if(recieveFilesVo.getFile7()!=null && !recieveFilesVo.getFile7().isEmpty()) storeFileInfo(recieveFilesVo.getFile7());
+            if(recieveFilesVo.getFile8()!=null && !recieveFilesVo.getFile8().isEmpty()) storeFileInfo(recieveFilesVo.getFile8());
+            if(recieveFilesVo.getFile9()!=null && !recieveFilesVo.getFile9().isEmpty()) storeFileInfo(recieveFilesVo.getFile9());
 
         }
 

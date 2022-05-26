@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Page content -->
 <div class="container-fluid flex-grow-1 container-p-y">
-    <h4 class="font-weight-bold py-3 mb-4">롤 관리</h4>
+    <h4 class="font-weight-bold py-3 mb-4">콘솔 대시보드 관드 관리</h4>
 </div>
 <!-- Layout footer -->
 <%@include file ="layouts/frame_footer.jsp" %>

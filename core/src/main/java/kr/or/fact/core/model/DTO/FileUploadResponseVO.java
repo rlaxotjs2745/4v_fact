@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class FileUploadResponseVO {
+    private long idx_file_info;
     private String fileName;
     private String fileDownloadUri;
     private String fileType;
