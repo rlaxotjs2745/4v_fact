@@ -37,9 +37,9 @@
             <div>최대 5개 파일, 200MB까지 첨부가 가능합니다.</div>
             <%--                <input type="file" class="form-control-file d-block py-1">--%>
         </div>
-<%--                <div class="form-group col col-md-10 col-form-label mode-view">--%>
+        <%--                <div class="form-group col col-md-10 col-form-label mode-view">--%>
         <%--                <a href="file.doc">공고문 상세.pdf</a>--%>
-<%--                    </div>--%>
+        <%--                    </div>--%>
     </div>
 
     <div class="form-group row">
@@ -59,7 +59,7 @@
         <div>
             <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
             <button type="button" class="btn btn-outline-primary mr-2">보내기 예약</button>
-            <button type="button" class="btn btn-primary send_mail" >바로 보내기</button>
+            <button type="submit" class="btn btn-primary send_mail" >바로 보내기</button>
         </div>
 
         <div>
@@ -72,7 +72,7 @@
     sendMailBtn.forEach(btn=>btn.addEventListener('click', sendMailNow));
 
     function sendMailNow(){
-        // event.preventDefault();
+        event.preventDefault();
         var fileForm = new FormData();
         fileForm.append("receiver",document.querySelector('#email_receiver').value);
         fileForm.append("title",document.querySelector('#email_title').value);
@@ -94,7 +94,7 @@
             dataType:'json',//받는 데이터 타입
             enctype: 'multipart/form-data',
             success: function(result){
-                // console.log(result);
+                console.log(result);
                 alert("메일 전송이 완료되었습니다.", () => window.redirect("/"))
             },
             error:function(err){

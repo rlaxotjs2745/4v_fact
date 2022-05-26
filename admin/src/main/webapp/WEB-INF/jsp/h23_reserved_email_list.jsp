@@ -29,7 +29,7 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${reservedMails}" var="mail" varStatus="status">
-                                <tr class="">
+                                <tr class="" name="${mail.idx_mail_reserved}">
                                     <td class=""><input class="text-center" type="checkbox" value=""></td>
                                     <td class="text-center">${status.count}</td>
                                     <td class="">${mail.receiver}</td>
@@ -68,12 +68,12 @@
                     <div class="col-sm-12 col-md-7">
                         <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                             <ul class="pagination">
-                                <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="javascript:pageLoad('h60_reserved_email_list',{tag:1},'예약된 이메일');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                                <li class="paginate_button page-item active"><a href="javascript:pageLoad('h60_reserved_email_list',{tag:1},'예약된 이메일');" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                <li class="paginate_button page-item "><a href="javascript:pageLoad('h60_reserved_email_list',{tag:1},'예약된 이메일');" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                <li class="paginate_button page-item "><a href="javascript:pageLoad('h60_reserved_email_list',{tag:1},'예약된 이메일');" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                <li class="paginate_button page-item "><a href="javascript:pageLoad('h60_reserved_email_list',{tag:1},'예약된 이메일');" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                <li class="paginate_button page-item "><a href="javascript:pageLoad('h60_reserved_email_list',{tag:1},'예약된 이메일');" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
+                                <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="javascript:load('h60_reserved_email_list?tag=1','예약된 이메일');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
+                                <li class="paginate_button page-item active"><a href="javascript:load('h60_reserved_email_list?tag=1','예약된 이메일');" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                                <li class="paginate_button page-item "><a href="javascript:load('h60_reserved_email_list?tag=2','예약된 이메일');" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+                                <li class="paginate_button page-item "><a href="javascript:load('h60_reserved_email_list?tag=3','예약된 이메일');" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
+                                <li class="paginate_button page-item "><a href="javascript:load('h60_reserved_email_list?tag=4','예약된 이메일');" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
+                                <li class="paginate_button page-item "><a href="javascript:load('h60_reserved_email_list?tag=5','예약된 이메일');" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
                                 <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
                             </ul>
                         </div>
@@ -99,7 +99,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">제목</label>
                         <div class="col-md-10">
-                            <div class="form-control-plaintext mode-view">제목제목제목제목 1</div>
+                            <div class="form-control-plaintext mode-view modal-title-view">제목제목제목제목 1</div>
                             <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요">
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">받는 사람</label>
                         <div class="col-md-10 mode-view">
-                            <div class="form-control-plaintext mode-view">자세히 보기</div>
+                            <div class="form-control-plaintext mode-view modal-receiver-view">자세히 보기</div>
                         </div>
                     </div>
 
@@ -116,7 +116,7 @@
                         <div class="form-group col col-md-10 mode-edit mode-new">
                             <input type="file" class="form-control-file d-block py-1">
                         </div>
-                        <div class="form-group col col-md-10 col-form-label mode-view">
+                        <div class="form-group col col-md-10 col-form-label mode-view modal-file-view">
                             <a href="file.doc">공고문.pdf</a>
                             <a href="file.doc">공고문 상세.pdf</a>
                         </div>
@@ -125,7 +125,7 @@
                     <div class="form-row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">보내는 시간</label>
                         <div class="form-group col col-md-10">
-                            <div class="form-control-plaintext mode-view">22.12.12 12:12:12</div>
+                            <div class="form-control-plaintext mode-view modal-date-view">22.12.12 12:12:12</div>
 
                             <div id="datepicker-show" class="input-daterange input-group mode-edit mode-new">
                                 <input type="text" class="form-control mr-1" name="start">
@@ -135,7 +135,7 @@
                     </div>
                     <div class="form-row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">내용</label>
-                        <div class="form-group col col-md-10 mode-view" style="min-height: 150px; border: 1px solid #f5f5f5; border-radius: 2px">
+                        <div class="form-group col col-md-10 mode-view modal-content-view" style="min-height: 150px; border: 1px solid #f5f5f5; border-radius: 2px">
                             내용
                         </div>
                         <div class="col-md-10 mode-edit mode-new">
@@ -172,34 +172,20 @@
 </div>
 <%@include file ="layouts/frame_footer.jsp" %>
 <script>
-    console.log("${reservedMails}")
-    // $(document).ready(() => {
-    //     $.ajax({
-    //         type: 'get',
-    //         url :'/reserved_mail', //데이터를 주고받을 파일 주소 입력
-    //         dataType:'json',//받는 데이터 타입
-    //         success: function(result){
-    //             console.log(result);
-    //             // alert("메일 전송이 완료되었습니다.", () => window.redirect("/"))
-    //         },
-    //         error:function(err){
-    //             console.log(err);
-    //         }
-    //     });
-    // })
-    <%--$('tbody').append(--%>
-    <%--    $('tr')--%>
-    <%--        .append($('td').append($('input').addClass('text-center').attr("type", "checkbox").attr("value", "")))--%>
-    <%--        .append($('td').addClass("text-center")).append(i+1) //번호--%>
-    <%--        .append($('td')).append(${reservedMails}[i].receiver) //받는 사람--%>
-    <%--        .append($('td').addClass("text-center")).append(${reservedMails}[i].status) // 상태--%>
-    <%--        .append($('td').addClass("text-left")).append(${reservedMails}[i].sendTime) // 보낸 시간--%>
-    <%--        .append($('td').addClass("text-center").append($('a').attr("href", "#none").attr("data-toggle", "modal").attr("data-target", "#modals-business").attr("data-what", "mode-view").append(${reservedMails}[i].title))) //제목--%>
-    <%--        .append($('td').addClass("text-center")).append(${reservedMails}[i].constent) //내용--%>
-    <%--)--%>
-
-
-
+    var modelReservedMails = '${reservedMails}';
+    // console.log(modelReservedMails);
+    var modelArr = [];
+    <c:forEach items="${reservedMails}" var="mail">
+    modelArr.push({
+        idx_mail_reserved: "${mail.idx_mail_reserved}",
+        receiver: "${mail.receiver}",
+        status: "${mail.status}",
+        sendTime:"${mail.sendTime}",
+        title: "${mail.title}",
+        content: "${mail.content}",
+        idx_mail_template: "${mail.idx_mail_templete}"
+    })
+    </c:forEach>
 
     $('.summernote').summernote({
         toolbar: [
@@ -287,6 +273,7 @@
                 console.log("시작");
                 if($('.mode-view').hasClass('d-none') == false){
                     $('.mode-view').addClass('d-none');
+
                 }
 
                 if($('.mode-edit').hasClass('d-none') == false){
