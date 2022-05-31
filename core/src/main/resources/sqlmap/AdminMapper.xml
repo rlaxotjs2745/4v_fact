@@ -97,8 +97,6 @@
                      #{admin_type},
                      #{auth_admin_idx},
                      #{sign_in_type},
-                     #{reg_date},
-                     #{last_upd_date},
                      SYSDATE,
                      SYSDATE
                  )

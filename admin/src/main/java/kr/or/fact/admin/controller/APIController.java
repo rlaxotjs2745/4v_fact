@@ -87,6 +87,10 @@ public class APIController {
 
         if (adminVo.getAdmin_id() != null && adminVo.getAdmin_pw() != null) {
             AdminVO findAdmin = adminService.login(adminVo.getAdmin_id(), adminVo.getAdmin_pw());
+            if(findAdmin.getAuth_status() == 0){
+                resultVO.setResult_str("로그인 성공");
+                resultVO.setResult_code("first_login");
+            }
 
             if (findAdmin != null) {
                 model.addAttribute("adminVo", findAdmin);
@@ -659,8 +663,7 @@ public class APIController {
 
         try{
             adminService.join(adminVO);
-            resultVO.setResult_str("이미 사용중인 아이디입니다.");
-            resultVO.setResult_code("ERROR002");
+            //메일보내주기 로직
         } catch (Exception e){
 
         }
