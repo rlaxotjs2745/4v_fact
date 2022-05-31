@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("corpService")
@@ -43,5 +44,8 @@ public class CorpServiceImpl implements CorpService {
     public CorpInfoVO getUserCorp(@Param("idx_user") long idx_user){
         return corpMapper.getUserCorp(idx_user);
     }
-
+    @Override
+    public ArrayList<CorpInfoVO> selectCorpInfo() {
+        return corpMapper.selectCorpInfo();
+    }
 }

@@ -626,5 +626,60 @@ public class APIController {
         }
         return  resultVO;
     }
+    @RequestMapping(value ="/admin_join",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  join(HttpSession session,
+                   @RequestBody AdminVO adminVo){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("직원등록에 필요한 데이터가 없습니다");
+        resultVO.setResult_code("ERROR_1000");
 
+        if(adminVo!=null && adminVo.getAdmin_id() !=null
+                && adminVo.getAdmin_id() !=null
+                && adminVo.getAdmin_pw() !=null
+                && adminVo.getAdmin_name() !=null
+//                && adminVo.() !=null
+                && adminVo.getMphone_num() !=null
+                && adminVo.getEmail() !=null){
+
+            AdminVO findAdminVo = adminService.findAdminById(adminVo.getAdmin_id());
+            if(findAdminVo !=null){
+                resultVO.setResult_str("이미 사용중인 아이디입니다");
+                resultVO.setResult_code("ERROR_1001");
+            }
+
+            long idx_admin = adminService.join(adminVo);
+            if(idx_admin>0){
+                resultVO.setResult_str("가입되었습니다");
+                resultVO.setResult_code(CONSTANT.Success);
+            }
+        }
+        //필수 데이터 체크 if
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/admin_id_check",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO user_id_check(HttpSession session,
+                           @RequestBody AdminVO adminVo){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("아이디 형식을 확인해 주세요");
+        resultVO.setResult_code("ERROR_1000");
+
+        if(adminVo!=null && adminVo.getAdmin_id() !=null){
+            AdminVO resultAdminVO = adminService.findAdminById(adminVo.getAdmin_id());
+
+            if(resultAdminVO !=null){
+                resultVO.setResult_str("아이디를 사용할 수 없습니다");
+                resultVO.setResult_code("ERROR_1001");
+
+            }
+            else {
+                resultVO.setResult_str("아이디를 사용할 수 있습니다");
+                resultVO.setResult_code("SUCCESS");
+            }
+        }
+        System.out.println(resultVO);
+        return resultVO;
+    }
 }
