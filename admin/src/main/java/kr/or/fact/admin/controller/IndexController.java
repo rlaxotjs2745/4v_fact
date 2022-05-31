@@ -55,7 +55,7 @@ public class IndexController {
     public FileService fileService;
 
     @Resource(name = "corpService")
-    public  CorpService corpService;
+    public CorpService corpService;
 
     @Resource(name = "systemService")
     public SystemService systemService;
@@ -950,11 +950,11 @@ public class IndexController {
     @RequestMapping(value = "/i21_admin_mng",method = RequestMethod.POST)
     public String i21_admin_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                 ModelMap model){
-
         ArrayList<CorpInfoVO> resultArray;
         resultArray = corpService.selectCorpInfo();
-        model.addAttribute("corp",resultArray);
+        model.addAttribute("corps", resultArray);
         System.out.println(resultArray);
+
         return "i21_admin_mng";
     }
     /*

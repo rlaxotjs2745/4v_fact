@@ -7,11 +7,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
-import java.util.Properties;
 
 @SpringBootApplication
 @EnableConfigurationProperties({
@@ -25,10 +21,11 @@ public class AdminApplication extends SpringBootServletInitializer {
     }
 
     public static void main(String[] args) {
+        System.out.println("fuck" + 1);
         SpringApplication.run(AdminApplication.class, args);
     }
 
-   @Bean
+    @Bean
     public InternalResourceViewResolver setupViewResolver(){
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("WEB-INF/jsp/");
@@ -36,3 +33,4 @@ public class AdminApplication extends SpringBootServletInitializer {
         return resolver;
     }
 }
+

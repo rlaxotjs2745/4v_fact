@@ -19,5 +19,4 @@ public interface CorpService {
     CorpInfoVO getUserCorp(long idx_user);
 
     ArrayList<CorpInfoVO> selectCorpInfo();
-
 }

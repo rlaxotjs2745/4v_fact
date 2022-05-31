@@ -44,6 +44,7 @@ public class CorpServiceImpl implements CorpService {
     public CorpInfoVO getUserCorp(@Param("idx_user") long idx_user){
         return corpMapper.getUserCorp(idx_user);
     }
+
     @Override
     public ArrayList<CorpInfoVO> selectCorpInfo() {
         return corpMapper.selectCorpInfo();
