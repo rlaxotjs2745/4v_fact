@@ -627,4 +627,44 @@ public class APIController {
         return  resultVO;
     }
 
+    @RequestMapping(value = "/admin_id_check",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  admin_id_check(HttpSession session,
+                                  @RequestBody AdminVO adminVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("사용할 수 있는 아이디입니다.");
+        resultVO.setResult_code("SUCCESS");
+        if(adminVO.getAdmin_id() == null || adminVO.getAdmin_id().trim() == ""){
+            resultVO.setResult_str("아이디를 입력해주세요.");
+            resultVO.setResult_code("ERROR001");
+        }
+
+        if(adminService.adminIdCheck(adminVO.getAdmin_id())){
+            resultVO.setResult_str("이미 사용중인 아이디입니다.");
+            resultVO.setResult_code("ERROR002");
+        }
+
+        return  resultVO;
+    }
+
+    @RequestMapping(value = "/admin_join",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  admin_join(HttpSession session,
+                             @RequestBody AdminVO adminVO){
+        System.out.println(adminVO);
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("사용할 수 있는 아이디입니다.");
+        resultVO.setResult_code("SUCCESS");
+
+        try{
+            adminService.join(adminVO);
+            resultVO.setResult_str("이미 사용중인 아이디입니다.");
+            resultVO.setResult_code("ERROR002");
+        } catch (Exception e){
+
+        }
+        return  resultVO;
+    }
+
 }

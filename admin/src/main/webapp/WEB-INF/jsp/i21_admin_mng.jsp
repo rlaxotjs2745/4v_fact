@@ -507,15 +507,15 @@
                                 <tr class="">
                                     <th class="text-center align-middle bg-light" rowspan="3" style="width:12%">개인정보</th>
                                     <th class="text-center bg-light" style="width:12%">이름</th>
-                                    <td class="text-center" style="width:24%"><input type="text" class="form-control form-control-sm" value="" name="admin_name"></td>
+                                    <td class="text-center" style="width:24%"><input type="text" class="form-control form-control-sm" value="" id="admin_name"></td>
                                     <th class="text-center bg-light" style="width:13%">일반전화번호</th>
-                                    <td class="text-center" style="width:29%"><input type="text" class="form-control form-control-sm" value="" name="tel_num"></td>
+                                    <td class="text-center" style="width:29%"><input type="text" class="form-control form-control-sm" value="" id="tel_num"></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">휴대폰 번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" name="mphone_num"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="mphone_num"></td>
                                     <th class="text-center bg-light">이메일</th>
-                                    <td class="text-center"><input type="email" class="form-control form-control-sm" value="" name="email"></td>
+                                    <td class="text-center"><input type="email" class="form-control form-control-sm" value=""></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">주소</th>
@@ -534,15 +534,16 @@
                                     <th class="text-center bg-light">단체명</th>
                                     <td class="" colspan="3">
                                         <select id="corp_select" class="form-control form-control-sm" name="corporate_name">
+                                            <option class="corps_option form-control form-control-sm" value="" disabled selected>단체 선택</option>
                                             <c:forEach items="${corps}" var="corp" varStatus="status">
-                                                <option class="corps_option form-control form-control-sm" value="${corps.idx_corp_info}">${corp.corp_name_kor}</option>
+                                                <option class="corps_option form-control form-control-sm" value="${corp.idx_corp_info}">${corp.corp_name_kor}</option>
                                             </c:forEach>
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">직위</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="부장" name="job_title"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="job_title"></td>
                                     <th class="text-center bg-light">전화번호</th>
                                     <td class="text-center"><input type="text" id="corp_telnum" class="form-control form-control-sm" value=""></td>
                                 </tr>
@@ -564,36 +565,31 @@
                             <table class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info" style="">
                                 <tbody>
                                 <tr>
-                                    <%--                                        String admin_id;//	varchar2	255					어드민 아이디	이메일 기본, 변경 가능--%>
-                                    <%--                                        String admin_pw;//	varchar2	255					어드민 패스워드	최소 8자리, 단방향 암호화--%>
-                                    <%--                                        String admin_name;//	varchar2	40					어드민  이름--%>
-                                    <%--                                        int corporate;//	number	4		0			소속	0:진흥원(관리기관), 1:센터, 2:지자체, 99:기타--%>
-                                    <%--                                        String corporate_name;//	varchar2	40					 소속기관 이름--%>
-                                    <%--                                        String department;//	varchar2	40					부서--%>
-                                    <%--                                        String job_title;//	varchar2	40					직위--%>
-                                    <%--                                        int auth_status;//	number	4		0			인증 여부	0:인증안함, 1:이메일 인증, 2:휴대폰 점유인증, 3:실명인증, 4:아이핀인증--%>
-                                    <%--                                        String tel_num;//	varchar2	20					일반전화번호--%>
-                                    <%--                                        String mphone_num;//	varchar2	20					휴대폰번호--%>
-                                    <%--                                        String email;//	varchar2	255					이메일--%>
-                                    <%--                                        int admin_type;//	number	4		0			어드민  형태	0:일반관리자, 1:실증책임자, 2:재배사, 4:관계기관, 512:슈퍼관리자--%>
-                                    <%--                                        long auth_admin_idx;//	number	32				◯	최초 등록 어드민--%>
-                                    <%--                                        int sign_in_type;//	number	4					가입 형태	0:슈퍼 관리자, 1:일반관리자--%>
-                                    <%--                                        Date reg_date;//	date						최초 등록 일시--%>
-                                    <%--                                        Date last_upd_date;//	date						최종 수정 일시--%>
-                                    <th class="text-center align-middle bg-light" style="width:13%" rowspan="2">시스템 정보</th>
-                                    <th class="text-center bg-light" style="width:14%" >웹ID</th>
-                                    <td class="text-center" style="width:25%" colspan="3">
-                                        <input type="text" id="web_id" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width:calc(100% - 80px)" name="admin_id">
-                                        <small id="web_id_guide"></small>
+                                    <th class="text-center align-middle bg-light" style="width: 4.5%" rowspan="2">시스템 정보</th>
+                                    <th class="text-center bg-light" style="width: 4.5%; vertical-align: middle;" >웹ID</th>
+                                    <td class="" style="width: 25%" colspan="3">
+                                        <input type="text" id="web_id" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width: 100px" name="admin_id">
+                                        @
+                                        <input type="text" id="web_id2" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width: 100px" name="">
+                                        <select id="admin_id_select_box" class="form-control form-control-sm d-inline-block align-middle mr-1" style="width: 100px">
+                                            <option value="0">직접입력</option>
+                                            <option value="naver.com">naver.com</option>
+                                            <option value="gmail.com">gmail.com</option>
+                                            <option value="hanmail.net">hanmail.net</option>
+                                            <option value="daum.net">daum.net</option>
+                                            <option value="nate.com">nate.com</option>
+                                        </select>
                                         <a href="#none" id="web_id_check" class="btn btn-sm btn-default">중복확인</a>
+                                        <br>
+                                        <small id="web_id_guide"></small>
                                     </td>
-                                    <th class="text-center bg-light" style="width:13%">비밀번호</th>
-                                    <td class="" colspan="2" style="width:34%"><small>등록한 이메일로 초기 비밀번호가 발송됩니다.</small></td>
+<%--                                    <th class="text-center bg-light" style="width:13%">비밀번호</th>--%>
+<%--                                    <td class="" colspan="2" style="width:34%"><small>등록한 이메일로 초기 비밀번호가 발송됩니다.</small></td>--%>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">시스템권한</th>
                                     <td class="" colspan="5">
-                                        <select name="sign_in_type" id="" class="custom-select custom-select-sm w-auto">
+                                        <select id="sign_in_type" class="custom-select custom-select-sm w-auto">
                                             <option value="1">C운영자</option>
                                             <option value="0">C마스터</option>
                                         </select>
@@ -607,7 +603,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                    <button type="submit" class="btn btn-primary">저장</button>
+                    <button type="button" id="btn-admin-join" class="btn btn-primary">저장</button>
                 </div>
             </form>
         </div>
@@ -652,14 +648,15 @@
 
 <script>
     var modelArr = [];
+    var corpName = ""
     <c:forEach items="${corps}" var="corp">
     modelArr.push({
-        idx_corp_info: ${corp.idx_corp_info},
-        corp_name_kor: ${corp.corp_name_kor},
-        company_num: ${corp.company_num},
-        tel_num: ${corp.tel_num},
-        fax_num: ${corp.fax_num},
-        homepage: ${corp.homepage},
+        idx_corp_info: "${corp.idx_corp_info}",
+        corp_name_kor: "${corp.corp_name_kor}",
+        company_num: "${corp.company_num}" ? "${corp.company_num}" : "-",
+        tel_num: "${corp.tel_num}" ? "${corp.tel_num}" : "-",
+        fax_num: "${corp.fax_num}" ? "${corp.fax_num}" : "-",
+        homepage: "${corp.homepage}" ? "${corp.homepage}" : "-",
     })
     </c:forEach>
 
@@ -676,6 +673,7 @@
     $("#corp_select").change(function(){
         for(var corp of modelArr){
             if(corp.idx_corp_info == $("#corp_select").val()){
+                corpName = corp.corp_name_kor;
                 $("#corp_telnum").val(corp.tel_num);
                 $("#corp_homepage").val(corp.homepage);
                 $("#corp_fax").val(corp.fax_num);
@@ -683,18 +681,29 @@
         }
     })
 
+    $("#admin_id_select_box").change(function(){
+        if($("#admin_id_select_box").val() == "0"){
+            $("#web_id2").attr("readonly", false);
+            $("#web_id2").val("");
+        } else {
+            $("#web_id2").attr("readonly", true);
+            $("#web_id2").val($("#admin_id_select_box").val());
+        }
+    })
+
     $("#web_id_check").click(function(){
         var user_id = $("#web_id").val();
-        if(user_id.length == 0){
+        var user_id2 = $("#web_id2").val();
+        if(user_id.length == 0 || user_id2.length == 0){
             alert("아이디가 입력되지 않았습니다");
             return;
         }
-        var param = {"user_id":user_id};
+        var param = {"admin_id":user_id + "@" + user_id2};
 
-        if(!CheckEmail(user_id)){
-            alert("아이디는 이메일형식입니다");
-            return;
-        }
+        // if(!CheckEmail(user_id)){
+        //     alert("아이디는 이메일형식입니다");
+        //     return;
+        // }
 
         console.log(param);
         $.ajax({
@@ -719,6 +728,49 @@
             }
         });
     });
+
+    $("#btn-admin-join").click(function(){
+        if(
+            $("#web_id").val() == "" ||
+            $("#web_id2").val() == "" ||
+            $("#admin_name").val() == "" ||
+            corpName == "" ||
+            $("#job_title").val() == "" ||
+            $("#mphone_num").val() == "" ||
+            $("#sign_in_type").val() == ""
+        ){
+            alert("회원가입에 필요한 데이터가 모두 입력되지 않았습니다.");
+            return;
+        }
+
+        var param = {
+            admin_id: $("#web_id").val() + "@" + $("#web_id2").val(),
+            admin_name: $("#admin_name").val(),
+            corporate_name: corpName,
+            job_title: $("#job_title").val(),
+            auth_status: 0,
+            tel_num: $("#tel_num").val(),
+            mphone_num: $("#mphone_num").val(),
+            email: $("#web_id").val() + "@" + $("#web_id2").val(),
+            sign_in_type: $("#sign_in_type").val()
+        }
+        console.log(param);
+
+        $.ajax({
+            type: 'post',
+            url: 'admin_join',
+            data: JSON.stringify(param),
+            contentType:"application/json; charset=utf-8;",
+            dataType:'json',
+            success: function(res){
+                if(res.result_code == "SUCCESS"){
+                    alert("관리자 등록이 완료되었습니다.\n생성한 계정의 비밀번호는 아이디로 지정한 메일로 전송되었습니다.");
+                    $("#modal-staff-write").addClass("fade")
+                }
+            }
+        })
+
+    })
 </script>
 <!-- / Layout footer -->
 

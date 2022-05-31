@@ -148,4 +148,8 @@
         UPDATE TB_ADMIN SET ADMIN_PW=#{admin_pw} WHERE ADMIN_ID=#{admin_id}
     </update>
 
+    <select id="getAdminByAdminId" resultType="kr.or.fact.core.model.DTO.AdminVO">
+        SELECT * FROM TB_ADMIN WHERE ADMIN_ID = #{admin_id}
+    </select>
+
 </mapper>

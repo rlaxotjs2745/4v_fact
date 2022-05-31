@@ -24,4 +24,6 @@ public interface AdminService extends UserDetailsService {
 
     UserDetails loadUserByUsername(String username);
     Integer saveAdminWorkHistory(AdminHistoryVO adminHistoryVo);
+
+    Boolean adminIdCheck(String adminId);
 }

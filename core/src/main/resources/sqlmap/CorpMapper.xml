@@ -125,4 +125,7 @@
         WHERE IDX_CORP_INFO = #{idx_corp_info}
     </update>
 
+    <select id="selectCorpInfo" resultType="kr.or.fact.core.model.DTO.CorpInfoVO">
+        SELECT * FROM TB_CORP_INFO ORDER BY IDX_CORP_INFO DESC
+    </select>
 </mapper>

@@ -5,6 +5,7 @@ import kr.or.fact.core.model.DTO.SimpleCorpInfoVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mapper
@@ -19,4 +20,6 @@ public interface CorpMapper {
     void updateCorpInfo(CorpInfoVO corpInfoVO);
 
     CorpInfoVO getUserCorp(@Param("idx_user") long idx_user);
+
+    ArrayList<CorpInfoVO> selectCorpInfo();
 }
