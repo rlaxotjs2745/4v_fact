@@ -16,15 +16,9 @@ import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.crypto.Data;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -662,10 +656,20 @@ public class APIController {
         resultVO.setResult_code("SUCCESS");
 
         try{
-            adminService.join(adminVO);
-            //메일보내주기 로직
-        } catch (Exception e){
+            String newPw = adminService.join(adminVO);
 
+            MimeMessage mail = mailSender.createMimeMessage();
+            MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+
+            mailHelper.setFrom("김태선 <taeseon@4thevision.com>"); // 보내는 사람 정보도 와야함
+            mailHelper.setTo(adminVO.getAdmin_id());
+            mailHelper.setSubject("스마트팜 혁신밸리 관리자 사이트 계정 안내");
+            mailHelper.setText("안녕하세요." + adminVO.getAdmin_name() + "님. 스마트팜 혁신밸리 관리자 사이트 비밀번호는 " + newPw + " 입니다.");
+            mailSender.send(mail);
+
+        } catch (Exception e){
+            resultVO.setResult_str("계정 생성에 실패했습니다.");
+            resultVO.setResult_code("ERROR002");
         }
         return  resultVO;
     }
