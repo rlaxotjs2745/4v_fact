@@ -1082,7 +1082,7 @@ public class IndexController {
 
     @RequestMapping("/login")
     public String login(HttpSession session,Model model){
-
+        System.out.println("login222");
         clearSessionAndRedirect(session);
         getHomepageInfo(model);
         return "login";
