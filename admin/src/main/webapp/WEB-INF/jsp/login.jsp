@@ -111,65 +111,10 @@
                             <span class="custom-control-label">자동 로그인</span>
                         </label>
                         <button id="btn_login" type="submit" class="btn btn-primary">로그인</button>
-                        <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#modal-staff-write">비밀번호변경</button>
                     </div>
                 </form>
                 <!-- / Form -->
-                <div class="modal fade" id="modal-staff-write">
-                    <div class="modal-dialog modal-lg">
-                        <form class="modal-content" action="" method="post">
-                            <div class="modal-header">
-                                <h5 class="modal-title">비밀번호 변경</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-                            </div>
-                            <div class="modal-body pb-2">
 
-                                <div class="form-row">
-                                    <div class="form-group col col-md-12">
-                                        <table class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info">
-                                            <tbody>
-                                            <tr class="">
-
-                                                <th class="text-center bg-light" style="width:12%">기존비밀번호</th>
-                                                <td class="text-center" style="width:24%"><input type="text" class="form-control form-control-sm" value="" id="admin_name"></td>
-
-
-                                            </tr>
-                                            <tr>
-                                                <th class="text-center bg-light">새비밀번호</th>
-                                                <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="mphone_num"></td>
-
-
-                                            </tr>
-
-
-                                            <tr>
-                                                <th class="text-center bg-light">새 비밀번호 확인</th>
-                                                <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="job_title"></td>
-
-                                            </tr>
-
-
-                                            </tbody>
-                                        </table>
-                                        <table class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info" style="">
-                                            <tbody>
-
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                                <button type="button" id="btn-admin-join" class="btn btn-primary">저장</button>
-                            </div>
-                        </form>
-                    </div>
-            </div>
-        </div>
 
     </div>
 </div>

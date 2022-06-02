@@ -387,7 +387,51 @@
     </div>
 </div>
 
+<div class="modal fade" id="modals-pw-modify-first">
+    <div class="modal-dialog mb-1 border-success">
+        <form class="modal-content">
+            <div class="modal-header bg-success-dark">
+                <h5 class="modal-title text-white font-weight-bold">
+                    초기 비밀번호 변경
+                </h5>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label class="form-label font-weight-bold">기존 비밀번호</label>
+                        <input type="password" class="form-control">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label class="form-label font-weight-bold">변경할 비밀번호</label>
+                        <input type="password" class="form-control">
+                        <small class="form-text text-muted">
+                            8-20 길이의 문자, 숫자, 특수문자 조합
+                        </small>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label class="form-label font-weight-bold">변경할 비밀번호 확인</label>
+                        <input type="password" class="form-control">
+                        <small class="form-text text-muted">
+                            8-20 길이의 문자, 숫자, 특수문자 조합
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
+    if("${admin.auth_status}" == "0"){
+        console.log("${admin.auth_status}");
+    }
 
     $('#btn_myinfo_edit_save').click( function(){
 

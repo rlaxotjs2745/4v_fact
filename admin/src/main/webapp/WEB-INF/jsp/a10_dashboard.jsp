@@ -302,7 +302,6 @@
 
 <!-- / Page content -->
 <script>
-    console.log("${admin.admin_id}")
     $(function() {
         var isRtl = $('html').attr('dir') === 'rtl';
         $('.datepickers').datepicker({
