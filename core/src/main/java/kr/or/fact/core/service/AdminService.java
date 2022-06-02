@@ -1,6 +1,7 @@
 package kr.or.fact.core.service;
 
 import kr.or.fact.core.model.DTO.AdminHistoryVO;
+import kr.or.fact.core.model.DTO.AdminResVO;
 import kr.or.fact.core.model.DTO.AdminVO;
 import kr.or.fact.core.model.DTO.ResultVO;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,5 +30,5 @@ public interface AdminService extends UserDetailsService {
 
     Boolean adminIdCheck(String adminId);
 
-    List<AdminVO> getAllAdminList();
+    List<AdminResVO> selectAdminbyIdx();
 }

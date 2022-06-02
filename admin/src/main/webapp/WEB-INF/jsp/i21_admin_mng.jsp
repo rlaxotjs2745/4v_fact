@@ -142,7 +142,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
+                        <div class="dataTables_info" id="" role="status" aria-live="polite">Showing ${((adminList[0].page - 1)/10 + 1)} to ${adminList[0].page * 10} of ${adminList[0].maxvalue} entries</div>
                     </div>
                     <div class="col-sm-12 col-md-7">
                         <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
@@ -417,9 +417,9 @@
                                 <tr>
                                     <th class="text-center bg-light">센터정보</th>
                                     <th class="text-center bg-light">담당업무</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value=""></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="admin_role"></td>
                                     <th class="text-center bg-light">관리번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value=""></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="admin_rolenum"></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -628,19 +628,24 @@
                     alert("관리자 등록이 완료되었습니다.\n생성한 계정의 비밀번호는 아이디로 지정한 메일로 전송되었습니다.");
                     $("#modal-staff-write").removeClass("show");
                     $(".modal-backdrop").removeClass("show");
-                    $("#admin_name").val("")
-                    $("#tel_num").val("")
-                    $("#mphone_num").val("")
-                    $("#email_admin").val("")
-                    $("#addr_main").val("")
-                    $("#addr_detail").val("")
-                    $("#corp_select").val("")
-                    $("#job_title").val("")
-                    $("#corp_telnum").val("")
-                    $("#corp_fax").val("")
-                    $("#corp_telnum").val("")
-                    $("#corp_telnum").val("")
-
+                    $("#admin_name").val("");
+                    $("#tel_num").val("");
+                    $("#mphone_num").val("");
+                    $("#email_admin").val("");
+                    $("#addr_main").val("");
+                    $("#addr_detail").val("");
+                    $("#corp_select").val("");
+                    $("#job_title").val("");
+                    $("#corp_telnum").val("");
+                    $("#corp_fax").val("");
+                    $("#corp_homepage").val("");
+                    $("#admin_rolenum").val("");
+                    $("#admin_role").val("");
+                    $("#web_id").val("");
+                    $("#web_id2").val("");
+                    $("#web_id2").val("");
+                    $("#admin_id_select_box").val("0");
+                    $("#web_id_guide").html("");
                 }
             }
         })

@@ -954,7 +954,7 @@ public class IndexController {
         ArrayList<CorpInfoVO> resultArray;
         resultArray = corpService.selectCorpInfo();
 
-        List<AdminVO> adminVOList = adminService.getAllAdminList();
+        List<AdminResVO> adminVOList = adminService.selectAdminbyIdx();
         model.addAttribute("adminList", adminVOList);
         model.addAttribute("corps", resultArray);
         System.out.println(resultArray);

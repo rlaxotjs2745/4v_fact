@@ -2,6 +2,7 @@ package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.AdminMapper;
 import kr.or.fact.core.model.DTO.AdminHistoryVO;
+import kr.or.fact.core.model.DTO.AdminResVO;
 import kr.or.fact.core.model.DTO.AdminVO;
 import kr.or.fact.core.model.DTO.ResultVO;
 import kr.or.fact.core.service.AdminService;
@@ -176,7 +177,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<AdminVO> getAllAdminList() {
-        return adminMapper.getAllAdminList();
+    public List<AdminResVO> selectAdminbyIdx() {
+        return adminMapper.selectAdminbyIdx(1, 10);
     }
 }
