@@ -83,6 +83,7 @@ public class IndexController {
                                  @RequestParam(value="id") String admin_id,
                                  @RequestParam(value="pw") String admin_pw){
 
+        System.out.println("api_post_login");
          if(admin_id == null || admin_pw == null){
             return "redirect:login";
         }
@@ -130,7 +131,7 @@ public class IndexController {
     @RequestMapping("/login")
     public String login(HttpSession session){
         session.setAttribute("CSRF_TOKEN", UUID.randomUUID().toString());
-
+        System.out.println("loginlogin");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 /*        AdminVO adminVo = adminService.findAdminById("abcdef01@abcde.com");

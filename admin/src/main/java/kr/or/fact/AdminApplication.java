@@ -21,7 +21,6 @@ public class AdminApplication extends SpringBootServletInitializer {
     }
 
     public static void main(String[] args) {
-        System.out.println("fuck" + 1);
         SpringApplication.run(AdminApplication.class, args);
     }
 

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -17,24 +16,14 @@ import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.crypto.Data;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 
 @Controller
 public class APIController {
@@ -74,7 +63,6 @@ public class APIController {
     @Resource(name = "fileService")
     public FileService fileService;
 
-
     @Autowired
     private JavaMailSender mailSender;
 
@@ -84,6 +72,7 @@ public class APIController {
     public @ResponseBody ResultVO admin_login(HttpSession session
             ,ModelMap model
             ,@RequestBody AdminVO adminVo) {
+        System.out.println("admin_lognin");
 
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("아이디 또는 비밀번호를 찾을수 없습니다");
@@ -92,6 +81,10 @@ public class APIController {
 
         if (adminVo.getAdmin_id() != null && adminVo.getAdmin_pw() != null) {
             AdminVO findAdmin = adminService.login(adminVo.getAdmin_id(), adminVo.getAdmin_pw());
+            if(findAdmin.getAuth_status() == 0){
+                resultVO.setResult_str("로그인 성공");
+                resultVO.setResult_code("first_login");
+            }
 
             if (findAdmin != null) {
                 model.addAttribute("adminVo", findAdmin);
@@ -185,6 +178,7 @@ public class APIController {
                     }
                 }
                 userVo.setSign_in_type(0);
+
                 long idx_user = userService.join(userVo);
                 if(idx_user>0){
                     resultVO.setResult_str("가입되었습니다");
@@ -660,29 +654,22 @@ public class APIController {
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("사용할 수 있는 아이디입니다.");
         resultVO.setResult_code("SUCCESS");
-        String newPw = "";
-        for(int i = 0; newPw.length() < 6; i++){
-            double dRd = Math.random();
-            if(Math.random() % 2 == 1){
-                newPw = newPw + (char)((dRd * 26) + 97);
-            } else {
-                newPw = newPw + (int)(Math.random() * 10);
-            }
-        }
 
-        adminVO.setAdmin_pw(newPw);
-//        adminVO.setReg_date(DateTimeFormat,"YYYY-MM-DDTHH:MI:SS");
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashedPassword = passwordEncoder.encode(adminVO.getAdmin_pw());
-        adminVO.setAdmin_pw(hashedPassword);
-        System.out.println(newPw);
-//        adminService.join(adminVO);
         try{
-            adminService.join(adminVO);
-            resultVO.setResult_str("이미 사용중인 아이디입니다.");
-            resultVO.setResult_code("ERROR002");
-        } catch (Exception e){
+            String newPw = adminService.join(adminVO);
 
+            MimeMessage mail = mailSender.createMimeMessage();
+            MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+
+            mailHelper.setFrom("김태선 <taeseon@4thevision.com>"); // 보내는 사람 정보도 와야함
+            mailHelper.setTo(adminVO.getAdmin_id());
+            mailHelper.setSubject("스마트팜 혁신밸리 관리자 사이트 계정 안내");
+            mailHelper.setText("안녕하세요." + adminVO.getAdmin_name() + "님. 스마트팜 혁신밸리 관리자 사이트 비밀번호는 " + newPw + " 입니다.");
+            mailSender.send(mail);
+
+        } catch (Exception e){
+            resultVO.setResult_str("계정 생성에 실패했습니다.");
+            resultVO.setResult_code("ERROR002");
         }
         return  resultVO;
     }

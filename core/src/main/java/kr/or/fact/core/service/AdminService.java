@@ -13,7 +13,7 @@ public interface AdminService extends UserDetailsService {
 
     public AdminVO login(String admin_id, String user_pw);
     public ResultVO logout(String admin_id);
-    public long join(AdminVO adminVO);
+    public String join(AdminVO adminVO);
     public AdminVO findAdminById(String admin_id);
     public AdminVO findAdminID(String admin_name, String mphone_number);
     public AdminVO findAdminPW(String admin_id);

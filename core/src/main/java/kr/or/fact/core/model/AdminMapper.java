@@ -23,7 +23,22 @@ public interface AdminMapper {
     int getAdminCount(@Param("admin_type") int admin_type);//99 모든 유저
 
 
-    long insertAdminInfo(AdminVO adminVO);
+    long insertAdminInfo(
+            @Param("admin_id") String admin_id,
+            @Param("admin_pw") String admin_pw,
+            @Param("admin_name") String admin_name,
+            @Param("corporate") int corporate,
+            @Param("corporate_name") String corporate_name,
+            @Param("department") String department,
+            @Param("job_title") String job_title,
+            @Param("auth_status") int auth_status,
+            @Param("tel_num") String tel_num,
+            @Param("mphone_num") String mphone_num,
+            @Param("email") String email,
+            @Param("admin_type") int admin_type,
+            @Param("auth_admin_idx") long auth_admin_idx,
+            @Param("sign_in_type") int sign_in_type
+    );
 
     int updateAdminInfo(AdminVO adminVO);
     int updateAdminInfoForLogout(@Param("admin_id") String admin_id);
