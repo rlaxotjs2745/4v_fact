@@ -1,10 +1,13 @@
 package kr.or.fact.core.service;
 
 import kr.or.fact.core.model.DTO.AdminHistoryVO;
+import kr.or.fact.core.model.DTO.AdminResVO;
 import kr.or.fact.core.model.DTO.AdminVO;
 import kr.or.fact.core.model.DTO.ResultVO;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+
+import java.util.List;
 
 public interface AdminService extends UserDetailsService {
 
@@ -26,4 +29,7 @@ public interface AdminService extends UserDetailsService {
     Integer saveAdminWorkHistory(AdminHistoryVO adminHistoryVo);
 
     Boolean adminIdCheck(String adminId);
+
+    List<AdminResVO> selectAdminbyIdx(String tagValue);
+    int selectCount();
 }

@@ -73,8 +73,6 @@ public class APIController {
     public @ResponseBody ResultVO admin_login(HttpSession session
             ,ModelMap model
             ,@RequestBody AdminVO adminVo) {
-        System.out.println("admin_lognin");
-
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("아이디 또는 비밀번호를 찾을수 없습니다");
         resultVO.setResult_code("ERROR_1000");
@@ -86,7 +84,6 @@ public class APIController {
                 resultVO.setResult_str("로그인 성공");
                 resultVO.setResult_code("first_login");
             }
-
             if (findAdmin != null) {
                 model.addAttribute("adminVo", findAdmin);
                 session.setAttribute("loginCheck", true);

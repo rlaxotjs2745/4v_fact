@@ -1,6 +1,7 @@
 package kr.or.fact.core.model;
 
 import kr.or.fact.core.model.DTO.AdminHistoryVO;
+import kr.or.fact.core.model.DTO.AdminResVO;
 import kr.or.fact.core.model.DTO.AdminVO;
 import kr.or.fact.core.model.DTO.PagedAdminListVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -51,4 +52,6 @@ long insertAdminInfo(AdminVO adminVO);
     int updateAdminPassword(AdminVO adminVo);
 
     List<AdminVO> getAdminByAdminId(@Param("admin_id") String admin_id);
+    List<AdminResVO> selectAdminbyIdx(@Param("pageNum") int pageNum, @Param("count") int count);
+    int selectCount();
 }

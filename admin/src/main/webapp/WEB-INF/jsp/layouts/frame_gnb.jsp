@@ -52,7 +52,7 @@
                     </div>
                     <div class="list-group list-group-flush">
                         <a href="javascript:void(0)" class="list-group-item list-group-item-action media d-flex align-items-center">
-                            <img src="/resources/assets/img/avatars/6-small.png" class="d-block ui-w-40 rounded-circle" alt>
+                            <img src="/static/assets/img/avatars/6-small.png" class="d-block ui-w-40 rounded-circle" alt>
                             <div class="media-body ml-3">
                                 <div class="text-body line-height-condenced">알람 메세지 내용 메세지 내용 메세지 내용 메세지 내용</div>
                                 <div class="text-light small mt-1">
@@ -62,7 +62,7 @@
                         </a>
 
                         <a href="javascript:void(0)" class="list-group-item list-group-item-action media d-flex align-items-center">
-                            <img src="/resources/assets/img/avatars/4-small.png" class="d-block ui-w-40 rounded-circle" alt>
+                            <img src="/static/assets/img/avatars/4-small.png" class="d-block ui-w-40 rounded-circle" alt>
                             <div class="media-body ml-3">
                                 <div class="text-body line-height-condenced">메세지 내용 메세지 내용</div>
                                 <div class="text-light small mt-1">
@@ -72,7 +72,7 @@
                         </a>
 
                         <a href="javascript:void(0)" class="list-group-item list-group-item-action media d-flex align-items-center">
-                            <img src="/resources/assets/img/avatars/5-small.png" class="d-block ui-w-40 rounded-circle" alt>
+                            <img src="/static/assets/img/avatars/5-small.png" class="d-block ui-w-40 rounded-circle" alt>
                             <div class="media-body ml-3">
                                 <div class="text-body line-height-condenced">메세지 내용 메세지 내용 메세지 내용 메세지 내용 메세지</div>
                                 <div class="text-light small mt-1">
@@ -82,7 +82,7 @@
                         </a>
 
                         <a href="javascript:void(0)" class="list-group-item list-group-item-action media d-flex align-items-center">
-                            <img src="/resources/assets/img/avatars/11-small.png" class="d-block ui-w-40 rounded-circle" alt>
+                            <img src="/static/assets/img/avatars/11-small.png" class="d-block ui-w-40 rounded-circle" alt>
                             <div class="media-body ml-3">
                                 <div class="text-body line-height-condenced">메세지 내용 메세지 내용메세지 내용 메세지 내용 메세지</div>
                                 <div class="text-light small mt-1">
@@ -168,8 +168,8 @@
             <div class="demo-navbar-user nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
                   <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
-                    <img src="/resources/assets/img/avatars/1.png" alt class="d-block ui-w-30 rounded-circle">
-                    <span class="px-1 mr-lg-2 ml-2 ml-lg-0">김사원</span>
+                    <img src="/static/assets/img/avatars/1.png" alt class="d-block ui-w-30 rounded-circle">
+                    <span class="px-1 mr-lg-2 ml-2 ml-lg-0">${admin.admin_name}</span>
                   </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">

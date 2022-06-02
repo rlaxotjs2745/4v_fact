@@ -2,6 +2,7 @@ package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.AdminMapper;
 import kr.or.fact.core.model.DTO.AdminHistoryVO;
+import kr.or.fact.core.model.DTO.AdminResVO;
 import kr.or.fact.core.model.DTO.AdminVO;
 import kr.or.fact.core.model.DTO.ResultVO;
 import kr.or.fact.core.service.AdminService;
@@ -158,11 +159,21 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Boolean adminIdCheck(String adminId){
         Boolean bool = false;
-        System.out.println(adminMapper.getAdminByAdminId(adminId).size());
         if(adminMapper.getAdminByAdminId(adminId).size() > 0){
             bool = true;
         }
         System.out.println(bool);
         return bool;
+    }
+
+    @Override
+    public List<AdminResVO> selectAdminbyIdx(String tagValue) {
+        int page = Integer.parseInt(tagValue);
+        return adminMapper.selectAdminbyIdx(page, 10);
+    }
+
+    @Override
+    public int selectCount(){
+        return adminMapper.selectCount();
     }
 }

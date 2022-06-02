@@ -12,7 +12,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="text-muted small mt-2">관리 직원수</div>
-                        <div class="text-large">5200</div>
+                        <div class="text-large">${adminCount}</div>
                     </div>
                 </div>
             </div>
@@ -98,7 +98,7 @@
             <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
                 <div class="row">
                     <div class="col-sm-12 col-md-6">
-                        <label class="mr-3">총 : <strong>150</strong>명</label>
+                        <label class="mr-3">총 : <strong>${adminCount}</strong>명</label>
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <div id="" class="dataTables_filter"><label>찾기:<input type="search" class="form-control form-control-sm" placeholder="소속, 이름, 전화번호" aria-controls="article-list"></label></div>
@@ -116,183 +116,46 @@
                                 <th class="text-center px-2" style="width:150px">소속</th>
                                 <th class="text-center px-2" style="width:70px">부서</th>
                                 <th class="text-center px-2" style="width:70px">직급</th>
-                                <th class="text-center px-2" style="width:70px">직무</th>
                                 <th class="text-center px-2" style="width:130px">사무실 전화번호</th>
                                 <th class="text-center px-2" style="width:130px">휴대폰 번호</th>
-                                <th class="text-center px-2" style="width:130px">팩스번호</th>
                                 <th class="text-center px-2" style="width:150px">이메일</th>
-                                <th class="text-center px-2" style="width:200px">메모</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="">
-                                <td class="text-center">1</td>
-                                <td class="text-center"><a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modals-staff-view">가나다</a></td>
-                                <td class="text-center">재단</td>
-                                <td class="text-center">SA</td>
-                                <td class="text-center">농업기술실용화재단</td>
-                                <td class="text-center">-</td>
-                                <td class="text-center">본부장</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">xxxx@xxxxx.xxx</td>
-                                <td class=""><span class="text-truncate d-inline-block" style="width:150px;">Lorem ipsum dolor</span></td>
-                            </tr>
-                            <tr class="">
-                                <td class="text-center">2</td>
-                                <td class="text-center">가나다</td>
-                                <td class="text-center">재단</td>
-                                <td class="text-center">BM</td>
-                                <td class="text-center">농업기술실용화재단</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">xxxx@xxxxx.xxx</td>
-                                <td class=""><span class="text-truncate d-inline-block" style="width:150px;">Lorem ipsum dolor</span></td>
-                            </tr>
-                            <tr class="">
-                                <td class="text-center">3</td>
-                                <td class="text-center">가나다</td>
-                                <td class="text-center">재단</td>
-                                <td class="text-center">BM</td>
-                                <td class="text-center">김제</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">xxxx@xxxxx.xxx</td>
-                                <td class=""><span class="text-truncate d-inline-block" style="width:150px;">Lorem ipsum dolor</span></td>
-                            </tr>
-                            <tr class="">
-                                <td class="text-center">4</td>
-                                <td class="text-center">가나다</td>
-                                <td class="text-center">재단</td>
-                                <td class="text-center">BM</td>
-                                <td class="text-center">김제</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">xxxx@xxxxx.xxx</td>
-                                <td class=""><span class="text-truncate d-inline-block" style="width:150px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                            </tr>
-                            <tr class="">
-                                <td class="text-center">5</td>
-                                <td class="text-center">가나다</td>
-                                <td class="text-center">재단</td>
-                                <td class="text-center">BM</td>
-                                <td class="text-center">김제</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">xxxx@xxxxx.xxx</td>
-                                <td class=""><span class="text-truncate d-inline-block" style="width:150px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                            </tr>
-                            <tr class="">
-                                <td class="text-center">6</td>
-                                <td class="text-center">가나다</td>
-                                <td class="text-center">재단</td>
-                                <td class="text-center">BM</td>
-                                <td class="text-center">전라북도/XXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">xxxx@xxxxx.xxx</td>
-                                <td class=""><span class="text-truncate d-inline-block" style="width:150px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                            </tr>
-                            <tr class="">
-                                <td class="text-center">7</td>
-                                <td class="text-center">XXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">xxxx@xxxxx.xxx</td>
-                                <td class=""><span class="text-truncate d-inline-block" style="width:150px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                            </tr>
-                            <tr class="">
-                                <td class="text-center">8</td>
-                                <td class="text-center">XXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">xxxx@xxxxx.xxx</td>
-                                <td class=""><span class="text-truncate d-inline-block" style="width:150px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                            </tr>
-                            <tr class="">
-                                <td class="text-center">9</td>
-                                <td class="text-center">XXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">xxxx@xxxxx.xxx</td>
-                                <td class=""><span class="text-truncate d-inline-block" style="width:150px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                            </tr>
-                            <tr class="">
-                                <td class="text-center">10</td>
-                                <td class="text-center">XXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">XXXXXX</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">000-0000-0000</td>
-                                <td class="text-center">xxxx@xxxxx.xxx</td>
-                                <td class=""><span class="text-truncate d-inline-block" style="width:150px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                            </tr>
+                            <c:forEach items="${adminList}" var="admin" varStatus="status">
+                                <tr class="">
+                                    <td class="text-center">${admin.page * 10 - 10 + status.count}</td>
+                                    <td class="text-center"><a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modals-staff-view">${admin.admin_name}</a></td>
+                                    <td class="text-center">${admin.corporate eq 0 ? "진흥원" : admin.corporate eq 1 ? "센터" : admin.corporate eq 2 ? "지자체" : "기타"}</td>
+                                    <td class="text-center">${admin.sign_in_type eq 1 ? "SA" : "BM"}</td>
+                                    <td class="text-center">${admin.corporate_name}</td>
+                                    <td class="text-center">${admin.department != null ? admin.department : "-"}</td>
+                                    <td class="text-center">${admin.job_title}</td>
+                                    <td class="text-center">${admin.tel_num}</td>
+                                    <td class="text-center">${admin.mphone_num}</td>
+                                    <td class="text-center">${admin.admin_id}</td>
+                                </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
+                        <div class="dataTables_info" id="" role="status" aria-live="polite">Showing ${adminList[0].page * 10 - 9} to ${adminList[0].page * 10 > adminCount ? adminCount : adminList[0].page * 10} of ${adminList[0].maxvalue} entries</div>
                     </div>
                     <div class="col-sm-12 col-md-7">
                         <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                             <ul class="pagination">
-                                <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                                <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
+                                <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="javascript:pageLoad('i21_admin_mng',{page_num:1},'대시보드');"aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
+                                <li class="paginate_button page-item previous disabled" id="article-list_previous-one"><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 5}'},'대시보드');"aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li>
+                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 4}'},'대시보드');" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">${adminList[0].page + pageBool - 4}</a></li>
+                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 3}'},'대시보드');" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">${adminList[0].page + pageBool - 3}</a></li>
+                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 2}'},'대시보드');" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">${adminList[0].page + pageBool - 2}</a></li>
+                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 1}'},'대시보드');" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">${adminList[0].page + pageBool - 1}</a></li>
+                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool}'},'대시보드');" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">${adminList[0].page + pageBool}</a></li>
+                                <li class="paginate_button page-item next" id="article-list_next-one"><a href="javascript:pageLoad('i21_admin_mng',{page_num: '${adminList[0].page + pageBool - 3}'},'대시보드');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li>
+                                <li class="paginate_button page-item next" id="article-list_next"><a href="javascript:pageLoad('i21_admin_mng',{page_num: '${adminList[0].maxvalue}'},'대시보드');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -515,7 +378,7 @@
                                     <th class="text-center bg-light">휴대폰 번호</th>
                                     <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="mphone_num"></td>
                                     <th class="text-center bg-light">이메일</th>
-                                    <td class="text-center"><input type="email" class="form-control form-control-sm" value=""></td>
+                                    <td class="text-center"><input type="email" class="form-control form-control-sm" value="" id="email_admin"></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">주소</th>
@@ -523,7 +386,7 @@
                                         <%--                                            <input type="text" class="form-control form-control-sm" placeholder="주소">--%>
                                         <%--                                            <input type="text" class="form-control form-control-sm" placeholder="상세 주소">--%>
                                         <input type="text" id="addr_main" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" placeholder="주소" style="width:calc(100% - 80px)">
-                                        <input type="text" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" placeholder="상세주소" style="width:calc(100% - 80px)">
+                                        <input type="text" id="addr_detail" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" placeholder="상세주소" style="width:calc(100% - 80px)">
                                         <a href="#none" id="addr_search" class="btn btn-sm btn-default">주소 찾기</a>
                                     </td>
                                     <%--                                        <th class="text-center bg-light">상세 주소</th>--%>
@@ -556,9 +419,9 @@
                                 <tr>
                                     <th class="text-center bg-light">센터정보</th>
                                     <th class="text-center bg-light">담당업무</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value=""></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="admin_role"></td>
                                     <th class="text-center bg-light">관리번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value=""></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="admin_rolenum"></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -647,6 +510,51 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script>
+    var curPage = "${adminList[0].page}";
+
+    if(curPage != "1"){
+        $("#article-list_previous").removeClass("disabled");
+        $("#article-list_previous-one").removeClass("disabled");
+    }
+    if("${pageBool}" == "0"){
+        $("#article-list_next").addClass("disabled");
+        $("#article-list_next-one").addClass("disabled");
+    }
+
+
+    $.each($(".page-item a"), function(idx,obj){
+        if($(obj).text() == "${adminList[0].page}"){
+            $(obj).parent().addClass("active");
+        }
+    })
+
+    var adminList = [];
+    <c:forEach items="${adminList}" var="admin">
+        adminList.push({
+            idx_admin: "${admin.idx_admin}",
+            admin_id: "${admin.admin_id}",
+            admin_pw: "${admin.admin_pw}",
+            admin_name: "${admin.admin_name}",
+            corporate: "${admin.corporate}",
+            corporate_name: "${admin.corporate_name}",
+            department: "${admin.department}",
+            job_title: "${admin.job_title}",
+            auth_status: "${admin.auth_status}",
+            tel_num: "${admin.tel_num}",
+            mphone_num: "${admin.mphone_num}",
+            email: "${admin.email}",
+            admin_type: "${admin.admin_type}",
+            auth_admin_idx: "${admin.auth_admin_idx}",
+            sign_in_type: "${admin.sign_in_type}",
+            reg_date: "${admin.reg_date}",
+            last_upd_date: "${admin.last_upd_date}",
+            page: "${admin.page}",
+            maxvalue: "${admin.maxvalue}",
+        })
+    </c:forEach>
+
+
+
     var modelArr = [];
     var corpName = ""
     <c:forEach items="${corps}" var="corp">
@@ -705,7 +613,6 @@
         //     return;
         // }
 
-        console.log(param);
         $.ajax({
             type: 'post',
             url :'admin_id_check', //데이터를 주고받을 파일 주소 입력
@@ -754,7 +661,6 @@
             email: $("#web_id").val() + "@" + $("#web_id2").val(),
             sign_in_type: $("#sign_in_type").val()
         }
-        console.log(param);
 
         $.ajax({
             type: 'post',
@@ -765,7 +671,26 @@
             success: function(res){
                 if(res.result_code == "SUCCESS"){
                     alert("관리자 등록이 완료되었습니다.\n생성한 계정의 비밀번호는 아이디로 지정한 메일로 전송되었습니다.");
-                    $("#modal-staff-write").addClass("fade")
+                    $("#modal-staff-write").removeClass("show");
+                    $(".modal-backdrop").removeClass("show");
+                    $("#admin_name").val("");
+                    $("#tel_num").val("");
+                    $("#mphone_num").val("");
+                    $("#email_admin").val("");
+                    $("#addr_main").val("");
+                    $("#addr_detail").val("");
+                    $("#corp_select").val("");
+                    $("#job_title").val("");
+                    $("#corp_telnum").val("");
+                    $("#corp_fax").val("");
+                    $("#corp_homepage").val("");
+                    $("#admin_rolenum").val("");
+                    $("#admin_role").val("");
+                    $("#web_id").val("");
+                    $("#web_id2").val("");
+                    $("#web_id2").val("");
+                    $("#admin_id_select_box").val("0");
+                    $("#web_id_guide").html("");
                 }
             }
         })

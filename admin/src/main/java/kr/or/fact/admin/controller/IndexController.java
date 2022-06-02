@@ -4,6 +4,7 @@ import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.*;
 import lombok.SneakyThrows;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.net.URL;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -63,9 +65,10 @@ public class IndexController {
 
     @PreAuthorize("hasRole('ROLE_MEMBER')")
     @RequestMapping("/")
-    public String root(){
+    public String root(Principal principal, ModelMap model){
 
-
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+        model.addAttribute("admin", adminInfo);
 
         return "index";
     }
@@ -129,10 +132,11 @@ public class IndexController {
 
 
     @RequestMapping("/login")
-    public String login(HttpSession session){
+    public String login(HttpSession session, @RequestBody(required = false) ParamVO paramVO){
         session.setAttribute("CSRF_TOKEN", UUID.randomUUID().toString());
-        System.out.println("loginlogin");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        System.out.println(paramVO);
 
 /*        AdminVO adminVo = adminService.findAdminById("abcdef01@abcde.com");
         if(adminVo !=null)
@@ -948,13 +952,22 @@ public class IndexController {
     }
 
     //시스템 코드 관리
-    @RequestMapping(value = "/i21_admin_mng",method = RequestMethod.POST)
-    public String i21_admin_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    @RequestMapping(value = "/i21_admin_mng" ,method = RequestMethod.POST)
+    public String i21_admin_mng(@RequestParam(value = "page_num", required = false) String tagValue,
+                                @RequestBody ParamPageListFilteredVO param,
                                 ModelMap model){
         ArrayList<CorpInfoVO> resultArray;
         resultArray = corpService.selectCorpInfo();
+
+        int pageBool = 4;
+        List<AdminResVO> adminVOList = adminService.selectAdminbyIdx(param.getPage_num() != 0 ? param.getPage_num() + "" : "1");
+        if(adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage() < 4){
+            pageBool = adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage();
+        }
+        model.addAttribute("pageBool", pageBool);
+        model.addAttribute("adminList", adminVOList);
         model.addAttribute("corps", resultArray);
-        System.out.println(resultArray);
+        model.addAttribute("adminCount", adminService.selectCount());
 
         return "i21_admin_mng";
     }
