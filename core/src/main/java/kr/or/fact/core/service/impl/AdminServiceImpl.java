@@ -73,19 +73,8 @@ public class AdminServiceImpl implements AdminService {
 
 
         long ret_idx=0;
-        //AdminVO findAdmin = adminDAO.getAdminInfoById(adminVO.getAdmin_id());
 
-        String newPw = "";
-        for(int i = 0; newPw.length() < 6; i++){
-            double dRd = Math.random();
-            if(Math.random() % 2 == 1){
-                newPw = newPw + (char)((dRd * 26) + 97);
-            } else {
-                newPw = newPw + (int)(Math.random() * 10);
-            }
-        }
 
-        adminVO.setAdmin_pw(newPw);
 
         try {
             ret_idx = adminMapper.insertAdminInfo(adminVO);

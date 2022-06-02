@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -25,11 +26,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 
 @Controller
 public class APIController {
@@ -180,7 +185,6 @@ public class APIController {
                     }
                 }
                 userVo.setSign_in_type(0);
-
                 long idx_user = userService.join(userVo);
                 if(idx_user>0){
                     resultVO.setResult_str("가입되었습니다");
@@ -656,7 +660,23 @@ public class APIController {
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("사용할 수 있는 아이디입니다.");
         resultVO.setResult_code("SUCCESS");
+        String newPw = "";
+        for(int i = 0; newPw.length() < 6; i++){
+            double dRd = Math.random();
+            if(Math.random() % 2 == 1){
+                newPw = newPw + (char)((dRd * 26) + 97);
+            } else {
+                newPw = newPw + (int)(Math.random() * 10);
+            }
+        }
 
+        adminVO.setAdmin_pw(newPw);
+//        adminVO.setReg_date(DateTimeFormat,"YYYY-MM-DDTHH:MI:SS");
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(adminVO.getAdmin_pw());
+        adminVO.setAdmin_pw(hashedPassword);
+        System.out.println(newPw);
+//        adminService.join(adminVO);
         try{
             adminService.join(adminVO);
             resultVO.setResult_str("이미 사용중인 아이디입니다.");

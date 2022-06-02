@@ -23,7 +23,7 @@ public interface AdminMapper {
     int getAdminCount(@Param("admin_type") int admin_type);//99 모든 유저
 
 
-    long insertAdminInfo(@Param("adminVo") AdminVO adminVO);
+    long insertAdminInfo(AdminVO adminVO);
 
     int updateAdminInfo(AdminVO adminVO);
     int updateAdminInfoForLogout(@Param("admin_id") String admin_id);
