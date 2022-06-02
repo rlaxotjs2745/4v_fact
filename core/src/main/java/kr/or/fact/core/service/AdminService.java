@@ -6,6 +6,8 @@ import kr.or.fact.core.model.DTO.ResultVO;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.util.List;
+
 public interface AdminService extends UserDetailsService {
 
     public AdminVO getAuthAdmin(String admin_id, String admin_pw);
@@ -26,4 +28,6 @@ public interface AdminService extends UserDetailsService {
     Integer saveAdminWorkHistory(AdminHistoryVO adminHistoryVo);
 
     Boolean adminIdCheck(String adminId);
+
+    List<AdminVO> getAllAdminList();
 }

@@ -174,4 +174,9 @@ public class AdminServiceImpl implements AdminService {
         System.out.println(bool);
         return bool;
     }
+
+    @Override
+    public List<AdminVO> getAllAdminList() {
+        return adminMapper.getAllAdminList();
+    }
 }

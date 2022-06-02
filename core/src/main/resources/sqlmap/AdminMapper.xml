@@ -20,7 +20,7 @@
     </select>
 
     <select id="getAllAdminList" resultType="kr.or.fact.core.model.DTO.AdminVO">
-        SELECT * FROM  TB_ADMIN;
+        SELECT * FROM  TB_ADMIN
     </select>
 
     <select id="getAdminSpecialInfoPagingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.PagedAdminListVO">

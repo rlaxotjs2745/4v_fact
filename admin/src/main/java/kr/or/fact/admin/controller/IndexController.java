@@ -953,6 +953,9 @@ public class IndexController {
                                 ModelMap model){
         ArrayList<CorpInfoVO> resultArray;
         resultArray = corpService.selectCorpInfo();
+
+        List<AdminVO> adminVOList = adminService.getAllAdminList();
+        model.addAttribute("adminList", adminVOList);
         model.addAttribute("corps", resultArray);
         System.out.println(resultArray);
 
