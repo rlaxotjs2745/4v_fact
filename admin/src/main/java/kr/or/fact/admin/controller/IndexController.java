@@ -948,16 +948,22 @@ public class IndexController {
     }
 
     //시스템 코드 관리
-    @RequestMapping(value = "/i21_admin_mng",method = RequestMethod.POST)
-    public String i21_admin_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    @RequestMapping(value = "/i21_admin_mng" ,method = RequestMethod.POST)
+    public String i21_admin_mng(@RequestParam(value = "page_num", required = false) String tagValue,
+                                @RequestBody ParamPageListFilteredVO param,
                                 ModelMap model){
         ArrayList<CorpInfoVO> resultArray;
         resultArray = corpService.selectCorpInfo();
 
-        List<AdminResVO> adminVOList = adminService.selectAdminbyIdx();
+        int pageBool = 4;
+        List<AdminResVO> adminVOList = adminService.selectAdminbyIdx(param.getPage_num() != 0 ? param.getPage_num() + "" : "1");
+        if(adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage() < 4){
+            pageBool = adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage();
+        }
+        model.addAttribute("pageBool", pageBool);
         model.addAttribute("adminList", adminVOList);
         model.addAttribute("corps", resultArray);
-        System.out.println(resultArray);
+        model.addAttribute("adminCount", adminService.selectCount());
 
         return "i21_admin_mng";
     }

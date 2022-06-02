@@ -162,4 +162,8 @@
         WHERE PAGE = #{pageNum}
     </select>
 
+    <select id="selectCount" resultType="int">
+        SELECT COUNT(*) as count from TB_ADMIN
+    </select>
+
 </mapper>

@@ -168,7 +168,6 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Boolean adminIdCheck(String adminId){
         Boolean bool = false;
-        System.out.println(adminMapper.getAdminByAdminId(adminId).size());
         if(adminMapper.getAdminByAdminId(adminId).size() > 0){
             bool = true;
         }
@@ -177,7 +176,13 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<AdminResVO> selectAdminbyIdx() {
-        return adminMapper.selectAdminbyIdx(1, 10);
+    public List<AdminResVO> selectAdminbyIdx(String tagValue) {
+        int page = Integer.parseInt(tagValue);
+        return adminMapper.selectAdminbyIdx(page, 10);
+    }
+
+    @Override
+    public int selectCount(){
+        return adminMapper.selectCount();
     }
 }

@@ -12,7 +12,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="text-muted small mt-2">관리 직원수</div>
-                        <div class="text-large">5200</div>
+                        <div class="text-large">${adminCount}</div>
                     </div>
                 </div>
             </div>
@@ -98,7 +98,7 @@
             <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
                 <div class="row">
                     <div class="col-sm-12 col-md-6">
-                        <label class="mr-3">총 : <strong>150</strong>명</label>
+                        <label class="mr-3">총 : <strong>${adminCount}</strong>명</label>
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <div id="" class="dataTables_filter"><label>찾기:<input type="search" class="form-control form-control-sm" placeholder="소속, 이름, 전화번호" aria-controls="article-list"></label></div>
@@ -124,7 +124,7 @@
                             <tbody>
                             <c:forEach items="${adminList}" var="admin" varStatus="status">
                                 <tr class="">
-                                    <td class="text-center">${status.count}</td>
+                                    <td class="text-center">${admin.page * 10 - 10 + status.count}</td>
                                     <td class="text-center"><a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modals-staff-view">${admin.admin_name}</a></td>
                                     <td class="text-center">${admin.corporate eq 0 ? "진흥원" : admin.corporate eq 1 ? "센터" : admin.corporate eq 2 ? "지자체" : "기타"}</td>
                                     <td class="text-center">${admin.sign_in_type eq 1 ? "SA" : "BM"}</td>
@@ -142,18 +142,20 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="" role="status" aria-live="polite">Showing ${((adminList[0].page - 1)/10 + 1)} to ${adminList[0].page * 10} of ${adminList[0].maxvalue} entries</div>
+                        <div class="dataTables_info" id="" role="status" aria-live="polite">Showing ${adminList[0].page * 10 - 9} to ${adminList[0].page * 10 > adminCount ? adminCount : adminList[0].page * 10} of ${adminList[0].maxvalue} entries</div>
                     </div>
                     <div class="col-sm-12 col-md-7">
                         <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                             <ul class="pagination">
-                                <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                                <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
+                                <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="javascript:pageLoad('i21_admin_mng',{page_num:1},'대시보드');"aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
+                                <li class="paginate_button page-item previous disabled" id="article-list_previous-one"><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 5}'},'대시보드');"aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li>
+                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 4}'},'대시보드');" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">${adminList[0].page + pageBool - 4}</a></li>
+                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 3}'},'대시보드');" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">${adminList[0].page + pageBool - 3}</a></li>
+                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 2}'},'대시보드');" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">${adminList[0].page + pageBool - 2}</a></li>
+                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 1}'},'대시보드');" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">${adminList[0].page + pageBool - 1}</a></li>
+                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool}'},'대시보드');" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">${adminList[0].page + pageBool}</a></li>
+                                <li class="paginate_button page-item next" id="article-list_next-one"><a href="javascript:pageLoad('i21_admin_mng',{page_num: '${adminList[0].page + pageBool - 3}'},'대시보드');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li>
+                                <li class="paginate_button page-item next" id="article-list_next"><a href="javascript:pageLoad('i21_admin_mng',{page_num: '${adminList[0].maxvalue}'},'대시보드');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -508,6 +510,51 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script>
+    var curPage = "${adminList[0].page}";
+
+    if(curPage != "1"){
+        $("#article-list_previous").removeClass("disabled");
+        $("#article-list_previous-one").removeClass("disabled");
+    }
+    if("${pageBool}" == "0"){
+        $("#article-list_next").addClass("disabled");
+        $("#article-list_next-one").addClass("disabled");
+    }
+
+
+    $.each($(".page-item a"), function(idx,obj){
+        if($(obj).text() == "${adminList[0].page}"){
+            $(obj).parent().addClass("active");
+        }
+    })
+
+    var adminList = [];
+    <c:forEach items="${adminList}" var="admin">
+        adminList.push({
+            idx_admin: "${admin.idx_admin}",
+            admin_id: "${admin.admin_id}",
+            admin_pw: "${admin.admin_pw}",
+            admin_name: "${admin.admin_name}",
+            corporate: "${admin.corporate}",
+            corporate_name: "${admin.corporate_name}",
+            department: "${admin.department}",
+            job_title: "${admin.job_title}",
+            auth_status: "${admin.auth_status}",
+            tel_num: "${admin.tel_num}",
+            mphone_num: "${admin.mphone_num}",
+            email: "${admin.email}",
+            admin_type: "${admin.admin_type}",
+            auth_admin_idx: "${admin.auth_admin_idx}",
+            sign_in_type: "${admin.sign_in_type}",
+            reg_date: "${admin.reg_date}",
+            last_upd_date: "${admin.last_upd_date}",
+            page: "${admin.page}",
+            maxvalue: "${admin.maxvalue}",
+        })
+    </c:forEach>
+
+
+
     var modelArr = [];
     var corpName = ""
     <c:forEach items="${corps}" var="corp">
@@ -566,7 +613,6 @@
         //     return;
         // }
 
-        console.log(param);
         $.ajax({
             type: 'post',
             url :'admin_id_check', //데이터를 주고받을 파일 주소 입력
@@ -615,7 +661,6 @@
             email: $("#web_id").val() + "@" + $("#web_id2").val(),
             sign_in_type: $("#sign_in_type").val()
         }
-        console.log(param);
 
         $.ajax({
             type: 'post',

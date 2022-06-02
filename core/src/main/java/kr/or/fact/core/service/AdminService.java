@@ -30,5 +30,6 @@ public interface AdminService extends UserDetailsService {
 
     Boolean adminIdCheck(String adminId);
 
-    List<AdminResVO> selectAdminbyIdx();
+    List<AdminResVO> selectAdminbyIdx(String tagValue);
+    int selectCount();
 }
