@@ -128,7 +128,4 @@
         SELECT * FROM TB_CORP_INFO ORDER BY IDX_CORP_INFO DESC
     </select>
 
-    <select id="selectCorpInfo" resultType="kr.or.fact.core.model.DTO.CorpInfoVO">
-        SELECT * FROM TB_CORP_INFO ORDER BY IDX_CORP_INFO DESC
-    </select>
 </mapper>

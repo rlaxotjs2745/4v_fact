@@ -147,7 +147,7 @@
 
 
                     var user_id =$('#user_id').val();
-                    var schedule_type =$('#send_type').val();
+                    var schedule_type =$('#send_now').val();
                     var subject =$('#subject').val();
                     var now_date = $('#now_date').val();
                     var send_date =$('#date').val() +$('#flatpickr-time-start').val();
@@ -192,6 +192,7 @@
                                 "dest_info": dest_info,
                                 "sms_msg": sms_msg,
                             }));
+                            console.log(schedule_type)
                         }
                     });
                 }

@@ -23,5 +23,5 @@ public interface CorpMapper {
 
     CorpInfoVO getUserCorp(@Param("idx_user") long idx_user);
 
-    ArrayList<CorpInfoVO> selectCorpInfo();
+
 }

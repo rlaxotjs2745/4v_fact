@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class SmsSendVO {
     String user_id;//agent_testO
+    int schedule_type;
     String subject;//제목O
     String sms_msg;//메세지내용O
     String now_date;//20220425155555

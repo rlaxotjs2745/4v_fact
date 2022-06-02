@@ -14,6 +14,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import kr.or.fact.core.util.CONSTANT;
 
@@ -72,41 +73,31 @@ public class AdminServiceImpl implements AdminService {
 
     }
     @Override
-    public String join(AdminVO adminVO){
-        String newPw = "";
-        for(int i = 0; newPw.length() < 6; i++){
-            double dRd = Math.random();
-            if(Math.random() % 2 == 1){
-                char randomWord = (char)((dRd * 26) + 97);
-                newPw = newPw + randomWord;
-            } else {
-                newPw = newPw + (int)(dRd * 10);
-            }
-        }
-        System.out.println(newPw);
-
+    public long join(AdminVO adminVO){
+        long ret_idx=0;
         try {
-            adminMapper.insertAdminInfo(
-                    adminVO.getAdmin_id(),
-                    newPw,
-            adminVO.getAdmin_name(),
-                    adminVO.getCorporate(),
-                    adminVO.getCorporate_name(),
-                    adminVO.getDepartment(),
-                    adminVO.getJob_title(),
-                    adminVO.getAuth_status(),
-                    adminVO.getTel_num(),
-                    adminVO.getMphone_num(),
-                    adminVO.getEmail(),
-                    adminVO.getAdmin_type(),
-                    adminVO.getAuth_admin_idx(),
-                    adminVO.getSign_in_type()
-            );
+           ret_idx= adminMapper.insertAdminInfo(adminVO);
+//                    adminVO.getAdmin_id(),
+//                    newPw,
+//            adminVO.getAdmin_name(),
+//                    adminVO.getCorporate(),
+//                    adminVO.getCorporate_name(),
+//                    adminVO.getDepartment(),
+//                    adminVO.getJob_title(),
+//                    adminVO.getAuth_status(),
+//                    adminVO.getTel_num(),
+//                    adminVO.getMphone_num(),
+//                    adminVO.getEmail(),
+//                    adminVO.getAdmin_type(),
+//                    adminVO.getAuth_admin_idx(),
+//                    adminVO.getSign_in_type()
+
         }
         catch (Exception e){
             System.out.println(e);
         }
-        return newPw;
+
+        return ret_idx;
     }
     @Override
     public AdminVO findAdminID(String admin_name, String mphone_number){

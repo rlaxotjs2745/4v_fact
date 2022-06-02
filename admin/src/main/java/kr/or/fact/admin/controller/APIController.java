@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -346,8 +347,8 @@ public class APIController {
     @RequestMapping(value = "/sms",method = RequestMethod.POST)
     public @ResponseBody
     long insertSmsMessage(@RequestBody SmsSendVO smsSendVO) {
-        System.out.println(smsSendVO);
         smsSendVO.setNow_date(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddhhmm")));
+        System.out.println(smsSendVO);
         return smsSendService.insertSmsMessage(smsSendVO);
     }
 
@@ -654,9 +655,24 @@ public class APIController {
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("사용할 수 있는 아이디입니다.");
         resultVO.setResult_code("SUCCESS");
-
+        String newPw = "";
+        for(int i = 0; newPw.length() < 6; i++){
+            double dRd = Math.random();
+            if(Math.random() % 2 == 1){
+                char randomWord = (char)((dRd * 26) + 97);
+                newPw = newPw + randomWord;
+            } else {
+                newPw = newPw + (int)(dRd * 10);
+            }
+        }
+        adminVO.setAdmin_pw(newPw);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(adminVO.getAdmin_pw());
+        adminVO.setAdmin_pw(hashedPassword);
+        System.out.println(newPw);
         try{
-            String newPw = adminService.join(adminVO);
+
+            adminService.join(adminVO);
 
             MimeMessage mail = mailSender.createMimeMessage();
             MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
