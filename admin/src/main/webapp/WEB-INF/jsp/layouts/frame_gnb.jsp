@@ -337,7 +337,7 @@
                     <div class="form-group col">
                         <label class="form-label font-weight-bold">변경할 비밀번호 확인</label>
                         <input type="password" class="form-control">
-                        <small class="form-text text-muted">
+                        <small class="form-text text-muted" >
                             8-20 길이의 문자, 숫자, 특수문자 조합
                         </small>
                     </div>
@@ -399,14 +399,14 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label class="form-label font-weight-bold">기존 비밀번호</label>
-                        <input type="password" class="form-control">
+                        <input type="password" class="form-control" id="cur-pw">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col">
                         <label class="form-label font-weight-bold">변경할 비밀번호</label>
-                        <input type="password" class="form-control">
-                        <small class="form-text text-muted">
+                        <input type="password" class="form-control" id="mod-pw">
+                        <small class="form-text text-muted" id="mod-pw-guide">
                             8-20 길이의 문자, 숫자, 특수문자 조합
                         </small>
                     </div>
@@ -414,24 +414,85 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label class="form-label font-weight-bold">변경할 비밀번호 확인</label>
-                        <input type="password" class="form-control">
-                        <small class="form-text text-muted">
+                        <input type="password" class="form-control" id="mod-pwcf">
+                        <small class="form-text text-muted" id="mod-pwcf-guide">
                             8-20 길이의 문자, 숫자, 특수문자 조합
                         </small>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="mod-pw-first-submit">Save</button>
             </div>
         </form>
     </div>
 </div>
+<div class="modal-backdrop fade" style="display: none"></div>
 
 <script>
     if("${admin.auth_status}" == "0"){
         console.log("${admin.auth_status}");
+        $("#modals-pw-modify-first").addClass("show").css("display", "block");
+        $(".modal-backdrop").addClass("show").css("display", "block");
     }
+
+    var regax = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
+
+    $("#mod-pw").on("change focus blur",() => {
+        console.log("비번변경")
+        if(!regax.test($("#mod-pw").val())){
+            $("#mod-pw-guide").text("비밀번호 규칙에 맞지 않습니다.");
+        }else{
+            $("#mod-pw-guide").text("");
+        }
+    })
+
+    $("#mod-pwcf").on("change focus blur",() => {
+        console.log("비번 확인")
+        if(!regax.test($("#mod-pwcf").val())){
+            $("#mod-pwcf-guide").text("비밀번호 규칙에 맞지 않습니다.");
+        }else if($("#mod-pwcf").val() != $("#mod-pw").val()){
+            $("#mod-pwcf-guide").text("변경할 비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+        }else{
+            $("#mod-pwcf-guide").text("");
+        }
+    })
+
+    $("#mod-pw-first-submit").click(() => {
+        var newPw = {
+            curPw : $("#cur-pw").val(),
+            modPW : $("#mod-pw").val(),
+            modPwCf :$("#mod-pwcf").val(),
+            adminIdx : "${admin.idx_admin}"
+        }
+        $.ajax({
+            type: 'post',
+            url :'changePw', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(newPw),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'json',//받는 데이터 타입
+            success: function(result){
+                //작업이 성공적으로 발생했을 경우
+                if(result.result_code=="SUCCESS"){
+                    alert("비밀번호 변경이 완료되었습니다.");
+                    $("#modals-pw-modify-first").removeClass("show").css("display", "none");
+                    $(".modal-backdrop").removeClass("show").css("display", "none");
+                }
+                else {
+                    alert(result.result_str); // 기존 비밀번호가 틀렸씁니다.
+                    //비밀번호 규칙에 맞지않급니다.
+                    //변경할 비밀번호와 비밀번호 확인 번호가 맞지 않습니다.
+                    //기존 비밀번호와 변경할 비밀번호가 같습니다.
+                }
+            },
+            error:function(){
+                //에러가 났을 경우 실행시킬 코드
+            }
+        })
+
+    })
+
+
 
     $('#btn_myinfo_edit_save').click( function(){
 
