@@ -461,6 +461,11 @@
             alert("변경할 비밀번호가 올바르지 않습니다.");
             return;
         }
+
+        if($("#cur-pw").val() == "" || $("#mod-pw").val() == "" || $("#mod-pwcf").val() == ""){
+            alert("비밀번호 변경에 필요한 정보가 모두 입력되지 않았습니다.");
+        }
+
         var newPw = {
             curPw : $("#cur-pw").val(),
             modPW : $("#mod-pw").val(),
