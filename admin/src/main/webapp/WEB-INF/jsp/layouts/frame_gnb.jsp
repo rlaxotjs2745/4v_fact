@@ -439,7 +439,6 @@
     var regax = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
 
     $("#mod-pw").on("change focus blur",() => {
-        console.log("비번변경")
         if(!regax.test($("#mod-pw").val())){
             $("#mod-pw-guide").text("비밀번호 규칙에 맞지 않습니다.");
         }else{
@@ -448,7 +447,6 @@
     })
 
     $("#mod-pwcf").on("change focus blur",() => {
-        console.log("비번 확인")
         if(!regax.test($("#mod-pwcf").val())){
             $("#mod-pwcf-guide").text("비밀번호 규칙에 맞지 않습니다.");
         }else if($("#mod-pwcf").val() != $("#mod-pw").val()){
