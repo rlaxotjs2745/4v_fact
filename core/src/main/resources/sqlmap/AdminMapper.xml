@@ -8,9 +8,11 @@
     </select>
 
     <select id="getAdminInfoByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.AdminVO">
-        SELECT * FROM TB_ADMIN  WHERE IDX_USER=#{idx_user}
+        SELECT * FROM TB_ADMIN  WHERE IDX_ADMIN=#{idx_admin}
     </select>
-
+    <select id="getAdminIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.AdminVO">
+        SELECT * FROM TB_ADMIN  WHERE IDX_ADMIN=#{idx_admin}
+    </select>
     <select id="getAuthAdmin" resultType="kr.or.fact.core.model.DTO.AdminVO">
         SELECT * FROM TB_ADMIN WHERE admin_id=#{admin_id} AND admin_pw=#{admin_pw}
     </select>
@@ -104,7 +106,7 @@
 
 
     <update id="updateAdminInfo" parameterType="kr.or.fact.core.model.DTO.AdminVO">
-
+UPDATE TB_ADMIN SET ADMIN_PW = #{admin_pw} WHERE IDX_ADMIN = #{idx_admin}
 
     </update>
     <update id="updateAdminInfoForLogout" parameterType="string">
@@ -142,8 +144,8 @@
                  )
     </insert>
 
-    <update id="updateAdminPassword" parameterType="kr.or.fact.core.model.DTO.AdminVO">
-        UPDATE TB_ADMIN SET ADMIN_PW=#{admin_pw} WHERE ADMIN_ID=#{admin_id}
+    <update id="updateAdminPassword" parameterType="kr.or.fact.core.model.DTO.ChangePwVO">
+        UPDATE TB_ADMIN SET ADMIN_PW=#{modPW},AUTH_STATUS=1 WHERE ADMIN_ID=#{admin_id}
     </update>
 
     <select id="getAdminByAdminId" resultType="kr.or.fact.core.model.DTO.AdminVO">

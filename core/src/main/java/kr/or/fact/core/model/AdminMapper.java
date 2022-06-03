@@ -1,9 +1,6 @@
 package kr.or.fact.core.model;
 
-import kr.or.fact.core.model.DTO.AdminHistoryVO;
-import kr.or.fact.core.model.DTO.AdminResVO;
-import kr.or.fact.core.model.DTO.AdminVO;
-import kr.or.fact.core.model.DTO.PagedAdminListVO;
+import kr.or.fact.core.model.DTO.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,7 +17,6 @@ public interface AdminMapper {
     List<AdminVO> getAllAdminList();
     List<AdminVO> getAdminPagingList(@Param("page_num") int page_num, @Param("amount") int amount, @Param("order_field") String order_field);
     List<PagedAdminListVO> getAdminSpecialInfoPagingList(@Param("page_num") int page_num, @Param("amount") int amount, @Param("order_field") String order_field);
-
     int getAdminCount(@Param("admin_type") int admin_type);//99 모든 유저
 
 long insertAdminInfo(AdminVO adminVO);
@@ -49,7 +45,7 @@ long insertAdminInfo(AdminVO adminVO);
 
     Integer saveAdminWorkHistory(AdminHistoryVO adminHistoryVo);
 
-    int updateAdminPassword(AdminVO adminVo);
+    int updateAdminPassword(ChangePwVO changePwVO);
 
     List<AdminVO> getAdminByAdminId(@Param("admin_id") String admin_id);
     List<AdminResVO> selectAdminbyIdx(@Param("pageNum") int pageNum, @Param("count") int count);

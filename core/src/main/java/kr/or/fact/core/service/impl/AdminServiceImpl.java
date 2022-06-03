@@ -1,10 +1,7 @@
 package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.AdminMapper;
-import kr.or.fact.core.model.DTO.AdminHistoryVO;
-import kr.or.fact.core.model.DTO.AdminResVO;
-import kr.or.fact.core.model.DTO.AdminVO;
-import kr.or.fact.core.model.DTO.ResultVO;
+import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -113,7 +110,6 @@ public class AdminServiceImpl implements AdminService {
         AdminVO findAdmin = adminMapper.getAdminInfoById("test04");
         return findAdmin;
     }
-
     @Override
     public ResultVO checkIdDuplicate(String admin_id){
         ResultVO resultVO = new ResultVO();
@@ -130,11 +126,11 @@ public class AdminServiceImpl implements AdminService {
 
         return resultVO;
     }
+    //더좋은 방법 idx, chpw만 들어가기
     @Override
-    public int updateAdminPassword(AdminVO adminVo){
-        return adminMapper.updateAdminPassword(adminVo);
+    public int updateAdminPassword(ChangePwVO changePwVO){
+        return adminMapper.updateAdminPassword(changePwVO);
     }
-
     //어드민 테이블에서 역할과 롤을 가져와 콘트롤러에게 검증 후 콘트롤러에게 준다
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -685,6 +686,44 @@ public class APIController {
             resultVO.setResult_code("ERROR002");
         }
         return  resultVO;
+    }
+    @RequestMapping(value = "/changePw",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO change_password(HttpSession session, Principal principal,
+                             @RequestBody ChangePwVO changePwVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("변경할 정보를 확인할 수 없습니다");
+        resultVO.setResult_code("ERROR_1000");
+
+        if(changePwVO.getCurPw()!=null &&
+                changePwVO.getModPW()!=null &&
+                changePwVO.getModPwCf()!=null){
+
+            AdminVO adminVo = adminService.findAdminById(principal.getName());
+
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+           // String hashedPassword = passwordEncoder.encode(changePwVO.getCurPw());
+            // 인코딩된 비밀번호와 일반 비밀번호를 대조합니다
+            if(passwordEncoder.matches(changePwVO.getCurPw(),adminVo.getAdmin_pw())){
+                try{
+
+                    String updatePassword = passwordEncoder.encode(changePwVO.getModPW());
+                    changePwVO.setModPW(updatePassword);
+                    changePwVO.setAdmin_id(adminVo.getAdmin_id());
+                    adminService.updateAdminPassword(changePwVO);
+                    resultVO.setResult_str("비밀번호변경에 성공하였습니다.");
+                    resultVO.setResult_code("SUCCESS");
+                }catch (Exception e){
+                    resultVO.setResult_str("비밀번호 변경에 실패하였습니다.");
+                    resultVO.setResult_code("ERROR_1000");
+                }
+                }
+            else {
+                resultVO.setResult_str("기존 비밀번호가 다릅니다.");
+                resultVO.setResult_code("ERROR_1000");
+            }
+        }
+        return resultVO;
     }
 
 }

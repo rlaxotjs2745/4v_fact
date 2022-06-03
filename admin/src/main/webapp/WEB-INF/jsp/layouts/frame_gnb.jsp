@@ -457,15 +457,19 @@
     })
 
     $("#mod-pw-first-submit").click(() => {
-        if($("#mod-pwcf-guide").text() != "" || $("#mod-pw-guide").text("") != ""){
-            alert("변경할 비밀번호가 올바르지 않습니다.");
+        // if($("#mod-pwcf-guide").text() == "" || $("#mod-pw-guide").text() == ""){
+        //     alert("변경할 비밀번호가 올바르지 않습니다.");
+        //     return;
+        // }
+        if($("#cur-pw").val() == $("#mod-pw").val()){
+            alert("변경할 비밀번호와 기존비밀번호가 같습니다.")
             return;
         }
         var newPw = {
             curPw : $("#cur-pw").val(),
             modPW : $("#mod-pw").val(),
             modPwCf :$("#mod-pwcf").val(),
-            adminIdx : parseInt("${admin.idx_admin}")
+            adminId : "${admin.admin_id}"
         }
         $.ajax({
             type: 'post',
@@ -481,9 +485,8 @@
                     $(".modal-backdrop").removeClass("show").css("display", "none");
                 }
                 else {
-                    alert(result.result_str); // 기존 비밀번호가 틀렸씁니다.
-                    //비밀번호 규칙에 맞지않급니다.
-                    //변경할 비밀번호와 비밀번호 확인 번호가 맞지 않습니다.
+                    alert(result.result_str);
+
                     //기존 비밀번호와 변경할 비밀번호가 같습니다.
                 }
             },
