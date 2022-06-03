@@ -457,11 +457,15 @@
     })
 
     $("#mod-pw-first-submit").click(() => {
+        if($("#mod-pwcf-guide").text() != "" || $("#mod-pw-guide").text("") != ""){
+            alert("변경할 비밀번호가 올바르지 않습니다.");
+            return;
+        }
         var newPw = {
             curPw : $("#cur-pw").val(),
             modPW : $("#mod-pw").val(),
             modPwCf :$("#mod-pwcf").val(),
-            adminIdx : "${admin.idx_admin}"
+            adminIdx : parseInt("${admin.idx_admin}")
         }
         $.ajax({
             type: 'post',
