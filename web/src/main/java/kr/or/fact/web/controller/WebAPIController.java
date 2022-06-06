@@ -969,7 +969,7 @@ public class WebAPIController {
 
         if(idx_user!=0) {
 
-            int list_amount = param.getAmount();;
+            int list_amount = 10;
             int page_amount = 10;
             //int page = paramVisitReqVO.getVisit_req_list_page();
 
@@ -1041,7 +1041,7 @@ public class WebAPIController {
 
         if(idx_user!=0) {
 
-            int list_amount = param.getAmount();;
+            int list_amount = 10;
             int page_amount = 10;
             //int page = paramVisitReqVO.getVisit_req_list_page();
 

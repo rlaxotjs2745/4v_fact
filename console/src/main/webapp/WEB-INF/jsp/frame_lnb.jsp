@@ -30,6 +30,26 @@
                     </a>
                 </li>
                 <!--//-->
+                <li class="sidenav-item">
+                    <a href="javascript:void(0);" class="sidenav-link sidenav-toggle"><i class="sidenav-icon far fa-address-card"></i>
+                        <div>실증사업 관리</div>
+                    </a>
+                    <ul class="sidenav-menu">
+                        <li class="sidenav-item">
+                            <a href="javascript:pageLoad('c10_event_alert','장애 이벤트');" class="sidenav-link">
+                                <div>공지사항</div>
+                            </a>
+                        </li>
+                        <li class="sidenav-item">
+                            <a href="javascript:pageLoad('c20_event_facility','시설 및 장비 이벤트');" class="sidenav-link">
+                                <div>실증사업 현황</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
                 <!-- 실증사업관리 -->
                 <li class="sidenav-item">
                     <a href="javascript:void(0);" class="sidenav-link sidenav-toggle"><i class="sidenav-icon lnr lnr-briefcase"></i>
@@ -75,7 +95,7 @@
                                 <div>센서별 정보</div>
                             </a>
                         </li>
-                        <li class="sidenav-item">
+                        <%--<li class="sidenav-item">
                             <a href="javascript:void(0);" class="sidenav-link sidenav-toggle">
                                 <div>온실 CCTV</div>
                             </a>
@@ -91,7 +111,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li>--%>
                         <li class="sidenav-item">
                             <a href="javascript:void(0)" class="sidenav-link sidenav-toggle"><i class="sidenav-icon fas fa-calculator"></i>
                                 <div>실증 기자재</div>
@@ -109,11 +129,11 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="sidenav-item">
+                        <%--<li class="sidenav-item">
                             <a href="javascript:pageLoad('b60_gh_guest','체험형 온실 현황');" class="sidenav-link">
                                 <div>체험형 온실</div>
                             </a>
-                        </li>
+                        </li>--%>
                     </ul>
                 </li>
                 <!--//-->
