@@ -154,15 +154,6 @@ public class IndexController {
     public String a10_dashboard(@RequestParam(value = "tag", required = false) String tagValue,
                                  ModelMap model
                                 ){
-
-        String urlGimje = "http://api.openweathermap.org/data/2.5/weather?q=gimje&appid=53adfc8e9ffcbf891a9be91b9e312c01";
-
-        String urlSangju = "http://api.openweathermap.org/data/2.5/weather?q=sangju&appid=53adfc8e9ffcbf891a9be91b9e312c01";
-
-
-        URL url = new URL(urlGimje);
-
-
         return "a10_dashboard";
     }
 

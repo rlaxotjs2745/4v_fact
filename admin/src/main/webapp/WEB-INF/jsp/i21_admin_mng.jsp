@@ -114,7 +114,7 @@
                                 <th class="text-center px-2" style="width:80px">구분</th>
                                 <th class="text-center px-2" style="width:80px">시스템 권한</th>
                                 <th class="text-center px-2" style="width:150px">소속</th>
-                                <th class="text-center px-2" style="width:70px">부서</th>
+                                <th class="text-center px-2" style="width:70px">담당업무</th>
                                 <th class="text-center px-2" style="width:70px">직급</th>
                                 <th class="text-center px-2" style="width:130px">사무실 전화번호</th>
                                 <th class="text-center px-2" style="width:130px">휴대폰 번호</th>
@@ -123,17 +123,17 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${adminList}" var="admin" varStatus="status">
-                                <tr class="">
-                                    <td class="text-center">${admin.page * 10 - 10 + status.count}</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modals-staff-view">${admin.admin_name}</a></td>
-                                    <td class="text-center">${admin.corporate eq 0 ? "진흥원" : admin.corporate eq 1 ? "센터" : admin.corporate eq 2 ? "지자체" : "기타"}</td>
-                                    <td class="text-center">${admin.sign_in_type eq 1 ? "SA" : "BM"}</td>
-                                    <td class="text-center">${admin.corporate_name}</td>
-                                    <td class="text-center">${admin.department != null ? admin.department : "-"}</td>
-                                    <td class="text-center">${admin.job_title}</td>
-                                    <td class="text-center">${admin.tel_num}</td>
-                                    <td class="text-center">${admin.mphone_num}</td>
-                                    <td class="text-center">${admin.admin_id}</td>
+                                <tr class="admin-entity" id="${admin.idx_admin}">
+                                    <td class="text-center" class="page-count">${admin.page * 10 - 10 + status.count}</td>
+                                    <td class="text-center"><a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modals-staff-view" class="admin-name">${admin.admin_name}</a></td>
+                                    <td class="text-center" class="admin-corp-type">${admin.corporate eq 0 ? "진흥원" : admin.corporate eq 1 ? "센터" : admin.corporate eq 2 ? "지자체" : "기타"}</td>
+                                    <td class="text-center" class="admin-type">${admin.sign_in_type eq 1 ? "SA" : "BM"}</td>
+                                    <td class="text-center" class="admin-corp">${admin.corporate_name}</td>
+                                    <td class="text-center" class="admin-depart">${admin.main_part != null ? admin.main_part : "-"}</td>
+                                    <td class="text-center" class="admin-jobTitle">${admin.job_title}</td>
+                                    <td class="text-center" class="admin-telnum">${admin.corporate_num}</td>
+                                    <td class="text-center" class="admin-mphonenum">${admin.mphone_num}</td>
+                                    <td class="text-center" class="admin-emailid">${admin.admin_id}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -149,11 +149,11 @@
                             <ul class="pagination">
                                 <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="javascript:pageLoad('i21_admin_mng',{page_num:1},'대시보드');"aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
                                 <li class="paginate_button page-item previous disabled" id="article-list_previous-one"><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 5}'},'대시보드');"aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li>
-                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 4}'},'대시보드');" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">${adminList[0].page + pageBool - 4}</a></li>
-                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 3}'},'대시보드');" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">${adminList[0].page + pageBool - 3}</a></li>
-                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 2}'},'대시보드');" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">${adminList[0].page + pageBool - 2}</a></li>
-                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 1}'},'대시보드');" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">${adminList[0].page + pageBool - 1}</a></li>
-                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool}'},'대시보드');" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">${adminList[0].page + pageBool}</a></li>
+                                <li class="paginate_button page-item " id="page1-button"><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 4}'},'대시보드');" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">${adminList[0].page + pageBool - 4}</a></li>
+                                <li class="paginate_button page-item " id="page2-button"><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 3}'},'대시보드');" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">${adminList[0].page + pageBool - 3}</a></li>
+                                <li class="paginate_button page-item " id="page3-button"><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 2}'},'대시보드');" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">${adminList[0].page + pageBool - 2}</a></li>
+                                <li class="paginate_button page-item " id="page4-button"><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 1}'},'대시보드');" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">${adminList[0].page + pageBool - 1}</a></li>
+                                <li class="paginate_button page-item " id="page5-button"><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool}'},'대시보드');" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">${adminList[0].page + pageBool}</a></li>
                                 <li class="paginate_button page-item next" id="article-list_next-one"><a href="javascript:pageLoad('i21_admin_mng',{page_num: '${adminList[0].page + pageBool - 3}'},'대시보드');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li>
                                 <li class="paginate_button page-item next" id="article-list_next"><a href="javascript:pageLoad('i21_admin_mng',{page_num: '${adminList[0].maxvalue}'},'대시보드');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
                             </ul>
@@ -186,43 +186,43 @@
                                 <tr class="">
                                     <th class="text-center align-middle bg-light" rowspan="3" style="width:12%">개인정보</th>
                                     <th class="text-center bg-light" style="width:12%">이름</th>
-                                    <td class="text-center" style="width:27%">홍길동</td>
+                                    <td class="text-center" style="width:27%" id="admin-detail-name">홍길동</td>
                                     <th class="text-center bg-light" style="width:13%">일반전화번호</th>
-                                    <td class="text-center" style="width:26%">000-0000-0000</td>
+                                    <td class="text-center" style="width:26%" id="admin-detail-telnum">000-0000-0000</td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">휴대폰 번호</th>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <th class="text-center bg-light">이메일</th>
-                                    <td class="text-center">abc@aaaaaa.com</td>
+                                    <td class="text-center" id="admin-detail-mphonenum">000-0000-0000</td>
+<%--                                    <th class="text-center bg-light">이메일</th>--%>
+<%--                                    <td class="text-center" id="admin-detail-email">abc@aaaaaa.com</td>--%>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">주소</th>
-                                    <td class="" colspan="3">제주도 서귀포시 XXXXXXX XXXXXXX</td>
+                                    <td class="" colspan="3" id="admin-detail-addr">제주도 서귀포시 XXXXXXX XXXXXXX</td>
                                 </tr>
                                 <tr class="">
                                     <th class="text-center align-middle bg-light" rowspan="3">소속 정보</th>
                                     <th class="text-center bg-light">단체명</th>
-                                    <td class="text-center">맛있는 농부(주)</td>
-                                    <th class="text-center bg-light">부서</th>
-                                    <td class="text-center">디지털농업본부/XXX팀</td>
+                                    <td class="text-center" id="admin-detail-corp">맛있는 농부(주)</td>
+<%--                                    <th class="text-center bg-light">부서</th>--%>
+<%--                                    <td class="text-center" id="admin-detail-depart">디지털농업본부/XXX팀</td>--%>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">직위</th>
-                                    <td class="text-center">계장</td>
+                                    <td class="text-center" id="admin-detail-jobTitle">계장</td>
                                     <th class="text-center bg-light">전화번호</th>
-                                    <td class="text-center">000-0000-0000</td>
+                                    <td class="text-center" id="admin-detail-corpnum">000-0000-0000</td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">팩스</th>
-                                    <td class="text-center">000-0000-0000</td>
+                                    <td class="text-center" id="admin-detail-fax">000-0000-0000</td>
                                     <th class="text-center bg-light">홈페이지</th>
-                                    <td class="text-center">www.asdfasdfasdf.com</td>
+                                    <td class="text-center" id="admin-detail-homepage">www.asdfasdfasdf.com</td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">센터 정보</th>
                                     <th class="text-center bg-light">담당 업무</th>
-                                    <td class="text-center">XXXXXXXX</td>
+                                    <td class="text-center" >XXXXXXXX</td>
                                     <th class="text-center bg-light">관리번호</th>
                                     <td class="text-center"></td>
                                 </tr>
@@ -282,8 +282,8 @@
                                 <tr>
                                     <th class="text-center bg-light">휴대폰 번호</th>
                                     <td class="text-center"><input type="text" class="form-control form-control-sm" value="000-0000-0000"></td>
-                                    <th class="text-center bg-light">이메일</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="abc@aaaaaa.com"></td>
+<%--                                    <th class="text-center bg-light">이메일</th>--%>
+<%--                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="abc@aaaaaa.com"></td>--%>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">주소</th>
@@ -377,8 +377,18 @@
                                 <tr>
                                     <th class="text-center bg-light">휴대폰 번호</th>
                                     <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="mphone_num"></td>
-                                    <th class="text-center bg-light">이메일</th>
-                                    <td class="text-center"><input type="email" class="form-control form-control-sm" value="" id="email_admin"></td>
+                                    <th class="text-center bg-light">관리 유형</th>
+                                    <td class="text-center">
+                                        <select id="admin_type" class="form-control form-control-sm">
+                                            <option class="form-control form-control-sm" value="" disabled selected>유형 선택</option>
+<%--                                            어드민  형태	0:일반관리자, 1:실증책임자, 2:재배사, 4:관계기관, 512:슈퍼관리자--%>
+                                            <option class="form-control form-control-sm" value="0">일반 관리자</option>
+                                            <option class="form-control form-control-sm" value="1">실증 책임자</option>
+                                            <option class="form-control form-control-sm" value="2">재배사</option>
+                                            <option class="form-control form-control-sm" value="4">관계 기관</option>
+                                            <option class="form-control form-control-sm" value="512">슈퍼 관리자</option>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">주소</th>
@@ -408,20 +418,20 @@
                                     <th class="text-center bg-light">직위</th>
                                     <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="job_title"></td>
                                     <th class="text-center bg-light">전화번호</th>
-                                    <td class="text-center"><input type="text" id="corp_telnum" class="form-control form-control-sm" value=""></td>
+                                    <td class="text-center"><input type="text" id="corp_telnum" class="form-control form-control-sm" id="corporate_num" value=""></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">팩스</th>
-                                    <td class="text-center"><input type="text" id="corp_fax" class="form-control form-control-sm" value=""></td>
+                                    <td class="text-center"><input type="text" id="corp_fax" class="form-control form-control-sm" id="corporate_fax" value=""></td>
                                     <th class="text-center bg-light">홈페이지</th>
-                                    <td class="text-center"><input type="text" id="corp_homepage" class="form-control form-control-sm" value=""></td>
+                                    <td class="text-center"><input type="text" id="corp_homepage" class="form-control form-control-sm" id="corporate_homepage" value=""></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">센터정보</th>
                                     <th class="text-center bg-light">담당업무</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="admin_role"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="main_part"></td>
                                     <th class="text-center bg-light">관리번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="admin_rolenum"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="manage_num"></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -537,21 +547,32 @@
             admin_name: "${admin.admin_name}",
             corporate: "${admin.corporate}",
             corporate_name: "${admin.corporate_name}",
-            department: "${admin.department}",
+            corporate_num: "${admin.corporate_num}",
+            corporate_fax: "${admin.corporate_fax}",
+            corporate_homepage: "${admin.corporate_homepage}",
             job_title: "${admin.job_title}",
             auth_status: "${admin.auth_status}",
             tel_num: "${admin.tel_num}",
             mphone_num: "${admin.mphone_num}",
-            email: "${admin.email}",
             admin_type: "${admin.admin_type}",
-            auth_admin_idx: "${admin.auth_admin_idx}",
+            main_part: "${admin.main_part}",
+            manage_num: "${admin.manage_num}",
             sign_in_type: "${admin.sign_in_type}",
-            reg_date: "${admin.reg_date}",
-            last_upd_date: "${admin.last_upd_date}",
             page: "${admin.page}",
             maxvalue: "${admin.maxvalue}",
         })
     </c:forEach>
+
+
+    if(adminList[0].maxvalue <= 10){
+        $("#page1-button, #page2-button, #page3-button, #page4-button").css("display", "none");
+    } else if(adminList[0].maxvalue <= 20){
+        $("#page1-button, #page2-button, #page3-button").css("display", "none");
+    } else if(adminList[0].maxvalue <= 30){
+        $("#page1-button, #page2-button").css("display", "none");
+    } else if(adminList[0].maxvalue <= 40){
+        $("#page1-button").css("display", "none");
+    }
 
 
 
@@ -658,8 +679,14 @@
             auth_status: 0,
             tel_num: $("#tel_num").val(),
             mphone_num: $("#mphone_num").val(),
-            email: $("#web_id").val() + "@" + $("#web_id2").val(),
-            sign_in_type: $("#sign_in_type").val()
+            sign_in_type: $("#sign_in_type").val(),
+            corporate_num: $("#corporate_num").val(),
+            corporate_fax: $("#corporate_fax").val(),
+            corporate_homepage: $("#corporate_homepage").val(),
+            admin_type: $("#admin_type").val(),
+            main_part: $("#main_part").val(),
+            manage_num: $("#manage_num").val(),
+            admin_addr: $("#addr_main").val() + " " + $("#addr_detail").val()
         }
 
         $.ajax({
@@ -692,9 +719,26 @@
                     $("#admin_id_select_box").val("0");
                     $("#web_id_guide").html("");
                 }
+            },
+            error:function(res){
+                alert(res.result_str);
+                //에러가 났을 경우 실행시킬 코드
             }
         })
 
+    })
+
+    // admin-corp-type
+    // admin-type">
+    // admin-corp">
+    // admin-depart">
+    // admin-jobTitle">
+    // admin-telnum">
+    // admin-mphonenum">
+    // admin-emailid">
+
+    $(".admin-entity").click(() => {
+        console.log($(this).children(""));
     })
 </script>
 <!-- / Layout footer -->

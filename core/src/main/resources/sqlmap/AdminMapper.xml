@@ -18,7 +18,7 @@
     </select>
 
     <select id="getAdminInfoByNameAndMPhoneNum" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.AdminVO">
-        SELECT * FROM TB_ADMIN WHERE USER_NAME='#{admin_name}' AND MPHONE_NUM='#{mphone_num}'
+        SELECT * FROM TB_ADMIN WHERE USER_NAME=#{admin_name} AND MPHONE_NUM=#{mphone_num}
     </select>
 
     <select id="getAllAdminList" resultType="kr.or.fact.core.model.DTO.AdminVO">
@@ -72,15 +72,18 @@
             ADMIN_NAME,
             CORPORATE,
             CORPORATE_NAME,
-            DEPARTMENT,
+            CORPORATE_NUM,
+            CORPORATE_FAX,
+            CORPORATE_HOMEPAGE,
             JOB_TITLE,
             AUTH_STATUS,
             TEL_NUM,
             MPHONE_NUM,
-            EMAIL,
-            ADMIN_TYPE,
-            AUTH_ADMIN_IDX,
             SIGN_IN_TYPE,
+            MAIN_PART,
+            ADMIN_TYPE,
+            MANAGE_NUM,
+            ADMIN_ADDR,
             REG_DATE,
             LAST_UPD_DATE
         ) VALUES (
@@ -90,15 +93,18 @@
                      #{admin_name},
                      #{corporate},
                      #{corporate_name},
-                     #{department},
+                     #{corporate_num},
+                     #{corporate_fax},
+                     #{corporate_homepage},
                      #{job_title},
                      #{auth_status},
                      #{tel_num},
                      #{mphone_num},
-                     #{email},
-                     #{admin_type},
-                     #{auth_admin_idx},
                      #{sign_in_type},
+                     #{main_part},
+                     #{admin_type},
+                     #{manage_num},
+                     #{admin_addr},
                      SYSDATE,
                      SYSDATE
                  )
@@ -113,11 +119,11 @@ UPDATE TB_ADMIN SET ADMIN_PW = #{admin_pw} WHERE IDX_ADMIN = #{idx_admin}
         UPDATE TB_ADMIN
         SET
             LAST_UPD_DATE = SYSDATE
-        WHERE USER_ID='#{admin_id}'
+        WHERE USER_ID=#{admin_id}
     </update>
 
     <delete id="deleteAdminInfoByID" parameterType="string">
-        DELETE TB_ADMIN WHERE  USER_ID = '#{admin_id}'
+        DELETE TB_ADMIN WHERE  USER_ID = #{admin_id}
     </delete>
 
     <delete id="deleteAdminInfoByIdx" parameterType="long">

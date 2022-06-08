@@ -666,21 +666,25 @@ public class APIController {
         adminVO.setAdmin_pw(newPw);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(adminVO.getAdmin_pw());
+        System.out.println(adminVO.getAdmin_pw());
         adminVO.setAdmin_pw(hashedPassword);
         System.out.println(newPw);
         try{
+            if(adminService.adminIdCheck(adminVO.getAdmin_id())){
+                resultVO.setResult_str("이미 사용중인 아이디입니다.");
+                resultVO.setResult_code("ERROR002");
+            } else{
+                adminService.join(adminVO);
 
-            adminService.join(adminVO);
+                MimeMessage mail = mailSender.createMimeMessage();
+                MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
 
-            MimeMessage mail = mailSender.createMimeMessage();
-            MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
-
-            mailHelper.setFrom("김태선 <taeseon@4thevision.com>"); // 보내는 사람 정보도 와야함
-            mailHelper.setTo(adminVO.getAdmin_id());
-            mailHelper.setSubject("스마트팜 혁신밸리 관리자 사이트 계정 안내");
-            mailHelper.setText("안녕하세요." + adminVO.getAdmin_name() + "님. 스마트팜 혁신밸리 관리자 사이트 비밀번호는 " + newPw + " 입니다.");
-            mailSender.send(mail);
-
+                mailHelper.setFrom("김태선 <taeseon@4thevision.com>"); // 보내는 사람 정보도 와야함
+                mailHelper.setTo(adminVO.getAdmin_id());
+                mailHelper.setSubject("스마트팜 혁신밸리 관리자 사이트 계정 안내");
+                mailHelper.setText("안녕하세요." + adminVO.getAdmin_name() + "님. 스마트팜 혁신밸리 관리자 사이트 비밀번호는 " + newPw + " 입니다.");
+                mailSender.send(mail);
+            }
         } catch (Exception e){
             resultVO.setResult_str("계정 생성에 실패했습니다.");
             resultVO.setResult_code("ERROR002");
@@ -714,14 +718,18 @@ public class APIController {
                     resultVO.setResult_str("비밀번호변경에 성공하였습니다.");
                     resultVO.setResult_code("SUCCESS");
                 }catch (Exception e){
+                    System.out.println(e.toString());
                     resultVO.setResult_str("비밀번호 변경에 실패하였습니다.");
                     resultVO.setResult_code("ERROR_1000");
                 }
-                }
+            }
             else {
                 resultVO.setResult_str("기존 비밀번호가 다릅니다.");
                 resultVO.setResult_code("ERROR_1000");
             }
+        } else {
+            resultVO.setResult_str("필요한 항목이 모두 채워지지 않았습니다.");
+            resultVO.setResult_code("ERROR_1000");
         }
         return resultVO;
     }
