@@ -95,18 +95,18 @@
         </h6>
 
         <div class="card-datatable table-responsive py-2">
-            <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div class="dataTables_wrapper dt-bootstrap4 no-footer">
                 <div class="row">
                     <div class="col-sm-12 col-md-6">
                         <label class="mr-3">총 : <strong>${adminCount}</strong>명</label>
                     </div>
                     <div class="col-sm-12 col-md-6">
-                        <div id="" class="dataTables_filter"><label>찾기:<input type="search" class="form-control form-control-sm" placeholder="소속, 이름, 전화번호" aria-controls="article-list"></label></div>
+                        <div class="dataTables_filter"><label>찾기:<input type="search" class="form-control form-control-sm" placeholder="소속, 이름, 전화번호" aria-controls="article-list"></label></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
+                        <table class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
                             <thead>
                             <tr role="row">
                                 <th class="text-center px-2" style="width:40px">No</th>
@@ -142,7 +142,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="" role="status" aria-live="polite">Showing ${adminList[0].page * 10 - 9} to ${adminList[0].page * 10 > adminCount ? adminCount : adminList[0].page * 10} of ${adminList[0].maxvalue} entries</div>
+                        <div class="dataTables_info" role="status" aria-live="polite">Showing ${adminList[0].page * 10 - 9} to ${adminList[0].page * 10 > adminCount ? adminCount : adminList[0].page * 10} of ${adminList[0].maxvalue} entries</div>
                     </div>
                     <div class="col-sm-12 col-md-7">
                         <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
@@ -228,7 +228,7 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <table id="" class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info" style="">
+                            <table class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info">
                                 <tbody>
                                 <tr>
                                     <th class="text-center align-middle bg-light" style="width:14%" rowspan="2">시스템 정보</th>
@@ -363,7 +363,7 @@
                 <div class="modal-footer justify-content-between">
                     <div>
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                        <button type="button" class="btn btn-outline-danger">제거</button>
+                        <button type="button" class="btn btn-outline-danger" id="btn-admin-delete">제거</button>
                     </div>
                     <button type="button" class="btn btn-primary" id="btn-admin-modify">저장</button>
                 </div>
@@ -837,25 +837,23 @@
             dataType:'json',
             success: function(res){
                 if(res.result_code == "SUCCESS"){
-                    alert("관리자 등록이 완료되었습니다.\n생성한 계정의 비밀번호는 아이디로 지정한 메일로 전송되었습니다.");
-                    $("#modal-staff-write").removeClass("show");
+                    alert("관리자 정보가 성공적으로 변경되었습니다.");
+                    $("#modal-staff-modify").removeClass("show");
                     $(".modal-backdrop").removeClass("show");
-                    $("#admin_name").val("");
-                    $("#tel_num").val("");
-                    $("#mphone_num").val("");
-                    $("#email_admin").val("");
-                    $("#addr_main").val("");
-                    $("#addr_detail").val("");
-                    $("#corp_select").val("");
-                    $("#job_title").val("");
-                    $("#corp_telnum").val("");
-                    $("#corp_fax").val("");
-                    $("#corp_homepage").val("");
-                    $("#admin_rolenum").val("");
-                    $("#admin_role").val("");
-                    $("#web_id").val("");
-                    $("#web_id2").val("");
-                    $("#web_id2").val("");
+                    $("#admin_name_modify").val("");
+                    $("#tel_num_modify").val("");
+                    $("#mphone_num_modify").val("");
+                    $("#admin_type_modify").val("");
+                    $("#addr_main_modify").val("");
+                    $("#corp_select_modify").val("");
+                    $("#job_title_modify").val("");
+                    $("#corporate_num_modify").val("");
+                    $("#corporate_fax_modify").val("");
+                    $("#corporate_homepage_modify").val("");
+                    $("#main_part_modify").val("");
+                    $("#manage_num_modify").val("");
+                    $("#web_id_modify").val("");
+                    $("#sign_in_type_modify").val("");
                     $("#admin_id_select_box").val("0");
                     $("#web_id_guide").html("");
                 }
@@ -865,6 +863,29 @@
                 //에러가 났을 경우 실행시킬 코드
             }
         })
+
+    })
+
+    $("#btn-admin-delete").click(function(){
+        if(confirm($("#admin_name_modify").val() + "님의 관리자 계정을 삭제하시겠습니까?")){
+                        window.location.reload();
+        //     $.ajax({
+        //         type: 'post',
+        //         url: 'admin_delete',
+        //         data: JSON.stringify(parseInt(curUser)),
+        //         contentType:"application/json; charset=utf-8;",
+        //         dataType:'json',
+        //         success: function(res){
+        //             if(res.result_code == "SUCCESS"){
+        //                 alert("해당 관리자 계정이 삭제되었습니다.");
+        //             }
+        //         },
+        //         error:function(res){
+        //             alert(res.result_str);
+        //             //에러가 났을 경우 실행시킬 코드
+        //         }
+        //     })
+        }
 
     })
 </script>
