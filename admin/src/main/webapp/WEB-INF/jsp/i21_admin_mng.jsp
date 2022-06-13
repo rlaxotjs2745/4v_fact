@@ -365,7 +365,7 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
                         <button type="button" class="btn btn-outline-danger">제거</button>
                     </div>
-                    <button type="button" class="btn btn-primary">저장</button>
+                    <button type="button" class="btn btn-primary" id="btn-admin-modify">저장</button>
                 </div>
             </form>
         </div>
@@ -537,6 +537,7 @@
 
 <script>
     var curPage = "${adminList[0].page}";
+    var curUser;
 
     if(curPage != "1"){
         $("#article-list_previous").removeClass("disabled");
@@ -703,7 +704,7 @@
             corporate_name: corpName,
             job_title: $("#job_title").val(),
             auth_status: 0,
-            tel_num: $("#tel_num").val(),
+            tel_num: $("#tel_num").val() == "" ? "-" : $("#tel_num").val(),
             mphone_num: $("#mphone_num").val(),
             sign_in_type: $("#sign_in_type").val(),
             corporate_num: $("#corporate_num").val(),
@@ -757,7 +758,6 @@
     $("#initializtion_pw").click(function(){
         if(confirm("해당 아이디의 비밀번호를 초기화하시겠습니까?")){
             var selectId = $(this).parent().attr('id');
-            console.log(typeof selectId);
             $.ajax({
                 type: 'post',
                 url: 'admin_pw_initialization',
@@ -765,13 +765,12 @@
                 contentType:"application/json; charset=utf-8;",
                 dataType:'json',
                 success: function(res){
-                    console.log(res);
                     if(res.result_code == "SUCCESS"){
                         alert("비밀번호가 초기화되었습니다. \n초기화된 비밀번호는 이메일로 전송되었습니다.");
                     }
-                },
-                error:function(res){
-                    alert(res.result_str);
+                    else{
+                        alert(res.result_str);
+                    }
                 }
             })
         }
@@ -780,6 +779,7 @@
 
     $(".admin-entity").click(function(){
         var selectId = $(this).attr('id');
+        curUser = selectId;
         for(var admin of adminList){
             if(selectId == admin.idx_admin){
                 $(".store-idx").attr("id", selectId);
@@ -814,6 +814,58 @@
                 break;
             }
         }
+    })
+
+    $("#btn-admin-modify").click(function(){
+        var param = {
+            idx_admin: parseInt(curUser),
+            tel_num: $("#tel_num_modify").val(),
+            mphone_num: $("#mphone_num_modify").val(),
+            admin_type: $("#admin_type_modify").val(),
+            admin_addr: $("#addr_detail_modify").val() != "" ? $("#addr_main_modify").val() + " " + $("#addr_detail_modify").val() : $("#addr_main_modify").val(),
+            job_title: $("#job_title_modify").val(),
+            main_part: $("#main_part_modify").val(),
+            manage_num: $("#manage_num_modify").val(),
+            sign_in_type: $("#sign_in_type_modify").val()
+        }
+
+        $.ajax({
+            type: 'post',
+            url: 'admin_modify',
+            data: JSON.stringify(param),
+            contentType:"application/json; charset=utf-8;",
+            dataType:'json',
+            success: function(res){
+                if(res.result_code == "SUCCESS"){
+                    alert("관리자 등록이 완료되었습니다.\n생성한 계정의 비밀번호는 아이디로 지정한 메일로 전송되었습니다.");
+                    $("#modal-staff-write").removeClass("show");
+                    $(".modal-backdrop").removeClass("show");
+                    $("#admin_name").val("");
+                    $("#tel_num").val("");
+                    $("#mphone_num").val("");
+                    $("#email_admin").val("");
+                    $("#addr_main").val("");
+                    $("#addr_detail").val("");
+                    $("#corp_select").val("");
+                    $("#job_title").val("");
+                    $("#corp_telnum").val("");
+                    $("#corp_fax").val("");
+                    $("#corp_homepage").val("");
+                    $("#admin_rolenum").val("");
+                    $("#admin_role").val("");
+                    $("#web_id").val("");
+                    $("#web_id2").val("");
+                    $("#web_id2").val("");
+                    $("#admin_id_select_box").val("0");
+                    $("#web_id_guide").html("");
+                }
+            },
+            error:function(res){
+                alert(res.result_str);
+                //에러가 났을 경우 실행시킬 코드
+            }
+        })
+
     })
 </script>
 <!-- / Layout footer -->
