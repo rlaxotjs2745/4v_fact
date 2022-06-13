@@ -867,23 +867,25 @@
 
     $("#btn-admin-delete").click(function(){
         if(confirm($("#admin_name_modify").val() + "님의 관리자 계정을 삭제하시겠습니까?")){
-                        window.location.reload();
-        //     $.ajax({
-        //         type: 'post',
-        //         url: 'admin_delete',
-        //         data: JSON.stringify(parseInt(curUser)),
-        //         contentType:"application/json; charset=utf-8;",
-        //         dataType:'json',
-        //         success: function(res){
-        //             if(res.result_code == "SUCCESS"){
-        //                 alert("해당 관리자 계정이 삭제되었습니다.");
-        //             }
-        //         },
-        //         error:function(res){
-        //             alert(res.result_str);
-        //             //에러가 났을 경우 실행시킬 코드
-        //         }
-        //     })
+
+            $.ajax({
+                type: 'post',
+                url: 'admin_delete',
+                data: JSON.stringify(parseInt(curUser)),
+                contentType:"application/json; charset=utf-8;",
+                dataType:'json',
+                success: function(res){
+                    if(res.result_code == "SUCCESS"){
+                        alert("해당 관리자 계정이 삭제되었습니다.");
+                        $(".modal-backdrop").removeClass("show");
+                        pageLoad("i21_admin_mng");
+                    }
+                },
+                error:function(res){
+                    alert(res.result_str);
+                    //에러가 났을 경우 실행시킬 코드
+                }
+            })
         }
 
     })
