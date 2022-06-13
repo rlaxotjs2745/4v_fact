@@ -180,4 +180,16 @@ public class AdminServiceImpl implements AdminService {
         adminMapper.modifyPw(adminIdx, hashedPassword);
         return adminMapper.getAdminInfoByIdx(adminIdx);
     }
+
+    @Override
+    public long adminModify(AdminVO adminVO) {
+        long ret_idx = 0;
+        try {
+            ret_idx = adminMapper.adminModify(adminVO);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    return ret_idx;
+    }
 }

@@ -781,4 +781,25 @@ public class APIController {
         return resultVO;
     }
 
+    @RequestMapping(value ="/admin_modify",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO adminModify(@RequestBody AdminVO adminVO){
+        System.out.println("통신됨??");
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("업데이트 실패");
+        try {
+            adminService.adminModify(adminVO);
+            resultVO.setResult_str("성공이여");
+            resultVO.setResult_code("SUCCESS");
+
+        }catch (Exception e){
+            resultVO.setResult_str("에러에여~");
+            resultVO.setResult_code("ERROR_1000");
+        }
+        return resultVO;
+
+    }
+
+
 }

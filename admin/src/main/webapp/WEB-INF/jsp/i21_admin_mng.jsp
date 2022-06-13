@@ -828,7 +828,6 @@
             manage_num: $("#manage_num_modify").val(),
             sign_in_type: $("#sign_in_type_modify").val()
         }
-
         $.ajax({
             type: 'post',
             url: 'admin_modify',

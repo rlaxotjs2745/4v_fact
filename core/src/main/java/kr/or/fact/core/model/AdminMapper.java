@@ -51,4 +51,5 @@ long insertAdminInfo(AdminVO adminVO);
     List<AdminResVO> selectAdminbyIdx(@Param("pageNum") int pageNum, @Param("count") int count);
     int selectCount();
     int modifyPw(@Param("adminIdx") long adminIdx, @Param("newPw") String hashedPassword);
+    long adminModify(AdminVO adminVO);
 }

@@ -181,5 +181,17 @@ UPDATE TB_ADMIN SET ADMIN_PW = #{admin_pw} WHERE IDX_ADMIN = #{idx_admin}
             AUTH_STATUS = 0
         WHERE IDX_ADMIN=#{adminIdx}
     </update>
-
+    <update id="adminModify">
+        UPDATE TB_ADMIN
+        SET
+TEL_NUM=#{tel_num},
+MPHONE_NUM=#{mphone_num},
+ADMIN_TYPE=#{admin_type},
+ADMIN_ADDR=#{admin_addr},
+JOB_TITLE=#{job_title},
+MAIN_PART=#{main_part},
+MANAGE_NUM=#{manage_num},
+SIGN_IN_TYPE=#{sign_in_type}
+        WHERE IDX_ADMIN=#{idx_admin}
+    </update>
 </mapper>
