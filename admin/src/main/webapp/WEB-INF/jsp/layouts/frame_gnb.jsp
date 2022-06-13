@@ -509,12 +509,15 @@
                 }
                 else {
                     alert(result.result_str);
-                    window.location.href("/logout")
+                    window.location.href = "/logout";
                     //기존 비밀번호와 변경할 비밀번호가 같습니다.
+                    return;
                 }
             },
             error:function(){
                 //에러가 났을 경우 실행시킬 코드
+                alert("에러발생");
+                return;
             }
         })
     })
@@ -554,12 +557,14 @@
                 }
                 else {
                     alert(result.result_str);
-                    window.location.href("/logout")
+                    // window.location.href = "/logout";
+                    return;
                     //기존 비밀번호와 변경할 비밀번호가 같습니다.
                 }
             },
             error:function(){
                 //에러가 났을 경우 실행시킬 코드
+                window.location.href = "/logout";
             }
         })
     })

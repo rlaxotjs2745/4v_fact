@@ -20,6 +20,7 @@ import javax.mail.internet.MimeMessage;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Service("adminService")
 public class AdminServiceImpl implements AdminService {
 
@@ -134,9 +135,7 @@ public class AdminServiceImpl implements AdminService {
     //어드민 테이블에서 역할과 롤을 가져와 콘트롤러에게 검증 후 콘트롤러에게 준다
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println(username + " #$#$##$#$#$");
         AdminVO adminVO = adminMapper.getAdminInfoById(username);
-        System.out.println(adminVO + "#@#@#@#@#@#@#@");
         if(adminVO == null){
             adminVO = new AdminVO();
             adminVO.setAdmin_type(CONSTANT.ROLE_GUEST);
@@ -174,5 +173,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public int selectCount(){
         return adminMapper.selectCount();
+    }
+
+    @Override
+    public AdminVO modifyPw(long adminIdx, String hashedPassword){
+        adminMapper.modifyPw(adminIdx, hashedPassword);
+        return adminMapper.getAdminInfoByIdx(adminIdx);
     }
 }

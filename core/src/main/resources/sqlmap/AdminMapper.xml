@@ -119,15 +119,15 @@ UPDATE TB_ADMIN SET ADMIN_PW = #{admin_pw} WHERE IDX_ADMIN = #{idx_admin}
         UPDATE TB_ADMIN
         SET
             LAST_UPD_DATE = SYSDATE
-        WHERE USER_ID=#{admin_id}
+        WHERE ADMIN_ID=#{admin_id}
     </update>
 
     <delete id="deleteAdminInfoByID" parameterType="string">
-        DELETE TB_ADMIN WHERE  USER_ID = #{admin_id}
+        DELETE TB_ADMIN WHERE  ADMIN_ID = #{admin_id}
     </delete>
 
     <delete id="deleteAdminInfoByIdx" parameterType="long">
-        DELETE TB_ADMIN WHERE  IDX_USER = #{idx_user}
+        DELETE TB_ADMIN WHERE IDX_ADMIN = #{idx_user}
     </delete>
 
     <insert id="saveAdminWorkHistory" parameterType="kr.or.fact.core.model.DTO.AdminHistoryVO">
@@ -173,5 +173,13 @@ UPDATE TB_ADMIN SET ADMIN_PW = #{admin_pw} WHERE IDX_ADMIN = #{idx_admin}
     <select id="selectCount" resultType="int">
         SELECT COUNT(*) as count from TB_ADMIN
     </select>
+
+    <update id="modifyPw">
+        UPDATE TB_ADMIN
+        SET
+            ADMIN_PW = #{newPw},
+            AUTH_STATUS = 0
+        WHERE IDX_ADMIN=#{adminIdx}
+    </update>
 
 </mapper>

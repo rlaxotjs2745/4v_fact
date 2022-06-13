@@ -698,23 +698,23 @@ public class APIController {
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("변경할 정보를 확인할 수 없습니다");
         resultVO.setResult_code("ERROR_1000");
-
         if(changePwVO.getCurPw()!=null &&
                 changePwVO.getModPW()!=null &&
                 changePwVO.getModPwCf()!=null){
 
             AdminVO adminVo = adminService.findAdminById(principal.getName());
-
+            System.out.println(adminVo);
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
            // String hashedPassword = passwordEncoder.encode(changePwVO.getCurPw());
             // 인코딩된 비밀번호와 일반 비밀번호를 대조합니다
             if(passwordEncoder.matches(changePwVO.getCurPw(),adminVo.getAdmin_pw())){
                 try{
-
+                    System.out.println("pass");
                     String updatePassword = passwordEncoder.encode(changePwVO.getModPW());
                     changePwVO.setModPW(updatePassword);
                     changePwVO.setAdmin_id(adminVo.getAdmin_id());
                     adminService.updateAdminPassword(changePwVO);
+
                     resultVO.setResult_str("비밀번호변경에 성공하였습니다.");
                     resultVO.setResult_code("SUCCESS");
                 }catch (Exception e){
@@ -731,6 +731,53 @@ public class APIController {
             resultVO.setResult_str("필요한 항목이 모두 채워지지 않았습니다.");
             resultVO.setResult_code("ERROR_1000");
         }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/admin_pw_initialization",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO admin_pw_initialization(HttpSession session, Principal principal,
+                             @RequestBody long adminIdx){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("비밀번호 변경에 실패했습니다.");
+        resultVO.setResult_code("ERROR_1000");
+
+        String newPw = "";
+        for(int i = 0; newPw.length() < 6; i++){
+            double dRd = Math.random();
+            if(Math.random() % 2 == 1){
+                char randomWord = (char)((dRd * 26) + 97);
+                newPw = newPw + randomWord;
+            } else {
+                newPw = newPw + (int)(dRd * 10);
+            }
+        }
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(newPw);
+        try{
+            AdminVO adminVO = adminService.modifyPw(adminIdx, hashedPassword);
+            System.out.println("1");
+            System.out.println(adminVO);
+            MimeMessage mail = mailSender.createMimeMessage();
+            System.out.println("2");
+            MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+            System.out.println("3");
+
+            mailHelper.setFrom("스마트팜 혁신벨리 실증단지 <fact@smartfarm.co.kr>"); // 보내는 사람 정보도 와야함
+            mailHelper.setTo(adminVO.getAdmin_id());
+            mailHelper.setSubject("스마트팜 혁신밸리 관리자 사이트 계정 안내");
+            mailHelper.setText("안녕하세요." + adminVO.getAdmin_name() + "님. 스마트팜 혁신밸리 관리자 사이트의 변경된 비밀번호는 " + newPw + " 입니다.");
+            mailSender.send(mail);
+
+            System.out.println("전송 완료");
+            resultVO.setResult_str("비밀번호 변경에 성공하였습니다. \n변경된 비밀번호는 해당 아이디 이메일로 전송되었습니다.");
+            resultVO.setResult_code("SUCCESS");
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_str("비밀번호 변경에 실패했습니다.");
+            resultVO.setResult_code("ERROR002");
+        }
+
         return resultVO;
     }
 

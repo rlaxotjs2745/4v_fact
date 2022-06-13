@@ -181,50 +181,50 @@
 
                     <div class="form-row">
                         <div class="form-group col col-md-12">
-                            <table id="" class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info" style="">
+                            <table class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info" style="">
                                 <tbody>
                                 <tr class="">
                                     <th class="text-center align-middle bg-light" rowspan="3" style="width:12%">개인정보</th>
                                     <th class="text-center bg-light" style="width:12%">이름</th>
-                                    <td class="text-center" style="width:27%" id="admin-detail-name">홍길동</td>
+                                    <td class="text-center" style="width:27%" id="admin_name_detail">홍길동</td>
                                     <th class="text-center bg-light" style="width:13%">일반전화번호</th>
-                                    <td class="text-center" style="width:26%" id="admin-detail-telnum">000-0000-0000</td>
+                                    <td class="text-center" style="width:26%" id="tel_num_detail">000-0000-0000</td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">휴대폰 번호</th>
-                                    <td class="text-center" id="admin-detail-mphonenum">000-0000-0000</td>
+                                    <td class="text-center" id="mphone_num_detail">000-0000-0000</td>
 <%--                                    <th class="text-center bg-light">이메일</th>--%>
 <%--                                    <td class="text-center" id="admin-detail-email">abc@aaaaaa.com</td>--%>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">주소</th>
-                                    <td class="" colspan="3" id="admin-detail-addr">제주도 서귀포시 XXXXXXX XXXXXXX</td>
+                                    <td class="" colspan="3" id="addr_main_detail">제주도 서귀포시 XXXXXXX XXXXXXX</td>
                                 </tr>
                                 <tr class="">
                                     <th class="text-center align-middle bg-light" rowspan="3">소속 정보</th>
                                     <th class="text-center bg-light">단체명</th>
-                                    <td class="text-center" id="admin-detail-corp">맛있는 농부(주)</td>
+                                    <td class="text-center" id="corporate_name_detail">맛있는 농부(주)</td>
 <%--                                    <th class="text-center bg-light">부서</th>--%>
 <%--                                    <td class="text-center" id="admin-detail-depart">디지털농업본부/XXX팀</td>--%>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">직위</th>
-                                    <td class="text-center" id="admin-detail-jobTitle">계장</td>
+                                    <td class="text-center" id="job_title_detail">계장</td>
                                     <th class="text-center bg-light">전화번호</th>
-                                    <td class="text-center" id="admin-detail-corpnum">000-0000-0000</td>
+                                    <td class="text-center" id="corporate_num_detail">000-0000-0000</td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">팩스</th>
-                                    <td class="text-center" id="admin-detail-fax">000-0000-0000</td>
+                                    <td class="text-center" id="corporate_fax_detail">000-0000-0000</td>
                                     <th class="text-center bg-light">홈페이지</th>
-                                    <td class="text-center" id="admin-detail-homepage">www.asdfasdfasdf.com</td>
+                                    <td class="text-center" id="corporate_homepage_detail">www.asdfasdfasdf.com</td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">센터 정보</th>
                                     <th class="text-center bg-light">담당 업무</th>
-                                    <td class="text-center" >XXXXXXXX</td>
+                                    <td class="text-center" id="main_part_detail" >XXXXXXXX</td>
                                     <th class="text-center bg-light">관리번호</th>
-                                    <td class="text-center"></td>
+                                    <td class="text-center" id="manage_num_detail"></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -233,15 +233,15 @@
                                 <tr>
                                     <th class="text-center align-middle bg-light" style="width:14%" rowspan="2">시스템 정보</th>
                                     <th class="text-center bg-light" style="width:13%">웹ID</th>
-                                    <td class="text-center" style="width:15%">dongdong</td>
+                                    <td class="text-center" style="width:15%" id="web_id_detail">dongdong</td>
                                     <th class="text-center bg-light" style="width:15%">비밀번호</th>
-                                    <td class="text-center" style="width:15%"><a href="#none" class="btn btn-sm btn-default">초기화</a></td>
+                                    <td class="text-center store-idx" style="width:15%"><a href="#none" class="btn btn-sm btn-default" id="initializtion_pw">초기화</a></td>
                                     <th class="text-center bg-light" style="width:15%">정보변경이력</th>
                                     <td class="text-center" style="width:13%"><a href="#none" class="btn btn-sm btn-default" data-toggle="popover" data-html="true"  data-placement="top" data-content="-YYYY.MM.DD. HH:MM 비밀번호 초기화 (변경자 이름) <br>-YYYY.MM.DD. HH:MM 전화번호 변경 (변경자 이름) <br> -YYYY.MM.DD. HH:MM 주소변경 (변경자 이름)" >이력보기</a></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">시스템권한</th>
-                                    <td class="" colspan="5">단지책임자</td>
+                                    <td class="" colspan="5" id="admin_type_detail">단지책임자</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -270,70 +270,87 @@
 
                     <div class="form-row">
                         <div class="form-group col col-md-12">
-                            <table id="" class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info" style="">
+                            <table class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info">
                                 <tbody>
                                 <tr class="">
                                     <th class="text-center align-middle bg-light" rowspan="3" style="width:12%">개인정보</th>
                                     <th class="text-center bg-light" style="width:12%">이름</th>
-                                    <td class="text-center" style="width:27%"><input type="text" class="form-control form-control-sm" value="홍길동"></td>
+                                    <td class="text-center" style="width:24%"><input type="text" class="form-control form-control-sm" value="" id="admin_name_modify" readonly></td>
                                     <th class="text-center bg-light" style="width:13%">일반전화번호</th>
-                                    <td class="text-center" style="width:26%"><input type="text" class="form-control form-control-sm" value="000-0000-0000"></td>
+                                    <td class="text-center" style="width:29%"><input type="text" class="form-control form-control-sm" value="" id="tel_num_modify"></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">휴대폰 번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="000-0000-0000"></td>
-<%--                                    <th class="text-center bg-light">이메일</th>--%>
-<%--                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="abc@aaaaaa.com"></td>--%>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="mphone_num_modify"></td>
+                                    <th class="text-center bg-light">관리 유형</th>
+                                    <td class="text-center">
+                                        <select id="admin_type_modify" class="form-control form-control-sm">
+                                            <option class="form-control form-control-sm" value="" disabled>유형 선택</option>
+                                            <option class="form-control form-control-sm" value="0">일반 관리자</option>
+                                            <option class="form-control form-control-sm" value="1">실증 책임자</option>
+                                            <option class="form-control form-control-sm" value="2">재배사</option>
+                                            <option class="form-control form-control-sm" value="4">관계 기관</option>
+                                            <option class="form-control form-control-sm" value="512">슈퍼 관리자</option>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">주소</th>
-                                    <td class=""><input type="text" class="form-control form-control-sm" value="제주도 서귀포시 XXXXXXX XXXXXXX"></td>
+                                    <td class="" colspan="3">
+                                        <%--                                            <input type="text" class="form-control form-control-sm" placeholder="주소">--%>
+                                        <%--                                            <input type="text" class="form-control form-control-sm" placeholder="상세 주소">--%>
+                                        <input type="text" id="addr_main_modify" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" placeholder="주소" style="width:calc(100% - 80px)">
+                                        <input type="text" id="addr_detail_modify" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" placeholder="상세주소" style="width:calc(100% - 80px)">
+                                        <a href="#none" id="addr_search_modify" class="btn btn-sm btn-default">주소 찾기</a>
+                                    </td>
+                                    <%--                                        <th class="text-center bg-light">상세 주소</th>--%>
+                                    <%--                                        <td class=""></td>--%>
                                 </tr>
                                 <tr class="">
                                     <th class="text-center align-middle bg-light" rowspan="3">소속 정보</th>
                                     <th class="text-center bg-light">단체명</th>
-                                    <td class=""><input type="text" class="form-control form-control-sm" value="맛있는 농부(주)"></td>
-                                    <th class="text-center bg-light">부서</th>
-                                    <td class=""><input type="text" class="form-control form-control-sm" value="디지털농업본부/XXXX팀"></td>
+                                    <td class="" colspan="3" >
+                                        <input type="text" id="corp_select_modify" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width:calc(100% - 80px)" readonly>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">직위</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="부장"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="job_title_modify"></td>
                                     <th class="text-center bg-light">전화번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="000-0000-0000"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_num_modify" value="" readonly></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">팩스</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="000-0000-0000"></td>
+                                    <td class="text-center"><input type="text"  class="form-control form-control-sm" id="corporate_fax_modify" value="" readonly></td>
                                     <th class="text-center bg-light">홈페이지</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="www.asdfasdfasdf.com"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_homepage_modify" value="" readonly></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">센터정보</th>
                                     <th class="text-center bg-light">담당업무</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="XXXXXXXX"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="main_part_modify"></td>
                                     <th class="text-center bg-light">관리번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="XXXXXXXX"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="manage_num_modify"></td>
                                 </tr>
                                 </tbody>
                             </table>
-                            <table id="" class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info" style="">
+                            <table class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info" style="">
                                 <tbody>
                                 <tr>
-                                    <th class="text-center align-middle bg-light"  style="width:14%" rowspan="2">시스템 정보</th>
-                                    <th class="text-center bg-light" style="width:13%">웹ID</th>
-                                    <td class="text-center" style="width:15%">dongdong</td>
-                                    <th class="text-center bg-light" style="width:15%">비밀번호</th>
-                                    <td class="text-center" style="width:15%"><a href="#none" class="btn btn-sm btn-default">초기화</a></td>
-                                    <th class="text-center bg-light" style="width:15%">정보변경이력</th>
-                                    <td class="text-center" style="width:13%"><a href="#none" class="btn btn-sm btn-default" data-toggle="popover" data-html="true"  data-placement="top" data-content="-YYYY.MM.DD. HH:MM 비밀번호 초기화 (변경자 이름) <br>-YYYY.MM.DD. HH:MM 전화번호 변경 (변경자 이름) <br> -YYYY.MM.DD. HH:MM 주소변경 (변경자 이름)" >이력보기</a></td>
+                                    <th class="text-center align-middle bg-light" style="width: 4.5%" rowspan="2">시스템 정보</th>
+                                    <th class="text-center bg-light" style="width: 4.5%; vertical-align: middle;" >웹ID</th>
+                                    <td class="" style="width: 25%" colspan="3">
+                                        <input type="text" id="web_id_modify" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width:calc(100% - 80px)" readonly>
+                                    </td>
+                                    <%--                                    <th class="text-center bg-light" style="width:13%">비밀번호</th>--%>
+                                    <%--                                    <td class="" colspan="2" style="width:34%"><small>등록한 이메일로 초기 비밀번호가 발송됩니다.</small></td>--%>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">시스템권한</th>
                                     <td class="" colspan="5">
-                                        <select name="" id="" class="custom-select custom-select-sm w-auto">
-                                            <option value="">C운영자</option>
-                                            <option value="">C마스터</option>
+                                        <select id="sign_in_type_modify" class="custom-select custom-select-sm w-auto">
+                                            <option value="1">C운영자</option>
+                                            <option value="0">C마스터</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -381,7 +398,6 @@
                                     <td class="text-center">
                                         <select id="admin_type" class="form-control form-control-sm">
                                             <option class="form-control form-control-sm" value="" disabled selected>유형 선택</option>
-<%--                                            어드민  형태	0:일반관리자, 1:실증책임자, 2:재배사, 4:관계기관, 512:슈퍼관리자--%>
                                             <option class="form-control form-control-sm" value="0">일반 관리자</option>
                                             <option class="form-control form-control-sm" value="1">실증 책임자</option>
                                             <option class="form-control form-control-sm" value="2">재배사</option>
@@ -558,8 +574,9 @@
             main_part: "${admin.main_part}",
             manage_num: "${admin.manage_num}",
             sign_in_type: "${admin.sign_in_type}",
+            admin_addr: "${admin.admin_addr}",
             page: "${admin.page}",
-            maxvalue: "${admin.maxvalue}",
+            maxvalue: "${admin.maxvalue}"
         })
     </c:forEach>
 
@@ -590,6 +607,15 @@
     </c:forEach>
 
     $("#addr_search, #addr_main").click(function() {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                $("#addr_main").val(data.roadAddress + " " + data.buildingName);
+                // console.log(data);
+            }
+        }).open();
+    })
+
+    $("#addr_main_modify, #addr_search_modify").click(function() {
         new daum.Postcode({
             oncomplete: function (data) {
                 $("#addr_main").val(data.roadAddress + " " + data.buildingName);
@@ -728,17 +754,66 @@
 
     })
 
-    // admin-corp-type
-    // admin-type">
-    // admin-corp">
-    // admin-depart">
-    // admin-jobTitle">
-    // admin-telnum">
-    // admin-mphonenum">
-    // admin-emailid">
+    $("#initializtion_pw").click(function(){
+        if(confirm("해당 아이디의 비밀번호를 초기화하시겠습니까?")){
+            var selectId = $(this).parent().attr('id');
+            console.log(typeof selectId);
+            $.ajax({
+                type: 'post',
+                url: 'admin_pw_initialization',
+                data: JSON.stringify(parseInt(selectId)),
+                contentType:"application/json; charset=utf-8;",
+                dataType:'json',
+                success: function(res){
+                    console.log(res);
+                    if(res.result_code == "SUCCESS"){
+                        alert("비밀번호가 초기화되었습니다. \n초기화된 비밀번호는 이메일로 전송되었습니다.");
+                    }
+                },
+                error:function(res){
+                    alert(res.result_str);
+                }
+            })
+        }
+    })
 
-    $(".admin-entity").click(() => {
-        console.log($(this).children(""));
+
+    $(".admin-entity").click(function(){
+        var selectId = $(this).attr('id');
+        for(var admin of adminList){
+            if(selectId == admin.idx_admin){
+                $(".store-idx").attr("id", selectId);
+                $("#admin_name_detail").text(admin.admin_name);
+                $("#tel_num_detail").text(admin.tel_num);
+                $("#mphone_num_detail").text(admin.mphone_num);
+                $("#addr_main_detail").text(admin.admin_addr);
+                $("#corporate_name_detail").text(admin.corporate_name);
+                $("#job_title_detail").text(admin.job_title);
+                $("#corporate_num_detail").text(admin.corporate_num);
+                $("#corporate_fax_detail").text(admin.corporate_fax);
+                $("#corporate_homepage_detail").text(admin.corporate_homepage);
+                $("#main_part_detail").text(admin.main_part);
+                $("#manage_num_detail").text(admin.manage_num);
+                $("#web_id_detail").text(admin.admin_id);
+                $("#admin_type_detail").text(admin.admin_type == "512" ? "슈퍼관리자" : admin.admin_type == "1" ? "실증책임자" : admin.admin_type == "2" ? "재배사" : admin.admin_type == "4" ? "관계기관" : "일반관리자");
+
+                $("#admin_name_modify").val(admin.admin_name);
+                $("#tel_num_modify").val(admin.tel_num);
+                $("#mphone_num_modify").val(admin.mphone_num);
+                $("#admin_type_modify").val(admin.admin_type);
+                $("#addr_main_modify").val(admin.admin_addr);
+                $("#corp_select_modify").val(admin.corporate_name);
+                $("#job_title_modify").val(admin.job_title);
+                $("#corporate_num_modify").val(admin.corporate_num);
+                $("#corporate_fax_modify").val(admin.corporate_fax);
+                $("#corporate_homepage_modify").val(admin.corporate_homepage);
+                $("#main_part_modify").val(admin.main_part);
+                $("#manage_num_modify").val(admin.manage_num);
+                $("#web_id_modify").val(admin.admin_id);
+                $("#sign_in_type_modify").val(admin.sign_in_type);
+                break;
+            }
+        }
     })
 </script>
 <!-- / Layout footer -->
