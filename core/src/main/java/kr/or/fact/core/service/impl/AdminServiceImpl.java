@@ -165,9 +165,9 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<AdminResVO> selectAdminbyIdx(String tagValue) {
+    public List<AdminResVO> selectAdminbyIdx(String tagValue, int corporate) {
         int page = Integer.parseInt(tagValue);
-        return adminMapper.selectAdminbyIdx(page, 10);
+        return adminMapper.selectAdminbyIdx(page, 10, corporate);
     }
 
     @Override

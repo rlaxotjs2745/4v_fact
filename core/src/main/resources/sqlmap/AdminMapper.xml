@@ -164,7 +164,11 @@ UPDATE TB_ADMIN SET ADMIN_PW = #{admin_pw} WHERE IDX_ADMIN = #{idx_admin}
                               SELECT MAX(FLOOR((ROWNUM - 1)/#{count} + 1)) FROM TB_ADMIN
                               WHERE IDX_ADMIN >= 1) MAXVALUE FROM (
                                                                                       SELECT TB_ADMIN.* FROM TB_ADMIN
-                                                                                      WHERE IDX_ADMIN >= 1 ORDER BY IDX_ADMIN ASC
+                                                                                      WHERE IDX_ADMIN >= 1
+                                                                                      <if test="corporate != '100'">
+                                                                                          AND CORPORATE = #{corporate}
+                                                                                      </if>
+                                                                                      ORDER BY IDX_ADMIN ASC
                                                                                   )
                                                                                       A)
         WHERE PAGE = #{pageNum}

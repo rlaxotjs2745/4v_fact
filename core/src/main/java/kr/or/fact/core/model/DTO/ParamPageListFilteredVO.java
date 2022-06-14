@@ -9,6 +9,7 @@ public class ParamPageListFilteredVO {
     int filter2;
     long idx;
     int amount;
+    int corp;
     String order_field;
 
 }

@@ -951,7 +951,7 @@ public class IndexController {
         resultArray = corpService.selectCorpInfo();
 
         int pageBool = 4;
-        List<AdminResVO> adminVOList = adminService.selectAdminbyIdx(param.getPage_num() != 0 ? param.getPage_num() + "" : "1");
+        List<AdminResVO> adminVOList = adminService.selectAdminbyIdx(param.getPage_num() != 0 ? param.getPage_num() + "" : "1", 100);
         if(adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage() < 4){
             pageBool = adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage();
         }
@@ -961,6 +961,26 @@ public class IndexController {
         model.addAttribute("adminCount", adminService.selectCount());
 
         return "i21_admin_mng";
+    }
+
+    @RequestMapping(value = "/admin_corporate" ,method = RequestMethod.POST)
+    public String admin_corporate(@RequestParam(value = "page_num", required = false) String tagValue,
+                                @RequestBody ParamPageListFilteredVO param,
+                                ModelMap model){
+        ArrayList<CorpInfoVO> resultArray;
+        resultArray = corpService.selectCorpInfo();
+
+        int pageBool = 4;
+        List<AdminResVO> adminVOList = adminService.selectAdminbyIdx(param.getPage_num() != 0 ? param.getPage_num() + "" : "1", param.getCorp());
+        if(adminVOList.size() != 0 && adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage() < 4){
+            pageBool = adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage();
+        }
+        model.addAttribute("pageBool", pageBool);
+        model.addAttribute("adminList", adminVOList);
+        model.addAttribute("corps", resultArray);
+        model.addAttribute("adminCount", adminService.selectCount());
+
+        return "admin_index";
     }
     /*
     //시스템 코드 관리
