@@ -957,7 +957,11 @@ public class IndexController {
         model.addAttribute("pageBool", pageBool);
         model.addAttribute("adminList", adminVOList);
         model.addAttribute("corps", resultArray);
-        model.addAttribute("adminCount", adminService.selectCount());
+        model.addAttribute("adminCount", adminService.selectCount(100));
+        model.addAttribute("otherAdminCount", adminService.selectCount(99));
+        model.addAttribute("mngAdminCount", adminService.selectCount(0));
+        model.addAttribute("centerAdminCount", adminService.selectCount(1));
+        model.addAttribute("localAdminCount", adminService.selectCount(2));
 
         return "i21_admin_mng";
     }
@@ -979,7 +983,7 @@ public class IndexController {
         model.addAttribute("corpCategory", param.getCorp());
         model.addAttribute("adminList", adminVOList);
         model.addAttribute("corps", resultArray);
-        model.addAttribute("adminCount", adminService.selectCount());
+        model.addAttribute("adminCount", adminService.selectCount(param.getCorp()));
 
         return "admin_index";
     }

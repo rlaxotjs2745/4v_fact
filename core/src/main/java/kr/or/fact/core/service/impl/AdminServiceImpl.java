@@ -3,6 +3,7 @@ package kr.or.fact.core.service.impl;
 import kr.or.fact.core.model.AdminMapper;
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.AdminService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.mail.javamail.JavaMailSender;
@@ -171,8 +172,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public int selectCount(){
-        return adminMapper.selectCount();
+    public int selectCount(int corporate){
+        return adminMapper.selectCount(corporate);
     }
 
     @Override

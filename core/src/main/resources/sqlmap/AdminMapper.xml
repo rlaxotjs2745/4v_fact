@@ -162,7 +162,11 @@ UPDATE TB_ADMIN SET ADMIN_PW = #{admin_pw} WHERE IDX_ADMIN = #{idx_admin}
         SELECT * FROM (
                           SELECT A.*, FLOOR((ROWNUM - 1)/#{count} + 1) PAGE, (
                               SELECT MAX(FLOOR((ROWNUM - 1)/#{count} + 1)) FROM TB_ADMIN
-                              WHERE IDX_ADMIN >= 1) MAXVALUE FROM (
+                              WHERE IDX_ADMIN >= 1
+                              <if test="corporate != '100'">
+                                 AND CORPORATE = #{corporate}
+                              </if>
+                              ) MAXVALUE FROM (
                                                                                       SELECT TB_ADMIN.* FROM TB_ADMIN
                                                                                       WHERE IDX_ADMIN >= 1
                                                                                       <if test="corporate != '100'">
@@ -176,6 +180,9 @@ UPDATE TB_ADMIN SET ADMIN_PW = #{admin_pw} WHERE IDX_ADMIN = #{idx_admin}
 
     <select id="selectCount" resultType="int">
         SELECT COUNT(*) as count from TB_ADMIN
+        <if test="corporate != '100'">
+            WHERE CORPORATE = #{corporate}
+        </if>
     </select>
 
     <update id="modifyPw">

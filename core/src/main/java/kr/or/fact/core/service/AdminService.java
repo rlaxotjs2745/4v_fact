@@ -28,7 +28,7 @@ public interface AdminService extends UserDetailsService {
     Boolean adminIdCheck(String adminId);
 
     List<AdminResVO> selectAdminbyIdx(String tagValue, int corporate);
-    int selectCount();
+    int selectCount(int corporate);
     AdminVO modifyPw(long adminIdx, String hashedPassword);
     long adminModify(AdminVO adminVO);
 }

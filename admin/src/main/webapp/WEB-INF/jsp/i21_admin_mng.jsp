@@ -11,8 +11,8 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <div class="text-muted small mt-2">관리 직원수</div>
-                        <div class="text-large">${adminCount}</div>
+                        <div class="text-muted small mt-2">재단소속</div>
+                        <div class="text-large">${mngAdminCount}</div>
                     </div>
                 </div>
             </div>
@@ -21,8 +21,8 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <div class="text-muted small mt-2">재단소속</div>
-                        <div class="text-large">2590</div>
+                        <div class="text-muted small mt-2">센터소속</div>
+                        <div class="text-large">${centerAdminCount}</div>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="text-muted small mt-2">지자체</div>
-                        <div class="text-large">000</div>
+                        <div class="text-large">${localAdminCount}</div>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="text-muted small mt-2">기타 유관기관</div>
-                        <div class="text-large">000</div>
+                        <div class="text-large">${otherAdminCount}</div>
                     </div>
                 </div>
             </div>
@@ -76,10 +76,7 @@
                     </label>
                 </div>
             </div>
-            <div class="col-lg-2 col-md-6 text-right">
-                <label class="form-label d-none d-md-block">&nbsp;</label>
-                <button type="button" class="btn btn-success" id="admin-classify">조회</button>
-            </div>
+
         </div>
     </div>
 
