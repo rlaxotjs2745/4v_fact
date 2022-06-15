@@ -974,8 +974,9 @@ public class IndexController {
         if(adminVOList.size() != 0 && adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage() < 4){
             pageBool = adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage();
         }
-        adminVOList.sort(Comparator.comparing(AdminResVO::getAdmin_name).thenComparing(AdminResVO::getAdmin_name));
+//        adminVOList.sort(Comparator.comparing(AdminResVO::getAdmin_name).thenComparing(AdminResVO::getAdmin_name));
         model.addAttribute("pageBool", pageBool);
+        model.addAttribute("corpCategory", param.getCorp());
         model.addAttribute("adminList", adminVOList);
         model.addAttribute("corps", resultArray);
         model.addAttribute("adminCount", adminService.selectCount());

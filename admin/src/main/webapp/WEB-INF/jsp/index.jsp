@@ -82,6 +82,9 @@
 
             </div>
             <!-- Layout content -->
+            <div id="loading_symbol">
+                <img src="resources/assets/image/g_loading.gif">
+            </div>
 
         </div>
         <!-- / Layout container -->
@@ -239,6 +242,13 @@
 
 
 </script>
+<style>
+    #loading_symbol{
+        display: block;
+        position: absolute;
+        text-align: center;
+    }
+</style>
 </body>
 
 </html>

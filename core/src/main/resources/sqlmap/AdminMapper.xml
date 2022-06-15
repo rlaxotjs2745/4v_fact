@@ -168,7 +168,7 @@ UPDATE TB_ADMIN SET ADMIN_PW = #{admin_pw} WHERE IDX_ADMIN = #{idx_admin}
                                                                                       <if test="corporate != '100'">
                                                                                           AND CORPORATE = #{corporate}
                                                                                       </if>
-                                                                                      ORDER BY IDX_ADMIN ASC
+                                                                                        ORDER BY CONVERT(ADMIN_NAME,'UTFE') ASC
                                                                                   )
                                                                                       A)
         WHERE PAGE = #{pageNum}

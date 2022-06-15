@@ -359,13 +359,13 @@
                                     <th class="text-center bg-light">직위</th>
                                     <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="job_title"></td>
                                     <th class="text-center bg-light">전화번호</th>
-                                    <td class="text-center"><input type="text" id="corp_telnum" class="form-control form-control-sm" id="corporate_num" value=""></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_num" value=""></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">팩스</th>
-                                    <td class="text-center"><input type="text" id="corp_fax" class="form-control form-control-sm" id="corporate_fax" value=""></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_fax" value=""></td>
                                     <th class="text-center bg-light">홈페이지</th>
-                                    <td class="text-center"><input type="text" id="corp_homepage" class="form-control form-control-sm" id="corporate_homepage" value=""></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_homepage" value=""></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">센터정보</th>
@@ -509,15 +509,15 @@
     </c:forEach>
 
 
-    if(adminList[0].maxvalue <= 10){
-        $("#page1-button, #page2-button, #page3-button, #page4-button").css("display", "none");
-    } else if(adminList[0].maxvalue <= 20){
-        $("#page1-button, #page2-button, #page3-button").css("display", "none");
-    } else if(adminList[0].maxvalue <= 30){
-        $("#page1-button, #page2-button").css("display", "none");
-    } else if(adminList[0].maxvalue <= 40){
-        $("#page1-button").css("display", "none");
-    }
+    // if(adminList[0].maxvalue <= 10){
+    //     $("#page1-button, #page2-button, #page3-button, #page4-button").css("display", "none");
+    // } else if(adminList[0].maxvalue <= 20){
+    //     $("#page1-button, #page2-button, #page3-button").css("display", "none");
+    // } else if(adminList[0].maxvalue <= 30){
+    //     $("#page1-button, #page2-button").css("display", "none");
+    // } else if(adminList[0].maxvalue <= 40){
+    //     $("#page1-button").css("display", "none");
+    // }
 
 
 
@@ -557,9 +557,9 @@
         for(var corp of modelArr){
             if(corp.idx_corp_info == $("#corp_select").val()){
                 corpName = corp.corp_name_kor;
-                $("#corp_telnum").val(corp.tel_num);
-                $("#corp_homepage").val(corp.homepage);
-                $("#corp_fax").val(corp.fax_num);
+                $("#corporate_num").val(corp.tel_num);
+                $("#corporate_homepage").val(corp.homepage);
+                $("#corporate_fax").val(corp.fax_num);
             }
         }
     })
@@ -624,6 +624,8 @@
             alert("회원가입에 필요한 데이터가 모두 입력되지 않았습니다.");
             return;
         }
+        console.log($("#corporate_num").val());
+        console.log($("#corporate_fax").val());
 
         var param = {
             admin_id: $("#web_id").val() + "@" + $("#web_id2").val(),
@@ -704,45 +706,6 @@
         }
     })
 
-
-    $(".admin-entity").click(function(){
-        var selectId = $(this).attr('id');
-        curUser = selectId;
-        for(var admin of adminList){
-            if(selectId == admin.idx_admin){
-                $(".store-idx").attr("id", selectId);
-                $("#admin_name_detail").text(admin.admin_name);
-                $("#tel_num_detail").text(admin.tel_num);
-                $("#mphone_num_detail").text(admin.mphone_num);
-                $("#addr_main_detail").text(admin.admin_addr);
-                $("#corporate_name_detail").text(admin.corporate_name);
-                $("#job_title_detail").text(admin.job_title);
-                $("#corporate_num_detail").text(admin.corporate_num);
-                $("#corporate_fax_detail").text(admin.corporate_fax);
-                $("#corporate_homepage_detail").text(admin.corporate_homepage);
-                $("#main_part_detail").text(admin.main_part);
-                $("#manage_num_detail").text(admin.manage_num);
-                $("#web_id_detail").text(admin.admin_id);
-                $("#admin_type_detail").text(admin.admin_type == "512" ? "슈퍼관리자" : admin.admin_type == "1" ? "실증책임자" : admin.admin_type == "2" ? "재배사" : admin.admin_type == "4" ? "관계기관" : "일반관리자");
-
-                $("#admin_name_modify").val(admin.admin_name);
-                $("#tel_num_modify").val(admin.tel_num);
-                $("#mphone_num_modify").val(admin.mphone_num);
-                $("#admin_type_modify").val(admin.admin_type);
-                $("#addr_main_modify").val(admin.admin_addr);
-                $("#corp_select_modify").val(admin.corporate_name);
-                $("#job_title_modify").val(admin.job_title);
-                $("#corporate_num_modify").val(admin.corporate_num);
-                $("#corporate_fax_modify").val(admin.corporate_fax);
-                $("#corporate_homepage_modify").val(admin.corporate_homepage);
-                $("#main_part_modify").val(admin.main_part);
-                $("#manage_num_modify").val(admin.manage_num);
-                $("#web_id_modify").val(admin.admin_id);
-                $("#sign_in_type_modify").val(admin.sign_in_type);
-                break;
-            }
-        }
-    })
 
     $("#btn-admin-modify").click(function(){
         var param = {
