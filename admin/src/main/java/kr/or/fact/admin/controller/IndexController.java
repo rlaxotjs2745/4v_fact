@@ -19,9 +19,8 @@ import java.net.URL;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class IndexController {
@@ -975,6 +974,7 @@ public class IndexController {
         if(adminVOList.size() != 0 && adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage() < 4){
             pageBool = adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage();
         }
+        adminVOList.sort(Comparator.comparing(AdminResVO::getAdmin_name).thenComparing(AdminResVO::getAdmin_name));
         model.addAttribute("pageBool", pageBool);
         model.addAttribute("adminList", adminVOList);
         model.addAttribute("corps", resultArray);
