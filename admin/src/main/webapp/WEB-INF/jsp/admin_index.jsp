@@ -68,13 +68,13 @@
             <div class="col-sm-12 col-md-7">
                 <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                     <ul class="pagination">
-                        <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="javascript:pageLoad('i21_admin_mng',{page_num:1},'대시보드');"aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
+                        <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="javascript:pageLoad('ㅁ으ㅑㅜ',{page_num:1},'대시보드');"aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
                         <li class="paginate_button page-item previous disabled" id="article-list_previous-one"><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 5}'},'대시보드');"aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li>
-                        <li class="paginate_button page-item " id="page1-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool - 4}'},'대시보드');" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">${adminList[0].page + pageBool - 4}</a></li>
-                        <li class="paginate_button page-item " id="page2-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool - 3}'},'대시보드');" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">${adminList[0].page + pageBool - 3}</a></li>
-                        <li class="paginate_button page-item " id="page3-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool - 2}'},'대시보드');" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">${adminList[0].page + pageBool - 2}</a></li>
-                        <li class="paginate_button page-item " id="page4-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool - 1}'},'대시보드');" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">${adminList[0].page + pageBool - 1}</a></li>
-                        <li class="paginate_button page-item " id="page5-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool}'},'대시보드');" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">${adminList[0].page + pageBool}</a></li>
+<%--                        <li class="paginate_button page-item " id="page1-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool - 4}'},'대시보드');" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">${adminList[0].page + pageBool - 4}</a></li>--%>
+<%--                        <li class="paginate_button page-item " id="page2-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool - 3}'},'대시보드');" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">${adminList[0].page + pageBool - 3}</a></li>--%>
+<%--                        <li class="paginate_button page-item " id="page3-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool - 2}'},'대시보드');" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">${adminList[0].page + pageBool - 2}</a></li>--%>
+<%--                        <li class="paginate_button page-item " id="page4-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool - 1}'},'대시보드');" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">${adminList[0].page + pageBool - 1}</a></li>--%>
+<%--                        <li class="paginate_button page-item " id="page5-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool}'},'대시보드');" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">${adminList[0].page + pageBool}</a></li>--%>
                         <li class="paginate_button page-item next" id="article-list_next-one"><a href="javascript:pageLoad('i21_admin_mng',{page_num: '${adminList[0].page + pageBool - 3}'},'대시보드');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li>
                         <li class="paginate_button page-item next" id="article-list_next"><a href="javascript:pageLoad('i21_admin_mng',{page_num: '${adminList[0].maxvalue}'},'대시보드');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
                     </ul>
@@ -131,7 +131,7 @@
         maxvalue: "${admin.maxvalue}"
     })
     </c:forEach>
-
+    console.log(adminList.length + )
 
     if(adminList.length > 0 || adminList[0].maxvalue <= 10){
         $("#page1-button, #page2-button, #page3-button, #page4-button").css("display", "none");

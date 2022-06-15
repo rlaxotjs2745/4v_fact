@@ -821,6 +821,7 @@
     $('input[name="corporate"]').change(function(){
         var corpClass = $('input[name="corporate"]:checked').val();
         pageLoad("admin_corporate", {page_num: 1, corp: parseInt(corpClass)}, "어드민 보드", true);
+        console.log(adminList.length + "  admin_mng")
     })
 
 
