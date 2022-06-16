@@ -17,6 +17,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.Date;
+import java.util.List;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -168,6 +169,17 @@ public class UserServiceImpl implements UserService {
         TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
         this.sqlsession.update("kr.or.fact.core.model.UserMapper.updateUserInfo",userVO);
         dataSourceTransactionManager.commit(status);
+    }
+
+    @Override
+    public int getActiveUserTotalCount(){//비 휴면회원 모두
+        return  userMapper.getActiveUserTotalCount();
+    }
+
+    @Override
+    public List<UserVO> getActiveUserList(ParamPageListFilteredVO paramPageListFilteredVO){
+        paramPageListFilteredVO.setFilter1(0);//0: user type=일반, 탈퇴, 임의 탈퇴
+        return userMapper.getUserPagingList(paramPageListFilteredVO);
     }
 
 }

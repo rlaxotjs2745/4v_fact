@@ -1,6 +1,9 @@
 package kr.or.fact.core.service;
 
 import kr.or.fact.core.model.DTO.*;
+import kr.or.fact.core.model.UserMapper;
+
+import java.util.List;
 
 public interface UserService {
 
@@ -27,7 +30,9 @@ public interface UserService {
 
     void updateUserInfo(UserVO userVO);
 
+    int getActiveUserTotalCount();//비 휴면회원 모두
 
+    List<UserVO> getActiveUserList(ParamPageListFilteredVO paramPageListFilteredVO);
 
 
 
