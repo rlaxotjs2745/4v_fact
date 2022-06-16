@@ -11,8 +11,8 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <div class="text-muted small mt-2">관리 직원수</div>
-                        <div class="text-large">${adminCount}</div>
+                        <div class="text-muted small mt-2">재단소속</div>
+                        <div class="text-large">${mngAdminCount}</div>
                     </div>
                 </div>
             </div>
@@ -21,8 +21,8 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <div class="text-muted small mt-2">재단소속</div>
-                        <div class="text-large">2590</div>
+                        <div class="text-muted small mt-2">센터소속</div>
+                        <div class="text-large">${centerAdminCount}</div>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="text-muted small mt-2">지자체</div>
-                        <div class="text-large">000</div>
+                        <div class="text-large">${localAdminCount}</div>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="text-muted small mt-2">기타 유관기관</div>
-                        <div class="text-large">000</div>
+                        <div class="text-large">${otherAdminCount}</div>
                     </div>
                 </div>
             </div>
@@ -55,113 +55,35 @@
                 <label class="form-label text-muted">직원 분류</label>
                 <div class="form-inline mt-2">
                     <label class="custom-control custom-checkbox mr-2">
-                        <input type="checkbox" class="custom-control-input">
+                        <input type="radio" name="corporate" class="custom-control-input" value="100" checked>
                         <span class="custom-control-label">전체</span>
                     </label>
                     <label class="custom-control custom-checkbox mr-2">
-                        <input type="checkbox" class="custom-control-input">
+                        <input type="radio" name="corporate" class="custom-control-input" value="0">
                         <span class="custom-control-label">재단 소속</span>
                     </label>
                     <label class="custom-control custom-checkbox mr-2">
-                        <input type="checkbox" class="custom-control-input">
+                        <input type="radio" name="corporate" class="custom-control-input" value="1">
                         <span class="custom-control-label">센터 소속</span>
                     </label>
                     <label class="custom-control custom-checkbox mr-2">
-                        <input type="checkbox" class="custom-control-input">
+                        <input type="radio" name="corporate" class="custom-control-input" value="2">
                         <span class="custom-control-label">지자체 소속</span>
                     </label>
                     <label class="custom-control custom-checkbox mr-2">
-                        <input type="checkbox" class="custom-control-input">
+                        <input type="radio" name="corporate" class="custom-control-input" value="99">
                         <span class="custom-control-label">기타</span>
                     </label>
                 </div>
             </div>
-            <div class="col-lg-2 col-md-6 text-right">
-                <label class="form-label d-none d-md-block">&nbsp;</label>
-                <button type="button" class="btn btn-success">조회</button>
-            </div>
+
         </div>
     </div>
 
     <hr>
 
-    <div class="card">
-        <h6 class="card-header with-elements">
-            <div class="card-header-title">직원 명단</div>
-            <div class="card-header-elements ml-auto">
-                <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#modal-staff-write">+ 등록</button>
-                <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#modal-staff-upload">+ 일괄등록</button>
-            </div>
-        </h6>
+    <div class="card" id="admin_index">
 
-        <div class="card-datatable table-responsive py-2">
-            <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <label class="mr-3">총 : <strong>${adminCount}</strong>명</label>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div id="" class="dataTables_filter"><label>찾기:<input type="search" class="form-control form-control-sm" placeholder="소속, 이름, 전화번호" aria-controls="article-list"></label></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
-                            <thead>
-                            <tr role="row">
-                                <th class="text-center px-2" style="width:40px">No</th>
-                                <th class="text-center px-2" style="width:80px">직원명</th>
-                                <th class="text-center px-2" style="width:80px">구분</th>
-                                <th class="text-center px-2" style="width:80px">시스템 권한</th>
-                                <th class="text-center px-2" style="width:150px">소속</th>
-                                <th class="text-center px-2" style="width:70px">부서</th>
-                                <th class="text-center px-2" style="width:70px">직급</th>
-                                <th class="text-center px-2" style="width:130px">사무실 전화번호</th>
-                                <th class="text-center px-2" style="width:130px">휴대폰 번호</th>
-                                <th class="text-center px-2" style="width:150px">이메일</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${adminList}" var="admin" varStatus="status">
-                                <tr class="">
-                                    <td class="text-center">${admin.page * 10 - 10 + status.count}</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modals-staff-view">${admin.admin_name}</a></td>
-                                    <td class="text-center">${admin.corporate eq 0 ? "진흥원" : admin.corporate eq 1 ? "센터" : admin.corporate eq 2 ? "지자체" : "기타"}</td>
-                                    <td class="text-center">${admin.sign_in_type eq 1 ? "SA" : "BM"}</td>
-                                    <td class="text-center">${admin.corporate_name}</td>
-                                    <td class="text-center">${admin.department != null ? admin.department : "-"}</td>
-                                    <td class="text-center">${admin.job_title}</td>
-                                    <td class="text-center">${admin.tel_num}</td>
-                                    <td class="text-center">${admin.mphone_num}</td>
-                                    <td class="text-center">${admin.admin_id}</td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="" role="status" aria-live="polite">Showing ${adminList[0].page * 10 - 9} to ${adminList[0].page * 10 > adminCount ? adminCount : adminList[0].page * 10} of ${adminList[0].maxvalue} entries</div>
-                    </div>
-                    <div class="col-sm-12 col-md-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="javascript:pageLoad('i21_admin_mng',{page_num:1},'대시보드');"aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                                <li class="paginate_button page-item previous disabled" id="article-list_previous-one"><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 5}'},'대시보드');"aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li>
-                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 4}'},'대시보드');" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">${adminList[0].page + pageBool - 4}</a></li>
-                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 3}'},'대시보드');" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">${adminList[0].page + pageBool - 3}</a></li>
-                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 2}'},'대시보드');" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">${adminList[0].page + pageBool - 2}</a></li>
-                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool - 1}'},'대시보드');" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">${adminList[0].page + pageBool - 1}</a></li>
-                                <li class="paginate_button page-item "><a href="javascript:pageLoad('i21_admin_mng',{page_num:'${adminList[0].page + pageBool}'},'대시보드');" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">${adminList[0].page + pageBool}</a></li>
-                                <li class="paginate_button page-item next" id="article-list_next-one"><a href="javascript:pageLoad('i21_admin_mng',{page_num: '${adminList[0].page + pageBool - 3}'},'대시보드');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li>
-                                <li class="paginate_button page-item next" id="article-list_next"><a href="javascript:pageLoad('i21_admin_mng',{page_num: '${adminList[0].maxvalue}'},'대시보드');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <div class="d-flex justify-content-end align-items-end demo-inline-spacing w-100 mt-3">
@@ -181,67 +103,67 @@
 
                     <div class="form-row">
                         <div class="form-group col col-md-12">
-                            <table id="" class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info" style="">
+                            <table class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info" style="">
                                 <tbody>
                                 <tr class="">
                                     <th class="text-center align-middle bg-light" rowspan="3" style="width:12%">개인정보</th>
                                     <th class="text-center bg-light" style="width:12%">이름</th>
-                                    <td class="text-center" style="width:27%">홍길동</td>
+                                    <td class="text-center" style="width:27%" id="admin_name_detail">홍길동</td>
                                     <th class="text-center bg-light" style="width:13%">일반전화번호</th>
-                                    <td class="text-center" style="width:26%">000-0000-0000</td>
+                                    <td class="text-center" style="width:26%" id="tel_num_detail">000-0000-0000</td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">휴대폰 번호</th>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <th class="text-center bg-light">이메일</th>
-                                    <td class="text-center">abc@aaaaaa.com</td>
+                                    <td class="text-center" id="mphone_num_detail">000-0000-0000</td>
+<%--                                    <th class="text-center bg-light">이메일</th>--%>
+<%--                                    <td class="text-center" id="admin-detail-email">abc@aaaaaa.com</td>--%>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">주소</th>
-                                    <td class="" colspan="3">제주도 서귀포시 XXXXXXX XXXXXXX</td>
+                                    <td class="" colspan="3" id="addr_main_detail">제주도 서귀포시 XXXXXXX XXXXXXX</td>
                                 </tr>
                                 <tr class="">
                                     <th class="text-center align-middle bg-light" rowspan="3">소속 정보</th>
                                     <th class="text-center bg-light">단체명</th>
-                                    <td class="text-center">맛있는 농부(주)</td>
-                                    <th class="text-center bg-light">부서</th>
-                                    <td class="text-center">디지털농업본부/XXX팀</td>
+                                    <td class="text-center" id="corporate_name_detail">맛있는 농부(주)</td>
+<%--                                    <th class="text-center bg-light">부서</th>--%>
+<%--                                    <td class="text-center" id="admin-detail-depart">디지털농업본부/XXX팀</td>--%>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">직위</th>
-                                    <td class="text-center">계장</td>
+                                    <td class="text-center" id="job_title_detail">계장</td>
                                     <th class="text-center bg-light">전화번호</th>
-                                    <td class="text-center">000-0000-0000</td>
+                                    <td class="text-center" id="corporate_num_detail">000-0000-0000</td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">팩스</th>
-                                    <td class="text-center">000-0000-0000</td>
+                                    <td class="text-center" id="corporate_fax_detail">000-0000-0000</td>
                                     <th class="text-center bg-light">홈페이지</th>
-                                    <td class="text-center">www.asdfasdfasdf.com</td>
+                                    <td class="text-center" id="corporate_homepage_detail">www.asdfasdfasdf.com</td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">센터 정보</th>
                                     <th class="text-center bg-light">담당 업무</th>
-                                    <td class="text-center">XXXXXXXX</td>
+                                    <td class="text-center" id="main_part_detail" >XXXXXXXX</td>
                                     <th class="text-center bg-light">관리번호</th>
-                                    <td class="text-center"></td>
+                                    <td class="text-center" id="manage_num_detail"></td>
                                 </tr>
                                 </tbody>
                             </table>
-                            <table id="" class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info" style="">
+                            <table class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info">
                                 <tbody>
                                 <tr>
                                     <th class="text-center align-middle bg-light" style="width:14%" rowspan="2">시스템 정보</th>
                                     <th class="text-center bg-light" style="width:13%">웹ID</th>
-                                    <td class="text-center" style="width:15%">dongdong</td>
+                                    <td class="text-center" style="width:15%" id="web_id_detail">dongdong</td>
                                     <th class="text-center bg-light" style="width:15%">비밀번호</th>
-                                    <td class="text-center" style="width:15%"><a href="#none" class="btn btn-sm btn-default">초기화</a></td>
+                                    <td class="text-center store-idx" style="width:15%"><a href="#none" class="btn btn-sm btn-default" id="initializtion_pw">초기화</a></td>
                                     <th class="text-center bg-light" style="width:15%">정보변경이력</th>
                                     <td class="text-center" style="width:13%"><a href="#none" class="btn btn-sm btn-default" data-toggle="popover" data-html="true"  data-placement="top" data-content="-YYYY.MM.DD. HH:MM 비밀번호 초기화 (변경자 이름) <br>-YYYY.MM.DD. HH:MM 전화번호 변경 (변경자 이름) <br> -YYYY.MM.DD. HH:MM 주소변경 (변경자 이름)" >이력보기</a></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">시스템권한</th>
-                                    <td class="" colspan="5">단지책임자</td>
+                                    <td class="" colspan="4" id="admin_type_detail">단지책임자</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -270,70 +192,87 @@
 
                     <div class="form-row">
                         <div class="form-group col col-md-12">
-                            <table id="" class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info" style="">
+                            <table class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info">
                                 <tbody>
                                 <tr class="">
                                     <th class="text-center align-middle bg-light" rowspan="3" style="width:12%">개인정보</th>
                                     <th class="text-center bg-light" style="width:12%">이름</th>
-                                    <td class="text-center" style="width:27%"><input type="text" class="form-control form-control-sm" value="홍길동"></td>
+                                    <td class="text-center" style="width:24%"><input type="text" class="form-control form-control-sm" value="" id="admin_name_modify" readonly></td>
                                     <th class="text-center bg-light" style="width:13%">일반전화번호</th>
-                                    <td class="text-center" style="width:26%"><input type="text" class="form-control form-control-sm" value="000-0000-0000"></td>
+                                    <td class="text-center" style="width:29%"><input type="text" class="form-control form-control-sm" value="" id="tel_num_modify"></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">휴대폰 번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="000-0000-0000"></td>
-                                    <th class="text-center bg-light">이메일</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="abc@aaaaaa.com"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="mphone_num_modify"></td>
+                                    <th class="text-center bg-light">관리 유형</th>
+                                    <td class="text-center">
+                                        <select id="admin_type_modify" class="form-control form-control-sm">
+                                            <option class="form-control form-control-sm" value="" disabled>유형 선택</option>
+                                            <option class="form-control form-control-sm" value="0">일반 관리자</option>
+                                            <option class="form-control form-control-sm" value="1">실증 책임자</option>
+                                            <option class="form-control form-control-sm" value="2">재배사</option>
+                                            <option class="form-control form-control-sm" value="4">관계 기관</option>
+                                            <option class="form-control form-control-sm" value="512">슈퍼 관리자</option>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">주소</th>
-                                    <td class=""><input type="text" class="form-control form-control-sm" value="제주도 서귀포시 XXXXXXX XXXXXXX"></td>
+                                    <td class="" colspan="3">
+                                        <%--                                            <input type="text" class="form-control form-control-sm" placeholder="주소">--%>
+                                        <%--                                            <input type="text" class="form-control form-control-sm" placeholder="상세 주소">--%>
+                                        <input type="text" id="addr_main_modify" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" placeholder="주소" style="width:calc(100% - 80px)">
+                                        <input type="text" id="addr_detail_modify" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" placeholder="상세주소" style="width:calc(100% - 80px)">
+                                        <a href="#none" id="addr_search_modify" class="btn btn-sm btn-default">주소 찾기</a>
+                                    </td>
+                                    <%--                                        <th class="text-center bg-light">상세 주소</th>--%>
+                                    <%--                                        <td class=""></td>--%>
                                 </tr>
                                 <tr class="">
                                     <th class="text-center align-middle bg-light" rowspan="3">소속 정보</th>
                                     <th class="text-center bg-light">단체명</th>
-                                    <td class=""><input type="text" class="form-control form-control-sm" value="맛있는 농부(주)"></td>
-                                    <th class="text-center bg-light">부서</th>
-                                    <td class=""><input type="text" class="form-control form-control-sm" value="디지털농업본부/XXXX팀"></td>
+                                    <td class="" colspan="3" >
+                                        <input type="text" id="corp_select_modify" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width:calc(100% - 80px)" readonly>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">직위</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="부장"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="job_title_modify"></td>
                                     <th class="text-center bg-light">전화번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="000-0000-0000"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_num_modify" value="" readonly></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">팩스</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="000-0000-0000"></td>
+                                    <td class="text-center"><input type="text"  class="form-control form-control-sm" id="corporate_fax_modify" value="" readonly></td>
                                     <th class="text-center bg-light">홈페이지</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="www.asdfasdfasdf.com"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_homepage_modify" value="" readonly></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">센터정보</th>
                                     <th class="text-center bg-light">담당업무</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="XXXXXXXX"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="main_part_modify"></td>
                                     <th class="text-center bg-light">관리번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="XXXXXXXX"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="manage_num_modify"></td>
                                 </tr>
                                 </tbody>
                             </table>
-                            <table id="" class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info" style="">
+                            <table class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info" style="">
                                 <tbody>
                                 <tr>
-                                    <th class="text-center align-middle bg-light"  style="width:14%" rowspan="2">시스템 정보</th>
-                                    <th class="text-center bg-light" style="width:13%">웹ID</th>
-                                    <td class="text-center" style="width:15%">dongdong</td>
-                                    <th class="text-center bg-light" style="width:15%">비밀번호</th>
-                                    <td class="text-center" style="width:15%"><a href="#none" class="btn btn-sm btn-default">초기화</a></td>
-                                    <th class="text-center bg-light" style="width:15%">정보변경이력</th>
-                                    <td class="text-center" style="width:13%"><a href="#none" class="btn btn-sm btn-default" data-toggle="popover" data-html="true"  data-placement="top" data-content="-YYYY.MM.DD. HH:MM 비밀번호 초기화 (변경자 이름) <br>-YYYY.MM.DD. HH:MM 전화번호 변경 (변경자 이름) <br> -YYYY.MM.DD. HH:MM 주소변경 (변경자 이름)" >이력보기</a></td>
+                                    <th class="text-center align-middle bg-light" style="width: 4.5%" rowspan="2">시스템 정보</th>
+                                    <th class="text-center bg-light" style="width: 4.5%; vertical-align: middle;" >웹ID</th>
+                                    <td class="" style="width: 25%" colspan="3">
+                                        <input type="text" id="web_id_modify" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width:calc(100% - 80px)" readonly>
+                                    </td>
+                                    <%--                                    <th class="text-center bg-light" style="width:13%">비밀번호</th>--%>
+                                    <%--                                    <td class="" colspan="2" style="width:34%"><small>등록한 이메일로 초기 비밀번호가 발송됩니다.</small></td>--%>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">시스템권한</th>
                                     <td class="" colspan="5">
-                                        <select name="" id="" class="custom-select custom-select-sm w-auto">
-                                            <option value="">C운영자</option>
-                                            <option value="">C마스터</option>
+                                        <select id="sign_in_type_modify" class="custom-select custom-select-sm w-auto">
+                                            <option value="1">C운영자</option>
+                                            <option value="0">C마스터</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -346,9 +285,9 @@
                 <div class="modal-footer justify-content-between">
                     <div>
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                        <button type="button" class="btn btn-outline-danger">제거</button>
+                        <button type="button" class="btn btn-outline-danger" id="btn-admin-delete">제거</button>
                     </div>
-                    <button type="button" class="btn btn-primary">저장</button>
+                    <button type="button" class="btn btn-primary" id="btn-admin-modify">저장</button>
                 </div>
             </form>
         </div>
@@ -377,8 +316,17 @@
                                 <tr>
                                     <th class="text-center bg-light">휴대폰 번호</th>
                                     <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="mphone_num"></td>
-                                    <th class="text-center bg-light">이메일</th>
-                                    <td class="text-center"><input type="email" class="form-control form-control-sm" value="" id="email_admin"></td>
+                                    <th class="text-center bg-light">관리 유형</th>
+                                    <td class="text-center">
+                                        <select id="admin_type" class="form-control form-control-sm">
+                                            <option class="form-control form-control-sm" value="" disabled selected>유형 선택</option>
+                                            <option class="form-control form-control-sm" value="0">일반 관리자</option>
+                                            <option class="form-control form-control-sm" value="1">실증 책임자</option>
+                                            <option class="form-control form-control-sm" value="2">재배사</option>
+                                            <option class="form-control form-control-sm" value="4">관계 기관</option>
+                                            <option class="form-control form-control-sm" value="512">슈퍼 관리자</option>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">주소</th>
@@ -408,20 +356,20 @@
                                     <th class="text-center bg-light">직위</th>
                                     <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="job_title"></td>
                                     <th class="text-center bg-light">전화번호</th>
-                                    <td class="text-center"><input type="text" id="corp_telnum" class="form-control form-control-sm" value=""></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_num" value=""></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">팩스</th>
-                                    <td class="text-center"><input type="text" id="corp_fax" class="form-control form-control-sm" value=""></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_fax" value=""></td>
                                     <th class="text-center bg-light">홈페이지</th>
-                                    <td class="text-center"><input type="text" id="corp_homepage" class="form-control form-control-sm" value=""></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_homepage" value=""></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">센터정보</th>
                                     <th class="text-center bg-light">담당업무</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="admin_role"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="main_part"></td>
                                     <th class="text-center bg-light">관리번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="admin_rolenum"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="manage_num"></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -508,9 +456,12 @@
 <!-- Layout footer -->
 <%@include file ="layouts/frame_footer.jsp" %>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
 <script>
+
     var curPage = "${adminList[0].page}";
+    var curUser;
+
+    pageLoad("admin_corporate", {page_num: 1, corp: 100}, "어드민 보드", true);
 
     if(curPage != "1"){
         $("#article-list_previous").removeClass("disabled");
@@ -537,21 +488,33 @@
             admin_name: "${admin.admin_name}",
             corporate: "${admin.corporate}",
             corporate_name: "${admin.corporate_name}",
-            department: "${admin.department}",
+            corporate_num: "${admin.corporate_num}",
+            corporate_fax: "${admin.corporate_fax}",
+            corporate_homepage: "${admin.corporate_homepage}",
             job_title: "${admin.job_title}",
             auth_status: "${admin.auth_status}",
             tel_num: "${admin.tel_num}",
             mphone_num: "${admin.mphone_num}",
-            email: "${admin.email}",
             admin_type: "${admin.admin_type}",
-            auth_admin_idx: "${admin.auth_admin_idx}",
+            main_part: "${admin.main_part}",
+            manage_num: "${admin.manage_num}",
             sign_in_type: "${admin.sign_in_type}",
-            reg_date: "${admin.reg_date}",
-            last_upd_date: "${admin.last_upd_date}",
+            admin_addr: "${admin.admin_addr}",
             page: "${admin.page}",
-            maxvalue: "${admin.maxvalue}",
+            maxvalue: "${admin.maxvalue}"
         })
     </c:forEach>
+
+
+    // if(adminList[0].maxvalue <= 10){
+    //     $("#page1-button, #page2-button, #page3-button, #page4-button").css("display", "none");
+    // } else if(adminList[0].maxvalue <= 20){
+    //     $("#page1-button, #page2-button, #page3-button").css("display", "none");
+    // } else if(adminList[0].maxvalue <= 30){
+    //     $("#page1-button, #page2-button").css("display", "none");
+    // } else if(adminList[0].maxvalue <= 40){
+    //     $("#page1-button").css("display", "none");
+    // }
 
 
 
@@ -577,14 +540,23 @@
         }).open();
     })
 
+    $("#addr_main_modify, #addr_search_modify").click(function() {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                $("#addr_main").val(data.roadAddress + " " + data.buildingName);
+                // console.log(data);
+            }
+        }).open();
+    })
+
 
     $("#corp_select").change(function(){
         for(var corp of modelArr){
             if(corp.idx_corp_info == $("#corp_select").val()){
                 corpName = corp.corp_name_kor;
-                $("#corp_telnum").val(corp.tel_num);
-                $("#corp_homepage").val(corp.homepage);
-                $("#corp_fax").val(corp.fax_num);
+                $("#corporate_num").val(corp.tel_num);
+                $("#corporate_homepage").val(corp.homepage);
+                $("#corporate_fax").val(corp.fax_num);
             }
         }
     })
@@ -649,6 +621,8 @@
             alert("회원가입에 필요한 데이터가 모두 입력되지 않았습니다.");
             return;
         }
+        console.log($("#corporate_num").val());
+        console.log($("#corporate_fax").val());
 
         var param = {
             admin_id: $("#web_id").val() + "@" + $("#web_id2").val(),
@@ -656,10 +630,16 @@
             corporate_name: corpName,
             job_title: $("#job_title").val(),
             auth_status: 0,
-            tel_num: $("#tel_num").val(),
+            tel_num: $("#tel_num").val() == "" ? "-" : $("#tel_num").val(),
             mphone_num: $("#mphone_num").val(),
-            email: $("#web_id").val() + "@" + $("#web_id2").val(),
-            sign_in_type: $("#sign_in_type").val()
+            sign_in_type: $("#sign_in_type").val(),
+            corporate_num: $("#corporate_num").val(),
+            corporate_fax: $("#corporate_fax").val(),
+            corporate_homepage: $("#corporate_homepage").val(),
+            admin_type: $("#admin_type").val(),
+            main_part: $("#main_part").val(),
+            manage_num: $("#manage_num").val(),
+            admin_addr: $("#addr_main").val() + " " + $("#addr_detail").val()
         }
 
         $.ajax({
@@ -673,6 +653,7 @@
                     alert("관리자 등록이 완료되었습니다.\n생성한 계정의 비밀번호는 아이디로 지정한 메일로 전송되었습니다.");
                     $("#modal-staff-write").removeClass("show");
                     $(".modal-backdrop").removeClass("show");
+                    pageLoad("i21_admin_mng");
                     $("#admin_name").val("");
                     $("#tel_num").val("");
                     $("#mphone_num").val("");
@@ -692,10 +673,118 @@
                     $("#admin_id_select_box").val("0");
                     $("#web_id_guide").html("");
                 }
+            },
+            error:function(res){
+                alert(res.result_str);
+                //에러가 났을 경우 실행시킬 코드
             }
         })
 
     })
+
+    $("#initializtion_pw").click(function(){
+        if(confirm("해당 아이디의 비밀번호를 초기화하시겠습니까?")){
+            var selectId = $(this).parent().attr('id');
+            $.ajax({
+                type: 'post',
+                url: 'admin_pw_initialization',
+                data: JSON.stringify(parseInt(selectId)),
+                contentType:"application/json; charset=utf-8;",
+                dataType:'json',
+                success: function(res){
+                    if(res.result_code == "SUCCESS"){
+                        alert("비밀번호가 초기화되었습니다. \n초기화된 비밀번호는 이메일로 전송되었습니다.");
+                    }
+                    else{
+                        alert(res.result_str);
+                    }
+                }
+            })
+        }
+    })
+
+
+    $("#btn-admin-modify").click(function(){
+        var param = {
+            idx_admin: parseInt(curUser),
+            tel_num: $("#tel_num_modify").val(),
+            mphone_num: $("#mphone_num_modify").val(),
+            admin_type: $("#admin_type_modify").val(),
+            admin_addr: $("#addr_detail_modify").val() != "" ? $("#addr_main_modify").val() + " " + $("#addr_detail_modify").val() : $("#addr_main_modify").val(),
+            job_title: $("#job_title_modify").val(),
+            main_part: $("#main_part_modify").val(),
+            manage_num: $("#manage_num_modify").val(),
+            sign_in_type: $("#sign_in_type_modify").val()
+        }
+        $.ajax({
+            type: 'post',
+            url: 'admin_modify',
+            data: JSON.stringify(param),
+            contentType:"application/json; charset=utf-8;",
+            dataType:'json',
+            success: function(res){
+                if(res.result_code == "SUCCESS"){
+                    alert("관리자 정보가 성공적으로 변경되었습니다.");
+                    $("#modal-staff-modify").removeClass("show");
+                    $(".modal-backdrop").removeClass("show");
+                    pageLoad("i21_admin_mng");
+                    $("#admin_name_modify").val("");
+                    $("#tel_num_modify").val("");
+                    $("#mphone_num_modify").val("");
+                    $("#admin_type_modify").val("");
+                    $("#addr_main_modify").val("");
+                    $("#corp_select_modify").val("");
+                    $("#job_title_modify").val("");
+                    $("#corporate_num_modify").val("");
+                    $("#corporate_fax_modify").val("");
+                    $("#corporate_homepage_modify").val("");
+                    $("#main_part_modify").val("");
+                    $("#manage_num_modify").val("");
+                    $("#web_id_modify").val("");
+                    $("#sign_in_type_modify").val("");
+                    $("#admin_id_select_box").val("0");
+                    $("#web_id_guide").html("");
+                }
+            },
+            error:function(res){
+                alert(res.result_str);
+                //에러가 났을 경우 실행시킬 코드
+            }
+        })
+
+    })
+
+    $("#btn-admin-delete").click(function(){
+        if(confirm($("#admin_name_modify").val() + "님의 관리자 계정을 삭제하시겠습니까?")){
+
+            $.ajax({
+                type: 'post',
+                url: 'admin_delete',
+                data: JSON.stringify(parseInt(curUser)),
+                contentType:"application/json; charset=utf-8;",
+                dataType:'json',
+                success: function(res){
+                    if(res.result_code == "SUCCESS"){
+                        alert("해당 관리자 계정이 삭제되었습니다.");
+                        $(".modal-backdrop").removeClass("show");
+                        pageLoad("i21_admin_mng");
+                    }
+                },
+                error:function(res){
+                    alert(res.result_str);
+                    //에러가 났을 경우 실행시킬 코드
+                }
+            })
+        }
+    })
+
+    $('input[name="corporate"]').change(function(){
+        var corpClass = $('input[name="corporate"]:checked').val();
+        pageLoad("admin_corporate", {page_num: 1, corp: parseInt(corpClass)}, "어드민 보드", true);
+        console.log(adminList.length + "  admin_mng")
+    })
+
+
 </script>
 <!-- / Layout footer -->
 

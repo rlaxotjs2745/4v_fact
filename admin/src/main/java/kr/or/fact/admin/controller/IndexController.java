@@ -19,9 +19,8 @@ import java.net.URL;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class IndexController {
@@ -158,15 +157,6 @@ public class IndexController {
     public String a10_dashboard(@RequestParam(value = "tag", required = false) String tagValue,
                                  ModelMap model
                                 ){
-
-        String urlGimje = "http://api.openweathermap.org/data/2.5/weather?q=gimje&appid=53adfc8e9ffcbf891a9be91b9e312c01";
-
-        String urlSangju = "http://api.openweathermap.org/data/2.5/weather?q=sangju&appid=53adfc8e9ffcbf891a9be91b9e312c01";
-
-
-        URL url = new URL(urlGimje);
-
-
         return "a10_dashboard";
     }
 
@@ -1025,16 +1015,42 @@ public class IndexController {
         resultArray = corpService.selectCorpInfo();
 
         int pageBool = 4;
-        List<AdminResVO> adminVOList = adminService.selectAdminbyIdx(param.getPage_num() != 0 ? param.getPage_num() + "" : "1");
+        List<AdminResVO> adminVOList = adminService.selectAdminbyIdx(param.getPage_num() != 0 ? param.getPage_num() + "" : "1", 100);
         if(adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage() < 4){
             pageBool = adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage();
         }
         model.addAttribute("pageBool", pageBool);
         model.addAttribute("adminList", adminVOList);
         model.addAttribute("corps", resultArray);
-        model.addAttribute("adminCount", adminService.selectCount());
+        model.addAttribute("adminCount", adminService.selectCount(100));
+        model.addAttribute("otherAdminCount", adminService.selectCount(99));
+        model.addAttribute("mngAdminCount", adminService.selectCount(0));
+        model.addAttribute("centerAdminCount", adminService.selectCount(1));
+        model.addAttribute("localAdminCount", adminService.selectCount(2));
 
         return "i21_admin_mng";
+    }
+
+    @RequestMapping(value = "/admin_corporate" ,method = RequestMethod.POST)
+    public String admin_corporate(@RequestParam(value = "page_num", required = false) String tagValue,
+                                @RequestBody ParamPageListFilteredVO param,
+                                ModelMap model){
+        ArrayList<CorpInfoVO> resultArray;
+        resultArray = corpService.selectCorpInfo();
+
+        int pageBool = 4;
+        List<AdminResVO> adminVOList = adminService.selectAdminbyIdx(param.getPage_num() != 0 ? param.getPage_num() + "" : "1", param.getCorp());
+        if(adminVOList.size() != 0 && adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage() < 4){
+            pageBool = adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage();
+        }
+//        adminVOList.sort(Comparator.comparing(AdminResVO::getAdmin_name).thenComparing(AdminResVO::getAdmin_name));
+        model.addAttribute("pageBool", pageBool);
+        model.addAttribute("corpCategory", param.getCorp());
+        model.addAttribute("adminList", adminVOList);
+        model.addAttribute("corps", resultArray);
+        model.addAttribute("adminCount", adminService.selectCount(param.getCorp()));
+
+        return "admin_index";
     }
     /*
     //시스템 코드 관리

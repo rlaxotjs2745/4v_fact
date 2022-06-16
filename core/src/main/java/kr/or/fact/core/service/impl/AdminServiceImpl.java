@@ -3,6 +3,7 @@ package kr.or.fact.core.service.impl;
 import kr.or.fact.core.model.AdminMapper;
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.AdminService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,6 +20,7 @@ import kr.or.fact.core.util.CONSTANT;
 import javax.mail.internet.MimeMessage;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Service("adminService")
 public class AdminServiceImpl implements AdminService {
@@ -155,6 +157,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Boolean adminIdCheck(String adminId){
         Boolean bool = false;
+        System.out.println(adminMapper.getAdminByAdminId(adminId));
         if(adminMapper.getAdminByAdminId(adminId).size() > 0){
             bool = true;
         }
@@ -163,13 +166,31 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<AdminResVO> selectAdminbyIdx(String tagValue) {
+    public List<AdminResVO> selectAdminbyIdx(String tagValue, int corporate) {
         int page = Integer.parseInt(tagValue);
-        return adminMapper.selectAdminbyIdx(page, 10);
+        return adminMapper.selectAdminbyIdx(page, 10, corporate);
     }
 
     @Override
-    public int selectCount(){
-        return adminMapper.selectCount();
+    public int selectCount(int corporate){
+        return adminMapper.selectCount(corporate);
+    }
+
+    @Override
+    public AdminVO modifyPw(long adminIdx, String hashedPassword){
+        adminMapper.modifyPw(adminIdx, hashedPassword);
+        return adminMapper.getAdminInfoByIdx(adminIdx);
+    }
+
+    @Override
+    public long adminModify(AdminVO adminVO) {
+        long ret_idx = 0;
+        try {
+            ret_idx = adminMapper.adminModify(adminVO);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    return ret_idx;
     }
 }

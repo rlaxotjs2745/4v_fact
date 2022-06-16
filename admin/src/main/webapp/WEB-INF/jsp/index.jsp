@@ -82,6 +82,9 @@
 
             </div>
             <!-- Layout content -->
+            <div id="loading_symbol">
+                <img src="resources/assets/image/g_loading.gif">
+            </div>
 
         </div>
         <!-- / Layout container -->
@@ -145,7 +148,7 @@
     //int amount;
     //String order_field;
 
-    function pageLoad(url,param,title){
+    function pageLoad(url,param,title,corp){
 /*      State : 브라우저 이동 시 넘겨줄 데이터 (popstate 에서 받아서 원하는 처리를 해줄 수 있음)
         Title : 변경할 브라우저 제목 (변경 원치 않으면 null)
         Url : 변경할 주소*/
@@ -168,7 +171,11 @@
                 contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
                 dataType:'html',//받는 데이터 타입
                 success:function(result){
-                    $("#contents").html(result);
+                    if(corp == true){
+                        $("#admin_index").html(result);
+                    } else{
+                        $("#contents").html(result);
+                    }
                 },
                 fail:function(xhr,status,err){
                     $("#contents").html("Request failed: " + status);
@@ -222,6 +229,8 @@
                 });
             }
         }, false);
+
+
     })();
     $(document).ready(function() {
         //ajax로 호출되는 첫번째 페이지
@@ -232,8 +241,14 @@
 
 
 
-
 </script>
+<style>
+    #loading_symbol{
+        display: block;
+        position: absolute;
+        text-align: center;
+    }
+</style>
 </body>
 
 </html>

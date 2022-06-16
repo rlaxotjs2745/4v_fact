@@ -176,7 +176,7 @@
                     <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#modal-myinfo"><i class="ion ion-ios-person text-lightest"></i> &nbsp; 프로필</a>
                     <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#modal-message"><i class="ion ion-ios-mail text-lightest"></i> &nbsp; 메세지</a>
                     <div class="dropdown-divider" data-toggle="modal" data-target="#modal-logout"></div>
-                    <a href="javascript:void(0)" class="dropdown-item"><i class="ion ion-ios-log-out text-danger"></i> &nbsp; 로그아웃</a>
+                    <a href="/logout" class="dropdown-item"><i class="ion ion-ios-log-out text-danger"></i> &nbsp; 로그아웃</a>
                 </div>
             </div>
         </div>
@@ -202,7 +202,7 @@
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">아이디</label>
 
                         <div class="col-md-10">
-                            <div class="form-control-plaintext">honggildong</div>
+                            <div class="form-control-plaintext">${admin.admin_id}</div>
                         </div>
                     </div>
                     <!-- 비밀번호 -->
@@ -220,46 +220,46 @@
                     <div class="form-group row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">이름</label>
                         <div class="col-md-10">
-                            <div class="form-control-plaintext">홍길동</div>
+                            <div class="form-control-plaintext">${admin.admin_name}</div>
                         </div>
                     </div>
                     <!-- 집전화번호 -->
-                    <div class="form-group row">
-                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">집전화번호</label>
-                        <div class="col-md-4">
-                            <div class="form-control-plaintext myinfo-view">02-1234-5678</div>
-                            <input type="text" class="form-control form-control-md myinfo-edit d-none" placeholder="000-0000-0000">
-                        </div>
-                    </div>
+<%--                    <div class="form-group row">--%>
+<%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">집전화번호</label>--%>
+<%--                        <div class="col-md-4">--%>
+<%--                            <div class="form-control-plaintext myinfo-view">${admin.tel_num}</div>--%>
+<%--                            <input type="text" class="form-control form-control-md myinfo-edit d-none" placeholder="000-0000-0000">--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                     <!-- 휴대폰 번호 -->
                     <div class="form-group row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">휴대폰 번호</label>
                         <div class="col-md-4">
-                            <div class="form-control-plaintext myinfo-view">010-1234-5678</div>
+                            <div class="form-control-plaintext myinfo-view">${admin.mphone_num}</div>
                             <input type="text" class="form-control form-control-md myinfo-edit d-none" placeholder="000-0000-0000">
                         </div>
                     </div>
                     <!-- 집 주소 -->
-                    <div class="form-group row">
-                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">집 주소</label>
-                        <div class="col-md-10">
-                            <div class="form-control-plaintext myinfo-view">(12345) 제주도 서귀포시 000로 xxxx xxx-xxx</div>
+<%--                    <div class="form-group row">--%>
+<%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">집 주소</label>--%>
+<%--                        <div class="col-md-10">--%>
+<%--                            <div class="form-control-plaintext myinfo-view">(12345) 제주도 서귀포시 000로 xxxx xxx-xxx</div>--%>
 
-                            <div class="input-group myinfo-edit d-none">
-                                <input type="text" class="form-control form-control-md" placeholder="집주소 찾기...">
-                                <span class="input-group-append">
-                                    <button id="btn_search_addr" class="btn btn-md btn-secondary" type="button">찾기</button>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control form-control-md mt-1 myinfo-edit" placeholder="상세 주소...">
+<%--                            <div class="input-group myinfo-edit d-none">--%>
+<%--                                <input type="text" class="form-control form-control-md" placeholder="집주소 찾기...">--%>
+<%--                                <span class="input-group-append">--%>
+<%--                                    <button id="btn_search_addr" class="btn btn-md btn-secondary" type="button">찾기</button>--%>
+<%--                                </span>--%>
+<%--                            </div>--%>
+<%--                            <input type="text" class="form-control form-control-md mt-1 myinfo-edit" placeholder="상세 주소...">--%>
 
-                        </div>
-                    </div>
+<%--                        </div>--%>
+<%--                    </div>--%>
                     <!-- 이메일 -->
                     <div class="form-group row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">이메일</label>
                         <div class="col-md-10">
-                            <div class="form-control-plaintext myinfo-view">honggildong@naver.com</div>
+                            <div class="form-control-plaintext myinfo-view">${admin.admin_id}</div>
                             <input type="text" class="form-control form-control-md myinfo-edit d-none" placeholder="xxxx@xxxxx.xxx">
                         </div>
                     </div>
@@ -271,7 +271,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">단체명</label>
                         <div class="col-md-4">
-                            <div class="form-control-plaintext myinfo-view">한국농업기술진흥원</div>
+                            <div class="form-control-plaintext myinfo-view">${admin.corporate_name}</div>
                             <input type="text" class="form-control form-control-md myinfo-edit d-none" placeholder="단체명...">
                         </div>
                     </div>
@@ -279,7 +279,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">직위</label>
                         <div class="col-md-4">
-                            <div class="form-control-plaintext myinfo-view">과장</div>
+                            <div class="form-control-plaintext myinfo-view">${admin.job_title}</div>
                             <input type="text" class="form-control form-control-md myinfo-edit d-none" placeholder="직위명...">
                         </div>
                     </div>
@@ -287,7 +287,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">전화 번호</label>
                         <div class="col-md-4">
-                            <div class="form-control-plaintext myinfo-view">031-1234-5678</div>
+                            <div class="form-control-plaintext myinfo-view">${admin.tel_num}</div>
                             <input type="text" class="form-control form-control-md myinfo-edit d-none" placeholder="000-0000-0000">
                         </div>
                     </div>
@@ -321,14 +321,14 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label class="form-label font-weight-bold">기존 비밀번호</label>
-                        <input type="password" class="form-control">
+                        <input type="password" class="form-control" id="cur-pw">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col">
                         <label class="form-label font-weight-bold">변경할 비밀번호</label>
-                        <input type="password" class="form-control">
-                        <small class="form-text text-muted">
+                        <input type="password" class="form-control" id="mod-pw">
+                        <small class="form-text text-muted" id="mod-pw-guide">
                             8-20 길이의 문자, 숫자, 특수문자 조합
                         </small>
                     </div>
@@ -336,8 +336,8 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label class="form-label font-weight-bold">변경할 비밀번호 확인</label>
-                        <input type="password" class="form-control">
-                        <small class="form-text text-muted" >
+                        <input type="password" class="form-control" id="mod-pwcf">
+                        <small class="form-text text-muted" id="mod-pwcf-guide">
                             8-20 길이의 문자, 숫자, 특수문자 조합
                         </small>
                     </div>
@@ -345,7 +345,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="mod-pw-submit">Save</button>
             </div>
         </form>
     </div>
@@ -399,14 +399,14 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label class="form-label font-weight-bold">기존 비밀번호</label>
-                        <input type="password" class="form-control" id="cur-pw">
+                        <input type="password" class="form-control" id="cur-pw-first">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col">
                         <label class="form-label font-weight-bold">변경할 비밀번호</label>
-                        <input type="password" class="form-control" id="mod-pw">
-                        <small class="form-text text-muted" id="mod-pw-guide">
+                        <input type="password" class="form-control" id="mod-pw-first">
+                        <small class="form-text text-muted" id="mod-pw-guide-first">
                             8-20 길이의 문자, 숫자, 특수문자 조합
                         </small>
                     </div>
@@ -414,15 +414,15 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label class="form-label font-weight-bold">변경할 비밀번호 확인</label>
-                        <input type="password" class="form-control" id="mod-pwcf">
-                        <small class="form-text text-muted" id="mod-pwcf-guide">
+                        <input type="password" class="form-control" id="mod-pwcf-first">
+                        <small class="form-text text-muted" id="mod-pwcf-guide-first">
                             8-20 길이의 문자, 숫자, 특수문자 조합
                         </small>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="mod-pw-first-submit">Save</button>
+                <button type="button" class="btn btn-primary" id="mod-pw-submit-first">Save</button>
             </div>
         </form>
     </div>
@@ -446,6 +446,14 @@
         }
     })
 
+    $("#mod-pw-first").on("change focus blur",() => {
+        if(!regax.test($("#mod-pw-first").val())){
+            $("#mod-pw-guide-first").text("비밀번호 규칙에 맞지 않습니다.");
+        }else{
+            $("#mod-pw-guide-first").text("");
+        }
+    })
+
     $("#mod-pwcf").on("change focus blur",() => {
         if(!regax.test($("#mod-pwcf").val())){
             $("#mod-pwcf-guide").text("비밀번호 규칙에 맞지 않습니다.");
@@ -456,7 +464,17 @@
         }
     })
 
-    $("#mod-pw-first-submit").click(() => {
+    $("#mod-pwcf-first").on("change focus blur",() => {
+        if(!regax.test($("#mod-pwcf-first").val())){
+            $("#mod-pwcf-guide-first").text("비밀번호 규칙에 맞지 않습니다.");
+        }else if($("#mod-pwcf-first").val() != $("#mod-pw-first").val()){
+            $("#mod-pwcf-guide-first").text("변경할 비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+        }else{
+            $("#mod-pwcf-guide-first").text("");
+        }
+    })
+
+    $("#mod-pw-submit").click(() => {
         // if($("#mod-pwcf-guide").text() == "" || $("#mod-pw-guide").text() == ""){
         //     alert("변경할 비밀번호가 올바르지 않습니다.");
         //     return;
@@ -486,20 +504,69 @@
                 //작업이 성공적으로 발생했을 경우
                 if(result.result_code=="SUCCESS"){
                     alert("비밀번호 변경이 완료되었습니다.");
+                    $("#modals-pw-edit").removeClass("show").css("display", "none");
+                    $(".modal-backdrop").removeClass("show").css("display", "none");
+                }
+                else {
+                    alert(result.result_str);
+                    window.location.href = "/logout";
+                    //기존 비밀번호와 변경할 비밀번호가 같습니다.
+                    return;
+                }
+            },
+            error:function(){
+                //에러가 났을 경우 실행시킬 코드
+                alert("에러발생");
+                return;
+            }
+        })
+    })
+
+    $("#mod-pw-submit-first").click(() => {
+        // if($("#mod-pwcf-guide").text() == "" || $("#mod-pw-guide").text() == ""){
+        //     alert("변경할 비밀번호가 올바르지 않습니다.");
+        //     return;
+        // }
+        if($("#cur-pw-first").val() == $("#mod-pw-first").val()){
+            alert("변경할 비밀번호와 기존비밀번호가 같습니다.")
+            return;
+        }
+
+        if($("#cur-pw-first").val() == "" || $("#mod-pw-first").val() == "" || $("#mod-pwcf-first").val() == ""){
+            alert("비밀번호 변경에 필요한 정보가 모두 입력되지 않았습니다.");
+        }
+
+        var newPw = {
+            curPw : $("#cur-pw-first").val(),
+            modPW : $("#mod-pw-first").val(),
+            modPwCf :$("#mod-pwcf-first").val(),
+            adminId : "${admin.admin_id}"
+        }
+        $.ajax({
+            type: 'post',
+            url :'changePw', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(newPw),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'json',//받는 데이터 타입
+            success: function(result){
+                //작업이 성공적으로 발생했을 경우
+                if(result.result_code=="SUCCESS"){
+                    alert("비밀번호 변경이 완료되었습니다.");
                     $("#modals-pw-modify-first").removeClass("show").css("display", "none");
                     $(".modal-backdrop").removeClass("show").css("display", "none");
                 }
                 else {
                     alert(result.result_str);
-
+                    // window.location.href = "/logout";
+                    return;
                     //기존 비밀번호와 변경할 비밀번호가 같습니다.
                 }
             },
             error:function(){
                 //에러가 났을 경우 실행시킬 코드
+                window.location.href = "/logout";
             }
         })
-
     })
 
 
