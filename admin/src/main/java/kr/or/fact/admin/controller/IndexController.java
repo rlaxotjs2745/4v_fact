@@ -932,6 +932,18 @@ public class IndexController {
         return "i11_user_mng";
     }
 
+    @RequestMapping(value = "/user_index",method = RequestMethod.POST)
+    public String user_index(@RequestParam(value = "tag", required = false) String tagValue,
+                               @RequestBody int sign_in_type,
+                               ModelMap model){
+        ArrayList<UserVO> userVOArrayList;
+
+
+
+        return "i11_user_mng";
+    }
+
+
     //시스템 코드 관리
     @RequestMapping(value = "/i12_dormant_user_mng",method = RequestMethod.POST)
     public String i12_dormant_user_mng(@RequestParam(value = "tag", required = false) String tagValue,

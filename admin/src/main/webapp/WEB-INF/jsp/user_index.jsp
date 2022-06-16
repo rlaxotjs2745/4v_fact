@@ -8,75 +8,86 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h6 class="card-header with-elements">
-    <div class="card-header-title">직원 명단</div>
+    <div class="card-header-title">고객 명단</div>
     <div class="card-header-elements ml-auto">
-        <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#modal-staff-write">+ 등록</button>
-        <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#modal-staff-upload">+ 일괄등록</button>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-person-write">+ 등록</button>
     </div>
 </h6>
 
 <div class="card-datatable table-responsive py-2">
-    <div class="dataTables_wrapper dt-bootstrap4 no-footer">
+    <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
         <div class="row">
             <div class="col-sm-12 col-md-6">
-                <label class="mr-3">총 : <strong>${adminCount}</strong>명</label>
+                <label class="mr-3">총 : <strong>150</strong>명</label><label class="mr-3">위탁 : <strong>70</strong>명</label><label class="mr-3">자율 : <strong>80</strong>명</label>
             </div>
             <div class="col-sm-12 col-md-6">
-                <div class="dataTables_filter"><label>찾기:<input type="search" class="form-control form-control-sm" placeholder="소속, 이름, 전화번호" aria-controls="article-list"></label></div>
+                <div id="" class="dataTables_filter"><label>찾기:<input type="search" class="form-control form-control-sm" placeholder="기업/기관명, 기업 대표자, 이름, 전화번호" aria-controls="article-list"></label></div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <table class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
+                <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
                     <thead>
                     <tr role="row">
                         <th class="text-center px-2" style="width:40px">No</th>
-                        <th class="text-center px-2" style="width:80px">직원명</th>
+                        <th class="text-center px-2" style="width:80px">고객명</th>
                         <th class="text-center px-2" style="width:80px">구분</th>
-                        <th class="text-center px-2" style="width:80px">시스템 권한</th>
-                        <th class="text-center px-2" style="width:150px">소속</th>
-                        <th class="text-center px-2" style="width:70px">담당업무</th>
-                        <th class="text-center px-2" style="width:70px">직급</th>
-                        <th class="text-center px-2" style="width:130px">사무실 전화번호</th>
-                        <th class="text-center px-2" style="width:130px">휴대폰 번호</th>
+                        <th class="text-center px-2" style="width:100px">시스템 권한</th>
+                        <th class="text-center px-2" style="width:120px">소속</th>
+                        <th class="text-center px-2" style="width:80px">직급</th>
+                        <th class="text-center px-2" style="width:100px">회사 전화번호</th>
+                        <th class="text-center px-2" style="width:100px">휴대폰 번호</th>
+                        <th class="text-center px-2" style="width:100px">팩스번호</th>
                         <th class="text-center px-2" style="width:150px">이메일</th>
+                        <th class="text-center px-2" style="width:200px">메모</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${adminList}" var="admin" varStatus="status">
-                        <tr class="admin-entity" id="${admin.idx_admin}">
-                            <td class="text-center" class="page-count">${admin.page * 10 - 10 + status.count}</td>
-                            <td class="text-center"><a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modals-staff-view" class="admin-name">${admin.admin_name}</a></td>
-                            <td class="text-center" class="admin-corp-type">${admin.corporate eq 0 ? "진흥원" : admin.corporate eq 1 ? "센터" : admin.corporate eq 2 ? "지자체" : "기타"}</td>
-                            <td class="text-center" class="admin-type">${admin.sign_in_type eq 1 ? "SA" : "BM"}</td>
-                            <td class="text-center" class="admin-corp">${admin.corporate_name}</td>
-                            <td class="text-center" class="admin-depart">${admin.main_part != null ? admin.main_part : "-"}</td>
-                            <td class="text-center" class="admin-jobTitle">${admin.job_title}</td>
-                            <td class="text-center" class="admin-telnum">${admin.corporate_num}</td>
-                            <td class="text-center" class="admin-mphonenum">${admin.mphone_num}</td>
-                            <td class="text-center" class="admin-emailid">${admin.admin_id}</td>
-                        </tr>
-                    </c:forEach>
+                    <tr class="">
+                        <td class="text-center">1</td>
+                        <td class="text-center"><a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modal-person-view">가나다</a></td>
+                        <td class="text-center">정회원</td>
+                        <td class="text-center">C마스터</td>
+                        <td class="text-center">XXXXXXX</td>
+                        <td class="text-center">사장</td>
+                        <td class="text-center">000-0000-0000</td>
+                        <td class="text-center">000-0000-0000</td>
+                        <td class="text-center">000-0000-0000</td>
+                        <td class="text-center">xxxx@xxxxx.xxx</td>
+                        <td class=""><span class="text-truncate d-inline-block" style="width:200px;">Lorem ipsum dolor</span></td>
+                    </tr>
+                    <tr class="">
+                        <td class="text-center">2</td>
+                        <td class="text-center">가나다</td>
+                        <td class="text-center">정회원</td>
+                        <td class="text-center">C마스터</td>
+                        <td class="text-center">XXXXXXX</td>
+                        <td class="text-center">사장</td>
+                        <td class="text-center">000-0000-0000</td>
+                        <td class="text-center">000-0000-0000</td>
+                        <td class="text-center">000-0000-0000</td>
+                        <td class="text-center">xxxx@xxxxx.xxx</td>
+                        <td class=""><span class="text-truncate d-inline-block" style="width:200px;">Lorem ipsum dolor</span></td>
+                    </tr>
+
                     </tbody>
                 </table>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-5">
-                <div class="dataTables_info" role="status" aria-live="polite">Showing ${adminList[0].page * 10 - 9} to ${adminList[0].page * 10 > adminCount ? adminCount : adminList[0].page * 10} of ${adminList[0].maxvalue} entries</div>
+                <div class="dataTables_info" id="" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
             </div>
             <div class="col-sm-12 col-md-7">
                 <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                     <ul class="pagination">
-                        <li class="paginate_button page-item previous" id="article-list_previous"><a aria-controls="article-list" data-dt-idx="0" tabindex="0" id="article-list_previous_btn" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                        <li class="paginate_button page-item previous" id="article-list_previous-one"><a aria-controls="article-list" data-dt-idx="0" tabindex="0" id="article-list_previous-one_btn" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li>
-<%--                        <li class="paginate_button page-item " id="page1-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool - 4}'},'대시보드');" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">${adminList[0].page + pageBool - 4}</a></li>--%>
-<%--                        <li class="paginate_button page-item " id="page2-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool - 3}'},'대시보드');" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">${adminList[0].page + pageBool - 3}</a></li>--%>
-<%--                        <li class="paginate_button page-item " id="page3-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool - 2}'},'대시보드');" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">${adminList[0].page + pageBool - 2}</a></li>--%>
-<%--                        <li class="paginate_button page-item " id="page4-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool - 1}'},'대시보드');" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">${adminList[0].page + pageBool - 1}</a></li>--%>
-<%--                        <li class="paginate_button page-item " id="page5-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool}'},'대시보드');" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">${adminList[0].page + pageBool}</a></li>--%>
-                        <li class="paginate_button page-item next" id="article-list_next-one"><a aria-controls="article-list" data-dt-idx="6" tabindex="0" id="article-list_next-one_btn" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li>
-                        <li class="paginate_button page-item next" id="article-list_next"><a aria-controls="article-list" data-dt-idx="6" tabindex="0" id="article-list_next_btn" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
+                        <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
+                        <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                        <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+                        <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
+                        <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
+                        <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
+                        <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
                     </ul>
                 </div>
             </div>

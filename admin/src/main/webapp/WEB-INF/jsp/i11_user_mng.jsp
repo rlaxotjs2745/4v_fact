@@ -81,197 +81,8 @@
 
         <hr>
 
-        <div class="card">
-            <h6 class="card-header with-elements">
-                <div class="card-header-title">고객 명단</div>
-                <div class="card-header-elements ml-auto">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-person-write">+ 등록</button>
-                </div>
-            </h6>
+        <div class="card" id="user_index">
 
-            <div class="card-datatable table-responsive py-2">
-                <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <label class="mr-3">총 : <strong>150</strong>명</label><label class="mr-3">위탁 : <strong>70</strong>명</label><label class="mr-3">자율 : <strong>80</strong>명</label>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div id="" class="dataTables_filter"><label>찾기:<input type="search" class="form-control form-control-sm" placeholder="기업/기관명, 기업 대표자, 이름, 전화번호" aria-controls="article-list"></label></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
-                                <thead>
-                                <tr role="row">
-                                    <th class="text-center px-2" style="width:40px">No</th>
-                                    <th class="text-center px-2" style="width:80px">고객명</th>
-                                    <th class="text-center px-2" style="width:80px">구분</th>
-                                    <th class="text-center px-2" style="width:100px">시스템 권한</th>
-                                    <th class="text-center px-2" style="width:120px">소속</th>
-                                    <th class="text-center px-2" style="width:80px">직급</th>
-                                    <th class="text-center px-2" style="width:100px">회사 전화번호</th>
-                                    <th class="text-center px-2" style="width:100px">휴대폰 번호</th>
-                                    <th class="text-center px-2" style="width:100px">팩스번호</th>
-                                    <th class="text-center px-2" style="width:150px">이메일</th>
-                                    <th class="text-center px-2" style="width:200px">메모</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="">
-                                    <td class="text-center">1</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modal-person-view">가나다</a></td>
-                                    <td class="text-center">정회원</td>
-                                    <td class="text-center">C마스터</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">사장</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">xxxx@xxxxx.xxx</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:200px;">Lorem ipsum dolor</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">2</td>
-                                    <td class="text-center">가나다</td>
-                                    <td class="text-center">정회원</td>
-                                    <td class="text-center">C마스터</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">사장</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">xxxx@xxxxx.xxx</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:200px;">Lorem ipsum dolor</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">3</td>
-                                    <td class="text-center">가나다</td>
-                                    <td class="text-center">정회원</td>
-                                    <td class="text-center">C마스터</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">사장</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">xxxx@xxxxx.xxx</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:200px;">Lorem ipsum dolor</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">4</td>
-                                    <td class="text-center">가나다</td>
-                                    <td class="text-center">정회원</td>
-                                    <td class="text-center">C마스터</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">사장</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">xxxx@xxxxx.xxx</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:200px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">5</td>
-                                    <td class="text-center">가나다</td>
-                                    <td class="text-center">정회원</td>
-                                    <td class="text-center">C마스터</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">사장</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">xxxx@xxxxx.xxx</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:200px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">6</td>
-                                    <td class="text-center">가나다</td>
-                                    <td class="text-center">정회원</td>
-                                    <td class="text-center">C마스터</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">사장</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">xxxx@xxxxx.xxx</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:200px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">7</td>
-                                    <td class="text-center">가나다</td>
-                                    <td class="text-center">정회원</td>
-                                    <td class="text-center">C마스터</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">사장</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">xxxx@xxxxx.xxx</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:200px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">8</td>
-                                    <td class="text-center">가나다</td>
-                                    <td class="text-center">정회원</td>
-                                    <td class="text-center">C마스터</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">사장</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">xxxx@xxxxx.xxx</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:200px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">9</td>
-                                    <td class="text-center">가나다</td>
-                                    <td class="text-center">정회원</td>
-                                    <td class="text-center">C마스터</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">사장</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">xxxx@xxxxx.xxx</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:200px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">10</td>
-                                    <td class="text-center">가나다</td>
-                                    <td class="text-center">정회원</td>
-                                    <td class="text-center">C마스터</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">사장</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">000-0000-0000</td>
-                                    <td class="text-center">xxxx@xxxxx.xxx</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:200px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
-                        </div>
-                        <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                    <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- Modal template -->
@@ -480,9 +291,9 @@
                                     <tr class="">
                                         <th class="text-center align-middle bg-light" rowspan="3" style="width:12%">개인정보</th>
                                         <th class="text-center bg-light" style="width:12%">이름</th>
-                                        <td class="text-center" style="width:27%"><input type="text" class="form-control form-control-sm" value="홍길동"></td>
-                                        <th class="text-center bg-light" style="width:13%">일반전화번호</th>
-                                        <td class="text-center" style="width:26%"><input type="text" class="form-control form-control-sm" value="000-0000-0000"></td>
+                                        <td class="text-center" style="width:27%"><input type="text" class="form-control form-control-sm" placeholder="홍길동" ></td>
+                                        <th class="text-center bg-light" style="width:13%">휴대폰 번호</th>
+                                        <td class="text-center" style="width:26%"><input type="text" class="form-control form-control-sm" placeholder="000-0000-0000"></td>
                                     </tr>
                                     <tr>
                                         <th class="text-center bg-light">휴대폰 번호</th>
@@ -568,3 +379,9 @@
 <!-- / Layout footer -->
 
 <!-- / Page content -->
+
+<script>
+    pageLoad("user_index", {page_num: 1, corp: 100}, "유저 보드", "user");
+
+
+</script>
