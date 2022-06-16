@@ -63,6 +63,10 @@ public class IndexController {
     public SystemService systemService;
 
 
+    @Resource(name = "userService")
+    public UserService userService;
+
+
     @PreAuthorize("hasRole('ROLE_MEMBER')")
     @RequestMapping("/")
     public String root(Principal principal, ModelMap model){
@@ -935,8 +939,69 @@ public class IndexController {
 
     //시스템 코드 관리
     @RequestMapping(value = "/i11_user_mng",method = RequestMethod.POST)
-    public String i11_user_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String i11_user_mng(@RequestBody ParamPageListFilteredVO param,
                                ModelMap model){
+
+        int list_amount = param.getAmount();
+        int page_amount = 10; //화면에 표현할 페이지 리스트의 갯수 , 넘어가면 화살표로..
+        int page = param.getPage_num();
+
+        //param.setAmount(10);
+
+        int activeUserTotalCount = userService.getActiveUserTotalCount();
+
+
+        model.addAttribute("total_count",activeUserTotalCount);
+
+        //페이지드 리스트 가져오기
+        param.setFilter1(0); //비 휴면회원 셋팅
+        List<UserVO> userVOS = userService.getActiveUserList(param);
+
+
+        model.addAttribute("userList",userVOS);
+        //model.addAttribute("filter1",filter1);
+        //model.addAttribute("filter2",filter2);
+        model.addAttribute("cur_page",page);
+        model.addAttribute("amount",list_amount);
+
+        int tot_page = activeUserTotalCount/list_amount+1;
+        if(activeUserTotalCount%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+        boolean is_active = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("page_amount",page_amount);
 
 
         return "i11_user_mng";

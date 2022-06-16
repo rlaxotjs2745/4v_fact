@@ -17,11 +17,12 @@ public  interface UserMapper {
     UserVO getUserInfoByNameAndMPhoneNum(@Param("user_name") String user_name,@Param("mphone_num") String mphone_num);
 
     List<UserVO> getAllUserList();
-    List<UserVO> getUserPagingList(@Param("page_num") int page_num, @Param("amount") int amount, @Param("order_field") String order_field);
+    List<UserVO> getUserPagingList(ParamPageListFilteredVO paramPageListFilteredVO);
     List<PagedUserListVO> getUserSpecialInfoPagingList(@Param("page_num") int page_num, @Param("amount") int amount, @Param("order_field") String order_field);
 
     int getUserCount(@Param("user_type") int user_type);//99 모든 유저
 
+    int getActiveUserTotalCount();//비 휴면회원 모두
 
     long insertUserInfo(UserVO userVO);
 

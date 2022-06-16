@@ -39,13 +39,23 @@
         )
         WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
     </select>
-    <select id="getUserPagingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.UserVO">
+
+
+    <select id="getUserPagingList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.UserVO">
         SELECT
                 *
         FROM (
             SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
                 t.*
-            FROM TB_USER t
+            FROM (
+                SELECT * FROM TB_USER
+                    <if test="filter1 == 0">
+                        WHERE USER_TYPE != 1
+                    </if>
+                    <if test="filter1 == 1">
+                        WHERE USER_TYPE == 1
+                    </if>
+                     ) t
             WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
             )
         WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
@@ -54,6 +64,11 @@
     <select id="getUserCount" parameterType="int" resultType="int">
         SELECT COUNT(*) FROM  TB_USER
         <if test='user_type != 99'> WHERE USER_TYPE = #{user_type}</if> ;
+    </select>
+
+    <select id="getActiveUserTotalCount" resultType="int">
+        SELECT COUNT(*) FROM  TB_USER
+        WHERE USER_TYPE != 1 ;
     </select>
 
     <select id="selectList" parameterType="kr.or.fact.core.model.DTO.UserVO" resultType="kr.or.fact.core.model.DTO.UserVO">
