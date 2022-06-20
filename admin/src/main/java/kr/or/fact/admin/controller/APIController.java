@@ -801,6 +801,17 @@ public class APIController {
 
     }
 
+    @RequestMapping(value ="/get_corp_info",method = RequestMethod.POST)
+    public @ResponseBody
+    CorpInfoVO getCorpInfo(@RequestBody long idx_corp){
+        CorpInfoVO resultVO = new CorpInfoVO();
+        try {
+            resultVO = corpService.getCorpInfo(idx_corp);
+        }catch (Exception e){
+            resultVO.setCorp_type(1111);
+        }
+        return resultVO;
+    }
 
 
 }

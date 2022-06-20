@@ -37,6 +37,7 @@ public  interface UserMapper {
     UserSecretCodeVO getUserSecretCodeByIdx(ParamUserNCodeVO paramUserNCodeVO);
     UserSecretCodeVO getUserSecretCodeForPwUpdate(ParamUserNCodeVO paramUserNCodeVO);
 
+    List<UserVO> selectUserbyPage(@Param("type") int type, @Param("page") int page);
 
 
 

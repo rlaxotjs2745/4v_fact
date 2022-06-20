@@ -182,4 +182,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.getUserPagingList(paramPageListFilteredVO);
     }
 
+    @Override
+    public List<UserVO> selectUserbyPage(int sign_in_type, int page){
+        return userMapper.selectUserbyPage(sign_in_type, page);
+    }
+
 }

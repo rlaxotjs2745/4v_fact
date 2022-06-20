@@ -35,4 +35,6 @@ public class UserVO {
     int is_email_agree;//	number	4		0			홍보성email 성 수신여부	0:동의안함, 1:동의
     Date reg_date;//	date						최초 등록 일시
     Date last_upd_date;//	date						최종 수정 일시
+    int maxvalue;
+    int page;
 }

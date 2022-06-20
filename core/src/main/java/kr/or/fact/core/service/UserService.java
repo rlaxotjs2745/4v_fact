@@ -34,6 +34,7 @@ public interface UserService {
 
     List<UserVO> getActiveUserList(ParamPageListFilteredVO paramPageListFilteredVO);
 
+    List<UserVO> selectUserbyPage(int sign_in_type, int page);
 
 
 }
