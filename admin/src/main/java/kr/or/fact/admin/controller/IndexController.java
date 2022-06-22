@@ -19,6 +19,7 @@ import java.net.URL;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -60,6 +61,15 @@ public class IndexController {
 
     @Resource(name = "systemService")
     public SystemService systemService;
+
+    @Resource(name = "consultingService")
+    public ConsultingService consultingService;
+
+    @Resource(name = "eventContentService")
+    public EventContentService eventContentService;
+
+    @Resource(name = "visitService")
+    public VisitService visitService;
 
 
     @PreAuthorize("hasRole('ROLE_MEMBER')")
@@ -566,10 +576,15 @@ public class IndexController {
         return "b90_demo_bs_cert_mng";
     }
 
-    //문의
+    //문의상담신청 관리
     @RequestMapping(value = "/c10_site_mng_consult_mng",method = RequestMethod.POST)
-    public String c10_site_mng_consult_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                           ModelMap model){
+    public String c10_site_mng_consult_mng(ModelMap model,@RequestBody ParamPageListFilteredVO param){
+//접수목록 가져오기 (db table) DemoBsConsultingVO get 요청으로 가져오기
+        int type= 1;
+        param.setAmount(40);
+
+        List<DemoBsConsultingVO> consultingList = consultingService.getConsultingList(type,param);
+        model.addAttribute("consultingList",consultingList);
 
 
         return "c10_site_mng_consult_mng";
@@ -578,7 +593,62 @@ public class IndexController {
     //자산현황
     @RequestMapping(value = "/c21_site_visit_list",method = RequestMethod.POST)
     public String c21_site_visit_list(@RequestParam(value = "tag", required = false) String tagValue,
-                                      ModelMap model){
+                                      ModelMap model,@RequestBody ParamPageListFilteredVO param){
+        param.setAmount(10);
+        int list_amount = 10;
+        int page_amount = param.getAmount();
+        int page = param.getPage_num();
+        int visitCount = visitService.getVisitReqCount();
+        if(visitCount==0){
+            return"c21_site_visit_list";
+        }
+
+
+        model.addAttribute("total_count",visitCount);
+        List<VisitReqVO> visitReqList = visitService.getVisitList(page,list_amount);
+        model.addAttribute("visitReqList",visitReqList);
+        model.addAttribute("cur_page",page);
+        model.addAttribute("amount",list_amount);
+
+
+        int tot_page = visitCount/list_amount+1;
+        if(visitCount%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+        boolean is_active = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("page_amount",page_amount);
 
 
         return "c21_site_visit_list";
@@ -670,11 +740,16 @@ public class IndexController {
         return "c41_site_notice_mng";
     }
 
-    //고객관리
+    //고객관리진행중
     @RequestMapping(value = "/c42_site_event_mng",method = RequestMethod.POST)
     public String c42_site_event_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                     ModelMap model){
-
+                                     ModelMap model,ParamPageListFilteredVO param){
+        //행사관리 테이블 추가 .tb_event_content
+        int page_num=1;
+        int count =0;
+        int amount =1;
+        List<EventContentVO> eventContentList = eventContentService.getEventContentList(page_num,count);
+        model.addAttribute("eventcontentlist",eventContentList);
 
         return "c42_site_event_mng";
     }

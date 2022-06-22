@@ -10,7 +10,7 @@
         <div class="card px-4 pt-4 mb-4">
             <div class="form-row mb-4">
                 <div class="col-md-3 ">
-                    <label class="form-label text-muted">상담 구분</label>
+                    <label class="form-label text-muted">행사 구분</label>
                     <div class="form-inline mt-2">
                         <label class="custom-control custom-checkbox mr-2">
                             <input type="checkbox" class="custom-control-input">
@@ -18,16 +18,16 @@
                         </label>
                         <label class="custom-control custom-checkbox mr-2">
                             <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-label">사전상담</span>
+                            <span class="custom-control-label">XX이벤트</span>
                         </label>
                         <label class="custom-control custom-checkbox mr-2">
                             <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-label">사용승인 후 상담</span>
+                            <span class="custom-control-label">XXX이벤트</span>
                         </label>
                     </div>
                 </div>
                 <div class="col-md-2 ">
-                    <label class="form-label text-muted">상담 접수</label>
+                    <label class="form-label text-muted">이벤트</label>
                     <div class="form-inline">
                         <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
                             <label class="btn btn-secondary">
@@ -37,7 +37,7 @@
                                 <input type="radio" name="btn-radio"> 신규
                             </label>
                             <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 해결
+                                <input type="radio" name="btn-radio"> 끝난이벤트
                             </label>
                         </div>
                     </div>
@@ -96,7 +96,7 @@
                                     <th class="text-center sorting" style="width:60px">구분</th>
                                     <th class="text-center sorting" style="width:100px">신청자</th>
                                     <th class="text-center sorting" style="width:100px">ID</th>
-                                    <th class="text-center sorting" style="width:150px">소속</th>
+                                    <th class="text-center sorting" style="width:150px">제목</th>
                                     <th class="text-center px-2" style="width:80px">접수</th>
                                     <th class="text-center px-2" style="width:120px">수신일</th>
                                     <th class="text-center px-2" style="width:120px">요청일</th>
@@ -106,20 +106,22 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="">
-                                    <td class="text-center">1</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록완료</a></td>
+<c:forEach items="${eventcontentlist}" var="eventcontent" varStatus="status">
+    <tr class="entity" id="${eventcontent.idx_event_content}">
+                                    <td class="text-center">${eventcontent.event_content_num}</td>
+        <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view">등록하기</a></td>
                                     <td class="text-center">사전</td>
-                                    <td class="text-center">홍길동</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">맛있는 농부</td>
+                                    <td class="text-center">${eventcontent.author}</td>
+                                    <td class="text-center">${eventcontent.event_content_code}</td>
+                                    <td class="text-center">${eventcontent.subject}</td>
                                     <td class="text-center">추가</td>
-                                    <td class="text-center">2021.00.00</td>
+        <td class=""><fmt:formatDate value="${eventcontent.last_upd_date}" pattern="yyyy-MM-dd HH:MM"/></td>
                                     <td class="text-center">0</td>
                                     <td class="text-center">이메일</td>
                                     <td class="text-center">1회</td>
                                     <td class="">2021.00/00 (0일전)</td>
                                 </tr>
+</c:forEach>
                                 <tr class="">
                                     <td class="text-center">2</td>
                                     <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view">등록하기</a></td>
