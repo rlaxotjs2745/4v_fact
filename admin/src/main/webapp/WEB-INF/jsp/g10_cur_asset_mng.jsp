@@ -152,29 +152,23 @@
                 <div class="col-md-10 ">
                     <label class="form-label text-muted">자산 분류</label>
                     <div class="form-inline">
-                        <select class="custom-select mr-sm-2 mb-2 mb-sm-0">
-                            <option selected="">대분류 전체</option>
+                        <select class="custom-select mr-sm-2 mb-2 mb-sm-0" id="asset_main_code">
+                            <option value="100" selected>대분류 전체</option>
                             <c:forEach items="${main_cate}" var="cate" varStatus="status">
                                 <option value="${cate.code_value}">${cate.code_name} ${cate.detail != null ?  cate.detail : ""}</option>
                             </c:forEach>
                         </select>
-                        <select class="custom-select mr-sm-2 mb-2 mb-sm-0">
-                            <option selected="">중분류 전체</option>
-                            <option value="1">분야</option>
-                            <option value="2">분야</option>
-                            <option value="3">분야</option>
+                        <select class="custom-select mr-sm-2 mb-2 mb-sm-0" id="asset_sub_code" value="0" style="display: none">
+                            <option value="0" selected>중분류 전체</option>
                         </select>
-                        <select class="custom-select mr-sm-2 mb-2 mb-sm-0">
-                            <option selected="">소분류 전체</option>
-                            <option value="1">분야</option>
-                            <option value="2">분야</option>
-                            <option value="3">분야</option>
+                        <select class="custom-select mr-sm-2 mb-2 mb-sm-0" id="asset_detail_code" value="0" style="display: none">
+                            <option value="0" selected>소분류 전체</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-md-2 text-right">
                     <label class="form-label d-none d-md-block">&nbsp;</label>
-                    <button type="button" class="btn btn-success">조회</button>
+                    <button type="button" class="btn btn-success" id="inqure_asset">조회</button>
                 </div>
             </div>
         </div>
@@ -398,6 +392,22 @@
         })
     })
 
+    $("#asset_main_code").change(function(){
+        $("#asset_sub_code").css("display", "none");
+        $("#asset_detail_code").css("display", "none");
+
+        $.ajax({
+            url: 'asset_category',
+            method: 'post',
+            data: JSON.stringify({code_value: $("#asset_main_code").val(), code_name: "sub_code"}),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'html',//받는 데이터 타입
+            success:function(result){
+                $("#asset_sub_code").html(result).css("display", "inline-block");
+            }
+        })
+    })
+
     $("#sub_code").change(function(){
         $("#detail_code").css("display", "none");
         $.ajax({
@@ -410,7 +420,28 @@
                 $("#detail_code").html(result).css("display", "inline-block");
             }
         })
-        // pageLoad("asset_category", {code_value: $("#sub_code").val(), code_name: "detail_code"}, "", "codeSelect");
+    })
+
+    $("#asset_sub_code").change(function(){
+        $("#asset_detail_code").css("display", "none");
+        $.ajax({
+            url: 'asset_category',
+            method: 'post',
+            data: JSON.stringify({code_value: $("#asset_sub_code").val(), code_name: "detail_code"}),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'html',//받는 데이터 타입
+            success:function(result){
+                $("#asset_detail_code").html(result).css("display", "inline-block");
+            }
+        })
+    })
+
+    $("#inqure_asset").click(function (){
+        pageLoad("cur_asset_index", {
+            filter1: parseInt($("#asset_main_code").val()),
+            filter2: parseInt($("#asset_sub_code").val()),
+            filter3: parseInt($("#asset_detail_code").val()),
+        }, "자산 현황 보드", "cur_asset_index");
     })
 
     $("#asset_submit").click(function(){

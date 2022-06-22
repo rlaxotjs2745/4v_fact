@@ -10,5 +10,5 @@ import java.util.List;
 public interface AssetMapper {
     int registerAsset(AssetVO assetVO);
 
-    List<AssetVO> getAssetList(@Param("filter") int filter);
+    List<AssetVO> getAssetList(@Param("filter1") int filter1, @Param("filter2") int filter2, @Param("filter3") int filter3);
 }

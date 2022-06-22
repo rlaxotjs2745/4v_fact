@@ -35,7 +35,6 @@
                         <th class="text-center px-2" style="width:120px">대분류</th>
                         <th class="text-center px-2" style="width:120px">중분류</th>
                         <th class="text-center px-2" style="width:120px">세분류</th>
-                        <th class="text-center px-2" style="width:60px">총 수량</th>
                         <th class="text-center px-2" style="width:60px">수량</th>
                         <th class="text-center px-2" style="width:80px">사용중</th>
                         <th class="text-center px-2" style="width:80px">예약현황</th>
@@ -47,118 +46,25 @@
                         <th class="text-center px-2" style="width:80px">메모</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr class="">
-                        <td class="text-center align-middle" rowspan="2">지원시설-임대가능</td>
-                        <td class="text-center align-middle" rowspan="2">R&D 연구실</td>
-                        <td class="text-center align-middle" rowspan="2">XXXXXXXXXXXXX</td>
-                        <td class="text-center align-middle" rowspan="2">00</td>
-                        <td class="text-center">00</td>
-                        <td class="text-center">00</td>
-                        <td class="text-center">가능(0)</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center"><span class="text-truncate d-inline-block" style="width:100px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
-                        </td>
-                    </tr>
-                    <tr class="">
-                        <td class="text-center">00</td>
-                        <td class="text-center">00</td>
-                        <td class="text-center">사용중</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center"><span class="text-truncate d-inline-block" style="width:100px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
-                        </td>
-                    </tr>
-                    <tr class="">
-                        <td class="text-center align-middle" rowspan="2">지원시설-임대가능</td>
-                        <td class="text-center align-middle" rowspan="2">R&D 연구실</td>
-                        <td class="text-center align-middle" rowspan="2">XXXXXXXXXXXXX</td>
-                        <td class="text-center align-middle" rowspan="2">00</td>
-                        <td class="text-center">00</td>
-                        <td class="text-center">00</td>
-                        <td class="text-center">불가</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center"><span class="text-truncate d-inline-block" style="width:100px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
-                        </td>
-                    </tr>
-                    <tr class="">
-                        <td class="text-center">00</td>
-                        <td class="text-center">00</td>
-                        <td class="text-center">가능(0)</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                    </tr>
-                    <tr class="">
-                        <td class="text-center" rowspan="2">지원시설-임대가능</td>
-                        <td class="text-center" rowspan="2">R&D 연구실</td>
-                        <td class="text-center" rowspan="2">XXXXXXXXXXXXX</td>
-                        <td class="text-center" rowspan="2">00</td>
-                        <td class="text-center">00</td>
-                        <td class="text-center">00</td>
-                        <td class="text-center">가능(0)</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center"><span class="text-truncate d-inline-block" style="width:100px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
-                        </td>
-                    </tr>
-                    <tr class="">
-                        <td class="text-center">00</td>
-                        <td class="text-center">00</td>
-                        <td class="text-center">가능(0)</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center"><span class="text-truncate d-inline-block" style="width:100px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
-                        </td>
-                    </tr>
-                    <tr class="">
-                        <td class="text-center" rowspan="2">지원시설-임대가능</td>
-                        <td class="text-center" rowspan="2">R&D 연구실</td>
-                        <td class="text-center" rowspan="2">XXXXXXXXXXXXX</td>
-                        <td class="text-center" rowspan="2">00</td>
-                        <td class="text-center">00</td>
-                        <td class="text-center">00</td>
-                        <td class="text-center">가능(0)</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center"><span class="text-truncate d-inline-block" style="width:100px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
-                        </td>
-                    </tr>
-                    <tr class="">
-                        <td class="text-center">00</td>
-                        <td class="text-center">00</td>
-                        <td class="text-center">가능(0)</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center">XXXXXXX</td>
-                        <td class="text-center"><span class="text-truncate d-inline-block" style="width:100px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
-                        </td>
-                    </tr>
+                    <tbody id="assetList">
+                    <c:forEach items="${assetList}" var="asset" varStatus="status">
+                        <tr class="asset_entity">
+                            <td class="text-center align-middle" id="${asset.asset_main_category_code}"></td>
+                            <td class="text-center align-middle" id="${asset.asset_sub_category_code}"></td>
+                            <td class="text-center align-middle" id="${asset.asset_detail_category_code}">XXXXXXXXXXXXX</td>
+                            <td class="text-center align-middle" >00</td>
+                            <td class="text-center">00</td>
+                            <td class="text-center">00</td>
+                            <td class="text-center">가능(0)</td>
+                            <td class="text-center">XXXXXXX</td>
+                            <td class="text-center">XXXXXXX</td>
+                            <td class="text-center">XXXXXXX</td>
+                            <td class="text-center">XXXXXXX</td>
+                            <td class="text-center">XXXXXXX</td>
+                            <td class="text-center"><span class="text-truncate d-inline-block" style="width:100px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+                            </td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
@@ -199,3 +105,91 @@
         </div>
     </div>
 </div>
+
+<script>
+    var assetArr = [];
+    <c:forEach items="${assetList}" var="asset" varStatus="status">
+        assetArr.push({
+            idx_asset: "${asset.idx_asset}",
+            asset_code: "${asset.asset_code}",
+            asset_main_category_code: "${asset.asset_main_category_code}",
+            asset_sub_category_code: "${asset.asset_sub_category_code}",
+            asset_detail_category_code: "${asset.asset_detail_category_code}",
+            asset_name: "${asset.asset_name}",
+            asset_status: "${asset.asset_status}",
+            is_asset_photo_file: "${asset.is_asset_photo_file}",
+            asset_manufacture: "${asset.asset_manufacture}",
+            asset_brand: "${asset.asset_brand}",
+            asset_model_name: "${asset.asset_model_name}",
+            asset_pid: "${asset.asset_pid}",
+            asset_manager_name: "${asset.asset_manager_name}",
+            asset_loc: "${asset.asset_loc}",
+            asset_spec: "${asset.asset_spec}",
+            representative_use: "${asset.representative_use}",
+            memo: "${asset.memo}",
+            idx_admin: "${asset.idx_admin}",
+            reg_date: "${asset.reg_date}",
+            last_upd_date: "${asset.last_upd_date}",
+        })
+    </c:forEach>
+    var mainCodeObj = {};
+    var subCodeObj = {};
+    var detailCodeObj = {};
+    var curCode = "";
+    var curAssetCount = 0;
+    var curObj;
+    var curCode;
+    sortAssetArr(1);
+    function sortAssetArr(count) {
+        if(count == 4){
+            return;
+        }
+        switch (count){
+            case 1:
+                curObj = mainCodeObj;
+                curCode = "asset_main_category_code";
+                break;
+            case 2:
+                curObj = subCodeObj;
+                curCode = "asset_sub_category_code";
+                break;
+            case 3:
+                curObj = detailCodeObj;
+                curCode = "asset_detail_category_code";
+                break;
+        }
+        assetArr.forEach(function (asset) {
+           if(curObj[asset[curCode]]){
+               curObj[asset[curCode]]++;
+           } else if(!curObj[asset[curCode]]){
+               curObj[asset[curCode]] = 1;
+           }
+        })
+        return sortAssetArr(count+1);
+    }
+
+    assetArr.forEach(function (asset) {
+        var curRowspan;
+        if($("#assetList").find($("#" + asset.asset_main_category_code)).length){
+            curRowspan = $("#" + asset.asset_main_category_code).attr("rowspan");
+            $("#" + asset.asset_main_category_code).attr("rowspan", parseInt(curRowspan) + 1);
+        } else {
+            $("#" + asset.asset_main_category_code).attr("rowspan", 1);
+        }
+
+        if($("#assetList").find($("#" + asset.asset_sub_category_code)).length){
+            curRowspan = $("#" + asset.asset_sub_category_code).attr("rowspan");
+            $("#" + asset.asset_sub_category_code).attr("rowspan", parseInt(curRowspan) + 1);
+        } else {
+            $("#" + asset.asset_sub_category_code).attr("rowspan", 1);
+        }
+
+        if($("#assetList").find($("#" + asset.asset_detail_category_code)).length){
+            curRowspan = $("#" + asset.asset_detail_category_code).attr("rowspan");
+            $("#" + asset.asset_detail_category_code).attr("rowspan", parseInt(curRowspan) + 1);
+        } else {
+            $("#" + asset.asset_detail_category_code).attr("rowspan", 1);
+        }
+
+    })
+</script>

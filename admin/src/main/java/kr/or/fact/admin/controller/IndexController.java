@@ -934,7 +934,9 @@ public class IndexController {
     public String cur_asset_index(@RequestParam(value = "tag", required = false) String tagValue,
                                   @RequestBody ParamPageListFilteredVO param,
                                     ModelMap model){
-        List<AssetVO> assetVOList = assetService.getAssetList(param.getFilter1());
+        List<AssetVO> assetVOList = assetService.getAssetList(param);
+
+        model.addAttribute("assetList", assetVOList);
 
 
         return "cur_asset_index";
