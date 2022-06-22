@@ -23,6 +23,10 @@
 
     </select>
 
+    <select id="getAllSystemCodeList" resultType="kr.or.fact.core.model.DTO.SystemCodeVO">
+        SELECT * FROM TB_SYSTEM_CODE
+    </select>
+
     <insert id="insertSystemCode" parameterType="kr.or.fact.core.model.DTO.SystemCodeVO">
         INSERT INTO TB_SYSTEM_CODE (
             IDX_SYSTEM_CODE,

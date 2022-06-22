@@ -10,6 +10,7 @@ import java.util.List;
 public interface SystemMapper {
     void insertSystemCode(SystemCodeVO codeVO);
     List<SystemCodeVO> getSystemCodeList(ParamPageListFilteredVO paramPageListFilteredVO);
+    List<SystemCodeVO> getAllSystemCodeList();
     SystemCodeVO getSystemCode(@Param("idx_system_code") long idx_system_code);
     int getSystemTotalCount();
 }

@@ -181,181 +181,17 @@
 
         <hr>
 
-        <div class="card">
-            <h6 class="card-header with-elements">
-                <div class="card-header-title">자산 목록</div>
-                <div class="card-header-elements ml-auto">
-                    <a href="#none" class="btn btn-outline-primary"  data-toggle="modal" data-target="#modals-souce-upload">XLS 일괄등록</a>
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modals-souce-write">+ 자원등록</button>
+        <div class="card" id="cur_asset_index">
 
-                </div>
-            </h6>
-
-            <div class="card-datatable table-responsive pt-0 pb-3">
-                <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                    <div class="row p-3">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="mr-3  mb-0">총 : <strong>999</strong>개</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
-                                <thead>
-                                <tr role="row">
-                                    <th class="text-center px-2" style="width:120px">대분류</th>
-                                    <th class="text-center px-2" style="width:120px">중분류</th>
-                                    <th class="text-center px-2" style="width:120px">세분류</th>
-                                    <th class="text-center px-2" style="width:60px">총 수량</th>
-                                    <th class="text-center px-2" style="width:60px">수량</th>
-                                    <th class="text-center px-2" style="width:80px">사용중</th>
-                                    <th class="text-center px-2" style="width:80px">예약현황</th>
-                                    <th class="text-center px-2" style="width:80px">브랜드</th>
-                                    <th class="text-center px-2" style="width:80px">모델명</th>
-                                    <th class="text-center px-2" style="width:80px">대표용도</th>
-                                    <th class="text-center px-2" style="width:80px">담당자</th>
-                                    <th class="text-center px-2" style="width:80px">위치</th>
-                                    <th class="text-center px-2" style="width:80px">메모</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="">
-                                    <td class="text-center align-middle" rowspan="2">지원시설-임대가능</td>
-                                    <td class="text-center align-middle" rowspan="2">R&D 연구실</td>
-                                    <td class="text-center align-middle" rowspan="2">XXXXXXXXXXXXX</td>
-                                    <td class="text-center align-middle" rowspan="2">00</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">가능(0)</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center"><span class="text-truncate d-inline-block" style="width:100px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">사용중</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center"><span class="text-truncate d-inline-block" style="width:100px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center align-middle" rowspan="2">지원시설-임대가능</td>
-                                    <td class="text-center align-middle" rowspan="2">R&D 연구실</td>
-                                    <td class="text-center align-middle" rowspan="2">XXXXXXXXXXXXX</td>
-                                    <td class="text-center align-middle" rowspan="2">00</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">불가</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center"><span class="text-truncate d-inline-block" style="width:100px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">가능(0)</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center" rowspan="2">지원시설-임대가능</td>
-                                    <td class="text-center" rowspan="2">R&D 연구실</td>
-                                    <td class="text-center" rowspan="2">XXXXXXXXXXXXX</td>
-                                    <td class="text-center" rowspan="2">00</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">가능(0)</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center"><span class="text-truncate d-inline-block" style="width:100px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">가능(0)</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center"><span class="text-truncate d-inline-block" style="width:100px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center" rowspan="2">지원시설-임대가능</td>
-                                    <td class="text-center" rowspan="2">R&D 연구실</td>
-                                    <td class="text-center" rowspan="2">XXXXXXXXXXXXX</td>
-                                    <td class="text-center" rowspan="2">00</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">가능(0)</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center"><span class="text-truncate d-inline-block" style="width:100px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">가능(0)</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center"><span class="text-truncate d-inline-block" style="width:100px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
-                        </div>
-                        <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                    <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="d-flex justify-content-end align-items-end demo-inline-spacing w-100 mt-3">
-            <a href="#none" class="btn btn-outline-primary"  data-toggle="modal" data-target="#modals-souce-upload">XLS 일괄등록</a>
-            <button type="button" class="btn btn-success mr-0"  data-toggle="modal" data-target="#modals-souce-write">+ 자원등록</button>
+            <a href="#none" class="btn btn-outline-primary"  data-toggle="modal" data-target="#modals-source-upload">XLS 일괄등록</a>
+            <button type="button" class="btn btn-success mr-0"  data-toggle="modal" data-target="#modals-source-write">+ 자원등록</button>
         </div>
 
         <!-- Modal template -->
-        <div class="modal fade" id="modals-souce-write">
+        <div class="modal fade" id="modals-source-write">
             <div class="modal-dialog modal-lg">
                 <form class="modal-content">
                     <div class="modal-header">
@@ -367,30 +203,24 @@
                         <div class="form-row">
                             <div class="form-group col col-md-6">
                                 <label class="form-label d-block text-muted">일련번호</label>
-                                <input type="text" class="form-control w-lg-auto" value="제20XXX-XXXX호">
+                                <input type="text" class="form-control w-lg-auto" id="asset_code">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col col-md-12">
                                 <label class="form-label d-block text-muted">자산 분류</label>
-                                <div class="form-inline">
-                                    <select class="custom-select mr-sm-2 mb-2 mb-sm-0">
-                                        <option selected="">대분류 전체</option>
-                                        <option value="1">분야</option>
-                                        <option value="2">분야</option>
-                                        <option value="3">분야</option>
+                                <div class="form-inline" id="code_select">
+                                    <select class="custom-select mr-sm-2 mb-2 mb-sm-0 code_select" id="main_code">
+                                        <option selected="" disabled>대분류 전체</option>
+                                        <c:forEach items="${main_cate}" var="cate" varStatus="status">
+                                            <option value="${cate.code_value}">${cate.code_name} ${cate.detail != null ?  cate.detail : ""}</option>
+                                        </c:forEach>
                                     </select>
-                                    <select class="custom-select mr-sm-2 mb-2 mb-sm-0">
-                                        <option selected="">중분류 전체</option>
-                                        <option value="1">분야</option>
-                                        <option value="2">분야</option>
-                                        <option value="3">분야</option>
+                                    <select class="custom-select mr-sm-2 mb-2 mb-sm-0 code_select" id="sub_code" style="display: none">
+
                                     </select>
-                                    <select class="custom-select mr-sm-2 mb-2 mb-sm-0">
-                                        <option selected="">소분류 전체</option>
-                                        <option value="1">분야</option>
-                                        <option value="2">분야</option>
-                                        <option value="3">분야</option>
+                                    <select class="custom-select mr-sm-2 mb-2 mb-sm-0 code_select" id="detail_code" style="display: none">
+
                                     </select>
                                 </div>
                             </div>
@@ -398,19 +228,18 @@
                         <div class="form-row">
                             <div class="form-group col col-md-6">
                                 <label class="form-label d-block text-muted">자산이름</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" id="asset_name">
                             </div>
                             <div class="form-group col col-md-6">
-                                <label class="form-label d-block text-muted">예약 가능</label>
-                                <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-8" type="radio" class="custom-control-input">
-                                    <span class="custom-control-label">예약 가능</span>
-                                </label>
-                                <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-8" type="radio" class="custom-control-input">
-                                    <span class="custom-control-label">예약 불가</span>
-                                </label>
+                                <label class="form-label d-block text-muted">관리 담당</label>
+                                <select class="custom-select mr-sm-2 mb-2 mb-sm-0" id="asset_manager">
+                                    <option selected="" disabled>관리자 선택</option>
+                                    <c:forEach items="${adminList}" var="admin" varStatus="status">
+                                        <option value="${admin.admin_name}">${admin.corporate_name == null ? "" : admin.corporate_name} ${admin.admin_name}</option>
+                                    </c:forEach>
+                                </select>
                             </div>
+
                         </div>
                         <div class="form-row">
                             <div class="form-group col col-md-12 mb-0">
@@ -430,69 +259,76 @@
                         </div>
 
                         <div class="form-row">
+                            <div class="form-group col col-md-12">
+                                <label class="form-label d-block text-muted">예약 가능</label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="reservation" type="radio" class="custom-control-input" value="0">
+                                    <span class="custom-control-label">예약 가능</span>
+                                </label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="reservation" type="radio" class="custom-control-input" value="2">
+                                    <span class="custom-control-label">사용 중</span>
+                                </label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="reservation" type="radio" class="custom-control-input" value="3">
+                                    <span class="custom-control-label">파손 수리 중</span>
+                                </label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="reservation" type="radio" class="custom-control-input" value="4">
+                                    <span class="custom-control-label">폐기</span>
+                                </label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="reservation" type="radio" class="custom-control-input" value="99">
+                                    <span class="custom-control-label">분실</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-row">
                             <div class="form-group col col-md-6">
                                 <label class="form-label d-block text-muted">제조사</label>
-                                <input type="text" class="form-control" value="XXXXXXXX">
+                                <input type="text" class="form-control" id="asset_manufacture">
                             </div>
                             <div class="form-group col col-md-6">
                                 <label class="form-label d-block text-muted">브랜드</label>
-                                <input type="text" class="form-control" value="XXXXXXXX">
+                                <input type="text" class="form-control" id="asset_brand">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col col-md-6">
                                 <label class="form-label d-block text-muted">모델명</label>
-                                <input type="text" class="form-control" value="XXXXXXXX">
-                            </div>
-                            <div class="form-group col col-md-6">
-                                <label class="form-label d-block text-muted">모델명</label>
-                                <input type="text" class="form-control" value="XXXXXXXX">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col col-md-6">
-                                <label class="form-label d-block text-muted">관리 담당</label>
-                                <input type="text" class="form-control" value="XXXXXXXX">
+                                <input type="text" class="form-control" id="asset_model_name">
                             </div>
                             <div class="form-group col col-md-6">
                                 <label class="form-label d-block text-muted">보관 위치</label>
-                                <input type="text" class="form-control" value="XXXXXXXX">
+                                <input type="text" class="form-control" id="asset_loc">
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">대표 용도</label>
-                                <input type="text" class="form-control" value="XXXXXXXX">
+                            <div class="form-group col col-md-6">
+                                <label class="form-label d-block text-muted">대표 사용처</label>
+                                <input type="text" class="form-control" id="representative_use">
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">규격 및 구성</label>
-                                <input type="text" class="form-control" value="XXXXXXXX">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">대표 용도</label>
-                                <input type="text" class="form-control" value="XXXXXXXX">
+                            <div class="form-group col col-md-6">
+                                <label class="form-label d-block text-muted">일련 번호</label>
+                                <input type="text" class="form-control" id="asset_pid">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col col-md-12">
                                 <label class="form-label d-block text-muted">메모</label>
-                                <textarea class="form-control" rows="3" placeholder="메모는 고객에게 노출이 되지 않으며 관리자만 볼 수 있습니다."></textarea>
+                                <textarea class="form-control" id="memo" rows="3" placeholder="메모는 고객에게 노출이 되지 않으며 관리자만 볼 수 있습니다."></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                        <button type="button" class="btn btn-primary">저장</button>
+                        <button type="button" class="btn btn-primary" id="asset_submit">저장</button>
                     </div>
                 </form>
             </div>
         </div>
 
-        <div class="modal fade" id="modals-souce-upload">
+        <div class="modal fade" id="modals-source-upload">
             <div class="modal-dialog ">
                 <form class="modal-content">
                     <div class="modal-header">
@@ -537,3 +373,94 @@
 <!-- / Layout footer -->
 
 <!-- / Page content -->
+<script>
+    var reservation;
+
+    pageLoad("cur_asset_index", {filter1: 100}, "자산 현황 보드", "cur_asset_index");
+
+    $('input[name="reservation"]').change(function(){
+        reservation = $('input[name="reservation"]:checked').val();
+    })
+
+    $("#main_code").change(function(){
+        $("#sub_code").css("display", "none");
+        $("#detail_code").css("display", "none");
+
+        $.ajax({
+            url: 'asset_category',
+            method: 'post',
+            data: JSON.stringify({code_value: $("#main_code").val(), code_name: "sub_code"}),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'html',//받는 데이터 타입
+            success:function(result){
+                $("#sub_code").html(result).css("display", "inline-block");
+            }
+        })
+    })
+
+    $("#sub_code").change(function(){
+        $("#detail_code").css("display", "none");
+        $.ajax({
+            url: 'asset_category',
+            method: 'post',
+            data: JSON.stringify({code_value: $("#sub_code").val(), code_name: "detail_code"}),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'html',//받는 데이터 타입
+            success:function(result){
+                $("#detail_code").html(result).css("display", "inline-block");
+            }
+        })
+        // pageLoad("asset_category", {code_value: $("#sub_code").val(), code_name: "detail_code"}, "", "codeSelect");
+    })
+
+    $("#asset_submit").click(function(){
+        console.log(typeof curMyIdx)
+        var param = {
+            asset_code:$("#asset_code").val(),
+            asset_main_category_code: parseInt($("#main_code").val()),
+            asset_sub_category_code: parseInt($("#sub_code").val()),
+            asset_detail_category_code: parseInt($("#detail_code").val()),
+            asset_name: $("#asset_name").val(),
+            asset_status: parseInt(reservation),
+            is_asset_photo_file: 0,
+            asset_manufacture: $("#asset_manufacture").val(),
+            asset_brand: $("#asset_brand").val(),
+            asset_model_name: $("#asset_model_name").val(),
+            asset_pid: $("#asset_pid").val(),
+            asset_manager_name: $("#asset_manager").val(),
+            asset_loc: $("#asset_loc").val(),
+            representative_use: $("#representative_use").val(),
+            memo: $("#memo").val(),
+            idx_admin: curMyIdx
+        }
+        $.ajax({
+            type: 'post',
+            url: 'register_asset',
+            data: JSON.stringify(param),
+            contentType: "application/json; charset=utf-8;",
+            dataType: 'json',
+            success: function (res) {
+                if(res.result_code == "SUCCESS")
+                alert(res.result_str);
+                $("#modals-source-write").modal("hide");
+                $("#asset_code").text("")
+                $("#main_code").val("");
+                $("#sub_code").val("");
+                $("#detail_code").val("");
+                $("#asset_name").text("");
+                $("#asset_manufacture").text("");
+                $("#asset_brand").text("");
+                $("#asset_model_name").text("");
+                $("#asset_pid").text("");
+                $("#asset_manager").val("");
+                $("#asset_loc").text("");
+                $("#representative_use").text("");
+                $("#memo").text("");
+                pageLoad("cur_asset_index", {page_num: 1, filter1: 100}, "자산 현황 보드", "cur_asset_index");
+            }
+        })
+    })
+
+
+
+</script>

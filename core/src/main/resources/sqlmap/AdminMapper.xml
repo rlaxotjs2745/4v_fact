@@ -4,177 +4,197 @@
 <mapper namespace="kr.or.fact.core.model.AdminMapper">
 
     <select id="getAdminInfoById" parameterType="String" resultType="kr.or.fact.core.model.DTO.AdminVO">
-        SELECT * FROM TB_ADMIN  WHERE admin_id=#{admin_id,jdbcType=VARCHAR}
+        SELECT *
+        FROM TB_ADMIN
+        WHERE admin_id = #{admin_id,jdbcType=VARCHAR}
     </select>
 
     <select id="getAdminInfoByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.AdminVO">
-        SELECT * FROM TB_ADMIN  WHERE IDX_ADMIN=#{idx_admin}
+        SELECT *
+        FROM TB_ADMIN
+        WHERE IDX_ADMIN = #{idx_admin}
     </select>
     <select id="getAdminIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.AdminVO">
-        SELECT * FROM TB_ADMIN  WHERE IDX_ADMIN=#{idx_admin}
+        SELECT *
+        FROM TB_ADMIN
+        WHERE IDX_ADMIN = #{idx_admin}
     </select>
     <select id="getAuthAdmin" resultType="kr.or.fact.core.model.DTO.AdminVO">
-        SELECT * FROM TB_ADMIN WHERE admin_id=#{admin_id} AND admin_pw=#{admin_pw}
+        SELECT *
+        FROM TB_ADMIN
+        WHERE admin_id = #{admin_id}
+          AND admin_pw = #{admin_pw}
     </select>
 
     <select id="getAdminInfoByNameAndMPhoneNum" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.AdminVO">
-        SELECT * FROM TB_ADMIN WHERE USER_NAME=#{admin_name} AND MPHONE_NUM=#{mphone_num}
+        SELECT *
+        FROM TB_ADMIN
+        WHERE USER_NAME = #{admin_name}
+          AND MPHONE_NUM = #{mphone_num}
     </select>
 
     <select id="getAllAdminList" resultType="kr.or.fact.core.model.DTO.AdminVO">
-        SELECT * FROM  TB_ADMIN
+        SELECT *
+        FROM TB_ADMIN
     </select>
 
-    <select id="getAdminSpecialInfoPagingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.PagedAdminListVO">
-        SELECT
-            admin_id
-             ,admin_name
-             ,mphone_num
+    <select id="getAdminSpecialInfoPagingList" parameterType="hashmap"
+            resultType="kr.or.fact.core.model.DTO.PagedAdminListVO">
+        SELECT admin_id
+             , admin_name
+             , mphone_num
         FROM (
                  SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
               ,admin_id
-                      ,admin_name
-                      ,mphone_num
+                      , admin_name
+                      , mphone_num
                  FROM TB_ADMIN
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{page_num} * #{amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+        WHERE row_num <![CDATA[>]]> (#{page_num} - 1) * #{amount}
     </select>
     <select id="getAdminPagingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.AdminVO">
-        SELECT
-            *
+        SELECT *
         FROM (
                  SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
                 t.*
                  FROM TB_ADMIN t
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{page_num} * #{amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+        WHERE row_num <![CDATA[>]]> (#{page_num} - 1) * #{amount}
     </select>
 
     <select id="getAdminCount" parameterType="int" resultType="int">
-        SELECT COUNT(*) FROM  TB_ADMIN
-        <if test='admin_type != 99'> WHERE USER_TYPE = #{admin_type}</if> ;
+        SELECT COUNT(*) FROM TB_ADMIN
+        <if test='admin_type != 99'>WHERE USER_TYPE = #{admin_type}</if>
+        ;
     </select>
 
-    <select id="selectList" parameterType="kr.or.fact.core.model.DTO.AdminVO" resultType="kr.or.fact.core.model.DTO.AdminVO">
-        SELECT * FROM (
-                          SELECT t.*
-                          FROM TB_ADMIN t
-                      ) WHERE ROWNUM <![CDATA[ <= ]]> 501
+    <select id="selectList" parameterType="kr.or.fact.core.model.DTO.AdminVO"
+            resultType="kr.or.fact.core.model.DTO.AdminVO">
+        SELECT *
+        FROM (
+                 SELECT t.*
+                 FROM TB_ADMIN t
+             )
+        WHERE ROWNUM <![CDATA[ <= ]]> 501
     </select>
 
     <insert id="insertAdminInfo" parameterType="kr.or.fact.core.model.DTO.AdminVO">
-        INSERT INTO TB_ADMIN (
-            IDX_ADMIN,
-            ADMIN_ID,
-            ADMIN_PW,
-            ADMIN_NAME,
-            CORPORATE,
-            CORPORATE_NAME,
-            CORPORATE_NUM,
-            CORPORATE_FAX,
-            CORPORATE_HOMEPAGE,
-            JOB_TITLE,
-            AUTH_STATUS,
-            TEL_NUM,
-            MPHONE_NUM,
-            SIGN_IN_TYPE,
-            MAIN_PART,
-            ADMIN_TYPE,
-            MANAGE_NUM,
-            ADMIN_ADDR,
-            REG_DATE,
-            LAST_UPD_DATE
-        ) VALUES (
-                     SEQ_ADMIN.NEXTVAL,
-                     #{admin_id},
-                     #{admin_pw},
-                     #{admin_name},
-                     #{corporate},
-                     #{corporate_name},
-                     #{corporate_num},
-                     #{corporate_fax},
-                     #{corporate_homepage},
-                     #{job_title},
-                     #{auth_status},
-                     #{tel_num},
-                     #{mphone_num},
-                     #{sign_in_type},
-                     #{main_part},
-                     #{admin_type},
-                     #{manage_num},
-                     #{admin_addr},
-                     SYSDATE,
-                     SYSDATE
-                 )
+        INSERT INTO TB_ADMIN (IDX_ADMIN,
+                              ADMIN_ID,
+                              ADMIN_PW,
+                              ADMIN_NAME,
+                              CORPORATE,
+                              CORPORATE_NAME,
+                              CORPORATE_NUM,
+                              CORPORATE_FAX,
+                              CORPORATE_HOMEPAGE,
+                              JOB_TITLE,
+                              AUTH_STATUS,
+                              TEL_NUM,
+                              MPHONE_NUM,
+                              SIGN_IN_TYPE,
+                              MAIN_PART,
+                              ADMIN_TYPE,
+                              MANAGE_NUM,
+                              ADMIN_ADDR,
+                              REG_DATE,
+                              LAST_UPD_DATE)
+        VALUES (SEQ_ADMIN.NEXTVAL,
+                #{admin_id},
+                #{admin_pw},
+                #{admin_name},
+                #{corporate},
+                #{corporate_name},
+                #{corporate_num},
+                #{corporate_fax},
+                #{corporate_homepage},
+                #{job_title},
+                #{auth_status},
+                #{tel_num},
+                #{mphone_num},
+                #{sign_in_type},
+                #{main_part},
+                #{admin_type},
+                #{manage_num},
+                #{admin_addr},
+                SYSDATE,
+                SYSDATE)
     </insert>
 
 
     <update id="updateAdminInfo" parameterType="kr.or.fact.core.model.DTO.AdminVO">
-UPDATE TB_ADMIN SET ADMIN_PW = #{admin_pw} WHERE IDX_ADMIN = #{idx_admin}
+        UPDATE TB_ADMIN
+        SET ADMIN_PW = #{admin_pw}
+        WHERE IDX_ADMIN = #{idx_admin}
 
     </update>
     <update id="updateAdminInfoForLogout" parameterType="string">
         UPDATE TB_ADMIN
-        SET
-            LAST_UPD_DATE = SYSDATE
-        WHERE ADMIN_ID=#{admin_id}
+        SET LAST_UPD_DATE = SYSDATE
+        WHERE ADMIN_ID = #{admin_id}
     </update>
 
     <delete id="deleteAdminInfoByID" parameterType="string">
-        DELETE TB_ADMIN WHERE  ADMIN_ID = #{admin_id}
+        DELETE
+        TB_ADMIN WHERE  ADMIN_ID =
+        #{admin_id}
     </delete>
 
     <delete id="deleteAdminInfoByIdx" parameterType="long">
-        DELETE TB_ADMIN WHERE IDX_ADMIN = #{idx_user}
+        DELETE
+        TB_ADMIN WHERE IDX_ADMIN =
+        #{idx_user}
     </delete>
 
     <insert id="saveAdminWorkHistory" parameterType="kr.or.fact.core.model.DTO.AdminHistoryVO">
-        INSERT INTO TB_ADMIN (
-            IDX_ADMIN_HISTORY,
-            IDX_ADMIN,
-            ADMIN_ID,
-            ADMIN_NAME,
-            WORK_TYPE,
-            WORK_DETAIL,
-            REG_DATE
-        ) VALUES (
-                     SEQ_ADMIN_HISTORY.NEXTVAL,
-                     #{idx_admin},
-                     #{admin_id},
-                     #{admin_name},
-                     #{work_type},
-                     #{work_detail},
-                     SYSDATE
-                 )
+        INSERT INTO TB_ADMIN (IDX_ADMIN_HISTORY,
+                              IDX_ADMIN,
+                              ADMIN_ID,
+                              ADMIN_NAME,
+                              WORK_TYPE,
+                              WORK_DETAIL,
+                              REG_DATE)
+        VALUES (SEQ_ADMIN_HISTORY.NEXTVAL,
+                #{idx_admin},
+                #{admin_id},
+                #{admin_name},
+                #{work_type},
+                #{work_detail},
+                SYSDATE)
     </insert>
 
     <update id="updateAdminPassword" parameterType="kr.or.fact.core.model.DTO.ChangePwVO">
-        UPDATE TB_ADMIN SET ADMIN_PW=#{modPW},AUTH_STATUS=1 WHERE ADMIN_ID=#{admin_id}
+        UPDATE TB_ADMIN
+        SET ADMIN_PW=#{modPW},
+            AUTH_STATUS=1
+        WHERE ADMIN_ID = #{admin_id}
     </update>
 
     <select id="getAdminByAdminId" resultType="kr.or.fact.core.model.DTO.AdminVO">
-        SELECT * FROM TB_ADMIN WHERE ADMIN_ID = #{admin_id}
+        SELECT *
+        FROM TB_ADMIN
+        WHERE ADMIN_ID = #{admin_id}
     </select>
 
     <select id="selectAdminbyIdx" resultType="kr.or.fact.core.model.DTO.AdminResVO">
         SELECT * FROM (
-                          SELECT A.*, FLOOR((ROWNUM - 1)/#{count} + 1) PAGE, (
-                              SELECT MAX(FLOOR((ROWNUM - 1)/#{count} + 1)) FROM TB_ADMIN
-                              WHERE IDX_ADMIN >= 1
-                              <if test="corporate != '100'">
-                                 AND CORPORATE = #{corporate}
-                              </if>
-                              ) MAXVALUE FROM (
-                                                                                      SELECT TB_ADMIN.* FROM TB_ADMIN
-                                                                                      WHERE IDX_ADMIN >= 1
-                                                                                      <if test="corporate != '100'">
-                                                                                          AND CORPORATE = #{corporate}
-                                                                                      </if>
-                                                                                        ORDER BY CONVERT(ADMIN_NAME,'UTFE') ASC
-                                                                                  )
-                                                                                      A)
+        SELECT A.*, FLOOR((ROWNUM - 1)/#{count} + 1) PAGE, (
+        SELECT MAX(FLOOR((ROWNUM - 1)/#{count} + 1)) FROM TB_ADMIN
+        WHERE IDX_ADMIN >= 1
+        <if test="corporate != '100'">
+            AND CORPORATE = #{corporate}
+        </if>
+        ) MAXVALUE FROM (
+        SELECT TB_ADMIN.* FROM TB_ADMIN
+        WHERE IDX_ADMIN >= 1
+        <if test="corporate != '100'">
+            AND CORPORATE = #{corporate}
+        </if>
+        ORDER BY CONVERT(ADMIN_NAME,'UTFE') ASC
+        )
+        A)
         WHERE PAGE = #{pageNum}
     </select>
 
@@ -187,22 +207,20 @@ UPDATE TB_ADMIN SET ADMIN_PW = #{admin_pw} WHERE IDX_ADMIN = #{idx_admin}
 
     <update id="modifyPw">
         UPDATE TB_ADMIN
-        SET
-            ADMIN_PW = #{newPw},
+        SET ADMIN_PW    = #{newPw},
             AUTH_STATUS = 0
-        WHERE IDX_ADMIN=#{adminIdx}
+        WHERE IDX_ADMIN = #{adminIdx}
     </update>
     <update id="adminModify">
         UPDATE TB_ADMIN
-        SET
-TEL_NUM=#{tel_num},
-MPHONE_NUM=#{mphone_num},
-ADMIN_TYPE=#{admin_type},
-ADMIN_ADDR=#{admin_addr},
-JOB_TITLE=#{job_title},
-MAIN_PART=#{main_part},
-MANAGE_NUM=#{manage_num},
-SIGN_IN_TYPE=#{sign_in_type}
-        WHERE IDX_ADMIN=#{idx_admin}
+        SET TEL_NUM=#{tel_num},
+            MPHONE_NUM=#{mphone_num},
+            ADMIN_TYPE=#{admin_type},
+            ADMIN_ADDR=#{admin_addr},
+            JOB_TITLE=#{job_title},
+            MAIN_PART=#{main_part},
+            MANAGE_NUM=#{manage_num},
+            SIGN_IN_TYPE=#{sign_in_type}
+        WHERE IDX_ADMIN = #{idx_admin}
     </update>
 </mapper>

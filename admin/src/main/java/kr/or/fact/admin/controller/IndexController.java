@@ -61,6 +61,8 @@ public class IndexController {
     @Resource(name = "systemService")
     public SystemService systemService;
 
+    @Resource(name = "assetService")
+    public AssetService assetService;
 
     @Resource(name = "userService")
     public UserService userService;
@@ -831,9 +833,90 @@ public class IndexController {
     @RequestMapping(value = "/g10_cur_asset_mng",method = RequestMethod.POST)
     public String g10_cur_asset_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                     ModelMap model){
+        List<SystemCodeVO> systemCodeVOList = systemService.getAllSystemCodeList();
+        List<SystemCodeVO> mainAssetCodeList = new ArrayList<>();
+        List<SystemCodeVO> subAssetCodeList = new ArrayList<>();
+        List<SystemCodeVO> detailAssetCodeList = new ArrayList<>();
+        systemCodeVOList.forEach(systemCodeVO -> {
+            if(systemCodeVO.getCode_value().length() == 1 || Integer.parseInt(systemCodeVO.getCode_value()) == 10){
+                mainAssetCodeList.add(systemCodeVO);
+            } else if(Integer.parseInt(systemCodeVO.getCode_value()) <= 120){
+                subAssetCodeList.add(systemCodeVO);
+            } else {
+                detailAssetCodeList.add(systemCodeVO);
+            }
+        });
+        model.addAttribute("adminList", adminService.getAdminList());
+        model.addAttribute("main_cate", mainAssetCodeList);
+        model.addAttribute("sub_cate", subAssetCodeList);
+        model.addAttribute("detail_cate", detailAssetCodeList);
 
 
         return "g10_cur_asset_mng";
+    }
+
+    @RequestMapping(value = "/cur_asset_index",method = RequestMethod.POST)
+    public String cur_asset_index(@RequestParam(value = "tag", required = false) String tagValue,
+                                  @RequestBody ParamPageListFilteredVO param,
+                                    ModelMap model){
+        List<AssetVO> assetVOList = assetService.getAssetList(param.getFilter1());
+
+
+        return "cur_asset_index";
+    }
+
+    @RequestMapping(value = "/asset_category",method = RequestMethod.POST)
+    public String asset_category(@RequestParam(value = "tag", required = false) String tagValue,
+                                 @RequestBody SystemCodeVO param,
+                                  ModelMap model){
+        List<SystemCodeVO> systemCodeVOList = systemService.getAllSystemCodeList();
+        List<SystemCodeVO> mainAssetCodeList = new ArrayList<>();
+        List<SystemCodeVO> subAssetCodeList = new ArrayList<>();
+        List<SystemCodeVO> detailAssetCodeList = new ArrayList<>();
+        systemCodeVOList.forEach(systemCodeVO -> {
+            if(systemCodeVO.getCode_value().length() == 1 || Integer.parseInt(systemCodeVO.getCode_value()) == 10){
+                mainAssetCodeList.add(systemCodeVO);
+            } else if(Integer.parseInt(systemCodeVO.getCode_value()) <= 120){
+                subAssetCodeList.add(systemCodeVO);
+            } else {
+                detailAssetCodeList.add(systemCodeVO);
+            }
+        });
+        List<SystemCodeVO> resultCodeList = new ArrayList<>();
+        if(param.getCode_name().equals("sub_code")){
+            subAssetCodeList.forEach(systemCodeVO -> {
+                if(param.getCode_value().length() == 1){
+                    if(param.getCode_value().equals(systemCodeVO.getCode_value().substring(0,1))){
+                        resultCodeList.add(systemCodeVO);
+                    }
+                } else {
+                    if(param.getCode_value().equals(systemCodeVO.getCode_value().substring(0,2))){
+                        resultCodeList.add(systemCodeVO);
+                    }
+                }
+            });
+        } else if(param.getCode_name().equals("detail_code")){
+            detailAssetCodeList.forEach(systemCodeVO -> {
+                if(param.getCode_value().length() == 2){
+                    if(param.getCode_value().equals(systemCodeVO.getCode_value().substring(0,2))){
+                        resultCodeList.add(systemCodeVO);
+                    }
+                } else {
+                    if(param.getCode_value().equals(systemCodeVO.getCode_value().substring(0,3))){
+                        resultCodeList.add(systemCodeVO);
+                    }
+                }
+            });
+        }
+        boolean bool = true;
+        if(resultCodeList.size() == 0){
+            bool = false;
+        }
+        model.addAttribute("codeList", resultCodeList);
+        model.addAttribute("curListName", param.getCode_name());
+        model.addAttribute("lengthBool", bool);
+
+        return "asset_category";
     }
 
     //콘솔 프론트 대시보드 관리

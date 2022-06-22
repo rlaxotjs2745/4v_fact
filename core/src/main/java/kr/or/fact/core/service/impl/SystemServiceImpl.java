@@ -39,4 +39,9 @@ public class SystemServiceImpl implements SystemService {
     public int getSystemTotalCount(){
         return systemMapper.getSystemTotalCount();
     }
+
+    @Override
+    public List<SystemCodeVO> getAllSystemCodeList(){
+        return systemMapper.getAllSystemCodeList();
+    }
 }

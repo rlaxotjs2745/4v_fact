@@ -2,5 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.fact.core.model.AssetMapper">
-
+    <insert id="registerAsset" parameterType="kr.or.fact.core.model.DTO.AssetVO">
+        INSERT INTO TB_ASSET (IDX_ASSET,
+                              ASSET_CODE,
+                              ASSET_MAIN_CATEGORY_CODE,
+                              ASSET_SUB_CATEGORY_CODE,
+                              ASSET_DETAIL_CATEGORY_CODE,
+                              ASSET_NAME,
+                              ASSET_STATUS,
+                              IS_ASSET_PHOTO_FILE,
+                              ASSET_MANUFACTURE,
+                              ASSET_BRAND,
+                              ASSET_MODEL_NAME,
+                              ASSET_PID,
+                              ASSET_MANAGER_NAME,
+                              ASSET_LOC,
+                              REPRESENTATIVE_USE,
+                              MEMO,
+                              IDX_ADMIN,
+                              REG_DATE,
+                              LAST_UPD_DATE)
+        VALUES (SEQ_ASSET.NEXTVAL,
+                #{asset_code},
+                #{asset_main_category_code},
+                #{asset_sub_category_code},
+                #{asset_detail_category_code},
+                #{asset_name},
+                #{asset_status},
+                #{is_asset_photo_file},
+                #{asset_manufacture},
+                #{asset_brand},
+                #{asset_model_name},
+                #{asset_pid},
+                #{asset_manager_name},
+                #{asset_loc},
+                #{representative_use},
+                #{memo},
+                #{idx_admin},
+                SYSDATE,
+                SYSDATE)
+    </insert>
 </mapper>

@@ -65,6 +65,9 @@ public class APIController {
     @Resource(name = "fileService")
     public FileService fileService;
 
+    @Resource(name = "assetService")
+    public AssetService assetService;
+
     @Autowired
     private JavaMailSender mailSender;
 
@@ -923,6 +926,24 @@ public class APIController {
         System.out.println(resultVO);
         return resultVO;
     }
+
+    @RequestMapping(value ="/register_asset",method = RequestMethod.POST)
+    public @ResponseBody ResultVO registerAsset(@RequestBody AssetVO assetVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("삭제 실패");
+        try {
+            assetService.registerAsset(assetVO);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("자산 등록이 완료되었습니다.");
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("자산 등록에 실패했습니다.");
+        }
+        return resultVO;
+    }
+
 
 
 
