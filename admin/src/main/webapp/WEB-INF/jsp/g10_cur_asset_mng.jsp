@@ -154,9 +154,9 @@
                     <div class="form-inline">
                         <select class="custom-select mr-sm-2 mb-2 mb-sm-0">
                             <option selected="">대분류 전체</option>
-                            <option value="1">분야</option>
-                            <option value="2">분야</option>
-                            <option value="3">분야</option>
+                            <c:forEach items="${main_cate}" var="cate" varStatus="status">
+                                <option value="${cate.code_value}">${cate.code_name} ${cate.detail != null ?  cate.detail : ""}</option>
+                            </c:forEach>
                         </select>
                         <select class="custom-select mr-sm-2 mb-2 mb-sm-0">
                             <option selected="">중분류 전체</option>
