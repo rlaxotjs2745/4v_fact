@@ -1143,6 +1143,7 @@ public class IndexController {
         model.addAttribute("count", userService.getDormantUserTotalCount(param.getFilter1()));
         model.addAttribute("filter", param.getFilter1());
         model.addAttribute("maxBool", maxBool);
+
         model.addAttribute("userList", userVOList);
 
 
