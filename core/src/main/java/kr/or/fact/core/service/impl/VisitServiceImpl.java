@@ -51,12 +51,22 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
+    public List<VisitReqVO> getVisitList(int page,int list_amount) {
+        return visitMapper.getVisitList(page,list_amount,"VISIT_REQ_NUM");
+    }
+
+    @Override
     public List<VisitReqVO> getMonthlyVisitReq(){
         return visitMapper.getMonthlyVisitReq();
     }
     @Override
     public List<VisitReqVO> getUserVisitReq(long idx_user,int page,int list_amount){
         return visitMapper.getUserVisitReq(idx_user,page,list_amount,"VISIT_REQ_NUM");
+    }
+
+    @Override
+    public int getVisitReqCount() {
+        return visitMapper.getVisitReqCount();
     }
 
     @Override
@@ -154,6 +164,11 @@ public class VisitServiceImpl implements VisitService {
         this.sqlsession.delete("kr.or.fact.core.model.VisitMapper.deleteVisitReq",idx_visit_req);
 
         dataSourceTransactionManager.commit(status);
+    }
+
+    @Override
+    public int updateVisitReq(VisitReqVO visitReqVO) {
+        return visitMapper.updateVisitReq(visitReqVO);
     }
 }
 

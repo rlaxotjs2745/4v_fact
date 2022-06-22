@@ -106,13 +106,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="">
-                                    <td class="text-center">1</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록완료</a></td>
+                                <c:forEach items="${consultingList}" var="consulting" varStatus="status">
+                                    <tr class="consulting-entity" id="${consulting.idx_demo_bs_consulting}">
+                                    <td class="text-center">${consulting.consulting_num}</td>
+                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view">등</a></td>
                                     <td class="text-center">사전</td>
-                                    <td class="text-center">홍길동</td>
+                                    <td class="text-center">${consulting.idx_user}</td>
                                     <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">맛있는 농부</td>
+                                    <td class="text-center">${consulting.memo}</td>
                                     <td class="text-center">추가</td>
                                     <td class="text-center">2021.00.00</td>
                                     <td class="text-center">0</td>
@@ -120,6 +121,7 @@
                                     <td class="text-center">1회</td>
                                     <td class="">2021.00/00 (0일전)</td>
                                 </tr>
+                                </c:forEach>
                                 <tr class="">
                                     <td class="text-center">2</td>
                                     <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view">등록하기</a></td>
@@ -652,7 +654,8 @@
         </div>
 
     </div>
-
+<script>
+</script>
 <!-- Layout footer -->
 <%@include file ="layouts/frame_footer.jsp" %>
 <!-- / Layout footer -->

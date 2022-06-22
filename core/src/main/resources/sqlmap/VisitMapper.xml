@@ -6,6 +6,69 @@
     <select id="getUserVisitReqCount" parameterType="long" resultType="int">
         SELECT COUNT(*) FROM TB_VISIT_REQ  WHERE IDX_USER = #{idx_user}
     </select>
+    <select id="getVisitList" resultType="kr.or.fact.core.model.DTO.VisitReqVO">
+        SELECT
+            IDX_VISIT_REQ,
+            VISIT_REQ_NUM,
+            GROUP_NAME,
+            VISITOR,
+            RESULVATION_DATE,
+            VISITOR_COUNT,
+            VISITOR_MPHONE_NUM,
+            VISITOR_EMAIL,
+            VISITOR_ADRESS,
+            VISIT_GOAL,
+            QUESTION,
+            VISIT_REQ_STATUS,
+            IS_PRIVACY_ACCEPT,
+            IS_GROUP,
+            IS_CANCEL,
+            IS_MANAGER,
+            IDX_MANAGER,
+            IS_DURATION,
+            DURATION_AMOUNT,
+            MEMO,
+            IDX_VISIT_DATA,
+            IDX_USER,
+            IDX_ADMIN,
+            REG_DATE
+        FROM (
+                 SELECT ROW_NUMBER() OVER(ORDER by VISIT_REQ_NUM ASC) AS row_num
+        ,IDX_VISIT_REQ,
+                        VISIT_REQ_NUM,
+                        GROUP_NAME,
+                        VISITOR,
+                        RESULVATION_DATE,
+                        VISITOR_COUNT,
+                        VISITOR_MPHONE_NUM,
+                        VISITOR_EMAIL,
+                        VISITOR_ADRESS,
+                        VISIT_GOAL,
+                        QUESTION,
+                        VISIT_REQ_STATUS,
+                        IS_PRIVACY_ACCEPT,
+                        IS_GROUP,
+                        IS_CANCEL,
+                        IS_MANAGER,
+                        IDX_MANAGER,
+                        IS_DURATION,
+                        DURATION_AMOUNT,
+                        MEMO,
+                        IDX_VISIT_DATA,
+                        IDX_USER,
+                        IDX_ADMIN,
+                        REG_DATE
+                 FROM (
+                          SELECT * FROM TB_VISIT_REQ  ORDER BY VISIT_REQ_NUM ASC
+                      )
+
+                 WHERE ROWNUM <![CDATA[<=]]> #{page}*#{list_amount}
+             )
+        WHERE row_num <![CDATA[>]]> (#{page} -1)*#{list_amount}
+    </select>
+    <select id="getVisitReqCount" resultType="int">
+        SELECT COUNT (*) FROM TB_VISIT_REQ ORDER BY VISIT_REQ_NUM ASC
+    </select>
 
     <select id="getVisitData" parameterType="Date" resultType="kr.or.fact.core.model.DTO.VisitDataVO">
         SELECT * FROM TB_VISIT_DATA WHERE TO_CHAR(CUR_DATE , 'YYYYMMDD' ) = TO_CHAR( #{cur_date}, 'YYYYMMDD')
@@ -38,7 +101,7 @@
                              VISIT_REQ_NUM,
                      GROUP_NAME,
                      VISITOR,
-                     RESULVATION_DATE,
+                     TO_DATE(RESULVATION_DATE,'YYYY-MM-DD hh:mm'),
                      VISITOR_COUNT,
                      VISITOR_MPHONE_NUM,
                      VISITOR_EMAIL,
@@ -182,6 +245,8 @@
                      SYSDATE
                  )
     </insert>
+<update id="updateVisitReq" parameterType="kr.or.fact.core.model.DTO.VisitReqVO">
+    UPDATE TB_VISIT_REQ SET VISIT_REQ_STATUS=#{visit_req_status} Where IDX_VISIT_REQ=#{idx_visit_req}
 
-
+</update>
 </mapper>

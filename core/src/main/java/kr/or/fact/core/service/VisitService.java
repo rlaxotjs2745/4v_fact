@@ -14,11 +14,11 @@ public interface VisitService {
 
     List<VisitDataVO> getMonthlyVisitData(Date cur_date);
     List<VisitDataVO> getDurationVisitData(VisitDateVO visitDateVO);
-
+//List<VisitReqVO>getVisitList();
 
     List<VisitReqVO> getMonthlyVisitReq();
     List<VisitReqVO> getUserVisitReq(long idx_user,int page,int list_amount);
-
+ int getVisitReqCount();
     long saveVisitData(VisitDataVO visitDataVO);
     void updateVisitData(VisitDataVO visitDataVO);
     void deleteVisitData(@Param("idx_visit_data") long idx_visit_data);
@@ -32,4 +32,8 @@ public interface VisitService {
     VisitReqVO getVisitReqByIdx(@Param("idx_visit_req") long idx_visit_req);
     void deleteVisitReq(@Param("idx_visit_req") long idx_visit_req);
 
+
+    int updateVisitReq(VisitReqVO visitReqVO);
+
+    List<VisitReqVO> getVisitList(int page, int list_amount);
 }
