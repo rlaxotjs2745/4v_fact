@@ -187,4 +187,21 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectUserbyPage(sign_in_type, page);
     }
 
+    @Override
+    public UserVO modifyPw(long idx_user, String hashedPassword){
+        userMapper.modifyPw(idx_user, hashedPassword);
+        return userMapper.getUserInfoByIdx(idx_user);
+    }
+
+    @Override
+    public int deleteUser(long idx_user, String ban_memo){
+        return userMapper.deleteUserInfoByIdx(idx_user, ban_memo);
+    }
+
+    @Override
+    public int updateUser(UserVO userVO){
+        return userMapper.updateUser(userVO);
+    }
+
+
 }

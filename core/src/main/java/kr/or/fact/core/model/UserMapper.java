@@ -4,6 +4,7 @@ package kr.or.fact.core.model;
 import kr.or.fact.core.model.DTO.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.parameters.P;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public  interface UserMapper {
     int updateUserInfoForLogout(@Param("user_id") String user_id);
 
     int deleteUserInfoByID(@Param("user_id") String user_id);
-    int deleteUserInfoByIdx(@Param("idx_user") long idx_user);
+    int deleteUserInfoByIdx(@Param("idx_user") long idx_user, @Param("ban_memo") String ban_memo);
 
     void insertUserSecretCode(UserSecretCodeVO userSecretCodeVO);
     void updateUserSecretCode(UserSecretCodeVO userSecretCodeVO);
@@ -39,7 +40,9 @@ public  interface UserMapper {
 
     List<UserVO> selectUserbyPage(@Param("type") int type, @Param("page") int page);
 
+    int modifyPw(@Param("idx_user") long idx_user, @Param("hashedPassword") String hashedPassword);
 
+    int updateUser(UserVO userVO);
 
 
 

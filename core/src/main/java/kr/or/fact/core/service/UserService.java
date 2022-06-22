@@ -36,5 +36,9 @@ public interface UserService {
 
     List<UserVO> selectUserbyPage(int sign_in_type, int page);
 
+    UserVO modifyPw(long idx_user, String hashedPassword);
 
+    int deleteUser(long idx_user, String ban_meno);
+
+    int updateUser(UserVO userVO);
 }
