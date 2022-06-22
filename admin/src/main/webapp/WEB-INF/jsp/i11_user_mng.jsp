@@ -6,48 +6,48 @@
         <h4 class="d-flex justify-content-between align-items-center w-100 mt-4">
             <div>고객 관리</div>
         </h4>
-        <div class="row">
-            <div class="col-sm-6 col-xl-3">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <div class="text-muted small mt-2">관리 고객수</div>
-                            <div class="text-large">5200</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-xl-3">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <div class="text-muted small mt-2">웹 회원수</div>
-                            <div class="text-large">2590</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-xl-3">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <div class="text-muted small mt-2">정회원(실증 사업중)</div>
-                            <div class="text-large">000</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-xl-3">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <div class="text-muted small mt-2">부회원(실증 참여한 이력)</div>
-                            <div class="text-large">000</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<%--        <div class="row">--%>
+<%--            <div class="col-sm-6 col-xl-3">--%>
+<%--                <div class="card mb-3">--%>
+<%--                    <div class="card-body">--%>
+<%--                        <div class="d-flex justify-content-between">--%>
+<%--                            <div class="text-muted small mt-2">관리 고객수</div>--%>
+<%--                            <div class="text-large">${}</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-sm-6 col-xl-3">--%>
+<%--                <div class="card mb-3">--%>
+<%--                    <div class="card-body">--%>
+<%--                        <div class="d-flex justify-content-between">--%>
+<%--                            <div class="text-muted small mt-2">웹 회원수</div>--%>
+<%--                            <div class="text-large">2590</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-sm-6 col-xl-3">--%>
+<%--                <div class="card mb-3">--%>
+<%--                    <div class="card-body">--%>
+<%--                        <div class="d-flex justify-content-between">--%>
+<%--                            <div class="text-muted small mt-2">정회원(실증 사업중)</div>--%>
+<%--                            <div class="text-large">000</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-sm-6 col-xl-3">--%>
+<%--                <div class="card mb-3">--%>
+<%--                    <div class="card-body">--%>
+<%--                        <div class="d-flex justify-content-between">--%>
+<%--                            <div class="text-muted small mt-2">부회원(실증 참여한 이력)</div>--%>
+<%--                            <div class="text-large">000</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
 
         <div class="card px-4 pt-4 ">
             <div class="form-row mb-4">
@@ -273,7 +273,6 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
-    var curUser = null;
     pageLoad("user_index", {page_num: 1, filter1: 100}, "유저 보드", "user");
 
     $("#addr_search, #user_addr_mod").click(function() {
@@ -285,6 +284,7 @@
         }).open();
     })
 
+    var curUser = null;
     var curPage = 1;
     var curCate = 100;
     var maxvalue = $(".max-value-starage").attr("id") == "noMax" ? 0 : parseInt($(".max-value-starage").attr("id"));
@@ -347,7 +347,6 @@
     })
 
     function clickUser (user) {
-        console.log(user);
         curUser = user.idx_user;
         if(user.is_corporate_member == 0){
             $(".corp_info").css("display", "none");
@@ -410,6 +409,7 @@
                 alert(result.result_str);
                 $("#modal-person-modify").modal("hide");
                 $("#modal-person-view").modal("hide");
+                pageLoad('i11_user_mng',{page_num:curPage, filter1: curCate},'고객 관리');
             },
             error:function(){
                 //에러가 났을 경우 실행시킬 코드
@@ -435,6 +435,7 @@
                     //작업이 성공적으로 발생했을 경우
                     alert(result.result_str);
                     $("#modal-person-modify").modal("hide");
+                    pageLoad('i11_user_mng',{page_num:curPage, filter1: curCate},'고객 관리');
                 },
                 error:function(){
                     //에러가 났을 경우 실행시킬 코드
@@ -456,6 +457,7 @@
                     //작업이 성공적으로 발생했을 경우
                     alert(result.result_str);
                     $("#modal-person-modify").modal("hide");
+                    pageLoad('i11_user_mng', {page_num:curPage, filter1: curCate},'고객 관리');
                 },
                 error:function(){
                     //에러가 났을 경우 실행시킬 코드

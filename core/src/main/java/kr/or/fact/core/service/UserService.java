@@ -30,15 +30,23 @@ public interface UserService {
 
     void updateUserInfo(UserVO userVO);
 
-    int getActiveUserTotalCount();//비 휴면회원 모두
+    int getActiveUserTotalCount(int sign_in_type);//비 휴면회원 모두
 
     List<UserVO> getActiveUserList(ParamPageListFilteredVO paramPageListFilteredVO);
 
     List<UserVO> selectUserbyPage(int sign_in_type, int page);
+
+    List<UserVO> selectDormantUserbyPage(int sign_in_type, int page);
 
     UserVO modifyPw(long idx_user, String hashedPassword);
 
     int deleteUser(long idx_user, String ban_meno);
 
     int updateUser(UserVO userVO);
+
+    int deleteDormantUser(int idx);
+
+    int getAllUserListCount();
+
+    int getDormantUserTotalCount(int sign_in_type);
 }

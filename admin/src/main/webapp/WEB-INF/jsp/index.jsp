@@ -175,7 +175,11 @@
                         $("#admin_index").html(result);
                     } else if(usage == "user"){
                         $("#user_index").html(result);
-                    } else{
+                    } else if(usage == "dormant_user"){
+                        $("#dormant_user_index").html(result);
+                    }
+
+                    else{
                         $("#contents").html(result);
                     }
                 },

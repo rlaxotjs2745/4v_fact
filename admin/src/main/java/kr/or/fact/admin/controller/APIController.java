@@ -905,5 +905,26 @@ public class APIController {
         return resultVO;
     }
 
+    @RequestMapping(value ="/delete_dormant_user",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO deleteDormantUser(@RequestBody int userIdx){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("삭제 실패");
+        try {
+            userService.deleteDormantUser(userIdx);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("회원정보 삭제가 완료되었습니다.");
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("이미 탈퇴된 고객이거나 없는 정보입니다.");
+        }
+        System.out.println(resultVO);
+        return resultVO;
+    }
+
+
+
 
 }
