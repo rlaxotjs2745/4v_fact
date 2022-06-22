@@ -905,5 +905,20 @@ public class APIController {
         return resultVO;
     }
 
-
+    @RequestMapping(value = "/visit_update",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO visitUpdate (@RequestBody VisitReqVO visitReqVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("업데이트 실패");
+        try {
+            visitService.updateVisitReq(visitReqVO);
+            resultVO.setResult_str("업데이트에 성공하였습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }catch(Exception e) {
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("업데이트 실패");
+        }
+        return resultVO;
+    }
 }
