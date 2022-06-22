@@ -14,6 +14,7 @@
             SELECT IDX_USER_DEMO_BS FROM TB_APPLICANT_DEMO_BS_JOIN WHERE IDX_USER=#{idx_user}
         ) ORDER BY IDX_DEMO_BUSINESS DESC
     </select>
+
     <select id="getDemoBsMsgByUserDemoBSIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.DemoBsMsgVO">
         SELECT
             *

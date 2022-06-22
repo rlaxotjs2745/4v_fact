@@ -4,6 +4,7 @@ package kr.or.fact.core.model;
 import kr.or.fact.core.model.DTO.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.parameters.P;
 
 import java.util.List;
 
@@ -17,11 +18,12 @@ public  interface UserMapper {
     UserVO getUserInfoByNameAndMPhoneNum(@Param("user_name") String user_name,@Param("mphone_num") String mphone_num);
 
     List<UserVO> getAllUserList();
-    List<UserVO> getUserPagingList(@Param("page_num") int page_num, @Param("amount") int amount, @Param("order_field") String order_field);
+    List<UserVO> getUserPagingList(ParamPageListFilteredVO paramPageListFilteredVO);
     List<PagedUserListVO> getUserSpecialInfoPagingList(@Param("page_num") int page_num, @Param("amount") int amount, @Param("order_field") String order_field);
 
     int getUserCount(@Param("user_type") int user_type);//99 모든 유저
 
+    int getActiveUserTotalCount();//비 휴면회원 모두
 
     long insertUserInfo(UserVO userVO);
 
@@ -29,15 +31,18 @@ public  interface UserMapper {
     int updateUserInfoForLogout(@Param("user_id") String user_id);
 
     int deleteUserInfoByID(@Param("user_id") String user_id);
-    int deleteUserInfoByIdx(@Param("idx_user") long idx_user);
+    int deleteUserInfoByIdx(@Param("idx_user") long idx_user, @Param("ban_memo") String ban_memo);
 
     void insertUserSecretCode(UserSecretCodeVO userSecretCodeVO);
     void updateUserSecretCode(UserSecretCodeVO userSecretCodeVO);
     UserSecretCodeVO getUserSecretCodeByIdx(ParamUserNCodeVO paramUserNCodeVO);
     UserSecretCodeVO getUserSecretCodeForPwUpdate(ParamUserNCodeVO paramUserNCodeVO);
 
+    List<UserVO> selectUserbyPage(@Param("type") int type, @Param("page") int page);
 
+    int modifyPw(@Param("idx_user") long idx_user, @Param("hashedPassword") String hashedPassword);
 
+    int updateUser(UserVO userVO);
 
 
 

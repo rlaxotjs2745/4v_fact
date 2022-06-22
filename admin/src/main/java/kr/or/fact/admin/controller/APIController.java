@@ -766,7 +766,7 @@ public class APIController {
             mailHelper.setFrom("스마트팜 혁신벨리 실증단지 <fact@smartfarm.co.kr>"); // 보내는 사람 정보도 와야함
             mailHelper.setTo(adminVO.getAdmin_id());
             mailHelper.setSubject("스마트팜 혁신밸리 관리자 사이트 계정 안내");
-            mailHelper.setText("안녕하세요." + adminVO.getAdmin_name() + "님. 스마트팜 혁신밸리 관리자 사이트의 변경된 비밀번호는 " + newPw + " 입니다.");
+            mailHelper.setText("안녕하세요. " + adminVO.getAdmin_name() + "님. 스마트팜 혁신밸리 관리자 사이트의 변경된 비밀번호는 " + newPw + " 입니다.");
             mailSender.send(mail);
 
             System.out.println("전송 완료");
@@ -800,20 +800,108 @@ public class APIController {
         return resultVO;
 
     }
-    @RequestMapping(value = "/visit_update",method = RequestMethod.POST)
+
+    @RequestMapping(value ="/get_corp_info",method = RequestMethod.POST)
     public @ResponseBody
-    ResultVO visitUpdate (@RequestBody VisitReqVO visitReqVO){
+    CorpInfoVO getCorpInfo(@RequestBody long idx_corp){
+        CorpInfoVO resultVO = new CorpInfoVO();
+        try {
+            resultVO = corpService.getCorpInfo(idx_corp);
+        }catch (Exception e){
+            resultVO.setCorp_type(1111);
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value ="/get_user_demo_bs",method = RequestMethod.POST)
+    public @ResponseBody
+    List<UserDemoBsVO> getUserDemoBs(@RequestBody long idx_user){
+        List<UserDemoBsVO> resultVO = null;
+            try {
+               resultVO = userDemoBsService.getUserDemoBsListByUserIdx(idx_user);
+            } catch (Exception e){
+                resultVO = null;
+            }
+        System.out.println(resultVO);
+        return resultVO;
+    }
+
+
+    @RequestMapping(value ="/user_pw_init",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO initUserPw(@RequestBody long idx_user){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("비밀번호 변경에 실패했습니다.");
+        resultVO.setResult_code("ERROR_1000");
+
+        String newPw = "";
+        for(int i = 0; newPw.length() < 6; i++){
+            double dRd = Math.random();
+            if(Math.random() % 2 == 1){
+                char randomWord = (char)((dRd * 26) + 97);
+                newPw = newPw + randomWord;
+            } else {
+                newPw = newPw + (int)(dRd * 10);
+            }
+        }
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(newPw);
+        try{
+            UserVO userVO = userService.modifyPw(idx_user, hashedPassword);
+            MimeMessage mail = mailSender.createMimeMessage();
+            MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+
+            mailHelper.setFrom("스마트팜 혁신벨리 실증단지 <fact@smartfarm.co.kr>"); // 보내는 사람 정보도 와야함
+            mailHelper.setTo(userVO.getUser_id());
+            mailHelper.setSubject("스마트팜 혁신밸리 계정 비밀번호 변경 안내");
+            mailHelper.setText("안녕하세요. " + userVO.getUser_name() + "님. 스마트팜 혁신밸리 관리자 사이트의 변경된 비밀번호는 " + newPw + " 입니다.");
+            mailSender.send(mail);
+
+            System.out.println("전송 완료");
+            resultVO.setResult_str("비밀번호 변경에 성공하였습니다. \n변경된 비밀번호는 해당 아이디 이메일로 전송되었습니다.");
+            resultVO.setResult_code("SUCCESS");
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_str("비밀번호 변경에 실패했습니다.");
+            resultVO.setResult_code("ERROR002");
+        }
+
+        return resultVO;
+    }
+
+    @RequestMapping(value ="/delete_user",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO deleteUser(@RequestBody UserVO userVO){
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
-        resultVO.setResult_str("업데이트 실패");
+        resultVO.setResult_str("탈퇴 실패");
         try {
-            visitService.updateVisitReq(visitReqVO);
-            resultVO.setResult_str("업데이트에 성공하였습니다.");
+            userService.deleteUser(userVO.getIdx_user(), userVO.getBan_memo());
             resultVO.setResult_code("SUCCESS");
-        }catch(Exception e) {
+            resultVO.setResult_str("탈퇴처리가 완료되었습니다. \n해당 고객은 휴면/제거 회원 메뉴에서 관리할 수 있습니다.");
+        } catch (Exception e){
             resultVO.setResult_code("ERROR_1000");
-            resultVO.setResult_str("업데이트 실패");
+            resultVO.setResult_str("이미 탈퇴된 고객이거나 없는 정보입니다.");
         }
+        System.out.println(resultVO);
+        return resultVO;
+    }
+
+    @RequestMapping(value ="/update_user",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO updateUser(@RequestBody UserVO userVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("수정 실패");
+        try {
+            userService.updateUser(userVO);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("회원정보 수정이 완료되었습니다.");
+        } catch (Exception e){
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("이미 탈퇴된 고객이거나 없는 정보입니다.");
+        }
+        System.out.println(resultVO);
         return resultVO;
     }
 

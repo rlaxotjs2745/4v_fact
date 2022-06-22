@@ -88,8 +88,6 @@
     var curPage = "${adminList[0].page}";
     var curUser;
 
-    // pageLoad("admin_corporate", {page_num: 1, corp: 100}, "어드민 보드", true);
-
     if(curPage != "1"){
         $("#article-list_previous").removeClass("disabled");
         $("#article-list_previous-one").removeClass("disabled");
@@ -144,7 +142,7 @@
 
 
     var modelArr = [];
-    var corpName = ""
+    var corpName = "";
     <c:forEach items="${corps}" var="corp">
     modelArr.push({
         idx_corp_info: "${corp.idx_corp_info}",
@@ -205,13 +203,13 @@
 
     $(".page-link").click(function (){
         if($(this).attr("id") == "article-list_next-one_btn"){
-            pageLoad('admin_corporate',{page_num: '${adminList[0].page + 1}', corp: parseInt(curCategory)},'대시보드', true);
+            pageLoad('admin_corporate',{page_num: '${adminList[0].page + 1}', corp: parseInt(curCategory)},'대시보드', "admin");
         } else if($(this).attr("id") == "article-list_next_btn"){
-            pageLoad('admin_corporate',{page_num: '${adminList[0].maxvalue}', corp: parseInt(curCategory)},'대시보드', true);
+            pageLoad('admin_corporate',{page_num: '${adminList[0].maxvalue}', corp: parseInt(curCategory)},'대시보드', "admin");
         } else if($(this).attr("id") == "article-list_previous_btn"){
-            pageLoad('admin_corporate',{page_num:1, corp: parseInt(curCategory)},'대시보드', true);
+            pageLoad('admin_corporate',{page_num:1, corp: parseInt(curCategory)},'대시보드', "admin");
         } else if($(this).attr("id") == "article-list_previous-one_btn"){
-            pageLoad('admin_corporate',{page_num: '${adminList[0].page - 1}', corp: parseInt(curCategory)},'대시보드', true);
+            pageLoad('admin_corporate',{page_num: '${adminList[0].page - 1}', corp: parseInt(curCategory)},'대시보드', "admin");
         }
     })
 

@@ -39,13 +39,23 @@
         )
         WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
     </select>
-    <select id="getUserPagingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.UserVO">
+
+
+    <select id="getUserPagingList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.UserVO">
         SELECT
                 *
         FROM (
             SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
                 t.*
-            FROM TB_USER t
+            FROM (
+                SELECT * FROM TB_USER
+                    <if test="filter1 == 0">
+                        WHERE USER_TYPE != 1
+                    </if>
+                    <if test="filter1 == 1">
+                        WHERE USER_TYPE == 1
+                    </if>
+                     ) t
             WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
             )
         WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
@@ -54,6 +64,11 @@
     <select id="getUserCount" parameterType="int" resultType="int">
         SELECT COUNT(*) FROM  TB_USER
         <if test='user_type != 99'> WHERE USER_TYPE = #{user_type}</if> ;
+    </select>
+
+    <select id="getActiveUserTotalCount" resultType="int">
+        SELECT COUNT(*) FROM  TB_USER
+        WHERE USER_TYPE != 1 ;
     </select>
 
     <select id="selectList" parameterType="kr.or.fact.core.model.DTO.UserVO" resultType="kr.or.fact.core.model.DTO.UserVO">
@@ -138,9 +153,17 @@
         DELETE TB_USER WHERE  USER_ID = #{user_id}
     </delete>
 
-    <delete id="deleteUserInfoByIdx" parameterType="long">
+    <delete id="" parameterType="long">
         DELETE TB_USER WHERE  IDX_USER = #{idx_user}
     </delete>
+
+    <update id="deleteUserInfoByIdx">
+        UPDATE TB_USER
+        SET
+            USER_TYPE = 2,
+            BAN_MEMO = #{ban_memo}
+        WHERE IDX_USER=#{idx_user}
+    </update>
 
 
     <insert id="insertUserSecretCode" parameterType="kr.or.fact.core.model.DTO.UserSecretCodeVO">
@@ -202,6 +225,42 @@
         EXPIRE_DATE=SYSDATE
         WHERE IDX_USER_SECRET_CODE = #{idx_user_secret_code}
 
+    </update>
+
+    <select id="selectUserbyPage" resultType="kr.or.fact.core.model.DTO.UserVO">
+        SELECT * FROM (
+        SELECT A.*, FLOOR((ROWNUM - 1)/10 + 1) PAGE, (
+        SELECT MAX(FLOOR((ROWNUM - 1)/10 + 1)) FROM TB_USER
+        WHERE IDX_USER >= 1 AND USER_TYPE = 0
+        <if test="!type.equals(100)">
+            AND SIGN_IN_TYPE = #{type}
+        </if>
+        ) MAXVALUE FROM (
+        SELECT TB_USER.* FROM TB_USER
+        WHERE IDX_USER >= 1 AND USER_TYPE = 0
+        <if test="!type.equals(100)">
+            AND SIGN_IN_TYPE = #{type}
+        </if>
+        ORDER BY CONVERT(USER_NAME,'UTFE') ASC
+        )
+        A)
+        WHERE PAGE = #{page}
+    </select>
+
+    <update id="modifyPw">
+        UPDATE TB_USER
+        SET
+        USER_PW = #{hashedPassword}
+        WHERE IDX_USER=#{idx_user}
+    </update>
+
+    <update id="updateUser" parameterType="kr.or.fact.core.model.DTO.UserVO">
+        UPDATE TB_USER
+        SET
+            TEL_NUM = #{tel_num},
+            MPHONE_NUM = #{mphone_num},
+            ADDR = #{addr}
+        WHERE IDX_USER= #{idx_user}
     </update>
 
 </mapper>

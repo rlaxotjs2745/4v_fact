@@ -17,6 +17,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.Date;
+import java.util.List;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -169,5 +170,38 @@ public class UserServiceImpl implements UserService {
         this.sqlsession.update("kr.or.fact.core.model.UserMapper.updateUserInfo",userVO);
         dataSourceTransactionManager.commit(status);
     }
+
+    @Override
+    public int getActiveUserTotalCount(){//비 휴면회원 모두
+        return  userMapper.getActiveUserTotalCount();
+    }
+
+    @Override
+    public List<UserVO> getActiveUserList(ParamPageListFilteredVO paramPageListFilteredVO){
+        paramPageListFilteredVO.setFilter1(0);//0: user type=일반, 탈퇴, 임의 탈퇴
+        return userMapper.getUserPagingList(paramPageListFilteredVO);
+    }
+
+    @Override
+    public List<UserVO> selectUserbyPage(int sign_in_type, int page){
+        return userMapper.selectUserbyPage(sign_in_type, page);
+    }
+
+    @Override
+    public UserVO modifyPw(long idx_user, String hashedPassword){
+        userMapper.modifyPw(idx_user, hashedPassword);
+        return userMapper.getUserInfoByIdx(idx_user);
+    }
+
+    @Override
+    public int deleteUser(long idx_user, String ban_memo){
+        return userMapper.deleteUserInfoByIdx(idx_user, ban_memo);
+    }
+
+    @Override
+    public int updateUser(UserVO userVO){
+        return userMapper.updateUser(userVO);
+    }
+
 
 }

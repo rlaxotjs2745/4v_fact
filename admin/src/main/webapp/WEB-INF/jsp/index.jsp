@@ -148,7 +148,7 @@
     //int amount;
     //String order_field;
 
-    function pageLoad(url,param,title,corp){
+    function pageLoad(url,param,title,usage){
 /*      State : 브라우저 이동 시 넘겨줄 데이터 (popstate 에서 받아서 원하는 처리를 해줄 수 있음)
         Title : 변경할 브라우저 제목 (변경 원치 않으면 null)
         Url : 변경할 주소*/
@@ -171,8 +171,10 @@
                 contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
                 dataType:'html',//받는 데이터 타입
                 success:function(result){
-                    if(corp == true){
+                    if(usage == "admin"){
                         $("#admin_index").html(result);
+                    } else if(usage == "user"){
+                        $("#user_index").html(result);
                     } else{
                         $("#contents").html(result);
                     }
