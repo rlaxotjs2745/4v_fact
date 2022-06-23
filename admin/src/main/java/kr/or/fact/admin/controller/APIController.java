@@ -65,8 +65,8 @@ public class APIController {
     @Resource(name = "fileService")
     public FileService fileService;
 
-    @Resource(name = "noticeService")
-    public NoticeService noticeService;
+    @Resource(name = "assetService")
+    public AssetService assetService;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -908,6 +908,45 @@ public class APIController {
         return resultVO;
     }
 
+    @RequestMapping(value ="/delete_dormant_user",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO deleteDormantUser(@RequestBody int userIdx){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("삭제 실패");
+        try {
+            userService.deleteDormantUser(userIdx);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("회원정보 삭제가 완료되었습니다.");
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("이미 탈퇴된 고객이거나 없는 정보입니다.");
+        }
+        System.out.println(resultVO);
+        return resultVO;
+    }
+
+    @RequestMapping(value ="/register_asset",method = RequestMethod.POST)
+    public @ResponseBody ResultVO registerAsset(@RequestBody AssetVO assetVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("삭제 실패");
+        try {
+            assetService.registerAsset(assetVO);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("자산 등록이 완료되었습니다.");
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("자산 등록에 실패했습니다.");
+        }
+        return resultVO;
+    }
+
+
+
+
     @RequestMapping(value = "/visit_update",method = RequestMethod.POST)
     public @ResponseBody
     ResultVO visitUpdate (@RequestBody VisitReqVO visitReqVO){
@@ -916,22 +955,6 @@ public class APIController {
         resultVO.setResult_str("업데이트 실패");
         try {
             visitService.updateVisitReq(visitReqVO);
-            resultVO.setResult_str("업데이트에 성공하였습니다.");
-            resultVO.setResult_code("SUCCESS");
-        }catch(Exception e) {
-            resultVO.setResult_code("ERROR_1000");
-            resultVO.setResult_str("업데이트 실패");
-        }
-        return resultVO;
-    }
-    @RequestMapping(value = "/insert_notice",method = RequestMethod.POST)
-    public @ResponseBody
-    ResultVO insertNotice (@RequestBody NoticeVO noticeVO){
-        ResultVO resultVO = new ResultVO();
-        resultVO.setResult_code("ERROR_1000");
-        resultVO.setResult_str("업데이트 실패");
-        try {
-            noticeService.insertNotice(noticeVO);
             resultVO.setResult_str("업데이트에 성공하였습니다.");
             resultVO.setResult_code("SUCCESS");
         }catch(Exception e) {
