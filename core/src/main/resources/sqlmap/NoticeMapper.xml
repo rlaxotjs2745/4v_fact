@@ -13,24 +13,52 @@
 
     <select id="getNoticeWebList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.NoticeVO">
         SELECT
-            IDX_NOTICE
-             ,NOTICE_NUM
-             ,SUBJECT
-             ,IS_FILE
-             ,IS_NEW
-             ,AUTHOR
-             ,POSTING_START_DATE
-             ,VIEW_COUNT
+            IDX_NOTICE,
+            NOTICE_CODE,
+            NOTICE_NUM,
+            SUBJECT,
+            NOTICE_CONTENTS,
+            IS_FILE,
+            IS_NEW,
+            IS_MAIN_PAGE,
+            IS_IMPORTANT,
+            IS_SHOW,
+            VIEW_COUNT,
+            NOTICE_STATUS,
+            POSTING_START_DATE,
+            POSTING_END_DATE,
+            DOC_VERSION,
+            MEMO,
+            SEARCH_TAG,
+            AUTHOR,
+            IDX_ADMIN,
+            CONFIRM_ADMIN_IDX,
+            REG_DATE,
+            LAST_UPD_DATE
         FROM (
                  SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
-        ,IDX_NOTICE
-                      ,NOTICE_NUM
-                      ,SUBJECT
-                      ,IS_FILE
-                      ,IS_NEW
-                      ,AUTHOR
-                      ,POSTING_START_DATE
-                      ,VIEW_COUNT
+        ,  IDX_NOTICE,
+                        NOTICE_CODE,
+                        NOTICE_NUM,
+                        SUBJECT,
+                        NOTICE_CONTENTS,
+                        IS_FILE,
+                        IS_NEW,
+                        IS_MAIN_PAGE,
+                        IS_IMPORTANT,
+                        IS_SHOW,
+                        VIEW_COUNT,
+                        NOTICE_STATUS,
+                        POSTING_START_DATE,
+                        POSTING_END_DATE,
+                        DOC_VERSION,
+                        MEMO,
+                        SEARCH_TAG,
+                        AUTHOR,
+                        IDX_ADMIN,
+                        CONFIRM_ADMIN_IDX,
+                        REG_DATE,
+                        LAST_UPD_DATE
                  FROM (
                           SELECT * FROM TB_NOTICE  WHERE IS_SHOW=1 AND NOTICE_STATUS=1
                       )

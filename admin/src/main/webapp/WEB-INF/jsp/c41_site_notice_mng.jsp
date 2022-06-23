@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!-- Page content -->
     <div class="container-fluid flex-grow-1 container-p-y">
 
@@ -35,11 +36,11 @@
                                 </thead>
                                 <tbody>
 <c:forEach items="${noticeList}" var="notice" varStatus="status">
-                                <tr class="">
+    <tr class="notice-entity" id="${notice.idx_notice}">
 
                                     <td class="text-center">${notice.notice_num}</td>
                                     <td class="text-center"><c:if test="${notice.is_important eq 1}">중요</c:if> </td>
-                                    <td class="text-center">${notice.notice_code eq 1} </td>
+                                    <td class="text-center">${notice.notice_code} </td>
                                     <td class="text-left"><a href="#none" data-toggle="modal" data-target="#modals-counsel-view" data-what="mode-view">${notice.subject}</a></td>
                                     <td class="text-center"><c:if test="${notice.is_file eq 1}"><span class="fas fa-paperclip"></span></c:if> </td>
                                     <td class="text-center">${notice.author}</td>
@@ -88,69 +89,55 @@
             <div class="modal-dialog modal-lg">
                 <form class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">상담내용 입력</h5>
+                        <h5 class="modal-title">공지사항</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
                     <div class="modal-body pb-2">
 
                         <div class="form-row">
-                            <div class="form-group col col-md-12 text-right">
-                                <a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modals-counsel-history">상담 이력</a>
+                            <div class="form-group col col-md-12 text-right" id="admin_name_view">
+                                <a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modals-counsel-history">게시자</a>
                             </div>
                         </div>
                         <hr class="mt-0">
                         <div class="form-row">
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">신청자</label>
+                            <div class="form-group col col-md-4" id="notice_code_view">
+                                <label class="form-label d-block text-muted">공지제목</label>
                                 <span>김홍삼</span>
                             </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">소속</label>
+                            <div class="form-group col col-md-4" id="is_file_view">
+                                <label class="form-label d-block text-muted">파일 포함 여부</label>
                                 <span>맛있는 농부</span>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">ID</label>
+                            <div class="form-group col col-md-4" id="is_new_view">
+                                <label class="form-label d-block text-muted">신규등록여부</label>
                                 <span>000-00-00000</span>
                             </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">연락처</label>
+                            <div class="form-group col col-md-4" id="is_main_page_view">
+                                <label class="form-label d-block text-muted">메인페이지 노출여부</label>
                                 <span>000-0000-0000</span>
                             </div>
                         </div>
                         <hr class="mt-0">
                         <div class="form-row">
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">상담 구분</label>
+                            <div class="form-group col col-md-4" id="posting_start_date_view">
+                                <label class="form-label d-block text-muted">게시시작일</label>
                                 <span>사전 상담</span>
                             </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">상담 접수</label>
+                            <div class="form-group col col-md-4" id="posting_end_date_view">
+                                <label class="form-label d-block text-muted">게시종료일</label>
                                 <span>추가</span>
                             </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">신청 목적</label>
+                            <div class="form-group col col-md-4" id="view_count_view">
+                                <label class="form-label d-block text-muted">조회수</label>
                                 <span>이용 신청서 작성</span>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">수신일</label>
-                                <span>2021.00.00</span>
-                            </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">요청일/변경일</label>
-                                <span>2021.00.00 HH:MM</span>
-                            </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">상담 방법</label>
-                                <span>방문 상담</span>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">내용</label>
+                            <div class="form-group col col-md-12" id="notice_contents_view">
+                                <label class="form-label d-block text-muted">컨텐츠</label>
                                 <span>
                           Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                           Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
@@ -160,55 +147,17 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">이용료 납부</label>
-                                <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-6" type="radio" class="custom-control-input">
-                                    <span class="custom-control-label">미납</span>
-                                </label>
-                                <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-6" type="radio" class="custom-control-input">
-                                    <span class="custom-control-label">납부</span>
-                                </label>
-                                <span class="font-weight-semibold">납부액 : 90,000,000원</span>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col col-md-12 mb-0">
-                                <label class="form-label d-block text-muted">상담일 변경</label>
-                                <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-7" type="radio" class="custom-control-input">
-                                    <span class="custom-control-label">변경 없음</span>
-                                </label>
-                                <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-7" type="radio" class="custom-control-input">
-                                    <span class="custom-control-label">변경</span>
-                                </label>
-                            </div>
-                            <div class="form-group col col-md-12 mb-1">
-                                <span class="text-muted">2021.00 00 HH:MM 에서</span> <input type="text" class="form-control d-inline-block datepickers" style="width:120px;"> <input type="text" id="timepicker-2" class="form-control d-inline-block ui-timepicker-input" autocomplete="off" style="width:90px;" placeholder="00:00 AM">
-                            </div>
-                            <div class="form-group col col-md-12">
-                                <span class="text-muted">신청자에게</span>
-                                <label class="custom-control custom-checkbox d-inline-block">
-                                    <input type="checkbox" class="custom-control-input" name="check-3">
-                                    <span class="custom-control-label">SMS</span>
-                                </label>
-                                <label class="custom-control custom-checkbox d-inline-block">
-                                    <input type="checkbox" class="custom-control-input" name="check-3">
-                                    <span class="custom-control-label">이메일</span>
-                                </label>
-                                <a href="#none" class="btn btn-outline-secondary">안내</a>
+                            <div class="form-group col col-md-12" id="subject_view">
+                                <label class="form-label d-block text-muted">내용</label>
+                                <span>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                          Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
+                          Accusantium consequuntur dignissimos iusto magnam provident, ratione reiciendis
+                          repellat. Aut, doloribus, enim.
+                        </span>
                             </div>
                         </div>
                         <hr class="mt-0">
-                        <div class="form-row">
-                            <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">상담일지</label>
-                                <input type="file" class="form-control-file d-block">
-                                <small class="form-text text-muted">상담 일지 등록, 피 상담자에게는 전달이 안됩니다.</small>
-                            </div>
-                        </div>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
@@ -219,7 +168,90 @@
                 </form>
             </div>
         </div>
+        <!-- Modal template -->
+        <div class="modal fade" id="modals-counsel-view-modify">
+            <div class="modal-dialog modal-lg">
+                <form class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">공지사항</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+                    </div>
+                    <div class="modal-body pb-2">
 
+                        <div class="form-row">
+                            <div class="form-group col col-md-12 text-right" id="admin_name_modify">
+                                <a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modals-counsel-history">게시자</a>
+                            </div>
+                        </div>
+                        <hr class="mt-0">
+                        <div class="form-row">
+                            <div class="form-group col col-md-4" id="notice_code_modify">
+                                <label class="form-label d-block text-muted">공지제목</label>
+                                <span>김홍삼</span>
+                            </div>
+                            <div class="form-group col col-md-4" id="is_file_modify">
+                                <label class="form-label d-block text-muted">파일 포함 여부</label>
+                                <span>맛있는 농부</span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col col-md-4" id="is_new_modify">
+                                <label class="form-label d-block text-muted">신규등록여부</label>
+                                <span>000-00-00000</span>
+                            </div>
+                            <div class="form-group col col-md-4" id="is_main_page_view_modify">
+                                <label class="form-label d-block text-muted">메인페이지 노출여부</label>
+                                <span>000-0000-0000</span>
+                            </div>
+                        </div>
+                        <hr class="mt-0">
+                        <div class="form-row">
+                            <div class="form-group col col-md-4" id="posting_start_date_modify">
+                                <label class="form-label d-block text-muted">게시시작일</label>
+                                <span>사전 상담</span>
+                            </div>
+                            <div class="form-group col col-md-4" id="posting_end_date_modify">
+                                <label class="form-label d-block text-muted">게시종료일</label>
+                                <span>추가</span>
+                            </div>
+                            <div class="form-group col col-md-4" id="view_count_modify">
+                                <label class="form-label d-block text-muted">조회수</label>
+                                <span>이용 신청서 작성</span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col col-md-12" id="notice_contents_modify">
+                                <label class="form-label d-block text-muted">내용</label>
+                                <span>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                          Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
+                          Accusantium consequuntur dignissimos iusto magnam provident, ratione reiciendis
+                          repellat. Aut, doloribus, enim.
+                        </span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col col-md-12" id="subject_modify">
+                                <label class="form-label d-block text-muted">내용</label>
+                                <span>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                          Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
+                          Accusantium consequuntur dignissimos iusto magnam provident, ratione reiciendis
+                          repellat. Aut, doloribus, enim.
+                        </span>
+                            </div>
+                        </div>
+                        <hr class="mt-0">
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                        <div>
+                            <button type="button" class="btn btn-primary">저장</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="modal fade" id="modals-counsel-history">
             <div class="modal-dialog modal-lg">
                 <form class="modal-content">
@@ -475,11 +507,11 @@
                     <!-- 사업번호 / 사업 상태-->
 
                     <!-- 사업 제목-->
-                    <div class="form-group row">
+                    <div class="form-group row" id="notice_code">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">공지 제목</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" value="${demobs.demo_subject}">
-                            <div class="form-control-plaintext mode-view">${demobs.demo_subject}</div>
+                            <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" >
+                            <div class="form-control-plaintext mode-view"></div>
                         </div>
                     </div>
 
@@ -492,7 +524,7 @@
                                             </div>--%>
 
                     <hr>
-                    <div class="form-row">
+                    <div class="form-row" id="memo">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">내용</label>
 
                         <div class="col-md-10 mode-edit mode-new">
@@ -500,35 +532,78 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="form-row">
-                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메모</label>
-                        <div class="form-group col col-md-10">
+                    <div class="form-row" >
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">컨텐츠</label>
+                        <div class="form-group col col-md-10" id="notice_contents">
                             <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
-                            <textarea class="form-control mode-view" readonly rows="5"></textarea>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row" id="time">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">게시 기간</label>
                         <div class="col-md-10">
-                            <div class="form-control-plaintext mode-view">2022-01-01 - 2022-02-01</div>
-
                             <div id="datepicker-open" class="input-daterange input-group mode-edit mode-new">
-                                <input type="text" class="form-control" name="start">
+                                <input type="text" class="form-control" name="posting_start_date" id="posting_start_date">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">~</span>
                                 </div>
-                                <input type="text" class="form-control" name="end">
+                                <input type="text" class="form-control" name="posting_end_date" id="posting_end_date">
                             </div>
                         </div>
                     </div>
+                    <div class="form-group row" id="admin_name">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">등록자</label>
+                        <div class="col-md-4 mode-edit mode-new">
+                            <span class="px-1 mr-lg-2 ml-2 ml-lg-0">${admin.admin_name}</span>
+<%--                            <div class="form-control-plaintext mode-view">${admin.admin_name}</div>--%>
+                        </div>
+                    </div>
+                        <div class="form-row">
+                            <div class="form-group col col-md-12" id="is_file">
+                                <label class="form-label d-block text-muted">파일여부</label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="custom-6" type="radio" class="custom-control-input"  value="0">
+                                    <span class="custom-control-label">포함안함</span>
+                                </label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="custom-6" type="radio" class="custom-control-input" value="1">
+                                    <span class="custom-control-label">포함</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col col-md-12" id="is_new">
+                                <label class="form-label d-block text-muted">신규 등록여부</label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="custom-7" type="radio" class="custom-control-input"  value="0">
+                                    <span class="custom-control-label">신규아님</span>
+                                </label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="custom-7" type="radio" class="custom-control-input" value="1">
+                                    <span class="custom-control-label">신규</span>
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="form-row">
+                            <div class="form-group col col-md-12" id="is_main_page">
+                                <label class="form-label d-block text-muted">메인페이지 노출여부</label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="custom-8" type="radio" class="custom-control-input"  value="0">
+                                    <span class="custom-control-label">노출안함</span>
+                                </label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="custom-8" type="radio" class="custom-control-input" value="1">
+                                    <span class="custom-control-label">노출</span>
+                                </label>
+                            </div>
+                        </div>
                     <div class="form-row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">파일 첨부</label>
                         <div class="form-group col col-md-10 mode-edit mode-new">
                             <input type="file" class="form-control-file d-block py-1">
-                            <input type="file" class="form-control-file d-block py-1">
                         </div>
                         <div class="form-group col col-md-10 col-form-label mode-view">
-                            <a href="file.doc"></a>
                             <a href="file.doc"></a>
                         </div>
                     </div>
@@ -538,7 +613,7 @@
                         </div>
                         <div>
                             <button type="button" class="btn btn-outline-primary mr-2">임시저장</button>
-                            <button type="button" class="btn btn-primary">작성완료</button>
+                            <button type="button" class="btn btn-primary" onclick="event_pass();">작성완료</button>
                         </div>
                     </div>
 
@@ -550,18 +625,6 @@
                             <button type="button" class="btn btn-primary">저장</button>
                         </div>
                     </div>
-
-                    <div class="modal-footer justify-content-between mode-view">
-                        <div>
-                            <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">닫기</button>
-                        </div>
-
-                        <div>
-                            <button id="btn_edit_mode" type="button" class="btn btn-primary">수정</button>
-                        </div>
-
-                    </div>
-
                 </form>
             </div>
         </div>
@@ -607,6 +670,142 @@
             static:true
         });
     });
+    var curNoticedata;
+    var noticeList=[];
+    <c:forEach items="${noticeList}" var="notice" varStatus="status">
+    noticeList.push({
+        idx_notice :"${notice.idx_notice}",
+        notice_code :"${notice.notice_code}",
+        notice_num :"${notice.notice_num}",
+        subject :"${notice.subject}",
+        notice_contents :"${notice.notice_contents}",
+        is_file :"${notice.is_file eq 0 ?"포함안함": notice.is_file eq 1 ?"포함함":""}",
+        is_new :"${notice.is_new eq 0 ?"신규아님": notice.is_new eq 1 ?"신규":""}",
+        is_main_page :"${notice.is_main_page eq 0 ?"노출안함": notice.is_main_page eq 1 ?"노출함":""}",
+        is_important :"${notice.is_important eq 0 ?"고정안함": notice.is_important eq 1 ?"고정안함":""}",
+        is_show :"${notice.is_show}",
+        view_count :"${notice.view_count}",
+        notice_status :"${notice.notice_status}",
+        posting_start_date :"${notice.posting_start_date}",
+        posting_end_date :"${notice.posting_end_date}",
+        doc_version :"${notice.doc_version}",
+        memo :"${notice.memo}",
+        search_tag :"${notice.search_tag}",
+        author :"${notice.author}",
+        idx_admin :"${notice.idx_admin}",
+        confirm_admin_idx :"${notice.confirm_admin_idx}",
+        reg_date :"${notice.reg_date}",
+        last_upd_date :"${notice.last_upd_date}"
+
+    })
+    </c:forEach>
+
+    $(".notice-entity").click(function(){
+        console.log("여긴와요>??")
+        var selectId = $(this).attr('id');
+        curNoticedata = selectId;
+        for(var notice of noticeList){
+            console.log(noticeList)
+            if(selectId === notice.idx_notice){
+                $(".idx_notice").attr("id",selectId);
+                $("#notice_code_view span").text(notice.notice_code);
+                $("#notice_num_view span").text(notice.notice_num);
+                $("#subject_view span").text(notice.subject);
+                $("#notice_contents_view span").text(notice.notice_contents);
+                $("#is_file_view span").text(notice.is_file);
+                $("#is_new_view span").text(notice.is_new);
+                $("#is_main_page_view span").text(notice.is_main_page);
+                $("#is_important_view span").text(notice.is_important);
+                $("#is_show_view span").text(notice.is_show);
+                $("#view_count_view span").text(notice.view_count);
+                $("#notice_status_view span").text(notice.notice_status);
+                $("#posting_start_date_view span").text(notice.posting_start_date);
+                $("#posting_end_date_view span").text(notice.posting_end_date);
+                $("#doc_version_view span").text(notice.doc_version);
+                $("#memo_view span").text(notice.memo);
+                $("#search_tag_view span").text(notice.search_tag);
+                $("#author_view span").text(notice.author);
+                $("#idx_admin_view span").text(notice.idx_admin);
+                $("#confirm_admin_idx_view span").text(notice.confirm_admin_idx);
+                $("#reg_date_view span").text(notice.reg_date);
+                $("#last_upd_date_view span").text(notice.last_upd_date);
+
+                $("#notice_code_modify span").val(notice.notice_code);
+                $("#notice_num_modify span").val(notice.notice_num);
+                $("#subject_modify span").val(notice.subject);
+                $("#notice_contents_modify span").val(notice.notice_contents);
+                $("#is_file_modify span").val(notice.is_file);
+                $("#is_new_modify span").val(notice.is_new);
+                $("#is_main_page_modify span").val(notice.is_main_page);
+                $("#is_important_modify span").val(notice.is_important);
+                $("#is_show_modify span").val(notice.is_show);
+                $("#view_count_modify span").val(notice.view_count);
+                $("#notice_status_modify span").val(notice.notice_status);
+                $("#posting_start_date_modify span").val(notice.posting_start_date);
+                $("#posting_end_date_modify span").val(notice.posting_end_date);
+                $("#doc_version_modify span").val(notice.doc_version);
+                $("#memo_modify span").val(notice.memo);
+                $("#search_tag_modify span").val(notice.search_tag);
+                $("#author_modify span").val(notice.author);
+                $("#idx_admin_modify span").val(notice.idx_admin);
+                $("#confirm_admin_idx_modify span").val(notice.confirm_admin_idx);
+                $("#reg_date_modify span").val(notice.reg_date);
+                $("#last_upd_date_modify span").val(notice.last_upd_date);
+                break;
+            }
+        }
+    });
+
+
+    function event_pass() {
+        console.log("버튼은 되니")
+// let result = document.getElementsByName('custom-6');
+        var selectId = $(this).attr('id');
+        param ={
+            idx_notice: parseInt(curNoticedata),
+            notice_code:$("#notice_code input").val(),
+            notice_num:$("#notice_num").val(),
+            subject:$("#subject").val(),
+            notice_contents:$("#notice_contents textarea").val(),
+            is_file:$("input:radio[name=custom-6]:checked").val(),
+            is_new:$("input:radio[name=custom-7]:checked").val(),
+            is_main_page:$("input:radio[name=custom-8]:checked").val(),
+            is_important:$("#is_important").val(),
+            is_show:$("#is_show").val(),
+            view_count:$("#view_count").val(),
+            notice_status:$("#notice_status").val(),
+            posting_start_date:$('#posting_start_date').val(),
+            posting_end_date:$('#posting_end_date').val(),
+            doc_version:$("#doc_version").val(),
+            memo:$("#memo label").val(),
+            search_tag:$("#search_tag").val(),
+            author:$("#author").val(),
+            idx_admin:$("#idx_admin").val(),
+            confirm_admin_idx:$("#confirm_admin").val(),
+            reg_date:$("#reg_date").val(),
+            last_upd_date:$("#last_upd_date").val()
+        }
+        $.ajax({
+            type: 'post',
+            url: '/insert_notice', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(param),//보내는 데이터
+            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType: 'json',//받는 데이터 타입
+            success: function (result) {
+                console.log(param);
+
+                if (result.result_code === "SUCCESS") {
+                    alert("상태 변경에 성공하였습니다")
+                } else {
+                    alert("상태 변경에 실패하였습니다")
+                }
+
+            },
+            error: function (res) {
+                console.log(res)
+            }
+        });
+    }
 </script>
 <!-- Layout footer -->
 <%@include file ="layouts/frame_footer.jsp" %>

@@ -9,4 +9,5 @@ public interface EventContentService {
     public int getWebpageEventContentCount();
     public List<EventContentVO> getEventContentList(int page, int count);
     public List<EventContentVO> getMainEventContentList();
+    List<EventContentVO> getEventList();
 }

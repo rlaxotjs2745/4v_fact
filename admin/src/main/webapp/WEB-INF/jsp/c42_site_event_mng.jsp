@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- Page content -->
     <div class="container-fluid flex-grow-1 container-p-y">
 
@@ -92,34 +93,34 @@
                                 <thead class="bg-success text-white font-weight-bold">
                                 <tr role="row">
                                     <th class="text-center px-2" style="width:60px">No</th>
-                                    <th class="text-center sorting" style="width:80px">상담일지</th>
-                                    <th class="text-center sorting" style="width:60px">구분</th>
-                                    <th class="text-center sorting" style="width:100px">신청자</th>
-                                    <th class="text-center sorting" style="width:100px">ID</th>
-                                    <th class="text-center sorting" style="width:150px">제목</th>
-                                    <th class="text-center px-2" style="width:80px">접수</th>
-                                    <th class="text-center px-2" style="width:120px">수신일</th>
-                                    <th class="text-center px-2" style="width:120px">요청일</th>
-                                    <th class="text-center px-2" style="width:120px">상담 방법</th>
-                                    <th class="text-center px-2" style="width:100px">상담 수</th>
-                                    <th class="text-center px-2" style="width:150px">마지막 상담일</th>
+                                    <th class="text-center sorting" style="width:80px">행사제목</th>
+                                    <th class="text-center sorting" style="width:60px">행사 컨텐츠</th>
+                                    <th class="text-center sorting" style="width:100px">파일 포함 여부</th>
+                                    <th class="text-center sorting" style="width:100px">신규등록여부</th>
+                                    <th class="text-center sorting" style="width:150px">고정 여부</th>
+                                    <th class="text-center px-2" style="width:80px">행사안내노출여부</th>
+                                    <th class="text-center px-2" style="width:120px">조회수</th>
+                                    <th class="text-center px-2" style="width:120px">행사안내 상태</th>
+                                    <th class="text-center px-2" style="width:120px">행사 내용</th>
+                                    <th class="text-center px-2" style="width:100px">행사시작 일시</th>
+                                    <th class="text-center px-2" style="width:150px">행사종료 일시</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 <c:forEach items="${eventcontentlist}" var="eventcontent" varStatus="status">
-    <tr class="entity" id="${eventcontent.idx_event_content}">
+    <tr class="eventcontent_entity" id="${eventcontent.idx_event_content}">
                                     <td class="text-center">${eventcontent.event_content_num}</td>
-        <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view">등록하기</a></td>
-                                    <td class="text-center">사전</td>
-                                    <td class="text-center">${eventcontent.author}</td>
+        <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view">${eventcontent.subject}</a></td>
                                     <td class="text-center">${eventcontent.event_content_code}</td>
-                                    <td class="text-center">${eventcontent.subject}</td>
-                                    <td class="text-center">추가</td>
-        <td class=""><fmt:formatDate value="${eventcontent.last_upd_date}" pattern="yyyy-MM-dd HH:MM"/></td>
-                                    <td class="text-center">0</td>
-                                    <td class="text-center">이메일</td>
-                                    <td class="text-center">1회</td>
-                                    <td class="">2021.00/00 (0일전)</td>
+                                    <td class="text-center">${eventcontent.is_file eq 0 ? "포함안함" : eventcontent.is_file eq 1 ? "포함" :""}</td>
+                                    <td class="text-center">${eventcontent.is_new eq 0 ? "신규아님" : eventcontent.is_new eq 1 ? "신규" :""}</td>
+                                    <td class="text-center">${eventcontent.is_important eq 0 ? "고정안함" : eventcontent.is_important eq 1 ? "고정함" : "" }</td>
+                                    <td class="text-center">${eventcontent.is_show eq 0 ? "노출안함" : eventcontent.is_show eq 1 ? "노출함" :""}</td>
+                                    <td class="">${eventcontent.view_count}</td>
+                                    <td class="text-center">${eventcontent.event_content_status eq 0 ? "임시저장" : eventcontent.event_content_status eq 1 ? "허락" : eventcontent.event_content_status eq 2 ? "수정발행" : eventcontent.event_content_status eq 3 ? "게시종료" : "기타"}</td>
+                                    <td class="text-center">${eventcontent.memo}</td>
+                                    <td class="text-center"><fmt:formatDate value="${eventcontent.event_start_date}" pattern="yyyy-MM-dd HH:MM"/></td>
+                                    <td class=""><fmt:formatDate value="${eventcontent.event_end_date}" pattern="yyyy-MM-dd HH:MM"/></td>
                                 </tr>
 </c:forEach>
                                 <tr class="">
@@ -280,7 +281,7 @@
             <div class="modal-dialog modal-lg">
                 <form class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">상담내용 입력</h5>
+                        <h5 class="modal-title">행사 안내</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
                     <div class="modal-body pb-2">
@@ -293,7 +294,7 @@
                         <hr class="mt-0">
                         <div class="form-row">
                             <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">신청자</label>
+                                <label class="form-label d-block text-muted">행사제목</label>
                                 <span>김홍삼</span>
                             </div>
                             <div class="form-group col col-md-4">
@@ -351,56 +352,7 @@
                         </span>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">이용료 납부</label>
-                                <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-6" type="radio" class="custom-control-input">
-                                    <span class="custom-control-label">미납</span>
-                                </label>
-                                <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-6" type="radio" class="custom-control-input">
-                                    <span class="custom-control-label">납부</span>
-                                </label>
-                                <span class="font-weight-semibold">납부액 : 90,000,000원</span>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col col-md-12 mb-0">
-                                <label class="form-label d-block text-muted">상담일 변경</label>
-                                <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-7" type="radio" class="custom-control-input">
-                                    <span class="custom-control-label">변경 없음</span>
-                                </label>
-                                <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-7" type="radio" class="custom-control-input">
-                                    <span class="custom-control-label">변경</span>
-                                </label>
-                            </div>
-                            <div class="form-group col col-md-12 mb-1">
-                                <span class="text-muted">2021.00 00 HH:MM 에서</span> <input type="text" class="form-control d-inline-block datepickers" style="width:120px;"> <input type="text" id="timepicker-2" class="form-control d-inline-block ui-timepicker-input" autocomplete="off" style="width:90px;" placeholder="00:00 AM">
-                            </div>
-                            <div class="form-group col col-md-12">
-                                <span class="text-muted">신청자에게</span>
-                                <label class="custom-control custom-checkbox d-inline-block">
-                                    <input type="checkbox" class="custom-control-input" name="check-3">
-                                    <span class="custom-control-label">SMS</span>
-                                </label>
-                                <label class="custom-control custom-checkbox d-inline-block">
-                                    <input type="checkbox" class="custom-control-input" name="check-3">
-                                    <span class="custom-control-label">이메일</span>
-                                </label>
-                                <a href="#none" class="btn btn-outline-secondary">안내</a>
-                            </div>
-                        </div>
                         <hr class="mt-0">
-                        <div class="form-row">
-                            <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">상담일지</label>
-                                <input type="file" class="form-control-file d-block">
-                                <small class="form-text text-muted">상담 일지 등록, 피 상담자에게는 전달이 안됩니다.</small>
-                            </div>
-                        </div>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
@@ -655,6 +607,11 @@
 
     </div>
 
+    </div>
+<script>
+
+
+</script>
 <!-- Layout footer -->
 <%@include file ="layouts/frame_footer.jsp" %>
 <!-- / Layout footer -->

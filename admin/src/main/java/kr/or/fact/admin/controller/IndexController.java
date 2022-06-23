@@ -584,7 +584,7 @@ public class IndexController {
 
     //문의상담신청 관리
     @RequestMapping(value = "/c10_site_mng_consult_mng",method = RequestMethod.POST)
-    public String c10_site_mng_consult_mng(ModelMap model,@RequestBody ParamPageListFilteredVO param){
+    public String c10_site_mng_consult_mng(ModelMap model,@RequestBody ParamPageListFilteredVO param,Principal principal){
 //접수목록 가져오기 (db table) DemoBsConsultingVO get 요청으로 가져오기
         param.setAmount(10);
         int list_amount = 10;
@@ -640,6 +640,9 @@ public class IndexController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
+
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+        model.addAttribute("admin", adminInfo);
         return "c10_site_mng_consult_mng";
     }
 
@@ -730,7 +733,7 @@ public class IndexController {
                                       ModelMap model){
 
         int list_amount = 10;
-        int page_amount = param.getAmount();
+        int page_amount = 10;
         int page = param.getPage_num();
 
         param.setAmount(10);
@@ -801,8 +804,10 @@ public class IndexController {
         int page_num=1;
         int count =0;
         int amount =1;
-        List<EventContentVO> eventContentList = eventContentService.getEventContentList(page_num,count);
+        List<EventContentVO> eventContentList = eventContentService.getEventList();
         model.addAttribute("eventcontentlist",eventContentList);
+        System.out.println(eventContentList);
+        System.out.println(eventContentList.size());
 
         return "c42_site_event_mng";
     }

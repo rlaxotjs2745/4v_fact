@@ -11,4 +11,5 @@ public interface EventContentMapper {
     int getWebpageEventContentCount();
     List<EventContentVO> getEventContentList(@Param("page_num") int page_num, @Param("amount") int amount, @Param("order_field") String order_field);
     List<EventContentVO> getMainEventContentList();
+    List<EventContentVO> getEventList();
 }
