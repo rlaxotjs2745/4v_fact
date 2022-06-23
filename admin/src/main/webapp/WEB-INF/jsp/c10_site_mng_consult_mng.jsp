@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- Page content -->
     <div class="container-fluid flex-grow-1 container-p-y">
 
@@ -93,162 +94,38 @@
                                 <tr role="row">
                                     <th class="text-center px-2" style="width:60px">No</th>
                                     <th class="text-center sorting" style="width:80px">상담일지</th>
-                                    <th class="text-center sorting" style="width:60px">구분</th>
+                                    <th class="text-center px-2" style="width:100px">상담 형식</th>
+                                    <th class="text-center sorting" style="width:60px">상담 상황</th>
                                     <th class="text-center sorting" style="width:100px">신청자</th>
-                                    <th class="text-center sorting" style="width:100px">ID</th>
-                                    <th class="text-center sorting" style="width:150px">소속</th>
-                                    <th class="text-center px-2" style="width:80px">접수</th>
-                                    <th class="text-center px-2" style="width:120px">수신일</th>
-                                    <th class="text-center px-2" style="width:120px">요청일</th>
-                                    <th class="text-center px-2" style="width:120px">상담 방법</th>
-                                    <th class="text-center px-2" style="width:100px">상담 수</th>
-                                    <th class="text-center px-2" style="width:150px">마지막 상담일</th>
+                                    <th class="text-center sorting" style="width:100px">상담목표</th>
+                                    <th class="text-center sorting" style="width:150px">상담파일 여부</th>
+                                    <th class="text-center px-2" style="width:80px">메모</th>
+                                    <th class="text-center px-2" style="width:120px">최초등록일시</th>
+                                    <th class="text-center px-2" style="width:120px">상담예정일</th>
+                                    <th class="text-center px-2" style="width:120px">상담 종류</th>
+                                    <th class="text-center px-2" style="width:150px">요청등록일</th>
+                                    <th class="text-center px-2" style="width:150px">주소</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${consultingList}" var="consulting" varStatus="status">
                                     <tr class="consulting-entity" id="${consulting.idx_demo_bs_consulting}">
                                     <td class="text-center">${consulting.consulting_num}</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view">등</a></td>
-                                    <td class="text-center">사전</td>
-                                    <td class="text-center">${consulting.idx_user}</td>
-                                    <td class="text-center">XXXXXX</td>
+                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view" >상담일지</a></td>
+                                        <td class="text-center">${consulting.consult_answer_type eq 0 ? "전화" : consulting.consult_answer_type eq 1 ? "이메일" :consulting.consult_answer_type eq 2 ? "대면상담" : "기타"}</td>
+                                    <td class="text-center">${consulting.consulting_status eq 0 ? "상담 요청 등록" : consulting.consulting_status eq 1 ? "상담자 지정" : consulting.consulting_status eq 2 ? "상담 계획 전송완료" :consulting.consulting_status eq 3 ? "상담 계획보냄" : consulting.consulting_status eq 4 ? "상담완료": consulting.consulting_status eq 99 ? "상담 불가" : "기타"}</td>
+                                    <td class="text-center">${consulting.user_name}</td>
+                                    <td class="text-center">${consulting.consulting_goal}</td>
+                                    <td class="text-center">${consulting.is_consulting_file eq 0 ? "파일없음" : consulting.is_consulting_file eq 1 ? "파일있음": ""}</td>
                                     <td class="text-center">${consulting.memo}</td>
-                                    <td class="text-center">추가</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">0</td>
-                                    <td class="text-center">이메일</td>
-                                    <td class="text-center">1회</td>
-                                    <td class="">2021.00/00 (0일전)</td>
+                                    <td class="text-center"><fmt:formatDate value="${consulting.reg_date}" pattern="yyyy-MM-dd HH:MM"/></td>
+                                    <td class="text-center"><fmt:formatDate value="${consulting.resulvation_date}" pattern="yyyy-MM-dd HH:MM"/></td>
+                                    <td class="text-center">${consulting.consulting_type eq 0 ? "지원상담": consulting.consulting_type eq 1 ? "평가상담": consulting.consulting_type eq 2 ? "사업계획상담":consulting.consulting_type eq 3 ? "협약상담":consulting.consulting_type eq 4 ? "실증수행상담":consulting.consulting_type eq 5 ? "정산상담": "기타"}</td>
+                                    <td class=""><fmt:formatDate value="${consulting.req_date}" pattern="yyyy-MM-dd HH:MM"/></td>
+                                        <td class="text-center">${consulting.addr}</td>
                                 </tr>
                                 </c:forEach>
-                                <tr class="">
-                                    <td class="text-center">2</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view">등록하기</a></td>
-                                    <td class="text-center">사후</td>
-                                    <td class="text-center">홍길동</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">전화</td>
-                                    <td class="text-center">0회</td>
-                                    <td class="">없음</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">3</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">사전</td>
-                                    <td class="text-center">홍길동</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">센터방문</td>
-                                    <td class="text-center">1회</td>
-                                    <td class="">2021.00/00 (0일전)</td>
-                                </tr>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">4</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">센터방문</td>
-                                    <td class="text-center">0회</td>
-                                    <td class="">없음</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">5</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">해결</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">센터방문</td>
-                                    <td class="text-center">0회</td>
-                                    <td class="">없음</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">6</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">-</td>
-                                    <td class="text-center">1:1게시판</td>
-                                    <td class="text-center">0회</td>
-                                    <td class=""></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">7</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">-</td>
-                                    <td class="text-center">1:1게시판</td>
-                                    <td class="text-center">0회</td>
-                                    <td class=""></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">8</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">센터방문</td>
-                                    <td class="text-center">0회</td>
-                                    <td class="">없음</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">9</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">센터방문</td>
-                                    <td class="text-center">0회</td>
-                                    <td class="">없음</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">10</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">센터방문</td>
-                                    <td class="text-center">0회</td>
-                                    <td class="">없음</td>
-                                </tr>
+
                                 </tbody>
                             </table>
                         </div>
@@ -280,7 +157,7 @@
             <div class="modal-dialog modal-lg">
                 <form class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">상담내용 입력</h5>
+                        <h5 class="modal-title">상담일지</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
                     <div class="modal-body pb-2">
@@ -292,57 +169,57 @@
                         </div>
                         <hr class="mt-0">
                         <div class="form-row">
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">신청자</label>
+                            <div class="form-group col col-md-4" id="user_name">
+                                <label class="form-label d-block text-muted" >신청자</label>
                                 <span>김홍삼</span>
                             </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">소속</label>
+                            <div class="form-group col col-md-4" id="addr">
+                                <label class="form-label d-block text-muted" >주소</label>
                                 <span>맛있는 농부</span>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">ID</label>
+                            <div class="form-group col col-md-4" id="email">
+                                <label class="form-label d-block text-muted" >email</label>
                                 <span>000-00-00000</span>
                             </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">연락처</label>
+                            <div class="form-group col col-md-4" id="mphone_num">
+                                <label class="form-label d-block text-muted" >연락처</label>
                                 <span>000-0000-0000</span>
                             </div>
                         </div>
                         <hr class="mt-0">
                         <div class="form-row">
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">상담 구분</label>
+                            <div class="form-group col col-md-4" id="consulting_status">
+                                <label class="form-label d-block text-muted" >상담 종류</label>
                                 <span>사전 상담</span>
                             </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">상담 접수</label>
+                            <div class="form-group col col-md-4" id="consulting_anser_type">
+                                <label class="form-label d-block text-muted" >상담 접수</label>
                                 <span>추가</span>
                             </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">신청 목적</label>
+                            <div class="form-group col col-md-4" id="consulting_goal">
+                                <label class="form-label d-block text-muted" >신청 목적</label>
                                 <span>이용 신청서 작성</span>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">수신일</label>
+                            <div class="form-group col col-md-4" id="reg_date">
+                                <label class="form-label d-block text-muted"  >최초등록일</label>
                                 <span>2021.00.00</span>
                             </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">요청일/변경일</label>
+                            <div class="form-group col col-md-4" id="req_date">
+                                <label class="form-label d-block text-muted" >요청일/변경일</label>
                                 <span>2021.00.00 HH:MM</span>
                             </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">상담 방법</label>
+                            <div class="form-group col col-md-4" id="consulting_answer_type">
+                                <label class="form-label d-block text-muted" >상담 방법</label>
                                 <span>방문 상담</span>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">내용</label>
+                            <div class="form-group col col-md-12" id="memo">
+                                <label class="form-label d-block text-muted" >내용</label>
                                 <span>
                           Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                           Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
@@ -352,19 +229,14 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">이용료 납부</label>
-                                <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-6" type="radio" class="custom-control-input">
-                                    <span class="custom-control-label">미납</span>
-                                </label>
-                                <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-6" type="radio" class="custom-control-input">
-                                    <span class="custom-control-label">납부</span>
-                                </label>
-                                <span class="font-weight-semibold">납부액 : 90,000,000원</span>
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" id="memom">메모</label>
+                            <div class="form-group col col-md-10">
+                                <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
+                                <textarea class="form-control mode-view" readonly rows="5"></textarea>
                             </div>
                         </div>
+
+
                         <div class="form-row">
                             <div class="form-group col col-md-12 mb-0">
                                 <label class="form-label d-block text-muted">상담일 변경</label>
@@ -380,27 +252,10 @@
                             <div class="form-group col col-md-12 mb-1">
                                 <span class="text-muted">2021.00 00 HH:MM 에서</span> <input type="text" class="form-control d-inline-block datepickers" style="width:120px;"> <input type="text" id="timepicker-2" class="form-control d-inline-block ui-timepicker-input" autocomplete="off" style="width:90px;" placeholder="00:00 AM">
                             </div>
-                            <div class="form-group col col-md-12">
-                                <span class="text-muted">신청자에게</span>
-                                <label class="custom-control custom-checkbox d-inline-block">
-                                    <input type="checkbox" class="custom-control-input" name="check-3">
-                                    <span class="custom-control-label">SMS</span>
-                                </label>
-                                <label class="custom-control custom-checkbox d-inline-block">
-                                    <input type="checkbox" class="custom-control-input" name="check-3">
-                                    <span class="custom-control-label">이메일</span>
-                                </label>
-                                <a href="#none" class="btn btn-outline-secondary">안내</a>
-                            </div>
+
                         </div>
                         <hr class="mt-0">
-                        <div class="form-row">
-                            <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">상담일지</label>
-                                <input type="file" class="form-control-file d-block">
-                                <small class="form-text text-muted">상담 일지 등록, 피 상담자에게는 전달이 안됩니다.</small>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
@@ -412,249 +267,231 @@
             </div>
         </div>
 
-        <div class="modal fade" id="modals-counsel-history">
+
+
+        <div class="modal fade" id="modals-counsel_modify">
             <div class="modal-dialog modal-lg">
                 <form class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">상담 이력</h5>
+                        <h5 class="modal-title">상담일지</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
                     <div class="modal-body pb-2">
 
                         <div class="form-row">
                             <div class="form-group col col-md-12 text-right">
-                                <a href="#none" class="btn btn-underline">상담 이력</a>
+                                <a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modals-counsel-history">상담 이력</a>
                             </div>
                         </div>
                         <hr class="mt-0">
                         <div class="form-row">
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">신청자</label>
+                            <div class="form-group col col-md-4" id="user_name_modify">
+                                <label class="form-label d-block text-muted" >신청자</label>
                                 <span>김홍삼</span>
                             </div>
                             <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">소속</label>
+                                <label class="form-label d-block text-muted" id="addr_modify">주소</label>
                                 <span>맛있는 농부</span>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">ID</label>
+                            <div class="form-group col col-md-4" id="email_modify">
+                                <label class="form-label d-block text-muted" >email</label>
                                 <span>000-00-00000</span>
                             </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">연락처</label>
+                            <div class="form-group col col-md-4" id="mphone_num_modify">
+                                <label class="form-label d-block text-muted" >연락처</label>
                                 <span>000-0000-0000</span>
                             </div>
                         </div>
                         <hr class="mt-0">
-
-                        <div id="ac2">
-                            <div class="card mb-2">
-
-                                <div class="card-header">
-                                    <a class="d-flex justify-content-between text-body" data-toggle="collapse" aria-expanded="true" href="#ac2-1">
-                                        <span class="pr-2">신규 해결 YYYY.DD.MM</span>
-                                        <div class="collapse-icon"></div>
-                                    </a>
-                                </div>
-
-                                <div id="ac2-1" class="collapse show" data-parent="#ac2" style="">
-                                    <div class="card-body">
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">상담 구분</label>
-                                                <span>사전 상담</span>
-                                            </div>
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">상담 접수</label>
-                                                <span>신규</span>
-                                            </div>
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">신청 목적</label>
-                                                <span>이용 신청서 작성</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">수신일</label>
-                                                <span>2021.00.00</span>
-                                            </div>
-                                            <div class="form-group col col-md-8">
-                                                <label class="form-label d-block text-muted">요청일/변경일</label>
-                                                <span>2021.00.00 HH:MM / 2021.00.00 HH:MM</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">상담 방법</label>
-                                                <span>방문 상담</span>
-                                            </div>
-                                            <div class="form-group col col-md-8">
-                                                <label class="form-label d-block text-muted">상담일</label>
-                                                <span>2021.00.00</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-12">
-                                                <label class="form-label d-block text-muted">방문상담</label>
-                                                <span>
-                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                  Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
-                                  Accusantium consequuntur dignissimos iusto magnam provident, ratione reiciendis
-                                  repellat. Aut, doloribus, enim.
-                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-12 mb-0">
-                                                <label class="form-label d-block text-muted">상담일지</label>
-                                                <span>XXXXXXXX.hwp</span><a href="#none" class="btn btn-outline-default ml-2"><i class="lnr lnr-download"></i> 내려받기</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="form-row">
+                            <div class="form-group col col-md-4" id="consulting_status_modify">
+                                <label class="form-label d-block text-muted" >상담 종류</label>
+                                <span>사전 상담</span>
                             </div>
-
-                            <div class="card mb-2">
-                                <div class="card-header">
-                                    <a class="d-flex justify-content-between text-body collapsed" data-toggle="collapse" href="#ac2-2" aria-expanded="false">
-                                        <span class="pr-2">신규 해결 YYYY.DD.MM</span>
-                                        <div class="collapse-icon"></div>
-                                    </a>
-                                </div>
-                                <div id="ac2-2" class="collapse" data-parent="#ac2" style="">
-                                    <div class="card-body">
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">상담 구분</label>
-                                                <span>사전 상담</span>
-                                            </div>
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">상담 접수</label>
-                                                <span>신규</span>
-                                            </div>
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">신청 목적</label>
-                                                <span>이용 신청서 작성</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">수신일</label>
-                                                <span>2021.00.00</span>
-                                            </div>
-                                            <div class="form-group col col-md-8">
-                                                <label class="form-label d-block text-muted">요청일/변경일</label>
-                                                <span>2021.00.00 HH:MM / 2021.00.00 HH:MM</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">상담 방법</label>
-                                                <span>방문 상담</span>
-                                            </div>
-                                            <div class="form-group col col-md-8">
-                                                <label class="form-label d-block text-muted">상담일</label>
-                                                <span>2021.00.00</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-12">
-                                                <label class="form-label d-block text-muted">방문상담</label>
-                                                <span>
-                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                  Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
-                                  Accusantium consequuntur dignissimos iusto magnam provident, ratione reiciendis
-                                  repellat. Aut, doloribus, enim.
-                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-12 mb-0">
-                                                <label class="form-label d-block text-muted">상담일지</label>
-                                                <span>XXXXXXXX.hwp</span><a href="#none" class="btn btn-outline-default ml-2"><i class="lnr lnr-download"></i> 내려받기</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="form-group col col-md-4" id="consulting_anser_type_modify">
+                                <label class="form-label d-block text-muted" >상담 접수</label>
+                                <span>추가</span>
                             </div>
-
-                            <div class="card mb-2">
-                                <div class="card-header">
-                                    <a class="collapsed d-flex justify-content-between text-body" data-toggle="collapse" href="#ac2-3">
-                                        <span class="pr-2">신규 해결 YYYY.DD.MM</span>
-                                        <div class="collapse-icon"></div>
-                                    </a>
-                                </div>
-                                <div id="ac2-3" class="collapse" data-parent="#ac2">
-                                    <div class="card-body">
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">상담 구분</label>
-                                                <span>사전 상담</span>
-                                            </div>
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">상담 접수</label>
-                                                <span>신규</span>
-                                            </div>
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">신청 목적</label>
-                                                <span>이용 신청서 작성</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">수신일</label>
-                                                <span>2021.00.00</span>
-                                            </div>
-                                            <div class="form-group col col-md-8">
-                                                <label class="form-label d-block text-muted">요청일/변경일</label>
-                                                <span>2021.00.00 HH:MM / 2021.00.00 HH:MM</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">상담 방법</label>
-                                                <span>방문 상담</span>
-                                            </div>
-                                            <div class="form-group col col-md-8">
-                                                <label class="form-label d-block text-muted">상담일</label>
-                                                <span>2021.00.00</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-12">
-                                                <label class="form-label d-block text-muted">방문상담</label>
-                                                <span>
-                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                  Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
-                                  Accusantium consequuntur dignissimos iusto magnam provident, ratione reiciendis
-                                  repellat. Aut, doloribus, enim.
-                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-12 mb-0">
-                                                <label class="form-label d-block text-muted">상담일지</label>
-                                                <span>XXXXXXXX.hwp</span><a href="#none" class="btn btn-outline-default ml-2"><i class="lnr lnr-download"></i> 내려받기</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="form-group col col-md-4" id="consulting_goal_modify">
+                                <label class="form-label d-block text-muted" >신청 목적</label>
+                                <span>이용 신청서 작성</span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col col-md-4" id="reg_date_modify">
+                                <label class="form-label d-block text-muted"  >최초등록일</label>
+                                <span>2021.00.00</span>
+                            </div>
+                            <div class="form-group col col-md-4" id="req_date_modify">
+                                <label class="form-label d-block text-muted" >요청일/변경일</label>
+                                <span>2021.00.00 HH:MM</span>
+                            </div>
+                            <div class="form-group col col-md-4" id="consulting_answer_type_modify">
+                                <label class="form-label d-block text-muted" >상담 방법</label>
+                                <span>방문 상담</span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col col-md-12" id="memo_get_modify">
+                                <label class="form-label d-block text-muted" >내용</label>
+                                <span>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                          Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
+                          Accusantium consequuntur dignissimos iusto magnam provident, ratione reiciendis
+                          repellat. Aut, doloribus, enim.
+                        </span>
+                            </div>
+                        </div>
+                        <div class="form-row" id="memo_modify">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" >메모</label>
+                            <div class="form-group col col-md-10">
+                                <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
+                                <textarea class="form-control mode-view" readonly rows="5"></textarea>
                             </div>
                         </div>
 
+
+                        <div class="form-row">
+                            <div class="form-group col col-md-12 mb-0">
+                                <label class="form-label d-block text-muted">상담일 변경</label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="custom-7" type="radio" class="custom-control-input">
+                                    <span class="custom-control-label">변경 없음</span>
+                                </label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="custom-7" type="radio" class="custom-control-input">
+                                    <span class="custom-control-label">변경</span>
+                                </label>
+                            </div>
+                            <div class="form-group col col-md-12 mb-1">
+                                <span class="text-muted">2021.00 00 HH:MM 에서</span> <input type="text" class="form-control d-inline-block datepickers" style="width:120px;"> <input type="text" id="timepicker-2" class="form-control d-inline-block ui-timepicker-input" autocomplete="off" style="width:90px;" placeholder="00:00 AM">
+                            </div>
+
+                        </div>
+                        <hr class="mt-0">
+
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                        <div>
+                            <button type="button" class="btn btn-primary">저장</button>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
 
+
+
     </div>
+
+
 <script>
+
+    var curConsultdata;
+    var consultList=[];
+    <c:forEach items="${consultingList}" var="consulting" varStatus="status">
+    consultList.push({
+        idx_demo_bs_consulting :"${consulting.idx_demo_bs_consulting}",
+        consulting_num :"${consulting.consulting_num}",
+        idx_demo_bs_applicaion :"${consulting.idx_demo_bs_applicaion}",
+        idx_demo_business :"${consulting.idx_demo_business}",
+        idx_corp_info :"${consulting.idx_corp_info}",
+        idx_user :"${consulting.idx_user}",
+        consulting_type :"${consulting.consulting_type}",
+        consult_type_etc_str :"${consulting.consult_type_etc_str}",
+        consulting_status :"${consulting.consulting_status}",
+        consulting_goal :"${consulting.consulting_goal}",
+        req_date :"${consulting.req_date}",
+        resulvation_date :"${consulting.resulvation_date}",
+        consulting_date :"${consulting.consulting_date}",
+        consultant_idx :"${consulting.consultant_idx}",
+        is_consulting_file :"${consulting.is_consulting_file}",
+        is_result_file :"${consulting.is_result_file}",
+        is_consultant :"${consulting.is_consultant}",
+        consult_answer_type :"${consulting.consult_answer_type eq 0 ? "전화" : consulting.consult_answer_type eq 1 ? "이메일" :consulting.consult_answer_type eq 2 ? "대면상담" : "기타"}",
+        is_share :"${consulting.is_share}",
+        is_privacy_accept :"${consulting.is_privacy_accept}",
+        memo :"${consulting.memo}",
+        idx_admin :"${consulting.idx_admin}",
+        user_name :"${consulting.user_name}",
+        reg_date :"${consulting.reg_date}",
+        email :"${consulting.email}",
+        addr :"${consulting.addr}",
+        mphone_num :"${consulting.mphone_num}"
+
+    })
+    </c:forEach>
+
+
+    $(".consulting-entity").click(function(){
+        console.log("여긴와요>??")
+        var selectId = $(this).attr('id');
+        curConsultdata = selectId;
+        for(var consulting of consultList){
+            if(selectId === consulting.idx_demo_bs_consulting){
+                $(".idx_demo_bs_consulting").attr("id", selectId);
+                // $('#question_mo span').text(visitList.question);
+                $("#consulting_num span").text(consulting.consulting_num);
+                $("#idx_demo_bs_applicaion span").text(consulting.idx_demo_bs_applicaion);
+                $("#idx_demo_business span").text(consulting.idx_demo_business);
+                $("#idx_corp_info span").text(consulting.idx_corp_info);
+                $("#idx_user span").text(consulting.idx_user);
+                $("#consulting_type span").text(consulting.consulting_type);
+                $("#consult_type_etc_str span").text(consulting.consult_type_etc_str);
+                $("#consulting_status span").text(consulting.consulting_status);
+                $("#consulting_goal span").text(consulting.consulting_goal);
+                $("#req_date span").text(consulting.req_date);
+                $("#resulvation_date span").text(consulting.resulvation_date);
+                $("#consulting_date span").text(consulting.consulting_date);
+                $("#consultant_idx span").text(consulting.consultant_idx);
+                $("#is_consulting_file span").text(consulting.is_consulting_file);
+                $("#is_result_file span").text(consulting.is_result_file);
+                $("#is_consultant span").text(consulting.is_consultant);
+                $("#consult_answer_type span").text(consulting.consult_answer_type);
+                $("#is_share span").text(consulting.is_share);
+                $("#is_privacy_accept span").text(consulting.is_privacy_accept);
+                $("#memo span").text(consulting.memo);
+                $("#idx_admin span").text(consulting.idx_admin);
+                $("#user_name span").text(consulting.user_name);
+                $("#reg_date span").text(consulting.reg_date);
+                $("#email span").text(consulting.email);
+                $("#addr span").text(consulting.addr);
+                $("#mphone_num span").text(consulting.mphone_num);
+
+
+                $("#consulting_num_modify span").val(consulting.consulting_num);
+                $("#idx_demo_bs_applicaion_modify span").val(consulting.idx_demo_bs_applicaion);
+                $("#idx_demo_business_modify span").val(consulting.idx_demo_business);
+                $("#idx_corp_info_modify span").val(consulting.idx_corp_info);
+                $("#idx_user_modify span").val(consulting.idx_user);
+                $("#consulting_type_modify span").val(consulting.consulting_type);
+                $("#consult_type_etc_str_modify span").val(consulting.consult_type_etc_str);
+                $("#consulting_status_modify span").val(consulting.consulting_status);
+                $("#consulting_goal_modify span").val(consulting.consulting_goal);
+                $("#req_date_modify span").val(consulting.req_date);
+                $("#resulvation_date_modify span").val(consulting.resulvation_date);
+                $("#consulting_date_modify span").val(consulting.consulting_date);
+                $("#consultant_idx_modify span").val(consulting.consultant_idx);
+                $("#is_consulting_file_modify span").val(consulting.is_consulting_file);
+                $("#is_result_file_modify span").val(consulting.is_result_file);
+                $("#is_consultant_modify span").val(consulting.is_consultant);
+                $("#consult_answer_type_modify span").val(consulting.consult_answer_type);
+                $("#is_share_modify span").val(consulting.is_share);
+                $("#is_privacy_accept_modify span").val(consulting.is_privacy_accept);
+                $("#memo_modify span").val(consulting.memo);
+                $("#idx_admin_modify span").val(consulting.idx_admin);
+                $("#user_name_modify span").val(consulting.user_name);
+                $("#reg_date_modify span").val(consulting.reg_date);
+                $("#email_modify span").val(consulting.email);
+                $("#addr_modify span").val(consulting.addr);
+                $("#mphone_num_modify span").val(consulting.mphone_num);
+                break;
+            }
+        }
+    });
 </script>
 <!-- Layout footer -->
 <%@include file ="layouts/frame_footer.jsp" %>

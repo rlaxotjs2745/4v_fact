@@ -30,4 +30,9 @@ public class NoticeServiceImpl implements NoticeService {
     public List<NoticeVO> getMainNoticeList(){
         return noticeMapper.getMainNoticeList();
     }
+
+    @Override
+    public int insertNotice(NoticeVO noticeVO) {
+        return noticeMapper.insertNotice(noticeVO);
+    }
 }

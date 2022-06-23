@@ -9,7 +9,41 @@
     <select id="getAdminConsultingCount" parameterType="long" resultType="int">
         SELECT COUNT(*) FROM TB_DEMO_BS_CONSULTING  WHERE CONSULTANT_IDX = #{idx_admin}
     </select>
+    <select id="getCountConsulting" parameterType="long" resultType="int">
+        SELECT COUNT(*) FROM TB_DEMO_BS_CONSULTING  ORDER BY CONSULTING_NUM ASC
+    </select>
+    <select id="getCunsultingList1" resultType="kr.or.fact.core.model.DTO.DemoBsConsultingVO">
+        SELECT
 
+            A.IDX_USER,
+            A.IDX_DEMO_BS_CONSULTING,
+            A.CONSULTING_NUM,
+            A.IDX_DEMO_BS_APPLICAION,
+            A.IDX_DEMO_BUSINESS,
+            A.IDX_CORP_INFO,
+            A.CONSULTING_TYPE,
+            A.CONSULT_TYPE_ETC_STR,
+            A.CONSULTING_STATUS,
+            A.CONSULTING_GOAL,
+            A.REQ_DATE,
+            A.RESULVATION_DATE,
+            A.CONSULTING_DATE,
+            A.CONSULTANT_IDX,
+            A.IS_CONSULTING_FILE,
+            A.IS_RESULT_FILE,
+            A.IS_CONSULTANT,
+            A.CONSULT_ANSWER_TYPE,
+            A.IS_SHARE,
+            A.IS_PRIVACY_ACCEPT,
+            A.MEMO,
+            A.IDX_ADMIN,
+            A.REG_DATE
+        ,TB_USER.IDX_USER, TB_USER.USER_NAME, TB_USER.EMAIL, TB_USER.ADDR,TB_USER.MPHONE_NUM
+        FROM TB_DEMO_BS_CONSULTING A JOIN TB_USER ON TB_USER.IDX_USER= A.IDX_USER
+    </select>
+    <select id="getCunsultingListUser" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.DemoBsConsultingVO">
+        SELECT TB_USER.IDX_USER, TB_USER.USER_NAME, TB_DEMO_BS_CONSULTING.IDX_USER FROM TB_USER,TB_DEMO_BS_CONSULTING WHERE TB_USER.IDX_USER= TB_DEMO_BS_CONSULTING.IDX_USER
+    </select>
     <select id="getUserConsultingList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.DemoBsConsultingVO">
         SELECT
                 IDX_DEMO_BS_CONSULTING

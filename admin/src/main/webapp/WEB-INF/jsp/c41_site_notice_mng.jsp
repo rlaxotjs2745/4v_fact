@@ -40,7 +40,7 @@
                                     <td class="text-center">${notice.notice_num}</td>
                                     <td class="text-center"><c:if test="${notice.is_important eq 1}">중요</c:if> </td>
                                     <td class="text-center">${notice.notice_code eq 1} </td>
-                                    <td class="text-left"><a href="#none" data-toggle="modal" data-target="#modals-notice" data-what="mode-view">${notice.subject}</a></td>
+                                    <td class="text-left"><a href="#none" data-toggle="modal" data-target="#modals-counsel-view" data-what="mode-view">${notice.subject}</a></td>
                                     <td class="text-center"><c:if test="${notice.is_file eq 1}"><span class="fas fa-paperclip"></span></c:if> </td>
                                     <td class="text-center">${notice.author}</td>
                                     <td class="text-center"><fmt:formatDate value="${notice.posting_start_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
@@ -462,7 +462,152 @@
         </div>
 
     </div>
+<!-- new demo bs-->
+<div class="modal fade" id="modals-business">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title text-white font-weight-bold mode-new">신규 공지사 작성</h5>
+                <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <!-- 사업번호 / 사업 상태-->
 
+                    <!-- 사업 제목-->
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">공지 제목</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" value="${demobs.demo_subject}">
+                            <div class="form-control-plaintext mode-view">${demobs.demo_subject}</div>
+                        </div>
+                    </div>
+
+                    <%--                        <div class="form-group row">
+                                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">사업내용</label>
+                                                <div class="col-md-10">
+                                                    <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" value="${demobs.demo_subject}">
+                                                    <div class="form-control-plaintext mode-view">${demobs.demo_subject}</div>
+                                                </div>
+                                            </div>--%>
+
+                    <hr>
+                    <div class="form-row">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">내용</label>
+
+                        <div class="col-md-10 mode-edit mode-new">
+                            <div class="summernote"></div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-row">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메모</label>
+                        <div class="form-group col col-md-10">
+                            <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
+                            <textarea class="form-control mode-view" readonly rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">게시 기간</label>
+                        <div class="col-md-10">
+                            <div class="form-control-plaintext mode-view">2022-01-01 - 2022-02-01</div>
+
+                            <div id="datepicker-open" class="input-daterange input-group mode-edit mode-new">
+                                <input type="text" class="form-control" name="start">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">~</span>
+                                </div>
+                                <input type="text" class="form-control" name="end">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">파일 첨부</label>
+                        <div class="form-group col col-md-10 mode-edit mode-new">
+                            <input type="file" class="form-control-file d-block py-1">
+                            <input type="file" class="form-control-file d-block py-1">
+                        </div>
+                        <div class="form-group col col-md-10 col-form-label mode-view">
+                            <a href="file.doc"></a>
+                            <a href="file.doc"></a>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between mode-new">
+                        <div>
+                            <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-outline-primary mr-2">임시저장</button>
+                            <button type="button" class="btn btn-primary">작성완료</button>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer justify-content-between mode-edit d-none">
+                        <div>
+                            <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-primary">저장</button>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer justify-content-between mode-view">
+                        <div>
+                            <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">닫기</button>
+                        </div>
+
+                        <div>
+                            <button id="btn_edit_mode" type="button" class="btn btn-primary">수정</button>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('.summernote').summernote({
+        toolbar: [
+            // [groupName, [list of button]]
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            ['style', ['bold', 'italic', 'underline']],
+            ['color', ['color']],
+            ['table', ['table']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['insert',['picture','link']],
+            ['view', ['fullscreen','codeview']],
+        ],
+        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+        fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+        height: 300                 // 에디터 높이
+    });
+
+    $(function() {
+        var isRtl = $('html').attr('dir') === 'rtl';
+
+        $('#datepicker-show,#datepicker-open').datepicker({
+            orientation: isRtl ? 'auto right' : 'auto left',
+            format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
+            startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
+            language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+        });
+
+
+    });
+    $(function () {
+        // Time
+        $('#flatpickr-time-start,#flatpickr-time-end').flatpickr({
+            enableTime: true,
+            noCalendar: true,
+            altInput: true,
+            static:true
+        });
+    });
+</script>
 <!-- Layout footer -->
 <%@include file ="layouts/frame_footer.jsp" %>
 <!-- / Layout footer -->

@@ -17,10 +17,10 @@
                     <div class="form-inline">
                         <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
                             <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio">전체
+                                <input type="radio" name="btn-radio" checked="">전체
                             </label>
                             <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio" value="0"> 신규
+                                <input type="radio" name="btn-radio" value="0" > 신규
                             </label>
                             <label class="btn btn-secondary ">
                                 <input type="radio" name="btn-radio" value="1"> 접수

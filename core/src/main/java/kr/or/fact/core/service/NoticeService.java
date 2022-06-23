@@ -9,4 +9,5 @@ public interface NoticeService {
     public int getWebpageNoticeCount();
     public List<NoticeVO> getNoticeWebList(int page, int count);
     public List<NoticeVO> getMainNoticeList();
+    public int insertNotice(NoticeVO noticeVO);
 }

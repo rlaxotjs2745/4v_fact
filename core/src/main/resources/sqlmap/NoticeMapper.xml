@@ -40,7 +40,55 @@
         WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
     </select>
 
-
+<insert id="insertNotice" parameterType="kr.or.fact.core.model.DTO.NoticeVO">
+    INSERT INTO TB_NOTICE(
+IDX_NOTICE,
+NOTICE_CODE,
+NOTICE_NUM,
+SUBJECT,
+NOTICE_CONTENTS,
+IS_FILE,
+IS_NEW,
+IS_MAIN_PAGE,
+IS_IMPORTANT,
+IS_SHOW,
+VIEW_COUNT,
+NOTICE_STATUS,
+POSTING_START_DATE,
+POSTING_END_DATE,
+DOC_VERSION,
+MEMO,
+SEARCH_TAG,
+AUTHOR,
+IDX_ADMIN,
+CONFIRM_ADMIN_IDX,
+REG_DATE,
+LAST_UPD_DATE
+    )VALUES (
+                    SEQ_NOTICE.NEXTVAL,
+                #{notice_code},
+                #{notice_num},
+                #{subject},
+                #{notice_contents},
+                #{is_file},
+                #{is_new},
+                #{is_main_page},
+                #{is_important},
+                #{is_show},
+                #{view_count},
+                #{notice_status},
+                #{posting_start_date},
+                #{posting_end_date},
+                #{doc_version},
+                #{memo},
+                #{search_tag},
+                #{author},
+                #{idx_admin},
+                #{confirm_admin_idx},
+                SYSDATE,
+                #{last_upd_date}
+                )
+</insert>
 
 
 
