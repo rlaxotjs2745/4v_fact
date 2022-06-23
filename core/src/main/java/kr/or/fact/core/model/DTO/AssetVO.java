@@ -27,5 +27,6 @@ public class AssetVO {
     long idx_admin;//	number	32				◯	작성자	idx_admin index pk
     Date reg_date;//	date						최초 등록 일시
     Date last_upd_date;//	date						최종 수정 일시
-
+    int maxvalue;
+    int page;
 }

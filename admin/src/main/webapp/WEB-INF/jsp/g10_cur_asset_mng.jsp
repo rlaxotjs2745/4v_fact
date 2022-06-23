@@ -6,146 +6,146 @@
         <h4 class="d-flex justify-content-between align-items-center w-100 mt-4">
             <div>자산 현황</div>
         </h4>
-        <div class="row">
-            <div class="col-sm-4 col-md- col-xl-2">
-                <div class="card mb-3">
-                    <div class="card-body p-3">
-                        <div class="d-flex align-items-center">
-                            <div class="display-4 "><img src="resources/assets/img/img_smartfarm.png" alt=""></div>
-                            <div class="w-lg-100 ml-3">
-                                <div class=" d-flex justify-content-between">
-                                    <div class="text-muted small mt-1">스마트팜</div>
-                                    <div class="text-big font-weight-semibold">548</div>
-                                </div>
-                                <div class=" d-flex justify-content-between">
-                                    <div class="text-muted small mt-1">위탁</div>
-                                    <div class="text-big font-weight-semibold">120</div>
-                                </div>
-                                <div class=" d-flex justify-content-between">
-                                    <div class="text-muted small mt-1">자율</div>
-                                    <div class="text-big font-weight-semibold">85</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md- col-xl-2">
-                <div class="card mb-3">
-                    <div class="card-body p-3">
-                        <div class="d-flex align-items-center">
-                            <div class="display-4 "><img src="resources/assets/img/img_greenhouse.png" alt=""></div>
-                            <div class="w-lg-100 ml-3">
-                                <div class=" d-flex justify-content-between">
-                                    <div class="text-muted small mt-1">온실 구조자재</div>
-                                    <div class="text-big font-weight-semibold">548</div>
-                                </div>
-                                <div class=" d-flex justify-content-between">
-                                    <div class="text-muted small mt-1">위탁</div>
-                                    <div class="text-big font-weight-semibold">120</div>
-                                </div>
-                                <div class=" d-flex justify-content-between">
-                                    <div class="text-muted small mt-1">자율</div>
-                                    <div class="text-big font-weight-semibold">85</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md- col-xl-2">
-                <div class="card mb-3">
-                    <div class="card-body p-3">
-                        <div class="d-flex align-items-center">
-                            <div class="display-4 "><img src="resources/assets/img/img_robot.png" alt=""></div>
-                            <div class="w-lg-100 ml-3">
-                                <div class=" d-flex justify-content-between">
-                                    <div class="text-muted small mt-1">농업용 로봇</div>
-                                    <div class="text-big font-weight-semibold">548</div>
-                                </div>
-                                <div class=" d-flex justify-content-between">
-                                    <div class="text-muted small mt-1">위탁</div>
-                                    <div class="text-big font-weight-semibold">120</div>
-                                </div>
-                                <div class=" d-flex justify-content-between">
-                                    <div class="text-muted small mt-1">자율</div>
-                                    <div class="text-big font-weight-semibold">85</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md- col-xl-2">
-                <div class="card mb-3">
-                    <div class="card-body p-3">
-                        <div class="d-flex align-items-center">
-                            <div class="display-4 "><img src="resources/assets/img/img_disease.png" alt=""></div>
-                            <div class="w-lg-100 ml-3">
-                                <div class=" d-flex justify-content-between">
-                                    <div class="text-muted small mt-1">병해충</div>
-                                    <div class="text-big font-weight-semibold">548</div>
-                                </div>
-                                <div class=" d-flex justify-content-between">
-                                    <div class="text-muted small mt-1">위탁</div>
-                                    <div class="text-big font-weight-semibold">120</div>
-                                </div>
-                                <div class=" d-flex justify-content-between">
-                                    <div class="text-muted small mt-1">자율</div>
-                                    <div class="text-big font-weight-semibold">85</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md- col-xl-2">
-                <div class="card mb-3">
-                    <div class="card-body p-3">
-                        <div class="d-flex align-items-center">
-                            <div class="display-4 "><img src="resources/assets/img/img_plant.png" alt=""></div>
-                            <div class="w-lg-100 ml-3">
-                                <div class=" d-flex justify-content-between">
-                                    <div class="text-muted small mt-1">수출플랜트</div>
-                                    <div class="text-big font-weight-semibold">548</div>
-                                </div>
-                                <div class=" d-flex justify-content-between">
-                                    <div class="text-muted small mt-1">위탁</div>
-                                    <div class="text-big font-weight-semibold">120</div>
-                                </div>
-                                <div class=" d-flex justify-content-between">
-                                    <div class="text-muted small mt-1">자율</div>
-                                    <div class="text-big font-weight-semibold">85</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-4 col-xl-2">
-                <div class="card mb-3">
-                    <div class="card-body p-3">
-                        <div class="d-flex align-items-center">
-                            <div class="display-4 "><img src="resources/assets/img/img_ict.png" alt=""></div>
-                            <div class="w-lg-100 ml-3">
-                                <div class=" d-flex justify-content-between">
-                                    <div class="text-muted small mt-1">ICT 기자재</div>
-                                    <div class="text-big font-weight-semibold">548</div>
-                                </div>
-                                <div class=" d-flex justify-content-between">
-                                    <div class="text-muted small mt-1">위탁</div>
-                                    <div class="text-big font-weight-semibold">120</div>
-                                </div>
-                                <div class=" d-flex justify-content-between">
-                                    <div class="text-muted small mt-1">자율</div>
-                                    <div class="text-big font-weight-semibold">85</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<%--        <div class="row">--%>
+<%--            <div class="col-sm-4 col-md- col-xl-2">--%>
+<%--                <div class="card mb-3">--%>
+<%--                    <div class="card-body p-3">--%>
+<%--                        <div class="d-flex align-items-center">--%>
+<%--                            <div class="display-4 "><img src="resources/assets/img/img_smartfarm.png" alt=""></div>--%>
+<%--                            <div class="w-lg-100 ml-3">--%>
+<%--                                <div class=" d-flex justify-content-between">--%>
+<%--                                    <div class="text-muted small mt-1">스마트팜</div>--%>
+<%--                                    <div class="text-big font-weight-semibold">548</div>--%>
+<%--                                </div>--%>
+<%--                                <div class=" d-flex justify-content-between">--%>
+<%--                                    <div class="text-muted small mt-1">위탁</div>--%>
+<%--                                    <div class="text-big font-weight-semibold">120</div>--%>
+<%--                                </div>--%>
+<%--                                <div class=" d-flex justify-content-between">--%>
+<%--                                    <div class="text-muted small mt-1">자율</div>--%>
+<%--                                    <div class="text-big font-weight-semibold">85</div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-sm-4 col-md- col-xl-2">--%>
+<%--                <div class="card mb-3">--%>
+<%--                    <div class="card-body p-3">--%>
+<%--                        <div class="d-flex align-items-center">--%>
+<%--                            <div class="display-4 "><img src="resources/assets/img/img_greenhouse.png" alt=""></div>--%>
+<%--                            <div class="w-lg-100 ml-3">--%>
+<%--                                <div class=" d-flex justify-content-between">--%>
+<%--                                    <div class="text-muted small mt-1">온실 구조자재</div>--%>
+<%--                                    <div class="text-big font-weight-semibold">548</div>--%>
+<%--                                </div>--%>
+<%--                                <div class=" d-flex justify-content-between">--%>
+<%--                                    <div class="text-muted small mt-1">위탁</div>--%>
+<%--                                    <div class="text-big font-weight-semibold">120</div>--%>
+<%--                                </div>--%>
+<%--                                <div class=" d-flex justify-content-between">--%>
+<%--                                    <div class="text-muted small mt-1">자율</div>--%>
+<%--                                    <div class="text-big font-weight-semibold">85</div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-sm-4 col-md- col-xl-2">--%>
+<%--                <div class="card mb-3">--%>
+<%--                    <div class="card-body p-3">--%>
+<%--                        <div class="d-flex align-items-center">--%>
+<%--                            <div class="display-4 "><img src="resources/assets/img/img_robot.png" alt=""></div>--%>
+<%--                            <div class="w-lg-100 ml-3">--%>
+<%--                                <div class=" d-flex justify-content-between">--%>
+<%--                                    <div class="text-muted small mt-1">농업용 로봇</div>--%>
+<%--                                    <div class="text-big font-weight-semibold">548</div>--%>
+<%--                                </div>--%>
+<%--                                <div class=" d-flex justify-content-between">--%>
+<%--                                    <div class="text-muted small mt-1">위탁</div>--%>
+<%--                                    <div class="text-big font-weight-semibold">120</div>--%>
+<%--                                </div>--%>
+<%--                                <div class=" d-flex justify-content-between">--%>
+<%--                                    <div class="text-muted small mt-1">자율</div>--%>
+<%--                                    <div class="text-big font-weight-semibold">85</div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-sm-4 col-md- col-xl-2">--%>
+<%--                <div class="card mb-3">--%>
+<%--                    <div class="card-body p-3">--%>
+<%--                        <div class="d-flex align-items-center">--%>
+<%--                            <div class="display-4 "><img src="resources/assets/img/img_disease.png" alt=""></div>--%>
+<%--                            <div class="w-lg-100 ml-3">--%>
+<%--                                <div class=" d-flex justify-content-between">--%>
+<%--                                    <div class="text-muted small mt-1">병해충</div>--%>
+<%--                                    <div class="text-big font-weight-semibold">548</div>--%>
+<%--                                </div>--%>
+<%--                                <div class=" d-flex justify-content-between">--%>
+<%--                                    <div class="text-muted small mt-1">위탁</div>--%>
+<%--                                    <div class="text-big font-weight-semibold">120</div>--%>
+<%--                                </div>--%>
+<%--                                <div class=" d-flex justify-content-between">--%>
+<%--                                    <div class="text-muted small mt-1">자율</div>--%>
+<%--                                    <div class="text-big font-weight-semibold">85</div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-sm-4 col-md- col-xl-2">--%>
+<%--                <div class="card mb-3">--%>
+<%--                    <div class="card-body p-3">--%>
+<%--                        <div class="d-flex align-items-center">--%>
+<%--                            <div class="display-4 "><img src="resources/assets/img/img_plant.png" alt=""></div>--%>
+<%--                            <div class="w-lg-100 ml-3">--%>
+<%--                                <div class=" d-flex justify-content-between">--%>
+<%--                                    <div class="text-muted small mt-1">수출플랜트</div>--%>
+<%--                                    <div class="text-big font-weight-semibold">548</div>--%>
+<%--                                </div>--%>
+<%--                                <div class=" d-flex justify-content-between">--%>
+<%--                                    <div class="text-muted small mt-1">위탁</div>--%>
+<%--                                    <div class="text-big font-weight-semibold">120</div>--%>
+<%--                                </div>--%>
+<%--                                <div class=" d-flex justify-content-between">--%>
+<%--                                    <div class="text-muted small mt-1">자율</div>--%>
+<%--                                    <div class="text-big font-weight-semibold">85</div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-sm-4 col-md-4 col-xl-2">--%>
+<%--                <div class="card mb-3">--%>
+<%--                    <div class="card-body p-3">--%>
+<%--                        <div class="d-flex align-items-center">--%>
+<%--                            <div class="display-4 "><img src="resources/assets/img/img_ict.png" alt=""></div>--%>
+<%--                            <div class="w-lg-100 ml-3">--%>
+<%--                                <div class=" d-flex justify-content-between">--%>
+<%--                                    <div class="text-muted small mt-1">ICT 기자재</div>--%>
+<%--                                    <div class="text-big font-weight-semibold">548</div>--%>
+<%--                                </div>--%>
+<%--                                <div class=" d-flex justify-content-between">--%>
+<%--                                    <div class="text-muted small mt-1">위탁</div>--%>
+<%--                                    <div class="text-big font-weight-semibold">120</div>--%>
+<%--                                </div>--%>
+<%--                                <div class=" d-flex justify-content-between">--%>
+<%--                                    <div class="text-muted small mt-1">자율</div>--%>
+<%--                                    <div class="text-big font-weight-semibold">85</div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
 
         <div class="card px-4 pt-4 mb-4">
             <div class="form-row mb-4">
@@ -370,7 +370,7 @@
 <script>
     var reservation;
 
-    pageLoad("cur_asset_index", {filter1: 100}, "자산 현황 보드", "cur_asset_index");
+    pageLoad("cur_asset_index", {page_num: 1, filter1: 100}, "자산 현황 보드", "cur_asset_index");
 
     $('input[name="reservation"]').change(function(){
         reservation = $('input[name="reservation"]:checked').val();
@@ -438,6 +438,7 @@
 
     $("#inqure_asset").click(function (){
         pageLoad("cur_asset_index", {
+            page_num: 1,
             filter1: parseInt($("#asset_main_code").val()),
             filter2: parseInt($("#asset_sub_code").val()),
             filter3: parseInt($("#asset_detail_code").val()),

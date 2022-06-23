@@ -935,9 +935,16 @@ public class IndexController {
                                   @RequestBody ParamPageListFilteredVO param,
                                     ModelMap model){
         List<AssetVO> assetVOList = assetService.getAssetList(param);
+        List<SystemCodeVO> systemCodeList = systemService.getAllSystemCodeList();
 
         model.addAttribute("assetList", assetVOList);
-
+        model.addAttribute("filter1", param.getFilter1());
+        model.addAttribute("filter2", param.getFilter2());
+        model.addAttribute("filter3", param.getFilter3());
+        model.addAttribute("page_num", param.getPage_num());
+        model.addAttribute("count", assetService.getCount(param));
+        model.addAttribute("maxvalue", assetVOList.get(0).getMaxvalue());
+        model.addAttribute("systemCodeList",systemCodeList);
 
         return "cur_asset_index";
     }

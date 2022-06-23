@@ -6,6 +6,7 @@ import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 import kr.or.fact.core.service.AssetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.font.CreatedFontTracker;
 
 import java.util.List;
 
@@ -28,6 +29,15 @@ public class AssetServiceImpl implements AssetService {
         int filter1 = param.getFilter1();
         int filter2 = param.getFilter2();
         int filter3 = param.getFilter3();
-        return assetMapper.getAssetList(filter1, filter2, filter3);
+        int page_num = param.getPage_num();
+        return assetMapper.getAssetList(filter1, filter2, filter3, page_num);
+    }
+
+    @Override
+    public int getCount(ParamPageListFilteredVO param){
+        int filter1 = param.getFilter1();
+        int filter2 = param.getFilter2();
+        int filter3 = param.getFilter3();
+        return assetMapper.getCount(filter1, filter2, filter3);
     }
 }
