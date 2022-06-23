@@ -15,5 +15,4 @@ public class AssetPhotoFileJoinVO {
     long idx_file_info;//	number	32				◯	파일 정보
     long idx_admin;//	number	32				◯	작성자	idx_admin index pk
     Date reg_date;//	date						최초 등록 일시
-
 }

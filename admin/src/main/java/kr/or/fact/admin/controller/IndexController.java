@@ -1008,7 +1008,6 @@ public class IndexController {
     public String g20_asset_booking(@RequestParam(value = "tag", required = false) String tagValue,
                                     ModelMap model){
 
-
         return "g20_asset_booking";
     }
 

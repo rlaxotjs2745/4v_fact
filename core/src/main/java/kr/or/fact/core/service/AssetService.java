@@ -11,4 +11,6 @@ public interface AssetService {
     List<AssetVO> getAssetList(ParamPageListFilteredVO param);
 
     int getCount(ParamPageListFilteredVO param);
+
+
 }
