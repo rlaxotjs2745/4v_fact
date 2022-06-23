@@ -172,8 +172,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int getActiveUserTotalCount(){//비 휴면회원 모두
-        return  userMapper.getActiveUserTotalCount();
+    public int getAllUserListCount(){
+        return userMapper.getAllUserListCount() != 0 ? userMapper.getAllUserListCount() : 0;
+    }
+
+    @Override
+    public int getActiveUserTotalCount(int sign_in_type){//비 휴면회원 모두
+        return  userMapper.getActiveUserTotalCount(sign_in_type);
     }
 
     @Override
@@ -185,6 +190,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserVO> selectUserbyPage(int sign_in_type, int page){
         return userMapper.selectUserbyPage(sign_in_type, page);
+    }
+
+    @Override
+    public List<UserVO> selectDormantUserbyPage(int sign_in_type, int page){
+        return userMapper.selectDormantUserbyPage(sign_in_type, page);
     }
 
     @Override
@@ -202,6 +212,17 @@ public class UserServiceImpl implements UserService {
     public int updateUser(UserVO userVO){
         return userMapper.updateUser(userVO);
     }
+
+    @Override
+    public int getDormantUserTotalCount(int sign_in_type){
+        return userMapper.getDormantUserTotalCount(sign_in_type);
+    }
+
+    @Override
+    public int deleteDormantUser(int userIdx){
+        return userMapper.deleteDormantUser(userIdx);
+    }
+
 
 
 }

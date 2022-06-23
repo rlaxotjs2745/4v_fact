@@ -7,6 +7,7 @@ public class ParamPageListFilteredVO {
     int page_num; //페이지 넘버
     int filter1;
     int filter2;
+    int filter3;
     long idx;
     int amount; //페이지당 갯수
     int corp;

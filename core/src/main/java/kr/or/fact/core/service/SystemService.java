@@ -8,6 +8,7 @@ import java.util.List;
 public interface SystemService {
     void insertSystemCode(SystemCodeVO codeVO);
     List<SystemCodeVO> getSystemCodeList(ParamPageListFilteredVO paramPageListFilteredVO);
+    List<SystemCodeVO> getAllSystemCodeList();
     SystemCodeVO getSystemCode(long idx_system_code);
     int getSystemTotalCount();
 }

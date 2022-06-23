@@ -71,6 +71,8 @@ public class IndexController {
     @Resource(name = "visitService")
     public VisitService visitService;
 
+    @Resource(name = "assetService")
+    public AssetService assetService;
 
     @Resource(name = "userService")
     public UserService userService;
@@ -953,16 +955,105 @@ public class IndexController {
     @RequestMapping(value = "/g10_cur_asset_mng",method = RequestMethod.POST)
     public String g10_cur_asset_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                     ModelMap model){
+        List<SystemCodeVO> systemCodeVOList = systemService.getAllSystemCodeList();
+        List<SystemCodeVO> mainAssetCodeList = new ArrayList<>();
+        List<SystemCodeVO> subAssetCodeList = new ArrayList<>();
+        List<SystemCodeVO> detailAssetCodeList = new ArrayList<>();
+        systemCodeVOList.forEach(systemCodeVO -> {
+            if(systemCodeVO.getCode_value().length() == 1 || Integer.parseInt(systemCodeVO.getCode_value()) == 10){
+                mainAssetCodeList.add(systemCodeVO);
+            } else if(Integer.parseInt(systemCodeVO.getCode_value()) <= 120){
+                subAssetCodeList.add(systemCodeVO);
+            } else {
+                detailAssetCodeList.add(systemCodeVO);
+            }
+        });
+        model.addAttribute("adminList", adminService.getAdminList());
+        model.addAttribute("main_cate", mainAssetCodeList);
+        model.addAttribute("sub_cate", subAssetCodeList);
+        model.addAttribute("detail_cate", detailAssetCodeList);
 
 
         return "g10_cur_asset_mng";
+    }
+
+    @RequestMapping(value = "/cur_asset_index",method = RequestMethod.POST)
+    public String cur_asset_index(@RequestParam(value = "tag", required = false) String tagValue,
+                                  @RequestBody ParamPageListFilteredVO param,
+                                    ModelMap model){
+        List<AssetVO> assetVOList = assetService.getAssetList(param);
+        List<SystemCodeVO> systemCodeList = systemService.getAllSystemCodeList();
+
+        model.addAttribute("assetList", assetVOList);
+        model.addAttribute("filter1", param.getFilter1());
+        model.addAttribute("filter2", param.getFilter2());
+        model.addAttribute("filter3", param.getFilter3());
+        model.addAttribute("page_num", param.getPage_num());
+        model.addAttribute("count", assetService.getCount(param));
+        model.addAttribute("maxvalue", assetVOList.get(0).getMaxvalue());
+        model.addAttribute("systemCodeList",systemCodeList);
+
+        return "cur_asset_index";
+    }
+
+    @RequestMapping(value = "/asset_category",method = RequestMethod.POST)
+    public String asset_category(@RequestParam(value = "tag", required = false) String tagValue,
+                                 @RequestBody SystemCodeVO param,
+                                  ModelMap model){
+        List<SystemCodeVO> systemCodeVOList = systemService.getAllSystemCodeList();
+        List<SystemCodeVO> mainAssetCodeList = new ArrayList<>();
+        List<SystemCodeVO> subAssetCodeList = new ArrayList<>();
+        List<SystemCodeVO> detailAssetCodeList = new ArrayList<>();
+        systemCodeVOList.forEach(systemCodeVO -> {
+            if(systemCodeVO.getCode_value().length() == 1 || Integer.parseInt(systemCodeVO.getCode_value()) == 10){
+                mainAssetCodeList.add(systemCodeVO);
+            } else if(Integer.parseInt(systemCodeVO.getCode_value()) <= 120){
+                subAssetCodeList.add(systemCodeVO);
+            } else {
+                detailAssetCodeList.add(systemCodeVO);
+            }
+        });
+        List<SystemCodeVO> resultCodeList = new ArrayList<>();
+        if(param.getCode_name().equals("sub_code")){
+            subAssetCodeList.forEach(systemCodeVO -> {
+                if(param.getCode_value().length() == 1){
+                    if(param.getCode_value().equals(systemCodeVO.getCode_value().substring(0,1))){
+                        resultCodeList.add(systemCodeVO);
+                    }
+                } else {
+                    if(param.getCode_value().equals(systemCodeVO.getCode_value().substring(0,2))){
+                        resultCodeList.add(systemCodeVO);
+                    }
+                }
+            });
+        } else if(param.getCode_name().equals("detail_code")){
+            detailAssetCodeList.forEach(systemCodeVO -> {
+                if(param.getCode_value().length() == 2){
+                    if(param.getCode_value().equals(systemCodeVO.getCode_value().substring(0,2))){
+                        resultCodeList.add(systemCodeVO);
+                    }
+                } else {
+                    if(param.getCode_value().equals(systemCodeVO.getCode_value().substring(0,3))){
+                        resultCodeList.add(systemCodeVO);
+                    }
+                }
+            });
+        }
+        boolean bool = true;
+        if(resultCodeList.size() == 0){
+            bool = false;
+        }
+        model.addAttribute("codeList", resultCodeList);
+        model.addAttribute("curListName", param.getCode_name());
+        model.addAttribute("lengthBool", bool);
+
+        return "asset_category";
     }
 
     //콘솔 프론트 대시보드 관리
     @RequestMapping(value = "/g20_asset_booking",method = RequestMethod.POST)
     public String g20_asset_booking(@RequestParam(value = "tag", required = false) String tagValue,
                                     ModelMap model){
-
 
         return "g20_asset_booking";
     }
@@ -1053,69 +1144,7 @@ public class IndexController {
     @RequestMapping(value = "/i11_user_mng",method = RequestMethod.POST)
     public String i11_user_mng(@RequestBody ParamPageListFilteredVO param,
                                ModelMap model){
-
-//        int list_amount = param.getAmount();
-//        int page_amount = 10; //화면에 표현할 페이지 리스트의 갯수 , 넘어가면 화살표로..
-//        int page = param.getPage_num();
-//
-//        //param.setAmount(10);
-//
-//        int activeUserTotalCount = userService.getActiveUserTotalCount();
-//
-//
-//        model.addAttribute("total_count",activeUserTotalCount);
-//
-//        //페이지드 리스트 가져오기
-//        param.setFilter1(0); //비 휴면회원 셋팅
-//        List<UserVO> userVOS = userService.getActiveUserList(param);
-//
-//
-//        model.addAttribute("userList",userVOS);
-//        //model.addAttribute("filter1",filter1);
-//        //model.addAttribute("filter2",filter2);
-//        model.addAttribute("cur_page",page);
-//        model.addAttribute("amount",list_amount);
-//
-//        int tot_page = activeUserTotalCount/list_amount+1;
-//        if(activeUserTotalCount%list_amount==0) tot_page-=1;
-//
-//        int tot_sector = tot_page/page_amount+1;
-//        if(tot_page%page_amount==0) tot_sector-=1;
-//
-//        int cur_sector = page/page_amount+1;
-//        if(page%page_amount==0) cur_sector-=1;
-//
-//        boolean is_past = false;
-//        boolean is_prev = false;
-//        boolean is_next = false;
-//        boolean is_last = false;
-//        boolean is_active = false;
-//
-//        if(page!=tot_page && tot_page>1) is_next = true;
-//
-//        if(page!=1 && tot_page>1) is_prev = true;
-//
-//        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
-//
-//        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
-//
-//        if(tot_page<=page_amount){
-//            is_past = false;
-//            is_last = false;
-//            page_amount = tot_page;
-//        }
-//
-//        model.addAttribute("tot_page",tot_page);
-//        model.addAttribute("tot_sector",tot_sector);
-//        model.addAttribute("cur_sector",cur_sector);
-//        model.addAttribute("is_past",is_past);
-//        model.addAttribute("is_prev",is_prev);
-//        model.addAttribute("is_next",is_next);
-//        model.addAttribute("is_last",is_last);
-//        model.addAttribute("list_amount",list_amount);
-//        model.addAttribute("page_amount",page_amount);
-//
-//
+        model.addAttribute("allCount", userService.getAllUserListCount());
         return "i11_user_mng";
     }
 
@@ -1126,13 +1155,13 @@ public class IndexController {
         boolean maxBool = false;
         System.out.println("filter: "+ param.getFilter1() + ", page: " + param.getPage_num());
         List<UserVO> userVOList = userService.selectUserbyPage(param.getFilter1(), param.getPage_num());
-        System.out.println(userVOList);
         model.addAttribute("maxvalue", 0);
         model.addAttribute("page", 0);
         if(userVOList.size() != 0){
             maxBool = true;
             model.addAttribute("maxvalue", userVOList.get(0).getMaxvalue());
             model.addAttribute("page", userVOList.get(0).getPage());
+            model.addAttribute("count", userService.getActiveUserTotalCount(param.getFilter1()));
         }
         model.addAttribute("filter", param.getFilter1());
         model.addAttribute("maxBool", maxBool);
@@ -1146,10 +1175,36 @@ public class IndexController {
     //시스템 코드 관리
     @RequestMapping(value = "/i12_dormant_user_mng",method = RequestMethod.POST)
     public String i12_dormant_user_mng(@RequestParam(value = "tag", required = false) String tagValue,
+
                                        ModelMap model){
 
         return "i12_dormant_user_mng";
     }
+
+    @RequestMapping(value = "/dormant_user_index",method = RequestMethod.POST)
+    public String dormant_user_index(@RequestParam(value = "tag", required = false) String tagValue,
+                                     @RequestBody ParamPageListFilteredVO param,
+                                       ModelMap model){
+        boolean maxBool = false;
+        System.out.println("filter: "+ param.getFilter1() + ", page: " + param.getPage_num());
+        List<UserVO> userVOList = userService.selectDormantUserbyPage(param.getFilter1(), param.getPage_num());
+        model.addAttribute("maxvalue", 0);
+        model.addAttribute("page", 0);
+        if(userVOList.size() != 0){
+            maxBool = true;
+            model.addAttribute("maxvalue", userVOList.get(0).getMaxvalue());
+            model.addAttribute("page", userVOList.get(0).getPage());
+        }
+        model.addAttribute("count", userService.getDormantUserTotalCount(param.getFilter1()));
+        model.addAttribute("filter", param.getFilter1());
+        model.addAttribute("maxBool", maxBool);
+        model.addAttribute("userList", userVOList);
+
+
+
+        return "dormant_user_index";
+    }
+
 
     //시스템 코드 관리
     @RequestMapping(value = "/i21_admin_mng" ,method = RequestMethod.POST)

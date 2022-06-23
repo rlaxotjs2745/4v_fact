@@ -617,67 +617,89 @@
         weather: "http://api.openweathermap.org/data/2.5/weather?q=sangju&appid=53adfc8e9ffcbf891a9be91b9e312c01",
         dust: "http://api.airvisual.com/v2/city?city=sangju&state=gyeongsangbuk-do&country=south-korea&key=3a760b19-7b72-40b9-860a-4ac383bdee39"
     }
+    nowDateTime();
+    nowWeatherAndDust(sangju);
 
-    var connectDate = new Date().toLocaleString().slice(0,21)[20] == ":" ? new Date().toLocaleString().slice(0,20) : new Date().toLocaleString().slice(0,21);
-    $('#now-date-nav').text(connectDate);
+    function nowDateTime(){
+        var connectDate = new Date().toLocaleString().slice(0,21)[20] == ":" ? new Date().toLocaleString().slice(0,20) : new Date().toLocaleString().slice(0,21);
+        $('#now-date-nav').text(connectDate);
+        // setTimeout(nowDateTime,5000);
+    }
 
-    fetch(sangju.weather) //weather
-        .then(res => res.json())
-        .then(json => {
-            $('.navbar-weather #now-temp-nav').text((json.main.temp - 273.15 + '').length > 4 ? (json.main.temp - 273.15 + '').slice(0,4) : json.main.temp - 273.15 + '');
-            switch(json.weather[0].icon){
-                case '01d'||'01n': $('#now-weather-nav').text('℃ 맑음');
-                    break;
-                case '02d'||'02n': $('#now-weather-nav').text('℃ 구름 조금');
-                    break;
-                case '03d'||'03n': $('#now-weather-nav').text('℃ 흐림');
-                    break;
-                case '04d'||'04n': $('#now-weather-nav').text('℃ 구름 많음');
-                    break;
-                case '09d'||'09n': $('#now-weather-nav').text('℃ 소나기');
-                    break;
-                case '10d'||'10n': $('#now-weather-nav').text('℃ 비');
-                    break;
-                case '11d'||'11n': $('#now-weather-nav').text('℃ 뇌우');
-                    break;
-                case '13d'||'13n': $('#now-weather-nav').text('℃ 눈');
-                    break;
-                case '50d'||'50n': $('#now-weather-nav').text('℃ 안개');
-                    break;
-                default: $('#now-weather-nav').text('℃ 날씨');
-            }
-        })
+    function nowWeatherAndDust(location) {
+        fetch(location.weather) //weather
+            .then(res => res.json())
+            .then(json => {
+                $('.navbar-weather #now-temp-nav').text((json.main.temp - 273.15 + '').length > 4 ? (json.main.temp - 273.15 + '').slice(0, 4) : json.main.temp - 273.15 + '');
+                switch (json.weather[0].icon) {
+                    case '01d' || '01n':
+                        $('#now-weather-nav').text('℃ 맑음');
+                        break;
+                    case '02d' || '02n':
+                        $('#now-weather-nav').text('℃ 구름 조금');
+                        break;
+                    case '03d' || '03n':
+                        $('#now-weather-nav').text('℃ 흐림');
+                        break;
+                    case '04d' || '04n':
+                        $('#now-weather-nav').text('℃ 구름 많음');
+                        break;
+                    case '09d' || '09n':
+                        $('#now-weather-nav').text('℃ 소나기');
+                        break;
+                    case '10d' || '10n':
+                        $('#now-weather-nav').text('℃ 비');
+                        break;
+                    case '11d' || '11n':
+                        $('#now-weather-nav').text('℃ 뇌우');
+                        break;
+                    case '13d' || '13n':
+                        $('#now-weather-nav').text('℃ 눈');
+                        break;
+                    case '50d' || '50n':
+                        $('#now-weather-nav').text('℃ 안개');
+                        break;
+                    default:
+                        $('#now-weather-nav').text('℃ 날씨');
+                }
+            })
 
 
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
 
-    var requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-    };
-
-    fetch(sangju.dust, requestOptions) //dust
-        .then(response => response.json())
-        .then(res => {
-            $('.now-dust-img-nav').removeClass('fa-laugh').removeClass('fa-tired').removeClass('fa-frown').removeClass('fa-smile');
-            $('.now-dust-nav').removeClass('text-info').removeClass('text-warning').removeClass('text-success').removeClass('text-danger').text('');
-            switch (res.data.current.pollution.mainus){
-                case 'p1': $('.now-dust-img-nav').addClass('fa-smile');
-                    $('.now-dust-nav').addClass('text-info').text(' 매우 좋음 ');
-                    break;
-                case 'p2': $('.now-dust-img-nav').addClass('fa-laugh');
-                    $('.now-dust-nav').addClass('text-success').text(' 보통 ');
-                    break;
-                case 'p3': $('.now-dust-img-nav').addClass('fa-tired');
-                    $('.now-dust-nav').addClass('text-warning').text(' 나쁨 ');
-                    break;
-                case 'p4': $('.now-dust-img-nav').addClass('fa-frown');
-                    $('.now-dust-nav').addClass('text-danger').text(' 매우 나쁨 ')
-                    break;
-                default: $('.now-dust-img-nav').addClass('fa-frown');
-                    $('.now-dust-nav').addClass('text-danger').text(' 매우 나쁨 ')
-                    break;
-            }
-        })
+        fetch(location.dust, requestOptions) //dust
+            .then(response => response.json())
+            .then(res => {
+                $('.now-dust-img-nav').removeClass('fa-laugh').removeClass('fa-tired').removeClass('fa-frown').removeClass('fa-smile');
+                $('.now-dust-nav').removeClass('text-info').removeClass('text-warning').removeClass('text-success').removeClass('text-danger').text('');
+                switch (res.data.current.pollution.mainus) {
+                    case 'p1':
+                        $('.now-dust-img-nav').addClass('fa-smile');
+                        $('.now-dust-nav').addClass('text-info').text(' 매우 좋음 ');
+                        break;
+                    case 'p2':
+                        $('.now-dust-img-nav').addClass('fa-laugh');
+                        $('.now-dust-nav').addClass('text-success').text(' 보통 ');
+                        break;
+                    case 'p3':
+                        $('.now-dust-img-nav').addClass('fa-tired');
+                        $('.now-dust-nav').addClass('text-warning').text(' 나쁨 ');
+                        break;
+                    case 'p4':
+                        $('.now-dust-img-nav').addClass('fa-frown');
+                        $('.now-dust-nav').addClass('text-danger').text(' 매우 나쁨 ')
+                        break;
+                    default:
+                        $('.now-dust-img-nav').addClass('fa-frown');
+                        $('.now-dust-nav').addClass('text-danger').text(' 매우 나쁨 ')
+                        break;
+                }
+            })
+        // setTimeout(nowWeatherAndDust(location), 600000);
+    }
 
     // console.log(weather);
 

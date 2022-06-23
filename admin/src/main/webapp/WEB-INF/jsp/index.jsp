@@ -117,6 +117,9 @@
 
 
 <script>
+    var curMyIdx = ${admin.idx_admin};
+
+
     $("li.sidenav-item").on('click',function(){
         if( $("li.sidenav-item").has('a')!=null){
             $(this).addClass("active");
@@ -175,7 +178,15 @@
                         $("#admin_index").html(result);
                     } else if(usage == "user"){
                         $("#user_index").html(result);
-                    } else{
+                    } else if(usage == "dormant_user"){
+                        $("#dormant_user_index").html(result);
+                    } else if(usage == "cur_asset_index"){
+                        $("#cur_asset_index").html(result);
+                    } else if(usage == "codeSelect"){
+                        $("#code_select").append(result);
+                    }
+
+                    else{
                         $("#contents").html(result);
                     }
                 },

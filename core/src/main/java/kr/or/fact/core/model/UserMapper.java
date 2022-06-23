@@ -23,9 +23,11 @@ public  interface UserMapper {
 
     int getUserCount(@Param("user_type") int user_type);//99 모든 유저
 
-    int getActiveUserTotalCount();//비 휴면회원 모두
+    int getActiveUserTotalCount(@Param("sign_in_type") int sign_in_type);//비 휴면회원 모두
 
     long insertUserInfo(UserVO userVO);
+
+    int getAllUserListCount();
 
     int updateUserInfo(UserVO userVO);
     int updateUserInfoForLogout(@Param("user_id") String user_id);
@@ -39,12 +41,15 @@ public  interface UserMapper {
     UserSecretCodeVO getUserSecretCodeForPwUpdate(ParamUserNCodeVO paramUserNCodeVO);
 
     List<UserVO> selectUserbyPage(@Param("type") int type, @Param("page") int page);
+    List<UserVO> selectDormantUserbyPage(@Param("type") int type, @Param("page") int page);
 
     int modifyPw(@Param("idx_user") long idx_user, @Param("hashedPassword") String hashedPassword);
 
     int updateUser(UserVO userVO);
 
+    int getDormantUserTotalCount(@Param("sign_in_type") int sign_in_type);
 
+    int deleteDormantUser(@Param("userIdx") int userIdx);
 
 
 

@@ -2,5 +2,89 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.fact.core.model.AssetMapper">
+    <insert id="registerAsset" parameterType="kr.or.fact.core.model.DTO.AssetVO">
+        INSERT INTO TB_ASSET (IDX_ASSET,
+                              ASSET_CODE,
+                              ASSET_MAIN_CATEGORY_CODE,
+                              ASSET_SUB_CATEGORY_CODE,
+                              ASSET_DETAIL_CATEGORY_CODE,
+                              ASSET_NAME,
+                              ASSET_STATUS,
+                              IS_ASSET_PHOTO_FILE,
+                              ASSET_MANUFACTURE,
+                              ASSET_BRAND,
+                              ASSET_MODEL_NAME,
+                              ASSET_PID,
+                              ASSET_MANAGER_NAME,
+                              ASSET_LOC,
+                              REPRESENTATIVE_USE,
+                              MEMO,
+                              IDX_ADMIN,
+                              REG_DATE,
+                              LAST_UPD_DATE)
+        VALUES (SEQ_ASSET.NEXTVAL,
+                #{asset_code},
+                #{asset_main_category_code},
+                #{asset_sub_category_code},
+                #{asset_detail_category_code},
+                #{asset_name},
+                #{asset_status},
+                #{is_asset_photo_file},
+                #{asset_manufacture},
+                #{asset_brand},
+                #{asset_model_name},
+                #{asset_pid},
+                #{asset_manager_name},
+                #{asset_loc},
+                #{representative_use},
+                #{memo},
+                #{idx_admin},
+                SYSDATE,
+                SYSDATE)
+    </insert>
 
+    <select id="getAssetList" resultType="kr.or.fact.core.model.DTO.AssetVO">
+        SELECT * FROM (
+        SELECT A.*, FLOOR((ROWNUM - 1)/10 + 1) PAGE, (
+        SELECT MAX(FLOOR((ROWNUM - 1)/10 + 1)) FROM TB_ASSET
+        WHERE IDX_ASSET >= 1
+        <if test='filter1 != 100'>
+            AND ASSET_MAIN_CATEGORY_CODE = #{filter1}
+        </if>
+        <if test='filter2 != 0'>
+            AND ASSET_SUB_CATEGORY_CODE = #{filter2}
+        </if>
+        <if test='filter3 != 0'>
+            AND ASSET_DETAIL_CATEGORY_CODE = #{filter3}
+        </if>
+        ) MAXVALUE FROM (
+        SELECT TB_ASSET.* FROM TB_ASSET
+        WHERE IDX_ASSET >= 1
+        <if test='filter1 != 100'>
+            AND ASSET_MAIN_CATEGORY_CODE = #{filter1}
+        </if>
+        <if test='filter2 != 0'>
+            AND ASSET_SUB_CATEGORY_CODE = #{filter2}
+        </if>
+        <if test='filter3 != 0'>
+            AND ASSET_DETAIL_CATEGORY_CODE = #{filter3}
+        </if>
+--         ORDER BY CONVERT(ADMIN_NAME,'UTFE') ASC
+        )
+        A)
+        WHERE PAGE = #{page_num}
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*) FROM TB_ASSET
+        <if test='filter1 != 100'>
+            WHERE ASSET_MAIN_CATEGORY_CODE = #{filter1}
+        </if>
+        <if test='filter2 != 0'>
+            AND ASSET_SUB_CATEGORY_CODE = #{filter2}
+        </if>
+        <if test='filter3 != 0'>
+            AND ASSET_DETAIL_CATEGORY_CODE = #{filter3}
+        </if>
+    </select>
 </mapper>

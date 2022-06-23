@@ -531,16 +531,7 @@
     })
     </c:forEach>
 
-    $("#addr_search, #addr_main").click(function() {
-        new daum.Postcode({
-            oncomplete: function (data) {
-                $("#addr_main").val(data.roadAddress + " " + data.buildingName);
-                // console.log(data);
-            }
-        }).open();
-    })
-
-    $("#addr_main_modify, #addr_search_modify").click(function() {
+    $("#addr_search, #addr_main, #addr_main_modify, #addr_search_modify").click(function() {
         new daum.Postcode({
             oncomplete: function (data) {
                 $("#addr_main").val(data.roadAddress + " " + data.buildingName);
@@ -781,7 +772,6 @@
     $('input[name="corporate"]').change(function(){
         var corpClass = $('input[name="corporate"]:checked').val();
         pageLoad("admin_corporate", {page_num: 1, corp: parseInt(corpClass)}, "어드민 보드", true);
-        console.log(adminList.length + "  admin_mng")
     })
 
 

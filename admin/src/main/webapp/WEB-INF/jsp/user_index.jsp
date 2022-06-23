@@ -16,14 +16,14 @@
 
 <div class="card-datatable table-responsive py-2">
     <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
-        <div class="row">
-            <div class="col-sm-12 col-md-6">
-                <label class="mr-3">총 : <strong>150</strong>명</label><label class="mr-3">위탁 : <strong>70</strong>명</label><label class="mr-3">자율 : <strong>80</strong>명</label>
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <div id="" class="dataTables_filter"><label>찾기:<input type="search" class="form-control form-control-sm" placeholder="기업/기관명, 기업 대표자, 이름, 전화번호" aria-controls="article-list"></label></div>
-            </div>
-        </div>
+<%--        <div class="row">--%>
+<%--            <div class="col-sm-12 col-md-6">--%>
+<%--                <label class="mr-3">총 : <strong>150</strong>명</label><label class="mr-3">위탁 : <strong>70</strong>명</label><label class="mr-3">자율 : <strong>80</strong>명</label>--%>
+<%--            </div>--%>
+<%--            <div class="col-sm-12 col-md-6">--%>
+<%--                <div id="" class="dataTables_filter"><label>찾기:<input type="search" class="form-control form-control-sm" placeholder="기업/기관명, 기업 대표자, 이름, 전화번호" aria-controls="article-list"></label></div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
         <div class="row">
             <div class="col-sm-12">
                 <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
@@ -54,25 +54,13 @@
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-5">
-                <div class="dataTables_info" id="" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
+                <div class="dataTables_info" id="" role="status" aria-live="polite">Showing ${maxBool ? page * 10 - 9 : 1} to ${!maxBool ? 1 : page * 10 > count ? count : page * 10} of ${count} entries</div>
             </div>
             <div class="col-sm-12 col-md-7">
                 <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                     <ul class="pagination">
-<%--                        <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>--%>
-<%--                        <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>--%>
-<%--                        <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>--%>
-<%--                        <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>--%>
-<%--                        <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>--%>
-<%--                        <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>--%>
-<%--                        <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>--%>
                         <li class="paginate_button page-item previous category_change" id="article-list_previous"><a aria-controls="article-list" data-dt-idx="0" tabindex="0" id="article-list_previous_btn" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
                         <li class="paginate_button page-item previous category_change" id="article-list_previous-one"><a aria-controls="article-list" data-dt-idx="0" tabindex="0" id="article-list_previous-one_btn" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li>
-                        <%--                        <li class="paginate_button page-item " id="page1-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool - 4}'},'대시보드');" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">${adminList[0].page + pageBool - 4}</a></li>--%>
-                        <%--                        <li class="paginate_button page-item " id="page2-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool - 3}'},'대시보드');" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">${adminList[0].page + pageBool - 3}</a></li>--%>
-                        <%--                        <li class="paginate_button page-item " id="page3-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool - 2}'},'대시보드');" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">${adminList[0].page + pageBool - 2}</a></li>--%>
-                        <%--                        <li class="paginate_button page-item " id="page4-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool - 1}'},'대시보드');" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">${adminList[0].page + pageBool - 1}</a></li>--%>
-                        <%--                        <li class="paginate_button page-item " id="page5-button"><a href="javascript:pageLoad('admin_corporate',{page_num:'${adminList[0].page + pageBool}'},'대시보드');" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">${adminList[0].page + pageBool}</a></li>--%>
                         <li class="paginate_button page-item next category_change" id="article-list_next-one"><a aria-controls="article-list" data-dt-idx="6" tabindex="0" id="article-list_next-one_btn" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li>
                         <li class="paginate_button page-item next category_change" id="article-list_next"><a aria-controls="article-list" data-dt-idx="6" tabindex="0" id="article-list_next_btn" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
                     </ul>
@@ -115,11 +103,10 @@
             is_sms_agree: "${user.is_sms_agree}" ? "${user.is_sms_agree}" : null,
             is_email_agree: "${user.is_email_agree}" ? "${user.is_email_agree}" : null,
             reg_date: "${user.reg_date}" ? "${user.reg_date}" : null,
-            last_upd_date: "${user.last_upd_date}" ? "${user.last_upd_date}" : null
+            last_upd_date: "${user.last_upd_date}" ? "${user.last_upd_date}" : null,
         })
     </c:forEach>
 
-    console.log(userArr);
 
     if(!${maxBool}){
         $("#article-list_previous").addClass("disabled");

@@ -193,4 +193,10 @@ public class AdminServiceImpl implements AdminService {
         }
     return ret_idx;
     }
+
+    @Override
+    public List<AdminVO> getAdminList(){
+        return adminMapper.getAllAdminList();
+    }
+
 }
