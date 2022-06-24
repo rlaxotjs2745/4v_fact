@@ -392,6 +392,20 @@
         })
     })
 
+    $("#sub_code").change(function(){
+        $("#detail_code").css("display", "none");
+        $.ajax({
+            url: 'asset_category',
+            method: 'post',
+            data: JSON.stringify({code_value: $("#sub_code").val(), code_name: "detail_code"}),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'html',//받는 데이터 타입
+            success:function(result){
+                $("#detail_code").html(result).css("display", "inline-block");
+            }
+        })
+    })
+
     $("#asset_main_code").change(function(){
         $("#asset_sub_code").css("display", "none");
         $("#asset_detail_code").css("display", "none");
@@ -404,20 +418,6 @@
             dataType:'html',//받는 데이터 타입
             success:function(result){
                 $("#asset_sub_code").html(result).css("display", "inline-block");
-            }
-        })
-    })
-
-    $("#sub_code").change(function(){
-        $("#detail_code").css("display", "none");
-        $.ajax({
-            url: 'asset_category',
-            method: 'post',
-            data: JSON.stringify({code_value: $("#sub_code").val(), code_name: "detail_code"}),//보내는 데이터
-            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
-            dataType:'html',//받는 데이터 타입
-            success:function(result){
-                $("#detail_code").html(result).css("display", "inline-block");
             }
         })
     })
