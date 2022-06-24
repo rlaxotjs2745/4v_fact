@@ -68,6 +68,9 @@ public class APIController {
     @Resource(name = "assetService")
     public AssetService assetService;
 
+    @Resource(name = "noticeService")
+    public NoticeService noticeService;
+
     @Autowired
     private JavaMailSender mailSender;
 
@@ -963,4 +966,40 @@ public class APIController {
         }
         return resultVO;
     }
+
+    @RequestMapping(value = "/insert_notice",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO insertNotice (@RequestBody NoticeVO noticeVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("업데이트 실패");
+        try {
+            noticeService.insertNotice(noticeVO);
+            resultVO.setResult_str("업데이트에 성공하였습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }catch(Exception e) {
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("업데이트 실패");
+            System.out.println(e);
+        }
+        return resultVO;
+    }
+
+//    @RequestMapping(value = "/delete_notice",method = RequestMethod.DELETE)
+//    public @ResponseBody
+//    ResultVO deleteNotice (@RequestBody NoticeVO noticeVO){
+//        ResultVO resultVO = new ResultVO();
+//        resultVO.setResult_code("ERROR_1000");
+//        resultVO.setResult_str("업데이트 실패");
+//        try {
+//            noticeService.deleteNotice(noticeVO);
+//            resultVO.setResult_str("업데이트에 성공하였습니다.");
+//            resultVO.setResult_code("SUCCESS");
+//        }catch(Exception e) {
+//            resultVO.setResult_code("ERROR_1000");
+//            resultVO.setResult_str("업데이트 실패");
+//        }
+//        return resultVO;
+//    }
+
 }

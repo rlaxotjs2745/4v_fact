@@ -23,11 +23,16 @@ public class NoticeServiceImpl implements NoticeService {
         return noticeMapper.getWebpageNoticeCount();
     }
     @Override
-    public List<NoticeVO> getNoticeWebList(int page, int count){
-        return noticeMapper.getNoticeWebList(page,count,"ANNOUNCE_NUM");
+    public List<NoticeVO> getNoticeWebList(int page, int list_amount){
+        return noticeMapper.getNoticeWebList(page,list_amount,"ANNOUNCE_NUM");
     }
     @Override
     public List<NoticeVO> getMainNoticeList(){
         return noticeMapper.getMainNoticeList();
+    }
+
+    @Override
+    public int insertNotice(NoticeVO noticeVO) {
+        return noticeMapper.insertNotice(noticeVO);
     }
 }

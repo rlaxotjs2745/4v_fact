@@ -47,13 +47,21 @@ public class ConsultingServiceImpl implements ConsultingService {
         return demoBsConsultingVOList;
     }
 
+    @Override
+    public List<DemoBsConsultingVO> getCunsultingList1(int page, int list_amount) {
+        return consultingMapper.getCunsultingList1(page,list_amount);
+    }
+
 
     @Override
     public void saveDemoBsConsulting(DemoBsConsultingVO demoBsConsultingVO){
         consultingMapper.saveDemoBsConsulting(demoBsConsultingVO);
     }
 
-
+    @Override
+    public int getCountConsulting() {
+        return consultingMapper.getCountConsulting();
+    }
 
 
 }

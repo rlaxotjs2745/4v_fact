@@ -10,8 +10,7 @@ public interface ConsultingService {
 
     int getConsultingCount(int type,long idx);
     List<DemoBsConsultingVO> getConsultingList(int type,ParamPageListFilteredVO paramPageListFilteredVO);//int type,long idx,int page, int count);
-
+    List<DemoBsConsultingVO>getCunsultingList1(int page, int list_amount);
     void saveDemoBsConsulting(DemoBsConsultingVO demoBsConsultingVO);
-
-
+    int getCountConsulting();
 }

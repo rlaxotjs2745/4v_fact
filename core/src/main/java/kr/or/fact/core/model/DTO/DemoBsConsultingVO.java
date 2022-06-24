@@ -29,6 +29,10 @@ public class DemoBsConsultingVO {
     int is_privacy_accept;//	NUMBER	4		1			개인정보 수집 이용동의	0:동의안함, 1:동의
     String memo;//	varchar2	1000					메모
     long idx_admin;//	number	32				◯	작성자	idx_admin index pk
+    String user_name;
+    String email;
+    String addr;
+    String mphone_num;
     Date reg_date;//	date						최초 등록 일시
 
 }

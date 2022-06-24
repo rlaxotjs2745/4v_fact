@@ -30,4 +30,9 @@ public class EventContentServiceImpl implements EventContentService {
     public List<EventContentVO> getMainEventContentList(){
         return eventContentMapper.getMainEventContentList();
     }
+
+    @Override
+    public List<EventContentVO> getEventList() {
+        return eventContentMapper.getEventList();
+    }
 }

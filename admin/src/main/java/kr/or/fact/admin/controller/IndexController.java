@@ -584,15 +584,65 @@ public class IndexController {
 
     //문의상담신청 관리
     @RequestMapping(value = "/c10_site_mng_consult_mng",method = RequestMethod.POST)
-    public String c10_site_mng_consult_mng(ModelMap model,@RequestBody ParamPageListFilteredVO param){
+    public String c10_site_mng_consult_mng(ModelMap model,@RequestBody ParamPageListFilteredVO param,Principal principal){
 //접수목록 가져오기 (db table) DemoBsConsultingVO get 요청으로 가져오기
-        int type= 1;
-        param.setAmount(40);
+        param.setAmount(10);
+        int list_amount = 10;
+        int page_amount = param.getAmount();
+        int page = param.getPage_num();
+        int consultingCount = consultingService.getCountConsulting();
+        if(consultingCount==0){
+            return "c10_site_mng_consult_mng";
+        }
+        model.addAttribute("cur_page",page);
+        model.addAttribute("amount",list_amount);
+        model.addAttribute("total_count",consultingCount);
 
-        List<DemoBsConsultingVO> consultingList = consultingService.getConsultingList(type,param);
+
+        List<DemoBsConsultingVO> consultingList = consultingService.getCunsultingList1(page,list_amount);
         model.addAttribute("consultingList",consultingList);
+        int tot_page = consultingCount/list_amount+1;
+        if(consultingCount%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+        boolean is_active = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("page_amount",page_amount);
 
 
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+        model.addAttribute("admin", adminInfo);
         return "c10_site_mng_consult_mng";
     }
 
@@ -683,7 +733,7 @@ public class IndexController {
                                       ModelMap model){
 
         int list_amount = 10;
-        int page_amount = param.getAmount();
+        int page_amount = 10;
         int page = param.getPage_num();
 
         param.setAmount(10);
@@ -754,8 +804,10 @@ public class IndexController {
         int page_num=1;
         int count =0;
         int amount =1;
-        List<EventContentVO> eventContentList = eventContentService.getEventContentList(page_num,count);
+        List<EventContentVO> eventContentList = eventContentService.getEventList();
         model.addAttribute("eventcontentlist",eventContentList);
+        System.out.println(eventContentList);
+        System.out.println(eventContentList.size());
 
         return "c42_site_event_mng";
     }

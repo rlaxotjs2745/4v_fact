@@ -43,5 +43,7 @@
     <select id="getMainEventContentList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.EventContentVO">
         SELECT * FROM TB_EVENT_CONTENT  WHERE  IS_MAIN_PAGE=1;
     </select>
-
+    <select id="getEventList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.EventContentVO">
+        SELECT * FROM TB_EVENT_CONTENT  ORDER BY EVENT_CONTENT_NUM
+    </select>
 </mapper>
