@@ -46,4 +46,59 @@
     <select id="getEventList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.EventContentVO">
         SELECT * FROM TB_EVENT_CONTENT  ORDER BY EVENT_CONTENT_NUM
     </select>
+
+    <insert id="insertEventContent" parameterType="kr.or.fact.core.model.DTO.EventContentVO">
+INSERT INTO TB_EVENT_CONTENT (
+IDX_EVENT_CONTENT,
+EVENT_CONTENT_CODE,
+EVENT_CONTENT_NUM,
+SUBJECT,
+EVENT_CONTENTS,
+IS_FILE,
+IS_NEW,
+IS_MAIN_PAGE,
+IS_IMPORTANT,
+IS_SHOW,
+VIEW_COUNT,
+EVENT_CONTENT_STATUS,
+EVENT_START_DATE,
+EVENT_END_DATE,
+DOC_VERSION,
+MEMO,
+SEARCH_TAG,
+AUTHOR,
+THUMB_IMG_FILE_IDX,
+IDX_ADMIN,
+CONFIRM_ADMIN_IDX,
+REG_DATE,
+LAST_UPD_DATE
+)VALUES (
+SEQ_EVENT_CONTENT.NEXTVAL,
+#{event_content_code},
+#{event_content_num},
+#{subject},
+#{event_contents},
+#{is_file},
+#{is_new},
+#{is_main_page},
+#{is_important},
+#{is_show},
+#{view_count},
+#{event_content_status},
+#{event_start_date},
+#{event_end_date},
+#{doc_version},
+#{memo},
+#{search_tag},
+#{author},
+#{thumb_img_file_idx},
+#{idx_admin},
+#{confirm_admin_idx},
+SYSDATE,
+#{last_upd_date}
+
+
+        )
+
+    </insert>
 </mapper>

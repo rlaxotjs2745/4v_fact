@@ -74,6 +74,9 @@ public class APIController {
     @Autowired
     private JavaMailSender mailSender;
 
+    @Resource(name = "eventContentService")
+    public EventContentService eventContentService;
+
 
 
     @RequestMapping(value = "/admin_login",method = RequestMethod.POST)
@@ -981,6 +984,24 @@ public class APIController {
             resultVO.setResult_code("ERROR_1000");
             resultVO.setResult_str("업데이트 실패");
             System.out.println(e);
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/insert_event",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO insertEventContent (@RequestBody EventContentVO eventContentVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("업데이트 실패");
+        try {
+           eventContentService.insertEventContent(eventContentVO);
+            resultVO.setResult_str("업데이트에 성공하였습니다.");
+            resultVO.setResult_code("SUCCESS");
+
+        }catch(Exception e) {
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("업데이트 실패");
         }
         return resultVO;
     }

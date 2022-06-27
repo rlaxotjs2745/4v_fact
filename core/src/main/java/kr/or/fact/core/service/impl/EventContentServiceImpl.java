@@ -35,4 +35,14 @@ public class EventContentServiceImpl implements EventContentService {
     public List<EventContentVO> getEventList() {
         return eventContentMapper.getEventList();
     }
+
+    @Override
+    public int insertEventContent(EventContentVO eventContentVO) {
+        int ret_idx = 0;
+        try {
+            ret_idx = eventContentMapper.insertEventContent(eventContentVO);
+        } catch (Exception e) {
+        }
+        return ret_idx;
+    }
 }

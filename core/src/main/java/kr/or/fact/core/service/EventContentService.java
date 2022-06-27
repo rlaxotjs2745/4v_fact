@@ -10,4 +10,6 @@ public interface EventContentService {
     public List<EventContentVO> getEventContentList(int page, int count);
     public List<EventContentVO> getMainEventContentList();
     List<EventContentVO> getEventList();
+
+    public int insertEventContent(EventContentVO eventContentVO);
 }

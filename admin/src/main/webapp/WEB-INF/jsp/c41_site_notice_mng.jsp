@@ -507,9 +507,9 @@
                     <!-- 사업번호 / 사업 상태-->
 
                     <!-- 사업 제목-->
-                    <div class="form-group row" id="notice_code">
+                    <div class="form-group row" >
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">공지 제목</label>
-                        <div class="col-md-10">
+                        <div class="col-md-10" id="notice_code">
                             <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" >
                             <div class="form-control-plaintext mode-view"></div>
                         </div>
@@ -524,7 +524,7 @@
                                             </div>--%>
 
                     <hr>
-                    <div class="form-row" id="memo">
+                    <div class="form-row" id="subject">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">내용</label>
 
                         <div class="col-md-10 mode-edit mode-new">
@@ -686,8 +686,8 @@
         is_show :"${notice.is_show}",
         view_count :"${notice.view_count}",
         notice_status :"${notice.notice_status}",
-        posting_start_date :"${notice.posting_start_date}",
-        posting_end_date :"${notice.posting_end_date}",
+        posting_start_date :"<fmt:formatDate value="${notice.posting_start_date}" pattern="yyyy-MM-dd HH:mm:ss"/>",
+        posting_end_date :"<fmt:formatDate value="${notice.posting_end_date}" pattern="yyyy-MM-dd HH:mm:ss"/>",
         doc_version :"${notice.doc_version}",
         memo :"${notice.memo}",
         search_tag :"${notice.search_tag}",
@@ -701,7 +701,7 @@
     </c:forEach>
 
     $(".notice-entity").click(function(){
-        console.log("여긴와요>??")
+
         var selectId = $(this).attr('id');
         curNoticedata = selectId;
         for(var notice of noticeList){
@@ -792,9 +792,8 @@
             contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
             dataType: 'json',//받는 데이터 타입
             success: function (result) {
-                console.log(param);
 
-                if (result.result_code === "SUCCESS") {
+                if (result.result_code == "SUCCESS") {
                     alert("상태 변경에 성공하였습니다")
                 } else {
                     alert("상태 변경에 실패하였습니다")
