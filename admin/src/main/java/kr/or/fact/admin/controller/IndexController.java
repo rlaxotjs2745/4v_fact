@@ -798,13 +798,61 @@ public class IndexController {
     public String c42_site_event_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                      ModelMap model,ParamPageListFilteredVO param){
         //행사관리 테이블 추가 .tb_event_content
-        int page_num=1;
-        int count =0;
-        int amount =1;
+
+        int list_amount = 10;
+        int page_amount = 10;
+        int page = param.getPage_num();
+        param.setAmount(10);
+        int eventCount = eventContentService.getMainEventContentCount();
+        if(eventCount==0){
+            return "brd_event_blank";
+        }
+        model.addAttribute("total_count",eventCount);
         List<EventContentVO> eventContentList = eventContentService.getEventList();
         model.addAttribute("eventcontentlist",eventContentList);
-        System.out.println(eventContentList);
-        System.out.println(eventContentList.size());
+
+        model.addAttribute("cur_page",page);
+        model.addAttribute("amount",list_amount);
+
+        int tot_page = eventCount/list_amount+1;
+        if(eventCount%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+        boolean is_active = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("page_amount",page_amount);
+
 
         return "c42_site_event_mng";
     }

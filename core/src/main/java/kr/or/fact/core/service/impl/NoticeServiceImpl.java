@@ -33,6 +33,15 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public int insertNotice(NoticeVO noticeVO) {
-        return noticeMapper.insertNotice(noticeVO);
+
+
+        int ret_idx = 0;
+
+        try {
+            ret_idx = noticeMapper.insertNotice(noticeVO);
+        } catch (Exception e) {
+
+        }
+        return ret_idx;
     }
 }
