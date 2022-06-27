@@ -232,8 +232,10 @@
                         <hr class="mt-0">
                     </div>
                     <div class="modal-footer justify-content-between">
+
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
                         <div>
+                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal" id="delete_event">삭제</button>
                             <button type="button" class="btn btn-primary">확인</button>
                         </div>
                     </div>
@@ -319,6 +321,7 @@
                         <hr class="mt-0">
                     </div>
                     <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">삭제</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
                         <div>
                             <button type="button" class="btn btn-primary">확인</button>
@@ -469,6 +472,7 @@
 
                     <div class="modal-footer justify-content-between mode-edit d-none">
                         <div>
+                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal" >삭제</button>
                             <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
                         </div>
                         <div>
@@ -585,6 +589,28 @@ $(function () {
         static:true
     });
 });
+
+
+$("#delete_event").click(function () {
+    if(confirm("이 이벤트를 삭제하시겟습까?")){
+        $.ajax({
+            type: 'post',
+            url :'delete_event', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(parseInt(curEventdata)),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'json',//받는 데이터 타입
+            success: function(result){
+                //작업이 성공적으로 발생했을 경우
+                alert(result.result_str);
+                $("#modals-counsel-view").modal("hide");
+                pageLoad('c42_site_event_mng');
+            },
+            error:function(){
+                //에러가 났을 경우 실행시킬 코드
+            }
+        });
+    }
+})
 </script>
 <!-- Layout footer -->
 <%@include file ="layouts/frame_footer.jsp" %>

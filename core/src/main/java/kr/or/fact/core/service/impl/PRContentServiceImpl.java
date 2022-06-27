@@ -30,4 +30,24 @@ public class PRContentServiceImpl implements PRContentsService {
     public List<PRContentVO> getMainPRContentList(){
         return prContentsMapper.getMainPRContentList();
     }
+
+    @Override
+    public int insertPRContent(PRContentVO prContentVO) {
+        int ret_idx = 0;
+        try {
+            ret_idx = prContentsMapper.insertPRContent(prContentVO);
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return ret_idx;
+    }
+
+    @Override
+    public int deletePR(int idx_pr_content) {
+        return prContentsMapper.deletePR(idx_pr_content);
+    }
+
 }

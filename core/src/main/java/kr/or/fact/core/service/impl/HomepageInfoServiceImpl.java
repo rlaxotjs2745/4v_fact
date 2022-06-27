@@ -35,5 +35,10 @@ public class HomepageInfoServiceImpl implements HomepageInfoService {
         homepageMapper.deleteHomepageInfo(idx);
     }
 
+    @Override
+    public List<HomepageInfoVO> getHomepageInfoList(HomepageInfoVO homepageInfoVO) {
+        return homepageMapper.getHomepageInfoList(homepageInfoVO);
+    }
+
 
 }

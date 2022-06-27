@@ -12,4 +12,6 @@ public interface PRContentsMapper {
     int getWebpagePRContentCount();
     List<PRContentVO> getPRContentList(@Param("page_num") int page_num, @Param("amount") int amount, @Param("order_field") String order_field);
     List<PRContentVO> getMainPRContentList();
+    int insertPRContent(PRContentVO prContentVO);
+    int deletePR(@Param("idx_pr_content") int idx_pr_content);
 }

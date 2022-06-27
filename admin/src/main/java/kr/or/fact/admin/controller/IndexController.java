@@ -74,6 +74,9 @@ public class IndexController {
     @Resource(name = "userService")
     public UserService userService;
 
+    @Resource(name="prContentService")
+    public PRContentsService prContentService;
+
 
     @PreAuthorize("hasRole('ROLE_MEMBER')")
     @RequestMapping("/")
@@ -857,10 +860,12 @@ public class IndexController {
         return "c42_site_event_mng";
     }
 
-    //휴면회원관리
     @RequestMapping(value = "/c43_site_adver_mng",method = RequestMethod.POST)
     public String c43_site_adver_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                      ModelMap model){
+
+List<PRContentVO> prlist = prContentService.getMainPRContentList();
+model.addAttribute("prlist",prlist);
 
 
         return "c43_site_adver_mng";
@@ -889,7 +894,8 @@ public class IndexController {
     public String c71_site_form_doc_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                         ModelMap model){
 
-
+    List<FormFileInfoVO> formFileList =fileService.getFormFileList();
+    model.addAttribute("formfilelist",formFileList);
         return "c71_site_form_doc_mng";
     }
 
@@ -897,7 +903,8 @@ public class IndexController {
     @RequestMapping(value = "/c72_site_rule_doc_mng",method = RequestMethod.POST)
     public String c72_site_rule_doc_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                         ModelMap model){
-
+List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
+model.addAttribute("rulefileinfolist",ruleFileInfoList);
 
         return "c72_site_rule_doc_mng";
     }
@@ -910,6 +917,9 @@ public class IndexController {
         //푸터 정보
         HomepageInfoVO homepageInfoVO = homepageInfoService.getHomepageInfo();
         model.addAttribute("homepageInfo",homepageInfoVO);
+
+        List<HomepageInfoVO> homepageInfoList = homepageInfoService.getHomepageInfoList(homepageInfoVO);
+        model.addAttribute("homepageInfoList",homepageInfoList);
 
         //조직도, 직원 정보
         List<CoWorkerVO> coWorkerVOList = coWorkerNService.getCoWorkerList();

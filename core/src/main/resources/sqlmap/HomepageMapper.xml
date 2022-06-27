@@ -38,7 +38,9 @@
         DELETE FROM TB_HOMEPAGE_INFO WHERE IDX_HOMEPAGE_INFO = #{idx_homepage_info}
     </delete>
 
-
+<select id="getHomepageInfoList" resultType="kr.or.fact.core.model.DTO.HomepageInfoVO">
+    SELECT * FROM TB_HOMEPAGE_INFO
+</select>
 
 
 </mapper>

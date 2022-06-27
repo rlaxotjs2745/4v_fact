@@ -13,4 +13,5 @@ public interface NoticeMapper {
     List<NoticeVO> getNoticeWebList(@Param("page_num") int page_num, @Param("amount") int amount, @Param("order_field") String order_field);
     List<NoticeVO> getMainNoticeList();
     public int insertNotice(NoticeVO noticeVO);
+    int deleteNotice(@Param("idx_notice")int idx_notice);
 }

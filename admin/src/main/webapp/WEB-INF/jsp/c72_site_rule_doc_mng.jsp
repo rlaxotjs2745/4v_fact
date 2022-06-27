@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- Page content -->
     <div class="container-fluid flex-grow-1 container-p-y">
 
@@ -92,161 +93,26 @@
                                 <thead class="bg-success text-white font-weight-bold">
                                 <tr role="row">
                                     <th class="text-center px-2" style="width:60px">No</th>
-                                    <th class="text-center sorting" style="width:80px">상담일지</th>
-                                    <th class="text-center sorting" style="width:60px">구분</th>
-                                    <th class="text-center sorting" style="width:100px">신청자</th>
-                                    <th class="text-center sorting" style="width:100px">ID</th>
-                                    <th class="text-center sorting" style="width:150px">소속</th>
-                                    <th class="text-center px-2" style="width:80px">접수</th>
-                                    <th class="text-center px-2" style="width:120px">수신일</th>
-                                    <th class="text-center px-2" style="width:120px">요청일</th>
-                                    <th class="text-center px-2" style="width:120px">상담 방법</th>
-                                    <th class="text-center px-2" style="width:100px">상담 수</th>
-                                    <th class="text-center px-2" style="width:150px">마지막 상담일</th>
+                                    <th class="text-center sorting" style="width:80px">규정 제목</th>
+                                    <th class="text-center sorting" style="width:60px">규정용도</th>
+                                    <th class="text-center sorting" style="width:100px">조직이름</th>
+                                    <th class="text-center sorting" style="width:100px">등록일시</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="">
-                                    <td class="text-center">1</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록완료</a></td>
-                                    <td class="text-center">사전</td>
-                                    <td class="text-center">홍길동</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">추가</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">0</td>
-                                    <td class="text-center">이메일</td>
-                                    <td class="text-center">1회</td>
-                                    <td class="">2021.00/00 (0일전)</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">2</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view">등록하기</a></td>
-                                    <td class="text-center">사후</td>
-                                    <td class="text-center">홍길동</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">전화</td>
-                                    <td class="text-center">0회</td>
-                                    <td class="">없음</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">3</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">사전</td>
-                                    <td class="text-center">홍길동</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">센터방문</td>
-                                    <td class="text-center">1회</td>
-                                    <td class="">2021.00/00 (0일전)</td>
-                                </tr>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">4</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">센터방문</td>
-                                    <td class="text-center">0회</td>
-                                    <td class="">없음</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">5</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">해결</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">센터방문</td>
-                                    <td class="text-center">0회</td>
-                                    <td class="">없음</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">6</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">-</td>
-                                    <td class="text-center">1:1게시판</td>
-                                    <td class="text-center">0회</td>
-                                    <td class=""></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">7</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">-</td>
-                                    <td class="text-center">1:1게시판</td>
-                                    <td class="text-center">0회</td>
-                                    <td class=""></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">8</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">센터방문</td>
-                                    <td class="text-center">0회</td>
-                                    <td class="">없음</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">9</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">센터방문</td>
-                                    <td class="text-center">0회</td>
-                                    <td class="">없음</td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">10</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">등록하기</a></td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center">맛있는 농부</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">XXXXXX</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">센터방문</td>
-                                    <td class="text-center">0회</td>
-                                    <td class="">없음</td>
-                                </tr>
+                                <c:forEach items="${rulefileinfolist}" var="rulefile">
+                                    <tr class="rulefile-entity" id="${rulefile.idx_rule_file_info}">
+                                        <td class="text-center">${rulefile.order_num}</td>
+                                        <td class="text-center">${rulefile.subject}</td>
+                                        <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">${rulefile.usage_detail}</a></td>
+                                        <td class="text-center">${rulefile.depart_name}</td>
+                                        <td class="text-center"><fmt:formatDate value="${rulefile.reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+
+
+                                    </tr>
+                                </c:forEach>
+
                                 </tbody>
                             </table>
                         </div>
@@ -652,7 +518,13 @@
         </div>
 
     </div>
+<script>
 
+
+
+
+
+</script>
 <!-- Layout footer -->
 <%@include file ="layouts/frame_footer.jsp" %>
 <!-- / Layout footer -->

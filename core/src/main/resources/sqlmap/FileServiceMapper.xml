@@ -234,5 +234,10 @@
                  JOIN TB_FILE_INFO B
                       ON A.IDX_FILE_INFO = B.IDX_FILE_INFO AND B.FILE_TYPE = 4 AND B.FILE_STATUS=0
     </select>
-
+<select id="getFormFileList" resultType="kr.or.fact.core.model.DTO.FormFileInfoVO">
+    SELECT * FROM TB_FORM_FILE_INFO ORDER BY ORDER_NUM
+</select>
+    <select id="getRuleFileInfoList1" resultType="kr.or.fact.core.model.DTO.RuleFileInfoVO">
+        SELECT * FROM TB_RULE_FILE_INFO
+    </select>
 </mapper>

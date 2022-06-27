@@ -62,7 +62,9 @@ public class FileServiceImpl implements FileService {
 
             return fileName;
         }catch(Exception e) {
+            System.out.println(e);
             throw new FileUploadException("["+fileName+"] 파일 업로드에 실패하였습니다. 다시 시도하십시오.",e);
+
         }
     }
 
@@ -114,6 +116,11 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
+    public List<FormFileInfoVO> getFormFileList() {
+        return fileServiceMapper.getFormFileList();
+    }
+
+    @Override
     public List<RuleFileInfoVO> getRuleFileInfoList(ParamPageListFilteredVO paramPageListFilteredVO){
         return fileServiceMapper.getRuleFileInfoList(paramPageListFilteredVO);
     }
@@ -128,5 +135,11 @@ public class FileServiceImpl implements FileService {
     @Override
     public int getRuleFileTotalCount(){
         return fileServiceMapper.getRuleFileTotalCount();
+    }
+
+
+    @Override
+    public List<RuleFileInfoVO> getRuleFileInfoList1() {
+        return fileServiceMapper.getRuleFileInfoList1();
     }
 }

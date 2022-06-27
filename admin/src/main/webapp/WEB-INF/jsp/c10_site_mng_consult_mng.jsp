@@ -228,13 +228,7 @@
                         </span>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" id="memom">메모</label>
-                            <div class="form-group col col-md-10">
-                                <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
-                                <textarea class="form-control mode-view" readonly rows="5"></textarea>
-                            </div>
-                        </div>
+
 
 
                         <div class="form-row">
@@ -249,10 +243,15 @@
                                     <span class="custom-control-label">변경</span>
                                 </label>
                             </div>
-                            <div class="form-group col col-md-12 mb-1">
-                                <span class="text-muted">2021.00 00 HH:MM 에서</span> <input type="text" class="form-control d-inline-block datepickers" style="width:120px;"> <input type="text" id="timepicker-2" class="form-control d-inline-block ui-timepicker-input" autocomplete="off" style="width:90px;" placeholder="00:00 AM">
-                            </div>
 
+                            <div class="col-md-10">
+                                <div class="form-control-plaintext mode-view" id="req_date2">2021.00 00 HH:MM 에서</div>
+
+                                <div id="datepicker-show" class="input-daterange input-group mode-edit mode-new">
+                                    <input type="text"  class="form-control d-inline-block datepickers" name="start" style="width:120px;">
+                                    <input type="text" class="form-control" placeholder="9:00 AM" id="flatpickr-time-start">
+                                </div>
+                            </div>
                         </div>
                         <hr class="mt-0">
 
@@ -348,7 +347,6 @@
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" >메모</label>
                             <div class="form-group col col-md-10">
                                 <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
-                                <textarea class="form-control mode-view" readonly rows="5"></textarea>
                             </div>
                         </div>
 
@@ -365,8 +363,8 @@
                                     <span class="custom-control-label">변경</span>
                                 </label>
                             </div>
-                            <div class="form-group col col-md-12 mb-1">
-                                <span class="text-muted">2021.00 00 HH:MM 에서</span> <input type="text" class="form-control d-inline-block datepickers" style="width:120px;"> <input type="text" id="timepicker-2" class="form-control d-inline-block ui-timepicker-input" autocomplete="off" style="width:90px;" placeholder="00:00 AM">
+                            <div class="form-group col col-md-12 mb-1" id="reqdate2_modify">
+                                <span class="text-muted">2021.00 00 HH:MM 에서</span> <input type="text" class="form-control d-inline-block datepickers"  style="width:120px;"> <input type="text"  class="form-control d-inline-block ui-timepicker-input" autocomplete="off" style="width:90px;" placeholder="00:00 AM">
                             </div>
 
                         </div>
@@ -389,7 +387,27 @@
 
 
 <script>
+    $(function() {
+        var isRtl = $('html').attr('dir') === 'rtl';
 
+        $('#datepicker-show,#datepicker-open').datepicker({
+            orientation: isRtl ? 'auto right' : 'auto left',
+            format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
+            startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
+            language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+        });
+
+
+    });
+    $(function () {
+        // Time
+        $('#flatpickr-time-start,#flatpickr-time-end').flatpickr({
+            enableTime: true,
+            noCalendar: true,
+            altInput: true,
+            static:true
+        });
+    });
     var curConsultdata;
     var consultList=[];
     <c:forEach items="${consultingList}" var="consulting" varStatus="status">
@@ -427,7 +445,6 @@
 
 
     $(".consulting-entity").click(function(){
-        console.log("여긴와요>??")
         var selectId = $(this).attr('id');
         curConsultdata = selectId;
         for(var consulting of consultList){
@@ -460,6 +477,7 @@
                 $("#email span").text(consulting.email);
                 $("#addr span").text(consulting.addr);
                 $("#mphone_num span").text(consulting.mphone_num);
+                $("#req_date2 span").text(consulting.req_date+"에서");
 
 
                 $("#consulting_num_modify span").val(consulting.consulting_num);
@@ -488,6 +506,7 @@
                 $("#email_modify span").val(consulting.email);
                 $("#addr_modify span").val(consulting.addr);
                 $("#mphone_num_modify span").val(consulting.mphone_num);
+                $("#req_date2_modify span").val(consulting.req_date+"에서");
                 break;
             }
         }

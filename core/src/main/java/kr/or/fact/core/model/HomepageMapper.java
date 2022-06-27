@@ -12,6 +12,7 @@ public interface HomepageMapper {
     void updateHomepageInfo(HomepageInfoVO homepageInfoVO);
     void insertHomepageInfo(HomepageInfoVO homepageInfoVO);
     void deleteHomepageInfo(long idx);
+    List<HomepageInfoVO> getHomepageInfoList(HomepageInfoVO homepageInfoVO);
 
 
 }

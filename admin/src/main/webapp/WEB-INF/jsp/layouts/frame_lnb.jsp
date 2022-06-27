@@ -172,7 +172,7 @@
                                     </a>
                                 </li>
                                 <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('c43_site_adver_mng.jsp',{page_num:1},'홍보자료 관리');" class="sidenav-link">
+                                    <a href="javascript:pageLoad('c43_site_adver_mng',{page_num:1},'홍보자료 관리');" class="sidenav-link">
                                         <div>홍보자료 관리</div>
                                     </a>
                                 </li>

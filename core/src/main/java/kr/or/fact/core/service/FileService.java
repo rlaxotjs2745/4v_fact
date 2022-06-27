@@ -22,10 +22,12 @@ public interface FileService {
     void insertFormFileInfo(FormFileInfoVO formFileInfoVO);
     FormFileInfoVO getFormFileInfo(long idx_form_file_info);
     int getFormFileTotalCount();
+    List<FormFileInfoVO> getFormFileList();
 
     List<RuleFileInfoVO> getRuleFileInfoList(ParamPageListFilteredVO paramPageListFilteredVO);
     void insertRuleFileInfo(RuleFileInfoVO ruleFileInfoVO);
     RuleFileInfoVO getRuleFileInfo(long idx_form_file_info);
     int getRuleFileTotalCount();
+    List<RuleFileInfoVO>getRuleFileInfoList1();
 
 }

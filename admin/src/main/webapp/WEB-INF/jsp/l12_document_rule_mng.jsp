@@ -12,7 +12,7 @@
         <h6 class="card-header with-elements">
             <div class="card-header-title">규정 문서 목록</div>
             <div class="card-header-elements ml-auto">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modals-default">+ 서식 등록</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modals-rule-file">+ 서식 등록</button>
             </div>
         </h6>
         <div class="card-datatable table-responsive pt-0 pb-3">
@@ -249,4 +249,37 @@
         });
     });
 
+    $('#btn_save_new').on('click', function(){
+        event.preventDefault();
+        var fileForm = new FormData();
+        fileForm.append("subject",document.querySelector('#subject').value);
+        fileForm.append("usage_detail",document.querySelector('#usage_detail').value);
+
+
+        var files = document.querySelector('#file_upload').files;
+        for(var i = 0; i < files.length; i++){
+            var num = i + 1;
+            fileForm.append("files" + num, files[i]);
+        }
+        fileForm.append("fileLength", files.length);
+        console.log(fileForm)
+
+        $.ajax({
+            type: 'post',
+            url :'uploadFile', //데이터를 주고받을 파일 주소 입력
+            data: fileForm,//보내는 데이터
+            contentType: false,//보내는 데이터 타입
+            processData: false,//Jquery 내부에서 파일을 queryString 형태로 전달하는 것을 방지
+            dataType:'json',//받는 데이터 타입
+            enctype: 'multipart/form-data',
+            success: function(result){
+                console.log(result);
+                alert("이게맞나", () => window.redirect("/"))
+            },
+            error:function(err){
+                console.log(err);
+            }
+        });
+        // event.preventDefault();
+    })
 </script>

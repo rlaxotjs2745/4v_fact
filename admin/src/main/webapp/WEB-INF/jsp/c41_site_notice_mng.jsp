@@ -161,7 +161,9 @@
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+
                         <div>
+                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal" id="delete_notice">삭제</button>
                             <button type="button" class="btn btn-primary">저장</button>
                         </div>
                     </div>
@@ -245,6 +247,7 @@
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal" >삭제</button>
                         <div>
                             <button type="button" class="btn btn-primary">저장</button>
                         </div>
@@ -705,7 +708,6 @@
         var selectId = $(this).attr('id');
         curNoticedata = selectId;
         for(var notice of noticeList){
-            console.log(noticeList)
             if(selectId === notice.idx_notice){
                 $(".idx_notice").attr("id",selectId);
                 $("#notice_code_view span").text(notice.notice_code);
@@ -805,6 +807,26 @@
             }
         });
     }
+    $("#delete_notice").click(function () {
+        if(confirm("이 공지를 삭제하시겟습까?")){
+            $.ajax({
+                type: 'post',
+                url :'delete_notice', //데이터를 주고받을 파일 주소 입력
+                data: JSON.stringify(parseInt(curNoticedata)),//보내는 데이터
+                contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+                dataType:'json',//받는 데이터 타입
+                success: function(result){
+                    //작업이 성공적으로 발생했을 경우
+                    alert(result.result_str);
+                    $("#modals-counsel-view").modal("hide");
+                    pageLoad('c41_site_notice_mng');
+                },
+                error:function(){
+                    //에러가 났을 경우 실행시킬 코드
+                }
+            });
+        }
+    })
 </script>
 <!-- Layout footer -->
 <%@include file ="layouts/frame_footer.jsp" %>

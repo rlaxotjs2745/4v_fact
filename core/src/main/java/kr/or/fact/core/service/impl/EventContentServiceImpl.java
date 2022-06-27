@@ -45,4 +45,9 @@ public class EventContentServiceImpl implements EventContentService {
         }
         return ret_idx;
     }
+
+    @Override
+    public int deleteEvent(int idx_event_content) {
+        return eventContentMapper.deleteEvent(idx_event_content);
+    }
 }

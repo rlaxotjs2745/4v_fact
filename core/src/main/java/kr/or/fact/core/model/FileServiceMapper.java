@@ -24,11 +24,12 @@ public interface FileServiceMapper {
     void insertFormFileInfo(FormFileInfoVO formFileInfoVO);
     FormFileInfoVO getFormFileInfo(@Param("idx_form_file_info") long idx_form_file_info);
     int getFormFileTotalCount();
+    List<FormFileInfoVO> getFormFileList();
 
     List<RuleFileInfoVO> getRuleFileInfoList(ParamPageListFilteredVO paramPageListFilteredVO);
     void insertRuleFileInfo(RuleFileInfoVO ruleFileInfoVO);
     RuleFileInfoVO getRuleFileInfo(@Param("idx_rule_file_info") long idx_rule_file_info);
 
     int getRuleFileTotalCount();
-
+    List<RuleFileInfoVO>getRuleFileInfoList1();
 }

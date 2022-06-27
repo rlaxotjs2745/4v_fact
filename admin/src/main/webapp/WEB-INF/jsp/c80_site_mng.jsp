@@ -52,6 +52,68 @@
             </div>
         </div>
         </form>
+        <div class="card-datatable table-responsive pt-0 pb-3">
+            <div id="table-list" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="" class="table table-striped table-bordered dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="" data-minimum-count-columns="10" >
+                            <thead class="bg-success text-white font-weight-bold">
+                            <tr role="row">
+                                <th class="text-center sorting" style="width:10%">성명</th>
+                                <th class="text-center sorting" style="width:auto">전화번호</th>
+                                <th class="text-center sorting" style="width:10%">이메일</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:choose>
+                                <c:when test="${fn:length(homepageInfoList)>0}">
+                                    <c:forEach items = "${homepageInfoList}" var ="homepageinfo">
+                                        <tr class="homepageinfo_entity" id="${homepageInfo.idx_homepage_info}">
+                                            <td class="text-center">${homepageinfo.homepage_admin}</td>
+                                            <td class="text-center">${homepageinfo.homepage_admin_pnum}</td>
+                                            <td class="text-center">${homepageinfo.email}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:when>
+                                <c:otherwise>
+
+                                    <tr class="">
+                                        <td colspan="8" class="text-center">아이템이 없어요</td>
+                                    </tr>
+
+
+
+                                </c:otherwise>
+
+
+
+
+                            </c:choose>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_info" id="article-list_info" role="status" aria-live="polite">총 50개 중 1에서 10까지</div>
+                    </div>
+                    <div class="col-sm-12 col-md-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
+                            <ul class="pagination">
+                                <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
+                                <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
+                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
+                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
+                                <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <hr class="container-m-nx mt-4 mb-4 ml-2 mr-2">
@@ -142,7 +204,136 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modals-default">
+        <div class="modal-dialog modal-lg">
+            <form class="modal-content"  action="insert_coworker" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title">직원 정보 등록</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+                </div>
+                <div class="modal-body pb-2">
+                    <div class="form-row">
+                        <div class="form-group col col-md-12">
+                            <table class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info">
+                                <tbody>
+                                <tr class="">
+                                    <th class="text-center align-middle bg-light" rowspan="3" style="width:12%">개인정보</th>
+                                    <th class="text-center bg-light" style="width:12%">이름</th>
+                                    <td class="text-center" style="width:24%"><input type="text" class="form-control form-control-sm" value="" id="coworker_name"></td>
+                                    <th class="text-center bg-light" style="width:13%">일반전화번호</th>
+                                    <td class="text-center" style="width:29%"><input type="text" class="form-control form-control-sm" value="" id="tel_num"></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center bg-light">휴대폰 번호</th>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="mphone_num"></td>
+                                    <th class="text-center bg-light">순서 번호</th>
+                                    <td class="text-center">
+                                        <input type="text" class="form-control form-control-sm" value="" id="co_worker_oder">
+                                    </td>
+                                </tr>
 
+                                <tr>
+                                    <th class="text-center bg-light">직책</th>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="job_title" value=""></td>
+                                    <th class="text-center bg-light">담당 권한</th>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="job_role" value=""></td>
+                                </tr>
+
+                                <tr>
+                                    <th class="text-center bg-light">소속정보</th>
+                                    <th class="text-center bg-light">부서</th>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="devision"></td>
+                                    <th class="text-center bg-light">소속</th>t
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="department"></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center bg-light">센터정보</th>
+                                    <th class="text-center bg-light">소속부서</th>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="main_part"></td>
+                                    <th class="text-center bg-light">담당업무</th>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="manage_num"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info" style="">
+                                <tbody>
+                                <tr>
+                                    <th class="text-center align-middle bg-light" style="width: 4.5%" rowspan="2">시스템 정보</th>
+                                    <th class="text-center bg-light" style="width: 4.5%; vertical-align: middle;" >웹ID</th>
+                                    <td class="" style="width: 25%" colspan="3">
+                                        <input type="text" id="web_id" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width: 100px" name="email">
+                                        @
+                                        <input type="text" id="web_id2" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width: 100px" name="">
+                                        <select id="admin_id_select_box" class="form-control form-control-sm d-inline-block align-middle mr-1" style="width: 100px">
+                                            <option value="0">직접입력</option>
+                                            <option value="naver.com">naver.com</option>
+                                            <option value="gmail.com">gmail.com</option>
+                                            <option value="hanmail.net">hanmail.net</option>
+                                            <option value="daum.net">daum.net</option>
+                                            <option value="nate.com">nate.com</option>
+                                        </select>
+
+                                        <br>
+                                        <small id="web_id_guide"></small>
+                                    </td>
+                                    <%--                                    <th class="text-center bg-light" style="width:13%">비밀번호</th>--%>
+                                    <%--                                    <td class="" colspan="2" style="width:34%"><small>등록한 이메일로 초기 비밀번호가 발송됩니다.</small></td>--%>
+                                </tr>
+                                <tr>
+                                    <th class="text-center bg-light">보이기</th>
+                                    <td class="" colspan="5">
+                                        <select id="is_show" class="custom-select custom-select-sm w-auto">
+                                            <option value="1">보임</option>
+                                            <option value="0">안보임</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                    <button type="button" id="btn-coworker" class="btn btn-primary" >저장</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-staff-upload">
+        <div class="modal-dialog ">
+            <form class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">직원정보 일괄등록</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+                </div>
+                <div class="modal-body pb-2">
+
+                    <div class="form-row">
+                        <div class="form-group col col-md-12 text-right">
+                            <a href="#none" class="btn btn-underline">일괄등록 양식 템플릿 다운로드</a>
+                        </div>
+                    </div>
+                    <hr class="mt-0">
+                    <div class="form-row">
+                        <div class="form-group col col-md-12 ">
+                            <label class="form-label d-block text-muted">파일등록</label>
+                            <input type="file" class="custom-file">
+                            <small class="text-muted">정보를 입력한 템플릿 XLS 파일을 등록하세요.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-primary"  >저장</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
 </div>
 <!-- Layout footer -->
 
@@ -290,7 +481,45 @@
             }
         });
     });
+    $('#btn-coworker').on('click',function() {
+        console.log("????")
+        var param ={
+            idx_co_worker:$("#idx_co_worker").val(),
+            co_worker_oder:$("#co_worker_oder").val(),
+            coworker_name:$("#coworker_name").val(),
+            devision:$("#devision").val(),
+            department:$("#department").val(),
+            department_sub:$("#department_sub").val(),
+            job_title:$("#job_title").val(),
+            job_role:$("#job_role").val(),
+            tel_num:$("#tel_num").val(),
+            mphone_num:$("#mphone_num").val(),
+            email:$("#web_id").val() + "@" + $("#web_id2").val(),
+            is_show:$("#is_show ").val(),
+            reg_date:$("#reg_date").val()
+        }
 
+        $.ajax({
+            type: 'post',
+            url: 'insert_coworker', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(param),//보내는 데이터
+            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType: 'json',//받는 데이터 타입
+            success: function (result) {
+                console.log(result)
+                if (result.result_code === "SUCCESS") {
+                    alert("상태 변경에 성공하였습니다")
+                } else {
+                    alert("상태 변경에 실패하였습니다")
+                    console.log(result)
+                }
+
+            },
+            error: function (res) {
+                console.log(res)
+            }
+        });
+    })
 </script>
 
 <!-- / Layout footer -->

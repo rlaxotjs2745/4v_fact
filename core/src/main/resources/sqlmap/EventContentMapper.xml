@@ -101,4 +101,8 @@ SYSDATE,
         )
 
     </insert>
+
+    <delete id="deleteEvent" parameterType="int">
+        DELETE FROM TB_EVENT_CONTENT WHERE IDX_EVENT_CONTENT = #{idx_event_content}
+    </delete>
 </mapper>

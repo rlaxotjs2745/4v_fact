@@ -71,7 +71,6 @@
                                     <th class="text-center sorting" style="width:80px">회신</th>
                                     <th class="text-center sorting" style="width:80px">신청자</th>
                                     <th class="text-center sorting" style="width:60px">ID</th>
-                                    <th class="text-center sorting" style="width:100px">구분</th>
                                     <th class="text-center sorting" style="width:100px">신청일</th>
                                     <th class="text-center sorting" style="width:150px">단체명</th>
                                     <th class="text-center px-2" style="width:80px">견학 희망일</th>
@@ -92,7 +91,6 @@
                                     <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view" class="visit-status">${visit.visit_req_status eq 0 ? "신청" : visit.visit_req_status eq 1 ? "접수" : visit.visit_req_status eq 3 ? "방문" : visit.visit_req_status eq 4 ? "방문 완료" : visit.visit_req_status eq 5 ? "방문취소": visit.visit_req_status eq 6 ? "승인거절" : "기타"}</a></td>
                                     <td class="text-center" id="visit_visitor">${visit.visitor}</td>
                                     <td class="text-center" id="visit_idx_user">${visit.idx_user}</td>
-                                    <td class="text-center" id="visit">구분없어요ㅜㅜ</td>
                                     <td class=""><fmt:formatDate value="${visit.reg_date}" pattern="yyyy-MM-dd HH:MM"/></td>
                                     <td class="text-center">${visit.group_name}</td>
                                     <td class=""><fmt:formatDate value="${visit.resulvation_date}" pattern="yyyy-MM-dd HH:MM"/></td>
@@ -690,11 +688,9 @@
     </c:forEach>
 
     $(".visit-entity").click(function(){
-        console.log("여긴와요>??")
         var selectId = $(this).attr('id');
         curVisitdata = selectId;
         for(var visit of visitList){
-            console.log("여기맞아요?")
             if(selectId === visit.idx_visit_req){
                 $(".idx_visit_req").attr("id", selectId);
                 // $('#question_mo span').text(visitList.question);
@@ -746,8 +742,6 @@
             contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
             dataType: 'json',//받는 데이터 타입
             success: function (result) {
-                console.log(result);
-                console.log(param);
                 if (result.result_code == "SUCCESS") {
                 alert("상태 변경에 성공하였습니다")
 

@@ -28,7 +28,7 @@
             MPHONE_NUM,
             EMAIL,
             IS_SHOW,
-            REG_DATE,
+            REG_DATE)
             VALUES (
                 SEQ_CO_WORKER.NEXTVAL,
                 #{co_worker_oder},
@@ -43,7 +43,7 @@
                 #{email},
                 #{is_show},
                 SYSDATE
-                );
+                )
     </insert>
 
     <update id="updateCoWorkerInfo" parameterType="kr.or.fact.core.model.DTO.CoWorkerVO">

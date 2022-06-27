@@ -9,7 +9,7 @@ public class RuleFileInfoVO {
 
     int row_num;
 
-    long idx_form_file_info;//	number	32			◯		인덱스	auto increase
+    long idx_rule_file_info;//	number	32			◯		인덱스	auto increase
     String subject;//	varchar2	100		0			양식 제목
     String usage_detail;//	varchar2	300					양식 사용 용도 내용
     String depart_name;//	VARCHAR2	100					관련 조직 이름

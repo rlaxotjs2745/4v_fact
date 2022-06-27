@@ -10,4 +10,5 @@ public interface NoticeService {
     public List<NoticeVO> getNoticeWebList(int page, int count);
     public List<NoticeVO> getMainNoticeList();
     public int insertNotice(NoticeVO noticeVO);
+    int deleteNotice(int idx_notice);
 }

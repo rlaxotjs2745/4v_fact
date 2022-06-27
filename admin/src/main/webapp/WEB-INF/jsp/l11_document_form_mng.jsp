@@ -94,7 +94,56 @@
         </div>
     </div>
 
+    <div id="modals-rule-file" class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title text-white font-weight-bold">규정 문서 등록</h5>
+                    <button id="modals-code-new-close" type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">양식 제목</label>
+                            <div class="col-md-10">
+                                <input id="subject" type="text" class="form-control form-control-md">
+                            </div>
 
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">양식 사용 용도</label>
+                            <div class="col-md-10">
+                                <textarea id="usage_detail" type="text" class="form-control form-control-md"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">관련조직 이름</label>
+                            <div class="col-md-10">
+                                <input id="detail" type="text" class="form-control form-control-md">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">파일 업로드</label>
+                            <div class="col-md-10">
+                                <input id="file_upload" type="file" class="form-control form-control-md">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer justify-content-between">
+                            <div>
+                                <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
+                            </div>
+                            <div>
+                                <button id="btn_save_new" type="button" class="btn btn-primary">저장</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 <!-- Layout footer -->
@@ -244,4 +293,40 @@
         });
     });
 
+
+
+    var saveNewBtn = document.querySelectorAll('.btn_save_new');
+    saveNewBtn.forEach(btn=>btn.addEventListener('click', saveForm));
+    function saveForm(){
+    event.preventDefault();
+    var fileForm = new FormData();
+    fileForm.append("subject",document.querySelector('#subject').value);
+    fileForm.append("usage_detail",document.querySelector('#usage_detail').value);
+
+
+    var files = document.querySelector('#file_upload').files;
+    for(var i = 0; i < files.length; i++){
+        var num = i + 1;
+        fileForm.append("files" + num, files[i]);
+    }
+    fileForm.append("fileLength", files.length);
+
+    $.ajax({
+        type: 'post',
+        url :'uploadFile', //데이터를 주고받을 파일 주소 입력
+        data: fileForm,//보내는 데이터
+        contentType: false,//보내는 데이터 타입
+        processData: false,//Jquery 내부에서 파일을 queryString 형태로 전달하는 것을 방지
+        dataType:'json',//받는 데이터 타입
+        enctype: 'multipart/form-data',
+        success: function(result){
+            console.log(result);
+            alert("이게맞나", () => window.redirect("/"))
+        },
+        error:function(err){
+            console.log(err);
+        }
+    });
+    // event.preventDefault();
+    }
 </script>

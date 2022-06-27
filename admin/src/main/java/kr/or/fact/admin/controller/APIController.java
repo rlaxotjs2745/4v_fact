@@ -77,7 +77,11 @@ public class APIController {
     @Resource(name = "eventContentService")
     public EventContentService eventContentService;
 
+    @Resource(name = "prContentService")
+    public  PRContentsService prContentService;
 
+    @Resource(name = "coWorkerNService")
+    public CoWorkerNService coWorkerNService;
 
     @RequestMapping(value = "/admin_login",method = RequestMethod.POST)
     public @ResponseBody ResultVO admin_login(HttpSession session
@@ -1005,23 +1009,98 @@ public class APIController {
         }
         return resultVO;
     }
+    @RequestMapping(value = "/insert_pr",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO insertPRContent (@RequestBody PRContentVO prcontensVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("업데이트 실패");
+        try {
+           prContentService.insertPRContent(prcontensVO);
+            resultVO.setResult_str("업데이트에 성공하였습니다.");
+            resultVO.setResult_code("SUCCESS");
 
-//    @RequestMapping(value = "/delete_notice",method = RequestMethod.DELETE)
-//    public @ResponseBody
-//    ResultVO deleteNotice (@RequestBody NoticeVO noticeVO){
-//        ResultVO resultVO = new ResultVO();
-//        resultVO.setResult_code("ERROR_1000");
-//        resultVO.setResult_str("업데이트 실패");
-//        try {
-//            noticeService.deleteNotice(noticeVO);
-//            resultVO.setResult_str("업데이트에 성공하였습니다.");
-//            resultVO.setResult_code("SUCCESS");
-//        }catch(Exception e) {
-//            resultVO.setResult_code("ERROR_1000");
-//            resultVO.setResult_str("업데이트 실패");
-//        }
-//        return resultVO;
-//    }
+        }catch(Exception e) {
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("업데이트 실패");
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/insert_coworker",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO insertCoworker (@RequestBody CoWorkerVO coWorkerVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("업데이트 실패");
+        try {
+           coWorkerNService.insertCoWorkerInfo(coWorkerVO);
+            resultVO.setResult_str("업데이트에 성공하였습니다.");
+            resultVO.setResult_code("SUCCESS");
+
+        }catch(Exception e) {
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("업데이트 실패");
+            System.out.println(e);
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value ="/delete_notice",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO deleteNotice(@RequestBody int idx_notice){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("삭제 실패");
+        try {
+            noticeService.deleteNotice(idx_notice);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("삭제가 완료되었습니다.");
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("없는 공지입니다.");
+        }
+        System.out.println(resultVO);
+        return resultVO;
+    }
+    @RequestMapping(value ="/delete_event",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO deleteEvent(@RequestBody int idx_event_content){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("삭제 실패");
+        try {
+            eventContentService.deleteEvent(idx_event_content);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("삭제가 완료되었습니다.");
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("없는 이벤트입니다.");
+        }
+        System.out.println(resultVO);
+        return resultVO;
+    }
+    @RequestMapping(value ="/delete_pr",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO deletePr(@RequestBody int idx_pr_content){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("삭제 실패");
+        try {
+            prContentService.deletePR(idx_pr_content);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("삭제가 완료되었습니다.");
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("없는 홍보자료입니다.");
+        }
+        System.out.println(resultVO);
+        return resultVO;
+    }
+
 
 }
 
