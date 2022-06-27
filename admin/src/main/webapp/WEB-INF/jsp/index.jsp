@@ -155,11 +155,11 @@
 /*      State : 브라우저 이동 시 넘겨줄 데이터 (popstate 에서 받아서 원하는 처리를 해줄 수 있음)
         Title : 변경할 브라우저 제목 (변경 원치 않으면 null)
         Url : 변경할 주소*/
-
+        // console.log(param)
         if(param==null)
             param={page_num:1};
 
-        if(cur!=url+param.page_num){
+        if(cur!=url+param.page_num || usage == "asset_list"){
             cur = url+param.page;
             history.pushState(param, title,url);
 
@@ -184,6 +184,8 @@
                         $("#cur_asset_index").html(result);
                     } else if(usage == "codeSelect"){
                         $("#code_select").append(result);
+                    } else if(usage == "asset_list"){
+                        $("#asset_list").html(result);
                     }
 
                     else{
@@ -250,6 +252,7 @@
         pageLoad('a10_dashboard','{tag:1}','대시보드');
 
     });
+
 
 
 

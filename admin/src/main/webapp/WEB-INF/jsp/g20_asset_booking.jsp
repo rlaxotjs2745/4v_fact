@@ -337,44 +337,13 @@
                                         <th class="text-center">No</th>
                                         <th class="text-center">관리번호</th>
                                         <th class="text-center">실증장비명</th>
-                                        <th class="text-center">수량</th>
                                         <th class="text-center">모델명</th>
-                                        <th class="text-center">규격 및 구성</th>
                                         <th class="text-center">제조사</th>
                                         <th class="text-center">신청</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td class="text-center">1</td>
-                                        <td class="text-center">00000000</td>
-                                        <td class="text-center">XXXXXXXXXXXX</td>
-                                        <td class="text-center">00</td>
-                                        <td class="text-center">XXXXX</td>
-                                        <td class="text-center">XXXXXXXXXXXXXXX</td>
-                                        <td class="text-center">XXXXX</td>
-                                        <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">선택</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">2</td>
-                                        <td class="text-center">00000000</td>
-                                        <td class="text-center">XXXXXXXXXXXX</td>
-                                        <td class="text-center">00</td>
-                                        <td class="text-center">XXXXX</td>
-                                        <td class="text-center">XXXXXXXXXXXXXXX</td>
-                                        <td class="text-center">XXXXX</td>
-                                        <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">선택</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">3</td>
-                                        <td class="text-center">00000000</td>
-                                        <td class="text-center">XXXXXXXXXXXX</td>
-                                        <td class="text-center">00</td>
-                                        <td class="text-center">XXXXX</td>
-                                        <td class="text-center">XXXXXXXXXXXXXXX</td>
-                                        <td class="text-center">XXXXX</td>
-                                        <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">선택</a></td>
-                                    </tr>
+                                    <tbody id="asset_list">
+
                                     </tbody>
                                 </table>
                             </div>
@@ -390,44 +359,13 @@
                                         <th class="text-center">No</th>
                                         <th class="text-center">관리번호</th>
                                         <th class="text-center">실증장비명</th>
-                                        <th class="text-center">수량</th>
                                         <th class="text-center">모델명</th>
-                                        <th class="text-center">규격 및 구성</th>
                                         <th class="text-center">제조사</th>
                                         <th class="text-center">취소</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td class="text-center">1</td>
-                                        <td class="text-center">00000000</td>
-                                        <td class="text-center">XXXXXXXXXXXX</td>
-                                        <td class="text-center">00</td>
-                                        <td class="text-center">XXXXX</td>
-                                        <td class="text-center">XXXXXXXXXXXXXXX</td>
-                                        <td class="text-center">XXXXX</td>
-                                        <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">삭제</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">2</td>
-                                        <td class="text-center">00000000</td>
-                                        <td class="text-center">XXXXXXXXXXXX</td>
-                                        <td class="text-center">00</td>
-                                        <td class="text-center">XXXXX</td>
-                                        <td class="text-center">XXXXXXXXXXXXXXX</td>
-                                        <td class="text-center">XXXXX</td>
-                                        <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">삭제</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">3</td>
-                                        <td class="text-center">00000000</td>
-                                        <td class="text-center">XXXXXXXXXXXX</td>
-                                        <td class="text-center">00</td>
-                                        <td class="text-center">XXXXX</td>
-                                        <td class="text-center">XXXXXXXXXXXXXXX</td>
-                                        <td class="text-center">XXXXX</td>
-                                        <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">삭제</a></td>
-                                    </tr>
+                                    <tbody id="apply_checked_entity">
+
                                     </tbody>
                                 </table>
                             </div>
@@ -435,7 +373,7 @@
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                        <button type="button" class="btn btn-primary">신청</button>
+                        <button type="button" class="btn btn-primary" id="asset_reservation_apply">신청</button>
                     </div>
                 </form>
             </div>
@@ -529,6 +467,7 @@
 
 <!-- / Page content -->
 <script>
+    pageLoad("get_asset_list", {page_num: 1, filter1: 100}, "자산 현황 보드", "asset_list");
 
     $("#asset_main_code").change(function(){
         $("#asset_sub_code").css("display", "none");
@@ -544,6 +483,8 @@
                 $("#asset_sub_code").html(result).css("display", "inline-block");
             }
         })
+
+        pageLoad("get_asset_list", {filter1: $("#asset_main_code").val()}, "자산 현황 보드", "asset_list");
     })
 
     $("#asset_sub_code").change(function(){
@@ -558,6 +499,27 @@
                 $("#asset_detail_code").html(result).css("display", "inline-block");
             }
         })
+        pageLoad("get_asset_list", {filter2: $("#asset_sub_code").val()}, "자산 현황 보드", "asset_list");
     })
 
+    $("#asset_detail_code").change(function(){
+        pageLoad("get_asset_list", {filter3: $("#asset_detail_code").val()}, "자산 현황 보드", "asset_list");
+    })
+
+    $("#asset_reservation_apply").click(function(){
+        var idxArr = [];
+        $("#apply_checked_entity").children().forEach(function(esset){
+            idxArr.push(parseInt(esset.attr("id").substring(7)));
+        })
+        $.ajax({
+            url: 'asset_reservation',
+            method: 'post',
+            data: JSON.stringify(idxArr),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'html',//받는 데이터 타입
+            success:function(result){
+                $("#asset_detail_code").html(result).css("display", "inline-block");
+            }
+        })
+    })
 </script>

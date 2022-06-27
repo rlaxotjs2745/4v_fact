@@ -985,6 +985,7 @@ public class APIController {
         return resultVO;
     }
 
+
 //    @RequestMapping(value = "/delete_notice",method = RequestMethod.DELETE)
 //    public @ResponseBody
 //    ResultVO deleteNotice (@RequestBody NoticeVO noticeVO){
@@ -1003,3 +1004,4 @@ public class APIController {
 //    }
 
 }
+

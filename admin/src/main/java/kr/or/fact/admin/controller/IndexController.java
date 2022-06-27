@@ -10,10 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URL;
 import javax.annotation.Resource;
@@ -1060,7 +1057,36 @@ public class IndexController {
     public String g20_asset_booking(@RequestParam(value = "tag", required = false) String tagValue,
                                     ModelMap model){
 
+        List<SystemCodeVO> systemCodeVOList = systemService.getAllSystemCodeList();
+        List<SystemCodeVO> mainAssetCodeList = new ArrayList<>();
+        List<SystemCodeVO> subAssetCodeList = new ArrayList<>();
+        List<SystemCodeVO> detailAssetCodeList = new ArrayList<>();
+        systemCodeVOList.forEach(systemCodeVO -> {
+            if(systemCodeVO.getCode_value().length() == 1 || Integer.parseInt(systemCodeVO.getCode_value()) == 10){
+                mainAssetCodeList.add(systemCodeVO);
+            } else if(Integer.parseInt(systemCodeVO.getCode_value()) <= 120){
+                subAssetCodeList.add(systemCodeVO);
+            } else {
+                detailAssetCodeList.add(systemCodeVO);
+            }
+        });
+        model.addAttribute("adminList", adminService.getAdminList());
+        model.addAttribute("main_cate", mainAssetCodeList);
+        model.addAttribute("sub_cate", subAssetCodeList);
+        model.addAttribute("detail_cate", detailAssetCodeList);
+
         return "g20_asset_booking";
+    }
+
+    @RequestMapping(value = "/get_asset_list",method = RequestMethod.POST)
+    public String get_asset_list (@RequestParam(value = "tag", required = false) String tagValue,
+                                  @RequestBody ParamPageListFilteredVO param,
+                                  ModelMap model){
+        System.out.println(param);
+        List<AssetVO> assetVOList = assetService.getAssetList(param);
+        model.addAttribute("assetList", assetVOList);
+
+        return "asset_list";
     }
 
     //서식관리

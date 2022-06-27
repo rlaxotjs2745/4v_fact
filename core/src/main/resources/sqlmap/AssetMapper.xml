@@ -72,7 +72,9 @@
 --         ORDER BY CONVERT(ADMIN_NAME,'UTFE') ASC
         )
         A)
-        WHERE PAGE = #{page_num}
+        <if test='page_num != 0'>
+            WHERE PAGE = #{page_num}
+        </if>
     </select>
 
     <select id="getCount" resultType="int">
