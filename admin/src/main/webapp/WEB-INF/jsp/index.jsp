@@ -186,6 +186,10 @@
                         $("#code_select").append(result);
                     } else if(usage == "asset_list"){
                         $("#asset_list").html(result);
+                    } else if(usage == "asset_reservation_list"){
+                        $("#asset_reservation_list").html(result);
+                    } else if(usage == "asset_reservation_items_list"){
+                        $("#asset_reservation_items_list").html(result);
                     }
 
                     else{

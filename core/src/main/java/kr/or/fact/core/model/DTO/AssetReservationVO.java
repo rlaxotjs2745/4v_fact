@@ -3,6 +3,7 @@ package kr.or.fact.core.model.DTO;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class AssetReservationVO {
@@ -22,5 +23,7 @@ public class AssetReservationVO {
     Date permission_date;//	date						사용 승인일
     Date reg_date;//	date						최초 등록 일시
     Date last_upd_date;//	date						최종 수정 일시
-
+    int maxvalue;
+    int page;
+    List<String> assetList;
 }

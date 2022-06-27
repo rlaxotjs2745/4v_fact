@@ -1,8 +1,7 @@
 package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.AssetMapper;
-import kr.or.fact.core.model.DTO.AssetVO;
-import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
+import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.AssetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,4 +39,43 @@ public class AssetServiceImpl implements AssetService {
         int filter3 = param.getFilter3();
         return assetMapper.getCount(filter1, filter2, filter3);
     }
+
+    @Override
+    public int reserveAsset(AssetReservationVO assetReservationVO, AdminVO adminInfo){
+        try{
+            System.out.println("before: " + assetReservationVO.getIdx_asset_reservation());
+            assetMapper.insertAssetReservation(assetReservationVO);
+            System.out.println("after: " + assetReservationVO.getIdx_asset_reservation());
+            List<String> assetCodes = assetReservationVO.getAssetList();
+            for(int i = 0; i < assetCodes.size(); i++){
+                assetMapper.insertReservationItem(
+                        assetCodes.get(i),
+                        assetReservationVO.getIdx_asset_reservation(),
+                        adminInfo.getIdx_admin(),
+                        1,
+                        0
+                );
+            }
+        } catch(Exception e){
+            System.out.println(e);
+            return 0;
+        }
+        return 1;
+    }
+
+    @Override
+    public List<AssetReservationVO> getAssetReservationList(ParamPageListFilteredVO param){
+        return assetMapper.getAssetReservationList(param.getFilter1(), param.getPage_num());
+    }
+
+    @Override
+    public int getAssetReservationCount(ParamPageListFilteredVO param){
+        return assetMapper.getAssetReservationCount(param.getFilter1());
+    }
+
+    @Override
+    public List<AssetReservationItemVO> getAssetReservationItemList(long idx){
+        return assetMapper.getAssetReservationItemList(idx);
+    }
+
 }

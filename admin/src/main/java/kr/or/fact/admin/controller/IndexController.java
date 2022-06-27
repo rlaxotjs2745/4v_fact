@@ -1037,6 +1037,38 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
         return "g10_cur_asset_mng";
     }
 
+    @RequestMapping(value = "/asset_reservation_list",method = RequestMethod.POST)
+    public String asset_reservation_list(@RequestParam(value = "tag", required = false) String tagValue,
+                                         @RequestBody ParamPageListFilteredVO param,
+                                    ModelMap model){
+
+        List<AssetReservationVO> assetReservationVOList = assetService.getAssetReservationList(param);
+        int count = assetService.getAssetReservationCount(param);
+
+
+        model.addAttribute("assetResList", assetReservationVOList);
+        model.addAttribute("maxvalue", assetReservationVOList.get(0).getMaxvalue());
+        model.addAttribute("count", count);
+        model.addAttribute("page_num", param.getPage_num());
+        model.addAttribute("curStatus", param.getFilter1());
+
+
+        return "asset_reservation_list";
+    }
+
+    @RequestMapping(value = "/asset_reservation_items_list",method = RequestMethod.POST)
+    public String asset_reservation_items_list(@RequestParam(value = "tag", required = false) String tagValue,
+                                               @RequestBody ParamPageListFilteredVO param,
+                                    ModelMap model){
+        List<AssetReservationItemVO> assetReservationItemVOList = assetService.getAssetReservationItemList(param.getFilter1());
+        List<AssetVO> assetVOList = assetService.getAssetList(new ParamPageListFilteredVO());
+
+        model.addAttribute("assetList", assetVOList);
+        model.addAttribute("itemList", assetReservationItemVOList);
+
+        return "asset_reservation_items_list";
+    }
+
     @RequestMapping(value = "/cur_asset_index",method = RequestMethod.POST)
     public String cur_asset_index(@RequestParam(value = "tag", required = false) String tagValue,
                                   @RequestBody ParamPageListFilteredVO param,
@@ -1113,7 +1145,10 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //콘솔 프론트 대시보드 관리
     @RequestMapping(value = "/g20_asset_booking",method = RequestMethod.POST)
     public String g20_asset_booking(@RequestParam(value = "tag", required = false) String tagValue,
+                                    Principal principal,
                                     ModelMap model){
+
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
 
         List<SystemCodeVO> systemCodeVOList = systemService.getAllSystemCodeList();
         List<SystemCodeVO> mainAssetCodeList = new ArrayList<>();
@@ -1128,6 +1163,7 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
                 detailAssetCodeList.add(systemCodeVO);
             }
         });
+        model.addAttribute("myInfo", adminInfo);
         model.addAttribute("adminList", adminService.getAdminList());
         model.addAttribute("main_cate", mainAssetCodeList);
         model.addAttribute("sub_cate", subAssetCodeList);

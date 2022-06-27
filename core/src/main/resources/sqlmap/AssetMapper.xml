@@ -43,6 +43,57 @@
                 SYSDATE)
     </insert>
 
+    <insert id="insertAssetReservation" parameterType="kr.or.fact.core.model.DTO.AssetReservationVO" useGeneratedKeys="false">
+        INSERT INTO TB_ASSET_RESERVATION (IDX_ASSET_RESERVATION,
+                              ASSET_RESERVAION_CODE,
+                              IDX_CORP_INFO,
+                              IDX_USER,
+                              RESERVAION_STATUS,
+                              ASSET_USAGE,
+                              IS_END,
+                              IS_RETURN,
+                              USE_START_DATE,
+                              USE_END_DATE,
+                              REG_DATE,
+                              LAST_UPD_DATE)
+        VALUES (SEQ_ASSET_RESERVATION.NEXTVAL,
+                #{asset_reservaion_code},
+                #{idx_corp_info},
+                #{idx_user},
+                #{reservaion_status},
+                #{asset_usage},
+                #{is_end},
+                #{is_return},
+                #{use_start_date},
+                #{use_end_date},
+                SYSDATE,
+                SYSDATE)
+                <selectKey keyProperty="idx_asset_reservation" resultType="long" order="AFTER">
+                    SELECT SEQ_ASSET_RESERVATION.CURRVAL FROM DUAL
+                </selectKey>
+    </insert>
+
+    <insert id="insertReservationItem">
+        INSERT INTO TB_ASSET_RESERVATION_ITEM (IDX_ASSET_RESERVATION_ITEM,
+                              ASSET_CODE,
+                              IDX_ASSET_RESERVATION,
+                              IDX_ASSET_MANAGE,
+                              AMOUNT,
+                              RESERVATION_ITEM_STATUS,
+                              REG_DATE,
+                              LAST_UPD_DATE
+                              )
+        VALUES (SEQ_ASSET_RESERVATION.NEXTVAL,
+                #{asset_code},
+                #{idx_asset_reservation},
+                #{idx_asset_manage},
+                #{amount},
+                #{reservation_item_status},
+                SYSDATE,
+                SYSDATE)
+    </insert>
+
+
     <select id="getAssetList" resultType="kr.or.fact.core.model.DTO.AssetVO">
         SELECT * FROM (
         SELECT A.*, FLOOR((ROWNUM - 1)/10 + 1) PAGE, (
@@ -77,6 +128,29 @@
         </if>
     </select>
 
+    <select id="getAssetReservationList" resultType="kr.or.fact.core.model.DTO.AssetReservationVO">
+        SELECT * FROM (
+        SELECT A.*, FLOOR((ROWNUM - 1)/10 + 1) PAGE, (
+        SELECT MAX(FLOOR((ROWNUM - 1)/10 + 1)) FROM TB_ASSET_RESERVATION
+        WHERE IDX_ASSET_RESERVATION >= 1
+        <if test='filter1 != 100'>
+            AND RESERVATION_STATUS = #{filter1}
+        </if>
+
+        ) MAXVALUE FROM (
+        SELECT TB_ASSET_RESERVATION.* FROM TB_ASSET_RESERVATION
+        WHERE IDX_ASSET_RESERVATION >= 1
+        <if test='filter1 != 100'>
+            AND RESERVATION_STATUS = #{filter1}
+        </if>
+--         ORDER BY CONVERT(ADMIN_NAME,'UTFE') ASC
+        )
+        A)
+        <if test='page_num != 0'>
+            WHERE PAGE = #{page_num}
+        </if>
+    </select>
+
     <select id="getCount" resultType="int">
         SELECT COUNT(*) FROM TB_ASSET
         <if test='filter1 != 100'>
@@ -89,4 +163,17 @@
             AND ASSET_DETAIL_CATEGORY_CODE = #{filter3}
         </if>
     </select>
+
+    <select id="getAssetReservationCount" resultType="int">
+        SELECT COUNT(*) FROM TB_ASSET_RESERVATION
+        <if test='filter1 != 100'>
+            WHERE RESERVATION_STATUS = #{filter1}
+        </if>
+    </select>
+
+    <select id="getAssetReservationItemList" resultType="int">
+        SELECT * FROM TB_ASSET_RESERVATION_ITEM WHERE IDX_ASSET_RESERVATION = #{idx}
+    </select>
+
+
 </mapper>

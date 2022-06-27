@@ -96,167 +96,8 @@
 
         <hr>
 
-        <div class="card">
-            <h6 class="card-header with-elements">
-                <div class="card-header-title">예약 현황</div>
-                <div class="card-header-elements ml-auto">
-                    <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#modals-reserve-write">자원 예약</button>
-                </div>
-            </h6>
+        <div class="card" id="asset_reservation_list">
 
-            <div class="card-datatable table-responsive pt-0 pb-3">
-                <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
-                                <thead class="bg-success text-white font-weight-bold">
-                                <tr role="row">
-                                    <th class="text-center px-2" style="width:40px">No</th>
-                                    <th class="text-center px-2" style="width:80px">구분</th>
-                                    <th class="text-center px-2" style="width:80px">처리</th>
-                                    <th class="text-center px-2" style="width:80px">접수일</th>
-                                    <th class="text-center px-2" style="width:150px">자원 명</th>
-                                    <th class="text-center px-2" style="width:60px">수량</th>
-                                    <th class="text-center px-2" style="width:150px">예약기간</th>
-                                    <th class="text-center px-2" style="width:60px">일수</th>
-                                    <th class="text-center px-2" style="width:250px">용도</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="">
-                                    <td class="text-center">1</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default"  data-toggle="modal" data-target="#modals-reserve-result">예약접수</a></td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">각종 장비류:XXXXX</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">2021.00.00~2021.00.00</td>
-                                    <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">2</td>
-                                    <td class="text-center">연장</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">불가</a></td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">각종 장비류:XXXXX</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">2021.00.00~2021.00.00</td>
-                                    <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">3</td>
-                                    <td class="text-center">취소</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">대기</a></td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">각종 장비류:XXXXX</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">2021.00.00~2021.00.00</td>
-                                    <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">4</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">예약 취소</a></td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">각종 장비류:XXXXX</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">2021.00.00~2021.00.00</td>
-                                    <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">5</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">일부 승인</a></td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">각종 장비류:XXXXX</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">2021.00.00~2021.00.00</td>
-                                    <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">6</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">예약 접수</a></td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">각종 장비류:XXXXX</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">2021.00.00~2021.00.00</td>
-                                    <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">7</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">예약 접수</a></td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">각종 장비류:XXXXX</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">2021.00.00~2021.00.00</td>
-                                    <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">8</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">예약 접수</a></td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">각종 장비류:XXXXX</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">2021.00.00~2021.00.00</td>
-                                    <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">9</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">예약 접수</a></td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">각종 장비류:XXXXX</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">2021.00.00~2021.00.00</td>
-                                    <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">10</td>
-                                    <td class="text-center">신규</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">예약 접수</a></td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center">각종 장비류:XXXXX</td>
-                                    <td class="text-center">00</td>
-                                    <td class="text-center">2021.00.00~2021.00.00</td>
-                                    <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor</span></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
-                        </div>
-                        <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                    <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="d-flex justify-content-end align-items-end demo-inline-spacing w-100 mt-3">
@@ -281,19 +122,19 @@
                                     <tr class="">
                                         <th class="text-center align-middle bg-light" rowspan="4" style="width:15%">신청인</th>
                                         <th class="text-center bg-light" style="width:15%">소속</th>
-                                        <td class="text-center" colspan="3">맛있는 농부</td>
+                                        <td class="text-center" colspan="3">${myInfo.corporate_name}</td>
                                     </tr>
                                     <tr>
                                         <th class="text-center bg-light" style="width:15%">직위</th>
-                                        <td class="text-center" style="width:22.5%">맛있는 농부</td>
+                                        <td class="text-center" style="width:22.5%">${myInfo.job_title}</td>
                                         <th class="text-center bg-light" style="width:15%">성명</th>
-                                        <td class="text-center" style="width:22.5%">홍길동</td>
+                                        <td class="text-center" style="width:22.5%">${myInfo.admin_name}</td>
                                     </tr>
                                     <tr>
                                         <th class="text-center bg-light">연락처</th>
-                                        <td class="text-center">010-0000-0000</td>
+                                        <td class="text-center">${myInfo.mphone_num}</td>
                                         <th class="text-center bg-light">팩스</th>
-                                        <td class="text-center">010-0000-0000</td>
+                                        <td class="text-center">${myInfo.corporate_fax}</td>
                                     </tr>
                                     <tr>
                                         <th class="text-center align-middle bg-light">실증시설<br>이용현황</th>
@@ -370,6 +211,24 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="form-row">
+                            <div class="form-group col col-md-12">
+                                <label class="form-label d-block text-muted">용도</label>
+                                <textarea class="form-control" id="asset_usage" rows="3" placeholder="1000자 이내로 작성이 가능합니다."></textarea>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label class="form-label d-block text-muted">사용 기간</label>
+                            <div class="col-md-10">
+                                <div id="datepicker-open" class="input-daterange input-group mode-edit mode-new">
+                                    <input type="text" class="form-control" name="posting_start_date" id="reserve_start_date">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">~</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="posting_end_date" id="reserve_end_date">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
@@ -390,11 +249,11 @@
                         <div class="form-row">
                             <div class="form-group col col-md-4">
                                 <label class="form-label d-block text-muted">신청일</label>
-                                <span>YYYY.MM.DD</span>
+                                <span id="reservation_register_date">YYYY.MM.DD</span>
                             </div>
                             <div class="form-group col col-md-8">
                                 <label class="form-label d-block text-muted">신청기간</label>
-                                <span>YYYY.MM.DD~YYYY.MM.DD (총 00일간)</span>
+                                <span id="reservation_using_term">YYYY.MM.DD~YYYY.MM.DD (총 00일간)</span>
                             </div>
                         </div>
                         <hr class="mt-0">
@@ -415,45 +274,16 @@
                                         <th class="text-center">결과</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td class="text-center">1</td>
-                                        <td class="text-center">00000000</td>
-                                        <td class="text-center">XXXXXXXXXXXX</td>
-                                        <td class="text-center">00</td>
-                                        <td class="text-center">XXXXX</td>
-                                        <td class="text-center">XXXXXXXXXXXXXXX</td>
-                                        <td class="text-center">XXXXX</td>
-                                        <td class="text-center"><span class="text-info">승인</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">2</td>
-                                        <td class="text-center">00000000</td>
-                                        <td class="text-center">XXXXXXXXXXXX</td>
-                                        <td class="text-center">00</td>
-                                        <td class="text-center">XXXXX</td>
-                                        <td class="text-center">XXXXXXXXXXXXXXX</td>
-                                        <td class="text-center">XXXXX</td>
-                                        <td class="text-center"><span class="text-warning">대기</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">3</td>
-                                        <td class="text-center">00000000</td>
-                                        <td class="text-center">XXXXXXXXXXXX</td>
-                                        <td class="text-center">00</td>
-                                        <td class="text-center">XXXXX</td>
-                                        <td class="text-center">XXXXXXXXXXXXXXX</td>
-                                        <td class="text-center">XXXXX</td>
-                                        <td class="text-center"><span class="text-hero">불가</span></td>
-                                    </tr>
+                                    <tbody id="">
+
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                        <button type="button" class="btn btn-primary">신청</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+                        <button type="button" class="btn btn-primary">신청 취소</button>
                     </div>
                 </form>
             </div>
@@ -468,6 +298,31 @@
 <!-- / Page content -->
 <script>
     pageLoad("get_asset_list", {page_num: 1, filter1: 100}, "자산 현황 보드", "asset_list");
+    pageLoad("asset_reservation_list", {page_num: 1, filter1: 100}, "자산 예약 보드", "asset_reservation_list");
+
+    var checkedIdxArr = [];
+
+    $(function() {
+        var isRtl = $('html').attr('dir') === 'rtl';
+
+        $('#datepicker-show,#datepicker-open').datepicker({
+            orientation: isRtl ? 'auto right' : 'auto left',
+            format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
+            startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
+            language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+        });
+
+
+    });
+    $(function () {
+        // Time
+        $('#flatpickr-time-start,#flatpickr-time-end').flatpickr({
+            enableTime: true,
+            noCalendar: true,
+            altInput: true,
+            static:true
+        });
+    });
 
     $("#asset_main_code").change(function(){
         $("#asset_sub_code").css("display", "none");
@@ -507,19 +362,41 @@
     })
 
     $("#asset_reservation_apply").click(function(){
-        var idxArr = [];
-        $("#apply_checked_entity").children().forEach(function(esset){
-            idxArr.push(parseInt(esset.attr("id").substring(7)));
-        })
-        $.ajax({
-            url: 'asset_reservation',
-            method: 'post',
-            data: JSON.stringify(idxArr),//보내는 데이터
-            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
-            dataType:'html',//받는 데이터 타입
-            success:function(result){
-                $("#asset_detail_code").html(result).css("display", "inline-block");
+        if($("#apply_checked_entity").children().length){
+            var idxArr = [];
+            var reserveObj = {
+                idx_user: ${myInfo.idx_admin},
+                reservation_status: 0,
+                is_end: 0,
+                use_start_date: $("#reserve_start_date").val(),
+                use_end_date: $("#reserve_end_date").val(),
+                is_return: 0,
+                asset_usage: $("#asset_usage").val()
             }
-        })
+            $.each($("#apply_checked_entity").children(),function(idx, esset){
+                idxArr.push($(esset).attr("id").substring(8));
+            })
+            reserveObj.assetList = idxArr;
+            $.ajax({
+                url: 'asset_reservation',
+                method: 'post',
+                data: JSON.stringify(reserveObj),//보내는 데이터
+                contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+                dataType:'json',//받는 데이터 타입
+                success:function(result){
+                    console.log(result);
+                    alert(result.result_str);
+                    if(result.result_code == "SUCCESS"){
+                        $("#modals-reserve-write").modal("hide");
+                        $(".modal-backdrop").css("display", "none");
+                        pageLoad('g20_asset_booking',{page_num:1},'자원예약관리');
+                    }
+                }
+            })
+        } else {
+            alert("신청 장비가 없습니다. 장비를 선택한 후 다시 신청해주세요.")
+        }
+
     })
+
 </script>

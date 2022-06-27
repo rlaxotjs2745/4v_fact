@@ -956,6 +956,42 @@ public class APIController {
 
 
 
+    @RequestMapping(value ="/asset_reservation",method = RequestMethod.POST)
+    public @ResponseBody ResultVO assetReservation(@RequestBody AssetReservationVO assetReservationVO, Principal principal){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("예약 실패");
+        String newPw = "";
+        for(int i = 0; newPw.length() < 40; i++){
+            double dRd = Math.random();
+            if(Math.random() % 2 == 1){
+                char randomWord = (char)((dRd * 26) + 97);
+                newPw = newPw + randomWord;
+            } else {
+                newPw = newPw + (int)(dRd * 10);
+            }
+        }
+        assetReservationVO.setAsset_reservaion_code(newPw);
+
+        try {
+            AdminVO adminInfo = adminService.findAdminById(principal.getName());
+
+            if(assetService.reserveAsset(assetReservationVO, adminInfo) == 1){
+                resultVO.setResult_code("SUCCESS");
+                resultVO.setResult_str("예약 등록이 완료되었습니다.");
+                System.out.println("다됐다");
+            } else {
+                resultVO.setResult_code("ERROR_1000");
+                resultVO.setResult_str("예약 등록에 실패했습니다.");
+            }
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("예약 등록에 실패했습니다.");
+        }
+        return resultVO;
+    }
+
 
     @RequestMapping(value = "/visit_update",method = RequestMethod.POST)
     public @ResponseBody

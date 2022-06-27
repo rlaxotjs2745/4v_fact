@@ -10,7 +10,7 @@
 
 <c:forEach items="${assetList}" var="asset" varStatus="status">
     <c:if test="${asset.asset_status eq 0 or asset.asset_status eq 1}">
-        <tr class="asset_entity" id="assetNum${asset.idx_asset}">
+        <tr class="asset_entity" id="assetNum${asset.asset_code}">
             <td class="text-center">${status.count}</td>
             <td class="text-center">${asset.asset_code}</td>
             <td class="text-center">${asset.asset_name}</td>
@@ -23,16 +23,28 @@
 
 
 <script>
+    $.each($(".asset_entity"), function(idx, entity){
+        if(checkedIdxArr.includes($(entity).attr("id")) && $(entity).parent().attr("id") == "asset_list"){
+            console.log("nice");
+            $(entity).remove();
+        }
+    })
 
     $(".asset_request_btn").click(function(){
-
         if($(this).hasClass("checked_asset")){
             $(this).text("신청 취소").removeClass("checked_asset");
             $("#apply_checked_entity").append($(this).parents(".asset_entity"));
-
+            checkedIdxArr.push($(this).parents(".asset_entity").attr("id"));
         } else {
+            var newArr = [];
             $(this).text("신청").addClass("checked_asset");
             $("#asset_list").append($(this).parents(".asset_entity"));
+            checkedIdxArr.forEach(function(idx){
+                if(idx != $(this).parents(".asset_entity").attr("id")){
+                    newArr.push(idx);
+                }
+            })
+            checkedIdxArr = newArr;
         }
     })
 </script>
