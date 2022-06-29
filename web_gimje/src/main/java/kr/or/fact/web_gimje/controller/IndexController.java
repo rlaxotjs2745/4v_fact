@@ -687,6 +687,9 @@ public class IndexController {
     public String brd_announce_detail(@RequestParam("idx") int idx,
                                       Model model){
 
+        BsAnnouncementVO announcementInfo =  bsAnnouncementService.getBsAnnouncementByIdx(idx);
+        model.addAttribute("announcementInfo",announcementInfo);
+
         getHomepageInfo(model);
         return "brd_announce_detail";
     }
