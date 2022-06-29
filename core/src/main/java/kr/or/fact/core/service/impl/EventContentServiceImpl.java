@@ -37,8 +37,9 @@ public class EventContentServiceImpl implements EventContentService {
     }
 
     @Override
-    public int getEventContentByIdx(int idx_event_content) {
-        return eventContentMapper.getEventContentByIdx(idx_event_content);
+    public EventContentVO getEventContentByIdx(int idx_event_content) {
+        long newIdx = Long.parseLong("" + idx_event_content);
+        return eventContentMapper.getEventContentByIdx(newIdx);
     }
 
     @Override

@@ -14,5 +14,5 @@ public interface EventContentMapper {
     List<EventContentVO> getEventList();
     public int insertEventContent(EventContentVO eventContentVO);
     int deleteEvent(@Param("idx_event_content") int idx_event_content);
-    int getEventContentByIdx (@Param("idx_event_content") int idx_event_content);
+    EventContentVO getEventContentByIdx (@Param("idx_event_content") long idx_event_content);
 }

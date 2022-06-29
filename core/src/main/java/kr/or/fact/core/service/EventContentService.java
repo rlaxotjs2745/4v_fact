@@ -11,7 +11,7 @@ public interface EventContentService {
     List<EventContentVO> getEventContentList(int page, int list_amount);
     public List<EventContentVO> getMainEventContentList();
     List<EventContentVO> getEventList();
-    int getEventContentByIdx (@Param("idx_event_content") int idx_event_content);
+    EventContentVO getEventContentByIdx (int idx_event_content);
     public int insertEventContent(EventContentVO eventContentVO);
     int deleteEvent(int idx_event_content);
 }

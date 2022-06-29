@@ -776,8 +776,9 @@ public class IndexController {
     @RequestMapping("/brd_event_detail")
     public String brd_event_detail(@RequestParam("idx") int idx,
                                       Model model){
-//        List<EventContentVO> eventContentList1 = eventContentService.getMainEventContentList();
-//        model.addAttribute("eventcontentlist",eventContentList1);
+
+        EventContentVO event = eventContentService.getEventContentByIdx(idx);
+        model.addAttribute("eventContent", event);
         getHomepageInfo(model);
         return "brd_event_detail";
     }
@@ -963,6 +964,9 @@ public class IndexController {
     @RequestMapping("/brd_promotion_detail")
     public String brd_promotion_detail(@RequestParam("idx") int idx,
                                     Model model){
+
+        PRContentVO prContentVO = prContentService.getPRContent(idx);
+        model.addAttribute("pr", prContentVO);
 
         getHomepageInfo(model);
         return "brd_promotion_detail";

@@ -15,7 +15,7 @@ public interface PRContentsMapper {
     int insertPRContent(PRContentVO prContentVO);
     int deletePR(@Param("idx_pr_content") int idx_pr_content);
 
-
+    PRContentVO getPRContent(@Param("idx") long idx);
 
 
     List<PRContentVO> selectPRContentList(@Param("pageNum") int pageNum, @Param("count") int count);

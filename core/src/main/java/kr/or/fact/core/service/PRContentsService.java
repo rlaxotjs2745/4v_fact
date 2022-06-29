@@ -13,6 +13,8 @@ public interface PRContentsService {
     int insertPRContent(PRContentVO prContentVO);
     int deletePR(int idx_pr_content);
 
+    PRContentVO getPRContent(int idx);
+
 
 
 

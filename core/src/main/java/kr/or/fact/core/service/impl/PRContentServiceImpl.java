@@ -61,4 +61,10 @@ public class PRContentServiceImpl implements PRContentsService {
         return prContentsMapper.deletePR(idx_pr_content);
     }
 
+    @Override
+    public PRContentVO getPRContent(int idx){
+        Long newIdx = Long.parseLong("" + idx);
+        return prContentsMapper.getPRContent(newIdx);
+    }
+
 }

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@include file ="header.jsp" %>
 
 <div class="content" id="content">
@@ -47,9 +48,10 @@
                         <th><a href="#none"></a><img src="resources/assets/image/ico_list.png" alt="리스트"></th>
                         <th class="th__edit">
                             <div class="detail__edit">
-                                <div class="edit--type"><em>게시자</em><span>이동우</span></div>
-                                <div class="edit--type"><em>등록일</em><span>2021.00.00</span></div>
-                                <div class="edit--type"><em>조회수</em><span>125</span></div>
+                                <div class="edit--type"><em>게시자</em><span>${eventContent.author}</span></div>
+                                <fmt:formatDate value="${eventContent.reg_date}" var="reg_date" pattern="yyyy.MM.dd."/>
+                                <div class="edit--type"><em>등록일</em><span>${reg_date}</span></div>
+                                <div class="edit--type"><em>조회수</em><span>${eventContent.view_count}</span></div>
                                 <div class="edit--print"><a href="#none"><img src="resources/assets/image/ico_print.png" alt="인쇄하기"></a></div>
                             </div>
                         </th>
@@ -154,22 +156,11 @@
                                 }
                             </style>
                             <div class="edit__templete">
-                                <div class="temp__title">경기도 내 3개 유관기관 GreenBio 연합IR 개최</div>
+                                <div class="temp__title">${eventContent.subject}</div>
                                 <div class="tem__photo"><img src="resources/assets/image/img-temp-01.png" alt=""></div>
-                                <div class="temp__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Doloribus, explicabo, sint. Aperiam aspernatur consectetur fugit harum in ipsum, quis quod vero.
-                                    Cupiditate distinctio
-                                    doloremque eius esse est excepturi porro quidem?
+                                <div class="temp__text">${eventContent.event_contents}
 
-                                    행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트
-                                    행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트
-                                    행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트
-                                    행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트
-                                    행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트
-                                    행사내용 텍스트행사내용 텍스트행사내용 텍스트
-                                    행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트
-                                    행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트
-                                    행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트행사내용 텍스트
+                                    ${eventContent.memo}
                                 </div>
                                 <div class="temp__download--box"><strong>첨부파일</strong>
                                     <ul>
