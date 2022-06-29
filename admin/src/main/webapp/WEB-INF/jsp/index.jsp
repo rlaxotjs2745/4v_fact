@@ -190,6 +190,8 @@
                         $("#asset_reservation_list").html(result);
                     } else if(usage == "asset_reservation_items_list"){
                         $("#asset_reservation_items_list").html(result);
+                    } else if(usage == "reserve_view"){
+                        $("#reserve_view_comp").html(result);
                     }
 
                     else{

@@ -25,6 +25,8 @@ import java.util.List;
 @Service("adminService")
 public class AdminServiceImpl implements AdminService {
 
+
+
     private final AdminMapper adminMapper;
 
     @Autowired
@@ -198,5 +200,6 @@ public class AdminServiceImpl implements AdminService {
     public List<AdminVO> getAdminList(){
         return adminMapper.getAllAdminList();
     }
+
 
 }

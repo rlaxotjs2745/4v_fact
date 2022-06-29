@@ -211,6 +211,7 @@
             AUTH_STATUS = 0
         WHERE IDX_ADMIN = #{adminIdx}
     </update>
+
     <update id="adminModify">
         UPDATE TB_ADMIN
         SET TEL_NUM=#{tel_num},

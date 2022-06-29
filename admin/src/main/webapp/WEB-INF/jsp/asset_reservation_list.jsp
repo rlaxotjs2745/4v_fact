@@ -42,7 +42,7 @@
                         <tr class="" >
                             <td class="text-center">${status.count}</td>
                             <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default res_choice" id="${assetRes.idx_asset_reservation}"
-                                                       data-toggle="modal" data-target="#modals-reserve-result">${assetRes.reservaion_status == 0 ? "신규 예약" : assetRes.reservaion_status == 1 ? "승인" : assetRes.reservaion_status == 2 ? "보류" : assetRes.reservaion_status == 3 ? "부분 승인" : assetRes.reservaion_status == 4 ? "거부" : assetRes.reservaion_status == 99 ? "권한 없음" : ""}</a>
+                                                       data-toggle="modal" data-target="${proto_page == 1 ? "#modals-reserve-result" : "#modals-reserve-view"}">${assetRes.reservaion_status == 0 ? "신규 예약" : assetRes.reservaion_status == 1 ? "승인" : assetRes.reservaion_status == 2 ? "보류" : assetRes.reservaion_status == 3 ? "부분 승인" : assetRes.reservaion_status == 4 ? "거부" : assetRes.reservaion_status == 99 ? "권한 없음" : ""}</a>
                             </td>
                             <td class="text-center" id="register_date">${update_date}</td>
                             <td class="text-center">각종 장비류:XXXXX</td>
@@ -131,12 +131,16 @@
 
     $(".res_choice").click(function(){
         var idx = $(this).attr("id");
-        assetResArr.forEach(function (res){
-            if(res.idx_asset_reservation == idx){
-                $("#reservation_register_date").val($("#register_date").val());
-                $("#reservation_using_term").val($("#using_term").val() + "(총 " + $("#using_term_num").val() + "간)");
-                pageLoad("asset_reservation_items_list", {filter1: parseInt(idx)}, "자산 현황 보드", "asset_reservation_items_list");
-            }
-        })
+        if("${proto_page}" == "1"){
+            assetResArr.forEach(function (res){
+                if(res.idx_asset_reservation == idx){
+                    $("#reservation_register_date").val($("#register_date").val());
+                    $("#reservation_using_term").val($("#using_term").val() + "(총 " + $("#using_term_num").val() + "간)");
+                    pageLoad("asset_reservation_items_list", {filter1: parseInt(idx)}, "자산 현황 보드", "asset_reservation_items_list");
+                }
+            })
+        } else {
+            pageLoad('reserve_view',{idx: parseInt(idx)},'대시보드', "reserve_view");
+        }
     })
 </script>

@@ -8,21 +8,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:forEach items="${itemList}" var="item" varStatus="status">
+<c:forEach items="${itemList}" var="resItem" varStatus="status">
     <tr>
         <td class="text-center">${status.count}</td>
-        <td class="text-center" id="asset_code">${item.asset_code}</td>
+        <td class="text-center" id="asset_code">${resItem.asset_code}</td>
         <td class="text-center" class="item_name"></td>
-        <td class="text-center">${item.amount}</td>
+        <td class="text-center">${resItem.amount}</td>
         <td class="text-center" class="item_model_name"></td>
         <td class="text-center" class="item_brand"></td>
         <td class="text-center" class="item_manufacture"></td>
-        <td class="text-center"><span class="${item.reservation_item_status == 0 ? "text-warning" : item.reservation_item_status == 1 ? "text-info" : item.reservation_item_status == 2 ? "text-warning" : item.reservation_item_status == 3 ? "text-hero" : ""}">${item.reservation_item_status == 0 ? "대기" : item.reservation_item_status == 1 ? "승인" : item.reservation_item_status == 2 ? "부분승인" : item.reservation_item_status == 3 ? "불가" : ""}</span></td>
+        <td class="text-center"><span class="${resItem.reservation_item_status == 0 ? "text-warning" : resItem.reservation_item_status == 1 ? "text-info" : resItem.reservation_item_status == 2 ? "text-warning" : resItem.reservation_item_status == 3 ? "text-hero" : ""}">${resItem.reservation_item_status == 0 ? "대기" : resItem.reservation_item_status == 1 ? "승인" : resItem.reservation_item_status == 2 ? "부분승인" : resItem.reservation_item_status == 3 ? "불가" : ""}</span></td>
     </tr>
 </c:forEach>
 
 <script>
-    console.log("ehoTek")
     <c:forEach items="${assetList}" var="asset">
     if("${asset.asset_code}" == $("#asset_code").val()){
          $(".item_name").text("${asset.asset_name}");

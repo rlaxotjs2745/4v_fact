@@ -1044,14 +1044,19 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
 
         List<AssetReservationVO> assetReservationVOList = assetService.getAssetReservationList(param);
         int count = assetService.getAssetReservationCount(param);
+        int maxValue = 0;
+
+        if(assetReservationVOList.size() != 0){
+            maxValue = assetReservationVOList.get(0).getMaxvalue();
+        }
 
 
+        model.addAttribute("maxvalue", maxValue);
         model.addAttribute("assetResList", assetReservationVOList);
-        model.addAttribute("maxvalue", assetReservationVOList.get(0).getMaxvalue());
         model.addAttribute("count", count);
         model.addAttribute("page_num", param.getPage_num());
         model.addAttribute("curStatus", param.getFilter1());
-
+        model.addAttribute("proto_page", param.getFilter2());
 
         return "asset_reservation_list";
     }
@@ -1060,8 +1065,14 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     public String asset_reservation_items_list(@RequestParam(value = "tag", required = false) String tagValue,
                                                @RequestBody ParamPageListFilteredVO param,
                                     ModelMap model){
-        List<AssetReservationItemVO> assetReservationItemVOList = assetService.getAssetReservationItemList(param.getFilter1());
-        List<AssetVO> assetVOList = assetService.getAssetList(new ParamPageListFilteredVO());
+        List<AssetReservationItemVO> assetReservationItemVOList = assetService.getAssetReservationItemList(Long.parseLong("" + param.getFilter1()));
+        ParamPageListFilteredVO newParam = new ParamPageListFilteredVO();
+        newParam.setPage_num(0);
+        newParam.setFilter1(100);
+        newParam.setFilter2(0);
+        newParam.setFilter3(0);
+
+        List<AssetVO> assetVOList = assetService.getAssetList(newParam);
 
         model.addAttribute("assetList", assetVOList);
         model.addAttribute("itemList", assetReservationItemVOList);
@@ -1176,7 +1187,6 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     public String get_asset_list (@RequestParam(value = "tag", required = false) String tagValue,
                                   @RequestBody ParamPageListFilteredVO param,
                                   ModelMap model){
-        System.out.println(param);
         List<AssetVO> assetVOList = assetService.getAssetList(param);
         model.addAttribute("assetList", assetVOList);
 
@@ -1186,10 +1196,52 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //서식관리
     @RequestMapping(value = "/g30_asset_book_mng",method = RequestMethod.POST)
     public String g30_asset_book_mng(@RequestParam(value = "tag", required = false) String tagValue,
+                                     Principal principal,
                                      ModelMap model){
 
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+
+        List<SystemCodeVO> systemCodeVOList = systemService.getAllSystemCodeList();
+        List<SystemCodeVO> mainAssetCodeList = new ArrayList<>();
+        List<SystemCodeVO> subAssetCodeList = new ArrayList<>();
+        List<SystemCodeVO> detailAssetCodeList = new ArrayList<>();
+        systemCodeVOList.forEach(systemCodeVO -> {
+            if(systemCodeVO.getCode_value().length() == 1 || Integer.parseInt(systemCodeVO.getCode_value()) == 10){
+                mainAssetCodeList.add(systemCodeVO);
+            } else if(Integer.parseInt(systemCodeVO.getCode_value()) <= 120){
+                subAssetCodeList.add(systemCodeVO);
+            } else {
+                detailAssetCodeList.add(systemCodeVO);
+            }
+        });
+        model.addAttribute("myInfo", adminInfo);
+        model.addAttribute("adminList", adminService.getAdminList());
+        model.addAttribute("main_cate", mainAssetCodeList);
+        model.addAttribute("sub_cate", subAssetCodeList);
+        model.addAttribute("detail_cate", detailAssetCodeList);
 
         return "g30_asset_book_mng";
+    }
+
+    @RequestMapping(value = "/reserve_view",method = RequestMethod.POST)
+    public String reserve_view (@RequestParam(value = "tag", required = false) String tagValue,
+                                  @RequestBody ParamPageListFilteredVO param,
+                                  Principal principal,
+                                  ModelMap model){
+        AssetReservationVO assetReservationVO = assetService.getAssetReservation(param.getIdx());
+        List<AssetReservationItemVO> assetReservationItemVOList = assetService.getAssetReservationItemList(param.getIdx());
+        AdminVO applicant = adminService.getAdminInfo(param.getIdx());
+        param.setFilter1(100);
+        List<AssetVO> assetVOList = assetService.getAssetList(param);
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+
+        model.addAttribute("assetList", assetVOList);
+        model.addAttribute("curReservation", assetReservationVO);
+        model.addAttribute("itemList", assetReservationItemVOList);
+        model.addAttribute("applicant", applicant);
+        model.addAttribute("myIdx", adminInfo.getIdx_admin());
+
+        return "reserve_view";
     }
 
     //시스템 코드 관리
