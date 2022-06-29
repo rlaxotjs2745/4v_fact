@@ -30,5 +30,5 @@ int updateVisitReq(VisitReqVO visitReqVO);
     void deleteVisitReq(@Param("idx_visit_req") long idx_visit_req);
 
 
-    List<VisitReqVO> getVisitList(int page, int list_amount, String visit_req_num);
+    List<VisitReqVO> getVisitList(int page, int list_amount, String visit_req_num,int visit_req_status);
 }

@@ -51,8 +51,8 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public List<VisitReqVO> getVisitList(int page,int list_amount) {
-        return visitMapper.getVisitList(page,list_amount,"VISIT_REQ_NUM");
+    public List<VisitReqVO> getVisitList(int page,int list_amount,int visit_req_status) {
+        return visitMapper.getVisitList(page,list_amount,"VISIT_REQ_NUM",visit_req_status);
     }
 
     @Override

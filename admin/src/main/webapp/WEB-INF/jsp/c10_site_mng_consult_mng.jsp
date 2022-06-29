@@ -259,6 +259,7 @@
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
                         <div>
+                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal" id="delete_consult">삭제</button>
                             <button type="button" class="btn btn-primary">저장</button>
                         </div>
                     </div>
@@ -511,6 +512,35 @@
             }
         }
     });
+
+
+    $("#delete_consult").click(function () {
+// let result = document.getElementsByName('custom-6');
+        var selectId = $(this).attr('id');
+
+        $.ajax({
+            type: 'post',
+            url: '/delete_consult', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify( parseInt(curConsultdata)),//보내는 데이터
+            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType: 'json',//받는 데이터 타입
+            success: function (result) {
+                if (result.result_code == "SUCCESS") {
+                    alert("상태 변경에 성공하였습니다")
+
+                } else {
+                    alert("상태 변경에 실패하였습니다")
+                }
+            },
+            error: function (res) {
+                console.log(res)
+            }
+        });
+    })
+
+
+
+
 </script>
 <!-- Layout footer -->
 <%@include file ="layouts/frame_footer.jsp" %>

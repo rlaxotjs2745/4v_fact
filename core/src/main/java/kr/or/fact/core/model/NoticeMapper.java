@@ -14,4 +14,5 @@ public interface NoticeMapper {
     List<NoticeVO> getMainNoticeList();
     public int insertNotice(NoticeVO noticeVO);
     int deleteNotice(@Param("idx_notice")int idx_notice);
+    NoticeVO getNoticeByIdx(@Param("idx_notice")long idx_notice);
 }

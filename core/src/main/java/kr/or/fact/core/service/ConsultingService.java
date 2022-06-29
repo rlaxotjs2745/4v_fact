@@ -13,4 +13,5 @@ public interface ConsultingService {
     List<DemoBsConsultingVO>getCunsultingList1(int page, int list_amount);
     void saveDemoBsConsulting(DemoBsConsultingVO demoBsConsultingVO);
     int getCountConsulting();
+    int deleteConsult(int idx_demo_bs_consulting);
 }

@@ -15,39 +15,35 @@
                 <div class="col-md-5 ">
                     <label class="form-label text-muted">견학접수</label>
                     <div class="form-inline">
-                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons" id="category_change">
                             <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio" checked="">전체
+                                <input type="radio" name="btn-radio" class="category_change" id="all" checked="">전체
                             </label>
                             <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio" value="0" > 신규
+                                <input type="radio" name="btn-radio" class="category_change" id="new" value="0" > 신규
                             </label>
                             <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio" value="1"> 접수
+                                <input type="radio" name="btn-radio" class="category_change" id="register" value="1"> 접수
                             </label>
                             <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio" value="2"> 승인
+                                <input type="radio" name="btn-radio" class="category_change" id="approval" value="2"> 승인
                             </label>
                             <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio" value="3"> 방문
+                                <input type="radio" name="btn-radio" class="category_change" id="visit" value="3"> 방문
                             </label>
                             <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio" value="4"> 방문완료
+                                <input type="radio" name="btn-radio" class="category_change" id="visited" value="4"> 방문완료
                             </label>
                             <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio" value="5"> 방문취소
+                                <input type="radio" name="btn-radio" class="category_change" id="cancle" value="5"> 방문취소
                             </label>
                             <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio" value="6"> 승인거절
+                                <input type="radio" name="btn-radio" class="category_change" id="refuse" value="6"> 승인거절
                             </label>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2 text-right">
-                    <label class="form-label d-none d-md-block">&nbsp;</label>
-                    <button type="button" class="btn btn-outline-default">초기화</button>
-                    <button type="button" class="btn btn-success" >조회</button>
-                </div>
+
             </div>
         </div>
 
@@ -755,12 +751,69 @@
         });
     }
 
-    $('input[name="btn-radio"]').change(function(){
-        var changeStatus = $('input[name="btn-radio"]:checked').val();
-        pageLoad("c21_site_visit_list", {page_num: 1, corp: parseInt(changeStatus)}, "이건무엇", true);
-        console.log(visitList.length + "  admin_mng")
-    })
+    // $('input[name="btn-radio"]').change(function(){
+    //     var changeStatus = $('input[name="btn-radio"]:checked').val();
+    //     pageLoad("c21_site_visit_list", {page_num: 1, corp: parseInt(changeStatus)}, "이건무엇", true);
+    //     console.log(visitList.length + "  admin_mng")
+    // })
+    //
 
+    $(".category_change").click(function(){
+        var param = {
+            page_num: null,
+            filter1: null
+        }
+        switch($(this).attr("id")){
+            case "all":
+                param.page_num = 1;
+                param.filter1 = 100;
+                curCate = 100;
+                break;
+            case "new":
+                param.page_num = 1;
+                param.filter1 = 0;
+                curCate = 0;
+                break;
+            case "register":
+                param.page_num = 1;
+                param.filter1 = 1;
+                curCate = 1;
+                break;
+            case "approval":
+                param.page_num = 1;
+                param.filter1 = 2;
+                curCate = 2;
+                break;
+            case "visit":
+                param.page_num = 1;
+                param.filter1 = 3;
+                curCate = 3;
+                break;
+            case "visited":
+                param.page_num = 1;
+                param.filter1 = 4;
+                curCate = 4;
+                break;
+            case "article-list_previous":
+                param.page_num = 1;
+                param.filter1 = curCate;
+                break;
+            case "article-list_previous-one":
+                param.page_num = curPage - 1;
+                param.filter1 = curCate;
+                break;
+            case "article-list_next-one":
+                param.page_num = curPage + 1;
+                param.filter1 = curCate;
+                break;
+            case "article-list_next":
+                param.page_num = maxvalue;
+                param.filter1 = curCate;
+                break;
+        }
+
+        pageLoad("c21_site_visit_list", param, "유저 보드", "user");
+    })
 </script>
 <!-- / Layout footer -->
 

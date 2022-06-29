@@ -56,12 +56,12 @@
                                     <a href="javascript:pageLoad('b22_demo_bs_doc_eval_result_mng',{page_num:1},'심사결과 관리');" class="sidenav-link">
                                         <div>심사업무 관리</div>
                                     </a>
-                                </li>
-                                <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('b23_demo_bs_pre_contract_mng',{page_num:1},'협약 전 업무관리');" class="sidenav-link">
-                                        <div>이용계획 확정</div>
-                                    </a>
-                                </li>
+<%--                                </li>--%>
+<%--                                <li class="sidenav-item">--%>
+<%--                                    <a href="javascript:pageLoad('b23_demo_bs_pre_contract_mng',{page_num:1},'협약 전 업무관리');" class="sidenav-link">--%>
+<%--                                        <div>이용계획 확정</div>--%>
+<%--                                    </a>--%>
+<%--                                </li>--%>
                             </ul>
                         </li>
 <%--                        <li class="sidenav-item">
@@ -220,53 +220,53 @@
                     </a>
                 </li>
                 <!--//-->
-                <li class="sidenav-item">
-                    <a href="javascript:void(0)" class="sidenav-link sidenav-toggle"><i class="sidenav-icon fas fa-calculator"></i>
-                        <div>문서발급 관리</div>
-                    </a>
+<%--                <li class="sidenav-item">--%>
+<%--                    <a href="javascript:void(0)" class="sidenav-link sidenav-toggle"><i class="sidenav-icon fas fa-calculator"></i>--%>
+<%--                        <div>문서발급 관리</div>--%>
+<%--                    </a>--%>
 
-                    <ul class="sidenav-menu">
-                        <li class="sidenav-item">
-                            <a href="javascript:pageLoad('e10_document_issued_req_list',{page_num:1},'문서발급요청 관리');" class="sidenav-link">
-                                <div>문서발급요청 관리</div>
-                            </a>
-                        </li>
-                        <li class="sidenav-item">
-                            <a href="javascript:pageLoad('e20_document_issued',{page_num:1},'문서발급');" class="sidenav-link">
-                                <div>문서발급</div>
-                            </a>
-                        </li>
-                        <li class="sidenav-item">
-                            <a href="javascript:pageLoad('e30_document_issued_history',{page_num:1},'문서발급 이력');" class="sidenav-link">
-                                <div>문서발급이력</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+<%--                    <ul class="sidenav-menu">--%>
+<%--                        <li class="sidenav-item">--%>
+<%--                            <a href="javascript:pageLoad('e10_document_issued_req_list',{page_num:1},'문서발급요청 관리');" class="sidenav-link">--%>
+<%--                                <div>문서발급요청 관리</div>--%>
+<%--                            </a>--%>
+<%--                        </li>--%>
+<%--                        <li class="sidenav-item">--%>
+<%--                            <a href="javascript:pageLoad('e20_document_issued',{page_num:1},'문서발급');" class="sidenav-link">--%>
+<%--                                <div>문서발급</div>--%>
+<%--                            </a>--%>
+<%--                        </li>--%>
+<%--                        <li class="sidenav-item">--%>
+<%--                            <a href="javascript:pageLoad('e30_document_issued_history',{page_num:1},'문서발급 이력');" class="sidenav-link">--%>
+<%--                                <div>문서발급이력</div>--%>
+<%--                            </a>--%>
+<%--                        </li>--%>
+<%--                    </ul>--%>
+<%--                </li>--%>
                 <!--//-->
-                <li class="sidenav-item">
-                    <a href="javascript:void(0)" class="sidenav-link sidenav-toggle"><i class="sidenav-icon fas fa-calculator"></i>
-                        <div>실증 데이터 관리</div>
-                    </a>
+<%--                <li class="sidenav-item">--%>
+<%--                    <a href="javascript:void(0)" class="sidenav-link sidenav-toggle"><i class="sidenav-icon fas fa-calculator"></i>--%>
+<%--                        <div>실증 데이터 관리</div>--%>
+<%--                    </a>--%>
 
-                    <ul class="sidenav-menu">
-                        <li class="sidenav-item">
-                            <a href="javascript:pageLoad('f10_gh_data_mng',{page_num:1},'시설관련 데이터');" class="sidenav-link">
-                                <div>시설관련 데이터</div>
-                            </a>
-                        </li>
-                        <li class="sidenav-item">
-                            <a href="javascript:pageLoad('f20_asset_data_mng',{page_num:1},'장비관련 데이터');" class="sidenav-link">
-                                <div>장비관련 데이터</div>
-                            </a>
-                        </li>
-                        <li class="sidenav-item">
-                            <a href="javascript:pageLoad('f30_data_req_history',{page_num:1},'데이터 전송 이력');" class="sidenav-link">
-                                <div>데이터 전송 이력</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+<%--                    <ul class="sidenav-menu">--%>
+<%--                        <li class="sidenav-item">--%>
+<%--                            <a href="javascript:pageLoad('f10_gh_data_mng',{page_num:1},'시설관련 데이터');" class="sidenav-link">--%>
+<%--                                <div>시설관련 데이터</div>--%>
+<%--                            </a>--%>
+<%--                        </li>--%>
+<%--                        <li class="sidenav-item">--%>
+<%--                            <a href="javascript:pageLoad('f20_asset_data_mng',{page_num:1},'장비관련 데이터');" class="sidenav-link">--%>
+<%--                                <div>장비관련 데이터</div>--%>
+<%--                            </a>--%>
+<%--                        </li>--%>
+<%--                        <li class="sidenav-item">--%>
+<%--                            <a href="javascript:pageLoad('f30_data_req_history',{page_num:1},'데이터 전송 이력');" class="sidenav-link">--%>
+<%--                                <div>데이터 전송 이력</div>--%>
+<%--                            </a>--%>
+<%--                        </li>--%>
+<%--                    </ul>--%>
+<%--                </li>--%>
                 <!--//-->
                 <li class="sidenav-item">
                     <a href="javascript:void(0)" class="sidenav-link sidenav-toggle"><i class="sidenav-icon fas fa-calculator"></i>
@@ -430,51 +430,51 @@
                     </ul>
                 </li>--%>
                 <!--//-->
-                <li class="sidenav-item">
-                    <a href="javascript:void(0);" class="sidenav-link sidenav-toggle"><i class="sidenav-icon ion ion-md-desktop"></i>
-                        <div>시스템관리</div>
-                    </a>
+<%--                <li class="sidenav-item">--%>
+<%--                    <a href="javascript:void(0);" class="sidenav-link sidenav-toggle"><i class="sidenav-icon ion ion-md-desktop"></i>--%>
+<%--                        <div>시스템관리</div>--%>
+<%--                    </a>--%>
 
-                    <ul class="sidenav-menu">
-                        <li class="sidenav-item">
-                            <a href="#none" class="sidenav-link sidenav-toggle">
-                                <div>권한 관리</div>
-                            </a>
-                            <ul class="sidenav-menu">
-                                <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('k11_system_authority_mng',{page_num:1},'권한 관리');" class="sidenav-link">
-                                        <div>권한 관리</div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="sidenav-item">
-                            <a href="#none" class="sidenav-link sidenav-toggle">
-                                <div>관리자페이지 관리</div>
-                            </a>
-                            <ul class="sidenav-menu">
-                                <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('k21_admin_dashboad_mng',{page_num:1},'대시보드 관리');" class="sidenav-link">
-                                        <div>대시보드 관리</div>
-                                    </a>
-                                </li>
+<%--                    <ul class="sidenav-menu">--%>
+<%--                        <li class="sidenav-item">--%>
+<%--                            <a href="#none" class="sidenav-link sidenav-toggle">--%>
+<%--                                <div>권한 관리</div>--%>
+<%--                            </a>--%>
+<%--                            <ul class="sidenav-menu">--%>
+<%--                                <li class="sidenav-item">--%>
+<%--                                    <a href="javascript:pageLoad('k11_system_authority_mng',{page_num:1},'권한 관리');" class="sidenav-link">--%>
+<%--                                        <div>권한 관리</div>--%>
+<%--                                    </a>--%>
+<%--                                </li>--%>
+<%--                            </ul>--%>
+<%--                        </li>--%>
+<%--                        <li class="sidenav-item">--%>
+<%--                            <a href="#none" class="sidenav-link sidenav-toggle">--%>
+<%--                                <div>관리자페이지 관리</div>--%>
+<%--                            </a>--%>
+<%--                            <ul class="sidenav-menu">--%>
+<%--                                <li class="sidenav-item">--%>
+<%--                                    <a href="javascript:pageLoad('k21_admin_dashboad_mng',{page_num:1},'대시보드 관리');" class="sidenav-link">--%>
+<%--                                        <div>대시보드 관리</div>--%>
+<%--                                    </a>--%>
+<%--                                </li>--%>
 
-                            </ul>
-                        </li>
-                        <li class="sidenav-item">
-                            <a href="#none" class="sidenav-link sidenav-toggle">
-                                <div>콘솔페이지 관리</div>
-                            </a>
-                            <ul class="sidenav-menu">
-                                <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('k31_console_dashboad_mng',{page_num:1},'대시보드 관리');" class="sidenav-link">
-                                        <div>대시보드 관리</div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
+<%--                            </ul>--%>
+<%--                        </li>--%>
+<%--                        <li class="sidenav-item">--%>
+<%--                            <a href="#none" class="sidenav-link sidenav-toggle">--%>
+<%--                                <div>콘솔페이지 관리</div>--%>
+<%--                            </a>--%>
+<%--                            <ul class="sidenav-menu">--%>
+<%--                                <li class="sidenav-item">--%>
+<%--                                    <a href="javascript:pageLoad('k31_console_dashboad_mng',{page_num:1},'대시보드 관리');" class="sidenav-link">--%>
+<%--                                        <div>대시보드 관리</div>--%>
+<%--                                    </a>--%>
+<%--                                </li>--%>
+<%--                            </ul>--%>
+<%--                        </li>--%>
+<%--                    </ul>--%>
+<%--                </li>--%>
                 <!--//-->
                 <li class="sidenav-item">
                     <a href="javascript:void(0)" class="sidenav-link sidenav-toggle"><i class="sidenav-icon lnr lnr-database"></i>
@@ -486,11 +486,11 @@
                                 <div>서식 관리</div>
                             </a>
                             <ul class="sidenav-menu">
-                                <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('l11_document_form_mng',{page_num:1},'양식문서관리');" class="sidenav-link">
-                                        <div>양식문서 관리</div>
-                                    </a>
-                                </li>
+<%--                                <li class="sidenav-item">--%>
+<%--                                    <a href="javascript:pageLoad('l11_document_form_mng',{page_num:1},'양식문서관리');" class="sidenav-link">--%>
+<%--                                        <div>양식문서 관리</div>--%>
+<%--                                    </a>--%>
+<%--                                </li>--%>
                                 <li class="sidenav-item">
                                     <a href="javascript:pageLoad('l12_document_rule_mng',{page_num:1},'규정문서관리');" class="sidenav-link">
                                         <div>규정문서 관리</div>

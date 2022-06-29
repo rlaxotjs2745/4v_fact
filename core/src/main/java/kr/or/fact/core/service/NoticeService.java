@@ -1,6 +1,7 @@
 package kr.or.fact.core.service;
 
 import kr.or.fact.core.model.DTO.NoticeVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,4 +12,5 @@ public interface NoticeService {
     public List<NoticeVO> getMainNoticeList();
     public int insertNotice(NoticeVO noticeVO);
     int deleteNotice(int idx_notice);
+    NoticeVO getNoticeByIdx(int idx_notice);
 }

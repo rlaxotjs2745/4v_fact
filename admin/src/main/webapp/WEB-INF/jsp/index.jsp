@@ -190,6 +190,8 @@
                         $("#asset_reservation_list").html(result);
                     } else if(usage == "asset_reservation_items_list"){
                         $("#asset_reservation_items_list").html(result);
+                    } else if(usage == "pr_contents"){
+                        $("#modals-content").html(result);
                     }
 
                     else{

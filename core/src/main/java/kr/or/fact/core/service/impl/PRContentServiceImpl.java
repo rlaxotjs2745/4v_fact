@@ -1,5 +1,6 @@
 package kr.or.fact.core.service.impl;
 
+import kr.or.fact.core.model.DTO.AdminResVO;
 import kr.or.fact.core.model.DTO.PRContentVO;
 import kr.or.fact.core.model.PRContentsMapper;
 import kr.or.fact.core.service.PRContentsService;
@@ -26,6 +27,16 @@ public class PRContentServiceImpl implements PRContentsService {
     public List<PRContentVO> getPRContentList(int page, int count){
         return prContentsMapper.getPRContentList(page,count,"ANNOUNCE_NUM");
     }
+
+
+
+    @Override
+    public List<PRContentVO> selectPRContentList(String tagValue) {
+        int page = Integer.parseInt(tagValue);
+        return prContentsMapper.selectPRContentList(page,10);
+    }
+
+
     @Override
     public List<PRContentVO> getMainPRContentList(){
         return prContentsMapper.getMainPRContentList();

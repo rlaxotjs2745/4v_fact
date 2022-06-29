@@ -12,4 +12,9 @@ public interface PRContentsService {
     public List<PRContentVO> getMainPRContentList();
     int insertPRContent(PRContentVO prContentVO);
     int deletePR(int idx_pr_content);
+
+
+
+
+ List<PRContentVO> selectPRContentList(String tagValue);
 }

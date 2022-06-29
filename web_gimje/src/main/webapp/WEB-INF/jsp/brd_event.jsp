@@ -52,7 +52,7 @@
                 <ul class="list__type--event">
 <c:forEach items="${eventContentVOList}" var="event" varStatus="status">
                     <li>
-                        <a href="brd_event_detail?idx=${event.idx_event_content}">
+                        <a href="brd_event_detail?idx=${event.idx_event_content}"  >
                             <figure><img src="resources/assets/image/@list_01.png" alt=""></figure>
                             <span class="list__title">${event.subject}</span>
                             <span class="list__duedate">${event.event_start_date}~${event.event_end_date}</span>
@@ -125,5 +125,16 @@
 <%@include file ="script.jsp" %>
 
 </div>
+<script>
+    $(".btn_content_modal").click(function (){
+        var idx = $(this).attr("id");
+        pageLoad("pr_contents", {idx: parseInt(idx)}, "홍보자료 모달컨텐츠", "pr_contents");
+    })
+    console.log(${eventContentVOList})
+</script>
+<script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
+<script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
+<script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 </body>
 </html>

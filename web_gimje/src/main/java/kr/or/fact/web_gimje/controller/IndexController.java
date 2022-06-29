@@ -776,7 +776,8 @@ public class IndexController {
     @RequestMapping("/brd_event_detail")
     public String brd_event_detail(@RequestParam("idx") int idx,
                                       Model model){
-
+//        List<EventContentVO> eventContentList1 = eventContentService.getMainEventContentList();
+//        model.addAttribute("eventcontentlist",eventContentList1);
         getHomepageInfo(model);
         return "brd_event_detail";
     }
@@ -868,6 +869,8 @@ public class IndexController {
 
 
 
+        NoticeVO noticeInfo = noticeService.getNoticeByIdx(idx);
+        model.addAttribute("noticeInfo",noticeInfo);
 
 
 

@@ -35,5 +35,5 @@ public interface VisitService {
 
     int updateVisitReq(VisitReqVO visitReqVO);
 
-    List<VisitReqVO> getVisitList(int page, int list_amount);
+    List<VisitReqVO> getVisitList(int page, int list_amount,int visit_req_status);
 }

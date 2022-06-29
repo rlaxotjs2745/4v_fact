@@ -49,4 +49,10 @@ public class NoticeServiceImpl implements NoticeService {
     public int deleteNotice(int idx_notice) {
         return noticeMapper.deleteNotice(idx_notice);
     }
+
+    @Override
+    public NoticeVO getNoticeByIdx(int idx_notice) {
+        Long newIdx = Long.parseLong("" + idx_notice);
+        return noticeMapper.getNoticeByIdx(newIdx);
+    }
 }

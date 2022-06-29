@@ -163,5 +163,7 @@
                  )
 
     </insert>
-
+<delete id="deleteConsult" parameterType="int">
+    DELETE FROM TB_DEMO_BS_CONSULTING WHERE IDX_DEMO_BS_CONSULTING = #{idx_demo_bs_consulting}
+</delete>
 </mapper>

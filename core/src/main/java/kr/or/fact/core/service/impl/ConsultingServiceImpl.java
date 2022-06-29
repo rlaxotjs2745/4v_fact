@@ -63,5 +63,10 @@ public class ConsultingServiceImpl implements ConsultingService {
         return consultingMapper.getCountConsulting();
     }
 
+    @Override
+    public int deleteConsult(int idx_demo_bs_consulting) {
+        return consultingMapper.deleteConsult(idx_demo_bs_consulting);
+    }
+
 
 }

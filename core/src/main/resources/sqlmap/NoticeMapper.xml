@@ -119,7 +119,10 @@ LAST_UPD_DATE
 </insert>
 
 
-
+    <select id="getNoticeByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.NoticeVO">
+        SELECT *
+        FROM TB_NOTICE WHERE IDX_NOTICE = #{idx_notice}
+    </select>
     <select id="getMainNoticeList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.NoticeVO">
         SELECT * FROM TB_NOTICE  WHERE  IS_MAIN_PAGE=1;
     </select>

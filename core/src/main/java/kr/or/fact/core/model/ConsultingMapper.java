@@ -18,4 +18,5 @@ int getCountConsulting();
     List<DemoBsConsultingVO> getAdminConsultingList(ParamPageListFilteredVO paramPageListFilteredVO);
     void saveDemoBsConsulting(DemoBsConsultingVO demoBsConsultingVO);
     //getUserConsultingList(DemoBsConsultingVO demoBsConsultingVO)
+    int deleteConsult(int idx_demo_bs_consulting);
 }

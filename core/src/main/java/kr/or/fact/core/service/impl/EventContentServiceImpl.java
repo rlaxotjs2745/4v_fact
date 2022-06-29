@@ -23,8 +23,8 @@ public class EventContentServiceImpl implements EventContentService {
         return eventContentMapper.getWebpageEventContentCount();
     }
     @Override
-    public List<EventContentVO> getEventContentList(int page, int count){
-        return eventContentMapper.getEventContentList(page,count,"ANNOUNCE_NUM");
+    public List<EventContentVO> getEventContentList(int page, int list_amount){
+        return eventContentMapper.getEventContentList(page,list_amount,"EVENT_CONTENT_NUM");
     }
     @Override
     public List<EventContentVO> getMainEventContentList(){
@@ -34,6 +34,11 @@ public class EventContentServiceImpl implements EventContentService {
     @Override
     public List<EventContentVO> getEventList() {
         return eventContentMapper.getEventList();
+    }
+
+    @Override
+    public int getEventContentByIdx(int idx_event_content) {
+        return eventContentMapper.getEventContentByIdx(idx_event_content);
     }
 
     @Override

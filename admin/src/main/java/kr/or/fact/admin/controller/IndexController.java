@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Reader;
 import java.net.URL;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -661,7 +662,7 @@ public class IndexController {
 
 
         model.addAttribute("total_count",visitCount);
-        List<VisitReqVO> visitReqList = visitService.getVisitList(page,list_amount);
+        List<VisitReqVO> visitReqList = visitService.getVisitList(page,list_amount,param.getFilter1());
         model.addAttribute("visitReqList",visitReqList);
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
@@ -802,17 +803,18 @@ public class IndexController {
                                      ModelMap model,ParamPageListFilteredVO param){
         //행사관리 테이블 추가 .tb_event_content
 
-        int list_amount = 10;
-        int page_amount = 10;
-        int page = param.getPage_num();
         param.setAmount(10);
+        int list_amount = 10;
+        int page_amount = param.getAmount();
+        int page = param.getPage_num();
         int eventCount = eventContentService.getMainEventContentCount();
         if(eventCount==0){
             return "brd_event_blank";
         }
         model.addAttribute("total_count",eventCount);
-        List<EventContentVO> eventContentList = eventContentService.getEventList();
-        model.addAttribute("eventcontentlist",eventContentList);
+        List<EventContentVO> eventContentList = eventContentService.getEventContentList(page,list_amount);
+        List<EventContentVO> eventContentList1 = eventContentService.getMainEventContentList();
+        model.addAttribute("eventcontentlist",eventContentList1);
 
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
@@ -856,20 +858,42 @@ public class IndexController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
+        System.out.println(eventContentList);
+        System.out.println(eventCount);
 
         return "c42_site_event_mng";
     }
 
     @RequestMapping(value = "/c43_site_adver_mng",method = RequestMethod.POST)
-    public String c43_site_adver_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                     ModelMap model){
+    public String c43_site_adver_mng(@RequestParam(value = "page_num", required = false) String tagValue,
+                                     @RequestBody ParamPageListFilteredVO param,   ModelMap model){
 
-List<PRContentVO> prlist = prContentService.getMainPRContentList();
+
+
+
+        List<PRContentVO> prlist = prContentService.getMainPRContentList();
 model.addAttribute("prlist",prlist);
-
-
+    model.addAttribute("prcontent",prlist);
         return "c43_site_adver_mng";
     }
+
+    @RequestMapping(value = "/pr_contents",method = RequestMethod.POST)
+    public String pr_contents(@RequestParam(value = "page_num", required = false) String tagValue,
+                                     @RequestBody ParamPageListFilteredVO param,   ModelMap model){
+
+        String content = "";
+        List<PRContentVO> prlist = prContentService.getMainPRContentList();
+        for (PRContentVO prContentVO : prlist) {
+            if (param.getIdx() == Integer.parseInt("" + prContentVO.getIdx_pr_content())) {
+                content = prContentVO.getPr_contents();
+            }
+        }
+        System.out.println(content);
+        model.addAttribute("contentFuck",  content);
+
+        return "pr_contents";
+    }
+
 
     //직원관리
     @RequestMapping(value = "/c50_site_banner_mng",method = RequestMethod.POST)

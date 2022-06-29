@@ -7,6 +7,7 @@
 
         <h4 class="d-flex justify-content-between align-items-center w-100 mt-4">
             <div>홍보자료 관리</div>
+            ${dd}
         </h4>
 
         <div class="card px-4 pt-4 mb-4">
@@ -114,8 +115,8 @@
                                <c:forEach items="${prlist}" var="pr" varStatus="status">
                                 <tr class="pr_entity" id="${pr.idx_pr_content}">
                                     <td class="text-center">${pr.pr_content_num}</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view" >${pr.subject}</a></td>
-                                    <td class="text-center">${pr.pr_contents}</td>
+                                    <td class="text-center"><a href="#none" id="data" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view" >${pr.subject}</a></td>
+                                    <td class="text-center"><a href="#none" id="${pr.idx_pr_content}" class="btn btn-outline-default  btn-sm btn_content_modal"  data-toggle="modal" data-target="#modals-content" >컨텐츠 보기</a></td>
                                     <td class="text-center">${pr.is_file eq 0 ? "포함안함" : pr.is_file eq 1 ? "포함" :""}</td>
                                     <td class="text-center">${pr.is_new eq 0 ? "신규아님" : pr.is_new eq 1 ? "신규" :""}</td>
                                     <td class="text-center">${pr.is_show eq 0 ? "노출안함" : pr.is_show eq 1 ? "노출함" :""}</td>
@@ -178,13 +179,17 @@
                                 <label class="form-label d-block text-muted">신규등록여부</label>
                                 <span>맛있는 농부</span>
                             </div>
+                            <div class="form-group col col-md-4" id="pr_content_code">
+                                <label class="form-label d-block text-muted">부제목</label>
+                                <span>맛있는 농부</span>
+                            </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col col-md-4" id="is_file">
                                 <label class="form-label d-block text-muted">파일포함여부</label>
                                 <span>000-00-00000</span>
                             </div>
-                            <div class="form-group col col-md-4" id="pr_content_code">
+                            <div class="form-group col col-md-4" id="pr_contents">
                                 <label class="form-label d-block text-muted">홍보자료 컨텐츠</label>
                                 <span>000-0000-0000</span>
                             </div>
@@ -272,7 +277,17 @@
                                 <label class="form-label d-block text-muted">파일포함여부</label>
                                 <span>000-00-00000</span>
                             </div>
-                            <div class="form-group col col-md-4" id="pr_content_code_modify">
+
+
+
+                                <div class="form-group col col-md-4" id="pr_content_code_modify">
+                                    <label class="form-label d-block text-muted">부제목</label>
+                                    <span>맛있는 농부</span>
+                                </div>
+
+
+
+                            <div class="form-group col col-md-4" id="pr_content_contents_modify">
                                 <label class="form-label d-block text-muted">홍보자료 컨텐츠</label>
                                 <span>000-0000-0000</span>
                             </div>
@@ -333,7 +348,7 @@
                         <h5 class="modal-title text-white font-weight-bold mode-new">신규 홍보자료 작성</h5>
                         <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body" id="dggdgg">
                         <form>
                             <!-- 사업번호 / 사업 상태-->
 
@@ -354,14 +369,14 @@
                                 </div>
                             </div>
                             <div class="form-row" >
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">내용</label>
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">컨텐츠</label>
                                 <div class="form-group col col-md-10" id="pr_contents_insert">
                                     <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
                                 </div>
                             </div>
                             <hr>
                             <div class="form-row" >
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">컨텐츠</label>
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">내용</label>
                                 <div class="form-group col col-md-10" id="memo_insert">
                                     <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
                                 </div>
@@ -477,6 +492,104 @@
                 </div>
             </div>
         </div>
+
+
+<div class="modal fade" id="modals-content">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title text-white font-weight-bold mode-new">신규 행사 작성</h5>
+                <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <!-- 사업번호 / 사업 상태-->
+
+                    <!-- 사업 제목-->
+                    <div class="form-group row" id="event_content_code_insert">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">행사 제목</label>
+                    </div>
+                    <hr>
+                    <div class="form-row" >
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">컨텐츠</label>
+                        <div class="form-group col col-md-10" id="pr_contents_show">
+
+                            <span>방문 상담</span>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer justify-content-between mode-new">
+                        <div>
+                            <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-outline-primary mr-2">임시저장</button>
+                            <button type="button" class="btn btn-primary" onclick="event_pass();">작성완료</button>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer justify-content-between mode-edit d-none">
+                        <div>
+                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal" >삭제</button>
+                            <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-primary">저장</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div class="modal fade" id="modals-content_modify">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header bg-success">
+                        <h5 class="modal-title text-white font-weight-bold mode-new">신규 행사 작성</h5>
+                        <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <!-- 사업번호 / 사업 상태-->
+
+                            <!-- 사업 제목-->
+                            <div class="form-group row" >
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">행사 제목</label>
+                            </div>
+                            <hr>
+                            <div class="form-row" >
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">컨텐츠</label>
+                                <div class="form-group col col-md-10" id="pr_contents_show_modify">
+                                    <span>방문 상담</span>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer justify-content-between mode-new">
+                                <div>
+                                    <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-outline-primary mr-2">임시저장</button>
+                                    <button type="button" class="btn btn-primary" onclick="event_pass();">작성완료</button>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer justify-content-between mode-edit d-none">
+                                <div>
+                                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal" >삭제</button>
+                                    <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary">저장</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Layout footer -->
 <%@include file ="layouts/frame_footer.jsp" %>
 
@@ -503,11 +616,10 @@
 
 
             $(".pr_entity").click(function(){
-                console.log("여긴와요>??")
+                console.log(prList)
                 var selectId = $(this).attr('id');
                 curPRdata = selectId;
                 for(var pr of prList){
-                    console.log(prList)
                     if(selectId === pr.idx_pr_content){
                         $(".idx_pr_content").attr("id", selectId);
                         $("#subject span").text(pr.subject);
@@ -558,13 +670,19 @@
                 });
             });
 
+            $(".btn_content_modal").click(function (){
+                var idx = $(this).attr("id");
+                pageLoad("pr_contents", {idx: parseInt(idx)}, "홍보자료 모달컨텐츠", "pr_contents");
+            })
+
+
             function event_pass() {
 // let result = document.getElementsByName('custom-6');
                 var selectId = $(this).attr('id');
                 param ={
                     subject:$("#pr_subject_insert input").val(),
                     pr_content_code:$("#pr_content_code_insert textarea").val(),
-                    pr_contents:$('#pr_contents_insert textarea').val(),
+                    pr_contents:`${ '${$("#pr_contents_insert textarea").val()}'}`,
                     show_start_date:$('#show_start_date_insert').val(),
                     show_end_date:$("#show_end_date_insert").val(),
                     is_file:$("input:radio[name=custom-6]:checked").val(),
@@ -614,6 +732,33 @@
                     });
                 }
             })
+            var prContent=[];
+<%--            <c:forEach items="${prcontent}" var="prcontents" varStatus="contentstatus">--%>
+<%--            prContent.push({--%>
+<%--                idx_pr_content :"${prcontents.idx_pr_content}",--%>
+<%--                pr_contents:"${prcontents.pr_contents}"--%>
+<%--            })--%>
+<%--            </c:forEach>--%>
+
+
+
+            <%--$(".modals-content").click(function(){--%>
+            <%--    console.log(prContent)--%>
+            <%--    var selectId = $(this).attr('id');--%>
+            <%--    curPRdata = selectId;--%>
+            <%--    for(var prcontents of prContent){--%>
+            <%--        if(selectId === prcontents.idx_pr_content){--%>
+            <%--            $(".idx_pr_content").attr("id", selectId);--%>
+
+            <%--            $("#pr_contents_show span").text(prcontents.pr_contents);--%>
+
+
+            <%--            $("#pr_contents_show_modify span").val(prcontents.pr_contents);--%>
+
+            <%--            break;--%>
+            <%--        }--%>
+            <%--    }--%>
+            <%--});--%>
         </script>
 <!-- / Layout footer -->
 

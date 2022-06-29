@@ -110,6 +110,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+<c:if test="${total_count ne 0}">
 <c:forEach items="${eventcontentlist}" var="eventcontent" varStatus="status">
     <tr class="eventcontent_entity" id="${eventcontent.idx_event_content}">
                                     <td class="text-center">${eventcontent.event_content_num}</td>
@@ -126,26 +127,36 @@
                                     <td class=""><fmt:formatDate value="${eventcontent.event_end_date}" pattern="yyyy-MM-dd HH:MM"/></td>
                                 </tr>
 </c:forEach>
-
+</c:if>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+<c:if test="${total_count ne 0}">
                     <div class="row">
                         <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
+                            <div class="dataTables_info" role="status" aria-live="polite">총 ${total_count}개 중 ${(cur_page-1)*list_amount+1}에서 ${cur_page*list_amount}까지</div>
                         </div>
                         <div class="col-sm-12 col-md-7">
                             <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                                 <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                    <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
-                                </ul>
+
+                                    <c:set var="name" value="${total_count/amount}" />
+
+
+                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c42_site_event_mng',{page_num:1},'행사 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c42_site_event_mng',{page_num:${cur_page-1}},'행사 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+
+
+
+                                    <c:forEach var="i" begin="1" end="${page_amount}">
+                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('c42_site_event_mng',{page_num:${(cur_sector-1)*page_amount+i}},'행사 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
+                                    </c:forEach>
+
+                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c42_site_event_mng',{page_num:${cur_page+1}},'행사 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c42_site_event_mng',{page_num:${tot_page}},'행사 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+                                    </c:if>
+    </ul>
                             </div>
                         </div>
                     </div>

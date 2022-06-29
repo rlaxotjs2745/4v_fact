@@ -51,7 +51,7 @@
                 <ul class="list__type--promo">
 <c:forEach items="${prContentList}" var="promotion" varStatus="status">
                     <li>
-                        <a href="brd_promotion_detail?idx=${promotion.idx_pr_content}">
+                        <a href="brd_promotion_detail?idx=${promotion.idx_pr_content}" class=" btn-sm btn_content_modal">
                             <figure><img src="resources/assets/image/@promo_01.png" alt=""></figure>
                             <div class="caption">
                                 <span class="list__title">${promotion.subject}</span>
@@ -164,5 +164,13 @@
 <%@include file ="script.jsp" %>
 
 </div>
+<script>
+    $(".btn_content_modal").click(function (){
+        var idx = $(this).attr("id");
+        pageLoad("pr_contents", {idx: parseInt(idx)}, "홍보자료 모달컨텐츠", "pr_contents");
+    })
+
+
+</script>
 </body>
 </html>

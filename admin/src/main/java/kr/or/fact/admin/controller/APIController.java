@@ -83,6 +83,9 @@ public class APIController {
     @Resource(name = "coWorkerNService")
     public CoWorkerNService coWorkerNService;
 
+    @Resource(name = "consultingService")
+    public ConsultingService consultingService;
+
     @RequestMapping(value = "/admin_login",method = RequestMethod.POST)
     public @ResponseBody ResultVO admin_login(HttpSession session
             ,ModelMap model
@@ -1097,7 +1100,7 @@ public class APIController {
             resultVO.setResult_code("ERROR_1000");
             resultVO.setResult_str("없는 공지입니다.");
         }
-        System.out.println(resultVO);
+
         return resultVO;
     }
     @RequestMapping(value ="/delete_event",method = RequestMethod.POST)
@@ -1115,7 +1118,7 @@ public class APIController {
             resultVO.setResult_code("ERROR_1000");
             resultVO.setResult_str("없는 이벤트입니다.");
         }
-        System.out.println(resultVO);
+
         return resultVO;
     }
     @RequestMapping(value ="/delete_pr",method = RequestMethod.POST)
@@ -1133,10 +1136,27 @@ public class APIController {
             resultVO.setResult_code("ERROR_1000");
             resultVO.setResult_str("없는 홍보자료입니다.");
         }
-        System.out.println(resultVO);
+
         return resultVO;
     }
 
+    @RequestMapping(value ="/delete_consult",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO deleteConsult(@RequestBody int idx_demo_bs_consulting){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("삭제 실패");
+        try {
+            consultingService.deleteConsult(idx_demo_bs_consulting);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("삭제가 완료되었습니다.");
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("없는 상담일지입니다.");
+        }
 
+        return resultVO;
+    }
 }
 

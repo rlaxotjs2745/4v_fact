@@ -29,4 +29,6 @@ public class PRContentVO {
     long confirm_admin_idx;//	number	32				◯	허가자
     Date reg_date;//	date						최초 등록 일시
     Date last_upd_date;//	date						최종 수정 일시
+    int page;
+    int maxvalue;
 }
