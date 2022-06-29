@@ -18,4 +18,10 @@ public interface AssetService {
     List<AssetReservationItemVO> getAssetReservationItemList(long idx);
 
     int getAssetReservationCount(ParamPageListFilteredVO param);
+
+    AssetReservationVO getAssetReservation(long idx);
+
+    int updateReservationItem(AssetReservationItemVO assetReservationItemVO);
+
+    int updateReservation(long reservationIdx, int status, long idx);
 }

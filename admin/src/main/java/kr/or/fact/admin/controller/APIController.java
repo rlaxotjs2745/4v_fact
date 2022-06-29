@@ -957,6 +957,44 @@ public class APIController {
         return resultVO;
     }
 
+    @RequestMapping(value ="/asset_reservation_item_confirm",method = RequestMethod.POST)
+    public @ResponseBody ResultVO assetReservationItemConfirm(@RequestBody AssetReservationItemVO assetReservationItemVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        System.out.println(assetReservationItemVO);
+//        resultVO.setResult_str("업데이트 실패");
+        try {
+            assetService.updateReservationItem(assetReservationItemVO);
+            resultVO.setResult_code("SUCCESS");
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+        }
+        System.out.println(resultVO);
+        return resultVO;
+    }
+
+    @RequestMapping(value ="/asset_reservation_confirm",method = RequestMethod.POST)
+    public @ResponseBody ResultVO assetReservationConfirm(@RequestBody ParamPageListFilteredVO param){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("업데이트 실패");
+        long idx = param.getIdx();
+        int reservationIdx = param.getFilter2();
+        int status = param.getFilter1();
+
+        try {
+            assetService.updateReservation(reservationIdx, status, idx);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("예약 업데이트가 완료되었습니다.");
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("예약 업데이트에 실패했습니다.");
+        }
+        return resultVO;
+    }
+
 
 
     @RequestMapping(value ="/asset_reservation",method = RequestMethod.POST)

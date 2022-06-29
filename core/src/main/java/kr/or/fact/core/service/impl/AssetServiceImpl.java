@@ -78,4 +78,20 @@ public class AssetServiceImpl implements AssetService {
         return assetMapper.getAssetReservationItemList(idx);
     }
 
+    @Override
+    public AssetReservationVO getAssetReservation(long idx){
+        return assetMapper.getAssetReservation(idx);
+    }
+
+    @Override
+    public int updateReservationItem(AssetReservationItemVO assetReservationItemVO){
+        int status = assetReservationItemVO.getReservation_item_status();
+        long idx = assetReservationItemVO.getIdx_asset_reservation_item();
+        return assetMapper.updateReservationItem(idx, status);
+    }
+
+    @Override
+    public int updateReservation(long reservationIdx, int status, long idx){
+        return assetMapper.updateReservation(reservationIdx, status, idx);
+    }
 }

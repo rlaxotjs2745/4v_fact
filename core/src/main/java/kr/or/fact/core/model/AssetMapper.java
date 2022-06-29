@@ -32,4 +32,10 @@ public interface AssetMapper {
     int getAssetReservationCount(@Param("filter1") int filter1);
 
     List<AssetReservationItemVO> getAssetReservationItemList(@Param("idx") long idx);
+
+    AssetReservationVO getAssetReservation(@Param("idx") long idx);
+
+    int updateReservationItem(@Param("idx") long idx, @Param("status") int status);
+
+    int updateReservation(@Param("reservationIdx") long reservationIdx, @Param("status") int status, @Param("idx") long idx);
 }

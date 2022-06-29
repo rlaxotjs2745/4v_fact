@@ -134,16 +134,15 @@
         SELECT MAX(FLOOR((ROWNUM - 1)/10 + 1)) FROM TB_ASSET_RESERVATION
         WHERE IDX_ASSET_RESERVATION >= 1
         <if test='filter1 != 100'>
-            AND RESERVATION_STATUS = #{filter1}
+            AND RESERVAION_STATUS = #{filter1}
         </if>
 
         ) MAXVALUE FROM (
         SELECT TB_ASSET_RESERVATION.* FROM TB_ASSET_RESERVATION
         WHERE IDX_ASSET_RESERVATION >= 1
         <if test='filter1 != 100'>
-            AND RESERVATION_STATUS = #{filter1}
+            AND RESERVAION_STATUS = #{filter1}
         </if>
---         ORDER BY CONVERT(ADMIN_NAME,'UTFE') ASC
         )
         A)
         <if test='page_num != 0'>
@@ -167,13 +166,32 @@
     <select id="getAssetReservationCount" resultType="int">
         SELECT COUNT(*) FROM TB_ASSET_RESERVATION
         <if test='filter1 != 100'>
-            WHERE RESERVATION_STATUS = #{filter1}
+            WHERE RESERVAION_STATUS = #{filter1}
         </if>
     </select>
 
-    <select id="getAssetReservationItemList" resultType="int">
+    <select id="getAssetReservation" resultType="kr.or.fact.core.model.DTO.AssetReservationVO">
+        SELECT * FROM TB_ASSET_RESERVATION WHERE IDX_ASSET_RESERVATION = #{idx}
+    </select>
+
+    <select id="getAssetReservationItemList" resultType="kr.or.fact.core.model.DTO.AssetReservationItemVO">
         SELECT * FROM TB_ASSET_RESERVATION_ITEM WHERE IDX_ASSET_RESERVATION = #{idx}
     </select>
+
+    <update id="updateReservationItem" >
+        UPDATE TB_ASSET_RESERVATION_ITEM
+        SET RESERVATION_ITEM_STATUS = #{status},
+            LAST_UPD_DATE = SYSDATE
+        WHERE IDX_ASSET_RESERVATION_ITEM = #{idx}
+    </update>
+
+    <update id="updateReservation">
+        UPDATE TB_ASSET_RESERVATION
+        SET RESERVAION_STATUS = #{status},
+            IDX_ADMIN = #{idx},
+            LAST_UPD_DATE = SYSDATE
+        WHERE IDX_ASSET_RESERVATION = #{reservationIdx}
+    </update>
 
 
 </mapper>
