@@ -123,7 +123,7 @@ public class IndexController {
             session.setAttribute("loginCheck",false);
         }
 
-        return "redirect:login";
+        return "redirect:/login";
     }
 
 /*    @RequestMapping("/frame_lnb")
@@ -147,7 +147,7 @@ public class IndexController {
 
 
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String login(HttpSession session, @RequestBody(required = false) ParamVO paramVO){
         session.setAttribute("CSRF_TOKEN", UUID.randomUUID().toString());
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -170,7 +170,7 @@ public class IndexController {
     public String a10_dashboard(@RequestParam(value = "tag", required = false) String tagValue,
                                  ModelMap model
                                 ){
-        return "a10_dashboard";
+        return "/a10_dashboard";
     }
 
     //사업공고문 관리
