@@ -12,7 +12,7 @@
         <h6 class="card-header with-elements">
             <div class="card-header-title">양식 문서 목록</div>
             <div class="card-header-elements ml-auto">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modals-default">+ 서식 등록</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modals-rule-file">+ 서식 등록</button>
             </div>
         </h6>
         <div class="card-datatable table-responsive pt-0 pb-3">
@@ -98,31 +98,31 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-success">
-                    <h5 class="modal-title text-white font-weight-bold">규정 문서 등록</h5>
+                    <h5 class="modal-title text-white font-weight-bold">양식 문서 등록</h5>
                     <button id="modals-code-new-close" type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="form-group row">
+                        <div class="form-group row" id="form_title">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">양식 제목</label>
                             <div class="col-md-10">
                                 <input id="subject" type="text" class="form-control form-control-md">
                             </div>
 
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" id="form_usage">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">양식 사용 용도</label>
                             <div class="col-md-10">
                                 <textarea id="usage_detail" type="text" class="form-control form-control-md"></textarea>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" id="form_corp_name">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">관련조직 이름</label>
                             <div class="col-md-10">
                                 <input id="detail" type="text" class="form-control form-control-md">
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" id="file">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">파일 업로드</label>
                             <div class="col-md-10">
                                 <input id="file_upload" type="file" class="form-control form-control-md">
@@ -134,7 +134,7 @@
                                 <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
                             </div>
                             <div>
-                                <button id="btn_save_new" type="button" class="btn btn-primary">저장</button>
+                                <button id="btn_save_new" type="button" class="btn btn-primary" onclick="saveForm();">저장</button>
                             </div>
                         </div>
 
@@ -303,18 +303,20 @@
     fileForm.append("subject",document.querySelector('#subject').value);
     fileForm.append("usage_detail",document.querySelector('#usage_detail').value);
 
-
     var files = document.querySelector('#file_upload').files;
+
+    console.log(fileForm);
+    console.log(files);
     for(var i = 0; i < files.length; i++){
         var num = i + 1;
         fileForm.append("files" + num, files[i]);
     }
     fileForm.append("fileLength", files.length);
-
+        console.log("여기")
     $.ajax({
         type: 'post',
         url :'uploadFile', //데이터를 주고받을 파일 주소 입력
-        data: fileForm,//보내는 데이터
+        data: files,//보내는 데이터
         contentType: false,//보내는 데이터 타입
         processData: false,//Jquery 내부에서 파일을 queryString 형태로 전달하는 것을 방지
         dataType:'json',//받는 데이터 타입
@@ -327,6 +329,43 @@
             console.log(err);
         }
     });
-    // event.preventDefault();
+     event.preventDefault();
     }
+
+
+
+
+
+    //
+    // function event_pass() {
+    //
+    //     var param = {
+    //
+    //         subject: $("#form_title input").val(),
+    //         usage_detail:$("#form_usage textarea").val()
+    //     };
+    //     console.log(param);
+    //     $.ajax({
+    //         type: 'post',
+    //         url :'upload_form_info', //데이터를 주고받을 파일 주소 입력
+    //         data: JSON.stringify(param),//보내는 데이터
+    //         contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+    //         dataType:'json',//받는 데이터 타입
+    //         success: function(result){
+    //             //작업이 성공적으로 발생했을 경우
+    //             console.log(result);
+    //             if(result.result_code=="SUCCESS"){
+    //
+    //             }
+    //             else {
+    //
+    //             }
+    //             alert(result.result_str);
+    //
+    //         },
+    //         error:function(){
+    //             //에러가 났을 경우 실행시킬 코드
+    //         }
+    //     });
+    // }
 </script>

@@ -1,5 +1,6 @@
 package kr.or.fact.core.service;
 
+import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 import kr.or.fact.core.model.DTO.VisitDataVO;
 import kr.or.fact.core.model.DTO.VisitDateVO;
 import kr.or.fact.core.model.DTO.VisitReqVO;
@@ -35,5 +36,5 @@ public interface VisitService {
 
     int updateVisitReq(VisitReqVO visitReqVO);
 
-    List<VisitReqVO> getVisitList(int page, int list_amount,int visit_req_status);
+    List<VisitReqVO> getVisitList(ParamPageListFilteredVO param);
 }

@@ -68,5 +68,10 @@ public class ConsultingServiceImpl implements ConsultingService {
         return consultingMapper.deleteConsult(idx_demo_bs_consulting);
     }
 
+    @Override
+    public int updateConsult(DemoBsConsultingVO demoBsConsultingVO) {
+        return consultingMapper.updateConsult(demoBsConsultingVO);
+    }
+
 
 }

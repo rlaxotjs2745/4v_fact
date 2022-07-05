@@ -30,7 +30,7 @@
                       ,SHOW_START_DATE
                       ,VIEW_COUNT
                  FROM (
-                          SELECT * FROM TB_PR_CONTENT  WHERE IS_SHOW=1 AND PR_CONTENT_STATUS=1
+                          SELECT * FROM TB_PR_CONTENT  WHERE IS_SHOW=1 AND PR_CONTENT_STATUS=1 ORDER by PR_CONTENT_NUM ASC
                       )
 
                  WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}

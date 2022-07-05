@@ -1,5 +1,6 @@
 package kr.or.fact.core.model;
 
+import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 import kr.or.fact.core.model.DTO.VisitDataVO;
 import kr.or.fact.core.model.DTO.VisitDateVO;
 import kr.or.fact.core.model.DTO.VisitReqVO;
@@ -30,5 +31,5 @@ int updateVisitReq(VisitReqVO visitReqVO);
     void deleteVisitReq(@Param("idx_visit_req") long idx_visit_req);
 
 
-    List<VisitReqVO> getVisitList(int page, int list_amount, String visit_req_num,int visit_req_status);
+    List<VisitReqVO> getVisitList(ParamPageListFilteredVO param);
 }

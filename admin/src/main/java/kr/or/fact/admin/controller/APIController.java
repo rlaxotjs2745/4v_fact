@@ -1197,5 +1197,25 @@ public class APIController {
 
         return resultVO;
     }
+
+
+    @RequestMapping(value ="/update_consult",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO updaeConsult(@RequestBody DemoBsConsultingVO demoBsConsultingVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("업데이트 실패");
+        try {
+            consultingService.updateConsult(demoBsConsultingVO);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("업데이트가 완료되었습니다.");
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("없는 상담일지입니다.");
+        }
+
+        return resultVO;
+    }
 }
 

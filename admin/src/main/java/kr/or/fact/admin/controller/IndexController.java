@@ -655,18 +655,43 @@ public class IndexController {
     @RequestMapping(value = "/c21_site_visit_list",method = RequestMethod.POST)
     public String c21_site_visit_list(@RequestParam(value = "tag", required = false) String tagValue,
                                       ModelMap model,@RequestBody ParamPageListFilteredVO param){
+
+
+
+//
+//        int page = param.getPage_num();
+
+//
+//        AdminAnnounceFilterVO adminAnnounceFilterVO = bsAnnouncementService.getAdminBsAnnouncementFilter();
+//        //리스트 총갯수를 이때 빼야 함
+//        int filtered_item_total = adminAnnounceFilterVO.getAnnounce_tot();
+//        if(filter1==CONSTANT.ANN_STATUS_ON_COUNT)
+//            filtered_item_total = adminAnnounceFilterVO.getStatus_on_count();
+//        else if(filter1==CONSTANT.ANN_WAIT_COUNT)
+//            filtered_item_total = adminAnnounceFilterVO.getWait_count();
+//        else if(filter1==CONSTANT.ANN_PAUSE_COUNT)
+//            filtered_item_total = adminAnnounceFilterVO.getPause_count();
+//
+//
+//        model.addAttribute("total_count",filtered_item_total);
+//        model.addAttribute("adminAnnounceFilterVO",adminAnnounceFilterVO);
+//        param.setOrder_field("IDX_BS_ANNOUNCEMENT");
+//
         param.setAmount(10);
         int list_amount = 10;
         int page_amount = param.getAmount();
         int page = param.getPage_num();
+        int filter1 = param.getFilter1();
+        int filter2 = param.getFilter2();
         int visitCount = visitService.getVisitReqCount();
         if(visitCount==0){
             return"c21_site_visit_list";
         }
 
-
+        model.addAttribute("filter1",filter1);
+        model.addAttribute("filter2",filter2);
         model.addAttribute("total_count",visitCount);
-        List<VisitReqVO> visitReqList = visitService.getVisitList(page,list_amount,param.getFilter1());
+        List<VisitReqVO> visitReqList = visitService.getVisitList(param);
         model.addAttribute("visitReqList",visitReqList);
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
@@ -711,7 +736,9 @@ public class IndexController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-
+        System.out.println(visitReqList.size());
+        System.out.println(filter1);
+        System.out.println(filter2);
         return "c21_site_visit_list";
     }
     //자원예약 관리
@@ -804,7 +831,7 @@ public class IndexController {
     //고객관리진행중
     @RequestMapping(value = "/c42_site_event_mng",method = RequestMethod.POST)
     public String c42_site_event_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                     ModelMap model,ParamPageListFilteredVO param){
+                                     ModelMap model,@RequestBody ParamPageListFilteredVO param){
         //행사관리 테이블 추가 .tb_event_content
 
         param.setAmount(10);
@@ -818,7 +845,7 @@ public class IndexController {
         model.addAttribute("total_count",eventCount);
         List<EventContentVO> eventContentList = eventContentService.getEventContentList(page,list_amount);
         List<EventContentVO> eventContentList1 = eventContentService.getMainEventContentList();
-        model.addAttribute("eventcontentlist",eventContentList1);
+        model.addAttribute("eventcontentlist",eventContentList);
 
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
@@ -872,12 +899,63 @@ public class IndexController {
     public String c43_site_adver_mng(@RequestParam(value = "page_num", required = false) String tagValue,
                                      @RequestBody ParamPageListFilteredVO param,   ModelMap model){
 
+        param.setAmount(10);
+        int list_amount = 10;
+        int page_amount = param.getAmount();
+        int page = param.getPage_num();
+        int prCount = prContentService.getMainPRContentCount();
+        if(prCount==0){
+            return "brd_adver_blank";
+        }
+        model.addAttribute("total_count",prCount);
 
-
-
-        List<PRContentVO> prlist = prContentService.getMainPRContentList();
+List<PRContentVO> prlist =prContentService.getPRContentList( page, list_amount);
+//        List<PRContentVO> prlist1 = prContentService.getMainPRContentList();
 model.addAttribute("prlist",prlist);
     model.addAttribute("prcontent",prlist);
+        model.addAttribute("cur_page",page);
+        model.addAttribute("amount",list_amount);
+
+        int tot_page = prCount/list_amount+1;
+        if(prCount%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+        boolean is_active = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("page_amount",page_amount);
+        System.out.println(prlist);
+        System.out.println(prCount);
         return "c43_site_adver_mng";
     }
 
