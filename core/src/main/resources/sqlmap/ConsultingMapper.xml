@@ -14,32 +14,40 @@
     </select>
     <select id="getCunsultingList1" resultType="kr.or.fact.core.model.DTO.DemoBsConsultingVO">
         SELECT
+            *
+        FROM (
+                 SELECT ROW_NUMBER() OVER(ORDER by CONSULTING_NUM ASC) AS row_num
+                ,TB_DEMO_BS_CONSULTING.IDX_USER,
+                        TB_DEMO_BS_CONSULTING.IDX_DEMO_BS_CONSULTING,
+                        TB_DEMO_BS_CONSULTING.CONSULTING_NUM,
+                        TB_DEMO_BS_CONSULTING.IDX_DEMO_BS_APPLICAION,
+                        TB_DEMO_BS_CONSULTING.IDX_DEMO_BUSINESS,
+                        TB_DEMO_BS_CONSULTING.IDX_CORP_INFO,
+                        TB_DEMO_BS_CONSULTING.CONSULTING_TYPE,
+                        TB_DEMO_BS_CONSULTING.CONSULT_TYPE_ETC_STR,
+                        TB_DEMO_BS_CONSULTING.CONSULTING_STATUS,
+                        TB_DEMO_BS_CONSULTING.CONSULTING_GOAL,
+                        TB_DEMO_BS_CONSULTING.REQ_DATE,
+                        TB_DEMO_BS_CONSULTING.RESULVATION_DATE,
+                        TB_DEMO_BS_CONSULTING.CONSULTING_DATE,
+                        TB_DEMO_BS_CONSULTING.CONSULTANT_IDX,
+                        TB_DEMO_BS_CONSULTING.IS_CONSULTING_FILE,
+                        TB_DEMO_BS_CONSULTING.IS_RESULT_FILE,
+                        TB_DEMO_BS_CONSULTING.IS_CONSULTANT,
+                        TB_DEMO_BS_CONSULTING.CONSULT_ANSWER_TYPE,
+                        TB_DEMO_BS_CONSULTING.IS_SHARE,
+                        TB_DEMO_BS_CONSULTING.IS_PRIVACY_ACCEPT,
+                        TB_DEMO_BS_CONSULTING.MEMO,
+                        TB_DEMO_BS_CONSULTING.IDX_ADMIN,
+                        TB_DEMO_BS_CONSULTING.REG_DATE
+                         , TB_USER.USER_NAME, TB_USER.EMAIL, TB_USER.ADDR,TB_USER.MPHONE_NUM
+                 FROM (
+                          SELECT * FROM TB_DEMO_BS_CONSULTING
+                      )TB_DEMO_BS_CONSULTING JOIN TB_USER ON TB_DEMO_BS_CONSULTING.IDX_USER= TB_USER.IDX_USER
 
-            A.IDX_USER,
-            A.IDX_DEMO_BS_CONSULTING,
-            A.CONSULTING_NUM,
-            A.IDX_DEMO_BS_APPLICAION,
-            A.IDX_DEMO_BUSINESS,
-            A.IDX_CORP_INFO,
-            A.CONSULTING_TYPE,
-            A.CONSULT_TYPE_ETC_STR,
-            A.CONSULTING_STATUS,
-            A.CONSULTING_GOAL,
-            A.REQ_DATE,
-            A.RESULVATION_DATE,
-            A.CONSULTING_DATE,
-            A.CONSULTANT_IDX,
-            A.IS_CONSULTING_FILE,
-            A.IS_RESULT_FILE,
-            A.IS_CONSULTANT,
-            A.CONSULT_ANSWER_TYPE,
-            A.IS_SHARE,
-            A.IS_PRIVACY_ACCEPT,
-            A.MEMO,
-            A.IDX_ADMIN,
-            A.REG_DATE
-        ,TB_USER.IDX_USER, TB_USER.USER_NAME, TB_USER.EMAIL, TB_USER.ADDR,TB_USER.MPHONE_NUM
-        FROM TB_DEMO_BS_CONSULTING A JOIN TB_USER ON TB_USER.IDX_USER= A.IDX_USER
+                 WHERE ROWNUM <![CDATA[<=]]> #{page}*#{list_amount}
+             )
+        WHERE row_num <![CDATA[>]]> (#{page} -1)*#{list_amount}
     </select>
     <select id="getCunsultingListUser" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.DemoBsConsultingVO">
         SELECT TB_USER.IDX_USER, TB_USER.USER_NAME, TB_DEMO_BS_CONSULTING.IDX_USER FROM TB_USER,TB_DEMO_BS_CONSULTING WHERE TB_USER.IDX_USER= TB_DEMO_BS_CONSULTING.IDX_USER
@@ -166,4 +174,11 @@
 <delete id="deleteConsult" parameterType="int">
     DELETE FROM TB_DEMO_BS_CONSULTING WHERE IDX_DEMO_BS_CONSULTING = #{idx_demo_bs_consulting}
 </delete>
+
+
+    <update id="updateConsult" parameterType="kr.or.fact.core.model.DTO.DemoBsConsultingVO">
+        UPDATE TB_DEMO_BS_CONSULTING  SET
+                                          RESULVATION_DATE=#{resulvation_date}
+        WHERE IDX_DEMO_BS_CONSULTING = #{idx_demo_bs_consulting}
+    </update>
 </mapper>

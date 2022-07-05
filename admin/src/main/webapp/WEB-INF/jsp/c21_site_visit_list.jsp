@@ -17,28 +17,28 @@
                     <div class="form-inline">
                         <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons" id="category_change">
                             <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio" class="category_change" id="all" checked="">전체
+                                <input type="radio" name="btn-radio" class="category_change" id="all" onclick="javascript:pageLoad('c21_site_visit_listpage=1&filter1=9999&filter2=9998','견학신청 목록');" checked="">전체
                             </label>
                             <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio" class="category_change" id="new" value="0" > 신규
+                                <input type="radio" name="btn-radio" class="category_change" id="new" value="0"  onclick="javascript:pageLoad('c21_site_visit_list',{page_num:1,filter1:0,filter2:9998},'견학신청 목록');"> 신규
                             </label>
                             <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio" class="category_change" id="register" value="1"> 접수
+                                <input type="radio" name="btn-radio" class="category_change" id="register" value="1" onclick="javascript:pageLoad('c21_site_visit_list',{page_num:1,filter1:1,filter2:9998},'견학신청 목록');" > 접수
                             </label>
                             <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio" class="category_change" id="approval" value="2"> 승인
+                                <input type="radio" name="btn-radio" class="category_change" id="approval" value="2" onclick="javascript:pageLoad('c21_site_visit_list',{page_num:1,filter1:2,filter2:9998},'견학신청 목록');"> 승인
                             </label>
                             <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio" class="category_change" id="visit" value="3"> 방문
+                                <input type="radio" name="btn-radio" class="category_change" id="visit" value="3" onclick="javascript:pageLoad('c21_site_visit_list',{page_num:1,filter1:3,filter2:9998},'견학신청 목록');"> 방문
                             </label>
                             <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio" class="category_change" id="visited" value="4"> 방문완료
+                                <input type="radio" name="btn-radio" class="category_change" id="visited" value="4" onclick="javascript:pageLoad('c21_site_visit_list',{page_num:1,filter1:4,filter2:9998},'견학신청 목록');"> 방문완료
                             </label>
                             <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio" class="category_change" id="cancle" value="5"> 방문취소
+                                <input type="radio" name="btn-radio" class="category_change" id="cancle" value="5" onclick="javascript:pageLoad('c21_site_visit_list',{page_num:1,filter1:5,filter2:9998},'견학신청 목록');"> 방문취소
                             </label>
                             <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio" class="category_change" id="refuse" value="6"> 승인거절
+                                <input type="radio" name="btn-radio" class="category_change" id="refuse" value="6" onclick="javascript:pageLoad('c21_site_visit_list',{page_num:1,filter1:6,filter2:9998},'견학신청 목록');"> 승인거절
                             </label>
                         </div>
                     </div>
@@ -82,7 +82,8 @@
                                 <tbody>
 <c:if test="${total_count ne 0}">
                             <c:forEach items="${visitReqList}" var="visit">
-                            <tr class="visit-entity" id="${visit.idx_visit_req}" onClick="getVisitList(${visit.idx_visit_req},1,9999)">
+                            <tr class="visit-entity" id="${visit.idx_visit_req}" >
+
                                     <td class="text-center" id="visit_req_num">${visit.visit_req_num}</td>
                                     <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view" class="visit-status">${visit.visit_req_status eq 0 ? "신청" : visit.visit_req_status eq 1 ? "접수" : visit.visit_req_status eq 3 ? "방문" : visit.visit_req_status eq 4 ? "방문 완료" : visit.visit_req_status eq 5 ? "방문취소": visit.visit_req_status eq 6 ? "승인거절" : "기타"}</a></td>
                                     <td class="text-center" id="visit_visitor">${visit.visitor}</td>
@@ -258,8 +259,9 @@
                                     <span class="custom-control-label">변경</span>
                                 </label>
                             </div>
-                            <div class="form-group col col-md-12 mb-1" id="visit_date">
-                                <span class="text-muted">2021.00 00 HH:MM 에서</span> <input type="text" class="form-control d-inline-block datepickers" style="width:120px;"> <input type="text" id="timepicker-2" class="form-control d-inline-block ui-timepicker-input" autocomplete="off" style="width:90px;" placeholder="00:00 AM">
+                            <div id="datepicker-show" class="input-daterange input-group mode-edit mode-new">
+                                <input type="text"  class="form-control d-inline-block datepickers" name="start" style="width:120px;" id="update_date">
+                                <input type="text" class="form-control" placeholder="9:00 AM" id="flatpickr-time-start" >
                             </div>
 
                         </div>
@@ -728,7 +730,8 @@
         var selectId = $(this).attr('id');
         param ={
             idx_visit_req: parseInt(curVisitdata),
-            visit_req_status : $("input:radio[name=custom-6]:checked").val()
+            visit_req_status : $("input:radio[name=custom-6]:checked").val(),
+            resulvation_date:$("#update_date").val()+"T"+$("#flatpickr-time-start").val()
         }
 
         $.ajax({
@@ -750,7 +753,27 @@
             }
         });
     }
+    $(function() {
+        var isRtl = $('html').attr('dir') === 'rtl';
 
+        $('#datepicker-show,#datepicker-open').datepicker({
+            orientation: isRtl ? 'auto right' : 'auto left',
+            format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
+            startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
+            language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+        });
+
+
+    });
+    $(function () {
+        // Time
+        $('#flatpickr-time-start,#flatpickr-time-end').flatpickr({
+            enableTime: true,
+            noCalendar: true,
+            altInput: true,
+            static:true
+        });
+    });
     // $('input[name="btn-radio"]').change(function(){
     //     var changeStatus = $('input[name="btn-radio"]:checked').val();
     //     pageLoad("c21_site_visit_list", {page_num: 1, corp: parseInt(changeStatus)}, "이건무엇", true);
@@ -758,62 +781,6 @@
     // })
     //
 
-    $(".category_change").click(function(){
-        var param = {
-            page_num: null,
-            filter1: null
-        }
-        switch($(this).attr("id")){
-            case "all":
-                param.page_num = 1;
-                param.filter1 = 100;
-                curCate = 100;
-                break;
-            case "new":
-                param.page_num = 1;
-                param.filter1 = 0;
-                curCate = 0;
-                break;
-            case "register":
-                param.page_num = 1;
-                param.filter1 = 1;
-                curCate = 1;
-                break;
-            case "approval":
-                param.page_num = 1;
-                param.filter1 = 2;
-                curCate = 2;
-                break;
-            case "visit":
-                param.page_num = 1;
-                param.filter1 = 3;
-                curCate = 3;
-                break;
-            case "visited":
-                param.page_num = 1;
-                param.filter1 = 4;
-                curCate = 4;
-                break;
-            case "article-list_previous":
-                param.page_num = 1;
-                param.filter1 = curCate;
-                break;
-            case "article-list_previous-one":
-                param.page_num = curPage - 1;
-                param.filter1 = curCate;
-                break;
-            case "article-list_next-one":
-                param.page_num = curPage + 1;
-                param.filter1 = curCate;
-                break;
-            case "article-list_next":
-                param.page_num = maxvalue;
-                param.filter1 = curCate;
-                break;
-        }
-
-        pageLoad("c21_site_visit_list", param, "유저 보드", "user");
-    })
 </script>
 <!-- / Layout footer -->
 

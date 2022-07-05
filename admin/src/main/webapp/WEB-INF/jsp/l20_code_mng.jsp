@@ -148,7 +148,9 @@
                 console.log(result);
                 if(result.result_code=="SUCCESS"){
                     alert(result.result_str);
-                    $('#modals-code-new-c').modal('toggle');
+
+                    $("#modals-code-new-c").modal("hide");
+                    $(".modal-backdrop").removeClass();
                     pageLoad('l20_code_mng',{page_num:1},'시스템 코드 관리');
                 }
                 else {

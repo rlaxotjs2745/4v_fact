@@ -1,5 +1,6 @@
 package kr.or.fact.core.service.impl;
 
+import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 import kr.or.fact.core.model.DTO.VisitDataVO;
 import kr.or.fact.core.model.DTO.VisitDateVO;
 import kr.or.fact.core.model.DTO.VisitReqVO;
@@ -51,8 +52,8 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public List<VisitReqVO> getVisitList(int page,int list_amount,int visit_req_status) {
-        return visitMapper.getVisitList(page,list_amount,"VISIT_REQ_NUM",visit_req_status);
+    public List<VisitReqVO> getVisitList(ParamPageListFilteredVO param) {
+        return visitMapper.getVisitList(param);
     }
 
     @Override

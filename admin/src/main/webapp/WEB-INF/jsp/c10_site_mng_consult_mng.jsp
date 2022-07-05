@@ -108,6 +108,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+<c:if test="${total_count ne 0}">
                                 <c:forEach items="${consultingList}" var="consulting" varStatus="status">
                                     <tr class="consulting-entity" id="${consulting.idx_demo_bs_consulting}">
                                     <td class="text-center">${consulting.consulting_num}</td>
@@ -125,25 +126,35 @@
                                         <td class="text-center">${consulting.addr}</td>
                                 </tr>
                                 </c:forEach>
-
+</c:if>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                    <c:if test="${total_count ne 0}">
                     <div class="row">
                         <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
+                            <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${total_count}개 중 ${list_amount*(cur_page-1)+1}에서 ${total_count}까지</div>
                         </div>
                         <div class="col-sm-12 col-md-7">
                             <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                                 <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                    <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
+                                    <c:set var="name" value="${total_count/amount}" />
+                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c10_site_mng_consult_mng',{page_num:1},'상담신청 목록');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c10_site_mng_consult_mng',{page_num:${cur_page-1}},'상담신청 목록');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+                                    <c:forEach var="i" begin="1" end="${page_amount}">
+                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('c10_site_mng_consult_mng',{page_num:${(cur_sector-1)*page_amount+i}},'상담신청 목록');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
+                                    </c:forEach>
+                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c10_site_mng_consult_mng',{page_num:${cur_page+1}},'상담신청 목록');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c10_site_mng_consult_mng',{page_num:${tot_page}},'상담신청 목록');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+                                    </c:if>
+                                    <%--                                    <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>--%>
+                                    <%--                                    <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>--%>
+                                    <%--                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>--%>
+                                    <%--                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>--%>
+                                    <%--                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>--%>
+                                    <%--                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>--%>
+                                    <%--                                    <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>--%>
                                 </ul>
                             </div>
                         </div>
@@ -248,8 +259,8 @@
                                 <div class="form-control-plaintext mode-view" id="req_date2">2021.00 00 HH:MM 에서</div>
 
                                 <div id="datepicker-show" class="input-daterange input-group mode-edit mode-new">
-                                    <input type="text"  class="form-control d-inline-block datepickers" name="start" style="width:120px;">
-                                    <input type="text" class="form-control" placeholder="9:00 AM" id="flatpickr-time-start">
+                                    <input type="text"  class="form-control d-inline-block datepickers" name="start" style="width:120px;" id="update_date">
+                                    <input type="text" class="form-control" placeholder="9:00 AM" id="flatpickr-time-start" >
                                 </div>
                             </div>
                         </div>
@@ -260,7 +271,7 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
                         <div>
                             <button type="button" class="btn btn-outline-danger" data-dismiss="modal" id="delete_consult">삭제</button>
-                            <button type="button" class="btn btn-primary">저장</button>
+                            <button type="button" class="btn btn-primary" id="update_consult">저장</button>
                         </div>
                     </div>
                 </form>
@@ -364,8 +375,13 @@
                                     <span class="custom-control-label">변경</span>
                                 </label>
                             </div>
-                            <div class="form-group col col-md-12 mb-1" id="reqdate2_modify">
-                                <span class="text-muted">2021.00 00 HH:MM 에서</span> <input type="text" class="form-control d-inline-block datepickers"  style="width:120px;"> <input type="text"  class="form-control d-inline-block ui-timepicker-input" autocomplete="off" style="width:90px;" placeholder="00:00 AM">
+                            <div class="col-md-10">
+                                <div class="form-control-plaintext mode-view" id="req_date2_modify">2021.00 00 HH:MM 에서</div>
+
+                                <div id="datepicker-open" class="input-daterange input-group mode-edit mode-new">
+                                    <input type="text"  class="form-control d-inline-block datepickers" name="start" style="width:120px;">
+                                    <input type="text" class="form-control" placeholder="9:00 AM" id="flatpickr-time-end">
+                                </div>
                             </div>
 
                         </div>
@@ -539,7 +555,33 @@
     })
 
 
+    $("#update_consult").click(function () {
+// let result = document.getElementsByName('custom-6');
+        var selectId = $(this).attr('id');
+        param={
+            idx_demo_bs_consulting:parseInt(curConsultdata),
+            resulvation_date:$("#update_date").val()+"T"+$("#flatpickr-time-start").val()
+        }
 
+        $.ajax({
+            type: 'post',
+            url: '/update_consult', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(param),//보내는 데이터
+            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType: 'json',//받는 데이터 타입
+            success: function (result) {
+                if (result.result_code == "SUCCESS") {
+                    alert("상태 변경에 성공하였습니다")
+
+                } else {
+                    alert("상태 변경에 실패하였습니다")
+                }
+            },
+            error: function (res) {
+                console.log(res)
+            }
+        });
+    })
 
 </script>
 <!-- Layout footer -->

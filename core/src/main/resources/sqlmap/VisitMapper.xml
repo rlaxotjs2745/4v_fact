@@ -6,7 +6,7 @@
     <select id="getUserVisitReqCount" parameterType="long" resultType="int">
         SELECT COUNT(*) FROM TB_VISIT_REQ  WHERE IDX_USER = #{idx_user}
     </select>
-    <select id="getVisitList" resultType="kr.or.fact.core.model.DTO.VisitReqVO">
+    <select id="getVisitList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.VisitReqVO">
         SELECT
             IDX_VISIT_REQ,
             VISIT_REQ_NUM,
@@ -33,7 +33,7 @@
             IDX_ADMIN,
             REG_DATE
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by VISIT_REQ_NUM ASC) AS row_num
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
         ,IDX_VISIT_REQ,
                         VISIT_REQ_NUM,
                         GROUP_NAME,
@@ -59,12 +59,17 @@
                         IDX_ADMIN,
                         REG_DATE
                  FROM (
-                          SELECT * FROM TB_VISIT_REQ  ORDER BY VISIT_REQ_NUM ASC
+                          SELECT * FROM TB_VISIT_REQ   <if test="filter1 != 9999">
+        WHERE VISIT_REQ_STATUS = #{filter1}
+    </if>
+        <if test="filter2 != 9998">
+            OR VISIT_REQ_STATUS = #{filter2}
+        </if>
                       )
 
-                 WHERE ROWNUM <![CDATA[<=]]> #{page}*#{list_amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{page} -1)*#{list_amount}
+        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
     </select>
     <select id="getVisitReqCount" resultType="int">
         SELECT COUNT (*) FROM TB_VISIT_REQ ORDER BY VISIT_REQ_NUM ASC
@@ -246,7 +251,7 @@
                  )
     </insert>
 <update id="updateVisitReq" parameterType="kr.or.fact.core.model.DTO.VisitReqVO">
-    UPDATE TB_VISIT_REQ SET VISIT_REQ_STATUS=#{visit_req_status} Where IDX_VISIT_REQ=#{idx_visit_req}
+    UPDATE TB_VISIT_REQ SET VISIT_REQ_STATUS=#{visit_req_status}, RESULVATION_DATE=#{resulvation_date} Where IDX_VISIT_REQ=#{idx_visit_req}
 
 </update>
 </mapper>
