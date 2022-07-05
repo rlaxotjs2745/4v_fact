@@ -79,21 +79,6 @@ public class AdminServiceImpl implements AdminService {
         long ret_idx=0;
         try {
            ret_idx= adminMapper.insertAdminInfo(adminVO);
-//                    adminVO.getAdmin_id(),
-//                    newPw,
-//            adminVO.getAdmin_name(),
-//                    adminVO.getCorporate(),
-//                    adminVO.getCorporate_name(),
-//                    adminVO.getDepartment(),
-//                    adminVO.getJob_title(),
-//                    adminVO.getAuth_status(),
-//                    adminVO.getTel_num(),
-//                    adminVO.getMphone_num(),
-//                    adminVO.getEmail(),
-//                    adminVO.getAdmin_type(),
-//                    adminVO.getAuth_admin_idx(),
-//                    adminVO.getSign_in_type()
-
         }
         catch (Exception e){
             System.out.println(e);
@@ -138,11 +123,13 @@ public class AdminServiceImpl implements AdminService {
     //어드민 테이블에서 역할과 롤을 가져와 콘트롤러에게 검증 후 콘트롤러에게 준다
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("1. " + username);
         AdminVO adminVO = adminMapper.getAdminInfoById(username);
         if(adminVO == null){
             adminVO = new AdminVO();
             adminVO.setAdmin_type(CONSTANT.ROLE_GUEST);
         }
+        System.out.println("2. " + adminVO);
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_MEMBER"/*CONSTANT.getRoleString(adminVO.getAdmin_type())*/));

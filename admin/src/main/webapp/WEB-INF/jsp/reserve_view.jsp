@@ -70,16 +70,6 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="text-center">1</td>
-                            <td class="text-center">00000000</td>
-                            <td class="text-center">XXXXXXXXXXXX</td>
-                            <td class="text-center">00</td>
-                            <td class="text-center">XXXXX</td>
-                            <td class="text-center">XXXXXXXXXXXXXXX</td>
-                            <td class="text-center">XXXXX</td>
-                            <td class="text-center">XX</td>
-                        </tr>
                         <c:forEach items="${itemList}" var="resItem" varStatus="status">
                             <tr>
                                 <td class="text-center">${status.count}</td>
@@ -132,27 +122,27 @@
                                 <td class="text-center" class="item_model_name"></td>
                                 <td class="text-center" class="item_brand"></td>
                                 <td class="text-center">
-                                    <select  class="custom-select custom-select-sm item_status" id="${resItem.idx_asset_reservation_item}" value="${resItem.reservation_item_status}">
+                                    <select  class="custom-select custom-select-sm item_status" id="${resItem.idx_asset_reservation_item}" >
                                     <c:if test="${resItem.reservation_item_status eq 1}">
                                         <option value="0">대기</option>
-                                        <option value="1" checked>승인</option>
+                                        <option value="1" selected>승인</option>
                                         <option value="2">부분 승인</option>
                                         <option value="3">불가</option>
                                     </c:if>
                                         <c:if test="${resItem.reservation_item_status eq 2}">
                                             <option value="0">대기</option>
                                             <option value="1">승인</option>
-                                            <option value="2" checked>부분 승인</option>
+                                            <option value="2" selected>부분 승인</option>
                                             <option value="3">불가</option>
                                         </c:if>
                                         <c:if test="${resItem.reservation_item_status eq 3}">
                                             <option value="0">대기</option>
                                             <option value="1" >승인</option>
                                             <option value="2">부분 승인</option>
-                                            <option value="3" checked>불가</option>
+                                            <option value="3" selected>불가</option>
                                         </c:if>
                                         <c:if test="${resItem.reservation_item_status eq 0}">
-                                            <option value="0" checked>대기</option>
+                                            <option value="0" selected>대기</option>
                                             <option value="1" >승인</option>
                                             <option value="2">부분 승인</option>
                                             <option value="3">불가</option>

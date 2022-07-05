@@ -20,13 +20,13 @@ import javax.annotation.Resource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Resource(name="adminService")
-    AdminService adminService;
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Resource(name="adminService")
+    AdminService adminService;
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -37,8 +37,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/").authenticated()
-                .anyRequest().authenticated();
+                .antMatchers("/")
+//                .authenticated()
+//                .anyRequest()
+//
+//                .authenticated();
+        .permitAll();
 
         http.formLogin()
                 .loginPage("/login")
@@ -55,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .sessionManagement()
-                .invalidSessionUrl("/login");
+                .invalidSessionUrl("/");
     }
 
     @Override

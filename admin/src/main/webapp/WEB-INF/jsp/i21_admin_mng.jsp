@@ -642,7 +642,7 @@
             success: function(res){
                 if(res.result_code == "SUCCESS"){
                     alert("관리자 등록이 완료되었습니다.\n생성한 계정의 비밀번호는 아이디로 지정한 메일로 전송되었습니다.");
-                    $("#modal-staff-write").removeClass("show");
+                    $("#modal-staff-write").modal("hide");
                     $(".modal-backdrop").removeClass("show");
                     pageLoad("i21_admin_mng");
                     $("#admin_name").val("");

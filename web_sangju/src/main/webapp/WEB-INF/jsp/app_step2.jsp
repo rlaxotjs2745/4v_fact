@@ -26,7 +26,7 @@
 <div class="wrapper" id="wrapper">
     <header class="header_app">
         <a href="/prv_application" class="close_window" onclick="javascript:window.close();"><img src="resources/assets/image/ico_close.svg" alt=""></a>
-        <h1><a href="/"><img src="resources/assets/image/img-logo-s.png" alt="스마트팜 실증센터"></a></h1>
+        <h1><a href="/"><img src="resources/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
         <h2>신청서 작성</h2>
         <div class="app__step">
             <div class="step is-passed">
@@ -102,37 +102,37 @@
                             <td class="td__left" colspan="2"><input type="text" value="${user.mphone_num}" disabled></td>
 
                         </tr>
-                            <th class="th__left">실증단지이용자</th>
-                            <td class="td__left" colspan="5">
-                                <div class="radio checkbox--inline">
-                                    <input type="radio" id="user_type1" name="user_type" value="1" <c:if test="${userDemoBs.user_demo_bs_type eq 1}">checked</c:if>>
-                                    <label for="user_type1">개인(기업설립예정 포함)</label>
-                                </div>
-                                <div class="radio checkbox--inline">
-                                    <input type="radio" id="user_type2" name="user_type" value="2" <c:if test="${userDemoBs.user_demo_bs_type eq 0 or userDemoBs.user_demo_bs_type eq 2}">checked</c:if>>
-                                    <label for="user_type2">일반기업</label>
-                                </div>
-                                <div class="radio checkbox--inline">
-                                    <input type="radio" id="user_type3" name="user_type" value="4" <c:if test="${userDemoBs.user_demo_bs_type eq 4}">checked</c:if>>
-                                    <label for="user_type3">농업진흥기관</label>
-                                </div>
-                                <div class="radio checkbox--inline">
-                                    <input type="radio" id="user_type4" name="user_type" value="5" <c:if test="${userDemoBs.user_demo_bs_type eq 5}">checked</c:if>>
-                                    <label for="user_type4">선도기관</label>
-                                </div>
-                                <div class="radio checkbox--inline">
-                                    <input type="radio" id="user_type5" name="user_type" value="7" <c:if test="${userDemoBs.user_demo_bs_type eq 7}">checked</c:if>>
-                                    <label for="user_type5">연구기관</label>
-                                </div>
-                                <div class="radio checkbox--inline">
-                                    <input type="radio" id="user_type6" name="user_type" value="10" <c:if test="${userDemoBs.user_demo_bs_type eq 10}">checked</c:if>>
-                                    <label for="user_type6">대학교</label>
-                                </div>
-                                <div class="radio checkbox--inline">
-                                    <input type="radio" id="user_type7" name="user_type" value="99" <c:if test="${userDemoBs.user_demo_bs_type eq 99}">checked</c:if>>
-                                    <label for="user_type7">기타단체</label>
-                                </div>
-                            </td>
+                        <th class="th__left">실증단지이용자</th>
+                        <td class="td__left" colspan="5">
+                            <div class="radio checkbox--inline">
+                                <input type="radio" id="user_type1" name="user_type" value="1" <c:if test="${userDemoBs.user_demo_bs_type eq 1}">checked</c:if>>
+                                <label for="user_type1">개인(기업설립예정 포함)</label>
+                            </div>
+                            <div class="radio checkbox--inline">
+                                <input type="radio" id="user_type2" name="user_type" value="2" <c:if test="${userDemoBs.user_demo_bs_type eq 0 or userDemoBs.user_demo_bs_type eq 2}">checked</c:if>>
+                                <label for="user_type2">일반기업</label>
+                            </div>
+                            <div class="radio checkbox--inline">
+                                <input type="radio" id="user_type3" name="user_type" value="4" <c:if test="${userDemoBs.user_demo_bs_type eq 4}">checked</c:if>>
+                                <label for="user_type3">농업진흥기관</label>
+                            </div>
+                            <div class="radio checkbox--inline">
+                                <input type="radio" id="user_type4" name="user_type" value="5" <c:if test="${userDemoBs.user_demo_bs_type eq 5}">checked</c:if>>
+                                <label for="user_type4">선도기관</label>
+                            </div>
+                            <div class="radio checkbox--inline">
+                                <input type="radio" id="user_type5" name="user_type" value="7" <c:if test="${userDemoBs.user_demo_bs_type eq 7}">checked</c:if>>
+                                <label for="user_type5">연구기관</label>
+                            </div>
+                            <div class="radio checkbox--inline">
+                                <input type="radio" id="user_type6" name="user_type" value="10" <c:if test="${userDemoBs.user_demo_bs_type eq 10}">checked</c:if>>
+                                <label for="user_type6">대학교</label>
+                            </div>
+                            <div class="radio checkbox--inline">
+                                <input type="radio" id="user_type7" name="user_type" value="99" <c:if test="${userDemoBs.user_demo_bs_type eq 99}">checked</c:if>>
+                                <label for="user_type7">기타단체</label>
+                            </div>
+                        </td>
                         </tr>
                         <tr>
                             <th class="th__left">신청기업명</th>
@@ -460,35 +460,35 @@
                                 <col style="width:44%">
                             </colgroup>
                             <tbody>
-                                <tr>
-                                    <th class="" rowspan="3">대<br>표<br>자</th>
-                                    <th class="th__left">성명</th>
+                            <tr>
+                                <th class="" rowspan="3">대<br>표<br>자</th>
+                                <th class="th__left">성명</th>
 
-                                    <td class="td__left">
-                                        <input id="ceo_name" type="text"  value="${userDemoBs.ceo_name}">
-                                    </td>
-                                    <th class="th__left" rowspan="2">전화번호</th>
-                                    <td class="td__left">
-                                        사무실 <input id="ceo_pnumber" type="text" style="width: calc(100% - 47px);" value="${userDemoBs.ceo_pnumber}">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">E-mail</th>
-                                    <td class="td__left">
-                                        <input id="ceo_email" type="text" value="${userDemoBs.ceo_email}">
-                                    </td>
-                                    <td class="td__left">
-                                        휴대폰 <input id="ceo_mnumber" type="text" style="width: calc(100% - 47px);" value="${userDemoBs.ceo_mnumber}">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">주소</th>
-                                    <td colspan="3" class="td__left">
-                                        <button id="juso_ceo_search" class="btn modify btn-lg">찾기</button>
-                                        <input id="ceo_address" type="text" style="width: calc(70% - 70px);" value="${userDemoBs.ceo_address}">
-                                        <input id="ceo_address2" type="text" style="width: 29%;margin-left:4px !important;margin-top: 0px!important;" value="${userDemoBs.ceo_address2}" placeholder="상세주소">
-                                    </td>
-                                </tr>
+                                <td class="td__left">
+                                    <input id="ceo_name" type="text"  value="${userDemoBs.ceo_name}">
+                                </td>
+                                <th class="th__left" rowspan="2">전화번호</th>
+                                <td class="td__left">
+                                    사무실 <input id="ceo_pnumber" type="text" style="width: calc(100% - 47px);" value="${userDemoBs.ceo_pnumber}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="th__left">E-mail</th>
+                                <td class="td__left">
+                                    <input id="ceo_email" type="text" value="${userDemoBs.ceo_email}">
+                                </td>
+                                <td class="td__left">
+                                    휴대폰 <input id="ceo_mnumber" type="text" style="width: calc(100% - 47px);" value="${userDemoBs.ceo_mnumber}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="th__left">주소</th>
+                                <td colspan="3" class="td__left">
+                                    <button id="juso_ceo_search" class="btn modify btn-lg">찾기</button>
+                                    <input id="ceo_address" type="text" style="width: calc(70% - 70px);" value="${userDemoBs.ceo_address}">
+                                    <input id="ceo_address2" type="text" style="width: 29%;margin-left:4px !important;margin-top: 0px!important;" value="${userDemoBs.ceo_address2}" placeholder="상세주소">
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>

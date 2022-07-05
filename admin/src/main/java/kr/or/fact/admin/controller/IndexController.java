@@ -104,7 +104,7 @@ public class IndexController {
 
         System.out.println("api_post_login");
          if(admin_id == null || admin_pw == null){
-            return "redirect:login";
+            return "redirect:/login";
         }
         //UserVO findUser = userService.getAuthUser(id,pw);
         //UserVO findUser = userService.getUserInfo(3);
@@ -152,14 +152,18 @@ public class IndexController {
         session.setAttribute("CSRF_TOKEN", UUID.randomUUID().toString());
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        System.out.println(paramVO);
+//        System.out.println(paramVO);
+//
+//        AdminVO adminVo = new AdminVO();
+//        adminVo.setAdmin_id("aa@aa.com");
+//        adminVo.setAdmin_pw("123123");
 
-/*        AdminVO adminVo = adminService.findAdminById("abcdef01@abcde.com");
-        if(adminVo !=null)
-        {
-            adminVo.setAdmin_pw(passwordEncoder.encode(adminVo.getAdmin_pw()));
-            adminService.updateAdminPassword(adminVo);
-        }*/
+////        if(adminVo !=null)
+////        {
+//            adminVo.setAdmin_pw(passwordEncoder.encode("123123"));
+//            adminService.join(adminVo);
+////        }
+//        System.out.println("confirm");
 
         return "login";
     }
@@ -1253,8 +1257,9 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
                                   Principal principal,
                                   ModelMap model){
         AssetReservationVO assetReservationVO = assetService.getAssetReservation(param.getIdx());
+        System.out.println(assetReservationVO);
         List<AssetReservationItemVO> assetReservationItemVOList = assetService.getAssetReservationItemList(param.getIdx());
-        AdminVO applicant = adminService.getAdminInfo(param.getIdx());
+        AdminVO applicant = adminService.getAdminInfo(assetReservationVO.getIdx_user());
         param.setFilter1(100);
         List<AssetVO> assetVOList = assetService.getAssetList(param);
         AdminVO adminInfo = adminService.findAdminById(principal.getName());

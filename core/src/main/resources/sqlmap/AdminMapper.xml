@@ -65,9 +65,11 @@
     </select>
 
     <select id="getAdminCount" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM TB_ADMIN WHERE USER_TYPE = #{admin_type}
+    </select>
+
+    <select id="getAdminCount99" parameterType="int" resultType="int">
         SELECT COUNT(*) FROM TB_ADMIN
-        <if test='admin_type != 99'>WHERE USER_TYPE = #{admin_type}</if>
-        ;
     </select>
 
     <select id="selectList" parameterType="kr.or.fact.core.model.DTO.AdminVO"
@@ -183,16 +185,24 @@
         SELECT A.*, FLOOR((ROWNUM - 1)/#{count} + 1) PAGE, (
         SELECT MAX(FLOOR((ROWNUM - 1)/#{count} + 1)) FROM TB_ADMIN
         WHERE IDX_ADMIN >= 1
-        <if test="corporate != '100'">
             AND CORPORATE = #{corporate}
-        </if>
         ) MAXVALUE FROM (
         SELECT TB_ADMIN.* FROM TB_ADMIN
         WHERE IDX_ADMIN >= 1
-        <if test="corporate != '100'">
             AND CORPORATE = #{corporate}
-        </if>
-        ORDER BY CONVERT(ADMIN_NAME,'UTFE') ASC
+        )
+        A)
+        WHERE PAGE = #{pageNum}
+    </select>
+
+    <select id="selectAdminbyIdx100" resultType="kr.or.fact.core.model.DTO.AdminResVO">
+        SELECT * FROM (
+        SELECT A.*, FLOOR((ROWNUM - 1)/#{count} + 1) PAGE, (
+        SELECT MAX(FLOOR((ROWNUM - 1)/#{count} + 1)) FROM TB_ADMIN
+        WHERE IDX_ADMIN >= 1
+        ) MAXVALUE FROM (
+        SELECT TB_ADMIN.* FROM TB_ADMIN
+        WHERE IDX_ADMIN >= 1
         )
         A)
         WHERE PAGE = #{pageNum}
@@ -200,9 +210,11 @@
 
     <select id="selectCount" resultType="int">
         SELECT COUNT(*) as count from TB_ADMIN
-        <if test="corporate != '100'">
             WHERE CORPORATE = #{corporate}
-        </if>
+    </select>
+
+    <select id="selectCount100" resultType="int">
+        SELECT COUNT(*) as count from TB_ADMIN
     </select>
 
     <update id="modifyPw">

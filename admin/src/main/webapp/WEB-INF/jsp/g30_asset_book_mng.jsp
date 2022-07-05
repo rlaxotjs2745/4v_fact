@@ -71,7 +71,6 @@
     </div>
 </div>
 
-</div>
 <div class="modal fade" id="modals-reserve-write">
     <div class="modal-dialog modal-lg">
         <form class="modal-content">
@@ -263,8 +262,6 @@
             </div>
         </form>
     </div>
-</div>
-
 </div>
 
 <!-- Layout footer -->

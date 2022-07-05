@@ -35,6 +35,8 @@ public interface AssetMapper {
 
     AssetReservationVO getAssetReservation(@Param("idx") long idx);
 
+    long getIdxAssetReservation();
+
     int updateReservationItem(@Param("idx") long idx, @Param("status") int status);
 
     int updateReservation(@Param("reservationIdx") long reservationIdx, @Param("status") int status, @Param("idx") long idx);

@@ -6,38 +6,38 @@
     <h4 class="d-flex justify-content-between align-items-center w-100 mt-4">
         <div>자원 예약</div>
     </h4>
-    <div class="row">
-        <div class="col-sm-6 col-xl-4">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="text-muted small mt-2">신규 예약</div>
-                        <div class="text-large">5200</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-xl-4">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="text-muted small mt-2">예약 승인</div>
-                        <div class="text-large">2590</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-xl-4">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="text-muted small mt-2">예약 불가</div>
-                        <div class="text-large">000</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<%--    <div class="row">--%>
+<%--        <div class="col-sm-6 col-xl-4">--%>
+<%--            <div class="card mb-3">--%>
+<%--                <div class="card-body">--%>
+<%--                    <div class="d-flex justify-content-between">--%>
+<%--                        <div class="text-muted small mt-2">신규 예약</div>--%>
+<%--                        <div class="text-large">5200</div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="col-sm-6 col-xl-4">--%>
+<%--            <div class="card mb-3">--%>
+<%--                <div class="card-body">--%>
+<%--                    <div class="d-flex justify-content-between">--%>
+<%--                        <div class="text-muted small mt-2">예약 승인</div>--%>
+<%--                        <div class="text-large">2590</div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="col-sm-6 col-xl-4">--%>
+<%--            <div class="card mb-3">--%>
+<%--                <div class="card-body">--%>
+<%--                    <div class="d-flex justify-content-between">--%>
+<%--                        <div class="text-muted small mt-2">예약 불가</div>--%>
+<%--                        <div class="text-large">000</div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
 
     <div class="card px-4 pt-4 pb-4" style="margin-bottom: 0.3em">
         <%--            <div class="form-row mb-4">--%>
@@ -83,9 +83,6 @@
                     </label>
                     <label class="btn btn-secondary">
                         <input type="radio" name="btn-radio-status" value="0"> 대기
-                    </label>
-                    <label class="btn btn-secondary">
-                        <input type="radio" name="btn-radio-status" value="2"> 사용 보류
                     </label>
                 </div>
             </div>
@@ -354,9 +351,6 @@
                 break;
             case "1":
                 param.filter1 = 1;
-                break;
-            case "2":
-                param.filter1 = 2;
                 break;
             case "3":
                 param.filter1 = 3;

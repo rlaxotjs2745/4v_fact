@@ -73,20 +73,20 @@
                     <tbody>
 
                     <c:forEach items="${announceList}" var="ann" varStatus="status">
-                    <tr>
-                        <td>${ann.announce_num}</td>
-                        <td>
-                            <c:if test="${ann.bs_status eq 2}"> 대기</c:if>
-                            <c:if test="${ann.bs_status eq 3}"> 신청중</c:if>
-                            <c:if test="${ann.bs_status eq 4}"> 신청완료</c:if>
-                            <c:if test="${ann.bs_status eq 10}"> 사업종료</c:if>
-                        </td>
-                        <td class="td__left"><a href="/brd_announce_detail?idx=${ann.idx_bs_announcement}" class="td__link">${ann.subject}<c:if test="${ann.is_new eq 1}"> <img src="resources/assets/image/ico_new.png" alt="NEW" class="board__badge"></c:if></a></td>
-                        <td class="td__data"><img src="resources/assets/image/ico_doc.png" alt=""></td>
-                        <td class="td__data">${ann.author}</td>
-                        <td class="td__data"><fmt:formatDate value="${ann.posting_start_date}" pattern="yyyy-MM-dd" /></td>
-                        <td class="td__data">${ann.view_count}</td>
-                    </tr>
+                        <tr>
+                            <td>${ann.announce_num}</td>
+                            <td>
+                                <c:if test="${ann.bs_status eq 2}"> 대기</c:if>
+                                <c:if test="${ann.bs_status eq 3}"> 신청중</c:if>
+                                <c:if test="${ann.bs_status eq 4}"> 신청완료</c:if>
+                                <c:if test="${ann.bs_status eq 10}"> 사업종료</c:if>
+                            </td>
+                            <td class="td__left"><a href="/brd_announce_detail?idx=${ann.idx_bs_announcement}" class="td__link">${ann.subject}<c:if test="${ann.is_new eq 1}"> <img src="resources/assets/image/ico_new.png" alt="NEW" class="board__badge"></c:if></a></td>
+                            <td class="td__data"><img src="resources/assets/image/ico_doc.png" alt=""></td>
+                            <td class="td__data">${ann.author}</td>
+                            <td class="td__data"><fmt:formatDate value="${ann.posting_start_date}" pattern="yyyy-MM-dd" /></td>
+                            <td class="td__data">${ann.view_count}</td>
+                        </tr>
                     </c:forEach>
                     <%--<tr>
                         <td>671</td>
@@ -177,9 +177,9 @@
 
                     <c:if test="${is_past eq true}"><a href="brd_announce?page=1" class="paging__prev2"><img src="resources/assets/image/ico_paging_prev_02.png" alt=""></a></c:if>
                     <c:if test="${is_prev eq true}"><a href="brd_announce?page=${cur_page-1}" class="paging__prev"><img src="resources/assets/image/ico_paging_prev.png" alt=""></a></c:if>
-<c:forEach var="i" begin="1" end="${page_amount}">
-                    <a href="brd_announce?page=${(cur_sector-1)*page_amount+i}" <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">class="is-active"</c:if>>${(cur_sector-1)*page_amount+i}</a>
-</c:forEach>
+                    <c:forEach var="i" begin="1" end="${page_amount}">
+                        <a href="brd_announce?page=${(cur_sector-1)*page_amount+i}" <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">class="is-active"</c:if>>${(cur_sector-1)*page_amount+i}</a>
+                    </c:forEach>
                     <c:if test="${is_next eq true}"><a href="brd_announce?page=${cur_page+1}" class="paging__next"><img src="resources/assets/image/ico_paging_next.png" alt=""></a></c:if>
                     <c:if test="${is_last eq true}"><a href="brd_announce?page=${tot_page}" class="paging__next2"><img src="resources/assets/image/ico_paging_next_02.png" alt=""></a></c:if>
                 </div>

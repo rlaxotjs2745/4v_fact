@@ -22,10 +22,10 @@ public class AdminApplication extends SpringBootServletInitializer {
     }
 
     public static void main(String[] args) {
+        SpringApplication.run(AdminApplication.class, args);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode("123123");
-        System.out.println(hashedPassword);
-        SpringApplication.run(AdminApplication.class, args);
+        System.err.println(hashedPassword);
     }
 
     @Bean

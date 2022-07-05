@@ -705,6 +705,7 @@ public class APIController {
             resultVO.setResult_str("계정 생성에 실패했습니다.");
             resultVO.setResult_code("ERROR002");
         }
+        System.out.println(resultVO);
         return  resultVO;
     }
     @RequestMapping(value = "/changePw",method = RequestMethod.POST)

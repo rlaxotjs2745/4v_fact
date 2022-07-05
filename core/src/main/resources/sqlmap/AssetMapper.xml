@@ -68,10 +68,10 @@
                 #{use_end_date},
                 SYSDATE,
                 SYSDATE)
-                <selectKey keyProperty="idx_asset_reservation" resultType="long" order="AFTER">
-                    SELECT SEQ_ASSET_RESERVATION.CURRVAL FROM DUAL
-                </selectKey>
     </insert>
+    <select id="getIdxAssetreservation" resultType="long">
+        SELECT SEQ_ASSET_RESERVATION.CURRVAL FROM DUAL
+    </select>
 
     <insert id="insertReservationItem">
         INSERT INTO TB_ASSET_RESERVATION_ITEM (IDX_ASSET_RESERVATION_ITEM,
@@ -120,7 +120,6 @@
         <if test='filter3 != 0'>
             AND ASSET_DETAIL_CATEGORY_CODE = #{filter3}
         </if>
---         ORDER BY CONVERT(ADMIN_NAME,'UTFE') ASC
         )
         A)
         <if test='page_num != 0'>
