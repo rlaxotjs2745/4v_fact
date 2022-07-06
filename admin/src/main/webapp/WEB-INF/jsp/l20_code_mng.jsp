@@ -30,9 +30,9 @@
                             <tbody>
                             <c:choose>
                                 <c:when test="${fn:length(systemCodeList)>0}">
-                                    <c:forEach items = "${systemCodeList}" var ="code">
+                                    <c:forEach items = "${systemCodeList}" var ="code" varStatus="status">
                                         <tr class="">
-                                            <td class="text-center">${code.order_num}</td>
+                                            <td class="text-center">${status.count}</td>
                                             <td class="text-center">${code.code_name}</td>
                                             <td class="text-center">${code.code_value}</td>
                                             <td class="text-center">${code.detail}</td>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="article-list_info" role="status" aria-live="polite">총 50개 중 1에서 10까지</div>
+<%--                        <div class="dataTables_info" id="article-list_info" role="status" aria-live="polite">총 50개 중 1에서 10까지</div>--%>
                     </div>
                     <div class="col-sm-12 col-md-7">
                         <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
