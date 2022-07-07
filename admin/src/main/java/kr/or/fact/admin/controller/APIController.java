@@ -307,7 +307,7 @@ public class APIController {
 
     @RequestMapping(value = "/send_mail",method = RequestMethod.POST)
     public String send_mail(@ModelAttribute MailVO mailVO, HttpSession session, HttpServletRequest request) throws Exception, IOException {
-        System.out.println(session.getAttribute("admin_id"));
+//        System.out.println(session.getAttribute("admin_id"));
         String title = mailVO.getTitle();
         String content = mailVO.getContent();
         String receiver = mailVO.getReceiver();

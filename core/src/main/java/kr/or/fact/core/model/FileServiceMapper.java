@@ -1,12 +1,8 @@
 package kr.or.fact.core.model;
 
-import kr.or.fact.core.model.DTO.FileInfoVO;
-import kr.or.fact.core.model.DTO.FormFileInfoVO;
-import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
-import kr.or.fact.core.model.DTO.RuleFileInfoVO;
+import kr.or.fact.core.model.DTO.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -32,4 +28,6 @@ public interface FileServiceMapper {
 
     int getRuleFileTotalCount();
     List<RuleFileInfoVO>getRuleFileInfoList1();
+
+    int insertFileInfo(FileInfoVO fileInfoVO);
 }

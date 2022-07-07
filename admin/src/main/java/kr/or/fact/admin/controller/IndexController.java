@@ -102,7 +102,7 @@ public class IndexController {
                                  @RequestParam(value="id") String admin_id,
                                  @RequestParam(value="pw") String admin_pw){
 
-        System.out.println("api_post_login");
+//        System.out.println("api_post_login");
          if(admin_id == null || admin_pw == null){
             return "redirect:/login";
         }
@@ -889,8 +889,7 @@ public class IndexController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-        System.out.println(eventContentList);
-        System.out.println(eventCount);
+
 
         return "c42_site_event_mng";
     }
@@ -954,8 +953,7 @@ model.addAttribute("prlist",prlist);
         model.addAttribute("is_last",is_last);
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
-        System.out.println(prlist);
-        System.out.println(prCount);
+
         return "c43_site_adver_mng";
     }
 
@@ -970,7 +968,7 @@ model.addAttribute("prlist",prlist);
                 content = prContentVO.getPr_contents();
             }
         }
-        System.out.println(content);
+
         model.addAttribute("contentFuck",  content);
 
         return "pr_contents";
@@ -1606,8 +1604,10 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //서식 관리
     @RequestMapping(value = "/l11_document_form_mng",method = RequestMethod.POST)
     public String l11_document_form_mng(@RequestBody ParamPageListFilteredVO param,
-                                           ModelMap model){
+                                           ModelMap model, Principal principal){
 
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+        model.addAttribute("admin", adminInfo);
 
         return "l11_document_form_mng";
     }

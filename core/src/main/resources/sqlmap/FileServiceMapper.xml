@@ -95,7 +95,8 @@
 
     </select>
 
-    <insert id="insertFormFileInfo" parameterType="kr.or.fact.core.model.DTO.FormFileInfoVO">
+    <insert id="insertFormFileInfo" parameterType="kr.or.fact.core.model.DTO.FormFileInfoVO" useGeneratedKeys="true">
+
         INSERT INTO TB_FORM_FILE_INFO (
             IDX_FORM_FILE_INFO,
             SUBJECT,
@@ -110,9 +111,10 @@
                      #{usage_detail},
                      #{idx_admin},
                      #{order_num},
-                     #{idx_file_info},
+                     ( SELECT (MAX(IDX_FILE_INFO)) FROM TB_FILE_INFO),
                      SYSDATE
                  )
+
     </insert>
     <select id="getFormFileInfo" parameterType="long" resultType="kr.or.fact.core.model.DTO.FormFileInfoVO">
 
@@ -193,7 +195,7 @@
                      #{depart_name},
                      #{idx_admin},
                      #{order_num},
-                     #{idx_file_info},
+                     ( SELECT (MAX(IDX_FILE_INFO)) FROM TB_FILE_INFO),
                      SYSDATE
                  )
     </insert>
@@ -240,4 +242,42 @@
     <select id="getRuleFileInfoList1" resultType="kr.or.fact.core.model.DTO.RuleFileInfoVO">
         SELECT * FROM TB_RULE_FILE_INFO
     </select>
+
+
+    <insert id="insertFileInfo" parameterType="kr.or.fact.core.model.DTO.FileInfoVO" >
+        INSERT INTO TB_FILE_INFO (
+            IDX_FILE_INFO,
+            FILE_NAME,
+            FILE_TYPE,
+            FILE_STATUS,
+            MIME_TYPE,
+            ENCODING,
+            EXTENTION,
+            FILE_SECURE_TYPE,
+            FILE_PATH,
+            FILE_SIZE,
+            CHECKSUM,
+            OWNER,
+            IDX_USER,
+            IDX_ADMIN,
+            REG_DATE
+        ) VALUES (
+                     SEQ_FILE_INFO.NEXTVAL,
+                     #{file_name},
+                     #{file_type},
+                     #{file_status},
+                     #{mime_type},
+                     #{encoding},
+                     #{extention},
+                     #{file_secure_type},
+                     #{file_path},
+                     #{file_size},
+                     #{checksum},
+                     #{owner},
+                     #{idx_user},
+                     #{idx_admin},
+                     SYSDATE
+                 )
+    </insert>
+
 </mapper>

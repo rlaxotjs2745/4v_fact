@@ -105,7 +105,7 @@
                                     <tr class="rulefile-entity" id="${rulefile.idx_rule_file_info}">
                                         <td class="text-center">${rulefile.order_num}</td>
                                         <td class="text-center">${rulefile.subject}</td>
-                                        <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">${rulefile.usage_detail}</a></td>
+                                        <td class="text-center"><a href="#none" data-toggle="modal" data-target="#modals-counsel-view" class="btn btn-outline-default  btn-sm">${rulefile.usage_detail}</a></td>
                                         <td class="text-center">${rulefile.depart_name}</td>
                                         <td class="text-center"><fmt:formatDate value="${rulefile.reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 

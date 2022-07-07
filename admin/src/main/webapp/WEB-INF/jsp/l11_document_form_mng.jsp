@@ -23,13 +23,12 @@
                             <thead class="bg-success text-white font-weight-bold">
                             <tr role="row">
                                 <th class="text-center px-2" style="width:6%">순서</th>
-                                <th class="text-center px-2" style="width:4%">표시</th>
-                                <th class="text-center sorting" style="width:10%">소속</th>
-                                <th class="text-center sorting" style="width:10%">성명</th>
-                                <th class="text-center sorting" style="width:auto">담당 업무</th>
-                                <th class="text-center sorting" style="width:10%">직위</th>
-                                <th class="text-center sorting" style="width:16%">전화번호</th>
-                                <th class="text-center px-2" style="width:16%">이메일</th>
+                                <th class="text-center px-2" style="width:16%">제목</th>
+                                <th class="text-center sorting" style="width:36%">용도</th>
+                                <th class="text-center sorting" style="width:10%">관련 조직</th>
+                                <th class="text-center sorting" style="width:14%">파일이름</th>
+                                <th class="text-center sorting" style="width:6%">파일형식</th>
+                                <th class="text-center sorting" style="width:12%">등록일</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -123,9 +122,9 @@
                             </div>
                         </div>
                         <div class="form-group row" id="file">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">파일 업로드</label>
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" for="file_upload">파일 업로드</label>
                             <div class="col-md-10">
-                                <input id="file_upload" type="file" class="form-control form-control-md">
+                                <input id="file_upload" name="file_upload" type="file" class="form-control form-control-md" multiple>
                             </div>
                         </div>
 
@@ -297,6 +296,7 @@
 
     var saveNewBtn = document.querySelectorAll('.btn_save_new');
     saveNewBtn.forEach(btn=>btn.addEventListener('click', saveForm));
+
     function saveForm(){
     event.preventDefault();
     var fileForm = new FormData();
@@ -305,67 +305,35 @@
 
     var files = document.querySelector('#file_upload').files;
 
-    console.log(fileForm);
-    console.log(files);
+
     for(var i = 0; i < files.length; i++){
         var num = i + 1;
         fileForm.append("files" + num, files[i]);
     }
     fileForm.append("fileLength", files.length);
-        console.log("여기")
+
     $.ajax({
         type: 'post',
-        url :'uploadFile', //데이터를 주고받을 파일 주소 입력
-        data: files,//보내는 데이터
+        url :'upload_form_file', //데이터를 주고받을 파일 주소 입력
+        data: fileForm,//보내는 데이터
         contentType: false,//보내는 데이터 타입
         processData: false,//Jquery 내부에서 파일을 queryString 형태로 전달하는 것을 방지
         dataType:'json',//받는 데이터 타입
         enctype: 'multipart/form-data',
         success: function(result){
             console.log(result);
-            alert("이게맞나", () => window.redirect("/"))
+            alert("업로드에 성공했습니다", () => window.redirect("/"))
         },
         error:function(err){
             console.log(err);
+            alert("업로드에 실패했습니다")
         }
     });
-     event.preventDefault();
+     // event.preventDefault();
     }
 
 
 
 
 
-    //
-    // function event_pass() {
-    //
-    //     var param = {
-    //
-    //         subject: $("#form_title input").val(),
-    //         usage_detail:$("#form_usage textarea").val()
-    //     };
-    //     console.log(param);
-    //     $.ajax({
-    //         type: 'post',
-    //         url :'upload_form_info', //데이터를 주고받을 파일 주소 입력
-    //         data: JSON.stringify(param),//보내는 데이터
-    //         contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
-    //         dataType:'json',//받는 데이터 타입
-    //         success: function(result){
-    //             //작업이 성공적으로 발생했을 경우
-    //             console.log(result);
-    //             if(result.result_code=="SUCCESS"){
-    //
-    //             }
-    //             else {
-    //
-    //             }
-    //             alert(result.result_str);
-    //
-    //         },
-    //         error:function(){
-    //             //에러가 났을 경우 실행시킬 코드
-    //         }
-    //     });
-    // }
 </script>
