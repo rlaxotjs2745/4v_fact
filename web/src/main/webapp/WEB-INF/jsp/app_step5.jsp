@@ -158,6 +158,56 @@
         document.body.appendChild(f);
         f.submit();
     }
+    $("#btn_save").click(function(){
+
+        if (!confirm("저장하시겠습니까.")) {
+            // 취소(아니오) 버튼 클릭 시 이벤트
+
+        } else {
+            // 확인(예) 버튼 클릭 시 이벤트
+
+            $('#btn_app_step6').attr('disabled', false);
+
+        }
+    });
+    var saveNewBtn = document.querySelectorAll('.btn_save_new');
+    saveNewBtn.forEach(btn=>btn.addEventListener('click', saveForm));
+
+    function saveForm(){
+        event.preventDefault();
+        var fileForm = new FormData();
+        fileForm.append("subject",document.querySelector('#subject').value);
+
+
+        var files = document.querySelector('#file_upload').files;
+
+
+        for(var i = 0; i < files.length; i++){
+            var num = i + 1;
+            fileForm.append("files" + num, files[i]);
+        }
+        fileForm.append("fileLength", files.length);
+
+        $.ajax({
+            type: 'post',
+            url :'upload_app_step5_file', //데이터를 주고받을 파일 주소 입력
+            data: fileForm,//보내는 데이터
+            contentType: false,//보내는 데이터 타입
+            processData: false,//Jquery 내부에서 파일을 queryString 형태로 전달하는 것을 방지
+            dataType:'json',//받는 데이터 타입
+            enctype: 'multipart/form-data',
+            success: function(result){
+                console.log(result);
+                alert("업로드에 성공했습니다", () => window.redirect("/"))
+            },
+            error:function(err){
+                console.log(err);
+                alert("업로드에 실패했습니다")
+            }
+        });
+        // event.preventDefault();
+    }
+
 
 </script>
 </body>

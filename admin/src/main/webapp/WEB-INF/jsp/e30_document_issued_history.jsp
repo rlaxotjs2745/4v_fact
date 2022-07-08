@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- Page content -->
 <div class="container-fluid flex-grow-1 container-p-y">
 
@@ -92,18 +93,16 @@
                             <thead class="bg-success text-white font-weight-bold">
                             <tr role="row">
                                 <th class="text-center px-2" style="width:60px">No</th>
-                                <th class="text-center sorting" style="width:80px">상담일지</th>
-                                <th class="text-center px-2" style="width:100px">상담 형식</th>
-                                <th class="text-center sorting" style="width:60px">상담 상황</th>
-                                <th class="text-center sorting" style="width:100px">신청자</th>
-                                <th class="text-center sorting" style="width:100px">상담목표</th>
-                                <th class="text-center sorting" style="width:150px">상담파일 여부</th>
-                                <th class="text-center px-2" style="width:80px">메모</th>
-                                <th class="text-center px-2" style="width:120px">최초등록일시</th>
-                                <th class="text-center px-2" style="width:120px">상담예정일</th>
-                                <th class="text-center px-2" style="width:120px">상담 종류</th>
-                                <th class="text-center px-2" style="width:150px">요청등록일</th>
-                                <th class="text-center px-2" style="width:150px">주소</th>
+                                <th class="text-center sorting" style="width:80px">발급상태</th>
+                                <th class="text-center px-2" style="width:100px">기업명</th>
+                                <th class="text-center sorting" style="width:60px">신청자</th>
+                                <th class="text-center sorting" style="width:100px">신청일</th>
+                                <th class="text-center sorting" style="width:100px">발급 요청 문서</th>
+                                <th class="text-center sorting" style="width:150px">수량</th>
+                                <th class="text-center px-2" style="width:80px">용도</th>
+                                <th class="text-center px-2" style="width:120px">발급일시</th>
+                                <th class="text-center px-2" style="width:120px">일련번호</th>
+
                             </tr>
                             </thead>
                             <tbody>
@@ -120,9 +119,7 @@
                                         <td class="text-center">${consulting.memo}</td>
                                         <td class="text-center"><fmt:formatDate value="${consulting.reg_date}" pattern="yyyy-MM-dd HH:MM"/></td>
                                         <td class="text-center"><fmt:formatDate value="${consulting.resulvation_date}" pattern="yyyy-MM-dd HH:MM"/></td>
-                                        <td class="text-center">${consulting.consulting_type eq 0 ? "지원상담": consulting.consulting_type eq 1 ? "평가상담": consulting.consulting_type eq 2 ? "사업계획상담":consulting.consulting_type eq 3 ? "협약상담":consulting.consulting_type eq 4 ? "실증수행상담":consulting.consulting_type eq 5 ? "정산상담": "기타"}</td>
-                                        <td class=""><fmt:formatDate value="${consulting.req_date}" pattern="yyyy-MM-dd HH:MM"/></td>
-                                        <td class="text-center">${consulting.addr}</td>
+
                                     </tr>
                                 </c:forEach>
                             </c:if>
@@ -147,13 +144,7 @@
                                 <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c10_site_mng_consult_mng',{page_num:${cur_page+1}},'상담신청 목록');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
                                 <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c10_site_mng_consult_mng',{page_num:${tot_page}},'상담신청 목록');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
                                 </c:if>
-                                <%--                                    <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>--%>
-                                <%--                                    <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>--%>
-                                <%--                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>--%>
-                                <%--                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>--%>
-                                <%--                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>--%>
-                                <%--                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>--%>
-                                <%--                                    <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>--%>
+
                             </ul>
                         </div>
                     </div>
@@ -166,3 +157,8 @@
 <%@include file ="layouts/frame_footer.jsp" %>
 <!-- / Layout footer -->
 <!-- / Page content -->
+<script>
+
+
+
+</script>

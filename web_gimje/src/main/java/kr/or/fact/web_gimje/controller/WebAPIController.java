@@ -834,7 +834,20 @@ public class WebAPIController {
         userDemoBsService.updateUserDemoBsWebStep4(findUserDemoBsVo);
         return resultVO;
     }
+    @RequestMapping(value ="/app_step5_save_temp")
+    public  @ResponseBody
+    ResultVO app_step5_save_temp(HttpSession session,@RequestBody UserDemoBsFileVO userDemoBsFileVO ){
 
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("저장했습니다");
+
+
+
+
+        return null;
+}
 
     @RequestMapping(value = "/get_monthly_visit_data",method = RequestMethod.POST)
     public @ResponseBody

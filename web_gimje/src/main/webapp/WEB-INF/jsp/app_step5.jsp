@@ -159,6 +159,19 @@
         f.submit();
     }
 
+    $("#btn_save").click(function(){
+
+        if (!confirm("저장하시겠습니까.")) {
+            // 취소(아니오) 버튼 클릭 시 이벤트
+
+        } else {
+            // 확인(예) 버튼 클릭 시 이벤트
+
+            $('#btn_app_step6').attr('disabled', false);
+
+        }
+    });
+
 </script>
 </body>
 </html>

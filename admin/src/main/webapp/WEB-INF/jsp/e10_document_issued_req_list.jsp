@@ -78,14 +78,16 @@
                         <table id="table_demo_bs" class="table table-striped table-bordered dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
                             <thead class="bg-success text-white font-weight-bold">
                             <tr role="row">
-                                <th class="text-center" style="width:60px">상태</th>
-                                <th class="text-center" style="width:100px">공고문 번호</th>
-                                <th class="text-center" style="width:300px">공고문 제목</th>
-                                <th class="text-center" style="width:80px">열람 수(회)</th>
-                                <th class="text-center" style="width:80px">지원 현황</th>
-                                <th class="text-center" style="width:110px">전시 시작일, 시간</th>
-                                <th class="text-center" style="width:110px">전시 종료일, 시간</th>
-                                <th class="text-center" style="width:80px">작성자</th>
+                                <th class="text-center" style="width:60px">NO.</th>
+                                <th class="text-center" style="width:100px">발급상태</th>
+                                <th class="text-center" style="width:300px">기업명</th>
+                                <th class="text-center" style="width:80px">신청자</th>
+                                <th class="text-center" style="width:80px">신청일</th>
+                                <th class="text-center" style="width:110px">발급 요청 문서</th>
+                                <th class="text-center" style="width:110px">수량</th>
+                                <th class="text-center" style="width:80px">용도</th>
+                                <th class="text-center" style="width:80px">발급일시</th>
+                                <th class="text-center" style="width:80px">일련번호</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -119,6 +121,8 @@
                                         <td class="text-right">${item.applicant_count}</td>
                                         <td class="text-center">${item.posting_start_date}</td>
                                         <td class="text-center">${item.posting_end_date}</td>
+                                        <td class="text-center">${item.author}</td>
+                                        <td class="text-center">${item.author}</td>
                                         <td class="text-center">${item.author}</td>
                                     </tr>
                                 </c:forEach>

@@ -111,7 +111,7 @@
                      #{usage_detail},
                      #{idx_admin},
                      #{order_num},
-                     ( SELECT (MAX(IDX_FILE_INFO)) FROM TB_FILE_INFO),
+                     SEQ_FILE_INFO.CURRVAL,
                      SYSDATE
                  )
 
@@ -195,7 +195,7 @@
                      #{depart_name},
                      #{idx_admin},
                      #{order_num},
-                     ( SELECT (MAX(IDX_FILE_INFO)) FROM TB_FILE_INFO),
+                     SEQ_FILE_INFO.CURRVAL,
                      SYSDATE
                  )
     </insert>
