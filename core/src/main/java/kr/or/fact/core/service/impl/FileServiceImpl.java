@@ -163,7 +163,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public int insertFileInfo(FileInfoVO fileInfoVO) {
-
+        fileInfoVO.setFile_path(factConfig.getUploadDir()+ fileInfoVO.getFile_path());
         return fileServiceMapper.insertFileInfo(fileInfoVO);
     }
 

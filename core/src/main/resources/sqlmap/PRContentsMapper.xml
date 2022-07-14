@@ -105,4 +105,22 @@ LAST_UPD_DATE
     <delete id="deletePR" parameterType="int">
         DELETE FROM TB_PR_CONTENT WHERE  IDX_PR_CONTENT = #{idx_pr_content}
     </delete>
+
+    <insert id="insertPRContentFileJoin" parameterType="kr.or.fact.core.model.DTO.PRContentFileJoinVO">
+        INSERT INTO TB_PR_CONTENT_FILE_JOIN (
+            IDX_PR_CONTENT_FILE_JOIN,
+            IDX_PR_CONTENT,
+
+            IDX_FILE_INFO,
+
+            REG_DATE
+        )VALUES (
+                    SEQ_PR_CONTENT_FILE_JOIN.NEXTVAL,
+                    SEQ_PR_CONTENT.CURRVAL,
+                    SEQ_FILE_INFO.CURRVAL,
+
+                    SYSDATE
+
+                )
+    </insert>
 </mapper>

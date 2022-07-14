@@ -14,4 +14,5 @@ public interface EventContentService {
     EventContentVO getEventContentByIdx (int idx_event_content);
     public int insertEventContent(EventContentVO eventContentVO);
     int deleteEvent(int idx_event_content);
+    int insertEventContentFileJoin();
 }

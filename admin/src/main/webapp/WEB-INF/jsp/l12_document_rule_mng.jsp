@@ -34,16 +34,14 @@
                             </thead>
                             <tbody>
                             <c:choose>
-                                <c:when test="${fn:length(ruleFileInfoVOList)>0}">
-                                    <c:forEach items = "${ruleFileInfoVOList}" var ="rule">
-                                        <tr class="">
-                                            <td class="text-center">${rule.order_num}</td>
-                                            <td class="text-center"><a href="#modals-rule-file" data-toggle="modal" data-target="#modals-default">${rule.subject}</a></td>
-                                            <td class="text-center">${rule.usage_detail}</td>
-                                            <td class="text-center">${rule.extention}</td>
-                                            <td class="text-center">${rule.file_name}</td>
-                                            <td class="text-center">${rule.extention}</td>
-                                            <td class="text-center">${rule.reg_date}</td>
+                                <c:when test="${fn:length(rulefileinfolist)>0}">
+                                    <c:forEach items="${rulefileinfolist}" var="rulefile">
+                                        <tr class="rulefile-entity" id="${rulefile.idx_rule_file_info}">
+                                            <td class="text-center">${rulefile.order_num}</td>
+                                            <td class="text-center">${rulefile.subject}</td>
+                                            <td class="text-center"><a href="#none" data-toggle="modal" data-target="#modals-counsel-view" class="btn btn-outline-default  btn-sm">${rulefile.usage_detail}</a></td>
+                                            <td class="text-center">${rulefile.depart_name}</td>
+                                            <td class="text-center"><fmt:formatDate value="${rulefile.reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                                         </tr>
                                     </c:forEach>
                                 </c:when>

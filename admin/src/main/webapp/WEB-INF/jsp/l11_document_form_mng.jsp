@@ -32,6 +32,17 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <c:forEach items="${formfilelist}" var="formfile">
+                                <tr class="formfile-entity" id="${formfile.idx_form_file_info}">
+                                    <td class="text-center">${formfile.order_num}</td>
+                                    <td class="text-center">${formfile.subject}</td>
+                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">${formfile.usage_detail}</a></td>
+                                    <td class="text-center">${formfile.row_num}</td>
+                                    <td class="text-center"><fmt:formatDate value="${formfile.reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                                    <td class="text-center">${formfile.idx_admin}</td>
+
+                                </tr>
+                            </c:forEach>
                             <%--<c:choose>
                                 <c:when test="${fn:length(coWorkerVOList)>0}">
                                     <c:forEach items = "${coWorkerVOList}" var ="coworker">

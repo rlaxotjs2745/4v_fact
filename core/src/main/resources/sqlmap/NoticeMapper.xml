@@ -124,9 +124,30 @@ LAST_UPD_DATE
         FROM TB_NOTICE WHERE IDX_NOTICE = #{idx_notice}
     </select>
     <select id="getMainNoticeList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.NoticeVO">
-        SELECT * FROM TB_NOTICE  WHERE  IS_MAIN_PAGE=1;
+        SELECT * FROM TB_NOTICE  WHERE  IS_MAIN_PAGE=1
     </select>
     <delete id="deleteNotice" parameterType="int">
         DELETE FROM TB_NOTICE WHERE IDX_NOTICE = #{idx_notice}
     </delete>
+
+
+
+    <insert id="insertNoticeFileJoin" parameterType="kr.or.fact.core.model.DTO.NoticeFileJoinVO">
+        INSERT INTO TB_NOTICE_FILE_JOIN (
+IDX_NOTICE_FILE_JOIN,
+IDX_NOTICE,
+
+IDX_FILE_INFO,
+
+REG_DATE
+        )VALUES (
+                    SEQ_NOTICE_FILE_JOIN.NEXTVAL,
+                    SEQ_NOTICE.CURRVAL,
+                    SEQ_FILE_INFO.CURRVAL,
+
+                    SYSDATE
+
+                )
+    </insert>
+
 </mapper>

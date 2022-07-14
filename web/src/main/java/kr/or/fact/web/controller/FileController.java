@@ -157,7 +157,7 @@ public class FileController {
         } catch(Exception e){} return reFileNm;
     }
 
-    @RequestMapping(value = "/upload_rule_file",method = RequestMethod.POST)
+    @RequestMapping(value = "/upload_userbs_file",method = RequestMethod.POST)
     public FileUploadResponseVO uploadRuleFile(@ModelAttribute FileRequestVO fileRequestVO, HttpSession session, HttpServletRequest request) throws Exception, IOException {
         String subject = fileRequestVO.getSubject();
         String usage_detail =fileRequestVO.getUsage_detail();

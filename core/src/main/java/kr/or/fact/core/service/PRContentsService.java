@@ -16,7 +16,7 @@ public interface PRContentsService {
     PRContentVO getPRContent(int idx);
 
 
-
+int insertPRContentFileJoin();
 
  List<PRContentVO> selectPRContentList(String tagValue);
 }

@@ -55,4 +55,9 @@ public class NoticeServiceImpl implements NoticeService {
         Long newIdx = Long.parseLong("" + idx_notice);
         return noticeMapper.getNoticeByIdx(newIdx);
     }
+
+    @Override
+    public int insertNoticeFileJoin() {
+        return noticeMapper.insertNoticeFileJoin();
+    }
 }

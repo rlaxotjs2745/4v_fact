@@ -1,5 +1,6 @@
 package kr.or.fact.admin.controller;
 
+import kr.or.fact.core.config.FACTConfig;
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.FileService;
 import org.slf4j.Logger;
@@ -29,6 +30,9 @@ public class FileController {
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
     @Autowired
     private FileService fileService;
+
+    @Autowired
+    private FACTConfig factConfig;
 
 
     @PostMapping("/uploadFile")

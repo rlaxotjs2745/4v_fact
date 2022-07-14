@@ -29,9 +29,9 @@
         </div>
         <div class="page__menu--box">
             <div class="page__menu--inner">
-                <h2 class="page__title">홍보자료</h2>
+                <h2 class="page__title">행사안내</h2>
                 <div class="page__location">
-                    <div class="location__deco">전북 김제 스마트팜 혁신밸리 실증단지의 다양한 홍보소식과 정보를 알려드립니다.</div>
+                    <div class="location__deco">전북 김제 스마트팜 혁신밸리 실증단지의 다양한 행사소식과 정보를 알려드립니다.</div>
                 </div>
             </div>
         </div>
@@ -157,7 +157,7 @@
                             </style>
                             <div class="edit__templete">
                                 <div class="temp__title">${eventContent.subject}</div>
-                                <div class="tem__photo"><img src="resources/assets/image/img-temp-01.png" alt=""></div>
+                                <div class="tem__photo"><img src="" alt=""></div>
                                 <div class="temp__text">${eventContent.event_contents}
 
                                     ${eventContent.memo}
@@ -193,9 +193,25 @@
 
     </div>
 </div>
+
 <%@include file ="footer.jsp" %>
 <%@include file ="script.jsp" %>
+<script>
+    function downloadFile(filename){
+        const encFileName = encodeURI(filename);
+        $.ajax({
+            method:"GET",
+            url : `/downloadFile/`,
+            success : function(data) {
 
+            },
+            error:function(request,status){
+                alert("오류가 발생했습니다.");
+            }
+        });
+    }
+
+</script>
 </div>
 </body>
 </html>
