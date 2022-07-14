@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -61,12 +62,14 @@ public class IndexController {
     @Resource(name = "jusoService")
     JusoService jusoService;
 
+    @Resource(name = "fileService")
+    FileService fileService;
+
     @RequestMapping("/")
     public String home(Model model){
 
         //List<UserVO> userList = userService.selectList();
         //model.addAttribute("test_data",userList.get(0).getCreat_co());
-
         getHomepageInfo(model);
         return "index";
     }
@@ -74,6 +77,7 @@ public class IndexController {
     @RequestMapping("/index")
     public String index(HttpSession session
             ,Model model){
+
 
         getHomepageInfo(model);
         return "index";
@@ -565,6 +569,10 @@ public class IndexController {
             return "index";
         }
 
+        List<UserDemoBsFileResultVO> fileList = fileService.getUserDemoFileList(userDemoBsVo.getIdx_user_demo_bs());
+
+        model.addAttribute("fileArr", fileList);
+
         model.addAttribute("userDemoBsDetailVO",userDemoBsDetailVO);
 
         model.addAttribute("userBsHumanResourceVOList",userBsHumanResourceVOList);
@@ -575,6 +583,7 @@ public class IndexController {
 
     @RequestMapping("/app_step6")
     public String app_step6(HttpSession session
+            ,UserDemoBsCheckVO userDemoBsCheckVO
             ,Model model){
         if(session==null
                 || session.getAttribute("loginCheck")==null
@@ -591,6 +600,14 @@ public class IndexController {
             return "index";
         }
         model.addAttribute("user",findUser);
+
+        UserDemoBsVO userDemoBsVo = userDemoBsService.getUserDemoBs(userDemoBsCheckVO);
+        if(userDemoBsVo==null){//이전에 저장한게 없다, 에러페이지로 보내야 한다...
+            session.removeAttribute("loginCheck");
+            clearSessionAndRedirect(session);
+            return "index";
+        }
+        model.addAttribute("userDemoBs",userDemoBsVo);
 
         getHomepageInfo(model);
         return "app_step6";

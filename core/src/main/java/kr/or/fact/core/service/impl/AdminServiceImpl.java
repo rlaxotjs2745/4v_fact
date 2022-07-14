@@ -123,13 +123,11 @@ public class AdminServiceImpl implements AdminService {
     //어드민 테이블에서 역할과 롤을 가져와 콘트롤러에게 검증 후 콘트롤러에게 준다
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("1. " + username);
         AdminVO adminVO = adminMapper.getAdminInfoById(username);
         if(adminVO == null){
             adminVO = new AdminVO();
             adminVO.setAdmin_type(CONSTANT.ROLE_GUEST);
         }
-        System.out.println("2. " + adminVO);
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_MEMBER"/*CONSTANT.getRoleString(adminVO.getAdmin_type())*/));

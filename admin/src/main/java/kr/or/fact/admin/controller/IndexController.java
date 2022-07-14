@@ -12,11 +12,17 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Reader;
 import java.net.URL;
 import javax.annotation.Resource;
+import javax.mail.*;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.search.*;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -77,6 +83,12 @@ public class IndexController {
 
     @Resource(name="prContentService")
     public PRContentsService prContentService;
+
+    private Session session;
+
+    private Store store;
+
+    private Folder folder;
 
 
     @PreAuthorize("hasRole('ROLE_MEMBER')")
@@ -1418,7 +1430,52 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //시스템 코드 관리
     @RequestMapping(value = "/h24_sent_email_list",method = RequestMethod.POST)
     public String h24_sent_email_list(@RequestParam(value = "tag", required = false) String tagValue,
-                                      ModelMap model){
+                                      ModelMap model) throws MessagingException, IOException {
+        session = null;
+//        URLName url = new URLName("imaps", "imap.gmail.com", 993, "INBOX", "seeshow202106", "27452745ts~~");
+        URLName url = new URLName("imaps", "imap.gmail.com", 993, "INBOX", "seeshow202106", "gcyqljnhdzyascpg");
+        if (session == null) {
+            Properties props = null;
+            try {
+                props = System.getProperties();
+//                System.out.println(props);
+                props.put("mail.smtp.starttls.required", "true");
+                props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+            } catch (SecurityException se) {
+                props = new Properties();
+            }
+            session = Session.getInstance(props, null);
+        }
+        store = session.getStore(url);
+        store.connect();
+        System.out.println(store.toString());
+        folder = store.getFolder("inbox"); //inbox는 받은 메일함을 의미
+        //folder.open(Folder.READ_WRITE);
+        folder.open(Folder.READ_ONLY); //읽기 전용
+
+        int messageCount = 0;
+        try {
+            messageCount = folder.getMessageCount();
+        } catch (MessagingException me) {
+            me.printStackTrace();
+        }
+
+        if(messageCount > 5){
+            messageCount = 5;
+        }
+
+        Message[] messages = folder.getMessages();
+
+        for(int i = 0; i < messageCount; i++){
+            Message msg = messages[i];
+            if(msg.getSubject() != null){
+                System.out.println(String.format("컨텐츠타입: %s", msg.getContentType()));
+                System.out.println(String.format("발신자[0]: %s", msg.getFrom()));
+                System.out.println(String.format("메일 제목: %s", msg.getSubject()));
+                System.out.println(String.format("메일 내용: %s", msg.getContent()));
+            }
+        }
+
 
 
         return "h24_sent_email_list";

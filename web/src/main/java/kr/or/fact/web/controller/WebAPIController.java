@@ -6,6 +6,8 @@ import kr.or.fact.core.util.CONSTANT;
 import kr.or.fact.web.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,7 +15,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -44,6 +50,9 @@ public class WebAPIController {
 
     @Resource(name = "smsService")
     SmsSendService smsSendService;
+
+    @Resource(name = "fileService")
+    FileService fileService;
 
     @RequestMapping(value = "/user_id_check",method = RequestMethod.POST)
     public @ResponseBody
@@ -1134,6 +1143,44 @@ public class WebAPIController {
 
         //저장후 예약관련 데이터 변경해야 함
 
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/app_step5_save_docs",method = RequestMethod.POST)
+    public @ResponseBody ResultVO send_mail(@ModelAttribute RecieveFilesVO recieveFilesVO, HttpSession session, HttpServletRequest request) throws Exception {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR1001");
+        resultVO.setResult_str("서류 저장에 실패했습니다.");
+
+        long sender = recieveFilesVO.getSender();
+        long bsIdx = recieveFilesVO.getBs_idx();
+        System.out.println(recieveFilesVO);
+
+        try{
+            if(recieveFilesVO.getFile1() != null){
+                fileService.insertFile(recieveFilesVO.getFile1(), sender, bsIdx, 3);
+            }
+            if(recieveFilesVO.getFile2() != null){
+                fileService.insertFile(recieveFilesVO.getFile2(), sender, bsIdx, 4);
+            }
+            if(recieveFilesVO.getFile3() != null){
+                fileService.insertFile(recieveFilesVO.getFile3(), sender, bsIdx, 5);
+            }
+            if(recieveFilesVO.getFile4() != null){
+                fileService.insertFile(recieveFilesVO.getFile4(), sender, bsIdx, 6);
+            }
+            if(recieveFilesVO.getFile5() != null){
+                fileService.insertFile(recieveFilesVO.getFile5(), sender, bsIdx, 7);
+            }
+            if(recieveFilesVO.getFile6() != null){
+                fileService.insertFile(recieveFilesVO.getFile6(), sender, bsIdx, 8);
+            }
+
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("서류 저장을 완료했습니다.");
+        } catch (Exception e){
+            System.out.println(e);
+        }
         return resultVO;
     }
 
