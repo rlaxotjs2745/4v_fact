@@ -29,7 +29,6 @@ public interface FileServiceMapper {
     int getRuleFileTotalCount();
     List<RuleFileInfoVO>getRuleFileInfoList1();
 
-    long insertFileInfo(FileInfoVO fileInfoVO);
 
     long insertUserDemoBsFileJoin(UserDemoBsFileVO userDemoBsFileVO);
 
