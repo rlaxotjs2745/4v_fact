@@ -76,27 +76,27 @@
 
                 <div class="app__fileupload">
                     <div class="fileupload__title">사업자등록증 사본 (해당자에 한함)</div>
-                    <input type="file" class="fileupload">
+                    <input type="file" class="fileupload" id="file_upload" name="file_upload" multiple>
                 </div>
                 <div class="app__fileupload">
                     <div class="fileupload__title">등기부등본 사본 (해당자에 한함, 원본은 차후 요청시,제출해 주십시오.)</div>
-                    <input type="file" class="fileupload">
+                    <input type="file" class="fileupload" name="file_upload">
                 </div>
                 <div class="app__fileupload">
                     <div class="fileupload__title">법인인감증명서 (해당자에 한함, 원본은 차후 요청시,제출해 주십시오.)</div>
-                    <input type="file" class="fileupload">
+                    <input type="file" class="fileupload" name="file_upload">
                 </div>
                 <div class="app__fileupload">
                     <div class="fileupload__title">4대보험 완납증명서 (해당자에 한함, 원본은 차후 요청시,제출해 주십시오.)</div>
-                    <input type="file" class="fileupload">
+                    <input type="file" class="fileupload" name="file_upload">
                 </div>
                 <div class="app__fileupload">
                     <div class="fileupload__title">최근 2년간 재무제표 또는 회계감사 보고서 (해당자에 한함, 원본은 차후 요청시,제출해 주십시오.)</div>
-                    <input type="file" class="fileupload">
+                    <input type="file" class="fileupload" name="file_upload">
                 </div>
                 <div class="app__fileupload">
                     <div class="fileupload__title">기타 (가점서류 및 기업역량을 보여줄 수 있는 자료, 자유 양식)</div>
-                    <input type="file" class="fileupload">
+                    <input type="file" class="fileupload" name="file_upload">
                 </div>
 
             </div>
@@ -105,7 +105,7 @@
     <div class="footer_app">
         <div class="footer__btn">
             <button id="btn_app_step4" class="btn info btn-lg fl-left">이전</button>
-            <button id="btn_save" class="btn dark btn-lg">임시저장</button>
+            <button id="btn_save" class="btn dark btn-lg" onclick="saveForm();">임시저장</button>
             <button id="btn_app_step6" class="btn submit btn-lg" disabled>다음</button>
         </div>
     </div>
@@ -159,6 +159,59 @@
         f.submit();
     }
 
+    // $("#btn_save").click(function(){
+    //
+    //     if (!confirm("저장하시겠습니까.")) {
+    //         // 취소(아니오) 버튼 클릭 시 이벤트
+    //
+    //     } else {
+    //         // 확인(예) 버튼 클릭 시 이벤트
+    //
+    //         $('#btn_app_step6').attr('disabled', false);
+    //
+    //     }
+    // });
+    var saveNewBtn = document.querySelectorAll('.btn_save');
+    saveNewBtn.forEach(btn=>btn.addEventListener('click', saveForm));
+
+    function saveForm(){
+        event.preventDefault();
+        var fileForm = new FormData();
+        // fileForm.append("subject",document.querySelector('#subject').value);
+        // fileForm.append("usage_detail",document.querySelector('#usage_detail').value);
+
+        var files = document.querySelector('input[name=file_upload]').files;
+
+
+        for(var i = 0; i < files.length; i++){
+            var num = i + 1;
+            fileForm.append("files" + num, files[i]);
+        }
+        fileForm.append("fileLength", files.length);
+
+        $.ajax({
+            type: 'post',
+            url :'upload_userbs_file', //데이터를 주고받을 파일 주소 입력
+            data: fileForm,//보내는 데이터
+            contentType: false,//보내는 데이터 타입
+            processData: false,//Jquery 내부에서 파일을 queryString 형태로 전달하는 것을 방지
+            dataType:'json',//받는 데이터 타입
+            enctype: 'multipart/form-data',
+            success: function(result){
+                console.log(result);
+                alert("업로드에 성공했습니다", () => window.redirect("/"))
+                $('#btn_app_step6').attr('disabled', false);
+                console.log(fileForm)
+                console.log(files)
+            },
+            error:function(err){
+                console.log(err);
+             console.log(files)
+                alert("업로드에 실패했습니다")
+            }
+        });
+        // event.preventDefault();
+    }
 </script>
 </body>
 </html>

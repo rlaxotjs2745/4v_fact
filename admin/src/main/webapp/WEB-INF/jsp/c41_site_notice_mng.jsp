@@ -512,8 +512,8 @@
                     <!-- 사업 제목-->
                     <div class="form-group row" >
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">공지 제목</label>
-                        <div class="col-md-10" id="notice_code">
-                            <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" >
+                        <div class="col-md-10" >
+                            <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" id="subject">
                             <div class="form-control-plaintext mode-view"></div>
                         </div>
                     </div>
@@ -527,18 +527,24 @@
                                             </div>--%>
 
                     <hr>
-                    <div class="form-row" id="subject">
-                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">내용</label>
-
-                        <div class="col-md-10 mode-edit mode-new">
-                            <div class="summernote"></div>
+                    <div class="form-row" >
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">컨텐츠</label>
+                        <div class="form-group col col-md-10">
+                            <textarea class="summernote" rows="3" id="notice_contents"></textarea>
                         </div>
                     </div>
                     <hr>
                     <div class="form-row" >
-                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">컨텐츠</label>
-                        <div class="form-group col col-md-10" id="notice_contents">
-                            <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">서브제목</label>
+                        <div class="form-group col col-md-10" >
+                            <textarea class="form-control mode-edit mode-new" rows="3" id="notice_code"></textarea>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-row" >
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">공지사 내용</label>
+                        <div class="form-group col col-md-10" >
+                            <textarea class="form-control mode-edit mode-new" rows="3"  id="memo"></textarea>
                         </div>
                     </div>
                     <div class="form-group row" id="time">
@@ -562,7 +568,7 @@
                     </div>
                         <div class="form-row">
                             <div class="form-group col col-md-12" id="is_file">
-                                <label class="form-label d-block text-muted">파일여부</label>
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">파일여부</label>
                                 <label class="custom-control custom-radio d-inline-block">
                                     <input name="custom-6" type="radio" class="custom-control-input"  value="0">
                                     <span class="custom-control-label">포함안함</span>
@@ -575,7 +581,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col col-md-12" id="is_new">
-                                <label class="form-label d-block text-muted">신규 등록여부</label>
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">신규 등록여부</label>
                                 <label class="custom-control custom-radio d-inline-block">
                                     <input name="custom-7" type="radio" class="custom-control-input"  value="0">
                                     <span class="custom-control-label">신규아님</span>
@@ -590,7 +596,7 @@
 
                         <div class="form-row">
                             <div class="form-group col col-md-12" id="is_main_page">
-                                <label class="form-label d-block text-muted">메인페이지 노출여부</label>
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메인페이지 노출여부</label>
                                 <label class="custom-control custom-radio d-inline-block">
                                     <input name="custom-8" type="radio" class="custom-control-input"  value="0">
                                     <span class="custom-control-label">노출안함</span>
@@ -602,21 +608,23 @@
                             </div>
                         </div>
                     <div class="form-row">
-                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">파일 첨부</label>
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" for="file_upload">파일 첨부</label>
                         <div class="form-group col col-md-10 mode-edit mode-new">
-                            <input type="file" class="form-control-file d-block py-1">
+                            <input type="file" class="form-control-file d-block py-1" id="file_upload" name="file_upload" multiple>
+
                         </div>
                         <div class="form-group col col-md-10 col-form-label mode-view">
                             <a href="file.doc"></a>
                         </div>
                     </div>
+
                     <div class="modal-footer justify-content-between mode-new">
                         <div>
                             <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
                         </div>
                         <div>
                             <button type="button" class="btn btn-outline-primary mr-2">임시저장</button>
-                            <button type="button" class="btn btn-primary" onclick="event_pass();">작성완료</button>
+                            <button id="btn_save_new" type="button" class="btn btn-primary" onclick="saveForm();">작성완료</button>
                         </div>
                     </div>
 
@@ -649,7 +657,8 @@
         ],
         fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
         fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-        height: 300                 // 에디터 높이
+        height: 300,               // 에디터 높이
+        lang: "ko-KR"
     });
 
     $(function() {
@@ -681,7 +690,7 @@
         notice_code :"${notice.notice_code}",
         notice_num :"${notice.notice_num}",
         subject :"${notice.subject}",
-        notice_contents :"${notice.notice_contents}",
+       <%--notice_contents :"${notice.notice_contents}",--%>
         is_file :"${notice.is_file eq 0 ?"포함안함": notice.is_file eq 1 ?"포함함":""}",
         is_new :"${notice.is_new eq 0 ?"신규아님": notice.is_new eq 1 ?"신규":""}",
         is_main_page :"${notice.is_main_page eq 0 ?"노출안함": notice.is_main_page eq 1 ?"노출함":""}",
@@ -759,54 +768,54 @@
     });
 
 
-    function event_pass() {
-        console.log("버튼은 되니")
-// let result = document.getElementsByName('custom-6');
-        var selectId = $(this).attr('id');
-        param ={
-            idx_notice: parseInt(curNoticedata),
-            notice_code:$("#notice_code input").val(),
-            notice_num:$("#notice_num").val(),
-            subject:$("#subject").val(),
-            notice_contents:$("#notice_contents textarea").val(),
-            is_file:$("input:radio[name=custom-6]:checked").val(),
-            is_new:$("input:radio[name=custom-7]:checked").val(),
-            is_main_page:$("input:radio[name=custom-8]:checked").val(),
-            is_important:$("#is_important").val(),
-            is_show:$("#is_show").val(),
-            view_count:$("#view_count").val(),
-            notice_status:$("#notice_status").val(),
-            posting_start_date:$('#posting_start_date').val(),
-            posting_end_date:$('#posting_end_date').val(),
-            doc_version:$("#doc_version").val(),
-            memo:$("#memo label").val(),
-            search_tag:$("#search_tag").val(),
-            author:$("#author").val(),
-            idx_admin:$("#idx_admin").val(),
-            confirm_admin_idx:$("#confirm_admin").val(),
-            reg_date:$("#reg_date").val(),
-            last_upd_date:$("#last_upd_date").val()
-        }
-        $.ajax({
-            type: 'post',
-            url: '/insert_notice', //데이터를 주고받을 파일 주소 입력
-            data: JSON.stringify(param),//보내는 데이터
-            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
-            dataType: 'json',//받는 데이터 타입
-            success: function (result) {
-
-                if (result.result_code == "SUCCESS") {
-                    alert("상태 변경에 성공하였습니다")
-                } else {
-                    alert("상태 변경에 실패하였습니다")
-                }
-
-            },
-            error: function (res) {
-                console.log(res)
-            }
-        });
-    }
+//     function event_pass() {
+//         console.log("버튼은 되니")
+// // let result = document.getElementsByName('custom-6');
+//         var selectId = $(this).attr('id');
+//         param ={
+//             idx_notice: parseInt(curNoticedata),
+//             notice_code:$("#notice_code input").val(),
+//             notice_num:$("#notice_num").val(),
+//             subject:$("#subject").val(),
+//             notice_contents:$("#notice_contents textarea").val(),
+//             is_file:$("input:radio[name=custom-6]:checked").val(),
+//             is_new:$("input:radio[name=custom-7]:checked").val(),
+//             is_main_page:$("input:radio[name=custom-8]:checked").val(),
+//             is_important:$("#is_important").val(),
+//             is_show:$("#is_show").val(),
+//             view_count:$("#view_count").val(),
+//             notice_status:$("#notice_status").val(),
+//             posting_start_date:$('#posting_start_date').val(),
+//             posting_end_date:$('#posting_end_date').val(),
+//             doc_version:$("#doc_version").val(),
+//             memo:$("#memo label").val(),
+//             search_tag:$("#search_tag").val(),
+//             author:$("#author").val(),
+//             idx_admin:$("#idx_admin").val(),
+//             confirm_admin_idx:$("#confirm_admin").val(),
+//             reg_date:$("#reg_date").val(),
+//             last_upd_date:$("#last_upd_date").val()
+//         }
+//         $.ajax({
+//             type: 'post',
+//             url: '/insert_notice', //데이터를 주고받을 파일 주소 입력
+//             data: JSON.stringify(param),//보내는 데이터
+//             contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+//             dataType: 'json',//받는 데이터 타입
+//             success: function (result) {
+//
+//                 if (result.result_code == "SUCCESS") {
+//                     alert("상태 변경에 성공하였습니다")
+//                 } else {
+//                     alert("상태 변경에 실패하였습니다")
+//                 }
+//
+//             },
+//             error: function (res) {
+//                 console.log(res)
+//             }
+//         });
+//     }
     $("#delete_notice").click(function () {
         if(confirm("이 공지를 삭제하시겟습까?")){
             $.ajax({
@@ -827,6 +836,55 @@
             });
         }
     })
+
+
+
+    var saveNewBtn = document.querySelectorAll('.btn_save_new');
+    saveNewBtn.forEach(btn=>btn.addEventListener('click', saveForm));
+
+    function saveForm(message){
+        event.preventDefault();
+        var fileForm = new FormData();
+            fileForm.append("notice_code",document.querySelector('#notice_code').value);
+             fileForm.append("subject",document.querySelector('#subject').value);
+            fileForm.append("notice_contents",document.querySelector('#notice_contents').value);
+            fileForm.append("is_file",document.querySelector('input[name=custom-6]:checked').value);
+            fileForm.append("is_new",document.querySelector('input[name=custom-7]:checked').value);
+            fileForm.append("is_main_page",document.querySelector('input[name=custom-8]:checked').value);
+             fileForm.append("posting_start_date",new Date(document.querySelector("#posting_start_date").value));
+             fileForm.append("posting_end_date",new Date(document.querySelector("#posting_end_date").value));
+
+
+        var files = document.querySelector('#file_upload').files;
+
+
+        for(var i = 0; i < files.length; i++){
+            var num = i + 1;
+            fileForm.append("files" + num, files[i]);
+        }
+        fileForm.append("fileLength", files.length);
+
+        $.ajax({
+            type: 'post',
+            url :'insert_notice', //데이터를 주고받을 파일 주소 입력
+            data: fileForm,//보내는 데이터
+            contentType: false,//보내는 데이터 타입
+            processData: false,//Jquery 내부에서 파일을 queryString 형태로 전달하는 것을 방지
+            dataType:'json',//받는 데이터 타입
+            enctype: 'multipart/form-data',
+            success: function(result){
+                console.log(result);
+                console.log(fileForm)
+                alert("업로드에 성공했습니다", () => window.redirect("/"))
+            },
+            error: function (res) {
+                console.log(res)
+                console.log(files)
+            }
+        });
+    }
+
+
 </script>
 <!-- Layout footer -->
 <%@include file ="layouts/frame_footer.jsp" %>

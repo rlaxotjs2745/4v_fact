@@ -3,7 +3,6 @@ package kr.or.fact.core.model;
 import kr.or.fact.core.model.DTO.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -37,4 +36,6 @@ public interface FileServiceMapper {
     long updateUserDemoBsFileJoin(UserDemoBsFileVO userDemoBsFileVO);
 
     List<UserDemoBsFileResultVO> getUserDemoBsFileJoin(@Param("idx_user_demo_bs") long idx);
+
+    int insertFileInfo(FileInfoVO fileInfoVO);
 }

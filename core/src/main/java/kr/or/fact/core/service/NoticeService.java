@@ -13,4 +13,5 @@ public interface NoticeService {
     public int insertNotice(NoticeVO noticeVO);
     int deleteNotice(int idx_notice);
     NoticeVO getNoticeByIdx(int idx_notice);
+    int insertNoticeFileJoin();
 }

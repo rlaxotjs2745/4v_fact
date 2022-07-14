@@ -67,4 +67,9 @@ public class PRContentServiceImpl implements PRContentsService {
         return prContentsMapper.getPRContent(newIdx);
     }
 
+    @Override
+    public int insertPRContentFileJoin() {
+        return prContentsMapper.insertPRContentFileJoin();
+    }
+
 }

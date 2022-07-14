@@ -1,5 +1,6 @@
 package kr.or.fact.admin.controller;
 
+import kr.or.fact.core.config.FACTConfig;
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.CONSTANT;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.annotation.Resource;
 import javax.mail.internet.InternetAddress;
@@ -86,6 +89,10 @@ public class APIController {
 
     @Resource(name = "consultingService")
     public ConsultingService consultingService;
+
+    @Autowired
+    private FACTConfig factConfig;
+
 
     @RequestMapping(value = "/admin_login",method = RequestMethod.POST)
     public @ResponseBody ResultVO admin_login(HttpSession session
@@ -308,7 +315,7 @@ public class APIController {
 
     @RequestMapping(value = "/send_mail",method = RequestMethod.POST)
     public String send_mail(@ModelAttribute MailVO mailVO, HttpSession session, HttpServletRequest request) throws Exception, IOException {
-        System.out.println(session.getAttribute("admin_id"));
+//        System.out.println(session.getAttribute("admin_id"));
         String title = mailVO.getTitle();
         String content = mailVO.getContent();
         String receiver = mailVO.getReceiver();
@@ -1055,31 +1062,93 @@ public class APIController {
     }
 
     @RequestMapping(value = "/insert_notice",method = RequestMethod.POST)
-    public @ResponseBody
-    ResultVO insertNotice (@RequestBody NoticeVO noticeVO){
-        ResultVO resultVO = new ResultVO();
-        resultVO.setResult_code("ERROR_1000");
-        resultVO.setResult_str("업데이트 실패");
-        try {
+   public @ResponseBody
+     FileUploadResponseVO  insertNotice(@ModelAttribute NoticeVO noticeVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
+
+            int fileLength = Integer.parseInt(noticeVO.getFileLength());
+            File[] files = new File[5];
+
+            if (fileLength > 0) {
+                files[0] = fileService.convertMultipartToFile(noticeVO.getFiles1());
+                if (fileLength >= 2) {
+                    files[1] = fileService.convertMultipartToFile(noticeVO.getFiles2());
+                    if (fileLength >= 3) {
+                        files[2] = fileService.convertMultipartToFile(noticeVO.getFiles3());
+                        if (fileLength >= 4) {
+                            files[3] = fileService.convertMultipartToFile(noticeVO.getFiles4());
+                            if (fileLength == 5) {
+                                files[4] = fileService.convertMultipartToFile(noticeVO.getFiles5());
+
+                            }
+                        }
+                    }
+                }
+            }
+            MultipartFile file = noticeVO.getFiles1();
+            String fileName = fileService.storeFileInfo(noticeVO.getFiles1());
+            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/downloadFile/")
+                    .path(fileName)
+                    .toUriString();
+            FileUploadResponseVO filepespons = new FileUploadResponseVO(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+            FileInfoVO fileInfoVO = new FileInfoVO();
+            fileInfoVO.setFile_name(filepespons.getFileName());
+            fileInfoVO.setFile_size(filepespons.getSize());
+            fileInfoVO.setMime_type(filepespons.getFileType());
+            fileInfoVO.setFile_path(file.getOriginalFilename());
+            fileService.storeFileInfo(file);
+            fileService.insertFileInfo(fileInfoVO);
             noticeService.insertNotice(noticeVO);
-            resultVO.setResult_str("업데이트에 성공하였습니다.");
-            resultVO.setResult_code("SUCCESS");
-        }catch(Exception e) {
-            resultVO.setResult_code("ERROR_1000");
-            resultVO.setResult_str("업데이트 실패");
-            System.out.println(e);
-        }
-        return resultVO;
+            noticeService.insertNoticeFileJoin();
+        System.out.println(noticeVO);
+
+
+        return new FileUploadResponseVO(fileName, fileDownloadUri, file.getContentType(), file.getSize());
     }
 
     @RequestMapping(value = "/insert_event",method = RequestMethod.POST)
     public @ResponseBody
-    ResultVO insertEventContent (@RequestBody EventContentVO eventContentVO){
+    ResultVO insertEventContent (@ModelAttribute EventContentVO eventContentVO, HttpSession session, HttpServletRequest request)throws Exception, IOException{
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
         resultVO.setResult_str("업데이트 실패");
         try {
+            int fileLength = Integer.parseInt(eventContentVO.getFileLength());
+            File[] files = new File[5];
+
+            if (fileLength > 0) {
+                files[0] = fileService.convertMultipartToFile(eventContentVO.getFiles1());
+                if (fileLength >= 2) {
+                    files[1] = fileService.convertMultipartToFile(eventContentVO.getFiles2());
+                    if (fileLength >= 3) {
+                        files[2] = fileService.convertMultipartToFile(eventContentVO.getFiles3());
+                        if (fileLength >= 4) {
+                            files[3] = fileService.convertMultipartToFile(eventContentVO.getFiles4());
+                            if (fileLength == 5) {
+                                files[4] = fileService.convertMultipartToFile(eventContentVO.getFiles5());
+
+                            }
+                        }
+                    }
+                }
+            }
+            MultipartFile file = eventContentVO.getFiles1();
+            String fileName = fileService.storeFileInfo(eventContentVO.getFiles1());
+            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/downloadFile/")
+                    .path(fileName)
+                    .toUriString();
+            FileUploadResponseVO filepespons = new FileUploadResponseVO(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+            FileInfoVO fileInfoVO = new FileInfoVO();
+            fileInfoVO.setFile_name(filepespons.getFileName());
+            fileInfoVO.setFile_size(filepespons.getSize());
+            fileInfoVO.setMime_type(filepespons.getFileType());
+            fileInfoVO.setFile_path(file.getOriginalFilename());
+            fileService.storeFileInfo(file);
+            fileService.insertFileInfo(fileInfoVO);
            eventContentService.insertEventContent(eventContentVO);
+           eventContentService.insertEventContentFileJoin();
+
             resultVO.setResult_str("업데이트에 성공하였습니다.");
             resultVO.setResult_code("SUCCESS");
 
@@ -1091,22 +1160,56 @@ public class APIController {
     }
     @RequestMapping(value = "/insert_pr",method = RequestMethod.POST)
     public @ResponseBody
-    ResultVO insertPRContent (@RequestBody PRContentVO prcontensVO){
+    ResultVO insertPRContent (@ModelAttribute PRContentVO prcontensVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
         resultVO.setResult_str("업데이트 실패");
         try {
-           prContentService.insertPRContent(prcontensVO);
+            int fileLength = Integer.parseInt(prcontensVO.getFileLength());
+            File[] files = new File[5];
+
+            if (fileLength > 0) {
+                files[0] = fileService.convertMultipartToFile(prcontensVO.getFiles1());
+                if (fileLength >= 2) {
+                    files[1] = fileService.convertMultipartToFile(prcontensVO.getFiles2());
+                    if (fileLength >= 3) {
+                        files[2] = fileService.convertMultipartToFile(prcontensVO.getFiles3());
+                        if (fileLength >= 4) {
+                            files[3] = fileService.convertMultipartToFile(prcontensVO.getFiles4());
+                            if (fileLength == 5) {
+                                files[4] = fileService.convertMultipartToFile(prcontensVO.getFiles5());
+
+                            }
+                        }
+                    }
+                }
+            }
+            MultipartFile file = prcontensVO.getFiles1();
+            String fileName = fileService.storeFileInfo(prcontensVO.getFiles1());
+            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/downloadFile/")
+                    .path(fileName)
+                    .toUriString();
+            FileUploadResponseVO filepespons = new FileUploadResponseVO(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+            FileInfoVO fileInfoVO = new FileInfoVO();
+            fileInfoVO.setFile_name(filepespons.getFileName());
+            fileInfoVO.setFile_size(filepespons.getSize());
+            fileInfoVO.setMime_type(filepespons.getFileType());
+            fileInfoVO.setFile_path(filepespons.getFileDownloadUri());
+            fileService.storeFileInfo(file);
+            fileService.insertFileInfo(fileInfoVO);
+            prContentService.insertPRContent(prcontensVO);
+            prContentService.insertPRContentFileJoin();
+
             resultVO.setResult_str("업데이트에 성공하였습니다.");
             resultVO.setResult_code("SUCCESS");
 
-        }catch(Exception e) {
+        } catch (Exception e) {
             resultVO.setResult_code("ERROR_1000");
             resultVO.setResult_str("업데이트 실패");
         }
         return resultVO;
     }
-
     @RequestMapping(value = "/insert_coworker",method = RequestMethod.POST)
     public @ResponseBody
     ResultVO insertCoworker (@RequestBody CoWorkerVO coWorkerVO){

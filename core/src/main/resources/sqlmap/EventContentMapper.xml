@@ -136,4 +136,21 @@ SYSDATE,
     <delete id="deleteEvent" parameterType="int">
         DELETE FROM TB_EVENT_CONTENT WHERE IDX_EVENT_CONTENT = #{idx_event_content}
     </delete>
+
+    <insert id="insertEventContentFileJoin" parameterType="kr.or.fact.core.model.DTO.EventContentFileJoinVO">
+        INSERT INTO TB_EVENT_CONTENT_FILE_JOIN (
+
+IDX_EVENT_CONTENT_FILE_JOIN,
+IDX_EVENT_CONTENT,
+IDX_FILE_INFO,
+REG_DATE
+        )VALUES (
+                 SEQ_EVENT_CONTENT_FILE_JOIN.NEXTVAL,
+                 SEQ_EVENT_CONTENT.CURRVAL,
+                 SEQ_FILE_INFO.CURRVAL,
+
+                 SYSDATE
+
+                        )
+    </insert>
 </mapper>

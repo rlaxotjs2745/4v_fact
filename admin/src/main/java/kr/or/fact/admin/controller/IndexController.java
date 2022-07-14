@@ -114,7 +114,7 @@ public class IndexController {
                                  @RequestParam(value="id") String admin_id,
                                  @RequestParam(value="pw") String admin_pw){
 
-        System.out.println("api_post_login");
+//        System.out.println("api_post_login");
          if(admin_id == null || admin_pw == null){
             return "redirect:/login";
         }
@@ -833,7 +833,7 @@ public class IndexController {
         model.addAttribute("page_amount",page_amount);
 
 
-
+        System.out.println(noticeList);
 
 
 
@@ -901,8 +901,7 @@ public class IndexController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-        System.out.println(eventContentList);
-        System.out.println(eventCount);
+
 
         return "c42_site_event_mng";
     }
@@ -966,8 +965,7 @@ model.addAttribute("prlist",prlist);
         model.addAttribute("is_last",is_last);
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
-        System.out.println(prlist);
-        System.out.println(prCount);
+
         return "c43_site_adver_mng";
     }
 
@@ -982,7 +980,7 @@ model.addAttribute("prlist",prlist);
                 content = prContentVO.getPr_contents();
             }
         }
-        System.out.println(content);
+
         model.addAttribute("contentFuck",  content);
 
         return "pr_contents";
@@ -1023,7 +1021,7 @@ model.addAttribute("prlist",prlist);
                                         ModelMap model){
 List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
 model.addAttribute("rulefileinfolist",ruleFileInfoList);
-
+        System.out.println(ruleFileInfoList);
         return "c72_site_rule_doc_mng";
     }
 
@@ -1663,8 +1661,11 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //서식 관리
     @RequestMapping(value = "/l11_document_form_mng",method = RequestMethod.POST)
     public String l11_document_form_mng(@RequestBody ParamPageListFilteredVO param,
-                                           ModelMap model){
-
+                                           ModelMap model, Principal principal){
+        List<FormFileInfoVO> formFileList =fileService.getFormFileList();
+        model.addAttribute("formfilelist",formFileList);
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+        model.addAttribute("admin", adminInfo);
 
         return "l11_document_form_mng";
     }
@@ -1672,7 +1673,8 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     public String l12_document_rule_mng(@RequestBody ParamPageListFilteredVO param,
                                    ModelMap model){
         int page = param.getPage_num();
-
+        List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
+        model.addAttribute("rulefileinfolist",ruleFileInfoList);
         //int filter1 = param.getFilter1();
         //int filter2 = param.getFilter2();
 

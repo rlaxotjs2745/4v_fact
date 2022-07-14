@@ -31,4 +31,8 @@ public interface FileService {
     List<RuleFileInfoVO>getRuleFileInfoList1();
     long insertFile(MultipartFile file, long userIdx, long bsIdx, int type) throws IllegalStateException, IOException;
     List<UserDemoBsFileResultVO> getUserDemoFileList(long idx);
+
+    public File convertMultipartToFile(MultipartFile file) throws IOException;
+
+    int insertFileInfo(FileInfoVO fileInfoVO);
 }

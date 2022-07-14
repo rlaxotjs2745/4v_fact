@@ -22,7 +22,7 @@ import java.net.URLEncoder;
 @RestController
 public class FileController {
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
-
+    @Autowired
     private FileService fileService;
 
     public FileUploadResponseVO storeFileInfo(@RequestParam("file") MultipartFile file) {

@@ -1,6 +1,7 @@
 package kr.or.fact.core.model.DTO;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 
@@ -31,4 +32,10 @@ public class PRContentVO {
     Date last_upd_date;//	date						최종 수정 일시
     int page;
     int maxvalue;
+    MultipartFile files1;
+    MultipartFile files2;
+    MultipartFile files3;
+    MultipartFile files4;
+    MultipartFile files5;
+    String fileLength;
 }

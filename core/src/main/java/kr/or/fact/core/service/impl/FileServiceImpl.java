@@ -1,6 +1,5 @@
 package kr.or.fact.core.service.impl;
 
-import com.sun.codemodel.internal.JForEach;
 import kr.or.fact.core.config.FACTConfig;
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.model.FileServiceMapper;
@@ -14,8 +13,6 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,27 +21,24 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
 @Service("fileService")
 public class FileServiceImpl implements FileService {
 
     private final Path fileLocation;
-
+    private final FACTConfig factConfig;
     private final FileServiceMapper fileServiceMapper;
 
-    private final FACTConfig factConfig;
-
     @Autowired
-    public FileServiceImpl(FACTConfig prop, FileServiceMapper fileServiceMapper, FACTConfig factConfig) {
+    public FileServiceImpl(FACTConfig prop, FACTConfig factConfig, FileServiceMapper fileServiceMapper) {
+        this.factConfig = factConfig;
 
         this.fileServiceMapper = fileServiceMapper;
 
         this.fileLocation = Paths.get(prop.getUploadDir())
                 .toAbsolutePath().normalize();
-        this.factConfig = factConfig;
 
         try {
             Files.createDirectories(this.fileLocation);
@@ -56,6 +50,12 @@ public class FileServiceImpl implements FileService {
     @Override
     public String storeFileInfo(MultipartFile file) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        long fileSize = file.getSize();
+        String fileType = file.getContentType();
+        FileInfoVO fileInfoVO = new FileInfoVO();
+        fileInfoVO.setFile_name(fileName);
+        fileInfoVO.setFile_size(fileSize);
+        fileInfoVO.setMime_type(fileType);
 
         try {
             // 파일명에 부적합 문자가 있는지 확인한다.
@@ -109,6 +109,7 @@ public class FileServiceImpl implements FileService {
     }
     @Override
     public void insertFormFileInfo(FormFileInfoVO formFileInfoVO){
+
         fileServiceMapper.insertFormFileInfo(formFileInfoVO);
     }
     @Override
@@ -206,4 +207,22 @@ public class FileServiceImpl implements FileService {
 
         return fileIdxArr;
     }
+
+    @Override
+    public File convertMultipartToFile(MultipartFile file) throws IOException {
+        File newFile = new File(factConfig.getUploadDir() + file.getOriginalFilename());
+        newFile.createNewFile();
+        FileOutputStream fos = new FileOutputStream(newFile);
+        fos.write(file.getBytes());
+        fos.close();
+
+        return newFile;
+    }
+
+    @Override
+    public int insertFileInfo(FileInfoVO fileInfoVO) {
+        fileInfoVO.setFile_path(factConfig.getUploadDir()+ fileInfoVO.getFile_path());
+        return fileServiceMapper.insertFileInfo(fileInfoVO);
+    }
+
 }

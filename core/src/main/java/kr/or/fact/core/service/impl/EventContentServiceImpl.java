@@ -47,6 +47,7 @@ public class EventContentServiceImpl implements EventContentService {
         int ret_idx = 0;
         try {
             ret_idx = eventContentMapper.insertEventContent(eventContentVO);
+
         } catch (Exception e) {
         }
         return ret_idx;
@@ -55,5 +56,10 @@ public class EventContentServiceImpl implements EventContentService {
     @Override
     public int deleteEvent(int idx_event_content) {
         return eventContentMapper.deleteEvent(idx_event_content);
+    }
+
+    @Override
+    public int insertEventContentFileJoin() {
+        return eventContentMapper.insertEventContentFileJoin();
     }
 }

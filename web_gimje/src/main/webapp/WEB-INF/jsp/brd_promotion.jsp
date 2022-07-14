@@ -52,7 +52,7 @@
 <c:forEach items="${prContentList}" var="promotion" varStatus="status">
                     <li>
                         <a href="brd_promotion_detail?idx=${promotion.idx_pr_content}" class=" btn-sm btn_content_modal">
-                            <figure><img src="resources/assets/image/@promo_01.png" alt=""></figure>
+                            <figure><img src="" alt=""></figure>
                             <div class="caption">
                                 <span class="list__title">${promotion.subject}</span>
                                 <div class="list__file">

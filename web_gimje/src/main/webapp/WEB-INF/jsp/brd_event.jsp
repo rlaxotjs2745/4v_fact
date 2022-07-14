@@ -53,7 +53,7 @@
 <c:forEach items="${eventContentVOList}" var="event" varStatus="status">
                     <li>
                         <a href="brd_event_detail?idx=${event.idx_event_content}"  >
-                            <figure><img src="resources/assets/image/@list_01.png" alt=""></figure>
+                            <figure><img src="resources/assets/image/img_use_house_02.jpg" alt=""></figure>
                             <span class="list__title">${event.subject}</span>
                             <span class="list__duedate">${event.event_start_date}~${event.event_end_date}</span>
                         </a>

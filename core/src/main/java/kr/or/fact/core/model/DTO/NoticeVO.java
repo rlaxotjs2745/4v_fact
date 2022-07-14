@@ -1,6 +1,8 @@
 package kr.or.fact.core.model.DTO;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 
@@ -28,4 +30,10 @@ public class NoticeVO {
     long confirm_admin_idx;//	number	32				◯	허가자
     Date reg_date;//	date						최초 등록 일시
     Date last_upd_date;//	date						최종 수정 일시
+    MultipartFile files1;
+    MultipartFile files2;
+    MultipartFile files3;
+    MultipartFile files4;
+    MultipartFile files5;
+    String fileLength;
 }

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file ="header.jsp" %>
 
 <div class="content" id="content">
@@ -47,8 +48,8 @@
                         <th><a href="brd_notice"><img src="resources/assets/image/ico_list.png" alt="리스트"></a></th>
                         <th class="th__edit">
                             <div class="detail__edit">
-                                <div class="edit--type"><em>게시자</em><span>이동우</span></div>
-                                <div class="edit--type"><em>등록일</em><span>${noticeInfo.reg_date}</span></div>
+                                <div class="edit--type"><em>게시자</em><span>${noticeInfo.author}</span></div>
+                                <div class="edit--type"><em>등록일</em><span><fmt:formatDate value="${noticeInfo.reg_date}" pattern="yyyy-MM-dd HH:MM"/></span></div>
                                 <div class="edit--type"><em>조회수</em><span>${noticeInfo.view_count}</span></div>
                                 <div class="edit--print"><a href="#none"><img src="resources/assets/image/ico_print.png" alt="인쇄하기"></a></div>
                             </div>
@@ -139,54 +140,13 @@
                                 <div class="temp__cover">한국농업기술진흥원 공고 제2021-121호</div>
                                 <div class="temp__title">${noticeInfo.subject}</div>
                                 <div class="temp__desc"> ${noticeInfo.notice_code}</div>
-                                <div class="temp__signature">2021년 6월 22일<br>한국농업기술진흥원 원장</div>
+                                <div class="temp__signature"><fmt:formatDate value="${noticeInfo.posting_start_date}" pattern="yyyy-MM-dd HH:MM"/><br>${noticeInfo.author}</div>
                                 <div class="temp__table">
-                                    <table>
-                                        <colgroup>
-                                            <col style="width:80px">
-                                            <col style="width:100px">
-                                            <col style="width:200px">
-                                            <col style="width:100px">
-                                            <col style="width:280px">
-                                        </colgroup>
-                                        <thead>
-                                        <tr>
-                                            <th colspan="2">교육과정</th>
-                                            <th>교육일정</th>
-                                            <th>교육인원</th>
-                                            <th>교육장소</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>1차</td>
-                                            <td>종자산업가</td>
-                                            <td>6.28(월) ~ 7.9(금) 10일간</td>
-                                            <td>15명</td>
-                                            <td class="td--left">원광대 농식품융합대학 66번동 101호</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2차</td>
-                                            <td>미래육종가</td>
-                                            <td>7.12(월) ~ 7.33(금) 10일간</td>
-                                            <td>15명</td>
-                                            <td class="td--left">정북대 농식품융합대학 본관 101호</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+
                                 </div>
                                 <div class="temp__text">
                                     ${noticeInfo.notice_contents}
-                                    □ 교육훈련생 선정 결과
-                                    ○ 최종선발 교육생 : 총 30명(종자산업가 15, 미래육종가 15)   * 첨부파일 참조
-                                    ○ 예비 교육생 : 총 4명(과정별 2명)
-                                    ※ 예비생은 추후 선정된 교육생의 결원 발생 시, 순차적으로 안내할 예정입니다.
 
-                                    □ 교육 등록안내
-                                    ○ 등록대상 : 과정별 최종선발 교육생
-                                    ○ 등록일시 : 해당 과정 개강일 8시 50분까지 입실
-                                    ○ 준비물 : 신분증 지참
-                                    □ 문의사항 : 한국농업기술진흥원 종자산업진흥센터(☎ 063-219-8816)
                                 </div>
                                 <div class="temp__goal">${noticeInfo.memo}</div>
                                 <div class="temp__notice--box"> ※ 코로나19 지역발생 상황에 따라 교육과정이 연기·변동될 수 있음을 알려드리며,
