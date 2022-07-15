@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: abeki
@@ -75,28 +76,34 @@
                 </div>
 
                 <div class="app__fileupload">
-                    <div class="fileupload__title">사업자등록증 사본 (해당자에 한함)</div>
-                    <input type="file" class="fileupload">
+                    <div class="fileupload__title" >사업자등록증 사본 (해당자에 한함)</div>
+                    <input type="file" id="bs_license" class="fileupload" value="dlrj">
+                    <span id="bs_license_title" class="text-info"></span>
                 </div>
                 <div class="app__fileupload">
                     <div class="fileupload__title">등기부등본 사본 (해당자에 한함, 원본은 차후 요청시,제출해 주십시오.)</div>
-                    <input type="file" class="fileupload">
+                    <input type="file" id="corp_register" class="fileupload">
+                    <span id="corp_register_title" class="text-info"></span>
                 </div>
                 <div class="app__fileupload">
                     <div class="fileupload__title">법인인감증명서 (해당자에 한함, 원본은 차후 요청시,제출해 주십시오.)</div>
-                    <input type="file" class="fileupload">
+                    <input type="file" id="corp_sign" class="fileupload">
+                    <span id="corp_sign_title" class="text-info"></span>
                 </div>
                 <div class="app__fileupload">
                     <div class="fileupload__title">4대보험 완납증명서 (해당자에 한함, 원본은 차후 요청시,제출해 주십시오.)</div>
-                    <input type="file" class="fileupload">
+                    <input type="file" id="insure_cert" class="fileupload">
+                    <span id="insure_cert_title" class="text-info"></span>
                 </div>
                 <div class="app__fileupload">
-                    <div class="fileupload__title">최근 2년간 재무제표 또는 회계감사 보고서 (해당자에 한함, 원본은 차후 요청시,제출해 주십시오.)</div>
-                    <input type="file" class="fileupload">
+                    <div class="fileupload__title" >최근 2년간 재무제표 또는 회계감사 보고서 (해당자에 한함, 원본은 차후 요청시,제출해 주십시오.)</div>
+                    <input type="file" id="fine_state" class="fileupload">
+                    <span id="fine_state_title" class="text-info"></span>
                 </div>
                 <div class="app__fileupload">
-                    <div class="fileupload__title">기타 (가점서류 및 기업역량을 보여줄 수 있는 자료, 자유 양식)</div>
-                    <input type="file" class="fileupload">
+                    <div class="fileupload__title" >기타 (가점서류 및 기업역량을 보여줄 수 있는 자료, 자유 양식)</div>
+                    <input type="file" id="other_data" class="fileupload">
+                    <span id="other_data_title" class="text-info"></span>
                 </div>
 
             </div>
@@ -116,6 +123,30 @@
 <script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
 <script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 <script>
+    var fileArr = [];
+
+    <c:forEach items="${fileArr}" var="file">
+    if("${file.file_type}" == "3") {
+        $("#bs_license_title").text("제출 완료: ${file.fileInfoVO.file_name}")
+    }
+    if("${file.file_type}" == "4") {
+        $("#corp_register_title").text("제출 완료: ${file.fileInfoVO.file_name}")
+    }
+    if("${file.file_type}" == "5") {
+        $("#corp_sign_title").text("제출 완료: ${file.fileInfoVO.file_name}")
+    }
+    if("${file.file_type}" == "6") {
+        $("#insure_cert_title").text("제출 완료: ${file.fileInfoVO.file_name}")
+    }
+    if("${file.file_type}" == "7") {
+        $("#fine_state_title").text("제출 완료: ${file.fileInfoVO.file_name}")
+    }
+    if("${file.file_type}" == "8") {
+        $("#other_data_title").text("제출 완료: ${file.fileInfoVO.file_name}")
+    }
+    </c:forEach>
+
+
     $("#btn_app_step6").click(function(){
         var param  = {
             "idx_user":${userDemoBs.idx_user},
@@ -131,6 +162,61 @@
         };
         goNextStep(param,'app_step4');
     });
+
+    $("#btn_save").click(function(){
+
+        if (!confirm("저장하시겠습니까.")) {
+            // 취소(아니오) 버튼 클릭 시 이벤트
+
+        } else {
+            // 확인(예) 버튼 클릭 시 이벤트
+            save_temp();
+            $('#btn_app_step6').attr('disabled', false);
+
+        }
+
+
+    });
+
+    function save_temp(){
+        var fileForm = new FormData();
+        fileForm.append("sender", "${userDemoBs.idx_user}");
+        fileForm.append("bs_idx", "${userDemoBs.idx_user_demo_bs}");
+        if(document.querySelector('#bs_license').files[0]){
+            fileForm.append("file1", document.querySelector('#bs_license').files[0]);
+        }
+        if(document.querySelector('#corp_register').files[0]){
+            fileForm.append("file2", document.querySelector('#corp_register').files[0]);
+        }
+        if(document.querySelector('#corp_sign').files[0]){
+            fileForm.append("file3", document.querySelector('#corp_sign').files[0]);
+        }
+        if(document.querySelector('#insure_cert').files[0]){
+            fileForm.append("file4", document.querySelector('#insure_cert').files[0]);
+        }
+        if(document.querySelector('#fine_state').files[0]){
+            fileForm.append("file5", document.querySelector('#fine_state').files[0]);
+        }
+        if(document.querySelector('#other_data').files[0]){
+            fileForm.append("file6", document.querySelector('#other_data').files[0]);
+        }
+
+        $.ajax({
+            type: 'post',
+            url :'app_step5_save_docs', //데이터를 주고받을 파일 주소 입력
+            data: fileForm,//보내는 데이터
+            contentType: false,//보내는 데이터 타입
+            processData: false,//Jquery 내부에서 파일을 queryString 형태로 전달하는 것을 방지
+            dataType:'json',//받는 데이터 타입
+            enctype: 'multipart/form-data',
+            success: function(result){
+                alert(result.result_str);
+            },
+            error:function(err){
+                console.log(err);
+            }
+        });
+    }
 
 
     function goNextStep(param,location){
@@ -158,6 +244,56 @@
         document.body.appendChild(f);
         f.submit();
     }
+    $("#btn_save").click(function(){
+
+        if (!confirm("저장하시겠습니까.")) {
+            // 취소(아니오) 버튼 클릭 시 이벤트
+
+        } else {
+            // 확인(예) 버튼 클릭 시 이벤트
+
+            $('#btn_app_step6').attr('disabled', false);
+
+        }
+    });
+    var saveNewBtn = document.querySelectorAll('.btn_save_new');
+    saveNewBtn.forEach(btn=>btn.addEventListener('click', saveForm));
+
+    function saveForm(){
+        event.preventDefault();
+        var fileForm = new FormData();
+        fileForm.append("subject",document.querySelector('#subject').value);
+
+
+        var files = document.querySelector('#file_upload').files;
+
+
+        for(var i = 0; i < files.length; i++){
+            var num = i + 1;
+            fileForm.append("files" + num, files[i]);
+        }
+        fileForm.append("fileLength", files.length);
+
+        $.ajax({
+            type: 'post',
+            url :'upload_app_step5_file', //데이터를 주고받을 파일 주소 입력
+            data: fileForm,//보내는 데이터
+            contentType: false,//보내는 데이터 타입
+            processData: false,//Jquery 내부에서 파일을 queryString 형태로 전달하는 것을 방지
+            dataType:'json',//받는 데이터 타입
+            enctype: 'multipart/form-data',
+            success: function(result){
+                console.log(result);
+                alert("업로드에 성공했습니다", () => window.redirect("/"))
+            },
+            error:function(err){
+                console.log(err);
+                alert("업로드에 실패했습니다")
+            }
+        });
+        // event.preventDefault();
+    }
+
 
 </script>
 </body>

@@ -149,6 +149,10 @@
 <script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
 <script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
 <script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
+<script>
 
+
+
+</script>
 </body>
 </html>

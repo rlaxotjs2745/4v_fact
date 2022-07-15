@@ -156,7 +156,7 @@
                             </style>
                             <div class="edit__templete">
                                 <div class="temp__title">${pr.subject}</div>
-                                <div class="tem__photo"><img src="resources/assets/image/img-temp-01.png" alt=""></div>
+                                <div class="tem__photo"><img src="" alt=""></div>
                                 <div class="temp__text">${pr.pr_contents}
 
                                     ${pr.memo}

@@ -79,21 +79,6 @@ public class AdminServiceImpl implements AdminService {
         long ret_idx=0;
         try {
            ret_idx= adminMapper.insertAdminInfo(adminVO);
-//                    adminVO.getAdmin_id(),
-//                    newPw,
-//            adminVO.getAdmin_name(),
-//                    adminVO.getCorporate(),
-//                    adminVO.getCorporate_name(),
-//                    adminVO.getDepartment(),
-//                    adminVO.getJob_title(),
-//                    adminVO.getAuth_status(),
-//                    adminVO.getTel_num(),
-//                    adminVO.getMphone_num(),
-//                    adminVO.getEmail(),
-//                    adminVO.getAdmin_type(),
-//                    adminVO.getAuth_admin_idx(),
-//                    adminVO.getSign_in_type()
-
         }
         catch (Exception e){
             System.out.println(e);

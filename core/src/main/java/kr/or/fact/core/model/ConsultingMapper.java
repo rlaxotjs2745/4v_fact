@@ -19,4 +19,5 @@ int getCountConsulting();
     void saveDemoBsConsulting(DemoBsConsultingVO demoBsConsultingVO);
     //getUserConsultingList(DemoBsConsultingVO demoBsConsultingVO)
     int deleteConsult(int idx_demo_bs_consulting);
+    int updateConsult(DemoBsConsultingVO demoBsConsultingVO);
 }

@@ -12,7 +12,7 @@
         <h6 class="card-header with-elements">
             <div class="card-header-title">양식 문서 목록</div>
             <div class="card-header-elements ml-auto">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modals-default">+ 서식 등록</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modals-rule-file">+ 서식 등록</button>
             </div>
         </h6>
         <div class="card-datatable table-responsive pt-0 pb-3">
@@ -23,16 +23,26 @@
                             <thead class="bg-success text-white font-weight-bold">
                             <tr role="row">
                                 <th class="text-center px-2" style="width:6%">순서</th>
-                                <th class="text-center px-2" style="width:4%">표시</th>
-                                <th class="text-center sorting" style="width:10%">소속</th>
-                                <th class="text-center sorting" style="width:10%">성명</th>
-                                <th class="text-center sorting" style="width:auto">담당 업무</th>
-                                <th class="text-center sorting" style="width:10%">직위</th>
-                                <th class="text-center sorting" style="width:16%">전화번호</th>
-                                <th class="text-center px-2" style="width:16%">이메일</th>
+                                <th class="text-center px-2" style="width:16%">제목</th>
+                                <th class="text-center sorting" style="width:36%">용도</th>
+                                <th class="text-center sorting" style="width:10%">관련 조직</th>
+                                <th class="text-center sorting" style="width:14%">파일이름</th>
+                                <th class="text-center sorting" style="width:6%">파일형식</th>
+                                <th class="text-center sorting" style="width:12%">등록일</th>
                             </tr>
                             </thead>
                             <tbody>
+                            <c:forEach items="${formfilelist}" var="formfile">
+                                <tr class="formfile-entity" id="${formfile.idx_form_file_info}">
+                                    <td class="text-center">${formfile.order_num}</td>
+                                    <td class="text-center">${formfile.subject}</td>
+                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">${formfile.usage_detail}</a></td>
+                                    <td class="text-center">${formfile.row_num}</td>
+                                    <td class="text-center"><fmt:formatDate value="${formfile.reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                                    <td class="text-center">${formfile.idx_admin}</td>
+
+                                </tr>
+                            </c:forEach>
                             <%--<c:choose>
                                 <c:when test="${fn:length(coWorkerVOList)>0}">
                                     <c:forEach items = "${coWorkerVOList}" var ="coworker">
@@ -98,34 +108,34 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-success">
-                    <h5 class="modal-title text-white font-weight-bold">규정 문서 등록</h5>
+                    <h5 class="modal-title text-white font-weight-bold">양식 문서 등록</h5>
                     <button id="modals-code-new-close" type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="form-group row">
+                        <div class="form-group row" id="form_title">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">양식 제목</label>
                             <div class="col-md-10">
                                 <input id="subject" type="text" class="form-control form-control-md">
                             </div>
 
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" id="form_usage">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">양식 사용 용도</label>
                             <div class="col-md-10">
                                 <textarea id="usage_detail" type="text" class="form-control form-control-md"></textarea>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" id="form_corp_name">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">관련조직 이름</label>
                             <div class="col-md-10">
                                 <input id="detail" type="text" class="form-control form-control-md">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">파일 업로드</label>
+                        <div class="form-group row" id="file">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" for="file_upload">파일 업로드</label>
                             <div class="col-md-10">
-                                <input id="file_upload" type="file" class="form-control form-control-md">
+                                <input id="file_upload" name="file_upload" type="file" class="form-control form-control-md" multiple>
                             </div>
                         </div>
 
@@ -134,7 +144,7 @@
                                 <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
                             </div>
                             <div>
-                                <button id="btn_save_new" type="button" class="btn btn-primary">저장</button>
+                                <button id="btn_save_new" type="button" class="btn btn-primary" onclick="saveForm();">저장</button>
                             </div>
                         </div>
 
@@ -297,14 +307,16 @@
 
     var saveNewBtn = document.querySelectorAll('.btn_save_new');
     saveNewBtn.forEach(btn=>btn.addEventListener('click', saveForm));
+
     function saveForm(){
     event.preventDefault();
     var fileForm = new FormData();
     fileForm.append("subject",document.querySelector('#subject').value);
     fileForm.append("usage_detail",document.querySelector('#usage_detail').value);
 
-
     var files = document.querySelector('#file_upload').files;
+
+
     for(var i = 0; i < files.length; i++){
         var num = i + 1;
         fileForm.append("files" + num, files[i]);
@@ -313,7 +325,7 @@
 
     $.ajax({
         type: 'post',
-        url :'uploadFile', //데이터를 주고받을 파일 주소 입력
+        url :'upload_form_file', //데이터를 주고받을 파일 주소 입력
         data: fileForm,//보내는 데이터
         contentType: false,//보내는 데이터 타입
         processData: false,//Jquery 내부에서 파일을 queryString 형태로 전달하는 것을 방지
@@ -321,12 +333,18 @@
         enctype: 'multipart/form-data',
         success: function(result){
             console.log(result);
-            alert("이게맞나", () => window.redirect("/"))
+            alert("업로드에 성공했습니다", () => window.redirect("/"))
         },
         error:function(err){
             console.log(err);
+            alert("업로드에 실패했습니다")
         }
     });
-    // event.preventDefault();
+     // event.preventDefault();
     }
+
+
+
+
+
 </script>

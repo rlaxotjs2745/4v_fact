@@ -252,7 +252,6 @@
         <if test="!type.equals(100)">
             AND SIGN_IN_TYPE = #{type}
         </if>
-        ORDER BY CONVERT(USER_NAME,'UTFE') ASC
         )
         A)
         WHERE PAGE = #{page}
@@ -272,7 +271,6 @@
         <if test="!type.equals(100)">
             AND SIGN_IN_TYPE = #{type}
         </if>
-        ORDER BY CONVERT(USER_NAME,'UTFE') ASC
         )
         A)
         WHERE PAGE = #{page}

@@ -12,11 +12,17 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Reader;
 import java.net.URL;
 import javax.annotation.Resource;
+import javax.mail.*;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.search.*;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -78,6 +84,12 @@ public class IndexController {
     @Resource(name="prContentService")
     public PRContentsService prContentService;
 
+    private Session session;
+
+    private Store store;
+
+    private Folder folder;
+
 
     @PreAuthorize("hasRole('ROLE_MEMBER')")
     @RequestMapping("/")
@@ -102,9 +114,9 @@ public class IndexController {
                                  @RequestParam(value="id") String admin_id,
                                  @RequestParam(value="pw") String admin_pw){
 
-        System.out.println("api_post_login");
+//        System.out.println("api_post_login");
          if(admin_id == null || admin_pw == null){
-            return "redirect:login";
+            return "redirect:/login";
         }
         //UserVO findUser = userService.getAuthUser(id,pw);
         //UserVO findUser = userService.getUserInfo(3);
@@ -152,14 +164,18 @@ public class IndexController {
         session.setAttribute("CSRF_TOKEN", UUID.randomUUID().toString());
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        System.out.println(paramVO);
+//        System.out.println(paramVO);
+//
+//        AdminVO adminVo = new AdminVO();
+//        adminVo.setAdmin_id("aa@aa.com");
+//        adminVo.setAdmin_pw("123123");
 
-/*        AdminVO adminVo = adminService.findAdminById("abcdef01@abcde.com");
-        if(adminVo !=null)
-        {
-            adminVo.setAdmin_pw(passwordEncoder.encode(adminVo.getAdmin_pw()));
-            adminService.updateAdminPassword(adminVo);
-        }*/
+////        if(adminVo !=null)
+////        {
+//            adminVo.setAdmin_pw(passwordEncoder.encode("123123"));
+//            adminService.join(adminVo);
+////        }
+//        System.out.println("confirm");
 
         return "login";
     }
@@ -651,18 +667,43 @@ public class IndexController {
     @RequestMapping(value = "/c21_site_visit_list",method = RequestMethod.POST)
     public String c21_site_visit_list(@RequestParam(value = "tag", required = false) String tagValue,
                                       ModelMap model,@RequestBody ParamPageListFilteredVO param){
+
+
+
+//
+//        int page = param.getPage_num();
+
+//
+//        AdminAnnounceFilterVO adminAnnounceFilterVO = bsAnnouncementService.getAdminBsAnnouncementFilter();
+//        //리스트 총갯수를 이때 빼야 함
+//        int filtered_item_total = adminAnnounceFilterVO.getAnnounce_tot();
+//        if(filter1==CONSTANT.ANN_STATUS_ON_COUNT)
+//            filtered_item_total = adminAnnounceFilterVO.getStatus_on_count();
+//        else if(filter1==CONSTANT.ANN_WAIT_COUNT)
+//            filtered_item_total = adminAnnounceFilterVO.getWait_count();
+//        else if(filter1==CONSTANT.ANN_PAUSE_COUNT)
+//            filtered_item_total = adminAnnounceFilterVO.getPause_count();
+//
+//
+//        model.addAttribute("total_count",filtered_item_total);
+//        model.addAttribute("adminAnnounceFilterVO",adminAnnounceFilterVO);
+//        param.setOrder_field("IDX_BS_ANNOUNCEMENT");
+//
         param.setAmount(10);
         int list_amount = 10;
         int page_amount = param.getAmount();
         int page = param.getPage_num();
+        int filter1 = param.getFilter1();
+        int filter2 = param.getFilter2();
         int visitCount = visitService.getVisitReqCount();
         if(visitCount==0){
             return"c21_site_visit_list";
         }
 
-
+        model.addAttribute("filter1",filter1);
+        model.addAttribute("filter2",filter2);
         model.addAttribute("total_count",visitCount);
-        List<VisitReqVO> visitReqList = visitService.getVisitList(page,list_amount,param.getFilter1());
+        List<VisitReqVO> visitReqList = visitService.getVisitList(param);
         model.addAttribute("visitReqList",visitReqList);
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
@@ -707,7 +748,9 @@ public class IndexController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-
+        System.out.println(visitReqList.size());
+        System.out.println(filter1);
+        System.out.println(filter2);
         return "c21_site_visit_list";
     }
     //자원예약 관리
@@ -790,7 +833,7 @@ public class IndexController {
         model.addAttribute("page_amount",page_amount);
 
 
-
+        System.out.println(noticeList);
 
 
 
@@ -800,7 +843,7 @@ public class IndexController {
     //고객관리진행중
     @RequestMapping(value = "/c42_site_event_mng",method = RequestMethod.POST)
     public String c42_site_event_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                     ModelMap model,ParamPageListFilteredVO param){
+                                     ModelMap model,@RequestBody ParamPageListFilteredVO param){
         //행사관리 테이블 추가 .tb_event_content
 
         param.setAmount(10);
@@ -814,7 +857,7 @@ public class IndexController {
         model.addAttribute("total_count",eventCount);
         List<EventContentVO> eventContentList = eventContentService.getEventContentList(page,list_amount);
         List<EventContentVO> eventContentList1 = eventContentService.getMainEventContentList();
-        model.addAttribute("eventcontentlist",eventContentList1);
+        model.addAttribute("eventcontentlist",eventContentList);
 
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
@@ -858,8 +901,7 @@ public class IndexController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-        System.out.println(eventContentList);
-        System.out.println(eventCount);
+
 
         return "c42_site_event_mng";
     }
@@ -868,12 +910,62 @@ public class IndexController {
     public String c43_site_adver_mng(@RequestParam(value = "page_num", required = false) String tagValue,
                                      @RequestBody ParamPageListFilteredVO param,   ModelMap model){
 
+        param.setAmount(10);
+        int list_amount = 10;
+        int page_amount = param.getAmount();
+        int page = param.getPage_num();
+        int prCount = prContentService.getMainPRContentCount();
+        if(prCount==0){
+            return "brd_adver_blank";
+        }
+        model.addAttribute("total_count",prCount);
 
-
-
-        List<PRContentVO> prlist = prContentService.getMainPRContentList();
+List<PRContentVO> prlist =prContentService.getPRContentList( page, list_amount);
+//        List<PRContentVO> prlist1 = prContentService.getMainPRContentList();
 model.addAttribute("prlist",prlist);
     model.addAttribute("prcontent",prlist);
+        model.addAttribute("cur_page",page);
+        model.addAttribute("amount",list_amount);
+
+        int tot_page = prCount/list_amount+1;
+        if(prCount%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+        boolean is_active = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("page_amount",page_amount);
+
         return "c43_site_adver_mng";
     }
 
@@ -888,7 +980,7 @@ model.addAttribute("prlist",prlist);
                 content = prContentVO.getPr_contents();
             }
         }
-        System.out.println(content);
+
         model.addAttribute("contentFuck",  content);
 
         return "pr_contents";
@@ -929,7 +1021,7 @@ model.addAttribute("prlist",prlist);
                                         ModelMap model){
 List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
 model.addAttribute("rulefileinfolist",ruleFileInfoList);
-
+        System.out.println(ruleFileInfoList);
         return "c72_site_rule_doc_mng";
     }
 
@@ -1253,8 +1345,9 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
                                   Principal principal,
                                   ModelMap model){
         AssetReservationVO assetReservationVO = assetService.getAssetReservation(param.getIdx());
+        System.out.println(assetReservationVO);
         List<AssetReservationItemVO> assetReservationItemVOList = assetService.getAssetReservationItemList(param.getIdx());
-        AdminVO applicant = adminService.getAdminInfo(param.getIdx());
+        AdminVO applicant = adminService.getAdminInfo(assetReservationVO.getIdx_user());
         param.setFilter1(100);
         List<AssetVO> assetVOList = assetService.getAssetList(param);
         AdminVO adminInfo = adminService.findAdminById(principal.getName());
@@ -1335,7 +1428,52 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //시스템 코드 관리
     @RequestMapping(value = "/h24_sent_email_list",method = RequestMethod.POST)
     public String h24_sent_email_list(@RequestParam(value = "tag", required = false) String tagValue,
-                                      ModelMap model){
+                                      ModelMap model) throws MessagingException, IOException {
+        session = null;
+//        URLName url = new URLName("imaps", "imap.gmail.com", 993, "INBOX", "seeshow202106", "27452745ts~~");
+        URLName url = new URLName("imaps", "imap.gmail.com", 993, "INBOX", "seeshow202106", "gcyqljnhdzyascpg");
+        if (session == null) {
+            Properties props = null;
+            try {
+                props = System.getProperties();
+//                System.out.println(props);
+                props.put("mail.smtp.starttls.required", "true");
+                props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+            } catch (SecurityException se) {
+                props = new Properties();
+            }
+            session = Session.getInstance(props, null);
+        }
+        store = session.getStore(url);
+        store.connect();
+        System.out.println(store.toString());
+        folder = store.getFolder("inbox"); //inbox는 받은 메일함을 의미
+        //folder.open(Folder.READ_WRITE);
+        folder.open(Folder.READ_ONLY); //읽기 전용
+
+        int messageCount = 0;
+        try {
+            messageCount = folder.getMessageCount();
+        } catch (MessagingException me) {
+            me.printStackTrace();
+        }
+
+        if(messageCount > 5){
+            messageCount = 5;
+        }
+
+        Message[] messages = folder.getMessages();
+
+        for(int i = 0; i < messageCount; i++){
+            Message msg = messages[i];
+            if(msg.getSubject() != null){
+                System.out.println(String.format("컨텐츠타입: %s", msg.getContentType()));
+                System.out.println(String.format("발신자[0]: %s", msg.getFrom()));
+                System.out.println(String.format("메일 제목: %s", msg.getSubject()));
+                System.out.println(String.format("메일 내용: %s", msg.getContent()));
+            }
+        }
+
 
 
         return "h24_sent_email_list";
@@ -1523,8 +1661,11 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //서식 관리
     @RequestMapping(value = "/l11_document_form_mng",method = RequestMethod.POST)
     public String l11_document_form_mng(@RequestBody ParamPageListFilteredVO param,
-                                           ModelMap model){
-
+                                           ModelMap model, Principal principal){
+        List<FormFileInfoVO> formFileList =fileService.getFormFileList();
+        model.addAttribute("formfilelist",formFileList);
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+        model.addAttribute("admin", adminInfo);
 
         return "l11_document_form_mng";
     }
@@ -1532,7 +1673,8 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     public String l12_document_rule_mng(@RequestBody ParamPageListFilteredVO param,
                                    ModelMap model){
         int page = param.getPage_num();
-
+        List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
+        model.addAttribute("rulefileinfolist",ruleFileInfoList);
         //int filter1 = param.getFilter1();
         //int filter2 = param.getFilter2();
 

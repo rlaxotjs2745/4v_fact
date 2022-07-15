@@ -14,4 +14,5 @@ public interface ConsultingService {
     void saveDemoBsConsulting(DemoBsConsultingVO demoBsConsultingVO);
     int getCountConsulting();
     int deleteConsult(int idx_demo_bs_consulting);
+    int updateConsult(DemoBsConsultingVO demoBsConsultingVO);
 }

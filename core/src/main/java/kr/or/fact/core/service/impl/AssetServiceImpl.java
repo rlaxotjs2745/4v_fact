@@ -43,14 +43,13 @@ public class AssetServiceImpl implements AssetService {
     @Override
     public int reserveAsset(AssetReservationVO assetReservationVO, AdminVO adminInfo){
         try{
-            System.out.println("before: " + assetReservationVO.getIdx_asset_reservation());
             assetMapper.insertAssetReservation(assetReservationVO);
-            System.out.println("after: " + assetReservationVO.getIdx_asset_reservation());
+            long curIdx = assetMapper.getIdxAssetReservation();
             List<String> assetCodes = assetReservationVO.getAssetList();
             for(int i = 0; i < assetCodes.size(); i++){
                 assetMapper.insertReservationItem(
                         assetCodes.get(i),
-                        assetReservationVO.getIdx_asset_reservation(),
+                        curIdx,
                         adminInfo.getIdx_admin(),
                         1,
                         0

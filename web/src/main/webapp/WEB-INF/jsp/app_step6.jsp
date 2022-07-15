@@ -105,7 +105,7 @@
     <div class="footer_app">
         <div class="footer__btn">
             <!--<a href="#" class="btn dark btn-lg fl-left">임시저장</a>-->
-            <a href="app_step5.html" class="btn info btn-lg ">이전</a>
+            <button id="btn_app_step5" class="btn info btn-lg">이전</button>
             <a href="#none" class="btn submit btn-lg " onclick="javascript: window.close();  ">신청서등록</a>
         </div>
     </div>
@@ -149,6 +149,41 @@
 <script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
 <script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
 <script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
+<script>
 
+    $("#btn_app_step5").click(function(){
+        var param  = {
+            "idx_user":${userDemoBs.idx_user},
+            "idx_demo_business":${userDemoBs.idx_demo_business}
+        };
+        goNextStep(param,'app_step5');
+    });
+
+    function goNextStep(param,location){
+        let f = document.createElement('form');
+
+        let input_idx_user;
+        input_idx_user = document.createElement('input');
+        input_idx_user.setAttribute('type', 'hidden');
+        input_idx_user.setAttribute('name', 'idx_user');
+        input_idx_user.setAttribute('value', param.idx_user);
+
+        f.appendChild(input_idx_user);
+
+        let input_idx_demo_business;
+        input_idx_demo_business = document.createElement('input');
+        input_idx_demo_business.setAttribute('type', 'hidden');
+        input_idx_demo_business.setAttribute('name', 'idx_demo_business');
+        input_idx_demo_business.setAttribute('value', param.idx_demo_business);
+
+        f.appendChild(input_idx_demo_business);
+
+
+        f.setAttribute('method', 'post');
+        f.setAttribute('action', location);
+        document.body.appendChild(f);
+        f.submit();
+    }
+</script>
 </body>
 </html>

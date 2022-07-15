@@ -1,12 +1,8 @@
 package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.config.FACTConfig;
-import kr.or.fact.core.model.DTO.FileInfoVO;
-import kr.or.fact.core.model.DTO.FormFileInfoVO;
-import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
-import kr.or.fact.core.model.DTO.RuleFileInfoVO;
+import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.model.FileServiceMapper;
-import kr.or.fact.core.model.HomepageMapper;
 import kr.or.fact.core.service.FileService;
 import kr.or.fact.core.util.FileDownloadException;
 import kr.or.fact.core.util.FileUploadException;
@@ -17,23 +13,29 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+
 import java.util.List;
 
 @Service("fileService")
 public class FileServiceImpl implements FileService {
 
     private final Path fileLocation;
-
+    private final FACTConfig factConfig;
     private final FileServiceMapper fileServiceMapper;
 
     @Autowired
-    public FileServiceImpl(FACTConfig prop,FileServiceMapper fileServiceMapper) {
+    public FileServiceImpl(FACTConfig prop, FACTConfig factConfig, FileServiceMapper fileServiceMapper) {
+        this.factConfig = factConfig;
 
         this.fileServiceMapper = fileServiceMapper;
 
@@ -50,6 +52,12 @@ public class FileServiceImpl implements FileService {
     @Override
     public String storeFileInfo(MultipartFile file) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        long fileSize = file.getSize();
+        String fileType = file.getContentType();
+        FileInfoVO fileInfoVO = new FileInfoVO();
+        fileInfoVO.setFile_name(fileName);
+        fileInfoVO.setFile_size(fileSize);
+        fileInfoVO.setMime_type(fileType);
 
         try {
             // 파일명에 부적합 문자가 있는지 확인한다.
@@ -103,6 +111,7 @@ public class FileServiceImpl implements FileService {
     }
     @Override
     public void insertFormFileInfo(FormFileInfoVO formFileInfoVO){
+
         fileServiceMapper.insertFormFileInfo(formFileInfoVO);
     }
     @Override
@@ -142,4 +151,80 @@ public class FileServiceImpl implements FileService {
     public List<RuleFileInfoVO> getRuleFileInfoList1() {
         return fileServiceMapper.getRuleFileInfoList1();
     }
+
+    @Override
+    public long insertFile(MultipartFile file, long userIdx, long bsIdx, int type) throws IllegalStateException, IOException {
+        File newFile = new File(factConfig.getUploadDir() + file.getOriginalFilename());
+        newFile.createNewFile();
+        FileOutputStream fos = new FileOutputStream(newFile);
+        fos.write(file.getBytes());
+        fos.close();
+
+        FileInfoVO fileInfoVO = new FileInfoVO();
+
+        fileInfoVO.setFile_name(file.getOriginalFilename());
+        fileInfoVO.setFile_type(1);
+        fileInfoVO.setFile_status(0);
+        fileInfoVO.setMime_type(file.getContentType());
+        fileInfoVO.setEncoding(1);
+        fileInfoVO.setExtention(StringUtils.getFilenameExtension(file.getOriginalFilename()));
+        fileInfoVO.setFile_secure_type(0);
+        fileInfoVO.setFile_path(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString() + factConfig.getUploadDir() + file.getOriginalFilename());
+        fileInfoVO.setFile_size(file.getSize());
+        fileInfoVO.setOwner(1);
+        fileInfoVO.setIdx_user(userIdx);
+
+
+
+        fileServiceMapper.insertFileInfo(fileInfoVO);
+
+        UserDemoBsFileVO userDemoBsFileVO = new UserDemoBsFileVO();
+
+        userDemoBsFileVO.setIdx_user_demo_bs(bsIdx);
+        userDemoBsFileVO.setFile_type(type);
+        userDemoBsFileVO.setFile_verion(1);
+        userDemoBsFileVO.setIs_last(0);
+
+        List<UserDemoBsFileResultVO> fileIdxArr = fileServiceMapper.getUserDemoBsFileJoin(bsIdx);
+        boolean isExist = false;
+        for(int i = 0; i < fileIdxArr.size(); i++){
+            if(fileIdxArr.get(i).getFile_type() == type){
+                isExist = true;
+                userDemoBsFileVO.setFile_verion(fileIdxArr.get(i).getFile_verion() + 1);
+                fileServiceMapper.updateUserDemoBsFileJoin(userDemoBsFileVO);
+                fileServiceMapper.deleteFileInfo(fileIdxArr.get(i).getIdx_file_info());
+            }
+        }
+
+        if(!isExist){
+            fileServiceMapper.insertUserDemoBsFileJoin(userDemoBsFileVO);
+        }
+
+        return 1;
+    }
+
+    @Override
+    public List<UserDemoBsFileResultVO> getUserDemoFileList(long idx){
+        List<UserDemoBsFileResultVO> fileIdxArr = fileServiceMapper.getUserDemoBsFileJoin(idx);
+
+        return fileIdxArr;
+    }
+
+    @Override
+    public File convertMultipartToFile(MultipartFile file) throws IOException {
+        File newFile = new File(factConfig.getUploadDir() + file.getOriginalFilename());
+        newFile.createNewFile();
+        FileOutputStream fos = new FileOutputStream(newFile);
+        fos.write(file.getBytes());
+        fos.close();
+
+        return newFile;
+    }
+
+    @Override
+    public int insertFileInfo(FileInfoVO fileInfoVO) {
+        fileInfoVO.setFile_path(factConfig.getUploadDir()+ fileInfoVO.getFile_path());
+        return fileServiceMapper.insertFileInfo(fileInfoVO);
+    }
+
 }

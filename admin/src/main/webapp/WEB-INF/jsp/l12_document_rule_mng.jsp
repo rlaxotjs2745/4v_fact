@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -33,16 +34,14 @@
                             </thead>
                             <tbody>
                             <c:choose>
-                                <c:when test="${fn:length(ruleFileInfoVOList)>0}">
-                                    <c:forEach items = "${ruleFileInfoVOList}" var ="rule">
-                                        <tr class="">
-                                            <td class="text-center">${rule.order_num}</td>
-                                            <td class="text-center"><a href="#modals-rule-file" data-toggle="modal" data-target="#modals-default">${rule.subject}</a></td>
-                                            <td class="text-center">${rule.usage_detail}</td>
-                                            <td class="text-center">${rule.extention}</td>
-                                            <td class="text-center">${rule.file_name}</td>
-                                            <td class="text-center">${rule.extention}</td>
-                                            <td class="text-center">${rule.reg_date}</td>
+                                <c:when test="${fn:length(rulefileinfolist)>0}">
+                                    <c:forEach items="${rulefileinfolist}" var="rulefile">
+                                        <tr class="rulefile-entity" id="${rulefile.idx_rule_file_info}">
+                                            <td class="text-center">${rulefile.order_num}</td>
+                                            <td class="text-center">${rulefile.subject}</td>
+                                            <td class="text-center"><a href="#none" data-toggle="modal" data-target="#modals-counsel-view" class="btn btn-outline-default  btn-sm">${rulefile.usage_detail}</a></td>
+                                            <td class="text-center">${rulefile.depart_name}</td>
+                                            <td class="text-center"><fmt:formatDate value="${rulefile.reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                                         </tr>
                                     </c:forEach>
                                 </c:when>
@@ -95,29 +94,29 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="form-group row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">양식 제목</label>
+                        <div class="form-group row" id="form_title">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">규정 제목</label>
                             <div class="col-md-10">
                                 <input id="subject" type="text" class="form-control form-control-md">
                             </div>
 
                         </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">양식 사용 용도</label>
+                        <div class="form-group row" id="form_usage">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">규정 사용 용도</label>
                             <div class="col-md-10">
                                 <textarea id="usage_detail" type="text" class="form-control form-control-md"></textarea>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" id="form_corp_name">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">관련조직 이름</label>
                             <div class="col-md-10">
                                 <input id="detail" type="text" class="form-control form-control-md">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">파일 업로드</label>
+                        <div class="form-group row" id="file">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" for="file_upload">파일 업로드</label>
                             <div class="col-md-10">
-                                <input id="file_upload" type="file" class="form-control form-control-md">
+                                <input id="file_upload" name="file_upload" type="file" class="form-control form-control-md" multiple>
                             </div>
                         </div>
 
@@ -126,10 +125,9 @@
                                 <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
                             </div>
                             <div>
-                                <button id="btn_save_new" type="button" class="btn btn-primary">저장</button>
+                                <button id="btn_save_new" type="button" class="btn btn-primary" onclick="saveForm();">저장</button>
                             </div>
                         </div>
-
 
                     </form>
                 </div>
@@ -249,24 +247,29 @@
         });
     });
 
-    $('#btn_save_new').on('click', function(){
+
+
+    var saveNewBtn = document.querySelectorAll('.btn_save_new');
+    saveNewBtn.forEach(btn=>btn.addEventListener('click', saveForm));
+
+    function saveForm(){
         event.preventDefault();
         var fileForm = new FormData();
         fileForm.append("subject",document.querySelector('#subject').value);
         fileForm.append("usage_detail",document.querySelector('#usage_detail').value);
 
-
         var files = document.querySelector('#file_upload').files;
+
+
         for(var i = 0; i < files.length; i++){
             var num = i + 1;
             fileForm.append("files" + num, files[i]);
         }
         fileForm.append("fileLength", files.length);
-        console.log(fileForm)
 
         $.ajax({
             type: 'post',
-            url :'uploadFile', //데이터를 주고받을 파일 주소 입력
+            url :'upload_rule_file', //데이터를 주고받을 파일 주소 입력
             data: fileForm,//보내는 데이터
             contentType: false,//보내는 데이터 타입
             processData: false,//Jquery 내부에서 파일을 queryString 형태로 전달하는 것을 방지
@@ -274,12 +277,16 @@
             enctype: 'multipart/form-data',
             success: function(result){
                 console.log(result);
-                alert("이게맞나", () => window.redirect("/"))
+                alert("업로드에 성공했습니다", () => window.redirect("/"))
             },
             error:function(err){
                 console.log(err);
+                alert("업로드에 실패했습니다")
             }
         });
         // event.preventDefault();
-    })
+    }
+
+
+
 </script>

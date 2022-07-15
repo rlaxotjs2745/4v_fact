@@ -362,10 +362,10 @@
                     <!-- 사업번호 / 사업 상태-->
 
                     <!-- 사업 제목-->
-                    <div class="form-group row" id="event_content_code_insert">
+                    <div class="form-group row" >
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">행사 제목</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" >
+                            <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" id="event_content_code_insert">
                             <div class="form-control-plaintext mode-view"></div>
                         </div>
                     </div>
@@ -373,15 +373,15 @@
                     <hr>
                     <div class="form-row" >
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">내용</label>
-                        <div class="form-group col col-md-10" id="subject_insert">
-                            <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
+                        <div class="form-group col col-md-10">
+                            <textarea class="form-control mode-edit mode-new" rows="3"  id="subject_insert"></textarea>
                         </div>
                     </div>
                     <hr>
                     <div class="form-row" >
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">컨텐츠</label>
                         <div class="form-group col col-md-10" id="event_content_insert">
-                            <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
+                            <textarea class="summernote" rows="3"></textarea>
                         </div>
                     </div>
                     <div class="form-group row" id="time">
@@ -405,7 +405,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col col-md-12" id="is_file_insert">
-                            <label class="form-label d-block text-muted">파일여부</label>
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">파일여부</label>
                             <label class="custom-control custom-radio d-inline-block">
                                 <input name="custom-6" type="radio" class="custom-control-input"  value="0">
                                 <span class="custom-control-label">포함안함</span>
@@ -418,7 +418,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col col-md-12" id="is_new_insert">
-                            <label class="form-label d-block text-muted">신규 등록여부</label>
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">신규 등록여부</label>
                             <label class="custom-control custom-radio d-inline-block">
                                 <input name="custom-7" type="radio" class="custom-control-input"  value="0">
                                 <span class="custom-control-label">신규아님</span>
@@ -433,7 +433,7 @@
 
                     <div class="form-row">
                         <div class="form-group col col-md-12" id="is_main_page_insert">
-                            <label class="form-label d-block text-muted">메인페이지 노출여부</label>
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메인페이지 노출여부</label>
                             <label class="custom-control custom-radio d-inline-block">
                                 <input name="custom-8" type="radio" class="custom-control-input"  value="0">
                                 <span class="custom-control-label">노출안함</span>
@@ -447,7 +447,7 @@
 
                     <div class="form-row">
                         <div class="form-group col col-md-12" id="event_content_status_insert">
-                            <label class="form-label d-block text-muted">행사안내 게시 프로세스 상태</label>
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">행사안내 프로세스 상태</label>
                             <label class="custom-control custom-radio d-inline-block">
                                 <input name="custom-9" type="radio" class="custom-control-input"  value="0">
                                 <span class="custom-control-label">임시저장</span>
@@ -471,19 +471,27 @@
                         </div>
                     </div>
 
+                    <div class="form-row">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" for="file_upload">파일 첨부</label>
+                        <div class="form-group col col-md-10 mode-edit mode-new">
+                            <input type="file" class="form-control-file d-block py-1" id="file_upload" name="file_upload" multiple>
+                        </div>
+                        <div class="form-group col col-md-10 col-form-label mode-view">
+                            <a href="file.doc"></a>
+                        </div>
+                    </div>
                     <div class="modal-footer justify-content-between mode-new">
                         <div>
                             <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
                         </div>
                         <div>
                             <button type="button" class="btn btn-outline-primary mr-2">임시저장</button>
-                            <button type="button" class="btn btn-primary" onclick="event_pass();">작성완료</button>
+                            <button id="btn_save_new" type="button" class="btn btn-primary" onclick="saveForm();">작성완료</button>
                         </div>
                     </div>
 
                     <div class="modal-footer justify-content-between mode-edit d-none">
                         <div>
-                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal" >삭제</button>
                             <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
                         </div>
                         <div>
@@ -542,40 +550,40 @@ $(".eventcontent_entity").click(function(){
 })
 
 
-function event_pass() {
-// let result = document.getElementsByName('custom-6');
-    var selectId = $(this).attr('id');
-    param ={
-        event_content_code:$("#event_content_code_insert input").val(),
-        subject:$("#subject_insert textarea").val(),
-        event_content:$('#event_content_insert textarea').val(),
-        event_start_date:$('#event_start_date_insert').val(),
-        event_end_date:$("#event_end_date_insert").val(),
-        is_file:$("input:radio[name=custom-6]:checked").val(),
-        is_new:$("input:radio[name=custom-7]:checked").val(),
-        is_main_page:$("input:radio[name=custom-8]:checked").val(),
-        event_content_status:$("input:radio[name=custom-9]:checked").val()
-    }
-
-    $.ajax({
-        type: 'post',
-        url: '/insert_event', //데이터를 주고받을 파일 주소 입력
-        data: JSON.stringify(param),//보내는 데이터
-        contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
-        dataType: 'json',//받는 데이터 타입
-        success: function (result) {
-            if (result.result_code === "SUCCESS") {
-                alert("상태 변경에 성공하였습니다")
-            } else {
-                alert("상태 변경에 실패하였습니다")
-            }
-
-        },
-        error: function (res) {
-            console.log(res)
-        }
-    });
-}
+// function event_pass() {
+// // let result = document.getElementsByName('custom-6');
+//     var selectId = $(this).attr('id');
+//     param ={
+//         event_content_code:$("#event_content_code_insert input").val(),
+//         subject:$("#subject_insert textarea").val(),
+//         event_content:$('#event_content_insert textarea').val(),
+//         event_start_date:$('#event_start_date_insert').val(),
+//         event_end_date:$("#event_end_date_insert").val(),
+//         is_file:$("input:radio[name=custom-6]:checked").val(),
+//         is_new:$("input:radio[name=custom-7]:checked").val(),
+//         is_main_page:$("input:radio[name=custom-8]:checked").val(),
+//         event_content_status:$("input:radio[name=custom-9]:checked").val()
+//     }
+//
+//     $.ajax({
+//         type: 'post',
+//         url: '/insert_event', //데이터를 주고받을 파일 주소 입력
+//         data: JSON.stringify(param),//보내는 데이터
+//         contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+//         dataType: 'json',//받는 데이터 타입
+//         success: function (result) {
+//             if (result.result_code === "SUCCESS") {
+//                 alert("상태 변경에 성공하였습니다")
+//             } else {
+//                 alert("상태 변경에 실패하였습니다")
+//             }
+//
+//         },
+//         error: function (res) {
+//             console.log(res)
+//         }
+//     });
+// }
 
 
 
@@ -622,6 +630,81 @@ $("#delete_event").click(function () {
         });
     }
 })
+
+
+
+
+
+var saveNewBtn = document.querySelectorAll('.btn_save_new');
+saveNewBtn.forEach(btn=>btn.addEventListener('click', saveForm));
+
+function saveForm(message){
+    event.preventDefault();
+    var fileForm = new FormData();
+    fileForm.append("event_content_code",document.querySelector('#event_content_code_insert').value);
+    fileForm.append("subject",document.querySelector('#subject_insert').value);
+    fileForm.append("event_contents",document.querySelector('#event_content_insert textarea').value);
+    fileForm.append("is_file",document.querySelector('input[name=custom-6]:checked').value);
+    fileForm.append("is_new",document.querySelector('input[name=custom-7]:checked').value);
+    fileForm.append("is_main_page",document.querySelector('input[name=custom-8]:checked').value);
+    fileForm.append("event_content_status",document.querySelector('input[name=custom-9]:checked').value);
+    fileForm.append("event_start_date",new Date(document.querySelector("#event_start_date_insert").value));
+    fileForm.append("event_end_date",new Date(document.querySelector("#event_end_date_insert").value));
+
+
+    var files = document.querySelector('#file_upload').files;
+
+
+    for(var i = 0; i < files.length; i++){
+        var num = i + 1;
+        fileForm.append("files" + num, files[i]);
+    }
+    fileForm.append("fileLength", files.length);
+
+    $.ajax({
+        type: 'post',
+        url :'insert_event', //데이터를 주고받을 파일 주소 입력
+        data: fileForm,//보내는 데이터
+        contentType: false,//보내는 데이터 타입
+        processData: false,//Jquery 내부에서 파일을 queryString 형태로 전달하는 것을 방지
+        dataType:'json',//받는 데이터 타입
+        enctype: 'multipart/form-data',
+        success: function(result){
+            console.log(result);
+            alert("업로드에 성공했습니다", () => window.redirect("/"))
+        },
+        error: function (res) {
+            console.log(res)
+        }
+    });
+}
+
+
+
+
+
+
+
+
+$('.summernote').summernote({
+    toolbar: [
+        // [groupName, [list of button]]
+        ['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],
+        ['style', ['bold', 'italic', 'underline']],
+        ['color', ['color']],
+        ['table', ['table']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+        ['insert',['picture','link']],
+        ['view', ['fullscreen','codeview']],
+    ],
+    fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+    fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+    height: 300                 // 에디터 높이
+});
+
+
 </script>
 <!-- Layout footer -->
 <%@include file ="layouts/frame_footer.jsp" %>
