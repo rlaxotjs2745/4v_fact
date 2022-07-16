@@ -17,4 +17,8 @@ public interface EventContentService {
     int deleteEvent(int idx_event_content);
     int insertEventContentFileJoin();
     EventFileJoinSelectVO getEventContentFileJoin(int idx_event_content);
+
+int getEventViewCount(int idx_event_content);
+void updateEventViewCount(EventContentVO eventContentVO);
+
 }

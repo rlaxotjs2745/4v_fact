@@ -18,5 +18,7 @@ public interface EventContentMapper {
     EventContentVO getEventContentByIdx (@Param("idx_event_content") long idx_event_content);
     int insertEventContentFileJoin();
     EventFileJoinSelectVO getEventContentFileJoin(@Param("idx_event_content") long idx_event_content);
+    int getEventViewCount(@Param("idx_event_content") long idx_event_content);
+    void updateEventViewCount(EventContentVO eventContentVO);
 }
 

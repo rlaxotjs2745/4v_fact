@@ -233,7 +233,12 @@
 
 
 
-
+    <select id="getBsAnnounceViewCount" parameterType="long" resultType="int">
+        SELECT VIEW_COUNT FROM TB_BS_ANNOUNCEMENT WHERE IDX_BS_ANNOUNCEMENT=#{idx_bs_announcement}
+    </select>
+    <update id="updateBsAnnounceViewCount" parameterType="kr.or.fact.core.model.DTO.EventContentVO">
+        UPDATE TB_BS_ANNOUNCEMENT SET VIEW_COUNT = #{view_count} WHERE IDX_BS_ANNOUNCEMENT =#{idx_bs_announcement}
+    </update>
 
 
 

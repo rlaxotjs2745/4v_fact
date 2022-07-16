@@ -781,17 +781,18 @@ public class IndexController {
                                       Model model){
 
 
-        EventFileJoinSelectVO eventContentVO = eventContentService.getEventContentFileJoin(idx);
+
         EventContentVO event = eventContentService.getEventContentByIdx(idx);
         if(event.getIs_file()==0){
             System.out.println("여기");
             model.addAttribute("eventContent", event);
         }else{
             System.out.println("아님여기");
+            EventFileJoinSelectVO eventContentVO = eventContentService.getEventContentFileJoin(idx);
             model.addAttribute("eventContent",eventContentVO);
+            System.out.println(eventContentVO);
         }
-        System.out.println(event);
-        System.out.println(eventContentVO);
+
         getHomepageInfo(model);
         return "brd_event_detail";
     }
@@ -881,15 +882,16 @@ public class IndexController {
     public String brd_notice_detail(@RequestParam("idx") int idx,
                                    Model model){
 
-
-
         NoticeVO noticeInfo = noticeService.getNoticeByIdx(idx);
-        model.addAttribute("noticeInfo",noticeInfo);
+        if(noticeInfo.getIs_file()==0){
+            System.out.println("여기");
+            model.addAttribute("noticeInfo",noticeInfo);
+        }else{
+            System.out.println("아님여기");
+            NoticeVO noticeVO =noticeService.getNoticeIsFile(idx);
+            model.addAttribute("noticeInfo",noticeVO);
 
-
-
-
-
+        }
 
 
         getHomepageInfo(model);
@@ -978,8 +980,22 @@ public class IndexController {
     public String brd_promotion_detail(@RequestParam("idx") int idx,
                                     Model model){
 
+
         PRContentVO prContentVO = prContentService.getPRContent(idx);
-        model.addAttribute("pr", prContentVO);
+        if(prContentVO.getIs_file()==0){
+            System.out.println("여기");
+            model.addAttribute("pr", prContentVO);
+        }else{
+            System.out.println("아님여기");
+            PRContentVO prContentVO1 = prContentService.getPRContentFileJoin(idx);
+            model.addAttribute("pr",prContentVO1);
+
+        }
+
+
+
+
+
 
         getHomepageInfo(model);
         return "brd_promotion_detail";

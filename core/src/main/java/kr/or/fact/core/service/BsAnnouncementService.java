@@ -26,8 +26,8 @@ public interface BsAnnouncementService {
     void updateBsAnnouncement(BsAnnouncementVO demoBusinessVO);
     void deleteBsAnnouncement(long idx_demo_business);
 
-
-
+   int getBsAnnounceViewCount(long idx_bs_announcement);
+   void updateBsAnnounceViewCount (BsAnnouncementVO bsAnnouncementVO);
 
 
     //List<BsAnnouncementVO> getAvailibleBsAnnouncement();

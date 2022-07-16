@@ -123,7 +123,7 @@ LAST_UPD_DATE
 
                 )
     </insert>
-    <select id="getPRContentFileJOIN">
+    <select id="getPRContentFileJoin" resultType="kr.or.fact.core.model.DTO.PRContentVO">
         SELECT     A.IDX_PR_CONTENT,
                    A.PR_CONTENT_CODE,
                    A.PR_CONTENT_NUM,
@@ -152,6 +152,12 @@ LAST_UPD_DATE
                    B.IDX_FILE_INFO,
                    C.FILE_PATH
         FROM TB_PR_CONTENT A JOIN TB_PR_CONTENT_FILE_JOIN B ON A.IDX_PR_CONTENT=B.IDX_PR_CONTENT
-                             JOIN TB_FILE_INFO C ON B.IDX_FILE_INFO=C.IDX_FILE_INFO WHERE IDX_PR_CONTENT=#{idx_pr_content}
+                             JOIN TB_FILE_INFO C ON B.IDX_FILE_INFO=C.IDX_FILE_INFO WHERE A.IDX_PR_CONTENT=#{idx_pr_content}
     </select>
+    <select id="getPrViewCount" parameterType="long" resultType="int">
+        SELECT VIEW_COUNT FROM TB_PR_CONTENT WHERE IDX_PR_CONTENT=#{idx_pr_content}
+    </select>
+    <update id="updatePrViewCount" parameterType="kr.or.fact.core.model.DTO.PRContentVO">
+        UPDATE TB_PR_CONTENT SET VIEW_COUNT = #{view_count} WHERE IDX_PR_CONTENT =#{idx_pr_content}
+    </update>
 </mapper>

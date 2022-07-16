@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file ="header.jsp" %>
 
 <div class="content" id="content">
@@ -49,6 +50,7 @@
                     </tr>
                     </thead>
                     <tbody>
+
                     <tr>
                         <td class="td__left">파일 형식별 내려받기</td>
                         <td class="td__left">2021년 종자생명산업 맞춤형 인력양성」 교육훈련생 선정 결과 알림</td>
