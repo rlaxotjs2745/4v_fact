@@ -1,6 +1,7 @@
 package kr.or.fact.core.service;
 
 import kr.or.fact.core.model.DTO.EventContentVO;
+import kr.or.fact.core.model.DTO.EventFileJoinSelectVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface EventContentService {
     public int insertEventContent(EventContentVO eventContentVO);
     int deleteEvent(int idx_event_content);
     int insertEventContentFileJoin();
+    EventFileJoinSelectVO getEventContentFileJoin(int idx_event_content);
 }

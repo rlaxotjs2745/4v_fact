@@ -833,7 +833,6 @@ public class IndexController {
         model.addAttribute("page_amount",page_amount);
 
 
-        System.out.println(noticeList);
 
 
 
@@ -1021,7 +1020,7 @@ model.addAttribute("prlist",prlist);
                                         ModelMap model){
 List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
 model.addAttribute("rulefileinfolist",ruleFileInfoList);
-        System.out.println(ruleFileInfoList);
+
         return "c72_site_rule_doc_mng";
     }
 

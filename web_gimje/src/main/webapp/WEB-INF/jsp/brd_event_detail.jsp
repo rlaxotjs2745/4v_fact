@@ -163,6 +163,7 @@
                                     ${eventContent.memo}
                                 </div>
                                 <div class="temp__download--box"><strong>첨부파일</strong>
+                                    ${eventContent.file_path}
                                     <ul>
                                         <li><img src="resources/assets/image/ico_hwp.png" alt=""><a href="#none">파일명 파일명.hwp</a></li>
                                         <li><img src="resources/assets/image/ico_pdf.png" alt=""><a href="#none">파일명 파일명.png</a></li>
@@ -197,19 +198,19 @@
 <%@include file ="footer.jsp" %>
 <%@include file ="script.jsp" %>
 <script>
-    function downloadFile(filename){
-        const encFileName = encodeURI(filename);
-        $.ajax({
-            method:"GET",
-            url : `/downloadFile/`,
-            success : function(data) {
-
-            },
-            error:function(request,status){
-                alert("오류가 발생했습니다.");
-            }
-        });
-    }
+    // function downloadFile(filename){
+    //     const encFileName = encodeURI(filename);
+    //     $.ajax({
+    //         method:"GET",
+    //         url : `/downloadFile/`,
+    //         success : function(data) {
+    //
+    //         },
+    //         error:function(request,status){
+    //             alert("오류가 발생했습니다.");
+    //         }
+    //     });
+    // }
 
 </script>
 </div>

@@ -1100,7 +1100,7 @@ public class APIController {
             fileService.insertFileInfo(fileInfoVO);
             noticeService.insertNotice(noticeVO);
             noticeService.insertNoticeFileJoin();
-        System.out.println(noticeVO);
+
 
 
         return new FileUploadResponseVO(fileName, fileDownloadUri, file.getContentType(), file.getSize());

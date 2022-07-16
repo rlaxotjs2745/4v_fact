@@ -315,3 +315,13 @@ html:not(.material-style) .material-style-only {
 .text-hero{
   color:#ee2438;
 }
+
+.greenhouse-area{
+  background-image: url('../image/img_company-map_dark.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100%;
+  height: 800px;
+
+}
