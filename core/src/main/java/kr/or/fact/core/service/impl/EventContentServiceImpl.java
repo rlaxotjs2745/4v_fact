@@ -1,6 +1,7 @@
 package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.DTO.EventContentVO;
+import kr.or.fact.core.model.DTO.EventFileJoinSelectVO;
 import kr.or.fact.core.model.EventContentMapper;
 import kr.or.fact.core.service.EventContentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +62,12 @@ public class EventContentServiceImpl implements EventContentService {
     @Override
     public int insertEventContentFileJoin() {
         return eventContentMapper.insertEventContentFileJoin();
+    }
+
+    @Override
+    public EventFileJoinSelectVO getEventContentFileJoin(int idx_event_content) {
+        long newIdx = Long.parseLong("" + idx_event_content);
+        System.out.println(newIdx);
+        return eventContentMapper.getEventContentFileJoin(newIdx);
     }
 }

@@ -36,4 +36,5 @@ public class EventContentVO {
     MultipartFile files4;
     MultipartFile files5;
     String fileLength;
+    String file_path;
 }

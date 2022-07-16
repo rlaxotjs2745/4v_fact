@@ -780,8 +780,18 @@ public class IndexController {
     public String brd_event_detail(@RequestParam("idx") int idx,
                                       Model model){
 
+
+        EventFileJoinSelectVO eventContentVO = eventContentService.getEventContentFileJoin(idx);
         EventContentVO event = eventContentService.getEventContentByIdx(idx);
-        model.addAttribute("eventContent", event);
+        if(event.getIs_file()==0){
+            System.out.println("여기");
+            model.addAttribute("eventContent", event);
+        }else{
+            System.out.println("아님여기");
+            model.addAttribute("eventContent",eventContentVO);
+        }
+        System.out.println(event);
+        System.out.println(eventContentVO);
         getHomepageInfo(model);
         return "brd_event_detail";
     }

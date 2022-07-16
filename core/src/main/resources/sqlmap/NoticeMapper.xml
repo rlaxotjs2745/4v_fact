@@ -126,6 +126,39 @@ LAST_UPD_DATE
     <select id="getMainNoticeList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.NoticeVO">
         SELECT * FROM TB_NOTICE  WHERE  IS_MAIN_PAGE=1
     </select>
+    <select id="getNoticeIsFile" resultType="kr.or.fact.core.model.DTO.NoticeFileJoinVO">
+
+        SELECT A.IDX_NOTICE_FILE_JOIN,
+               A.IDX_NOTICE,
+               A.IDX_FILE_INFO,
+               B.IDX_NOTICE,
+               B.IS_FILE,
+               B.IS_MAIN_PAGE,
+               B.IS_IMPORTANT,
+               B.NOTICE_CODE,
+               B.NOTICE_NUM,
+               B.SUBJECT,
+               B.NOTICE_CONTENTS,
+               B.IS_SHOW,
+               B.VIEW_COUNT,
+               B.NOTICE_STATUS,
+               B.POSTING_START_DATE,
+               B.POSTING_END_DATE,
+               B.DOC_VERSION,
+               B.MEMO,
+               B.SEARCH_TAG,
+               B.AUTHOR,
+               B.IDX_ADMIN,
+               B.CONFIRM_ADMIN_IDX,
+               B.REG_DATE,
+               B.LAST_UPD_DATE,
+               C.FILE_PATH
+        FROM TB_NOTICE_FILE_JOIN A JOIN TB_NOTICE B ON A.IDX_NOTICE= B.IDX_NOTICE
+                                   JOIN TB_FILE_INFO C ON C.IDX_FILE_INFO= A.IDX_FILE_INFO WHERE B.IDX_NOTICE=#{idx_notice}
+
+    </select>
+
+
     <delete id="deleteNotice" parameterType="int">
         DELETE FROM TB_NOTICE WHERE IDX_NOTICE = #{idx_notice}
     </delete>

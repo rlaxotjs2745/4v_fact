@@ -153,4 +153,90 @@ REG_DATE
 
                         )
     </insert>
+
+    <resultMap id="EventFileJoinSelectVO" type="kr.or.fact.core.model.DTO.EventFileJoinSelectVO">
+        <result column="IDX_EVENT_CONTENT" property="idx_event_content"/>
+        <result column="EVENT_CONTENT_CODE" property="event_content_code"/>
+        <result column="EVENT_CONTENT_NUM" property="event_content_num"/>
+        <result column="SUBJECT" property="subject"/>
+        <result column="EVENT_CONTENTS" property="event_contents"/>
+        <result column="IS_FILE" property="is_file"/>
+        <result column="IS_NEW" property="is_new"/>
+        <result column="IS_MAIN_PAGE" property="is_main_page"/>
+        <result column="IS_IMPORTANT" property="is_important"/>
+        <result column="IS_SHOW" property="is_show"/>
+        <result column="VIEW_COUNT" property="view_count"/>
+        <result column="EVENT_CONTENT_STATUS" property="event_content_status"/>
+        <result column="EVENT_START_DATE" property="event_start_date"/>
+        <result column="EVENT_END_DATE" property="event_end_date"/>
+        <result column="DOC_VERSION" property="doc_version"/>
+        <result column="MEMO" property="memo"/>
+        <result column="SEARCH_TAG" property="search_tag"/>
+        <result column="AUTHOR" property="author"/>
+        <result column="THUMB_IMG_FILE_IDX" property="thumb_img_file_idx"/>
+        <result column="IDX_ADMIN" property="idx_admin"/>
+        <result column="CONFIRM_ADMIN_IDX" property="confirm_admin_idx"/>
+        <result column="REG_DATE" property="reg_date"/>
+        <result column="LAST_UPD_DATE" property="last_upd_date"/>
+        <result column="IDX_FILE_INFO" property="idx_file_info"/>
+        <result column="FILE_NAME" property="file_name"/>
+        <result column="FILE_PATH" property="file_path"/>
+        <collection property="fileInfoVO" resultMap="fileInfoVO"/>
+    </resultMap>
+
+    <resultMap id="FileInfoVO" type="kr.or.fact.core.model.DTO.FileInfoVO">
+        <result column="IDX_FILE_INFO" property="idx_file_info"/>
+        <result column="FILE_NAME" property="file_name"/>
+        <result column="FILE_TYPE" property="file_type"/>
+        <result column="FILE_STATUS" property="file_status"/>
+        <result column="MIME_TYPE" property="mime_type"/>
+        <result column="ENCODING" property="encoding"/>
+        <result column="EXTENTION" property="extention"/>
+        <result column="FILE_SECURE_TYPE" property="file_secure_type"/>
+        <result column="FILE_PATH" property="file_path"/>
+        <result column="FILE_SIZE" property="file_size"/>
+        <result column="CHECKSUM" property="checksum"/>
+        <result column="OWNER" property="owner"/>
+        <result column="IDX_USER" property="idx_user"/>
+        <result column="IDX_ADMIN" property="idx_admin"/>
+        <result column="REG_DATE" property="reg_date"/>
+    </resultMap>
+
+
+
+
+
+
+    <select id="getEventContentFileJoin" parameterType="long" resultType="kr.or.fact.core.model.DTO.EventFileJoinSelectVO">
+        SELECT A.IDX_EVENT_CONTENT,
+               A.EVENT_CONTENT_CODE,
+               A.EVENT_CONTENT_NUM,
+               A.SUBJECT,
+               A.EVENT_CONTENTS,
+               A.IS_FILE,
+               A.IS_NEW,
+               A.IS_MAIN_PAGE,
+               A.IS_IMPORTANT,
+               A.IS_SHOW,
+               A.VIEW_COUNT,
+               A.EVENT_CONTENT_STATUS,
+               A.EVENT_START_DATE,
+               A.EVENT_END_DATE,
+               A.DOC_VERSION,
+               A.MEMO,
+               A.SEARCH_TAG,
+               A.AUTHOR,
+               A.THUMB_IMG_FILE_IDX,
+               A.IDX_ADMIN,
+               A.CONFIRM_ADMIN_IDX,
+               A.REG_DATE,
+               A.LAST_UPD_DATE,
+               B.IDX_EVENT_CONTENT,
+               B.IDX_FILE_INFO,
+               C.FILE_PATH
+        FROM TB_EVENT_CONTENT A JOIN TB_EVENT_CONTENT_FILE_JOIN  B ON A.IDX_EVENT_CONTENT=B.IDX_EVENT_CONTENT
+                                JOIN TB_FILE_INFO C ON B.IDX_FILE_INFO=C.IDX_FILE_INFO WHERE A.IDX_EVENT_CONTENT=#{idx_event_content}
+
+
+    </select>
 </mapper>

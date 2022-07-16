@@ -1,6 +1,7 @@
 package kr.or.fact.core.model;
 
 import kr.or.fact.core.model.DTO.EventContentVO;
+import kr.or.fact.core.model.DTO.EventFileJoinSelectVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,4 +17,6 @@ public interface EventContentMapper {
     int deleteEvent(@Param("idx_event_content") int idx_event_content);
     EventContentVO getEventContentByIdx (@Param("idx_event_content") long idx_event_content);
     int insertEventContentFileJoin();
+    EventFileJoinSelectVO getEventContentFileJoin(@Param("idx_event_content") long idx_event_content);
 }
+
