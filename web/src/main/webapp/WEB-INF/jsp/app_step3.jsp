@@ -1783,61 +1783,51 @@ function save_temp(){
     $('input:checkbox[name="req_facility"]:checked').each(function() {
         req_facility|=$(this).val();
     });
-    console.log(req_facility);
 
     let user_demo_type = 0;
     $('input:checkbox[name="user_demo_type"]:checked').each(function() {
         user_demo_type|=$(this).val();
     });
-    console.log(user_demo_type);
 
     let user_demo_facility = 0;
     $('input:checkbox[name="user_demo_facility"]:checked').each(function() {
         user_demo_facility|=$(this).val();
     });
-    console.log(user_demo_facility);
 
     let user_demo_way = 0;
     $('input:checkbox[name="user_demo_way"]:checked').each(function() {
         user_demo_way|=$(this).val();
     });
-    console.log(user_demo_way);
 
     let user_demo_repeat = 0;
     $('input:checkbox[name="user_demo_repeat"]:checked').each(function() {
         user_demo_repeat|=$(this).val();
     });
-    console.log(user_demo_repeat);
 
     let user_demo_goal = 0;
     $('input:checkbox[name="user_demo_goal"]:checked').each(function() {
         user_demo_goal|=$(this).val();
     });
-    console.log(user_demo_goal);
 
     let user_demo_option = 0;
     $('input:checkbox[name="user_demo_option"]:checked').each(function() {
         user_demo_option|=$(this).val();
     });
-    console.log(user_demo_option);
 
     let culture_soil = 0;
     $('input:checkbox[name="culture_soil"]:checked').each(function() {
         culture_soil|=$(this).val();
     });
-    console.log(culture_soil);
 
     let demo_type = 0;
     $('input:checkbox[name="demo_type"]:checked').each(function() {
         demo_type|=$(this).val();
     });
-    console.log(demo_type);
 
     let resident_type = 0;
     $('input:checkbox[name="resident_type"]:checked').each(function() {
         resident_type|=$(this).val();
     });
-    console.log(resident_type);
 
 
     let param = {
@@ -2116,6 +2106,29 @@ function save_temp(){
             //에러가 났을 경우 실행시킬 코드
         }
     });
+
+    if(document.querySelector('#user_demobs_file').files[0]){
+        var formData = new FormData();
+        formData.append("file1", document.querySelector('#user_demobs_file').files[0]);
+        formData.append("sender", "${userDemoBs.idx_user}");
+        formData.append("bs_idx", "${userDemoBs.idx_user_demo_bs}");
+        $.ajax({
+            type: 'post',
+            url :'app_step3_save_docs', //데이터를 주고받을 파일 주소 입력
+            data: formData,//보내는 데이터
+            contentType: false,//보내는 데이터 타입
+            processData: false,//Jquery 내부에서 파일을 queryString 형태로 전달하는 것을 방지
+            dataType:'json',//받는 데이터 타입
+            enctype: 'multipart/form-data',
+            success: function(result){
+                alert(result.result_str);
+            },
+            error:function(err){
+                console.log(err);
+            }
+        });
+    }
+
 }
 </script>
 

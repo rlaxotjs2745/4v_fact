@@ -787,11 +787,33 @@ public class WebAPIController {
         return resultVO;
     }
 
+    @RequestMapping(value = "/app_step3_save_docs",method = RequestMethod.POST)
+    public @ResponseBody ResultVO app_step3_save_docs(@ModelAttribute RecieveFilesVO recieveFilesVO, HttpSession session, HttpServletRequest request) throws Exception {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR1001");
+        resultVO.setResult_str("서류 저장에 실패했습니다.");
+
+        long sender = recieveFilesVO.getSender();
+        long bsIdx = recieveFilesVO.getBs_idx();
+        System.out.println(recieveFilesVO);
+
+        try{
+            fileService.insertFile(recieveFilesVO.getFile1(), sender, bsIdx, 1);
+
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("서류 저장을 완료했습니다.");
+        } catch (Exception e){
+            System.out.println(e);
+        }
+        return resultVO;
+    }
+
     @RequestMapping(value = "/app_step4_save_temp",method = RequestMethod.POST)
     public @ResponseBody
     ResultVO app_step4_save_temp(HttpSession session,
                                         @RequestBody UserDemoBsVO userDemoBsVO){
 
+        System.out.println(userDemoBsVO);
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("SUCCESS");
         resultVO.setResult_str("저장했습니다");

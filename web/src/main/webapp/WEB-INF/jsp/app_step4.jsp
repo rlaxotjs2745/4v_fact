@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: abeki
@@ -63,9 +64,16 @@
         <div class="app__body">
             <div class="app__cnt">
                 <h3>개인정보 수집·이용·제공에 관한 동의서</h3>
+                <div class="app__agree--all">
+                    <div class="checkbox">
+                        <input type="checkbox" id="is_all_agree" name="is_agree"<c:if test="${userDemoBs.is_indi_use_agree eq 1 && userDemoBs.is_use_agree eq 1 && userDemoBs.is_indi_info_agree eq 1}">checked</c:if>>
+                        <label for="is_all_agree">전체동의</label>
+                        <span class="cl-red">* “개인정보 수집·이용·제공에 관한 동의서”를 전체 동의하지 않을 경우는 신청서 등록을 하실 수 없습니다.</span>
+                    </div>
+                </div>
                 <div class="app__agree">
                     <div class="checkbox">
-                        <input type="checkbox" id="is_use_agree" class="each_check" name="is_agree">
+                        <input type="checkbox" id="is_use_agree" class="each_check" name="is_agree"<c:if test="${userDemoBs.is_use_agree eq 1}">checked</c:if> >
                         <label for="is_use_agree">실증단지 이용약관 동의(필수)</label>
                     </div>
                     <div class="app__terms">제1장 총 칙
@@ -75,7 +83,7 @@
                 </div>
                 <div class="app__agree">
                     <div class="checkbox">
-                        <input type="checkbox" id="is_indi_use_agree" class="each_check" name="is_agree">
+                        <input type="checkbox" id="is_indi_use_agree" class="each_check" name="is_agree"<c:if test="${userDemoBs.is_indi_use_agree eq 1}"> checked</c:if> >
                         <label for="is_indi_use_agree">개인정보 수집 및 이용 동의(필수)</label>
                     </div>
                     <div class="app__terms">제1장 총 칙
@@ -85,19 +93,12 @@
                 </div>
                 <div class="app__agree">
                     <div class="checkbox">
-                        <input type="checkbox" id="is_indi_info_agree" class="each_check" name="is_agree">
+                        <input type="checkbox" id="is_indi_info_agree" class="each_check" name="is_agree" <c:if test="${userDemoBs.is_indi_info_agree eq 1}"> checked</c:if>>
                         <label for="is_indi_info_agree">개인정보처리 위탁에 관한 사항 동의(필수)</label>
                     </div>
                     <div class="app__terms">제1장 총 칙
                         제 1조 (목적)
                         본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은XXXXX XXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트
-                    </div>
-                </div>
-                <div class="app__agree--all">
-                    <div class="checkbox">
-                        <input type="checkbox" id="is_all_agree" name="is_agree">
-                        <label for="is_all_agree">전체동의</label>
-                        <span class="cl-red">* “개인정보 수집·이용·제공에 관한 동의서”를 전체 동의하지 않을 경우는 신청서 등록을 하실 수 없습니다.</span>
                     </div>
                 </div>
 
@@ -118,11 +119,32 @@
 <script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
 <script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 <script>
+    // $('#is_use_agree').click(function(){
+    //     var checked = $('#is_use_agree').is(':checked');
+    //     $('#is_use_agree').prop('checked',!checked);
+    // });
+    //
+    // $('#is_indi_use_agree').click(function(){
+    //     var checked = $('#is_indi_use_agree').is(':checked');
+    //     $('#is_indi_use_agree').prop('checked',!checked);
+    // });
+    //
+    // $('#is_indi_info_agree').click(function(){
+    //     var checked = $('#is_indi_info_agree').is(':checked');
+    //     $('#is_indi_info_agree').prop('checked',!checked);
+    // });
+    //
+    $('#is_all_agree').click(function(){
+        $(".each_check").prop("checked", false);
+        var checked = $('#is_all_agree').is(':checked');
 
-    // 체크박스 전체 선택
-    $(".app__agree").on("click", "#is_all_agree", function () {
-        $(this).parents(".app__agree").find('input').prop("checked", $(this).is(":checked"));
+        if(checked)
+            $('input:checkbox').prop('checked',true);
     });
+    // 체크박스 전체 선택
+    // $("#is_all_agree").on("click", "#is_all_agree", function () {
+    //     $("#is_all_agree, #is_indi_info_agree, #is_use_agree").prop("checked", $(this).is(":checked"));
+    // });
 
     // 체크박스 개별 선택
     $(".app__agree").on("click", ".each_check", function() {
@@ -201,9 +223,9 @@
             idx_demo_business:${userDemoBs.idx_demo_business},//		number	32		0		◯	지원사업
             idx_user:${userDemoBs.idx_user},
 
-            user_demo_bs_type:$('#is_use_agree').is(":checked")?1:0, //		number	4		1			사업 진행 주체 타입	0:개인, 1:일반기업, 2:미등록기업(설립전), 3: 농업진흥기관, 4:선도기업, 5:외국연구기관, 6:특정연구기관, 7:정부출연연구기관, 8:스마트팜 관련 기업부설연구소 보유기업, 9: 대학교, 99:기타 단체
-            user_demo_bs_type:$('#is_indi_use_agree').is(":checked")?1:0,
-            user_demo_bs_type:$('#is_indi_info_agree').is(":checked")?1:0,
+            is_use_agree:$('#is_use_agree').is(":checked")?1:0, //		number	4		1			사업 진행 주체 타입	0:개인, 1:일반기업, 2:미등록기업(설립전), 3: 농업진흥기관, 4:선도기업, 5:외국연구기관, 6:특정연구기관, 7:정부출연연구기관, 8:스마트팜 관련 기업부설연구소 보유기업, 9: 대학교, 99:기타 단체
+            is_indi_use_agree:$('#is_indi_use_agree').is(":checked")?1:0,
+            is_indi_info_agree:$('#is_indi_info_agree').is(":checked")?1:0,
 
         };
 

@@ -563,9 +563,25 @@
 <script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
 <script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
 <script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
-
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script>
+
+    $("#juso_corp_search, #juso_lab_search, #juso_ceo_search, #corp_addr, #corp_rnd_addr, #ceo_address").click(function() {
+        var nowJuso = $(this).attr("id");
+        new daum.Postcode({
+            oncomplete: function (data) {
+                if(nowJuso == "juso_corp_search" || nowJuso == "corp_addr"){
+                    $("#corp_addr").val(data.roadAddress + " " + data.buildingName);
+                } else if(nowJuso == "juso_lab_search" || nowJuso == "corp_rnd_addr"){
+                    $("#corp_rnd_addr").val(data.roadAddress + " " + data.buildingName);
+                } else if(nowJuso == "juso_ceo_search" || nowJuso == "ceo_address"){
+                    $("#ceo_address").val(data.roadAddress + " " + data.buildingName);
+                }
+                // console.log(data);
+            }
+        }).open();
+    })
 
     $( document ).ready(function() {
         let i=1;
@@ -866,58 +882,6 @@
                 //에러가 났을 경우 실행시킬 코드
             }
         });
-    }
-
-    var new_popup;
-    $("#juso_corp_search").click(function(){
-        juso_popup('corp_search');
-    });
-    $("#juso_lab_search").click(function(){
-        juso_popup('lab_search');
-    });
-    $("#juso_ceo_search").click(function(){
-        juso_popup('ceo_search');
-    });
-    /**
-     * 주소검색창 호출
-     */
-    function juso_popup(juso_type) {
-        var cw=screen.availWidth;     //화면 넓이
-        var ch=screen.availHeight;    //화면 높이
-        var sw=640;    //띄울 창의 넓이
-        var sh=480;    //띄울 창의 높이
-        var ml=(cw-sw)/2;        //가운데 띄우기위한 창의 x위치
-        var mt=(ch-sh)/2;         //가운데 띄우기위한 창의 y위치
-
-        new_popup = window.open('juso_search?juso_type='+juso_type, '주소검색','width='+sw+',height='+sh+',top='+mt+',left='+ml+', resizable=no');
-    }
-
-    /**
-     * 주소검색 결과 처리
-     */
-    function fn_setJuso(data) {
-        var juso_type = data["juso_type"];
-        console.log(juso_type);
-        switch (juso_type){
-            case "corp_search":
-                $('#corp_addr').val("("+data["zipNo"]+")"+data["roadFullAddr"]);
-
-                break;
-            case "lab_search":
-                $("#corp_rnd_addr").val("("+data["zipNo"]+")"+data["roadFullAddr"]);
-                break;
-            case "ceo_search":
-                $('#ceo_address').val("("+data["zipNo"]+")"+data["roadFullAddr"]);
-                break;
-            case "join":
-                $("#juso_find").val(data["roadFullAddr"]);
-                $("#zip_code").val(data["zipNo"]);
-                break;
-            default:alert(juso_type);
-                break;
-        }
-
-        new_popup.close();
     }
 
 </script>

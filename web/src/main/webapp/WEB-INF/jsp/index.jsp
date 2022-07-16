@@ -97,7 +97,7 @@
                         <div class="news__more"><a href="brd_notice?page=1" class="btn btn-more">+더보기</a></div>
                         <ul class="news__list">
                             <li>
-                                <a href="#"><span>12월31일까지 에너지 바우처 신청 12월31일까지 에너지 바우처 신청</span><em>07-06</em></a>
+                                <a href="brd_notice_detail?idx=10061"><span>12월31일까지 에너지 바우처 신청 12월31일까지 에너지 바우처 신청</span><em>07-06</em></a>
                             </li>
                             <li>
                                 <a href="#"><span>‘21년 제2차 한국농업기술진흥원' </span><em>07-06</em></a>
@@ -116,7 +116,7 @@
                         <div class="news__more"><a href="brd_announce?page=1" class="btn btn-more">+더보기</a></div>
                         <ul class="news__list">
                             <li>
-                                <a href="#"><span>국제농업박람회 참여기업 모집 국제농업박람회 참여기업 모집</span><em>07-06</em></a>
+                                <a href="brd_announce_detail?idx=4"><span>국제농업박람회 참여기업 모집 국제농업박람회 참여기업 모집</span><em>07-06</em></a>
                             </li>
                             <li>
                                 <a href="#"><span>2021 혁신도시 공공기관연계육성 스마트 공공기관연계육성 스마트 </span><em>07-06</em></a>
