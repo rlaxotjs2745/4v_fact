@@ -77,7 +77,7 @@
 
                 <div class="app__fileupload">
                     <div class="fileupload__title" >사업자등록증 사본 (해당자에 한함)</div>
-                    <input type="file" id="bs_license" class="fileupload" value="dlrj">
+                    <input type="file" id="bs_license" class="fileupload" value="">
                     <span id="bs_license_title" class="text-info"></span>
                 </div>
                 <div class="app__fileupload">

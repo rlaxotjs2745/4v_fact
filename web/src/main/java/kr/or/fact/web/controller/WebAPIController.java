@@ -651,7 +651,7 @@ public class WebAPIController {
     public @ResponseBody
     ResultVO app_step3_save_temp(HttpSession session,
                                  @RequestBody UserDemoBsVO userDemoBsVO){
-
+        System.out.println(userDemoBsVO);
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("SUCCESS");
         resultVO.setResult_str("저장했습니다");
@@ -710,7 +710,6 @@ public class WebAPIController {
         findUserDemoBsVo.setHistory3(userDemoBsVO.getHistory3()==null?"":userDemoBsVO.getHistory3());
         findUserDemoBsVo.setHistory3_date(userDemoBsVO.getHistory3_date()==null?"":userDemoBsVO.getHistory3_date());
 
-
         findUserDemoBsVo.setPrize1(userDemoBsVO.getPrize1()==null?"":userDemoBsVO.getPrize1());
         findUserDemoBsVo.setPrize1_date(userDemoBsVO.getPrize1_date()==null?"":userDemoBsVO.getPrize1_date());
         findUserDemoBsVo.setPrize1_org(userDemoBsVO.getPrize1_org()==null?"":userDemoBsVO.getPrize1_org());
@@ -725,6 +724,13 @@ public class WebAPIController {
         findUserDemoBsVo.setPrize3_date(userDemoBsVO.getPrize3_date()==null?"":userDemoBsVO.getPrize3_date());
         findUserDemoBsVo.setPrize3_org(userDemoBsVO.getPrize3_org()==null?"":userDemoBsVO.getPrize3_org());
         findUserDemoBsVo.setPrize3_etc(userDemoBsVO.getPrize3_etc()==null?"":userDemoBsVO.getPrize3_org());
+
+        findUserDemoBsVo.setFarming_start_date(userDemoBsVO.getFarming_start_date());
+        findUserDemoBsVo.setFarming_end_date(userDemoBsVO.getFarming_end_date());
+        findUserDemoBsVo.setFarming_repeat(userDemoBsVO.getFarming_repeat());
+
+        findUserDemoBsVo.setDemo_start_date(userDemoBsVO.getDemo_start_date());
+        findUserDemoBsVo.setDemo_end_date(userDemoBsVO.getDemo_end_date());
 
         findUserDemoBsVo.setLab_est_date(userDemoBsVO.getLab_est_date()==null?"":userDemoBsVO.getPrize3_org());
         findUserDemoBsVo.setRnd_rate(userDemoBsVO.getRnd_rate());

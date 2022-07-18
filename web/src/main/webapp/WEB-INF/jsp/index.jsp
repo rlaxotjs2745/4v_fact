@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@include file ="header.jsp" %>
 
 <div class="content" id="content">
@@ -89,25 +90,18 @@
                 </div>
             </div>
             <!--//-->
-
             <div class="main__news">
                 <div class="main__news--inner">
                     <div class="main__news--notice">
                         <div class="news__badge"><img src="resources/assets/image/ico_notice.svg" alt="">공지사항</div>
                         <div class="news__more"><a href="brd_notice?page=1" class="btn btn-more">+더보기</a></div>
                         <ul class="news__list">
-                            <li>
-                                <a href="brd_notice_detail?idx=10061"><span>12월31일까지 에너지 바우처 신청 12월31일까지 에너지 바우처 신청</span><em>07-06</em></a>
-                            </li>
-                            <li>
-                                <a href="#"><span>‘21년 제2차 한국농업기술진흥원' </span><em>07-06</em></a>
-                            </li>
-                            <li>
-                                <a href="#"><span>공동구매 안내</span><em>07-06</em></a>
-                            </li>
-                            <li>
-                                <a href="#"><span>중국 스마트팜 기술 세미나</span><em>07-06</em></a>
-                            </li>
+                            <c:forEach items="${noticeList}" var="notice">
+                                <li>
+                                    <fmt:formatDate value="${notice.posting_start_date}" var="notice_date" pattern="MM-dd"/>
+                                    <a href="brd_notice_detail?idx=${notice.idx_notice}"><span>${notice.subject.length() > 23 ? notice.subject.subString(0,23) + "..." : notice.subject}</span><em>${notice_date}</em></a>
+                                </li>
+                            </c:forEach>
                         </ul>
                     </div>
                     <!--//-->
@@ -115,18 +109,12 @@
                         <div class="news__badge"><img src="resources/assets/image/ico_business.svg" alt="">사업공고</div>
                         <div class="news__more"><a href="brd_announce?page=1" class="btn btn-more">+더보기</a></div>
                         <ul class="news__list">
-                            <li>
-                                <a href="brd_announce_detail?idx=4"><span>국제농업박람회 참여기업 모집 국제농업박람회 참여기업 모집</span><em>07-06</em></a>
-                            </li>
-                            <li>
-                                <a href="#"><span>2021 혁신도시 공공기관연계육성 스마트 공공기관연계육성 스마트 </span><em>07-06</em></a>
-                            </li>
-                            <li>
-                                <a href="#"><span>2021년 농식품 벤처육성 지원사업</span><em>07-06</em></a>
-                            </li>
-                            <li>
-                                <a href="#"><span>한국형 농업기술 · 제품 해외마케팅 지원사업안내 설명회 개최</span><em>07-06</em></a>
-                            </li>
+                            <c:forEach items="${annoList}" var="anno">
+                                <li>
+                                    <fmt:formatDate value="${anno.posting_start_date}" var="anno_date" pattern="MM-dd"/>
+                                    <a href="brd_announce_detail?idx=${anno.idx_bs_announcement}"><span>${anno.subject.length() > 23 ? anno.subject.subString(0,23) + "..." : anno.subject}</span><em>${anno_date}</em></a>
+                                </li>
+                            </c:forEach>
                         </ul>
                     </div>
                     <!--//-->
@@ -134,18 +122,12 @@
                         <div class="news__badge"><img src="resources/assets/image/ico_event.svg" alt="">행사안내</div>
                         <div class="news__more"><a href="brd_event?page=1" class="btn btn-more">+더보기</a></div>
                         <ul class="news__list">
-                            <li>
-                                <a href="#"><span>공공빅데이터 활용 창업경진대회 공공빅데이터 활용 창업경진대회</span><em>07-06</em></a>
-                            </li>
-                            <li>
-                                <a href="#"><span>전주한옥마을 ‘영농하게’ 전주한옥마을 ‘영농하게’ </span><em>07-06</em></a>
-                            </li>
-                            <li>
-                                <a href="#"><span>청년벤처들 모여 불멍쇼!! 청년벤처들 모여 불멍쇼!!</span><em>07-06</em></a>
-                            </li>
-                            <li>
-                                <a href="#"><span>중국 스마트팜 기술 세미나</span><em>07-06</em></a>
-                            </li>
+                            <c:forEach items="${eventList}" var="event">
+                                <li>
+                                    <fmt:formatDate value="${event.event_start_date}" var="event_date" pattern="MM-dd"/>
+                                    <a href="brd_event_detail?idx=${event.idx_event_content}"><span>${event.subject.length() > 23 ? event.subject.subString(0,23) + "..." : event.subject}</span><em>${event_date}</em></a>
+                                </li>
+                            </c:forEach>
                         </ul>
                     </div>
                     <!--//-->

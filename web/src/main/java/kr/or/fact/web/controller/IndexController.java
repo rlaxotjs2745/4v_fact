@@ -456,6 +456,10 @@ public class IndexController {
         else {
 
         }
+        List<UserDemoBsFileResultVO> fileList = fileService.getUserDemoFileList(userDemoBsVo.getIdx_user_demo_bs());
+
+        model.addAttribute("fileArr", fileList);
+
         model.addAttribute("userDemoBsDetailVO",userDemoBsDetailVO);
 
         model.addAttribute("userBsHumanResourceVOList",userBsHumanResourceVOList);
@@ -1479,6 +1483,16 @@ public class IndexController {
 
     public void getHomepageInfo(Model model){
         HomepageInfoVO homepageInfoVO = homepageInfoService.getHomepageInfo();
+
+        List<NoticeVO> noticeVOList = noticeService.getMainNoticeList();
+
+        List<BsAnnouncementVO> bsAnnouncementVOList = bsAnnouncementService.getMainBsAnnouncementList();
+
+        List<EventContentVO> eventContentVOList = eventContentService.getMainEventContentList();
+
+        model.addAttribute("noticeList", noticeVOList);
+        model.addAttribute("annoList", bsAnnouncementVOList);
+        model.addAttribute("eventList", eventContentVOList);
         model.addAttribute("homepageInfo",homepageInfoVO);
 
     }

@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="ko" class="html-popup">
@@ -76,6 +77,7 @@
                    <div class="app__fileupload">
                        <div class="fileupload__title">실증계획서 원본 업로드</div>
                        <input id="user_demobs_file" type="file" class="fileupload">
+                       <span id="user_demobs_file_info" class="text-info"></span>
                    </div>
 <%--                     이용신청인 : <input id="signature_name" type="text" value="홍길동" disabled style="width:200px;"><br>
                     <div class="checkbox checkbox--inline">
@@ -224,15 +226,15 @@
                             </th>
                         </tr>
                         <tr>
-                            <td class="td__left"><input id="history1_date" type="text" value="${userDemoBs.history1_date}"></td>
+                            <td class="td__left"><input id="history1_date" class="date_picker" type="text" value="${userDemoBs.history1_date}"></td>
                             <td class="td__left" colspan="4"><input id="history1" type="text" value="${userDemoBs.history1}"></td>
                         </tr>
                         <tr>
-                            <td class="td__left"><input id="history2_date" type="text" value="${userDemoBs.history2_date}"></td>
+                            <td class="td__left"><input id="history2_date" class="date_picker" type="text" value="${userDemoBs.history2_date}"></td>
                             <td class="td__left" colspan="4"><input id="history2" type="text" value="${userDemoBs.history2}"></td>
                         </tr>
                         <tr>
-                            <td class="td__left"><input id="history3_date" type="text" value="${userDemoBs.history3_date}"></td>
+                            <td class="td__left"><input id="history3_date" class="date_picker" type="text" value="${userDemoBs.history3_date}"></td>
                             <td class="td__left" colspan="4"><input id="history3" type="text" value="${userDemoBs.history3}"></td>
                         </tr>
                         <tr>
@@ -244,7 +246,7 @@
                         </tr>
                         <tr>
                             <td class="td__left">
-                                <input id="prize1_date" type="text" value="${userDemoBs.prize1_date}">
+                                <input id="prize1_date" class="date_picker" type="text" value="${userDemoBs.prize1_date}">
                             </td>
                             <td class="td__left" colspan="2">
                                 <input id="prize1" type="text" value="${userDemoBs.prize1}">
@@ -258,7 +260,7 @@
                         </tr>
                         <tr>
                             <td class="td__left">
-                                <input id="prize2_date" type="text" value="${userDemoBs.prize2_date}">
+                                <input id="prize2_date" class="date_picker" type="text" value="${userDemoBs.prize2_date}">
                             </td>
                             <td class="td__left" colspan="2">
                                 <input id="prize2" type="text" value="${userDemoBs.prize2}">
@@ -272,7 +274,7 @@
                         </tr>
                         <tr>
                             <td class="td__left">
-                                <input id="prize3_date" type="text" value="${userDemoBs.prize3_date}">
+                                <input id="prize3_date" class="date_picker" type="text" value="${userDemoBs.prize3_date}">
                             </td>
                             <td class="td__left" colspan="2">
                                 <input id="prize3" type="text" value="${userDemoBs.prize3}">
@@ -332,7 +334,7 @@
                                 <th class="th__left" rowspan="4">연구개발투자에<br>관한 사항</th>
                                 <td class="td__left">연구소 설립일</td>
                                 <td class="td__left" colspan="4">
-                                    <input id="lab_est_date" type="text" class="" value="${userDemoBs.lab_est_date}">
+                                    <input id="lab_est_date" type="text" class="date_picker" value="${userDemoBs.lab_est_date}">
                                 </td>
                             </tr>
                             <tr>
@@ -401,7 +403,7 @@
                                 <input id="ceo_rnd_result1_org" type="text" value="${userDemoBsDetailVO.ceo_rnd_result1_org}">
                             </td>
                             <td class="td__left">
-                                <input id="ceo_rnd_result1_dur" type="text" value="${userDemoBsDetailVO.ceo_rnd_result1_dur}">
+                                <input id="ceo_rnd_result1_dur" class="date_picker" type="text" value="${userDemoBsDetailVO.ceo_rnd_result1_dur}">
                             </td>
                             <td class="td__left">
                                 <input id="ceo_rnd_result1_role" type="text" value="${userDemoBsDetailVO.ceo_rnd_result1_role}">
@@ -418,7 +420,7 @@
                                 <input id="ceo_rnd_result2_org" type="text" value="${userDemoBsDetailVO.ceo_rnd_result2_org}">
                             </td>
                             <td class="td__left">
-                                <input id="ceo_rnd_result2_dur" type="text" value="${userDemoBsDetailVO.ceo_rnd_result2_dur}">
+                                <input id="ceo_rnd_result2_dur" class="date_picker" type="text" value="${userDemoBsDetailVO.ceo_rnd_result2_dur}">
                             </td>
                             <td class="td__left">
                                 <input id="ceo_rnd_result2_role" type="text" value="${userDemoBsDetailVO.ceo_rnd_result2_role}">
@@ -518,7 +520,7 @@
                             <th>구분</th>
                             <th>출원/등록번호</th>
                             <th>명칭</th>
-                            <th>츌원/등록일자</th>
+                            <th>출원/등록일자</th>
                             <th>담당기관</th>
                             <th>비고</th>
                         </tr>
@@ -533,7 +535,7 @@
                                 <input id="own_ip1" type="text" value="${userDemoBsDetailVO.own_ip1}">
                             </td>
                             <td class="td__left">
-                                <input id="own_ip1_date" type="text" value="${userDemoBsDetailVO.own_ip1_date}">
+                                <input id="own_ip1_date" type="text" class="date_picker" value="${userDemoBsDetailVO.own_ip1_date}">
                             </td>
                             <td class="td__left">
                                 <input id="own_ip1_org" type="text" value="${userDemoBsDetailVO.own_ip1_org}">
@@ -553,7 +555,7 @@
                                 <input id="own_ip2" type="text" value="${userDemoBsDetailVO.own_ip2}">
                             </td>
                             <td class="td__left">
-                                <input id="own_ip2_date" type="text" value="${userDemoBsDetailVO.own_ip2_date}">
+                                <input id="own_ip2_date" type="text" class="date_picker"  value="${userDemoBsDetailVO.own_ip2_date}">
                             </td>
                             <td class="td__left">
                                 <input id="own_ip2_org" type="text" value="${userDemoBsDetailVO.own_ip2_org}">
@@ -573,7 +575,7 @@
                                 <input id="own_ip3" type="text" value="${userDemoBsDetailVO.own_ip3}">
                             </td>
                             <td class="td__left">
-                                <input id="own_ip3_date" type="text" value="${userDemoBsDetailVO.own_ip3_date}">
+                                <input id="own_ip3_date" type="text" class="date_picker" value="${userDemoBsDetailVO.own_ip3_date}">
                             </td>
                             <td class="td__left">
                                 <input id="own_ip3_org" type="text" value="${userDemoBsDetailVO.own_ip3_org}">
@@ -601,7 +603,7 @@
                             <th>구분</th>
                             <th>출원/등록번호</th>
                             <th>명칭</th>
-                            <th>츌원/등록일자</th>
+                            <th>출원/등록일자</th>
                         </tr>
                         <tr>
                             <td class="td__left">
@@ -614,7 +616,7 @@
                                 <input id="own_cert1" type="text" value="${userDemoBsDetailVO.own_cert1}">
                             </td>
                             <td class="td__left">
-                                <input id="own_cert1_date" type="text" value="${userDemoBsDetailVO.own_cert1_date}">
+                                <input id="own_cert1_date" type="text" class="date_picker" value="${userDemoBsDetailVO.own_cert1_date}">
                             </td>
                         </tr>
                         <tr>
@@ -628,7 +630,7 @@
                                 <input id="own_cert2" type="text" value="${userDemoBsDetailVO.own_cert2}">
                             </td>
                             <td class="td__left">
-                                <input id="own_cert2_date" type="text" value="${userDemoBsDetailVO.own_cert2_date}">
+                                <input id="own_cert2_date" type="text" class="date_picker" value="${userDemoBsDetailVO.own_cert2_date}">
                             </td>
                         </tr>
                         <tr>
@@ -642,7 +644,7 @@
                                 <input id="own_cert3" type="text" value="${userDemoBsDetailVO.own_cert3}">
                             </td>
                             <td class="td__left">
-                                <input id="own_cert3_date" type="text" value="${userDemoBsDetailVO.own_cert3_date}">
+                                <input id="own_cert3_date" type="text" class="date_picker" value="${userDemoBsDetailVO.own_cert3_date}">
                             </td>
                         </tr>
                         </tbody>
@@ -668,7 +670,7 @@
                             <th rowspan="2">번호</th>
                             <th>성명</th>
                             <th>과학기술인<br>등록번호</th>
-                            <th colspan="3">전공 및 학윈</th>
+                            <th colspan="3">전공 및 학위</th>
                             <th>연구담당<br>분야</th>
                             <th rowspan="2">주요 경력,연구개발 실적</th>
                         </tr>
@@ -711,7 +713,7 @@
                                 <input id="rnd_user_role${status.count}" type="text" value="${humanR.rnd_user_role}">
                             </td>
                             <td class="td__left">
-                                <input id="rnd_user_birth${status.count}" type="text" value="${humanR.rnd_user_birth}">
+                                <input id="rnd_user_birth${status.count}" class="date_picker" type="text" value="${humanR.rnd_user_birth}">
                             </td>
                             <td class="td__left">
                                 <input id="rnd_user_6t${status.count}" type="text" value="${humanR.rnd_user_6t}">
@@ -869,16 +871,19 @@
                         <tr>
                             <th>실증기간</th>
                             <td class="td__left">
-                                시작 <input id="" type="text" class="datepicker" value="${userDemoBs.demo_start_date}"><span class="text--guide">부터 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                <input id="" type="text" class="datepicker" value="${userDemoBs.demo_end_date}"> &nbsp; (00년 00개월)
+                                <fmt:formatDate value="${userDemoBs.demo_start_date}" var="dstart_date" pattern="yyyy-MM-dd"/>
+                                <fmt:formatDate value="${userDemoBs.demo_end_date}" var="dend_date" pattern="yyyy-MM-dd"/>
+                                <input id="bs_demo_dur" type="text" class="date_range_picker" value="${dstart_date}~${dend_date}">
+                                <span id="bs_demo_numofmonth"></span>
                             </td>
                         </tr>
                         <tr>
                             <th>실증기간 중 작물재배기간</th>
                             <td class="td__left">
-                                1)작물재배기간 <input id="farming_start_date" type="text" class="datepicker" value="${userDemoBs.farming_start_date}"><span class="text--guide">부터 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                <input id="farming_end_date" type="text" class="datepicker" value="${userDemoBs.farming_end_date}">
-                                3)재배작기수: <input id="farming_repeat" type="text" style="width:100px;" value="${userDemoBs.farming_repeat}"> &nbsp; 기작
+                                <fmt:formatDate value="${userDemoBs.farming_start_date}" var="fstart_date" pattern="yyyy-MM-dd"/>
+                                <fmt:formatDate value="${userDemoBs.farming_end_date}" var="fend_date" pattern="yyyy-MM-dd"/>
+                                1)작물재배기간 <input id="farming_start_date" type="text" class="date_range_picker" value="${fstart_date}~${fend_date}">
+                                2)재배작기수: <input id="farming_repeat" type="text" style="width:100px;" value="${userDemoBs.farming_repeat}"> &nbsp; 기작
                             </td>
                         </tr>
                         </tbody>
@@ -1586,7 +1591,88 @@
 <script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
 <script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
 <script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <script>
+    $(function() {
+        $('.date_range_picker').daterangepicker({
+            "locale": {
+                // "format": "YY.MM.DD.",
+                // "separator": "~",
+                "applyLabel": "확인",
+                "cancelLabel": "취소",
+                "fromLabel": "From",
+                "toLabel": "To",
+                "customRangeLabel": "Custom",
+                "weekLabel": "W",
+                "daysOfWeek": ["월", "화", "수", "목", "금", "토", "일"],
+                "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+                "firstDay": 1
+            },
+            autoUpdateInput: false,
+            "setDate": ""
+
+        });
+
+        $('.date_picker').daterangepicker({
+            "locale": {
+                // "format": "YY.MM.DD.",
+                // "separator": "~",
+                "applyLabel": "확인",
+                "cancelLabel": "취소",
+                "fromLabel": "From",
+                "toLabel": "To",
+                "customRangeLabel": "Custom",
+                "weekLabel": "W",
+                "daysOfWeek": ["월", "화", "수", "목", "금", "토", "일"],
+                "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+                "firstDay": 1
+            },
+            autoUpdateInput: false,
+            "singleDatePicker": true,
+            "setDate": ""
+
+        });
+
+        $('.date_range_picker').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY.MM.DD') + '~' + picker.endDate.format('YYYY.MM.DD'));
+        });
+
+        $('.date_picker').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY.MM.DD'));
+        });
+
+        $('.date_range_picker, .date_picker').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
+
+
+
+    });
+    $("#bs_start_date").on("change", function(){
+        var day = 0;
+        var month = 0;
+        var year = 0;
+        var gap = new Date($("#be_demo_dur").val().split(" ~ ")[1]) - new Date($("#be_demo_dur").val().split(" ~ ")[0]);
+
+        day = Math.floor(gap / (1000 * 60 * 60 * 24)) || 0;
+        if(Math.floor(day/30) >= 1){
+            month = Math.floor(day/30);
+            if(Math.floor(month/12) >= 1){
+                year = Math.floor(month/12);
+                month = month % 12;
+            }
+        }
+        $("#bs_demo_numofmonth").text("(" + year + "년 " + month + "개월)");
+    })
+
+    <c:forEach items="${fileArr}" var="file">
+        if("${file.file_type}" == "1") {
+            $("#user_demobs_file_info").text("제출 완료: ${file.fileInfoVO.file_name}")
+        }
+    </c:forEach>
 
 
     $( document ).ready(function() {
@@ -1841,7 +1927,9 @@ function save_temp(){
         lab_est_date : $('#lab_est_date').val(),//	VARCHAR2	20					연구소 설립일수
         rnd_rate : $('#rnd_rate').val(),//	NUMBER	4					연구개발투자비율
         consolidated_company:$('#consolidated_company').val(),//	VARCHAR2	100 연결회사
-
+        farming_start_date: new Date($('#farming_start_date').val().split('~')[0]),
+        farming_end_date: new Date($('#farming_start_date').val().split('~')[1]),
+        farming_repeat: $('#farming_repeat').val(),
         history1:$('#history1').val(),//	varchar2	100					주요연혁 1
         history1_date:$('#history1_date').val(),//	varchar2	20					주요연혁 1 날짜
         history2:$('#history2').val(),//	varchar2	100					주요연혁 2
@@ -1860,8 +1948,11 @@ function save_temp(){
         prize3_date:$('#prize3_date').val(),//	varchar2	20					포상날자3
         prize3_org:$('#prize3_org').val(),//	varchar2	100					포상기관3
         prize3_etc:$('#prize3_etc').val(),//	varchar2	100					포상 비고3
+        demo_start_date: new Date($('#bs_demo_dur').val().split('~')[0]),
+        demo_end_date: new Date($('#bs_demo_dur').val().split('~')[1])
 
     };
+    console.log(param);
 
 
     $.ajax({
@@ -2094,7 +2185,7 @@ function save_temp(){
         success: function(result){
             //작업이 성공적으로 발생했을 경우
             if(result.result_code=="SUCCESS"){
-                alert(result.result_str);
+                // alert(result.result_str);
 
             }
             else {
@@ -2121,7 +2212,13 @@ function save_temp(){
             dataType:'json',//받는 데이터 타입
             enctype: 'multipart/form-data',
             success: function(result){
-                alert(result.result_str);
+                if(result.result_code=="SUCCESS"){
+                    alert(result.result_str);
+
+                }
+                else {
+                    alert(result.result_str);
+                }
             },
             error:function(err){
                 console.log(err);
