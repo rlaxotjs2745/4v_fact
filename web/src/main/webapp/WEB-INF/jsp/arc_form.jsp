@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file ="header.jsp" %>
 
 <div class="content" id="content">
@@ -49,56 +50,18 @@
                     </tr>
                     </thead>
                     <tbody>
+<c:forEach items="${formfileList}" var="form">
+    <tr class="form-entity" id="${form.idx_form_file_info}" >
                     <tr>
-                        <td class="td__left">파일 형식별 내려받기</td>
-                        <td class="td__left">2021년 종자생명산업 맞춤형 인력양성」 교육훈련생 선정 결과 알림</td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_doc.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_pdf.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
+                        <td class="td__left">${form.subject}</td>
+                        <td class="td__left">${form.usage_detail}</td>
+                        <td class="td__data"><a href="${form.file_path}"><img src="resources/assets/image/ico_doc.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_pdf.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
                     </tr>
-                    <tr>
-                        <td class="td__left">파일 형식별 내려받기</td>
-                        <td class="td__left">2021년 종자생명산업 맞춤형 인력양성」 교육훈련생 선정 결과 알림</td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_jpg.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_png.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_jpg.png" alt=""></a></td>
-                    </tr>
-                    <tr>
-                        <td class="td__left">파일 형식별 내려받기</td>
-                        <td class="td__left">2021년 종자생명산업 맞춤형 인력양성」 교육훈련생 선정 결과 알림</td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_ppt.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_xls.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_png.png" alt=""></a></td>
-                    </tr>
-                    <tr>
-                        <td class="td__left">파일 형식별 내려받기</td>
-                        <td class="td__left">2021년 종자생명산업 맞춤형 인력양성」 교육훈련생 선정 결과 알림</td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_png.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_ppt.png" alt=""></a></td>
-                    </tr>
-                    <tr>
-                        <td class="td__left">파일 형식별 내려받기</td>
-                        <td class="td__left">2021년 종자생명산업 맞춤형 인력양성」 교육훈련생 선정 결과 알림</td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_doc.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_pdf.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
-                    </tr>
-                    <tr>
-                        <td class="td__left">파일 형식별 내려받기</td>
-                        <td class="td__left">2021년 종자생명산업 맞춤형 인력양성」 교육훈련생 선정 결과 알림</td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_jpg.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_png.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_jpg.png" alt=""></a></td>
-                    </tr>
-                    <tr>
-                        <td class="td__left">파일 형식별 내려받기</td>
-                        <td class="td__left">2021년 종자생명산업 맞춤형 인력양성」 교육훈련생 선정 결과 알림</td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_ppt.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_xls.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_png.png" alt=""></a></td>
-                    </tr>
-                    <tr>
-                        <td class="td__left">파일 형식별 내려받기</td>
-                        <td class="td__left">2021년 종자생명산업 맞춤형 인력양성」 교육훈련생 선정 결과 알림</td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_png.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_ppt.png" alt=""></a></td>
-                    </tr>
-                    <tr>
-                        <td class="td__left">파일 형식별 내려받기</td>
-                        <td class="td__left">2021년 종자생명산업 맞춤형 인력양성」 교육훈련생 선정 결과 알림</td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_doc.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_pdf.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
-                    </tr>
-                    <tr>
-                        <td class="td__left">파일 형식별 내려받기</td>
-                        <td class="td__left">2021년 종자생명산업 맞춤형 인력양성」 교육훈련생 선정 결과 알림</td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_jpg.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_png.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_jpg.png" alt=""></a></td>
-                    </tr>
+
+
+</c:forEach>
+
+
                     </tbody>
                 </table>
                 <!--//-->

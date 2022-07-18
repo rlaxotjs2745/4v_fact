@@ -49,20 +49,20 @@
             </div>
             <div class="list__type">
                 <ul class="list__type--promo">
-<c:forEach items="${prContentList}" var="promotion" varStatus="status">
-                    <li>
-                        <a href="brd_promotion_detail?idx=${promotion.idx_pr_content}">
-                            <figure><img src="resources/assets/image/@promo_01.png" alt=""></figure>
-                            <div class="caption">
-                                <span class="list__title">${promotion.subject}</span>
-                                <div class="list__file">
-                                    <img src="resources/assets/image/ico_hwp.png" alt="hwp">
-                                    <img src="resources/assets/image/ico_pdf.png" alt="pdf">
+                    <c:forEach items="${prContentList}" var="promotion" varStatus="status">
+                        <li>
+                            <a href="brd_promotion_detail?idx=${promotion.idx_pr_content}" class=" btn-sm btn_content_modal">
+                                <figure><img src="" alt=""></figure>
+                                <div class="caption">
+                                    <span class="list__title">${promotion.subject}</span>
+                                    <div class="list__file">
+                                        <img src="resources/assets/image/ico_hwp.png" alt="hwp">
+                                        <img src="resources/assets/image/ico_pdf.png" alt="pdf">
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </li>
-</c:forEach>
+                            </a>
+                        </li>
+                    </c:forEach>
                     <%--
                     <li>
                         <a href="brd_promotion_detail">
@@ -164,5 +164,13 @@
 <%@include file ="script.jsp" %>
 
 </div>
+<script>
+    $(".btn_content_modal").click(function (){
+        var idx = $(this).attr("id");
+        pageLoad("pr_contents", {idx: parseInt(idx)}, "홍보자료 모달컨텐츠", "pr_contents");
+    })
+
+
+</script>
 </body>
 </html>

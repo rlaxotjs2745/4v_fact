@@ -17,6 +17,10 @@ public interface PRContentsService {
 
 
 int insertPRContentFileJoin();
-
+    PRContentVO getPRContentFileJoin(int idx_pr_content);
  List<PRContentVO> selectPRContentList(String tagValue);
+
+    int getPrViewCount(int idx_pr_content);
+    void updatePrViewCount(PRContentVO prContentVO);
+
 }

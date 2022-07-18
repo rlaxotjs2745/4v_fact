@@ -3,8 +3,13 @@ package kr.or.fact.core.service.impl;
 import kr.or.fact.core.model.DTO.NoticeVO;
 import kr.or.fact.core.model.NoticeMapper;
 import kr.or.fact.core.service.NoticeService;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.List;
 
@@ -13,6 +18,12 @@ public class NoticeServiceImpl implements NoticeService {
     private final NoticeMapper noticeMapper;
     @Autowired
     public NoticeServiceImpl(NoticeMapper noticeMapper){this.noticeMapper = noticeMapper;}
+
+    @Autowired
+    private SqlSession sqlsession;
+
+    @Autowired
+    private DataSourceTransactionManager dataSourceTransactionManager;
 
     @Override
     public int getMainNoticeCount(){
@@ -60,4 +71,28 @@ public class NoticeServiceImpl implements NoticeService {
     public int insertNoticeFileJoin() {
         return noticeMapper.insertNoticeFileJoin();
     }
+
+    @Override
+    public NoticeVO getNoticeIsFile(int idx_notice) {
+        long newIdx = Long.parseLong("" + idx_notice);
+        return noticeMapper.getNoticeIsFile(newIdx);
+    }
+
+    @Override
+    public int getNoticeViewCount(int idx_notice) {
+        long newIdx = Long.parseLong("" + idx_notice);
+        return noticeMapper.getNoticeViewCount(newIdx);
+    }
+
+    @Override
+    public void updateNoticeViewCount(NoticeVO noticeVO) {
+
+        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+
+        this.sqlsession.delete("kr.or.fact.core.model.NoticeMapper.updateNoticeViewCount",noticeVO);
+
+        dataSourceTransactionManager.commit(status);
+    }
+
 }

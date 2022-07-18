@@ -17,6 +17,9 @@ public interface PRContentsMapper {
 
     PRContentVO getPRContent(@Param("idx") long idx);
     int insertPRContentFileJoin();
-
+PRContentVO getPRContentFileJoin(@Param("idx_pr_content") long idx_pr_content);
     List<PRContentVO> selectPRContentList(@Param("pageNum") int pageNum, @Param("count") int count);
+
+    int getPrViewCount(@Param("idx_pr_content") long idx_pr_content);
+    void updatePrViewCount(PRContentVO prContentVO);
 }

@@ -38,4 +38,5 @@ public class PRContentVO {
     MultipartFile files4;
     MultipartFile files5;
     String fileLength;
+    String file_path;
 }

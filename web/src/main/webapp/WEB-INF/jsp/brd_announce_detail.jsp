@@ -47,9 +47,9 @@
                         <th><a href="brd_notice"><img src="resources/assets/image/ico_list.png" alt="리스트"></a></th>
                         <th class="th__edit">
                             <div class="detail__edit">
-                                <div class="edit--type"><em>게시자</em><span>이동우</span></div>
-                                <div class="edit--type"><em>등록일</em><span>2021.00.00</span></div>
-                                <div class="edit--type"><em>조회수</em><span>125</span></div>
+                                <div class="edit--type"><em>게시자</em><span>${bsAnnouns.author}</span></div>
+                                <div class="edit--type"><em>등록일</em><span>${bsAnnouns.reg_date}</span></div>
+                                <div class="edit--type"><em>조회수</em><span>${bsAnnouns.view_count}</span></div>
                                 <div class="edit--print"><a href="#none"><img src="resources/assets/image/ico_print.png" alt="인쇄하기"></a></div>
                             </div>
                         </th>
@@ -136,8 +136,8 @@
                                 }
                             </style>
                             <div class="edit__templete">
-                                <div class="temp__cover">농업기술실용화재단 공고 제2021-121호</div>
-                                <div class="temp__title">2021년 종자생명산업 맞춤형 인력양성 교육훈련생 선정 결과 알림</div>
+                                <div class="temp__cover">${bsAnnouns.bs_announcement_code}</div>
+                                <div class="temp__title">${bsAnnouns.subject}</div>
                                 <div class="temp__desc"> [2021년 종자생명산업 맞춤형 인력양성] 교육과정 별 교육훈련생 선정결과를 첨부와 같이 알려드리며, <br>선정된 교육생들은 향후 일정이 원활히 진행될 수 있도록 협조하여 주시기 바랍니다.</div>
                                 <div class="temp__signature">2021년 6월 22일<br>농업기술실용화재단 이사장</div>
                                 <div class="temp__table">
@@ -176,16 +176,7 @@
                                     </table>
                                 </div>
                                 <div class="temp__text">
-                                    □ 교육훈련생 선정 결과
-                                    ○ 최종선발 교육생 : 총 30명(종자산업가 15, 미래육종가 15)   * 첨부파일 참조
-                                    ○ 예비 교육생 : 총 4명(과정별 2명)
-                                    ※ 예비생은 추후 선정된 교육생의 결원 발생 시, 순차적으로 안내할 예정입니다.
-
-                                    □ 교육 등록안내
-                                    ○ 등록대상 : 과정별 최종선발 교육생
-                                    ○ 등록일시 : 해당 과정 개강일 8시 50분까지 입실
-                                    ○ 준비물 : 신분증 지참
-                                    □ 문의사항 : 농업기술실용화재단 종자산업진흥센터(☎ 063-219-8816)
+                                    ${bsAnnouns.announce_contents}
                                 </div>
                                 <div class="temp__goal">- 본 교육과정에 관심을 가지고 지원하신 모든 분들께 감사드립니다. -</div>
                                 <div class="temp__notice--box"> ※ 코로나19 지역발생 상황에 따라 교육과정이 연기·변동될 수 있음을 알려드리며,

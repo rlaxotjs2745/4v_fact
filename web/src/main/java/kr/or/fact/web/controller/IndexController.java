@@ -627,7 +627,8 @@ public class IndexController {
 
     @RequestMapping("/arc_form")
     public String arc_form(Model model){
-
+List<FormFileInfoVO> formFileInfoVO = fileService.getFormFileList();
+model.addAttribute("formfileList",formFileInfoVO);
         getHomepageInfo(model);
         return "arc_form";
     }
@@ -641,7 +642,8 @@ public class IndexController {
 
     @RequestMapping("/arc_rule")
     public String arc_rule(Model model){
-
+List<RuleFileInfoVO> ruleFileInfoList = fileService.getRuleFileInfoList1();
+model.addAttribute("rulefileList",ruleFileInfoList);
         getHomepageInfo(model);
         return "arc_rule";
     }
@@ -707,6 +709,13 @@ public class IndexController {
     @RequestMapping("/brd_announce_detail")
     public String brd_announce_detail(@RequestParam("idx") int idx,
                                       Model model){
+        int view = bsAnnouncementService.getBsAnnounceViewCount(idx);
+        BsAnnouncementVO bsAnnouncementVO = new BsAnnouncementVO();
+        bsAnnouncementVO.setIdx_bs_announcement(idx);
+        bsAnnouncementVO.setView_count(view+1);
+        bsAnnouncementService.updateBsAnnounceViewCount(bsAnnouncementVO);
+   BsAnnouncementVO bsAnnouncementInfo= bsAnnouncementService.getBsAnnouncementByIdx(idx);
+        model.addAttribute("bsAnnouns",bsAnnouncementInfo);
 
         getHomepageInfo(model);
         return "brd_announce_detail";
@@ -796,7 +805,24 @@ public class IndexController {
     }
     @RequestMapping("/brd_event_detail")
     public String brd_event_detail(@RequestParam("idx") int idx,
-                                      Model model){
+                                   Model model){
+
+
+int view = eventContentService.getEventViewCount(idx);
+EventContentVO eventContentVO1= new EventContentVO();
+        eventContentVO1.setIdx_event_content(idx);
+        eventContentVO1.setView_count(view+1);
+        eventContentService.updateEventViewCount(eventContentVO1);
+        EventContentVO event = eventContentService.getEventContentByIdx(idx);
+        if(event.getIs_file()==0){
+
+            model.addAttribute("eventContent", event);
+        }else{
+
+            EventFileJoinSelectVO eventContentVO = eventContentService.getEventContentFileJoin(idx);
+            model.addAttribute("eventContent",eventContentVO);
+
+        }
 
         getHomepageInfo(model);
         return "brd_event_detail";
@@ -810,7 +836,7 @@ public class IndexController {
 
     @RequestMapping("/brd_event_search")
     public String brd_event_search(@RequestParam("page") int page,
-                            Model model){
+                                   Model model){
 
         getHomepageInfo(model);
         return "brd_event_search";
@@ -885,15 +911,25 @@ public class IndexController {
     }
     @RequestMapping("/brd_notice_detail")
     public String brd_notice_detail(@RequestParam("idx") int idx,
-                                   Model model){
+                                    Model model){
+        int view = noticeService.getNoticeViewCount(idx);
+        NoticeVO noticeVO1= new NoticeVO();
+        noticeVO1.setIdx_notice(idx);
+        noticeVO1.setView_count(view+1);
+        noticeService.updateNoticeViewCount(noticeVO1);
+        System.out.println(noticeVO1);
 
 
+        NoticeVO noticeInfo = noticeService.getNoticeByIdx(idx);
+        if(noticeInfo.getIs_file()==0){
+            System.out.println("여기");
+            model.addAttribute("noticeInfo",noticeInfo);
+        }else{
+            System.out.println("아님여기");
+            NoticeVO noticeVO =noticeService.getNoticeIsFile(idx);
+            model.addAttribute("noticeInfo",noticeVO);
 
-
-
-
-
-
+        }
 
 
         getHomepageInfo(model);
@@ -907,7 +943,7 @@ public class IndexController {
     }
     @RequestMapping("/brd_notice_search")
     public String brd_notice_search(@RequestParam("page") int page,
-                                   Model model){
+                                    Model model){
 
         getHomepageInfo(model);
         return "brd_notice_search";
@@ -980,7 +1016,28 @@ public class IndexController {
     }
     @RequestMapping("/brd_promotion_detail")
     public String brd_promotion_detail(@RequestParam("idx") int idx,
-                                    Model model){
+                                       Model model){
+
+int view = prContentService.getPrViewCount(idx);
+PRContentVO prContentVO2 = new PRContentVO();
+prContentVO2.setIdx_pr_content(idx);
+prContentVO2.setView_count(view+1);
+prContentService.updatePrViewCount(prContentVO2);
+        PRContentVO prContentVO = prContentService.getPRContent(idx);
+        if(prContentVO.getIs_file()==0){
+
+            model.addAttribute("pr", prContentVO);
+        }else{
+
+            PRContentVO prContentVO1 = prContentService.getPRContentFileJoin(idx);
+            model.addAttribute("pr",prContentVO1);
+
+        }
+
+
+
+
+
 
         getHomepageInfo(model);
         return "brd_promotion_detail";

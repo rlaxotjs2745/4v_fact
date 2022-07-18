@@ -127,10 +127,9 @@ LAST_UPD_DATE
         SELECT * FROM TB_NOTICE WHERE ROWNUM <![CDATA[<]]> 5 AND NOTICE_STATUS != 3 AND IS_SHOW = 1 AND IS_MAIN_PAGE = 1 ORDER BY POSTING_START_DATE DESC
     </select>
 
-    <select id="getNoticeIsFile" resultType="kr.or.fact.core.model.DTO.NoticeFileJoinVO">
+    <select id="getNoticeIsFile" resultType="kr.or.fact.core.model.DTO.NoticeVO">
 
-        SELECT A.IDX_NOTICE_FILE_JOIN,
-               A.IDX_NOTICE,
+        SELECT
                A.IDX_FILE_INFO,
                B.IDX_NOTICE,
                B.IS_FILE,
@@ -183,5 +182,10 @@ REG_DATE
 
                 )
     </insert>
-
+<select id="getNoticeViewCount" parameterType="long" resultType="int">
+    SELECT VIEW_COUNT FROM TB_NOTICE WHERE IDX_NOTICE=#{idx_notice}
+</select>
+    <update id="updateNoticeViewCount" parameterType="kr.or.fact.core.model.DTO.NoticeVO">
+        UPDATE TB_NOTICE SET VIEW_COUNT = #{view_count} WHERE IDX_NOTICE =#{idx_notice}
+    </update>
 </mapper>

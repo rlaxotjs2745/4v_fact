@@ -4,8 +4,12 @@ import kr.or.fact.core.model.DTO.EventContentVO;
 import kr.or.fact.core.model.DTO.EventFileJoinSelectVO;
 import kr.or.fact.core.model.EventContentMapper;
 import kr.or.fact.core.service.EventContentService;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.List;
 
@@ -14,7 +18,11 @@ public class EventContentServiceImpl implements EventContentService {
     private final EventContentMapper eventContentMapper;
     @Autowired
     public EventContentServiceImpl(EventContentMapper eventContentMapper){this.eventContentMapper = eventContentMapper;}
+    @Autowired
+    private SqlSession sqlsession;
 
+    @Autowired
+    private DataSourceTransactionManager dataSourceTransactionManager;
     @Override
     public int getMainEventContentCount(){
         return eventContentMapper.getMainEventContentCount();
@@ -69,5 +77,21 @@ public class EventContentServiceImpl implements EventContentService {
         long newIdx = Long.parseLong("" + idx_event_content);
         System.out.println(newIdx);
         return eventContentMapper.getEventContentFileJoin(newIdx);
+    }
+
+    @Override
+    public int getEventViewCount(int idx_event_content) {
+        long newIdx = Long.parseLong("" + idx_event_content);
+        return eventContentMapper.getEventViewCount(newIdx);
+    }
+
+    @Override
+    public void updateEventViewCount(EventContentVO eventContentVO) {
+        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+
+        this.sqlsession.delete("kr.or.fact.core.model.EventContentMapper.updateEventViewCount",eventContentVO);
+
+        dataSourceTransactionManager.commit(status);
     }
 }
