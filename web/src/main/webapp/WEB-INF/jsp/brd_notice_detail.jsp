@@ -161,11 +161,11 @@
                 </table>
                 <!--//-->
                 <div class="detail__nav">
-                    <a href="#none" class="detail__anchor anchor--back">
-                        <img src="resources/assets/image/ico_back.png" alt="이전글"> 이전글 <span>한국농업기술진흥원 공고 제2021-121호</span>
+                    <a href="brd_notice_detail?idx=${noticeInfo.idx_notice-1}" class="detail__anchor anchor--back">
+                        <img src="resources/assets/image/ico_back.png" alt="이전글"> 이전글
                     </a>
-                    <a href="#none" class="detail__anchor anchor__foword">
-                        <span>한국농업기술진흥원 공고 제2021-121호</span> 다음글 <img src="resources/assets/image/ico_foword.png" alt="다음글">
+                    <a href="brd_notice_detail?idx=${noticeInfo.idx_notice+1}" class="detail__anchor anchor__foword">
+                        다음글 <img src="resources/assets/image/ico_foword.png" alt="다음글">
                     </a>
                     <a href="#none" class="detail__anchor anchor__list"><img src="resources/assets/image/ico_list.png" alt="리스트"></a>
                 </div>

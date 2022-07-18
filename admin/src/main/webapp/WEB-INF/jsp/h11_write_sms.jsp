@@ -6,18 +6,24 @@
     <div class="card px-4 pt-4 mb-4">
         <div>
             <form name="smssend" method="post" >
-                <div class="form-row">
-                    <span id="counter">글자수:###</span>
-                    <br>
-                    <div class="form-group col col-md-10">
-                        <input id="subject" type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목">
+                <div class="modal-body">
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">제목</label>
+                        <div class="col-md-6 mode-edit mode-new">
+                            <input id="subject" type="text" class="form-control form-control-md text-md-right" placeholder="제목">
+                        </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" id="sms"></label>
+
+
+
+                <div class="form-group row">
+                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" id="sms">내용</label>
+
                     <div class="form-group col col-md-10">
+                        <span id="counter">글자수:###</span>
                         <textarea id="sms_msg" maxlength="80" class="form-control mode-edit mode-new" rows="3"></textarea>
-                        <%--    <textarea style="height:300px; resize: none;" maxlength="200" placeholder="텍스트를 입력하세요."> </textarea>--%>
+
                     </div>
                 </div>
                 <div class="form-group row">
@@ -33,6 +39,14 @@
                         <label for="user_id"></label><input id="user_id" type="text" class="form-control form-control-md text-md-right" placeholder="보내는사람">
                     </div>
                 </div>
+
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">받는사람 선택</label>
+                        <div class="col-md-6 mode-edit mode-new">
+                            <label for="user_id"></label><input id="dest_info" type="text" class="form-control form-control-md text-md-right" placeholder="받는사람">
+                        </div>
+                    </div>
                 <br>
                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">예약여부</label>
                 <label><input id="send_now" type="checkbox" name="sendtype" value="1" > 바로보내기</label>
@@ -50,28 +64,12 @@
                 </div>
                 <div>
                     <button type="button" class="btn btn-outline-dark mr-2 sms_cancel" data-dismiss="modal">취소</button>
-                    <button type="button" class="btn btn-primary sms_send" id ="send" onclick="event_pass();">보내기예약 여기서 이벤트 발생</button>
+                    <button type="button" class="btn btn-primary sms_send" id ="send" onclick="event_pass();">보내기</button>
                 </div>
-                <div class="col-md ">
-                    <label class="form-label text-muted">받는사람 선택</label>
-                    <div class="form-inline">
-                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio" checked="">직접입력
-                            </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio"> 조건 검색
-                            </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 고객 명단 검색
-                            </label>
-                            <div class="form-group col col-md-10">
-                                <input id="dest_info" type="text" class="form-control form-control-md mode-edit mode-new" placeholder="받는사람">
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </form>
+
             <script>
 
 
@@ -159,7 +157,7 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "/sms",
+                        url: 'sms',
                         data:JSON.stringify( {
                             "user_id": user_id,
                             "schedule_type": schedule_type,
