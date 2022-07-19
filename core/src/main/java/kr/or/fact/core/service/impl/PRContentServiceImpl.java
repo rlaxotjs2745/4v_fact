@@ -21,7 +21,7 @@ public class PRContentServiceImpl implements PRContentsService {
     @Autowired
     private SqlSession sqlsession;
 
-    @Autowired
+    @Autowired(required = false)
     private DataSourceTransactionManager dataSourceTransactionManager;
 
     @Override

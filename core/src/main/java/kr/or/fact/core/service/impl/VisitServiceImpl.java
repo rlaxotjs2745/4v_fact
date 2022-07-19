@@ -28,7 +28,7 @@ public class VisitServiceImpl implements VisitService {
     @Autowired
     private SqlSession sqlsession;
 
-    @Autowired
+    @Autowired(required = false)
     private DataSourceTransactionManager dataSourceTransactionManager;
 
 

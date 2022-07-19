@@ -731,7 +731,7 @@ public class APIController {
             AdminVO adminVo = adminService.findAdminById(principal.getName());
             System.out.println(adminVo);
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-           // String hashedPassword = passwordEncoder.encode(changePwVO.getCurPw());
+//            String hashedPassword = passwordEncoder.encode(changePwVO.getCurPw());
             // 인코딩된 비밀번호와 일반 비밀번호를 대조합니다
             if(passwordEncoder.matches(changePwVO.getCurPw(),adminVo.getAdmin_pw())){
                 try{

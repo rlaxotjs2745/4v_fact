@@ -160,10 +160,10 @@ public class IndexController {
 
 
     @GetMapping("/login")
-    public String login(HttpSession session, @RequestBody(required = false) ParamVO paramVO){
+    public String login(HttpSession session, Model model, @RequestBody(required = false) ParamVO paramVO){
         session.setAttribute("CSRF_TOKEN", UUID.randomUUID().toString());
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        String hashedPassword = passwordEncoder.encode("123123");
 //        System.out.println(paramVO);
 //
 //        AdminVO adminVo = new AdminVO();
@@ -176,6 +176,7 @@ public class IndexController {
 //            adminService.join(adminVo);
 ////        }
 //        System.out.println("confirm");
+//        model.addAttribute("init", hashedPassword);
 
         return "login";
     }
