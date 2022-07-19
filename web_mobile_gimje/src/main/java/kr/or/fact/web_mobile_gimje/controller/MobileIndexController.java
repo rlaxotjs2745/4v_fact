@@ -140,7 +140,7 @@ public class MobileIndexController {
 
     @RequestMapping("/brd_announce")
     public String brd_announce(@RequestParam("page") int page,
-                               Model model){
+                               Model model, ParamPageListFilteredVO param){
         int list_amount = param.getAmount();;
         int page_amount = 10;
 
@@ -226,7 +226,7 @@ public class MobileIndexController {
 
     @RequestMapping("/brd_event")
     public String brd_event(@RequestParam("page") int page,
-                            Model model){
+                            Model model, ParamPageListFilteredVO param){
         int list_amount = param.getAmount();;
         int page_amount = 10;
 
@@ -305,7 +305,7 @@ public class MobileIndexController {
 
     @RequestMapping("/brd_notice")
     public String brd_notice(@RequestParam("page") int page,
-                             Model model){
+                             Model model, ParamPageListFilteredVO param){
         int list_amount = param.getAmount();;
         int page_amount = 10;
 
@@ -381,7 +381,7 @@ public class MobileIndexController {
 
     @RequestMapping("/brd_promotion")
     public String brd_promotion(@RequestParam("page") int page,
-                                Model model){
+                                Model model, ParamPageListFilteredVO param){
         int list_amount = param.getAmount();;
         int page_amount = 10;
 
@@ -709,7 +709,7 @@ public class MobileIndexController {
     @RequestMapping("/spt_email")
     public String spt_email(HttpSession session
             ,@Param("page") int page
-            , Model model){
+            , Model model, ParamPageListFilteredVO param){
 
         UserVO findUser = null;
         //model.addAttribute("is_login",false);

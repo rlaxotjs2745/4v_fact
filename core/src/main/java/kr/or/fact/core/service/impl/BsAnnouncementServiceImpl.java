@@ -20,7 +20,7 @@ public class BsAnnouncementServiceImpl implements BsAnnouncementService {
     @Autowired
     private SqlSession sqlsession;
 
-    @Autowired
+    @Autowired(required = false)
     private DataSourceTransactionManager dataSourceTransactionManager;
     @Override
     public int getMainBsAnnouncementCount(){

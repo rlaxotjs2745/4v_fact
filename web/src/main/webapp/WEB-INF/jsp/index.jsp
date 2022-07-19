@@ -237,8 +237,11 @@
             </div>
 
         </div>
+
     </div>--%>
+
 </div>
+
 
 <%@include file ="script.jsp" %>
 <script>
