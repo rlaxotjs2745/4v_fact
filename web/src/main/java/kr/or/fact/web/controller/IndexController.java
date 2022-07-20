@@ -456,6 +456,10 @@ public class IndexController {
         else {
 
         }
+        List<UserDemoBsFileResultVO> fileList = fileService.getUserDemoFileList(userDemoBsVo.getIdx_user_demo_bs());
+
+        model.addAttribute("fileArr", fileList);
+
         model.addAttribute("userDemoBsDetailVO",userDemoBsDetailVO);
 
         model.addAttribute("userBsHumanResourceVOList",userBsHumanResourceVOList);
@@ -623,7 +627,8 @@ public class IndexController {
 
     @RequestMapping("/arc_form")
     public String arc_form(Model model){
-
+List<FormFileInfoVO> formFileInfoVO = fileService.getFormFileList();
+model.addAttribute("formfileList",formFileInfoVO);
         getHomepageInfo(model);
         return "arc_form";
     }
@@ -638,7 +643,7 @@ public class IndexController {
     @RequestMapping("/arc_rule")
     public String arc_rule(Model model){
 List<RuleFileInfoVO> ruleFileInfoList = fileService.getRuleFileInfoList1();
-model.addAttribute("formfileList",ruleFileInfoList);
+model.addAttribute("rulefileList",ruleFileInfoList);
         getHomepageInfo(model);
         return "arc_rule";
     }
@@ -810,13 +815,13 @@ EventContentVO eventContentVO1= new EventContentVO();
         eventContentService.updateEventViewCount(eventContentVO1);
         EventContentVO event = eventContentService.getEventContentByIdx(idx);
         if(event.getIs_file()==0){
-            System.out.println("여기");
+
             model.addAttribute("eventContent", event);
         }else{
-            System.out.println("아님여기");
+
             EventFileJoinSelectVO eventContentVO = eventContentService.getEventContentFileJoin(idx);
             model.addAttribute("eventContent",eventContentVO);
-            System.out.println(eventContentVO);
+
         }
 
         getHomepageInfo(model);
@@ -1020,10 +1025,10 @@ prContentVO2.setView_count(view+1);
 prContentService.updatePrViewCount(prContentVO2);
         PRContentVO prContentVO = prContentService.getPRContent(idx);
         if(prContentVO.getIs_file()==0){
-            System.out.println("여기");
+
             model.addAttribute("pr", prContentVO);
         }else{
-            System.out.println("아님여기");
+
             PRContentVO prContentVO1 = prContentService.getPRContentFileJoin(idx);
             model.addAttribute("pr",prContentVO1);
 
@@ -1535,6 +1540,16 @@ prContentService.updatePrViewCount(prContentVO2);
 
     public void getHomepageInfo(Model model){
         HomepageInfoVO homepageInfoVO = homepageInfoService.getHomepageInfo();
+
+        List<NoticeVO> noticeVOList = noticeService.getMainNoticeList();
+
+        List<BsAnnouncementVO> bsAnnouncementVOList = bsAnnouncementService.getMainBsAnnouncementList();
+
+        List<EventContentVO> eventContentVOList = eventContentService.getMainEventContentList();
+
+        model.addAttribute("noticeList", noticeVOList);
+        model.addAttribute("annoList", bsAnnouncementVOList);
+        model.addAttribute("eventList", eventContentVOList);
         model.addAttribute("homepageInfo",homepageInfoVO);
 
     }

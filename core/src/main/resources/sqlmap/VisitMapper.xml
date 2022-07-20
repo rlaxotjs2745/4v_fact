@@ -59,12 +59,7 @@
                         IDX_ADMIN,
                         REG_DATE
                  FROM (
-                          SELECT * FROM TB_VISIT_REQ   <if test="filter1 != 9999">
-        WHERE VISIT_REQ_STATUS = #{filter1}
-    </if>
-        <if test="filter2 != 9998">
-            OR VISIT_REQ_STATUS = #{filter2}
-        </if>
+                          SELECT * FROM TB_VISIT_REQ
                       )
 
                  WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}

@@ -27,8 +27,6 @@
                                 <th class="text-center px-2" style="width:16%">제목</th>
                                 <th class="text-center sorting" style="width:36%">용도</th>
                                 <th class="text-center sorting" style="width:10%">관련 조직</th>
-                                <th class="text-center sorting" style="width:14%">파일이름</th>
-                                <th class="text-center sorting" style="width:6%">파일형식</th>
                                 <th class="text-center sorting" style="width:12%">등록일</th>
                             </tr>
                             </thead>

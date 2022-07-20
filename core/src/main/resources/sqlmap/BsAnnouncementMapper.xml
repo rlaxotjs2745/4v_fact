@@ -42,7 +42,7 @@
     </select>
 
     <select id="getMainBsAnnouncementList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
-        SELECT * FROM TB_BS_ANNOUNCEMENT  WHERE  IS_MAIN_PAGE=1;
+        SELECT * FROM TB_BS_ANNOUNCEMENT WHERE ROWNUM <![CDATA[<]]> 5 AND ANNOUNCE_STATUS = 3 AND IS_SHOW = 1 AND IS_MAIN_PAGE = 1 ORDER BY POSTING_START_DATE DESC
     </select>
 
 

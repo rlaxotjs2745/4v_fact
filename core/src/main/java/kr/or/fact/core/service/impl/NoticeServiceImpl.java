@@ -22,7 +22,7 @@ public class NoticeServiceImpl implements NoticeService {
     @Autowired
     private SqlSession sqlsession;
 
-    @Autowired
+    @Autowired(required = false)
     private DataSourceTransactionManager dataSourceTransactionManager;
 
     @Override

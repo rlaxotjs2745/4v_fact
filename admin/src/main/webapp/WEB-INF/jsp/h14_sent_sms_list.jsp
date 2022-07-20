@@ -32,7 +32,7 @@
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${sentSms}" var="smsSent" varStatus="status">
-                                    <tr class="">
+                                    <tr class="smsSent-entity" id="${sentSms.msg_id}">
                                         <td class="text-center">${status.count}</td>
                                         <td class="text-center">${smsSent.callback}</td>
                                         <td class="text-center">${smsSent.send_date}</td>
@@ -41,96 +41,7 @@
                                         <td class=""><span class="text-truncate d-inline-block" style="width:300px;">${smsSent.sms_msg}</span></td>
                                     </tr>
                                 </c:forEach>
-                                <tr class="">
-                                    <td class="text-center">1</td>
-                                    <td class="text-center">010-0000-0000</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">예약</td>
-                                    <td class="text-center"><span class="text-truncate d-inline-block" style="width:200px;">김장군, 박장군, 010-000-0000</span></td>
-                                    <td class="text-center">발신제목제목 제목제목 제목 제목제목 제목</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">2</td>
-                                    <td class="text-center">010-0000-0000</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">예약</td>
-                                    <td class="text-center"><span class="text-truncate d-inline-block" style="width:200px;">홍길동</span></td>
-                                    <td class="text-center">발신제목제목 제목제목 제목 제목제목 제목</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">3</td>
-                                    <td class="text-center">010-0000-0000</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">즉시</td>
-                                    <td class="text-center"><span class="text-truncate d-inline-block" style="width:200px;">김장군, 박장군, 010-000-0000</span></td>
-                                    <td class="text-center">발신제목제목 제목제목 제목 제목제목 제목</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">4</td>
-                                    <td class="text-center">010-0000-0000</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">즉시</td>
-                                    <td class="text-center"><span class="text-truncate d-inline-block" style="width:200px;">김장군, 박장군, 010-000-0000</span></td>
-                                    <td class="text-center">발신제목제목 제목제목 제목 제목제목 제목</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor</span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">5</td>
-                                    <td class="text-center">010-0000-0000</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">즉시</td>
-                                    <td class="text-center"><span class="text-truncate d-inline-block" style="width:200px;">김장군, 박장군, 010-000-0000</span></td>
-                                    <td class="text-center">발신제목제목 제목제목 제목 제목제목 제목</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. </span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">6</td>
-                                    <td class="text-center">010-0000-0000</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">즉시</td>
-                                    <td class="text-center"><span class="text-truncate d-inline-block" style="width:200px;">김장군, 박장군, 010-000-0000</span></td>
-                                    <td class="text-center">발신제목제목 제목제목 제목 제목제목 제목</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. </span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">7</td>
-                                    <td class="text-center">010-0000-0000</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">즉시</td>
-                                    <td class="text-center"><span class="text-truncate d-inline-block" style="width:200px;">김장군, 박장군, 010-000-0000</span></td>
-                                    <td class="text-center">발신제목제목 제목제목 제목 제목제목 제목</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. </span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">8</td>
-                                    <td class="text-center">010-0000-0000</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">즉시</td>
-                                    <td class="text-center"><span class="text-truncate d-inline-block" style="width:200px;">김장군, 박장군, 010-000-0000</span></td>
-                                    <td class="text-center">발신제목제목 제목제목 제목 제목제목 제목</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. </span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">9</td>
-                                    <td class="text-center">010-0000-0000</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">즉시</td>
-                                    <td class="text-center"><span class="text-truncate d-inline-block" style="width:200px;">김장군, 박장군, 010-000-0000</span></td>
-                                    <td class="text-center">발신제목제목 제목제목 제목 제목제목 제목</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. </span></td>
-                                </tr>
-                                <tr class="">
-                                    <td class="text-center">10</td>
-                                    <td class="text-center">010-0000-0000</td>
-                                    <td class="text-center">2021.00.00 00:00</td>
-                                    <td class="text-center">즉시</td>
-                                    <td class="text-center"><span class="text-truncate d-inline-block" style="width:200px;">김장군, 박장군, 010-000-0000</span></td>
-                                    <td class="text-center">발신제목제목 제목제목 제목 제목제목 제목</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. </span></td>
-                                </tr>
+
                                 </tbody>
                             </table>
                         </div>

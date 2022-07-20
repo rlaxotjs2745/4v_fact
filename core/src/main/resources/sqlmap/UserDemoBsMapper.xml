@@ -438,7 +438,11 @@
               PRIZE3_DATE = #{prize3_date},
               PRIZE3_ORG = #{prize3_org},
               PRIZE3_ETC = #{prize3_etc},
-
+              DEMO_START_DATE = #{demo_start_date},
+              DEMO_END_DATE = #{demo_end_date},
+              FARMING_START_DATE = #{farming_start_date},
+              FARMING_END_DATE = #{farming_end_date},
+              FARMING_REPEAT = #{farming_repeat},
 
                LAST_UPD_DATE = SYSDATE
         WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}

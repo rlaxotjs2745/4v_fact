@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="ko" class="html-popup">
@@ -26,7 +27,7 @@
 <div class="wrapper" id="wrapper">
     <header class="header_app">
         <a href="/prv_application" class="close_window" onclick="javascript:window.close();"><img src="resources/assets/image/ico_close.svg" alt=""></a>
-        <h1><a href="/"><img src="resources/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
+        <h1><a href="/"><img src="resources/assets/image/img-logo-s.png" alt="스마트팜 실증센터"></a></h1>
         <h2>신청서 작성</h2>
         <div class="app__step">
             <div class="step is-passed">
@@ -426,8 +427,9 @@
                         <tr>
                             <th class="th__left">실증기간</th>
                             <td class="td__left" colspan="3">
-                                시작 <input type="text" class="datepicker"><span class="text--guide">부터 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                완료 <input type="text" class="datepicker"> &nbsp; (00년 00개월)
+                                <fmt:formatDate value="${userDemoBs.demo_start_date}" var="start_date" pattern="yyyy-MM-dd"/>
+                                <fmt:formatDate value="${userDemoBs.demo_end_date}" var="end_date" pattern="yyyy-MM-dd"/>
+                                <input type="text" class="date_range_picker" id="bs_start_date" value="${start_date} ~ ${end_date}"><span class="text--guide" id="between_start_end"></span>
                             </td>
                         </tr>
                         <tr>
@@ -564,6 +566,10 @@
 <script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
 <script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 <script>
 
@@ -581,6 +587,47 @@
                 // console.log(data);
             }
         }).open();
+    })
+
+    $(function() {
+        $('.date_range_picker').daterangepicker({
+            autoUpdateInput: false,
+            "locale": {
+                "format": "YYYY-MM-DD",
+                "separator": " ~ ",
+                "applyLabel": "확인",
+                "cancelLabel": "취소",
+                "fromLabel": "From",
+                "toLabel": "To",
+                "customRangeLabel": "Custom",
+                "weekLabel": "W",
+                "daysOfWeek": ["월", "화", "수", "목", "금", "토", "일"],
+                "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+                "firstDay": 1
+            }
+
+        });
+    })
+    $('.date_range_picker').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+    });
+
+    $("#bs_start_date").on("change", function(){
+        var day = 0;
+        var month = 0;
+        var year = 0;
+        var gap = new Date($("#bs_start_date").val().split(" ~ ")[1]) - new Date($("#bs_start_date").val().split(" ~ ")[0]);
+
+        day = Math.floor(gap / (1000 * 60 * 60 * 24)) || 0;
+        if(Math.floor(day/30) >= 1){
+            month = Math.floor(day/30);
+            day = day % 30;
+            if(Math.floor(month/12) >= 1){
+                year = Math.floor(month/12);
+                month = month % 12;
+            }
+        }
+        $("#between_start_end").text("(" + year + "년 " + month + "개월)");
     })
 
     $( document ).ready(function() {
@@ -652,6 +699,21 @@
             i++;
         });
 
+        var day = 0;
+        var month = 0;
+        var year = 0;
+        var gap = new Date($("#bs_start_date").val().split(" ~ ")[1]) - new Date($("#bs_start_date").val().split(" ~ ")[0]);
+
+        day = Math.floor(gap / (1000 * 60 * 60 * 24)) || 0;
+        if(Math.floor(day/30) >= 1){
+            month = Math.floor(day/30);
+            day = day % 30;
+            if(Math.floor(month/12) >= 1){
+                year = Math.floor(month/12);
+                month = month % 12;
+            }
+        }
+        $("#between_start_end").text("(" + year + "년 " + month + "개월)");
     });
 
     $("#btn_app_step1").click(function(){
@@ -848,8 +910,8 @@
             user_demo_is_crops:user_demo_is_crops,
             culture_soil: culture_soil,//	number	4		0			생육토양	0: 토경재배, 1:수경재배, 2:고형배지재배
             demo_type: demo_type,//	number	4		0			실증 대상	0:해당없음, 1:시설자재, 2:ict기자재, 4:작물보호제/비료, 8:스마트팜sw, 16:생육모델, 32:로봇, 512:기타
-            demo_start_date: $('#demo_start_date').val(),//	date						입주 시작 날짜
-            demo_end_date: $('#demo_end_date').val(),//	date						입주 종료 날짜
+            demo_start_date: $('#bs_start_date').val().split(" ~ ")[0],//	date						입주 시작 날짜
+            demo_end_date: $('#bs_start_date').val().split(" ~ ")[1],//	date						입주 종료 날짜
             resident_type: resident_type,//	number	4		0			상주 타입	0:해당없음, 1:r&d연구실, 2:스타트업사무실, 512:기타
             resident_etc: $('#resident_etc').val(),//	varchar2	100					이용 실증시설 기타	이용 신청시설 기타 내용
             staff_num: $('#staff_num').val()*1,//	number	10					상주인원
@@ -860,6 +922,8 @@
             man_etc_count:$('#man_etc_count').val()//	number	4		0			키타지원 수
 
         };
+
+        console.log(param);
 
         $.ajax({
             type: 'post',

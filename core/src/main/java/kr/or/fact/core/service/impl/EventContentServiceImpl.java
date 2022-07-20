@@ -21,7 +21,7 @@ public class EventContentServiceImpl implements EventContentService {
     @Autowired
     private SqlSession sqlsession;
 
-    @Autowired
+    @Autowired(required = false)
     private DataSourceTransactionManager dataSourceTransactionManager;
     @Override
     public int getMainEventContentCount(){
