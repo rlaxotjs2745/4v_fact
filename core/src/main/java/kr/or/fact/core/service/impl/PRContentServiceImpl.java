@@ -16,13 +16,18 @@ import java.util.List;
 @Service("prContentService")
 public class PRContentServiceImpl implements PRContentsService {
     private final PRContentsMapper prContentsMapper;
+    private final DataSourceTransactionManager dataSourceTransactionManager;
     @Autowired
-    public PRContentServiceImpl(PRContentsMapper prContentsMapper){this.prContentsMapper = prContentsMapper;}
+    public PRContentServiceImpl(PRContentsMapper prContentsMapper,DataSourceTransactionManager dataSourceTransactionManager){
+
+        this.prContentsMapper = prContentsMapper;
+    this.dataSourceTransactionManager = dataSourceTransactionManager;
+    }
     @Autowired
     private SqlSession sqlsession;
 
-    @Autowired(required = false)
-    private DataSourceTransactionManager dataSourceTransactionManager;
+
+
 
     @Override
     public int getMainPRContentCount(){

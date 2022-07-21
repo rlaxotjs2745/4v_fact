@@ -15,15 +15,19 @@ import java.util.List;
 
 @Service("noticeService")
 public class NoticeServiceImpl implements NoticeService {
+    private final DataSourceTransactionManager dataSourceTransactionManager;
     private final NoticeMapper noticeMapper;
-    @Autowired
-    public NoticeServiceImpl(NoticeMapper noticeMapper){this.noticeMapper = noticeMapper;}
 
+    @Autowired
+    public NoticeServiceImpl(NoticeMapper noticeMapper,DataSourceTransactionManager dataSourceTransactionManager){
+        this.noticeMapper = noticeMapper;
+    this.dataSourceTransactionManager = dataSourceTransactionManager;
+    }
     @Autowired
     private SqlSession sqlsession;
 
-    @Autowired(required = false)
-    private DataSourceTransactionManager dataSourceTransactionManager;
+
+
 
     @Override
     public int getMainNoticeCount(){

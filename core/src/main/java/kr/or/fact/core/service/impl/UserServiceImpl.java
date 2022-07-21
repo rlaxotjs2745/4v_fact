@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,15 +26,18 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
 
 
+    private final DataSourceTransactionManager dataSourceTransactionManager;
+
 
     @Autowired
-    public UserServiceImpl(UserMapper userMapper){this.userMapper = userMapper;}
-
+    public UserServiceImpl(UserMapper userMapper,DataSourceTransactionManager dataSourceTransactionManager){
+        this.userMapper = userMapper;
+    this.dataSourceTransactionManager = dataSourceTransactionManager;
+    }
     @Autowired
     private SqlSession sqlsession;
 
-    @Autowired(required = false)
-    private DataSourceTransactionManager dataSourceTransactionManager;
+
 
     @Override
     public UserVO getAuthUser(String user_id, String user_pw){

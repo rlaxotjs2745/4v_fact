@@ -15,14 +15,18 @@ import java.util.List;
 
 @Service("eventContentService")
 public class EventContentServiceImpl implements EventContentService {
+    private final DataSourceTransactionManager dataSourceTransactionManager;
     private final EventContentMapper eventContentMapper;
     @Autowired
-    public EventContentServiceImpl(EventContentMapper eventContentMapper){this.eventContentMapper = eventContentMapper;}
+    public EventContentServiceImpl(EventContentMapper eventContentMapper,DataSourceTransactionManager dataSourceTransactionManager
+    ){
+        this.eventContentMapper = eventContentMapper;
+    this.dataSourceTransactionManager = dataSourceTransactionManager;}
     @Autowired
     private SqlSession sqlsession;
 
-    @Autowired(required = false)
-    private DataSourceTransactionManager dataSourceTransactionManager;
+
+
     @Override
     public int getMainEventContentCount(){
         return eventContentMapper.getMainEventContentCount();
@@ -87,11 +91,11 @@ public class EventContentServiceImpl implements EventContentService {
 
     @Override
     public void updateEventViewCount(EventContentVO eventContentVO) {
-        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
-
-        this.sqlsession.delete("kr.or.fact.core.model.EventContentMapper.updateEventViewCount",eventContentVO);
-
-        dataSourceTransactionManager.commit(status);
+//        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+//        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+//
+//        this.sqlsession.delete("kr.or.fact.core.model.EventContentMapper.updateEventViewCount",eventContentVO);
+//
+//        dataSourceTransactionManager.commit(status);
     }
 }

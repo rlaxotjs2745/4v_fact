@@ -10,9 +10,9 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.Date;
@@ -21,15 +21,18 @@ import java.util.List;
 @Service("visitService")
 public class VisitServiceImpl implements VisitService {
 
+    private final DataSourceTransactionManager dataSourceTransactionManager;
     private final VisitMapper visitMapper;
-    @Autowired
-    public VisitServiceImpl(VisitMapper visitMapper){this.visitMapper = visitMapper;}
 
+    @Autowired
+    public VisitServiceImpl(VisitMapper visitMapper,DataSourceTransactionManager dataSourceTransactionManager){this.visitMapper = visitMapper;
+    this.dataSourceTransactionManager = dataSourceTransactionManager;
+    }
     @Autowired
     private SqlSession sqlsession;
 
-    @Autowired(required = false)
-    private DataSourceTransactionManager dataSourceTransactionManager;
+
+
 
 
     @Override

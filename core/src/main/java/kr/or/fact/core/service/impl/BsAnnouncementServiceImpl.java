@@ -15,13 +15,16 @@ import java.util.List;
 @Service("bsAnnouncementService")
 public class BsAnnouncementServiceImpl implements BsAnnouncementService {
     private final BsAnnouncementMapper bsAnnouncementMapper;
+    private final DataSourceTransactionManager dataSourceTransactionManager;
     @Autowired
-    public BsAnnouncementServiceImpl(BsAnnouncementMapper bsAnnouncementMapper){this.bsAnnouncementMapper = bsAnnouncementMapper;}
+    public BsAnnouncementServiceImpl(BsAnnouncementMapper bsAnnouncementMapper,DataSourceTransactionManager dataSourceTransactionManager){
+        this.bsAnnouncementMapper = bsAnnouncementMapper;
+    this.dataSourceTransactionManager = dataSourceTransactionManager;
+    }
     @Autowired
     private SqlSession sqlsession;
 
-    @Autowired(required = false)
-    private DataSourceTransactionManager dataSourceTransactionManager;
+
     @Override
     public int getMainBsAnnouncementCount(){
         return bsAnnouncementMapper.getMainBsAnnouncementCount();
