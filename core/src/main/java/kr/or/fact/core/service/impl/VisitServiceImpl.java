@@ -15,6 +15,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class VisitServiceImpl implements VisitService {
     @Autowired
     private SqlSession sqlsession;
 
-    @Autowired(required = false)
+    @Resource(name = "transactionManager")
     private DataSourceTransactionManager dataSourceTransactionManager;
 
 

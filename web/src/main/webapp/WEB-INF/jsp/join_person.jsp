@@ -161,10 +161,22 @@
 <script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>
 <script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 <script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
-
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <!-- Initialize Swiper -->
 <script>
+
+    $("#zip_code, #juso_search, #juso_find").click(function() {
+        var nowJuso = $(this).attr("id");
+        new daum.Postcode({
+            oncomplete: function (data) {
+
+                $("#zip_code").val(data.zonecode);
+                $("#juso_find").val(data.roadAddress + " " + data.buildingName);
+                // console.log(data);
+            }
+        }).open();
+    })
 
     $(document).ready(function(){
         $(".search__none").hide();
@@ -179,6 +191,7 @@
             alert("아이디는 이메일형식입니다");
             return;
         }
+
 
         console.log(param);
         $.ajax({
@@ -253,27 +266,6 @@
             }
         });
     });
-
-    var new_popup;
-    $("#juso_search,#zip_code,#juso_find").click(function(){
-        var cw=screen.availWidth;     //화면 넓이
-        var ch=screen.availHeight;    //화면 높이
-        var sw=640;    //띄울 창의 넓이
-        var sh=480;    //띄울 창의 높이
-        var ml=(cw-sw)/2;        //가운데 띄우기위한 창의 x위치
-        var mt=(ch-sh)/2;         //가운데 띄우기위한 창의 y위치
-
-        new_popup = window.open("juso_search?juso_type=join", '주소검색','width='+sw+',height='+sh+',top='+mt+',left='+ml+', resizable=no');
-    });
-    /**
-     * 주소검색 결과 처리
-     */
-    function fn_setJuso(data) {
-        //alert(data["type"]);
-        $("#juso_find").val(data["roadFullAddr"]);
-        $("#zip_code").val(data["zipNo"]);
-        new_popup.close();
-    }
     function CheckEmail(str)
     {
         var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;

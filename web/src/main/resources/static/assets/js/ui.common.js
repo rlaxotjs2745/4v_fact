@@ -154,7 +154,6 @@
 
   $(document).on('mouseenter', '.nav--depth1 > li > a', function (e) {
     e.preventDefault();
-    console.log("d1");
     $(".nav--depth2").hide();
     $(".nav--depth1 > li > a").removeClass("is-active");
     $(this).next(".nav--depth2").show();
@@ -162,19 +161,16 @@
   });
   $(document).on('mouseleave', '.nav--depth2', function (e) {
     e.preventDefault();
-    console.log("d2");
     $(this).hide();
     $(this).prev(".is-active").removeClass("is-active");
   }); //breadcrumbs--box
 
   $(document).on('mouseenter', '.under__depth--anchor', function (e) {
     e.preventDefault();
-    console.log("d3");
     $(this).next().addClass("is-show");
   });
   $(document).on('mouseleave', '.under__depth--list', function (e) {
     e.preventDefault();
-    console.log("d2-2");
     $(this).removeClass("is-show");
   }); //popup tab
 

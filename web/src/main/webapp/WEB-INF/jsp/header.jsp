@@ -39,8 +39,8 @@
                 </li>
                 <li><a href="#" class="">실증단지 소개</a><!--is-selected-->
                     <ul class="nav--depth2">
-                        <li><a href="cnt_goal">비전과 미션</a></li>
                         <%--<li><a href="cnt_history">실증센터 연혁</a></li>--%>
+                        <li><a href="cnt_goal">비전과 미션</a></li>
                         <li><a href="cnt_organize">조직도</a></li>
                         <li><a href="cnt_map">찾아오시는 길</a></li>
                     </ul>
@@ -65,7 +65,6 @@
                     <ul class="nav--depth2">
                         <li><a href="spt_faq">FAQ</a></li>
                         <li><a href="spt_consulting">상담 신청</a></li>
-
                         <li><a href="spt_visit">견학 신청</a></li>
                     </ul>
                 </li>
@@ -169,7 +168,6 @@
                             <ul class="nav__full--depth2">
                                 <li><a href="spt_faq">FAQ</a></li>
                                 <li><a href="spt_consulting">상담 신청</a></li>
-
                                 <li><a href="spt_visit">견학 신청</a></li>
                             </ul>
                         </li>
@@ -197,6 +195,3 @@
             </div>
         </div>
     </header>
-</div>
-</body>
-</html>

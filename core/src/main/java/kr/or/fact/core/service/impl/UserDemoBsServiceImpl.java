@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import javax.annotation.Resource;
 import java.util.List;
 @Service("userDemoBsService")
 public class UserDemoBsServiceImpl implements UserDemoBsService {
@@ -22,7 +23,7 @@ public class UserDemoBsServiceImpl implements UserDemoBsService {
     @Autowired
     private SqlSession sqlsession;
 
-    @Autowired(required = false)
+    @Resource(name = "transactionManager")
     private DataSourceTransactionManager dataSourceTransactionManager;
 
     @Override

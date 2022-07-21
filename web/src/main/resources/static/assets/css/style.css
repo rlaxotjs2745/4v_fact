@@ -7734,7 +7734,8 @@ html {
     height: 100%;
     overflow: scroll;
     overflow-X: hidden;
-    background: url(../image/img_bglogo.jpg) no-repeat 50% 50%;
+    /*background: url(../image/img_bglogo.jpg) no-repeat 50% 50%;*/
+    background: url(../image/img_bglogo.png) no-repeat 50% 50%;
     background-size: cover;
     position: fixed;
     left: 0;

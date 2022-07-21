@@ -536,7 +536,7 @@
     </div>
 </div>
 
-<%@include file ="footer.jsp" %><%@include file ="footer.jsp" %>
+<%@include file ="footer.jsp" %>
 <%@include file ="script.jsp" %>
 <script>
     <c:forEach items="${demoList}" var="demo3" varStatus="status">

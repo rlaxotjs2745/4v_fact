@@ -651,6 +651,7 @@ model.addAttribute("rulefileList",ruleFileInfoList);
     @RequestMapping("/brd_announce")
     public String brd_announce(@RequestParam("page") int page,
                                Model model){
+        System.out.println(page);
         int list_amount = 10;
         int page_amount = 10;
 

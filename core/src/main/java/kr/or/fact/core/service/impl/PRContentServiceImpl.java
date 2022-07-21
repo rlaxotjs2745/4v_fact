@@ -11,17 +11,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service("prContentService")
 public class PRContentServiceImpl implements PRContentsService {
     private final PRContentsMapper prContentsMapper;
     @Autowired
-    public PRContentServiceImpl(PRContentsMapper prContentsMapper){this.prContentsMapper = prContentsMapper;}
+    public PRContentServiceImpl(PRContentsMapper prContentsMapper, DataSourceTransactionManager dataSourceTransactionManager){
+        this.prContentsMapper = prContentsMapper;
+        this.dataSourceTransactionManager = dataSourceTransactionManager;
+    }
+
     @Autowired
     private SqlSession sqlsession;
 
-    @Autowired(required = false)
+    @Resource(name = "transactionManager")
     private DataSourceTransactionManager dataSourceTransactionManager;
 
     @Override

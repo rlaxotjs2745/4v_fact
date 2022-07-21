@@ -269,15 +269,15 @@
         $(".swiper-main-button-play").hide();
     });
     var cookiedata;
-    $(document).ready(function () {
-        $('.popup').show();
-        cookiedata = document.cookie;
-        if ( cookiedata.indexOf("popup_1=done") < 0 ){ //쿠키 변경 여부 불러오기
-            document.all['popup_1'].style.visibility = "visible";
-        } else {
-            document.all['popup_1'].style.display = "none";
-        } PopupBgDisplay();
-    });
+    // $(document).ready(function () {
+    //     $('.popup').show();
+    //     cookiedata = document.cookie;
+    //     if ( cookiedata.indexOf("popup_1=done") < 0 ){ //쿠키 변경 여부 불러오기
+    //         document.all['popup_1'].style.visibility = "visible";
+    //     } else {
+    //         document.all['popup_1'].style.display = "none";
+    //     } PopupBgDisplay();
+    // });
     function PopupNoDisplay_1() {
         setCookie("popup_1", "done", 1); //쿠키값 변경
         PopupHide();

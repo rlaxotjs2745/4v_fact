@@ -16,6 +16,7 @@ import kr.or.fact.core.util.CONSTANT;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private SqlSession sqlsession;
 
-    @Autowired(required = false)
+    @Resource(name = "transactionManager")
     private DataSourceTransactionManager dataSourceTransactionManager;
 
     @Override
