@@ -26,13 +26,13 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
 
 
-    private final DataSourceTransactionManager dataSourceTransactionManager;
+
 
 
     @Autowired
-    public UserServiceImpl(UserMapper userMapper,DataSourceTransactionManager dataSourceTransactionManager){
+    public UserServiceImpl(UserMapper userMapper){
         this.userMapper = userMapper;
-    this.dataSourceTransactionManager = dataSourceTransactionManager;
+
     }
     @Autowired
     private SqlSession sqlsession;
@@ -150,11 +150,12 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public void updateUserSecretCode(UserSecretCodeVO userSecretCodeVO){
-
-        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
-        this.sqlsession.update("kr.or.fact.core.model.UserMapper.updateUserSecretCode",userSecretCodeVO);
-        dataSourceTransactionManager.commit(status);
+        userMapper.updateUserSecretCode(userSecretCodeVO);
+//
+//        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+//        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+//        this.sqlsession.update("kr.or.fact.core.model.UserMapper.updateUserSecretCode",userSecretCodeVO);
+//        dataSourceTransactionManager.commit(status);
     }
 
     @Override
@@ -169,10 +170,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUserInfo(UserVO userVO){
-        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
-        this.sqlsession.update("kr.or.fact.core.model.UserMapper.updateUserInfo",userVO);
-        dataSourceTransactionManager.commit(status);
+//        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+//        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+//        this.sqlsession.update("kr.or.fact.core.model.UserMapper.updateUserInfo",userVO);
+//        dataSourceTransactionManager.commit(status);
+        userMapper.updateUserInfo(userVO);
     }
 
     @Override

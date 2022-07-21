@@ -139,22 +139,13 @@
                             <div class="form-group col col-md-12" id="notice_contents_view">
                                 <label class="form-label d-block text-muted">컨텐츠</label>
                                 <span>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                          Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
-                          Accusantium consequuntur dignissimos iusto magnam provident, ratione reiciendis
-                          repellat. Aut, doloribus, enim.
                         </span>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col col-md-12" id="subject_view">
                                 <label class="form-label d-block text-muted">내용</label>
-                                <span>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                          Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
-                          Accusantium consequuntur dignissimos iusto magnam provident, ratione reiciendis
-                          repellat. Aut, doloribus, enim.
-                        </span>
+                                <span></span>
                             </div>
                         </div>
                         <hr class="mt-0">
@@ -225,10 +216,6 @@
                             <div class="form-group col col-md-12" id="notice_contents_modify">
                                 <label class="form-label d-block text-muted">내용</label>
                                 <span>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                          Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
-                          Accusantium consequuntur dignissimos iusto magnam provident, ratione reiciendis
-                          repellat. Aut, doloribus, enim.
                         </span>
                             </div>
                         </div>
@@ -236,10 +223,6 @@
                             <div class="form-group col col-md-12" id="subject_modify">
                                 <label class="form-label d-block text-muted">내용</label>
                                 <span>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                          Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
-                          Accusantium consequuntur dignissimos iusto magnam provident, ratione reiciendis
-                          repellat. Aut, doloribus, enim.
                         </span>
                             </div>
                         </div>
@@ -255,6 +238,10 @@
                 </form>
             </div>
         </div>
+
+
+
+
         <div class="modal fade" id="modals-counsel-history">
             <div class="modal-dialog modal-lg">
                 <form class="modal-content">
@@ -470,10 +457,7 @@
                                             <div class="form-group col col-md-12">
                                                 <label class="form-label d-block text-muted">방문상담</label>
                                                 <span>
-                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                  Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
-                                  Accusantium consequuntur dignissimos iusto magnam provident, ratione reiciendis
-                                  repellat. Aut, doloribus, enim.
+
                                 </span>
                                             </div>
                                         </div>
@@ -495,6 +479,9 @@
                 </form>
             </div>
         </div>
+
+
+
 
     </div>
 <!-- new demo bs-->

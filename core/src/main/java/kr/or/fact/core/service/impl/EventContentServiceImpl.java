@@ -9,19 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.List;
 
 @Service("eventContentService")
 public class EventContentServiceImpl implements EventContentService {
-    private final DataSourceTransactionManager dataSourceTransactionManager;
+
     private final EventContentMapper eventContentMapper;
     @Autowired
-    public EventContentServiceImpl(EventContentMapper eventContentMapper,DataSourceTransactionManager dataSourceTransactionManager
-    ){
+    public EventContentServiceImpl(EventContentMapper eventContentMapper ){
         this.eventContentMapper = eventContentMapper;
-    this.dataSourceTransactionManager = dataSourceTransactionManager;}
+    }
     @Autowired
     private SqlSession sqlsession;
 
@@ -90,6 +91,7 @@ public class EventContentServiceImpl implements EventContentService {
     }
 
     @Override
+    @Transactional(propagation= Propagation.REQUIRED)
     public void updateEventViewCount(EventContentVO eventContentVO) {
 //        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 //        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
@@ -97,5 +99,6 @@ public class EventContentServiceImpl implements EventContentService {
 //        this.sqlsession.delete("kr.or.fact.core.model.EventContentMapper.updateEventViewCount",eventContentVO);
 //
 //        dataSourceTransactionManager.commit(status);
+        eventContentMapper.updateEventViewCount(eventContentVO);
     }
 }

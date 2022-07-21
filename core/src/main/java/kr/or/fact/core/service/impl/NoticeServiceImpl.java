@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
@@ -15,13 +16,13 @@ import java.util.List;
 
 @Service("noticeService")
 public class NoticeServiceImpl implements NoticeService {
-    private final DataSourceTransactionManager dataSourceTransactionManager;
+
     private final NoticeMapper noticeMapper;
 
     @Autowired
-    public NoticeServiceImpl(NoticeMapper noticeMapper,DataSourceTransactionManager dataSourceTransactionManager){
+    public NoticeServiceImpl(NoticeMapper noticeMapper){
         this.noticeMapper = noticeMapper;
-    this.dataSourceTransactionManager = dataSourceTransactionManager;
+
     }
     @Autowired
     private SqlSession sqlsession;
@@ -89,14 +90,16 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
+    @Transactional(propagation= Propagation.REQUIRED)
     public void updateNoticeViewCount(NoticeVO noticeVO) {
-
-        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
-
-        this.sqlsession.delete("kr.or.fact.core.model.NoticeMapper.updateNoticeViewCount",noticeVO);
-
-        dataSourceTransactionManager.commit(status);
+//
+//        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+//        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+//
+//        this.sqlsession.delete("kr.or.fact.core.model.NoticeMapper.updateNoticeViewCount",noticeVO);
+//
+//        dataSourceTransactionManager.commit(status);
+         noticeMapper.updateNoticeViewCount(noticeVO);
     }
 
 }

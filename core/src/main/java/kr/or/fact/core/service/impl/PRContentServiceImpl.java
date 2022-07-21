@@ -16,12 +16,11 @@ import java.util.List;
 @Service("prContentService")
 public class PRContentServiceImpl implements PRContentsService {
     private final PRContentsMapper prContentsMapper;
-    private final DataSourceTransactionManager dataSourceTransactionManager;
+
     @Autowired
-    public PRContentServiceImpl(PRContentsMapper prContentsMapper,DataSourceTransactionManager dataSourceTransactionManager){
+    public PRContentServiceImpl(PRContentsMapper prContentsMapper){
 
         this.prContentsMapper = prContentsMapper;
-    this.dataSourceTransactionManager = dataSourceTransactionManager;
     }
     @Autowired
     private SqlSession sqlsession;
@@ -63,12 +62,13 @@ public class PRContentServiceImpl implements PRContentsService {
 
     @Override
     public void updatePrViewCount(PRContentVO prContentVO) {
-        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
-
-        this.sqlsession.delete("kr.or.fact.core.model.PRContentsMapper.updatePrViewCount",prContentVO);
-
-        dataSourceTransactionManager.commit(status);
+//        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+//        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+//
+//        this.sqlsession.delete("kr.or.fact.core.model.PRContentsMapper.updatePrViewCount",prContentVO);
+//
+//        dataSourceTransactionManager.commit(status);
+        prContentsMapper.updatePrViewCount(prContentVO);
     }
 
 

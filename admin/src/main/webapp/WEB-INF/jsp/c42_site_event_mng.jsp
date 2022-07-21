@@ -233,10 +233,7 @@
                             <div class="form-group col col-md-12" id="memo">
                                 <label class="form-label d-block text-muted">내용</label>
                                 <span>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                          Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
-                          Accusantium consequuntur dignissimos iusto magnam provident, ratione reiciendis
-                          repellat. Aut, doloribus, enim.
+
                         </span>
                             </div>
                         </div>
