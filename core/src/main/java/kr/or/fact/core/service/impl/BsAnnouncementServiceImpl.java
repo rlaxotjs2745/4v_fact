@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.List;
@@ -15,14 +17,14 @@ import java.util.List;
 @Service("bsAnnouncementService")
 public class BsAnnouncementServiceImpl implements BsAnnouncementService {
     private final BsAnnouncementMapper bsAnnouncementMapper;
-    private final DataSourceTransactionManager dataSourceTransactionManager;
     @Autowired
-    public BsAnnouncementServiceImpl(BsAnnouncementMapper bsAnnouncementMapper,DataSourceTransactionManager dataSourceTransactionManager){
-        this.bsAnnouncementMapper = bsAnnouncementMapper;
-    this.dataSourceTransactionManager = dataSourceTransactionManager;
-    }
-    @Autowired
-    private SqlSession sqlsession;
+    public BsAnnouncementServiceImpl(BsAnnouncementMapper bsAnnouncementMapper){this.bsAnnouncementMapper = bsAnnouncementMapper;}
+
+    //@Autowired
+    //private SqlSession sqlsession;
+
+    //@Autowired
+    //private DataSourceTransactionManager dataSourceTransactionManager;
 
 
     @Override
@@ -84,13 +86,16 @@ public class BsAnnouncementServiceImpl implements BsAnnouncementService {
     }
 
     @Override
+    @Transactional(propagation= Propagation.REQUIRED)
     public void updateBsAnnounceViewCount(BsAnnouncementVO bsAnnouncementVO) {
-        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
 
-        this.sqlsession.delete("kr.or.fact.core.model.BsAnnouncementMapper.updateBsAnnounceViewCount",bsAnnouncementVO);
+        //DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        //TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
 
-        dataSourceTransactionManager.commit(status);
+        //this.sqlsession.delete("kr.or.fact.core.model.BsAnnouncementMapper.updateBsAnnounceViewCount",bsAnnouncementVO);
+
+        //dataSourceTransactionManager.commit(status);
+        bsAnnouncementMapper.updateBsAnnounceViewCount(bsAnnouncementVO);
 
     }
 
