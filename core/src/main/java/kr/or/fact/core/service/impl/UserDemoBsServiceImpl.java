@@ -7,24 +7,30 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-import javax.annotation.Resource;
 import java.util.List;
 @Service("userDemoBsService")
 public class UserDemoBsServiceImpl implements UserDemoBsService {
 
-    private final UserDemoBsMapper userDemoBsMapper;
-    @Autowired
-    public UserDemoBsServiceImpl(UserDemoBsMapper userDemoBsMapper){this.userDemoBsMapper = userDemoBsMapper;}
 
+    private final UserDemoBsMapper userDemoBsMapper;
+
+    @Autowired
+    public UserDemoBsServiceImpl(UserDemoBsMapper userDemoBsMapper){
+        this.userDemoBsMapper = userDemoBsMapper;
+
+    }
     @Autowired
     private SqlSession sqlsession;
 
-    @Resource(name = "transactionManager")
-    private DataSourceTransactionManager dataSourceTransactionManager;
+
+
 
     @Override
     public List<ApplicantDemoBsJoinVO> getUserDemoBsFromJoin(long idx_user){
@@ -89,13 +95,14 @@ public class UserDemoBsServiceImpl implements UserDemoBsService {
         userDemoBsMapper.saveUserDemoBsHumanResource(userBsHumanResourceVO);
     }
     @Override
+    @Transactional(propagation= Propagation.REQUIRED)
     public void deleteUserDemoBsHumanResource(long idx_user_demo_bs){
-
-        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
-        this.sqlsession.delete("kr.or.fact.core.model.UserDemoBsMapper.deleteUserDemoBsHumanResource",idx_user_demo_bs);
-        //userDemoBsMapper.getUserDemoBsHumanResourceList(idx_user_demo_bs);
-        dataSourceTransactionManager.commit(status);
+userDemoBsMapper.deleteUserDemoBsHumanResource(idx_user_demo_bs);
+//        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+//        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+//        this.sqlsession.delete("kr.or.fact.core.model.UserDemoBsMapper.deleteUserDemoBsHumanResource",idx_user_demo_bs);
+//        //userDemoBsMapper.getUserDemoBsHumanResourceList(idx_user_demo_bs);
+//        dataSourceTransactionManager.commit(status);
     }
 
     @Override

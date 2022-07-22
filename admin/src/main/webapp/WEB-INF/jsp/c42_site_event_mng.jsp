@@ -176,7 +176,7 @@
 
                         <div class="form-row">
                             <div class="form-group col col-md-12 text-right">
-                                <a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modals-counsel-history"></a>
+                                <a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modals-counsel-view-update">행사 내용 수정</a>
                             </div>
                         </div>
                         <hr class="mt-0">
@@ -233,10 +233,7 @@
                             <div class="form-group col col-md-12" id="memo">
                                 <label class="form-label d-block text-muted">내용</label>
                                 <span>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                          Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
-                          Accusantium consequuntur dignissimos iusto magnam provident, ratione reiciendis
-                          repellat. Aut, doloribus, enim.
+
                         </span>
                             </div>
                         </div>
@@ -504,6 +501,166 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="modals-counsel-view-update">
+<div class="modal-dialog modal-xl">
+    <div class="modal-content">
+        <div class="modal-header bg-success">
+            <h5 class="modal-title text-white font-weight-bold mode-new">행사 내용 수정</h5>
+            <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <!-- 사업번호 / 사업 상태-->
+
+                <!-- 사업 제목-->
+                <div class="form-group row" >
+                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">행사 제목</label>
+                    <div class="col-md-10">
+                        <input type="text" id="subject_update" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요">
+                        <div class="form-control-plaintext mode-view"></div>
+                    </div>
+                </div>
+
+                <hr>
+                <div class="form-row" >
+                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">내용</label>
+                    <div class="form-group col col-md-10">
+                        <textarea class="form-control mode-edit mode-new" rows="3"  id="event_content_code_update"></textarea>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-row" >
+                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">컨텐츠</label>
+                    <div class="form-group col col-md-10" >
+                        <textarea class="summernote" rows="3" id="event_content_update"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row" id="time_update">
+                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">게시 기간</label>
+                    <div class="col-md-10">
+                        <div id="datepicker-open_update" class="input-daterange input-group mode-edit mode-new">
+                            <input type="text" class="form-control" name="posting_start_date" id="event_start_date_update">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">~</span>
+                            </div>
+                            <input type="text" class="form-control" name="posting_end_date" id="event_end_date_update">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row" id="admin_name_update">
+                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">등록자</label>
+                    <div class="col-md-4 mode-edit mode-new">
+                        <span class="px-1 mr-lg-2 ml-2 ml-lg-0">${admin.admin_name}</span>
+
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col col-md-12" id="is_file_update">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">파일여부</label>
+                        <label class="custom-control custom-radio d-inline-block">
+                            <input name="custom-6" type="radio" class="custom-control-input"  value="0">
+                            <span class="custom-control-label">포함안함</span>
+                        </label>
+                        <label class="custom-control custom-radio d-inline-block">
+                            <input name="custom-6" type="radio" class="custom-control-input" value="1">
+                            <span class="custom-control-label">포함</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col col-md-12" id="is_new_update">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">신규 등록여부</label>
+                        <label class="custom-control custom-radio d-inline-block">
+                            <input name="custom-7" type="radio" class="custom-control-input"  value="0">
+                            <span class="custom-control-label">신규아님</span>
+                        </label>
+                        <label class="custom-control custom-radio d-inline-block">
+                            <input name="custom-7" type="radio" class="custom-control-input" value="1">
+                            <span class="custom-control-label">신규</span>
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="form-group col col-md-12" id="is_main_page_update">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메인페이지 노출여부</label>
+                        <label class="custom-control custom-radio d-inline-block">
+                            <input name="custom-8" type="radio" class="custom-control-input"  value="0">
+                            <span class="custom-control-label">노출안함</span>
+                        </label>
+                        <label class="custom-control custom-radio d-inline-block">
+                            <input name="custom-8" type="radio" class="custom-control-input" value="1">
+                            <span class="custom-control-label">노출</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col col-md-12" id="event_content_status_update">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">행사안내 프로세스 상태</label>
+                        <label class="custom-control custom-radio d-inline-block">
+                            <input name="custom-9" type="radio" class="custom-control-input"  value="0">
+                            <span class="custom-control-label">임시저장</span>
+                        </label>
+                        <label class="custom-control custom-radio d-inline-block">
+                            <input name="custom-9" type="radio" class="custom-control-input" value="1">
+                            <span class="custom-control-label">허락</span>
+                        </label>
+                        <label class="custom-control custom-radio d-inline-block">
+                            <input name="custom-9" type="radio" class="custom-control-input" value="2">
+                            <span class="custom-control-label">수정발행</span>
+                        </label>
+                        <label class="custom-control custom-radio d-inline-block">
+                            <input name="custom-9" type="radio" class="custom-control-input" value="3">
+                            <span class="custom-control-label">게시종료</span>
+                        </label>
+                        <label class="custom-control custom-radio d-inline-block">
+                            <input name="custom-9" type="radio" class="custom-control-input" value="99">
+                            <span class="custom-control-label">기타</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" for="file_upload">파일 첨부</label>
+                    <div class="form-group col col-md-10 mode-edit mode-new">
+                        <input type="file" class="form-control-file d-block py-1" id="file_upload_update" name="file_upload" multiple>
+                    </div>
+                    <div class="form-group col col-md-10 col-form-label mode-view">
+                        <a href="file.doc"></a>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between mode-new">
+                    <div>
+                        <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-outline-primary mr-2">임시저장</button>
+                        <button id="btn_save_new_update" type="button" class="btn btn-primary" onclick="event_pass();">작성완료</button>
+                    </div>
+                </div>
+
+                <div class="modal-footer justify-content-between mode-edit d-none">
+                    <div>
+                        <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary">저장</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+
+
+
 <script>
 var curEventdata;
 var eventContentList = [];
@@ -550,47 +707,49 @@ $(".eventcontent_entity").click(function(){
 })
 
 
-// function event_pass() {
-// // let result = document.getElementsByName('custom-6');
-//     var selectId = $(this).attr('id');
-//     param ={
-//         event_content_code:$("#event_content_code_insert input").val(),
-//         subject:$("#subject_insert textarea").val(),
-//         event_content:$('#event_content_insert textarea').val(),
-//         event_start_date:$('#event_start_date_insert').val(),
-//         event_end_date:$("#event_end_date_insert").val(),
-//         is_file:$("input:radio[name=custom-6]:checked").val(),
-//         is_new:$("input:radio[name=custom-7]:checked").val(),
-//         is_main_page:$("input:radio[name=custom-8]:checked").val(),
-//         event_content_status:$("input:radio[name=custom-9]:checked").val()
-//     }
-//
-//     $.ajax({
-//         type: 'post',
-//         url: '/insert_event', //데이터를 주고받을 파일 주소 입력
-//         data: JSON.stringify(param),//보내는 데이터
-//         contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
-//         dataType: 'json',//받는 데이터 타입
-//         success: function (result) {
-//             if (result.result_code === "SUCCESS") {
-//                 alert("상태 변경에 성공하였습니다")
-//             } else {
-//                 alert("상태 변경에 실패하였습니다")
-//             }
-//
-//         },
-//         error: function (res) {
-//             console.log(res)
-//         }
-//     });
-// }
+function event_pass() {
+// let result = document.getElementsByName('custom-6');
+    var selectId = $(this).attr('id');
+    param ={
+        idx_event_content:parseInt(curEventdata),
+        event_content_code:$("#event_content_code_update").val(),
+        subject:$("#subject_update").val(),
+        event_contents:$("#event_content_update").val(),
+
+        event_start_date:$('#event_start_date_update').val(),
+        event_end_date:$("#event_end_date_update").val(),
+        is_file:$("input:radio[name=custom-6]:checked").val(),
+        is_new:$("input:radio[name=custom-7]:checked").val(),
+        is_main_page:$("input:radio[name=custom-8]:checked").val(),
+        event_content_status:$("input:radio[name=custom-9]:checked").val()
+    }
+    console.log(param);
+    $.ajax({
+        type: 'post',
+        url: 'update_event', //데이터를 주고받을 파일 주소 입력
+        data: JSON.stringify(param),//보내는 데이터
+        contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+        dataType: 'json',//받는 데이터 타입
+        success: function (result) {
+            if (result.result_code === "SUCCESS") {
+                alert("상태 변경에 성공하였습니다")
+            } else {
+                alert("상태 변경에 실패하였습니다")
+            }
+
+        },
+        error: function (res) {
+            console.log(res)
+        }
+    });
+}
 
 
 
 $(function() {
     var isRtl = $('html').attr('dir') === 'rtl';
 
-    $('#datepicker-show,#datepicker-open').datepicker({
+    $('#datepicker-show,#datepicker-open,#datepicker-open_update').datepicker({
         orientation: isRtl ? 'auto right' : 'auto left',
         format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
         startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)

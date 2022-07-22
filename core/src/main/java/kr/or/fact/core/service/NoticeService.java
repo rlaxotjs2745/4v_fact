@@ -17,5 +17,6 @@ public interface NoticeService {
     NoticeVO getNoticeIsFile(int idx_notice);
     int getNoticeViewCount(int idx_notice);
     void updateNoticeViewCount(NoticeVO noticeVO);
+    void updateNotice(NoticeVO noticeVO);
 
 }

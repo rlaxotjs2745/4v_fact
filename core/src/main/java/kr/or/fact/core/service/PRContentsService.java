@@ -22,5 +22,6 @@ int insertPRContentFileJoin();
 
     int getPrViewCount(int idx_pr_content);
     void updatePrViewCount(PRContentVO prContentVO);
+    void updatePrContent(PRContentVO prContentVO);
 
 }

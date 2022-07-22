@@ -9,21 +9,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Service("eventContentService")
 public class EventContentServiceImpl implements EventContentService {
+
     private final EventContentMapper eventContentMapper;
     @Autowired
-    public EventContentServiceImpl(EventContentMapper eventContentMapper){this.eventContentMapper = eventContentMapper;}
+    public EventContentServiceImpl(EventContentMapper eventContentMapper ){
+        this.eventContentMapper = eventContentMapper;
+    }
     @Autowired
     private SqlSession sqlsession;
 
-    @Resource(name = "transactionManager")
-    private DataSourceTransactionManager dataSourceTransactionManager;
+
+
     @Override
     public int getMainEventContentCount(){
         return eventContentMapper.getMainEventContentCount();
@@ -87,12 +91,19 @@ public class EventContentServiceImpl implements EventContentService {
     }
 
     @Override
+    @Transactional(propagation= Propagation.REQUIRED)
     public void updateEventViewCount(EventContentVO eventContentVO) {
-        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+//        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+//        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+//
+//        this.sqlsession.delete("kr.or.fact.core.model.EventContentMapper.updateEventViewCount",eventContentVO);
+//
+//        dataSourceTransactionManager.commit(status);
+        eventContentMapper.updateEventViewCount(eventContentVO);
+    }
 
-        this.sqlsession.delete("kr.or.fact.core.model.EventContentMapper.updateEventViewCount",eventContentVO);
-
-        dataSourceTransactionManager.commit(status);
+    @Override
+    public void updateEventContent(EventContentVO eventContentVO) {
+        eventContentMapper.updateEventContent(eventContentVO);
     }
 }

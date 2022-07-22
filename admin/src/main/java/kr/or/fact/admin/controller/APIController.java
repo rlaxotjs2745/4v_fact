@@ -1067,7 +1067,9 @@ public class APIController {
 
             int fileLength = Integer.parseInt(noticeVO.getFileLength());
             File[] files = new File[5];
-
+        if(fileLength==0){
+            noticeService.insertNotice(noticeVO);
+        }else {
             if (fileLength > 0) {
                 files[0] = fileService.convertMultipartToFile(noticeVO.getFiles1());
                 if (fileLength >= 2) {
@@ -1084,6 +1086,7 @@ public class APIController {
                     }
                 }
             }
+        }
             MultipartFile file = noticeVO.getFiles1();
             String fileName = fileService.storeFileInfo(noticeVO.getFiles1());
             String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -1110,23 +1113,26 @@ public class APIController {
     public @ResponseBody
     ResultVO insertEventContent (@ModelAttribute EventContentVO eventContentVO, HttpSession session, HttpServletRequest request)throws Exception, IOException{
         ResultVO resultVO = new ResultVO();
-        resultVO.setResult_code("ERROR_1000");
-        resultVO.setResult_str("업데이트 실패");
+
+
         try {
             int fileLength = Integer.parseInt(eventContentVO.getFileLength());
             File[] files = new File[5];
+            if(fileLength==0){
+                eventContentService.insertEventContent(eventContentVO);
+            }else {
+                if (fileLength > 0) {
+                    files[0] = fileService.convertMultipartToFile(eventContentVO.getFiles1());
+                    if (fileLength >= 2) {
+                        files[1] = fileService.convertMultipartToFile(eventContentVO.getFiles2());
+                        if (fileLength >= 3) {
+                            files[2] = fileService.convertMultipartToFile(eventContentVO.getFiles3());
+                            if (fileLength >= 4) {
+                                files[3] = fileService.convertMultipartToFile(eventContentVO.getFiles4());
+                                if (fileLength == 5) {
+                                    files[4] = fileService.convertMultipartToFile(eventContentVO.getFiles5());
 
-            if (fileLength > 0) {
-                files[0] = fileService.convertMultipartToFile(eventContentVO.getFiles1());
-                if (fileLength >= 2) {
-                    files[1] = fileService.convertMultipartToFile(eventContentVO.getFiles2());
-                    if (fileLength >= 3) {
-                        files[2] = fileService.convertMultipartToFile(eventContentVO.getFiles3());
-                        if (fileLength >= 4) {
-                            files[3] = fileService.convertMultipartToFile(eventContentVO.getFiles4());
-                            if (fileLength == 5) {
-                                files[4] = fileService.convertMultipartToFile(eventContentVO.getFiles5());
-
+                                }
                             }
                         }
                     }
@@ -1162,23 +1168,26 @@ public class APIController {
     public @ResponseBody
     ResultVO insertPRContent (@ModelAttribute PRContentVO prcontensVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
         ResultVO resultVO = new ResultVO();
-        resultVO.setResult_code("ERROR_1000");
-        resultVO.setResult_str("업데이트 실패");
+
         try {
             int fileLength = Integer.parseInt(prcontensVO.getFileLength());
             File[] files = new File[5];
+            if(fileLength==0){
+               prContentService.insertPRContent(prcontensVO);
+            }else {
 
-            if (fileLength > 0) {
-                files[0] = fileService.convertMultipartToFile(prcontensVO.getFiles1());
-                if (fileLength >= 2) {
-                    files[1] = fileService.convertMultipartToFile(prcontensVO.getFiles2());
-                    if (fileLength >= 3) {
-                        files[2] = fileService.convertMultipartToFile(prcontensVO.getFiles3());
-                        if (fileLength >= 4) {
-                            files[3] = fileService.convertMultipartToFile(prcontensVO.getFiles4());
-                            if (fileLength == 5) {
-                                files[4] = fileService.convertMultipartToFile(prcontensVO.getFiles5());
+                if (fileLength > 0) {
+                    files[0] = fileService.convertMultipartToFile(prcontensVO.getFiles1());
+                    if (fileLength >= 2) {
+                        files[1] = fileService.convertMultipartToFile(prcontensVO.getFiles2());
+                        if (fileLength >= 3) {
+                            files[2] = fileService.convertMultipartToFile(prcontensVO.getFiles3());
+                            if (fileLength >= 4) {
+                                files[3] = fileService.convertMultipartToFile(prcontensVO.getFiles4());
+                                if (fileLength == 5) {
+                                    files[4] = fileService.convertMultipartToFile(prcontensVO.getFiles5());
 
+                                }
                             }
                         }
                     }
@@ -1322,5 +1331,70 @@ public class APIController {
 
         return resultVO;
     }
+
+
+    @RequestMapping(value="/update_notice",method = RequestMethod.POST)
+    @ResponseBody
+    ResultVO updateNotice(@RequestBody NoticeVO noticeVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("업데이트 실패");
+        try {
+
+            noticeService.updateNotice(noticeVO);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("업데이트가 완료되었습니다.");
+            System.out.println(noticeVO);
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("없는 상담일지입니다.");
+        }
+        System.out.println(resultVO);
+        return resultVO;
+    }
+
+    @RequestMapping(value="/update_event",method = RequestMethod.POST)
+    @ResponseBody
+    ResultVO updateEventContent(@RequestBody EventContentVO eventContentVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("업데이트 실패");
+        try {
+            eventContentService.updateEventContent(eventContentVO);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("업데이트가 완료되었습니다.");
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("없는 상담일지입니다.");
+        }
+
+        return resultVO;
+    }
+
+
+    @RequestMapping(value="/update_pr",method = RequestMethod.POST)
+    @ResponseBody
+    ResultVO updatePrContent(@RequestBody PRContentVO prContentVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("업데이트 실패");
+
+        try {
+            prContentService.updatePrContent(prContentVO);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("업데이트가 완료되었습니다.");
+            System.out.println("여기");
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("없는 상담일지입니다.");
+        }
+
+        return resultVO;
+    }
+
+
 }
 

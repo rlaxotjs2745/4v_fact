@@ -7,25 +7,28 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Service("noticeService")
 public class NoticeServiceImpl implements NoticeService {
-    private final NoticeMapper noticeMapper;
-    @Autowired
-    public NoticeServiceImpl(NoticeMapper noticeMapper){this.noticeMapper = noticeMapper;}
 
+    private final NoticeMapper noticeMapper;
+
+    @Autowired
+    public NoticeServiceImpl(NoticeMapper noticeMapper){
+        this.noticeMapper = noticeMapper;
+
+    }
     @Autowired
     private SqlSession sqlsession;
 
-    @Resource(name = "transactionManager")
-    private DataSourceTransactionManager dataSourceTransactionManager;
+
+
 
     @Override
     public int getMainNoticeCount(){
@@ -87,15 +90,21 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
+    @Transactional(propagation= Propagation.REQUIRED)
     public void updateNoticeViewCount(NoticeVO noticeVO) {
+//
+//        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+//        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+//
+//        this.sqlsession.delete("kr.or.fact.core.model.NoticeMapper.updateNoticeViewCount",noticeVO);
+//
+//        dataSourceTransactionManager.commit(status);
+         noticeMapper.updateNoticeViewCount(noticeVO);
+    }
 
-        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-        def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
-        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
-
-        this.sqlsession.delete("kr.or.fact.core.model.NoticeMapper.updateNoticeViewCount",noticeVO);
-
-        dataSourceTransactionManager.commit(status);
+    @Override
+    public void updateNotice(NoticeVO noticeVO) {
+        noticeMapper.updateNotice(noticeVO);
     }
 
 }

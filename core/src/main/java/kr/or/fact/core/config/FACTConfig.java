@@ -11,4 +11,5 @@ public class FACTConfig {
     private String uploadDir;
     private String searchSeverUrl;
 
+
 }

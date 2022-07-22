@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,6 @@ import kr.or.fact.core.util.CONSTANT;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
@@ -27,14 +27,17 @@ public class UserServiceImpl implements UserService {
 
 
 
-    @Autowired
-    public UserServiceImpl(UserMapper userMapper){this.userMapper = userMapper;}
 
+
+    @Autowired
+    public UserServiceImpl(UserMapper userMapper){
+        this.userMapper = userMapper;
+
+    }
     @Autowired
     private SqlSession sqlsession;
 
-    @Resource(name = "transactionManager")
-    private DataSourceTransactionManager dataSourceTransactionManager;
+
 
     @Override
     public UserVO getAuthUser(String user_id, String user_pw){
@@ -147,11 +150,12 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public void updateUserSecretCode(UserSecretCodeVO userSecretCodeVO){
-
-        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
-        this.sqlsession.update("kr.or.fact.core.model.UserMapper.updateUserSecretCode",userSecretCodeVO);
-        dataSourceTransactionManager.commit(status);
+        userMapper.updateUserSecretCode(userSecretCodeVO);
+//
+//        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+//        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+//        this.sqlsession.update("kr.or.fact.core.model.UserMapper.updateUserSecretCode",userSecretCodeVO);
+//        dataSourceTransactionManager.commit(status);
     }
 
     @Override
@@ -166,10 +170,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUserInfo(UserVO userVO){
-        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
-        this.sqlsession.update("kr.or.fact.core.model.UserMapper.updateUserInfo",userVO);
-        dataSourceTransactionManager.commit(status);
+//        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+//        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+//        this.sqlsession.update("kr.or.fact.core.model.UserMapper.updateUserInfo",userVO);
+//        dataSourceTransactionManager.commit(status);
+        userMapper.updateUserInfo(userVO);
     }
 
     @Override

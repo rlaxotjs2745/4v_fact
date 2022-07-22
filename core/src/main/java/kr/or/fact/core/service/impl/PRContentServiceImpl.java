@@ -11,23 +11,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Service("prContentService")
 public class PRContentServiceImpl implements PRContentsService {
     private final PRContentsMapper prContentsMapper;
-    @Autowired
-    public PRContentServiceImpl(PRContentsMapper prContentsMapper, DataSourceTransactionManager dataSourceTransactionManager){
-        this.prContentsMapper = prContentsMapper;
-        this.dataSourceTransactionManager = dataSourceTransactionManager;
-    }
 
+    @Autowired
+    public PRContentServiceImpl(PRContentsMapper prContentsMapper){
+
+        this.prContentsMapper = prContentsMapper;
+    }
     @Autowired
     private SqlSession sqlsession;
 
-    @Resource(name = "transactionManager")
-    private DataSourceTransactionManager dataSourceTransactionManager;
+
+
 
     @Override
     public int getMainPRContentCount(){
@@ -63,12 +62,18 @@ public class PRContentServiceImpl implements PRContentsService {
 
     @Override
     public void updatePrViewCount(PRContentVO prContentVO) {
-        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+//        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+//        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+//
+//        this.sqlsession.delete("kr.or.fact.core.model.PRContentsMapper.updatePrViewCount",prContentVO);
+//
+//        dataSourceTransactionManager.commit(status);
+        prContentsMapper.updatePrViewCount(prContentVO);
+    }
 
-        this.sqlsession.delete("kr.or.fact.core.model.PRContentsMapper.updatePrViewCount",prContentVO);
-
-        dataSourceTransactionManager.commit(status);
+    @Override
+    public void updatePrContent(PRContentVO prContentVO) {
+prContentsMapper.updatePrContent(prContentVO);
     }
 
 

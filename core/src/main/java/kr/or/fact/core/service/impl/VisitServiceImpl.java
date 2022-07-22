@@ -10,27 +10,31 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
 @Service("visitService")
 public class VisitServiceImpl implements VisitService {
 
-    private final VisitMapper visitMapper;
-    @Autowired
-    public VisitServiceImpl(VisitMapper visitMapper){this.visitMapper = visitMapper;}
 
+    private final VisitMapper visitMapper;
+
+    @Autowired
+    public VisitServiceImpl(VisitMapper visitMapper){this.visitMapper = visitMapper;
+
+    }
     @Autowired
     private SqlSession sqlsession;
+    @Autowired(required = false)
+    public DataSourceTransactionManager dataSourceTransactionManager;
 
-    @Resource(name = "transactionManager")
-    private DataSourceTransactionManager dataSourceTransactionManager;
+
+
 
 
     @Override
@@ -161,12 +165,13 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public void deleteVisitReq(long idx_visit_req){
-        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
-
-        this.sqlsession.delete("kr.or.fact.core.model.VisitMapper.deleteVisitReq",idx_visit_req);
-
-        dataSourceTransactionManager.commit(status);
+//        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+//        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+//
+//        this.sqlsession.delete("kr.or.fact.core.model.VisitMapper.deleteVisitReq",idx_visit_req);
+//
+//        dataSourceTransactionManager.commit(status);
+        visitMapper.deleteVisitReq(idx_visit_req);
     }
 
     @Override
