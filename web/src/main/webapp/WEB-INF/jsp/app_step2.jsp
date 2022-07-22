@@ -139,13 +139,13 @@
                             <th class="th__left">신청기업명</th>
                             <td class="td__left" colspan="2"><input id="corp_name" type="text" placeholder="사업자 등록증과 동일하게 입력" value="${userDemoBs.corp_name}"></td>
                             <th class="th__left">법인등록번호</th>
-                            <td class="td__left" colspan="2"><input id="corp_reg_num" type="text" placeholder="1234567-123456789" value="${userDemoBs.corp_reg_num}"></td>
+                            <td class="td__left" colspan="2"><input id="corp_reg_num" type="text" placeholder="ex)1234567-123456789" value="${userDemoBs.corp_reg_num}"></td>
                         </tr>
                         <tr>
                             <th class="th__left">사업자등록번호</th>
-                            <td class="td__left" colspan="2"><input id="corp_num" type="text" placeholder="123-12-1234567" value="${userDemoBs.corp_num}"></td>
+                            <td class="td__left" colspan="2"><input id="corp_num" type="text" placeholder="ex)123-12-1234567" value="${userDemoBs.corp_num}"></td>
                             <th class="th__left">설립일</th>
-                            <td class="td__left" colspan="2"><input id="corp_birth" type="text" placeholder="2000-05-01" value="${userDemoBs.corp_birth}"></td>
+                            <td class="td__left" colspan="2"><input id="corp_birth" class="date_picker" type="text" placeholder="ex)2000.xx.xx" value="${userDemoBs.corp_birth}"></td>
                         </tr>
                         <tr>
                             <th class="th__left" rowspan="2">본사</th>
@@ -158,7 +158,7 @@
                         </tr>
                         <tr>
                             <th class="th__left">연락처 </th>
-                            <td class="td__left"><input id="corp_phone" type="text" value="${userDemoBs.corp_phone}"></td>
+                            <td class="td__left"><input id="corp_phone" type="tel" value="${userDemoBs.corp_phone}" placeholder="'-'없이 숫자만"></td>
                             <td class="td__left">보유형태</td>
                             <td class="td__left" colspan="2">
                                 <div class="radio radio--inline">
@@ -183,7 +183,7 @@
 
                         <tr>
                             <th class="th__left">연락처 </th>
-                            <td class="td__left"><input id="lab_phone" type="text" value="${userDemoBs.lab_phone}"></td>
+                            <td class="td__left"><input id="lab_phone" type="tel" value="${userDemoBs.lab_phone}" placeholder="'-'없이 숫자만"></td>
                             <td class="td__left">연구소 보유형태</td>
                             <td class="td__left" colspan="2">
                                 <div class="radio radio--inline">
@@ -204,7 +204,7 @@
                             <th class="th__left">대표 이메일</th>
                             <td class="td__left" colspan="2"><input id="email" type="text" placeholder="사업자 등록증과 동일하게 입력" value="${userDemoBs.corp_name}"></td>
                             <th class="th__left">홈페이지</th>
-                            <td class="td__left" colspan="2"><input id="homepage" type="text" placeholder="1234567-123456789" value="${userDemoBs.corp_reg_num}"></td>
+                            <td class="td__left" colspan="2"><input id="homepage" type="text" placeholder="ex)www.xxx.xxx" value="${userDemoBs.corp_reg_num}"></td>
                         </tr>
                         <tr>
                             <th class="th__left">인력현황</th>
@@ -427,9 +427,9 @@
                         <tr>
                             <th class="th__left">실증기간</th>
                             <td class="td__left" colspan="3">
-                                <fmt:formatDate value="${userDemoBs.demo_start_date}" var="start_date" pattern="yyyy-MM-dd"/>
-                                <fmt:formatDate value="${userDemoBs.demo_end_date}" var="end_date" pattern="yyyy-MM-dd"/>
-                                <input type="text" class="date_range_picker" id="bs_start_date" value="${start_date} ~ ${end_date}"><span class="text--guide" id="between_start_end"></span>
+                                <fmt:formatDate value="${userDemoBs.demo_start_date}" var="dstart_date" pattern="yyyy-MM-dd"/>
+                                <fmt:formatDate value="${userDemoBs.demo_end_date}" var="dend_date" pattern="yyyy-MM-dd"/>
+                                <input id="bs_demo_dur" type="text" class="date_range_picker" value="${dstart_date}~${dend_date}">
                             </td>
                         </tr>
                         <tr>
@@ -591,10 +591,9 @@
 
     $(function() {
         $('.date_range_picker').daterangepicker({
-            autoUpdateInput: false,
             "locale": {
-                "format": "YYYY-MM-DD",
-                "separator": " ~ ",
+                // "format": "YYYY.MM.DD.",
+                // "separator": "~",
                 "applyLabel": "확인",
                 "cancelLabel": "취소",
                 "fromLabel": "From",
@@ -604,31 +603,43 @@
                 "daysOfWeek": ["월", "화", "수", "목", "금", "토", "일"],
                 "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
                 "firstDay": 1
-            }
+            },
+            autoUpdateInput: false,
+        });
+
+        $('.date_picker').daterangepicker({
+            "locale": {
+                // "format": "YY.MM.DD.",
+                // "separator": "~",
+                "applyLabel": "확인",
+                "cancelLabel": "취소",
+                "fromLabel": "From",
+                "toLabel": "To",
+                "customRangeLabel": "Custom",
+                "weekLabel": "W",
+                "daysOfWeek": ["월", "화", "수", "목", "금", "토", "일"],
+                "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+                "firstDay": 1
+            },
+            autoUpdateInput: false,
+            "singleDatePicker": true,
+            "setDate": ""
 
         });
-    })
-    $('.date_range_picker').on('cancel.daterangepicker', function(ev, picker) {
-        $(this).val('');
-    });
 
-    $("#bs_start_date").on("change", function(){
-        var day = 0;
-        var month = 0;
-        var year = 0;
-        var gap = new Date($("#bs_start_date").val().split(" ~ ")[1]) - new Date($("#bs_start_date").val().split(" ~ ")[0]);
+        $('.date_range_picker').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY.MM.DD') + '~' + picker.endDate.format('YYYY.MM.DD'));
+        });
 
-        day = Math.floor(gap / (1000 * 60 * 60 * 24)) || 0;
-        if(Math.floor(day/30) >= 1){
-            month = Math.floor(day/30);
-            day = day % 30;
-            if(Math.floor(month/12) >= 1){
-                year = Math.floor(month/12);
-                month = month % 12;
-            }
-        }
-        $("#between_start_end").text("(" + year + "년 " + month + "개월)");
+        $('.date_picker').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY.MM.DD'));
+        });
+
+        $('.date_range_picker, .date_picker').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
     })
+
 
     $( document ).ready(function() {
         let i=1;
@@ -698,22 +709,6 @@
             $("#user_demo_is_crops"+i).prop('checked', ($(this).val()&user_demo_is_crops)>0?true:false);
             i++;
         });
-
-        var day = 0;
-        var month = 0;
-        var year = 0;
-        var gap = new Date($("#bs_start_date").val().split(" ~ ")[1]) - new Date($("#bs_start_date").val().split(" ~ ")[0]);
-
-        day = Math.floor(gap / (1000 * 60 * 60 * 24)) || 0;
-        if(Math.floor(day/30) >= 1){
-            month = Math.floor(day/30);
-            day = day % 30;
-            if(Math.floor(month/12) >= 1){
-                year = Math.floor(month/12);
-                month = month % 12;
-            }
-        }
-        $("#between_start_end").text("(" + year + "년 " + month + "개월)");
     });
 
     $("#btn_app_step1").click(function(){
@@ -910,8 +905,8 @@
             user_demo_is_crops:user_demo_is_crops,
             culture_soil: culture_soil,//	number	4		0			생육토양	0: 토경재배, 1:수경재배, 2:고형배지재배
             demo_type: demo_type,//	number	4		0			실증 대상	0:해당없음, 1:시설자재, 2:ict기자재, 4:작물보호제/비료, 8:스마트팜sw, 16:생육모델, 32:로봇, 512:기타
-            demo_start_date: $('#bs_start_date').val().split(" ~ ")[0],//	date						입주 시작 날짜
-            demo_end_date: $('#bs_start_date').val().split(" ~ ")[1],//	date						입주 종료 날짜
+            demo_start_date: new Date($('#bs_demo_dur').val().split('~')[0]),
+            demo_end_date: new Date($('#bs_demo_dur').val().split('~')[1]),		//	입주 종료 날짜
             resident_type: resident_type,//	number	4		0			상주 타입	0:해당없음, 1:r&d연구실, 2:스타트업사무실, 512:기타
             resident_etc: $('#resident_etc').val(),//	varchar2	100					이용 실증시설 기타	이용 신청시설 기타 내용
             staff_num: $('#staff_num').val()*1,//	number	10					상주인원

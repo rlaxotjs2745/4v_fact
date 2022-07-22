@@ -1127,6 +1127,7 @@ prContentService.updatePrViewCount(prContentVO2);
 
     @RequestMapping("/join_person")
     public String join_person(HttpSession session,
+                              Model model,
                               @RequestParam(value="service_agree") String service_agree,
                               @RequestParam(value="privacy_agree") String privacy_agree,
                               @RequestParam(value="third_party_agree") String third_party_agree){
@@ -1141,6 +1142,10 @@ prContentService.updatePrViewCount(prContentVO2);
         else {
             return "/errors/404";
         }
+
+        ArrayList<CorpInfoVO> corpInfoVOList = corpService.selectCorpInfo();
+
+        model.addAttribute("corps", corpInfoVOList);
 
         return "join_person";
     }

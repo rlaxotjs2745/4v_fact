@@ -283,23 +283,13 @@ public class WebAPIController {
             else {
                 userVo.setUser_type(0);
 
-                userVo.setIs_service_agree(1);
-                userVo.setService_agree_ver(1);
-                userVo.setIs_privacy_agree(1);;
-                userVo.setPrivacy_agree_ver(1);
-                userVo.setIs_maketing_agree(1);
-                userVo.setMaketing_agree_ver(1);
-                userVo.setAuth_status(0);
-
                 if(userVo.getIdx_corp_info()!=0)
                 {
                     CorpInfoVO corpInfoVO = corpService.getCorpInfo(userVo.getIdx_corp_info());
                     if(corpInfoVO!=null){
                         userVo.setIs_applicant(corpInfoVO.getIs_applicant());
-                        userVo.setIs_corporate_member(1);
                     }
                 }
-                userVo.setSign_in_type(0);
 
                 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
                 String hashedPassword = passwordEncoder.encode(userVo.getUser_pw());
@@ -311,6 +301,29 @@ public class WebAPIController {
                 }
             }
         }//필수 데이터 체크 if
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/user_modify", method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO user_modify(HttpSession session, @RequestBody UserVO userVO){
+        System.out.println(userVO);
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("고객 정보 변경이 완료되었습니다.");
+
+        try {
+            if(userVO.getUser_pw() != null){
+                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                String hashedPassword = passwordEncoder.encode(userVO.getUser_pw());
+                userVO.setUser_pw(hashedPassword);
+            }
+            userService.updateUserInfoSelf(userVO);
+        } catch (Exception e){
+            resultVO.setResult_code("ERROR_001");
+            resultVO.setResult_str("고객 정보 변경이 실패했습니다.");
+        }
+
         return resultVO;
     }
 
@@ -1206,6 +1219,21 @@ public class WebAPIController {
 
             resultVO.setResult_code("SUCCESS");
             resultVO.setResult_str("서류 저장을 완료했습니다.");
+        } catch (Exception e){
+            System.out.println(e);
+        }
+        return resultVO;
+    }
+    @RequestMapping(value = "/app_step6_submit_demo_ds",method = RequestMethod.POST)
+    public @ResponseBody ResultVO app_step6_submit_demo_ds(@RequestBody UserDemoBsCheckVO userDemoBsCheckVO, HttpSession session, HttpServletRequest request) throws Exception {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR1001");
+        resultVO.setResult_str("서류 제출에 실패했습니다.");
+
+        try{
+            userDemoBsService.submitUserDemoBs(userDemoBsCheckVO);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("서류 제출을 완료했습니다.");
         } catch (Exception e){
             System.out.println(e);
         }

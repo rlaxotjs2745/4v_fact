@@ -106,7 +106,7 @@
         <div class="footer__btn">
             <!--<a href="#" class="btn dark btn-lg fl-left">임시저장</a>-->
             <button id="btn_app_step5" class="btn info btn-lg">이전</button>
-            <a href="#none" class="btn submit btn-lg " onclick="javascript: window.close();  ">신청서등록</a>
+            <a href="#none" class="btn submit btn-lg" id="bs_submit">신청서등록</a>
         </div>
     </div>
 
@@ -184,6 +184,38 @@
         document.body.appendChild(f);
         f.submit();
     }
+
+    $("#bs_submit").click(function(){
+        if(confirm("이용 신청서를 제출하시겠습니까?")){
+            var param  = {
+                "idx_user":${userDemoBs.idx_user},
+                "idx_demo_business":${userDemoBs.idx_demo_business}
+            };
+            $.ajax({
+                type: 'post',
+                url :'app_step6_submit_demo_ds', //데이터를 주고받을 파일 주소 입력
+                data: JSON.stringify(param),//보내는 데이터
+                contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+                dataType:'json',//받는 데이터 타입
+                success: function(result){
+                    //작업이 성공적으로 발생했을 경우
+                    if(result.result_code=="SUCCESS"){
+                        alert(result.result_str);
+                        var pathArr = window.location.pathname.split("/");
+                        pathArr[pathArr.length -1] = "index";
+                        window.location.pathname = pathArr.reduce(function(acc, cur){return acc + "/" + cur;});
+                    }
+                    else {
+                        alert(result.result_str);
+                    }
+                    //STATUS_001 :
+                },
+                error:function(){
+                    //에러가 났을 경우 실행시킬 코드
+                }
+            });
+        }
+    })
 </script>
 </body>
 </html>

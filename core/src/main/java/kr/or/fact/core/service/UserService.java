@@ -49,4 +49,6 @@ public interface UserService {
     int getAllUserListCount();
 
     int getDormantUserTotalCount(int sign_in_type);
+
+    int updateUserInfoSelf(UserVO userVO);
 }

@@ -22,6 +22,4 @@ public interface CorpMapper {
     void updateCorpInfo(CorpInfoVO corpInfoVO);
 
     CorpInfoVO getUserCorp(@Param("idx_user") long idx_user);
-
-
 }

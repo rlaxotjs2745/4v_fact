@@ -32,6 +32,8 @@ public interface UserDemoBsService {
     void saveUserDemoBsDetail(UserDemoBsDetailVO userDemoBsDetailVO);
     void updateUserDemoBsDetail(UserDemoBsDetailVO userDemoBsDetailVO);
 
+    int submitUserDemoBs(UserDemoBsCheckVO userDemoBsCheckVO);
+
     List<UserDemoBsVO> getUserDemoBsPagingList(int page_num, int amount, String order_field, int filter1, int filter2);
 }
 

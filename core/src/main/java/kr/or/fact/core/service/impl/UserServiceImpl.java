@@ -224,6 +224,14 @@ public class UserServiceImpl implements UserService {
         return userMapper.deleteDormantUser(userIdx);
     }
 
-
+    @Override
+    public int updateUserInfoSelf(UserVO userVO){
+        System.out.println(userVO);
+        if(userVO.getUser_pw() != null){
+            return userMapper.updateUserInfoSelfWithPw(userVO);
+        } else {
+            return userMapper.updateUserInfoSelf(userVO);
+        }
+    }
 
 }

@@ -392,7 +392,7 @@
                             <th>개발과제명 또는<br>연구논문명</th>
                             <th>개발(연구) 기관/기업</th>
                             <th>기간</th>
-                            <th>역활</th>
+                            <th>역할</th>
                             <th>주요성과</th>
                         </tr>
                         <tr>
@@ -753,7 +753,7 @@
                             <th>사용전원</th>
                             <th>소비전력</th>
                             <th>용도</th>
-                            <th>실증단지설치여부<br><span class="btn__desc fl-left">1)</span></th>
+                            <th>실증단지설치여부</th>
                         </tr>
                         <tr>
                             <th>1</th>
@@ -776,7 +776,10 @@
                                 <input id="own_device1_type" type="text" value="${userDemoBsDetailVO.own_device1_type}">
                             </td>
                             <td class="td__left">
-                                <input id="is_in_own_device1" type="text" value="${userDemoBsDetailVO.is_in_own_device1}">
+                                <select id="is_in_own_device1">
+                                    <option value="1"<c:if test="${userDemoBsDetailVO.is_in_own_device1 == 1}">selected</c:if>>설치</option>
+                                    <option value="0"<c:if test="${userDemoBsDetailVO.is_in_own_device1 == 0}">selected</c:if>>미설치</option>
+                                </select>
                             </td>
                         </tr>
                         <tr>
@@ -800,7 +803,10 @@
                                 <input id="own_device2_type" type="text" value="${userDemoBsDetailVO.own_device2_type}">
                             </td>
                             <td class="td__left">
-                                <input id="is_in_own_device2" type="text" value="${userDemoBsDetailVO.is_in_own_device2}">
+                                <select id="is_in_own_device2">
+                                    <option value="1"<c:if test="${userDemoBsDetailVO.is_in_own_device2 == 1}">selected</c:if>>설치</option>
+                                    <option value="0"<c:if test="${userDemoBsDetailVO.is_in_own_device2 == 0}">selected</c:if>>미설치</option>
+                                </select>
                             </td>
                         </tr>
                         <tr>
@@ -824,7 +830,10 @@
                                 <input id="own_device3_type" type="text" value="${userDemoBsDetailVO.own_device3_type}">
                             </td>
                             <td class="td__left">
-                                <input id="is_in_own_device3" type="text" value="${userDemoBsDetailVO.is_in_own_device3}">
+                                <select id="is_in_own_device3">
+                                    <option value="1"<c:if test="${userDemoBsDetailVO.is_in_own_device3 == 1}">selected</c:if>>설치</option>
+                                    <option value="0"<c:if test="${userDemoBsDetailVO.is_in_own_device3 == 0}">selected</c:if>>미설치</option>
+                                </select>
                             </td>
                         </tr>
                         </tbody>

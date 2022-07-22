@@ -117,4 +117,9 @@ public class UserDemoBsServiceImpl implements UserDemoBsService {
     public List<UserDemoBsVO> getUserDemoBsPagingList(int page_num,int amount,String order_field, int filter1, int filter2){
         return userDemoBsMapper.getUserDemoBsPagingList(page_num, amount, order_field,filter1,filter2);
     }
+
+    @Override
+    public int submitUserDemoBs(UserDemoBsCheckVO userDemoBsCheckVO){
+        return userDemoBsMapper.submitUserDemoBs(userDemoBsCheckVO);
+    }
 }

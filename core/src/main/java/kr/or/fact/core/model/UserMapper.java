@@ -51,7 +51,9 @@ public  interface UserMapper {
 
     int deleteDormantUser(@Param("userIdx") int userIdx);
 
+    int updateUserInfoSelf(UserVO userVO);
 
+    int updateUserInfoSelfWithPw(UserVO userVO);
 
 
 

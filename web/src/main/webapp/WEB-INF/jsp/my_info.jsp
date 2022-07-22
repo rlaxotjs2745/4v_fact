@@ -51,15 +51,15 @@
                             <td class="td__left">${user.user_id}</td>
                         </tr>
                         <tr>
-                            <th class="th__left">집주소</th>
+                            <th class="th__left">주소</th>
                             <td class="td__left">${user.addr}</td>
                         </tr>
                         <tr>
-                            <th class="th__left">휴대전화번호</th>
+                            <th class="th__left">휴대폰</th>
                             <td class="td__left">${user.mphone_num}</td>
                         </tr>
                         <tr>
-                            <th class="th__left">집전화번호</th>
+                            <th class="th__left">전화번호</th>
                             <td class="td__left">${user.tel_num}</td>
                         </tr>
                         <tr>
@@ -144,15 +144,15 @@
                                 <tbody>
                                 <tr>
                                     <th class="th__left">이름</th>
-                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="이름" style="width:180px;" />  <span class="text__dash"></span></td>
+                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>
                                 </tr>
                                 <tr>
                                     <th class="th__left">아이디</th>
-                                    <td class="td__modify">HongXXXXX@company.com</td>
+                                    <td class="td__modify">${user.user_id}</td>
                                 </tr>
                                 <tr>
                                     <th class="th__left">비밀번호<span class="text__essential">*</span></th>
-                                    <td class="td__modify is-alert"><input type="password" style="width:350px;">
+                                    <td class="td__modify is-alert"><input type="password" style="width:350px;" id="user_pw">
                                         <br><span class="text--guide is-alert" style="display: none">비밀번호 규칙에 맞지 않습니다. 다시 입력해 주세요.</span>
                                         <div class="text__message">
                                             <ul>
@@ -166,30 +166,35 @@
                                 </tr>
                                 <tr>
                                     <th class="th__left">비밀번호 확인<span class="text__essential">*</span></th>
-                                    <td class="td__modify"><input type="password" placeholder="사용자 비밀번호 입력" style="width:350px;"></td>
+                                    <td class="td__modify"><input type="password" id="user_pwcf"placeholder="사용자 비밀번호 입력" style="width:350px;"></td>
                                 </tr>
                                 <tr>
                                     <th class="th__left">주소</th>
-                                    <td class="td__modify"><input type="text" placeholder="우편번호" style="width:180px;" /> <span class="text__zipcode"><a href="#" class="btn modify btn-lg">주소검색</a></span>
-                                        <input type="text" placeholder="상세주소">
-                                        <input type="text" placeholder="나머지 주소">
+                                    <td class="td__modify"><input type="text" id="user_addr_num" placeholder="우편번호"  style="width:180px;" /> <span class="text__zipcode"><a href="#" id="addr_search_btn" class="btn modify btn-lg">주소검색</a></span>
+                                        <input type="text" id="user_addr_main" placeholder="상세주소" value="${user.addr}">
+                                        <input type="text" id="user_addr_detail" placeholder="나머지 주소">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th class="th__left">휴대전화번호</th>
-                                    <td class="td__modify"><input type="tel" class="tel" value="010" style="width:80px;" /><span class="text__dash">-</span><input type="tel" class="tel" style="width:80px;" /><span class="text__dash">-</span><input type="tel" class="tel" style="width:80px;" /></td>
+                                    <td class="td__modify"><input type="tel" class="tel" value="${user.mphone_num.split("-")[0]}" style="width:80px;" id="mphone_num1"/><span class="text__dash">-</span><input type="tel" id="mphone_num2" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[1]}" /><span class="text__dash">-</span><input type="tel" id="mphone_num3" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[2]}"/></td>
                                 </tr>
                                 <tr>
                                     <th class="th__left">집전화번호</th>
-                                    <td class="td__modify"><input type="tel" class="" style="width:273px;" /></td>
+                                    <td class="td__modify"><input type="tel" class="" style="width:273px;" value="${user.tel_num}"/></td>
                                 </tr>
                                 <tr>
                                     <th class="th__left">회사전화번호</th>
-                                    <td class="td__modify"><input type="tel" class="" style="width:273px;" /></td>
+                                    <td class="td__modify"><input type="tel" class="" style="width:273px;" value="${corp.tel_num}" disabled/></td>
                                 </tr>
                                 <tr>
                                     <th class="th__left">소속</th>
-                                    <td class="td__modify"><input type="text" class="" placeholder="소속없음" style="width:273px;" /><span class="text__dash"><a href="#popup_company" class="btn modify btn-lg  js-modal-detail">찾기</a></span><span class="text--guide">실증센터에 등록된 기업/단체만 검색이 됩니다.</span></td>
+                                    <td class="td__modify"><input type="text" class="" placeholder="소속없음" style="width:273px;" value="${corp.corp_name_kor}"/>
+                                        <span class="text__dash">
+<%--                                            <a href="#popup_company" class="btn modify btn-lg  js-modal-detail">찾기</a>--%>
+                                        </span>
+                                        <span class="text--guide">실증센터에 등록된 기업/단체만 검색이 됩니다.</span>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th class="th__left">정보수신동의<span class="text__essential">*</span></th>
@@ -204,14 +209,20 @@
                                         </div></td>
                                 </tr>
                                 <tr>
-                                    <th class="th__left">매체</th>
+                                    <th class="th__left">이벤트 및 광고</th>
                                     <td class="td__modify">
                                         <div class="checkbox checkbox--inline">
-                                            <input type="checkbox" id="type-1" name="type">
+                                            <c:choose>
+                                                <c:when test="${user.is_email_agree eq 1}"><input type="checkbox" id="type-1" name="type" checked></c:when>
+                                                <c:when test="${user.is_email_agree eq 0}"><input type="checkbox" id="type-1" name="type"></c:when>
+                                            </c:choose>
                                             <label for="type-1">이메일</label>
                                         </div>
                                         <div class="checkbox checkbox--inline">
-                                            <input type="checkbox" id="type-2" name="type">
+                                            <c:choose>
+                                                <c:when test="${user.is_sms_agree eq 1}"><input type="checkbox" id="type-2" name="type" checked></c:when>
+                                                <c:when test="${user.is_sms_agree eq 0}"><input type="checkbox" id="type-2" name="type"></c:when>
+                                            </c:choose>
                                             <label for="type-2">SMS</label>
                                         </div>
                                     </td>
@@ -223,7 +234,7 @@
                 </div>
                 <div class="popup__btn">
                     <a href="#" class="btn light btn-lg  js-btn-close">취소</a>
-                    <a href="#"  class="btn submit btn-lg">정보변경</a>
+                    <a href="#" id="info_modify" class="btn submit btn-lg">정보변경</a>
                 </div>
             </div>
         </div>
@@ -291,7 +302,80 @@
 </div>
 <%@include file ="footer.jsp" %>
 <%@include file ="script.jsp" %>
-
 </div>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    <%--$(document).ready(function(){--%>
+    <%--    var type1 = ${user.is_sms_agree}--%>
+    <%--    $('input:checkbox[name="type-1"]').each(function() {--%>
+    <%--        $("#type-1").prop('checked', ($(this).val()&req_facility)>0?true:false);--%>
+    <%--        i++;--%>
+    <%--    });--%>
+    <%--})--%>
+
+    $("#user_addr_num, #user_addr_main, #addr_search_btn").click(function() {
+        new daum.Postcode({
+            oncomplete: function (data) {
+
+                $("#user_addr_num").val(data.zonecode);
+                $("#user_addr_main").val(data.roadAddress + " " + data.buildingName);
+                // console.log(data);
+            }
+        }).open();
+    })
+
+    $("#info_modify").click(function(){
+        var param;
+        if($("#user_pw").val() != ""){
+            if($("#user_pw").val().length > 9){
+                if($("#user_pw").val() == $("#user_pwcf").val()){
+                    param = {
+                        "user_pw": $("#user_pw").val(),
+                        "addr": $("#user_addr_num").val() != "" ? "("+ $("#user_addr_num").val()+") "+$("#user_addr_main").val() +" "+$("#user_addr_detail").val() : $("#user_addr_main").val(),
+                        "mphone_num": $("#mphone_num1").val()+"-"+$("#mphone_num2").val()+"-"+$("#mphone_num3").val(),
+                        "is_sms_agree": $("#type-1").is(":checked") ? 1 : 0,
+                        "is_email_agree": $("#type-2").is(":checked") ? 1 : 0
+                    }
+
+                } else {
+                    alert("비밀번호 확인이 일치하지 않습니다.");
+                    return;
+                }
+            } else {
+                alert("비밀번호 규칙이 맞지 않습니다.");
+                return;
+            }
+        } else {
+            param = {
+                "addr": $("#user_addr_num").val() != "" ? "("+ $("#user_addr_num").val()+") "+$("#user_addr_main").val() +" "+$("#user_addr_detail").val() : $("#user_addr_main").val(),
+                "mphone_num": $("#mphone_num1").val()+"-"+$("#mphone_num2").val()+"-"+$("#mphone_num3").val(),
+                "is_sms_agree": $("#type-1").is(":checked") ? 1 : 0,
+                "is_email_agree": $("#type-2").is(":checked") ? 1 : 0
+            }
+        }
+
+        console.log(param);
+        $.ajax({
+            type: 'post',
+            url :'user_modify', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(param),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'json',//받는 데이터 타입
+            success: function(result){
+                //작업이 성공적으로 발생했을 경우
+                if(result.result_code=="SUCCESS"){
+                    alert(result.result_str);
+                    location.href='my_info';
+                }
+                else {
+                    alert(result.result_str);
+                }
+            },
+            error:function(){
+                //에러가 났을 경우 실행시킬 코드
+            }
+        });
+    })
+</script>
 </body>
 </html>

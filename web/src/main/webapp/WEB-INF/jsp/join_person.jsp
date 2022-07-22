@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: abeki
@@ -27,7 +28,9 @@
         <div class="page__full">
             <div class="page__floating">
 
-                <div class="tb__logo"><img src="resources/assets/image/img_loginLogo.png" alt="SMART FARM POTAL"></div>
+                <div class="tb__logo">
+<%--                    <img src="resources/assets/image/img_loginLogo.png" alt="SMART FARM POTAL">&lt;%&ndash;상주는 주석&ndash;%&gt;--%>
+                </div>
                 <div class="tb__join">
                     <div class="td__cell">
                         <div class="join__board">
@@ -93,7 +96,15 @@
                                     </tr>--%>
                                     <tr>
                                         <th class="th__left">소속</th>
-                                        <td class="td__modify"><input id = "corp_sel_name" type="text" class="" placeholder="소속없음" style="width:250px;"><span class="text__dash"><input id = "idx_corp_info" type="hidden"/><a href="#popup_company" class="btn modify btn-lg  js-modal-mini">찾기</a></span><span class="text--guide">실증센터에 등록된 기업/단체만 검색이 됩니다.</span></td>
+                                        <td class="td__modify">
+                                            <select id="corp_sel_name" style="width:250px;">
+                                                <option value="0" selected>소속없음</option>
+                                                <c:forEach items="${corps}" var="corp" varStatus="status">
+                                                    <option value="${corp.idx_corp_info}">${corp.corp_name_kor} (${corp.corp_addr} ${corp.corp_addr2})</option>
+                                                </c:forEach>
+                                            </select>
+                                            <span class="text--guide">실증센터에 등록된 기업/단체만 검색이 됩니다.</span>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th class="th__left">정보수신동의<span class="text__essential">*</span></th>
@@ -108,7 +119,7 @@
                                             </div></td>
                                     </tr>
                                     <tr>
-                                        <th class="th__left">매체</th>
+                                        <th class="th__left">이벤트 및 광고</th>
                                         <td class="td__register">
                                             <div class="checkbox checkbox--inline">
                                                 <input type="checkbox" id="type-1" name="type">
@@ -118,6 +129,7 @@
                                                 <input type="checkbox" id="type-2" name="type">
                                                 <label for="type-2">SMS</label>
                                             </div>
+                                            <span class="text--guide">체크하지 않아도 비밀번호 변경 등 개인정보 관리에 관련한 수신은 가능합니다.</span>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -202,7 +214,6 @@
             dataType:'json',//받는 데이터 타입
             success: function(result){
                 //작업이 성공적으로 발생했을 경우
-                console.log(result);
                 if(result.result_code=="SUCCESS"){
                     $("#text_guide_id").html(result.result_str);
                 }
@@ -241,8 +252,16 @@
             "addr":"("+ $("#zip_code").val()+") "+$("#juso_find").val() +" "+$("#juso_detail").val(),
             "mphone_num":$("#mphone_num1").val()+"-"+$("#mphone_num2").val()+"-"+$("#mphone_num3").val(),
             "email":$("#user_id").val(),
-            "idx_corp_info":$("#idx_corp_info").val()
-
+            "idx_corp_info":$("#idx_corp_info").val(),
+            "is_service_agree": 1,
+            "is_third_party_agree": 1,
+            "auth_status": 0,
+            "is_applicant": 0,
+            "is_corporate_member": $("#corp_sel_name").val() == "" ? 0 : 1,
+            "idx_corp_info": $("#corp_sel_name").val() == "" ? 0 : 1,
+            "sign_in_type": 0,
+            "is_sms_agree": $("#type-1").is(":checked") ? 1 : 0,
+            "is_email_agree": $("#type-2").is(":checked") ? 1 : 0,
         };
         console.log(JSON.stringify(param));
 
