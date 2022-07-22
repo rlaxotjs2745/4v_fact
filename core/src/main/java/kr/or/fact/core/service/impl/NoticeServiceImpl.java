@@ -102,4 +102,10 @@ public class NoticeServiceImpl implements NoticeService {
          noticeMapper.updateNoticeViewCount(noticeVO);
     }
 
+    @Override
+    public void updateNotice(NoticeVO noticeVO) {
+
+noticeMapper.updateNotice(noticeVO);
+    }
+
 }

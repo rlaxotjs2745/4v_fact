@@ -1331,5 +1331,70 @@ public class APIController {
 
         return resultVO;
     }
+
+
+    @RequestMapping(value="/update_notice",method = RequestMethod.POST)
+    @ResponseBody
+    ResultVO updateNotice(@RequestBody NoticeVO noticeVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("업데이트 실패");
+        try {
+
+            noticeService.updateNotice(noticeVO);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("업데이트가 완료되었습니다.");
+            System.out.println(noticeVO);
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("없는 상담일지입니다.");
+        }
+        System.out.println(resultVO);
+        return resultVO;
+    }
+
+    @RequestMapping(value="/update_event",method = RequestMethod.POST)
+    @ResponseBody
+    ResultVO updateEventContent(@RequestBody EventContentVO eventContentVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("업데이트 실패");
+        try {
+            eventContentService.updateEventContent(eventContentVO);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("업데이트가 완료되었습니다.");
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("없는 상담일지입니다.");
+        }
+
+        return resultVO;
+    }
+
+
+    @RequestMapping(value="/update_pr",method = RequestMethod.POST)
+    @ResponseBody
+    ResultVO updatePrContent(@RequestBody PRContentVO prContentVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("업데이트 실패");
+
+        try {
+            prContentService.updatePrContent(prContentVO);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("업데이트가 완료되었습니다.");
+            System.out.println("여기");
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("없는 상담일지입니다.");
+        }
+
+        return resultVO;
+    }
+
+
 }
 

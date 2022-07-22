@@ -20,5 +20,6 @@ public interface EventContentService {
 
 int getEventViewCount(int idx_event_content);
 void updateEventViewCount(EventContentVO eventContentVO);
+    void updateEventContent(EventContentVO eventContentVO);
 
 }

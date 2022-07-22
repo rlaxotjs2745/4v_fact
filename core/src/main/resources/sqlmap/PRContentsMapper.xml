@@ -110,9 +110,7 @@ LAST_UPD_DATE
         INSERT INTO TB_PR_CONTENT_FILE_JOIN (
             IDX_PR_CONTENT_FILE_JOIN,
             IDX_PR_CONTENT,
-
             IDX_FILE_INFO,
-
             REG_DATE
         )VALUES (
                     SEQ_PR_CONTENT_FILE_JOIN.NEXTVAL,
@@ -159,5 +157,38 @@ LAST_UPD_DATE
     </select>
     <update id="updatePrViewCount" parameterType="kr.or.fact.core.model.DTO.PRContentVO">
         UPDATE TB_PR_CONTENT SET VIEW_COUNT = #{view_count} WHERE IDX_PR_CONTENT =#{idx_pr_content}
+    </update>
+    <update id="updatePrContent" parameterType="kr.or.fact.core.model.DTO.PRContentVO">
+        UPDATE TB_PR_CONTENT SET
+
+                                 PR_CONTENT_CODE=#{pr_content_code},
+                                 PR_CONTENT_NUM=#{pr_content_num},
+                                 SUBJECT=#{subject},
+                                 PR_CONTENTS=#{pr_contents},
+                                 IS_FILE=#{is_file},
+                                 IS_NEW=#{is_new},
+                                 IS_MAIN_PAGE=#{is_main_page},
+                                 IS_IMPORTANT=#{is_important},
+                                 IS_SHOW=#{is_show},
+                                 VIEW_COUNT=#{view_count},
+                                 PR_CONTENT_STATUS=#{pr_content_status},
+                                 SHOW_START_DATE=#{show_start_date},
+                                 SHOW_END_DATE=#{show_end_date},
+                                 DOC_VERSION=#{doc_version},
+                                 MEMO=#{memo},
+                                 SEARCH_TAG=#{search_tag},
+                                 AUTHOR=#{author},
+                                 THUMB_IMG_FILE_IDX=#{thumb_img_file_idx},
+                                 IDX_ADMIN=#{idx_admin},
+                                 CONFIRM_ADMIN_IDX=#{confirm_admin_idx},
+                                 REG_DATE=#{reg_date},
+                                 LAST_UPD_DATE=SYSDATE WHERE IDX_PR_CONTENT =#{idx_pr_content}
+    </update>
+    <update id="updatePRContentFileJoin" parameterType="kr.or.fact.core.model.DTO.PRContentFileJoinVO">
+UPDATE TB_PR_CONTENT_FILE_JOIN SET
+IDX_PR_CONTENT_FILE_JOIN=#{IDX_PR_CONTENT_FILE_JOIN},
+IDX_PR_CONTENT=#{IDX_PR_CONTENT},
+IDX_FILE_INFO=#{IDX_FILE_INFO},
+REG_DATE=SYSDATE
     </update>
 </mapper>

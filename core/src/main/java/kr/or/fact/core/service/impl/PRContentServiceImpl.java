@@ -71,6 +71,11 @@ public class PRContentServiceImpl implements PRContentsService {
         prContentsMapper.updatePrViewCount(prContentVO);
     }
 
+    @Override
+    public void updatePrContent(PRContentVO prContentVO) {
+prContentsMapper.updatePrContent(prContentVO);
+    }
+
 
     @Override
     public List<PRContentVO> getMainPRContentList(){

@@ -246,7 +246,32 @@ REG_DATE
     <update id="updateEventViewCount" parameterType="kr.or.fact.core.model.DTO.EventContentVO">
         UPDATE TB_EVENT_CONTENT SET VIEW_COUNT = #{view_count} WHERE IDX_EVENT_CONTENT =#{idx_event_content}
     </update>
-
+<update id="updateEventContent" parameterType="kr.or.fact.core.model.DTO.EventContentVO">
+    UPDATE TB_EVENT_CONTENT SET
+                                IDX_EVENT_CONTENT=#{idx_event_content},
+                                EVENT_CONTENT_CODE=#{event_content_code},
+                                EVENT_CONTENT_NUM=#{event_content_num},
+                                SUBJECT=#{subject},
+                                EVENT_CONTENTS=#{event_contents},
+                                IS_FILE=#{is_file},
+                                IS_NEW=#{is_new},
+                                IS_MAIN_PAGE=#{is_main_page},
+                                IS_IMPORTANT=#{is_important},
+                                IS_SHOW=#{is_show},
+                                VIEW_COUNT=#{view_count},
+                                EVENT_CONTENT_STATUS=#{event_content_status},
+                                EVENT_START_DATE=#{event_start_date},
+                                EVENT_END_DATE=#{event_end_date},
+                                DOC_VERSION=#{doc_version},
+                                MEMO=#{memo},
+                                SEARCH_TAG=#{search_tag},
+                                AUTHOR=#{author},
+                                THUMB_IMG_FILE_IDX=#{thumb_img_file_idx},
+                                IDX_ADMIN=#{idx_admin},
+                                CONFIRM_ADMIN_IDX=#{confirm_admin_idx},
+                                REG_DATE=#{reg_date},
+                                LAST_UPD_DATE=SYSDATE WHERE IDX_EVENT_CONTENT=#{idx_event_content}
+</update>
 
 
 </mapper>

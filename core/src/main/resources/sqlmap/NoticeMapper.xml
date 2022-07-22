@@ -188,4 +188,31 @@ REG_DATE
     <update id="updateNoticeViewCount" parameterType="kr.or.fact.core.model.DTO.NoticeVO">
         UPDATE TB_NOTICE SET VIEW_COUNT = #{view_count} WHERE IDX_NOTICE =#{idx_notice}
     </update>
+
+    <update id="updateNotice" parameterType="kr.or.fact.core.model.DTO.NoticeVO">
+UPDATE TB_NOTICE SET
+    IDX_NOTICE=#{idx_notice},
+                     NOTICE_CODE=#{notice_code},
+                     NOTICE_NUM=#{notice_num},
+                     SUBJECT=#{subject},
+                     NOTICE_CONTENTS=#{notice_contents},
+                     IS_FILE=#{is_file},
+                     IS_NEW=#{is_new},
+                     IS_MAIN_PAGE=#{is_main_page},
+                     IS_IMPORTANT=#{is_important},
+                     IS_SHOW=#{is_show},
+                     VIEW_COUNT=#{view_count},
+                     NOTICE_STATUS=#{notice_status},
+                     POSTING_START_DATE=#{posting_start_date},
+                     POSTING_END_DATE=#{posting_end_date},
+                     DOC_VERSION=#{doc_version},
+                     MEMO=#{memo},
+                     SEARCH_TAG=#{search_tag},
+                     AUTHOR=#{author},
+                     IDX_ADMIN=#{idx_admin},
+                     CONFIRM_ADMIN_IDX=#{confirm_admin_idx},
+                     REG_DATE=#{reg_date},
+                     LAST_UPD_DATE=SYSDATE WHERE IDX_NOTICE=#{idx_notice}
+
+    </update>
 </mapper>

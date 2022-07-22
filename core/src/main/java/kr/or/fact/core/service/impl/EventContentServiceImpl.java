@@ -101,4 +101,9 @@ public class EventContentServiceImpl implements EventContentService {
 //        dataSourceTransactionManager.commit(status);
         eventContentMapper.updateEventViewCount(eventContentVO);
     }
+
+    @Override
+    public void updateEventContent(EventContentVO eventContentVO) {
+eventContentMapper.updateEventContent(eventContentVO);
+    }
 }
