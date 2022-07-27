@@ -60,15 +60,14 @@
                         <c:forEach items="${demoList}" var="demo" varStatus="status">
                             <tr>
                                 <td>${status.count}</td>
-                                <td class="td__left"><button id="demo_sel${status.index}" href="my_info" class="td__link"><c:if test="${not empty demo.demo_bs_subject}">${demo.demo_bs_subject}</c:if></button></td>
+                                <td class="td__left"><button id="demo_sel${status.index}" href="my_info" class="td__link"><c:if test="${not empty demo.demo_subject}">${demo.demo_subject}</c:if></button></td>
                                 <td class="td__data" style="white-space: nowrap;">
                                     <div class="request__step">
                                         <c:choose>
-                                            <c:when test="${demo.user_demo_status eq 0}"><strong>신청 &gt; </strong>서류검토 &gt; 접수완료 &gt; 선정평가 &gt; 계획확정</c:when>
-                                            <c:when test="${demo.user_demo_status eq 1 || demo.user_demo_status eq 2|| demo.user_demo_status eq 4}"><strong>접수중 &gt; 서류검토 &gt; </strong>접수완료 &gt; 선정평가 &gt; 계획확정</c:when>
-                                            <c:when test="${demo.user_demo_status eq 3}"><strong>접수중 &gt; 서류검토 &gt; 접수완료 &gt; </strong>선정평가 &gt; 계획확정</c:when>
-                                            <c:when test="${demo.user_demo_status eq 10 || demo.user_demo_status eq 12|| demo.user_demo_status eq 13|| demo.user_demo_status eq 14}"><strong>접수중 &gt; 서류검토 &gt; 접수완료 &gt; 선정평가 &gt; </strong>계획확정</c:when>
-                                            <c:when test="${demo.user_demo_status > 29}"><strong>접수중 &gt; 서류검토 &gt; 접수완료 &gt; 선정평가 &gt; 계획확정</strong></c:when>
+                                            <c:when test="${demo.user_demobs_status eq 0}"><strong>신청 > </strong>접수완료 > 선정평가 > 계획확정</c:when>
+                                            <c:when test="${demo.user_demobs_status eq 1}">신청 > <strong>접수완료 > </strong>선정평가 > 계획확정</c:when>
+                                            <c:when test="${demo.user_demobs_status eq 1 && demo.is_confirm eq 1 && demo.is_share eq 0}">신청 > 접수완료 > <strong>선정평가 > </strong>계획확정</c:when>
+                                            <c:when test="${demo.user_demobs_status eq 1 && demo.is_confirm eq 1 && demo.is_share eq 1}">신청 > 접수완료 > 선정평가 > <strong>계획확정</strong></c:when>
                                         </c:choose>
                                     </div>
                                 </td>

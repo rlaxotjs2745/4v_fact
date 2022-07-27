@@ -161,6 +161,7 @@ public class FileServiceImpl implements FileService {
         fos.write(file.getBytes());
         fos.close();
 
+
         FileInfoVO fileInfoVO = new FileInfoVO();
 
         fileInfoVO.setFile_name(file.getOriginalFilename());
@@ -170,7 +171,10 @@ public class FileServiceImpl implements FileService {
         fileInfoVO.setEncoding(1);
         fileInfoVO.setExtention(StringUtils.getFilenameExtension(file.getOriginalFilename()));
         fileInfoVO.setFile_secure_type(0);
-        fileInfoVO.setFile_path(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString() + factConfig.getUploadDir() + file.getOriginalFilename());
+        fileInfoVO.setFile_path(ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/downloadFile/")
+                .path(file.getOriginalFilename())
+                .toUriString());
         fileInfoVO.setFile_size(file.getSize());
         fileInfoVO.setOwner(1);
         fileInfoVO.setIdx_user(userIdx);

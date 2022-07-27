@@ -78,32 +78,32 @@
                 <div class="app__fileupload">
                     <div class="fileupload__title" >사업자등록증 사본 (해당자에 한함)</div>
                     <input type="file" id="bs_license" class="fileupload" value="">
-                    <span id="bs_license_title" class="text-info"></span>
+                    <a id="bs_license_title" class="text-info"></a>
                 </div>
                 <div class="app__fileupload">
                     <div class="fileupload__title">등기부등본 사본 (해당자에 한함, 원본은 차후 요청시,제출해 주십시오.)</div>
                     <input type="file" id="corp_register" class="fileupload">
-                    <span id="corp_register_title" class="text-info"></span>
+                    <a id="corp_register_title" class="text-info"></a>
                 </div>
                 <div class="app__fileupload">
                     <div class="fileupload__title">법인인감증명서 (해당자에 한함, 원본은 차후 요청시,제출해 주십시오.)</div>
                     <input type="file" id="corp_sign" class="fileupload">
-                    <span id="corp_sign_title" class="text-info"></span>
+                    <a id="corp_sign_title" class="text-info"></a>
                 </div>
                 <div class="app__fileupload">
                     <div class="fileupload__title">4대보험 완납증명서 (해당자에 한함, 원본은 차후 요청시,제출해 주십시오.)</div>
                     <input type="file" id="insure_cert" class="fileupload">
-                    <span id="insure_cert_title" class="text-info"></span>
+                    <a id="insure_cert_title" class="text-info"></a>
                 </div>
                 <div class="app__fileupload">
                     <div class="fileupload__title" >최근 2년간 재무제표 또는 회계감사 보고서 (해당자에 한함, 원본은 차후 요청시,제출해 주십시오.)</div>
                     <input type="file" id="fine_state" class="fileupload">
-                    <span id="fine_state_title" class="text-info"></span>
+                    <a id="fine_state_title" class="text-info"></a>
                 </div>
                 <div class="app__fileupload">
                     <div class="fileupload__title" >기타 (가점서류 및 기업역량을 보여줄 수 있는 자료, 자유 양식)</div>
                     <input type="file" id="other_data" class="fileupload">
-                    <span id="other_data_title" class="text-info"></span>
+                    <a id="other_data_title" class="text-info"></a>
                 </div>
 
             </div>
@@ -127,22 +127,22 @@
 
     <c:forEach items="${fileArr}" var="file">
     if("${file.file_type}" == "3") {
-        $("#bs_license_title").text("제출 완료: ${file.fileInfoVO.file_name}")
+        $("#bs_license_title").text("제출 완료: ${file.fileInfoVO.file_name}").attr("href", "${file.fileInfoVO.file_path}");
     }
     if("${file.file_type}" == "4") {
-        $("#corp_register_title").text("제출 완료: ${file.fileInfoVO.file_name}")
+        $("#corp_register_title").text("제출 완료: ${file.fileInfoVO.file_name}").attr("href", "${file.fileInfoVO.file_path}");
     }
     if("${file.file_type}" == "5") {
-        $("#corp_sign_title").text("제출 완료: ${file.fileInfoVO.file_name}")
+        $("#corp_sign_title").text("제출 완료: ${file.fileInfoVO.file_name}").attr("href", "${file.fileInfoVO.file_path}");
     }
     if("${file.file_type}" == "6") {
-        $("#insure_cert_title").text("제출 완료: ${file.fileInfoVO.file_name}")
+        $("#insure_cert_title").text("제출 완료: ${file.fileInfoVO.file_name}").attr("href", "${file.fileInfoVO.file_path}");
     }
     if("${file.file_type}" == "7") {
-        $("#fine_state_title").text("제출 완료: ${file.fileInfoVO.file_name}")
+        $("#fine_state_title").text("제출 완료: ${file.fileInfoVO.file_name}").attr("href", "${file.fileInfoVO.file_path}");
     }
     if("${file.file_type}" == "8") {
-        $("#other_data_title").text("제출 완료: ${file.fileInfoVO.file_name}")
+        $("#other_data_title").text("제출 완료: ${file.fileInfoVO.file_name}").attr("href", "${file.fileInfoVO.file_path}");
     }
     </c:forEach>
 

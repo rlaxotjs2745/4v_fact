@@ -105,7 +105,7 @@
                             <td class="td__left" style="white-space: nowrap;">
                                 <c:choose>
                                 <c:when test="${user.is_sms_agree eq 0}">동의안함</c:when>
-                                <c:when test="${qna.is_sms_agree eq 1}">동의함</c:when>
+                                <c:when test="${user.is_sms_agree eq 1}">동의함</c:when>
                                 </c:choose>
                             </td>
                         </tr>
@@ -114,7 +114,7 @@
                             <td class="td__left" style="white-space: nowrap;">
                                 <c:choose>
                                 <c:when test="${user.is_email_agree eq 0}">동의안함</c:when>
-                                <c:when test="${qna.is_email_agree eq 1}">동의함</c:when>
+                                <c:when test="${user.is_email_agree eq 1}">동의함</c:when>
                                 </c:choose>
                             </td>
                         </tbody>
@@ -181,7 +181,7 @@
                                 </tr>
                                 <tr>
                                     <th class="th__left">집전화번호</th>
-                                    <td class="td__modify"><input type="tel" class="" style="width:273px;" value="${user.tel_num}"/></td>
+                                    <td class="td__modify"><input type="tel" class="" style="width:273px;" value="${user.tel_num}" id="telnum_modify"/></td>
                                 </tr>
                                 <tr>
                                     <th class="th__left">회사전화번호</th>
@@ -305,14 +305,6 @@
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-    <%--$(document).ready(function(){--%>
-    <%--    var type1 = ${user.is_sms_agree}--%>
-    <%--    $('input:checkbox[name="type-1"]').each(function() {--%>
-    <%--        $("#type-1").prop('checked', ($(this).val()&req_facility)>0?true:false);--%>
-    <%--        i++;--%>
-    <%--    });--%>
-    <%--})--%>
-
     $("#user_addr_num, #user_addr_main, #addr_search_btn").click(function() {
         new daum.Postcode({
             oncomplete: function (data) {
@@ -330,11 +322,13 @@
             if($("#user_pw").val().length > 9){
                 if($("#user_pw").val() == $("#user_pwcf").val()){
                     param = {
+                        "idx_user": ${user.idx_user},
                         "user_pw": $("#user_pw").val(),
                         "addr": $("#user_addr_num").val() != "" ? "("+ $("#user_addr_num").val()+") "+$("#user_addr_main").val() +" "+$("#user_addr_detail").val() : $("#user_addr_main").val(),
                         "mphone_num": $("#mphone_num1").val()+"-"+$("#mphone_num2").val()+"-"+$("#mphone_num3").val(),
                         "is_sms_agree": $("#type-1").is(":checked") ? 1 : 0,
-                        "is_email_agree": $("#type-2").is(":checked") ? 1 : 0
+                        "is_email_agree": $("#type-2").is(":checked") ? 1 : 0,
+                        "tel_num": $("#telnum_modify").val()
                     }
 
                 } else {
@@ -347,14 +341,15 @@
             }
         } else {
             param = {
+                "idx_user": ${user.idx_user},
                 "addr": $("#user_addr_num").val() != "" ? "("+ $("#user_addr_num").val()+") "+$("#user_addr_main").val() +" "+$("#user_addr_detail").val() : $("#user_addr_main").val(),
                 "mphone_num": $("#mphone_num1").val()+"-"+$("#mphone_num2").val()+"-"+$("#mphone_num3").val(),
                 "is_sms_agree": $("#type-1").is(":checked") ? 1 : 0,
-                "is_email_agree": $("#type-2").is(":checked") ? 1 : 0
+                "is_email_agree": $("#type-2").is(":checked") ? 1 : 0,
+                "tel_num": $("#telnum_modify").val()
             }
         }
 
-        console.log(param);
         $.ajax({
             type: 'post',
             url :'user_modify', //데이터를 주고받을 파일 주소 입력

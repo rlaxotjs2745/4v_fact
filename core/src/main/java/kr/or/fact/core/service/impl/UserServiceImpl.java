@@ -231,11 +231,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int updateUserInfoSelf(UserVO userVO){
-        System.out.println(userVO);
-        if(userVO.getUser_pw() != null){
-            return userMapper.updateUserInfoSelfWithPw(userVO);
-        } else {
-            return userMapper.updateUserInfoSelf(userVO);
+//        System.out.println(userVO);
+        try{
+            if(userVO.getUser_pw() != null){
+                return userMapper.updateUserInfoSelfWithPw(userVO);
+            } else {
+                return userMapper.updateUserInfoSelf(userVO);
+            }
+        } catch (Exception e){
+            System.out.println(e.toString());
+            return 0;
         }
     }
 

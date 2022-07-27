@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="ko" class="html-popup">
@@ -70,24 +71,10 @@
         <!--//-->
         <div class="app__body">
             <div class="app__cnt">
+
                 <div class="desc__text">
                     - 마감된 사업은 목록에서 보이지 않습니다.<br>
                     - 마감된 사업의 공고를 확인하실 분은 '열린마당 > 사업공고'에서 확인하실 수 있습니다
-                </div>
-
-                <div class="cnt__title">사업 개요</div>
-                <div class="application__document">
-                    <ol>
-                        <li>실증단지 이용신청서 1부(필수)</li>
-                        <li>실증계획서 1부 (필수)</li>
-                        <li>개인정보 수집·이용·제공에 관한 동의서 1부(필수)</li>
-                        <li>사업자등록증 사본1부(해당자에 한함)</li>
-                        <li>법인등기부등본 1부(해당자에 한함)</li>
-                        <li>법인인감증명서 1부(해당자에 한함)</li>
-                        <li>4대보험 완납증명서 1부(해당자에 한함)</li>
-                        <li>최근 2년간 재무제표 또는 회계감사 보고서 1부(해당자에 한함)</li>
-                        <li>기타(가점서류 및 기업역량을 보여줄 수 있는 자료(자유 양식)</li>
-                    </ol>
                 </div>
                 <div class="cnt__title">실증단지 이용 신청서 제출 서류</div>
                 <div class="cnt__text">사업별로 제출 서류는 일부 다를 수 있습니다.</div>
@@ -105,6 +92,23 @@
                     </ol>
                 </div>
 
+                <div id="bs_doc" style="display: none">
+                    <div class="cnt__title">사업 개요</div>
+                    <div class="application__document">
+                        <ol>
+                            <li id="app_demo_bs_code"></li>
+                            <li id="app_demo_subject"></li>
+                            <li id="app_demo_bs_contents"></li>
+                            <li id="app_demo_bs_main_type"></li>
+                            <li id="app_demo_bs_sub_type"></li>
+                            <li id="app_demo_bs_detail_type"></li>
+                            <li id="app_recruit_count_limit"></li>
+                            <li id="app_applicant_count"></li>
+                            <li id="app_demo_date"></li>
+                            <li id="app_recruit_date"></li>
+                        </ol>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -204,6 +208,25 @@
 
 
     $("#select-business").change(function (){
+    $("#bs_doc").css("display", "block")
+    <c:forEach items="${demoBusinessVOs}" var="bs" varStatus="status">
+        if($("#select-business option:selected").val() == "${bs.idx_demo_business}"){
+            $("#app_demo_bs_code").text("사업 코드: ${bs.demo_bs_code}");
+            $("#app_demo_subject").text("사업 제목: ${bs.demo_subject}");
+            $("#app_demo_bs_contents").text(`사업 내용: ${bs.demo_bs_contents}`);
+            $("#app_demo_bs_main_type").text("사업 대분류: ${bs.demo_bs_main_type}");
+            $("#app_demo_bs_sub_type").text("사업 중분류: ${bs.demo_bs_sub_type}");
+            $("#app_demo_bs_detail_type").text("사업 소분류: ${bs.demo_bs_detail_type}");
+            $("#app_applicant_count").text("사업 지원 현황: ${bs.applicant_count}");
+            $("#app_recruit_count_limit").text("사업 모집 수: ${bs.recruit_count_limit}");
+            <fmt:formatDate value="${bs.start_date}" var="start_date" pattern="yyyy.MM.dd"/>
+            <fmt:formatDate value="${bs.end_date}" var="end_date" pattern="yyyy.MM.dd"/>
+            <fmt:formatDate value="${bs.recruit_start_date}" var="rec_start_date" pattern="yyyy.MM.dd"/>
+            <fmt:formatDate value="${bs.recruit_end_date}" var="rec_end_date" pattern="yyyy.MM.dd"/>
+            $("#app_demo_date").text("사업 기간: " + "${start_date}" + " ~ " + "${end_date}");
+            $("#app_recruit_date").text("모집 기간: " + "${rec_start_date}" + " ~ " + "${rec_end_date}");
+        }
+    </c:forEach>
 
         $('#btn_app_step2').attr('disabled', true);
         $('#btn_app_step1_save_new').attr('disabled', true);

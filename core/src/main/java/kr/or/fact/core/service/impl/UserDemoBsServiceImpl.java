@@ -39,7 +39,9 @@ public class UserDemoBsServiceImpl implements UserDemoBsService {
 
     @Override
     public List<UserDemoBsVO> getUserDemoBsListByUserIdx(long idx_user){
-        return userDemoBsMapper.getUserDemoBsListByUserIdx(idx_user);
+        List<UserDemoBsVO> ss = userDemoBsMapper.getUserDemoBsListByUserIdx(idx_user);
+        System.out.println(ss);
+        return ss;
     }
 
     @Override
