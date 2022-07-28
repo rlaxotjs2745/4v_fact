@@ -29,7 +29,7 @@
             <div class="page__floating">
 
                 <div class="tb__logo">
-<%--                    <img src="resources/assets/image/img_loginLogo.png" alt="SMART FARM POTAL">&lt;%&ndash;상주는 주석&ndash;%&gt;--%>
+                    <img src="resources/assets/image/img_loginLogo.png" alt="SMART FARM POTAL"><%--상주는 주석--%>
                 </div>
                 <div class="tb__join">
                     <div class="td__cell">

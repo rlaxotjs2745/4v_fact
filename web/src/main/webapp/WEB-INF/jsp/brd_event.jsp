@@ -49,12 +49,12 @@
                     <input type="text" class="search" placeholder="검색어를 입력해주세요."><a href="#none" class="btn btn__board--search">검색</a></div>
             </div>
             <div class="list__type">
-                <ul class="list__type--event">
-                    <c:forEach items="${eventContentVOList}" var="event" varStatus="status">
+                <ul class="list__type--event" id="event_list">
+                    <c:forEach var="event" items="${eventContentVOList}"  varStatus="status"  >
                         <li>
-                            <a href="brd_event_detail?idx=${event.idx_event_content}"  >
-                                <figure><img src="resources/assets/image/img_use_house_02.jpg" alt=""></figure>
-                                <span class="list__title">${event.subject}</span>
+                            <a href="brd_event_detail?idx=${event.idx_event_content}" >
+                                <figure><img src="${event.thumb_img_file_path}" alt="" class="thumb_list_item"></figure>
+                                <span class="list__title">${event.subject}</span><br>
                                 <span class="list__duedate">${event.event_start_date}~${event.event_end_date}</span>
                             </a>
                         </li>
@@ -113,7 +113,7 @@
             </div>
             <div class="list__paging">
                 <div class="form__btn">
-                    <a href="#" class="btn btn-next">더보기 1/100</a>
+                    <button id="plus_event" class="btn btn-next">더보기 1/100</button>
                 </div>
             </div>
             <!--//-->
@@ -130,7 +130,35 @@
         var idx = $(this).attr("id");
         pageLoad("pr_contents", {idx: parseInt(idx)}, "홍보자료 모달컨텐츠", "pr_contents");
     })
-    console.log(${eventContentVOList})
+    console.log('${eventContentVOList}')
+
+    const a = function(event){
+        return '<li>\n' +
+    '   <a href="brd_event_detail?idx=' + event.idx_event_content + '"  >\n' +
+    '       <figure><img src="'+ event.thumb_img_file_path   +'" alt="" class="thumb_list_item"></figure>\n' +
+    '       <span class="list__title">' + event.subject + '</span>\n' +
+    '       <span class="list__duedate">' + event.event_start_date + '~' +event.event_end_date + '</span>\n' +
+    '   </a>\n' +
+    '</li>'}
+
+    var page = 2;
+    $("#plus_event").click(function() {
+            $.ajax({
+                type: 'post',
+                url :'plus_event', //데이터를 주고받을 파일 주소 입력
+                data: JSON.stringify(page),//보내는 데이터
+                contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+                dataType:'json',//받는 데이터 타입
+                success: function(res){
+                    for(var event of res){
+                        $("#event_list").append(a(event));
+                    }
+                    page += 1;
+                }
+            })
+    })
+
+
 </script>
 <script src="resources/assets/js/lib/jquery-2.2.4.min.js" type="text/javascript"></script>
 <script src="resources/assets/js/lib/jquery-ui.js" type="text/javascript"></script>

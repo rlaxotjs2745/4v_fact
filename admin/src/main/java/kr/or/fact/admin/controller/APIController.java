@@ -1098,7 +1098,7 @@ public class APIController {
             fileInfoVO.setFile_name(filepespons.getFileName());
             fileInfoVO.setFile_size(filepespons.getSize());
             fileInfoVO.setMime_type(filepespons.getFileType());
-            fileInfoVO.setFile_path(file.getOriginalFilename());
+            fileInfoVO.setFile_path(fileDownloadUri);
             fileService.storeFileInfo(file);
             fileService.insertFileInfo(fileInfoVO);
             noticeService.insertNotice(noticeVO);
@@ -1114,27 +1114,18 @@ public class APIController {
     ResultVO insertEventContent (@ModelAttribute EventContentVO eventContentVO, HttpSession session, HttpServletRequest request)throws Exception, IOException{
         ResultVO resultVO = new ResultVO();
 
-
         try {
-            int fileLength = Integer.parseInt(eventContentVO.getFileLength());
+//            int fileLength = Integer.parseInt(eventContentVO.getFileLength());
+//            System.out.println(fileLength);
             File[] files = new File[5];
-            if(fileLength==0){
+            if(eventContentVO.getFiles1() == null){
                 eventContentService.insertEventContent(eventContentVO);
             }else {
-                if (fileLength > 0) {
+                if (eventContentVO.getFiles1() != null) {
                     files[0] = fileService.convertMultipartToFile(eventContentVO.getFiles1());
-                    if (fileLength >= 2) {
-                        files[1] = fileService.convertMultipartToFile(eventContentVO.getFiles2());
-                        if (fileLength >= 3) {
-                            files[2] = fileService.convertMultipartToFile(eventContentVO.getFiles3());
-                            if (fileLength >= 4) {
-                                files[3] = fileService.convertMultipartToFile(eventContentVO.getFiles4());
-                                if (fileLength == 5) {
-                                    files[4] = fileService.convertMultipartToFile(eventContentVO.getFiles5());
+                    if (eventContentVO.getFiles2() != null) {
+                        files[1] = fileService.convertMultipartToFile2(eventContentVO.getFiles2());
 
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -1149,50 +1140,65 @@ public class APIController {
             fileInfoVO.setFile_name(filepespons.getFileName());
             fileInfoVO.setFile_size(filepespons.getSize());
             fileInfoVO.setMime_type(filepespons.getFileType());
-            fileInfoVO.setFile_path(file.getOriginalFilename());
+            fileInfoVO.setFile_path(fileDownloadUri);
             fileService.storeFileInfo(file);
             fileService.insertFileInfo(fileInfoVO);
-           eventContentService.insertEventContent(eventContentVO);
-           eventContentService.insertEventContentFileJoin();
+
+
+
+
+            MultipartFile fileThum = eventContentVO.getFiles2();
+            String fileThumName = fileService.storeFileInfo(eventContentVO.getFiles2());
+            String fileThumDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/downloadFile/")
+                    .path(fileThumName)
+                    .toUriString();
+            FileUploadResponseVO thumFilepespons = new FileUploadResponseVO(fileThumName, fileThumDownloadUri, fileThum.getContentType(),fileThum.getSize());
+            FileInfoVO thumFileInfoVO = new FileInfoVO();
+            thumFileInfoVO.setFile_name(fileThumName);
+            thumFileInfoVO.setFile_size(thumFilepespons.getSize());
+            thumFileInfoVO.setMime_type(thumFilepespons.getFileType());
+            thumFileInfoVO.setFile_path(fileThumDownloadUri);
+            fileService.storeFileInfo(fileThum);
+            fileService.insertFileInfo(thumFileInfoVO);
+            eventContentService.insertEventContent(eventContentVO);
+            eventContentService.insertEventContentFileJoin();
+
+
+
 
             resultVO.setResult_str("업데이트에 성공하였습니다.");
             resultVO.setResult_code("SUCCESS");
 
         }catch(Exception e) {
+
             resultVO.setResult_code("ERROR_1000");
             resultVO.setResult_str("업데이트 실패");
         }
+
         return resultVO;
     }
     @RequestMapping(value = "/insert_pr",method = RequestMethod.POST)
     public @ResponseBody
     ResultVO insertPRContent (@ModelAttribute PRContentVO prcontensVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
         ResultVO resultVO = new ResultVO();
-
+        File[] files = new File[5];
         try {
-            int fileLength = Integer.parseInt(prcontensVO.getFileLength());
-            File[] files = new File[5];
-            if(fileLength==0){
+
+
+            if(prcontensVO.getFiles1() == null){
                prContentService.insertPRContent(prcontensVO);
             }else {
-
-                if (fileLength > 0) {
+                if (prcontensVO.getFiles1() != null) {
                     files[0] = fileService.convertMultipartToFile(prcontensVO.getFiles1());
-                    if (fileLength >= 2) {
-                        files[1] = fileService.convertMultipartToFile(prcontensVO.getFiles2());
-                        if (fileLength >= 3) {
-                            files[2] = fileService.convertMultipartToFile(prcontensVO.getFiles3());
-                            if (fileLength >= 4) {
-                                files[3] = fileService.convertMultipartToFile(prcontensVO.getFiles4());
-                                if (fileLength == 5) {
-                                    files[4] = fileService.convertMultipartToFile(prcontensVO.getFiles5());
+                    if (prcontensVO.getFiles2() != null) {
+                        files[1] = fileService.convertMultipartToFile2(prcontensVO.getFiles2());
 
-                                }
-                            }
-                        }
                     }
                 }
             }
+
+
             MultipartFile file = prcontensVO.getFiles1();
             String fileName = fileService.storeFileInfo(prcontensVO.getFiles1());
             String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -1204,9 +1210,30 @@ public class APIController {
             fileInfoVO.setFile_name(filepespons.getFileName());
             fileInfoVO.setFile_size(filepespons.getSize());
             fileInfoVO.setMime_type(filepespons.getFileType());
-            fileInfoVO.setFile_path(filepespons.getFileDownloadUri());
+            fileInfoVO.setFile_path(fileDownloadUri);
             fileService.storeFileInfo(file);
             fileService.insertFileInfo(fileInfoVO);
+
+
+
+            MultipartFile fileThum = prcontensVO.getFiles2();
+            String fileThumName = fileService.storeFileInfo(prcontensVO.getFiles2());
+            String fileThumDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/downloadFile/")
+                    .path(fileThumName)
+                    .toUriString();
+            FileUploadResponseVO thumFilepespons = new FileUploadResponseVO(fileThumName, fileThumDownloadUri, fileThum.getContentType(),fileThum.getSize());
+            FileInfoVO thumFileInfoVO = new FileInfoVO();
+            thumFileInfoVO.setFile_name(fileThumName);
+            thumFileInfoVO.setFile_size(thumFilepespons.getSize());
+            thumFileInfoVO.setMime_type(thumFilepespons.getFileType());
+            thumFileInfoVO.setFile_path(fileThumDownloadUri);
+            fileService.storeFileInfo(fileThum);
+            fileService.insertFileInfo(thumFileInfoVO);
+            System.out.println(thumFileInfoVO);
+            System.out.println(fileThumName);
+
+
             prContentService.insertPRContent(prcontensVO);
             prContentService.insertPRContentFileJoin();
 

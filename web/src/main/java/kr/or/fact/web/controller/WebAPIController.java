@@ -4,6 +4,7 @@ import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.CONSTANT;
 import kr.or.fact.web.utils.Utils;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.FileSystemResource;
@@ -54,8 +55,12 @@ public class WebAPIController {
     @Resource(name = "fileService")
     FileService fileService;
 
+    @Resource(name = "eventContentService")
+    EventContentService eventContentService;
+
+    @PostMapping
     @RequestMapping(value = "/user_id_check",method = RequestMethod.POST)
-    public @ResponseBody
+    public
     ResultVO user_id_check(HttpSession session,
                            @RequestBody UserVO userVo){
         ResultVO resultVO = new ResultVO();
@@ -1239,5 +1244,18 @@ public class WebAPIController {
         }
         return resultVO;
     }
+    @RequestMapping("/plus_event")
+    @ResponseBody
+    public List<EventContentVO> brd_event(@RequestBody Integer page,
+                            Model model){
+        int list_amount = 10;
 
+        List<EventContentVO> eventContentVOList = eventContentService.getEventContentList(page,list_amount);
+        model.addAttribute("eventContentVOList",eventContentVOList);
+
+
+        System.out.println(MDC.get("REQUEST_ID"));
+
+        return eventContentVOList;
+    }
 }

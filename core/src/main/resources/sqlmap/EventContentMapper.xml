@@ -14,7 +14,7 @@
     <select id="getEventContentList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.EventContentVO">
         SELECT
             IDX_EVENT_CONTENT,
-                EVENT_CONTENT_CODE,
+            EVENT_CONTENT_CODE,
             EVENT_CONTENT_NUM,
             SUBJECT,
             IS_FILE,
@@ -37,7 +37,7 @@
             LAST_UPD_DATE
         FROM (
                  SELECT ROW_NUMBER() OVER(ORDER by EVENT_CONTENT_NUM ASC) AS row_num
-        ,IDX_EVENT_CONTENT,
+                 ,IDX_EVENT_CONTENT,
                         EVENT_CONTENT_CODE,
                         EVENT_CONTENT_NUM,
                         SUBJECT,
@@ -63,9 +63,9 @@
                           SELECT * FROM TB_EVENT_CONTENT ORDER BY EVENT_CONTENT_NUM ASC
                       )
 
-                 WHERE ROWNUM <![CDATA[<=]]> #{page}*#{list_amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{page} -1)*#{list_amount}
+        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
     </select>
 
     <select id="getMainEventContentList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.EventContentVO">
@@ -74,7 +74,9 @@
     <select id="getEventList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.EventContentVO">
         SELECT * FROM TB_EVENT_CONTENT  ORDER BY EVENT_CONTENT_NUM
     </select>
-
+<select id="getThum" resultType="kr.or.fact.core.model.DTO.EventContentVO">
+    SELECT IDX_EVENT_CONTENT, FILE_PATH FROM TB_FILE_INFO JOIN TB_EVENT_CONTENT ON THUMB_IMG_FILE_IDX=IDX_FILE_INFO
+</select>
     <insert id="insertEventContent" parameterType="kr.or.fact.core.model.DTO.EventContentVO">
 INSERT INTO TB_EVENT_CONTENT (
 IDX_EVENT_CONTENT,
@@ -119,7 +121,7 @@ SEQ_EVENT_CONTENT.NEXTVAL,
 #{memo},
 #{search_tag},
 #{author},
-#{thumb_img_file_idx},
+SEQ_FILE_INFO.CURRVAL,
 #{idx_admin},
 #{confirm_admin_idx},
 SYSDATE,
@@ -147,7 +149,7 @@ REG_DATE
         )VALUES (
                  SEQ_EVENT_CONTENT_FILE_JOIN.NEXTVAL,
                  SEQ_EVENT_CONTENT.CURRVAL,
-                 SEQ_FILE_INFO.CURRVAL,
+                 SEQ_FILE_INFO.CURRVAL-1,
 
                  SYSDATE
 
@@ -239,7 +241,17 @@ REG_DATE
 
 
     </select>
+    <select id="getEventContentThum" parameterType="String" resultType="kr.or.fact.core.model.DTO.EventFileJoinSelectVO">
+        SELECT A.IDX_EVENT_CONTENT,
 
+               A.THUMB_IMG_FILE_IDX,
+
+               C.FILE_PATH
+        FROM TB_EVENT_CONTENT A
+                                JOIN TB_FILE_INFO C ON A.THUMB_IMG_FILE_IDX=C.IDX_FILE_INFO
+
+
+    </select>
     <select id="getEventViewCount" parameterType="long" resultType="int">
         SELECT VIEW_COUNT FROM TB_EVENT_CONTENT WHERE IDX_EVENT_CONTENT=#{idx_event_content}
     </select>

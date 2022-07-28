@@ -471,7 +471,17 @@
                     <div class="form-row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" for="file_upload">파일 첨부</label>
                         <div class="form-group col col-md-10 mode-edit mode-new">
-                            <input type="file" class="form-control-file d-block py-1" id="file_upload" name="file_upload" multiple>
+                            <input type="file" class="form-control-file d-block py-1" id="file_upload1" name="file_upload1" multiple>
+                        </div>
+                        <div class="form-group col col-md-10 col-form-label mode-view">
+                            <a href="file.doc"></a>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" for="file_upload">썸네일 파일 첨부</label>
+                        <div class="form-group col col-md-10 mode-edit mode-new">
+                            <input type="file" class="form-control-file d-block py-1" id="file_upload2" name="file_upload2" multiple>
                         </div>
                         <div class="form-group col col-md-10 col-form-label mode-view">
                             <a href="file.doc"></a>
@@ -632,6 +642,7 @@
                         <a href="file.doc"></a>
                     </div>
                 </div>
+
                 <div class="modal-footer justify-content-between mode-new">
                     <div>
                         <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
@@ -811,14 +822,19 @@ function saveForm(message){
     fileForm.append("event_end_date",new Date(document.querySelector("#event_end_date_insert").value));
 
 
-    var files = document.querySelector('#file_upload').files;
+    // var files = document.querySelector('#file_upload').files;
 
-
-    for(var i = 0; i < files.length; i++){
-        var num = i + 1;
-        fileForm.append("files" + num, files[i]);
+    if(document.querySelector('#file_upload1').files[0]){
+        fileForm.append("files1", document.querySelector('#file_upload1').files[0]);
     }
-    fileForm.append("fileLength", files.length);
+    if(document.querySelector('#file_upload2').files[0]){
+        fileForm.append("files2", document.querySelector('#file_upload2').files[0]);
+    }
+    // for(var i = 0; i < files.length; i++){
+    //     var num = i + 1;
+    //     fileForm.append("files" + num, files[i]);
+    // }
+    // fileForm.append("fileLength", fileForm.length);
 
     $.ajax({
         type: 'post',
@@ -829,7 +845,7 @@ function saveForm(message){
         dataType:'json',//받는 데이터 타입
         enctype: 'multipart/form-data',
         success: function(result){
-            console.log(result);
+
             alert("업로드에 성공했습니다", () => window.redirect("/"))
         },
         error: function (res) {

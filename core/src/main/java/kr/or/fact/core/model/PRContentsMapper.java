@@ -23,4 +23,5 @@ PRContentVO getPRContentFileJoin(@Param("idx_pr_content") long idx_pr_content);
     int getPrViewCount(@Param("idx_pr_content") long idx_pr_content);
     void updatePrViewCount(PRContentVO prContentVO);
     void updatePrContent(PRContentVO prContentVO);
+    List<PRContentVO> getThumb();
 }

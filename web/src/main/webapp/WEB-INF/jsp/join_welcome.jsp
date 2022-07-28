@@ -28,7 +28,9 @@
                 <div class="tb__init">
                     <a href="main"><img src="resources/assets/image/ico_close.svg" alt=""></a>
                 </div>
-                <div class="tb__logo"><img src="resources/assets/image/img_loginLogo.png" alt="SMART FARM POTAL"></div>
+                <div class="tb__logo">
+<%--                    <img src="resources/assets/image/img_loginLogo.png" alt="SMART FARM POTAL">--%>
+                </div>
                 <div class="tb__join">
                     <div class="td__cell">
                         <div class="join__board">

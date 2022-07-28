@@ -150,7 +150,7 @@
                     var now_date = $('#now_date').val();
                     var send_date =$('#date').val() +$('#flatpickr-time-start').val();
                     var callback =$('#callback').val();
-                    //     var dest_count =$('#dest_count').val();
+
                     var dest_info =$('#dest_info').val();
                     var sms_msg =$('#sms_msg').val();
 
@@ -179,18 +179,9 @@
                                     f.reset();
                                 }
                             }
-                            console.log(JSON.stringify( {
-                                "user_id": user_id,
-                                "schedule_type": schedule_type,
-                                "subject": subject,
-                                "now_date": now_date,
-                                "send_date": send_date,
-                                "callback": callback,
-                                //  "dest_count": dest_count,
-                                "dest_info": dest_info,
-                                "sms_msg": sms_msg,
-                            }));
-                            console.log(schedule_type)
+                        },
+                        error: function (res) {
+                            console.log(res)
                         }
                     });
                 }

@@ -27,7 +27,7 @@
             <div class="page__floating">
 
                 <div class="tb__logo">
-<%--                    <img src="resources/assets/image/img_loginLogo.png" alt="SMART FARM POTAL">--%>
+                    <img src="resources/assets/image/img_loginLogo.png" alt="SMART FARM POTAL">
                 </div>
                 <div class="tb__join">
                     <div class="td__cell">

@@ -39,4 +39,5 @@ public class PRContentVO {
     MultipartFile files5;
     String fileLength;
     String file_path;
+    String thumb_img_file_path;
 }
