@@ -60,7 +60,9 @@
             <select name="business" id="select-business">
                 <option value="0">지원사업 선택</option>
                 <c:forEach items="${demoBusinessVOs}" var="demoBs" varStatus="status">
-                    <option value="${demoBs.idx_demo_business}">${demoBs.demo_subject}</option>
+                    <c:if test="${demoBs.is_announce eq 1}">
+                        <option value="${demoBs.idx_demo_business}">${demoBs.demo_subject}</option>
+                    </c:if>
                 </c:forEach>
             </select>
         </div>
@@ -78,7 +80,7 @@
                 </div>
                 <div class="cnt__title">실증단지 이용 신청서 제출 서류</div>
                 <div class="cnt__text">사업별로 제출 서류는 일부 다를 수 있습니다.</div>
-                <div class="application__document">
+                <div class="application__document docu_style">
                     <ol>
                         <li>실증단지 이용신청서 1부(필수)</li>
                         <li>실증계획서 1부 (필수)</li>
@@ -96,16 +98,16 @@
                     <div class="cnt__title">사업 개요</div>
                     <div class="application__document">
                         <ol>
-                            <li id="app_demo_bs_code"></li>
-                            <li id="app_demo_subject"></li>
-                            <li id="app_demo_bs_contents"></li>
-                            <li id="app_demo_bs_main_type"></li>
-                            <li id="app_demo_bs_sub_type"></li>
-                            <li id="app_demo_bs_detail_type"></li>
-                            <li id="app_recruit_count_limit"></li>
-                            <li id="app_applicant_count"></li>
-                            <li id="app_demo_date"></li>
-                            <li id="app_recruit_date"></li>
+                            <li><strong>사업 코드: </strong><span id="app_demo_bs_code"></span></li>
+                            <li><strong>사업 제목: </strong><span id="app_demo_subject"></span></li>
+                            <li><strong>사업 내용: </strong><span id="app_demo_bs_contents"></span></li>
+                            <li><strong>사업 대분류: </strong><span id="app_demo_bs_main_type"></span></li>
+                            <li><strong>사업 중분류: </strong><span id="app_demo_bs_sub_type"></span></li>
+                            <li><strong>사업 소분류: </strong><span id="app_demo_bs_detail_type"></span></li>
+                            <li><strong>사업 모집 수: </strong><span id="app_recruit_count_limit"></span></li>
+                            <li><strong>사업 지원 현황: </strong><span id="app_applicant_count"></span></li>
+                            <li><strong>사업 기간: </strong><span id="app_demo_date"></span></li>
+                            <li><strong>모집 기간: </strong><span id="app_recruit_date"></span></li>
                         </ol>
                     </div>
                 </div>
@@ -211,20 +213,20 @@
     $("#bs_doc").css("display", "block")
     <c:forEach items="${demoBusinessVOs}" var="bs" varStatus="status">
         if($("#select-business option:selected").val() == "${bs.idx_demo_business}"){
-            $("#app_demo_bs_code").text("사업 코드: ${bs.demo_bs_code}");
-            $("#app_demo_subject").text("사업 제목: ${bs.demo_subject}");
-            $("#app_demo_bs_contents").text(`사업 내용: ${bs.demo_bs_contents}`);
-            $("#app_demo_bs_main_type").text("사업 대분류: ${bs.demo_bs_main_type}");
-            $("#app_demo_bs_sub_type").text("사업 중분류: ${bs.demo_bs_sub_type}");
-            $("#app_demo_bs_detail_type").text("사업 소분류: ${bs.demo_bs_detail_type}");
-            $("#app_applicant_count").text("사업 지원 현황: ${bs.applicant_count}");
-            $("#app_recruit_count_limit").text("사업 모집 수: ${bs.recruit_count_limit}");
+            $("#app_demo_bs_code").text("${bs.demo_bs_code}");
+            $("#app_demo_subject").text("${bs.demo_subject}");
+            $("#app_demo_bs_contents").text(`${bs.demo_bs_contents}`);
+            $("#app_demo_bs_main_type").text("${bs.demo_bs_main_type}");
+            $("#app_demo_bs_sub_type").text("${bs.demo_bs_sub_type}");
+            $("#app_demo_bs_detail_type").text("${bs.demo_bs_detail_type}");
+            $("#app_applicant_count").text("${bs.applicant_count}");
+            $("#app_recruit_count_limit").text("${bs.recruit_count_limit}");
             <fmt:formatDate value="${bs.start_date}" var="start_date" pattern="yyyy.MM.dd"/>
             <fmt:formatDate value="${bs.end_date}" var="end_date" pattern="yyyy.MM.dd"/>
             <fmt:formatDate value="${bs.recruit_start_date}" var="rec_start_date" pattern="yyyy.MM.dd"/>
             <fmt:formatDate value="${bs.recruit_end_date}" var="rec_end_date" pattern="yyyy.MM.dd"/>
-            $("#app_demo_date").text("사업 기간: " + "${start_date}" + " ~ " + "${end_date}");
-            $("#app_recruit_date").text("모집 기간: " + "${rec_start_date}" + " ~ " + "${rec_end_date}");
+            $("#app_demo_date").text("${start_date}" + " ~ " + "${end_date}");
+            $("#app_recruit_date").text("${rec_start_date}" + " ~ " + "${rec_end_date}");
         }
     </c:forEach>
 

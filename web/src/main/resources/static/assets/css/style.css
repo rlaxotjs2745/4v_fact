@@ -9291,3 +9291,8 @@ table.table__type--pee tbody tr.tr__subsum th {
     border-right: none !important;
     border-bottom: 1px solid #000 !important;
 }
+
+.docu_style li{
+    font-size: 1rem;
+    margin-bottom: 7px;
+}
