@@ -297,7 +297,8 @@
             ADDR = #{addr},
             MPHONE_NUM = #{mphone_num},
             IS_SMS_AGREE = #{is_sms_agree},
-            IS_EMAIL_AGREE = #{is_email_agree}
+            IS_EMAIL_AGREE = #{is_email_agree},
+            TEL_NUM = #{tel_num}
         WHERE IDX_USER= #{idx_user}
     </update>
     <update id="updateUserInfoSelfWithPw" parameterType="kr.or.fact.core.model.DTO.UserVO">
@@ -307,7 +308,8 @@
             ADDR = #{addr},
             MPHONE_NUM = #{mphone_num},
             IS_SMS_AGREE = #{is_sms_agree},
-            IS_EMAIL_AGREE = #{is_email_agree}
+            IS_EMAIL_AGREE = #{is_email_agree},
+            TEL_NUM = #{tel_num}
         WHERE IDX_USER= #{idx_user}
     </update>
 

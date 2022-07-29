@@ -1182,7 +1182,7 @@ prContentService.updatePrViewCount(prContentVO2);
     @RequestMapping("/my_business")
     public String my_business(HttpSession session
             ,Model model){
-
+        System.out.println("왔음");
         if(session==null
                 || session.getAttribute("loginCheck")==null
                 ||(session.getAttribute("loginCheck")!=null&&(Boolean)session.getAttribute("loginCheck")==false)
@@ -1200,7 +1200,7 @@ prContentService.updatePrViewCount(prContentVO2);
         }
         model.addAttribute("user",findUser);
 
-
+        System.out.println(findUser.getIdx_user());
         List<UserDemoBsVO> userDemoBsVOs = userDemoBsService.getUserDemoBsListByUserIdx(findUser.getIdx_user());
 
         if(userDemoBsVOs==null || userDemoBsVOs.isEmpty())//찾고 보니 지원 정보가 없네......
@@ -1212,11 +1212,14 @@ prContentService.updatePrViewCount(prContentVO2);
         model.addAttribute("user_demo_bs_count",userDemoBsVOs.size());
 
 
-        for(int i=0;i<userDemoBsVOs.size();i++)
-        {
-            List<DemoBsMsgVO> demoBsMsgVOs = userDemoBsService.getDemoBsMsgByUserDemoBSIdx(userDemoBsVOs.get(i).getIdx_user_demo_bs());
-            userDemoBsVOs.get(i).setDemoBsMsgVo(demoBsMsgVOs.get(0));
-        }
+//        for(int i=0;i<userDemoBsVOs.size();i++)
+//        {
+//            List<DemoBsMsgVO> demoBsMsgVOs = userDemoBsService.getDemoBsMsgByUserDemoBSIdx(userDemoBsVOs.get(i).getIdx_user_demo_bs());
+//            userDemoBsVOs.get(i).setDemoBsMsgVo(demoBsMsgVOs.get(0));
+//        System.out.println("왔음2 ");
+//        }
+//        System.out.println("왔음3");
+//        System.out.println(userDemoBsVOs);
         model.addAttribute("demoList",userDemoBsVOs);
 
         getHomepageInfo(model);

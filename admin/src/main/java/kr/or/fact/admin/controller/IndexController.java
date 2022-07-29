@@ -207,7 +207,7 @@ public class IndexController {
         param.setAmount(10);
         int page = param.getPage_num();
 
-        AdminDemoBSFilterVO adminDemoBSFilterVO = demoBsService.getAdminDemoBsFilter();
+        AdminDemoBSFilterVO adminDemoBSFilterVO = demoBsService.getAdminDemoBsFilter();  // 사업 상태별 카운트
         //리스트 총갯수를 이때 빼야 함
         int filtered_item_total = adminDemoBSFilterVO.getTot_count();
 
@@ -280,6 +280,7 @@ public class IndexController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
+        System.out.println(filtered_item_total);
         return "b00_demo_bs_mng";
     }
 

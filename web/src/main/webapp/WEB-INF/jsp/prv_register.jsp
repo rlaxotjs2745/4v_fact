@@ -80,7 +80,6 @@
             </div>
             <!--//-->
         </div>
-<%--
 
         <div id="popup_fileupload" class="pop__detail">
             <div class="section">
@@ -170,7 +169,6 @@
 
             </div>
         </div>
---%>
 
     </div>
 </div>

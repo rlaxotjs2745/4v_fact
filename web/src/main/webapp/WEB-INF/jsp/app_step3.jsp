@@ -78,7 +78,7 @@
                    <div class="app__fileupload">
                        <div class="fileupload__title">실증계획서 원본 업로드</div>
                        <input id="user_demobs_file" type="file" class="fileupload">
-                       <span id="user_demobs_file_info" class="text-info"></span>
+                       <a id="user_demobs_file_info" class="text-info"></a>
                    </div>
 <%--                     이용신청인 : <input id="signature_name" type="text" value="홍길동" disabled style="width:200px;"><br>
                     <div class="checkbox checkbox--inline">
@@ -1680,7 +1680,7 @@
 
     <c:forEach items="${fileArr}" var="file">
         if("${file.file_type}" == "1") {
-            $("#user_demobs_file_info").text("제출 완료: ${file.fileInfoVO.file_name}")
+            $("#user_demobs_file_info").text("제출 완료: ${file.fileInfoVO.file_name}").attr("href", "${file.fileInfoVO.file_path}");
         }
     </c:forEach>
 
@@ -1867,13 +1867,19 @@
 
         } else {
             // 확인(예) 버튼 클릭 시 이벤트
-            save_temp();
-            $('#btn_app_step4').attr('disabled', false);
-
+            var reqStatus = save_temp();
+            alert(reqStatus.returnStr)
+            if(reqStatus.bool){
+                $('#btn_app_step4').attr('disabled', false);
+            }
         }
     });
 
 function save_temp(){
+    var returnObj = {
+        bool: 1,
+        returnStr: "임시 저장에 성공했습니다.",
+    }
     let i=0;
     let req_facility = 0;
     $('input:checkbox[name="req_facility"]:checked').each(function() {
@@ -1978,7 +1984,8 @@ function save_temp(){
 
             }
             else {
-                alert(result.result_str);
+                returnObj.returnStr = result.result_str;
+                returnObj.bool = 0;
             }
             //STATUS_001 :
         },
@@ -2199,7 +2206,8 @@ function save_temp(){
 
             }
             else {
-                alert(result.result_str);
+                returnObj.returnStr = result.result_str;
+                returnObj.bool = 0;
             }
             //STATUS_001 :
         },
@@ -2223,19 +2231,21 @@ function save_temp(){
             enctype: 'multipart/form-data',
             success: function(result){
                 if(result.result_code=="SUCCESS"){
-                    alert(result.result_str);
+                    // alert(result.result_str);
 
                 }
                 else {
-                    alert(result.result_str);
+                    returnObj.returnStr = result.result_str;
+                    returnObj.bool = 0;
                 }
             },
             error:function(err){
                 console.log(err);
+                returnObj.bool = 0;
             }
         });
     }
-
+    return returnObj;
 }
 </script>
 

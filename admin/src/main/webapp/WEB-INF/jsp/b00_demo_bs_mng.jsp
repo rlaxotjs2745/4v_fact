@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- Page content -->
     <div class="container-fluid flex-grow-1 container-p-y">
 
@@ -148,10 +149,12 @@
                                              </c:choose>
                                         </td>
                                         <td class="text-center">${demoBs.demo_bs_code}</td>
-                                        <td class=""><a href="#none" data-toggle="modal" data-target="#modals-business" data-what="mode-view">${demoBs.demo_subject}</a></td>
+                                        <td class="demo_entity" id="demo_${demoBs.idx_demo_business}"><a href="#none" data-toggle="modal" data-target="#modals-business" data-what="mode-view" >${demoBs.demo_subject}</a></td>
                                         <td class="text-right">${demoBs.recruit_count_limit}</td>
-                                        <td class="text-center">${demoBs.start_date}</td>
-                                        <td class="text-center">${demoBs.end_date}</td>
+                                        <fmt:formatDate value="${demoBs.start_date}" var="dstart_date" pattern="yyyy-MM-dd"/>
+                                        <fmt:formatDate value="${demoBs.end_date}" var="dend_date" pattern="yyyy-MM-dd"/>
+                                        <td class="text-center">${dstart_date}</td>
+                                        <td class="text-center">${dend_date}</td>
                                         <td class="text-center">
                                             <c:choose>
                                                 <c:when test="${demoBs.is_announce eq 0}">아니오</c:when>
@@ -205,6 +208,15 @@
     </div>
 
 
+
+
+
+
+
+
+
+
+
     <!-- new demo bs-->
     <div class="modal fade" id="modals-business">
         <div class="modal-dialog modal-xl">
@@ -220,7 +232,7 @@
                         <!-- 사업번호 / 사업 상태-->
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">사업번호</label>
-                            <div class="form-control-plaintext col-md-4 mode-edit mode-view">${demobs.demo_bs_code}</div>
+                            <div class="form-control-plaintext col-md-4 mode-edit mode-view" id="demo_bs_code_view">${demobs.demo_bs_code}</div>
                             <div class="input-group col-md-4 mode-new">
                                 <input id="demo_bs_code" type="text" class="form-control form-control-md" placeholder="사업번호를 입력해 주세요..." value="${demobs.demo_bs_code}">
                                 <span class="input-group-append">
@@ -254,26 +266,26 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">대분류</label>
                             <div class="col-md-2">
-                                <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="대분류..." value="${demobs.demo_subject}">
-                                <div class="form-control-plaintext mode-view">${demobs.demo_bs_main_type}</div>
+                                <input type="text" class="form-control form-control-md mode-edit mode-new" id="demo_bs_main_type" placeholder="대분류..." value="${demobs.demo_bs_main_type}">
+                                <div class="form-control-plaintext mode-view" id="demo_bs_main_type_view">${demobs.demo_bs_main_type}</div>
                             </div>
                             <label class="col-form-label col-form-label-md col-md-1 text-md-right font-weight-bold">중분류</label>
                             <div class="col-md-2">
-                                <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="중분류..." value="${demobs.demo_bs_sub_type}">
-                                <div class="form-control-plaintext mode-view">${demobs.demo_bs_sub_type}</div>
+                                <input type="text" class="form-control form-control-md mode-edit mode-new" id="demo_bs_sub_type" placeholder="중분류..." value="${demobs.demo_bs_sub_type}">
+                                <div class="form-control-plaintext mode-view" id="demo_bs_sub_type_view">${demobs.demo_bs_sub_type}</div>
                             </div>
                             <label class="col-form-label col-form-label-md col-md-1 text-md-right font-weight-bold">소분류</label>
                             <div class="col-md-2">
-                                <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="소분류..." value="${demobs.demo_bs_detail_type}">
-                                <div class="form-control-plaintext mode-view">${demobs.demo_bs_detail_type}</div>
+                                <input type="text" class="form-control form-control-md mode-edit mode-new" id="demo_bs_detail_type" placeholder="소분류..." value="${demobs.demo_bs_detail_type}">
+                                <div class="form-control-plaintext mode-view" id="demo_bs_detail_type_view">${demobs.demo_bs_detail_type}</div>
                             </div>
                         </div>
                         <!-- 사업 제목-->
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">사업제목</label>
                             <div class="col-md-10">
-                                <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" value="${demobs.demo_subject}">
-                                <div class="form-control-plaintext mode-view">${demobs.demo_subject}</div>
+                                <input type="text" class="form-control form-control-md mode-edit mode-new" id="demo_subject" placeholder="제목을 입력해 주세요" value="${demobs.demo_subject}">
+                                <div class="form-control-plaintext mode-view" id="demo_subject_view">${demobs.demo_subject}</div>
                             </div>
                         </div>
 
@@ -290,14 +302,14 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">사업 기간</label>
                             <div class="col-md-10">
-                                <div class="form-control-plaintext mode-view">${demobs.start_date} - ${demobs.end_date}</div>
+                                <div class="form-control-plaintext mode-view" id="demo_dur">${demobs.start_date} - ${demobs.end_date}</div>
 
-                                <div id="datepicker-open" class="input-daterange input-group mode-edit mode-new">
-                                    <input type="text" class="form-control" name="start">
+                                <div class="input-daterange input-group mode-edit mode-new datepicker-open">
+                                    <input type="text" class="form-control" id="demo_start" name="start">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">~</span>
                                     </div>
-                                    <input type="text" class="form-control" name="end">
+                                    <input type="text" class="form-control" id="demo_end" name="end">
                                 </div>
                             </div>
                         </div>
@@ -305,14 +317,14 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">모집 기간</label>
                             <div class="col-md-10">
-                                <div class="form-control-plaintext mode-view">2022-01-01 - 2022-02-01</div>
+                                <div class="form-control-plaintext mode-view" id="demo_appl_dur">2022-01-01 - 2022-02-01</div>
 
-                                <div id="datepicker-open" class="input-daterange input-group mode-edit mode-new">
-                                    <input type="text" class="form-control" name="start">
+                                <div class="input-daterange input-group mode-edit mode-new datepicker-open">
+                                    <input type="text" class="form-control" id="demo_appl_start" name="start">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">~</span>
                                     </div>
-                                    <input type="text" class="form-control" name="end">
+                                    <input type="text" class="form-control" id="demo_appl_end" name="end">
                                 </div>
                             </div>
                         </div>
@@ -320,14 +332,14 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">심사 기간</label>
                             <div class="col-md-10">
-                                <div class="form-control-plaintext mode-view">2022-01-01 - 2022-02-01</div>
+                                <div class="form-control-plaintext mode-view" id="demo_eval_dur">2022-01-01 - 2022-02-01</div>
 
-                                <div id="datepicker-open" class="input-daterange input-group mode-edit mode-new">
-                                    <input type="text" class="form-control" name="start">
+                                <div class="input-daterange input-group mode-edit mode-new datepicker-open">
+                                    <input type="text" class="form-control" id="demo_eval_start" name="start">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">~</span>
                                     </div>
-                                    <input type="text" class="form-control" name="end">
+                                    <input type="text" class="form-control" id="demo_eval_end" name="end">
                                 </div>
                             </div>
                         </div>
@@ -335,14 +347,14 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">이용계획 조정기간</label>
                             <div class="col-md-10">
-                                <div class="form-control-plaintext mode-view">2022-01-01 - 2022-02-01</div>
+                                <div class="form-control-plaintext mode-view" id="demo_modify_dur">2022-01-01 - 2022-02-01</div>
 
-                                <div id="datepicker-open" class="input-daterange input-group mode-edit mode-new">
-                                    <input type="text" class="form-control" name="start">
+                                <div class="input-daterange input-group mode-edit mode-new datepicker-open">
+                                    <input type="text" class="form-control" id="demo_modify_start" name="start">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">~</span>
                                     </div>
-                                    <input type="text" class="form-control" name="end">
+                                    <input type="text" class="form-control" id="demo_modify_end" name="end">
                                 </div>
                             </div>
                         </div>
@@ -350,14 +362,14 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">협약 기간</label>
                             <div class="col-md-10">
-                                <div class="form-control-plaintext mode-view">2022-01-01 - 2022-02-01</div>
+                                <div class="form-control-plaintext mode-view" id="demo_arrange_dur">2022-01-01 - 2022-02-01</div>
 
-                                <div id="datepicker-open" class="input-daterange input-group mode-edit mode-new">
-                                    <input type="text" class="form-control" name="start">
+                                <div class="input-daterange input-group mode-edit mode-new datepicker-open">
+                                    <input type="text" class="form-control" id="demo_arrange_start" name="start">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">~</span>
                                     </div>
-                                    <input type="text" class="form-control" name="end">
+                                    <input type="text" class="form-control" id="demo_arrange_end" name="end">
                                 </div>
                             </div>
                         </div>
@@ -365,14 +377,14 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">모집 수</label>
                             <div class="form-inline col-md-4 mode-edit mode-new">
-                                <input type="text" class="form-control form-control-md text-md-right" style="width: 50%;" placeholder="0" value="${demobs.recruit_count_limit}">
+                                <input type="text" class="form-control form-control-md text-md-right" id="recruit_count_limit" style="width: 50%;" placeholder="0" value="${demobs.recruit_count_limit}">
                                 <small class="form-text text-muted">
                                     명(기업)
                                 </small>
                             </div>
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">게시여부</label>
                             <div class="col-md-4 mode-edit mode-new">
-                                <div class="form-control-plaintext mode-view">아니오</div>
+                                <div class="form-control-plaintext mode-view" id="is_announce">아니오</div>
                             </div>
 
                         </div>
@@ -381,16 +393,15 @@
                         <div class="form-row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메모</label>
                             <div class="form-group col col-md-10">
-                                <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
-                                <textarea class="form-control mode-view" readonly rows="5"></textarea>
+                                <textarea class="form-control mode-edit mode-new" id="memo" rows="3"></textarea>
+                                <textarea class="form-control mode-view" id="memo_view" readonly rows="5"></textarea>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">파일 첨부</label>
                             <div class="form-group col col-md-10 mode-edit mode-new">
-                                <input type="file" class="form-control-file d-block py-1">
-                                <input type="file" class="form-control-file d-block py-1">
+                                <input type="file" class="form-control-file d-block py-1" id="demo_files" multiple>
                             </div>
                             <div class="form-group col col-md-10 col-form-label mode-view">
                                 <a href="file.doc">공고문.pdf</a>
@@ -401,14 +412,14 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">등록자</label>
                             <div class="col-md-4 mode-edit mode-new">
-                                <div class="form-control-plaintext mode-view">${demobs.author_name}</div>
+                                <div class="form-control-plaintext mode-view" id="author_name">${demobs.author_name}</div>
                             </div>
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit">승인여부</label>
                             <div class="col-md-2 mode-edit">
                                 <div class="form-control-plaintext mode-edit">아니오</div>
                             </div>
                             <div class="col-md-2 mode-edit">
-                                <button type="button" class="btn btn-primary">승인하기</button>
+                                <button type="button" class="btn btn-primary" id="is_confirm">승인하기</button>
                             </div>
 
                         </div>
@@ -420,7 +431,7 @@
                             </div>
                             <div>
                                 <button type="button" class="btn btn-outline-primary mr-2">임시저장</button>
-                                <button type="button" class="btn btn-primary">작성완료</button>
+                                <button type="button" class="btn btn-primary" id="demo_new_submit">작성완료</button>
                             </div>
                         </div>
 
@@ -429,7 +440,7 @@
                                 <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
                             </div>
                             <div>
-                                <button type="button" class="btn btn-primary">저장</button>
+                                <button type="button" class="btn btn-primary" id="demo_edit_submit">저장</button>
                             </div>
                         </div>
 
@@ -439,7 +450,7 @@
                             </div>
 
                             <div>
-                                <button id="btn_edit_mode" type="button" class="btn btn-primary">수정</button>
+                                <button id="btn_edit_mode" type="button" class="btn btn-primary" >수정</button>
                             </div>
 
                         </div>
@@ -518,6 +529,45 @@
 
     <!-- / Layout footer -->
     <script>
+        var demoArr = [];
+        <c:forEach items="${demoBusinessVOList}" var="demo" varStatus="status">
+        demoArr.push({
+            idx_demo_business: "${demo.idx_demo_business}",
+            demo_bs_code: "${demo.demo_bs_code}",
+            demo_subject: "${demo.demo_subject}",
+            demo_bs_contents: "${demo.demo_bs_contents}",
+            demo_bs_main_type: "${demo.demo_bs_main_type}",
+            demo_bs_sub_type: "${demo.demo_bs_sub_type}",
+            demo_bs_detail_type: "${demo.demo_bs_detail_type}",
+            demo_bs_status: "${demo.demo_bs_status}",
+            applicant_count: "${demo.applicant_count}",
+            applicant_count_limit: "${demo.applicant_count_limit}",
+            start_date: "${demo.start_date}",
+            end_date: "${demo.end_date}",
+            recruit_start_date: "${demo.recruit_start_date}",
+            recruit_end_date: "${demo.recruit_end_date}",
+            exam_start: "${demo.exam_start}",
+            exam_end: "${demo.exam_end}",
+            plan_review_start: "${demo.plan_review_start}",
+            plan_review_end: "${demo.plan_review_end}",
+            convention_start: "${demo.convention_start}",
+            convention_end: "${demo.convention_end}",
+            recruit_count_limit: "${demo.recruit_count_limit}",
+            memo: "${demo.memo}",
+            idx_admin: "${demo.idx_admin}",
+            idx_conform_admin: "${demo.idx_conform_admin}",
+            is_announce: "${demo.is_announce}",
+            reg_date: "${demo.reg_date}",
+            last_upd_date: "${demo.last_upd_date}",
+        })
+        </c:forEach>
+
+        $(".demo_entity").on("click", function(){
+            var selectedIdx = $(this).attr("id").split("_")[1];
+            console.log(selectedIdx)
+        })
+
+
         $('.summernote').summernote({
             toolbar: [
                 // [groupName, [list of button]]
@@ -539,7 +589,7 @@
         $(function() {
             var isRtl = $('html').attr('dir') === 'rtl';
 
-            $('#datepicker-show,#datepicker-open').datepicker({
+            $('#datepicker-show, .datepicker-open').datepicker({
                 orientation: isRtl ? 'auto right' : 'auto left',
                 format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
                 startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)

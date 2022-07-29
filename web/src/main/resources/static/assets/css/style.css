@@ -9299,3 +9299,8 @@ table.table__type--pee tbody tr.tr__subsum th {
     width: 100%;
     background-position: center;
 }
+
+.docu_style li{
+    font-size: 1rem;
+    margin-bottom: 7px;
+}

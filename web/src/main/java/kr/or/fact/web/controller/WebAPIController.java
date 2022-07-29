@@ -315,7 +315,7 @@ public class WebAPIController {
     @RequestMapping(value = "/user_modify", method = RequestMethod.POST)
     public @ResponseBody
     ResultVO user_modify(HttpSession session, @RequestBody UserVO userVO){
-        System.out.println(userVO);
+//        System.out.println(userVO);
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("SUCCESS");
         resultVO.setResult_str("고객 정보 변경이 완료되었습니다.");
