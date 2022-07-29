@@ -52,11 +52,11 @@
                     <c:forEach items="${prContentList}" var="promotion" varStatus="status">
                         <li>
                             <a href="brd_promotion_detail?idx=${promotion.idx_pr_content}" class=" btn-sm btn_content_modal">
-                                <figure><img src="" alt=""></figure>
+                                <figure><img src="${promotion.thumb_img_file_path}" alt="" class="thumb_list_item"></figure>
                                 <div class="caption">
                                     <span class="list__title">${promotion.subject}</span>
                                     <div class="list__file">
-                                        <img src="resources/assets/image/ico_hwp.png" alt="hwp">
+                                        <a href="${promotion.file_path}"><img src="resources/assets/image/ico_hwp.png" alt="hwp"></a>
                                         <img src="resources/assets/image/ico_pdf.png" alt="pdf">
                                     </div>
                                 </div>
@@ -152,7 +152,7 @@
             </div>
             <div class="list__paging">
                 <div class="form__btn">
-                    <a href="#" class="btn btn-next">더보기 1/100</a>
+                    <a href="brd_promotion?page=" class="btn btn-next">더보기 1/100</a>
                 </div>
             </div>
             <!--//-->

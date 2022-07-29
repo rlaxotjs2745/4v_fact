@@ -6,10 +6,10 @@
 
             <!-- Brand demo (see assets/css/demo/demo.css) -->
             <div class="app-brand demo">
-                <a href="home" class="app-brand-text demo sidenav-text font-weight-normal ml-2 default"><img src="resources/assets/img/logo_sj.png" alt="스마트팜"></a>
-<%--                <a href="home" class="app-brand-text demo sidenav-text font-weight-normal ml-2 default"><img src="resources/assets/img/h1-logo.png" alt="스마트팜"></a>--%>
-                <a href="home" class="app-brand-text demo sidenav-text font-weight-normal ml-2 mini"><img src="resources/assets/img/logo_2.png" alt="상주"></a>
-<%--                <a href="home" class="app-brand-text demo sidenav-text font-weight-normal ml-2 mini"><img src="resources/assets/img/logo.png" alt="김제"></a>--%>
+<%--                <a href="home" class="app-brand-text demo sidenav-text font-weight-normal ml-2 default"><img src="resources/assets/img/logo_sj.png" alt="스마트팜"></a>--%>
+                <a href="home" class="app-brand-text demo sidenav-text font-weight-normal ml-2 default"><img src="resources/assets/img/h1-logo.png" alt="스마트팜"></a>
+<%--                <a href="home" class="app-brand-text demo sidenav-text font-weight-normal ml-2 mini"><img src="resources/assets/img/logo_2.png" alt="상주"></a>--%>
+                <a href="home" class="app-brand-text demo sidenav-text font-weight-normal ml-2 mini"><img src="resources/assets/img/logo.png" alt="김제"></a>
                 <a href="javascript:void(0)" class="layout-sidenav-toggle sidenav-link text-large ml-auto">
                     <i class="ion ion-md-menu align-middle"></i>
                 </a>
@@ -222,53 +222,53 @@
                     </a>
                 </li>
                 <!--//-->
-<%--                <li class="sidenav-item">--%>
-<%--                    <a href="javascript:void(0)" class="sidenav-link sidenav-toggle"><i class="sidenav-icon fas fa-calculator"></i>--%>
-<%--                        <div>문서발급 관리</div>--%>
-<%--                    </a>--%>
+                <li class="sidenav-item">
+                    <a href="javascript:void(0)" class="sidenav-link sidenav-toggle"><i class="sidenav-icon fas fa-calculator"></i>
+                        <div>문서발급 관리</div>
+                    </a>
 
-<%--                    <ul class="sidenav-menu">--%>
-<%--                        <li class="sidenav-item">--%>
-<%--                            <a href="javascript:pageLoad('e10_document_issued_req_list',{page_num:1},'문서발급요청 관리');" class="sidenav-link">--%>
-<%--                                <div>문서발급요청 관리</div>--%>
-<%--                            </a>--%>
-<%--                        </li>--%>
-<%--                        <li class="sidenav-item">--%>
-<%--                            <a href="javascript:pageLoad('e20_document_issued',{page_num:1},'문서발급');" class="sidenav-link">--%>
-<%--                                <div>문서발급</div>--%>
-<%--                            </a>--%>
-<%--                        </li>--%>
-<%--                        <li class="sidenav-item">--%>
-<%--                            <a href="javascript:pageLoad('e30_document_issued_history',{page_num:1},'문서발급 이력');" class="sidenav-link">--%>
-<%--                                <div>문서발급이력</div>--%>
-<%--                            </a>--%>
-<%--                        </li>--%>
-<%--                    </ul>--%>
-<%--                </li>--%>
+                    <ul class="sidenav-menu">
+                        <li class="sidenav-item">
+                            <a href="javascript:pageLoad('e10_document_issued_req_list',{page_num:1},'문서발급요청 관리');" class="sidenav-link">
+                                <div>문서발급요청 관리</div>
+                            </a>
+                        </li>
+                        <li class="sidenav-item">
+                            <a href="javascript:pageLoad('e20_document_issued',{page_num:1},'문서발급');" class="sidenav-link">
+                                <div>문서발급</div>
+                            </a>
+                        </li>
+                        <li class="sidenav-item">
+                            <a href="javascript:pageLoad('e30_document_issued_history',{page_num:1},'문서발급 이력');" class="sidenav-link">
+                                <div>문서발급이력</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <!--//-->
-<%--                <li class="sidenav-item">--%>
-<%--                    <a href="javascript:void(0)" class="sidenav-link sidenav-toggle"><i class="sidenav-icon fas fa-calculator"></i>--%>
-<%--                        <div>실증 데이터 관리</div>--%>
-<%--                    </a>--%>
+                <li class="sidenav-item">
+                    <a href="javascript:void(0)" class="sidenav-link sidenav-toggle"><i class="sidenav-icon fas fa-calculator"></i>
+                        <div>실증 데이터 관리</div>
+                    </a>
 
-<%--                    <ul class="sidenav-menu">--%>
-<%--                        <li class="sidenav-item">--%>
-<%--                            <a href="javascript:pageLoad('f10_gh_data_mng',{page_num:1},'시설관련 데이터');" class="sidenav-link">--%>
-<%--                                <div>시설관련 데이터</div>--%>
-<%--                            </a>--%>
-<%--                        </li>--%>
-<%--                        <li class="sidenav-item">--%>
-<%--                            <a href="javascript:pageLoad('f20_asset_data_mng',{page_num:1},'장비관련 데이터');" class="sidenav-link">--%>
-<%--                                <div>장비관련 데이터</div>--%>
-<%--                            </a>--%>
-<%--                        </li>--%>
-<%--                        <li class="sidenav-item">--%>
-<%--                            <a href="javascript:pageLoad('f30_data_req_history',{page_num:1},'데이터 전송 이력');" class="sidenav-link">--%>
-<%--                                <div>데이터 전송 이력</div>--%>
-<%--                            </a>--%>
-<%--                        </li>--%>
-<%--                    </ul>--%>
-<%--                </li>--%>
+                    <ul class="sidenav-menu">
+                        <li class="sidenav-item">
+                            <a href="javascript:pageLoad('f10_gh_data_mng',{page_num:1},'시설관련 데이터');" class="sidenav-link">
+                                <div>시설관련 데이터</div>
+                            </a>
+                        </li>
+                        <li class="sidenav-item">
+                            <a href="javascript:pageLoad('f20_asset_data_mng',{page_num:1},'장비관련 데이터');" class="sidenav-link">
+                                <div>장비관련 데이터</div>
+                            </a>
+                        </li>
+                        <li class="sidenav-item">
+                            <a href="javascript:pageLoad('f30_data_req_history',{page_num:1},'데이터 전송 이력');" class="sidenav-link">
+                                <div>데이터 전송 이력</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <!--//-->
                 <li class="sidenav-item">
                     <a href="javascript:void(0)" class="sidenav-link sidenav-toggle"><i class="sidenav-icon fas fa-calculator"></i>

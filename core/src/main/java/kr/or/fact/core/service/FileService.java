@@ -33,6 +33,7 @@ public interface FileService {
     List<UserDemoBsFileResultVO> getUserDemoFileList(long idx);
 
     public File convertMultipartToFile(MultipartFile file) throws IOException;
+    public File convertMultipartToFile2(MultipartFile file) throws IOException;
 
     int insertFileInfo(FileInfoVO fileInfoVO);
 }

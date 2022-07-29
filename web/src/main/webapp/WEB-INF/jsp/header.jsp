@@ -25,7 +25,8 @@
 <body>
 <div class="wrapper" id="wrapper">
     <header class="header">
-        <h1><a href="index"><img src="resources/assets/image/img-logo-s.png" alt="스마트팜 실증센터"></a></h1>
+<%--        <h1><a href="index"><img src="resources/assets/image/img-logo-s.png" alt="스마트팜 실증센터"></a></h1>--%>
+        <h1><a href="index"><img src="resources/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
         <nav class="nav"><!--is-expanded-->
             <ul class="nav--depth1">
                 <li><a href="#" class="">실증 안내/신청</a>

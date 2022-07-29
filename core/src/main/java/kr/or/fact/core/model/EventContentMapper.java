@@ -10,7 +10,7 @@ import java.util.List;
 public interface EventContentMapper {
     int getMainEventContentCount();
     int getWebpageEventContentCount();
-    List<EventContentVO> getEventContentList(int page, int list_amount, String event_content_num);
+    List<EventContentVO> getEventContentList(@Param("page_num") int page_num, @Param("amount") int amount, @Param("order_field") String order_field);
     List<EventContentVO> getMainEventContentList();
     List<EventContentVO> getEventList();
     public int insertEventContent(EventContentVO eventContentVO);
@@ -21,5 +21,6 @@ public interface EventContentMapper {
     int getEventViewCount(@Param("idx_event_content") long idx_event_content);
     void updateEventViewCount(EventContentVO eventContentVO);
     void updateEventContent(EventContentVO eventContentVO);
+    public List<EventContentVO> getThum();
 }
 

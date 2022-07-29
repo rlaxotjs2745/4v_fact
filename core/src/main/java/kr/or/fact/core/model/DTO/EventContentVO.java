@@ -26,6 +26,7 @@ public class EventContentVO {
     long search_tag;//	number	32					검색 태그
     String author;//	varchar2	40					게시자	게시자 이름
     long thumb_img_file_idx;//	number	32					썸네일 이미지 파일 정보	tb_file_idx
+    String thumb_img_file_path;
     long idx_admin;//	number	32				◯	최초 등록 어드민
     long confirm_admin_idx;//	number	32				◯	허가자
     Date reg_date;//	date						최초 등록 일시

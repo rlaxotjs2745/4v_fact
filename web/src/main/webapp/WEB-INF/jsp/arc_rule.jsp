@@ -58,7 +58,7 @@
                         <td class="td__dic">${rule.subject}</td>
                         <td class="td__list">${rule.usage_detail}</td>
                         <td class="">${rule.depart_name}</td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_doc.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_pdf.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
+                        <td class="td__data"><a href="${rule.file_path}"><img src="resources/assets/image/ico_doc.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_pdf.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
                     </tr>
 </c:forEach>
                     </tbody>

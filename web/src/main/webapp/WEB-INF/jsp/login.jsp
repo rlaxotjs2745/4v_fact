@@ -27,8 +27,8 @@
         <div class="page__full">
             <div class="page__floating">
 
-<%--                <div class="tb__logo"><img src="resources/assets/image/img_loginLogo.png" alt="SMART FARM POTAL"></div>&lt;%&ndash;김제&ndash;%&gt;--%>
-                <div class="tb__logo"></div><%--상주--%>
+                <div class="tb__logo"><img src="resources/assets/image/img_loginLogo.png" alt="SMART FARM POTAL"></div><%--김제--%>
+<%--                <div class="tb__logo"></div>&lt;%&ndash;상주&ndash;%&gt;--%>
                 <form id="loginForm" action="api_post_login" method="post">
                 <div class="tb__login">
                     <div class="td__cell--float">

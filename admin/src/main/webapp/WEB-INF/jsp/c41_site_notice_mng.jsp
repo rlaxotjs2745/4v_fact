@@ -691,7 +691,7 @@
             reg_date:$("#reg_date_update").val(),
             last_upd_date:$("#last_upd_date_update").val()
         }
-        console.log(param);
+
         $.ajax({
             type: 'post',
             url: 'update_notice', //데이터를 주고받을 파일 주소 입력
@@ -699,7 +699,7 @@
             contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
             dataType: 'json',//받는 데이터 타입
             success: function (result) {
-console.log(param);
+
                 if (result.result_code == "SUCCESS") {
                     alert("상태 변경에 성공하였습니다")
                 } else {
@@ -769,13 +769,12 @@ console.log(param);
             dataType:'json',//받는 데이터 타입
             enctype: 'multipart/form-data',
             success: function(result){
-                console.log(result);
-                console.log(fileForm)
+
                 alert("업로드에 성공했습니다", () => window.redirect("/"))
             },
             error: function (res) {
                 console.log(res)
-                console.log(files)
+
             }
         });
     }

@@ -29,7 +29,8 @@
                 <li><a href="#none">사이트 맵</a></li>
             </ul>
             <div class="footer__info">
-                <h3 class="footer__logo"><img src="resources/assets/image/logo-footer-s.png" alt=""></h3>
+<%--                <h3 class="footer__logo"><img src="resources/assets/image/logo-footer-s.png" alt="상주"></h3>--%>
+                <h3 class="footer__logo"><img src="resources/assets/image/logo_footer.svg" alt="김제"></h3>
                 <div class="footer__address">54331 전라북도 김제시 백구면 황토로 1079</div>
                 <div class="footer__copyright">Copyright(c) 2021 Korea Agriculture Technology Promotion Agency. All Rights Reserved.</div>
             </div>

@@ -1740,7 +1740,7 @@ td {
 }
 
 .list__type ul.list__type--event li:nth-child(1),
-.list__type ul.list__type--event li:nth-child(5) {
+.list__type ul.list__type--event li:nth-child(4n+1){
     margin-left: 0
 }
 
@@ -7734,8 +7734,8 @@ html {
     height: 100%;
     overflow: scroll;
     overflow-X: hidden;
-    /*background: url(../image/img_bglogo.jpg) no-repeat 50% 50%;*/
-    background: url(../image/img_bglogo.png) no-repeat 50% 50%;
+    background: url(../image/img_bglogo.jpg) no-repeat 50% 50%;
+    /*background: url(../image/img_bglogo.png) no-repeat 50% 50%;*/
     background-size: cover;
     position: fixed;
     left: 0;
@@ -9290,6 +9290,14 @@ table.table__type--pee tbody tr.tr__subsum th {
 .last_bottom {
     border-right: none !important;
     border-bottom: 1px solid #000 !important;
+}
+
+.thumb_list_item {
+    height: 184px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    background-position: center;
 }
 
 .docu_style li{

@@ -289,6 +289,7 @@
                 //작업이 성공적으로 발생했을 경우
                 console.log(result);
                 if(result.result_code=="SUCCESS"){
+                    alert("양식 등록에 성공하였습니다.")
 
                 }
                 else {

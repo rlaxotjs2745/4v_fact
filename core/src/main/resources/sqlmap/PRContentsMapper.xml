@@ -20,7 +20,7 @@
              ,SHOW_START_DATE
              ,VIEW_COUNT
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field}  DESC) AS row_num
         ,IDX_PR_CONTENT
                       ,PR_CONTENT_NUM
                       ,SUBJECT
@@ -30,7 +30,7 @@
                       ,SHOW_START_DATE
                       ,VIEW_COUNT
                  FROM (
-                          SELECT * FROM TB_PR_CONTENT  WHERE IS_SHOW=1 AND PR_CONTENT_STATUS=1 ORDER by PR_CONTENT_NUM ASC
+                          SELECT * FROM TB_PR_CONTENT WHERE IS_SHOW=1 AND PR_CONTENT_STATUS=1 ORDER by PR_CONTENT_NUM ASC
                       )
 
                  WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
@@ -82,7 +82,7 @@ LAST_UPD_DATE
                     #{memo},
                     #{search_tag},
                     #{author},
-                    #{thumb_img_file_idx},
+                    SEQ_FILE_INFO.CURRVAL,
                     #{idx_admin},
                     #{confirm_admin_idx},
                     SYSDATE,
@@ -91,7 +91,9 @@ LAST_UPD_DATE
                 )
 </insert>
 
-
+<select id="getThumb" resultType="kr.or.fact.core.model.DTO.PRContentVO">
+    SELECT IDX_PR_CONTENT, FILE_PATH FROM TB_FILE_INFO JOIN TB_PR_CONTENT ON THUMB_IMG_FILE_IDX=IDX_FILE_INFO
+</select>
 
 
     <select id="getMainPRContentList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.PRContentVO">
@@ -115,7 +117,7 @@ LAST_UPD_DATE
         )VALUES (
                     SEQ_PR_CONTENT_FILE_JOIN.NEXTVAL,
                     SEQ_PR_CONTENT.CURRVAL,
-                    SEQ_FILE_INFO.CURRVAL,
+                    SEQ_FILE_INFO.CURRVAL-1,
 
                     SYSDATE
 
@@ -146,7 +148,6 @@ LAST_UPD_DATE
                    A.REG_DATE,
                    A.LAST_UPD_DATE,
                    B.IDX_PR_CONTENT,
-
                    B.IDX_FILE_INFO,
                    C.FILE_PATH
         FROM TB_PR_CONTENT A JOIN TB_PR_CONTENT_FILE_JOIN B ON A.IDX_PR_CONTENT=B.IDX_PR_CONTENT

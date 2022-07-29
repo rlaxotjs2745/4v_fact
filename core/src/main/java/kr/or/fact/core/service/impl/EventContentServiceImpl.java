@@ -37,8 +37,20 @@ public class EventContentServiceImpl implements EventContentService {
         return eventContentMapper.getWebpageEventContentCount();
     }
     @Override
-    public List<EventContentVO> getEventContentList(int page, int list_amount){
-        return eventContentMapper.getEventContentList(page,list_amount,"EVENT_CONTENT_NUM");
+    public List<EventContentVO> getEventContentList(int page_num, int list_amount){
+        List<EventContentVO> eventContentVOList = eventContentMapper.getEventContentList(page_num,list_amount,"ANNOUNCE_NUM");
+
+        List<EventContentVO> thumbList = eventContentMapper.getThum();
+
+        for (int i = 0; i < eventContentVOList.size(); i++){
+            for(int l = 0; l < thumbList.size(); l++){
+                if(eventContentVOList.get(i).getIdx_event_content() == thumbList.get(l).getIdx_event_content()){
+                    eventContentVOList.get(i).setThumb_img_file_path(thumbList.get(l).getFile_path());
+                }
+            }
+        }
+
+        return eventContentVOList;
     }
     @Override
     public List<EventContentVO> getMainEventContentList(){
@@ -106,4 +118,7 @@ public class EventContentServiceImpl implements EventContentService {
     public void updateEventContent(EventContentVO eventContentVO) {
         eventContentMapper.updateEventContent(eventContentVO);
     }
+
+
+
 }

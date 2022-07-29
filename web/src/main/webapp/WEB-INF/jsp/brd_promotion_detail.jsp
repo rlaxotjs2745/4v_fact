@@ -164,7 +164,7 @@
                                 <div class="temp__download--box"><strong>첨부파일</strong>
                                     ${pr.file_path}
                                     <ul>
-                                        <li><img src="resources/assets/image/ico_hwp.png" alt=""><a href="#none">파일명 파일명.hwp</a></li>
+                                        <li><img src="resources/assets/image/ico_hwp.png" alt=""><a href="${pr.file_path}">파일명 파일명.hwp</a></li>
                                         <li><img src="resources/assets/image/ico_pdf.png" alt=""><a href="#none">파일명 파일명.png</a></li>
                                         <li><img src="resources/assets/image/ico_jpg.png" alt=""><a href="#none">파일명 파일명.jpg</a></li>
                                     </ul>

@@ -225,10 +225,20 @@ public class FileServiceImpl implements FileService {
 
         return newFile;
     }
+    @Override
+    public File convertMultipartToFile2(MultipartFile file) throws IOException {
+        File newFile = new File(factConfig.getUploadDir() +file.getOriginalFilename());
+        FileOutputStream fos = new FileOutputStream(newFile);
+        fos.write(file.getBytes());
+        fos.close();
 
+
+
+        return newFile;
+    }
     @Override
     public int insertFileInfo(FileInfoVO fileInfoVO) {
-        fileInfoVO.setFile_path(factConfig.getUploadDir()+ fileInfoVO.getFile_path());
+//        fileInfoVO.setFile_path(factConfig.getUploadDir() +fileInfoVO.getFile_path());
         return fileServiceMapper.insertFileInfo(fileInfoVO);
     }
 

@@ -888,9 +888,6 @@
             });
 
 
-            console.log(JSON.stringify(visitDataVOList));
-
-
             $.ajax({
                 type: 'post',
                 url: 'save_visit_date', //데이터를 주고받을 파일 주소 입력
