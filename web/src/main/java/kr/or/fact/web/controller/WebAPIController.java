@@ -58,6 +58,9 @@ public class WebAPIController {
     @Resource(name = "eventContentService")
     EventContentService eventContentService;
 
+    @Resource(name = "prContentService")
+    PRContentsService prContentService;
+
     @PostMapping
     @RequestMapping(value = "/user_id_check",method = RequestMethod.POST)
     public
@@ -1258,4 +1261,23 @@ public class WebAPIController {
 
         return eventContentVOList;
     }
+
+    @RequestMapping("/plus_pr")
+    @ResponseBody
+    public List<PRContentVO> brd_promotion(@RequestBody Integer page,
+                                Model model){
+        int list_amount = 10;
+        int page_amount = 10;
+
+
+
+        List<PRContentVO> prContentList = prContentService.getPRContentList(page,list_amount);
+        model.addAttribute("prContentList",prContentList);
+
+
+
+        return prContentList;
+    }
+
+
 }

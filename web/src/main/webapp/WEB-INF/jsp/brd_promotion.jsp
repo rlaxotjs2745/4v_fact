@@ -48,7 +48,7 @@
                     <input type="text" class="search" placeholder="검색어를 입력해주세요."><a href="#none" class="btn btn__board--search">검색</a></div>
             </div>
             <div class="list__type">
-                <ul class="list__type--promo">
+                <ul class="list__type--promo" id="pr_list">
                     <c:forEach items="${prContentList}" var="promotion" varStatus="status">
                         <li>
                             <a href="brd_promotion_detail?idx=${promotion.idx_pr_content}" class=" btn-sm btn_content_modal">
@@ -152,7 +152,7 @@
             </div>
             <div class="list__paging">
                 <div class="form__btn">
-                    <a href="brd_promotion?page=" class="btn btn-next">더보기 1/100</a>
+                    <button id="plus_pr" class="btn btn-next">더보기 1/100</button>
                 </div>
             </div>
             <!--//-->
@@ -169,7 +169,42 @@
         var idx = $(this).attr("id");
         pageLoad("pr_contents", {idx: parseInt(idx)}, "홍보자료 모달컨텐츠", "pr_contents");
     })
+    const a = function(promotion){
+        return '<li>\n' +
+            '<a href="brd_promotion_detail?idx=' + promotion.idx_pr_content + '" class=" btn-sm btn_content_modal">\n'+
+            ' <figure><img src="' + promotion.thumb_img_file_path + '" alt="" class="thumb_list_item"></figure>\n'+
+            '    <div class="caption">\n'+
+            '  <span class="list__title">'+promotion.subject+'</span>\n'+
+            '  <div class="list__file">\n'+
+            '  <a href="'+ promotion.file_path +'"><img src="resources/assets/image/ico_hwp.png" alt="hwp"></a>\n'+
+            ' <img src="resources/assets/image/ico_pdf.png" alt="pdf">\n'+
+            ' </div>\n'+
+        ' </div>\n'+
+        '</a>\n'+
+        '</li>\n'}
 
+
+
+
+
+
+
+    var page = 2;
+    $("#plus_pr").click(function() {
+        $.ajax({
+            type: 'post',
+            url :'plus_pr', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(page),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'json',//받는 데이터 타입
+            success: function(res){
+                for(var promotion of res){
+                    $("#pr_list").append(a(promotion));
+                }
+                page += 1;
+            }
+        })
+    })
 
 </script>
 </body>
