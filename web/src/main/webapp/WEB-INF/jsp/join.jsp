@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko" class="view">
 <head>
@@ -27,7 +28,9 @@
             <div class="page__floating">
 
                 <div class="tb__logo">
-                    <img src="resources/assets/image/img_loginLogo.png" alt="SMART FARM POTAL">
+                    <c:if test="${profile == 'gimje-prod'}">
+                        <h1><a href="/"><img src="resources/assets/image/img_loginLogo.png" alt="스마트팜 실증센터"></a></h1>
+                    </c:if>
                 </div>
                 <div class="tb__join">
                     <div class="td__cell">
@@ -108,6 +111,13 @@
     <!-- Initialize Swiper -->
 
     <script>
+
+        if('${profile}' == 'sangju-prod'){
+            $('#login').css('background', 'url(resources/assets/image/img_bglogo.png) no-repeat 50% 50%');
+        }else {
+            $('#login').css('background', 'url(resources/assets/image/img_bglogo.jpg) no-repeat 50% 50%');
+        }
+
         // 체크박스 전체 선택
         $(".join__field").on("click", "#join-1", function () {
             $(this).parents(".join__field").find('input').prop("checked", $(this).is(":checked"));

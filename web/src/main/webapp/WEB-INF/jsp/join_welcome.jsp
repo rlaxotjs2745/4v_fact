@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko" class="view">
 <head>
@@ -29,7 +30,9 @@
                     <a href="main"><img src="resources/assets/image/ico_close.svg" alt=""></a>
                 </div>
                 <div class="tb__logo">
-<%--                    <img src="resources/assets/image/img_loginLogo.png" alt="SMART FARM POTAL">--%>
+                    <c:if test="${profile == 'gimje-prod'}">
+                        <img src="resources/assets/image/img_loginLogo.png" alt="스마트팜 실증센터">
+                    </c:if>
                 </div>
                 <div class="tb__join">
                     <div class="td__cell">
@@ -70,6 +73,14 @@
 <script src="resources/assets/js/lib/swiper.min.js" type="text/javascript"></script>
 <script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 <!-- Initialize Swiper -->
+<script>
+    if('${profile}' == 'sangju-prod'){
+        $('#login').css('background', 'url(resources/assets/image/img_bglogo.png) no-repeat 50% 50%');
+    }else {
+        $('#login').css('background', 'url(resources/assets/image/img_bglogo.jpg) no-repeat 50% 50%');
+    }
+
+</script>
 </body>
 </html>
 

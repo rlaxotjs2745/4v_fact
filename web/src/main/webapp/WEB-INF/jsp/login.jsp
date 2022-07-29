@@ -27,8 +27,9 @@
         <div class="page__full">
             <div class="page__floating">
 
-                <div class="tb__logo"><img src="resources/assets/image/img_loginLogo.png" alt="SMART FARM POTAL"></div><%--김제--%>
-<%--                <div class="tb__logo"></div>&lt;%&ndash;상주&ndash;%&gt;--%>
+                <div class="tb__logo"><c:if test="${profile == 'gimje-prod'}">
+                    <h1><a href="/"><img src="resources/assets/image/img_loginLogo.png" alt="스마트팜 실증센터"></a></h1>
+                </c:if></div>
                 <form id="loginForm" action="api_post_login" method="post">
                 <div class="tb__login">
                     <div class="td__cell--float">
@@ -217,6 +218,11 @@
     <script src="resources/assets/js/ui.common.js" type="text/javascript"></script>
 
 <script>
+    if('${profile}' == 'sangju-prod'){
+        $('#login').css('background', 'url(resources/assets/image/img_bglogo.png) no-repeat 50% 50%');
+    }else {
+        $('#login').css('background', 'url(resources/assets/image/img_bglogo.jpg) no-repeat 50% 50%');
+    }
 
     $("#btn_id_find").click(function(){
         $("#find_id_result *").remove("");
