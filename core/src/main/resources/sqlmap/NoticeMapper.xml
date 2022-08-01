@@ -11,61 +11,106 @@
         SELECT COUNT(*) FROM TB_NOTICE  WHERE IS_SHOW=1 AND NOTICE_STATUS=1
     </select>
 
+    <sql id="searchNoticeCondition">
+        <if test='query != null and query != ""'>
+            <choose>
+                <when test='filter == null or filter == ""'>
+                    AND SUBJECT LIKE '%' || #{query} || '%'
+                </when>
+                <when test='filter == "t"'>
+                    AND SUBJECT LIKE '%' || #{query} || '%'
+                </when>
+                <when test='filter == "w"'>
+                    AND AUTHOR LIKE '%' || #{query} || '%'
+                </when>
+                <when test='filter == "c"'>
+                    AND NOTICE_CONTENTS LIKE '%' || #{query} || '%'
+                </when>
+                <when test='filter == "tc"'>
+                    AND (SUBJECT LIKE '%' || #{query} || '%' OR NOTICE_CONTENTS LIKE '%' || #{query} || '%')
+                </when>
+                <otherwise>
+                    AND SUBJECT LIKE '%' || #{query} || '%'
+                </otherwise>
+            </choose>
+        </if>
+    </sql>
+    <select id="getOpenNoticeCount" resultType="int">
+        SELECT COUNT(*) FROM TB_NOTICE
+        WHERE IS_SHOW=1
+            AND NOTICE_STATUS=1
+            <include refid="searchNoticeCondition"></include>
+    </select>
+
+    <select id="getOpenNoticeList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.NoticeVO">
+        SELECT
+            *
+        FROM (
+            SELECT
+                ROW_NUMBER() OVER(ORDER by IDX_NOTICE DESC) AS row_num,
+                IDX_NOTICE,
+                NOTICE_CODE,
+                NOTICE_NUM,
+                SUBJECT,
+                NOTICE_CONTENTS,
+                IS_FILE,
+                IS_NEW,
+                IS_MAIN_PAGE,
+                IS_IMPORTANT,
+                IS_SHOW,
+                VIEW_COUNT,
+                NOTICE_STATUS,
+                POSTING_START_DATE,
+                POSTING_END_DATE,
+                DOC_VERSION,
+                MEMO,
+                SEARCH_TAG,
+                AUTHOR,
+                IDX_ADMIN,
+                CONFIRM_ADMIN_IDX,
+                REG_DATE,
+                LAST_UPD_DATE
+            FROM TB_NOTICE
+            WHERE IS_SHOW=1
+                AND NOTICE_STATUS=1
+                <include refid="searchNoticeCondition"></include>
+        )
+        WHERE row_num BETWEEN #{count} * (#{page} - 1) + 1 AND #{count} * #{page}
+    </select>
+
     <select id="getNoticeWebList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.NoticeVO">
         SELECT
-            IDX_NOTICE,
-            NOTICE_CODE,
-            NOTICE_NUM,
-            SUBJECT,
-            NOTICE_CONTENTS,
-            IS_FILE,
-            IS_NEW,
-            IS_MAIN_PAGE,
-            IS_IMPORTANT,
-            IS_SHOW,
-            VIEW_COUNT,
-            NOTICE_STATUS,
-            POSTING_START_DATE,
-            POSTING_END_DATE,
-            DOC_VERSION,
-            MEMO,
-            SEARCH_TAG,
-            AUTHOR,
-            IDX_ADMIN,
-            CONFIRM_ADMIN_IDX,
-            REG_DATE,
-            LAST_UPD_DATE
+            *
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
-        ,  IDX_NOTICE,
-                        NOTICE_CODE,
-                        NOTICE_NUM,
-                        SUBJECT,
-                        NOTICE_CONTENTS,
-                        IS_FILE,
-                        IS_NEW,
-                        IS_MAIN_PAGE,
-                        IS_IMPORTANT,
-                        IS_SHOW,
-                        VIEW_COUNT,
-                        NOTICE_STATUS,
-                        POSTING_START_DATE,
-                        POSTING_END_DATE,
-                        DOC_VERSION,
-                        MEMO,
-                        SEARCH_TAG,
-                        AUTHOR,
-                        IDX_ADMIN,
-                        CONFIRM_ADMIN_IDX,
-                        REG_DATE,
-                        LAST_UPD_DATE
-                 FROM (
-                          SELECT * FROM TB_NOTICE  WHERE IS_SHOW=1 AND NOTICE_STATUS=1
-                      )
-
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
-             )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+            SELECT
+                ROW_NUMBER() OVER(ORDER by ${order_field} DESC) AS row_num,
+                IDX_NOTICE,
+                NOTICE_CODE,
+                NOTICE_NUM,
+                SUBJECT,
+                NOTICE_CONTENTS,
+                IS_FILE,
+                IS_NEW,
+                IS_MAIN_PAGE,
+                IS_IMPORTANT,
+                IS_SHOW,
+                VIEW_COUNT,
+                NOTICE_STATUS,
+                POSTING_START_DATE,
+                POSTING_END_DATE,
+                DOC_VERSION,
+                MEMO,
+                SEARCH_TAG,
+                AUTHOR,
+                IDX_ADMIN,
+                CONFIRM_ADMIN_IDX,
+                REG_DATE,
+                LAST_UPD_DATE
+            FROM TB_NOTICE
+            WHERE IS_SHOW=1
+                AND NOTICE_STATUS=1
+        )
+        WHERE row_num BETWEEN #{amount} * (#{page_num} - 1) + 1 AND #{amount} * #{page_num}
     </select>
 
 <insert id="insertNotice" parameterType="kr.or.fact.core.model.DTO.NoticeVO">
@@ -186,7 +231,7 @@ REG_DATE
     SELECT VIEW_COUNT FROM TB_NOTICE WHERE IDX_NOTICE=#{idx_notice}
 </select>
     <update id="updateNoticeViewCount" parameterType="kr.or.fact.core.model.DTO.NoticeVO">
-        UPDATE TB_NOTICE SET VIEW_COUNT = #{view_count} WHERE IDX_NOTICE =#{idx_notice}
+        UPDATE TB_NOTICE SET VIEW_COUNT = VIEW_COUNT + 1 WHERE IDX_NOTICE =#{idx_notice}
     </update>
 
     <update id="updateNotice" parameterType="kr.or.fact.core.model.DTO.NoticeVO">

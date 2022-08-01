@@ -900,18 +900,27 @@ public class IndexController {
 
 
     @RequestMapping("/brd_notice")
-    public String brd_notice(@RequestParam("page") int page,
+    public String brd_notice(@RequestParam(value = "page", required = false) Integer page,
+                             @RequestParam(name = "filter", required = false) String filter,
+                             @RequestParam(name = "query", required = false) String query,
                              Model model) {
+        if (page == null) {
+            page = 1;
+        }
+
         int list_amount = 10;
         int page_amount = 10;
 
-        int noticeCount = noticeService.getWebpageNoticeCount();
+        model.addAttribute("filter", filter);
+        model.addAttribute("query", query);
+
+        int noticeCount = noticeService.getOpenNoticeCount(filter, query);
         if (noticeCount == 0) {
             satProfile(model);
             return "brd_notice_blank";
         }
         model.addAttribute("total_count", noticeCount);
-        List<NoticeVO> noticeList = noticeService.getNoticeWebList(page, list_amount);
+        List<NoticeVO> noticeList = noticeService.getOpenNoticeList(page, list_amount, filter, query);
         model.addAttribute("noticeList", noticeList);
 
         model.addAttribute("cur_page", page);
@@ -956,7 +965,7 @@ public class IndexController {
         model.addAttribute("list_amount", list_amount);
         model.addAttribute("page_amount", page_amount);
 
-        getHomepageInfo(model);
+//        getHomepageInfo(model);
         satProfile(model);
         return "brd_notice";
     }
@@ -967,7 +976,6 @@ public class IndexController {
         int view = noticeService.getNoticeViewCount(idx);
         NoticeVO noticeVO1 = new NoticeVO();
         noticeVO1.setIdx_notice(idx);
-        noticeVO1.setView_count(view + 1);
         noticeService.updateNoticeViewCount(noticeVO1);
         System.out.println(noticeVO1);
 
