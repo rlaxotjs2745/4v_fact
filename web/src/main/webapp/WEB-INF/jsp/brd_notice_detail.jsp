@@ -51,7 +51,7 @@
                                 <div class="edit--type"><em>게시자</em><span>${noticeInfo.author}</span></div>
                                 <div class="edit--type"><em>등록일</em><span><fmt:formatDate value="${noticeInfo.reg_date}" pattern="yyyy-MM-dd HH:MM"/></span></div>
                                 <div class="edit--type"><em>조회수</em><span>${noticeInfo.view_count}</span></div>
-                                <div class="edit--print"><a href="#none"><img src="resources/assets/image/ico_print.png" alt="인쇄하기"></a></div>
+                                <div class="edit--print"><img src="resources/assets/image/ico_print.png" alt="인쇄하기" onclick="window.print()"></div>
                             </div>
                         </th>
                     </tr>
