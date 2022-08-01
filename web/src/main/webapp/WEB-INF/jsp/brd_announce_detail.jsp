@@ -50,7 +50,7 @@
                                 <div class="edit--type"><em>게시자</em><span>${bsAnnouns.author}</span></div>
                                 <div class="edit--type"><em>등록일</em><span>${bsAnnouns.reg_date}</span></div>
                                 <div class="edit--type"><em>조회수</em><span>${bsAnnouns.view_count}</span></div>
-                                <div class="edit--print"><a href="#none"><img src="resources/assets/image/ico_print.png" alt="인쇄하기"></a></div>
+                                <div class="edit--print"><img src="resources/assets/image/ico_print.png" alt="인쇄하기" onclick="window.print()"></div>
                             </div>
                         </th>
                     </tr>
