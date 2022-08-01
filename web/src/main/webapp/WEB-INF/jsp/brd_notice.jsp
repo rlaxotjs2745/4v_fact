@@ -72,7 +72,7 @@
                         <tr>
                             <td>${notice.notice_num}</td>
                             <td class="td__left"><a href="brd_notice_detail?idx=${notice.idx_notice}" class="td__link">${notice.subject}<c:if test="${notice.is_new eq 1}"><img src="resources/assets/image/ico_new.png" alt="NEW" class="board__badge"></c:if></a></td>
-                            <td class="td__data"><img src="resources/assets/image/ico_doc.png" alt=""></td>
+                            <td class="td__data"><img src="resources/assets/image/ico_file-present.png" alt=""></td>
                             <td class="td__data">${notice.author}</td>
                             <td class="td__data">${notice.last_upd_date}</td>
                             <td class="td__data">${notice.view_count}</td>
