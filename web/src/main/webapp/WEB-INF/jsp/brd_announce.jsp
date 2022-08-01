@@ -64,7 +64,7 @@
                         <th>번호</th>
                         <th>구분</th>
                         <th class="th__left">제목</th>
-                        <th>첨부파일</th>
+                        <th>첨부<br>파일</th>
                         <th>게시자</th>
                         <th>등록일</th>
                         <th>조회수</th>
@@ -82,7 +82,7 @@
                             <c:if test="${ann.bs_status eq 10}"> 사업종료</c:if>
                         </td>
                         <td class="td__left"><a href="brd_announce_detail?idx=${ann.idx_bs_announcement}" class="td__link">${ann.subject}<c:if test="${ann.is_new eq 1}"> <img src="resources/assets/image/ico_new.png" alt="NEW" class="board__badge"></c:if></a></td>
-                        <td class="td__data"><img src="resources/assets/image/ico_doc.png" alt=""></td>
+                        <td class="td__data"><img src="resources/assets/image/ico_file-present.png" alt=""></td>
                         <td class="td__data">${ann.author}</td>
                         <td class="td__data"><fmt:formatDate value="${ann.posting_start_date}" pattern="yyyy-MM-dd" /></td>
                         <td class="td__data">${ann.view_count}</td>
@@ -191,7 +191,6 @@
 </div>
 <%@include file ="footer.jsp" %>
 <%@include file ="script.jsp" %>
-
 </div>
 </body>
 </html>

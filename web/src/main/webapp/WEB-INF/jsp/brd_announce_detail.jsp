@@ -16,7 +16,7 @@
                 <span>홈</span>
                 <span>열린마당</span>
                 <div class="under__depth">
-                    <a href="#" class="under__depth--anchor">공지사항</a>
+                    <a href="#" class="under__depth--anchor">사업공고</a>
                     <div class="under__depth--list">
                         <a href="brd_notice?page=1">공지사항</a>
                         <a href="brd_announce?page=1">사업공고</a>
@@ -28,7 +28,7 @@
         </div>
         <div class="page__menu--box">
             <div class="page__menu--inner">
-                <h2 class="page__title">공지사항</h2>
+                <h2 class="page__title">사업공고</h2>
                 <div class="page__location">
                     <div class="location__deco">담당자는 해당 게시물 작성자 및 전화번호 참고 부탁드립니다.</div>
                 </div>
@@ -50,7 +50,7 @@
                                 <div class="edit--type"><em>게시자</em><span>${bsAnnouns.author}</span></div>
                                 <div class="edit--type"><em>등록일</em><span>${bsAnnouns.reg_date}</span></div>
                                 <div class="edit--type"><em>조회수</em><span>${bsAnnouns.view_count}</span></div>
-                                <div class="edit--print"><a href="#none"><img src="resources/assets/image/ico_print.png" alt="인쇄하기"></a></div>
+                                <div class="edit--print"><img src="resources/assets/image/ico_print.png" alt="인쇄하기" onclick="window.print()"></div>
                             </div>
                         </th>
                     </tr>
