@@ -9303,3 +9303,8 @@ table.table__type--pee tbody tr.tr__subsum th {
     font-size: 1rem;
     margin-bottom: 7px;
 }
+
+/* page custome */
+.part__container .part__service {
+    height: 200px;
+}
