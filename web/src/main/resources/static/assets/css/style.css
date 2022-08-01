@@ -9308,3 +9308,8 @@ table.table__type--pee tbody tr.tr__subsum th {
 .part__container .part__service {
     height: 200px;
 }
+
+.table__paging a img {
+    padding: 0 !important;
+    margin: 10px;
+}
