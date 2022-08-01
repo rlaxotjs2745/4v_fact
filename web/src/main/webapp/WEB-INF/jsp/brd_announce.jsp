@@ -64,7 +64,7 @@
                         <th>번호</th>
                         <th>구분</th>
                         <th class="th__left">제목</th>
-                        <th>첨부파일</th>
+                        <th>첨부<br>파일</th>
                         <th>게시자</th>
                         <th>등록일</th>
                         <th>조회수</th>
@@ -191,7 +191,6 @@
 </div>
 <%@include file ="footer.jsp" %>
 <%@include file ="script.jsp" %>
-
 </div>
 </body>
 </html>
