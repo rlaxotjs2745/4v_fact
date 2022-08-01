@@ -431,7 +431,6 @@
 
 <script>
     if("${admin.auth_status}" == "0"){
-        console.log("${admin.auth_status}");
         $("#modals-pw-modify-first").addClass("show").css("display", "block");
         $(".modal-backdrop").addClass("show").css("display", "block");
     }

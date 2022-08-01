@@ -184,7 +184,6 @@ public class FileController {
         }
         MultipartFile file = fileRequestVO.getFiles1();
         String fileName = fileService.storeFileInfo(fileRequestVO.getFiles1());
-        System.out.println("여기");
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
                 .path(fileName)

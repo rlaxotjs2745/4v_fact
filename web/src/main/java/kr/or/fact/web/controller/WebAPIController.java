@@ -662,7 +662,6 @@ public class WebAPIController {
     public @ResponseBody
     ResultVO app_step3_save_temp(HttpSession session,
                                  @RequestBody UserDemoBsVO userDemoBsVO){
-        System.out.println(userDemoBsVO);
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("SUCCESS");
         resultVO.setResult_str("저장했습니다");
@@ -812,7 +811,6 @@ public class WebAPIController {
 
         long sender = recieveFilesVO.getSender();
         long bsIdx = recieveFilesVO.getBs_idx();
-        System.out.println(recieveFilesVO);
 
         try{
             fileService.insertFile(recieveFilesVO.getFile1(), sender, bsIdx, 1);
@@ -830,7 +828,6 @@ public class WebAPIController {
     ResultVO app_step4_save_temp(HttpSession session,
                                         @RequestBody UserDemoBsVO userDemoBsVO){
 
-        System.out.println(userDemoBsVO);
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("SUCCESS");
         resultVO.setResult_str("저장했습니다");
@@ -1193,7 +1190,6 @@ public class WebAPIController {
 
         long sender = recieveFilesVO.getSender();
         long bsIdx = recieveFilesVO.getBs_idx();
-        System.out.println(recieveFilesVO);
 
         try{
             if(recieveFilesVO.getFile1() != null){

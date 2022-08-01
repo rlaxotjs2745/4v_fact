@@ -28,4 +28,6 @@ public interface DemoBsMapper {
     AdminDemoBSFilterVO getAdminDemoBsFilter();
     List<DemoBusinessVO> getAvailibleDemoBs();
 
+    List<String> isValidCode(String code);
+
 }

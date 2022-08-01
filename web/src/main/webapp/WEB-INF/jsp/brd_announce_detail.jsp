@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file ="header.jsp" %>
 
@@ -28,7 +29,7 @@
         </div>
         <div class="page__menu--box">
             <div class="page__menu--inner">
-                <h2 class="page__title">공지사항</h2>
+                <h2 class="page__title">사업공고</h2>
                 <div class="page__location">
                     <div class="location__deco">담당자는 해당 게시물 작성자 및 전화번호 참고 부탁드립니다.</div>
                 </div>
@@ -48,7 +49,8 @@
                         <th class="th__edit">
                             <div class="detail__edit">
                                 <div class="edit--type"><em>게시자</em><span>${bsAnnouns.author}</span></div>
-                                <div class="edit--type"><em>등록일</em><span>${bsAnnouns.reg_date}</span></div>
+                                <fmt:formatDate value="${bsAnnouns.reg_date}" var="reg_date" pattern="yyyy.MM.dd."/>
+                                <div class="edit--type"><em>등록일</em><span>${reg_date}</span></div>
                                 <div class="edit--type"><em>조회수</em><span>${bsAnnouns.view_count}</span></div>
                                 <div class="edit--print"><a href="#none"><img src="resources/assets/image/ico_print.png" alt="인쇄하기"></a></div>
                             </div>

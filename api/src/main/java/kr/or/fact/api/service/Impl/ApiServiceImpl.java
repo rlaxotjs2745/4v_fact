@@ -781,9 +781,7 @@ public class ApiServiceImpl implements ApiService {
     }
 
     public ArrayList<EnvInfoVO> selectbyGuyokEnv(long guyok, String farm_cd){
-        System.out.println(guyok);
         ArrayList<MetaDataVO> metaDataVO = apiMapper.selectbyGuyokEnv(guyok, farm_cd);
-        System.out.println(metaDataVO);
         ArrayList<EnvInfoVO> result = new ArrayList<>();
 
         for(int i = 0; i < metaDataVO.size(); i++){

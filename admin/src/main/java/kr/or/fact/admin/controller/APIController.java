@@ -222,6 +222,19 @@ public class APIController {
         return "pages/demoBsListByFilter";
     }
 
+    @RequestMapping(value = "/bs_code_dupl_check",method = RequestMethod.POST)
+    public @ResponseBody ResultVO bs_code_dupl_check(HttpSession session,
+                           @RequestBody String code){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("SUCCESS");
+
+        if(!demoBsService.isValidCode(code)){
+            resultVO.setResult_code("Fail");
+        }
+
+        return resultVO;
+    }
+
     @RequestMapping(value = "/appl_list_by_b21_filtered",method = RequestMethod.POST)
     public String demo_bs_list_by_filter(HttpSession session,
                                          @RequestBody ParamPageListFilteredVO param,
@@ -371,7 +384,6 @@ public class APIController {
     public @ResponseBody
     long insertSmsMessage(@RequestBody SmsSendVO smsSendVO) {
         smsSendVO.setNow_date(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddhhmm")));
-        System.out.println(smsSendVO);
         return smsSendService.insertSmsMessage(smsSendVO);
     }
 
@@ -674,7 +686,6 @@ public class APIController {
     public @ResponseBody
     ResultVO  admin_join(HttpSession session,
                              @RequestBody AdminVO adminVO){
-        System.out.println(adminVO);
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("사용할 수 있는 아이디입니다.");
         resultVO.setResult_code("SUCCESS");
@@ -691,9 +702,7 @@ public class APIController {
         adminVO.setAdmin_pw(newPw);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(adminVO.getAdmin_pw());
-        System.out.println(adminVO.getAdmin_pw());
         adminVO.setAdmin_pw(hashedPassword);
-        System.out.println(newPw);
         try{
             if(adminService.adminIdCheck(adminVO.getAdmin_id())){
                 resultVO.setResult_str("이미 사용중인 아이디입니다.");
@@ -714,7 +723,6 @@ public class APIController {
             resultVO.setResult_str("계정 생성에 실패했습니다.");
             resultVO.setResult_code("ERROR002");
         }
-        System.out.println(resultVO);
         return  resultVO;
     }
     @RequestMapping(value = "/changePw",method = RequestMethod.POST)
@@ -729,13 +737,11 @@ public class APIController {
                 changePwVO.getModPwCf()!=null){
 
             AdminVO adminVo = adminService.findAdminById(principal.getName());
-            System.out.println(adminVo);
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 //            String hashedPassword = passwordEncoder.encode(changePwVO.getCurPw());
             // 인코딩된 비밀번호와 일반 비밀번호를 대조합니다
             if(passwordEncoder.matches(changePwVO.getCurPw(),adminVo.getAdmin_pw())){
                 try{
-                    System.out.println("pass");
                     String updatePassword = passwordEncoder.encode(changePwVO.getModPW());
                     changePwVO.setModPW(updatePassword);
                     changePwVO.setAdmin_id(adminVo.getAdmin_id());
@@ -782,12 +788,8 @@ public class APIController {
         String hashedPassword = passwordEncoder.encode(newPw);
         try{
             AdminVO adminVO = adminService.modifyPw(adminIdx, hashedPassword);
-            System.out.println("1");
-            System.out.println(adminVO);
             MimeMessage mail = mailSender.createMimeMessage();
-            System.out.println("2");
             MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
-            System.out.println("3");
 
             mailHelper.setFrom("스마트팜 혁신벨리 실증단지 <fact@smartfarm.co.kr>"); // 보내는 사람 정보도 와야함
             mailHelper.setTo(adminVO.getAdmin_id());
@@ -810,7 +812,6 @@ public class APIController {
     @RequestMapping(value ="/admin_modify",method = RequestMethod.POST)
     public @ResponseBody
     ResultVO adminModify(@RequestBody AdminVO adminVO){
-        System.out.println("통신됨??");
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
         resultVO.setResult_str("업데이트 실패");
@@ -848,7 +849,6 @@ public class APIController {
             } catch (Exception e){
                 resultVO = null;
             }
-        System.out.println(resultVO);
         return resultVO;
     }
 
@@ -909,7 +909,6 @@ public class APIController {
             resultVO.setResult_code("ERROR_1000");
             resultVO.setResult_str("이미 탈퇴된 고객이거나 없는 정보입니다.");
         }
-        System.out.println(resultVO);
         return resultVO;
     }
 
@@ -927,7 +926,6 @@ public class APIController {
             resultVO.setResult_code("ERROR_1000");
             resultVO.setResult_str("이미 탈퇴된 고객이거나 없는 정보입니다.");
         }
-        System.out.println(resultVO);
         return resultVO;
     }
 
@@ -946,7 +944,6 @@ public class APIController {
             resultVO.setResult_code("ERROR_1000");
             resultVO.setResult_str("이미 탈퇴된 고객이거나 없는 정보입니다.");
         }
-        System.out.println(resultVO);
         return resultVO;
     }
 
@@ -971,7 +968,6 @@ public class APIController {
     public @ResponseBody ResultVO assetReservationItemConfirm(@RequestBody AssetReservationItemVO assetReservationItemVO){
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
-        System.out.println(assetReservationItemVO);
 //        resultVO.setResult_str("업데이트 실패");
         try {
             assetService.updateReservationItem(assetReservationItemVO);
@@ -980,7 +976,6 @@ public class APIController {
             System.out.println(e);
             resultVO.setResult_code("ERROR_1000");
         }
-        System.out.println(resultVO);
         return resultVO;
     }
 
@@ -1030,7 +1025,6 @@ public class APIController {
             if(assetService.reserveAsset(assetReservationVO, adminInfo) == 1){
                 resultVO.setResult_code("SUCCESS");
                 resultVO.setResult_str("예약 등록이 완료되었습니다.");
-                System.out.println("다됐다");
             } else {
                 resultVO.setResult_code("ERROR_1000");
                 resultVO.setResult_str("예약 등록에 실패했습니다.");
@@ -1230,8 +1224,6 @@ public class APIController {
             thumFileInfoVO.setFile_path(fileThumDownloadUri);
             fileService.storeFileInfo(fileThum);
             fileService.insertFileInfo(thumFileInfoVO);
-            System.out.println(thumFileInfoVO);
-            System.out.println(fileThumName);
 
 
             prContentService.insertPRContent(prcontensVO);
@@ -1371,13 +1363,11 @@ public class APIController {
             noticeService.updateNotice(noticeVO);
             resultVO.setResult_code("SUCCESS");
             resultVO.setResult_str("업데이트가 완료되었습니다.");
-            System.out.println(noticeVO);
         } catch (Exception e){
             System.out.println(e);
             resultVO.setResult_code("ERROR_1000");
             resultVO.setResult_str("없는 상담일지입니다.");
         }
-        System.out.println(resultVO);
         return resultVO;
     }
 
@@ -1412,7 +1402,6 @@ public class APIController {
             prContentService.updatePrContent(prContentVO);
             resultVO.setResult_code("SUCCESS");
             resultVO.setResult_str("업데이트가 완료되었습니다.");
-            System.out.println("여기");
         } catch (Exception e){
             System.out.println(e);
             resultVO.setResult_code("ERROR_1000");

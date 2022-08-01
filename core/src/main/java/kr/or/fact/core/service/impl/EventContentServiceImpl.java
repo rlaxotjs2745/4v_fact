@@ -92,7 +92,6 @@ public class EventContentServiceImpl implements EventContentService {
     @Override
     public EventFileJoinSelectVO getEventContentFileJoin(int idx_event_content) {
         long newIdx = Long.parseLong("" + idx_event_content);
-        System.out.println(newIdx);
         return eventContentMapper.getEventContentFileJoin(newIdx);
     }
 

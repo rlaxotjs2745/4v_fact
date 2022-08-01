@@ -434,7 +434,6 @@
             success: function (result) {
                 //작업이 성공적으로 발생했을 경우
 
-console.log(result);
                 alert(result.result_str);
                 $("#btn_corp_save").html("기업 정보 수정");
                 $("#idx_corp_info").val(result.result_idx);

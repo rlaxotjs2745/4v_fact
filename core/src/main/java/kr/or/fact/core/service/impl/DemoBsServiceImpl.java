@@ -64,5 +64,16 @@ public class DemoBsServiceImpl implements DemoBsService {
         return demoBsMapper.getAvailibleDemoBs();
     }
 
-
+    @Override
+    public Boolean isValidCode(String code){
+        Boolean bool = true;
+        try{
+            if(demoBsMapper.isValidCode(code).size() != 0){
+                bool = false;
+            }
+        } catch (Exception e) {
+            bool = false;
+        }
+        return bool;
+    }
 }

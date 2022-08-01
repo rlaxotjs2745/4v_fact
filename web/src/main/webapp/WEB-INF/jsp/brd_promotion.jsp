@@ -52,7 +52,7 @@
                     <c:forEach items="${prContentList}" var="promotion" varStatus="status">
                         <li>
                             <a href="brd_promotion_detail?idx=${promotion.idx_pr_content}" class=" btn-sm btn_content_modal">
-                                <figure><img src="${promotion.thumb_img_file_path}" alt="" class="thumb_list_item"></figure>
+                                <figure><img src="${!promotion.thumb_img_file_path ? 'resources/assets/image/h1_logo@3x.png' : promotion.thumb_img_file_path}" alt="" class="thumb_list_item"></figure>
                                 <div class="caption">
                                     <span class="list__title">${promotion.subject}</span>
                                     <div class="list__file">
@@ -170,6 +170,9 @@
         pageLoad("pr_contents", {idx: parseInt(idx)}, "홍보자료 모달컨텐츠", "pr_contents");
     })
     const a = function(promotion){
+        if(!promotion.thumb_img_file_path){
+            promotion.thumb_img_file_path = 'resources/assets/image/h1_logo@3x.png';
+        }
         return '<li>\n' +
             '<a href="brd_promotion_detail?idx=' + promotion.idx_pr_content + '" class=" btn-sm btn_content_modal">\n'+
             ' <figure><img src="' + promotion.thumb_img_file_path + '" alt="" class="thumb_list_item"></figure>\n'+
@@ -182,11 +185,6 @@
         ' </div>\n'+
         '</a>\n'+
         '</li>\n'}
-
-
-
-
-
 
 
     var page = 2;

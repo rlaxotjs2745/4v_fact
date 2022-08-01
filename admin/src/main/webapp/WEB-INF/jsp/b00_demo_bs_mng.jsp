@@ -627,6 +627,26 @@
             $('.mode-edit').removeClass('d-none');
         });
 
+        $("#btn_bs_code_dupl_check").click(function (){
+            var code = $("#demo_bs_code").val();
+            $.ajax({
+                url: 'bs_code_dupl_check',
+                method: 'post',
+                data: JSON.stringify(code),//보내는 데이터
+                contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+                dataType: 'json',//받는 데이터 타입
+                success: function (result) {
+                    if (result.result_code == "SUCCESS") {
+                        alert("신규 사용이 가능한 사업번호입니다.");
+                    } else {
+                        alert("이미 사용 중이거나 사용이 불가능한 사업번호입니다.");
+                    }
+                }
+            })
+        }) //String to bool
+
+
+
         //Filter
         //$('#btn_filter1').on('click', function() {
 
