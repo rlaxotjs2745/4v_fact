@@ -28,7 +28,7 @@
         </div>
         <div class="page__menu--box">
             <div class="page__menu--inner">
-                <h2 class="page__title">공지사항</h2>
+                <h2 class="page__title">행사 안내</h2>
                 <div class="page__location">
                     <div class="location__deco">담당자는 해당 게시물 작성자 및 전화번호 참고 부탁드립니다.</div>
                 </div>
