@@ -36,6 +36,17 @@ public class EventContentServiceImpl implements EventContentService {
     public int getWebpageEventContentCount(){
         return eventContentMapper.getWebpageEventContentCount();
     }
+
+    @Override
+    public int getOpenEventContentCount(String filter, String query) {
+        return eventContentMapper.getOpenEventContentCount(filter, query);
+    }
+
+    @Override
+    public List<EventContentVO> getOpenEventContentList(int page, int count, String filter, String query) {
+        return eventContentMapper.getOpenEventContentList(page, count, filter, query);
+    }
+
     @Override
     public List<EventContentVO> getEventContentList(int page_num, int list_amount){
         List<EventContentVO> eventContentVOList = eventContentMapper.getEventContentList(page_num,list_amount,"ANNOUNCE_NUM");
