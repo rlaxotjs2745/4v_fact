@@ -17,7 +17,7 @@
                 <span>홈</span>
                 <span>열린마당</span>
                 <div class="under__depth">
-                    <a href="#" class="under__depth--anchor">공지사항</a>
+                    <a href="#" class="under__depth--anchor">사업공고</a>
                     <div class="under__depth--list">
                         <a href="brd_notice?page=1">공지사항</a>
                         <a href="brd_announce?page=1">사업공고</a>
@@ -52,7 +52,7 @@
                                 <fmt:formatDate value="${bsAnnouns.reg_date}" var="reg_date" pattern="yyyy.MM.dd."/>
                                 <div class="edit--type"><em>등록일</em><span>${reg_date}</span></div>
                                 <div class="edit--type"><em>조회수</em><span>${bsAnnouns.view_count}</span></div>
-                                <div class="edit--print"><a href="#none"><img src="resources/assets/image/ico_print.png" alt="인쇄하기"></a></div>
+                                <div class="edit--print"><img src="resources/assets/image/ico_print.png" alt="인쇄하기" onclick="window.print()"></div>
                             </div>
                         </th>
                     </tr>

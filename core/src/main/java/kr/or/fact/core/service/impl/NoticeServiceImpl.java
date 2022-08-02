@@ -38,9 +38,20 @@ public class NoticeServiceImpl implements NoticeService {
     public int getWebpageNoticeCount(){
         return noticeMapper.getWebpageNoticeCount();
     }
+
+    @Override
+    public int getOpenNoticeCount(String filter, String query) {
+        return noticeMapper.getOpenNoticeCount(filter, query);
+    }
+
+    @Override
+    public List<NoticeVO> getOpenNoticeList(int page, int count, String filter, String query) {
+        return noticeMapper.getOpenNoticeList(page, count, filter, query);
+    }
+
     @Override
     public List<NoticeVO> getNoticeWebList(int page, int list_amount){
-        return noticeMapper.getNoticeWebList(page,list_amount,"ANNOUNCE_NUM");
+        return noticeMapper.getNoticeWebList(page,list_amount,"IDX_NOTICE");
     }
     @Override
     public List<NoticeVO> getMainNoticeList(){

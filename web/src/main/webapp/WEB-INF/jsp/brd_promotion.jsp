@@ -56,8 +56,7 @@
                                 <div class="caption">
                                     <span class="list__title">${promotion.subject}</span>
                                     <div class="list__file">
-                                        <a href="${promotion.file_path}"><img src="resources/assets/image/ico_hwp.png" alt="hwp"></a>
-                                        <img src="resources/assets/image/ico_pdf.png" alt="pdf">
+                                        <a href="${promotion.file_path}"><img src="resources/assets/image/ico_file-present.png" alt="hwp"></a>
                                     </div>
                                 </div>
                             </a>
