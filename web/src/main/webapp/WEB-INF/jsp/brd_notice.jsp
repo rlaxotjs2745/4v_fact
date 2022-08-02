@@ -78,7 +78,7 @@
                                 final NoticeVO notice = (NoticeVO) pageContext.getAttribute("notice");
                                 final String query = (String) request.getAttribute("query");
                                 final String highlightSubject;
-                                if (query.trim().length() == 0) {
+                                if (query == null || query.trim().length() == 0) {
                                     highlightSubject = notice.getSubject();
                                 } else {
                                     highlightSubject = notice.getSubject().replaceAll(query, "<span style=\"background-color:yellow\">" + query + "</span>");
