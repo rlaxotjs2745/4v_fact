@@ -1,3 +1,4 @@
+<%@ page import="kr.or.fact.core.model.DTO.NoticeVO" %>
 <%--
   Created by IntelliJ IDEA.
   User: abeki
@@ -73,8 +74,18 @@
                     <c:forEach items="${noticeList}" var="notice" varStatus="status">
                         <tr>
                             <td>${notice.notice_num}</td>
-                            <td class="td__left"><a href="brd_notice_detail?idx=${notice.idx_notice}" class="td__link">${notice.subject}<c:if test="${notice.is_new eq 1}"><img src="resources/assets/image/ico_new.png" alt="NEW" class="board__badge"></c:if></a></td>
-                            <td class="td__data"> <c:if test="${notice.is_file eq 1}"><img src="resources/assets/image/ico_doc.png" alt=""></c:if></td>
+                            <%
+                                final NoticeVO notice = (NoticeVO) pageContext.getAttribute("notice");
+                                final String query = (String) request.getAttribute("query");
+                                final String highlightSubject;
+                                if (query == null || query.trim().length() == 0) {
+                                    highlightSubject = notice.getSubject();
+                                } else {
+                                    highlightSubject = notice.getSubject().replaceAll(query, "<span style=\"background-color:yellow\">" + query + "</span>");
+                                }
+                            %>
+                            <td class="td__left"><a href="brd_notice_detail?idx=${notice.idx_notice}" class="td__link"><%=highlightSubject%><c:if test="${notice.is_new eq 1}"><img src="resources/assets/image/ico_new.png" alt="NEW" class="board__badge"></c:if></a></td>
+                            <td class="td__data"><c:if test="${notice.is_file eq 1}"><img src="resources/assets/image/ico_file-present.png" alt=""></c:if></td>
                             <td class="td__data">${notice.author}</td>
                             <td class="td__data"><fmt:formatDate value="${notice.last_upd_date}" pattern="yyyy-MM-dd"/></td>
                             <td class="td__data">${notice.view_count}</td>
