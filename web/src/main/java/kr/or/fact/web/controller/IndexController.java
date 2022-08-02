@@ -681,19 +681,27 @@ public class IndexController {
     }
 
     @RequestMapping("/brd_announce")
-    public String brd_announce(@RequestParam("page") int page,
+    public String brd_announce(@RequestParam(value = "page", required = false) Integer page,
+                               @RequestParam(name = "filter", required = false) String filter,
+                               @RequestParam(name = "query", required = false) String query,
                                Model model) {
-        System.out.println(page);
+        if (page == null) {
+            page = 1;
+        }
+
         int list_amount = 10;
         int page_amount = 10;
 
-        int annouceCount = bsAnnouncementService.getWebpageBsAnnouncementCount();
+        model.addAttribute("filter", filter);
+        model.addAttribute("query", query);
+
+        int annouceCount = bsAnnouncementService.getOpenBsAnnouncementCount(filter, query);
         if (annouceCount == 0) {
             satProfile(model);
             return "brd_announce_blank";
         }
         model.addAttribute("total_count", annouceCount);
-        List<BsAnnouncementVO> announcementVOList = bsAnnouncementService.getBsAnnouncementWebList(page, list_amount);
+        List<BsAnnouncementVO> announcementVOList = bsAnnouncementService.getOpenBsAnnouncementWebList(page, list_amount, filter, query);
         model.addAttribute("announceList", announcementVOList);
 
         model.addAttribute("cur_page", page);
@@ -745,10 +753,8 @@ public class IndexController {
     @RequestMapping("/brd_announce_detail")
     public String brd_announce_detail(@RequestParam("idx") int idx,
                                       Model model) {
-        int view = bsAnnouncementService.getBsAnnounceViewCount(idx);
         BsAnnouncementVO bsAnnouncementVO = new BsAnnouncementVO();
         bsAnnouncementVO.setIdx_bs_announcement(idx);
-        bsAnnouncementVO.setView_count(view + 1);
         bsAnnouncementService.updateBsAnnounceViewCount(bsAnnouncementVO);
         BsAnnouncementVO bsAnnouncementInfo = bsAnnouncementService.getBsAnnouncementByIdx(idx);
         model.addAttribute("bsAnnouns", bsAnnouncementInfo);
@@ -973,7 +979,6 @@ public class IndexController {
     @RequestMapping("/brd_notice_detail")
     public String brd_notice_detail(@RequestParam("idx") int idx,
                                     Model model) {
-        int view = noticeService.getNoticeViewCount(idx);
         NoticeVO noticeVO1 = new NoticeVO();
         noticeVO1.setIdx_notice(idx);
         noticeService.updateNoticeViewCount(noticeVO1);

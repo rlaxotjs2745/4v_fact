@@ -10,6 +10,8 @@ import java.util.List;
 public interface BsAnnouncementMapper {
     int getMainBsAnnouncementCount();
     int getWebpageBsAnnouncementCount();
+    int getOpenBsAnnouncementCount(@Param("filter") String filter,@Param("query") String query);
+    List<BsAnnouncementVO> getOpenBsAnnouncementWebList(@Param("page") int page, @Param("count") int count, @Param("filter") String filter, @Param("query") String query);
     List<BsAnnouncementVO> getBsAnnouncementWebList(@Param("page_num") int page_num, @Param("amount") int amount,@Param("order_field") String order_field);
     List<BsAnnouncementVO> getMainBsAnnouncementList();
 
