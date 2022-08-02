@@ -197,13 +197,11 @@ public class IndexController {
     //사업공고문 관리
     @RequestMapping(value = "/b00_demo_bs_mng",method = RequestMethod.POST)
     public String b00_demo_bs_mng(@RequestBody ParamPageListFilteredVO param,
-/*            @RequestParam("page") int page,
-            @RequestParam("filter1") int filter1,
-            @RequestParam("filter2") int filter2,*/
+            Principal principal,
             ModelMap model){
 
 
-
+        System.out.println(principal.getName());
 
         int list_amount = 10;;
         int page_amount = 10;
@@ -241,7 +239,7 @@ public class IndexController {
         List<DemoBusinessVO>  demoBusinessVOList = demoBsService.getDemoBsPagingList(param);
 
         model.addAttribute("demoBusinessVOList",demoBusinessVOList);
-
+//        model.addAttribute("admin_idx", );
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
 
@@ -1567,8 +1565,11 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
 
         int pageBool = 4;
         List<AdminResVO> adminVOList = adminService.selectAdminbyIdx(param.getPage_num() != 0 ? param.getPage_num() + "" : "1", 100);
-        if(adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage() < 4){
-            pageBool = adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage();
+        System.out.println(adminVOList);
+        if(adminVOList.size() != 0){
+            if(adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage() < 4){
+                pageBool = adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage();
+            }
         }
         model.addAttribute("pageBool", pageBool);
         model.addAttribute("adminList", adminVOList);
@@ -1811,16 +1812,17 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
         return "l20_code_mng";
     }
     private void satProfile(ModelMap model) {
-        String[] activeProfiles = env.getActiveProfiles();
-        if (activeProfiles.length != 0) {
-            String activeProfile = activeProfiles[0];
-
-            if (activeProfile.equals("local")) {
-                model.addAttribute("profile", "gimje-prod");
-            } else {
-                model.addAttribute("profile", activeProfile);
-            }
-        }
+//        String[] activeProfiles = env.getActiveProfiles();
+//        if (activeProfiles.length != 0) {
+//            String activeProfile = activeProfiles[0];
+//
+//            if (activeProfile.equals("local")) {
+//                model.addAttribute("profile", "gimje-prod");
+//            } else {
+//                model.addAttribute("profile", activeProfile);
+//            }
+//        }
+                model.addAttribute("profile", "sangju-prod");
     }
 
 }

@@ -67,6 +67,7 @@ public class DemoBsServiceImpl implements DemoBsService {
     @Override
     public Boolean isValidCode(String code){
         Boolean bool = true;
+        System.out.println(code);
         try{
             if(demoBsMapper.isValidCode(code).size() != 0){
                 bool = false;

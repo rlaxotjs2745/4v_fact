@@ -612,8 +612,6 @@
             alert("회원가입에 필요한 데이터가 모두 입력되지 않았습니다.");
             return;
         }
-        console.log($("#corporate_num").val());
-        console.log($("#corporate_fax").val());
 
         var param = {
             admin_id: $("#web_id").val() + "@" + $("#web_id2").val(),

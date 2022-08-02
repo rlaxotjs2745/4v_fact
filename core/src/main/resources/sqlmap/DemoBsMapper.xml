@@ -47,7 +47,7 @@
         WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
     </select>
 
-    <select id="isValidCode" parameterType="String">
+    <select id="isValidCode" parameterType="String" resultType="String">
         SELECT DEMO_BS_CODE FROM TB_DEMO_BUSINESS WHERE DEMO_BS_CODE = #{code}
     </select>
 

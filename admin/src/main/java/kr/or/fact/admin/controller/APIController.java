@@ -224,9 +224,11 @@ public class APIController {
 
     @RequestMapping(value = "/bs_code_dupl_check",method = RequestMethod.POST)
     public @ResponseBody ResultVO bs_code_dupl_check(HttpSession session,
-                           @RequestBody String code){
+                           @RequestBody ParamVO param){
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("SUCCESS");
+
+        String code = param.getUser_id();
 
         if(!demoBsService.isValidCode(code)){
             resultVO.setResult_code("Fail");
