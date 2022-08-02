@@ -10,6 +10,8 @@ import java.util.List;
 public interface NoticeMapper {
     int getMainNoticeCount();
     int getWebpageNoticeCount();
+    int getOpenNoticeCount(@Param("filter") String filter, @Param("query") String query);
+    List<NoticeVO> getOpenNoticeList(@Param("page") int page, @Param("count") int count, @Param("filter") String filter, @Param("query") String query);
     List<NoticeVO> getNoticeWebList(@Param("page_num") int page_num, @Param("amount") int amount, @Param("order_field") String order_field);
     List<NoticeVO> getMainNoticeList();
     public int insertNotice(NoticeVO noticeVO);

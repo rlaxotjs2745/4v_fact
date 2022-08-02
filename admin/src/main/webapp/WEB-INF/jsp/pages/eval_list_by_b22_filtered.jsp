@@ -155,14 +155,9 @@
             success: function (result) {
 
 //작업이 성공적으로 발생했을 경우
-                console.log(result);
 
 
                 var data = JSON.parse(result);
-
-
-                console.log(data["userDemoBsVO"].corp_name);
-
 
                 $("#corp_name").val(data["userDemoBsVO"].corp_name);
                 $("#corp_reg_num").val(data["userDemoBsVO"].corp_reg_num);
@@ -183,8 +178,6 @@
 
 
                 //let corpInfoVO = data["userDemoBsVO"].corpInfoVO;
-
-                console.log(data["userDemoBsVO"]["corpInfoVO"].idx_corp_info);
 
                 $("#idx_corp_info").val(data["userDemoBsVO"]["corpInfoVO"].idx_corp_info);
                 $("#is_saved").val(data["userDemoBsVO"]["corpInfoVO"].is_saved);

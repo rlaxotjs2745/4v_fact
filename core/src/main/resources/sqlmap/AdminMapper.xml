@@ -185,24 +185,15 @@
         SELECT A.*, FLOOR((ROWNUM - 1)/#{count} + 1) PAGE, (
         SELECT MAX(FLOOR((ROWNUM - 1)/#{count} + 1)) FROM TB_ADMIN
         WHERE IDX_ADMIN >= 1
+          <if test="corporate neq 100">
             AND CORPORATE = #{corporate}
+          </if>
         ) MAXVALUE FROM (
         SELECT TB_ADMIN.* FROM TB_ADMIN
         WHERE IDX_ADMIN >= 1
+        <if test="corporate neq 100">
             AND CORPORATE = #{corporate}
-        )
-        A)
-        WHERE PAGE = #{pageNum}
-    </select>
-
-    <select id="selectAdminbyIdx100" resultType="kr.or.fact.core.model.DTO.AdminResVO">
-        SELECT * FROM (
-        SELECT A.*, FLOOR((ROWNUM - 1)/#{count} + 1) PAGE, (
-        SELECT MAX(FLOOR((ROWNUM - 1)/#{count} + 1)) FROM TB_ADMIN
-        WHERE IDX_ADMIN >= 1
-        ) MAXVALUE FROM (
-        SELECT TB_ADMIN.* FROM TB_ADMIN
-        WHERE IDX_ADMIN >= 1
+        </if>
         )
         A)
         WHERE PAGE = #{pageNum}

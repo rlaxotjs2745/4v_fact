@@ -627,6 +627,71 @@
             $('.mode-edit').removeClass('d-none');
         });
 
+        var duplBool = false;
+
+        $("#demo_bs_code").change(function(){
+            duplBool = false;
+        })
+
+        $("#btn_bs_code_dupl_check").click(function (){
+            var code = $("#demo_bs_code").val();
+            if(code.length < 1){
+                alert('사업번호가 비어있습니다.');
+            }
+            else if(code.includes(/[^a-z|A-Z|0-9|ㄱ-ㅎ|가-힣\s]/g)){
+                alert('특수문자는 포함할 수 없습니다.')
+            }
+            else {
+                $.ajax({
+                    url: 'bs_code_dupl_check',
+                    method: 'post',
+                    data: JSON.stringify({user_id: code}),//보내는 데이터
+                    contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+                    dataType: 'json',//받는 데이터 타입
+                    success: function (result) {
+                        if (result.result_code == "SUCCESS") {
+                            if(confirm("신규 사용이 가능한 사업번호입니다. 사용하시겠습니까?")){
+                                duplBool = true;
+                                $("#demo_bs_code").attr('disabled', 'true');
+                            }
+                        } else {
+                            alert("이미 사용 중이거나 사용이 불가능한 사업번호입니다.");
+                        }
+                    }
+                })
+            }
+        })
+
+        $('#demo_new_submit').click(function(){
+            if(!duplBool){
+                alert('사업번호 중복체크 후 작성이 가능합니다.')
+            }
+            else if(1){}//하나라도 비어있으면
+            var param = {
+                demo_bs_code: $('#demo_bs_code').val(),
+                demo_bs_status: $("#demo_bs_status").val(),
+                demo_bs_main_type: $('#demo_bs_main_type').val(),
+                demo_bs_sub_type: $('#demo_bs_sub_type').val(),
+                demo_bs_detail_type: $('#demo_bs_detail_type').val(),
+                demo_subject: $('#demo_subject').val(),
+                start_date: $('#demo_start').val(),
+                end_date: $('#demo_end').val(),
+                recruit_start_date: $('#demo_appl_start').val(),
+                recruit_end_date: $('#demo_appl_end').val(),
+                exam_start: $('#demo_eval_start').val(),
+                exam_end: $('#demo_eval_end').val(),
+                plan_review_start: $('#demo_modify_start').val(),
+                plan_review_end: $('#demo_modify_end').val(),
+                convention_start: $('#demo_arrange_start').val(),
+                convention_end: $('#demo_arrange_end').val(),
+                recruit_count_limit: $('#recruit_count_limit').val(),
+                memo: $('#memo').val(),
+
+            }
+        })
+
+
+
         //Filter
         //$('#btn_filter1').on('click', function() {
 

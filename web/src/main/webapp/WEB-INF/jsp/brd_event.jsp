@@ -53,7 +53,7 @@
                     <c:forEach var="event" items="${eventContentVOList}"  varStatus="status"  >
                         <li>
                             <a href="brd_event_detail?idx=${event.idx_event_content}" >
-                                <figure><img src="${event.thumb_img_file_path}" alt="" class="thumb_list_item"></figure>
+                                <figure><img src="${!event.thumb_img_file_path ? 'resources/assets/image/h1_logo@3x.png' : event.thumb_img_file_path}" alt="" class="thumb_list_item"></figure>
                                 <span class="list__title">${event.subject}</span><br>
                                 <span class="list__duedate">${event.event_start_date}~${event.event_end_date}</span>
                             </a>
@@ -130,9 +130,11 @@
         var idx = $(this).attr("id");
         pageLoad("pr_contents", {idx: parseInt(idx)}, "홍보자료 모달컨텐츠", "pr_contents");
     })
-    console.log('${eventContentVOList}')
 
     const a = function(event){
+        if(!event.thumb_img_file_path){
+            event.thumb_img_file_path = 'resources/assets/image/h1_logo@3x.png';
+        }
         return '<li>\n' +
     '   <a href="brd_event_detail?idx=' + event.idx_event_content + '"  >\n' +
     '       <figure><img src="'+ event.thumb_img_file_path   +'" alt="" class="thumb_list_item"></figure>\n' +

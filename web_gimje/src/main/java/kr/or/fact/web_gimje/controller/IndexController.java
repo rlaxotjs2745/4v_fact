@@ -784,13 +784,10 @@ public class IndexController {
 
         EventContentVO event = eventContentService.getEventContentByIdx(idx);
         if(event.getIs_file()==0){
-            System.out.println("여기");
             model.addAttribute("eventContent", event);
         }else{
-            System.out.println("아님여기");
             EventFileJoinSelectVO eventContentVO = eventContentService.getEventContentFileJoin(idx);
             model.addAttribute("eventContent",eventContentVO);
-            System.out.println(eventContentVO);
         }
 
         getHomepageInfo(model);
@@ -884,10 +881,8 @@ public class IndexController {
 
         NoticeVO noticeInfo = noticeService.getNoticeByIdx(idx);
         if(noticeInfo.getIs_file()==0){
-            System.out.println("여기");
             model.addAttribute("noticeInfo",noticeInfo);
         }else{
-            System.out.println("아님여기");
             NoticeVO noticeVO =noticeService.getNoticeIsFile(idx);
             model.addAttribute("noticeInfo",noticeVO);
 
@@ -983,10 +978,8 @@ public class IndexController {
 
         PRContentVO prContentVO = prContentService.getPRContent(idx);
         if(prContentVO.getIs_file()==0){
-            System.out.println("여기");
             model.addAttribute("pr", prContentVO);
         }else{
-            System.out.println("아님여기");
             PRContentVO prContentVO1 = prContentService.getPRContentFileJoin(idx);
             model.addAttribute("pr",prContentVO1);
 

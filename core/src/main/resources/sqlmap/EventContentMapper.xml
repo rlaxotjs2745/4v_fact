@@ -69,7 +69,7 @@
     </select>
 
     <select id="getMainEventContentList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.EventContentVO">
-        SELECT * FROM TB_EVENT_CONTENT WHERE ROWNUM <![CDATA[<]]> 5 AND EVENT_CONTENT_STATUS = 1 AND EVENT_CONTENT_STATUS = 2 AND IS_SHOW = 1 AND IS_MAIN_PAGE = 1 ORDER BY EVENT_START_DATE DESC
+        SELECT * FROM TB_EVENT_CONTENT WHERE ROWNUM <![CDATA[<]]> 5 AND EVENT_CONTENT_STATUS = 1 OR EVENT_CONTENT_STATUS = 2 AND IS_SHOW = 1 AND IS_MAIN_PAGE = 1 ORDER BY EVENT_START_DATE DESC
     </select>
     <select id="getEventList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.EventContentVO">
         SELECT * FROM TB_EVENT_CONTENT  ORDER BY EVENT_CONTENT_NUM

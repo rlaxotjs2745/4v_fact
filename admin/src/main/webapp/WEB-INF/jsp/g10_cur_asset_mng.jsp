@@ -446,7 +446,6 @@
     })
 
     $("#asset_submit").click(function(){
-        console.log(typeof curMyIdx)
         var param = {
             asset_code:$("#asset_code").val(),
             asset_main_category_code: parseInt($("#main_code").val()),

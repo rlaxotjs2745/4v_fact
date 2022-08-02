@@ -157,7 +157,6 @@ public class FileController {
     }
     MultipartFile file = fileRequestVO.getFiles1();
     String fileName = fileService.storeFileInfo(fileRequestVO.getFiles1());
-    System.out.println("여기");
     String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
             .path("/downloadFile/")
             .path(fileName)
@@ -178,7 +177,6 @@ public class FileController {
     formFileInfoVO.setIdx_admin(idx_admin);
     formFileInfoVO.setIdx_form_file_info(formFileInfoVO.getIdx_form_file_info());
     fileService.insertFormFileInfo(formFileInfoVO);
-    System.out.println(formFileInfoVO);
 
     return new FileUploadResponseVO(fileName, fileDownloadUri, file.getContentType(), file.getSize());
     }
@@ -210,7 +208,6 @@ public class FileController {
         }
         MultipartFile file = fileRequestVO.getFiles1();
         String fileName = fileService.storeFileInfo(fileRequestVO.getFiles1());
-        System.out.println("여기");
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
                 .path(fileName)

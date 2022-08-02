@@ -175,13 +175,11 @@
         var reservation_status = "";
 
         $(".item_status").each(function (idx, node){
-            console.log($(this).val())
             reservation_status += $(this).val();
             var param = {
                 idx_asset_reservation_item: parseInt($(this).attr("id")),
                 reservation_item_status: parseInt($(this).val())
             }
-            console.log(param);
             $.ajax({
                 url: 'asset_reservation_item_confirm',
                 method: 'post',
@@ -198,7 +196,6 @@
                 }
             })
         })
-        console.log(reservation_status);
         if(!reservation_status.includes("1")){ //보류 불가 부분승인
             if(reservation_status.includes("0")){ // 보류
                 reservation_status = 2;
@@ -214,7 +211,6 @@
                 reservation_status = 1;
             }
         }
-        console.log(reservation_status);
 
         $.ajax({
             url: 'asset_reservation_confirm',
@@ -225,13 +221,11 @@
             success: function (result) {
                 alert(result.result_str);
                 if (result.result_code == "SUCCESS") {
-                    console.log("dodododod")
                     modalClose();
                     // $("#modals-reserve-write").modal("hide");
                     // $(".modal-backdrop").css("display", "none");
                     // pageLoad('g30_asset_book_mng', {page_num: 1}, '자원예약관리');
                 } else {
-                    console.log("anjrkdksehoTsp")
                 }
             }
         })

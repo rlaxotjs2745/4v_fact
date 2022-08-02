@@ -23,7 +23,6 @@ public class SmsSendServiceImpl implements SmsSendService {
     public long insertSmsMessage(SmsSendVO smsSendVO) {
         long msg_id = 1;
         try{
-            System.out.println("여기까지와요?");
             smsSendMapper.insertSmsMessage(smsSendVO);
         }catch(Exception e){
             msg_id =0;
@@ -36,7 +35,6 @@ public class SmsSendServiceImpl implements SmsSendService {
 
 
         //ArrayList<SmsSentVO> result = smsSendMapper.selectSentmeesage1();
-        System.out.println(result);
         return result;
     }
 

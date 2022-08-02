@@ -144,11 +144,9 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Boolean adminIdCheck(String adminId){
         Boolean bool = false;
-        System.out.println(adminMapper.getAdminByAdminId(adminId));
         if(adminMapper.getAdminByAdminId(adminId).size() > 0){
             bool = true;
         }
-        System.out.println(bool);
         return bool;
     }
 
