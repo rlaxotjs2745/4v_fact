@@ -1,5 +1,7 @@
 package kr.or.fact.core.model.DTO;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import kr.or.fact.core.serializer.CustomDateOnlyDateSerializer;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,7 +21,9 @@ public class EventContentVO {
     int is_show;//	number	4		0			노출여부	0:노출안함 1:노출
     int view_count;//	number	20					조회수
     int event_content_status;//	number	4		0			행사안내 게시 프로세스 상태	0:임시저장, 1:허락, 2:수정 발행, 3:게시 종료, 99:기타
+    @JsonSerialize(using = CustomDateOnlyDateSerializer.class)
     Date event_start_date;//	date						행사 시작 일시분초
+    @JsonSerialize(using = CustomDateOnlyDateSerializer.class)
     Date event_end_date;//	date						행사 종료 일시분초
     int doc_version;//	number	4		1			공지 버전	default:1, increase 1
     String memo;//	varchar2	1000					메모	공고 관련 내용

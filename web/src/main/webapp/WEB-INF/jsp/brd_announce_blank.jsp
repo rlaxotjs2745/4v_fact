@@ -38,20 +38,21 @@
 
             <div class="board__head">
                 <div class="board__total">검색 결과 총 <strong>00</strong>개</div>
-                <select name="" id="search_select" class="select-sm">
-                    <option value="t">제목</option>
-                    <option value="w">작성자</option>
-                    <option value="c">내용</option>
-                    <option value="tc">제목+내용</option>
-                </select>
-                <input type="text" id="search_input" class="search" placeholder="검색어를 입력해주세요."><a id="search_btn" class="btn btn__board--search">검색</a>
+                <div class="board__search">
+                    <select name="" id="search_select" class="select-sm">
+                        <option value="t">제목</option>
+                        <option value="w">작성자</option>
+                        <option value="c">내용</option>
+                        <option value="tc">제목+내용</option>
+                    </select>
+                    <input type="text" id="search_input" class="search" placeholder="검색어를 입력해주세요."><a id="search_btn" class="btn btn__board--search">검색</a>
+                </div>
             </div>
 
             <div class="table__blank">
                 <div class="blank__title">준비중.</div>
                 <div class="blank__text">공지사항 준비중입니다</div>
             </div>
-            <!--//-->
         </div>
 
     </div>
