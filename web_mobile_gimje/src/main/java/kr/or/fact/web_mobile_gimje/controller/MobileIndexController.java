@@ -227,7 +227,7 @@ public class MobileIndexController {
     @RequestMapping("/brd_event")
     public String brd_event(@RequestParam("page") int page,
                             Model model){
-        int list_amount = param.getAmount();;
+        int list_amount = 10;
         int page_amount = 10;
 
         int eventCount = eventContentService.getWebpageEventContentCount();
@@ -306,7 +306,7 @@ public class MobileIndexController {
     @RequestMapping("/brd_notice")
     public String brd_notice(@RequestParam("page") int page,
                              Model model){
-        int list_amount = param.getAmount();;
+        int list_amount = 10;
         int page_amount = 10;
 
         int noticeCount = noticeService.getWebpageNoticeCount();
@@ -382,7 +382,7 @@ public class MobileIndexController {
     @RequestMapping("/brd_promotion")
     public String brd_promotion(@RequestParam("page") int page,
                                 Model model){
-        int list_amount = param.getAmount();;
+        int list_amount = 10;
         int page_amount = 10;
 
         int promotionCount = prContentService.getWebpagePRContentCount();
@@ -724,7 +724,7 @@ public class MobileIndexController {
             if(findUser!=null) {
                 //session.setAttribute("loginCheck", true);
                 model.addAttribute("is_login",true);
-                int list_amount = param.getAmount();;
+                int list_amount = 10;
                 int page_amount = 10;
 
                 int qnaCount = qnaService.getDemoBSQnaCount(CONSTANT.user_idx,findUser.getIdx_user());
