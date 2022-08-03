@@ -11,65 +11,113 @@
         SELECT COUNT(*) FROM TB_EVENT_CONTENT  WHERE IS_SHOW=1 AND EVENT_CONTENT_STATUS=1
     </select>
 
+    <sql id="searchEventCondition">
+        <if test='query != null and query != ""'>
+            <choose>
+                <when test='filter == null or filter == ""'>
+                    AND SUBJECT LIKE '%' || #{query} || '%'
+                </when>
+                <when test='filter == "t"'>
+                    AND SUBJECT LIKE '%' || #{query} || '%'
+                </when>
+                <when test='filter == "w"'>
+                    AND AUTHOR LIKE '%' || #{query} || '%'
+                </when>
+                <when test='filter == "c"'>
+                    AND EVENT_CONTENTS LIKE '%' || #{query} || '%'
+                </when>
+                <when test='filter == "tc"'>
+                    AND (SUBJECT LIKE '%' || #{query} || '%' OR EVENT_CONTENTS LIKE '%' || #{query} || '%')
+                </when>
+                <otherwise>
+                    AND SUBJECT LIKE '%' || #{query} || '%'
+                </otherwise>
+            </choose>
+        </if>
+    </sql>
+    <select id="getOpenEventContentCount" resultType="int">
+        SELECT COUNT(*)
+        FROM TB_EVENT_CONTENT
+        WHERE IS_SHOW=1
+            AND EVENT_CONTENT_STATUS=1
+            <include refid="searchEventCondition"></include>
+    </select>
+
+    <select id="getOpenEventContentList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.EventContentVO">
+        SELECT
+            *
+        FROM (
+            SELECT
+                ROW_NUMBER() OVER(ORDER by EVENT_CONTENT_NUM ASC) AS row_num,
+                IDX_EVENT_CONTENT,
+                EVENT_CONTENT_CODE,
+                EVENT_CONTENT_NUM,
+                SUBJECT,
+                IS_FILE,
+                IS_NEW,
+                IS_MAIN_PAGE,
+                IS_IMPORTANT,
+                IS_SHOW,
+                VIEW_COUNT,
+                EVENT_CONTENT_STATUS,
+                EVENT_START_DATE,
+                EVENT_END_DATE,
+                DOC_VERSION,
+                MEMO,
+                SEARCH_TAG,
+                AUTHOR,
+                THUMB_IMG_FILE_IDX,
+                IDX_ADMIN,
+                CONFIRM_ADMIN_IDX,
+                REG_DATE,
+                LAST_UPD_DATE
+            FROM TB_EVENT_CONTENT
+            WHERE IS_SHOW=1
+                AND EVENT_CONTENT_STATUS=1
+                <include refid="searchEventCondition"></include>
+            ORDER BY EVENT_CONTENT_NUM ASC
+        )
+        WHERE row_num BETWEEN #{count} * (#{page} - 1) + 1 AND #{count} * #{page}
+    </select>
+
     <select id="getEventContentList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.EventContentVO">
         SELECT
-            IDX_EVENT_CONTENT,
-            EVENT_CONTENT_CODE,
-            EVENT_CONTENT_NUM,
-            SUBJECT,
-            IS_FILE,
-            IS_NEW,
-            IS_MAIN_PAGE,
-            IS_IMPORTANT,
-            IS_SHOW,
-            VIEW_COUNT,
-            EVENT_CONTENT_STATUS,
-            EVENT_START_DATE,
-            EVENT_END_DATE,
-            DOC_VERSION,
-            MEMO,
-            SEARCH_TAG,
-            AUTHOR,
-            THUMB_IMG_FILE_IDX,
-            IDX_ADMIN,
-            CONFIRM_ADMIN_IDX,
-            REG_DATE,
-            LAST_UPD_DATE
+            *
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by EVENT_CONTENT_NUM ASC) AS row_num
-                 ,IDX_EVENT_CONTENT,
-                        EVENT_CONTENT_CODE,
-                        EVENT_CONTENT_NUM,
-                        SUBJECT,
-                        IS_FILE,
-                        IS_NEW,
-                        IS_MAIN_PAGE,
-                        IS_IMPORTANT,
-                        IS_SHOW,
-                        VIEW_COUNT,
-                        EVENT_CONTENT_STATUS,
-                        EVENT_START_DATE,
-                        EVENT_END_DATE,
-                        DOC_VERSION,
-                        MEMO,
-                        SEARCH_TAG,
-                        AUTHOR,
-                        THUMB_IMG_FILE_IDX,
-                        IDX_ADMIN,
-                        CONFIRM_ADMIN_IDX,
-                        REG_DATE,
-                        LAST_UPD_DATE
-                 FROM (
-                          SELECT * FROM TB_EVENT_CONTENT ORDER BY EVENT_CONTENT_NUM ASC
-                      )
-
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
-             )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+            SELECT
+                ROW_NUMBER() OVER(ORDER by EVENT_CONTENT_NUM ASC) AS row_num,
+                IDX_EVENT_CONTENT,
+                EVENT_CONTENT_CODE,
+                EVENT_CONTENT_NUM,
+                SUBJECT,
+                IS_FILE,
+                IS_NEW,
+                IS_MAIN_PAGE,
+                IS_IMPORTANT,
+                IS_SHOW,
+                VIEW_COUNT,
+                EVENT_CONTENT_STATUS,
+                EVENT_START_DATE,
+                EVENT_END_DATE,
+                DOC_VERSION,
+                MEMO,
+                SEARCH_TAG,
+                AUTHOR,
+                THUMB_IMG_FILE_IDX,
+                IDX_ADMIN,
+                CONFIRM_ADMIN_IDX,
+                REG_DATE,
+                LAST_UPD_DATE
+            FROM TB_EVENT_CONTENT
+            WHERE IS_SHOW=1
+                AND EVENT_CONTENT_STATUS=1
+            ORDER BY EVENT_CONTENT_NUM ASC
+        )
+        WHERE row_num BETWEEN #{amount} * (#{page_num} - 1) + 1 AND #{amount} * #{page_num}
     </select>
 
     <select id="getMainEventContentList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.EventContentVO">
-        SELECT * FROM TB_EVENT_CONTENT WHERE ROWNUM <![CDATA[<]]> 5 AND EVENT_CONTENT_STATUS = 1 AND EVENT_CONTENT_STATUS = 2 AND IS_SHOW = 1 AND IS_MAIN_PAGE = 1 ORDER BY EVENT_START_DATE DESC
+        SELECT * FROM TB_EVENT_CONTENT WHERE ROWNUM <![CDATA[<]]> 5 AND EVENT_CONTENT_STATUS = 1 OR EVENT_CONTENT_STATUS = 2 AND IS_SHOW = 1 AND IS_MAIN_PAGE = 1 ORDER BY EVENT_START_DATE DESC
     </select>
     <select id="getEventList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.EventContentVO">
         SELECT * FROM TB_EVENT_CONTENT  ORDER BY EVENT_CONTENT_NUM

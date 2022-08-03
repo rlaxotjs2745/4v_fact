@@ -35,9 +35,20 @@ public class BsAnnouncementServiceImpl implements BsAnnouncementService {
     public int getWebpageBsAnnouncementCount(){
         return bsAnnouncementMapper.getWebpageBsAnnouncementCount();
     }
+
+    @Override
+    public int getOpenBsAnnouncementCount(String filter, String query) {
+        return bsAnnouncementMapper.getOpenBsAnnouncementCount(filter, query);
+    }
+
+    @Override
+    public List<BsAnnouncementVO> getOpenBsAnnouncementWebList(int page, int count, String filter, String query) {
+        return bsAnnouncementMapper.getOpenBsAnnouncementWebList(page, count,filter, query);
+    }
+
     @Override
     public List<BsAnnouncementVO> getBsAnnouncementWebList(int page, int count){
-        return bsAnnouncementMapper.getBsAnnouncementWebList(page,count,"ANNOUNCE_NUM");
+        return bsAnnouncementMapper.getBsAnnouncementWebList(page, count,"ANNOUNCE_NUM");
     }
     @Override
     public List<BsAnnouncementVO> getMainBsAnnouncementList(){

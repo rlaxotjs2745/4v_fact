@@ -25,7 +25,6 @@
             oncomplete : function(data) {
                 data.juso_type = '${juso_type}';
                 let json_data = JSON.stringify(data);
-                console.log(json_data);
                 $(opener.location).attr("href", "javascript:fn_setJuso(" + json_data+");");
             },
         }).open({

@@ -1,6 +1,7 @@
 package kr.or.fact.core.model.DTO;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 
@@ -36,5 +37,5 @@ public class DemoBusinessVO {
     int is_announce;//	NUMBER	4					게시 여부	0:아니오, 1:예
     Date reg_date;//	date						최초 등록 일시
     Date last_upd_date;//	DATE						최종 수정 일시
-
+    MultipartFile file;
 }

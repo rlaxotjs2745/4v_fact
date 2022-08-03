@@ -10,7 +10,9 @@ public interface BsAnnouncementService {
 
     public int getMainBsAnnouncementCount();
     public int getWebpageBsAnnouncementCount();
+    public int getOpenBsAnnouncementCount(String filter, String query);
 
+    public List<BsAnnouncementVO> getOpenBsAnnouncementWebList(int page, int count, String filter, String query);
     public List<BsAnnouncementVO> getBsAnnouncementWebList(int page, int count);
     public List<BsAnnouncementVO> getMainBsAnnouncementList();
 

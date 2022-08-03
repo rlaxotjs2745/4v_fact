@@ -10,6 +10,8 @@ import java.util.List;
 public interface PRContentsMapper {
     int getMainPRContentCount();
     int getWebpagePRContentCount();
+    int getOpenPRContentCount(@Param("filter") String filter, @Param("query") String query);
+    List<PRContentVO> getOpenPRContentList(@Param("page") int page, @Param("count") int count, @Param("filter") String filter, @Param("query") String query);
     List<PRContentVO> getPRContentList(@Param("page_num") int page_num, @Param("amount") int amount, @Param("order_field") String order_field);
     List<PRContentVO> getMainPRContentList();
     int insertPRContent(PRContentVO prContentVO);

@@ -317,11 +317,19 @@ html:not(.material-style) .material-style-only {
 }
 
 .greenhouse-area{
-  background-image: url('../image/img_company-map_dark.png');
+/*  background-image: url('../image/img_company-map_dark.png');
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center center;*/
+  position: relative;
   width: 100%;
   height: 800px;
 
+}
+
+.greenhouse-area-txt1{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: white;
 }

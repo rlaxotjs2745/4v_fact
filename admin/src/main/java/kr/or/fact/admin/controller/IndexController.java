@@ -4,9 +4,9 @@ import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.*;
 import lombok.SneakyThrows;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -84,11 +84,15 @@ public class IndexController {
     @Resource(name="prContentService")
     public PRContentsService prContentService;
 
+    @Autowired
+    Environment env;
+
     private Session session;
 
     private Store store;
 
     private Folder folder;
+
 
 
     @PreAuthorize("hasRole('ROLE_MEMBER')")
@@ -97,6 +101,7 @@ public class IndexController {
 
         AdminVO adminInfo = adminService.findAdminById(principal.getName());
         model.addAttribute("admin", adminInfo);
+        satProfile(model);
 
         return "index";
     }
@@ -114,7 +119,6 @@ public class IndexController {
                                  @RequestParam(value="id") String admin_id,
                                  @RequestParam(value="pw") String admin_pw){
 
-//        System.out.println("api_post_login");
          if(admin_id == null || admin_pw == null){
             return "redirect:/login";
         }
@@ -193,13 +197,12 @@ public class IndexController {
     //사업공고문 관리
     @RequestMapping(value = "/b00_demo_bs_mng",method = RequestMethod.POST)
     public String b00_demo_bs_mng(@RequestBody ParamPageListFilteredVO param,
-/*            @RequestParam("page") int page,
-            @RequestParam("filter1") int filter1,
-            @RequestParam("filter2") int filter2,*/
+            Principal principal,
             ModelMap model){
 
 
-
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+        model.addAttribute("admin", adminInfo);
 
         int list_amount = 10;;
         int page_amount = 10;
@@ -237,7 +240,7 @@ public class IndexController {
         List<DemoBusinessVO>  demoBusinessVOList = demoBsService.getDemoBsPagingList(param);
 
         model.addAttribute("demoBusinessVOList",demoBusinessVOList);
-
+//        model.addAttribute("admin_idx", );
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
 
@@ -280,7 +283,6 @@ public class IndexController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-        System.out.println(filtered_item_total);
         return "b00_demo_bs_mng";
     }
 
@@ -750,9 +752,6 @@ public class IndexController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-        System.out.println(visitReqList.size());
-        System.out.println(filter1);
-        System.out.println(filter2);
         return "c21_site_visit_list";
     }
     //자원예약 관리
@@ -1137,12 +1136,16 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
         List<SystemCodeVO> subAssetCodeList = new ArrayList<>();
         List<SystemCodeVO> detailAssetCodeList = new ArrayList<>();
         systemCodeVOList.forEach(systemCodeVO -> {
-            if(systemCodeVO.getCode_value().length() == 1 || Integer.parseInt(systemCodeVO.getCode_value()) == 10){
-                mainAssetCodeList.add(systemCodeVO);
-            } else if(Integer.parseInt(systemCodeVO.getCode_value()) <= 120){
-                subAssetCodeList.add(systemCodeVO);
-            } else {
-                detailAssetCodeList.add(systemCodeVO);
+            String code = systemCodeVO.getCode_value();
+            if(code.charAt(0) == 'A'){
+                code = code.substring(1);
+                if(code.length() == 1 || Integer.parseInt(code) == 10){
+                    mainAssetCodeList.add(systemCodeVO);
+                } else if(Integer.parseInt(code) <= 120){
+                    subAssetCodeList.add(systemCodeVO);
+                } else {
+                    detailAssetCodeList.add(systemCodeVO);
+                }
             }
         });
         model.addAttribute("adminList", adminService.getAdminList());
@@ -1225,36 +1228,46 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
         List<SystemCodeVO> subAssetCodeList = new ArrayList<>();
         List<SystemCodeVO> detailAssetCodeList = new ArrayList<>();
         systemCodeVOList.forEach(systemCodeVO -> {
-            if(systemCodeVO.getCode_value().length() == 1 || Integer.parseInt(systemCodeVO.getCode_value()) == 10){
-                mainAssetCodeList.add(systemCodeVO);
-            } else if(Integer.parseInt(systemCodeVO.getCode_value()) <= 120){
-                subAssetCodeList.add(systemCodeVO);
-            } else {
-                detailAssetCodeList.add(systemCodeVO);
+            String code = systemCodeVO.getCode_value();
+            if(code.charAt(0) == 'A'){
+                code = code.substring(1);
+                if(code.length() == 1 || Integer.parseInt(code) == 10){
+                    mainAssetCodeList.add(systemCodeVO);
+                } else if(Integer.parseInt(code) <= 120){
+                    subAssetCodeList.add(systemCodeVO);
+                } else {
+                    detailAssetCodeList.add(systemCodeVO);
+                }
             }
         });
         List<SystemCodeVO> resultCodeList = new ArrayList<>();
         if(param.getCode_name().equals("sub_code")){
             subAssetCodeList.forEach(systemCodeVO -> {
-                if(param.getCode_value().length() == 1){
-                    if(param.getCode_value().equals(systemCodeVO.getCode_value().substring(0,1))){
-                        resultCodeList.add(systemCodeVO);
-                    }
-                } else {
-                    if(param.getCode_value().equals(systemCodeVO.getCode_value().substring(0,2))){
-                        resultCodeList.add(systemCodeVO);
+                if(param.getCode_value().length() == 2){
+                    String code = systemCodeVO.getCode_value();
+                    if(code.charAt(0) == 'A'){
+                        if(param.getCode_value().equals(systemCodeVO.getCode_value().substring(0,2))){
+                            resultCodeList.add(systemCodeVO);
+                        }
+                    } else {
+                        if(param.getCode_value().equals(systemCodeVO.getCode_value().substring(0,3))){
+                            resultCodeList.add(systemCodeVO);
+                        }
                     }
                 }
             });
         } else if(param.getCode_name().equals("detail_code")){
             detailAssetCodeList.forEach(systemCodeVO -> {
-                if(param.getCode_value().length() == 2){
-                    if(param.getCode_value().equals(systemCodeVO.getCode_value().substring(0,2))){
-                        resultCodeList.add(systemCodeVO);
-                    }
-                } else {
-                    if(param.getCode_value().equals(systemCodeVO.getCode_value().substring(0,3))){
-                        resultCodeList.add(systemCodeVO);
+                if(param.getCode_value().length() == 3){
+                    String code = systemCodeVO.getCode_value();
+                    if(code.charAt(0) == 'A'){
+                        if(param.getCode_value().equals(systemCodeVO.getCode_value().substring(0,3))){
+                            resultCodeList.add(systemCodeVO);
+                        }
+                    } else {
+                        if(param.getCode_value().equals(systemCodeVO.getCode_value().substring(0,4))){
+                            resultCodeList.add(systemCodeVO);
+                        }
                     }
                 }
             });
@@ -1346,7 +1359,6 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
                                   Principal principal,
                                   ModelMap model){
         AssetReservationVO assetReservationVO = assetService.getAssetReservation(param.getIdx());
-        System.out.println(assetReservationVO);
         List<AssetReservationItemVO> assetReservationItemVOList = assetService.getAssetReservationItemList(param.getIdx());
         AdminVO applicant = adminService.getAdminInfo(assetReservationVO.getIdx_user());
         param.setFilter1(100);
@@ -1493,7 +1505,6 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
                                @RequestBody ParamPageListFilteredVO param,
                                ModelMap model){
         boolean maxBool = false;
-        System.out.println("filter: "+ param.getFilter1() + ", page: " + param.getPage_num());
         List<UserVO> userVOList = userService.selectUserbyPage(param.getFilter1(), param.getPage_num());
         model.addAttribute("maxvalue", 0);
         model.addAttribute("page", 0);
@@ -1526,7 +1537,6 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
                                      @RequestBody ParamPageListFilteredVO param,
                                        ModelMap model){
         boolean maxBool = false;
-        System.out.println("filter: "+ param.getFilter1() + ", page: " + param.getPage_num());
         List<UserVO> userVOList = userService.selectDormantUserbyPage(param.getFilter1(), param.getPage_num());
         model.addAttribute("maxvalue", 0);
         model.addAttribute("page", 0);
@@ -1556,8 +1566,11 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
 
         int pageBool = 4;
         List<AdminResVO> adminVOList = adminService.selectAdminbyIdx(param.getPage_num() != 0 ? param.getPage_num() + "" : "1", 100);
-        if(adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage() < 4){
-            pageBool = adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage();
+        System.out.println(adminVOList);
+        if(adminVOList.size() != 0){
+            if(adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage() < 4){
+                pageBool = adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage();
+            }
         }
         model.addAttribute("pageBool", pageBool);
         model.addAttribute("adminList", adminVOList);
@@ -1798,6 +1811,19 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
         model.addAttribute("page_amount",page_amount);
 
         return "l20_code_mng";
+    }
+    private void satProfile(ModelMap model) {
+        String[] activeProfiles = env.getActiveProfiles();
+        if (activeProfiles.length != 0) {
+            String activeProfile = activeProfiles[0];
+
+            if (activeProfile.equals("local")) {
+                model.addAttribute("profile", "gimje-prod");
+            } else {
+                model.addAttribute("profile", activeProfile);
+            }
+        }
+//                model.addAttribute("profile", "sangju-prod");
     }
 
 }

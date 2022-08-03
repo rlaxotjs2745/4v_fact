@@ -1,4 +1,4 @@
-<%--
+<%@ page import="kr.or.fact.core.model.DTO.BsAnnouncementVO" %><%--
   Created by IntelliJ IDEA.
   User: abeki
   Date: 2021/09/01
@@ -40,13 +40,14 @@
             <div class="board__head">
                 <div class="board__total">총 <strong>${total_count}</strong>개</div>
                 <div class="board__search">
-                    <select name="" id="" class="select-sm">
-                        <option value="">제목</option>
-                        <option value="">작성자</option>
-                        <option value="">내용</option>
-                        <option value="">제목+내용</option>
+                    <select name="" id="search_select" class="select-sm">
+                        <option value="t">제목</option>
+                        <option value="w">작성자</option>
+                        <option value="c">내용</option>
+                        <option value="tc">제목+내용</option>
                     </select>
-                    <input type="text" class="search" placeholder="검색어를 입력해주세요."><a href="#none" class="btn btn__board--search">검색</a></div>
+                    <input type="text" id="search_input" class="search" placeholder="검색어를 입력해주세요."><a id="search_btn" class="btn btn__board--search">검색</a>
+                </div>
             </div>
             <div class="table__type">
                 <table class="table__type--board">
@@ -73,118 +74,45 @@
                     <tbody>
 
                     <c:forEach items="${announceList}" var="ann" varStatus="status">
-                    <tr>
-                        <td>${ann.announce_num}</td>
-                        <td>
-                            <c:if test="${ann.bs_status eq 2}"> 대기</c:if>
-                            <c:if test="${ann.bs_status eq 3}"> 신청중</c:if>
-                            <c:if test="${ann.bs_status eq 4}"> 신청완료</c:if>
-                            <c:if test="${ann.bs_status eq 10}"> 사업종료</c:if>
-                        </td>
-                        <td class="td__left"><a href="brd_announce_detail?idx=${ann.idx_bs_announcement}" class="td__link">${ann.subject}<c:if test="${ann.is_new eq 1}"> <img src="resources/assets/image/ico_new.png" alt="NEW" class="board__badge"></c:if></a></td>
-                        <td class="td__data"><img src="resources/assets/image/ico_file-present.png" alt=""></td>
-                        <td class="td__data">${ann.author}</td>
-                        <td class="td__data"><fmt:formatDate value="${ann.posting_start_date}" pattern="yyyy-MM-dd" /></td>
-                        <td class="td__data">${ann.view_count}</td>
-                    </tr>
+                        <tr>
+                            <td>${ann.announce_num}</td>
+                            <td>
+                                <c:if test="${ann.bs_status eq 2}"> 대기</c:if>
+                                <c:if test="${ann.bs_status eq 3}"> 신청중</c:if>
+                                <c:if test="${ann.bs_status eq 4}"> 신청완료</c:if>
+                                <c:if test="${ann.bs_status eq 10}"> 사업종료</c:if>
+                            </td>
+                            <%
+                                final BsAnnouncementVO notice = (BsAnnouncementVO) pageContext.getAttribute("ann");
+                                final String query = (String) request.getAttribute("query");
+                                final String highlightSubject;
+                                if (query == null || query.trim().length() == 0) {
+                                    highlightSubject = notice.getSubject();
+                                } else {
+                                    highlightSubject = notice.getSubject().replaceAll(query, "<span style=\"background-color:yellow\">" + query + "</span>");
+                                }
+                            %>
+                            <td class="td__left"><a href="brd_announce_detail?idx=${ann.idx_bs_announcement}" class="td__link"><%=highlightSubject%>><c:if test="${ann.is_new eq 1}"> <img src="resources/assets/image/ico_new.png" alt="NEW" class="board__badge"></c:if></a></td>
+                            <td class="td__data"><c:if test="${notice.is_file eq 1}"><img src="resources/assets/image/ico_file-present.png" alt=""></c:if></td>
+                            <td class="td__data">${ann.author}</td>
+                            <td class="td__data"><fmt:formatDate value="${ann.posting_start_date}" pattern="yyyy-MM-dd" /></td>
+                            <td class="td__data">${ann.view_count}</td>
+                        </tr>
                     </c:forEach>
-                    <%--<tr>
-                        <td>671</td>
-                        <td>진행중</td>
-                        <td class="td__left"><a href="#none" class="td__link">농업기술실용화재단 규제개선 현황(`21.6월)</a></td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_jpg.png" alt=""></a></td>
-                        <td class="td__data">XXXX</td>
-                        <td class="td__data">2021-00-00</td>
-                        <td class="td__data">0,000</td>
-                    </tr>
-                    <tr>
-                        <td>672</td>
-                        <td>완료</td>
-                        <td class="td__left"><a href="#none" class="td__link">농업기술실용화재단 정보보안 및 개인정보처리방침 변경 알림</a></td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
-                        <td class="td__data">XXXX</td>
-                        <td class="td__data">2021-00-00</td>
-                        <td class="td__data">0,000</td>
-                    </tr>
-                    <tr>
-                        <td>673</td>
-                        <td>진행중</td>
-                        <td class="td__left"><a href="#none" class="td__link">종자생명산업 맞춤형 인력양성_교육훈련생_신청</a></td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_pdf.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_png.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
-                        <td class="td__data">XXXX</td>
-                        <td class="td__data">2021-00-00</td>
-                        <td class="td__data">0,000</td>
-                    </tr>
-                    <tr>
-                        <td>674</td>
-                        <td>진행중</td>
-                        <td class="td__left"><a href="#none" class="td__link">2021년 종자생명산업 맞춤형 인력양성」 교육훈련생 선정 결과 알림</a></td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_ppt.png" alt=""></a></td>
-                        <td class="td__data">XXXX</td>
-                        <td class="td__data">2021-00-00</td>
-                        <td class="td__data">0,000</td>
-                    </tr>
-                    <tr>
-                        <td>675</td>
-                        <td>진행중</td>
-                        <td class="td__left"><a href="#none" class="td__link">창업기업제품 공공기관 우선구매제도 안내</a></td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_xls.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
-                        <td class="td__data">XXXX</td>
-                        <td class="td__data">2021-00-00</td>
-                        <td class="td__data">0,000</td>
-                    </tr>
-                    <tr>
-                        <td>676</td>
-                        <td>진행중</td>
-                        <td class="td__left"><a href="#none" class="td__link">2021년 혁신도시 공공기관연계육성 스마트팜 기업지원사업(비R&D) 온라인 신청 2021년 혁신도시 공공기관연계육성 스마트팜 기업지원사업(비R&D) </a></td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
-                        <td class="td__data">XXXX</td>
-                        <td class="td__data">2021-00-00</td>
-                        <td class="td__data">0,000</td>
-                    </tr>
-                    <tr>
-                        <td>677</td>
-                        <td>진행중</td>
-                        <td class="td__left"><a href="#none" class="td__link">농업기술실용화재단 규제개선 현황(`21.6월)</a></td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
-                        <td class="td__data">XXXX</td>
-                        <td class="td__data">2021-00-00</td>
-                        <td class="td__data">0,000</td>
-                    </tr>
-                    <tr>
-                        <td>678</td>
-                        <td>진행중</td>
-                        <td class="td__left"><a href="#none" class="td__link">2021년 종자생명산업 맞춤형 인력양성」 교육훈련생 선정 결과 알림</a></td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
-                        <td class="td__data">XXXX</td>
-                        <td class="td__data">2021-00-00</td>
-                        <td class="td__data">0,000</td>
-                    </tr>
-                    <tr>
-                        <td>679</td>
-                        <td>진행중</td>
-                        <td class="td__left"><a href="#none" class="td__link">종자생명산업 맞춤형 인력양성_교육훈련생_신청</a></td>
-                        <td class="td__data"><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
-                        <td class="td__data">XXXX</td>
-                        <td class="td__data">2021-00-00</td>
-                        <td class="td__data">0,000</td>
-                    </tr>--%>
                     </tbody>
                 </table>
-                <!--//-->
                 <div class="table__paging">
                     <c:set var="name" value="${total_count/amount}" />
 
-                    <c:if test="${is_past eq true}"><a href="brd_announce?page=1" class="paging__prev2"><img src="resources/assets/image/ico_paging_prev_02.png" alt=""></a></c:if>
-                    <c:if test="${is_prev eq true}"><a href="brd_announce?page=${cur_page-1}" class="paging__prev"><img src="resources/assets/image/ico_paging_prev.png" alt=""></a></c:if>
-<c:forEach var="i" begin="1" end="${page_amount}">
-                    <a href="brd_announce?page=${(cur_sector-1)*page_amount+i}" <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">class="is-active"</c:if>>${(cur_sector-1)*page_amount+i}</a>
-</c:forEach>
-                    <c:if test="${is_next eq true}"><a href="brd_announce?page=${cur_page+1}" class="paging__next"><img src="resources/assets/image/ico_paging_next.png" alt=""></a></c:if>
-                    <c:if test="${is_last eq true}"><a href="brd_announce?page=${tot_page}" class="paging__next2"><img src="resources/assets/image/ico_paging_next_02.png" alt=""></a></c:if>
+                    <c:if test="${is_past eq true}"><a href="brd_announce?page=1&filter=${filter}&query=${query}" class="paging__prev2"><img src="resources/assets/image/ico_paging_prev_02.png" alt=""></a></c:if>
+                    <c:if test="${is_prev eq true}"><a href="brd_announce?page=${cur_page-1}&filter=${filter}&query=${query}" class="paging__prev"><img src="resources/assets/image/ico_paging_prev.png" alt=""></a></c:if>
+                    <c:forEach var="i" begin="1" end="${page_amount}">
+                        <a href="brd_announce?page=${(cur_sector-1)*page_amount+i}&filter=${filter}&query=${query}" <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">class="is-active"</c:if>>${(cur_sector-1)*page_amount+i}</a>
+                    </c:forEach>
+                    <c:if test="${is_next eq true}"><a href="brd_announce?page=${cur_page+1}&filter=${filter}&query=${query}" class="paging__next"><img src="resources/assets/image/ico_paging_next.png" alt=""></a></c:if>
+                    <c:if test="${is_last eq true}"><a href="brd_announce?page=${tot_page}&filter=${filter}&query=${query}" class="paging__next2"><img src="resources/assets/image/ico_paging_next_02.png" alt=""></a></c:if>
                 </div>
             </div>
-            <!--//-->
         </div>
 
     </div>
@@ -192,5 +120,41 @@
 <%@include file ="footer.jsp" %>
 <%@include file ="script.jsp" %>
 </div>
+<script>
+
+    function locationSearch() {
+        const searchSelect = $('#search_select').val();
+        const searchInput = $('#search_input').val();
+        console.log(searchSelect, searchInput);
+        window.location = '/brd_announce?page=1&filter=' + searchSelect + '&query=' + searchInput;
+    }
+
+    $(document).ready(function() {
+        (function() {
+            switch('${filter}') {
+                case 't':
+                case 'w':
+                case 'c':
+                case 'tc':
+                    $('#search_select').val('${filter}').prop("selected", true);
+                    break;
+                default:
+                    $('#search_select').val('t').prop("selected", true);
+            }
+            $('#search_input').val('${query}');
+        })();
+
+        $('#search_btn').click(function () {
+            locationSearch();
+        });
+
+        $("#search_input").on('keyup', function(key) {
+            if(key.keyCode === 13) {
+                locationSearch();
+            }
+        });
+    });
+
+</script>
 </body>
 </html>

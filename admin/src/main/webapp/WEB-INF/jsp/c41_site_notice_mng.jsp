@@ -13,7 +13,7 @@
             <h6 class="card-header with-elements">
                 <div class="card-header-title">포털 공지사항 목록</div>
                 <div class="card-header-elements ml-auto">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals-business" data-what="mode-new">+ 신규 공지사  작성</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals-business" data-what="mode-new">+ 신규 공지사항 작성</button>
                 </div>
             </h6>
             <div class="card-datatable table-responsive pt-0 pb-3">
@@ -247,7 +247,7 @@
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header bg-success">
-                        <h5 class="modal-title text-white font-weight-bold mode-new">공지사 수정</h5>
+                        <h5 class="modal-title text-white font-weight-bold mode-new">공지사항 수정</h5>
                         <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
                     <div class="modal-body">
@@ -397,7 +397,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header bg-success">
-                <h5 class="modal-title text-white font-weight-bold mode-new">신규 공지사 작성</h5>
+                <h5 class="modal-title text-white font-weight-bold mode-new">신규 공지사항 작성</h5>
                 <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
             </div>
             <div class="modal-body">
@@ -406,7 +406,7 @@
 
                     <!-- 사업 제목-->
                     <div class="form-group row" >
-                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">공지 제목</label>
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">제목</label>
                         <div class="col-md-10" >
                             <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" id="subject">
                             <div class="form-control-plaintext mode-view"></div>
@@ -423,21 +423,21 @@
 
                     <hr>
                     <div class="form-row" >
-                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">컨텐츠</label>
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">내용</label>
                         <div class="form-group col col-md-10">
                             <textarea class="summernote" rows="3" id="notice_contents"></textarea>
                         </div>
                     </div>
                     <hr>
                     <div class="form-row" >
-                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">서브제목</label>
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">소제목</label>
                         <div class="form-group col col-md-10" >
                             <textarea class="form-control mode-edit mode-new" rows="3" id="notice_code"></textarea>
                         </div>
                     </div>
                     <hr>
                     <div class="form-row" >
-                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">공지사 내용</label>
+                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메모</label>
                         <div class="form-group col col-md-10" >
                             <textarea class="form-control mode-edit mode-new" rows="3"  id="memo"></textarea>
                         </div>

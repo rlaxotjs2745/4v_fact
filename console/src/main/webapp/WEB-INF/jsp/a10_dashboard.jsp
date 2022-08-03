@@ -28,7 +28,8 @@
 
                     </h6>
                     <div class="greenhouse-area">
-
+                        <img src="/resources/assets/image/img_company-map_dark.png">
+                        <p class="txt1">김제 코포레이션</p>
                     </div>
 
                 </div>

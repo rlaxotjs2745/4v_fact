@@ -47,6 +47,10 @@
         WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
     </select>
 
+    <select id="isValidCode" parameterType="String" resultType="String">
+        SELECT DEMO_BS_CODE FROM TB_DEMO_BUSINESS WHERE DEMO_BS_CODE = #{code}
+    </select>
+
 
     <select id="getDemoBsListByFilter" parameterType="int" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
         SELECT * FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS = #{type} ORDER BY START_DATE DESC
@@ -77,6 +81,12 @@
             IDX_ADMIN,
             IDX_CONFORM_ADMIN,
             IS_ANNOUNCE,
+            EXAM_START,
+            EXAM_END,
+            PLAN_REVIEW_START,
+            PLAN_REVIEW_END,
+            CONVENTION_START,
+            CONVENTION_END,
             REG_DATE,
             LAST_UPD_DATE
         ) VALUES (
@@ -99,6 +109,12 @@
                      #{idx_admin},
                      #{idx_conform_admin},
                      #{is_announce},
+                     #{exam_start},
+                     #{exam_end},
+                     #{plan_review_start},
+                     #{plan_review_end},
+                     #{convention_start},
+                     #{convention_end},
                      SYSDATE,
                      SYSDATE
                  )

@@ -9,6 +9,60 @@
     <select id="getWebpagePRContentCount" resultType="int">
         SELECT COUNT(*) FROM TB_PR_CONTENT  WHERE IS_SHOW=1 AND PR_CONTENT_STATUS=1
     </select>
+
+    <sql id="searchPromotionCondition">
+        <if test='query != null and query != ""'>
+            <choose>
+                <when test='filter == null or filter == ""'>
+                    AND SUBJECT LIKE '%' || #{query} || '%'
+                </when>
+                <when test='filter == "t"'>
+                    AND SUBJECT LIKE '%' || #{query} || '%'
+                </when>
+                <when test='filter == "w"'>
+                    AND AUTHOR LIKE '%' || #{query} || '%'
+                </when>
+                <when test='filter == "c"'>
+                    AND PR_CONTENTS LIKE '%' || #{query} || '%'
+                </when>
+                <when test='filter == "tc"'>
+                    AND (SUBJECT LIKE '%' || #{query} || '%' OR PR_CONTENTS LIKE '%' || #{query} || '%')
+                </when>
+                <otherwise>
+                    AND SUBJECT LIKE '%' || #{query} || '%'
+                </otherwise>
+            </choose>
+        </if>
+    </sql>
+    <select id="getOpenPRContentCount" resultType="int">
+        SELECT COUNT(*)
+        FROM TB_PR_CONTENT
+        WHERE IS_SHOW=1
+            AND PR_CONTENT_STATUS=1
+            <include refid="searchPromotionCondition"></include>
+    </select>
+    <select id="getOpenPRContentList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.PRContentVO">
+        SELECT
+            *
+        FROM (
+            SELECT
+                ROW_NUMBER() OVER(ORDER by PR_CONTENT_NUM DESC) AS row_num
+                ,IDX_PR_CONTENT
+                ,PR_CONTENT_NUM
+                ,SUBJECT
+                ,IS_FILE
+                ,IS_NEW
+                ,AUTHOR
+                ,SHOW_START_DATE
+                ,VIEW_COUNT
+            FROM TB_PR_CONTENT
+            WHERE IS_SHOW=1
+                AND PR_CONTENT_STATUS=1
+                <include refid="searchPromotionCondition"></include>
+        )
+        WHERE row_num BETWEEN #{count} * (#{page} - 1) + 1 AND #{count} * #{page}
+    </select>
+
     <select id="getPRContentList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.PRContentVO">
         SELECT
             IDX_PR_CONTENT

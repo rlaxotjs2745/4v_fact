@@ -72,7 +72,6 @@
     //최초 진입시 호출되는 ajax 페이지 초기값
     var cur = "";
     function load(a,b){
-        console.log("cur = "+cur + "   load="+a);
 
         if(cur!=a){
             cur = a;

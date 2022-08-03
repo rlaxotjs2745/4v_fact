@@ -37,22 +37,24 @@
         <div class="page__cnt">
 
             <div class="board__head">
-                <div class="board__total">${total_count} <strong>00</strong>개</div>
+                <div class="board__total">${total_count}개</div>
                 <div class="board__search">
-                    <select name="" id="" class="select-sm">
-                        <option value="">제목</option>
-                        <option value="">작성자</option>
-                        <option value="">내용</option>
-                        <option value="">제목+내용</option>
-                    </select>
-                    <input type="text" class="search" placeholder="검색어를 입력해주세요."><a href="#none" class="btn btn__board--search">검색</a></div>
+                    <div class="board__search">
+                        <select name="" id="search_select" class="select-sm">
+                            <option value="t">제목</option>
+                            <option value="w">작성자</option>
+                            <option value="c">내용</option>
+                            <option value="tc">제목+내용</option>
+                        </select>
+                        <input type="text" id="search_input" class="search" placeholder="검색어를 입력해주세요."><a id="search_btn" class="btn btn__board--search">검색</a>
+                    </div>
             </div>
             <div class="list__type">
                 <ul class="list__type--promo" id="pr_list">
                     <c:forEach items="${prContentList}" var="promotion" varStatus="status">
                         <li>
                             <a href="brd_promotion_detail?idx=${promotion.idx_pr_content}" class=" btn-sm btn_content_modal">
-                                <figure><img src="${promotion.thumb_img_file_path}" alt="" class="thumb_list_item"></figure>
+                                <figure><img src="${!promotion.thumb_img_file_path ? 'resources/assets/image/h1_logo@3x.png' : promotion.thumb_img_file_path}" alt="" class="thumb_list_item"></figure>
                                 <div class="caption">
                                     <span class="list__title">${promotion.subject}</span>
                                     <div class="list__file">
@@ -62,96 +64,19 @@
                             </a>
                         </li>
                     </c:forEach>
-                    <%--
-                    <li>
-                        <a href="brd_promotion_detail">
-                            <figure><img src="resources/assets/image/@promo_02.png" alt=""></figure>
-                            <div class="caption">
-                                <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
-                                <div class="list__file">
-                                    <a href="#"><img src="resources/assets/image/ico_png.png" alt="png"></a>
-                                    <a href="#"><img src="resources/assets/image/ico_jpg.png" alt="jpg"></a>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="brd_promotion_detail">
-                            <figure><img src="resources/assets/image/@promo_03.png" alt=""></figure>
-                            <div class="caption">
-                                <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
-                                <div class="list__file">
-                                    <a href="#"><img src="resources/assets/image/ico_hwp.png" alt="hwp"></a>
-                                    <a href="#"><img src="resources/assets/image/ico_pdf.png" alt="pdf"></a>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="brd_promotion_detail">
-                            <figure><img src="resources/assets/image/@promo_04.png" alt=""></figure>
-                            <div class="caption">
-                                <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
-                                <div class="list__file">
-                                    <a href="#"><img src="resources/assets/image/ico_hwp.png" alt="hwp"></a>
-                                    <a href="#"><img src="resources/assets/image/ico_pdf.png" alt="pdf"></a>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="brd_promotion_detail">
-                            <figure><img src="resources/assets/image/@promo_02.png" alt=""></figure>
-                            <div class="caption">
-                                <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
-                                <div class="list__file">
-                                    <a href="#"><img src="resources/assets/image/ico_hwp.png" alt="hwp"></a>
-                                    <a href="#"><img src="resources/assets/image/ico_pdf.png" alt="pdf"></a>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="brd_promotion_detail">
-                            <figure><img src="resources/assets/image/@promo_03.png" alt=""></figure>
-                            <div class="caption">
-                                <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
-                                <div class="list__file">
-                                    <a href="#"><img src="resources/assets/image/ico_hwp.png" alt="hwp"></a>
-                                    <a href="#"><img src="resources/assets/image/ico_pdf.png" alt="pdf"></a>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="brd_promotion_detail">
-                            <figure><img src="resources/assets/image/@promo_04.png" alt=""></figure>
-                            <div class="caption">
-                                <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
-                                <div class="list__file">
-                                    <a href="#"><img src="resources/assets/image/ico_hwp.png" alt="hwp"></a>
-                                    <a href="#"><img src="resources/assets/image/ico_pdf.png" alt="pdf"></a>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="brd_promotion_detail">
-                            <figure><img src="resources/assets/image/@promo_01.png" alt=""></figure>
-                            <div class="caption">
-                                <span class="list__title">제26회 용스네 (용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹 용감한 스타트업 네트워킹)</span>
-                                <div class="list__file">
-                                    <a href="#"><img src="resources/assets/image/ico_hwp.png" alt="hwp"></a>
-                                    <a href="#"><img src="resources/assets/image/ico_pdf.png" alt="pdf"></a>
-                                </div>
-                            </div>
-                        </a>
-                    </li>--%>
                 </ul>
             </div>
             <div class="list__paging">
                 <div class="form__btn">
-                    <button id="plus_pr" class="btn btn-next">더보기 1/100</button>
+                    <%
+                        final Integer totalCount = (Integer) request.getAttribute("total_count");
+                        int totalPage = totalCount / 10;
+
+                        if (totalCount % 10 != 0) {
+                            totalPage += 1;
+                        }
+                    %>
+                    <button id="plus_pr" class="btn btn-next">더보기 1/<%=totalPage%></button>
                 </div>
             </div>
             <!--//-->
@@ -168,39 +93,84 @@
         var idx = $(this).attr("id");
         pageLoad("pr_contents", {idx: parseInt(idx)}, "홍보자료 모달컨텐츠", "pr_contents");
     })
-    const a = function(promotion){
-        return '<li>\n' +
-            '<a href="brd_promotion_detail?idx=' + promotion.idx_pr_content + '" class=" btn-sm btn_content_modal">\n'+
-            ' <figure><img src="' + promotion.thumb_img_file_path + '" alt="" class="thumb_list_item"></figure>\n'+
-            '    <div class="caption">\n'+
-            '  <span class="list__title">'+promotion.subject+'</span>\n'+
-            '  <div class="list__file">\n'+
-            '  <a href="'+ promotion.file_path +'"><img src="resources/assets/image/ico_hwp.png" alt="hwp"></a>\n'+
-            ' <img src="resources/assets/image/ico_pdf.png" alt="pdf">\n'+
-            ' </div>\n'+
-        ' </div>\n'+
-        '</a>\n'+
-        '</li>\n'}
+
+    function locationSearch() {
+        const searchSelect = $('#search_select').val();
+        const searchInput = $('#search_input').val();
+        console.log(searchSelect, searchInput);
+        window.location = '/brd_promotion?page=1&filter=' + searchSelect + '&query=' + searchInput;
+    }
+
+    $(document).ready(function() {
+        (function() {
+            switch('${filter}') {
+                case 't':
+                case 'w':
+                case 'c':
+                case 'tc':
+                    $('#search_select').val('${filter}').prop("selected", true);
+                    break;
+                default:
+                    $('#search_select').val('t').prop("selected", true);
+            }
+            $('#search_input').val('${query}');
+        })();
+
+        $('#search_btn').click(function () {
+            locationSearch();
+        });
+
+        $("#search_input").on('keyup', function(key) {
+            if(key.keyCode === 13) {
+                locationSearch();
+            }
+        });
+    });
+
+    const makeCard = function(promotion){
+        if(!promotion.thumb_img_file_path){
+            promotion.thumb_img_file_path = 'resources/assets/image/h1_logo@3x.png';
+        }
+        return  '<li>' +
+                '   <a href="brd_promotion_detail?idx=' + promotion.idx_pr_content + '" class=" btn-sm btn_content_modal">'+
+                '       <figure><img src="' + promotion.thumb_img_file_path + '" alt="" class="thumb_list_item"></figure>'+
+                '       <div class="caption">'+
+                '           <span class="list__title">'+promotion.subject+'</span>'+
+                '           <div class="list__file">'+
+                '               <a href="'+ promotion.file_path +'"><img src="resources/assets/image/ico_file-present.png" alt=""></a>'+
+                '           </div>'+
+                '       </div>'+
+                '   </a>'+
+                '</li>'
+        }
 
 
-
-
-
-
-
-    var page = 2;
+    var totalPage = <%=totalPage%>;
+    var page = ${page} + 1;
     $("#plus_pr").click(function() {
+
+        if (page > totalPage) {
+            return;
+        }
+
+        var request = {
+            page,
+            filter: $('#search_select').val(),
+            query: $('#search_input').val(),
+        }
+
         $.ajax({
             type: 'post',
             url :'plus_pr', //데이터를 주고받을 파일 주소 입력
-            data: JSON.stringify(page),//보내는 데이터
+            data: JSON.stringify(request),//보내는 데이터
             contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
             dataType:'json',//받는 데이터 타입
             success: function(res){
-                for(var promotion of res){
-                    $("#pr_list").append(a(promotion));
+                for (var i = 0; i < res.length; ++i) {
+                    $("#pr_list").append(makeCard(res[i]));
+                    $('#plus_pr')[0].innerText = ('더보기 ' + page + '/' + totalPage);
                 }
-                page += 1;
+                page++;
             }
         })
     })

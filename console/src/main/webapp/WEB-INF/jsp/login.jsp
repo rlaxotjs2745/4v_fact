@@ -146,7 +146,6 @@
             "admin_id":$("#input_id").val(),
             "admin_pw":$("#input_pw").val()
         };
-        console.log(JSON.stringify(param));
 
         $.ajax({
             type: 'post',

@@ -73,7 +73,7 @@
                 </div>
 
                 <div <c:if test="${is_login eq false}">hidden</c:if>>
-                    <div class="table__caption">상담 이력 : 총 ${total_count}회</div>
+                    <div class="table__caption">상담 이력 : 총 ${total_count ? total_count : 0}회</div>
                     <div id="user_consulting_list" class="table__type "><!--no--head-->
 
                     </div>

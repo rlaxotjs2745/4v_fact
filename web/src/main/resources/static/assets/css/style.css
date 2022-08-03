@@ -9313,3 +9313,8 @@ table.table__type--pee tbody tr.tr__subsum th {
     padding: 0 !important;
     margin: 10px;
 }
+
+.list__type ul.list__type--promo li:nth-child(1),
+.list__type ul.list__type--promo li:nth-child(4n+1) {
+    margin-left: 0;
+}

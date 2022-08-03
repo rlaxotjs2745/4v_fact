@@ -1,5 +1,6 @@
 package kr.or.fact.core.service;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import kr.or.fact.core.model.DTO.AdminDemoBSFilterVO;
 import kr.or.fact.core.model.DTO.DemoBusinessVO;
 import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
@@ -27,6 +28,8 @@ public interface DemoBsService {
     AdminDemoBSFilterVO getAdminDemoBsFilter();
 
     List<DemoBusinessVO> getAvailibleDemoBs();
+
+    Boolean isValidCode(String code);
 
 
 }

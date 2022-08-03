@@ -72,6 +72,15 @@ public class IndexController {
 
         //List<UserVO> userList = userService.selectList();
         //model.addAttribute("test_data",userList.get(0).getCreat_co());
+        List<NoticeVO> noticeVOList = noticeService.getMainNoticeList();
+
+        List<BsAnnouncementVO> bsAnnouncementVOList = bsAnnouncementService.getMainBsAnnouncementList();
+
+        List<EventContentVO> eventContentVOList = eventContentService.getMainEventContentList();
+
+        model.addAttribute("noticeList", noticeVOList);
+        model.addAttribute("annoList", bsAnnouncementVOList);
+        model.addAttribute("eventList", eventContentVOList);
         getHomepageInfo(model);
         satProfile(model);
         return "index";
@@ -81,6 +90,15 @@ public class IndexController {
     public String index(HttpSession session
             , Model model) {
 
+        List<NoticeVO> noticeVOList = noticeService.getMainNoticeList();
+
+        List<BsAnnouncementVO> bsAnnouncementVOList = bsAnnouncementService.getMainBsAnnouncementList();
+
+        List<EventContentVO> eventContentVOList = eventContentService.getMainEventContentList();
+
+        model.addAttribute("noticeList", noticeVOList);
+        model.addAttribute("annoList", bsAnnouncementVOList);
+        model.addAttribute("eventList", eventContentVOList);
 
         getHomepageInfo(model);
         satProfile(model);
@@ -121,7 +139,6 @@ public class IndexController {
                     session.setAttribute("corpName", "회사등록필요");
                 }
             }
-
             session.setAttribute("isApplicant", findUser.getIs_applicant());
             return "redirect:/";
         } else {
@@ -681,19 +698,28 @@ public class IndexController {
     }
 
     @RequestMapping("/brd_announce")
-    public String brd_announce(@RequestParam("page") int page,
+    public String brd_announce(@RequestParam(value = "page", required = false) Integer page,
+                               @RequestParam(name = "filter", required = false) String filter,
+                               @RequestParam(name = "query", required = false) String query,
                                Model model) {
-        System.out.println(page);
+        if (page == null || page <= 0) {
+            page = 1;
+        }
+
         int list_amount = 10;
         int page_amount = 10;
 
-        int annouceCount = bsAnnouncementService.getWebpageBsAnnouncementCount();
+        model.addAttribute("page", page);
+        model.addAttribute("filter", filter);
+        model.addAttribute("query", query);
+
+        int annouceCount = bsAnnouncementService.getOpenBsAnnouncementCount(filter, query);
         if (annouceCount == 0) {
             satProfile(model);
             return "brd_announce_blank";
         }
         model.addAttribute("total_count", annouceCount);
-        List<BsAnnouncementVO> announcementVOList = bsAnnouncementService.getBsAnnouncementWebList(page, list_amount);
+        List<BsAnnouncementVO> announcementVOList = bsAnnouncementService.getOpenBsAnnouncementWebList(page, list_amount, filter, query);
         model.addAttribute("announceList", announcementVOList);
 
         model.addAttribute("cur_page", page);
@@ -745,10 +771,8 @@ public class IndexController {
     @RequestMapping("/brd_announce_detail")
     public String brd_announce_detail(@RequestParam("idx") int idx,
                                       Model model) {
-        int view = bsAnnouncementService.getBsAnnounceViewCount(idx);
         BsAnnouncementVO bsAnnouncementVO = new BsAnnouncementVO();
         bsAnnouncementVO.setIdx_bs_announcement(idx);
-        bsAnnouncementVO.setView_count(view + 1);
         bsAnnouncementService.updateBsAnnounceViewCount(bsAnnouncementVO);
         BsAnnouncementVO bsAnnouncementInfo = bsAnnouncementService.getBsAnnouncementByIdx(idx);
         model.addAttribute("bsAnnouns", bsAnnouncementInfo);
@@ -786,18 +810,26 @@ public class IndexController {
 
 
     @RequestMapping("/brd_event")
-    public String brd_event(@RequestParam("page") int page,
+    public String brd_event(@RequestParam(name = "filter", required = false) String filter,
+                            @RequestParam(name = "query", required = false) String query,
                             Model model) {
+
+        int page = 1;
+
         int list_amount = 10;
         int page_amount = 10;
 
-        int eventCount = eventContentService.getWebpageEventContentCount();
+        model.addAttribute("page", page);
+        model.addAttribute("filter", filter);
+        model.addAttribute("query", query);
+
+        int eventCount = eventContentService.getOpenEventContentCount(filter, query);
         if (eventCount == 0) {
             satProfile(model);
             return "brd_event_blank";
         }
         model.addAttribute("total_count", eventCount);
-        List<EventContentVO> eventContentVOList = eventContentService.getEventContentList(page, list_amount);
+        List<EventContentVO> eventContentVOList = eventContentService.getOpenEventContentList(page, list_amount, filter, query);
         model.addAttribute("eventContentVOList", eventContentVOList);
 
         model.addAttribute("cur_page", page);
@@ -904,13 +936,14 @@ public class IndexController {
                              @RequestParam(name = "filter", required = false) String filter,
                              @RequestParam(name = "query", required = false) String query,
                              Model model) {
-        if (page == null) {
+        if (page == null || page <= 0) {
             page = 1;
         }
 
         int list_amount = 10;
         int page_amount = 10;
 
+        model.addAttribute("page", page);
         model.addAttribute("filter", filter);
         model.addAttribute("query", query);
 
@@ -973,19 +1006,15 @@ public class IndexController {
     @RequestMapping("/brd_notice_detail")
     public String brd_notice_detail(@RequestParam("idx") int idx,
                                     Model model) {
-        int view = noticeService.getNoticeViewCount(idx);
         NoticeVO noticeVO1 = new NoticeVO();
         noticeVO1.setIdx_notice(idx);
         noticeService.updateNoticeViewCount(noticeVO1);
-        System.out.println(noticeVO1);
 
 
         NoticeVO noticeInfo = noticeService.getNoticeByIdx(idx);
         if (noticeInfo.getIs_file() == 0) {
-            System.out.println("여기");
             model.addAttribute("noticeInfo", noticeInfo);
         } else {
-            System.out.println("아님여기");
             NoticeVO noticeVO = noticeService.getNoticeIsFile(idx);
             model.addAttribute("noticeInfo", noticeVO);
 
@@ -1023,18 +1052,28 @@ public class IndexController {
     }
 
     @RequestMapping("/brd_promotion")
-    public String brd_promotion(@RequestParam("page") int page,
+    public String brd_promotion(@RequestParam(value = "page", required = false) Integer page,
+                                @RequestParam(name = "filter", required = false) String filter,
+                                @RequestParam(name = "query", required = false) String query,
                                 Model model) {
+        if (page == null || page <= 0) {
+            page = 1;
+        }
+
         int list_amount = 10;
         int page_amount = 10;
 
-        int promotionCount = prContentService.getWebpagePRContentCount();
+        model.addAttribute("page", page);
+        model.addAttribute("filter", filter);
+        model.addAttribute("query", query);
+
+        int promotionCount = prContentService.getOpenPRContentCount(filter, query);
         if (promotionCount == 0) {
             satProfile(model);
             return "brd_announce_blank";
         }
         model.addAttribute("total_count", promotionCount);
-        List<PRContentVO> prContentList = prContentService.getPRContentList(page, list_amount);
+        List<PRContentVO> prContentList = prContentService.getOpenPRContentList(page, list_amount, filter, query);
         model.addAttribute("prContentList", prContentList);
 
         model.addAttribute("cur_page", page);
@@ -1244,7 +1283,6 @@ public class IndexController {
 
     @RequestMapping("/login")
     public String login(HttpSession session, Model model) {
-        System.out.println("login222");
         clearSessionAndRedirect(session);
         getHomepageInfo(model);
         satProfile(model);
@@ -1262,7 +1300,6 @@ public class IndexController {
     @RequestMapping("/my_business")
     public String my_business(HttpSession session
             , Model model) {
-        System.out.println("왔음");
         if (session == null
                 || session.getAttribute("loginCheck") == null
                 || (session.getAttribute("loginCheck") != null && (Boolean) session.getAttribute("loginCheck") == false)
@@ -1282,7 +1319,6 @@ public class IndexController {
         }
         model.addAttribute("user", findUser);
 
-        System.out.println(findUser.getIdx_user());
         List<UserDemoBsVO> userDemoBsVOs = userDemoBsService.getUserDemoBsListByUserIdx(findUser.getIdx_user());
 
         if (userDemoBsVOs == null || userDemoBsVOs.isEmpty())//찾고 보니 지원 정보가 없네......
@@ -1650,33 +1686,25 @@ return "spt_visit";
         return "util_search_blant";
     }
 
+
     public void getHomepageInfo(Model model) {
         HomepageInfoVO homepageInfoVO = homepageInfoService.getHomepageInfo();
 
-        List<NoticeVO> noticeVOList = noticeService.getMainNoticeList();
 
-        List<BsAnnouncementVO> bsAnnouncementVOList = bsAnnouncementService.getMainBsAnnouncementList();
-
-        List<EventContentVO> eventContentVOList = eventContentService.getMainEventContentList();
-
-        model.addAttribute("noticeList", noticeVOList);
-        model.addAttribute("annoList", bsAnnouncementVOList);
-        model.addAttribute("eventList", eventContentVOList);
         model.addAttribute("homepageInfo", homepageInfoVO);
 
     }
 
     private void satProfile(Model model) {
-//        String[] activeProfiles = env.getActiveProfiles();
-//        if (activeProfiles.length != 0) {
-//            String activeProfile = activeProfiles[0];
-//
-//            if (activeProfile.equals("local")) {
-//                model.addAttribute("profile", "gimje-prod");
-//            } else {
-//                model.addAttribute("profile", activeProfile);
-//            }
-//        }
-                model.addAttribute("profile", "sangju-prod");
+        String[] activeProfiles = env.getActiveProfiles();
+        if (activeProfiles.length != 0) {
+            String activeProfile = activeProfiles[0];
+
+            if (activeProfile.equals("local")) {
+                model.addAttribute("profile", "gimje-prod");
+            } else {
+                model.addAttribute("profile", activeProfile);
+            }
+        }
     }
 }

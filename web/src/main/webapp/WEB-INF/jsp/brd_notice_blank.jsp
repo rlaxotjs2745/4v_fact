@@ -60,6 +60,7 @@
 </div>
 <%@include file ="footer.jsp" %>
 <%@include file ="script.jsp" %>
+</div>
 
 <script>
 
@@ -97,7 +98,5 @@
     });
 
 </script>
-
-</div>
 </body>
 </html>
