@@ -625,7 +625,7 @@
     }
 
     function nowDateTime(){
-        var connectDate = new Date().toLocaleString().slice(0,21)[20] == ":" ? new Date().toLocaleString().slice(0,20) : new Date().toLocaleString().slice(0,21);
+        var connectDate = new Date().toLocaleString().slice(0,20)[19] == ":" ? new Date().toLocaleString().slice(0,19) : new Date().toLocaleString().slice(0,20);
         $('#now-date-nav').text(connectDate);
         // setTimeout(nowDateTime,5000);
     }

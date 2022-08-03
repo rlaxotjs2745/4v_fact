@@ -391,10 +391,9 @@
 
                         <hr>
                         <div class="form-row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메모</label>
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">사업 내용</label>
                             <div class="form-group col col-md-10">
-                                <textarea class="form-control mode-edit mode-new" id="memo" rows="3"></textarea>
-                                <textarea class="form-control mode-view" id="memo_view" readonly rows="5"></textarea>
+                                <textarea class="form-control summernote" id="bs_content" rows="3"></textarea>
                             </div>
                         </div>
 
@@ -413,6 +412,7 @@
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">등록자</label>
                             <div class="col-md-4 mode-edit mode-new">
                                 <div class="form-control-plaintext mode-view" id="author_name">${demobs.author_name}</div>
+                                <div class="form-control-plaintext mode-new" id="new_author_name">${admin.admin_name}</div>
                             </div>
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit">승인여부</label>
                             <div class="col-md-2 mode-edit">
@@ -564,6 +564,7 @@
 
         $(".demo_entity").on("click", function(){
             var selectedIdx = $(this).attr("id").split("_")[1];
+            $('#memo_view').summernote('disable');
             console.log(selectedIdx)
         })
 
@@ -585,6 +586,7 @@
             fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
             height: 300                 // 에디터 높이
         });
+
 
         $(function() {
             var isRtl = $('html').attr('dir') === 'rtl';
@@ -613,15 +615,18 @@
             //$('.mode-view').addClass('d-non');
             if($('.mode-view').hasClass('d-none') == false){
                 $('.mode-view').addClass('d-none');
+                $('#memo_view').summernote('disable');
             }
 
             if($('.mode-edit').hasClass('d-none') == false){
                 console.log("실행했어요..")
                 $('.mode-edit').addClass('d-none');
+                $('#memo_view').summernote('disable');
             }
 
             if($('.mode-new').hasClass('d-none') == false){
                 $('.mode-new').addClass('d-none');
+                $('#memo_view').summernote('disable');
             }
 
             $('.mode-edit').removeClass('d-none');
@@ -638,7 +643,7 @@
             if(code.length < 1){
                 alert('사업번호가 비어있습니다.');
             }
-            else if(code.includes(/[^a-z|A-Z|0-9|ㄱ-ㅎ|가-힣\s]/g)){
+            else if(code.match(/[^a-z|A-Z|0-9|ㄱ-ㅎ|가-힣\s]/g)){
                 alert('특수문자는 포함할 수 없습니다.')
             }
             else {
@@ -653,6 +658,7 @@
                             if(confirm("신규 사용이 가능한 사업번호입니다. 사용하시겠습니까?")){
                                 duplBool = true;
                                 $("#demo_bs_code").attr('disabled', 'true');
+                                $('#memo_view').summernote('enable');
                             }
                         } else {
                             alert("이미 사용 중이거나 사용이 불가능한 사업번호입니다.");
@@ -665,29 +671,70 @@
         $('#demo_new_submit').click(function(){
             if(!duplBool){
                 alert('사업번호 중복체크 후 작성이 가능합니다.')
+                return;
             }
-            else if(1){}//하나라도 비어있으면
-            var param = {
-                demo_bs_code: $('#demo_bs_code').val(),
-                demo_bs_status: $("#demo_bs_status").val(),
-                demo_bs_main_type: $('#demo_bs_main_type').val(),
-                demo_bs_sub_type: $('#demo_bs_sub_type').val(),
-                demo_bs_detail_type: $('#demo_bs_detail_type').val(),
-                demo_subject: $('#demo_subject').val(),
-                start_date: $('#demo_start').val(),
-                end_date: $('#demo_end').val(),
-                recruit_start_date: $('#demo_appl_start').val(),
-                recruit_end_date: $('#demo_appl_end').val(),
-                exam_start: $('#demo_eval_start').val(),
-                exam_end: $('#demo_eval_end').val(),
-                plan_review_start: $('#demo_modify_start').val(),
-                plan_review_end: $('#demo_modify_end').val(),
-                convention_start: $('#demo_arrange_start').val(),
-                convention_end: $('#demo_arrange_end').val(),
-                recruit_count_limit: $('#recruit_count_limit').val(),
-                memo: $('#memo').val(),
+            else if(
+                $('#demo_bs_code').val() == "" ||
+                $("#demo_bs_status").val() == "" ||
+                $('#demo_bs_main_type').val() == "" ||
+                $('#demo_bs_sub_type').val() == "" ||
+                $('#demo_bs_detail_type').val() == "" ||
+                $('#demo_subject').val() == "" ||
+                $('#demo_start').val() == "" ||
+                $('#demo_end').val() == "" ||
+                $('#demo_appl_start').val() == "" ||
+                $('#demo_appl_end').val() == "" ||
+                $('#demo_eval_start').val() == "" ||
+                $('#demo_eval_end').val() == "" ||
+                $('#demo_modify_start').val() == "" ||
+                $('#demo_modify_end').val() == "" ||
+                $('#demo_arrange_start').val() == "" ||
+                $('#demo_arrange_end').val() == "" ||
+                $('#recruit_count_limit').val() == ""
+            ){
+                alert('모든 데이터를 입력해야 합니다.');
+                return;
+            }
 
-            }
+            var fileForm = new FormData();
+            fileForm.append("demo_bs_code", $('#demo_bs_code').val());
+            fileForm.append("demo_bs_status", $("#demo_bs_status").val());
+            fileForm.append("demo_bs_main_type", $('#demo_bs_main_type').val());
+            fileForm.append("demo_bs_sub_type", $('#demo_bs_sub_type').val());
+            fileForm.append("demo_bs_detail_type", $('#demo_bs_detail_type').val());
+            fileForm.append("demo_subject", $('#demo_subject').val());
+            fileForm.append("start_date", new Date($('#demo_start').val()));
+            fileForm.append("end_date", new Date($('#demo_end').val()));
+            fileForm.append("recruit_start_date", new Date($('#demo_appl_start').val()));
+            fileForm.append("recruit_end_date", new Date($('#demo_appl_end').val()));
+            fileForm.append("exam_start", new Date($('#demo_eval_start').val()));
+            fileForm.append("exam_end", new Date($('#demo_eval_end').val()));
+            fileForm.append("plan_review_start", new Date($('#demo_modify_start').val()));
+            fileForm.append("plan_review_end", new Date($('#demo_modify_end').val()));
+            fileForm.append("convention_start", new Date($('#demo_arrange_start').val()));
+            fileForm.append("convention_end", new Date($('#demo_arrange_end').val()));
+            fileForm.append("recruit_count_limit", $('#recruit_count_limit').val());
+            fileForm.append("memo", $('#memo').val());
+            fileForm.append("idx_admin", "${admin.idx_admin}");
+            fileForm.append("file", document.querySelector('#demo_files').files[0]);
+
+            $.ajax({
+                url: 'insert_new_demobs',
+                method: 'post',
+                data: fileForm,//보내는 데이터
+                contentType: false,//보내는 데이터 타입
+                processData: false,//Jquery 내부에서 파일을 queryString 형태로 전달하는 것을 방지
+                dataType:'json',//받는 데이터 타입
+                enctype: 'multipart/form-data',
+                success: function (result) {
+                    if (result.result_code == "SUCCESS") {
+                        alert("실증 사업이 등록되었습니다.");
+                        $('#modals-business').modal('hide');
+                    } else {
+                        alert("이미 사용 중이거나 사용이 불가능한 사업번호입니다.");
+                    }
+                }
+            })
         })
 
 

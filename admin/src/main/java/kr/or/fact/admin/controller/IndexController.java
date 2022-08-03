@@ -201,7 +201,8 @@ public class IndexController {
             ModelMap model){
 
 
-        System.out.println(principal.getName());
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+        model.addAttribute("admin", adminInfo);
 
         int list_amount = 10;;
         int page_amount = 10;
@@ -1812,17 +1813,17 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
         return "l20_code_mng";
     }
     private void satProfile(ModelMap model) {
-//        String[] activeProfiles = env.getActiveProfiles();
-//        if (activeProfiles.length != 0) {
-//            String activeProfile = activeProfiles[0];
-//
-//            if (activeProfile.equals("local")) {
-//                model.addAttribute("profile", "gimje-prod");
-//            } else {
-//                model.addAttribute("profile", activeProfile);
-//            }
-//        }
-                model.addAttribute("profile", "sangju-prod");
+        String[] activeProfiles = env.getActiveProfiles();
+        if (activeProfiles.length != 0) {
+            String activeProfile = activeProfiles[0];
+
+            if (activeProfile.equals("local")) {
+                model.addAttribute("profile", "gimje-prod");
+            } else {
+                model.addAttribute("profile", activeProfile);
+            }
+        }
+//                model.addAttribute("profile", "sangju-prod");
     }
 
 }

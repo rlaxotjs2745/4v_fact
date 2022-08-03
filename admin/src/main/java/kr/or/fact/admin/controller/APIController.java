@@ -1413,6 +1413,25 @@ public class APIController {
         return resultVO;
     }
 
+    @RequestMapping(value = "/insert_new_demobs", method = RequestMethod.POST)
+    @ResponseBody
+    ResultVO insertNewDemobs(@ModelAttribute DemoBusinessVO demoBusinessVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("등록이 완료되었습니다.");
+
+        try {
+            demoBsService.saveDemoBs(demoBusinessVO);
+            fileService.convertMultipartToFile(demoBusinessVO.getFile());
+            fileService.insertDemoBsFile(demoBusinessVO.getFile(), demoBusinessVO.getIdx_admin());
+        } catch (Exception e) {
+            resultVO.setResult_code("ERR_001");
+            resultVO.setResult_code("등록에 실패했습니다.");
+        }
+
+        return resultVO;
+    }
+
 
 }
 

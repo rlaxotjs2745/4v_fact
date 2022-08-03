@@ -243,7 +243,7 @@
                                     <th class="text-center bg-light">소속정보</th>
                                     <th class="text-center bg-light">부서</th>
                                     <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="devision"></td>
-                                    <th class="text-center bg-light">소속</th>t
+                                    <th class="text-center bg-light">소속</th>
                                     <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="department"></td>
                                 </tr>
                                 <tr>
@@ -493,16 +493,16 @@
         if(string.length < 2){ //2글자 초과
             val += 2;
         }
-        if(string.includes(/[^a-z|A-Z|ㄱ-ㅎ|가-힣|0-9\s]/g)){ // 특수문자
+        if(string.match(/[^a-z|A-Z|ㄱ-ㅎ|가-힣|0-9\s]/g)){ // 특수문자
             val += 3;
         }
-        if(string.includes(/[0-9]/g)){ //숫자
+        if(string.match(/[0-9]/g)){ //숫자
             val += 4;
         }
-        if(string.includes(/^[0-9]/g)){ //숫자 시작
+        if(string.match(/^[0-9]/g)){ //숫자 시작
             val += 5;
         }
-        if(string.includes(/\s/g)){ // 공백
+        if(string.match(/\s/g)){ // 공백
             val += 6;
         }
         return val;
@@ -510,68 +510,68 @@
 
     $('#btn-coworker').on('click',function() {
 
-        if(isValid($("#coworker_name").val()).includes('2')){
+        if(isValid($("#coworker_name").val()).match('2')){
             alert("관리자의 이름이 너무 짧습니다.");
             return;
         }
-        if(isValid($("#coworker_name").val()).includes('3')){
+        if(isValid($("#coworker_name").val()).match('3')){
             alert("관리자 이름에는 특수문자가 포함될 수 없습니다.");
             return;
         }
-        if(isValid($("#coworker_name").val()).includes('4')){
+        if(isValid($("#coworker_name").val()).match('4')){
             alert("관리자 이름에는 숫자가 포함될 수 없습니다.");
             return;
         }
-        if(isValid($("#coworker_name").val()).includes('6')){
+        if(isValid($("#coworker_name").val()).match('6')){
             alert("관리자 이름에는 공백이 포함될 수 없습니다.");
             return;
         }
-        if(isValid($("#devision").val()).includes('2')){
+        if(isValid($("#devision").val()).match('2')){
             alert("관리자의 이름이 너무 짧습니다.");
             return;
         }
 
-        if(isValid($("#devision").val()).includes('3')){
+        if(isValid($("#devision").val()).match('3')){
             alert("부서에는 특수문자가 포함될 수 없습니다.");
             return;
         }
-        if(isValid($("#devision").val()).includes('5')){
+        if(isValid($("#devision").val()).match('5')){
             alert("부서이름은 숫자로 시작될 수 없습니다.");
             return;
         }
-        if(isValid($("#devision").val()).includes('2')){
+        if(isValid($("#devision").val()).match('2')){
             alert("부서이름이 너무 짧습니다.");
             return;
         }
-        if(isValid($("#devision").val()).includes('6')){
+        if(isValid($("#devision").val()).match('6')){
             alert("부서이름은 공백이 포함될 수 없습니다.");
             return;
         }
 
-        if(isValid($("#job_role").val()).includes('5')){
+        if(isValid($("#job_role").val()).match('5')){
             alert("담당업무는 숫자로 시작될 수 없습니다.");
             return;
         }
-        if(isValid($("#job_role").val()).includes('2')){
+        if(isValid($("#job_role").val()).match('2')){
             alert("담당업무의 이름이 너무 짧습니다.");
             return;
         }
-        if(isValid($("#job_role").val()).includes('3')){
+        if(isValid($("#job_role").val()).match('3')){
             alert("담당업무는 특수문자가 포함될 수 없습니다.");
             return;
         }
 
-        if(isValid($("#job_title").val()).includes('5')){
+        if(isValid($("#job_title").val()).match('5')){
             alert("직위는 숫자로 시작될 수 없습니다.");
             return;
         }
-        if(isValid($("#job_title").val()).includes('2')){
+        if(isValid($("#job_title").val()).match('2')){
             alert("직위가 너무 짧습니다.");
             return;
         }
 
 
-        if(isValid($("#mphone_num").val()).includes('2')){
+        if(isValid($("#mphone_num").val()).match('2')){
             alert("휴대폰 번호가 너무 짧습니다.");
             return;
         }
@@ -605,8 +605,8 @@
             success: function (result) {
                 console.log(result)
                 if (result.result_code === "SUCCESS") {
-                    alert("상태 변경에 성공하였습니다")
-                    pageLoad()
+                    alert("상태 변경에 성공하였습니다");
+                    pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
                 } else {
                     alert("상태 변경에 실패하였습니다")
                     console.log(result)

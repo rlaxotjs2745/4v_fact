@@ -81,6 +81,12 @@
             IDX_ADMIN,
             IDX_CONFORM_ADMIN,
             IS_ANNOUNCE,
+            EXAM_START,
+            EXAM_END,
+            PLAN_REVIEW_START,
+            PLAN_REVIEW_END,
+            CONVENTION_START,
+            CONVENTION_END,
             REG_DATE,
             LAST_UPD_DATE
         ) VALUES (
@@ -103,6 +109,12 @@
                      #{idx_admin},
                      #{idx_conform_admin},
                      #{is_announce},
+                     #{exam_start},
+                     #{exam_end},
+                     #{plan_review_start},
+                     #{plan_review_end},
+                     #{convention_start},
+                     #{convention_end},
                      SYSDATE,
                      SYSDATE
                  )
