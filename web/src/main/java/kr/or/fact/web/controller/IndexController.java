@@ -702,13 +702,14 @@ public class IndexController {
                                @RequestParam(name = "filter", required = false) String filter,
                                @RequestParam(name = "query", required = false) String query,
                                Model model) {
-        if (page == null) {
+        if (page == null || page <= 0) {
             page = 1;
         }
 
         int list_amount = 10;
         int page_amount = 10;
 
+        model.addAttribute("page", page);
         model.addAttribute("filter", filter);
         model.addAttribute("query", query);
 
@@ -809,18 +810,26 @@ public class IndexController {
 
 
     @RequestMapping("/brd_event")
-    public String brd_event(@RequestParam("page") int page,
+    public String brd_event(@RequestParam(name = "filter", required = false) String filter,
+                            @RequestParam(name = "query", required = false) String query,
                             Model model) {
+
+        int page = 1;
+
         int list_amount = 10;
         int page_amount = 10;
 
-        int eventCount = eventContentService.getWebpageEventContentCount();
+        model.addAttribute("page", page);
+        model.addAttribute("filter", filter);
+        model.addAttribute("query", query);
+
+        int eventCount = eventContentService.getOpenEventContentCount(filter, query);
         if (eventCount == 0) {
             satProfile(model);
             return "brd_event_blank";
         }
         model.addAttribute("total_count", eventCount);
-        List<EventContentVO> eventContentVOList = eventContentService.getEventContentList(page, list_amount);
+        List<EventContentVO> eventContentVOList = eventContentService.getOpenEventContentList(page, list_amount, filter, query);
         model.addAttribute("eventContentVOList", eventContentVOList);
 
         model.addAttribute("cur_page", page);
@@ -927,13 +936,14 @@ public class IndexController {
                              @RequestParam(name = "filter", required = false) String filter,
                              @RequestParam(name = "query", required = false) String query,
                              Model model) {
-        if (page == null) {
+        if (page == null || page <= 0) {
             page = 1;
         }
 
         int list_amount = 10;
         int page_amount = 10;
 
+        model.addAttribute("page", page);
         model.addAttribute("filter", filter);
         model.addAttribute("query", query);
 
@@ -1042,18 +1052,28 @@ public class IndexController {
     }
 
     @RequestMapping("/brd_promotion")
-    public String brd_promotion(@RequestParam("page") int page,
+    public String brd_promotion(@RequestParam(value = "page", required = false) Integer page,
+                                @RequestParam(name = "filter", required = false) String filter,
+                                @RequestParam(name = "query", required = false) String query,
                                 Model model) {
+        if (page == null || page <= 0) {
+            page = 1;
+        }
+
         int list_amount = 10;
         int page_amount = 10;
 
-        int promotionCount = prContentService.getWebpagePRContentCount();
+        model.addAttribute("page", page);
+        model.addAttribute("filter", filter);
+        model.addAttribute("query", query);
+
+        int promotionCount = prContentService.getOpenPRContentCount(filter, query);
         if (promotionCount == 0) {
             satProfile(model);
             return "brd_announce_blank";
         }
         model.addAttribute("total_count", promotionCount);
-        List<PRContentVO> prContentList = prContentService.getPRContentList(page, list_amount);
+        List<PRContentVO> prContentList = prContentService.getOpenPRContentList(page, list_amount, filter, query);
         model.addAttribute("prContentList", prContentList);
 
         model.addAttribute("cur_page", page);

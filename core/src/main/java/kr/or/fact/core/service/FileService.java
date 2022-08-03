@@ -32,8 +32,10 @@ public interface FileService {
     long insertFile(MultipartFile file, long userIdx, long bsIdx, int type) throws IllegalStateException, IOException;
     List<UserDemoBsFileResultVO> getUserDemoFileList(long idx);
 
-    public File convertMultipartToFile(MultipartFile file) throws IOException;
-    public File convertMultipartToFile2(MultipartFile file) throws IOException;
+    File convertMultipartToFile(MultipartFile file) throws IOException;
+    File convertMultipartToFile2(MultipartFile file) throws IOException;
 
     int insertFileInfo(FileInfoVO fileInfoVO);
+
+    int insertDemoBsFile(MultipartFile file, long adminIdx);
 }

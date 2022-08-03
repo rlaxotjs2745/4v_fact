@@ -8,6 +8,8 @@ import java.util.List;
 public interface PRContentsService {
     public int getMainPRContentCount();
     public int getWebpagePRContentCount();
+    int getOpenPRContentCount(String filter, String query);
+    List<PRContentVO> getOpenPRContentList(Integer page, int list_amount, String filter, String query);
     public List<PRContentVO> getPRContentList(int page, int list_amount);
     public List<PRContentVO> getMainPRContentList();
     int insertPRContent(PRContentVO prContentVO);

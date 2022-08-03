@@ -36,6 +36,29 @@ public class PRContentServiceImpl implements PRContentsService {
     public int getWebpagePRContentCount(){
         return prContentsMapper.getWebpagePRContentCount();
     }
+
+    @Override
+    public int getOpenPRContentCount(String filter, String query) {
+        return prContentsMapper.getOpenPRContentCount(filter, query);
+    }
+
+    @Override
+    public List<PRContentVO> getOpenPRContentList(Integer page, int count, String filter, String query) {
+        List<PRContentVO> prContentList= prContentsMapper.getOpenPRContentList(page,count,filter, query);
+
+        List<PRContentVO> thumbList =prContentsMapper.getThumb();
+
+        for (int i = 0; i < prContentList.size(); i++){
+            for(int l = 0; l < thumbList.size(); l++){
+                if(prContentList.get(i).getIdx_pr_content() == thumbList.get(l).getIdx_pr_content()){
+                    prContentList.get(i).setThumb_img_file_path(thumbList.get(l).getFile_path());
+                }
+            }
+        }
+
+        return prContentList;
+    }
+
     @Override
     public List<PRContentVO> getPRContentList(int page, int list_amount){
         List<PRContentVO> prContentList= prContentsMapper.getPRContentList(page,list_amount,"ANNOUNCE_NUM");

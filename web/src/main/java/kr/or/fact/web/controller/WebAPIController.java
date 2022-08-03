@@ -4,7 +4,6 @@ import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.CONSTANT;
 import kr.or.fact.web.utils.Utils;
-import org.slf4j.MDC;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -1235,34 +1234,28 @@ public class WebAPIController {
     }
     @RequestMapping("/plus_event")
     @ResponseBody
-    public List<EventContentVO> brd_event(@RequestBody Integer page,
-                            Model model){
-        int list_amount = 10;
+    public List<EventContentVO> brd_event(@RequestBody BrdCardRequestVO request){
 
-        List<EventContentVO> eventContentVOList = eventContentService.getEventContentList(page,list_amount);
-        model.addAttribute("eventContentVOList",eventContentVOList);
+        if (request.getPage() == null || request.getPage() <= 0) {
+            throw new RuntimeException("invalid page");
+        }
 
+        int count = 10;
 
-        System.out.println(MDC.get("REQUEST_ID"));
-
-        return eventContentVOList;
+        return eventContentService.getOpenEventContentList(request.getPage(), count, request.getFilter(), request.getQuery());
     }
 
     @RequestMapping("/plus_pr")
     @ResponseBody
-    public List<PRContentVO> brd_promotion(@RequestBody Integer page,
-                                Model model){
-        int list_amount = 10;
-        int page_amount = 10;
+    public List<PRContentVO> brd_promotion(@RequestBody BrdCardRequestVO request){
 
+        if (request.getPage() == null || request.getPage() <= 0) {
+            throw new RuntimeException("invalid page");
+        }
 
+        int count = 10;
 
-        List<PRContentVO> prContentList = prContentService.getPRContentList(page,list_amount);
-        model.addAttribute("prContentList",prContentList);
-
-
-
-        return prContentList;
+        return prContentService.getOpenPRContentList(request.getPage(), count, request.getFilter(), request.getQuery());
     }
 
 

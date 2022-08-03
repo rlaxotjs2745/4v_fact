@@ -46,7 +46,8 @@
                         <option value="c">내용</option>
                         <option value="tc">제목+내용</option>
                     </select>
-                    <input type="text" id="search_input" class="search" placeholder="검색어를 입력해주세요."><a id="search_btn" class="btn btn__board--search">검색</a></div>
+                    <input type="text" id="search_input" class="search" placeholder="검색어를 입력해주세요."><a id="search_btn" class="btn btn__board--search">검색</a>
+                </div>
             </div>
             <div class="table__type">
                 <table class="table__type--board">
@@ -100,7 +101,6 @@
                     </c:forEach>
                     </tbody>
                 </table>
-                <!--//-->
                 <div class="table__paging">
                     <c:set var="name" value="${total_count/amount}" />
 
@@ -113,7 +113,6 @@
                     <c:if test="${is_last eq true}"><a href="brd_announce?page=${tot_page}&filter=${filter}&query=${query}" class="paging__next2"><img src="resources/assets/image/ico_paging_next_02.png" alt=""></a></c:if>
                 </div>
             </div>
-            <!--//-->
         </div>
 
     </div>
