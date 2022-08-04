@@ -16,6 +16,7 @@ public interface NoticeService {
     int deleteNotice(int idx_notice);
     NoticeVO getNoticeByIdx(int idx_notice);
     int insertNoticeFileJoin();
+    int updateNoticeFileJoin(long idx_notice);
     NoticeVO getNoticeIsFile(int idx_notice);
     int getNoticeViewCount(int idx_notice);
     void updateNoticeViewCount(NoticeVO noticeVO);

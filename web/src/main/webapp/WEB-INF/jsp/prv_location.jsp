@@ -40,382 +40,1311 @@
                 </div>
             </div>
         </div>
-        <div class="page__cnt">
-            <h3 class="page__subject">실증 장비</h3>
+        <c:if test="${profile == 'sangju-prod'}">
+            <div class="page__cnt">
+                <h3 class="page__subject">실증 장비</h3>
 
-            <div class="use__container">
-                <div class="cnt__text">실증장비의 경우 지역 특화분야 및. 기업수요에 따라 일부 변경될 수 있습니다.</div>
+                <div class="use__container">
+                    <div class="cnt__text">실증장비의 경우 지역 특화분야 및. 기업수요에 따라 일부 변경될 수 있습니다.</div>
 
-                <div class="table__type">
-                    <table class="table__type--normal">
-                        <colgroup>
-                            <col style="width:12%"></col>
-                            <col style="width:25%"></col>
-                            <col style="width:19%"></col>
-                            <col style="width:7%"></col>
-                            <col style="width:9%"></col>
-                            <col style="width:9%"></col>
-                            <col style="width:9%"></col>
-                            <col></col>
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th>대분류</th>
-                            <th>중분류</th>
-                            <th>세분류</th>
-                            <th>수량</th>
-                            <th>제조사</th>
-                            <th>모델명</th>
-                            <th>제위</th>
-                            <th>비고</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td rowspan="7">스마트팜 기자재<br>신뢰성 실증장비</td>
-                            <td>온/습도 시험기(센서연속 시험기)</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>투습도 측정기</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>복합 진동 시험기</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>열충격 시험기</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>강우 및 침수 시험기</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>EC 센서 시험기</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>열관류율 시험기</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td rowspan="18">스마트팜 기자재<br>신뢰성 실증장비</td>
-                            <td rowspan="4">육묘 자동 파종 시스템<br>(자동파종시스템, 순대포트제조기 등)</td>
-                            <td>자동파종시스템</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td rowspan="18">육묘실</td>
-                        </tr>
-                        <tr>
-                            <td>순대포트 제조기</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>육묘 생육 영상장치 시스템</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>에어 콤프</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td rowspan="14">스마트 육묘 시스템<br>(발아실, 접목활착실, 초정밀 접목로봇,<br>식물공장용 육묘시스템 등)</td>
-                            <td>발아실</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>접목활착실</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>초정밀접목로봇</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>식물공장용 육묘시스템</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>RFID 입출력 시스템(생산이력)</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>선별출하 영상장치 시스템</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>관제실(CCTV)</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>육묘 무빙 베드</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>베드 레일 및 받침대</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>전동포크리프트(베드이송)</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>육묘베드 이송용 캐리어</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>자주식살수장치</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>전동회전대차</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>배관, 분전반 배선공사</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td rowspan="6">스마트팜 혁신밸리 실증단지<br>시제품제작장비</td>
-                            <td rowspan="6">스마트팜혁신밸리실증단지시제품 제작장비<br>(3D프린터(메탈), 3D스캐너, 설계용 S/W,<br>설계용 PC, 재료비 등)</td>
-                            <td>3D 프린터(대)</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td rowspan="6">공용제작실</td>
-                        </tr>
-                        <tr>
-                            <td>3D 프린터(중)</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>3D 프린터(소)</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>3D스캐너</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>설계용 PC</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>설계 S/W</td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td rowspan="5">스마트팜 전시장비</td>
-                            <td>스마트팜(복합제어, 구동기, 센서)</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td rowspan="5">전시실</td>
-                        </tr>
-                        <tr>
-                            <td>양액공급기</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>온실골조/피복 등 자재</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>스마트 농기계</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>키오스크</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>체험형온실</td>
-                            <td>체험형 온실 구축</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td rowspan="5" class="last-child">실증 보조장비</td>
-                            <td>고소작업차(리프트)</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>농업용 동력운반차</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>동력 분무기</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>지게차</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>비닐피복기</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div class="table__type">
+                        <table class="table__type--normal">
+                            <colgroup>
+                                <col style="width:12%"></col>
+                                <col style="width:25%"></col>
+                                <col style="width:19%"></col>
+                                <col style="width:7%"></col>
+                                <col style="width:9%"></col>
+                                <col style="width:9%"></col>
+                                <col style="width:9%"></col>
+                                <col></col>
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th>대분류</th>
+                                <th>중분류</th>
+                                <th>세분류</th>
+                                <th>수량</th>
+                                <th>제조사</th>
+                                <th>모델명</th>
+                                <th>제위</th>
+                                <th>비고</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td rowspan="16">스마트팜 기자재<br>실증장비</td>
+                                <td>복합환경제어기 시험시스템</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>실증 구동기 데이터 취득장비</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>실증 데이터 취득용 DAQ</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>복합환경 모사장치</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>식물 생리상태 시험기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>당도 측정계</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>색도 측정계</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>엽록소 측정기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>식물 생육상태 시험기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>식물 수분 측정기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>생육 측정 시험기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>냉난방 시험기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>서지 시험기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>환경데이터 취득용 복합센서</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>만능 시험기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>물성 시험기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4">스마트팜 기자재<br>신뢰성 실증장비</td>
+                                <td>농업용 로봇 복합환경 챔버</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>농업용 로봇 열충격 챔버</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>농업용 로봇 더스트 챔버</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>농업용 로봇 살수 시험용 챔버</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="6">스마트팜 혁실밸리 실증단지<br>농업용 로봇 실증장비</td>
+                                <td>농업용 로봇 전도 시험장치</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">농업용 로봇<br>위치 추적 시험장치</td>
+                                <td>농업용 로봇 위치추적시스템</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>농업용 로봇 자율주행 시험장치</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3">농업용 로봇 수확 성능 시험 장치</td>
+                                <td>농업용 로봇 관절 시험장치</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>농업용 로봇 그리퍼 시험장치</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>농업용 로봇 통신 시험장치</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="18">스마트팜 기자재<br>신뢰성 실증장비</td>
+                                <td rowspan="4">육묘 자동 파종 시스템<br>(자동파종시스템, 순대포트제조기 등)</td>
+                                <td>자동파종시스템</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td rowspan="18">육묘실</td>
+                            </tr>
+                            <tr>
+                                <td>순대포트 제조기</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>육묘 생육 영상장치 시스템</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>에어 콤프</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="14">스마트 육묘 시스템<br>(발아실, 접목활착실, 초정밀 접목로봇,<br>식물공장용 육묘시스템 등)</td>
+                                <td>발아실</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>접목활착실</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>초정밀접목로봇</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>식물공장용 육묘시스템</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>RFID 입출력 시스템(생산이력)</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>선별출하 영상장치 시스템</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>관제실(CCTV)</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>육묘 무빙 베드</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>베드 레일 및 받침대</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>전동포크리프트(베드이송)</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>육묘베드 이송용 캐리어</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>자주식살수장치</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>전동회전대차</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>배관, 분전반 배선공사</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="6">스마트팜 혁신밸리 실증단지<br>시제품제작장비</td>
+                                <td rowspan="6">스마트팜혁신밸리실증단지시제품 제작장비<br>(3D프린터(메탈), 3D스캐너, 설계용 S/W,<br>설계용 PC, 재료비 등)</td>
+                                <td>3D 프린터(대)</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td rowspan="6">공용제작실</td>
+                            </tr>
+                            <tr>
+                                <td>3D 프린터(중)</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>3D 프린터(소)</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>3D스캐너</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>설계용 PC</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>설계 S/W</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="5">스마트팜 전시장비</td>
+                                <td>스마트팜(복합제어, 구동기, 센서)</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td rowspan="5">전시실</td>
+                            </tr>
+                            <tr>
+                                <td>양액공급기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>온실골조/피복 등 자재</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>스마트 농기계</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>키오스크</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>체험형온실</td>
+                                <td>체험형 온실 구축</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="5" class="last-child">실증 보조장비</td>
+                                <td>고소작업차(리프트)</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>농업용 동력운반차</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>동력 분무기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>지게차</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>비닐피복기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
+                <!--//-->
 
             </div>
-            <!--//-->
+        </c:if>
+        <c:if test="${profile == 'gimje-prod'}">
+            <div class="page__cnt">
+                <h3 class="page__subject">실증 장비</h3>
 
-        </div>
+                <div class="use__container">
+                    <div class="cnt__text">실증장비의 경우 지역 특화분야 및. 기업수요에 따라 일부 변경될 수 있습니다.</div>
+
+                    <div class="table__type">
+                        <table class="table__type--normal">
+                            <colgroup>
+                                <col style="width:12%"></col>
+                                <col style="width:25%"></col>
+                                <col style="width:19%"></col>
+                                <col style="width:7%"></col>
+                                <col style="width:9%"></col>
+                                <col style="width:9%"></col>
+                                <col style="width:9%"></col>
+                                <col></col>
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th>대분류</th>
+                                <th>중분류</th>
+                                <th>세분류</th>
+                                <th>수량</th>
+                                <th>제조사</th>
+                                <th>모델명</th>
+                                <th>제위</th>
+                                <th>비고</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td rowspan="7">스마트팜 기자재<br>신뢰성 실증장비</td>
+                                <td>온/습도 시험기(센서연속 시험기)</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>투습도 측정기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>복합 진동 시험기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>열충격 시험기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>강우 및 침수 시험기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>EC 센서 시험기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>열관류율 시험기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="18">스마트팜 기자재<br>신뢰성 실증장비</td>
+                                <td rowspan="4">육묘 자동 파종 시스템<br>(자동파종시스템, 순대포트제조기 등)</td>
+                                <td>자동파종시스템</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td rowspan="18">육묘실</td>
+                            </tr>
+                            <tr>
+                                <td>순대포트 제조기</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>육묘 생육 영상장치 시스템</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>에어 콤프</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="14">스마트 육묘 시스템<br>(발아실, 접목활착실, 초정밀 접목로봇,<br>식물공장용 육묘시스템 등)</td>
+                                <td>발아실</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>접목활착실</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>초정밀접목로봇</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>식물공장용 육묘시스템</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>RFID 입출력 시스템(생산이력)</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>선별출하 영상장치 시스템</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>관제실(CCTV)</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>육묘 무빙 베드</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>베드 레일 및 받침대</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>전동포크리프트(베드이송)</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>육묘베드 이송용 캐리어</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>자주식살수장치</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>전동회전대차</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>배관, 분전반 배선공사</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="6">스마트팜 혁신밸리 실증단지<br>시제품제작장비</td>
+                                <td rowspan="6">스마트팜혁신밸리실증단지시제품 제작장비<br>(3D프린터(메탈), 3D스캐너, 설계용 S/W,<br>설계용 PC, 재료비 등)</td>
+                                <td>3D 프린터(대)</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td rowspan="6">공용제작실</td>
+                            </tr>
+                            <tr>
+                                <td>3D 프린터(중)</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>3D 프린터(소)</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>3D스캐너</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>설계용 PC</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>설계 S/W</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="5">스마트팜 전시장비</td>
+                                <td>스마트팜(복합제어, 구동기, 센서)</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td rowspan="5">전시실</td>
+                            </tr>
+                            <tr>
+                                <td>양액공급기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>온실골조/피복 등 자재</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>스마트 농기계</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>키오스크</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>체험형온실</td>
+                                <td>체험형 온실 구축</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="5" class="last-child">실증 보조장비</td>
+                                <td>고소작업차(리프트)</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>농업용 동력운반차</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>동력 분무기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>지게차</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>비닐피복기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <!--//-->
+
+            </div>
+        </c:if>
+        <c:if test="${profile == 'local'}">
+            <div class="page__cnt">
+                <h3 class="page__subject">실증 장비</h3>
+
+                <div class="use__container">
+                    <div class="cnt__text">실증장비의 경우 지역 특화분야 및. 기업수요에 따라 일부 변경될 수 있습니다.</div>
+
+                    <div class="table__type">
+                        <table class="table__type--normal">
+                            <colgroup>
+                                <col style="width:12%"></col>
+                                <col style="width:25%"></col>
+                                <col style="width:19%"></col>
+                                <col style="width:7%"></col>
+                                <col style="width:9%"></col>
+                                <col style="width:9%"></col>
+                                <col style="width:9%"></col>
+                                <col></col>
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th>대분류</th>
+                                <th>중분류</th>
+                                <th>세분류</th>
+                                <th>수량</th>
+                                <th>제조사</th>
+                                <th>모델명</th>
+                                <th>제위</th>
+                                <th>비고</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td rowspan="7">스마트팜 기자재<br>신뢰성 실증장비</td>
+                                <td>온/습도 시험기(센서연속 시험기)</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>투습도 측정기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>복합 진동 시험기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>열충격 시험기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>강우 및 침수 시험기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>EC 센서 시험기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>열관류율 시험기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="18">스마트팜 기자재<br>신뢰성 실증장비</td>
+                                <td rowspan="4">육묘 자동 파종 시스템<br>(자동파종시스템, 순대포트제조기 등)</td>
+                                <td>자동파종시스템</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td rowspan="18">육묘실</td>
+                            </tr>
+                            <tr>
+                                <td>순대포트 제조기</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>육묘 생육 영상장치 시스템</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>에어 콤프</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="14">스마트 육묘 시스템<br>(발아실, 접목활착실, 초정밀 접목로봇,<br>식물공장용 육묘시스템 등)</td>
+                                <td>발아실</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>접목활착실</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>초정밀접목로봇</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>식물공장용 육묘시스템</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>RFID 입출력 시스템(생산이력)</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>선별출하 영상장치 시스템</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>관제실(CCTV)</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>육묘 무빙 베드</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>베드 레일 및 받침대</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>전동포크리프트(베드이송)</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>육묘베드 이송용 캐리어</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>자주식살수장치</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>전동회전대차</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>배관, 분전반 배선공사</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="6">스마트팜 혁신밸리 실증단지<br>시제품제작장비</td>
+                                <td rowspan="6">스마트팜혁신밸리실증단지시제품 제작장비<br>(3D프린터(메탈), 3D스캐너, 설계용 S/W,<br>설계용 PC, 재료비 등)</td>
+                                <td>3D 프린터(대)</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td rowspan="6">공용제작실</td>
+                            </tr>
+                            <tr>
+                                <td>3D 프린터(중)</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>3D 프린터(소)</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>3D스캐너</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>설계용 PC</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>설계 S/W</td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="5">스마트팜 전시장비</td>
+                                <td>스마트팜(복합제어, 구동기, 센서)</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td rowspan="5">전시실</td>
+                            </tr>
+                            <tr>
+                                <td>양액공급기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>온실골조/피복 등 자재</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>스마트 농기계</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>키오스크</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>체험형온실</td>
+                                <td>체험형 온실 구축</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="5" class="last-child">실증 보조장비</td>
+                                <td>고소작업차(리프트)</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>농업용 동력운반차</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>동력 분무기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>지게차</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>비닐피복기</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <!--//-->
+
+            </div>
+        </c:if>
+
 
     </div>
 </div>

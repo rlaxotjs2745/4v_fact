@@ -10,6 +10,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -1057,52 +1058,36 @@ public class APIController {
         return resultVO;
     }
 
+    @Transactional
     @RequestMapping(value = "/insert_notice",method = RequestMethod.POST)
    public @ResponseBody
-     FileUploadResponseVO  insertNotice(@ModelAttribute NoticeVO noticeVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
+     List<FileUploadResponseVO>  insertNotice(@ModelAttribute NoticeVO noticeVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
 
-            int fileLength = Integer.parseInt(noticeVO.getFileLength());
-            File[] files = new File[5];
-        if(fileLength==0){
-            noticeService.insertNotice(noticeVO);
-        }else {
-            if (fileLength > 0) {
-                files[0] = fileService.convertMultipartToFile(noticeVO.getFiles1());
-                if (fileLength >= 2) {
-                    files[1] = fileService.convertMultipartToFile(noticeVO.getFiles2());
-                    if (fileLength >= 3) {
-                        files[2] = fileService.convertMultipartToFile(noticeVO.getFiles3());
-                        if (fileLength >= 4) {
-                            files[3] = fileService.convertMultipartToFile(noticeVO.getFiles4());
-                            if (fileLength == 5) {
-                                files[4] = fileService.convertMultipartToFile(noticeVO.getFiles5());
+        noticeService.insertNotice(noticeVO);
 
-                            }
-                        }
-                    }
-                }
+        final ArrayList<FileUploadResponseVO> response = new ArrayList<>();
+        if (noticeVO.getIs_file() != 0 && noticeVO.getFiles() != null && noticeVO.getFiles().length != 0) {
+
+            for (MultipartFile file : noticeVO.getFiles()) {
+                String fileName = fileService.storeFileInfo(file);
+                String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                        .path("/downloadFile/")
+                        .path(fileName)
+                        .toUriString();
+                FileUploadResponseVO filepespons = new FileUploadResponseVO(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+                response.add(filepespons);
+                FileInfoVO fileInfoVO = new FileInfoVO();
+                fileInfoVO.setFile_name(filepespons.getFileName());
+                fileInfoVO.setFile_size(filepespons.getSize());
+                fileInfoVO.setMime_type(filepespons.getFileType());
+                fileInfoVO.setFile_path(fileDownloadUri);
+                fileService.storeFileInfo(file);
+                fileService.insertFileInfo(fileInfoVO);
+                noticeService.insertNoticeFileJoin();
             }
         }
-            MultipartFile file = noticeVO.getFiles1();
-            String fileName = fileService.storeFileInfo(noticeVO.getFiles1());
-            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                    .path("/downloadFile/")
-                    .path(fileName)
-                    .toUriString();
-            FileUploadResponseVO filepespons = new FileUploadResponseVO(fileName, fileDownloadUri, file.getContentType(), file.getSize());
-            FileInfoVO fileInfoVO = new FileInfoVO();
-            fileInfoVO.setFile_name(filepespons.getFileName());
-            fileInfoVO.setFile_size(filepespons.getSize());
-            fileInfoVO.setMime_type(filepespons.getFileType());
-            fileInfoVO.setFile_path(fileDownloadUri);
-            fileService.storeFileInfo(file);
-            fileService.insertFileInfo(fileInfoVO);
-            noticeService.insertNotice(noticeVO);
-            noticeService.insertNoticeFileJoin();
 
-
-
-        return new FileUploadResponseVO(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+        return response;
     }
 
     @RequestMapping(value = "/insert_event",method = RequestMethod.POST)
@@ -1354,22 +1339,47 @@ public class APIController {
     }
 
 
+    @Transactional
     @RequestMapping(value="/update_notice",method = RequestMethod.POST)
     @ResponseBody
-    ResultVO updateNotice(@RequestBody NoticeVO noticeVO){
+    ResultVO updateNotice(@ModelAttribute NoticeVO noticeVO){
+
+//    ResultVO updateNotice(@RequestBody NoticeVO noticeVO){
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
         resultVO.setResult_str("업데이트 실패");
-        try {
 
-            noticeService.updateNotice(noticeVO);
-            resultVO.setResult_code("SUCCESS");
-            resultVO.setResult_str("업데이트가 완료되었습니다.");
-        } catch (Exception e){
-            System.out.println(e);
-            resultVO.setResult_code("ERROR_1000");
-            resultVO.setResult_str("없는 상담일지입니다.");
+        noticeService.updateNotice(noticeVO);
+
+        if (noticeVO.getIs_file() != 0 && noticeVO.getFiles() != null && noticeVO.getFiles().length != 0) {
+
+            for (MultipartFile file : noticeVO.getFiles()) {
+                String fileName = fileService.storeFileInfo(file);
+                String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                        .path("/downloadFile/")
+                        .path(fileName)
+                        .toUriString();
+                FileUploadResponseVO filepespons = new FileUploadResponseVO(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+                FileInfoVO fileInfoVO = new FileInfoVO();
+                fileInfoVO.setFile_name(filepespons.getFileName());
+                fileInfoVO.setFile_size(filepespons.getSize());
+                fileInfoVO.setMime_type(filepespons.getFileType());
+                fileInfoVO.setFile_path(fileDownloadUri);
+                fileService.storeFileInfo(file);
+                fileService.insertFileInfo(fileInfoVO);
+                noticeService.updateNoticeFileJoin(noticeVO.getIdx_notice());
+            }
         }
+        if (noticeVO.getIs_file() != 0 && noticeVO.getRemovedFiles() != null && noticeVO.getRemovedFiles().length != 0) {
+            for (Long removedFile : noticeVO.getRemovedFiles()) {
+                fileService.deleteFileInfo(removedFile);
+            }
+        }
+
+
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("업데이트가 완료되었습니다.");
+
         return resultVO;
     }
 

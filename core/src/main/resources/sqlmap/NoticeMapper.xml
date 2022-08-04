@@ -38,7 +38,7 @@
     <select id="getOpenNoticeCount" resultType="int">
         SELECT COUNT(*) FROM TB_NOTICE
         WHERE IS_SHOW=1
-            AND NOTICE_STATUS=1
+            AND POSTING_START_DATE <![CDATA[<=]]> SYSDATE AND POSTING_END_DATE <![CDATA[>=]]> SYSDATE
             <include refid="searchNoticeCondition"></include>
     </select>
 
@@ -72,7 +72,7 @@
                 LAST_UPD_DATE
             FROM TB_NOTICE
             WHERE IS_SHOW=1
-                AND NOTICE_STATUS=1
+                AND POSTING_START_DATE <![CDATA[<=]]> SYSDATE AND POSTING_END_DATE <![CDATA[>=]]> SYSDATE
                 <include refid="searchNoticeCondition"></include>
         )
         WHERE row_num BETWEEN #{count} * (#{page} - 1) + 1 AND #{count} * #{page}
@@ -147,12 +147,12 @@ LAST_UPD_DATE
                 #{is_new},
                 #{is_main_page},
                 #{is_important},
-                #{is_show},
+                1,
                 #{view_count},
-                #{notice_status},
+                1,
                 #{posting_start_date},
                 #{posting_end_date},
-                #{doc_version},
+                1,
                 #{memo},
                 #{search_tag},
                 #{author},
@@ -172,35 +172,63 @@ LAST_UPD_DATE
         SELECT * FROM TB_NOTICE WHERE ROWNUM <![CDATA[<]]> 5 AND NOTICE_STATUS != 3 AND IS_SHOW = 1 AND IS_MAIN_PAGE = 1 ORDER BY POSTING_START_DATE DESC
     </select>
 
-    <select id="getNoticeIsFile" resultType="kr.or.fact.core.model.DTO.NoticeVO">
 
+    <resultMap id="noticeDetailMap" type="kr.or.fact.core.model.DTO.NoticeVO">
+        <id property="idx_notice" column="IDX_NOTICE" />
+        <result property="is_file" column="IS_FILE" />
+        <result property="is_main_page" column="IS_MAIN_PAGE" />
+        <result property="is_important" column="IS_IMPORTANT" />
+        <result property="notice_code" column="NOTICE_CODE" />
+        <result property="notice_num" column="NOTICE_NUM" />
+        <result property="subject" column="SUBJECT" />
+        <result property="notice_contents" column="NOTICE_CONTENTS" />
+        <result property="is_show" column="IS_SHOW" />
+        <result property="view_count" column="VIEW_COUNT" />
+        <result property="notice_status" column="NOTICE_STATUS" />
+        <result property="posting_start_date" column="POSTING_START_DATE" />
+        <result property="posting_end_date" column="POSTING_END_DATE" />
+        <result property="doc_version" column="DOC_VERSION" />
+        <result property="memo" column="MEMO" />
+        <result property="search_tag" column="SEARCH_TAG" />
+        <result property="author" column="AUTHOR" />
+        <result property="idx_admin" column="IDX_ADMIN" />
+        <result property="confirm_admin_idx" column="CONFIRM_ADMIN_IDX" />
+        <result property="reg_date" column="REG_DATE" />
+        <result property="last_upd_date" column="LAST_UPD_DATE" />
+
+        <collection property="attachmentsUrl" ofType="String">
+            <id property="attachmentsUrl" column="FILE_PATH" />
+        </collection>
+    </resultMap>
+    <select id="getNoticeIsFile" resultMap="noticeDetailMap" resultType="kr.or.fact.core.model.DTO.NoticeVO">
         SELECT
-               A.IDX_FILE_INFO,
-               B.IDX_NOTICE,
-               B.IS_FILE,
-               B.IS_MAIN_PAGE,
-               B.IS_IMPORTANT,
-               B.NOTICE_CODE,
-               B.NOTICE_NUM,
-               B.SUBJECT,
-               B.NOTICE_CONTENTS,
-               B.IS_SHOW,
-               B.VIEW_COUNT,
-               B.NOTICE_STATUS,
-               B.POSTING_START_DATE,
-               B.POSTING_END_DATE,
-               B.DOC_VERSION,
-               B.MEMO,
-               B.SEARCH_TAG,
-               B.AUTHOR,
-               B.IDX_ADMIN,
-               B.CONFIRM_ADMIN_IDX,
-               B.REG_DATE,
-               B.LAST_UPD_DATE,
-               C.FILE_PATH
-        FROM TB_NOTICE_FILE_JOIN A JOIN TB_NOTICE B ON A.IDX_NOTICE= B.IDX_NOTICE
-                                   JOIN TB_FILE_INFO C ON C.IDX_FILE_INFO= A.IDX_FILE_INFO WHERE B.IDX_NOTICE=#{idx_notice}
-
+            A.IDX_NOTICE,
+            B.IDX_FILE_INFO,
+            A.IS_FILE,
+            A.IS_MAIN_PAGE,
+            A.IS_IMPORTANT,
+            A.NOTICE_CODE,
+            A.NOTICE_NUM,
+            A.SUBJECT,
+            A.NOTICE_CONTENTS,
+            A.IS_SHOW,
+            A.VIEW_COUNT,
+            A.NOTICE_STATUS,
+            A.POSTING_START_DATE,
+            A.POSTING_END_DATE,
+            A.DOC_VERSION,
+            A.MEMO,
+            A.SEARCH_TAG,
+            A.AUTHOR,
+            A.IDX_ADMIN,
+            A.CONFIRM_ADMIN_IDX,
+            A.REG_DATE,
+            A.LAST_UPD_DATE,
+            C.FILE_PATH
+        FROM TB_NOTICE A
+        LEFT JOIN TB_NOTICE_FILE_JOIN B ON A.IDX_NOTICE = B.IDX_NOTICE
+        LEFT JOIN TB_FILE_INFO C ON B.IDX_FILE_INFO = C.IDX_FILE_INFO
+        WHERE A.IDX_NOTICE=#{idx_notice}
     </select>
 
 
@@ -227,6 +255,24 @@ REG_DATE
 
                 )
     </insert>
+
+    <insert id="updateNoticeFileJoin" parameterType="kr.or.fact.core.model.DTO.NoticeFileJoinVO">
+        INSERT INTO TB_NOTICE_FILE_JOIN (
+            IDX_NOTICE_FILE_JOIN,
+            IDX_NOTICE,
+
+            IDX_FILE_INFO,
+
+            REG_DATE
+        )VALUES (
+                    SEQ_NOTICE_FILE_JOIN.NEXTVAL,
+                    #{idx_notice},
+                    SEQ_FILE_INFO.CURRVAL,
+
+                    SYSDATE
+
+                )
+    </insert>
 <select id="getNoticeViewCount" parameterType="long" resultType="int">
     SELECT VIEW_COUNT FROM TB_NOTICE WHERE IDX_NOTICE=#{idx_notice}
 </select>
@@ -235,29 +281,19 @@ REG_DATE
     </update>
 
     <update id="updateNotice" parameterType="kr.or.fact.core.model.DTO.NoticeVO">
-UPDATE TB_NOTICE SET
-    IDX_NOTICE=#{idx_notice},
-                     NOTICE_CODE=#{notice_code},
-                     NOTICE_NUM=#{notice_num},
-                     SUBJECT=#{subject},
-                     NOTICE_CONTENTS=#{notice_contents},
-                     IS_FILE=#{is_file},
-                     IS_NEW=#{is_new},
-                     IS_MAIN_PAGE=#{is_main_page},
-                     IS_IMPORTANT=#{is_important},
-                     IS_SHOW=#{is_show},
-                     VIEW_COUNT=#{view_count},
-                     NOTICE_STATUS=#{notice_status},
-                     POSTING_START_DATE=#{posting_start_date},
-                     POSTING_END_DATE=#{posting_end_date},
-                     DOC_VERSION=#{doc_version},
-                     MEMO=#{memo},
-                     SEARCH_TAG=#{search_tag},
-                     AUTHOR=#{author},
-                     IDX_ADMIN=#{idx_admin},
-                     CONFIRM_ADMIN_IDX=#{confirm_admin_idx},
-                     REG_DATE=#{reg_date},
-                     LAST_UPD_DATE=SYSDATE WHERE IDX_NOTICE=#{idx_notice}
+        UPDATE TB_NOTICE
+        SET NOTICE_CODE=#{notice_code},
+            SUBJECT=#{subject},
+            NOTICE_CONTENTS=#{notice_contents},
+            IS_FILE=#{is_file},
+            IS_NEW=#{is_new},
+            IS_MAIN_PAGE=#{is_main_page},
+            POSTING_START_DATE=#{posting_start_date},
+            POSTING_END_DATE=#{posting_end_date},
+            DOC_VERSION=DOC_VERSION + 1,
+            MEMO=#{memo},
+            LAST_UPD_DATE=SYSDATE
+        WHERE IDX_NOTICE=#{idx_notice}
 
     </update>
 </mapper>

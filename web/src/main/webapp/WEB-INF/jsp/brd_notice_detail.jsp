@@ -139,7 +139,7 @@
                                 }
                             </style>
                             <div class="edit__templete">
-                                <div class="temp__cover">한국농업기술진흥원 공고 제2021-121호</div>
+                                <div class="temp__cover"></div>
                                 <div class="temp__title">${noticeInfo.subject}</div>
                                 <div class="temp__desc"> ${noticeInfo.notice_code}</div>
                                 <div class="temp__signature"><fmt:formatDate value="${noticeInfo.posting_start_date}" pattern="yyyy-MM-dd HH:MM"/><br>${noticeInfo.author}</div>

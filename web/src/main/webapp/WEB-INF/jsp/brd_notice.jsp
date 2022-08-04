@@ -73,7 +73,7 @@
                     <tbody>
                     <c:forEach items="${noticeList}" var="notice" varStatus="status">
                         <tr>
-                            <td>${notice.notice_num}</td>
+                            <td>${notice.idx_notice}</td>
                             <%
                                 final NoticeVO notice = (NoticeVO) pageContext.getAttribute("notice");
                                 final String query = (String) request.getAttribute("query");
@@ -121,7 +121,7 @@
         const searchSelect = $('#search_select').val();
         const searchInput = $('#search_input').val();
         console.log(searchSelect, searchInput);
-        window.location = '/brd_notice?page=1&filter=' + searchSelect + '&query=' + searchInput;
+        window.location = 'brd_notice?page=1&filter=' + searchSelect + '&query=' + searchInput;
     }
 
     $(document).ready(function() {

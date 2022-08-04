@@ -39,7 +39,7 @@
         SELECT COUNT(*)
         FROM TB_EVENT_CONTENT
         WHERE IS_SHOW=1
-            AND EVENT_CONTENT_STATUS=1
+            AND EVENT_START_DATE <![CDATA[<=]]> SYSDATE AND EVENT_END_DATE <![CDATA[>=]]> SYSDATE
             <include refid="searchEventCondition"></include>
     </select>
 
@@ -73,9 +73,8 @@
                 LAST_UPD_DATE
             FROM TB_EVENT_CONTENT
             WHERE IS_SHOW=1
-                AND EVENT_CONTENT_STATUS=1
+                AND EVENT_START_DATE <![CDATA[<=]]> SYSDATE AND EVENT_END_DATE <![CDATA[>=]]> SYSDATE
                 <include refid="searchEventCondition"></include>
-            ORDER BY EVENT_CONTENT_NUM ASC
         )
         WHERE row_num BETWEEN #{count} * (#{page} - 1) + 1 AND #{count} * #{page}
     </select>

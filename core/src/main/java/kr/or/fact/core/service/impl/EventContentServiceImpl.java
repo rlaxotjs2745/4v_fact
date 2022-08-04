@@ -2,6 +2,7 @@ package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.DTO.EventContentVO;
 import kr.or.fact.core.model.DTO.EventFileJoinSelectVO;
+import kr.or.fact.core.model.DTO.PRContentVO;
 import kr.or.fact.core.model.EventContentMapper;
 import kr.or.fact.core.service.EventContentService;
 import org.apache.ibatis.session.SqlSession;
@@ -65,7 +66,14 @@ public class EventContentServiceImpl implements EventContentService {
     }
     @Override
     public List<EventContentVO> getMainEventContentList(){
-        return eventContentMapper.getMainEventContentList();
+        List<EventContentVO> result = null;
+        try{
+            result = eventContentMapper.getMainEventContentList();
+        } catch (Exception e){
+            System.out.println("eventContentMapper.getMainEventContentList: " + e.toString());
+        }
+
+        return result;
     }
 
     @Override

@@ -15,6 +15,7 @@ public interface FileServiceMapper {
     void updateFileInfo(FileInfoVO fileInfoVO);
     void deleteFileInfo(@Param("idx_file_info") long idx_file_info);
     FileInfoVO getFileInfo(@Param("idx_file_info") long idx_file_info);
+    List<FileInfoVO> getFileInfoListByNotice(@Param("idx_notice") long idx_notice);
 
     List<FormFileInfoVO> getFormFileInfoList(ParamPageListFilteredVO paramPageListFilteredVO);
     void insertFormFileInfo(FormFileInfoVO formFileInfoVO);

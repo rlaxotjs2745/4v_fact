@@ -55,7 +55,13 @@ public class NoticeServiceImpl implements NoticeService {
     }
     @Override
     public List<NoticeVO> getMainNoticeList(){
-        return noticeMapper.getMainNoticeList();
+        List<NoticeVO> result = null;
+        try{
+            result =  noticeMapper.getMainNoticeList();
+        } catch (Exception e){
+            System.out.println("noticeMapper.getMainNoticeList: " + e.toString());
+        }
+        return result;
     }
 
     @Override
@@ -86,6 +92,11 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     public int insertNoticeFileJoin() {
         return noticeMapper.insertNoticeFileJoin();
+    }
+
+    @Override
+    public int updateNoticeFileJoin(long idx_notice) {
+        return noticeMapper.updateNoticeFileJoin(idx_notice);
     }
 
     @Override

@@ -75,7 +75,7 @@
 
                     <c:forEach items="${announceList}" var="ann" varStatus="status">
                         <tr>
-                            <td>${ann.announce_num}</td>
+                            <td>${ann.idx_bs_announcement}</td>
                             <td>
                                 <c:if test="${ann.bs_status eq 2}"> 대기</c:if>
                                 <c:if test="${ann.bs_status eq 3}"> 신청중</c:if>
@@ -92,7 +92,7 @@
                                     highlightSubject = notice.getSubject().replaceAll(query, "<span style=\"background-color:yellow\">" + query + "</span>");
                                 }
                             %>
-                            <td class="td__left"><a href="brd_announce_detail?idx=${ann.idx_bs_announcement}" class="td__link"><%=highlightSubject%>><c:if test="${ann.is_new eq 1}"> <img src="resources/assets/image/ico_new.png" alt="NEW" class="board__badge"></c:if></a></td>
+                            <td class="td__left"><a href="brd_announce_detail?idx=${ann.idx_bs_announcement}" class="td__link"><%=highlightSubject%><c:if test="${ann.is_new eq 1}"> <img src="resources/assets/image/ico_new.png" alt="NEW" class="board__badge"></c:if></a></td>
                             <td class="td__data"><c:if test="${notice.is_file eq 1}"><img src="resources/assets/image/ico_file-present.png" alt=""></c:if></td>
                             <td class="td__data">${ann.author}</td>
                             <td class="td__data"><fmt:formatDate value="${ann.posting_start_date}" pattern="yyyy-MM-dd" /></td>
@@ -126,7 +126,7 @@
         const searchSelect = $('#search_select').val();
         const searchInput = $('#search_input').val();
         console.log(searchSelect, searchInput);
-        window.location = '/brd_announce?page=1&filter=' + searchSelect + '&query=' + searchInput;
+        window.location = 'brd_announce?page=1&filter=' + searchSelect + '&query=' + searchInput;
     }
 
     $(document).ready(function() {

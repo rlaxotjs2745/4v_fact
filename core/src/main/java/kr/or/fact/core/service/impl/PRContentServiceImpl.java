@@ -1,6 +1,7 @@
 package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.DTO.AdminResVO;
+import kr.or.fact.core.model.DTO.NoticeVO;
 import kr.or.fact.core.model.DTO.PRContentVO;
 import kr.or.fact.core.model.PRContentsMapper;
 import kr.or.fact.core.service.PRContentsService;
@@ -114,7 +115,13 @@ prContentsMapper.updatePrContent(prContentVO);
 
     @Override
     public List<PRContentVO> getMainPRContentList(){
-        return prContentsMapper.getMainPRContentList();
+        List<PRContentVO> result = null;
+        try{
+            result = prContentsMapper.getMainPRContentList();
+        } catch (Exception e){
+            System.out.println("prContentsMapper.getMainPRContentListt: " + e.toString());
+        }
+        return result;
     }
 
     @Override
