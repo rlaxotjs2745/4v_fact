@@ -9318,3 +9318,7 @@ table.table__type--pee tbody tr.tr__subsum th {
 .list__type ul.list__type--promo li:nth-child(4n+1) {
     margin-left: 0;
 }
+
+.p_personal-data th{
+    vertical-align: middle;
+}
