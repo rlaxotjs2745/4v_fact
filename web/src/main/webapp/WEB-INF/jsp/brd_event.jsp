@@ -55,7 +55,7 @@
                     <c:forEach var="event" items="${eventContentVOList}"  varStatus="status"  >
                         <li>
                             <a href="brd_event_detail?idx=${event.idx_event_content}">
-                                <figure><img src="${!event.thumb_img_file_path ? 'resources/assets/image/h1_logo@3x.png' : event.thumb_img_file_path}" alt="" class="thumb_list_item"></figure>
+                                <figure><img src="${!event.thumb_img_file_path ? 'resources/assets/image/img_thumbnail-no-resources.png' : event.thumb_img_file_path}" alt="" class="thumb_list_item"></figure>
                                 <span class="list__title">${event.subject}</span>
                                 <span class="list__duedate">
                                     <fmt:formatDate value="${event.event_start_date}" pattern="yyyy-MM-dd" />

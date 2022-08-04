@@ -54,7 +54,7 @@
                     <c:forEach items="${prContentList}" var="promotion" varStatus="status">
                         <li>
                             <a href="brd_promotion_detail?idx=${promotion.idx_pr_content}" class=" btn-sm btn_content_modal">
-                                <figure><img src="${!promotion.thumb_img_file_path ? 'resources/assets/image/h1_logo@3x.png' : promotion.thumb_img_file_path}" alt="" class="thumb_list_item"></figure>
+                                <figure><img src="${!promotion.thumb_img_file_path ? 'resources/assets/image/img_thumbnail-no-resources.png' : promotion.thumb_img_file_path}" alt="" class="thumb_list_item"></figure>
                                 <div class="caption">
                                     <span class="list__title">${promotion.subject}</span>
                                     <div class="list__file">
