@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@include file ="header.jsp" %>
 
 <div class="content" id="content">
@@ -96,12 +97,27 @@
                         <div class="news__badge"><img src="resources/assets/image/ico_notice.svg" alt="">공지사항</div>
                         <div class="news__more"><a href="brd_notice?page=1" class="btn btn-more">+더보기</a></div>
                         <ul class="news__list">
-                            <c:forEach items="${noticeList}" var="notice">
-                                <li>
-                                    <fmt:formatDate value="${notice.posting_start_date}" var="notice_date" pattern="MM-dd"/>
-                                    <a href="brd_notice_detail?idx=${notice.idx_notice}"><span>${notice.subject.length() > 23 ? notice.subject.subString(0,23) + "..." : notice.subject}</span><em>${notice_date}</em></a>
-                                </li>
-                            </c:forEach>
+                            <c:if test="${noticeList.size() != 0}">
+                                <c:forEach items="${noticeList}" var="notice">
+                                    <li>
+                                        <fmt:formatDate value="${notice.posting_start_date}" var="notice_date" pattern="MM-dd"/>
+                                        <a href="brd_notice_detail?idx=${notice.idx_notice}">
+                                            <span>
+                                                <c:choose>
+                                                    <c:when test="${fn:length(notice.subject) > 23}">
+                                                        ${fn:substring(notice.subject,0,23)}...
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        ${notice.subject}
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </span><em>${notice_date}</em></a>
+                                    </li>
+                                </c:forEach>
+                            </c:if>
+                            <c:if test="${noticeList.size() == 0}">
+                                현재 공지사항이 없습니다.
+                            </c:if>
                         </ul>
                     </div>
                     <!--//-->
@@ -109,12 +125,26 @@
                         <div class="news__badge"><img src="resources/assets/image/ico_business.svg" alt="">사업공고</div>
                         <div class="news__more"><a href="brd_announce?page=1" class="btn btn-more">+더보기</a></div>
                         <ul class="news__list">
-                            <c:forEach items="${annoList}" var="anno">
-                                <li>
-                                    <fmt:formatDate value="${anno.posting_start_date}" var="anno_date" pattern="MM-dd"/>
-                                    <a href="brd_announce_detail?idx=${anno.idx_bs_announcement}"><span>${anno.subject.length() > 23 ? anno.subject.subString(0,23) + "..." : anno.subject}</span><em>${anno_date}</em></a>
-                                </li>
-                            </c:forEach>
+                            <c:if test="${annoList.size() != 0}">
+                                <c:forEach items="${annoList}" var="anno">
+                                    <li>
+                                        <fmt:formatDate value="${anno.posting_start_date}" var="anno_date" pattern="MM-dd"/>
+                                        <a href="brd_announce_detail?idx=${anno.idx_bs_announcement}"><span>
+                                                <c:choose>
+                                                    <c:when test="${fn:length(anno.subject) > 23}">
+                                                        ${fn:substring(anno.subject,0,23)}...
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        ${anno.subject}
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </span><em>${anno_date}</em></a>
+                                    </li>
+                                </c:forEach>
+                            </c:if>
+                            <c:if test="${annoList.size() == 0}">
+                                현재 진행중인 사업공고가 없습니다.
+                            </c:if>
                         </ul>
                     </div>
                     <!--//-->
@@ -122,12 +152,26 @@
                         <div class="news__badge"><img src="resources/assets/image/ico_event.svg" alt="">행사안내</div>
                         <div class="news__more"><a href="brd_event?page=1" class="btn btn-more">+더보기</a></div>
                         <ul class="news__list">
-                            <c:forEach items="${eventList}" var="event">
-                                <li>
-                                    <fmt:formatDate value="${event.event_start_date}" var="event_date" pattern="MM-dd"/>
-                                    <a href="brd_event_detail?idx=${event.idx_event_content}"><span>${event.subject.length() > 23 ? event.subject.subString(0,23) + "..." : event.subject}</span><em>${event_date}</em></a>
-                                </li>
-                            </c:forEach>
+                            <c:if test="${eventList.size() != 0}">
+                                <c:forEach items="${eventList}" var="event">
+                                    <li>
+                                        <fmt:formatDate value="${event.event_start_date}" var="event_date" pattern="MM-dd"/>
+                                        <a href="brd_event_detail?idx=${event.idx_event_content}"><span>
+                                                <c:choose>
+                                                    <c:when test="${fn:length(event.subject) > 23}">
+                                                        ${fn:substring(event.subject,0,23)}...
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        ${event.subject}
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </span><em>${event_date}</em></a>
+                                    </li>
+                                </c:forEach>
+                            </c:if>
+                            <c:if test="${eventList.size() == 0}">
+                                현재 진행중인 행사가 없습니다.
+                            </c:if>
                         </ul>
                     </div>
                     <!--//-->

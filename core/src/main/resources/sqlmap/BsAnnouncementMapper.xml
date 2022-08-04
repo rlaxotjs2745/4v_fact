@@ -8,7 +8,7 @@
     </select>
 
     <select id="getWebpageBsAnnouncementCount" resultType="int">
-        SELECT COUNT(*) FROM TB_BS_ANNOUNCEMENT  WHERE IS_SHOW=1 AND ANNOUNCE_STATUS=1
+        SELECT COUNT(*) FROM TB_BS_ANNOUNCEMENT  WHERE IS_SHOW=1 AND ANNOUNCE_STATUS=3
     </select>
 
     <sql id="searchAnnouncementCondition">
@@ -39,7 +39,7 @@
         SELECT COUNT(*)
         FROM TB_BS_ANNOUNCEMENT
         WHERE IS_SHOW=1
-            AND ANNOUNCE_STATUS=1
+            AND ANNOUNCE_STATUS=3
             <include refid="searchAnnouncementCondition"></include>
     </select>
      
@@ -60,7 +60,7 @@
                 ,VIEW_COUNT
             FROM TB_BS_ANNOUNCEMENT
             WHERE IS_SHOW=1
-                AND ANNOUNCE_STATUS=1
+                AND ANNOUNCE_STATUS=3
                 <include refid="searchAnnouncementCondition"></include>
         )
         WHERE row_num BETWEEN #{count} * (#{page} - 1) + 1 AND #{count} * #{page}
@@ -82,7 +82,7 @@
                 ,POSTING_START_DATE
                 ,VIEW_COUNT
             FROM TB_BS_ANNOUNCEMENT
-            WHERE IS_SHOW=1 AND ANNOUNCE_STATUS=1
+            WHERE IS_SHOW=1 AND ANNOUNCE_STATUS=3
         )
         WHERE row_num BETWEEN #{amount} * (#{page_num} - 1) + 1 AND #{amount} * #{page_num}
     </select>

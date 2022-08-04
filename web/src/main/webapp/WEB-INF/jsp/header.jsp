@@ -32,6 +32,9 @@
         <c:if test="${profile == 'gimje-prod'}">
             <h1><a href="index"><img src="resources/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
         </c:if>
+        <c:if test="${profile == 'local'}">
+            <h1><a href="index"><img src="resources/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
+        </c:if>
 
         <nav class="nav"><!--is-expanded-->
             <ul class="nav--depth1">
@@ -111,7 +114,7 @@
                     </c:when>
                     <c:when test="${sessionScope.userid eq null}">
                 <a href="login"><img src="resources/assets/image/ico_login_n.svg" alt="">로그인</a>
-                <a href="login"><img src="resources/assets/image/ico_user.svg" alt="">회원가입</a>
+                <a href="join"><img src="resources/assets/image/ico_user.svg" alt="">회원가입</a>
                     </c:when>
                 </c:choose>
             </div>

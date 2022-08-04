@@ -140,43 +140,43 @@
                             <div class="edit__templete">
                                 <div class="temp__cover">${bsAnnouns.bs_announcement_code}</div>
                                 <div class="temp__title">${bsAnnouns.subject}</div>
-                                <div class="temp__desc"> [2021년 종자생명산업 맞춤형 인력양성] 교육과정 별 교육훈련생 선정결과를 첨부와 같이 알려드리며, <br>선정된 교육생들은 향후 일정이 원활히 진행될 수 있도록 협조하여 주시기 바랍니다.</div>
-                                <div class="temp__signature">2021년 6월 22일<br>농업기술실용화재단 이사장</div>
-                                <div class="temp__table">
-                                    <table>
-                                        <colgroup>
-                                            <col style="width:80px">
-                                            <col style="width:100px">
-                                            <col style="width:200px">
-                                            <col style="width:100px">
-                                            <col style="width:280px">
-                                        </colgroup>
-                                        <thead>
-                                        <tr>
-                                            <th colspan="2">교육과정</th>
-                                            <th>교육일정</th>
-                                            <th>교육인원</th>
-                                            <th>교육장소</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>1차</td>
-                                            <td>종자산업가</td>
-                                            <td>6.28(월) ~ 7.9(금) 10일간</td>
-                                            <td>15명</td>
-                                            <td class="td--left">원광대 농식품융합대학 66번동 101호</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2차</td>
-                                            <td>미래육종가</td>
-                                            <td>7.12(월) ~ 7.33(금) 10일간</td>
-                                            <td>15명</td>
-                                            <td class="td--left">정북대 농식품융합대학 본관 101호</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+<%--                                <div class="temp__desc"> [2021년 종자생명산업 맞춤형 인력양성] 교육과정 별 교육훈련생 선정결과를 첨부와 같이 알려드리며, <br>선정된 교육생들은 향후 일정이 원활히 진행될 수 있도록 협조하여 주시기 바랍니다.</div>--%>
+<%--                                <div class="temp__signature">2021년 6월 22일<br>농업기술실용화재단 이사장</div>--%>
+<%--                                <div class="temp__table">--%>
+<%--                                    <table>--%>
+<%--                                        <colgroup>--%>
+<%--                                            <col style="width:80px">--%>
+<%--                                            <col style="width:100px">--%>
+<%--                                            <col style="width:200px">--%>
+<%--                                            <col style="width:100px">--%>
+<%--                                            <col style="width:280px">--%>
+<%--                                        </colgroup>--%>
+<%--                                        <thead>--%>
+<%--                                        <tr>--%>
+<%--                                            <th colspan="2">교육과정</th>--%>
+<%--                                            <th>교육일정</th>--%>
+<%--                                            <th>교육인원</th>--%>
+<%--                                            <th>교육장소</th>--%>
+<%--                                        </tr>--%>
+<%--                                        </thead>--%>
+<%--                                        <tbody>--%>
+<%--                                        <tr>--%>
+<%--                                            <td>1차</td>--%>
+<%--                                            <td>종자산업가</td>--%>
+<%--                                            <td>6.28(월) ~ 7.9(금) 10일간</td>--%>
+<%--                                            <td>15명</td>--%>
+<%--                                            <td class="td--left">원광대 농식품융합대학 66번동 101호</td>--%>
+<%--                                        </tr>--%>
+<%--                                        <tr>--%>
+<%--                                            <td>2차</td>--%>
+<%--                                            <td>미래육종가</td>--%>
+<%--                                            <td>7.12(월) ~ 7.33(금) 10일간</td>--%>
+<%--                                            <td>15명</td>--%>
+<%--                                            <td class="td--left">정북대 농식품융합대학 본관 101호</td>--%>
+<%--                                        </tr>--%>
+<%--                                        </tbody>--%>
+<%--                                    </table>--%>
+<%--                                </div>--%>
                                 <div class="temp__text">
                                     ${bsAnnouns.announce_contents}
                                 </div>

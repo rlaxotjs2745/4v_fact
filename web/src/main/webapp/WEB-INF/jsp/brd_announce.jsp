@@ -92,7 +92,7 @@
                                     highlightSubject = notice.getSubject().replaceAll(query, "<span style=\"background-color:yellow\">" + query + "</span>");
                                 }
                             %>
-                            <td class="td__left"><a href="brd_announce_detail?idx=${ann.idx_bs_announcement}" class="td__link"><%=highlightSubject%>><c:if test="${ann.is_new eq 1}"> <img src="resources/assets/image/ico_new.png" alt="NEW" class="board__badge"></c:if></a></td>
+                            <td class="td__left"><a href="brd_announce_detail?idx=${ann.idx_bs_announcement}" class="td__link"><%=highlightSubject%><c:if test="${ann.is_new eq 1}"> <img src="resources/assets/image/ico_new.png" alt="NEW" class="board__badge"></c:if></a></td>
                             <td class="td__data"><c:if test="${notice.is_file eq 1}"><img src="resources/assets/image/ico_file-present.png" alt=""></c:if></td>
                             <td class="td__data">${ann.author}</td>
                             <td class="td__data"><fmt:formatDate value="${ann.posting_start_date}" pattern="yyyy-MM-dd" /></td>

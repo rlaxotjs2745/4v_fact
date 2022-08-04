@@ -39,10 +39,12 @@ public class FileController {
     public FileUploadResponseVO uploadFile(@RequestParam("file") MultipartFile file) {
         String fileName = fileService.storeFileInfo(file);
 
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
-                .path(fileName)
-                .toUriString();
+//        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+//                .path("/downloadFile/")
+//                .path(fileName)
+//                .toUriString();
+
+        String fileDownloadUri = "downloadFile/" + fileName;
 
         return new FileUploadResponseVO(fileName, fileDownloadUri, file.getContentType(), file.getSize());
     }

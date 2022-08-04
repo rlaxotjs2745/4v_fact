@@ -150,6 +150,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public List<RuleFileInfoVO> getRuleFileInfoList1() {
+
         return fileServiceMapper.getRuleFileInfoList1();
     }
 
@@ -171,10 +172,7 @@ public class FileServiceImpl implements FileService {
         fileInfoVO.setEncoding(1);
         fileInfoVO.setExtention(StringUtils.getFilenameExtension(file.getOriginalFilename()));
         fileInfoVO.setFile_secure_type(0);
-        fileInfoVO.setFile_path(ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
-                .path(file.getOriginalFilename())
-                .toUriString());
+        fileInfoVO.setFile_path("downloadFile/" + file.getOriginalFilename());
         fileInfoVO.setFile_size(file.getSize());
         fileInfoVO.setOwner(1);
         fileInfoVO.setIdx_user(userIdx);
@@ -253,10 +251,7 @@ public class FileServiceImpl implements FileService {
         fileInfoVO.setEncoding(1);
         fileInfoVO.setExtention(StringUtils.getFilenameExtension(file.getOriginalFilename()));
         fileInfoVO.setFile_secure_type(0);
-        fileInfoVO.setFile_path(ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
-                .path(file.getOriginalFilename())
-                .toUriString());
+        fileInfoVO.setFile_path(("downloadFile/" + file.getOriginalFilename()));
         fileInfoVO.setFile_size(file.getSize());
         fileInfoVO.setOwner(0);
         fileInfoVO.setIdx_user(adminIdx);

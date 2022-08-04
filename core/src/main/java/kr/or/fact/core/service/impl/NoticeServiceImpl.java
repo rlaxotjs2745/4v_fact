@@ -55,7 +55,13 @@ public class NoticeServiceImpl implements NoticeService {
     }
     @Override
     public List<NoticeVO> getMainNoticeList(){
-        return noticeMapper.getMainNoticeList();
+        List<NoticeVO> result = null;
+        try{
+            result =  noticeMapper.getMainNoticeList();
+        } catch (Exception e){
+            System.out.println("noticeMapper.getMainNoticeList: " + e.toString());
+        }
+        return result;
     }
 
     @Override
