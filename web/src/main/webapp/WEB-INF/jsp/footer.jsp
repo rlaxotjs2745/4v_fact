@@ -10,10 +10,10 @@
 <c:if test="${is_main eq null}">
     <div class="charge__part">
         <div class="part__inner">
-            <div class="part__message">본 콘텐츠의 담당자를 안내해 드립니다.  문의사항이 있는 경우, <a href="/spt_consulting">여기</a>를 눌러 상담신청을 하시거나 연락을 주십시오.</div>
+            <div class="part__message">본 콘텐츠의 담당자를 안내해 드립니다.  문의사항이 있는 경우, <a href="spt_consulting">여기</a>를 눌러 상담신청을 하시거나 연락을 주십시오.</div>
             <div class="part__member">
-                <em>담당자</em><strong>${homepageInfo.homepage_admin}</strong>
-                <em>연락처</em><strong>${homepageInfo.homepage_admin_pnum}</strong>
+                <em>윤여민</em><strong>${homepageInfo.homepage_admin}</strong>
+                <em>010-5695-9919</em><strong>${homepageInfo.homepage_admin_pnum}</strong>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <ul class="footer__anchor">
                 <li><a href="#none">서비스이용약관</a></li>
                 <li><a href="#none">개인정보처리방침</a></li>
-                <li><a href="#none">부패신고바로하기</a></li>
+<%--                <li><a href="#none">부패신고바로하기</a></li>--%>
                 <%--<li><a href="#none">홈페이지 개선의견</a></li>--%>
                 <li><a href="#none">사이트 맵</a></li>
             </ul>
