@@ -39,7 +39,7 @@
         SELECT COUNT(*)
         FROM TB_BS_ANNOUNCEMENT
         WHERE IS_SHOW=1
-            AND ANNOUNCE_STATUS=1
+            AND POSTING_START_DATE <![CDATA[<=]]> SYSDATE AND POSTING_END_DATE <![CDATA[>=]]> SYSDATE
             <include refid="searchAnnouncementCondition"></include>
     </select>
      
@@ -60,7 +60,7 @@
                 ,VIEW_COUNT
             FROM TB_BS_ANNOUNCEMENT
             WHERE IS_SHOW=1
-                AND ANNOUNCE_STATUS=1
+                AND POSTING_START_DATE <![CDATA[<=]]> SYSDATE AND POSTING_END_DATE <![CDATA[>=]]> SYSDATE
                 <include refid="searchAnnouncementCondition"></include>
         )
         WHERE row_num BETWEEN #{count} * (#{page} - 1) + 1 AND #{count} * #{page}

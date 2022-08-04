@@ -105,6 +105,10 @@ public class FileServiceImpl implements FileService {
     public FileInfoVO getFileInfo(@Param("idx_file_info") long idx_file_info){
         return fileServiceMapper.getFileInfo(idx_file_info);
     }
+    @Override
+    public List<FileInfoVO> getFileInfoListByNotice(long idxNotice){
+        return fileServiceMapper.getFileInfoListByNotice(idxNotice);
+    }
 
     @Override
     public List<FormFileInfoVO> getFormFileInfoList(ParamPageListFilteredVO paramPageListFilteredVO){

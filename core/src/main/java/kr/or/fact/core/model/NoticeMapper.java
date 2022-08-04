@@ -19,6 +19,7 @@ public interface NoticeMapper {
     NoticeVO getNoticeByIdx(@Param("idx_notice")long idx_notice);
     NoticeVO getNoticeIsFile(@Param("idx_notice")long idx_notice);
     int insertNoticeFileJoin();
+    int updateNoticeFileJoin(@Param("idx_notice") long idx_notice);
     int getNoticeViewCount(@Param("idx_notice")long idx_notice);
     void updateNoticeViewCount(NoticeVO noticeVO);
     void updateNotice(NoticeVO noticeVO);

@@ -353,3 +353,12 @@ html:not(.material-style) .material-style-only {
 
 .text-success-custom {
   color: #008956 !important;}
+
+.uploaded-file-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.uploaded-file-list span {
+
+}

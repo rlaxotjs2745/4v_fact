@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class NoticeVO {
@@ -30,6 +31,12 @@ public class NoticeVO {
     long confirm_admin_idx;//	number	32				◯	허가자
     Date reg_date;//	date						최초 등록 일시
     Date last_upd_date;//	date						최종 수정 일시
+    MultipartFile[] files;
+    Long[] removedFiles;
+
+    List<String> attachmentsUrl;
+
+    // Deprecated
     MultipartFile files1;
     MultipartFile files2;
     MultipartFile files3;

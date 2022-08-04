@@ -126,7 +126,7 @@
         const searchSelect = $('#search_select').val();
         const searchInput = $('#search_input').val();
         console.log(searchSelect, searchInput);
-        window.location = '/brd_announce?page=1&filter=' + searchSelect + '&query=' + searchInput;
+        window.location = 'brd_announce?page=1&filter=' + searchSelect + '&query=' + searchInput;
     }
 
     $(document).ready(function() {

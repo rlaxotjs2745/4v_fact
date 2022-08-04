@@ -51,7 +51,7 @@
 
             <div class="table__blank">
                 <div class="blank__title">준비중.</div>
-                <div class="blank__text">공지사항 준비중입니다</div>
+                <div class="blank__text">사업공고 준비중입니다</div>
             </div>
         </div>
 
@@ -67,7 +67,7 @@
         const searchSelect = $('#search_select').val();
         const searchInput = $('#search_input').val();
         console.log(searchSelect, searchInput);
-        window.location = '/brd_announce?page=1&filter=' + searchSelect + '&query=' + searchInput;
+        window.location = 'brd_announce?page=1&filter=' + searchSelect + '&query=' + searchInput;
     }
 
     $(document).ready(function() {
