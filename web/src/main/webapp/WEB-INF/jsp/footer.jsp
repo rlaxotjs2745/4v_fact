@@ -24,7 +24,7 @@
             <ul class="footer__anchor">
                 <li><a href="#none">서비스이용약관</a></li>
                 <li><a href="#none">개인정보처리방침</a></li>
-                <li><a href="#none">부패신고바로하기</a></li>
+<%--                <li><a href="#none">부패신고바로하기</a></li>--%>
                 <%--<li><a href="#none">홈페이지 개선의견</a></li>--%>
                 <li><a href="#none">사이트 맵</a></li>
             </ul>
