@@ -18,6 +18,8 @@ public interface FileService {
     void deleteFileInfo(long idx_file_info);
     FileInfoVO getFileInfo(long idx_file_info);
 
+    List<FileInfoVO> getFileInfoListByNotice(long idxNotice);
+
     List<FormFileInfoVO> getFormFileInfoList(ParamPageListFilteredVO paramPageListFilteredVO);
     void insertFormFileInfo(FormFileInfoVO formFileInfoVO);
     FormFileInfoVO getFormFileInfo(long idx_form_file_info);

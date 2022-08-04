@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@include file ="header.jsp" %>
+<%@include file="header.jsp" %>
 
 <div class="content" id="content">
     <div class="page__body">
@@ -38,36 +38,44 @@
             <div class="table__type no--head">
                 <table class="table__type--board">
                     <colgroup>
-                        <col style="width:20%"></col>
+                        <col style="width:70%"></col>
                         <col></col>
-                        <col style="width:20%"></col>
+                        <col style="width:20%;"></col>
                     </colgroup>
                     <thead>
                     <tr>
                         <th class="th__left">제목</th>
                         <th class="th__left">용도</th>
-                        <th>파일 형식별 내려받기</th>
+                        <th>파일 내려받기</th>
                     </tr>
                     </thead>
                     <tbody>
-<c:forEach items="${formfileList}" var="form">
-    <tr class="form-entity" id="${form.idx_form_file_info}" >
-                    <tr>
-                        <td class="td__left">${form.subject}</td>
-                        <td class="td__left">${form.usage_detail}</td>
-                        <td class="td__data"><a href="${form.file_path}"><img src="resources/assets/image/ico_doc.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_pdf.png" alt=""></a><a href="#none"><img src="resources/assets/image/ico_hwp.png" alt=""></a></td>
-                    </tr>
+                    <c:forEach items="${formfileList}" var="form">
+                        <tr class="form-entity" id="${form.idx_form_file_info}">
+                        <tr>
+                            <td class="td__left">${form.subject}</td>
+                            <td class="td__left">${form.usage_detail}</td>
+                        <td class="td__data">
+                            <a href="${form.file_path}"><img src="resources/assets/image/ico_local-download.png" alt=""></a>
+                            <!--
+                            <a href="${form.file_path}"><img src="resources/assets/image/ico_doc.png" alt=""></a>
+                            <a href="${form.file_path}"><img src="resources/assets/image/ico_doc.png" alt=""></a>
+                            -->
+                        </td>
+                        </tr>
 
 
-</c:forEach>
+                    </c:forEach>
 
 
                     </tbody>
                 </table>
                 <!--//-->
                 <div class="table__paging">
-                    <a href="#none" class="paging__prev2 disabled"><img src="resources/assets/image/ico_paging_prev_02.png" alt=""></a>
-                    <a href="#none" class="paging__prev disabled"><img src="resources/assets/image/ico_paging_prev.png" alt=""></a>
+                    <a href="#none" class="paging__prev2 disabled"><img
+                            src="resources/assets/image/ico_paging_prev_02.png" alt=""></a>
+                    <a href="#none" class="paging__prev disabled"><img src="resources/assets/image/ico_paging_prev.png"
+                                                                       alt=""></a>
                     <a href="#none" class="is-active">1</a>
                     <a href="#none">2</a>
                     <a href="#none">3</a>
@@ -78,8 +86,10 @@
                     <a href="#none">8</a>
                     <a href="#none">9</a>
                     <a href="#none">10</a>
-                    <a href="#none" class="paging__next"><img src="resources/assets/image/ico_paging_next.png" alt=""></a>
-                    <a href="#none" class="paging__next2"><img src="resources/assets/image/ico_paging_next_02.png" alt=""></a>
+                    <a href="#none" class="paging__next"><img src="resources/assets/image/ico_paging_next.png"
+                                                              alt=""></a>
+                    <a href="#none" class="paging__next2"><img src="resources/assets/image/ico_paging_next_02.png"
+                                                               alt=""></a>
                 </div>
             </div>
             <!--//-->
@@ -87,8 +97,8 @@
 
     </div>
 </div>
-<%@include file ="footer.jsp" %>
-<%@include file ="script.jsp" %>
+<%@include file="footer.jsp" %>
+<%@include file="script.jsp" %>
 
 </div>
 </body>

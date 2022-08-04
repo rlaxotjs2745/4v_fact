@@ -95,6 +95,11 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
+    public int updateNoticeFileJoin(long idx_notice) {
+        return noticeMapper.updateNoticeFileJoin(idx_notice);
+    }
+
+    @Override
     public NoticeVO getNoticeIsFile(int idx_notice) {
         long newIdx = Long.parseLong("" + idx_notice);
         return noticeMapper.getNoticeIsFile(newIdx);

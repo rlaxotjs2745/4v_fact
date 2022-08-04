@@ -27,15 +27,16 @@
                 </div>
             </div>
         </div>
-        <div class="page__menu--box">
-            <div class="page__menu--inner">
-                <h2 class="page__title">공지사항</h2>
-                <div class="page__location">
-                    <div class="location__deco">담당자는 해당 게시물 작성자 및 전화번호 참고 부탁드립니다.</div>
+        <div id="printArea">
+            <div class="page__menu--box">
+                <div class="page__menu--inner">
+                    <h2 class="page__title">공지사항</h2>
+                    <div class="page__location">
+                        <div class="location__deco">담당자는 해당 게시물 작성자 및 전화번호 참고 부탁드립니다.</div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="page__cnt">
+            <div class="page__cnt">
 
             <div class="table__type no--head">
                 <table class="table__type--detail">
@@ -180,5 +181,37 @@
 <%@include file ="script.jsp" %>
 
 </div>
+
+<script>
+
+    function headerAndFooterOnOff(sw) {
+        const headSection = document.getElementsByClassName('header')[0];
+        const footerSection = document.getElementsByClassName('footer')[0];
+
+        if (sw === 'on') {
+            headSection.style.display = 'block';
+            footerSection.style.display = 'block';
+        } else {
+            headSection.style.display = 'none';
+            footerSection.style.display = 'none';
+        }
+
+    }
+
+    (function() {
+        window.onafterprint = function() {
+            headerAndFooterOnOff('on');
+        };
+    }());
+
+    function printArticle() {
+        headerAndFooterOnOff('off');
+
+        setTimeout(function() {
+            window.print();
+        }, 500);
+    }
+
+</script>
 </body>
 </html>

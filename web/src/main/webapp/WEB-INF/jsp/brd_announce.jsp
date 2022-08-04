@@ -75,7 +75,7 @@
 
                     <c:forEach items="${announceList}" var="ann" varStatus="status">
                         <tr>
-                            <td>${ann.announce_num}</td>
+                            <td>${ann.idx_bs_announcement}</td>
                             <td>
                                 <c:if test="${ann.bs_status eq 2}"> 대기</c:if>
                                 <c:if test="${ann.bs_status eq 3}"> 신청중</c:if>
@@ -126,7 +126,7 @@
         const searchSelect = $('#search_select').val();
         const searchInput = $('#search_input').val();
         console.log(searchSelect, searchInput);
-        window.location = '/brd_announce?page=1&filter=' + searchSelect + '&query=' + searchInput;
+        window.location = 'brd_announce?page=1&filter=' + searchSelect + '&query=' + searchInput;
     }
 
     $(document).ready(function() {

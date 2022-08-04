@@ -2,6 +2,7 @@ package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.AdminMapper;
 import kr.or.fact.core.model.DTO.*;
+import kr.or.fact.core.model.DTO.user.CustomUser;
 import kr.or.fact.core.service.AdminService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -132,7 +133,7 @@ public class AdminServiceImpl implements AdminService {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_MEMBER"/*CONSTANT.getRoleString(adminVO.getAdmin_type())*/));
 
-        return new User(adminVO.getAdmin_id(), adminVO.getAdmin_pw(), authorities);
+        return new CustomUser(adminVO.getAdmin_id(), adminVO.getAdmin_pw(), authorities, adminVO.getAdmin_name());
     }
 
     @Override

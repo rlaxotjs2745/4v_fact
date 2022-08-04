@@ -1010,15 +1010,17 @@ public class IndexController {
         noticeVO1.setIdx_notice(idx);
         noticeService.updateNoticeViewCount(noticeVO1);
 
+        NoticeVO noticeVO = noticeService.getNoticeIsFile(idx);
+        model.addAttribute("noticeInfo", noticeVO);
 
-        NoticeVO noticeInfo = noticeService.getNoticeByIdx(idx);
-        if (noticeInfo.getIs_file() == 0) {
-            model.addAttribute("noticeInfo", noticeInfo);
-        } else {
-            NoticeVO noticeVO = noticeService.getNoticeIsFile(idx);
-            model.addAttribute("noticeInfo", noticeVO);
-
-        }
+//        NoticeVO noticeInfo = noticeService.getNoticeByIdx(idx);
+//        if (noticeInfo.getIs_file() == 0) {
+//            model.addAttribute("noticeInfo", noticeInfo);
+//        } else {
+//            NoticeVO noticeVO = noticeService.getNoticeIsFile(idx);
+//            model.addAttribute("noticeInfo", noticeVO);
+//
+//        }
 
 
         getHomepageInfo(model);
@@ -1052,13 +1054,10 @@ public class IndexController {
     }
 
     @RequestMapping("/brd_promotion")
-    public String brd_promotion(@RequestParam(value = "page", required = false) Integer page,
-                                @RequestParam(name = "filter", required = false) String filter,
+    public String brd_promotion(@RequestParam(name = "filter", required = false) String filter,
                                 @RequestParam(name = "query", required = false) String query,
                                 Model model) {
-        if (page == null || page <= 0) {
-            page = 1;
-        }
+        int page = 1;
 
         int list_amount = 10;
         int page_amount = 10;
@@ -1070,7 +1069,7 @@ public class IndexController {
         int promotionCount = prContentService.getOpenPRContentCount(filter, query);
         if (promotionCount == 0) {
             satProfile(model);
-            return "brd_announce_blank";
+            return "brd_promotion_blank";
         }
         model.addAttribute("total_count", promotionCount);
         List<PRContentVO> prContentList = prContentService.getOpenPRContentList(page, list_amount, filter, query);

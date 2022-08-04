@@ -57,6 +57,14 @@
         SELECT * FROM TB_FILE_INFO WHERE IDX_FILE_INFO = #{idx_file_info}
     </select>
 
+    <select id="getFileInfoListByNotice" parameterType="long" resultType="kr.or.fact.core.model.DTO.FileInfoVO">
+
+        SELECT B.*
+        FROM TB_NOTICE_FILE_JOIN A
+        JOIN TB_FILE_INFO B ON A.IDX_FILE_INFO = B.IDX_FILE_INFO
+        WHERE A.IDX_NOTICE = #{idx_notice}
+    </select>
+
     <select id="getFormFileInfoList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.FormFileInfoVO">
     SELECT * FROM (
         SELECT

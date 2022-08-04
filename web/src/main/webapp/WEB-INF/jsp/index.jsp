@@ -54,9 +54,9 @@
                     <img src="resources/assets/image/img_application.svg" alt="">
                     <span>실증 신청</span>
                 </a>
-                <a href="brd_announce?page=1" class="quick__anchor">
+                <a href="prv_step" class="quick__anchor">
                     <img src="resources/assets/image/img_management.svg" alt="">
-                    <span>실증 신청 현황</span>
+                    <span>실증 절차 안내</span>
                 </a>
 <%--                <a href="spt_consulting" class="quick__anchor">
                     <img src="resources/assets/image/img_advance.svg" alt="">
@@ -81,7 +81,7 @@
                     </a>
                 </div>
                 <div class="main__board--business">
-                    <a href="brd_notice_detail?idx=4">
+                    <a href="brd_announce">
                         <div class="board__badge">
                             <img src="resources/assets/image/ico_business.svg" alt="">사업공고
                         </div>
