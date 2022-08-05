@@ -3,6 +3,7 @@ package kr.or.fact.core.model.DTO;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class EventFileJoinSelectVO {
@@ -32,4 +33,6 @@ public class EventFileJoinSelectVO {
     long idx_file_info;
     String file_name;
     String file_path;
+
+    List<FileInfoVO> attachments;
 }

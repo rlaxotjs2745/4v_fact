@@ -34,7 +34,7 @@ public class NoticeVO {
     MultipartFile[] files;
     Long[] removedFiles;
 
-    List<String> attachmentsUrl;
+    List<FileInfoVO> attachments;
 
     // Deprecated
     MultipartFile files1;

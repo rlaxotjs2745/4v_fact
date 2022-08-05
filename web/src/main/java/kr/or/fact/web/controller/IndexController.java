@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -709,6 +712,8 @@ public class IndexController {
         int list_amount = 10;
         int page_amount = 10;
 
+        query = decodeUrlValue(query);
+
         model.addAttribute("page", page);
         model.addAttribute("filter", filter);
         model.addAttribute("query", query);
@@ -819,6 +824,8 @@ public class IndexController {
         int list_amount = 10;
         int page_amount = 10;
 
+        query = decodeUrlValue(query);
+
         model.addAttribute("page", page);
         model.addAttribute("filter", filter);
         model.addAttribute("query", query);
@@ -889,16 +896,19 @@ public class IndexController {
         eventContentVO1.setIdx_event_content(idx);
         eventContentVO1.setView_count(view + 1);
         eventContentService.updateEventViewCount(eventContentVO1);
-        EventContentVO event = eventContentService.getEventContentByIdx(idx);
-        if (event.getIs_file() == 0) {
 
-            model.addAttribute("eventContent", event);
-        } else {
-
-            EventFileJoinSelectVO eventContentVO = eventContentService.getEventContentFileJoin(idx);
-            model.addAttribute("eventContent", eventContentVO);
-
-        }
+//        EventContentVO event = eventContentService.getEventContentByIdx(idx);
+        EventFileJoinSelectVO eventContentVO = eventContentService.getEventContentFileJoin(idx);
+        model.addAttribute("eventContent", eventContentVO);
+//        if (event.getIs_file() == 0) {
+//
+//            model.addAttribute("eventContent", event);
+//        } else {
+//
+//            EventFileJoinSelectVO eventContentVO = eventContentService.getEventContentFileJoin(idx);
+//            model.addAttribute("eventContent", eventContentVO);
+//
+//        }
 
         getHomepageInfo(model);
         satProfile(model);
@@ -942,6 +952,8 @@ public class IndexController {
 
         int list_amount = 10;
         int page_amount = 10;
+
+        query = decodeUrlValue(query);
 
         model.addAttribute("page", page);
         model.addAttribute("filter", filter);
@@ -1062,6 +1074,8 @@ public class IndexController {
         int list_amount = 10;
         int page_amount = 10;
 
+        query = decodeUrlValue(query);
+
         model.addAttribute("page", page);
         model.addAttribute("filter", filter);
         model.addAttribute("query", query);
@@ -1129,19 +1143,9 @@ public class IndexController {
         int view = prContentService.getPrViewCount(idx);
         PRContentVO prContentVO2 = new PRContentVO();
         prContentVO2.setIdx_pr_content(idx);
-        prContentVO2.setView_count(view + 1);
         prContentService.updatePrViewCount(prContentVO2);
-        PRContentVO prContentVO = prContentService.getPRContent(idx);
-        if (prContentVO.getIs_file() == 0) {
-
-            model.addAttribute("pr", prContentVO);
-        } else {
-
-            PRContentVO prContentVO1 = prContentService.getPRContentFileJoin(idx);
-            model.addAttribute("pr", prContentVO1);
-
-        }
-
+        PRContentVO prContentVO1 = prContentService.getPRContentFileJoin(idx);
+        model.addAttribute("pr", prContentVO1);
 
         getHomepageInfo(model);
         satProfile(model);
@@ -1732,6 +1736,19 @@ return "spt_visit";
             } else {
                 model.addAttribute("profile", activeProfile);
             }
+        }
+    }
+
+    private String decodeUrlValue(String value) {
+
+        if (value == null) {
+            return null;
+        }
+
+        try {
+            return URLDecoder.decode(value, StandardCharsets.UTF_8.toString());
+        } catch (UnsupportedEncodingException e) {
+            throw new IllegalArgumentException(e);
         }
     }
 }
