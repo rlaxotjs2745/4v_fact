@@ -72,7 +72,7 @@
         <div class="page__cnt--bg">
             <div class="main__board">
                 <div class="main__board--notice">
-                    <a href="brd_notice_detail?idx=4">
+                    <a href="brd_notice">
                         <div class="board__badge">
                             <img src="resources/assets/image/ico_notice.svg" alt="">공지사항
                         </div>

@@ -22,11 +22,11 @@
     <div class="footer">
         <div class="footer__box">
             <ul class="footer__anchor">
-                <li><a href="#none">서비스이용약관</a></li>
-                <li><a href="#none">개인정보처리방침</a></li>
+                <li><a href="our_tos">서비스이용약관</a></li>
+                <li><a href="personal_data">개인정보처리방침</a></li>
 <%--                <li><a href="#none">부패신고바로하기</a></li>--%>
                 <%--<li><a href="#none">홈페이지 개선의견</a></li>--%>
-                <li><a href="#none">사이트 맵</a></li>
+                <li><a href="our_sitemap">사이트 맵</a></li>
             </ul>
             <div class="footer__info">
                 <c:if test="${profile == 'sangju-prod'}">

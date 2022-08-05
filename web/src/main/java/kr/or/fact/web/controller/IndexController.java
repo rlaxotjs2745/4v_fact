@@ -1663,6 +1663,33 @@ return "spt_visit";
         return "util_search_blant";
     }
 
+    @RequestMapping("/our_sitemap")
+    public String our_sitemap(Model model) {
+
+
+        getHomepageInfo(model);
+        satProfile(model);
+        return "our_sitemap";
+    }
+
+    @RequestMapping("/our_tos")
+    public String our_tos(Model model) {
+
+
+        getHomepageInfo(model);
+        satProfile(model);
+        return "our_tos";
+    }
+
+    @RequestMapping("/personal_data")
+    public String personal_data(Model model) {
+
+
+        getHomepageInfo(model);
+        satProfile(model);
+        return "personal_data";
+    }
+
 
     //== Helper Function=========================
     public void clearSessionAndRedirect(HttpSession session) {
@@ -1684,6 +1711,7 @@ return "spt_visit";
     public String denied() {
         return "util_search_blant";
     }
+
 
 
     public void getHomepageInfo(Model model) {
