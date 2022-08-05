@@ -176,7 +176,7 @@
                     <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#modal-myinfo"><i class="ion ion-ios-person text-lightest"></i> &nbsp; 프로필</a>
                     <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#modal-message"><i class="ion ion-ios-mail text-lightest"></i> &nbsp; 메세지</a>
                     <div class="dropdown-divider" data-toggle="modal" data-target="#modal-logout"></div>
-                    <a href="/logout" class="dropdown-item"><i class="ion ion-ios-log-out text-danger"></i> &nbsp; 로그아웃</a>
+                    <a href="logout" class="dropdown-item"><i class="ion ion-ios-log-out text-danger"></i> &nbsp; 로그아웃</a>
                 </div>
             </div>
         </div>

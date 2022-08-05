@@ -1432,8 +1432,10 @@ public class APIController {
 
         try {
             demoBsService.saveDemoBs(demoBusinessVO);
-            fileService.convertMultipartToFile(demoBusinessVO.getFile());
-            fileService.insertDemoBsFile(demoBusinessVO.getFile(), demoBusinessVO.getIdx_admin());
+            if(demoBusinessVO.getFile() != null){
+                fileService.convertMultipartToFile(demoBusinessVO.getFile());
+                fileService.insertDemoBsFile(demoBusinessVO.getFile(), demoBusinessVO.getIdx_admin());
+            }
         } catch (Exception e) {
             resultVO.setResult_code("ERR_001");
             resultVO.setResult_code("등록에 실패했습니다.");

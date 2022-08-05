@@ -241,7 +241,9 @@
                             </div>
 
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">사업상태</label>
+                            <div class="form-control-plaintext col-md-4 mode-edit mode-view" id="demo_bs_status_view"></div>
                             <div class="input-group col-md-4 mode-new">
+
                                 <select id="demo_bs_status" class="custom-select form-control" style="width: 100%;">
                                     <option value="0">임시 작성</option>
                                     <option value="1">작성완료</option>
@@ -529,6 +531,10 @@
 
     <!-- / Layout footer -->
     <script>
+
+        $(document).ready(function() {
+            initSummerNote();
+        });
         var demoArr = [];
         <c:forEach items="${demoBusinessVOList}" var="demo" varStatus="status">
         demoArr.push({
@@ -542,16 +548,26 @@
             demo_bs_status: "${demo.demo_bs_status}",
             applicant_count: "${demo.applicant_count}",
             applicant_count_limit: "${demo.applicant_count_limit}",
-            start_date: "${demo.start_date}",
-            end_date: "${demo.end_date}",
-            recruit_start_date: "${demo.recruit_start_date}",
-            recruit_end_date: "${demo.recruit_end_date}",
-            exam_start: "${demo.exam_start}",
-            exam_end: "${demo.exam_end}",
-            plan_review_start: "${demo.plan_review_start}",
-            plan_review_end: "${demo.plan_review_end}",
-            convention_start: "${demo.convention_start}",
-            convention_end: "${demo.convention_end}",
+            <fmt:formatDate value="${demo.start_date}" var="start_date" pattern="yyyy-MM-dd"/>
+            <fmt:formatDate value="${demo.end_date}" var="end_date" pattern="yyyy-MM-dd"/>
+            <fmt:formatDate value="${demo.recruit_start_date}" var="rstart_date" pattern="yyyy-MM-dd"/>
+            <fmt:formatDate value="${demo.recruit_end_date}" var="rend_date" pattern="yyyy-MM-dd"/>
+            <fmt:formatDate value="${demo.exam_start}" var="estart_date" pattern="yyyy-MM-dd"/>
+            <fmt:formatDate value="${demo.exam_end}" var="eend_date" pattern="yyyy-MM-dd"/>
+            <fmt:formatDate value="${demo.plan_review_start}" var="pstart_date" pattern="yyyy-MM-dd"/>
+            <fmt:formatDate value="${demo.plan_review_end}" var="pend_date" pattern="yyyy-MM-dd"/>
+            <fmt:formatDate value="${demo.convention_start}" var="cstart_date" pattern="yyyy-MM-dd"/>
+            <fmt:formatDate value="${demo.convention_end}" var="cend_date" pattern="yyyy-MM-dd"/>
+            start_date: "${start_date}",
+            end_date: "${end_date}",
+            recruit_start_date: "${rstart_date}",
+            recruit_end_date: "${rend_date}",
+            exam_start: "${estart_date}",
+            exam_end: "${eend_date}",
+            plan_review_start: "${pstart_date}",
+            plan_review_end: "${pend_date}",
+            convention_start: "${cstart_date}",
+            convention_end: "${cend_date}",
             recruit_count_limit: "${demo.recruit_count_limit}",
             memo: "${demo.memo}",
             idx_admin: "${demo.idx_admin}",
@@ -564,28 +580,91 @@
 
         $(".demo_entity").on("click", function(){
             var selectedIdx = $(this).attr("id").split("_")[1];
-            $('#memo_view').summernote('disable');
-            console.log(selectedIdx)
+            $('#memo_view').summernote('distroy');
+            console.log(selectedIdx);
+
+            demoArr.forEach(function(demo){
+                if(demo.idx_demo_business == selectedIdx){
+                    $('#demo_bs_code_view').text(demo.demo_bs_code);
+                    var demoStatus = '';
+                    switch (demo.demo_bs_status){
+                        case '0':
+                            demoStatus = '임시';
+                            break;
+                        case '1':
+                            demoStatus = '설계 완료';
+                            break;
+                        case '2':
+                            demoStatus = '승인 완료';
+                            break;
+                        case '3':
+                            demoStatus = '모집 중';
+                            break;
+                        case '4':
+                            demoStatus = '모집 종료';
+                            break;
+                        case '5':
+                            demoStatus = '심사 중';
+                            break;
+                        case '6':
+                            demoStatus = '심사 완료';
+                            break;
+                        case '7':
+                            demoStatus = '협약 중';
+                            break;
+                        case '8':
+                            demoStatus = '협약 완료';
+                            break;
+                        case '9':
+                            demoStatus = '사업 시작';
+                            break;
+                        case '10':
+                            demoStatus = '사업 종료';
+                            break;
+                        case '11':
+                            demoStatus = '결산 중';
+                            break;
+                        case '12':
+                            demoStatus = '결산 완료';
+                            break;
+                        default:
+                            demoStatus = '확인 불가';
+                    }
+                    $('#demo_bs_status_view').text(demoStatus);
+                    $('#demo_bs_main_type_view').text(demo.demo_bs_main_type);
+                    $('#demo_bs_sub_type_view').text(demo.demo_bs_sub_type);
+                    $('#demo_bs_detail_type_view').text(demo.demo_bs_detail_type);
+                    $('#demo_subject_view').text(demo.subject);
+                    $('#demo_dur').text(demo.start_date + ' ~ ' + demo.end_date);
+                    $('#demo_eval_dur').text(demo.exam_start + ' ~ ' + demo.exam_end);
+                    $('#demo_modify_dur').text(demo.plan_review_start + ' ~ ' + demo.plan_review_end);
+                    $('#demo_arrange_dur').text(demo.convention_start + ' ~ ' + demo.convention_end);
+                    $('#bs_content').text(demo.demo_bs_contents);
+
+                }
+            })
         })
 
 
-        $('.summernote').summernote({
-            toolbar: [
-                // [groupName, [list of button]]
-                ['fontname', ['fontname']],
-                ['fontsize', ['fontsize']],
-                ['style', ['bold', 'italic', 'underline']],
-                ['color', ['color']],
-                ['table', ['table']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['height', ['height']],
-                ['insert',['picture','link']],
-                ['view', ['fullscreen','codeview']],
-            ],
-            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-            fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-            height: 300                 // 에디터 높이
-        });
+        function initSummerNote(){
+            $('.summernote').summernote({
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['fontname', ['fontname']],
+                    ['fontsize', ['fontsize']],
+                    ['style', ['bold', 'italic', 'underline']],
+                    ['color', ['color']],
+                    ['table', ['table']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
+                    ['insert',['picture','link']],
+                    ['view', ['fullscreen','codeview']],
+                ],
+                fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+                fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+                height: 300                 // 에디터 높이
+            });
+        }
 
 
         $(function() {
@@ -658,10 +737,10 @@
                             if(confirm("신규 사용이 가능한 사업번호입니다. 사용하시겠습니까?")){
                                 duplBool = true;
                                 $("#demo_bs_code").attr('disabled', 'true');
-                                $('#memo_view').summernote('enable');
+                                initSummerNote();
                             }
                         } else {
-                            alert("이미 사용 중이거나 사용이 불가능한 사업번호입니다.");
+                            alert("이미 사용 중이거나 사용이 불가능한 사업 m번호입니다.");
                         }
                     }
                 })
@@ -716,7 +795,7 @@
             fileForm.append("recruit_count_limit", $('#recruit_count_limit').val());
             fileForm.append("memo", $('#memo').val());
             fileForm.append("idx_admin", "${admin.idx_admin}");
-            fileForm.append("file", document.querySelector('#demo_files').files[0]);
+            document.querySelector('#demo_files').files[0] ? fileForm.append("file", document.querySelector('#demo_files').files[0]) : '';
 
             $.ajax({
                 url: 'insert_new_demobs',
