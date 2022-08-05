@@ -1,4 +1,5 @@
-<%@ page import="kr.or.fact.core.model.DTO.BsAnnouncementVO" %><%--
+<%@ page import="kr.or.fact.core.model.DTO.BsAnnouncementVO" %>
+<%@ page import="javax.servlet.jsp.jstl.core.LoopTagStatus" %><%--
   Created by IntelliJ IDEA.
   User: abeki
   Date: 2021/09/01
@@ -75,7 +76,16 @@
 
                     <c:forEach items="${announceList}" var="ann" varStatus="status">
                         <tr>
-                            <td>${ann.idx_bs_announcement}</td>
+                            <%
+                                int pageCount = 10;
+                                final LoopTagStatus status = (LoopTagStatus) pageContext.getAttribute("status");
+                                final Integer totalCount = (Integer) request.getAttribute("total_count");
+                                final Integer pageNum = (Integer) request.getAttribute("page");
+
+                                int boardStartNumber = totalCount - (pageNum - 1) * pageCount;
+                                final int boardNumber = boardStartNumber - (status.getIndex() % pageCount);
+                            %>
+                            <td><%=boardNumber%></td>
                             <td>
                                 <c:if test="${ann.bs_status eq 2}"> 대기</c:if>
                                 <c:if test="${ann.bs_status eq 3}"> 신청중</c:if>
