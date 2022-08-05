@@ -48,7 +48,7 @@
             *
         FROM (
             SELECT
-                ROW_NUMBER() OVER(ORDER by EVENT_CONTENT_NUM ASC) AS row_num,
+                ROW_NUMBER() OVER(ORDER by EVENT_START_DATE DESC) AS row_num,
                 IDX_EVENT_CONTENT,
                 EVENT_CONTENT_CODE,
                 EVENT_CONTENT_NUM,
@@ -116,7 +116,13 @@
     </select>
 
     <select id="getMainEventContentList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.EventContentVO">
-        SELECT * FROM TB_EVENT_CONTENT WHERE ROWNUM <![CDATA[<]]> 5 AND EVENT_CONTENT_STATUS = 1 OR EVENT_CONTENT_STATUS = 2 AND IS_SHOW = 1 AND IS_MAIN_PAGE = 1 ORDER BY EVENT_START_DATE DESC
+        SELECT * FROM TB_EVENT_CONTENT
+        WHERE ROWNUM <![CDATA[<]]> 5
+--             AND (EVENT_CONTENT_STATUS = 1 OR EVENT_CONTENT_STATUS = 2)
+            AND IS_SHOW = 1
+            AND IS_MAIN_PAGE = 1
+            AND EVENT_START_DATE <![CDATA[<=]]> SYSDATE AND EVENT_END_DATE <![CDATA[>=]]> SYSDATE
+        ORDER BY EVENT_START_DATE DESC
     </select>
     <select id="getEventList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.EventContentVO">
         SELECT * FROM TB_EVENT_CONTENT  ORDER BY EVENT_CONTENT_NUM
@@ -204,7 +210,7 @@ REG_DATE
     </insert>
 
     <resultMap id="EventFileJoinSelectVO" type="kr.or.fact.core.model.DTO.EventFileJoinSelectVO">
-        <result column="IDX_EVENT_CONTENT" property="idx_event_content"/>
+        <id column="IDX_EVENT_CONTENT" property="idx_event_content"/>
         <result column="EVENT_CONTENT_CODE" property="event_content_code"/>
         <result column="EVENT_CONTENT_NUM" property="event_content_num"/>
         <result column="SUBJECT" property="subject"/>
@@ -229,12 +235,12 @@ REG_DATE
         <result column="LAST_UPD_DATE" property="last_upd_date"/>
         <result column="IDX_FILE_INFO" property="idx_file_info"/>
         <result column="FILE_NAME" property="file_name"/>
-        <result column="FILE_PATH" property="file_path"/>
-        <collection property="fileInfoVO" resultMap="fileInfoVO"/>
+
+        <collection property="attachments" resultMap="Attachments"/>
     </resultMap>
 
-    <resultMap id="FileInfoVO" type="kr.or.fact.core.model.DTO.FileInfoVO">
-        <result column="IDX_FILE_INFO" property="idx_file_info"/>
+    <resultMap id="Attachments" type="kr.or.fact.core.model.DTO.FileInfoVO">
+        <id column="IDX_FILE_INFO" property="idx_file_info"/>
         <result column="FILE_NAME" property="file_name"/>
         <result column="FILE_TYPE" property="file_type"/>
         <result column="FILE_STATUS" property="file_status"/>
@@ -250,13 +256,7 @@ REG_DATE
         <result column="IDX_ADMIN" property="idx_admin"/>
         <result column="REG_DATE" property="reg_date"/>
     </resultMap>
-
-
-
-
-
-
-    <select id="getEventContentFileJoin" parameterType="long" resultType="kr.or.fact.core.model.DTO.EventFileJoinSelectVO">
+    <select id="getEventContentFileJoin" parameterType="long" resultMap="EventFileJoinSelectVO">
         SELECT A.IDX_EVENT_CONTENT,
                A.EVENT_CONTENT_CODE,
                A.EVENT_CONTENT_NUM,
@@ -280,11 +280,15 @@ REG_DATE
                A.CONFIRM_ADMIN_IDX,
                A.REG_DATE,
                A.LAST_UPD_DATE,
-               B.IDX_EVENT_CONTENT,
-               B.IDX_FILE_INFO,
-               C.FILE_PATH
-        FROM TB_EVENT_CONTENT A JOIN TB_EVENT_CONTENT_FILE_JOIN  B ON A.IDX_EVENT_CONTENT=B.IDX_EVENT_CONTENT
-                                JOIN TB_FILE_INFO C ON B.IDX_FILE_INFO=C.IDX_FILE_INFO WHERE A.IDX_EVENT_CONTENT=#{idx_event_content}
+               C.IDX_FILE_INFO,
+               C.FILE_NAME,
+               C.MIME_TYPE,
+               C.FILE_PATH,
+               C.FILE_SIZE
+        FROM TB_EVENT_CONTENT A
+        LEFT JOIN TB_EVENT_CONTENT_FILE_JOIN B ON A.IDX_EVENT_CONTENT=B.IDX_EVENT_CONTENT
+        LEFT JOIN TB_FILE_INFO C ON B.IDX_FILE_INFO=C.IDX_FILE_INFO
+        WHERE A.IDX_EVENT_CONTENT=#{idx_event_content}
 
 
     </select>

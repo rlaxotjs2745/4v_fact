@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class PRContentVO {
@@ -40,4 +41,6 @@ public class PRContentVO {
     String fileLength;
     String file_path;
     String thumb_img_file_path;
+
+    List<FileInfoVO> Attachments;
 }

@@ -177,7 +177,52 @@ LAST_UPD_DATE
 
                 )
     </insert>
-    <select id="getPRContentFileJoin" resultType="kr.or.fact.core.model.DTO.PRContentVO">
+
+    <resultMap id="promotionDetailMap" type="kr.or.fact.core.model.DTO.PRContentVO">
+        <id property="idx_pr_content" column="IDX_PR_CONTENT" />
+        <result property="pr_content_code" column="PR_CONTENT_CODE" />
+        <result property="pr_content_num" column="PR_CONTENT_NUM" />
+        <result property="subject" column="SUBJECT" />
+        <result property="pr_contents" column="PR_CONTENTS" />
+        <result property="is_file" column="IS_FILE" />
+        <result property="is_new" column="IS_NEW" />
+        <result property="is_main_page" column="IS_MAIN_PAGE" />
+        <result property="is_important" column="IS_IMPORTANT" />
+        <result property="is_show" column="IS_SHOW" />
+        <result property="view_count" column="VIEW_COUNT" />
+        <result property="pr_content_status" column="PR_CONTENT_STATUS" />
+        <result property="show_start_date" column="SHOW_START_DATE" />
+        <result property="show_end_date" column="SHOW_END_DATE" />
+        <result property="doc_version" column="DOC_VERSION" />
+        <result property="memo" column="MEMO" />
+        <result property="search_tag" column="SEARCH_TAG" />
+        <result property="author" column="AUTHOR" />
+        <result property="thumb_img_file_idx" column="THUMB_IMG_FILE_IDX" />
+        <result property="idx_admin" column="IDX_ADMIN" />
+        <result property="confirm_admin_idx" column="CONFIRM_ADMIN_IDX" />
+        <result property="reg_date" column="REG_DATE" />
+        <result property="last_upd_date" column="LAST_UPD_DATE" />
+
+        <collection property="attachments" resultMap="Attachments"/>
+    </resultMap>
+    <resultMap id="Attachments" type="kr.or.fact.core.model.DTO.FileInfoVO">
+        <id column="IDX_FILE_INFO" property="idx_file_info"/>
+        <result column="FILE_NAME" property="file_name"/>
+        <result column="FILE_TYPE" property="file_type"/>
+        <result column="FILE_STATUS" property="file_status"/>
+        <result column="MIME_TYPE" property="mime_type"/>
+        <result column="ENCODING" property="encoding"/>
+        <result column="EXTENTION" property="extention"/>
+        <result column="FILE_SECURE_TYPE" property="file_secure_type"/>
+        <result column="FILE_PATH" property="file_path"/>
+        <result column="FILE_SIZE" property="file_size"/>
+        <result column="CHECKSUM" property="checksum"/>
+        <result column="OWNER" property="owner"/>
+        <result column="IDX_USER" property="idx_user"/>
+        <result column="IDX_ADMIN" property="idx_admin"/>
+        <result column="REG_DATE" property="reg_date"/>
+    </resultMap>
+    <select id="getPRContentFileJoin" resultMap="promotionDetailMap">
         SELECT     A.IDX_PR_CONTENT,
                    A.PR_CONTENT_CODE,
                    A.PR_CONTENT_NUM,
@@ -201,9 +246,11 @@ LAST_UPD_DATE
                    A.CONFIRM_ADMIN_IDX,
                    A.REG_DATE,
                    A.LAST_UPD_DATE,
-                   B.IDX_PR_CONTENT,
-                   B.IDX_FILE_INFO,
-                   C.FILE_PATH
+                   C.IDX_FILE_INFO,
+                   C.FILE_NAME,
+                   C.MIME_TYPE,
+                   C.FILE_PATH,
+                   C.FILE_SIZE
         FROM TB_PR_CONTENT A JOIN TB_PR_CONTENT_FILE_JOIN B ON A.IDX_PR_CONTENT=B.IDX_PR_CONTENT
                              JOIN TB_FILE_INFO C ON B.IDX_FILE_INFO=C.IDX_FILE_INFO WHERE A.IDX_PR_CONTENT=#{idx_pr_content}
     </select>
@@ -211,7 +258,7 @@ LAST_UPD_DATE
         SELECT VIEW_COUNT FROM TB_PR_CONTENT WHERE IDX_PR_CONTENT=#{idx_pr_content}
     </select>
     <update id="updatePrViewCount" parameterType="kr.or.fact.core.model.DTO.PRContentVO">
-        UPDATE TB_PR_CONTENT SET VIEW_COUNT = #{view_count} WHERE IDX_PR_CONTENT =#{idx_pr_content}
+        UPDATE TB_PR_CONTENT SET VIEW_COUNT = VIEW_COUNT + 1 WHERE IDX_PR_CONTENT =#{idx_pr_content}
     </update>
     <update id="updatePrContent" parameterType="kr.or.fact.core.model.DTO.PRContentVO">
         UPDATE TB_PR_CONTENT SET
