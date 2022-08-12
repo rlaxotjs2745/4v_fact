@@ -418,10 +418,12 @@
                             </div>
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit">승인여부</label>
                             <div class="col-md-2 mode-edit">
-                                <div class="form-control-plaintext mode-edit">아니오</div>
+                                <div class="form-control-plaintext mode-edit">
+                                    아니오
+                                </div>
                             </div>
                             <div class="col-md-2 mode-edit">
-                                <button type="button" class="btn btn-primary" id="is_confirm">승인하기</button>
+<%--                                <button type="button" class="btn btn-primary" id="is_confirm">승인하기</button>--%>
                             </div>
 
                         </div>
@@ -580,7 +582,7 @@
 
         $(".demo_entity").on("click", function(){
             var selectedIdx = $(this).attr("id").split("_")[1];
-            $('#memo_view').summernote('distroy');
+            $('#bs_content').summernote('distroy');
             console.log(selectedIdx);
 
             demoArr.forEach(function(demo){

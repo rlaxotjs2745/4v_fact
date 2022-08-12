@@ -543,7 +543,7 @@
         notice_code :"${notice.notice_code}",
         notice_num :"${notice.notice_num}",
         subject :"${notice.subject}",
-        notice_contents :'${notice.notice_contents}',
+        notice_contents :`${notice.notice_contents}`,
         is_file_ord : ${notice.is_file},
         is_file :"${notice.is_file eq 0 ?"포함안함": notice.is_file eq 1 ?"포함함":""}",
         is_new_ord : ${notice.is_new},

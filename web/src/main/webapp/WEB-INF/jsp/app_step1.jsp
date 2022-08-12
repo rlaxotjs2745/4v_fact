@@ -28,7 +28,7 @@
     <header class="header_app">
         <a href="/prv_application" class="close_window" onclick="javascript:window.close();"><img src="resources/assets/image/ico_close.svg" alt=""></a>
         <c:if test="${profile == 'sangju-prod'}">
-            <h1><a href="/"><img src="resources/assets/image/img-logo-s.png" alt="스마트팜 실증센터"></a></h1>
+            <h1><a href="index"><img src="resources/assets/image/img-logo-s.png" alt="스마트팜 실증센터"></a></h1>
         </c:if>
         <c:if test="${profile == 'gimje-prod'}">
             <h1><a href="/"><img src="resources/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
@@ -66,7 +66,7 @@
             <select name="business" id="select-business">
                 <option value="0">지원사업 선택</option>
                 <c:forEach items="${demoBusinessVOs}" var="demoBs" varStatus="status">
-                    <c:if test="${demoBs.is_announce eq 1}">
+                    <c:if test="${demoBs.demo_bs_status eq 3}">
                         <option value="${demoBs.idx_demo_business}">${demoBs.demo_subject}</option>
                     </c:if>
                 </c:forEach>

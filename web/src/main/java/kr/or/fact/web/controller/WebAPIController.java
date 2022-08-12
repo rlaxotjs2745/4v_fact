@@ -52,7 +52,7 @@ public class WebAPIController {
 
     @PostMapping
     @RequestMapping(value = "/user_id_check",method = RequestMethod.POST)
-    public
+    public @ResponseBody
     ResultVO user_id_check(HttpSession session,
                            @RequestBody UserVO userVo){
         ResultVO resultVO = new ResultVO();
