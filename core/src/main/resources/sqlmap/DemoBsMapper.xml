@@ -14,24 +14,62 @@
 
     <select id="getDemoBsPagingList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
         SELECT
-            IDX_DEMO_BUSINESS
-             ,DEMO_BS_STATUS
-             ,DEMO_BS_CODE
-             ,DEMO_SUBJECT
-             ,RECRUIT_COUNT_LIMIT
-             ,START_DATE
-             ,END_DATE
-             ,IS_ANNOUNCE
+        IDX_DEMO_BUSINESS
+        ,DEMO_BS_CODE
+        ,DEMO_SUBJECT
+        ,DEMO_BS_CONTENTS
+        ,DEMO_BS_MAIN_TYPE
+        ,DEMO_BS_SUB_TYPE
+        ,DEMO_BS_DETAIL_TYPE
+        ,DEMO_BS_STATUS
+        ,APPLICANT_COUNT
+        ,APPLICANT_COUNT_LIMIT
+        ,START_DATE
+        ,END_DATE
+        ,RECRUIT_START_DATE
+        ,RECRUIT_END_DATE
+        ,RECRUIT_COUNT_LIMIT
+        ,MEMO
+        ,IDX_ADMIN
+        ,REG_DATE
+        ,LAST_UPD_DATE
+        ,IDX_CONFORM_ADMIN
+        ,IS_ANNOUNCE
+        ,EXAM_START
+        ,EXAM_END
+        ,PLAN_REVIEW_START
+        ,PLAN_REVIEW_END
+        ,CONVENTION_START
+        ,CONVENTION_END
         FROM (
                  SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
         ,IDX_DEMO_BUSINESS
-                      ,DEMO_BS_STATUS
-                      ,DEMO_BS_CODE
-                      ,DEMO_SUBJECT
-                      ,RECRUIT_COUNT_LIMIT
-                      ,START_DATE
-                      ,END_DATE
-                      ,IS_ANNOUNCE
+        ,DEMO_BS_CODE
+        ,DEMO_SUBJECT
+        ,DEMO_BS_CONTENTS
+        ,DEMO_BS_MAIN_TYPE
+        ,DEMO_BS_SUB_TYPE
+        ,DEMO_BS_DETAIL_TYPE
+        ,DEMO_BS_STATUS
+        ,APPLICANT_COUNT
+        ,APPLICANT_COUNT_LIMIT
+        ,START_DATE
+        ,END_DATE
+        ,RECRUIT_START_DATE
+        ,RECRUIT_END_DATE
+        ,RECRUIT_COUNT_LIMIT
+        ,MEMO
+        ,IDX_ADMIN
+        ,REG_DATE
+        ,LAST_UPD_DATE
+        ,IDX_CONFORM_ADMIN
+        ,IS_ANNOUNCE
+        ,EXAM_START
+        ,EXAM_END
+        ,PLAN_REVIEW_START
+        ,PLAN_REVIEW_END
+        ,CONVENTION_START
+        ,CONVENTION_END
                  FROM (
                           SELECT * FROM TB_DEMO_BUSINESS
                         <if test="filter1 != 9999">

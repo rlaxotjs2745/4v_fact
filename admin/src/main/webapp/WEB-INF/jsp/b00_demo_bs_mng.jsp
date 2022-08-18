@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!-- Page content -->
     <div class="container-fluid flex-grow-1 container-p-y">
 
@@ -232,9 +233,9 @@
                         <!-- 사업번호 / 사업 상태-->
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">사업번호</label>
-                            <div class="form-control-plaintext col-md-4 mode-edit mode-view" id="demo_bs_code_view">${demobs.demo_bs_code}</div>
+                            <div class="form-control-plaintext col-md-4 mode-edit mode-view" id="demo_bs_code_view"></div>
                             <div class="input-group col-md-4 mode-new">
-                                <input id="demo_bs_code" type="text" class="form-control form-control-md" placeholder="사업번호를 입력해 주세요..." value="${demobs.demo_bs_code}">
+                                <input id="demo_bs_code" type="text" class="form-control form-control-md" placeholder="사업번호를 입력해 주세요...">
                                 <span class="input-group-append">
                                         <button id="btn_bs_code_dupl_check" class="btn btn-md btn-outline-dark" type="button">중복체크</button>
                                 </span>
@@ -268,26 +269,26 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">대분류</label>
                             <div class="col-md-2">
-                                <input type="text" class="form-control form-control-md mode-edit mode-new" id="demo_bs_main_type" placeholder="대분류..." value="${demobs.demo_bs_main_type}">
-                                <div class="form-control-plaintext mode-view" id="demo_bs_main_type_view">${demobs.demo_bs_main_type}</div>
+                                <input type="text" class="form-control form-control-md mode-edit mode-new" id="demo_bs_main_type" placeholder="대분류..." >
+                                <div class="form-control-plaintext mode-view" id="demo_bs_main_type_view"></div>
                             </div>
                             <label class="col-form-label col-form-label-md col-md-1 text-md-right font-weight-bold">중분류</label>
                             <div class="col-md-2">
-                                <input type="text" class="form-control form-control-md mode-edit mode-new" id="demo_bs_sub_type" placeholder="중분류..." value="${demobs.demo_bs_sub_type}">
-                                <div class="form-control-plaintext mode-view" id="demo_bs_sub_type_view">${demobs.demo_bs_sub_type}</div>
+                                <input type="text" class="form-control form-control-md mode-edit mode-new" id="demo_bs_sub_type" placeholder="중분류...">
+                                <div class="form-control-plaintext mode-view" id="demo_bs_sub_type_view"></div>
                             </div>
                             <label class="col-form-label col-form-label-md col-md-1 text-md-right font-weight-bold">소분류</label>
                             <div class="col-md-2">
-                                <input type="text" class="form-control form-control-md mode-edit mode-new" id="demo_bs_detail_type" placeholder="소분류..." value="${demobs.demo_bs_detail_type}">
-                                <div class="form-control-plaintext mode-view" id="demo_bs_detail_type_view">${demobs.demo_bs_detail_type}</div>
+                                <input type="text" class="form-control form-control-md mode-edit mode-new" id="demo_bs_detail_type" placeholder="소분류..." >
+                                <div class="form-control-plaintext mode-view" id="demo_bs_detail_type_view"></div>
                             </div>
                         </div>
                         <!-- 사업 제목-->
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">사업제목</label>
                             <div class="col-md-10">
-                                <input type="text" class="form-control form-control-md mode-edit mode-new" id="demo_subject" placeholder="제목을 입력해 주세요" value="${demobs.demo_subject}">
-                                <div class="form-control-plaintext mode-view" id="demo_subject_view">${demobs.demo_subject}</div>
+                                <input type="text" class="form-control form-control-md mode-edit mode-new" id="demo_subject" placeholder="제목을 입력해 주세요">
+                                <div class="form-control-plaintext mode-view" id="demo_subject_view"></div>
                             </div>
                         </div>
 
@@ -304,7 +305,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">사업 기간</label>
                             <div class="col-md-10">
-                                <div class="form-control-plaintext mode-view" id="demo_dur">${demobs.start_date} - ${demobs.end_date}</div>
+                                <div class="form-control-plaintext mode-view" id="demo_dur"></div>
 
                                 <div class="input-daterange input-group mode-edit mode-new datepicker-open">
                                     <input type="text" class="form-control" id="demo_start" name="start">
@@ -319,7 +320,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">모집 기간</label>
                             <div class="col-md-10">
-                                <div class="form-control-plaintext mode-view" id="demo_appl_dur">2022-01-01 - 2022-02-01</div>
+                                <div class="form-control-plaintext mode-view" id="demo_appl_dur"></div>
 
                                 <div class="input-daterange input-group mode-edit mode-new datepicker-open">
                                     <input type="text" class="form-control" id="demo_appl_start" name="start">
@@ -334,7 +335,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">심사 기간</label>
                             <div class="col-md-10">
-                                <div class="form-control-plaintext mode-view" id="demo_eval_dur">2022-01-01 - 2022-02-01</div>
+                                <div class="form-control-plaintext mode-view" id="demo_eval_dur"></div>
 
                                 <div class="input-daterange input-group mode-edit mode-new datepicker-open">
                                     <input type="text" class="form-control" id="demo_eval_start" name="start">
@@ -349,7 +350,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">이용계획 조정기간</label>
                             <div class="col-md-10">
-                                <div class="form-control-plaintext mode-view" id="demo_modify_dur">2022-01-01 - 2022-02-01</div>
+                                <div class="form-control-plaintext mode-view" id="demo_modify_dur"></div>
 
                                 <div class="input-daterange input-group mode-edit mode-new datepicker-open">
                                     <input type="text" class="form-control" id="demo_modify_start" name="start">
@@ -364,7 +365,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">협약 기간</label>
                             <div class="col-md-10">
-                                <div class="form-control-plaintext mode-view" id="demo_arrange_dur">2022-01-01 - 2022-02-01</div>
+                                <div class="form-control-plaintext mode-view" id="demo_arrange_dur"></div>
 
                                 <div class="input-daterange input-group mode-edit mode-new datepicker-open">
                                     <input type="text" class="form-control" id="demo_arrange_start" name="start">
@@ -379,7 +380,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">모집 수</label>
                             <div class="form-inline col-md-4 mode-edit mode-new">
-                                <input type="text" class="form-control form-control-md text-md-right" id="recruit_count_limit" style="width: 50%;" placeholder="0" value="${demobs.recruit_count_limit}">
+                                <input type="text" class="form-control form-control-md text-md-right" id="recruit_count_limit" style="width: 50%;" placeholder="0">
                                 <small class="form-text text-muted">
                                     명(기업)
                                 </small>
@@ -395,7 +396,8 @@
                         <div class="form-row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">사업 내용</label>
                             <div class="form-group col col-md-10">
-                                <textarea class="form-control summernote" id="bs_content" rows="3"></textarea>
+                                <div class="form-control-plaintext mode-view" id="bs_content"></div>
+                                <textarea class="form-control summernote mode-edit mode-new" id="bs_content_edit" rows="3"></textarea>
                             </div>
                         </div>
 
@@ -534,16 +536,19 @@
     <!-- / Layout footer -->
     <script>
 
-        $(document).ready(function() {
-            initSummerNote();
-        });
+        // $(document).ready(function() {
+        //     initSummerNote();
+        // });
         var demoArr = [];
         <c:forEach items="${demoBusinessVOList}" var="demo" varStatus="status">
+        <%--var content = "${fn:replace(demo.demo_bs_contents, '\n', '<br/>')}";--%>
         demoArr.push({
             idx_demo_business: "${demo.idx_demo_business}",
             demo_bs_code: "${demo.demo_bs_code}",
             demo_subject: "${demo.demo_subject}",
+            <%--demo_bs_contents: `${demo.demo_bs_contents}`,--%>
             demo_bs_contents: "${demo.demo_bs_contents}",
+            // demo_bs_contents: content,
             demo_bs_main_type: "${demo.demo_bs_main_type}",
             demo_bs_sub_type: "${demo.demo_bs_sub_type}",
             demo_bs_detail_type: "${demo.demo_bs_detail_type}",
@@ -582,11 +587,10 @@
 
         $(".demo_entity").on("click", function(){
             var selectedIdx = $(this).attr("id").split("_")[1];
-            $('#bs_content').summernote('distroy');
-            console.log(selectedIdx);
 
             demoArr.forEach(function(demo){
                 if(demo.idx_demo_business == selectedIdx){
+                    console.log(demo);
                     $('#demo_bs_code_view').text(demo.demo_bs_code);
                     var demoStatus = '';
                     switch (demo.demo_bs_status){
@@ -636,13 +640,13 @@
                     $('#demo_bs_main_type_view').text(demo.demo_bs_main_type);
                     $('#demo_bs_sub_type_view').text(demo.demo_bs_sub_type);
                     $('#demo_bs_detail_type_view').text(demo.demo_bs_detail_type);
-                    $('#demo_subject_view').text(demo.subject);
+                    $('#demo_subject_view').text(demo.demo_subject);
                     $('#demo_dur').text(demo.start_date + ' ~ ' + demo.end_date);
                     $('#demo_eval_dur').text(demo.exam_start + ' ~ ' + demo.exam_end);
+                    $('#demo_appl_dur').text(demo.recruit_start_date + ' ~ ' + demo.recruit_end_date);
                     $('#demo_modify_dur').text(demo.plan_review_start + ' ~ ' + demo.plan_review_end);
                     $('#demo_arrange_dur').text(demo.convention_start + ' ~ ' + demo.convention_end);
-                    $('#bs_content').text(demo.demo_bs_contents);
-
+                    $('#bs_content').html(demo.demo_bs_contents);
                 }
             })
         })
@@ -691,26 +695,20 @@
             });
         });
         $('#btn_edit_mode').on('click', function() {
-
-            //$('.mode-edit').removeClass('d-non');
-            //$('.mode-view').addClass('d-non');
             if($('.mode-view').hasClass('d-none') == false){
                 $('.mode-view').addClass('d-none');
-                $('#memo_view').summernote('disable');
             }
 
             if($('.mode-edit').hasClass('d-none') == false){
-                console.log("실행했어요..")
                 $('.mode-edit').addClass('d-none');
-                $('#memo_view').summernote('disable');
             }
 
             if($('.mode-new').hasClass('d-none') == false){
                 $('.mode-new').addClass('d-none');
-                $('#memo_view').summernote('disable');
             }
 
             $('.mode-edit').removeClass('d-none');
+            initSummerNote();
         });
 
         var duplBool = false;

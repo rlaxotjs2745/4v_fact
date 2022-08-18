@@ -169,7 +169,7 @@
                                         <td class="td__register">전북 김제 스마트팜 실증밸리 실증단지의 정보를<br>
                                             <div class="radio radio--inline">
                                                 <input type="radio" id="ad-1" name="ad-range" value="1" checked>
-                                                <label for="ad-1">밭고 싶습니다.</label>
+                                                <label for="ad-1">받고 싶습니다.</label>
                                             </div>
                                             <div class="radio radio--inline">
                                                 <input type="radio" id="ad-2" name="ad-range" value="0">
@@ -316,11 +316,13 @@
             $('#drop_down_btn').show();
             $("#id_select_box").hide();
             $('#id_select_box').css('width', '1px');
+            console.log(selectBool);
         } else {
             selectBool = 1;
             $('#user_id2').hide();
             $('#drop_down_btn').hide();
             $('#id_select_box').css('width', '100px');
+            console.log(selectBool);
         }
     })
 
@@ -394,7 +396,7 @@
         if (!confirmPhoneBool) return alert('휴대폰번호는 숫자만 입력이 가능합니다.');
 
 
-        var user_id = $("#user_id").val();
+        var user_id = selectBool ? $("#user_id").val() + '@' + $('#id_select_box').val() : $("#user_id").val() + '@' + $('#user_id2').val();
         var user_pw = $("#user_pw").val();
 
         var param = {
@@ -409,8 +411,7 @@
             "is_third_party_agree": 1,
             "auth_status": 0,
             "is_applicant": 0,
-            "is_corporate_member": $("#corp_sel_name").val() == "" ? 0 : 1,
-            "idx_corp_info": $("#corp_sel_name").val() == "" ? 0 : 1,
+            "is_corporate_member": 0,
             "sign_in_type": 0,
             "is_sms_agree": $("#type-1").is(":checked") ? 1 : 0,
             "is_email_agree": $("#type-2").is(":checked") ? 1 : 0,

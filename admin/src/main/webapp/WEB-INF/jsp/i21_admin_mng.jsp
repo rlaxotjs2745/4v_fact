@@ -122,32 +122,32 @@
                                     <th class="text-center bg-light">주소</th>
                                     <td class="" colspan="3" id="addr_main_detail">제주도 서귀포시 XXXXXXX XXXXXXX</td>
                                 </tr>
-                                <tr class="">
-                                    <th class="text-center align-middle bg-light" rowspan="3">소속 정보</th>
-                                    <th class="text-center bg-light">단체명</th>
-                                    <td class="text-center" id="corporate_name_detail">맛있는 농부(주)</td>
-<%--                                    <th class="text-center bg-light">부서</th>--%>
-<%--                                    <td class="text-center" id="admin-detail-depart">디지털농업본부/XXX팀</td>--%>
-                                </tr>
-                                <tr>
-                                    <th class="text-center bg-light">직위</th>
-                                    <td class="text-center" id="job_title_detail">계장</td>
-                                    <th class="text-center bg-light">전화번호</th>
-                                    <td class="text-center" id="corporate_num_detail">000-0000-0000</td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center bg-light">팩스</th>
-                                    <td class="text-center" id="corporate_fax_detail">000-0000-0000</td>
-                                    <th class="text-center bg-light">홈페이지</th>
-                                    <td class="text-center" id="corporate_homepage_detail">www.asdfasdfasdf.com</td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center bg-light">센터 정보</th>
-                                    <th class="text-center bg-light">담당 업무</th>
-                                    <td class="text-center" id="main_part_detail" >XXXXXXXX</td>
-                                    <th class="text-center bg-light">관리번호</th>
-                                    <td class="text-center" id="manage_num_detail"></td>
-                                </tr>
+<%--                                <tr class="">--%>
+<%--                                    <th class="text-center align-middle bg-light" rowspan="3">소속 정보</th>--%>
+<%--                                    <th class="text-center bg-light">단체명</th>--%>
+<%--                                    <td class="text-center" id="corporate_name_detail">맛있는 농부(주)</td>--%>
+<%--&lt;%&ndash;                                    <th class="text-center bg-light">부서</th>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <td class="text-center" id="admin-detail-depart">디지털농업본부/XXX팀</td>&ndash;%&gt;--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <th class="text-center bg-light">직위</th>--%>
+<%--                                    <td class="text-center" id="job_title_detail">계장</td>--%>
+<%--                                    <th class="text-center bg-light">전화번호</th>--%>
+<%--                                    <td class="text-center" id="corporate_num_detail">000-0000-0000</td>--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <th class="text-center bg-light">팩스</th>--%>
+<%--                                    <td class="text-center" id="corporate_fax_detail">000-0000-0000</td>--%>
+<%--                                    <th class="text-center bg-light">홈페이지</th>--%>
+<%--                                    <td class="text-center" id="corporate_homepage_detail">www.asdfasdfasdf.com</td>--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <th class="text-center bg-light">센터 정보</th>--%>
+<%--                                    <th class="text-center bg-light">담당 업무</th>--%>
+<%--                                    <td class="text-center" id="main_part_detail" >XXXXXXXX</td>--%>
+<%--                                    <th class="text-center bg-light">관리번호</th>--%>
+<%--                                    <td class="text-center" id="manage_num_detail"></td>--%>
+<%--                                </tr>--%>
                                 </tbody>
                             </table>
                             <table class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info">
@@ -228,33 +228,33 @@
                                     <%--                                        <th class="text-center bg-light">상세 주소</th>--%>
                                     <%--                                        <td class=""></td>--%>
                                 </tr>
-                                <tr class="">
-                                    <th class="text-center align-middle bg-light" rowspan="3">소속 정보</th>
-                                    <th class="text-center bg-light">단체명</th>
-                                    <td class="" colspan="3" >
-                                        <input type="text" id="corp_select_modify" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width:calc(100% - 80px)" readonly>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center bg-light">직위</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="job_title_modify"></td>
-                                    <th class="text-center bg-light">전화번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_num_modify" value="" readonly></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center bg-light">팩스</th>
-                                    <td class="text-center"><input type="text"  class="form-control form-control-sm" id="corporate_fax_modify" value="" readonly></td>
-                                    <th class="text-center bg-light">홈페이지</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_homepage_modify" value="" readonly></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center bg-light">센터정보</th>
-                                    <th class="text-center bg-light">담당업무</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="main_part_modify"></td>
-                                    <th class="text-center bg-light">관리번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="manage_num_modify"></td>
-                                </tr>
-                                </tbody>
+<%--                                <tr class="">--%>
+<%--                                    <th class="text-center align-middle bg-light" rowspan="3">소속 정보</th>--%>
+<%--                                    <th class="text-center bg-light">단체명</th>--%>
+<%--                                    <td class="" colspan="3" >--%>
+<%--                                        <input type="text" id="corp_select_modify" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width:calc(100% - 80px)" readonly>--%>
+<%--                                    </td>--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <th class="text-center bg-light">직위</th>--%>
+<%--                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="job_title_modify"></td>--%>
+<%--                                    <th class="text-center bg-light">전화번호</th>--%>
+<%--                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_num_modify" value="" readonly></td>--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <th class="text-center bg-light">팩스</th>--%>
+<%--                                    <td class="text-center"><input type="text"  class="form-control form-control-sm" id="corporate_fax_modify" value="" readonly></td>--%>
+<%--                                    <th class="text-center bg-light">홈페이지</th>--%>
+<%--                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_homepage_modify" value="" readonly></td>--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <th class="text-center bg-light">센터정보</th>--%>
+<%--                                    <th class="text-center bg-light">담당업무</th>--%>
+<%--                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="main_part_modify"></td>--%>
+<%--                                    <th class="text-center bg-light">관리번호</th>--%>
+<%--                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="manage_num_modify"></td>--%>
+<%--                                </tr>--%>
+<%--                                </tbody>--%>
                             </table>
                             <table class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info" style="">
                                 <tbody>
@@ -340,37 +340,37 @@
                                     <%--                                        <th class="text-center bg-light">상세 주소</th>--%>
                                     <%--                                        <td class=""></td>--%>
                                 </tr>
-                                <tr class="">
-                                    <th class="text-center align-middle bg-light" rowspan="3">소속 정보</th>
-                                    <th class="text-center bg-light">단체명</th>
-                                    <td class="" colspan="3">
-                                        <select id="corp_select" class="form-control form-control-sm" name="corporate_name">
-                                            <option class="corps_option form-control form-control-sm" value="" disabled selected>단체 선택</option>
-                                            <c:forEach items="${corps}" var="corp" varStatus="status">
-                                                <option class="corps_option form-control form-control-sm" value="${corp.idx_corp_info}">${corp.corp_name_kor}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center bg-light">직위</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="job_title"></td>
-                                    <th class="text-center bg-light">전화번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_num" value=""></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center bg-light">팩스</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_fax" value=""></td>
-                                    <th class="text-center bg-light">홈페이지</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_homepage" value=""></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center bg-light">센터정보</th>
-                                    <th class="text-center bg-light">담당업무</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="main_part"></td>
-                                    <th class="text-center bg-light">관리번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="manage_num"></td>
-                                </tr>
+<%--                                <tr class="">--%>
+<%--                                    <th class="text-center align-middle bg-light" rowspan="3">소속 정보</th>--%>
+<%--                                    <th class="text-center bg-light">단체명</th>--%>
+<%--                                    <td class="" colspan="3">--%>
+<%--                                        <select id="corp_select" class="form-control form-control-sm" name="corporate_name">--%>
+<%--                                            <option class="corps_option form-control form-control-sm" value="" disabled selected>단체 선택</option>--%>
+<%--                                            <c:forEach items="${corps}" var="corp" varStatus="status">--%>
+<%--                                                <option class="corps_option form-control form-control-sm" value="${corp.idx_corp_info}">${corp.corp_name_kor}</option>--%>
+<%--                                            </c:forEach>--%>
+<%--                                        </select>--%>
+<%--                                    </td>--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <th class="text-center bg-light">직위</th>--%>
+<%--                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="job_title"></td>--%>
+<%--                                    <th class="text-center bg-light">전화번호</th>--%>
+<%--                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_num" value=""></td>--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <th class="text-center bg-light">팩스</th>--%>
+<%--                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_fax" value=""></td>--%>
+<%--                                    <th class="text-center bg-light">홈페이지</th>--%>
+<%--                                    <td class="text-center"><input type="text" class="form-control form-control-sm" id="corporate_homepage" value=""></td>--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <th class="text-center bg-light">센터정보</th>--%>
+<%--                                    <th class="text-center bg-light">담당업무</th>--%>
+<%--                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="main_part"></td>--%>
+<%--                                    <th class="text-center bg-light">관리번호</th>--%>
+<%--                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="manage_num"></td>--%>
+<%--                                </tr>--%>
                                 </tbody>
                             </table>
                             <table class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info" style="">
@@ -604,10 +604,10 @@
             $("#web_id").val() == "" ||
             $("#web_id2").val() == "" ||
             $("#admin_name").val() == "" ||
-            corpName == "" ||
-            $("#job_title").val() == "" ||
-            $("#mphone_num").val() == "" ||
-            $("#sign_in_type").val() == ""
+            // corpName == "" ||
+            // $("#job_title").val() == "" ||
+            // $("#sign_in_type").val() == "" ||
+            $("#mphone_num").val() == ""
         ){
             alert("회원가입에 필요한 데이터가 모두 입력되지 않았습니다.");
             return;
@@ -616,18 +616,18 @@
         var param = {
             admin_id: $("#web_id").val() + "@" + $("#web_id2").val(),
             admin_name: $("#admin_name").val(),
-            corporate_name: corpName,
-            job_title: $("#job_title").val(),
+            // corporate_name: corpName,
+            // job_title: $("#job_title").val(),
             auth_status: 0,
             tel_num: $("#tel_num").val() == "" ? "-" : $("#tel_num").val(),
             mphone_num: $("#mphone_num").val(),
-            sign_in_type: $("#sign_in_type").val(),
-            corporate_num: $("#corporate_num").val(),
-            corporate_fax: $("#corporate_fax").val(),
-            corporate_homepage: $("#corporate_homepage").val(),
-            admin_type: $("#admin_type").val(),
-            main_part: $("#main_part").val(),
-            manage_num: $("#manage_num").val(),
+            // sign_in_type: $("#sign_in_type").val(),
+            // corporate_num: $("#corporate_num").val(),
+            // corporate_fax: $("#corporate_fax").val(),
+            // corporate_homepage: $("#corporate_homepage").val(),
+            // admin_type: $("#admin_type").val(),
+            // main_part: $("#main_part").val(),
+            // manage_num: $("#manage_num").val(),
             admin_addr: $("#addr_main").val() + " " + $("#addr_detail").val()
         }
 
@@ -698,12 +698,12 @@
             idx_admin: parseInt(curUser),
             tel_num: $("#tel_num_modify").val(),
             mphone_num: $("#mphone_num_modify").val(),
-            admin_type: $("#admin_type_modify").val(),
+            // admin_type: $("#admin_type_modify").val(),
             admin_addr: $("#addr_detail_modify").val() != "" ? $("#addr_main_modify").val() + " " + $("#addr_detail_modify").val() : $("#addr_main_modify").val(),
-            job_title: $("#job_title_modify").val(),
-            main_part: $("#main_part_modify").val(),
-            manage_num: $("#manage_num_modify").val(),
-            sign_in_type: $("#sign_in_type_modify").val()
+            // job_title: $("#job_title_modify").val(),
+            // main_part: $("#main_part_modify").val(),
+            // manage_num: $("#manage_num_modify").val(),
+            // sign_in_type: $("#sign_in_type_modify").val()
         }
         $.ajax({
             type: 'post',

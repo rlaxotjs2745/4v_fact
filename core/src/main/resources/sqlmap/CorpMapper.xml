@@ -83,11 +83,15 @@
              SYSDATE,
              SYSDATE
          )
-        <selectKey keyProperty="idx_corp_info" resultType="long" order="AFTER">
+        <selectKey resultType="long" order="AFTER">
          SELECT SEQ_CORP_INFO.CURRVAL FROM DUAL
         </selectKey>
 
     </insert>
+
+    <select id="getCurCorpIdx" resultType="long">
+        SELECT SEQ_CORP_INFO.CURRVAL FROM DUAL
+    </select>
 
 
 

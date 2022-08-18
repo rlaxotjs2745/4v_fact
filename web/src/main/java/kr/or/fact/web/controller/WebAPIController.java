@@ -301,6 +301,49 @@ public class WebAPIController {
         return resultVO;
     }
 
+    @RequestMapping(value = "/join_new_corp",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  join_new_corp(HttpSession session,
+                           @RequestBody CorpInfoVO corpInfoVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("기업 등록에 실패했습니다.");
+        resultVO.setResult_code("ERROR_1000");
+
+        try {
+            long corpIdx = corpService.saveCorpInfo(corpInfoVO);
+            resultVO.setResult_str(corpIdx + "");
+            resultVO.setResult_code("SUCCESS");
+        } catch (Exception e){
+            System.out.println(e);
+        }
+
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/corp_name_check",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  corp_name_check(HttpSession session,
+                            @RequestBody CorpInfoVO corpInfoVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("사용 가능한 상호명입니다.");
+        resultVO.setResult_code("SUCCESS");
+
+        try {
+            String corpName = corpInfoVO.getCorp_name_kor();
+            if(corpService.getSimpleCorpInfoList(corpName).size() > 0){
+                resultVO.setResult_code("FAIL");
+                resultVO.setResult_str("이미 사용중인 상호명입니다.");
+            }
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("FAIL");
+            resultVO.setResult_str("이미 사용중인 상호명입니다.");
+        }
+        return resultVO;
+    }
+
+
+
     @RequestMapping(value = "/user_modify", method = RequestMethod.POST)
     public @ResponseBody
     ResultVO user_modify(HttpSession session, @RequestBody UserVO userVO){

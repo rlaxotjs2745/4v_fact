@@ -31,7 +31,8 @@ public class CorpServiceImpl implements CorpService {
     }
     @Override
     public long saveCorpInfo(CorpInfoVO corpInfoVO){
-        return corpMapper.saveCorpInfo(corpInfoVO);
+        corpMapper.saveCorpInfo(corpInfoVO);
+        return corpMapper.getCurCorpIdx();
     }
 
     @Override

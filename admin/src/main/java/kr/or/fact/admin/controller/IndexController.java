@@ -238,7 +238,10 @@ public class IndexController {
 
 
         List<DemoBusinessVO>  demoBusinessVOList = demoBsService.getDemoBsPagingList(param);
-
+        for(int i = 0; i < demoBusinessVOList.size(); i++){
+            demoBusinessVOList.get(i).setDemo_bs_contents(demoBusinessVOList.get(i).getDemo_bs_contents().replaceAll("(\t)", "  ").replaceAll("(\r\n|\r|\n|\n\r)", "<br/>"));
+            System.out.println(demoBusinessVOList.get(i).getDemo_bs_contents());
+        }
         model.addAttribute("demoBusinessVOList",demoBusinessVOList);
 //        model.addAttribute("admin_idx", );
         model.addAttribute("cur_page",page);
