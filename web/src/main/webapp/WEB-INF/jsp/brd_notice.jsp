@@ -1,4 +1,5 @@
 <%@ page import="kr.or.fact.core.model.DTO.NoticeVO" %>
+<%@ page import="javax.servlet.jsp.jstl.core.LoopTagStatus" %>
 <%--
   Created by IntelliJ IDEA.
   User: abeki
@@ -73,7 +74,16 @@
                     <tbody>
                     <c:forEach items="${noticeList}" var="notice" varStatus="status">
                         <tr>
-                            <td>${notice.idx_notice}</td>
+                            <%
+                                int pageCount = 10;
+                                final LoopTagStatus status = (LoopTagStatus) pageContext.getAttribute("status");
+                                final Integer totalCount = (Integer) request.getAttribute("total_count");
+                                final Integer pageNum = (Integer) request.getAttribute("page");
+
+                                int boardStartNumber = totalCount - (pageNum - 1) * pageCount;
+                                final int boardNumber = boardStartNumber - (status.getIndex() % pageCount);
+                            %>
+                            <td><%=boardNumber%></td>
                             <%
                                 final NoticeVO notice = (NoticeVO) pageContext.getAttribute("notice");
                                 final String query = (String) request.getAttribute("query");

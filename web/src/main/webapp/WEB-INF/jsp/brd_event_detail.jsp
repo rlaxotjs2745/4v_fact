@@ -159,8 +159,6 @@
                                 <div class="temp__title">${eventContent.subject}</div>
                                 <div class="tem__photo"><img src="" alt=""></div>
                                 <div class="temp__text">${eventContent.event_contents}
-
-                                    ${eventContent.memo}
                                 </div>
                                 <div class="temp__download--box"><strong>첨부파일</strong>
                                     ${eventContent.file_path}

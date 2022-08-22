@@ -1081,7 +1081,6 @@ public class APIController {
                 fileInfoVO.setFile_size(filepespons.getSize());
                 fileInfoVO.setMime_type(filepespons.getFileType());
                 fileInfoVO.setFile_path(fileDownloadUri);
-                fileService.storeFileInfo(file);
                 fileService.insertFileInfo(fileInfoVO);
                 noticeService.insertNoticeFileJoin();
             }
@@ -1365,7 +1364,6 @@ public class APIController {
                 fileInfoVO.setFile_size(filepespons.getSize());
                 fileInfoVO.setMime_type(filepespons.getFileType());
                 fileInfoVO.setFile_path(fileDownloadUri);
-                fileService.storeFileInfo(file);
                 fileService.insertFileInfo(fileInfoVO);
                 noticeService.updateNoticeFileJoin(noticeVO.getIdx_notice());
             }

@@ -1,4 +1,5 @@
-<%--
+<%@ page import="org.apache.tomcat.jni.FileInfo" %>
+<%@ page import="kr.or.fact.core.model.DTO.FileInfoVO" %><%--
   Created by IntelliJ IDEA.
   User: abeki
   Date: 2021/07/30
@@ -137,6 +138,24 @@
                                     color:#ff0000 !important;
                                     font-weight: 400 !important;
                                 }
+                                .edit__templete .temp__download--box{
+                                    background: #f8f8f8 !important;
+                                    padding: 15px !important;
+                                    font-size: 14px !important;
+                                    line-height: 1.5 !important;
+                                    border-radius: 8px !important;
+                                    margin:10px 0 !important;
+                                }
+                                .edit__templete .temp__download--box ul{
+                                    margin:10px 0 0 0 !important;
+                                }
+                                .edit__templete .temp__download--box ul li{
+                                    margin:5px 0 !important;
+                                }
+                                .edit__templete .temp__download--box ul li img{
+                                    width: 20px !important;
+                                    margin-right:5px !important;
+                                }
                             </style>
                             <div class="edit__templete">
                                 <div class="temp__cover"></div>
@@ -150,7 +169,28 @@
                                     ${noticeInfo.notice_contents}
 
                                 </div>
-                                <div class="temp__goal">${noticeInfo.memo}</div>
+                                <c:if test="${noticeInfo.attachments != null && noticeInfo.attachments.size() != 0}">
+                                    <div class="temp__download--box"><strong>첨부파일</strong>
+                                        <ul>
+                                            <c:forEach items="${noticeInfo.attachments}" var="attachment" varStatus="status">
+                                                <li>
+                                                    <%
+                                                        String extension = "file-present";
+                                                        final FileInfoVO attachment = (FileInfoVO) pageContext.getAttribute("attachment");
+                                                        if (attachment.getFile_name() != null) { // 임시
+                                                            final String[] split = attachment.getFile_name().split("\\.");
+                                                            System.out.println(split.length);
+                                                            if (split.length >= 2) {
+                                                                extension = split[split.length - 1];
+                                                            }
+                                                        }
+                                                    %>
+                                                    <img src="resources/assets/image/ico_<%=extension%>.png" alt=""><a href="${attachment.file_path}">${attachment.file_name}</a>
+                                                </li>
+                                            </c:forEach>
+                                        </ul>
+                                    </div>
+                                </c:if>
                                 <div class="temp__notice--box"> ※ 코로나19 지역발생 상황에 따라 교육과정이 연기·변동될 수 있음을 알려드리며,
                                     이 경우 별도로 개별통보(전화, SMS 등)를 통하여 안내할 예정입니다.
                                     <strong>< 교육생들은 주말행사·모임 자제 및 다중 이용시설 방문을 삼가해주시기 바랍니다. ></strong></div>

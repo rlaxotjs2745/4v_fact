@@ -1,4 +1,4 @@
-<%--
+<%@ page import="kr.or.fact.core.model.DTO.FileInfoVO" %><%--
   Created by IntelliJ IDEA.
   User: abeki
   Date: 2021/09/01
@@ -159,17 +159,29 @@
                                     <div class="temp__title">${pr.subject}</div>
                                     <div class="tem__photo"><img src="" alt=""></div>
                                     <div class="temp__text">${pr.pr_contents}
-
-                                        ${pr.memo}
                                     </div>
-                                    <div class="temp__download--box"><strong>첨부파일</strong>
-                                        ${pr.file_path}
-                                        <ul>
-                                            <li><img src="resources/assets/image/ico_hwp.png" alt=""><a href="${pr.file_path}">파일명 파일명.hwp</a></li>
-                                            <li><img src="resources/assets/image/ico_pdf.png" alt=""><a href="#none">파일명 파일명.png</a></li>
-                                            <li><img src="resources/assets/image/ico_jpg.png" alt=""><a href="#none">파일명 파일명.jpg</a></li>
-                                        </ul>
-                                    </div>
+                                    <c:if test="${pr.attachments.size() != 0}">
+                                        <div class="temp__download--box"><strong>첨부파일</strong>
+                                            <ul>
+                                                <c:forEach items="${pr.attachments}" var="attachment" varStatus="status">
+                                                    <li>
+                                                        <%
+                                                            String extension = "file-present";
+                                                            final FileInfoVO attachment = (FileInfoVO) pageContext.getAttribute("attachment");
+                                                            if (attachment.getFile_name() != null) { // 임시
+                                                                final String[] split = attachment.getFile_name().split("\\.");
+                                                                System.out.println(split.length);
+                                                                if (split.length >= 2) {
+                                                                    extension = split[split.length - 1];
+                                                                }
+                                                            }
+                                                        %>
+                                                        <img src="resources/assets/image/ico_<%=extension%>.png" alt=""><a href="${attachment.file_path}">${attachment.file_name}</a>
+                                                    </li>
+                                                </c:forEach>
+                                            </ul>
+                                        </div>
+                                    </c:if>
 
                                 </div>
                                 <!--//-->
@@ -203,7 +215,7 @@
         const beforeBody = document.body;
         const printArticle = document.getElementsByClassName('articleArea')[0];
 
-        document.body = `<body>' + printArticle + '</body>';
+        document.body = '<body>' + printArticle + '</body>';
     }
 </script>
 </body>
