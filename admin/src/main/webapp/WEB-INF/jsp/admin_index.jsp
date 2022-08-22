@@ -34,10 +34,10 @@
                         <th class="text-center px-2" style="width:80px">직원명</th>
                         <th class="text-center px-2" style="width:80px">구분</th>
                         <th class="text-center px-2" style="width:80px">시스템 권한</th>
-                        <th class="text-center px-2" style="width:150px">소속</th>
-                        <th class="text-center px-2" style="width:70px">담당업무</th>
-                        <th class="text-center px-2" style="width:70px">직급</th>
-                        <th class="text-center px-2" style="width:130px">사무실 전화번호</th>
+<%--                        <th class="text-center px-2" style="width:150px">소속</th>--%>
+<%--                        <th class="text-center px-2" style="width:70px">담당업무</th>--%>
+<%--                        <th class="text-center px-2" style="width:70px">직급</th>--%>
+<%--                        <th class="text-center px-2" style="width:130px">사무실 전화번호</th>--%>
                         <th class="text-center px-2" style="width:130px">휴대폰 번호</th>
                         <th class="text-center px-2" style="width:150px">이메일</th>
                     </tr>
@@ -49,10 +49,10 @@
                             <td class="text-center"><a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modals-staff-view" class="admin-name">${admin.admin_name}</a></td>
                             <td class="text-center" class="admin-corp-type">${admin.corporate eq 0 ? "진흥원" : admin.corporate eq 1 ? "센터" : admin.corporate eq 2 ? "지자체" : "기타"}</td>
                             <td class="text-center" class="admin-type">${admin.sign_in_type eq 1 ? "SA" : "BM"}</td>
-                            <td class="text-center" class="admin-corp">${admin.corporate_name}</td>
-                            <td class="text-center" class="admin-depart">${admin.main_part != null ? admin.main_part : "-"}</td>
-                            <td class="text-center" class="admin-jobTitle">${admin.job_title}</td>
-                            <td class="text-center" class="admin-telnum">${admin.corporate_num}</td>
+<%--                            <td class="text-center" class="admin-corp">${admin.corporate_name}</td>--%>
+<%--                            <td class="text-center" class="admin-depart">${admin.main_part != null ? admin.main_part : "-"}</td>--%>
+<%--                            <td class="text-center" class="admin-jobTitle">${admin.job_title}</td>--%>
+<%--                            <td class="text-center" class="admin-telnum">${admin.corporate_num}</td>--%>
                             <td class="text-center" class="admin-mphonenum">${admin.mphone_num}</td>
                             <td class="text-center" class="admin-emailid">${admin.admin_id}</td>
                         </tr>

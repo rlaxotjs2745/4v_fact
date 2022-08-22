@@ -239,8 +239,10 @@ public class IndexController {
 
         List<DemoBusinessVO>  demoBusinessVOList = demoBsService.getDemoBsPagingList(param);
         for(int i = 0; i < demoBusinessVOList.size(); i++){
-            demoBusinessVOList.get(i).setDemo_bs_contents(demoBusinessVOList.get(i).getDemo_bs_contents().replaceAll("(\t)", "  ").replaceAll("(\r\n|\r|\n|\n\r)", "<br/>"));
-            System.out.println(demoBusinessVOList.get(i).getDemo_bs_contents());
+            if(demoBusinessVOList.get(i).getDemo_bs_contents() != null){
+                demoBusinessVOList.get(i).setDemo_bs_contents(demoBusinessVOList.get(i).getDemo_bs_contents().replaceAll("(\t)", "  ").replaceAll("(\r\n|\r|\n|\n\r)", "<br/>"));
+                System.out.println(demoBusinessVOList.get(i).getDemo_bs_contents());
+            }
         }
         model.addAttribute("demoBusinessVOList",demoBusinessVOList);
 //        model.addAttribute("admin_idx", );
@@ -275,7 +277,8 @@ public class IndexController {
             is_last = false;
             page_amount = tot_page;
         }
-
+        model.addAttribute("filter1", param.getFilter1());
+        model.addAttribute("filter2", param.getFilter2());
         model.addAttribute("tot_page",tot_page);
         model.addAttribute("tot_sector",tot_sector);
         model.addAttribute("cur_sector",cur_sector);

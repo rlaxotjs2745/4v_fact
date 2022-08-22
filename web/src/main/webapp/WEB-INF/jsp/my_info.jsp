@@ -62,24 +62,20 @@
                             <th class="th__left">전화번호</th>
                             <td class="td__left">${user.tel_num}</td>
                         </tr>
+                        <c:if test="${user.is_corporate_member eq 1}">
                         <tr>
                             <th class="th__left">소속</th>
                             <td class="td__left" style="white-space: nowrap;">
-                                <c:choose>
-                                    <c:when test="${user.is_corporate_member eq 0}">없음</c:when>
-                                    <c:when test="${user.is_corporate_member eq 1}">${corp.corp_name_kor}</c:when>
-                                </c:choose>
+                                    ${corp.corp_name_kor}
                             </td>
                         </tr>
                         <tr>
                             <th class="th__left">회사전화번호</th>
                             <td class="td__left" style="white-space: nowrap;">
-                                <c:choose>
-                                    <c:when test="${user.is_corporate_member eq 0}">없음</c:when>
-                                    <c:when test="${user.is_corporate_member eq 1}">${corp.tel_num}</c:when>
-                                </c:choose>
+                                ${corp.tel_num}
                             </td>
                         </tr>
+                        </c:if>
                         <tr>
                             <th class="th__left">정보수신동의</th>
                             <td class="td__left" style="white-space: nowrap;">
@@ -117,6 +113,10 @@
                                 <c:when test="${user.is_email_agree eq 1}">동의함</c:when>
                                 </c:choose>
                             </td>
+                        </tr>
+                        <c:if test="${user.is_corporate_member eq 1}">
+
+                        </c:if>
                         </tbody>
                     </table>
                     <!--//-->

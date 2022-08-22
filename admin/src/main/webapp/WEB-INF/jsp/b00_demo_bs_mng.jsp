@@ -174,7 +174,7 @@
 <c:if test="${total_count ne 0}">
                     <div class="row">
                         <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="article-list_info" role="status" aria-live="polite">총 ${total_count}개 중 ${list_amount*(cur_page-1)+1}에서 ${list_amount*page_amount}까지까지</div>
+                            <div class="dataTables_info" id="article-list_info" role="status" aria-live="polite">총 ${total_count}개 중 ${list_amount*(cur_page-1)+1}에서 ${list_amount*page_amount}까지</div>
                         </div>
                         <div class="col-sm-12 col-md-7">
                             <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
@@ -183,8 +183,8 @@
                                     <c:set var="name" value="${total_count/amount}" />
 
 
-                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:${filter1},filter2:${filter2}},'실증사업 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
-                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('b00_demo_bs_mng',{page_num:${cur_page-1},filter1:${filter1},filter2:${filter2}},'실증사업 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:parseInt('${filter1}'),filter2:parseInt('${filter2}')},'실증사업 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('b00_demo_bs_mng',{page_num:parseInt('${cur_page-1}'),filter1:parseInt('${filter1}'),filter2:parseInt('${filter2}')},'실증사업 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
 
 
 
@@ -192,8 +192,8 @@
                                         <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('b00_demo_bs_mng?page=${(cur_sector-1)*page_amount+i}&filter1=${filter1}&filter2=${filter2}','실증사업 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
                                     </c:forEach>
 
-                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('b00_demo_bs_mng',{page_num:${cur_page+1},filter1:${filter1},filter2:${filter2}},'실증사업 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
-                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('b00_demo_bs_mng',{page_num:${tot_page},filter1:${filter1},filter2:${filter2}},'실증사업 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('b00_demo_bs_mng',{page_num:parseInt('${cur_page+1}'),filter1:parseInt('${filter1}'),filter2:parseInt('${filter2}')},'실증사업 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('b00_demo_bs_mng',{page_num:parseInt('${tot_page}'),filter1:parseInt('${filter1}'),filter2:parseInt('${filter2}')},'실증사업 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
                                 </ul>
                             </div>
                         </div>
@@ -875,7 +875,6 @@
                 var button = $(event.relatedTarget);
                 var what = button.data('what');
                 if(what=='mode-view' || what=='mode-edit'||what=='mode-new'){
-                    console.log("시작");
                     if($('.mode-view').hasClass('d-none') == false){
                         $('.mode-view').addClass('d-none');
                     }
@@ -890,7 +889,6 @@
                     }
 
                     $('.'+what+'').removeClass('d-none');
-                    console.log(what);
                 }
 
 

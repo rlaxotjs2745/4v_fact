@@ -610,6 +610,8 @@ public class WebAPIController {
         // 저장단계 변경
 
 
+
+
         findUserDemoBsVo.setUser_demo_bs_type(userDemoBsVO.getUser_demo_bs_type());//		number	4		1			사업 진행 주체 타입	0:개인, 1:일반기업, 2:미등록기업(설립전), 3: 농업진흥기관, 4:선도기업, 5:외국연구기관, 6:특정연구기관, 7:정부출연연구기관, 8:스마트팜 관련 기업부설연구소 보유기업, 9: 대학교, 99:기타 단체
         //findUserDemoBsVo.setIdx_corp_info(userDemoBsVO.getIdx_corp_info());//		number	32		0		◯	지원회사
 
