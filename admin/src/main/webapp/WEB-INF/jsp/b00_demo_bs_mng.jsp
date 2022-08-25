@@ -584,13 +584,13 @@
             last_upd_date: "${demo.last_upd_date}",
         })
         </c:forEach>
+        var curEntity;
 
         $(".demo_entity").on("click", function(){
             var selectedIdx = $(this).attr("id").split("_")[1];
 
             demoArr.forEach(function(demo){
                 if(demo.idx_demo_business == selectedIdx){
-                    console.log(demo);
                     $('#demo_bs_code_view').text(demo.demo_bs_code);
                     var demoStatus = '';
                     switch (demo.demo_bs_status){
@@ -647,6 +647,8 @@
                     $('#demo_modify_dur').text(demo.plan_review_start + ' ~ ' + demo.plan_review_end);
                     $('#demo_arrange_dur').text(demo.convention_start + ' ~ ' + demo.convention_end);
                     $('#bs_content').html(demo.demo_bs_contents);
+                    $(".summernote").summernote('destroy');
+                    curEntity = demo;
                 }
             })
         })
@@ -670,6 +672,7 @@
                 fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
                 height: 300                 // 에디터 높이
             });
+
         }
 
 
@@ -709,7 +712,16 @@
 
             $('.mode-edit').removeClass('d-none');
             initSummerNote();
+            initEditMode(curEntity);
         });
+
+        function initEditMode(demo){
+            $('#demo_bs_main_type').val(demo.demo_bs_main_type);
+            $('#demo_bs_sub_type').val(demo.demo_bs_sub_type);
+            $('#demo_bs_detail_type').val(demo.demo_bs_detail_type);
+            $('#demo_subject').val(demo.demo_subject);
+            $('#demo_start').val(demo.demo_s);
+        }
 
         var duplBool = false;
 

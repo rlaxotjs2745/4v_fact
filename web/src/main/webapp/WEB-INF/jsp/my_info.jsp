@@ -75,6 +75,24 @@
                                 ${corp.tel_num}
                             </td>
                         </tr>
+                            <tr>
+                                <th class="th__left">사업자 등록번호</th>
+                                <td class="td__left" style="white-space: nowrap;">
+                                        ${corp.company_num}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="th__left">업태/종목</th>
+                                <td class="td__left" style="white-space: nowrap;">
+                                        ${corp.bs_sector}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="th__left">회사 주소</th>
+                                <td class="td__left" style="white-space: nowrap;">
+                                        ${corp.corp_addr} ${corp.corp_addr2}
+                                </td>
+                            </tr>
                         </c:if>
                         <tr>
                             <th class="th__left">정보수신동의</th>
@@ -93,7 +111,7 @@
                                 <c:when test="${user.sign_in_type eq 1}">모바일 웹가입</c:when>
                                 <c:when test="${user.sign_in_type eq 2}">관리기관 가입</c:when>
                                 <c:when test="${user.sign_in_type eq 3}">한국농업기술진흥원 가입</c:when>
-                                <c:when test="${user.sign_in_type eq 4}">관계기간 가입</c:when>
+                                <c:when test="${user.sign_in_type eq 4}">관계기관 가입</c:when>
                                 </c:choose>
                             </td>
                         <tr>
@@ -114,9 +132,6 @@
                                 </c:choose>
                             </td>
                         </tr>
-                        <c:if test="${user.is_corporate_member eq 1}">
-
-                        </c:if>
                         </tbody>
                     </table>
                     <!--//-->
