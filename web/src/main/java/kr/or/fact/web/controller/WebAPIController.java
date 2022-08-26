@@ -292,6 +292,10 @@ public class WebAPIController {
                 String hashedPassword = passwordEncoder.encode(userVo.getUser_pw());
                 userVo.setUser_pw(hashedPassword);
                 long idx_user = userService.join(userVo);
+                userVo.setIdx_user(idx_user);
+                if(userVo.getSign_in_type() == 99){
+                    corpService.insertCorpManager(userVo);
+                }
                 if(idx_user>0){
                     resultVO.setResult_str("가입되었습니다");
                     resultVO.setResult_code(CONSTANT.Success);

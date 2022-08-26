@@ -1,6 +1,7 @@
 package kr.or.fact.core.model;
 
 import kr.or.fact.core.model.DTO.CorpInfoVO;
+import kr.or.fact.core.model.DTO.CorpManagerVO;
 import kr.or.fact.core.model.DTO.SimpleCorpInfoVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -24,4 +25,8 @@ public interface CorpMapper {
     CorpInfoVO getUserCorp(@Param("idx_user") long idx_user);
 
     long getCurCorpIdx();
+
+    int insertCorpManager(CorpManagerVO corpManagerVO);
+
+    ArrayList<CorpManagerVO> selectCorpManagerList(@Param("idx_corp") long idx_corp);
 }

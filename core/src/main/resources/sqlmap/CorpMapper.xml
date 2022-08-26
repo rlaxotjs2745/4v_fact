@@ -132,4 +132,31 @@
         SELECT * FROM TB_CORP_INFO ORDER BY IDX_CORP_INFO DESC
     </select>
 
+    <insert id="insertCorpManager" parameterType="kr.or.fact.core.model.DTO.CorpManagerVO">
+        INSERT INTO TB_CORP_MANAGER (
+            IDX_CORP_MANAGER,
+            MANAGER_NAME_KOR,
+            CORP_MANAGER_TYPE,
+            MPHONE_NUM,
+            EMAIL,
+            IDX_CORP_INFO,
+            IDX_USER,
+            REG_DATE,
+            LAST_UPD_DATE
+        ) VALUES (
+            SEQ_CORP_MANAGER.NEXTVAL,
+            #{manager_name_kor},
+            #{corp_manager_type},
+            #{mphone_num},
+            #{email},
+            #{idx_corp_info},
+            #{idx_user},
+            SYSDATE,
+            SYSDATE
+        )
+    </insert>
+
+    <select id="selectCorpManagerList" resultType="kr.or.fact.core.model.DTO.CorpManagerVO">
+        SELECT * FROM TB_CORP_MANAGER WHERE IDX_CORP_INFO = #{idx_corp}
+    </select>
 </mapper>

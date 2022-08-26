@@ -824,7 +824,7 @@
                             "is_applicant": 0,
                             "is_corporate_member": 1,
                             "idx_corp_info": newCorpBool ? newCorpReq : parseInt($('#corp_sel_name').val()),
-                            "sign_in_type": 0,
+                            "sign_in_type": 99, //웹가입 + 신규 기업 등록 담당자 지정
                             "is_sms_agree": $("#type-1").is(":checked") ? 1 : 0,
                             "is_email_agree": $("#type-2").is(":checked") ? 1 : 0,
                         };

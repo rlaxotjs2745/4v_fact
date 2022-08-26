@@ -1412,6 +1412,8 @@ public class IndexController {
             }
             model.addAttribute("corp", corpInfoVO);
 
+            ArrayList<CorpManagerVO> corpManagerVOArrayList = corpService.selectCorpManagerList(findUser.getIdx_corp_info());
+            model.addAttribute("corpManager", corpManagerVOArrayList);
         }
 
         getHomepageInfo(model);

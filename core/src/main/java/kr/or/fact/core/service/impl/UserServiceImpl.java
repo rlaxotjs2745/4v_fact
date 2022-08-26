@@ -99,7 +99,8 @@ public class UserServiceImpl implements UserService {
         //UserVO findUser = userDAO.getUserInfoById(userVO.getUser_id());
 
         try {
-            ret_idx = userMapper.insertUserInfo(userVO);
+            userMapper.insertUserInfo(userVO);
+            ret_idx = userMapper.getUserInfoById(userVO.getUser_id()).getIdx_user();
         }
         catch (Exception e){
 

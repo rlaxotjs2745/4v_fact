@@ -9322,3 +9322,20 @@ table.table__type--pee tbody tr.tr__subsum th {
 .p_personal-data th{
     vertical-align: middle;
 }
+
+.tap-group {
+    margin: 0 20px;
+}
+
+.tap-group button{
+    color: #000;
+    border-radius: 0px;
+}
+
+.tap-group button:hover {
+    color: #00c300;
+}
+
+.tap-group .focus {
+    border-bottom: 3px solid #00c300;
+}

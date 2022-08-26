@@ -1,7 +1,10 @@
 package kr.or.fact.core.service;
 
+import kr.or.fact.core.model.CorpMapper;
 import kr.or.fact.core.model.DTO.CorpInfoVO;
+import kr.or.fact.core.model.DTO.CorpManagerVO;
 import kr.or.fact.core.model.DTO.SimpleCorpInfoVO;
+import kr.or.fact.core.model.DTO.UserVO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,4 +22,8 @@ public interface CorpService {
     CorpInfoVO getUserCorp(long idx_user);
 
     ArrayList<CorpInfoVO> selectCorpInfo();
+
+    int insertCorpManager(UserVO userVO);
+
+    ArrayList<CorpManagerVO> selectCorpManagerList(long idx_corp);
 }
