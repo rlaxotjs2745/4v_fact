@@ -41,11 +41,11 @@
         <div class="navbar-nav align-items-lg-center ml-auto">
 
             <div class="demo-navbar-messages nav-item dropdown mr-lg-3">
-                <a class="nav-link dropdown-toggle hide-arrow" href="#" data-toggle="dropdown">
-                    <i class="far fa-comment-alt navbar-icon align-middle"></i>
-                    <span class="badge badge-primary badge-dot indicator"></span>
-                    <span class="d-lg-none align-middle">&nbsp; Messages</span>
-                </a>
+<%--                <a class="nav-link dropdown-toggle hide-arrow" href="#" data-toggle="dropdown">--%>
+<%--                    <i class="far fa-comment-alt navbar-icon align-middle"></i>--%>
+<%--                    <span class="badge badge-primary badge-dot indicator"></span>--%>
+<%--                    <span class="d-lg-none align-middle">&nbsp; Messages</span>--%>
+<%--                </a>--%>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="bg-primary text-center text-white font-weight-bold p-3">
                         4 미확인 메세지
@@ -97,11 +97,11 @@
             </div>
 
             <div class="demo-navbar-notifications nav-item dropdown mr-lg-3">
-                <a class="nav-link dropdown-toggle hide-arrow" href="#" data-toggle="dropdown">
-                    <i class="ion ion-ios-notifications-outline navbar-icon align-middle"></i>
-                    <span class="badge badge-primary badge-dot indicator"></span>
-                    <span class="d-lg-none align-middle">&nbsp; 알림</span>
-                </a>
+<%--                <a class="nav-link dropdown-toggle hide-arrow" href="#" data-toggle="dropdown">--%>
+<%--                    <i class="ion ion-ios-notifications-outline navbar-icon align-middle"></i>--%>
+<%--                    <span class="badge badge-primary badge-dot indicator"></span>--%>
+<%--                    <span class="d-lg-none align-middle">&nbsp; 알림</span>--%>
+<%--                </a>--%>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="bg-primary text-center text-white font-weight-bold p-3">
                         4 새알림
@@ -174,7 +174,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#modal-myinfo"><i class="ion ion-ios-person text-lightest"></i> &nbsp; 프로필</a>
-                    <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#modal-message"><i class="ion ion-ios-mail text-lightest"></i> &nbsp; 메세지</a>
+<%--                    <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#modal-message"><i class="ion ion-ios-mail text-lightest"></i> &nbsp; 메세지</a>--%>
                     <div class="dropdown-divider" data-toggle="modal" data-target="#modal-logout"></div>
                     <a href="logout" class="dropdown-item"><i class="ion ion-ios-log-out text-danger"></i> &nbsp; 로그아웃</a>
                 </div>

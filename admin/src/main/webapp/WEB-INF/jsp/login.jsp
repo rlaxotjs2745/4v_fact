@@ -107,8 +107,8 @@
                     <span id = "span_result" class="is-alert" style="display: none">아이디 또는 비밀번호를 찾을 수 없습니다.</span>
                     <div class="d-flex justify-content-between align-items-center m-0">
                         <label class="custom-control custom-checkbox m-0">
-                            <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-label">자동 로그인</span>
+<%--                            <input type="checkbox" class="custom-control-input">--%>
+<%--                            <span class="custom-control-label">자동 로그인</span>--%>
                         </label>
                         <button id="btn_login" type="submit" class="btn btn-primary">로그인</button>
                     </div>

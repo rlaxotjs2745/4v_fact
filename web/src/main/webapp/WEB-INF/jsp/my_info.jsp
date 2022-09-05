@@ -316,96 +316,108 @@
                                 </tr>
                                 </tbody>
 
+
+
                                 <tbody id="corp_table">
-                                <tr>
-                                    <th class="th__left">기업/단체명</th>
-                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">종목/업태</th>
-                                    <td class="td__modify">${user.user_id}</td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">사업자등록번호</th>
-                                    <td class="td__modify"><input type="tel" class="tel" value="${user.mphone_num.split("-")[0]}" style="width:80px;" id="corp_num1"/><span class="text__dash">-</span><input type="tel" id="corp_num2" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[1]}" /><span class="text__dash">-</span><input type="tel" id="corp_num3" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[2]}"/></td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">회사 주소</th>
-                                    <td class="td__modify"><input type="text" id="corp_addr_num" placeholder="우편번호"  style="width:180px;" /> <span class="text__zipcode"><a href="#" id="corp_addr_search_btn" class="btn modify btn-lg">주소검색</a></span>
-                                        <input type="text" id="corp_addr_main" placeholder="상세주소">
-                                        <input type="text" id="corp_addr_detail" placeholder="나머지 주소">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">회사전화번호</th>
-                                    <td class="td__modify"><input type="tel" class="tel" value="${user.mphone_num.split("-")[0]}" style="width:80px;" id="corp_tel_num1"/><span class="text__dash">-</span><input type="tel" id="corp_tel_num2" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[1]}" /><span class="text__dash">-</span><input type="tel" id="corp_tel_num3" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[2]}"/></td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">담당자명</th>
-                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">담당자 전화번호</th>
-                                    <td class="td__modify"><input type="tel" class="" style="width:273px;" value="${user.tel_num}" id="telnum_modify"/></td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">담당자 이메일</th>
-                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">대표 이메일</th>
-                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="XXX@XXX.XXX" style="width:180px;" />  <span class="text__dash"></span></td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">홈페이지</th>
-                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>
-                                </tr>
+                                <c:if test="${user.is_corporate_member eq 1}">
+                                    <tr>
+                                        <th class="th__left">기업/단체명</th>
+                                        <td class="td__modify"><input type="text" value="${corp.corp_name_kor}" placeholder="이름" style="width:180px;"/>  <span class="text__dash"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="th__left">종목/업태</th>
+                                        <td class="td__modify">${corp.bs_sector}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="th__left">사업자등록번호</th>
+                                        <td class="td__modify"><input type="tel" class="tel" value="${corp.company_num.split("-")[0]}" style="width:80px;" id="corp_num1" disabled/><span class="text__dash">-</span><input type="tel" id="corp_num2" class="tel" style="width:80px;" value="${corp.company_num.split("-")[1]}" disabled /><span class="text__dash">-</span><input type="tel" id="corp_num3" class="tel" style="width:80px;" value="${corp.company_num.split("-")[2]}" disabled/></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="th__left">회사 주소</th>
+                                        <td class="td__modify">
+                                            <div id="corp_addr_init">
+                                                <span class="text__zipcode">${corp.corp_addr}</span><span class="text__zipcode"><a href="#" id="corp_addr_modify_btn" class="btn modify btn-lg">주소변경</a></span>
+                                            </div>
+                                            <div id="corp_addr_modify">
+                                                <input type="text" id="corp_addr_num" placeholder="우편번호"  style="width:180px;" /> <span class="text__zipcode"><a href="#" id="corp_addr_search_btn" class="btn modify btn-lg">주소검색</a></span>
+                                                <input type="text" id="corp_addr_main" placeholder="상세주소">
+                                                <input type="text" id="corp_addr_detail" placeholder="나머지 주소">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="th__left">회사전화번호</th>
+                                        <td class="td__modify"><input type="tel" class="tel" value="${corp.tel_num.split("-")[0]}" style="width:80px;" id="corp_tel_num1"/><span class="text__dash">-</span><input type="tel" id="corp_tel_num2" class="tel" style="width:80px;" value="${corp.tel_num.split("-")[1]}" /><span class="text__dash">-</span><input type="tel" id="corp_tel_num3" class="tel" style="width:80px;" value="${corp.tel_num.split("-")[2]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="th__left">담당자명</th>
+                                        <td class="td__modify"><input type="text" value="${mainManager.manager_name_kor}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="th__left">담당자 전화번호</th>
+                                        <td class="td__modify"><input type="tel" class="tel" value="${mainManager.mphone_num.split("-")[0]}" style="width:80px;" id="manager_mphone_num1" disabled/><span class="text__dash">-</span><input type="tel" id="manager_mphone_num2" class="tel" style="width:80px;" value="${mainManager.mphone_num.split("-")[1]}" disabled /><span class="text__dash">-</span><input type="tel" id="manager_mphone_num3" class="tel" style="width:80px;" value="${mainManager.mphone_num.split("-")[2]}" disabled/></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="th__left">담당자 이메일</th>
+                                        <td class="td__modify"><input type="text" value="${mainManager.email}" placeholder="이메일" style="width:180px;" disabled /></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="th__left">대표 이메일</th>
+                                        <td class="td__modify"><input type="text" value="${corp.ceo_email}" placeholder="XXX@XXX.XXX" style="width:180px;" disabled /> </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="th__left">홈페이지</th>
+                                        <td class="td__modify"><input type="text" value="${corp.homepage}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>
+                                    </tr>
+                                </c:if>
                                 </tbody>
 
+
+
                                 <tbody id="manager_table">
-                                <tr>
-                                    <th class="th__left">기업/단체명</th>
-                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">종목/업태</th>
-                                    <td class="td__modify">${user.user_id}</td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">사업자등록번호</th>
-                                    <td class="td__modify"><input type="tel" class="tel" value="${user.mphone_num.split("-")[0]}" style="width:80px;" id="corp_num1"/><span class="text__dash">-</span><input type="tel" id="corp_num2" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[1]}" /><span class="text__dash">-</span><input type="tel" id="corp_num3" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[2]}"/></td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">회사 주소</th>
-                                    <td class="td__modify"><input type="text" id="corp_addr_num" placeholder="우편번호"  style="width:180px;" /> <span class="text__zipcode"><a href="#" id="corp_addr_search_btn" class="btn modify btn-lg">주소검색</a></span>
-                                        <input type="text" id="corp_addr_main" placeholder="상세주소">
-                                        <input type="text" id="corp_addr_detail" placeholder="나머지 주소">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">회사전화번호</th>
-                                    <td class="td__modify"><input type="tel" class="tel" value="${user.mphone_num.split("-")[0]}" style="width:80px;" id="corp_tel_num1"/><span class="text__dash">-</span><input type="tel" id="corp_tel_num2" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[1]}" /><span class="text__dash">-</span><input type="tel" id="corp_tel_num3" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[2]}"/></td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">담당자명</th>
-                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">담당자 전화번호</th>
-                                    <td class="td__modify"><input type="tel" class="" style="width:273px;" value="${user.tel_num}" id="telnum_modify"/></td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">담당자 이메일</th>
-                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">대표 이메일</th>
-                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="XXX@XXX.XXX" style="width:180px;" />  <span class="text__dash"></span></td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">홈페이지</th>
-                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>
-                                </tr>
+<%--                                <tr>--%>
+<%--                                    <th class="th__left">기업/단체명</th>--%>
+<%--                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <th class="th__left">종목/업태</th>--%>
+<%--                                    <td class="td__modify">${user.user_id}</td>--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <th class="th__left">사업자등록번호</th>--%>
+<%--                                    <td class="td__modify"><input type="tel" class="tel" value="${user.mphone_num.split("-")[0]}" style="width:80px;" id="corp_num1"/><span class="text__dash">-</span><input type="tel" id="corp_num2" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[1]}" /><span class="text__dash">-</span><input type="tel" id="corp_num3" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[2]}"/></td>--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <th class="th__left">회사 주소</th>--%>
+<%--                                    <td class="td__modify"><input type="text" id="corp_addr_num" placeholder="우편번호"  style="width:180px;" /> <span class="text__zipcode"><a href="#" id="corp_addr_search_btn" class="btn modify btn-lg">주소검색</a></span>--%>
+<%--                                        <input type="text" id="corp_addr_main" placeholder="상세주소">--%>
+<%--                                        <input type="text" id="corp_addr_detail" placeholder="나머지 주소">--%>
+<%--                                    </td>--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <th class="th__left">회사전화번호</th>--%>
+<%--                                    <td class="td__modify"><input type="tel" class="tel" value="${user.mphone_num.split("-")[0]}" style="width:80px;" id="corp_tel_num1"/><span class="text__dash">-</span><input type="tel" id="corp_tel_num2" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[1]}" /><span class="text__dash">-</span><input type="tel" id="corp_tel_num3" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[2]}"/></td>--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <th class="th__left">담당자명</th>--%>
+<%--                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <th class="th__left">담당자 전화번호</th>--%>
+<%--                                    <td class="td__modify"><input type="tel" class="" style="width:273px;" value="${user.tel_num}" id="telnum_modify"/></td>--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <th class="th__left">담당자 이메일</th>--%>
+<%--                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <th class="th__left">대표 이메일</th>--%>
+<%--                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="XXX@XXX.XXX" style="width:180px;" />  <span class="text__dash"></span></td>--%>
+<%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <th class="th__left">홈페이지</th>--%>
+<%--                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>--%>
+<%--                                </tr>--%>
                                 </tbody>
                             </table>
                         </div>
@@ -485,20 +497,39 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     var nowModify = 'user_modify';
+    var addrModifyBool = 0;
 
     $('#modify_tab').hide();
     $('#corp_table').hide();
     $('#manager_table').hide();
+    $('#corp_addr_modify').hide();
     //corp modify 조건 만들고 변환 적용 해야함
     <c:if test="${user.is_corporate_member eq 1}">
+
     $('#modify_tab').show();
+    if(${user.idx_user} != ${mainManager.idx_user}){
+        $('#manager_modify').hide();
+    }
 
     $('.tap-item').click(function(){
         $('.tap-item').removeClass('focus');
         $(this).addClass('focus');
         nowModify = $(this).attr('id');
+        console.log()
         if(nowModify == 'corp_modify'){
-
+            $('#corp_table').show();
+            $('#manager_table').hide();
+            $('#user_table').hide();
+            insertAddress("${corp.corp_addr}", 2);
+        } else if(nowModify == 'user_modify'){
+            $('#corp_table').hide();
+            $('#manager_table').hide();
+            $('#user_table').show();
+        }
+        else if(nowModify == 'manager_modify'){
+            $('#corp_table').hide();
+            $('#manager_table').show();
+            $('#user_table').hide();
         }
     })
 
@@ -507,19 +538,20 @@
     $("#user_addr_num, #user_addr_main, #addr_search_btn").click(function() {
         new daum.Postcode({
             oncomplete: function (data) {
-
                 $("#user_addr_num").val(data.zonecode);
                 $("#user_addr_main").val(data.roadAddress + " " + data.buildingName);
                 // console.log(data);
             }
         }).open();
     })
-    $("#corp_addr_num, #corp_addr_main, #corp_addr_search_btn").click(function() {
+    $("#corp_addr_num, #corp_addr_main, #corp_addr_search_btn, #corp_addr_modify_btn").click(function() {
         new daum.Postcode({
             oncomplete: function (data) {
-
+                $('#corp_addr_init').hide();
+                $('#corp_addr_modify').show();
                 $("#corp_addr_num").val(data.zonecode);
                 $("#corp_addr_main").val(data.roadAddress + " " + data.buildingName);
+                addrModifyBool = 1;
                 // console.log(data);
             }
         }).open();
@@ -534,8 +566,10 @@
                         param = {
                             "idx_user": ${user.idx_user},
                             "user_pw": $("#user_pw").val(),
-                            "addr": $("#user_addr_num").val() != "" ? "("+ $("#user_addr_num").val()+") "+$("#user_addr_main").val() +" "+$("#user_addr_detail").val() : $("#user_addr_main").val(),
-                            "mphone_num": $("#mphone_num1").val()+"-"+$("#mphone_num2").val()+"-"+$("#mphone_num3").val(),
+                            "addr": $("#user_addr_num").val() != "" ?
+                                "("+ $("#user_addr_num").val()+") "+$("#user_addr_main").val() +" "+$("#user_addr_detail").val()
+                                : $("#user_addr_main").val(),
+                            "mphone_num": $("#mphone_num1").val() + "-" + $("#mphone_num2").val() + "-" + $("#mphone_num3").val(),
                             "is_sms_agree": $("#type-1").is(":checked") ? 1 : 0,
                             "is_email_agree": $("#type-2").is(":checked") ? 1 : 0,
                             "tel_num": $("#telnum_modify").val()
@@ -582,6 +616,10 @@
             });
         }
         else if(nowModify == 'corp_modify'){
+            if(addrModifyBool){
+
+            }
+
 
         }
         else if(nowModify == 'manager_modify'){
@@ -590,33 +628,33 @@
     })
 
     function insertAddress(addr, type){
-        var bool = 0;
-        var homeCode = '';
-        var homeAddress = '';
+        var zipCodeBool = 0;
+        var zipCode = '';
+        var newAddr = ''
         for(var i = 0; i < addr.length; i++){
-            if(!bool){
-                if(addr[i] == '('){
-                    continue;
-                } else if(addr[i] == ')') {
-                    bool = 1;
-                } else {
-                    homeCode = homeCode + addr[i];
-                }
+            if(addr[i] == '(' && !zipCodeBool){
+                zipCodeBool = 1;
+                continue;
+            } else if(addr[i] == ')' && zipCodeBool){
+                zipCodeBool = 0;
+                continue;
+            } else if(zipCodeBool){
+                zipCode += addr[i];
             } else {
-                homeAddress = homeAddress + addr[i];
+                newAddr += addr[i];
             }
         }
         if(type == 1){
-            $('#user_addr_num').val(homeCode);
-            $('#user_addr_main').val(homeAddress);
+            $('#user_addr_num').val(zipCode);
+            $('#user_addr_main').val(newAddr);
         } else if(type == 2){
-            $('#corp_addr_num').val(homeCode);
-            $('#corp_addr_main').val(homeAddress);
+            $('#corp_addr_num').val(zipCode);
+            $('#corp_addr_main').val(newAddr);
         }
     }
 
     $('#modify_modal_open').click(function(){
-        insertAddress("${user.addr}", 0);
+        insertAddress("${user.addr}", 1);
     })
 
 

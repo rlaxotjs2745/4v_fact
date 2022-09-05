@@ -8,73 +8,73 @@
             <div>상담신청 관리</div>
         </h4>
 
-        <div class="card px-4 pt-4 mb-4">
-            <div class="form-row mb-4">
-                <div class="col-md-3 ">
-                    <label class="form-label text-muted">상담 구분</label>
-                    <div class="form-inline mt-2">
-                        <label class="custom-control custom-checkbox mr-2">
-                            <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-label">전체</span>
-                        </label>
-                        <label class="custom-control custom-checkbox mr-2">
-                            <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-label">사전상담</span>
-                        </label>
-                        <label class="custom-control custom-checkbox mr-2">
-                            <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-label">사용승인 후 상담</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-2 ">
-                    <label class="form-label text-muted">상담 접수</label>
-                    <div class="form-inline">
-                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio" checked="">전체
-                            </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio"> 신규
-                            </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 해결
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-5 ">
-                    <label class="form-label text-muted">상담 접수일</label>
-                    <div class="form-inline">
-                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio" checked="">오늘
-                            </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio"> 1주일
-                            </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 1개월
-                            </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 3개월
-                            </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 6개월
-                            </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 1년이상
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2 text-right">
-                    <label class="form-label d-none d-md-block">&nbsp;</label>
-                    <button type="button" class="btn btn-outline-default">초기화</button>
-                    <button type="button" class="btn btn-success">조회</button>
-                </div>
-            </div>
-        </div>
+<%--        <div class="card px-4 pt-4 mb-4">--%>
+<%--            <div class="form-row mb-4">--%>
+<%--                <div class="col-md-3 ">--%>
+<%--                    <label class="form-label text-muted">상담 구분</label>--%>
+<%--                    <div class="form-inline mt-2">--%>
+<%--                        <label class="custom-control custom-checkbox mr-2">--%>
+<%--                            <input type="checkbox" class="custom-control-input">--%>
+<%--                            <span class="custom-control-label">전체</span>--%>
+<%--                        </label>--%>
+<%--                        <label class="custom-control custom-checkbox mr-2">--%>
+<%--                            <input type="checkbox" class="custom-control-input">--%>
+<%--                            <span class="custom-control-label">사전상담</span>--%>
+<%--                        </label>--%>
+<%--                        <label class="custom-control custom-checkbox mr-2">--%>
+<%--                            <input type="checkbox" class="custom-control-input">--%>
+<%--                            <span class="custom-control-label">사용승인 후 상담</span>--%>
+<%--                        </label>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="col-md-2 ">--%>
+<%--                    <label class="form-label text-muted">상담 접수</label>--%>
+<%--                    <div class="form-inline">--%>
+<%--                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">--%>
+<%--                            <label class="btn btn-secondary">--%>
+<%--                                <input type="radio" name="btn-radio" checked="">전체--%>
+<%--                            </label>--%>
+<%--                            <label class="btn btn-secondary">--%>
+<%--                                <input type="radio" name="btn-radio"> 신규--%>
+<%--                            </label>--%>
+<%--                            <label class="btn btn-secondary ">--%>
+<%--                                <input type="radio" name="btn-radio"> 해결--%>
+<%--                            </label>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="col-md-5 ">--%>
+<%--                    <label class="form-label text-muted">상담 접수일</label>--%>
+<%--                    <div class="form-inline">--%>
+<%--                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">--%>
+<%--                            <label class="btn btn-secondary">--%>
+<%--                                <input type="radio" name="btn-radio" checked="">오늘--%>
+<%--                            </label>--%>
+<%--                            <label class="btn btn-secondary">--%>
+<%--                                <input type="radio" name="btn-radio"> 1주일--%>
+<%--                            </label>--%>
+<%--                            <label class="btn btn-secondary ">--%>
+<%--                                <input type="radio" name="btn-radio"> 1개월--%>
+<%--                            </label>--%>
+<%--                            <label class="btn btn-secondary ">--%>
+<%--                                <input type="radio" name="btn-radio"> 3개월--%>
+<%--                            </label>--%>
+<%--                            <label class="btn btn-secondary ">--%>
+<%--                                <input type="radio" name="btn-radio"> 6개월--%>
+<%--                            </label>--%>
+<%--                            <label class="btn btn-secondary ">--%>
+<%--                                <input type="radio" name="btn-radio"> 1년이상--%>
+<%--                            </label>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="col-md-2 text-right">--%>
+<%--                    <label class="form-label d-none d-md-block">&nbsp;</label>--%>
+<%--                    <button type="button" class="btn btn-outline-default">초기화</button>--%>
+<%--                    <button type="button" class="btn btn-success">조회</button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
 
         <div class="card">
             <h6 class="card-header with-elements">
@@ -270,7 +270,7 @@
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
                         <div>
-                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal" id="delete_consult">삭제</button>
+<%--                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal" id="delete_consult">삭제</button>--%>
                             <button type="button" class="btn btn-primary" id="update_consult">저장</button>
                         </div>
                     </div>

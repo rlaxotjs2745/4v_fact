@@ -357,7 +357,7 @@ public class APIController {
             MimeMessage mail = mailSender.createMimeMessage();
             MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
 
-            mailHelper.setFrom("스마트팜 실증단지 혁신밸리"); // 보내는 사람 정보도 와야함
+            mailHelper.setFrom("스마트팜 실증단지 혁신밸리 <innovalley@smartfarmkorea.or.kr>"); // 보내는 사람 정보도 와야함
 //            mailHelper.setFrom(new InternetAddress("taeseon@4thevision.com")); // 보내는 사람 정보도 와야함
             mailHelper.setTo(receiver);
             mailHelper.setSubject(title != null ? content : "제목없는 이메일");

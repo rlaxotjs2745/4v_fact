@@ -1411,9 +1411,17 @@ public class IndexController {
                 findUser.setIs_corporate_member(CONSTANT.no);
             }
             model.addAttribute("corp", corpInfoVO);
-
+            CorpManagerVO mainManager = new CorpManagerVO();
             ArrayList<CorpManagerVO> corpManagerVOArrayList = corpService.selectCorpManagerList(findUser.getIdx_corp_info());
+            if(corpManagerVOArrayList.size() > 0){
+                for(int i = 0; i < corpManagerVOArrayList.size(); i++){
+                    if(corpManagerVOArrayList.get(i).getCorp_manager_type() == 0){
+                        mainManager = corpManagerVOArrayList.get(i);
+                    }
+                }
+            }
             model.addAttribute("corpManager", corpManagerVOArrayList);
+            model.addAttribute("mainManager", mainManager);
         }
 
         getHomepageInfo(model);

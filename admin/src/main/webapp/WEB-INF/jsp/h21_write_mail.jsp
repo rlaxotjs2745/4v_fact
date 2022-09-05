@@ -6,16 +6,6 @@
         <h4 class="font-weight-bold py-3 mb-4">이메일 발송</h4>
     </div>
 
-    <div class="modal-footer justify-content-between mode-view">
-        <div>
-            <%--                <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">닫기</button>--%>
-            <%--                <button type="button" class="btn btn-secondary">미리보기</button>--%>
-        </div>
-        <div>
-            <button type="submit" class="btn btn-primary send_mail">바로 보내기</button>
-            <button type="button" class="btn btn-outline-primary mr-2">보내기 예약</button>
-        </div>
-    </div>
     <div class="form-group row">
         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">받는 사람</label>
         <div class="col-md-10">
@@ -60,6 +50,7 @@
             <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
             <button type="button" class="btn btn-outline-primary mr-2">보내기 예약</button>
             <button type="submit" class="btn btn-primary send_mail" >바로 보내기</button>
+<%--            <button type="submit" class="btn btn-primary send_mail" >바로 보내기<img src="https://acegif.com/wp-content/uploads/loading-34.gif" style="width: 20px"></button>--%>
         </div>
 
         <div>
@@ -71,7 +62,13 @@
     var sendMailBtn = document.querySelectorAll('.send_mail');
     sendMailBtn.forEach(btn=>btn.addEventListener('click', sendMailNow));
 
+    var send = 0;
+
     function sendMailNow(){
+        if(send){
+            return alert('메일 전송 중입니다.');
+        }
+        send = 1;
         event.preventDefault();
         var fileForm = new FormData();
         fileForm.append("receiver",document.querySelector('#email_receiver').value);
@@ -95,10 +92,12 @@
             enctype: 'multipart/form-data',
             success: function(result){
                 console.log(result);
-                alert("메일 전송이 완료되었습니다.", () => window.redirect("/"))
+                send = 0;
+                alert("메일 전송이 완료되었습니다.", () => window.redirect("index"))
             },
             error:function(err){
                 console.log(err);
+                send = 0;
             }
         });
         // event.preventDefault();

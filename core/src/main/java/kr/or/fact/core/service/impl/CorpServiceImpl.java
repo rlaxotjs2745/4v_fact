@@ -57,7 +57,11 @@ public class CorpServiceImpl implements CorpService {
     public int insertCorpManager(UserVO userVO){
         CorpManagerVO corpManagerVO = new CorpManagerVO();
         corpManagerVO.setManager_name_kor(userVO.getUser_name());
-        corpManagerVO.setCorp_manager_type(0);
+        if(userVO.getSign_in_type() == 99){
+            corpManagerVO.setCorp_manager_type(0);
+        } else {
+            corpManagerVO.setCorp_manager_type(99);
+        }
         corpManagerVO.setMphone_num(userVO.getMphone_num());
         corpManagerVO.setEmail(userVO.getUser_id());
         corpManagerVO.setIdx_corp_info(userVO.getIdx_corp_info());

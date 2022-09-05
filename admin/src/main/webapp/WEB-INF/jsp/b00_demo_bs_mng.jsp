@@ -96,7 +96,7 @@
             <h6 class="card-header font-weight-bold with-elements">
                 <div class="card-header-title">실증사업 목록</div>
                 <div class="card-header-elements ml-auto">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals-business" data-what="mode-new">+ 신규 사업 등록</button>
+                    <button type="button" id="btn_new_domo_bs" class="btn btn-primary" data-toggle="modal" data-target="#modals-business" data-what="mode-new">+ 신규 사업 등록</button>
                 </div>
             </h6>
             <div class="card-datatable table-responsive pt-0 pb-3">
@@ -653,6 +653,10 @@
             })
         })
 
+        $('#btn_new_domo_bs').click(function(){
+            initSummerNote();
+        })
+
 
         function initSummerNote(){
             $('.summernote').summernote({
@@ -821,6 +825,7 @@
                     if (result.result_code == "SUCCESS") {
                         alert("실증 사업이 등록되었습니다.");
                         $('#modals-business').modal('hide');
+                        $(".summernote").summernote('destroy');
                     } else {
                         alert("이미 사용 중이거나 사용이 불가능한 사업번호입니다.");
                     }

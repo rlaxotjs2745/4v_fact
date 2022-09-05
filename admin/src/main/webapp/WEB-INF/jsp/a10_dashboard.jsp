@@ -65,7 +65,7 @@
                     <div class="card-header-title">공고별 이용신청 현황</div>
 
                     <div class="card-header-elements ml-auto">
-                        <button type="button" class="btn btn-default btn-xs md-btn-flat">Show more</button>
+<%--                        <button type="button" class="btn btn-default btn-xs md-btn-flat">Show more</button>--%>
                     </div>
 
                 </h6>
@@ -271,32 +271,32 @@
             </div>
         </div>
     </div>
-    <div class="row d-flex justify-content-center">
-        <div class="col-sm-6 col-xl-3">
-            <div class="btn btn-lg btn-block btn-success w-100">
-                현황보고서 작성
-                <span class="fas fa-arrow-right"></span>
-            </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="btn btn-lg btn-block btn-success">
-                신청서 평가
-                <span class="fas fa-arrow-right"></span>
-            </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="btn btn-lg btn-block btn-success">
-                실증성적서 발급
-                <span class="fas fa-arrow-right"></span>
-            </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="btn btn-lg btn-block btn-success">
-                SMS 작성
-                <span class="fas fa-arrow-right"></span>
-            </div>
-        </div>
-    </div>
+<%--    <div class="row d-flex justify-content-center">--%>
+<%--        <div class="col-sm-6 col-xl-3">--%>
+<%--            <div class="btn btn-lg btn-block btn-success w-100">--%>
+<%--                현황보고서 작성--%>
+<%--                <span class="fas fa-arrow-right"></span>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="col-sm-6 col-xl-3">--%>
+<%--            <div class="btn btn-lg btn-block btn-success">--%>
+<%--                신청서 평가--%>
+<%--                <span class="fas fa-arrow-right"></span>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="col-sm-6 col-xl-3">--%>
+<%--            <div class="btn btn-lg btn-block btn-success">--%>
+<%--                실증성적서 발급--%>
+<%--                <span class="fas fa-arrow-right"></span>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="col-sm-6 col-xl-3">--%>
+<%--            <div class="btn btn-lg btn-block btn-success">--%>
+<%--                SMS 작성--%>
+<%--                <span class="fas fa-arrow-right"></span>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
 </div>
 
 

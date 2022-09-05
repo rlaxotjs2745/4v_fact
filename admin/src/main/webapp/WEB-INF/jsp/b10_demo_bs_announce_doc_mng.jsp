@@ -68,7 +68,7 @@
             <h6 class="card-header font-weight-bold with-elements">
                 <div class="card-header-title">사업 공고문 목록</div>
                 <div class="card-header-elements ml-auto">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals-business" data-what="mode-new">+ 신규 공고문 작성</button>
+<%--                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals-business" data-what="mode-new">+ 신규 공고문 작성</button>--%>
                 </div>
             </h6>
             <div class="card-datatable table-responsive pt-0 pb-3">
