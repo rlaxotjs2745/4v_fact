@@ -211,6 +211,7 @@
 
 </div>
 <script>
+
     function printArticle() {
         const beforeBody = document.body;
         const printArticle = document.getElementsByClassName('articleArea')[0];

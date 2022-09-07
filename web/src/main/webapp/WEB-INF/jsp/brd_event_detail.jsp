@@ -196,6 +196,7 @@
 <%@include file ="footer.jsp" %>
 <%@include file ="script.jsp" %>
 <script>
+
     // function downloadFile(filename){
     //     const encFileName = encodeURI(filename);
     //     $.ajax({

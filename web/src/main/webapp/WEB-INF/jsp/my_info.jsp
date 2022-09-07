@@ -498,6 +498,7 @@
 <script>
     var nowModify = 'user_modify';
     var addrModifyBool = 0;
+    var corpTelNumBool = 0;
 
     $('#modify_tab').hide();
     $('#corp_table').hide();
@@ -534,6 +535,17 @@
     })
 
     </c:if>
+
+    $('#corp_tel_num1, #corp_tel_num2, #corp_tel_num3').change(function(){
+        var newTel_num = $('#corp_tel_num1').val() + '-' + $('#corp_tel_num2').val() + '-' + $('#corp_tel_num3').val();
+        if(newTel_num != '${corp.tel_num}'){
+            corpTelNumBool = 1;
+        } else {
+            corpTelNumBool = 0;
+        }
+    })
+
+
 
     $("#user_addr_num, #user_addr_main, #addr_search_btn").click(function() {
         new daum.Postcode({
@@ -616,7 +628,12 @@
             });
         }
         else if(nowModify == 'corp_modify'){
+            param = {};
             if(addrModifyBool){
+
+            }
+            if(!corpTelNumBool){
+                param.tel_num = $('#corp_tel_num1').val() + '-' + $('#corp_tel_num2').val() + '-' + $('#corp_tel_num3').val()
 
             }
 

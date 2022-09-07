@@ -45,7 +45,19 @@ public class EventContentServiceImpl implements EventContentService {
 
     @Override
     public List<EventContentVO> getOpenEventContentList(int page, int count, String filter, String query) {
-        return eventContentMapper.getOpenEventContentList(page, count, filter, query);
+        List<EventContentVO> eventContentVOList = eventContentMapper.getOpenEventContentList(page, count, filter, query);
+
+        List<EventContentVO> thumbList = eventContentMapper.getThum();
+
+        for (int i = 0; i < eventContentVOList.size(); i++){
+            for(int l = 0; l < thumbList.size(); l++){
+                if(eventContentVOList.get(i).getIdx_event_content() == thumbList.get(l).getIdx_event_content()){
+                    eventContentVOList.get(i).setThumb_img_file_path(thumbList.get(l).getFile_path());
+                }
+            }
+        }
+
+        return eventContentVOList;
     }
 
     @Override
