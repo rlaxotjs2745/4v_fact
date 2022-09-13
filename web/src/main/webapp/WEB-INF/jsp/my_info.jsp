@@ -193,6 +193,12 @@
                             </colgroup>
                             <tbody>
                             <tr>
+                                <th class="th__left">메인 담당자</th>
+                                <td class="td__left" style="white-space: nowrap;">
+                                    ${mainManager.manager_name_kor} | ${mainManager.mphone_num}
+                                </td>
+                            </tr>
+                            <tr>
                                 <th class="th__left">일반 담당자 목록</th>
                                 <td class="td__left" style="white-space: nowrap;">
                                         <ul>
@@ -247,7 +253,7 @@
                                     <td class="td__modify">${user.user_id}</td>
                                 </tr>
                                 <tr>
-                                    <th class="th__left">비밀번호<span class="text__essential">*</span></th>
+                                    <th class="th__left">비밀번호</th>
                                     <td class="td__modify is-alert"><input type="password" style="width:350px;" id="user_pw">
                                         <br><span class="text--guide is-alert" style="display: none">비밀번호 규칙에 맞지 않습니다. 다시 입력해 주세요.</span>
                                         <div class="text__message">
@@ -261,7 +267,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="th__left">비밀번호 확인<span class="text__essential">*</span></th>
+                                    <th class="th__left">비밀번호 확인</th>
                                     <td class="td__modify"><input type="password" id="user_pwcf"placeholder="사용자 비밀번호 입력" style="width:350px;"></td>
                                 </tr>
                                 <tr>
@@ -287,11 +293,19 @@
                                     <th class="th__left">정보수신동의<span class="text__essential">*</span></th>
                                     <td class="td__modify">전북 김제 스마트팜 실증밸리 실증단지의 정보를 &nbsp; &nbsp;
                                         <div class="radio radio--inline">
-                                            <input type="radio" id="ad-1" name="ad-range">
+                                            <input type="radio" id="ad-1" name="ad-range"
+                                                <c:if test="${user.is_maketing_agree eq 1}">
+                                                    checked
+                                                </c:if>
+                                            >
                                             <label for="ad-1">네 받습니다.</label>
                                         </div>
                                         <div class="radio radio--inline">
-                                            <input type="radio" id="ad-2" name="ad-range">
+                                            <input type="radio" id="ad-2" name="ad-range"
+                                            <c:if test="${user.is_maketing_agree eq 0}">
+                                                   checked
+                                            </c:if>
+                                            >
                                             <label for="ad-2">아니오 받지 않습니다.</label>
                                         </div></td>
                                 </tr>
@@ -375,49 +389,55 @@
 
 
                                 <tbody id="manager_table">
-<%--                                <tr>--%>
-<%--                                    <th class="th__left">기업/단체명</th>--%>
-<%--                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>--%>
-<%--                                </tr>--%>
-<%--                                <tr>--%>
-<%--                                    <th class="th__left">종목/업태</th>--%>
-<%--                                    <td class="td__modify">${user.user_id}</td>--%>
-<%--                                </tr>--%>
-<%--                                <tr>--%>
-<%--                                    <th class="th__left">사업자등록번호</th>--%>
-<%--                                    <td class="td__modify"><input type="tel" class="tel" value="${user.mphone_num.split("-")[0]}" style="width:80px;" id="corp_num1"/><span class="text__dash">-</span><input type="tel" id="corp_num2" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[1]}" /><span class="text__dash">-</span><input type="tel" id="corp_num3" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[2]}"/></td>--%>
-<%--                                </tr>--%>
-<%--                                <tr>--%>
-<%--                                    <th class="th__left">회사 주소</th>--%>
-<%--                                    <td class="td__modify"><input type="text" id="corp_addr_num" placeholder="우편번호"  style="width:180px;" /> <span class="text__zipcode"><a href="#" id="corp_addr_search_btn" class="btn modify btn-lg">주소검색</a></span>--%>
-<%--                                        <input type="text" id="corp_addr_main" placeholder="상세주소">--%>
-<%--                                        <input type="text" id="corp_addr_detail" placeholder="나머지 주소">--%>
-<%--                                    </td>--%>
-<%--                                </tr>--%>
-<%--                                <tr>--%>
-<%--                                    <th class="th__left">회사전화번호</th>--%>
-<%--                                    <td class="td__modify"><input type="tel" class="tel" value="${user.mphone_num.split("-")[0]}" style="width:80px;" id="corp_tel_num1"/><span class="text__dash">-</span><input type="tel" id="corp_tel_num2" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[1]}" /><span class="text__dash">-</span><input type="tel" id="corp_tel_num3" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[2]}"/></td>--%>
-<%--                                </tr>--%>
-<%--                                <tr>--%>
-<%--                                    <th class="th__left">담당자명</th>--%>
-<%--                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>--%>
-<%--                                </tr>--%>
-<%--                                <tr>--%>
-<%--                                    <th class="th__left">담당자 전화번호</th>--%>
-<%--                                    <td class="td__modify"><input type="tel" class="" style="width:273px;" value="${user.tel_num}" id="telnum_modify"/></td>--%>
-<%--                                </tr>--%>
-<%--                                <tr>--%>
-<%--                                    <th class="th__left">담당자 이메일</th>--%>
-<%--                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>--%>
-<%--                                </tr>--%>
-<%--                                <tr>--%>
-<%--                                    <th class="th__left">대표 이메일</th>--%>
-<%--                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="XXX@XXX.XXX" style="width:180px;" />  <span class="text__dash"></span></td>--%>
-<%--                                </tr>--%>
-<%--                                <tr>--%>
-<%--                                    <th class="th__left">홈페이지</th>--%>
-<%--                                    <td class="td__modify"><input type="text" value="${user.user_name}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>--%>
-<%--                                </tr>--%>
+                                <c:if test="${user.is_corporate_member ne 1}">
+                                    담당자 변경 권한이 없습니다.
+                                </c:if>
+                                <c:if test="${user.idx_user eq mainManager.idx_user}">
+
+                                    <tr>
+                                        <th class="th__left">메인 담당자</th>
+                                        <td class="td__left" style="white-space: nowrap;">
+                                                ${mainManager.manager_name_kor} | ${mainManager.mphone_num}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="th__left">서브 담당자 목록</th>
+                                        <td class="td__left" style="white-space: nowrap;">
+                                            <ul>
+                                                <c:forEach items="${corpManager}" var="man">
+                                                    <c:if test="${man.corp_manager_type != 0}">
+                                                        <li>
+                                                                ${man.manager_name_kor} | ${man.email}
+                                                                    <select id="modify_manager_type_${man.idx_user}" class="form-control form-control-sm d-inline-block align-middle mr-1 modify_manager_type" style="width: 100px">
+                                                                        <option value="0">메인 담당자</option>
+                                                                        <option value="1" selected>서브 담당자</option>
+                                                                        <option value="99">일반 기업 회원</option>
+                                                                    </select>
+                                                        </li>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="th__left">일반 기업 회원 목록</th>
+                                        <td class="td__left" style="white-space: nowrap;">
+                                            <ul>
+                                                <c:forEach items="${corpUser}" var="cou">
+                                                    <li>
+                                                            ${cou.user_name} | ${cou.mphone_num}
+                                                                <select id="modify_manager_type_${cou.idx_user}" class="form-control form-control-sm d-inline-block align-middle mr-1 modify_manager_type" style="width: 150px; padding: 5px 45px 5px 16px">
+                                                                    <option value="0">메인 담당자</option>
+                                                                    <option value="1">서브 담당자</option>
+                                                                    <option value="99" selected>일반 기업 회원</option>
+                                                                </select>
+                                                    </li>
+                                                </c:forEach>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                </c:if>
                                 </tbody>
                             </table>
                         </div>
@@ -569,6 +589,12 @@
         }).open();
     })
 
+    $('.modify_manager_type').change(function(){
+        console.log($(this).val());
+        console.log($(this).attr('id'));
+
+    })
+
     $("#info_modify").click(function(){
         var param;
         if(nowModify == 'user_modify'){
@@ -602,6 +628,7 @@
                     "mphone_num": $("#mphone_num1").val()+"-"+$("#mphone_num2").val()+"-"+$("#mphone_num3").val(),
                     "is_sms_agree": $("#type-1").is(":checked") ? 1 : 0,
                     "is_email_agree": $("#type-2").is(":checked") ? 1 : 0,
+                    "is_maketing_agree": $('#ad-1').is('checked') ? 1 : 0,
                     "tel_num": $("#telnum_modify").val()
                 }
             }

@@ -17,6 +17,7 @@ import kr.or.fact.core.util.CONSTANT;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -244,4 +245,8 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public ArrayList<UserVO> getUserListInCorp(long idx_corp){
+        return userMapper.getUserListInCorp(idx_corp);
+    }
 }

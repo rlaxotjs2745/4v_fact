@@ -313,4 +313,7 @@
         WHERE IDX_USER= #{idx_user}
     </update>
 
+    <select id="getUserListInCorp" resultType="kr.or.fact.core.model.DTO.UserVO">
+        SELECT * FROM TB_USER WHERE IDX_CORP_INFO = #{idx_corp}
+    </select>
 </mapper>

@@ -757,16 +757,16 @@
         if (!confirmIdBool) return alert('적절한 이메일 형식이 아닙니다.\n(공백, 특수문자, 한글 등)');
         if (!confirmPwBool) return alert('적절한 비밀번호 형식이 아닙니다.');
         if (!confirmPhoneBool) return alert('휴대폰번호는 숫자만 입력이 가능합니다.');
-        if (!confirmCeoPhoneBool) return alert('대표 휴대폰번호는 숫자만 입력이 가능합니다.');
-        if (!confirmCeoNameBool) return alert('대표 이름은 한글만 입력이 가능합니다.');
-        if (!confirmCorpTelBool) return alert('회사 전화번호는 숫자만 입력이 가능합니다.');
-        if (!confirmCorpFaxBool) return alert('팩스번호는 숫자만 입력이 가능합니다.');
-        if (!confirmCorpNameBool) return alert('회사 이름 중복확인을 해주세요.');
 
         var newCorpReq = 1;
         var param;
 
         if(newCorpBool){
+            if (!confirmCeoPhoneBool) return alert('대표 휴대폰번호는 숫자만 입력이 가능합니다.');
+            if (!confirmCeoNameBool) return alert('대표 이름은 한글만 입력이 가능합니다.');
+            if (!confirmCorpTelBool) return alert('회사 전화번호는 숫자만 입력이 가능합니다.');
+            if (!confirmCorpFaxBool) return alert('팩스번호는 숫자만 입력이 가능합니다.');
+            if (!confirmCorpNameBool) return alert('회사 이름 중복확인을 해주세요.');
             var corpParam = {
                 corp_name_kor: $('#corp_name_kor').val(), //*
                 company_num: $('#corp_num1').val()+ '-' + $('#corp_num2').val() + '-' + $('#corp_num3').val(), //*

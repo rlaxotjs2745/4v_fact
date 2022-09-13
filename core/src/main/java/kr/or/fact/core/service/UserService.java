@@ -3,6 +3,7 @@ package kr.or.fact.core.service;
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.model.UserMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface UserService {
@@ -51,4 +52,6 @@ public interface UserService {
     int getDormantUserTotalCount(int sign_in_type);
 
     int updateUserInfoSelf(UserVO userVO);
+
+    ArrayList<UserVO> getUserListInCorp(long idx_corp);
 }

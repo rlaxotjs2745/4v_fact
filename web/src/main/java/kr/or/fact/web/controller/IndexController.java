@@ -1420,6 +1420,26 @@ public class IndexController {
                     }
                 }
             }
+
+            if(findUser.getIdx_user() == mainManager.getIdx_user()){
+                ArrayList<UserVO> corpUserVOArrayList = userService.getUserListInCorp(findUser.getIdx_corp_info());
+                ArrayList<UserVO> newCorpUserVOArrayList = new ArrayList<>();
+                for (int i = 0; i < corpUserVOArrayList.size(); i++){
+                    Boolean isContainManager = false;
+                    for(int l = 0; l < corpManagerVOArrayList.size(); l++){
+                        if(corpManagerVOArrayList.get(l).getIdx_user() == corpUserVOArrayList.get(i).getIdx_user()){
+                            isContainManager = true;
+                            break;
+                        }
+                    }
+                    if(!isContainManager){
+                        newCorpUserVOArrayList.add(corpUserVOArrayList.get(i));
+                    }
+                }
+                System.out.println(newCorpUserVOArrayList);
+                model.addAttribute("corpUser", newCorpUserVOArrayList);
+            }
+
             model.addAttribute("corpManager", corpManagerVOArrayList);
             model.addAttribute("mainManager", mainManager);
         }

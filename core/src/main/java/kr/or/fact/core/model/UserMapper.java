@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.security.core.parameters.P;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mapper
@@ -55,6 +56,7 @@ public  interface UserMapper {
 
     int updateUserInfoSelfWithPw(UserVO userVO);
 
+    ArrayList<UserVO> getUserListInCorp(@Param("idx_corp") long idx_corp);
 
 
 
