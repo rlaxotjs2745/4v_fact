@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -409,6 +410,44 @@ public class WebAPIController {
 
         return resultVO;
     }
+
+    @RequestMapping(value = "/change_manager_type",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO change_manager_type(HttpSession session,
+                                @RequestBody CorpManagerVO corpManagerVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("저장했습니다.");
+
+        try{
+            corpService.changeCorpManagerType(corpManagerVO);
+        } catch (Exception e){
+            resultVO.setResult_str("담당자 상태변경에 실패했습니다.");
+            resultVO.setResult_code("ERROR_1001");
+            System.out.println(e.toString());
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/corp_modify",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO corp_modify(HttpSession session,
+                                 @RequestBody CorpInfoVO corpInfoVO) {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("저장했습니다.");
+
+        try{
+            corpService.updateCorpInfo(corpInfoVO);
+        } catch (Exception e){
+            resultVO.setResult_str("기업 정보 변경에 실패했습니다.");
+            resultVO.setResult_code("ERROR_1001");
+            System.out.println(e.toString());
+        }
+
+        return resultVO;
+    }
+
 
     //실증단지 이용 신청 프로세스
     //app_step1

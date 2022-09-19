@@ -135,25 +135,35 @@
                     </div>
                 </div>--%>
 
-                <h3 class="page__subject">전북 김제 스마트팜 혁신밸리 실증단지 조직 및 직원</h3>
+                <h3 class="page__subject">
+                    <c:if test="${profile == 'sangju-prod'}">
+                        경북 상주 스마트팜 혁신밸리 실증단지 조직 및 직원
+                    </c:if>
+                    <c:if test="${profile == 'gimje-prod'}">
+                        전북 김제 스마트팜 혁신밸리 실증단지 조직 및 직원
+                    </c:if>
+                    <c:if test="${profile == 'local'}">
+                        전북 김제 스마트팜 혁신밸리 실증단지 조직 및 직원
+                    </c:if>
+                </h3>
                 <div class="table__type team--table is-active" id="team-01">
                     <table class="table__type--normal">
                         <colgroup>
-                            <col style="width:15%"></col>
-                            <col style="width:15%"></col>
                             <col style="width:30%"></col>
                             <col style="width:15%"></col>
-                            <col style="width:15%"></col>
+<%--                            <col style="width:30%"></col>--%>
                             <col style="width:30%"></col>
+<%--                            <col style="width:15%"></col>--%>
+<%--                            <col style="width:30%"></col>--%>
                         </colgroup>
                         <thead>
                         <tr>
                             <th>소속</th>
                             <th>성명</th>
-                            <th>담당업무</th>
+<%--                            <th>담당업무</th>--%>
                             <th>직위</th>
-                            <th>전화번호</th>
-                            <th>이메일</th>
+<%--                            <th>전화번호</th>--%>
+<%--                            <th>이메일</th>--%>
                         </tr>
                         </thead>
                         <tbody>
@@ -163,10 +173,10 @@
                         <tr class="">
                             <td class="text-center">${coworker.devision}</td>
                             <td class="text-center">${coworker.coworker_name}</td>
-                            <td class="text-center">${coworker.job_role}</td>
+<%--                            <td class="text-center">${coworker.job_role}</td>--%>
                             <td class="text-center">${coworker.job_title}</td>
-                            <td class="text-center">${coworker.tel_num}</td>
-                            <td class="text-center">${coworker.email}</td>
+<%--                            <td class="text-center">${coworker.tel_num}</td>--%>
+<%--                            <td class="text-center">${coworker.email}</td>--%>
                         </tr>
                         </c:forEach>
                         </c:when>

@@ -77,7 +77,15 @@
                         <tr>
                             <th>항목</th>
                             <th>값</th>
-                            <th>전북 김제</th>
+                            <c:if test="${profile == 'sangju-prod'}">
+                                <th>경북 상주</th>
+                            </c:if>
+                            <c:if test="${profile == 'gimje-prod'}">
+                                <th>전북 김제</th>
+                            </c:if>
+                            <c:if test="${profile == 'local'}">
+                                <th>전북 김제</th>
+                            </c:if>
                             <th>값</th>
                         </tr>
                         </thead>

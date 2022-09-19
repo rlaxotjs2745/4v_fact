@@ -1163,7 +1163,6 @@ td {
     text-align: center;
     font-size: 15px;
     line-height: 1.5;
-    letter-spacing: -.25;
     vertical-align: middle;
     font-weight: 600;
     color: #000
@@ -1190,7 +1189,6 @@ td {
     padding: 15px;
     font-size: 14px;
     line-height: 1.5;
-    letter-spacing: -.25;
     vertical-align: middle;
     font-weight: 400;
     color: #000
@@ -2566,12 +2564,12 @@ td {
 }
 
 .swiper-container-horizontal.swiper-container-css-mode>.swiper-wrapper {
-    -ms-scroll-snap-type: x mandatory;
+    /*-ms-scroll-snap-type: x mandatory;*/
     scroll-snap-type: x mandatory
 }
 
 .swiper-container-vertical.swiper-container-css-mode>.swiper-wrapper {
-    -ms-scroll-snap-type: y mandatory;
+    /*-ms-scroll-snap-type: y mandatory;*/
     scroll-snap-type: y mandatory
 }
 
@@ -3447,7 +3445,7 @@ button.swiper-pagination-bullet {
     -ms-flex-align: center;
     -webkit-box-align: center;
     align-items: center;
-    -ms-flex-pack: flex-start;
+    /*-ms-flex-pack: flex-start;*/
     -webkit-box-pack: start;
     justify-content: flex-start
 }
@@ -4358,7 +4356,7 @@ html {
 
 .nav ul.nav--depth2>li a:hover {
     color: #00c300;
-    border-bottom: solid 1px #00c300
+    /*border-bottom: solid 1px #00c300*/
 }
 
 .common__control {
@@ -8658,7 +8656,7 @@ button.danger:disabled {
 
 .app__step .step+.step:after {
     content: "";
-    background: url(../image/ico_arrow_right.png) no-repeat 0 0;
+    background: url(../image/ico-arrow-right.png) no-repeat 0 0;
     background-size: 16px 16px;
     position: absolute;
     left: -20px;
@@ -8749,7 +8747,7 @@ button.danger:disabled {
 
 .my__step .step+.step:after {
     content: "";
-    background: url(../image/ico_arrow_right.png) no-repeat 0 0;
+    background: url(../image/ico-arrow-right.png) no-repeat 0 0;
     background-size: 16px 16px;
     position: absolute;
     left: -20px;

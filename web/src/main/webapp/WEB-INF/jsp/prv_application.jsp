@@ -222,12 +222,32 @@
                         </tr>
                         <tr>
                             <td>6</td>
-                            <td>전라북도에 본사를 둔 기업</td>
+                            <td>
+                                <c:if test="${profile == 'sangju-prod'}">
+                                    경상북도에 본사를 둔 기업
+                                </c:if>
+                                <c:if test="${profile == 'gimje-prod'}">
+                                    전라북도에 본사를 둔 기업
+                                </c:if>
+                                <c:if test="${profile == 'local'}">
+                                    전라북도에 본사를 둔 기업
+                                </c:if>
+                            </td>
                             <td>1</td>
                         </tr>
                         <tr>
                             <td>7</td>
-                            <td>전라북도 김제시에 실증참여의향서를 기 제출한 기업</td>
+                            <td>
+                                <c:if test="${profile == 'sangju-prod'}">
+                                    경상북도 상주시에 실증참여의향서를 기 제출한 기업
+                                </c:if>
+                                <c:if test="${profile == 'gimje-prod'}">
+                                    전라북도 김제시에 실증참여의향서를 기 제출한 기업
+                                </c:if>
+                                <c:if test="${profile == 'local'}">
+                                    전라북도 김제시에 실증참여의향서를 기 제출한 기업
+                                </c:if>
+                            </td>
                             <td>1</td>
                         </tr>
                         </tbody>

@@ -97,35 +97,19 @@
 
     <update id="updateCorpInfo" parameterType="kr.or.fact.core.model.DTO.CorpInfoVO">
         UPDATE TB_CORP_INFO SET
-                                CORP_NAME_KOR   = #{corp_name_kor},
-                                COMPANY_NUM     = #{company_num},
-                                CORP_REG_NUM    = #{corp_reg_num},
-                                TEL_NUM         = #{tel_num},
-                                FAX_NUM         = #{fax_num},
-                                EMAIL           = #{email},
-                                HOMEPAGE        = #{homepage},
-                                CORP_ADDR       = #{corp_addr},
-                                CORP_ADDR2      = #{corp_addr2},
-                                IS_OTHER_ADDR   = #{is_other_addr},
-                                OTHER_ADDR      = #{other_addr},
-                                SALES_IN_PREV   = #{sales_in_prev},
-                                CA_RATIO        = #{ca_ratio},
-                                EMPLOEE_NUM     = #{emploee_num},
-                                BS_SECTOR       = #{bs_sector},
-                                PRODUCT         = #{product},
-                                CORP_TYPE       = #{corp_type},
-                                IS_BENTURE      = #{is_benture},
-                                BS_PLAN         = #{bs_plan},
-                                IS_APPLICANT    = #{is_applicant},
-                                DEMO_FACILITY_TYPE = #{demo_facility_type},
-                                DEMO_FACILITY_ETC = #{demo_facility_etc},
-                                FOUNDING_DATE   = #{founding_date},
-                                CEO_NAME_KOR    = #{ceo_name_kor},
-                                CEO_ADDR        = #{ceo_addr},
-                                CEO_TEL_NUM     = #{ceo_tel_num},
-                                CEO_MPHONE_NUM  = #{ceo_mphone_num},
-                                CEO_EMAIL       = #{ceo_email},
-                                LAST_UPD_DATE = SYSDATE
+           <if test="corp_name_kor != null">
+           CORP_NAME_KOR   = #{corp_name_kor},
+           </if>
+           <if test="tel_num != null">
+           TEL_NUM         = #{tel_num},
+           </if>
+           <if test="homepage != null">
+           HOMEPAGE        = #{homepage},
+           </if>
+           <if test="corp_addr != null">
+           CORP_ADDR       = #{corp_addr},
+           </if>
+           LAST_UPD_DATE = SYSDATE
         WHERE IDX_CORP_INFO = #{idx_corp_info}
     </update>
     <select id="selectCorpInfo" resultType="kr.or.fact.core.model.DTO.CorpInfoVO">
@@ -159,4 +143,8 @@
     <select id="selectCorpManagerList" resultType="kr.or.fact.core.model.DTO.CorpManagerVO">
         SELECT * FROM TB_CORP_MANAGER WHERE IDX_CORP_INFO = #{idx_corp}
     </select>
+
+    <delete id="deleteCorpManager" parameterType="kr.or.fact.core.model.DTO.CorpManagerVO">
+        DELETE TB_CORP_MANAGER WHERE IDX_USER = #{idx_user}
+    </delete>
 </mapper>

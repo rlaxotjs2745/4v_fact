@@ -199,12 +199,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th class="th__left">일반 담당자 목록</th>
+                                <th class="th__left">서브 담당자 목록</th>
                                 <td class="td__left" style="white-space: nowrap;">
                                         <ul>
                                             <c:forEach items="${corpManager}" var="man">
                                                 <c:if test="${man.corp_manager_type != 0}">
-                                                    <li>${man.manager_name_kor} | ${man.email}</li>
+                                                    <li>${man.manager_name_kor} | ${man.mphone_num}</li>
                                                 </c:if>
                                             </c:forEach>
                                         </ul>
@@ -226,7 +226,7 @@
         <!--개인일 경우-->
         <div id="popup_info" class="pop__detail ">
             <div class="section">
-                <a href="#none" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
+                <a href="#none" class="js-modal-close" id="close_modal_Xbtn"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
                 <div class="popup__cnt">
                     <div style="display: flex; justify-content: space-between;">
                         <h5 class="popup__title">정보변경</h5>
@@ -336,7 +336,7 @@
                                 <c:if test="${user.is_corporate_member eq 1}">
                                     <tr>
                                         <th class="th__left">기업/단체명</th>
-                                        <td class="td__modify"><input type="text" value="${corp.corp_name_kor}" placeholder="이름" style="width:180px;"/>  <span class="text__dash"></span></td>
+                                        <td class="td__modify"><input type="text" id="corp_name_modify" value="${corp.corp_name_kor}" placeholder="이름" style="width:180px;"/>  <span class="text__dash"></span></td>
                                     </tr>
                                     <tr>
                                         <th class="th__left">종목/업태</th>
@@ -381,7 +381,7 @@
                                     </tr>
                                     <tr>
                                         <th class="th__left">홈페이지</th>
-                                        <td class="td__modify"><input type="text" value="${corp.homepage}" placeholder="이름" style="width:180px;" disabled />  <span class="text__dash"></span></td>
+                                        <td class="td__modify"><input type="text" id="corp_homepage_modify" value="${corp.homepage}" placeholder="http://xxx.xxx" style="width:180px;" />  <span class="text__dash"></span></td>
                                     </tr>
                                 </c:if>
                                 </tbody>
@@ -398,21 +398,20 @@
                                         <th class="th__left">메인 담당자</th>
                                         <td class="td__left" style="white-space: nowrap;">
                                                 ${mainManager.manager_name_kor} | ${mainManager.mphone_num}
+
                                         </td>
                                     </tr>
                                     <tr>
                                         <th class="th__left">서브 담당자 목록</th>
                                         <td class="td__left" style="white-space: nowrap;">
-                                            <ul>
+                                            <ul id="sub_manager">
                                                 <c:forEach items="${corpManager}" var="man">
                                                     <c:if test="${man.corp_manager_type != 0}">
-                                                        <li>
-                                                                ${man.manager_name_kor} | ${man.email}
-                                                                    <select id="modify_manager_type_${man.idx_user}" class="form-control form-control-sm d-inline-block align-middle mr-1 modify_manager_type" style="width: 100px">
-                                                                        <option value="0">메인 담당자</option>
-                                                                        <option value="1" selected>서브 담당자</option>
-                                                                        <option value="99">일반 기업 회원</option>
-                                                                    </select>
+                                                        <li style="display: flex; justify-content: space-between; margin-bottom: 5px">
+                                                            <span>
+                                                                ${man.manager_name_kor} | ${man.mphone_num}
+                                                            </span>
+                                                            <button id="modify_manager_type&${man.idx_user}" class="btn btn-more modify_manager_type">- 일반 회원 전환</button>
                                                         </li>
                                                     </c:if>
                                                 </c:forEach>
@@ -422,15 +421,13 @@
                                     <tr>
                                         <th class="th__left">일반 기업 회원 목록</th>
                                         <td class="td__left" style="white-space: nowrap;">
-                                            <ul>
+                                            <ul id="corp_user">
                                                 <c:forEach items="${corpUser}" var="cou">
-                                                    <li>
+                                                    <li style="display: flex; justify-content: space-between; margin-bottom: 5px">
+                                                        <span>
                                                             ${cou.user_name} | ${cou.mphone_num}
-                                                                <select id="modify_manager_type_${cou.idx_user}" class="form-control form-control-sm d-inline-block align-middle mr-1 modify_manager_type" style="width: 150px; padding: 5px 45px 5px 16px">
-                                                                    <option value="0">메인 담당자</option>
-                                                                    <option value="1">서브 담당자</option>
-                                                                    <option value="99" selected>일반 기업 회원</option>
-                                                                </select>
+                                                        </span>
+                                                        <button id="modify_manager_type&${cou.idx_user}" class="btn btn-more modify_manager_type">+ 담당자 추가</button>
                                                     </li>
                                                 </c:forEach>
                                             </ul>
@@ -443,7 +440,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="popup__btn">
+                <div class="popup__btn" id="commit_cancel_btn">
                     <a href="#" class="btn light btn-lg  js-btn-close">취소</a>
                     <a href="#" id="info_modify" class="btn submit btn-lg">정보변경</a>
                 </div>
@@ -519,7 +516,9 @@
     var nowModify = 'user_modify';
     var addrModifyBool = 0;
     var corpTelNumBool = 0;
-
+    var corpNameBool = 0;
+    var homepageBool = 0;
+    var modifyConfirmBool = 0;
     $('#modify_tab').hide();
     $('#corp_table').hide();
     $('#manager_table').hide();
@@ -541,16 +540,19 @@
             $('#corp_table').show();
             $('#manager_table').hide();
             $('#user_table').hide();
+            $('#commit_cancel_btn').show();
             insertAddress("${corp.corp_addr}", 2);
         } else if(nowModify == 'user_modify'){
             $('#corp_table').hide();
             $('#manager_table').hide();
             $('#user_table').show();
+            $('#commit_cancel_btn').show();
         }
         else if(nowModify == 'manager_modify'){
             $('#corp_table').hide();
             $('#manager_table').show();
             $('#user_table').hide();
+            $('#commit_cancel_btn').hide();
         }
     })
 
@@ -589,13 +591,68 @@
         }).open();
     })
 
-    $('.modify_manager_type').change(function(){
-        console.log($(this).val());
-        console.log($(this).attr('id'));
-
+    $('#close_modal_Xbtn').click(function(){
+        location.href='my_info';
     })
 
+    $('.modify_manager_type').click(function(){
+        var clickedBtn = $(this);
+        var managerComp = clickedBtn.closest('li');
+        var modifyType = clickedBtn.closest('ul').attr('id');
+        var userTypeModifyArr = clickedBtn.attr('id').split('&');
+
+        $.ajax({
+            type: 'post',
+            url :'change_manager_type', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(
+                {idx_user: userTypeModifyArr[1], corp_manager_type: modifyType == 'sub_manager' ? 99 : 1},
+              ),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'json',//받는 데이터 타입
+            success: function(result){
+                //작업이 성공적으로 발생했을 경우
+                if(result.result_code=="SUCCESS"){
+                    if(modifyType == 'sub_manager'){
+                        clickedBtn.text('+ 담당자 추가');
+                        $('#corp_user').append(managerComp);
+
+                    } else {
+                        clickedBtn.text('- 일반 회원 전환');
+                        $('#sub_manager').append(managerComp);
+                    }
+                }
+                else {
+                    alert(result.result_str);
+                }
+            },
+            error:function(){
+                //에러가 났을 경우 실행시킬 코드
+            }
+        });
+    })
+
+    $('#corp_name_modify').change(function(){
+        if($(this).val() == '${corp.corp_name_kor}'){
+            corpNameBool = 0;
+        } else {
+            corpNameBool = 1;
+        }
+    })
+
+    $('#corp_homepage_modify').change(function(){
+        if($(this).val() == '${corp.homepage}'){
+            homepageBool = 0;
+        } else {
+            homepageBool = 1;
+        }
+    })
+
+
     $("#info_modify").click(function(){
+        if(modifyConfirmBool){
+            return alert('처리중입니다. 잠시만 기다려주세요.');
+        }
+        modifyConfirmBool = 1;
         var param;
         if(nowModify == 'user_modify'){
             if($("#user_pw").val() != ""){
@@ -655,20 +712,54 @@
             });
         }
         else if(nowModify == 'corp_modify'){
-            param = {};
+            var paramBool = 0;
+            param = {idx_corp_info: '${corp.idx_corp_info}'};
             if(addrModifyBool){
-
+                param.corp_addr = '(' + $('#corp_addr_num').val() + ')' + $('#corp_addr_main').val() + ' ' + $('#corp_addr_detail').val();
+                paramBool = 1;
             }
-            if(!corpTelNumBool){
-                param.tel_num = $('#corp_tel_num1').val() + '-' + $('#corp_tel_num2').val() + '-' + $('#corp_tel_num3').val()
-
+            if(corpTelNumBool){
+                param.tel_num = $('#corp_tel_num1').val() + '-' + $('#corp_tel_num2').val() + '-' + $('#corp_tel_num3').val();
+                paramBool = 1;
+            }
+            if(corpNameBool){
+                param.corp_name_kor = $('#corp_name_modify').val();
+                paramBool = 1;
+            }
+            if(homepageBool){
+                param.homepage = $('#corp_homepage_modify').val();
+                paramBool = 1;
             }
 
+            if(paramBool == 1){
+                $.ajax({
+                    type: 'post',
+                    url :'corp_modify', //데이터를 주고받을 파일 주소 입력
+                    data: JSON.stringify(param),//보내는 데이터
+                    contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+                    dataType:'json',//받는 데이터 타입
+                    success: function(result){
+                        //작업이 성공적으로 발생했을 경우
+                        console.log(result);
+                        if(result.result_code=="SUCCESS"){
+                            alert(result.result_str);
+                            // location.href='my_info';
+
+                        }
+                        else {
+                            alert(result.result_str);
+                        }
+                    },
+                    error:function(){
+                        //에러가 났을 경우 실행시킬 코드
+                    }
+                });
+            } else {
+                alert('수정 사항이 없습니다.')
+            }
 
         }
-        else if(nowModify == 'manager_modify'){
-
-        }
+        modifyConfirmBool = 0;
     })
 
     function insertAddress(addr, type){

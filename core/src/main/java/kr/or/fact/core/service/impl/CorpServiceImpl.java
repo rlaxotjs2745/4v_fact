@@ -5,6 +5,7 @@ import kr.or.fact.core.model.DTO.CorpInfoVO;
 import kr.or.fact.core.model.DTO.CorpManagerVO;
 import kr.or.fact.core.model.DTO.SimpleCorpInfoVO;
 import kr.or.fact.core.model.DTO.UserVO;
+import kr.or.fact.core.model.UserMapper;
 import kr.or.fact.core.service.CorpService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,12 @@ import java.util.List;
 @Service("corpService")
 public class CorpServiceImpl implements CorpService {
     private final CorpMapper corpMapper;
+    private final UserMapper userMapper;
     @Autowired
-    public CorpServiceImpl(CorpMapper corpMapper){this.corpMapper = corpMapper;}
+    public CorpServiceImpl(CorpMapper corpMapper, UserMapper userMapper){
+        this.corpMapper = corpMapper;
+        this.userMapper = userMapper;
+    }
 
 
     @Override
@@ -39,6 +44,7 @@ public class CorpServiceImpl implements CorpService {
 
     @Override
     public void updateCorpInfo(CorpInfoVO corpInfoVO){
+
         corpMapper.updateCorpInfo(corpInfoVO);
     }
 
@@ -72,5 +78,21 @@ public class CorpServiceImpl implements CorpService {
     @Override
     public ArrayList<CorpManagerVO> selectCorpManagerList(long idx_corp){
         return corpMapper.selectCorpManagerList(idx_corp);
+    }
+
+    @Override
+    public int changeCorpManagerType(CorpManagerVO corpManagerVO){
+        if(corpManagerVO.getCorp_manager_type() == 1){
+            UserVO newCorpManagerInfo = userMapper.getUserInfoByIdx(corpManagerVO.getIdx_user());
+
+            corpManagerVO.setEmail(newCorpManagerInfo.getUser_id());
+            corpManagerVO.setManager_name_kor(newCorpManagerInfo.getUser_name());
+            corpManagerVO.setMphone_num(newCorpManagerInfo.getMphone_num());
+            corpManagerVO.setIdx_corp_info(newCorpManagerInfo.getIdx_corp_info());
+
+            return corpMapper.insertCorpManager(corpManagerVO);
+        } else {
+            return corpMapper.deleteCorpManager(corpManagerVO);
+        }
     }
 }

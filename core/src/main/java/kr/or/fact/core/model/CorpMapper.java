@@ -29,4 +29,6 @@ public interface CorpMapper {
     int insertCorpManager(CorpManagerVO corpManagerVO);
 
     ArrayList<CorpManagerVO> selectCorpManagerList(@Param("idx_corp") long idx_corp);
+
+    int deleteCorpManager(CorpManagerVO corpManagerVO);
 }
