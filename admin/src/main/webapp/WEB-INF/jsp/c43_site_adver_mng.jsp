@@ -85,8 +85,27 @@
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals-business" data-what="mode-new">신규 홍보자료작성</button>
                 </div>
             </h6>
+            <c:if test="${total_count eq 0}">
+                <div class="table__blank" style="
+                                    padding: 0 0 390px 0;
+    text-align: center;
+">
+                    <div class="blank__title" style="    padding: 25px 0 5px 0;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.61;
+    letter-spacing: -.9px;
+    color: #161616;">홍보 안내 없음</div>
+                    <div class="blank__text" style="    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.43;
+    letter-spacing: -.42px;
+    color: #262626;">홍보 안내 진행 중인 데이터가 없습니다.</div>
+                </div>
+            </c:if>
+                                <c:if test="${total_count ne 0}">
             <div class="card-datatable table-responsive pt-0 pb-3">
-                <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                <div class="dataTables_wrapper dt-bootstrap4 no-footer">
                     <div class="row p-3">
                         <div class="col-sm-12 col-md-12">
                             <label class="mr-3  mb-0">총 : <strong>999</strong>건</label><label class="mr-3  mb-0">신규 : <strong>70</strong>건</label><label class="mr-3  mb-0">추가 : <strong>70</strong>건</label><label class="mr-3  mb-0">해결 : <strong>70</strong>건</label>
@@ -94,7 +113,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
+                            <table class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
                                 <thead class="bg-success text-white font-weight-bold">
                                 <tr role="row">
                                     <th class="text-center px-2" style="width:60px">No</th>
@@ -111,7 +130,6 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:if test="${total_count ne 0}">
                                <c:forEach items="${prlist}" var="pr" varStatus="status">
                                 <tr class="pr_entity" id="${pr.idx_pr_content}">
                                     <td class="text-center">${pr.pr_content_num}</td>
@@ -127,7 +145,6 @@
                                     <td class="text-center">${pr.memo}</td>
                                 </tr>
                                </c:forEach>
-                                </c:if>
                                 </tbody>
                             </table>
                         </div>
@@ -171,6 +188,7 @@
                     </div>
                 </div>
             </div>
+                                </c:if>
         </div>
 
         <!-- Modal template -->

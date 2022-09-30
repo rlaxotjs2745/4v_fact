@@ -95,4 +95,14 @@ public class CorpServiceImpl implements CorpService {
             return corpMapper.deleteCorpManager(corpManagerVO);
         }
     }
+
+    @Override
+    public CorpManagerVO getCorpManagerUserIdx(long idx_user){
+        return corpMapper.getCorpManagerUserIdx(idx_user);
+    }
+
+    @Override
+    public int updateCorpManager(CorpManagerVO corpManagerVO){
+        return corpMapper.updateCorpManager(corpManagerVO);
+    }
 }

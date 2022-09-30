@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="ko" class="html-popup">
 <head>
@@ -75,7 +77,8 @@
                         <li>- 작성하신 “이용신청서, 실증계획서”를 충분히 확인해 주십시오.
                         <li>-  등록 전에 수정이 필요한 경우는 “이전”버튼을 선택하여 수정해 주십시오.</li>
                         <li>-  등록 후에 수정이 필요한 경우는 “마이 페이지 / 나의 사업”에서 마감 전까지 수정하실 수 있습니다.</li>
-                        <li>-  신청서를 등록하는 사업의 마감일은 <span class="cl-red">XXXX년 XX월 XX일 XX시 XX분</span> 까지 입니다.</li>
+                        <fmt:formatDate value="${demoBs.recruit_end_date}" var="dstart_date" pattern="yyyy년 MM월 dd일"/>
+                        <li>-  신청서를 등록하는 사업의 마감일은 <span class="cl-red">${dstart_date}</span> 까지 입니다.</li>
                     </ul>
                 </div>
 
@@ -98,10 +101,16 @@
                     </div>
                 </div>
                 <div class="app__register">
-                    <div class="register__title">
-                        <p>기타서류<br><br>
-                            <span>XXXXXXXX.zip</span></p>
-                        <a href="#none" class="btn dark">내려받기</a>
+                    <div class="register__title" style="display: block">
+                        <div>
+                        <p>기타서류</p>
+                        </div>
+                        <c:forEach items="${fileArr}" var="file" varStatus="status">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px">
+                                <span>${file.fileInfoVO.file_name}</span>
+                                <a href="${file.fileInfoVO.file_path}" class="btn dark">내려받기</a>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
 
@@ -194,8 +203,7 @@
     $("#bs_submit").click(function(){
         if(confirm("이용 신청서를 제출하시겠습니까?")){
             var param  = {
-                "idx_user":${userDemoBs.idx_user},
-                "idx_demo_business":${userDemoBs.idx_demo_business}
+                "idx_user_demo_bs":${userDemoBs.idx_user_demo_bs},
             };
             $.ajax({
                 type: 'post',

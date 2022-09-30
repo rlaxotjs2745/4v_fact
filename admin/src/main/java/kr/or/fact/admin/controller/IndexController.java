@@ -789,10 +789,12 @@ public class IndexController {
 
         param.setAmount(10);
         int noticeCount = noticeService.getWebpageNoticeCount();
-        if(noticeCount==0){
-            return "brd_notice_blank";
-        }
+        System.out.println(noticeCount);
+//        if(noticeCount==0){
+//            return "brd_notice_blank";
+//        }
         model.addAttribute("total_count",noticeCount);
+//        model.addAttribute("total_count",0);
         List<NoticeVO> noticeList = noticeService.getNoticeWebList(page,list_amount);
         model.addAttribute("noticeList",noticeList);
         //model.addAttribute("filter1",filter1);
@@ -857,9 +859,9 @@ public class IndexController {
         int page_amount = param.getAmount();
         int page = param.getPage_num();
         int eventCount = eventContentService.getMainEventContentCount();
-        if(eventCount==0){
-            return "brd_event_blank";
-        }
+//        if(eventCount==0){
+//            return "brd_event_blank";
+//        }
         model.addAttribute("total_count",eventCount);
         List<EventContentVO> eventContentList = eventContentService.getEventContentList(page,list_amount);
         List<EventContentVO> eventContentList1 = eventContentService.getMainEventContentList();
@@ -896,7 +898,6 @@ public class IndexController {
             is_last = false;
             page_amount = tot_page;
         }
-
         model.addAttribute("tot_page",tot_page);
         model.addAttribute("tot_sector",tot_sector);
         model.addAttribute("cur_sector",cur_sector);
@@ -921,9 +922,9 @@ public class IndexController {
         int page_amount = param.getAmount();
         int page = param.getPage_num();
         int prCount = prContentService.getMainPRContentCount();
-        if(prCount==0){
-            return "brd_adver_blank";
-        }
+//        if(prCount==0){
+//            return "brd_adver_blank";
+//        }
         model.addAttribute("total_count",prCount);
 
 List<PRContentVO> prlist =prContentService.getPRContentList( page, list_amount);

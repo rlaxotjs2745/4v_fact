@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@include file ="header.jsp" %>
 
 <div class="content" id="content">
@@ -58,16 +59,16 @@
                         </thead>
                         <tbody>
                         <c:forEach items="${demoList}" var="demo" varStatus="status">
-                            <tr>
+                            <tr id="demo_${demo.idx_user_demo_bs}" class="demo_bs_entity">
                                 <td>${status.count}</td>
                                 <td class="td__left"><button id="demo_sel${status.index}" href="my_info" class="td__link"><c:if test="${not empty demo.demo_subject}">${demo.demo_subject}</c:if></button></td>
                                 <td class="td__data" style="white-space: nowrap;">
                                     <div class="request__step">
                                         <c:choose>
-                                            <c:when test="${demo.user_demobs_status eq 0}"><strong>신청 > </strong>접수완료 > 선정평가 > 계획확정</c:when>
-                                            <c:when test="${demo.user_demobs_status eq 1}">신청 > <strong>접수완료 > </strong>선정평가 > 계획확정</c:when>
-                                            <c:when test="${demo.user_demobs_status eq 1 && demo.is_confirm eq 1 && demo.is_share eq 0}">신청 > 접수완료 > <strong>선정평가 > </strong>계획확정</c:when>
-                                            <c:when test="${demo.user_demobs_status eq 1 && demo.is_confirm eq 1 && demo.is_share eq 1}">신청 > 접수완료 > 선정평가 > <strong>계획확정</strong></c:when>
+                                            <c:when test="${demo.user_demobs_status < 5}"><strong>신청 > </strong>접수완료 > 선정평가 > 계획확정</c:when>
+                                            <c:when test="${demo.user_demobs_status < 9}">신청 > <strong>접수완료 > </strong>선정평가 > 계획확정</c:when>
+                                            <c:when test="${demo.user_demobs_status < 40}">신청 > 접수완료 > <strong>선정평가 > </strong>계획확정</c:when>
+                                            <c:when test="${demo.user_demobs_status < 100}">신청 > 접수완료 > 선정평가 > <strong>계획확정</strong></c:when>
                                         </c:choose>
                                     </div>
                                 </td>
@@ -80,37 +81,37 @@
                 <!--//-->
 
 
-                <div class="cnt__title">진행 현황</div>
+                <div id="now_condition">
+                    <div class="cnt__title">진행 현황</div>
 
-                <div class="my__step">
-                    <div class="step is-active">
-                        <span>접수중</span>
-                        <em>접수일<br>YYYY.MM.DD HH:MM</em>
-                    </div>
-                    <div class="step ">
-                        <span>서류검토</span>
-                    </div>
-                    <div class="step ">
-                        <span>접수완료</span>
-                    </div>
-                    <div class="step ">
-                        <span>선정평가</span>
-                    </div>
-                    <div class="step ">
-                        <span>계획확정</span>
-                    </div>
-                    <div class="step ">
-                        <span>협약중</span>
-                    </div>
-                    <div class="step ">
-                        <span>협약완료</span>
-                    </div>
-                    <div class="step ">
-                        <span>사업중</span>
+                    <div class="my__step">
+                        <div id="receipting" class="step is-active">
+                            <span>접수중</span>
+                            <em id="status_date">접수일<br>YYYY.MM.DD HH:MM</em>
+                        </div>
+                        <div id="review_doc" class="step ">
+                            <span>서류검토</span>
+                        </div>
+                        <div id="review_fin" class="step ">
+                            <span>접수완료</span>
+                        </div>
+                        <div id="estimate_selecting" class="step ">
+                            <span>선정평가</span>
+                        </div>
+                        <div id="definite_plan" class="step ">
+                            <span>계획확정</span>
+                        </div>
+                        <div id="in_agreement" class="step ">
+                            <span>협약중</span>
+                        </div>
+                        <div id="agreement_fin" class="step ">
+                            <span>협약완료</span>
+                        </div>
+                        <div id="in_business" class="step ">
+                            <span>사업중</span>
+                        </div>
                     </div>
                 </div>
-
-
                 <%--
                 <div class="my__step">
                     <div class="step is-passed">
@@ -331,6 +332,7 @@
                 </div>
 
                 <!--접수중-->
+            <div id="now_condition_notice">
                 <div class="cnt__title">안내</div>
                 <div class="table__type no--border">
                     <table class="table__type--my ">
@@ -446,8 +448,9 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
                 <!--//-->
-
+            <div id="application_condition">
                 <div class="cnt__title">신청 현황</div>
                 <!--//-->
                 <div class="table__type">
@@ -490,7 +493,9 @@
                     <!--//-->
                 </div>
                 <!--//-->
+            </div>
 
+            <div id="agree_condition">
                 <div class="cnt__title">협약 현황</div>
                 <div class="table__type">
                     <table class="table__type--my">
@@ -545,8 +550,9 @@
                     </table>
                     <!--//-->
                 </div>
-                <!--//-->
+            </div>
 
+            <div id="demobs_plan">
                 <div class="cnt__title">실증계획
                     <a href="#none" class="btn modify fl-right">콘솔 바로 가기</a>
                 </div>
@@ -604,8 +610,9 @@
                     </table>
                     <!--//-->
                 </div>
-                <!--//-->
+            </div>
 
+            <div id="tenant_info">
                 <div class="cnt__title">입주 정보
                     <a href="#popup_pee" class="btn pee__btn js-modal-detail">이용료 확인</a>
                 </div>
@@ -635,7 +642,9 @@
                     <!--//-->
                 </div>
                 <!--//-->
+            </div>
 
+            <div id="last_doc">
                 <div class="cnt__title">최종서류</div>
                 <div class="table__type">
                     <table class="table__type--my">
@@ -655,7 +664,9 @@
                     <!--//-->
                 </div>
                 <!--//-->
+            </div>
 
+            <div id="result_report">
                 <div class="cnt__title">실증결과보고서</div>
                 <div class="table__type">
                     <table class="table__type--my">
@@ -672,7 +683,9 @@
                     <!--//-->
                 </div>
                 <!--//-->
+            </div>
 
+            <div id="history_modify_use_fac">
                 <div class="cnt__title">실증시설 이용변경 이력</div>
                 <div class="table__type">
                     <table class="table__type--my">
@@ -688,7 +701,9 @@
                     <!--//-->
                 </div>
                 <!--//-->
+            </div>
 
+            <div id="others">
                 <div class="cnt__title">기타사항</div>
                 <div class="table__type">
                     <table class="table__type--my">
@@ -706,6 +721,7 @@
                     <p class="text--guide is-alert">* 각종 서류 신청 발급은 콘솔사이트에서 신청/발급을 받으십시오.</p>
 
                 </div>
+            </div>
                 <!--//-->
 
             </div>
@@ -1136,6 +1152,8 @@
 <%@include file ="footer.jsp" %>
 <%@include file ="script.jsp" %>
 <script>
+    $('#now_condition, #now_condition_notice, #application_condition, #agree_condition, #demobs_plan, #tenant_info, #last_doc, #result_report, #history_modify_use_fac, #others').hide();
+
     <c:forEach items="${demoList}" var="demo3" varStatus="status">
     $("#demo_sel"+"${status.index}").on("click", function() {
 
@@ -1144,6 +1162,27 @@
         $("#demo_msg"+"${status.index}").css("display","block");
     });
     </c:forEach>
+
+    $('.demo_bs_entity').click(function(){
+        $('#receipting, #review_doc, #review_fin, #estimate_selecting, #definite_plan, #in_agreement, #agreement_fin, #in_business').removeClass('is-active');
+        $('#now_condition_notice, #application_condition, #agree_condition, #demobs_plan, #tenant_info, #last_doc, #result_report, #history_modify_use_fac, #others, #status_date').hide();
+        var entityId = $(this).attr('id').split('_')[1];
+        $('#now_condition').show();
+        var status_date = $('#status_date');
+        <c:forEach items="${demoList}" var="clickedDemo" varStatus="status">
+        <fm
+            if(entityId == '${clickedDemo.idx_user_demo_bs}'){
+                if('${clickedDemo.user_demobs_status}' < 4){
+                    console.log('${clickedDemo.user_demobs_status}');
+                    $('#receipting').addClass('is-active').append(status_date);
+                    status_date.show();
+                } else if('${clickedDemo.user_demobs_status}' == 4){
+                    $('#receipting').addClass('is-active').append(status_date.val('접수일<br>YYYY.MM.DD HH:MM'));
+                }
+
+            }
+        </c:forEach>
+    })
 </script>
 </div>
 </body>

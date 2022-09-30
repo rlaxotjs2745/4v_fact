@@ -609,7 +609,7 @@
 
     var gimje = {
         weather: "https://api.openweathermap.org/data/2.5/weather?q=gimje&appid=53adfc8e9ffcbf891a9be91b9e312c01",
-        dust: "https://api.airvisual.com/v2/city?city=gimje&state=jeollabuk-do&country=south-korea&key=3a760b19-7b72-40b9-860a-4ac383bdee39"
+        dust: "https://api.airvisual.com/v2/city?city=gunsan&state=jeollabuk-do&country=south-korea&key=3a760b19-7b72-40b9-860a-4ac383bdee39"
     }
 
     var sangju = {

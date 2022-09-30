@@ -294,26 +294,32 @@
     <update id="updateUserInfoSelf" parameterType="kr.or.fact.core.model.DTO.UserVO">
         UPDATE TB_USER
         SET
+            <if test="user_pw != null">
+                USER_PW = #{user_pw},
+            </if>
+        <if test="addr != null">
             ADDR = #{addr},
+        </if>
+        <if test="mphone_num != null">
             MPHONE_NUM = #{mphone_num},
+        </if>
             IS_SMS_AGREE = #{is_sms_agree},
             IS_EMAIL_AGREE = #{is_email_agree},
-            TEL_NUM = #{tel_num}
+            IS_MAKETING_AGREE = #{is_maketing_agree}
         WHERE IDX_USER= #{idx_user}
     </update>
-    <update id="updateUserInfoSelfWithPw" parameterType="kr.or.fact.core.model.DTO.UserVO">
-        UPDATE TB_USER
-        SET
-            USER_PW = #{user_pw},
-            ADDR = #{addr},
-            MPHONE_NUM = #{mphone_num},
-            IS_SMS_AGREE = #{is_sms_agree},
-            IS_EMAIL_AGREE = #{is_email_agree},
-            TEL_NUM = #{tel_num}
-        WHERE IDX_USER= #{idx_user}
-    </update>
+
 
     <select id="getUserListInCorp" resultType="kr.or.fact.core.model.DTO.UserVO">
         SELECT * FROM TB_USER WHERE IDX_CORP_INFO = #{idx_corp}
     </select>
+
+    <update id="updateUserApplicant" parameterType="kr.or.fact.core.model.DTO.UserVO">
+        UPDATE TB_USER
+            SET
+                IS_APPLICANT = 1
+            WHERE IDX_USER = #{idx_user}
+
+    </update>
+
 </mapper>

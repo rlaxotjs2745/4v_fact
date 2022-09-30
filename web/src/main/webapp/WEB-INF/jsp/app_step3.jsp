@@ -656,8 +656,22 @@
                     </table>
                 </div>
                 <!--//-->
+                <div style="display: flex; position: relative;">
+                    <div class="cnt__title" style="width: 50%">연구/개발인력 인적사항
+                        <span class="text__essential">*</span>
+                    </div>
+                    <div style="width: 50%; display: flex; justify-content: end; position: absolute; top: 25px; right: 0;">
+                        <div class="app__btn">
+                            <button id="human_add" title="행추가" style="">
+                                <img src="resources/assets/image/ico_add-item.png" style="margin: 0; height: 30px;">
+                            </button>
+                            <button id="human_delete" title="행추가" style="">
+                                <img src="resources/assets/image/ico_remove-item.png" style="margin: 0; height: 30px;">
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-                <div class="cnt__title">연구/개발인력 인적사항</div>
                 <div class="table__type no--border">
                     <table class="table__type--app">
                         <colgroup>
@@ -727,12 +741,7 @@
                         </c:forEach>
                         </tbody>
                     </table>
-                    <div class="app__btn">
-                        <button id="human_delete" class="btn default fl-right" title="행추가">-</button>
-                    </div>
-                    <div class="app__btn">
-                        <button id="human_add" class="btn default fl-right" title="행추가">┼</button>
-                    </div>
+
                 </div>
                 <!--//-->
 
@@ -1807,12 +1816,13 @@
     });
 
     $("#human_delete").click(function(){
-        let order = human_count;
-        if(human_count>3){
-            $('#human1_t'+order).remove();
-            $('#human2_t'+order).remove();
-            human_count--;
+        if(!human_count){
+            return alert('현재 삭제할 인력 사항이 없습니다.');
         }
+        let order = human_count;
+        $('#human1_t'+order).remove();
+        $('#human2_t'+order).remove();
+        human_count--;
     });
 
 
@@ -2018,6 +2028,13 @@ function save_temp(){
             rnd_user_result:$("#rnd_user_result"+j+"").val()
         }
         userBsHumanResourceVOList.push(param_human);
+    }
+
+    if(!userBsHumanResourceVOList.length){
+        returnObj.bool = 0;
+        alert('연구/개발 인력 인적사항은 필수 입력 항목입니다.');
+        $('.app__body').animate({scrollTop: 3025.5}, 400);
+        return;
     }
 
     let param_detail = {

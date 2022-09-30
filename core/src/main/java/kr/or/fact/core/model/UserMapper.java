@@ -58,7 +58,7 @@ public  interface UserMapper {
 
     ArrayList<UserVO> getUserListInCorp(@Param("idx_corp") long idx_corp);
 
-
+    int updateUserApplicant(UserVO userVO);
 
 
 

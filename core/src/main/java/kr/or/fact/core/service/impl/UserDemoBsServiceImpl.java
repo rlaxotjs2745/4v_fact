@@ -127,7 +127,7 @@ userDemoBsMapper.deleteUserDemoBsHumanResource(idx_user_demo_bs);
     }
 
     @Override
-    public int submitUserDemoBs(UserDemoBsCheckVO userDemoBsCheckVO){
-        return userDemoBsMapper.submitUserDemoBs(userDemoBsCheckVO);
+    public int submitUserDemoBs(long idx_user_demo_bs){
+        return userDemoBsMapper.submitUserDemoBs(idx_user_demo_bs);
     }
 }

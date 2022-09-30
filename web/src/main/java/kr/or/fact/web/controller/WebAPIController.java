@@ -364,6 +364,12 @@ public class WebAPIController {
                 userVO.setUser_pw(hashedPassword);
             }
             userService.updateUserInfoSelf(userVO);
+
+            if(userVO.getIs_corporate_member() == 1){
+                CorpManagerVO managerVO = corpService.getCorpManagerUserIdx(userVO.getIdx_user());
+                managerVO.setMphone_num(userVO.getMphone_num());
+                corpService.updateCorpManager(managerVO);
+            }
         } catch (Exception e){
             resultVO.setResult_code("ERROR_001");
             resultVO.setResult_str("고객 정보 변경이 실패했습니다.");
@@ -371,6 +377,32 @@ public class WebAPIController {
 
         return resultVO;
     }
+
+
+    @RequestMapping(value = "/check_pw", method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO check_pw(HttpSession session, @RequestBody UserVO userVO) {
+//        System.out.println(userVO);
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("비밀번호가 확인되었습니다.");
+
+        try{
+            UserVO dbUser = userService.getUserInfo(userVO.getIdx_user());
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            if(!passwordEncoder.matches(userVO.getUser_pw(), dbUser.getUser_pw())){
+                resultVO.setResult_code("FAIL");
+                resultVO.setResult_str("비밀번호가 일치하지 않습니다.");
+            }
+        } catch (Exception e){
+            resultVO.setResult_code("ERROR_001");
+            resultVO.setResult_str("데이터베이스 이상으로 인해 비밀번호 확인이 실패했습니다.");
+            System.out.println(e.toString());
+        }
+
+        return resultVO;
+    }
+
 
     //유저가 신청한 사업의 상태 체크
     //return STATUS_001 : 신청한 사업 없음 -> 신규신청 가능
@@ -393,16 +425,16 @@ public class WebAPIController {
             if(userDemoBsVo==null){
                 return resultVO;
             }
-            else if(userDemoBsVo.getUser_demobs_status() ==0){ // 신청서 작성중
+            else if(userDemoBsVo.getUser_demobs_status() < 4){ // 신청서 작성중
                 resultVO.setResult_str("이미 작성중인 내용이 있습니다");
                 resultVO.setResult_code("STATUS_002");
             }
-            else if(userDemoBsVo.getUser_demobs_status() ==3){ // 서류 보완 요청
+            else if(userDemoBsVo.getUser_demobs_status() == 6){ // 서류 보완 요청
                 resultVO.setResult_str("보완 요청 사항이 있습니다.");
                 resultVO.setResult_code("STATUS_003");
             }
-            else {
-                resultVO.setResult_str("사업 선정단계에서는 수정할 수 없습니다");
+            else if(userDemoBsVo.getUser_demobs_status() >= 4) {
+                resultVO.setResult_str("이미 작성을 완료한 사업입니다.");
                 resultVO.setResult_code("STATUS_004");
             }
         }
@@ -467,6 +499,7 @@ public class WebAPIController {
             resultVO.setResult_code("ERROR_1001");
             return resultVO;
         }
+        userService.updateUserApplicant(userVo);
         //2.신청 Demo BS 파악
         DemoBusinessVO demoBusinessVo = demoBsService.getDemoBsByIdx(userDemoBsCheckVo.getIdx_demo_business());
 
@@ -789,7 +822,7 @@ public class WebAPIController {
         // 저장단계 변경
 
         if(findUserDemoBsVo.getUser_demobs_status()<1){
-            findUserDemoBsVo.setUser_demobs_status(1);
+            findUserDemoBsVo.setUser_demobs_status(0);
         }
         findUserDemoBsVo.setLab_est_date(userDemoBsVO.getLab_est_date()==null?"":userDemoBsVO.getLab_est_date());//
         findUserDemoBsVo.setRnd_rate(userDemoBsVO.getRnd_rate());
@@ -872,6 +905,10 @@ public class WebAPIController {
             return resultVO;
         }
 
+
+
+
+
         if(findUserDemoBsDetailVO.getIdx_user_demo_bs() == userDemoBsDetailVO.getIdx_user_demo_bs()){
             userDemoBsService.updateUserDemoBsDetail(userDemoBsDetailVO);
             userDemoBsService.deleteUserDemoBsHumanResource(userDemoBsDetailVO.getIdx_user_demo_bs());
@@ -879,6 +916,12 @@ public class WebAPIController {
             for(int i=0;i<userDemoBsDetailVO.getUserBsHumanResourceVOList().size();i++){
                 userDemoBsService.saveUserDemoBsHumanResource(userDemoBsDetailVO.getUserBsHumanResourceVOList().get(i));
             }
+
+            if(userDemoBsVO.getUser_demobs_status()<1){
+                userDemoBsVO.setUser_demobs_status(1);
+                userDemoBsService.updateUserDemoBsWebStep3(userDemoBsVO);
+            }
+
 
         }
         else {
@@ -1298,6 +1341,12 @@ public class WebAPIController {
                 fileService.insertFile(recieveFilesVO.getFile6(), sender, bsIdx, 8);
             }
 
+            UserDemoBsVO findUserDemoBsVo = userDemoBsService.getUserDemoBsByIdx(bsIdx);
+            if(findUserDemoBsVo.getUser_demobs_status()<3){
+                findUserDemoBsVo.setUser_demobs_status(3);
+                userDemoBsService.updateUserDemoBsWebStep4(findUserDemoBsVo);
+            }
+
             resultVO.setResult_code("SUCCESS");
             resultVO.setResult_str("서류 저장을 완료했습니다.");
         } catch (Exception e){
@@ -1306,13 +1355,15 @@ public class WebAPIController {
         return resultVO;
     }
     @RequestMapping(value = "/app_step6_submit_demo_ds",method = RequestMethod.POST)
-    public @ResponseBody ResultVO app_step6_submit_demo_ds(@RequestBody UserDemoBsCheckVO userDemoBsCheckVO, HttpSession session, HttpServletRequest request) throws Exception {
+    public @ResponseBody ResultVO app_step6_submit_demo_ds(@RequestBody UserDemoBsVO userDemoBsVO, HttpSession session, HttpServletRequest request) throws Exception {
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR1001");
         resultVO.setResult_str("서류 제출에 실패했습니다.");
 
+
+
         try{
-            userDemoBsService.submitUserDemoBs(userDemoBsCheckVO);
+            userDemoBsService.submitUserDemoBs(userDemoBsVO.getIdx_user_demo_bs());
             resultVO.setResult_code("SUCCESS");
             resultVO.setResult_str("서류 제출을 완료했습니다.");
         } catch (Exception e){

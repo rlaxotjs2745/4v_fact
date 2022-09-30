@@ -41,5 +41,5 @@ public interface UserDemoBsMapper {
 
     List<UserDemoBsVO> getUserDemoBsPagingList(@Param("page_num") int page_num, @Param("amount") int amount,@Param("order_field")String order_field,@Param("filter1") int filter1, @Param("filter2") int filter2);
 
-    int submitUserDemoBs(UserDemoBsCheckVO userDemoBsCheckVO);
+    int submitUserDemoBs(@Param("idx_user_demo_bs") long idx_user_demo_bs);
 }

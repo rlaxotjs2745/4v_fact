@@ -15,7 +15,7 @@
 </head>
 <body>
 <h1>잘못된 접근입니다</h1>
-<a href="/">Go Home</a>
+<a href="login">Go Home</a>
 
 </body>
 <script>

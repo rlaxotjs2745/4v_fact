@@ -23,6 +23,25 @@
             <div class="card-datatable table-responsive pt-0 pb-3">
                 <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
 
+                                        <c:if test="${total_count eq 0}">
+                                            <div class="table__blank" style="
+                                                        padding: 0 0 390px 0;
+                        text-align: center;
+                    ">
+                                                <div class="blank__title" style="    padding: 25px 0 5px 0;
+                        font-size: 18px;
+                        font-weight: 700;
+                        line-height: 1.61;
+                        letter-spacing: -.9px;
+                        color: #161616;">공지사항 없음</div>
+                                                <div class="blank__text" style="    font-size: 14px;
+                        font-weight: 400;
+                        line-height: 1.43;
+                        letter-spacing: -.42px;
+                        color: #262626;">공지 중인 데이터가 없습니다.</div>
+                                            </div>
+                                        </c:if>
+<c:if test="${total_count ne 0}">
                     <div class="row">
                         <div class="col-sm-12">
                             <table id="" class="table table-bordered table-striped dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
@@ -54,6 +73,7 @@
                             </table>
                         </div>
                     </div>
+</c:if>
                     <div class="row">
                         <div class="col-sm-12 col-md-5">
                             <div class="dataTables_info" role="status" aria-live="polite">총 ${total_count}개 중 ${(cur_page-1)*list_amount+1}에서 ${cur_page*list_amount}까지</div>

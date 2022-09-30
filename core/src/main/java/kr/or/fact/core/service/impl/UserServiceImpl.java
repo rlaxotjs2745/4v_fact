@@ -234,11 +234,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateUserInfoSelf(UserVO userVO){
         try{
-            if(userVO.getUser_pw() != null){
-                return userMapper.updateUserInfoSelfWithPw(userVO);
-            } else {
-                return userMapper.updateUserInfoSelf(userVO);
-            }
+            return userMapper.updateUserInfoSelf(userVO);
         } catch (Exception e){
             System.out.println(e.toString());
             return 0;
@@ -246,7 +242,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ArrayList<UserVO> getUserListInCorp(long idx_corp){
+    public ArrayList<UserVO> getUserListInCorp(long idx_corp) {
         return userMapper.getUserListInCorp(idx_corp);
+    }
+
+    @Override
+    public int updateUserApplicant(UserVO userVO){
+        return userMapper.updateUserApplicant(userVO);
     }
 }

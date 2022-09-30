@@ -142,6 +142,7 @@ public class IndexController {
                     session.setAttribute("corpName", "회사등록필요");
                 }
             }
+            System.out.println(findUser);
             session.setAttribute("isApplicant", findUser.getIs_applicant());
             return "redirect:/";
         } else {
@@ -507,7 +508,6 @@ public class IndexController {
                 || session.getAttribute("loginCheck") == null
                 || (session.getAttribute("loginCheck") != null && (Boolean) session.getAttribute("loginCheck") == false)
                 || (session.getAttribute("userid") == null)) {//로그인 필요
-
             clearSessionAndRedirect(session);
             satProfile(model);
             return "index";
@@ -637,7 +637,6 @@ public class IndexController {
                 || session.getAttribute("loginCheck") == null
                 || (session.getAttribute("loginCheck") != null && (Boolean) session.getAttribute("loginCheck") == false)
                 || (session.getAttribute("userid") == null)) {//로그인 필요
-
             clearSessionAndRedirect(session);
             satProfile(model);
             return "index";
@@ -651,6 +650,18 @@ public class IndexController {
         }
         model.addAttribute("user", findUser);
 
+        DemoBusinessVO demoBusinessVo = demoBsService.getDemoBsByIdx(userDemoBsCheckVO.getIdx_demo_business());
+        if (demoBusinessVo == null) {//해당 사업 없음, 에러페이지로 보내야 한다...
+
+            session.removeAttribute("loginCheck");
+            clearSessionAndRedirect(session);
+            satProfile(model);
+            return "index";
+        }
+
+        model.addAttribute("demoBs", demoBusinessVo);
+
+
         UserDemoBsVO userDemoBsVo = userDemoBsService.getUserDemoBs(userDemoBsCheckVO);
         if (userDemoBsVo == null) {//이전에 저장한게 없다, 에러페이지로 보내야 한다...
             session.removeAttribute("loginCheck");
@@ -659,6 +670,10 @@ public class IndexController {
             return "index";
         }
         model.addAttribute("userDemoBs", userDemoBsVo);
+
+        List<UserDemoBsFileResultVO> fileList = fileService.getUserDemoFileList(userDemoBsVo.getIdx_user_demo_bs());
+
+        model.addAttribute("fileArr", fileList);
 
         getHomepageInfo(model);
         satProfile(model);

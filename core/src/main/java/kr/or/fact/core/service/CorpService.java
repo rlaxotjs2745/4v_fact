@@ -28,4 +28,8 @@ public interface CorpService {
     ArrayList<CorpManagerVO> selectCorpManagerList(long idx_corp);
 
     int changeCorpManagerType(CorpManagerVO corpManagerVO);
+
+    CorpManagerVO getCorpManagerUserIdx(long idx_user);
+
+    int updateCorpManager(CorpManagerVO corpManagerVO);
 }

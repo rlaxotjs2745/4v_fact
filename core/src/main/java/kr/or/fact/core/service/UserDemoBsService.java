@@ -32,7 +32,7 @@ public interface UserDemoBsService {
     void saveUserDemoBsDetail(UserDemoBsDetailVO userDemoBsDetailVO);
     void updateUserDemoBsDetail(UserDemoBsDetailVO userDemoBsDetailVO);
 
-    int submitUserDemoBs(UserDemoBsCheckVO userDemoBsCheckVO);
+    int submitUserDemoBs(long idx_user_demo_bs);
 
     List<UserDemoBsVO> getUserDemoBsPagingList(int page_num, int amount, String order_field, int filter1, int filter2);
 }

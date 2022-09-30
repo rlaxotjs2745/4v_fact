@@ -147,4 +147,14 @@
     <delete id="deleteCorpManager" parameterType="kr.or.fact.core.model.DTO.CorpManagerVO">
         DELETE TB_CORP_MANAGER WHERE IDX_USER = #{idx_user}
     </delete>
+
+    <select id="getCorpManagerUserIdx" resultType="kr.or.fact.core.model.DTO.CorpManagerVO">
+        SELECT * FROM TB_CORP_MANAGER WHERE IDX_USER = #{idx_user}
+    </select>
+
+    <update id="updateCorpManager" parameterType="kr.or.fact.core.model.DTO.CorpManagerVO">
+        UPDATE TB_CORP_MANAGER SET
+            MPHONE_NUM = #{mphone_num}
+        WHERE IDX_CORP_MANAGER = #{idx_corp_manager}
+    </update>
 </mapper>

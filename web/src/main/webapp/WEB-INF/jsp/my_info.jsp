@@ -59,10 +59,10 @@
                             <th class="th__left">휴대폰</th>
                             <td class="td__left">${user.mphone_num}</td>
                         </tr>
-                        <tr>
-                            <th class="th__left">전화번호</th>
-                            <td class="td__left">${user.tel_num}</td>
-                        </tr>
+<%--                        <tr>--%>
+<%--                            <th class="th__left">전화번호</th>--%>
+<%--                            <td class="td__left">${user.tel_num}</td>--%>
+<%--                        </tr>--%>
 
                         <tr>
                             <th class="th__left">정보수신동의</th>
@@ -77,8 +77,8 @@
                             <th class="th__left">가입방식</th>
                             <td class="td__left" style="white-space: nowrap;">
                                 <c:choose>
-                                <c:when test="${user.sign_in_type eq 0}">웹가입</c:when>
-                                <c:when test="${user.sign_in_type eq 1}">모바일 웹가입</c:when>
+                                <c:when test="${user.sign_in_type eq 0}">웹 가입</c:when>
+                                <c:when test="${user.sign_in_type eq 1}">모바일 가입</c:when>
                                 <c:when test="${user.sign_in_type eq 2}">관리기관 가입</c:when>
                                 <c:when test="${user.sign_in_type eq 3}">한국농업기술진흥원 가입</c:when>
                                 <c:when test="${user.sign_in_type eq 4}">관계기관 가입</c:when>
@@ -254,41 +254,48 @@
                                 </tr>
                                 <tr>
                                     <th class="th__left">비밀번호</th>
-                                    <td class="td__modify is-alert"><input type="password" style="width:350px;" id="user_pw">
-                                        <br><span class="text--guide is-alert" style="display: none">비밀번호 규칙에 맞지 않습니다. 다시 입력해 주세요.</span>
-                                        <div class="text__message">
-                                            <ul>
-                                                <li>비밀번호는 10~15 자 입력 가능합니다.</li>
-                                                <li>영문소문자 / 숫자 / 특수문자 필수 혼합 입력</li>
-                                                <li>비밀번호는 동일한 문자열을 3 회 이상 반복할 수 없습니다.</li>
-                                                <li>비밀번호는 연속된 문자열을 3 회 이상 사용할 수 없습니다.</li>
-                                            </ul>
+                                    <td class="td__modify is-alert">
+                                        <div id="cur_pw">
+                                            <input type="password" style="width:350px;" id="cur_user_pw" placeholder="기존 비밀번호를 입력해주세요."><a href="#" id="confirm_pw" class="btn modify btn-lg">비밀번호 확인</a>
+                                        </div>
+                                        <div class="modify_pw">
+                                            <input type="password" style="width:350px;" id="user_pw" placeholder="새로운 비밀번호를 입력해주세요.">
+                                            <br><span class="text--guide is-alert" style="display: none">비밀번호 규칙에 맞지 않습니다. 다시 입력해 주세요.</span>
+                                            <div class="text__message">
+                                                <ul>
+                                                    <li>비밀번호는 8~15 자 입력 가능합니다.</li>
+                                                    <li>영문소문자 / 숫자 / 특수문자 필수 혼합 입력</li>
+                                                    <li>비밀번호는 동일한 문자열을 3 회 이상 반복할 수 없습니다.</li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr class="modify_pw">
                                     <th class="th__left">비밀번호 확인</th>
                                     <td class="td__modify"><input type="password" id="user_pwcf"placeholder="사용자 비밀번호 입력" style="width:350px;"></td>
                                 </tr>
                                 <tr>
                                     <th class="th__left">주소</th>
-                                    <td class="td__modify"><input type="text" id="user_addr_num" placeholder="우편번호"  style="width:180px;" /> <span class="text__zipcode"><a href="#" id="addr_search_btn" class="btn modify btn-lg">주소검색</a></span>
-                                        <input type="text" id="user_addr_main" placeholder="상세주소" value="${user.addr}">
-                                        <input type="text" id="user_addr_detail" placeholder="나머지 주소">
+                                    <td class="td__modify">
+                                        <div id="addr_init">
+                                            <span class="text__zipcode">${user.addr}</span><span class="text__zipcode"><a href="#" id="addr_modify_btn" class="btn modify btn-lg">주소변경</a></span>
+                                        </div>
+                                        <div id="addr_modify">
+                                            <input type="text" id="addr_num" placeholder="우편번호"  style="width:180px;" /> <span class="text__zipcode"><a href="#" id="addr_search_btn" class="btn modify btn-lg">주소검색</a></span>
+                                            <input type="text" id="addr_main" placeholder="상세주소">
+                                            <input type="text" id="addr_detail" placeholder="나머지 주소">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th class="th__left">휴대전화번호</th>
-                                    <td class="td__modify"><input type="tel" class="tel" value="${user.mphone_num.split("-")[0]}" style="width:80px;" id="mphone_num1"/><span class="text__dash">-</span><input type="tel" id="mphone_num2" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[1]}" /><span class="text__dash">-</span><input type="tel" id="mphone_num3" class="tel" style="width:80px;" value="${user.mphone_num.split("-")[2]}"/></td>
+                                    <td class="td__modify"><input type="text" class="tel" pattern="[0-9]+" value="${user.mphone_num.split("-")[0]}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" style="width:80px;" id="mphone_num1" maxlength="3"/><span class="text__dash">-</span><input type="text" id="mphone_num2" class="tel" style="width:80px;" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="${user.mphone_num.split("-")[1]}" maxlength="4"/><span class="text__dash">-</span><input type="text" id="mphone_num3" class="tel" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" style="width:80px;" value="${user.mphone_num.split("-")[2]}" maxlength="4"/></td>
                                 </tr>
-                                <tr>
-                                    <th class="th__left">집전화번호</th>
-                                    <td class="td__modify"><input type="tel" class="" style="width:273px;" value="${user.tel_num}" id="telnum_modify"/></td>
-                                </tr>
-                                <tr>
-                                    <th class="th__left">회사전화번호</th>
-                                    <td class="td__modify"><input type="tel" class="" style="width:273px;" value="${corp.tel_num}" disabled/></td>
-                                </tr>
+<%--                                <tr>--%>
+<%--                                    <th class="th__left">자택전화번호</th>--%>
+<%--                                    <td class="td__modify"><input type="text" class="tel" value="${user.tel_num.split("-")[0]}" style="width:80px;" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" id="tel_num1" maxlength="3"/><span class="text__dash">-</span><input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" id="tel_num2" class="tel" style="width:80px;" value="${user.tel_num.split("-")[1]}" maxlength="4"/><span class="text__dash">-</span><input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" id="tel_num3" class="tel" style="width:80px;" value="${user.tel_num.split("-")[2]}" maxlength="4"/></td>--%>
+<%--                                </tr>--%>
                                 <tr>
                                     <th class="th__left">정보수신동의<span class="text__essential">*</span></th>
                                     <td class="td__modify">전북 김제 스마트팜 실증밸리 실증단지의 정보를 &nbsp; &nbsp;
@@ -361,7 +368,7 @@
                                     </tr>
                                     <tr>
                                         <th class="th__left">회사전화번호</th>
-                                        <td class="td__modify"><input type="tel" class="tel" value="${corp.tel_num.split("-")[0]}" style="width:80px;" id="corp_tel_num1"/><span class="text__dash">-</span><input type="tel" id="corp_tel_num2" class="tel" style="width:80px;" value="${corp.tel_num.split("-")[1]}" /><span class="text__dash">-</span><input type="tel" id="corp_tel_num3" class="tel" style="width:80px;" value="${corp.tel_num.split("-")[2]}"/></td>
+                                        <td class="td__modify"><input type="text" class="tel" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="${corp.tel_num.split("-")[0]}" style="width:80px;" id="corp_tel_num1" maxlength="3"/><span class="text__dash">-</span><input type="text" id="corp_tel_num2" class="tel" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" style="width:80px;" value="${corp.tel_num.split("-")[1]}" maxlength="4" /><span class="text__dash">-</span><input type="text" id="corp_tel_num3" class="tel" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" style="width:80px;" value="${corp.tel_num.split("-")[2]}" maxlength="4"/></td>
                                     </tr>
                                     <tr>
                                         <th class="th__left">담당자명</th>
@@ -369,7 +376,7 @@
                                     </tr>
                                     <tr>
                                         <th class="th__left">담당자 전화번호</th>
-                                        <td class="td__modify"><input type="tel" class="tel" value="${mainManager.mphone_num.split("-")[0]}" style="width:80px;" id="manager_mphone_num1" disabled/><span class="text__dash">-</span><input type="tel" id="manager_mphone_num2" class="tel" style="width:80px;" value="${mainManager.mphone_num.split("-")[1]}" disabled /><span class="text__dash">-</span><input type="tel" id="manager_mphone_num3" class="tel" style="width:80px;" value="${mainManager.mphone_num.split("-")[2]}" disabled/></td>
+                                        <td class="td__modify"><input type="text" class="tel" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="${mainManager.mphone_num.split("-")[0]}" style="width:80px;" id="manager_mphone_num1" disabled/><span class="text__dash">-</span><input type="text" id="manager_mphone_num2" class="tel" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" style="width:80px;" value="${mainManager.mphone_num.split("-")[1]}" disabled /><span class="text__dash">-</span><input type="text" id="manager_mphone_num3" class="tel" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" style="width:80px;" value="${mainManager.mphone_num.split("-")[2]}" disabled/></td>
                                     </tr>
                                     <tr>
                                         <th class="th__left">담당자 이메일</th>
@@ -515,6 +522,7 @@
 <script>
     var nowModify = 'user_modify';
     var addrModifyBool = 0;
+    var userAddrModifyBool = 0;
     var corpTelNumBool = 0;
     var corpNameBool = 0;
     var homepageBool = 0;
@@ -523,6 +531,8 @@
     $('#corp_table').hide();
     $('#manager_table').hide();
     $('#corp_addr_modify').hide();
+    $('#addr_modify').hide();
+    $('.modify_pw').hide()
     //corp modify 조건 만들고 변환 적용 해야함
     <c:if test="${user.is_corporate_member eq 1}">
 
@@ -568,12 +578,14 @@
     })
 
 
-
-    $("#user_addr_num, #user_addr_main, #addr_search_btn").click(function() {
+    $("#addr_num, #addr_main, #addr_search_btn, #addr_modify_btn").click(function() {
         new daum.Postcode({
             oncomplete: function (data) {
-                $("#user_addr_num").val(data.zonecode);
-                $("#user_addr_main").val(data.roadAddress + " " + data.buildingName);
+                $('#addr_init').hide();
+                $('#addr_modify').show();
+                $("#addr_num").val(data.zonecode);
+                $("#addr_main").val(data.roadAddress + " " + data.buildingName);
+                userAddrModifyBool = 1;
                 // console.log(data);
             }
         }).open();
@@ -594,6 +606,31 @@
     $('#close_modal_Xbtn').click(function(){
         location.href='my_info';
     })
+
+    $('#confirm_pw').click(function(){
+        $.ajax({
+            type: 'post',
+            url :'check_pw', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(
+                {idx_user: '${user.idx_user}', user_pw: $('#cur_user_pw').val()},
+            ),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'json',//받는 데이터 타입
+            success: function(result){
+                if(result.result_code == 'SUCCESS'){
+                    if(confirm('현재 비밀번호가 확인되었습니다.\n새로운 비밀번호를 입력하시겠습니까?')){
+                        $('#cur_pw').hide();
+                        $('.modify_pw').show();
+                    }
+                } else if(result.result_code == 'FAIL'){
+                    alert('입력한 비밀번호가 틀립니다.')
+                } else {
+                    alert('서버 이상으로 인해 비밀번호 확인에 실패했습니다.')
+                }
+            }
+        })
+    })
+
 
     $('.modify_manager_type').click(function(){
         var clickedBtn = $(this);
@@ -653,42 +690,32 @@
             return alert('처리중입니다. 잠시만 기다려주세요.');
         }
         modifyConfirmBool = 1;
-        var param;
+        var testPw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+        var param = {"idx_user": ${user.idx_user}}
         if(nowModify == 'user_modify'){
             if($("#user_pw").val() != ""){
-                if($("#user_pw").val().length > 9){
+                if(testPw.test($("#user_pw").val())){
                     if($("#user_pw").val() == $("#user_pwcf").val()){
-                        param = {
-                            "idx_user": ${user.idx_user},
-                            "user_pw": $("#user_pw").val(),
-                            "addr": $("#user_addr_num").val() != "" ?
-                                "("+ $("#user_addr_num").val()+") "+$("#user_addr_main").val() +" "+$("#user_addr_detail").val()
-                                : $("#user_addr_main").val(),
-                            "mphone_num": $("#mphone_num1").val() + "-" + $("#mphone_num2").val() + "-" + $("#mphone_num3").val(),
-                            "is_sms_agree": $("#type-1").is(":checked") ? 1 : 0,
-                            "is_email_agree": $("#type-2").is(":checked") ? 1 : 0,
-                            "tel_num": $("#telnum_modify").val()
-                        }
-
+                        param.user_pw = $("#user_pw").val();
                     } else {
                         alert("비밀번호 확인이 일치하지 않습니다.");
-                        return;
+                        return modifyConfirmBool = 0;
                     }
                 } else {
                     alert("비밀번호 규칙이 맞지 않습니다.");
-                    return;
-                }
-            } else {
-                param = {
-                    "idx_user": ${user.idx_user},
-                    "addr": $("#user_addr_num").val() != "" ? "("+ $("#user_addr_num").val()+") "+$("#user_addr_main").val() +" "+$("#user_addr_detail").val() : $("#user_addr_main").val(),
-                    "mphone_num": $("#mphone_num1").val()+"-"+$("#mphone_num2").val()+"-"+$("#mphone_num3").val(),
-                    "is_sms_agree": $("#type-1").is(":checked") ? 1 : 0,
-                    "is_email_agree": $("#type-2").is(":checked") ? 1 : 0,
-                    "is_maketing_agree": $('#ad-1').is('checked') ? 1 : 0,
-                    "tel_num": $("#telnum_modify").val()
+                    return modifyConfirmBool = 0;
                 }
             }
+
+            if(userAddrModifyBool){
+                param.addr = "("+ $("#addr_num").val()+")"+$("#addr_main").val() +" "+$("#addr_detail").val();
+            }
+            if($("#mphone_num1").val() + "-" + $("#mphone_num2").val() + "-" + $("#mphone_num3").val() != '${user.mphone_num}'){
+                param.mphone_num = $("#mphone_num1").val() + "-" + $("#mphone_num2").val() + "-" + $("#mphone_num3").val();
+            }
+            param.is_maketing_agree = $('#ad-1').is(":checked") ? 1 : 0;
+            param.is_sms_agree = $("#type-1").is(":checked") ? 1 : 0;
+            param.is_email_agree = $("#type-2").is(":checked") ? 1 : 0;
 
             $.ajax({
                 type: 'post',
@@ -740,11 +767,9 @@
                     dataType:'json',//받는 데이터 타입
                     success: function(result){
                         //작업이 성공적으로 발생했을 경우
-                        console.log(result);
                         if(result.result_code=="SUCCESS"){
                             alert(result.result_str);
-                            // location.href='my_info';
-
+                            location.href='my_info';
                         }
                         else {
                             alert(result.result_str);
@@ -762,35 +787,35 @@
         modifyConfirmBool = 0;
     })
 
-    function insertAddress(addr, type){
-        var zipCodeBool = 0;
-        var zipCode = '';
-        var newAddr = ''
-        for(var i = 0; i < addr.length; i++){
-            if(addr[i] == '(' && !zipCodeBool){
-                zipCodeBool = 1;
-                continue;
-            } else if(addr[i] == ')' && zipCodeBool){
-                zipCodeBool = 0;
-                continue;
-            } else if(zipCodeBool){
-                zipCode += addr[i];
-            } else {
-                newAddr += addr[i];
-            }
-        }
-        if(type == 1){
-            $('#user_addr_num').val(zipCode);
-            $('#user_addr_main').val(newAddr);
-        } else if(type == 2){
-            $('#corp_addr_num').val(zipCode);
-            $('#corp_addr_main').val(newAddr);
-        }
-    }
+    <%--function insertAddress(addr, type){--%>
+    <%--    var zipCodeBool = 0;--%>
+    <%--    var zipCode = '';--%>
+    <%--    var newAddr = ''--%>
+    <%--    for(var i = 0; i < addr.length; i++){--%>
+    <%--        if(addr[i] == '(' && !zipCodeBool){--%>
+    <%--            zipCodeBool = 1;--%>
+    <%--            continue;--%>
+    <%--        } else if(addr[i] == ')' && zipCodeBool){--%>
+    <%--            zipCodeBool = 0;--%>
+    <%--            continue;--%>
+    <%--        } else if(zipCodeBool){--%>
+    <%--            zipCode += addr[i];--%>
+    <%--        } else {--%>
+    <%--            newAddr += addr[i];--%>
+    <%--        }--%>
+    <%--    }--%>
+    <%--    if(type == 1){--%>
+    <%--        $('#user_addr_num').val(zipCode);--%>
+    <%--        $('#user_addr_main').val(newAddr.trim());--%>
+    <%--    } else if(type == 2){--%>
+    <%--        $('#corp_addr_num').val(zipCode);--%>
+    <%--        $('#corp_addr_main').val(newAddr.trim());--%>
+    <%--    }--%>
+    <%--}--%>
 
-    $('#modify_modal_open').click(function(){
-        insertAddress("${user.addr}", 1);
-    })
+    <%--$('#modify_modal_open').click(function(){--%>
+    <%--    insertAddress("${user.addr}", 1);--%>
+    <%--})--%>
 
 
 </script>
