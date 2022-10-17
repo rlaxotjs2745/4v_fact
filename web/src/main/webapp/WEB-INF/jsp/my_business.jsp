@@ -334,7 +334,8 @@
                 <!--접수중-->
             <div id="now_condition_notice">
                 <div class="cnt__title">안내</div>
-                <div class="table__type no--border">
+
+                <div id="notice_req_supplement" class="table__type no--border">
                     <table class="table__type--my ">
                         <colgroup>
                             <col style="width:100%">
@@ -343,7 +344,7 @@
                         <tr>
                             <td class="td__infomation"><div class="td__attention"><strong>보완 요청이 있습니다. 보완요청서를 확인하시고, 본 화면에서 보완된 서류를 제출해 주십시오.</strong>
                                 <strong>등록시, 보완된 서류를 포함해서 모든 서류를 다시 제출해 주십시오. </strong>
-                                <a href="#none" class="btn btn-download">보완요청서 보기</a></div>
+                                <a href="#popup_supply" class="btn btn-download js-modal-detail">보완요청서 보기</a></div>
                                 <div class="td__attention--fileupload"><a href="#popup_supply" class="btn dark btn-lg  js-modal-detail">서류등록</a></div>
                             </td>
                         </tr>
@@ -353,7 +354,7 @@
                 <!--//-->
 
                 <!--검토-->
-                <div class="table__type no--border">
+                <div id="notice_req_fin_apply" class="table__type no--border">
                     <table class="table__type--my ">
                         <colgroup>
                             <col style="width:100%">
@@ -368,7 +369,7 @@
                 <!--//-->
 
                 <!--심사-->
-                <div class="table__type no--border">
+                <div id="notice_evaluating" class="table__type no--border">
                     <table class="table__type--my ">
                         <colgroup>
                             <col style="width:100%">
@@ -383,16 +384,20 @@
                 <!--//-->
 
                 <!--실증담당자 지정-->
-                <div class="table__type no--border">
+                <div id="notice_appoint_manager" class="table__type no--border">
                     <table class="table__type--my ">
                         <colgroup>
                             <col style="width:100%">
                         </colgroup>
                         <tbody>
                         <tr>
-                            <td class="td__infomation"><div class="td__attention"><strong>실증담당자가 지정되었습니다.</strong>
-                                <strong>아래의 최종서류를 확인후 변경할 부분이 없다면, ‘계획확정’ 버튼을 선택해 주십시오.</strong>
-                                <strong>서류에 대한 문의는 실증담당자와 상의해 주십시오.</strong></div></td>
+                            <td class="td__infomation">
+                                <div class="td__attention">
+                                    <strong>실증담당자가 지정되었습니다.</strong>
+                                    <strong>아래의 최종서류를 확인후 변경할 부분이 없다면, ‘계획확정’ 버튼을 선택해 주십시오.</strong>
+                                    <strong>서류에 대한 문의는 실증담당자와 상의해 주십시오.</strong>
+                                </div>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -400,16 +405,20 @@
                 <!--//-->
 
                 <!--계획확정 / 승인-->
-                <div class="table__type no--border">
+                <div id="notice_confirm_plan" class="table__type no--border">
                     <table class="table__type--my ">
                         <colgroup>
                             <col style="width:100%">
                         </colgroup>
                         <tbody>
                         <tr>
-                            <td class="td__infomation"><div class="td__approval"><strong>신청하신 사업에 선정이 되었으며, 실증책임자 “000”이 지정되었습니다.
-                                실증책임자와 이용계획을 확정해 주십시오. 확정 후, 협약이 진행됩니다.</strong>
-                                <a href="#none" class="btn btn-download">선정평가 종합의견서 다운로드</a></div></td>
+                            <td class="td__infomation">
+                                <div class="td__approval">
+                                    <strong>신청하신 사업에 선정이 되었으며, 실증책임자 “000”이 지정되었습니다.
+                                    실증책임자와 이용계획을 확정해 주십시오. 확정 후, 협약이 진행됩니다.</strong>
+                                    <a href="#none" class="btn btn-download">선정평가 종합의견서 다운로드</a>
+                                </div>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -417,16 +426,20 @@
                 <!--//-->
 
                 <!--계획확정 / 보류-->
-                <div class="table__type no--border">
+                <div id="notice_defer" class="table__type no--border">
                     <table class="table__type--my ">
                         <colgroup>
                             <col style="width:100%">
                         </colgroup>
                         <tbody>
                         <tr>
-                            <td class="td__infomation"><div class="td__pending"><strong>심사가 보류 되었습니다.
-                                자세한 사항은 선정평가 종합의견서를 참고해 주십시오.</strong>
-                                <a href="#none" class="btn btn-download">선정평가 종합의견서 다운로드</a></div></td>
+                            <td class="td__infomation">
+                                <div class="td__pending">
+                                    <strong>심사가 보류 되었습니다.
+                                    자세한 사항은 선정평가 종합의견서를 참고해 주십시오.</strong>
+                                    <a href="#none" class="btn btn-download">선정평가 종합의견서 다운로드</a>
+                                </div>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -434,16 +447,20 @@
                 <!--//-->
 
                 <!--계획확정 / 사용불가-->
-                <div class="table__type no--border">
+                <div id="notice_rejection" class="table__type no--border">
                     <table class="table__type--my ">
                         <colgroup>
                             <col style="width:100%">
                         </colgroup>
                         <tbody>
                         <tr>
-                            <td class="td__infomation"><div class="td__refusal"><strong>신청하신 사업에 사용이 불가능합니다.
-                                자세한 사항은 아래의 선정평가 종합의견서를 참고해 주십시오.</strong>
-                                <a href="#none" class="btn btn-download">선정평가 종합의견서 다운로드</a></div></td>
+                            <td class="td__infomation">
+                                <div class="td__refusal">
+                                    <strong>신청하신 사업에 사용이 불가능합니다.
+                                    자세한 사항은 아래의 선정평가 종합의견서를 참고해 주십시오.</strong>
+                                    <a href="#none" class="btn btn-download">선정평가 종합의견서 다운로드</a>
+                                </div>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -464,15 +481,15 @@
                         <tbody>
                         <tr>
                             <th class="th__left">사업명</th>
-                            <td class="td__left">XXXXXXX XXXXXXX XXXXXX XXXXXXXXXXXXXXX</td>
+                            <td class="td__left" id="application_condition_bs_title">XXXXXXX XXXXXXX XXXXXX XXXXXXXXXXXXXXX</td>
                             <th class="th__left">접수번호</th>
-                            <td class="td__left">미부여</td>
+                            <td class="td__left" id="application_condition_bs_num">미부여</td>
                         </tr>
                         <tr>
                             <th class="th__left">신청일</th>
-                            <td class="td__left">YYYY.MM.DD-HH:00</td>
+                            <td class="td__left" id="application_condition_reg_date">YYYY.MM.DD-HH:00</td>
                             <th class="th__left">문의</th>
-                            <td class="td__left">아무개. 063-000-0000, 내선 0, 이메일</td>
+                            <td class="td__left" id="application_condition_apply_manager">아무개. 063-000-0000, 내선 0, 이메일</td>
                         </tr>
                         <!--<tr>
                           <th class="th__left">처리상태</th>
@@ -1152,6 +1169,7 @@
 <%@include file ="footer.jsp" %>
 <%@include file ="script.jsp" %>
 <script>
+    $('#notice_req_supplement, #notice_req_fin_apply, #notice_evaluating, #notice_appoint_manager, #notice_confirm_plan, #notice_defer, #notice_rejection').hide();
     $('#now_condition, #now_condition_notice, #application_condition, #agree_condition, #demobs_plan, #tenant_info, #last_doc, #result_report, #history_modify_use_fac, #others').hide();
 
     <c:forEach items="${demoList}" var="demo3" varStatus="status">
@@ -1163,23 +1181,157 @@
     });
     </c:forEach>
 
-    $('.demo_bs_entity').click(function(){
+    function clickEntity(tagId, message, update_date){
         $('#receipting, #review_doc, #review_fin, #estimate_selecting, #definite_plan, #in_agreement, #agreement_fin, #in_business').removeClass('is-active');
+        $('#receipting, #review_doc, #review_fin, #estimate_selecting, #definite_plan, #in_agreement, #agreement_fin, #in_business').removeClass('is-passed');
+        // 진행 현황 상태 초기화
+        $('#notice_req_supplement, #notice_req_fin_apply, #notice_evaluating, #notice_appoint_manager, #notice_confirm_plan, #notice_defer, #notice_rejection').hide();
+        // 안내 상태 초기화
+        $(tagId).addClass('is-active');
+        if(tagId == '#review_doc'){
+            $('#receipting').addClass('is-passed');
+        } else if(tagId == '#review_fin'){
+            $('#receipting, #review_doc').addClass('is-passed');
+        } else if(tagId == '#estimate_selecting'){
+            $('#receipting, #review_doc, #review_fin').addClass('is-passed');
+        } else if(tagId == '#definite_plan'){
+            $('#receipting, #review_doc, #review_fin, #estimate_selecting').addClass('is-passed');
+        } else if(tagId == '#in_agreement'){
+            $('#receipting, #review_doc, #review_fin, #estimate_selecting, #definite_plan').addClass('is-passed');
+        } else if(tagId == '#agreement_fin'){
+            $('#receipting, #review_doc, #review_fin, #estimate_selecting, #definite_plan, #in_agreement').addClass('is-passed');
+        } else if(tagId == '#in_business'){
+            $('#receipting, #review_doc, #review_fin, #estimate_selecting, #definite_plan, #in_agreement, #agreement_fin').addClass('is-passed');
+        }
+
+        if(tagId != '#receipting'){
+            $('#now_condition_notice').show();
+        }
+        if(message != '작성중'){
+            $(tagId).append($('#status_date').html(message + '<br>' + update_date));
+            $('#status_date').show();
+        }
+    }
+
+    $('.demo_bs_entity').click(function(){
+        $('#notice_req_supplement, #notice_req_fin_apply, #notice_evaluating, #notice_appoint_manager, #notice_confirm_plan, #notice_defer, #notice_rejection').hide();
+        // 안내 모두 숨김
         $('#now_condition_notice, #application_condition, #agree_condition, #demobs_plan, #tenant_info, #last_doc, #result_report, #history_modify_use_fac, #others, #status_date').hide();
+        // 실증서비스 신청현황 제외한 모든 테이블 숨기기
         var entityId = $(this).attr('id').split('_')[1];
-        $('#now_condition').show();
-        var status_date = $('#status_date');
+        $('#now_condition').show(); // 진행현황 보이기
+        var tagId;
+        var message;
         <c:forEach items="${demoList}" var="clickedDemo" varStatus="status">
-        <fm
+        <fmt:formatDate value="${clickedDemo.last_upd_date}" var="update_date" pattern="yyyy.MM.dd"/>
             if(entityId == '${clickedDemo.idx_user_demo_bs}'){
                 if('${clickedDemo.user_demobs_status}' < 4){
-                    console.log('${clickedDemo.user_demobs_status}');
-                    $('#receipting').addClass('is-active').append(status_date);
-                    status_date.show();
+                    tagId = '#receipting';
+                    message = '작성중';
                 } else if('${clickedDemo.user_demobs_status}' == 4){
-                    $('#receipting').addClass('is-active').append(status_date.val('접수일<br>YYYY.MM.DD HH:MM'));
-                }
+                    tagId = '#receipting';
+                    message = '접수일';
+                } else if('${clickedDemo.user_demobs_status}' == 5){
+                    tagId = '#review_doc';
+                    message = '검토 접수일';
+                    $('#notice_evaluating').show();
+                } else if('${clickedDemo.user_demobs_status}' == 6){
+                    tagId = '#review_doc';
+                    message = '보완 요청';
+                    $('#notice_req_supplement').show();
+                } else if('${clickedDemo.user_demobs_status}' == 7){
+                    tagId = '#review_doc';
+                    message = '보완 중';
+                    $('#notice_req_supplement').show();
+                } else if('${clickedDemo.user_demobs_status}' == 8){
+                    tagId = '#review_fin';
+                    message = '접수 완료';
+                    $('#notice_req_fin_apply').show();
+                } else if('${clickedDemo.user_demobs_status}' == 9){
+                    tagId = '#review_fin';
+                    message = '서류 부적격';
+                    $('#notice_req_fin_apply').show();
+                } else if('${clickedDemo.user_demobs_status}' == 10){
+                    tagId = '#estimate_selecting';
+                    message = '서류 심사 중';
+                    $('#notice_evaluating').show();
+                } else if('${clickedDemo.user_demobs_status}' == 11){
+                    tagId = '#estimate_selecting';
+                    message = '서류 심사 통과';
+                    $('#notice_req_fin_apply').show();
+                } else if('${clickedDemo.user_demobs_status}' == 12){
+                    tagId = '#estimate_selecting';
+                    message = '서류 심사 보류';
+                    $('#notice_defer').show();
+                } else if('${clickedDemo.user_demobs_status}' == 13){
+                    tagId = '#estimate_selecting';
+                    message = '서류 심사 부적격';
+                    $('#notice_rejection').show();
+                } else if('${clickedDemo.user_demobs_status}' == 14){
+                    tagId = '#estimate_selecting';
+                    message = '제안서 요청';
+                    $('#notice_req_supplement').show();
+                } else if('${clickedDemo.user_demobs_status}' == 15){
+                    tagId = '#estimate_selecting';
+                    message = '제안서 접수';
+                    $('#notice_req_fin_apply').show();
+                } else if('${clickedDemo.user_demobs_status}' == 16){
+                    tagId = '#estimate_selecting';
+                    message = '발표 요청';
 
+                } else if('${clickedDemo.user_demobs_status}' == 17){
+                    tagId = '#estimate_selecting';
+                    message = '발표 완료';
+                } else if('${clickedDemo.user_demobs_status}' == 18){
+                    tagId = '#estimate_selecting';
+                    message = '발표 평가 중';
+                } else if('${clickedDemo.user_demobs_status}' == 19){
+                    tagId = '#definite_plan';
+                    message = '발표 합격';
+                } else if('${clickedDemo.user_demobs_status}' == 20){
+                    tagId = '#in_agreement';
+                    message = '이의 신청';
+                } else if('${clickedDemo.user_demobs_status}' == 21){
+                    tagId = '#in_agreement';
+                    message = '이의 검토';
+                } else if('${clickedDemo.user_demobs_status}' == 22){
+                    tagId = '#in_agreement';
+                    message = '이의 기각';
+                } else if('${clickedDemo.user_demobs_status}' == 23){
+                    tagId = '#in_agreement';
+                    message = '이의 인용';
+                } else if('${clickedDemo.user_demobs_status}' == 30){
+                    tagId = '#in_agreement';
+                    message = '협약중';
+                } else if('${clickedDemo.user_demobs_status}' == 31){
+                    tagId = '#in_agreement';
+                    message = '협약 보완 요청';
+                } else if('${clickedDemo.user_demobs_status}' == 32){
+                    tagId = '#agreement_fin';
+                    message = '협약 완료';
+                } else if('${clickedDemo.user_demobs_status}' == 33){
+                    tagId = '#agreement_fin';
+                    message = '협약 보류';
+                } else if('${clickedDemo.user_demobs_status}' == 34){
+                    tagId = '#agreement_fin';
+                    message = '협약 실패';
+                } else if('${clickedDemo.user_demobs_status}' == 40){
+                    tagId = '#in_business';
+                    message = '사업 시작';
+                } else if('${clickedDemo.user_demobs_status}' == 50){
+                    tagId = '#in_business';
+                    message = '사업 종료';
+                } else if('${clickedDemo.user_demobs_status}' == 60){
+                    tagId = '#in_business';
+                    message = '결산 중';
+                } else if('${clickedDemo.user_demobs_status}' == 61){
+                    tagId = '#in_business';
+                    message = '결산 완료';
+                } else if('${clickedDemo.user_demobs_status}' == 99){
+                    tagId = '#in_business';
+                    message = '최종 탈락';
+                }
+                clickEntity(tagId, message, '${update_date}');
             }
         </c:forEach>
     })

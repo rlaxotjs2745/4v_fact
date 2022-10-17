@@ -85,7 +85,7 @@ public class IndexController {
         model.addAttribute("annoList", bsAnnouncementVOList);
         model.addAttribute("eventList", eventContentVOList);
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "index";
     }
 
@@ -104,7 +104,7 @@ public class IndexController {
         model.addAttribute("eventList", eventContentVOList);
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "index";
     }
 
@@ -161,14 +161,14 @@ public class IndexController {
                 || (session.getAttribute("userid") == null)) {//로그인 필요
 
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
         UserVO findUser = userService.findUserById(String.valueOf(session.getAttribute("userid")));
         if (findUser == null) {
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
         model.addAttribute("user", findUser);
@@ -179,7 +179,7 @@ public class IndexController {
 
         getHomepageInfo(model);
 
-        satProfile(model);
+        setProfile(model);
 
         return "app_step1";
     }
@@ -194,7 +194,7 @@ public class IndexController {
                 || (session.getAttribute("userid") == null)) {//로그인 필요
 
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
 
@@ -204,7 +204,7 @@ public class IndexController {
                 || !findUser.getUser_id().equals(String.valueOf(session.getAttribute("userid")))) {
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
         model.addAttribute("user", findUser);
@@ -215,7 +215,7 @@ public class IndexController {
 
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
 
@@ -225,12 +225,12 @@ public class IndexController {
         if (userDemoBsVo == null) {//이전에 저장한게 없다, 에러페이지로 보내야 한다...
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
         model.addAttribute("userDemoBs", userDemoBsVo);
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
 
         return "app_step2";
     }
@@ -245,7 +245,7 @@ public class IndexController {
                 || (session.getAttribute("userid") == null)) {//로그인 필요
 
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
         UserVO findUser = userService.getUserInfo(userDemoBsCheckVO.getIdx_user());
@@ -254,7 +254,7 @@ public class IndexController {
                 || !findUser.getUser_id().equals(String.valueOf(session.getAttribute("userid")))) {
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
         model.addAttribute("user", findUser);
@@ -265,7 +265,7 @@ public class IndexController {
 
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
 
@@ -275,7 +275,7 @@ public class IndexController {
         if (userDemoBsVo == null) {//이전에 저장한게 없다, 에러페이지로 보내야 한다...
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
         model.addAttribute("userDemoBs", userDemoBsVo);
@@ -496,7 +496,7 @@ public class IndexController {
         model.addAttribute("userBsHumanResourceVOList", userBsHumanResourceVOList);
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "app_step3";
     }
 
@@ -509,14 +509,14 @@ public class IndexController {
                 || (session.getAttribute("loginCheck") != null && (Boolean) session.getAttribute("loginCheck") == false)
                 || (session.getAttribute("userid") == null)) {//로그인 필요
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
         UserVO findUser = userService.findUserById(String.valueOf(session.getAttribute("userid")));
         if (findUser == null) {
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
         model.addAttribute("user", findUser);
@@ -526,7 +526,7 @@ public class IndexController {
 
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
 
@@ -536,7 +536,7 @@ public class IndexController {
         if (userDemoBsVo == null) {//이전에 저장한게 없다, 에러페이지로 보내야 한다...
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
         model.addAttribute("userDemoBs", userDemoBsVo);
@@ -548,7 +548,7 @@ public class IndexController {
         if (userDemoBsDetailVO == null || userBsHumanResourceVOList == null || userBsHumanResourceVOList.isEmpty()) {
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
 
@@ -557,7 +557,7 @@ public class IndexController {
         model.addAttribute("userBsHumanResourceVOList", userBsHumanResourceVOList);
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "app_step4";
     }
 
@@ -571,14 +571,14 @@ public class IndexController {
                 || (session.getAttribute("userid") == null)) {//로그인 필요
 
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
         UserVO findUser = userService.findUserById(String.valueOf(session.getAttribute("userid")));
         if (findUser == null) {
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
         model.addAttribute("user", findUser);
@@ -589,7 +589,7 @@ public class IndexController {
 
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
 
@@ -599,7 +599,7 @@ public class IndexController {
         if (userDemoBsVo == null) {//이전에 저장한게 없다, 에러페이지로 보내야 한다...
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
         model.addAttribute("userDemoBs", userDemoBsVo);
@@ -611,7 +611,7 @@ public class IndexController {
         if (userDemoBsDetailVO == null || userBsHumanResourceVOList == null || userBsHumanResourceVOList.isEmpty()) {
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
 
@@ -624,8 +624,8 @@ public class IndexController {
         model.addAttribute("userBsHumanResourceVOList", userBsHumanResourceVOList);
 
         getHomepageInfo(model);
-        satProfile(model);
-        satProfile(model);
+        setProfile(model);
+        setProfile(model);
         return "app_step5";
     }
 
@@ -638,14 +638,14 @@ public class IndexController {
                 || (session.getAttribute("loginCheck") != null && (Boolean) session.getAttribute("loginCheck") == false)
                 || (session.getAttribute("userid") == null)) {//로그인 필요
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
         UserVO findUser = userService.findUserById(String.valueOf(session.getAttribute("userid")));
         if (findUser == null) {
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
         model.addAttribute("user", findUser);
@@ -655,7 +655,7 @@ public class IndexController {
 
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
 
@@ -666,7 +666,7 @@ public class IndexController {
         if (userDemoBsVo == null) {//이전에 저장한게 없다, 에러페이지로 보내야 한다...
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
         model.addAttribute("userDemoBs", userDemoBsVo);
@@ -676,7 +676,7 @@ public class IndexController {
         model.addAttribute("fileArr", fileList);
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "app_step6";
     }
 
@@ -685,7 +685,7 @@ public class IndexController {
     public String arc_center(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "arc_center";
     }
 
@@ -694,7 +694,7 @@ public class IndexController {
         List<FormFileInfoVO> formFileInfoVO = fileService.getFormFileList();
         model.addAttribute("formfileList", formFileInfoVO);
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "arc_form";
     }
 
@@ -702,7 +702,7 @@ public class IndexController {
     public String arc_pee(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "arc_pee";
     }
 
@@ -711,7 +711,7 @@ public class IndexController {
         List<RuleFileInfoVO> ruleFileInfoList = fileService.getRuleFileInfoList1();
         model.addAttribute("rulefileList", ruleFileInfoList);
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "arc_rule";
     }
 
@@ -735,7 +735,7 @@ public class IndexController {
 
         int annouceCount = bsAnnouncementService.getOpenBsAnnouncementCount(filter, query);
         if (annouceCount == 0) {
-            satProfile(model);
+            setProfile(model);
             return "brd_announce_blank";
         }
         model.addAttribute("total_count", annouceCount);
@@ -784,7 +784,7 @@ public class IndexController {
         model.addAttribute("list_amount", list_amount);
         model.addAttribute("page_amount", page_amount);
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_announce";
     }
 
@@ -798,7 +798,7 @@ public class IndexController {
         model.addAttribute("bsAnnouns", bsAnnouncementInfo);
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_announce_detail";
     }
 
@@ -807,7 +807,7 @@ public class IndexController {
     public String brd_announce_blank(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_announce_blank";
     }
 
@@ -816,7 +816,7 @@ public class IndexController {
                                       Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_announce_search";
     }
 
@@ -824,7 +824,7 @@ public class IndexController {
     public String brd_announce_search_blank(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_announce_search_blank";
     }
 
@@ -847,7 +847,7 @@ public class IndexController {
 
         int eventCount = eventContentService.getOpenEventContentCount(filter, query);
         if (eventCount == 0) {
-            satProfile(model);
+            setProfile(model);
             return "brd_event_blank";
         }
         model.addAttribute("total_count", eventCount);
@@ -897,7 +897,7 @@ public class IndexController {
         model.addAttribute("page_amount", page_amount);
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_event";
     }
 
@@ -926,7 +926,7 @@ public class IndexController {
 //        }
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_event_detail";
     }
 
@@ -934,7 +934,7 @@ public class IndexController {
     public String brd_event_blank(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_event_blank";
     }
 
@@ -943,7 +943,7 @@ public class IndexController {
                                    Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_event_search";
     }
 
@@ -951,7 +951,7 @@ public class IndexController {
     public String brd_event_search_blank(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_event_search_blank";
     }
 
@@ -976,7 +976,7 @@ public class IndexController {
 
         int noticeCount = noticeService.getOpenNoticeCount(filter, query);
         if (noticeCount == 0) {
-            satProfile(model);
+            setProfile(model);
             return "brd_notice_blank";
         }
         model.addAttribute("total_count", noticeCount);
@@ -1026,7 +1026,7 @@ public class IndexController {
         model.addAttribute("page_amount", page_amount);
 
 //        getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_notice";
     }
 
@@ -1051,7 +1051,7 @@ public class IndexController {
 
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_notice_detail";
     }
 
@@ -1059,7 +1059,7 @@ public class IndexController {
     public String brd_notice_blank(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_notice_blank";
     }
 
@@ -1068,7 +1068,7 @@ public class IndexController {
                                     Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_notice_search";
     }
 
@@ -1076,7 +1076,7 @@ public class IndexController {
     public String brd_notice_search_blank(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_notice_search_blank";
     }
 
@@ -1097,7 +1097,7 @@ public class IndexController {
 
         int promotionCount = prContentService.getOpenPRContentCount(filter, query);
         if (promotionCount == 0) {
-            satProfile(model);
+            setProfile(model);
             return "brd_promotion_blank";
         }
         model.addAttribute("total_count", promotionCount);
@@ -1147,7 +1147,7 @@ public class IndexController {
         model.addAttribute("page_amount", page_amount);
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_promotion";
     }
 
@@ -1163,7 +1163,7 @@ public class IndexController {
         model.addAttribute("pr", prContentVO1);
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_promotion_detail";
     }
 
@@ -1171,7 +1171,7 @@ public class IndexController {
     public String brd_promotion_blank(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_promotion_blank";
     }
 
@@ -1180,7 +1180,7 @@ public class IndexController {
                                        Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_promotion_search";
     }
 
@@ -1188,7 +1188,7 @@ public class IndexController {
     public String brd_promotion_search_blank(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "brd_promotion_search_blank";
     }
 
@@ -1197,7 +1197,7 @@ public class IndexController {
     public String cnt_goal(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "cnt_goal";
     }
 
@@ -1205,7 +1205,7 @@ public class IndexController {
     public String cnt_history(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "cnt_history";
     }
 
@@ -1213,7 +1213,7 @@ public class IndexController {
     public String cnt_map(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "cnt_map";
     }
 
@@ -1224,7 +1224,7 @@ public class IndexController {
         model.addAttribute("coWorkerVOList", coWorkerVOList);
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "cnt_organize";
     }
 
@@ -1277,7 +1277,7 @@ public class IndexController {
             session.setAttribute("privacy_agree", privacy_agree);
             session.setAttribute("third_party_agree", third_party_agree);
         } else {
-            satProfile(model);
+            setProfile(model);
             return "/errors/404";
         }
 
@@ -1285,7 +1285,7 @@ public class IndexController {
 
         model.addAttribute("corps", corpInfoVOList);
 
-        satProfile(model);
+        setProfile(model);
         return "join_person";
     }
 
@@ -1295,7 +1295,7 @@ public class IndexController {
 
         model.addAttribute("searchSeverUrl", jusoService.getSearchServerUrl());
         model.addAttribute("juso_type", juso_type);
-        satProfile(model);
+        setProfile(model);
         return "juso_search";
     }
 
@@ -1308,7 +1308,7 @@ public class IndexController {
     public String login(HttpSession session, Model model) {
         clearSessionAndRedirect(session);
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "login";
     }
 
@@ -1316,7 +1316,7 @@ public class IndexController {
     public String my_agreement(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "my_agreement";
     }
 
@@ -1330,14 +1330,14 @@ public class IndexController {
 
             clearSessionAndRedirect(session);
 
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
         UserVO findUser = userService.findUserById(String.valueOf(session.getAttribute("userid")));
         if (findUser == null) {
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
         model.addAttribute("user", findUser);
@@ -1348,7 +1348,7 @@ public class IndexController {
         {
             //개인정보 업데이트 필요!
             //userService.update();
-            satProfile(model);
+            setProfile(model);
             return "my_business_blank";
         }
         model.addAttribute("user_demo_bs_count", userDemoBsVOs.size());
@@ -1365,7 +1365,7 @@ public class IndexController {
         model.addAttribute("demoList", userDemoBsVOs);
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "my_business";
     }
 
@@ -1373,7 +1373,7 @@ public class IndexController {
     public String my_business_blank(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "my_business_blank";
     }
 
@@ -1382,7 +1382,7 @@ public class IndexController {
 
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "my_consignment";
     }
 
@@ -1390,7 +1390,7 @@ public class IndexController {
     public String my_group(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "my_group";
     }
 
@@ -1404,7 +1404,7 @@ public class IndexController {
                 || (session.getAttribute("userid") == null)) {//로그인 필요
 
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
 
@@ -1412,7 +1412,7 @@ public class IndexController {
         if (findUser == null) {
             session.removeAttribute("loginCheck");
             clearSessionAndRedirect(session);
-            satProfile(model);
+            setProfile(model);
             return "index";
         }
         model.addAttribute("user", findUser);
@@ -1460,7 +1460,7 @@ public class IndexController {
         }
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "my_info";
     }
 
@@ -1468,7 +1468,7 @@ public class IndexController {
     public String prv_application(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "prv_application";
     }
 
@@ -1476,7 +1476,7 @@ public class IndexController {
     public String prv_bill(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "prv_bill";
     }
 
@@ -1484,7 +1484,7 @@ public class IndexController {
     public String prv_facility(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "prv_facility";
     }
 
@@ -1492,7 +1492,7 @@ public class IndexController {
     public String prv_fee(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "prv_fee";
     }
 
@@ -1500,7 +1500,7 @@ public class IndexController {
     public String prv_location(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "prv_location";
     }
 
@@ -1508,7 +1508,7 @@ public class IndexController {
     public String prv_office(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "prv_office";
     }
 
@@ -1516,7 +1516,7 @@ public class IndexController {
     public String prv_part(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "prv_part";
     }
 
@@ -1524,7 +1524,7 @@ public class IndexController {
     public String prv_prepare(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "prv_prepare";
     }
 
@@ -1556,7 +1556,7 @@ public class IndexController {
 
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "prv_register";
     }
 
@@ -1564,7 +1564,7 @@ public class IndexController {
     public String prv_step(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "prv_step";
     }
 
@@ -1573,7 +1573,7 @@ public class IndexController {
 
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "prv_subsidy";
     }
 
@@ -1581,7 +1581,7 @@ public class IndexController {
     public String prv_support(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "prv_support";
     }
 
@@ -1589,7 +1589,7 @@ public class IndexController {
     public String prv_use(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "prv_use";
     }
 
@@ -1597,7 +1597,7 @@ public class IndexController {
     public String spt_faq(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "spt_faq";
     }
 
@@ -1622,12 +1622,15 @@ public class IndexController {
 
                 model.addAttribute("findUserVO", findUserVO);
                 model.addAttribute("idx_user", findUserVO.getIdx_user());
-                //CorpInfoVO corpInfoVO = corpService.getCorpInfo(findUserVO.getIdx_corp_info());
-                //model.addAttribute("corpInfoVO",corpInfoVO);
+                model.addAttribute("corpInfoVO", null);
+                if(findUserVO.getIs_corporate_member() == 1){
+                    CorpInfoVO corpInfoVO = corpService.getCorpInfo(findUserVO.getIdx_corp_info());
+                    model.addAttribute("corpInfoVO",corpInfoVO);
+                }
             } else {//세션 만료 혹은 부정 접근
                 model.addAttribute("is_login", false);
                 clearSessionAndRedirect(session);
-                satProfile(model);
+                setProfile(model);
                 return "spt_consulting";
             }
 
@@ -1637,7 +1640,7 @@ public class IndexController {
         }
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "spt_consulting";
     }
 
@@ -1666,7 +1669,7 @@ public class IndexController {
 
                 /*if(visitReqCount==0){ //컨설팅한게 업다
 
-                    satProfile(model);
+                    setProfile(model);
 return "spt_visit";
                 }*/
 
@@ -1678,7 +1681,7 @@ return "spt_visit";
             } else {//세션 만료 혹은 부정 접근
                 model.addAttribute("is_login", false);
                 clearSessionAndRedirect(session);
-                satProfile(model);
+                setProfile(model);
                 return "spt_visit";
             }
 
@@ -1688,7 +1691,7 @@ return "spt_visit";
         }
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "spt_visit";
     }
 
@@ -1696,7 +1699,7 @@ return "spt_visit";
     public String template(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "template";
     }
 
@@ -1704,7 +1707,7 @@ return "spt_visit";
     public String util_search(Model model) {
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "util_search";
     }
 
@@ -1713,7 +1716,7 @@ return "spt_visit";
 
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "util_search_blant";
     }
 
@@ -1722,7 +1725,7 @@ return "spt_visit";
 
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "our_sitemap";
     }
 
@@ -1731,7 +1734,7 @@ return "spt_visit";
 
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "our_tos";
     }
 
@@ -1740,7 +1743,7 @@ return "spt_visit";
 
 
         getHomepageInfo(model);
-        satProfile(model);
+        setProfile(model);
         return "personal_data";
     }
 
@@ -1776,7 +1779,7 @@ return "spt_visit";
 
     }
 
-    private void satProfile(Model model) {
+    private void setProfile(Model model) {
         String[] activeProfiles = env.getActiveProfiles();
         if (activeProfiles.length != 0) {
             String activeProfile = activeProfiles[0];

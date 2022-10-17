@@ -185,37 +185,23 @@ public class FileController {
 
 
     @RequestMapping(value = "/upload_rule_file",method = RequestMethod.POST)
-    public FileUploadResponseVO uploadRuleFile(@ModelAttribute FileRequestVO fileRequestVO, HttpSession session, HttpServletRequest request) throws Exception, IOException {
+    public FileUploadResponseVO uploadRuleFile(@ModelAttribute FileRequestVO fileRequestVO,
+                                               HttpSession session,
+                                               HttpServletRequest request)
+            throws Exception, IOException {
         String subject = fileRequestVO.getSubject();
         String usage_detail =fileRequestVO.getUsage_detail();
         long idx_admin = fileRequestVO.getIdx_admin();
         int fileLength = Integer.parseInt(fileRequestVO.getFileLength());
-        File[] files = new File[5];
 
-        if(fileLength > 0){
-            files[0] = fileService.convertMultipartToFile(fileRequestVO.getFiles1());
-            if(fileLength >= 2){
-                files[1] = fileService.convertMultipartToFile(fileRequestVO.getFiles2());
-                if(fileLength >= 3){
-                    files[2] = fileService.convertMultipartToFile(fileRequestVO.getFiles3());
-                    if(fileLength >= 4){
-                        files[3] = fileService.convertMultipartToFile(fileRequestVO.getFiles4());
-                        if(fileLength == 5){
-                            files[4] = fileService.convertMultipartToFile(fileRequestVO.getFiles5());
-
-                        }
-                    }
-                }
-            }
-        }
         MultipartFile file = fileRequestVO.getFiles1();
         String fileName = fileService.storeFileInfo(fileRequestVO.getFiles1());
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
                 .path(fileName)
                 .toUriString();
-        FileUploadResponseVO filepespons= new FileUploadResponseVO(fileName, fileDownloadUri, file.getContentType(), file.getSize());
-        FileInfoVO fileInfoVO =new FileInfoVO();
+        FileUploadResponseVO filepespons = new FileUploadResponseVO(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+        FileInfoVO fileInfoVO = new FileInfoVO();
         fileInfoVO.setFile_name(filepespons.getFileName());
         fileInfoVO.setFile_size(filepespons.getSize());
         fileInfoVO.setMime_type(filepespons.getFileType());

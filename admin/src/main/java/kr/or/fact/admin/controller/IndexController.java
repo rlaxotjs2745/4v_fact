@@ -101,7 +101,7 @@ public class IndexController {
 
         AdminVO adminInfo = adminService.findAdminById(principal.getName());
         model.addAttribute("admin", adminInfo);
-        satProfile(model);
+        setProfile(model);
 
         return "index";
     }
@@ -1819,7 +1819,7 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
 
         return "l20_code_mng";
     }
-    private void satProfile(ModelMap model) {
+    private void setProfile(ModelMap model) {
         String[] activeProfiles = env.getActiveProfiles();
         if (activeProfiles.length != 0) {
             String activeProfile = activeProfiles[0];

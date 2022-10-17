@@ -100,7 +100,6 @@
                 send = 0;
             }
         });
-        // event.preventDefault();
     }
     $('.summernote').summernote({
         toolbar: [

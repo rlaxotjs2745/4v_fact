@@ -1,3 +1,4 @@
+<%@ page import="java.time.LocalDate" %>
 <%--
   Created by IntelliJ IDEA.
   User: abeki
@@ -42,7 +43,11 @@
                         실증단지 견학시, 실증사업에 참여중인 기업의 연구 목적에 따라 일부 시설은<br>
                         제한될 수 있으며, 사정에 따라 견학 코스가 변경이 될 수 있습니다.</div>
                 </div>
-                <div class="cnt__title">2021년 견학 가능일</div>
+                <%
+                    LocalDate now = LocalDate.now();
+                    int year = now.getYear();
+                %>
+                <div class="cnt__title"><%=year%>년 견학 가능일</div>
                 <div class="prevent__support">
                     <ul>
                         <li>견학 가능한 일자를 확인해 주시고 신청해 주십시오.</li>

@@ -1,4 +1,4 @@
-<%@ page import="org.apache.tomcat.jni.FileInfo" %>
+<%--<%@ page import="org.apache.tomcat.jni.FileInfo" %>--%>
 <%@ page import="kr.or.fact.core.model.DTO.FileInfoVO" %><%--
   Created by IntelliJ IDEA.
   User: abeki

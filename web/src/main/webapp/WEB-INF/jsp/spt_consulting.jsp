@@ -109,8 +109,10 @@
                                 <tr>
                                     <th class="th__left">연락처</th>
                                     <td class="td__left">${findUserVO.mphone_num}</td>
-                                    <th class="th__left">단체명</th>
-                                    <td class="td__left">${corpInfoVO.corp_name_kor}</td>
+                                    <c:if test="${corpInfoVO != null}">
+                                        <th class="th__left">단체명</th>
+                                        <td class="td__left">${corpInfoVO.corp_name_kor}</td>
+                                    </c:if>
                                 </tr>
                                 <tr>
                                     <th class="th__left">신청자 주소</th>
@@ -235,6 +237,8 @@
 
             is_privacy_accept:$("input[name='agree']:checked").val( )*1//	number	4		0			1:오전, 2:오후, 3:종일, 4, 여러날
         }
+
+        console.log(param);
 
         $.ajax({
             type: 'post',
