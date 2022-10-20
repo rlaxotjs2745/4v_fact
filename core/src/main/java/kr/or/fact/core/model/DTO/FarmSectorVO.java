@@ -26,6 +26,7 @@ public class FarmSectorVO {
     Date farming_start_date;//	date						경작시작
     Date farming_end_date;//	date						경작종료
     int farming_repeat;//	number	4					경작주기
+    int guyok;//            number(10,4)        구역정보
     Date reg_date;//	date						등록일
     Date last_upd_date;//	date						마지막 업데이트
 }
