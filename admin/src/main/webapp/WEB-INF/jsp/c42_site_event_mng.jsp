@@ -551,13 +551,13 @@
                 </div>
 
                 <hr>
-                <div class="form-row" >
-                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">내용</label>
-                    <div class="form-group col col-md-10">
-                        <textarea class="form-control mode-edit mode-new" rows="3"  id="event_content_code_update"></textarea>
-                    </div>
-                </div>
-                <hr>
+<%--                <div class="form-row" >--%>
+<%--                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">내용</label>--%>
+<%--                    <div class="form-group col col-md-10">--%>
+<%--                        <textarea class="form-control mode-edit mode-new" rows="3"  id="event_content_code_update"></textarea>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <hr>--%>
                 <div class="form-row" >
                     <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">컨텐츠</label>
                     <div class="form-group col col-md-10" >

@@ -101,6 +101,7 @@ public class FileServiceImpl implements FileService {
     public void deleteFileInfo(@Param("idx_file_info") long idx_file_info){
         fileServiceMapper.deleteFileInfo(idx_file_info);
     }
+
     @Override
     public FileInfoVO getFileInfo(@Param("idx_file_info") long idx_file_info){
         return fileServiceMapper.getFileInfo(idx_file_info);

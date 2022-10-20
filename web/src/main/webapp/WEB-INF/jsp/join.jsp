@@ -55,8 +55,20 @@
                             <div class="join__agree">
                                 <div class="checkbox">
                                     <input type="checkbox" id="join-1" name="logingroup">
-                                    <label for="join-1">전북 김제 스마트팜 혁신밸리 실증단지 (이하실증단지) 이용약관,
-                                        개인정보 수집 및 이용, 개인정보처리 위탁에 대한 사항에 모두 동의합니다.</label>
+                                    <label for="join-1">
+                                        <c:if test="${profile == 'sangju-prod'}">
+                                            경북 상주 스마트팜 혁신밸리 실증단지 (이하실증단지) 이용약관,
+                                            개인정보 수집 및 이용, 개인정보처리 위탁에 대한 사항에 모두 동의합니다.
+                                        </c:if>
+                                        <c:if test="${profile == 'gimje-prod'}">
+                                            전북 김제 스마트팜 혁신밸리 실증단지 (이하실증단지) 이용약관,
+                                            개인정보 수집 및 이용, 개인정보처리 위탁에 대한 사항에 모두 동의합니다.
+                                        </c:if>
+                                        <c:if test="${profile == 'local'}">
+                                            전북 김제 스마트팜 혁신밸리 실증단지 (이하실증단지) 이용약관,
+                                            개인정보 수집 및 이용, 개인정보처리 위탁에 대한 사항에 모두 동의합니다.
+                                        </c:if>
+                                    </label>
                                 </div>
                             </div>
                             <div class="join__agree">

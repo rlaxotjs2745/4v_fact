@@ -246,7 +246,10 @@
                  )
     </insert>
 <update id="updateVisitReq" parameterType="kr.or.fact.core.model.DTO.VisitReqVO">
-    UPDATE TB_VISIT_REQ SET VISIT_REQ_STATUS=#{visit_req_status}, RESULVATION_DATE=#{resulvation_date} Where IDX_VISIT_REQ=#{idx_visit_req}
-
+    UPDATE TB_VISIT_REQ SET VISIT_REQ_STATUS=#{visit_req_status}, RESULVATION_DATE=#{resulvation_date} where IDX_VISIT_REQ=#{idx_visit_req}
 </update>
+
+    <select id="getDateVisitReqList" resultType="kr.or.fact.core.model.DTO.VisitReqVO">
+        SELECT * FROM TB_VISIT_REQ WHERE IS_DURATION = #{is_duration} AND RESULVATION_DATE = #{resulvation_date}
+    </select>
 </mapper>

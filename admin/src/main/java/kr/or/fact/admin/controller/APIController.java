@@ -330,8 +330,12 @@ public class APIController {
     }
 
     @RequestMapping(value = "/send_mail",method = RequestMethod.POST)
-    public String send_mail(@ModelAttribute MailVO mailVO, HttpSession session, HttpServletRequest request) throws Exception, IOException {
+    public ResultVO send_mail(@ModelAttribute MailVO mailVO, HttpSession session, HttpServletRequest request) throws Exception, IOException {
 //        System.out.println(session.getAttribute("admin_id"));
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("메일이 정상적으로 전송되었습니다");
+
         String title = mailVO.getTitle();
         String content = mailVO.getContent();
         String receiver = mailVO.getReceiver();
@@ -373,14 +377,16 @@ public class APIController {
 //                files[i].delete();
 //            }
             System.out.println("전송 완료");
-            return "메일이 정상적으로 전송되었습니다.";
+            return resultVO;
         } catch (Exception e){
             System.out.println("전송 실패");
             System.out.println(e);
             for(int i = 0; i < fileLength; i++){
                 files[i].delete();
             }
-            return "전송이 실패했습니다.";
+            resultVO.setResult_code("ERR_001");
+            resultVO.setResult_str("전송에 실패했습니다.");
+            return resultVO;
         }
     }
     @RequestMapping(value = "/sms",method = RequestMethod.POST)
@@ -521,6 +527,13 @@ public class APIController {
         }
 
         return  resultVO;
+    }
+
+    @RequestMapping(value = "/get_date_visit_req",method = RequestMethod.GET)
+    public @ResponseBody
+    List<VisitReqVO>  get_date_visit_req(HttpSession session,
+                             @RequestBody VisitReqVO visitReqVO){
+        return visitService.getDateVisitReqList(visitReqVO);
     }
 
     @RequestMapping(value = "/get_visit_data",method = RequestMethod.POST)

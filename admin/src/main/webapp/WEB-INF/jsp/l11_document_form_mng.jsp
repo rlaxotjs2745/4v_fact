@@ -32,9 +32,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${formfilelist}" var="formfile">
+                            <c:forEach items="${formfilelist}" var="formfile" varStatus="status">
                                 <tr class="formfile-entity" id="${formfile.idx_form_file_info}">
-                                    <td class="text-center">${formfile.order_num}</td>
+                                    <td class="text-center">${status.count}</td>
                                     <td class="text-center">${formfile.subject}</td>
                                     <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">${formfile.usage_detail}</a></td>
                                     <td class="text-center">${formfile.row_num}</td>

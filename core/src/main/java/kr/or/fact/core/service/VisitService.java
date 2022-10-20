@@ -37,4 +37,6 @@ public interface VisitService {
     int updateVisitReq(VisitReqVO visitReqVO);
 
     List<VisitReqVO> getVisitList(ParamPageListFilteredVO param);
+
+    List<VisitReqVO> getDateVisitReqList(VisitReqVO visitReqVO);
 }

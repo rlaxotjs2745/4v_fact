@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- Page content -->
 <div class="container-fluid flex-grow-1 container-p-y">
 
@@ -33,9 +34,9 @@
                             <tbody>
                             <c:choose>
                                 <c:when test="${fn:length(rulefileinfolist)>0}">
-                                    <c:forEach items="${rulefileinfolist}" var="rulefile">
+                                    <c:forEach items="${rulefileinfolist}" var="rulefile" varStatus="status">
                                         <tr class="rulefile-entity" id="${rulefile.idx_rule_file_info}">
-                                            <td class="text-center">${rulefile.order_num}</td>
+                                            <td class="text-center">${status.count}</td>
                                             <td class="text-center">${rulefile.subject}</td>
                                             <td class="text-center"><a href="#none" data-toggle="modal" data-target="#modals-counsel-view" class="btn btn-outline-default  btn-sm">${rulefile.usage_detail}</a></td>
                                             <td class="text-center">${rulefile.depart_name}</td>
@@ -138,6 +139,9 @@
 
 <%@include file ="layouts/frame_footer.jsp" %>
 <script>
+<c:forEach items="${rulefileinfolist}" var="rulefil">
+console.log('${rulefil}');
+</c:forEach>
 
     $('#btn_edit_mode').on('click', function() {
 
@@ -266,6 +270,7 @@
         }
         fileForm.append("fileLength", files.length);
 
+        console.log(fileForm);
         $.ajax({
             type: 'post',
             url :'upload_rule_file', //데이터를 주고받을 파일 주소 입력

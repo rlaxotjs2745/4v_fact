@@ -203,7 +203,7 @@
                      #{depart_name},
                      #{idx_admin},
                      #{order_num},
-                     #{idx_file_info},
+                     SEQ_FILE_INFO.CURRVAL,
                      SYSDATE
                  )
     </insert>

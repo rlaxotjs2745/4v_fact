@@ -101,7 +101,7 @@ public class IndexController {
 
         AdminVO adminInfo = adminService.findAdminById(principal.getName());
         model.addAttribute("admin", adminInfo);
-        satProfile(model);
+        setProfile(model);
 
         return "index";
     }
@@ -129,14 +129,14 @@ public class IndexController {
 
         if(findAdmin!=null){
             model.addAttribute("adminVo",findAdmin);
-            session.setAttribute("loginCheck",true);
+            session.setAttribute("loginCheck1",true);
             session.setAttribute("admin_id",admin_id);
             session.setAttribute("name",findAdmin.getAdmin_name());
             session.setAttribute("isCorpMember",findAdmin.getAdmin_type());
             return "redirect:/";
         }
         else {
-            session.setAttribute("loginCheck",false);
+            session.setAttribute("loginCheck1",false);
         }
 
         return "redirect:/login";
@@ -1819,7 +1819,7 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
 
         return "l20_code_mng";
     }
-    private void satProfile(ModelMap model) {
+    private void setProfile(ModelMap model) {
         String[] activeProfiles = env.getActiveProfiles();
         if (activeProfiles.length != 0) {
             String activeProfile = activeProfiles[0];
