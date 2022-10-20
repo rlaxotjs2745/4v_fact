@@ -129,14 +129,14 @@ public class IndexController {
 
         if(findAdmin!=null){
             model.addAttribute("adminVo",findAdmin);
-            session.setAttribute("loginCheck",true);
+            session.setAttribute("loginCheck1",true);
             session.setAttribute("admin_id",admin_id);
             session.setAttribute("name",findAdmin.getAdmin_name());
             session.setAttribute("isCorpMember",findAdmin.getAdmin_type());
             return "redirect:/";
         }
         else {
-            session.setAttribute("loginCheck",false);
+            session.setAttribute("loginCheck1",false);
         }
 
         return "redirect:/login";

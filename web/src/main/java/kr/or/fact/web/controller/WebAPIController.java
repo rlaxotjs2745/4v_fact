@@ -819,11 +819,7 @@ public class WebAPIController {
             resultVO.setResult_code("ERROR_1001");
             return resultVO;
         }
-        // 저장단계 변경
 
-        if(findUserDemoBsVo.getUser_demobs_status()<1){
-            findUserDemoBsVo.setUser_demobs_status(0);
-        }
         findUserDemoBsVo.setLab_est_date(userDemoBsVO.getLab_est_date()==null?"":userDemoBsVO.getLab_est_date());//
         findUserDemoBsVo.setRnd_rate(userDemoBsVO.getRnd_rate());
 

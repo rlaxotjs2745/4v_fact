@@ -102,7 +102,7 @@
                                             <span class="text--guide is-alert" id="text_guide_pw"></span>
                                             <div class="text__message">
                                                 <ul>
-                                                    <li>비밀번호는 8~15 자 입력 가능합니다.</li>
+                                                    <li>비밀번호는 최소 8자 입력 가능합니다.</li>
                                                     <li>영문소문자 / 숫자 / 특수문자 필수 혼합 입력</li>
                                                     <li>비밀번호는 동일한 문자열을 3 회 이상 반복할 수 없습니다.</li>
                                                 </ul>

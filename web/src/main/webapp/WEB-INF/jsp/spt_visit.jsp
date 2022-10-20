@@ -39,9 +39,9 @@
         <div class="page__cnt">
             <div class="spt__container">
                 <div class="visit__banner">
-                    <div class="visit__banner--title"><strong>실증단지 견학은 신증단지의 시설을 확인하고 설명을 들을 수 있습니다.</strong><br>
-                        실증단지 견학시, 실증사업에 참여중인 기업의 연구 목적에 따라 일부 시설은<br>
-                        제한될 수 있으며, 사정에 따라 견학 코스가 변경이 될 수 있습니다.</div>
+                    <div class="visit__banner--title"><strong>실증단지의 시설을 확인하고 설명을 들을 수 있습니다.</strong><br>
+                        실증단지 견학 시, 사업에 참여중인 기업의 연구 목적에 따라 일부 시설은<br>
+                        견학이 제한될 수 있으며, 일정에 따라 견학 코스가 변경 될 수 있습니다.</div>
                 </div>
                 <%
                     LocalDate now = LocalDate.now();
@@ -121,7 +121,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr id="group_name_row">
                                     <th class="th__left">단체명<span class="text__essential">*</span></th>
                                     <td class="td__left"><input id="group_name" type="text" placeholder="단체명을 입력해주세요." style="width:350px;">
                                         <br><span class="text--guide">개인의 경우 입력을 하지 않으셔도 됩니다.</span></td>
@@ -357,7 +357,7 @@
 
         getUserVisitList(1);
 
-
+        $('#group_name_row').hide();
 
     });
 
@@ -365,6 +365,14 @@
         console.log(${idx_user});
         $("#visit_req_table").load('visit_req_list',{"idx_user": ${idx_user},"page":page}).trigger("create");
     }
+
+    $("input:radio[name='is_group']").change(function(){
+        if($("input:radio[name='is_group']:checked").val() == 1){
+            $('#group_name_row').hide();
+        } else {
+            $('#group_name_row').show();
+        }
+    })
 
 
     $('[data-go*="#"]').on("click", function(a) {
@@ -403,7 +411,7 @@
             visit_goal:$("#visit_goal").val(),//	varchar2	400					방문목표
             question:$("#question").val(),//	varchar2	400					방문전 질문사항
             is_privacy_accept:$('#is_privacy_accept').is(":checked")?1:0,//	number	4		1			개인정보 수집 이용동의	0:동의안함, 1:동의
-            is_group:$("input:radio[name='is_group']:checked").val( ),//	number	4		0			그룹 여부	0:개인, 1:그룹
+            is_group:$("input:radio[name='is_group']:checked").val(),//	number	4		0			그룹 여부	0:개인, 1:그룹
             is_duration:$("input:radio[name='is_duration']:checked").val( )//	number	4		0			1:오전, 2:오후, 3:종일, 4, 여러날
         }
 

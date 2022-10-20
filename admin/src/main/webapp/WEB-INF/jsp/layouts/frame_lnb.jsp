@@ -150,11 +150,11 @@
                                         <div>견학신청 접수</div>
                                     </a>
                                 </li>
-<%--                                <li class="sidenav-item">--%>
-<%--                                    <a href="javascript:pageLoad('c22_site_visit_mng','1:1문의');" class="sidenav-link">--%>
-<%--                                        <div>견학일정 관리</div>--%>
-<%--                                    </a>--%>
-<%--                                </li>--%>
+                                <li class="sidenav-item">
+                                    <a href="javascript:pageLoad('c22_site_visit_mng','1:1문의');" class="sidenav-link">
+                                        <div>견학일정 관리</div>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 <%--                        <li class="sidenav-item">--%>

@@ -178,6 +178,12 @@ public class VisitServiceImpl implements VisitService {
     public int updateVisitReq(VisitReqVO visitReqVO) {
         return visitMapper.updateVisitReq(visitReqVO);
     }
+
+    @Override
+    public List<VisitReqVO> getDateVisitReqList(VisitReqVO visitReqVO){
+
+        return visitMapper.getDateVisitReqList(visitReqVO.getResulvation_date(), visitReqVO.getIs_duration());
+    }
 }
 
 

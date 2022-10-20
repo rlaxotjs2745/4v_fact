@@ -529,6 +529,13 @@ public class APIController {
         return  resultVO;
     }
 
+    @RequestMapping(value = "/get_date_visit_req",method = RequestMethod.GET)
+    public @ResponseBody
+    List<VisitReqVO>  get_date_visit_req(HttpSession session,
+                             @RequestBody VisitReqVO visitReqVO){
+        return visitService.getDateVisitReqList(visitReqVO);
+    }
+
     @RequestMapping(value = "/get_visit_data",method = RequestMethod.POST)
     public @ResponseBody
     ResultVO  get_visit_data(HttpSession session,

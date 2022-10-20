@@ -48,17 +48,17 @@
                     <!--반복 없이 기간등록-->
                     <div class="form-group row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">선택기간</label>
-                        <div class="col-md-10">
-                            <div id="repeat_none_datepicker" class="input-daterange input-group" style="width: 80%;">
-                                <input type="text" class="form-control" name="start">
-                                <div class="input-group-prepend repeat__none">
-                                    <span class="input-group-text">~</span>
-                                </div>
-                                <input type="text" class="form-control repeat__none" name="end">
-                                <span class="form-text repeat__none">동안 매일</span>
-                                <span class="form-text repeat__weekly repeat_date_monthly repeat_week_monthly">부터</span>
-                            </div>
-                        </div>
+<%--                        <div class="col-md-10">--%>
+<%--                            <div id="repeat_none_datepicker" class="input-daterange input-group" style="width: 80%;">--%>
+<%--                                <input type="text" class="form-control" name="start">--%>
+<%--                                <div class="input-group-prepend repeat__none">--%>
+<%--                                    <span class="input-group-text">~</span>--%>
+<%--                                </div>--%>
+<%--                                <input type="text" class="form-control repeat__none" name="end">--%>
+<%--                                <span class="form-text repeat__none">동안 매일</span>--%>
+<%--                                <span class="form-text repeat__weekly repeat_date_monthly repeat_week_monthly">부터</span>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
                     </div>
 
                     <div class="form-group row repeat_date_monthly repeat_week_monthly d-none">
@@ -346,6 +346,110 @@
             </div>
         </div>
     </form>
+
+    <div class="modal fade" id="modal_reservation_now">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-success">
+                        <h5 class="modal-title text-white font-weight-bold">코드 작성</h5>
+                        <button id="modals-code-new-close" type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group row">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 예약 일자</label>
+                                    <div class="col-md-4">
+                                        <div id="repeat_none_datepicker" class="input-daterange input-group" style="width: 80%;">
+                                            <input type="text" class="form-control" name="start">
+                                        </div>
+                                    </div>
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">오전/오후</label>
+                                <div class="col-md-4">
+                                    <select class="form-control form-control-md">
+                                        <option value="am" selected>오전</option>
+                                        <option value="pm">오후</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div id="exist_req">
+                                <div class="form-group row">
+                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">구분</label>
+                                    <div class="col-md-4">
+                                        <div class="form-control-plaintext">개인</div>
+                                    </div>
+                                </div>
+                                <div id="team_name_row" class="form-group row">
+                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">단체명</label>
+                                    <div class="col-md-4">
+                                        <div class="form-control-plaintext" id="team_name">이름</div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">신청인</label>
+                                    <div class="col-md-4">
+                                        <div class="form-control-plaintext">김태선</div>
+                                    </div>
+                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 인원</label>
+                                    <div class="col-md-4">
+                                        <div class="form-control-plaintext">4명</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">연락처</label>
+                                    <div class="col-md-4">
+                                        <div class="form-control-plaintext">010-0000-0000</div>
+                                    </div>
+                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">이메일</label>
+                                    <div class="col-md-4">
+                                        <div class="form-control-plaintext">tarfsnfl@sdlkfm.com</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">거주지 주소</label>
+                                    <div class="col-md-10">
+                                        <div class="form-control-plaintext">(08099) 경기 뭐시 어떻구 그랬동 123 202동 2020호</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 목적</label>
+                                    <div class="col-md-10">
+                                        <div class="form-control-plaintext">밥먹으러</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">기타사전 질문</label>
+                                    <div class="col-md-10">
+                                        <div class="form-control-plaintext">화장실이 어디예요?</div>
+                                    </div>
+                                </div>
+                            </div>
+<%--                            <div id="none_req">--%>
+<%--                                <div class=""--%>
+<%--                            </div>--%>
+
+
+                            <div class="modal-footer justify-content-between">
+                                <div>
+                                    <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
+                                </div>
+                                <div>
+                                    <button id="btn_save_new" type="button" class="btn btn-primary">저장</button>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     <!-- / Event modal -->
 </div>
 
@@ -446,104 +550,108 @@
                 }*/
 
 
-                $('#visit-req-modal')
-                    .on('shown.bs.modal', function() {
-
-                        //달력 날짜 선택했을때
-                        var sDate = new Date(selectionData.startStr);
-                        var eDate = new Date(selectionData.endStr);
-
-                        $('#repeat_none_datepicker').children('input[name="start"]').val(sDate.yyyymmdd());
-                        $('#repeat_none_datepicker').children('input[name="end"]').val(eDate.yyyymmdd());
-
-
-                        //console.log(selectionData);
-                        var param = {
-                            start_date:sDate,
-                            end_date:eDate
-                        }
-
-                        $.ajax({
-                            type: 'post',
-                            url: 'get_visit_data', //데이터를 주고받을 파일 주소 입력
-                            data: JSON.stringify(param),//보내는 데이터
-                            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
-                            dataType: 'text',//받는 데이터 타입
-                            success: function (result) {
-                                //작업이 성공적으로 발생했을 경우
-                                var data = JSON.parse(result);
-
-                                var array_data = data["visitDataVOList"];
-
-
-
-                                $.each(array_data, function(key, item)
-                                {
-                                    var sDate = new Date(item.cur_date);
-                                    var ampm=item.visit_data_type;
-                                    var ampm_text = "오전, 오후";
-                                    if(ampm==1){
-                                        ampm_text = "오전, 저장됨";
-                                    }else if(ampm==2){
-                                        ampm_text = "오후, 저장됨";
-                                    }else{
-                                        ampm_text = "오전, 오후, 저장됨";
-                                        ampm=3;
-                                    }
-                                    var keyvalue_txt = sDate.yyyymmdd() + ", " + ampm_text;
-
-                                    var saved = "yes";
-
-                                    var keyvalue=[sDate,ampm,saved];
-
-                                    $("#available_visit_date_list")
-                                        .append($("<option></option>")
-                                            .attr("value", keyvalue)
-                                            .text(keyvalue_txt));
-
-
-                                });
-
-                                //STATUS_001 :
-                            },
-                            error: function () {
-                                //에러가 났을 경우 실행시킬 코드
-                            }
-                        });
-
-                        //$(this).find('input[type="text"]').trigger('focus');
-
-
-
-
-
-                    })
-                    .on('hidden.bs.modal', function() {
-
-                        $(this).off('shown.bs.modal hidden.bs.modal submit').find('input[type="text"], select').val('');
-                        defaultCalendar.unselect();
-
-                        $("#available_visit_date_list").empty();
-                    })
-                    .on('submit', function(e) {
-                        e.preventDefault();
-                        var title = $(this).find('input[type="text"]').val();
-                        var className = $(this).find('select').val() || null;
-
-                        /*if (title) {
-                            var eventData = {
-                                title: title,
-                                start: selectionData.startStr,
-                                end: selectionData.endStr,
-                                classNames: className,
-                                display: isOneDay(selectionData.startStr, selectionData.endStr) ? 'list-item' : 'block'
-                            }
-                            defaultCalendar.addEvent(eventData);
-                        }*/
-
-                        $(this).modal('hide');
-                    })
-                    .modal('show');
+                // $('#visit-req-modal').on('shown.bs.modal', function() {
+                //
+                //         //달력 날짜 선택했을때
+                //         var sDate = new Date(selectionData.startStr);
+                //         var eDate = new Date(selectionData.endStr);
+                //
+                //         $('#repeat_none_datepicker').children('input[name="start"]').val(sDate.yyyymmdd());
+                //         $('#repeat_none_datepicker').children('input[name="end"]').val(eDate.yyyymmdd());
+                // console.log('gd')
+                //
+                //
+                //         //console.log(selectionData);
+                //         var param = {
+                //             start_date:sDate,
+                //             end_date:eDate
+                //         }
+                //
+                //         $.ajax({
+                //             type: 'post',
+                //             url: 'get_visit_data', //데이터를 주고받을 파일 주소 입력
+                //             data: JSON.stringify(param),//보내는 데이터
+                //             contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+                //             dataType: 'text',//받는 데이터 타입
+                //             success: function (result) {
+                //                 //작업이 성공적으로 발생했을 경우
+                //                 var data = JSON.parse(result);
+                //
+                //                 var array_data = data["visitDataVOList"];
+                //
+                //
+                //
+                //                 $.each(array_data, function(key, item)
+                //                 {
+                //                     var sDate = new Date(item.cur_date);
+                //                     var ampm=item.visit_data_type;
+                //                     var ampm_text = "오전, 오후";
+                //                     if(ampm==1){
+                //                         ampm_text = "오전, 저장됨";
+                //                     }else if(ampm==2){
+                //                         ampm_text = "오후, 저장됨";
+                //                     }else{
+                //                         ampm_text = "오전, 오후, 저장됨";
+                //                         ampm=3;
+                //                     }
+                //                     var keyvalue_txt = sDate.yyyymmdd() + ", " + ampm_text;
+                //
+                //                     var saved = "yes";
+                //
+                //                     var keyvalue=[sDate,ampm,saved];
+                //
+                //                     $("#available_visit_date_list")
+                //                         .append($("<option></option>")
+                //                             .attr("value", keyvalue)
+                //                             .text(keyvalue_txt));
+                //
+                //
+                //                 });
+                //
+                //                 //STATUS_001 :
+                //             },
+                //             error: function () {
+                //                 //에러가 났을 경우 실행시킬 코드
+                //             }
+                //         });
+                //
+                //         //$(this).find('input[type="text"]').trigger('focus');
+                //
+                //
+                //
+                //
+                //
+                //     })
+                //     .on('hidden.bs.modal', function() {
+                //
+                //         $(this).off('shown.bs.modal hidden.bs.modal submit').find('input[type="text"], select').val('');
+                //         defaultCalendar.unselect();
+                //
+                //         $("#available_visit_date_list").empty();
+                //     })
+                //     .on('submit', function(e) {
+                //         e.preventDefault();
+                //         var title = $(this).find('input[type="text"]').val();
+                //         var className = $(this).find('select').val() || null;
+                //
+                //         /*if (title) {
+                //             var eventData = {
+                //                 title: title,
+                //                 start: selectionData.startStr,
+                //                 end: selectionData.endStr,
+                //                 classNames: className,
+                //                 display: isOneDay(selectionData.startStr, selectionData.endStr) ? 'list-item' : 'block'
+                //             }
+                //             defaultCalendar.addEvent(eventData);
+                //         }*/
+                //
+                //         $(this).modal('hide');
+                //     })
+                //     .modal('show');
+                console.log(selectionData);
+                $('#modal_reservation_now').modal('show');
+                var startDate = new Date(selectionData.startStr);
+                $('#repeat_none_datepicker').children('input[name="start"]').val(startDate.yyyymmdd());
             },
             eventSources: [{
                 events: function(info, successCallback, failureCallback) {
@@ -653,7 +761,29 @@
         function setEnabled()
         {
             enableRequest = true;
-        };
+        }
+
+        function getReservationInfo(date, dur){
+            var param = {
+                is_duration: dur,
+                resulvation_date: date
+            }
+
+            $.ajax({
+                type: 'get',
+                url: 'get_date_visit_req', //데이터를 주고받을 파일 주소 입력
+                data: JSON.stringify(param),//보내는 데이터
+                contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+                dataType: 'json',//받는 데이터 타입
+                success: function (result) {
+                    console.log(result);
+
+                },
+                error: function (res) {
+                    console.log(res)
+                }
+            });
+        }
 
 
 
@@ -922,11 +1052,5 @@
     };
 
 </script>
-
-
-
-<!-- Layout footer -->
-<%@include file ="layouts/frame_footer.jsp" %>
-<!-- / Layout footer -->
 
 <!-- / Page content -->
