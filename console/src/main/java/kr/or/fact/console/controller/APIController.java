@@ -1,10 +1,10 @@
 package kr.or.fact.console.controller;
 
 import kr.or.fact.core.model.DTO.*;
-import kr.or.fact.core.service.AdminService;
-import kr.or.fact.core.service.CorpService;
-import kr.or.fact.core.service.UserService;
+import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.CONSTANT;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class APIController {
@@ -25,32 +28,57 @@ public class APIController {
     @Resource(name = "adminService")
     AdminService adminService;
 
+    @Resource(name = "consoleService")
+    ConsoleService consoleService;
 
-    @RequestMapping(value = "/admin_login",method = RequestMethod.POST)
-    public @ResponseBody ResultVO admin_login(HttpSession session
-            ,ModelMap model
-            ,@RequestBody AdminVO adminVo) {
+    @Resource(name = "authService")
+    AuthService authService;
 
-        ResultVO resultVO = new ResultVO();
-        resultVO.setResult_str("아이디 또는 비밀번호를 찾을수 없습니다");
-        resultVO.setResult_code("ERROR_1000");
-        session.setAttribute("loginCheck", false);
+    @RequestMapping(value = "/console_login",method = RequestMethod.POST)
+    public @ResponseBody ResultWithDataVO console_login(@RequestBody AdminVO adminVo) {
 
-        if (adminVo.getAdmin_id() != null && adminVo.getAdmin_pw() != null) {
-            AdminVO findAdmin = adminService.login(adminVo.getAdmin_id(), adminVo.getAdmin_pw());
+        ResultWithDataVO resultWithDataVO = new ResultWithDataVO();
+        resultWithDataVO.setResult_code("ERROR1001");
+        resultWithDataVO.setResult_str("콘솔 유저를 찾을 수 없음");
 
-            if (findAdmin != null) {
-                model.addAttribute("adminVo", findAdmin);
-                session.setAttribute("loginCheck", true);
-                session.setAttribute("admin_id", findAdmin.getAdmin_id());
-                session.setAttribute("name", findAdmin.getAdmin_name());
+        if (adminVo !=null) {
 
-                resultVO.setResult_str("로그인 성공");
-                resultVO.setResult_code(CONSTANT.Success);
+            //AdminVO findAdminVo = adminService.getAuthAdmin(adminVo.getAdmin_id(),adminVo.getAdmin_pw());
+
+
+            AdminVO findAdminVo = adminService.findAdminById(adminVo.getAdmin_id());
+
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+            if(findAdminVo!=null && passwordEncoder.matches(adminVo.getAdmin_pw(),findAdminVo.getAdmin_pw())){
+            //if(findAdminVo!=null){
+                ConsoleUserVO consoleUserVO;
+                consoleUserVO = consoleService.getConsoleUserByAdminIdx(findAdminVo.getIdx_admin());
+
+                if(consoleUserVO!=null){
+
+                    AuthVO authVO = new AuthVO();
+                    authVO.setIdx_console_user(consoleUserVO.getIdx_console_user());
+                    authVO.setAuth_code(UUID.randomUUID().toString());
+                    authVO.setIs_available(CONSTANT.yes);
+                    Date now = new Date();
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(now);
+                    cal.add(Calendar.MINUTE,1);
+
+                    authVO.setExpired_dt(cal.getTime());
+
+                    authService.insertAuth(authVO);
+
+                    resultWithDataVO.setResult_code("SUCCESS");
+                    resultWithDataVO.setResult_str("찾았습니다");
+                    resultWithDataVO.setElement(authVO);
+
+                }
             }
-        }
 
-        return resultVO;
+        }
+        return resultWithDataVO;
     }
 
     @RequestMapping(value = "/user_id_check",method = RequestMethod.POST)

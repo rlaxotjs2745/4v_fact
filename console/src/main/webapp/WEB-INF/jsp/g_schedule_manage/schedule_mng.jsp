@@ -14,6 +14,22 @@
         <div>일정관리</div>
     </h4>
 
+
+    <div id="list_calendar" class="card mb-4" style="display:none;">
+        <div class="card-body">
+            <div id="fullcalendar-list-view"></div>
+        </div>
+    </div>
+
+
+    <!--//-->
+
+    <div id="month_calendar" class="card mb-4">
+        <div class="card-body">
+            <div id="fullcalendar-default-view"></div>
+        </div>
+    </div>
+
     <!-- Event modal -->
     <form class="modal modal-top fade" id="fullcalendar-default-view-modal">
         <div class="modal-dialog">
@@ -144,10 +160,9 @@
                         </div>
 
                         <!--입력 미리보기-->
-                        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Aliquid animi dignissimos distinctio, ex ipsam itaque natus neque
-                        nisi non odit officia similique ullam voluptatum. Hic laborum magnam
-                        nostrum quibusdam tempora.</span>
+                        <span>
+                            일정을 추가해 주세요
+                        </span>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -160,31 +175,10 @@
     <!-- / Event modal -->
 
 
-    <div id="list_calendar" class="card mb-4" style="display:none;">
-        <div class="card-body">
-            <div id="fullcalendar-list-view"></div>
-        </div>
-    </div>
-
-
-    <!--//-->
-
-    <div id="month_calendar" class="card mb-4">
-        <div class="card-body">
-            <div id="fullcalendar-default-view"></div>
-        </div>
-    </div>
-
-
 
 </div>
 
-<!-- Layout footer -->
-<%@include file ="frame_footer.jsp" %>
-<!-- / Layout footer -->
 <script>
-
-
 
 
 
