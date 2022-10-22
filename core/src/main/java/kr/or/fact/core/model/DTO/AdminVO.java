@@ -20,7 +20,7 @@ public class AdminVO {
     int auth_status;//	number	4		0			인증 여부	0:인증안함, 1:이메일 인증, 2:휴대폰 점유인증, 3:실명인증, 4:아이핀인증       초기0 첫 로그인 시 비밀번호 변경 유도
     String tel_num;//	varchar2	20					일반전화번호      일반
     String mphone_num;//	varchar2	20					휴대폰번호   휴대폰
-    int admin_type;//	number	4		0			어드민  형태	0:일반관리자, 1:실증책임자, 2:재배사, 4:관계기관, 512:슈퍼관리자     ??
+    int admin_type;//	number	4		0			어드민 형태	1:user 콘솔 접근 일반(자율,위탁), 2:manager 콘솔 관리 일반(자율,위탁), 8:admin 어드민 관리 일반 16:super 슈퍼관리자(어드민, 콘솔 모든 권한)     ??
     String main_part;// varchar2	255	 담당 업무
     String manage_num;//varchar2	255  관리번호
     int sign_in_type;//	number	4					가입 형태	0:슈퍼 관리자, 1:일반관리자

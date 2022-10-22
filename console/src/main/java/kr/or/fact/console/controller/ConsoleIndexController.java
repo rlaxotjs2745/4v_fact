@@ -1,251 +1,387 @@
 package kr.or.fact.console.controller;
 
-import org.apache.ibatis.annotations.Param;
+import kr.or.fact.core.model.DTO.*;
+import kr.or.fact.core.service.*;
+import kr.or.fact.core.util.CONSTANT;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class ConsoleIndexController {
 
-    @RequestMapping("/")
-    public String home(){
+    @Resource(name = "authService")
+    AuthService authService;
 
+    @Resource(name = "consoleService")
+    ConsoleService consoleService;
+
+    @Resource(name = "demoBsService")
+    DemoBsService demoBsService;
+
+    @Resource(name = "adminService")
+    AdminService adminService;
+
+    @RequestMapping(value = "/",method = RequestMethod.GET)
+    public String home(@CookieValue(name = "idx_console_user",required = false) String idx_console_user,
+                       @CookieValue(name = "auth_code",required = false) String auth_code){
+
+        if(auth_code==null){
+            return "redirect:login";
+        }
+
+        AuthVO findAuthVo = authService.getAuth(Long.parseLong(idx_console_user),auth_code);
+        if(findAuthVo!=null && findAuthVo.getIs_available()== CONSTANT.yes){
+            findAuthVo.setIs_available(CONSTANT.no);
+            authService.updAuth(findAuthVo);
+        }
 
         return "index";
-    }
-
-    @RequestMapping("/index")
-    public String index(){
-
-
-        return "redirect:/";
-    }
-
-    @RequestMapping("/user")
-    public String home_user(@Param("id")String user_id){
-
-
-        return "index_user";
     }
 
     @RequestMapping("/login")
     public String login(){
 
+
         return "login";
     }
 
     //대시보드
-    @RequestMapping(value = "/a10_dashboard",method = RequestMethod.POST)
-    public String a10_dashboard(@RequestParam(value = "tag", required = true) String tagValue){
+    @PostMapping(value = "/dashboard")
+    public String dashboard(@CookieValue(name = "idx_console_user",required = false) String idx_console_user,
+                            @CookieValue(name = "auth_code",required = false) String auth_code,
+                            @RequestBody ParamPageListFilteredVO param){
 
-        return "a10_dashboard";
+        if(auth_code==null){
+            return "redirect:login";
+        }
+
+
+
+        return "a_dashboard/dashboard";
     }
 
-    //사업공고문 관리
-    @RequestMapping(value = "/b10_gh_total_monitor",method = RequestMethod.POST)
-    public String b10_gh_total_monitor(@RequestParam(value = "tag", required = true) String tagValue){
 
-        return "b10_gh_total_monitor";
+
+    //공지사항
+    @RequestMapping(value = "/notice",method = RequestMethod.POST)
+    public String notice(@RequestBody ParamPageListFilteredVO param){
+
+
+
+        return "b_demobs_manage/notice";
     }
 
-    //신규 신청 접수
-    @RequestMapping(value = "/b21_gh_glass",method = RequestMethod.POST)
-    public String b21_gh_glass(@RequestParam(value = "tag", required = true) String tagValue){
 
-        return "b21_gh_glass";
+    @RequestMapping(value = "/bm_demo_corp_cur",method = RequestMethod.POST)
+    public String bm_demo_corp_list(@RequestBody ParamPageListFilteredVO param){
+
+
+
+        return "b_demobs_manage/bm_demo_corp_cur";
     }
 
-    //심사결과 관리
-    @RequestMapping(value = "/b22_gh_vinyl",method = RequestMethod.POST)
-    public String b22_gh_vinyl(@RequestParam(value = "tag", required = true) String tagValue){
 
-        return "b22_gh_vinyl";
+
+
+
+    //실증사업 현황
+    @RequestMapping(value = "/demobs",method = RequestMethod.POST)
+    public String demobs(@RequestBody ParamPageListFilteredVO param,
+                         Principal principal,
+                         ModelMap model){
+
+
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+        model.addAttribute("admin", adminInfo);
+
+        int list_amount = 10;;
+        int page_amount = 10;
+
+        param.setAmount(10);
+        int page = param.getPage_num();
+
+        AdminDemoBSFilterVO adminDemoBSFilterVO = demoBsService.getAdminDemoBsFilter();  // 사업 상태별 카운트
+        //리스트 총갯수를 이때 빼야 함
+        int filtered_item_total = adminDemoBSFilterVO.getTot_count();
+
+        if(param.getFilter1()==CONSTANT.DEMOBS_FILTER_APPL)
+            filtered_item_total = adminDemoBSFilterVO.getAppl_count();
+        else if(param.getFilter1()==CONSTANT.DEMOBS_FILTER_REVUIEW)
+            filtered_item_total = adminDemoBSFilterVO.getRevuiew_count();
+        else if(param.getFilter1()==CONSTANT.DEMOBS_FILTER_AGREE)
+            filtered_item_total = adminDemoBSFilterVO.getAgree_count();
+        else if(param.getFilter1()==CONSTANT.DEMOBS_FILTER_DEMO)
+            filtered_item_total = adminDemoBSFilterVO.getDemo_count();
+        else if(param.getFilter1()==CONSTANT.DEMOBS_FILTER_RESULT)
+            filtered_item_total = adminDemoBSFilterVO.getResult_count();
+
+        model.addAttribute("total_count",filtered_item_total);
+        model.addAttribute("adminDemoBsFilter",adminDemoBSFilterVO);
+
+        param.setOrder_field("IDX_DEMO_BUSINESS");
+/*        ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
+        listPagingParamVO.setPage_num(page);
+        listPagingParamVO.setAmount(list_amount);
+        listPagingParamVO.setFilter1(filter1);
+        listPagingParamVO.setFilter2(filter2);
+        listPagingParamVO.setOrder_field("IDX_DEMO_BUSINESS");*/
+
+
+        List<DemoBusinessVO> demoBusinessVOList = demoBsService.getDemoBsPagingList(param);
+        for(int i = 0; i < demoBusinessVOList.size(); i++){
+            if(demoBusinessVOList.get(i).getDemo_bs_contents() != null){
+                demoBusinessVOList.get(i).setDemo_bs_contents(demoBusinessVOList.get(i).getDemo_bs_contents().replaceAll("(\t)", "  ").replaceAll("(\r\n|\r|\n|\n\r)", "<br/>"));
+                System.out.println(demoBusinessVOList.get(i).getDemo_bs_contents());
+            }
+        }
+        model.addAttribute("demoBusinessVOList",demoBusinessVOList);
+//        model.addAttribute("admin_idx", );
+        model.addAttribute("cur_page",page);
+        model.addAttribute("amount",list_amount);
+
+        int tot_page = filtered_item_total/list_amount+1;
+        if(filtered_item_total%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+        boolean is_active = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+        model.addAttribute("filter1", param.getFilter1());
+        model.addAttribute("filter2", param.getFilter2());
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("page_amount",page_amount);
+
+
+        return "demobs1";
     }
 
-    //협약 전 업무관리
-    @RequestMapping(value = "/b23_gh_silgle",method = RequestMethod.POST)
-    public String b23_gh_silgle(@RequestParam(value = "tag", required = true) String tagValue){
+    //온실 전체 현황
+    @RequestMapping(value = "/gh_total_monitor",method = RequestMethod.POST)
+    public String gh_total_monitor(@RequestBody ParamPageListFilteredVO param){
 
-
-        return "b23_gh_silgle";
+        return "c_center_manage/gh_total_monitor";
     }
 
-    //협약관리
-    @RequestMapping(value = "/b24_gh_complex",method = RequestMethod.POST)
-    public String b24_gh_complex(@RequestParam(value = "tag", required = true) String tagValue){
+    //유리온실 현황
+    @RequestMapping(value = "/gh_glass",method = RequestMethod.POST)
+    public String gh_glass(@RequestBody ParamPageListFilteredVO param){
 
-        return "b24_gh_complex";
+        return "c_center_manage/gh_glass";
+    }
+
+    //비닐온실 현황
+    @RequestMapping(value = "/gh_vinyl",method = RequestMethod.POST)
+    public String gh_vinyl(@RequestBody ParamPageListFilteredVO param){
+
+        return "c_center_manage/gh_vinyl";
+    }
+
+    //단동온실 현황
+    @RequestMapping(value = "/gh_silgle",method = RequestMethod.POST)
+    public String b23_gh_silgle(@RequestBody ParamPageListFilteredVO param){
+
+
+        return "c_center_manage/gh_silgle";
+    }
+
+    //복합온실 현황
+    @RequestMapping(value = "/gh_complex",method = RequestMethod.POST)
+    public String gh_complex(@RequestBody ParamPageListFilteredVO param){
+
+        return "c_center_manage/gh_complex";
     }
 
     //실증성적서
     @RequestMapping(value = "/b30_gh_sensor",method = RequestMethod.POST)
-    public String b30_gh_sensor(@RequestParam(value = "tag", required = true) String tagValue){
+    public String b30_gh_sensor(@RequestBody ParamPageListFilteredVO param){
 
-        return "b30_gh_sensor";
+        return "c_center_manage/gh_sensor";
     }
 
-    //현황보고서 작성
-    @RequestMapping(value = "/b41_cctv_01",method = RequestMethod.POST)
-    public String b41_cctv_01(@RequestParam(value = "tag", required = true) String tagValue){
+    //센서별 현황
+    @RequestMapping(value = "/gh_sensor",method = RequestMethod.POST)
+    public String gh_sensor(@RequestBody ParamPageListFilteredVO param){
 
-        return "b41_cctv_01";
+        return "c_center_manage/gh_sensor";
     }
 
-    //분야별 기업현황
-    @RequestMapping(value = "/b42_cctv_02",method = RequestMethod.POST)
-    public String b42_cctv_02(@RequestParam(value = "tag", required = true) String tagValue){
+    //실증장비 현황
+    @RequestMapping(value = "/facility_monitor",method = RequestMethod.POST)
+    public String facility_monitor(@RequestBody ParamPageListFilteredVO param){
 
-        return "b42_cctv_02";
+        return "c_center_manage/facility_monitor";
     }
 
-    //위탁기업 목록
-    @RequestMapping(value = "/b51_facility_monitor",method = RequestMethod.POST)
-    public String b51_facility_monitor(@RequestParam(value = "tag", required = true) String tagValue){
+    //실증장비 사용이력
+    @RequestMapping(value = "/facility_history",method = RequestMethod.POST)
+    public String facility_history(@RequestBody ParamPageListFilteredVO param){
 
-        return "b51_facility_monitor";
+
+        return "c_center_manage/facility_history";
     }
 
-    //연장신청 접수
-    @RequestMapping(value = "/b52_facility_history",method = RequestMethod.POST)
-    public String b52_facility_history(@RequestParam(value = "tag", required = true) String tagValue){
 
-        return "b52_facility_history";
+    //장애 이벤트
+    @RequestMapping(value = "/event_alert",method = RequestMethod.POST)
+    public String event_alert(@RequestBody ParamPageListFilteredVO param){
+
+
+        return "d_event_manage/event_alert";
     }
 
-    //상담
-    @RequestMapping(value = "/b60_gh_guest",method = RequestMethod.POST)
-    public String b60_gh_guest(@RequestParam(value = "tag", required = true) String tagValue){
+    //시설 및 장비 이벤트
+    @RequestMapping(value = "/event_facility",method = RequestMethod.POST)
+    public String event_facility(@RequestBody ParamPageListFilteredVO param){
 
-        return "b60_gh_guest";
+
+
+        return "d_event_manage/event_facility";
+    }
+    //운영 이벤트
+    @RequestMapping(value = "/event_bs",method = RequestMethod.POST)
+    public String event_bs(@RequestBody ParamPageListFilteredVO param){
+
+        return "d_event_manage/event_bs";
     }
 
-    //문의
-    @RequestMapping(value = "/c10_event_alert",method = RequestMethod.POST)
-    public String c10_event_alert(@RequestParam(value = "tag", required = true) String tagValue){
+    //온실 생성 데이터
+    @RequestMapping(value = "/gh_data",method = RequestMethod.POST)
+    public String d11_gh_data(@RequestBody ParamPageListFilteredVO param){
 
-        return "c10_event_alert";
+        return "e_data_manage/gh_data";
     }
 
-    //자산현황
-    @RequestMapping(value = "/c20_event_facility",method = RequestMethod.POST)
-    public String c20_event_facility(@RequestParam(value = "tag", required = true) String tagValue){
+    //장비 생성 데이터
+    @RequestMapping(value = "/facility_data",method = RequestMethod.POST)
+    public String facility_data(@RequestBody ParamPageListFilteredVO param){
 
-        return "c20_event_facility";
+        return "e_data_manage/facility_data";
     }
+
+    //위탁사업 데이터
+    @RequestMapping(value = "/consign_data",method = RequestMethod.POST)
+    public String consign_data(@RequestBody ParamPageListFilteredVO param){
+
+        return "e_data_manage/consign_data";
+    }
+
+    //자율사업 데이터
+    @RequestMapping(value = "/self_data",method = RequestMethod.POST)
+    public String self_data(@RequestBody ParamPageListFilteredVO param){
+
+        return "e_data_manage/self_data";
+    }
+
+    //전송 기록
+    @RequestMapping(value = "/big_data_log",method = RequestMethod.POST)
+    public String d31_big_data_log(@RequestBody ParamPageListFilteredVO param){
+
+        return "e_data_manage/big_data_log";
+    }
+
+    //빅데이터센터 데이터 관리
+    @RequestMapping(value = "/big_data_manage",method = RequestMethod.POST)
+    public String d32_big_data_manage(@RequestBody ParamPageListFilteredVO param){
+
+        return "e_data_manage/big_data_manage";
+    }
+
+    //자산 현황
+    @RequestMapping(value = "/cur_asset_mng",method = RequestMethod.POST)
+    public String e10_cur_asset_mng(@RequestBody ParamPageListFilteredVO param){
+
+        return "f_assets_manage/cur_asset_mng";
+    }
+
+
+
     //자원예약 관리
-    @RequestMapping(value = "/c30_event_bs",method = RequestMethod.POST)
-    public String c30_event_bs(@RequestParam(value = "tag", required = true) String tagValue){
+    @RequestMapping(value = "/asset_book_mng",method = RequestMethod.POST)
+    public String asset_book_mng(@RequestBody ParamPageListFilteredVO param){
 
-        return "c30_event_bs";
+        return "f_assets_manage/asset_book_mng";
     }
 
-    //자원예약
-    @RequestMapping(value = "/d11_gh_data",method = RequestMethod.POST)
-    public String d11_gh_data(@RequestParam(value = "tag", required = true) String tagValue){
+    //자원 예약
+    @RequestMapping(value = "/asset_booking",method = RequestMethod.POST)
+    public String asset_booking(@RequestBody ParamPageListFilteredVO param){
 
-        return "d11_gh_data";
+        return "f_assets_manage/asset_booking";
     }
 
-    //일정관리
-    @RequestMapping(value = "/d12_facility_data",method = RequestMethod.POST)
-    public String d12_facility_data(@RequestParam(value = "tag", required = true) String tagValue){
+    //일정 관리
+    @RequestMapping(value = "/schedule_mng",method = RequestMethod.POST)
+    public String f10_schedule_mng(@RequestBody ParamPageListFilteredVO param){
 
-        return "d12_facility_data";
+        return "g_schedule_manage/schedule_mng";
     }
 
-    //고객관리
-    @RequestMapping(value = "/d21_consign_data",method = RequestMethod.POST)
-    public String d21_consign_data(@RequestParam(value = "tag", required = true) String tagValue){
+    //SMS 작성
+    @RequestMapping(value = "/write_sms",method = RequestMethod.POST)
+    public String g10_write_sms(@RequestBody ParamPageListFilteredVO param){
 
-        return "d21_consign_data";
+        return "h_comm_manage/write_sms";
     }
 
-    //휴면회원관리
-    @RequestMapping(value = "/d22_self_data",method = RequestMethod.POST)
-    public String d22_self_data(@RequestParam(value = "tag", required = true) String tagValue){
+    //자동 SMS 관리
+    @RequestMapping(value = "/auto_sms_mng",method = RequestMethod.POST)
+    public String g20_auto_sms_mng(@RequestBody ParamPageListFilteredVO param){
 
-        return "d22_self_data";
-    }
-
-    //직원관리
-    @RequestMapping(value = "/d31_big_data_log",method = RequestMethod.POST)
-    public String d31_big_data_log(@RequestParam(value = "tag", required = true) String tagValue){
-
-        return "d31_big_data_log";
-    }
-
-    //협약담당자 관리
-    @RequestMapping(value = "/d32_big_data_manage",method = RequestMethod.POST)
-    public String d32_big_data_manage(@RequestParam(value = "tag", required = true) String tagValue){
-
-        return "d32_big_data_manage";
-    }
-
-    //재배사 관리
-    @RequestMapping(value = "/e10_cur_asset_mng",method = RequestMethod.POST)
-    public String e10_cur_asset_mng(@RequestParam(value = "tag", required = true) String tagValue){
-
-        return "e10_cur_asset_mng";
-    }
-
-
-
-    //sms 작성
-    @RequestMapping(value = "/e20_asset_book_mng",method = RequestMethod.POST)
-    public String e20_asset_book_mng(@RequestParam(value = "tag", required = true) String tagValue){
-
-        return "e20_asset_book_mng";
-    }
-
-    //자동 sms 관리
-    @RequestMapping(value = "/e30_asset_booking",method = RequestMethod.POST)
-    public String e30_asset_booking(@RequestParam(value = "tag", required = true) String tagValue){
-
-        return "e30_asset_booking";
+        return "h_comm_manage/auto_sms_mng";
     }
 
     //예약된 SMS
-    @RequestMapping(value = "/f10_schedule_mng",method = RequestMethod.POST)
-    public String f10_schedule_mng(@RequestParam(value = "tag", required = true) String tagValue){
+    @RequestMapping(value = "/reserved_sms_list_",method = RequestMethod.POST)
+    public String reserved_sms_list_(@RequestBody ParamPageListFilteredVO param){
 
-        return "f10_schedule_mng";
+        return "h_comm_manage/reserved_sms_list";
     }
 
-    //보낸 sms
-    @RequestMapping(value = "/g10_write_sms",method = RequestMethod.POST)
-    public String g10_write_sms(@RequestParam(value = "tag", required = true) String tagValue){
+    //보낸 SMS
+    @RequestMapping(value = "/system_mng",method = RequestMethod.POST)
+    public String system_mng(@RequestBody ParamPageListFilteredVO param){
 
-        return "g10_write_sms";
+        return "i_comm_manage/system_mng";
     }
 
-    //자동 email 관리
-    @RequestMapping(value = "/g20_auto_sms_mng",method = RequestMethod.POST)
-    public String g20_auto_sms_mng(@RequestParam(value = "tag", required = true) String tagValue){
+    //보낸 SMS
+    @RequestMapping(value = "/admin_mng",method = RequestMethod.POST)
+    public String admin_mng(@RequestBody ParamPageListFilteredVO param){
 
-        return "g20_auto_sms_mng";
-    }
-
-    //예약된 이메일
-    @RequestMapping(value = "/g30_reserved_sms_list_",method = RequestMethod.POST)
-    public String g30_reserved_sms_list_(@RequestParam(value = "tag", required = true) String tagValue){
-
-        return "g30_reserved_sms_list";
-    }
-
-    //보낸 email
-    @RequestMapping(value = "/g40_sent_sms_list",method = RequestMethod.POST)
-    public String g40_sent_sms_list(@RequestParam(value = "tag", required = true) String tagValue){
-
-        return "g40_sent_sms_list";
-    }
-
-    //웹 프론트 메인 페이지 관리
-    @RequestMapping(value = "/g11_web_front_main_mng",method = RequestMethod.POST)
-    public String g11_web_front_main_mng(@RequestParam(value = "tag", required = true) String tagValue){
-
-        return "/WEB-INF/jsp/z_web_front_main_mng.jsp";
+        return "i_comm_manage/admin_mng";
     }
 
 }
