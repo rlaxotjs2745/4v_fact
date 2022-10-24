@@ -360,7 +360,7 @@
                      #{owner},
                      #{idx_user},
                   <if test="file_type == 70">
-                      SEQ_DEMO_BUSINESS.CURVAL
+                      SEQ_DEMO_BUSINESS.CURVAL,
                   </if>
                   <if test="file_type != 70">
                      #{idx_admin},

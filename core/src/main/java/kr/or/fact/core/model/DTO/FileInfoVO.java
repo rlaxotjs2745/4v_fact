@@ -22,4 +22,5 @@ public class FileInfoVO {
     long idx_user;//	number	32				◯	소유자가 유저일경우
     long idx_admin;//	number	32				◯	소유자가 관리자일경우
     Date reg_date;//	date						최초 등록 일시
+    long idx_file_usage;
 }
