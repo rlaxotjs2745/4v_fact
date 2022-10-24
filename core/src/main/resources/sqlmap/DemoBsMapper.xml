@@ -185,7 +185,38 @@
 
     <update id="updateBsApproval" parameterType="kr.or.fact.core.model.DTO.DemoBusinessVO">
         UPDATE TB_DEMO_BUSINESS SET
-                IDX_CONFORM_ADMIN=#{idx_conform_admin}
+                IDX_CONFORM_ADMIN=#{idx_conform_admin},
+                DEMO_BS_STATUS = 2
+        WHERE IDX_DEMO_BUSINESS = #{idx_demo_business}
+    </update>
+
+    <update id="updateBsContent" parameterType="kr.or.fact.core.model.DTO.DemoBusinessVO">
+        UPDATE TB_DEMO_BUSINESS SET
+            <if test="demo_bs_code != null"> DEMO_BS_CODE = #{demo_bs_code},</if>
+            <if test="demo_subject != null"> DEMO_SUBJECT = #{demo_subject},</if>
+            <if test="demo_bs_contents != null"> DEMO_BS_CONTENTS= #{demo_bs_contents},</if>
+            <if test="demo_bs_main_type != null"> DEMO_BS_MAIN_TYPE = #{demo_bs_main_type},</if>
+            <if test="demo_bs_sub_type != null"> DEMO_BS_SUB_TYPE = #{demo_bs_sub_type},</if>
+            <if test="demo_bs_detail_type != null"> DEMO_BS_DETAIL_TYPE = #{demo_bs_detail_type},</if>
+            <if test="demo_bs_status != null"> DEMO_BS_STATUS = #{demo_bs_status},</if>
+            <if test="applicant_count != null"> APPLICANT_COUNT = #{applicant_count},</if>
+            <if test="applicant_count_limit != null"> APPLICANT_COUNT_LIMIT = #{applicant_count_limit},</if>
+            <if test="start_date != null"> START_DATE = #{start_date},</if>
+            <if test="end_date != null"> END_DATE = #{end_date},</if>
+            <if test="recruit_start_date != null"> RECRUIT_START_DATE = #{recruit_start_date},</if>
+            <if test="recruit_end_date != null"> RECRUIT_END_DATE = #{recruit_end_date},</if>
+            <if test="recruit_count_limit != null"> RECRUIT_COUNT_LIMIT = #{recruit_count_limit},</if>
+            <if test="memo != null"> MEMO=#{memo},</if>
+            <if test="idx_admin != null"> IDX_ADMIN=#{idx_admin},</if>
+            <if test="idx_conform_admin != null"> IDX_CONFORM_ADMIN=#{idx_conform_admin},</if>
+            <if test="is_announce != null"> IS_ANNOUNCE=#{is_announce},</if>
+            <if test="exan_start != null"> EXAM_START=#{exan_start},</if>
+            <if test="exan_end != null"> EXAM_END=#{exan_end},</if>
+            <if test="plan_review_start != null"> PLAN_REVIEW_START=#{plan_review_start},</if>
+            <if test="plan_review_end != null"> PLAN_REVIEW_END=#{plan_review_end},</if>
+            <if test="convention_start != null"> CONVENTION_START=#{convention_start},</if>
+            <if test="convention_end != null"> CONVENTION_END=#{convention_end},</if>
+            LAST_UPD_DATE = SYSDATE
         WHERE IDX_DEMO_BUSINESS = #{idx_demo_business}
     </update>
 
