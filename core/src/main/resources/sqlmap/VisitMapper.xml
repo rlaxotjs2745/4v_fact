@@ -63,11 +63,18 @@
                       )
 
                  WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+                <if test="filter1 != null">
+                    AND visit_req_status = #{filter1}
+                </if>
              )
         WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
     </select>
     <select id="getVisitReqCount" resultType="int">
-        SELECT COUNT (*) FROM TB_VISIT_REQ ORDER BY VISIT_REQ_NUM ASC
+        SELECT COUNT (*) FROM TB_VISIT_REQ
+        <if test="filter1 != null">
+            WHERE visit_req_status = #{filter1}
+        </if>
+        ORDER BY VISIT_REQ_NUM ASC
     </select>
 
     <select id="getVisitData" parameterType="Date" resultType="kr.or.fact.core.model.DTO.VisitDataVO">

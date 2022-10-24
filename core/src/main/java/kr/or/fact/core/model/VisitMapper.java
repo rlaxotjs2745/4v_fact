@@ -26,7 +26,7 @@ public interface VisitMapper {
     void deleteVisitData(@Param("idx_visit_data") long idx_visit_data);
 int updateVisitReq(VisitReqVO visitReqVO);
     void saveVisitReq(VisitReqVO visitReqVO);
-    int getVisitReqCount();
+    int getVisitReqCount(int filter1);
     VisitReqVO getVisitReqByIdx(@Param("idx_visit_req") long idx_visit_req);
     void deleteVisitReq(@Param("idx_visit_req") long idx_visit_req);
 
