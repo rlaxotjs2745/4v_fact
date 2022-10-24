@@ -1477,7 +1477,7 @@ public class APIController {
         return resultVO;
     }
 
-    @RequestMapping(value="/update_BsContent",method = RequestMethod.POST)
+    @RequestMapping(value="/update_bs_content",method = RequestMethod.POST)
     @ResponseBody
     ResultVO updateBsContent(@RequestBody DemoBusinessVO demoBusinessVO){
 
@@ -1497,6 +1497,13 @@ public class APIController {
         }
 
         return resultVO;
+    }
+
+    @RequestMapping(value ="/demo_bs_file",method = RequestMethod.GET)
+    public @ResponseBody
+    FileInfoVO demo_bs_file(@RequestParam int idx_demo_bs){
+
+        return fileService.selectBsFile(idx_demo_bs);
     }
 
 }

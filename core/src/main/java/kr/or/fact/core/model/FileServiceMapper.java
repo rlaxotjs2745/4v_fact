@@ -38,4 +38,6 @@ public interface FileServiceMapper {
     List<UserDemoBsFileResultVO> getUserDemoBsFileJoin(@Param("idx_user_demo_bs") long idx);
 
     int insertFileInfo(FileInfoVO fileInfoVO);
+
+    FileInfoVO selectBsFile(int idx_demo_bs);
 }
