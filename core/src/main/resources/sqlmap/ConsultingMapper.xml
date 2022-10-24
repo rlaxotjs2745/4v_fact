@@ -46,6 +46,7 @@
                       )TB_DEMO_BS_CONSULTING JOIN TB_USER ON TB_DEMO_BS_CONSULTING.IDX_USER= TB_USER.IDX_USER
 
                  WHERE ROWNUM <![CDATA[<=]]> #{page}*#{list_amount}
+                ORDER BY IDX_DEMO_BS_CONSULTING DESC
              )
         WHERE row_num <![CDATA[>]]> (#{page} -1)*#{list_amount}
     </select>

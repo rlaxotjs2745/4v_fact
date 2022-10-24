@@ -274,6 +274,7 @@
                                             <if test="filter2 != 9998">
                                                 OR A.ANNOUNCE_STATUS = #{filter2}
                                             </if>
+                         ORDER BY IDX_BS_ANNOUNCEMENT DESC
                       )
                  WHERE ROWNUM <![CDATA[<=]]> #{page_num} * #{amount}
              )

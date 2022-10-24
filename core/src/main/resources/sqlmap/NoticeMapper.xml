@@ -109,6 +109,7 @@
             FROM TB_NOTICE
             WHERE IS_SHOW=1
                 AND NOTICE_STATUS=1
+            order by IDX_NOTICE desc
         )
         WHERE row_num BETWEEN #{amount} * (#{page_num} - 1) + 1 AND #{amount} * #{page_num}
     </select>

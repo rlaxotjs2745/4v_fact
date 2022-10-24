@@ -60,6 +60,7 @@
                         REG_DATE
                  FROM (
                           SELECT * FROM TB_VISIT_REQ
+                          order by IDX_VISIT_REQ desc
                       )
 
                  WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
