@@ -2,6 +2,8 @@ package kr.or.fact.api.model.DTO;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class ActuatorGreenhouseComplexGimjeVO {
     long idx_actuator_gh_complex_g;// number(10,4) PRIMARY KEY,

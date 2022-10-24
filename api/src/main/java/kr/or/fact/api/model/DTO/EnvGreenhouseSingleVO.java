@@ -2,6 +2,8 @@ package kr.or.fact.api.model.DTO;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class EnvGreenhouseSingleVO {
     long idx_env_gh_single;// number(10,4) PRIMARY KEY,

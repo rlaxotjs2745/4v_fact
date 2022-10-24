@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @RequestMapping("/V2")
@@ -16,6 +17,10 @@ import java.util.ArrayList;
 public class GetAPIController {
     @Autowired
     public ApiService apiService;
+
+    Connection conn = null;
+    PreparedStatement pstm = null;
+    ResultSet rs = null;
 
     @RequestMapping(value = "/idx", method = RequestMethod.GET)
     public @ResponseBody
@@ -40,7 +45,7 @@ public class GetAPIController {
 
         return apiService.selectbyTime(fromTime, toTime);
     }
-    //    데이터형식
+//    데이터형식
 //    {
 //        "from":"2022.03.25 14:36:00”, (가져갈 시작시간)
 //        "to":"2022.03.25 14:38:00”(지금시간)

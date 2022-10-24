@@ -6,17 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+
 
 @RequestMapping("/V2")
 @Controller
 public class PostAPIController {
-    @Autowired
+
+    @Resource(name = "apiService")
     public ApiService  apiService;
 
     @RequestMapping(value = "/actuator_greenhouse_complex_gimje", method = RequestMethod.POST)
     public @ResponseBody
     ResultVO insertActuatorGreenhouseComplexGimje(@RequestBody ActuatorGreenhouseComplexGimjeVO actuatorGreenhouseComplexGimjeVO){
         ResultVO result = new ResultVO();
+        System.out.println(actuatorGreenhouseComplexGimjeVO.getIncurtain());
         if(     actuatorGreenhouseComplexGimjeVO == null ||
                 actuatorGreenhouseComplexGimjeVO.getDaqtime() == null
         ){
@@ -864,6 +868,7 @@ public class PostAPIController {
     ResultVO insertNowGreenhouseSingleSangju(@RequestBody NowGreenhouseSingleSangjuVO nowGreenhouseSingleSangjuVO){
         ResultVO result = new ResultVO();
         if(  nowGreenhouseSingleSangjuVO == null
+
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
@@ -928,7 +933,7 @@ public class PostAPIController {
     ResultVO insertNowWeather(@RequestBody NowWeatherVO nowWeatherVO){
         ResultVO result = new ResultVO();
         if(
-                nowWeatherVO == null ||
+                nowWeatherVO == null||
                         nowWeatherVO.getRaindetect() == null // char(1) 0 or 1
         ){
             result.setResult_code("code_003");
@@ -996,7 +1001,8 @@ public class PostAPIController {
         if( verifyDataACMotorVO == null ||
                 verifyDataACMotorVO.getVerifyid() == null ||//  varchar(100),
                 verifyDataACMotorVO.getDeviceid() == null ||// varchar(100),
-                verifyDataACMotorVO.getDaqtime() == null
+                verifyDataACMotorVO.getDaqtime() == null //  date ,
+
         ){
             result.setResult_code("code_003");
             result.setMessage("데이터 입력에 실패했습니다.");
@@ -2274,6 +2280,7 @@ public class PostAPIController {
                 verifyDataSensorTestVO.getVerifyid() == null ||//  varchar(100),
                 verifyDataSensorTestVO.getDeviceid() == null ||// varchar(100),
                 verifyDataSensorTestVO.getDaqtime() == null ||//  date ,
+
                 verifyDataSensorTestVO.getValuename1() == null ||// varchar(100),
                 verifyDataSensorTestVO.getValuename2() == null ||// varchar(100),
                 verifyDataSensorTestVO.getValuename3() == null ||// varchar(100),

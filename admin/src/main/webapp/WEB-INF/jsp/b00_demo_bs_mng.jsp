@@ -425,7 +425,7 @@
                                 </div>
                             </div>
                             <div class="col-md-2 mode-edit">
-<%--                                <button type="button" class="btn btn-primary" id="is_confirm">승인하기</button>--%>
+                                <button type="button" class="btn btn-primary" id="is_confirm">승인하기</button>
                             </div>
 
                         </div>
@@ -649,6 +649,28 @@
                     $('#bs_content').html(demo.demo_bs_contents);
                     $(".summernote").summernote('destroy');
                     curEntity = demo;
+                }
+            })
+        })
+
+        $('#is_confirm').click(function(){
+            var param = {
+                idx_demo_business: curEntity.idx_demo_business,
+                idx_conform_admin: '${admin.idx_admin}'
+            }
+
+            $.ajax({
+                url: 'confirm_demo_bs',
+                method: 'post',
+                data: JSON.stringify({user_id: code}),//보내는 데이터
+                contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+                dataType: 'json',//받는 데이터 타입
+                success: function (result) {
+                    if (result.result_code == "SUCCESS") {
+                        console.log(result);
+                    } else {
+                        console.log(result);
+                    }
                 }
             })
         })
