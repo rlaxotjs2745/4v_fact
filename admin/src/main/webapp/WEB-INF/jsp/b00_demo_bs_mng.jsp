@@ -188,9 +188,9 @@
 
 
 
-                                    <c:forEach var="i" begin="1" end="${page_amount}">
-                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('b00_demo_bs_mng?page=${(cur_sector-1)*page_amount+i}&filter1=${filter1}&filter2=${filter2}','실증사업 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
-                                    </c:forEach>
+<%--                                    <c:forEach var="i" begin="1" end="${page_amount}">--%>
+<%--                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('b00_demo_bs_mng?page=${(cur_sector-1)*page_amount+i}&filter1=${filter1}&filter2=${filter2}','실증사업 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>--%>
+<%--                                    </c:forEach>--%>
 
                                     <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('b00_demo_bs_mng',{page_num:parseInt('${cur_page+1}'),filter1:parseInt('${filter1}'),filter2:parseInt('${filter2}')},'실증사업 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
                                     <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('b00_demo_bs_mng',{page_num:parseInt('${tot_page}'),filter1:parseInt('${filter1}'),filter2:parseInt('${filter2}')},'실증사업 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
@@ -408,7 +408,6 @@
                             </div>
                             <div class="form-group col col-md-10 col-form-label mode-view">
                                 <a href="file.doc">공고문.pdf</a>
-                                <a href="file.doc">공고문 상세.pdf</a>
                             </div>
                         </div>
 
@@ -420,8 +419,7 @@
                             </div>
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit">승인여부</label>
                             <div class="col-md-2 mode-edit">
-                                <div class="form-control-plaintext mode-edit">
-                                    아니오
+                                <div class="form-control-plaintext mode-edit" id="confirm_message">
                                 </div>
                             </div>
                             <div class="col-md-2 mode-edit">
@@ -647,8 +645,36 @@
                     $('#demo_modify_dur').text(demo.plan_review_start + ' ~ ' + demo.plan_review_end);
                     $('#demo_arrange_dur').text(demo.convention_start + ' ~ ' + demo.convention_end);
                     $('#bs_content').html(demo.demo_bs_contents);
+                    if(demo.idx_conform_admin == '0'){
+                        $('#confirm_message').text('미승인')
+                        $('#is_confirm').show();
+                    } else {
+                        $('#confirm_message').text('승인됨');
+                        $('#is_confirm').hide();
+                    }
+
+                    if(demo.idx_admin == '${admin.idx_admin}'){
+                        $('#is_confirm').hide();
+                    }
                     $(".summernote").summernote('destroy');
                     curEntity = demo;
+                }
+            })
+            $.ajax({
+                url: 'confirm_demo_bs',
+                method: 'post',
+                data: JSON.stringify(param),//보내는 데이터
+                contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+                dataType: 'json',//받는 데이터 타입
+                success: function (result) {
+                    if (result.result_code == "SUCCESS") {
+                        alert('승인되었습니다.')
+                        $('#is_confirm').hide();
+                        $('#confirm_message').text('승인');
+
+                    } else {
+                        console.log(result);
+                    }
                 }
             })
         })
@@ -659,15 +685,22 @@
                 idx_conform_admin: '${admin.idx_admin}'
             }
 
+            if(curEntity.idx_admin == param.idx_conform_admin){
+                return alert('본인이 등록한 사업은 직접 승인할 수 없습니다.');
+            }
+
             $.ajax({
                 url: 'confirm_demo_bs',
                 method: 'post',
-                data: JSON.stringify({user_id: code}),//보내는 데이터
+                data: JSON.stringify(param),//보내는 데이터
                 contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
                 dataType: 'json',//받는 데이터 타입
                 success: function (result) {
                     if (result.result_code == "SUCCESS") {
-                        console.log(result);
+                        alert('승인되었습니다.')
+                        $('#is_confirm').hide();
+                        $('#confirm_message').text('승인');
+
                     } else {
                         console.log(result);
                     }
@@ -681,7 +714,8 @@
 
 
         function initSummerNote(){
-            $('.summernote').summernote({
+            $('.summernote')
+                .summernote({
                 toolbar: [
                     // [groupName, [list of button]]
                     ['fontname', ['fontname']],
@@ -696,8 +730,10 @@
                 ],
                 fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
                 fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-                height: 300                 // 에디터 높이
-            });
+                height: 300,             // 에디터 높이
+
+            })
+            .summernote('code', '');
 
         }
 
@@ -746,7 +782,22 @@
             $('#demo_bs_sub_type').val(demo.demo_bs_sub_type);
             $('#demo_bs_detail_type').val(demo.demo_bs_detail_type);
             $('#demo_subject').val(demo.demo_subject);
-            $('#demo_start').val(demo.demo_s);
+            $('#demo_start').datepicker('setDate', demo.start_date);
+            $('#demo_end').datepicker('setDate', demo.end_date);
+            $('#demo_appl_start').datepicker('setDate', demo.recruit_start_date);
+            $('#demo_appl_end').datepicker('setDate', demo.recruit_end_date);
+            $('#demo_eval_start').datepicker('setDate', demo.exam_start);
+            $('#demo_eval_end').datepicker('setDate', demo.exam_end);
+            $('#demo_modify_start').datepicker('setDate', demo.plan_review_start);
+            $('#demo_modify_end').datepicker('setDate', demo.plan_review_end);
+            $('#demo_arrange_start').datepicker('setDate', demo.convention_start);
+            $('#demo_arrange_end').datepicker('setDate', demo.convention_end);
+            $('#demo_arrange_end').datepicker('setDate', demo.convention_end);
+            $('#recruit_count_limit').val(demo.recruit_count_limit);
+            var newContent = demo.demo_bs_contents.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+            $('.summernote').summernote('editor.insertText', newContent);
+
+            ///////////////////////////////////////////////////////////////
         }
 
         var duplBool = false;

@@ -9,7 +9,7 @@ public class FileInfoVO {
 
     long idx_file_info;//	number	32			◯		인덱스	auto increase
     String file_name;//	varchar2	256					파일 이름
-    int file_type;//	number	4		0			파일 타입	0:해당없음, 1:실증계획, 2:실증보고, …
+    int file_type;//	number	4		0			파일 타입	0:해당없음, 1:실증계획, 2:실증보고, 70 신규사업 관련 파일, …
     int file_status;//	number	4		0			파일 상태	0:정상, 1:사용불가
     String mime_type;//	varchar2	100					마임 타입
     int encoding;//	number	4		0			파일 인코딩 종류	0:해당없음, 1:utf-8, …
@@ -22,5 +22,4 @@ public class FileInfoVO {
     long idx_user;//	number	32				◯	소유자가 유저일경우
     long idx_admin;//	number	32				◯	소유자가 관리자일경우
     Date reg_date;//	date						최초 등록 일시
-
 }

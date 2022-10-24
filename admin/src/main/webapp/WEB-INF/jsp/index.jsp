@@ -82,9 +82,9 @@
 
             </div>
             <!-- Layout content -->
-            <div id="loading_symbol">
-                <img src="resources/assets/image/g_loading.gif">
-            </div>
+<%--            <div id="loading_symbol">--%>
+<%--                <img src="resources/assets/image/g_loading.gif">--%>
+<%--            </div>--%>
 
         </div>
         <!-- / Layout container -->

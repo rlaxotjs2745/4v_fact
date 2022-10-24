@@ -250,7 +250,7 @@ public class FileServiceImpl implements FileService {
         FileInfoVO fileInfoVO = new FileInfoVO();
 
         fileInfoVO.setFile_name(file.getOriginalFilename());
-        fileInfoVO.setFile_type(0);
+        fileInfoVO.setFile_type(70);
         fileInfoVO.setFile_status(0);
         fileInfoVO.setMime_type(file.getContentType());
         fileInfoVO.setEncoding(1);
