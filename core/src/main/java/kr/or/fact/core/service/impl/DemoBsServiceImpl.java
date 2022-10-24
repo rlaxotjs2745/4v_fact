@@ -82,4 +82,9 @@ public class DemoBsServiceImpl implements DemoBsService {
     public void updateBsApproval(DemoBusinessVO demoBusinessVO) {
         demoBsMapper.updateBsApproval(demoBusinessVO);
     }
+
+    @Override
+    public void updateBsContent(DemoBusinessVO demoBusinessVO) {
+        demoBsMapper.updateBsContent(demoBusinessVO);
+    }
 }

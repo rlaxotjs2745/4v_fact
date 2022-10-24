@@ -32,4 +32,6 @@ public interface DemoBsService {
     Boolean isValidCode(String code);
 
     void updateBsApproval(DemoBusinessVO demoBusinessVO);
+
+    void updateBsContent(DemoBusinessVO demoBusinessVO);
 }
