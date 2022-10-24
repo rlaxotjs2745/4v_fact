@@ -6,6 +6,7 @@ import kr.or.fact.core.service.FileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -33,6 +34,9 @@ public class FileController {
 
     @Autowired
     private FACTConfig factConfig;
+
+    @Autowired
+    Environment env;
 
 
     @PostMapping("/uploadFile")
@@ -157,9 +161,25 @@ public class FileController {
             }
         }
     }
+
+//    String[] activeProfiles = env.getActiveProfiles();
+//    if (activeProfiles.length != 0) {
+//        String activeProfile = activeProfiles[0];
+//
+//        if (activeProfile.equals("local")) {
+//
+//        } else if(activeProfile.equals("sangju-prod")){
+//
+//        } else {
+//
+//        }
+//    }
+
     MultipartFile file = fileRequestVO.getFiles1();
     String fileName = fileService.storeFileInfo(fileRequestVO.getFiles1());
-    String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+    String fileDownloadUri =
+            ServletUriComponentsBuilder.fromUriString("")
+//                    .fromCurrentContextPath()
             .path("/downloadFile/")
             .path(fileName)
             .toUriString();

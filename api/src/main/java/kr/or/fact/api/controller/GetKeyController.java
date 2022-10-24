@@ -10,14 +10,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @RequestMapping("/V2")
 @Controller
 public class GetKeyController {
-    @Autowired
+
+    @Resource(name = "apiService")
     public ApiService apiService;
+
+
     @RequestMapping(value = "/get_key",method = RequestMethod.POST)
     public @ResponseBody
     ResultVO getKey (@RequestBody LoginVO loginVO){
