@@ -538,6 +538,26 @@
         //     initSummerNote();
         // });
         var demoArr = [];
+        var curEntity = null;
+        var duplBool = false;
+        var demo_bs_main_typeBool = 0;
+        var demo_bs_sub_typeBool = 0;
+        var demo_bs_detail_typeBool = 0;
+        var demo_subjectBool = 0;
+        var start_dateBool = 0;
+        var end_dateBool = 0;
+        var recruit_start_dateBool = 0;
+        var recruit_end_dateBool = 0;
+        var exam_startBool = 0;
+        var exam_endBool = 0;
+        var plan_review_startBool = 0;
+        var plan_review_endBool = 0;
+        var convention_startBool = 0;
+        var convention_endBool = 0;
+        var convention_endBool = 0;
+        var recruit_count_limitBool = 0;
+
+
         <c:forEach items="${demoBusinessVOList}" var="demo" varStatus="status">
         <%--var content = "${fn:replace(demo.demo_bs_contents, '\n', '<br/>')}";--%>
         demoArr.push({
@@ -582,7 +602,7 @@
             last_upd_date: "${demo.last_upd_date}",
         })
         </c:forEach>
-        var curEntity;
+
 
         $(".demo_entity").on("click", function(){
             var selectedIdx = $(this).attr("id").split("_")[1];
@@ -663,12 +683,13 @@
 
 
             $.ajax({
-                url: 'get_demobs_files?idx_demo_bs=' + selectedIdx,
+                url: 'demo_bs_file?idx_demo_bs=' + selectedIdx,
                 method: 'get',
                 contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
                 dataType: 'json',//받는 데이터 타입
                 success: function (result) {
                     if(result != null){
+                        console.log('일방젃이야')
                         $('#demo_bs_file').attr('href', result.file_path).text(result.file_name);
                     }
                 }
@@ -794,156 +815,142 @@
             $('.summernote').summernote('editor.insertText', newContent);
         }
 
-        var duplBool = false;
 
-        var demo_bs_main_typeBool = 0;
-        var demo_bs_sub_typeBool = 0;
-        var demo_bs_detail_typeBool = 0;
-        var demo_subjectBool = 0;
-        var start_dateBool = 0;
-        var end_dateBool = 0;
-        var recruit_start_dateBool = 0;
-        var recruit_end_dateBool = 0;
-        var exam_startBool = 0;
-        var exam_endBool = 0;
-        var plan_review_startBool = 0;
-        var plan_review_endBool = 0;
-        var convention_startBool = 0;
-        var convention_endBool = 0;
-        var convention_endBool = 0;
-        var recruit_count_limitBool = 0;
 
         $("#demo_bs_code").change(function(){
             duplBool = false;
         })
 
-        $('#demo_bs_main_type').change(function(){
-            if($(this).val() != curEntity.demo_bs_main_type){
-                demo_bs_main_typeBool = 1;
-            } else {
-                demo_bs_main_typeBool = 0;
-            }
-        })
+        if(curEntity != null){
+            $('#demo_bs_main_type').change(function(){
+                if($(this).val() != curEntity.demo_bs_main_type){
+                    demo_bs_main_typeBool = 1;
+                } else {
+                    demo_bs_main_typeBool = 0;
+                }
+            })
 
-        $('#demo_bs_sub_type').change(function(){
-            if($(this).val() != curEntity.demo_bs_sub_type){
-                demo_bs_sub_typeBool = 1;
-            } else {
-                demo_bs_sub_typeBool = 0;
-            }
-        })
+            $('#demo_bs_sub_type').change(function(){
+                if($(this).val() != curEntity.demo_bs_sub_type){
+                    demo_bs_sub_typeBool = 1;
+                } else {
+                    demo_bs_sub_typeBool = 0;
+                }
+            })
 
-        $('#demo_bs_detail_type').change(function(){
-            if($(this).val() != curEntity.demo_bs_detail_type){
-                demo_bs_detail_typeBool = 1;
-            } else {
-                demo_bs_detail_typeBool = 0;
-            }
-        })
+            $('#demo_bs_detail_type').change(function(){
+                if($(this).val() != curEntity.demo_bs_detail_type){
+                    demo_bs_detail_typeBool = 1;
+                } else {
+                    demo_bs_detail_typeBool = 0;
+                }
+            })
 
-        $('#demo_subject').change(function(){
-            if($(this).val() != curEntity.demo_subject){
-                demo_subjectBool = 1;
-            } else {
-                demo_subjectBool = 0;
-            }
-        })
+            $('#demo_subject').change(function(){
+                if($(this).val() != curEntity.demo_subject){
+                    demo_subjectBool = 1;
+                } else {
+                    demo_subjectBool = 0;
+                }
+            })
 
-        $('#demo_start').change(function(){
-            if($(this).val() != curEntity.start_date){
-                start_dateBool = 1;
-            } else {
-                start_dateBool = 0;
-            }
-        })
+            $('#demo_start').change(function(){
+                if($(this).val() != curEntity.start_date){
+                    start_dateBool = 1;
+                } else {
+                    start_dateBool = 0;
+                }
+            })
 
-        $('#demo_end').change(function(){
-            if($(this).val() != curEntity.end_date){
-                end_dateBool = 1;
-            } else {
-                end_dateBool = 0;
-            }
-        })
+            $('#demo_end').change(function(){
+                if($(this).val() != curEntity.end_date){
+                    end_dateBool = 1;
+                } else {
+                    end_dateBool = 0;
+                }
+            })
 
-        $('#demo_appl_start').change(function(){
-            if($(this).val() != curEntity.recruit_start_date){
-                recruit_start_dateBool = 1;
-            } else {
-                recruit_start_dateBool = 0;
-            }
-        })
+            $('#demo_appl_start').change(function(){
+                if($(this).val() != curEntity.recruit_start_date){
+                    recruit_start_dateBool = 1;
+                } else {
+                    recruit_start_dateBool = 0;
+                }
+            })
 
-        $('#demo_appl_end').change(function(){
-            if($(this).val() != curEntity.recruit_end_date){
-                recruit_end_dateBool = 1;
-            } else {
-                recruit_end_dateBool = 0;
-            }
-        })
+            $('#demo_appl_end').change(function(){
+                if($(this).val() != curEntity.recruit_end_date){
+                    recruit_end_dateBool = 1;
+                } else {
+                    recruit_end_dateBool = 0;
+                }
+            })
 
-        $('#demo_eval_start').change(function(){
-            if($(this).val() != curEntity.exam_start){
-                exam_startBool = 1;
-            } else {
-                exam_startBool = 0;
-            }
-        })
+            $('#demo_eval_start').change(function(){
+                if($(this).val() != curEntity.exam_start){
+                    exam_startBool = 1;
+                } else {
+                    exam_startBool = 0;
+                }
+            })
 
-        $('#demo_eval_end').change(function(){
-            if($(this).val() != curEntity.exam_end){
-                exam_endBool = 1;
-            } else {
-                exam_endBool = 0;
-            }
-        })
+            $('#demo_eval_end').change(function(){
+                if($(this).val() != curEntity.exam_end){
+                    exam_endBool = 1;
+                } else {
+                    exam_endBool = 0;
+                }
+            })
 
-        $('#demo_modify_start').change(function(){
-            if($(this).val() != curEntity.plan_review_start){
-                plan_review_startBool = 1;
-            } else {
-                plan_review_startBool = 0;
-            }
-        })
+            $('#demo_modify_start').change(function(){
+                if($(this).val() != curEntity.plan_review_start){
+                    plan_review_startBool = 1;
+                } else {
+                    plan_review_startBool = 0;
+                }
+            })
 
-        $('#demo_modify_end').change(function(){
-            if($(this).val() != curEntity.plan_review_end){
-                plan_review_endBool = 1;
-            } else {
-                plan_review_endBool = 0;
-            }
-        })
+            $('#demo_modify_end').change(function(){
+                if($(this).val() != curEntity.plan_review_end){
+                    plan_review_endBool = 1;
+                } else {
+                    plan_review_endBool = 0;
+                }
+            })
 
-        $('#demo_arrange_start').change(function(){
-            if($(this).val() != curEntity.convention_start){
-                convention_startBool = 1;
-            } else {
-                convention_startBool = 0;
-            }
-        })
+            $('#demo_arrange_start').change(function(){
+                if($(this).val() != curEntity.convention_start){
+                    convention_startBool = 1;
+                } else {
+                    convention_startBool = 0;
+                }
+            })
 
-        $('#demo_arrange_end').change(function(){
-            if($(this).val() != curEntity.convention_end){
-                convention_endBool = 1;
-            } else {
-                convention_endBool = 0;
-            }
-        })
+            $('#demo_arrange_end').change(function(){
+                if($(this).val() != curEntity.convention_end){
+                    convention_endBool = 1;
+                } else {
+                    convention_endBool = 0;
+                }
+            })
 
-        $('#demo_arrange_end').change(function(){
-            if($(this).val() != curEntity.convention_end){
-                convention_endBool = 1;
-            } else {
-                convention_endBool = 0;
-            }
-        })
+            $('#demo_arrange_end').change(function(){
+                if($(this).val() != curEntity.convention_end){
+                    convention_endBool = 1;
+                } else {
+                    convention_endBool = 0;
+                }
+            })
 
-        $('#recruit_count_limit').change(function(){
-            if($(this).val() != curEntity.recruit_count_limit){
-                recruit_count_limitBool = 1;
-            } else {
-                recruit_count_limitBool = 0;
-            }
-        })
+            $('#recruit_count_limit').change(function(){
+                if($(this).val() != curEntity.recruit_count_limit){
+                    recruit_count_limitBool = 1;
+                } else {
+                    recruit_count_limitBool = 0;
+                }
+            })
+        }
+
 
 
 
