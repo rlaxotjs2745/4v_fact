@@ -183,6 +183,12 @@
         WHERE IDX_DEMO_BUSINESS = #{idx_demo_business}
     </update>
 
+    <update id="updateBsApproval" parameterType="kr.or.fact.core.model.DTO.DemoBusinessVO">
+        UPDATE TB_DEMO_BUSINESS SET
+                IDX_CONFORM_ADMIN=#{idx_conform_admin}
+        WHERE IDX_DEMO_BUSINESS = #{idx_demo_business}
+    </update>
+
 
     <delete id="deleteDemoBs" parameterType="long">
         DELETE FROM TB_DEMO_BUSINESS WHERE IDX_DEMO_BUSINESS = #{idx_demo_business}

@@ -1455,6 +1455,27 @@ public class APIController {
         return resultVO;
     }
 
+    @RequestMapping(value="/confirm_demo_bs",method = RequestMethod.POST)
+    @ResponseBody
+    ResultVO confirm_demo_bs(@RequestBody DemoBusinessVO demoBusinessVO){
+
+        ResultVO resultVO = new ResultVO();
+
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("승인 실패");
+
+        try {
+            demoBsService.updateBsApproval(demoBusinessVO);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("승인이 완료되었습니다.");
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("승인이 실패하였습니다.");
+        }
+
+        return resultVO;
+    }
 
 }
 

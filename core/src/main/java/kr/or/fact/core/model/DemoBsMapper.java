@@ -30,4 +30,6 @@ public interface DemoBsMapper {
 
     List<String> isValidCode(String code);
 
+    void updateBsApproval(DemoBusinessVO demoBusinessVO);
+
 }

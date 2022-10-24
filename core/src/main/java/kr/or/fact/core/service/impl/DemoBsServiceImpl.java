@@ -77,4 +77,9 @@ public class DemoBsServiceImpl implements DemoBsService {
         }
         return bool;
     }
+
+    @Override
+    public void updateBsApproval(DemoBusinessVO demoBusinessVO) {
+        demoBsMapper.updateBsApproval(demoBusinessVO);
+    }
 }

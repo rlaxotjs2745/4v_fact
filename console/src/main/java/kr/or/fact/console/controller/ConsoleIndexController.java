@@ -95,7 +95,6 @@ public class ConsoleIndexController {
                          Principal principal,
                          ModelMap model){
 
-
         AdminVO adminInfo = adminService.findAdminById(principal.getName());
         model.addAttribute("admin", adminInfo);
 
