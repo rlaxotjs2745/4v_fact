@@ -343,6 +343,9 @@
             CHECKSUM,
             OWNER,
             IDX_USER,
+            <if test="file_type == 70">
+                IDX_FILE_USAGE
+            </if>
             IDX_ADMIN,
             REG_DATE
         ) VALUES (
@@ -362,9 +365,7 @@
                   <if test="file_type == 70">
                       SEQ_DEMO_BUSINESS.CURVAL,
                   </if>
-                  <if test="file_type != 70">
                      #{idx_admin},
-                  </if>
                      SYSDATE
                  )
     </insert>
@@ -373,6 +374,6 @@
         SELECT FILE_NAME,
                FILE_PATH
         FROM TB_FORM_FILE_INFO
-        WHERE IDX_ADMIN = #{idx_demo_bs}
+        WHERE IDX_FILE_USAGE = #{idx_demo_bs}
     </select>
 </mapper>
