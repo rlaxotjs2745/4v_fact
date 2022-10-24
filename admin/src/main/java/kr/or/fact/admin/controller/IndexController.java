@@ -244,8 +244,8 @@ public class IndexController {
                 System.out.println(demoBusinessVOList.get(i).getDemo_bs_contents());
             }
         }
+
         model.addAttribute("demoBusinessVOList",demoBusinessVOList);
-//        model.addAttribute("admin_idx", );
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
 
