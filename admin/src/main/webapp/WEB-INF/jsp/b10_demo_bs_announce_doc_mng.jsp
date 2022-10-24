@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- Page content -->
     <div class="container-fluid flex-grow-1 container-p-y">
 
@@ -117,8 +118,10 @@
                                         <td class=""><a href="#none" data-toggle="modal" data-target="#modals-business" data-what="mode-view">${item.subject}</a></td>
                                         <td class="text-right">${item.view_count}</td>
                                         <td class="text-right">${item.applicant_count}</td>
-                                        <td class="text-center">${item.posting_start_date}</td>
-                                        <td class="text-center">${item.posting_end_date}</td>
+                                        <fmt:formatDate value="${item.posting_start_date}" var="pstart_date" pattern="yyyy-MM-dd"/>
+                                        <fmt:formatDate value="${item.posting_end_date}" var="pend_date" pattern="yyyy-MM-dd"/>
+                                        <td class="text-center">${pstart_date}</td>
+                                        <td class="text-center">${pend_date}</td>
                                         <td class="text-center">${item.author}</td>
                                     </tr>
                                     </c:forEach>
@@ -182,7 +185,7 @@
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">문서버전</label>
 
                             <div class="col-md-2">
-                                <div class="form-control-plaintext">1</div>
+                                <div id="edit_doc" class="form-control-plaintext">1</div>
                             </div>
                             <div class="col-md-2 mode-view">
                                 <div class="form-control-plaintext">전시전</div>

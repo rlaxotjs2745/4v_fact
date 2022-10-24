@@ -226,7 +226,7 @@
                     <h5 class="modal-title text-white font-weight-bold mode-new">실증사업 등록</h5>
                     <h5 class="modal-title text-white font-weight-bold mode-edit d-none">실증사업 수정</h5>
                     <h5 class="modal-title text-white font-weight-bold mode-view">실증사업 내용</h5>
-                    <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
+                    <button type="button" id="close_button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
                 </div>
                 <div class="modal-body">
                     <form>
@@ -242,25 +242,13 @@
                             </div>
 
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">사업상태</label>
-                            <div class="form-control-plaintext col-md-4 mode-edit mode-view" id="demo_bs_status_view"></div>
-                            <div class="input-group col-md-4 mode-new">
+                            <div class="form-control-plaintext col-md-4 mode-view" id="demo_bs_status_view"></div>
+                            <div class="input-group col-md-4 mode-new mode-edit">
 
                                 <select id="demo_bs_status" class="custom-select form-control" style="width: 100%;">
                                     <option value="0">임시 작성</option>
-                                    <option value="1">작성완료</option>
-                                    <option value="2">승인완료</option>
-                                    <option value="3">모집중</option>
-                                    <option value="4">모집 종료</option>
-                                    <option value="5">심사중</option>
-                                    <option value="6">심사완료</option>
-                                    <option value="7">이용계획 조정</option>
-                                    <option value="8">이용계획 확정</option>
-                                    <option value="9">협약중</option>
-                                    <option value="10">협약완료</option>
-                                    <option value="11">사업 시작</option>
-                                    <option value="12">사업 종료</option>
-                                    <option value="13">결산중</option>
-                                    <option value="14">결산 완료</option>
+                                    <option value="1">작성 완료</option>
+                                    <option value="2">승인 완료</option>
                                 </select>
                             </div>
                         </div>
@@ -556,7 +544,9 @@
         var convention_endBool = 0;
         var convention_endBool = 0;
         var recruit_count_limitBool = 0;
+        var statusBool = 0;
         var demo_bs_contents_init = '';
+        var confirmBool = 0;
 
 
         <c:forEach items="${demoBusinessVOList}" var="demo" varStatus="status">
@@ -617,7 +607,7 @@
                             demoStatus = '임시';
                             break;
                         case '1':
-                            demoStatus = '설계 완료';
+                            demoStatus = '작성 완료';
                             break;
                         case '2':
                             demoStatus = '승인 완료';
@@ -717,7 +707,7 @@
                         alert('승인되었습니다.')
                         $('#is_confirm').hide();
                         $('#confirm_message').text('승인');
-
+                        confirmBool = 1;
                     } else {
                         console.log(result);
                     }
@@ -811,9 +801,10 @@
             $('#demo_arrange_end').datepicker('setDate', demo.convention_end);
             $('#demo_arrange_end').datepicker('setDate', demo.convention_end);
             $('#recruit_count_limit').val(demo.recruit_count_limit);
-            var newContent = demo.demo_bs_contents.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+            $('#demo_bs_status option[value=' + demo.demo_bs_status + ']').prop('selected', 'selected')
             $('.summernote').summernote('pasteHTML', demo.demo_bs_contents);
             demo_bs_contents_init = $('.summernote').summernote('code');
+            demo_bs_main_typeBool, demo_bs_sub_typeBool, demo_bs_detail_typeBool, demo_subjectBool, start_dateBool, end_dateBool, recruit_start_dateBool, recruit_end_dateBool, exam_startBool, exam_endBool, plan_review_startBool, plan_review_endBool, convention_startBool, convention_endBool, convention_endBool, recruit_count_limitBool, statusBool = 0;
         }
 
 
@@ -982,6 +973,17 @@
                 }
             })
 
+            $('#demo_bs_status').change(function (){
+                if(curEntity != null){
+                    if($(this).val() != curEntity.demo_bs_status){
+                        statusBool = 1;
+                    } else {
+                        statusBool = 0;
+                    }
+                }
+            })
+
+
 
 
 
@@ -992,7 +994,7 @@
                 alert('사업번호가 비어있습니다.');
             }
             else if(code.match(/[^a-z|A-Z|0-9|ㄱ-ㅎ|가-힣\s]/g)){
-                alert('특수문자는 포함할 수 없습니다.')
+                alert('특수문자는 포함할 수 없습니다.');
             }
             else {
                 $.ajax({
@@ -1072,6 +1074,13 @@
             if($('.summernote').summernote('code') != demo_bs_contents_init){
                 param.demo_bs_contents = $('.summernote').summernote('code');
             }
+            if(statusBool == 1){
+                param.demo_bs_status = $('#demo_bs_status').val();
+                if(curEntity.idx_conform_admin == 0 && param.demo_bs_status == 2){
+                    param.idx_conform_admin = '${admin.idx_admin}';
+                }
+            }
+
 
 
 
