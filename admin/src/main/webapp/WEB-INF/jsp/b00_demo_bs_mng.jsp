@@ -660,23 +660,22 @@
                     curEntity = demo;
                 }
             })
-            $.ajax({
-                url: 'confirm_demo_bs',
-                method: 'post',
-                data: JSON.stringify(param),//보내는 데이터
-                contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
-                dataType: 'json',//받는 데이터 타입
-                success: function (result) {
-                    if (result.result_code == "SUCCESS") {
-                        alert('승인되었습니다.')
-                        $('#is_confirm').hide();
-                        $('#confirm_message').text('승인');
 
-                    } else {
-                        console.log(result);
-                    }
-                }
-            })
+
+            // $.ajax({
+            //     url: '',
+            //     method: 'post',
+            //     data: JSON.stringify(param),//보내는 데이터
+            //     contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+            //     dataType: 'json',//받는 데이터 타입
+            //     success: function (result) {
+            //         if (result.result_code == "SUCCESS") {
+            //
+            //         } else {
+            //             console.log(result);
+            //         }
+            //     }
+            // })
         })
 
         $('#is_confirm').click(function(){
