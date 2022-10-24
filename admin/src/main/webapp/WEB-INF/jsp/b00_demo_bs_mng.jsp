@@ -662,7 +662,7 @@
             $.ajax({
                 url: 'confirm_demo_bs',
                 method: 'post',
-                data: JSON.stringify({user_id: code}),//보내는 데이터
+                data: JSON.stringify(param),//보내는 데이터
                 contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
                 dataType: 'json',//받는 데이터 타입
                 success: function (result) {
