@@ -373,7 +373,7 @@
     <select id="selectBsFile" resultType="kr.or.fact.core.model.DTO.FileInfoVO" >
         SELECT FILE_NAME,
                FILE_PATH
-        FROM TB_FORM_FILE_INFO
+        FROM TB_FILE_INFO
         WHERE IDX_FILE_USAGE = #{idx_demo_bs}
     </select>
 </mapper>
