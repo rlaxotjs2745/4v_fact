@@ -210,8 +210,8 @@
             <if test="idx_admin != null"> IDX_ADMIN=#{idx_admin},</if>
             <if test="idx_conform_admin != null"> IDX_CONFORM_ADMIN=#{idx_conform_admin},</if>
             <if test="is_announce != null"> IS_ANNOUNCE=#{is_announce},</if>
-            <if test="exan_start != null"> EXAM_START=#{exan_start},</if>
-            <if test="exan_end != null"> EXAM_END=#{exan_end},</if>
+            <if test="exam_start != null"> EXAM_START=#{exam_start},</if>
+            <if test="exam_end != null"> EXAM_END=#{exam_end},</if>
             <if test="plan_review_start != null"> PLAN_REVIEW_START=#{plan_review_start},</if>
             <if test="plan_review_end != null"> PLAN_REVIEW_END=#{plan_review_end},</if>
             <if test="convention_start != null"> CONVENTION_START=#{convention_start},</if>

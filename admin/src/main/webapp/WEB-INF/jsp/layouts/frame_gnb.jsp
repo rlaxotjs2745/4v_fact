@@ -617,6 +617,7 @@
         dust: "https://api.airvisual.com/v2/city?city=sangju&state=gyeongsangbuk-do&country=south-korea&key=3a760b19-7b72-40b9-860a-4ac383bdee39"
     }
     nowDateTime();
+    setInterval(nowDateTime, 1000)
     if("${profile}" == 'sangju-prod'){
         nowWeatherAndDust(sangju);
     }
@@ -625,9 +626,7 @@
     }
 
     function nowDateTime(){
-        var connectDate = new Date().toLocaleString().slice(0,20)[19] == ":" ? new Date().toLocaleString().slice(0,19) : new Date().toLocaleString().slice(0,20);
-        $('#now-date-nav').text(connectDate);
-        // setTimeout(nowDateTime,5000);
+        $('#now-date-nav').text(new Date().toLocaleString().slice(0,14) + new Date().getHours() + ':' + new Date().getMinutes());
     }
 
     function nowWeatherAndDust(location) {
