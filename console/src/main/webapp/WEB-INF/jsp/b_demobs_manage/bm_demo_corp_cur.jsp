@@ -10,7 +10,7 @@
 
 <div class="container-fluid flex-grow-1 container-p-y">
     <h4 class="d-flex justify-content-between align-items-center w-100 mt-4">
-        <div>실증사업 분야별 기업현황</div>
+        <div>실증사업 현황</div>
     </h4>
 
     <div class="card px-4 pt-4 mb-4">

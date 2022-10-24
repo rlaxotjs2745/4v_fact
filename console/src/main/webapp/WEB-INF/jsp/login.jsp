@@ -149,19 +149,22 @@
 
         $.ajax({
             type: 'post',
-            url :'admin_login', //데이터를 주고받을 파일 주소 입력
+            url :'console_login', //데이터를 주고받을 파일 주소 입력
             data: JSON.stringify(param),//보내는 데이터
             contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
             dataType:'json',//받는 데이터 타입
             success: function(result){
-                //작업이 성공적으로 발생했을 경우
                 if(result.result_code=="SUCCESS"){
-                    location.replace('/');
+                    setCookie("auth_code",result.element.auth_code,"1"); //변수, 변수값, 저장기간
+                    setCookie("idx_console_user",result.element.idx_console_user,"1"); //변수, 변수값, 저장기간
+                    var checkEvent = getCookie("Ck_01");
+
+                    location.href="/";
                 }
                 else {
-                    $("#span_result").show();
-                    //alert(result.result_str);
+                    alert(result.result_str);
                 }
+        //STATUS_001 :
             },
             error:function(){
                 //에러가 났을 경우 실행시킬 코드
@@ -175,6 +178,29 @@
         $("#span_result").hide();
     });
 
+    // 쿠키 생성 함수
+    function setCookie(cName, cValue, cDay){
+        var expire = new Date();
+        expire.setDate(expire.getDate() + cDay);
+        cookies = cName + '=' + escape(cValue) + '; path=/ '; // 한글 깨짐을 막기위해 escape(cValue)를 합니다.
+        if(typeof cDay != 'undefined') cookies += ';expires=' + expire.toGMTString() + ';';
+        document.cookie = cookies;
+    }
+
+    // 쿠키 가져오기 함수
+    function getCookie(cName) {
+        cName = cName + '=';
+        var cookieData = document.cookie;
+        var start = cookieData.indexOf(cName);
+        var cValue = '';
+        if(start != -1){
+            start += cName.length;
+            var end = cookieData.indexOf(';', start);
+            if(end == -1)end = cookieData.length;
+            cValue = cookieData.substring(start, end);
+        }
+        return unescape(cValue);
+    }
 </script>
 </body>
 

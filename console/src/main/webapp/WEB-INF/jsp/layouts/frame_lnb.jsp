@@ -25,7 +25,7 @@
             <ul class="sidenav-inner">
 
                 <li class="sidenav-item active">
-                    <a href="javascript:pageLoad('a10_dashboard','대시보드');" class="sidenav-link"><i class="sidenav-icon oi oi-grid-two-up"></i>
+                    <a href="javascript:pageLoad('dashboard',{page_num:1},'대시보드');" class="sidenav-link"><i class="sidenav-icon oi oi-grid-two-up"></i>
                         <div>대시보드</div>
                     </a>
                 </li>
@@ -36,12 +36,12 @@
                     </a>
                     <ul class="sidenav-menu">
                         <li class="sidenav-item">
-                            <a href="javascript:pageLoad('c10_event_alert','장애 이벤트');" class="sidenav-link">
+                            <a href="javascript:pageLoad('notice',{page_num:1},'공지사항');" class="sidenav-link">
                                 <div>공지사항</div>
                             </a>
                         </li>
                         <li class="sidenav-item">
-                            <a href="javascript:pageLoad('c20_event_facility','시설 및 장비 이벤트');" class="sidenav-link">
+                            <a href="javascript:pageLoad('bm_demo_corp_cur',{page_num:1},'실증사업 현황');" class="sidenav-link">
                                 <div>실증사업 현황</div>
                             </a>
                         </li>
@@ -58,40 +58,40 @@
 
                     <ul class="sidenav-menu">
                         <li class="sidenav-item">
-                            <a href="javascript:pageLoad('b10_gh_total_monitor','온실 전체현황');" class="sidenav-link">
+                            <a href="javascript:pageLoad('gh_total_monitor',{page_num:1},'온실 전체현황');" class="sidenav-link">
                                 <div>온실 전체현황</div>
                             </a>
                         </li>
-
+<%--
                         <li class="sidenav-item">
                             <a href="javascript:void(0);" class="sidenav-link sidenav-toggle">
                                 <div>온실별 현황</div>
                             </a>
                             <ul class="sidenav-menu">
                                 <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('b21_gh_glass','유리온실 현황');" class="sidenav-link">
+                                    <a href="javascript:pageLoad('gh_glass',{page_num:1},'유리온실 현황');" class="sidenav-link">
                                         <div>유리온실</div>
                                     </a>
                                 </li>
                                 <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('b22_gh_vinyl','비닐온실 현황');" class="sidenav-link">
+                                    <a href="javascript:pageLoad('gh_vinyl',{page_num:1},'비닐온실 현황');" class="sidenav-link">
                                         <div>비닐온실</div>
                                     </a>
                                 </li>
                                 <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('b23_gh_silgle','단동온실 현황');" class="sidenav-link">
+                                    <a href="javascript:pageLoad('gh_silgle',{page_num:1},'단동온실 현황');" class="sidenav-link">
                                         <div>단동온실</div>
                                     </a>
                                 </li>
                                 <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('b24_gh_complex','복합온실 현황');" class="sidenav-link">
+                                    <a href="javascript:pageLoad('gh_complex',{page_num:1},'복합온실 현황');" class="sidenav-link">
                                         <div>복합온실</div>
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li>--%>
                         <li class="sidenav-item">
-                            <a href="javascript:pageLoad('b30_gh_sensor','센서별 정보');" class="sidenav-link">
+                            <a href="javascript:pageLoad('gh_sensor',{page_num:1},'센서별 정보');" class="sidenav-link">
                                 <div>센서별 정보</div>
                             </a>
                         </li>
@@ -118,22 +118,17 @@
                             </a>
                             <ul class="sidenav-menu">
                                 <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('b51_facility_monitor','실증장비 현황');" class="sidenav-link">
-                                        <div>실증 기자재 현황</div>
+                                    <a href="javascript:pageLoad('facility_monitor',{page_num:1},'실증장비 현황');" class="sidenav-link">
+                                        <div>실증장비 현황</div>
                                     </a>
                                 </li>
                                 <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('b52_facility_history','실증장비 사용이력');" class="sidenav-link">
-                                        <div>기자재별 상세이력</div>
+                                    <a href="javascript:pageLoad('facility_history',{page_num:1},'실증장비 사용이력');" class="sidenav-link">
+                                        <div>실증장비별 상세이력</div>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-                        <%--<li class="sidenav-item">
-                            <a href="javascript:pageLoad('b60_gh_guest','체험형 온실 현황');" class="sidenav-link">
-                                <div>체험형 온실</div>
-                            </a>
-                        </li>--%>
                     </ul>
                 </li>
                 <!--//-->
@@ -143,17 +138,17 @@
                     </a>
                     <ul class="sidenav-menu">
                         <li class="sidenav-item">
-                            <a href="javascript:pageLoad('c10_event_alert','장애 이벤트');" class="sidenav-link">
+                            <a href="javascript:pageLoad('event_alert',{page_num:1},'장애 이벤트');" class="sidenav-link">
                                 <div>장애 이벤트</div>
                             </a>
                         </li>
                         <li class="sidenav-item">
-                            <a href="javascript:pageLoad('c20_event_facility','시설 및 장비 이벤트');" class="sidenav-link">
+                            <a href="javascript:pageLoad('event_facility',{page_num:1},'시설 및 장비 이벤트');" class="sidenav-link">
                                 <div>시설 및 장비 이벤트</div>
                             </a>
                         </li>
                         <li class="sidenav-item">
-                            <a href="javascript:pageLoad('c30_event_bs','운영 이벤트');" class="sidenav-link">
+                            <a href="javascript:pageLoad('event_bs',{page_num:1},'운영 이벤트');" class="sidenav-link">
                                 <div>운영 이벤트</div>
                             </a>
                         </li>
@@ -171,12 +166,12 @@
                             </a>
                             <ul class="sidenav-menu">
                                 <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('d11_gh_data','온실 생성 데이터');" class="sidenav-link">
+                                    <a href="javascript:pageLoad('gh_data',{page_num:1},'온실 생성 데이터');" class="sidenav-link">
                                         <div>온실 데이터</div>
                                     </a>
                                 </li>
                                 <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('d12_facility_data','장비 생성 데이터');" class="sidenav-link">
+                                    <a href="javascript:pageLoad('facility_data',{page_num:1},'장비 생성 데이터');" class="sidenav-link">
                                         <div>장비 데이터</div>
                                     </a>
                                 </li>
@@ -188,12 +183,12 @@
                             </a>
                             <ul class="sidenav-menu">
                                 <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('d21_consign_data','위탁사업 데이터');" class="sidenav-link">
+                                    <a href="javascript:pageLoad('consign_data',{page_num:1},'위탁사업 데이터');" class="sidenav-link">
                                         <div>위탁사업 데이터</div>
                                     </a>
                                 </li>
                                 <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('d22_self_data','자율사업 데이터');" class="sidenav-link">
+                                    <a href="javascript:pageLoad('self_data',{page_num:1},'자율사업 데이터');" class="sidenav-link">
                                         <div>자율사업 데이터</div>
                                     </a>
                                 </li>
@@ -205,12 +200,12 @@
                             </a>
                             <ul class="sidenav-menu">
                                 <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('d31_big_data_log','빅데이터센터 데이터 전송현황');" class="sidenav-link">
+                                    <a href="javascript:pageLoad('big_data_log',{page_num:1},'빅데이터센터 데이터 전송현황');" class="sidenav-link">
                                         <div>전송 기록</div>
                                     </a>
                                 </li>
                                 <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('d32_big_data_manage','빅데이터센터 데이터 전송관리');" class="sidenav-link">
+                                    <a href="javascript:pageLoad('big_data_manage',{page_num:1},'빅데이터센터 데이터 전송관리');" class="sidenav-link">
                                         <div>전송 관리</div>
                                     </a>
                                 </li>
@@ -225,49 +220,49 @@
                     </a>
                     <ul class="sidenav-menu">
                         <li class="sidenav-item">
-                            <a href="javascript:pageLoad('e10_cur_asset_mng','자산 현황');" class="sidenav-link">
+                            <a href="javascript:pageLoad('cur_asset_mng',{page_num:1},'자산 현황');" class="sidenav-link">
                                 <div>자산 현황</div>
                             </a>
                         </li>
                         <li class="sidenav-item">
-                            <a href="javascript:pageLoad('e20_asset_book_mng','자원 예약관리');" class="sidenav-link">
+                            <a href="javascript:pageLoad('asset_book_mng',{page_num:1},'자원 예약관리');" class="sidenav-link">
                                 <div>자원 예약관리</div>
                             </a>
                         </li>
                         <li class="sidenav-item">
-                            <a href="javascript:pageLoad('e30_asset_booking','자원 예약');" class="sidenav-link">
+                            <a href="javascript:pageLoad('asset_booking',{page_num:1},'자원 예약');" class="sidenav-link">
                                 <div>자원 예약</div>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li class="sidenav-item">
-                    <a href="javascript:pageLoad('f10_schedule_mng','일정관리');" class="sidenav-link"><i class="sidenav-icon far fa-address-card"></i>
+                    <a href="javascript:pageLoad('schedule_mng',{page_num:1},'일정관리');" class="sidenav-link"><i class="sidenav-icon far fa-address-card"></i>
                         <div>일정관리</div>
                     </a>
                 </li>
                 <li class="sidenav-item">
                     <a href="javascript:void(0);" class="sidenav-link sidenav-toggle"><i class="sidenav-icon fas fa-tablet-alt"></i>
-                        <div>SMS</div>
+                        <div>SMS 관리</div>
                     </a>
                     <ul class="sidenav-menu">
                         <li class="sidenav-item">
-                            <a href="javascript:pageLoad('g10_write_sms','SMS 작성');" class="sidenav-link">
+                            <a href="javascript:pageLoad('write_sms',{page_num:1},'SMS 작성');" class="sidenav-link">
                                 <div>SMS 작성</div>
                             </a>
                         </li>
                         <li class="sidenav-item">
-                            <a href="javascript:pageLoad('g20_auto_sms_mng','자동 SMS 관리');" class="sidenav-link">
+                            <a href="javascript:pageLoad('auto_sms_mng',{page_num:1},'자동 SMS 관리');" class="sidenav-link">
                                 <div>자동 SMS 관리</div>
                             </a>
                         </li>
                         <li class="sidenav-item">
-                            <a href="javascript:pageLoad('g30_reserved_sms_list','예약된 SMS');" class="sidenav-link">
+                            <a href="javascript:pageLoad('reserved_sms_list',{page_num:1},'예약된 SMS');" class="sidenav-link">
                                 <div>예약된 SMS</div>
                             </a>
                         </li>
                         <li class="sidenav-item">
-                            <a href="javascript:pageLoad('g40_sent_sms_list','보낸 SMS');" class="sidenav-link">
+                            <a href="javascript:pageLoad('sent_sms_list',{page_num:1},'보낸 SMS');" class="sidenav-link">
                                 <div>보낸 SMS</div>
                             </a>
                         </li>
@@ -281,38 +276,17 @@
 
                     <ul class="sidenav-menu">
                         <li class="sidenav-item">
-                            <a href="#none" class="sidenav-link sidenav-toggle">
-                                <div>콘솔 관리</div>
+                            <a href="javascript:pageLoad('system_mng',{page_num:1},'시스템 관리');" class="sidenav-link">
+                                <div>시스템 관리</div>
                             </a>
                         </li>
                         <li class="sidenav-item">
-                            <a href="#none" class="sidenav-link sidenav-toggle">
+                            <a href="javascript:pageLoad('admin_mng',{page_num:1},'관리자 관리');" class="sidenav-link">
                                 <div>관리자 관리</div>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <!--//-->
-               <%-- <li class="sidenav-item">
-                    <a href="javascript:void(0)" class="sidenav-link sidenav-toggle"><i class="sidenav-icon lnr lnr-database"></i>
-                        <div>기초자료관리</div>
-                    </a>
-
-                    <ul class="sidenav-menu">
-                        <li class="sidenav-item">
-                            <a href="javascript:pageLoad('h10_document_mng','서식관리');" class="sidenav-link">
-                                <div>서식관리</div>
-                            </a>
-                        </li>
-                        <li class="sidenav-item">
-                            <a href="javascript:pageLoad('h20_code_mng','시스템코드 관리')" class="sidenav-link">
-                                <div>시스템코드 관리</div>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>--%>
-                <!--//-->
             </ul>
         </div>
         <!-- / Layout sidenav -->

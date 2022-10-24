@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.fact.core.model.ConsoleMapper">
+
+    <select id="getConsoleUserByUserIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.ConsoleUserVO">
+        SELECT * FROM TB_CONSOLE_USER WHERE IDX_USER = #{idx_user}
+    </select>
+    <select id="getConsoleUserByAdminIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.ConsoleUserVO">
+        SELECT * FROM TB_CONSOLE_USER WHERE IDX_ADMIN = #{idx_admin}
+    </select>
+    <insert id="insertConsoleUser" parameterType="kr.or.fact.core.model.DTO.ConsoleUserVO">
+        INSERT INTO TB_CONSOLE_USER (
+            IDX_CONSOLE_USER,
+                IDX_USER,
+    IDX_ADMIN,
+    IS_ADMIN,
+    REG_DATE,
+    LAST_UPD_DATE
+        )
+        VALUES (
+                SEQ_CONSOLE_USER.NEXTVAL,
+                #{idx_user},
+                #{idx_admin},
+                #{is_admin},
+                #{reg_date},
+                #{last_upd_date},
+                SYSDATE,
+                SYSDATE)
+
+    </insert>
+
+    <update id="updConsoleUser" parameterType="kr.or.fact.core.model.DTO.ConsoleUserVO">
+        UPDATE TB_CONSOLE_USER
+        SET
+            idx_user = #{idx_user},
+            idx_admin = #{idx_admin},
+            is_admin = #{is_admin},
+            LAST_UPD_DATE = SYSDATE
+        WHERE IDX_CONSOLE_USER = #{idx_console_user}
+    </update>
+
+</mapper>

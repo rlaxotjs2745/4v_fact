@@ -33,8 +33,10 @@ public class UserVO {
     int sign_in_type;//	number	4		0			가입 형태	0:웹가입, 1:모바일웹가입, 2:관리기관(센터) 가입, 3:재단 가입, 4:관계기관 가입(지자체)
     int is_sms_agree;//	number	4		0			홍보성 sms 수신여부	0:동의안함, 1:동의
     int is_email_agree;//	number	4		0			홍보성email 성 수신여부	0:동의안함, 1:동의
+    int is_admin;//number                           관리자 연결계정 여부	0:아니오, 1:예
     Date reg_date;//	date						최초 등록 일시
     Date last_upd_date;//	date						최종 수정 일시
     int maxvalue;
     int page;
+    long idx_admin; //console 과 연결을 위해 필요, 회원정보 가입 시 값을 갖게 됨
 }

@@ -132,6 +132,7 @@ public class IndexController {
             model.addAttribute("userVo", findUser);
             session.setAttribute("loginCheck", true);
             session.setAttribute("userid", user_id);
+            session.setAttribute("idx_user", findUser.getIdx_user());
             session.setAttribute("name", findUser.getUser_name());
             session.setAttribute("isCorpMember", findUser.getIs_corporate_member());
             if (findUser.getIs_corporate_member() == 1 && findUser.getIdx_corp_info() != 0) {
@@ -1758,6 +1759,7 @@ return "spt_visit";
         session.removeAttribute("corpName");
         session.removeAttribute("isApplicant");
         session.removeAttribute("loginCheck");
+        session.removeAttribute("idx_user");
     }
 
 

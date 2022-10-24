@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.fact.core.model.AuthMapper">
+    <select id="getAuth" parameterType="String" resultType="kr.or.fact.core.model.DTO.AuthVO">
+        SELECT * FROM TB_AUTH WHERE AUTH_CODE = #{auth_code}
+    </select>
+
+    <insert id="insertAuth" parameterType="kr.or.fact.core.model.DTO.AuthVO">
+        INSERT INTO TB_AUTH (
+            IDX_AUTH,
+            IDX_CONSOLE_USER,
+            AUTH_CODE,
+            IS_AVAILABLE,
+            EXPIRED_DT,
+            REG_DATE,
+            LAST_UPD_DATE
+        )
+        VALUES (
+           SEQ_AUTH.NEXTVAL,
+           #{idx_console_user},
+           #{auth_code},
+           #{is_available},
+           #{expired_dt},
+           SYSDATE,
+           SYSDATE)
+    </insert>
+    <update id="updAuth" parameterType="kr.or.fact.core.model.DTO.AuthVO">
+        UPDATE TB_AUTH
+        SET
+            IS_AVAILABLE = #{is_available},
+            LAST_UPD_DATE = SYSDATE
+        WHERE IDX_AUTH = #{idx_auth}
+    </update>
+
+</mapper>

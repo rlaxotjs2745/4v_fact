@@ -19,6 +19,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import java.util.UUID;
+
 @Controller
 public class WebAPIController {
     @Resource(name = "userService")
@@ -50,6 +52,12 @@ public class WebAPIController {
 
     @Resource(name = "prContentService")
     PRContentsService prContentService;
+
+    @Resource(name = "consoleService")
+    ConsoleService consoleService;
+
+    @Resource(name = "authService")
+    AuthService authService;
 
     @PostMapping
     @RequestMapping(value = "/user_id_check",method = RequestMethod.POST)
@@ -1393,5 +1401,47 @@ public class WebAPIController {
         return prContentService.getOpenPRContentList(request.getPage(), count, request.getFilter(), request.getQuery());
     }
 
+    @PostMapping("/console_login")
+    @ResponseBody
+    public ResultWithDataVO console_login(@RequestBody UserVO userVO){
 
+        ResultWithDataVO resultWithDataVO = new ResultWithDataVO();
+        resultWithDataVO.setResult_code("ERROR1001");
+        resultWithDataVO.setResult_str("콘솔 유저를 찾을 수 없음");
+
+        if (userVO !=null) {
+            UserVO findUserVo = userService.getUserInfo(userVO.getIdx_user());
+            if(findUserVo!=null)
+            {
+                ConsoleUserVO consoleUserVO;
+                if(userVO.getIs_admin()==CONSTANT.yes)
+                    consoleUserVO = consoleService.getConsoleUserByAdminIdx(findUserVo.getIdx_admin());
+                else
+                    consoleUserVO = consoleService.getConsoleUserByUserIdx(findUserVo.getIdx_user());
+
+                if(consoleUserVO!=null){
+
+                    AuthVO authVO = new AuthVO();
+                    authVO.setIdx_console_user(consoleUserVO.getIdx_console_user());
+                    authVO.setAuth_code(UUID.randomUUID().toString());
+                    authVO.setIs_available(CONSTANT.yes);
+                    Date now = new Date();
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(now);
+                    cal.add(Calendar.MINUTE,1);
+
+                    authVO.setExpired_dt(cal.getTime());
+
+                    authService.insertAuth(authVO);
+
+                    resultWithDataVO.setResult_code("SUCCESS");
+                    resultWithDataVO.setResult_str("찾았습니다");
+                    resultWithDataVO.setElement(authVO);
+
+                }
+            }
+
+        }
+        return resultWithDataVO;
+    }
 }

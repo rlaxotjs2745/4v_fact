@@ -53,6 +53,9 @@
     <link rel="stylesheet" href="resources/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css">
     <link rel="stylesheet" href="resources/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
     <link rel="stylesheet" href="resources/assets/vendor/libs/fullcalendar/fullcalendar.css">
+
+
+
 </head>
 
 <body>
@@ -65,13 +68,13 @@
     <div class="layout-inner">
 
         <!-- Layout sidenav -->
-        <%@include file ="frame_lnb.jsp" %>
+        <%@include file ="layouts/frame_lnb.jsp" %>
         <!-- / Layout sidenav -->
 
         <!-- Layout container -->
         <div class="layout-container">
             <!-- Layout gnb -->
-            <%@include file ="frame_gnb.jsp" %>
+            <%@include file ="layouts/frame_gnb.jsp" %>
             <!-- / Layout gnb -->
 
             <!-- Layout content -->
@@ -80,7 +83,7 @@
 
             </div>
             <!-- Layout content -->
-
+            <%@include file ="layouts/frame_footer.jsp" %>
         </div>
         <!-- / Layout container -->
 
@@ -106,11 +109,9 @@
 
 <script>
 
-
-    $(".sidenav-item").on('click',function(){
-        if( $(".sidenav-item").has('a')!=null){
-            $(".sidenav-item").removeClass('active');
-            $(this).addClass('active');
+    $("li.sidenav-item").on('click',function(){
+        if( $("li.sidenav-item").has('a')!=null){
+            $(this).addClass("active");
         }
     });
     $(function(){
@@ -119,22 +120,88 @@
             sBtn.removeClass("active");     // sBtn 속에 (active) 클래스를 삭제 한다.
             $(this).parent().addClass("active"); // 클릭한 a에 (active)클래스를 넣는다.
         });
+
     });
 
+    var csrfParameter = $("meta[name='_csrf_parameter']").attr("content");
+    var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+    var csrfToken = $("meta[name='_csrf']").attr("content");
     //최초 진입시 호출되는 ajax 페이지 초기값
     var cur = "";
-    function load(a,b){
-        console.log("cur = "+cur + "   load="+a);
 
-        if(cur!=a){
-            cur = a;
-            var state = {'url':a};
-            var title = b;
-            //var url = a;
-            history.pushState(state, title);
-            $("#contents").load(a,{"tag":a} ,function(){
-                //alert(a);
+
+    function pageLoad(url,param,title,usage){
+        /*      State : 브라우저 이동 시 넘겨줄 데이터 (popstate 에서 받아서 원하는 처리를 해줄 수 있음)
+                Title : 변경할 브라우저 제목 (변경 원치 않으면 null)
+                Url : 변경할 주소*/
+
+
+         console.log(param)
+
+
+        if(param==null)
+            param={page_num:1};
+
+        if(cur!=url+param.page_num || usage == "asset_list"){
+            cur = url+param.page_num;
+            history.pushState(url, title,url);
+
+            $.ajaxSetup({
+                headers:
+                    { 'X-CSRF-TOKEN': csrfToken }
             });
+            var request = $.ajax({
+                url: url,
+                method: 'post',
+                data: JSON.stringify(param),//보내는 데이터
+                contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+                dataType:'html',//받는 데이터 타입
+                success:function(result){
+                    if(usage == "admin"){
+                        $("#admin_index").html(result);
+                    } else if(usage == "user"){
+                        $("#user_index").html(result);
+                    } else if(usage == "dormant_user"){
+                        $("#dormant_user_index").html(result);
+                    } else if(usage == "cur_asset_index"){
+                        $("#cur_asset_index").html(result);
+                    } else if(usage == "codeSelect"){
+                        $("#code_select").append(result);
+                    } else if(usage == "asset_list"){
+                        $("#asset_list").html(result);
+                    } else if(usage == "asset_reservation_list"){
+                        $("#asset_reservation_list").html(result);
+                    } else if(usage == "asset_reservation_items_list"){
+                        $("#asset_reservation_items_list").html(result);
+                    } else if(usage == "pr_contents"){
+                        $("#modals-content").html(result);
+                    } else if(usage == "reserve_view"){
+                        $("#reserve_view_comp").html(result);
+                    }
+
+                    else{
+                        $("#contents").html(result);
+
+
+                    }
+                },
+                fail:function(xhr,status,err){
+                    $("#contents").html("Request failed: " + status);
+                }
+
+            });
+
+            /*            request.done(function(msg) {
+                            $("#contents").html(msg);
+                        });
+
+                        request.fail(function(jqXHR, textStatus) {
+                            $("#contents").html("Request failed: " + textStatus);
+                        });*/
+
+            //$("#contents").load(a,{"tag":a} ,function(){
+            //alert(a);
+
         }else{//현재 주소 클릭시 변화 없음
 
             return;
@@ -164,19 +231,20 @@
             }
             if (!window.innerDoc) {
 
-                $("#contents").load(evt.state.url,{"tag":evt.state.url} ,function(){
-                    //alert(a);
-                    //lng 하이라이트 바꿔줘야 함
-                });
+                console.log(evt);
+                pageLoad(evt.state,{page_num:1},"");
+
             }
         }, false);
+
+
     })();
+
     $(document).ready(function() {
         //ajax로 호출되는 첫번째 페이지
-        load("a10_dashboard","대시보드");
+        pageLoad('dashboard',{page_num:1},'대시보드');
+
     });
-
-
 
 </script>
 </body>
