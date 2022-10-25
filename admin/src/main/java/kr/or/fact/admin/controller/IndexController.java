@@ -333,8 +333,10 @@ public class IndexController {
         listPagingParamVO.setOrder_field("IDX_BS_ANNOUNCEMENT");*/
 
         List<BsAnnouncementVO> bsAnnounceHeaderVOList = bsAnnouncementService.getBsAnnounceVOPagingList(param);
+        List<DemoBusinessVO> demoStateBsVOList = demoBsService.getDemoBsstatusList();
 
         model.addAttribute("bsAnnounceHeaderVOList",bsAnnounceHeaderVOList);
+        model.addAttribute("demoStateBsVOList",demoStateBsVOList);
         model.addAttribute("filter1",filter1);
         model.addAttribute("filter2",filter2);
 
