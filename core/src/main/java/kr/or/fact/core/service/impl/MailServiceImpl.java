@@ -42,5 +42,10 @@ public class MailServiceImpl implements MailService {
         return mailMapper.getReservedMail(tag);
     }
 
+    @Override
+    public void insertPasswdEmail(ReservedMailVO mailSendVO) {
+        mailMapper.insertPWEmail(mailSendVO);
+    }
+
 
 }

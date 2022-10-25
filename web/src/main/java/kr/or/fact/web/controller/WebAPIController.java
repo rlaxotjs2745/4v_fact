@@ -4,12 +4,18 @@ import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.CONSTANT;
 import kr.or.fact.web.utils.Utils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
@@ -58,6 +64,12 @@ public class WebAPIController {
 
     @Resource(name = "authService")
     AuthService authService;
+
+    @Resource(name = "mailService")
+    MailService mailService;
+
+    @Autowired
+    private JavaMailSender mailSender;
 
     @PostMapping
     @RequestMapping(value = "/user_id_check",method = RequestMethod.POST)
@@ -118,7 +130,7 @@ public class WebAPIController {
     @RequestMapping(value = "/send_imsi_code",method = RequestMethod.POST)
     public @ResponseBody
     ResultVO send_imsi_code(HttpSession session,
-                          @RequestBody ParamUserNCodeVO paramUserNCodeVO){
+                          @RequestBody ParamUserNCodeVO paramUserNCodeVO) throws MessagingException {
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("아이디를 확인해주세요");
         resultVO.setResult_code("ERROR_1000");
@@ -145,7 +157,6 @@ public class WebAPIController {
                     smsSendVO.setCallback(resultUserVO.getMphone_num());
                     smsSendVO.setDest_info(resultUserVO.getUser_name()+"^"+resultUserVO.getMphone_num());
 
-
                     //smsSendVO.setNow_date(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddhhmmss")));
                     smsSendService.insertSmsMessage(smsSendVO);
 
@@ -162,6 +173,41 @@ public class WebAPIController {
                     userService.insertUserSecretCode(userSecretCodeVO);
                 }
                 else if(paramUserNCodeVO.getCode_type()==2){
+                    String secure_code=Utils.generateAuthNo();
+                    String smsMessage = "비밀번호 초기화를 위한 인증번호 입니다. 로그인 후 비밀번호를 변경하세요 ["+secure_code+"]";
+
+                    ReservedMailVO mailSendVO = new ReservedMailVO();
+                    mailSendVO.setReceiver(resultUserVO.getEmail());
+                    mailSendVO.setTitle("[농업기술진흥원] 임시 비밀번호");
+                    mailSendVO.setContent(smsMessage);
+
+                    DateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String now_date = fm.format(new Date());
+                    mailSendVO.setSendTime(now_date);
+
+                    mailService.insertPasswdEmail(mailSendVO);
+
+                    UserSecretCodeVO userSecretCodeVO = new UserSecretCodeVO();
+                    userSecretCodeVO.setIdx_user(resultUserVO.getIdx_user());
+                    userSecretCodeVO.setSecret_code_type(2);
+                    userSecretCodeVO.setSecret_code(secure_code);
+                    userSecretCodeVO.setIs_confirm(0);
+                    userSecretCodeVO.setIs_use(0);
+                    Calendar cal = Calendar.getInstance();
+                    cal.add(Calendar.MINUTE, 5);
+                    Date expired_dt = cal.getTime();
+                    userSecretCodeVO.setExpire_date(expired_dt);
+                    userService.insertUserSecretCode(userSecretCodeVO);
+
+                    MimeMessage mail = mailSender.createMimeMessage();
+                    MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+
+                    mailHelper.setFrom("스마트팜 실증단지 혁신밸리 <innovalley@smartfarmkorea.or.kr>");
+                    mailHelper.setTo(mailSendVO.getReceiver());
+                    mailHelper.setSubject(mailSendVO.getTitle() != null ? mailSendVO.getContent() : "제목없는 이메일");
+                    mailHelper.setText(mailSendVO.getContent() != null ? mailSendVO.getContent() : "", true);
+
+                    mailSender.send(mail);
 
                 }
 
@@ -176,6 +222,7 @@ public class WebAPIController {
         }
         return resultVO;
     }
+
 
     @RequestMapping(value = "/confirm_code",method = RequestMethod.POST)
     public @ResponseBody

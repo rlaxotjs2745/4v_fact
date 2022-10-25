@@ -17,4 +17,6 @@ public class MailVO {
     MultipartFile files5;
     String content;
     String fileLength;
+
+
 }

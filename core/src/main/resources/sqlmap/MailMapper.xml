@@ -15,5 +15,7 @@
         WHERE PAGE = #{tag}
     </select>
 
-
+    <insert id="insertPWEmail" >
+        insert
+    </insert>
 </mapper>

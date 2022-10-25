@@ -9,4 +9,6 @@ import java.util.ArrayList;
 @Mapper
 public interface MailMapper {
     ArrayList<ReservedMailVO> getReservedMail(@Param("tag")int tagValue);
+
+    void insertPWEmail(ReservedMailVO mailSendVO);
 }

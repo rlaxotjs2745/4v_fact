@@ -8,10 +8,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public interface MailService {
+
 //    public boolean sendMail(String sender,String title, String receiver, String content, File[] files) throws Exception;
 
     public File convertMultipartToFile(MultipartFile file) throws IOException;
 
     public ArrayList<ReservedMailVO> getReservedMail(String tagValue);
 
+    public void insertPasswdEmail(ReservedMailVO mailSendVO);
 }
