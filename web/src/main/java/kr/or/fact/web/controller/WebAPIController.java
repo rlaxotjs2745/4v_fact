@@ -68,6 +68,9 @@ public class WebAPIController {
     @Resource(name = "mailService")
     MailService mailService;
 
+    @Resource(name = "userPwHistoryService")
+    UserPwHistoryService userPwHistoryService;
+
     @Autowired
     private JavaMailSender mailSender;
 
@@ -269,10 +272,15 @@ public class WebAPIController {
         paramUserNCodeVO.getUser_pw()!=null){
 
             UserVO resultUserVO = userService.getUserInfoById(paramUserNCodeVO.getUser_id());
+            UserPwHistoryVO pwHistoryVO = new UserPwHistoryVO();
+
+            pwHistoryVO.setIdx_user(resultUserVO.getIdx_user());
+            pwHistoryVO.setPast_user_pw(resultUserVO.getUser_pw());
 
             if(resultUserVO !=null){
                 paramUserNCodeVO.setIdx_user(resultUserVO.getIdx_user());
                 UserSecretCodeVO userSecretCodeVO = userService.getUserSecretCodeForPwUpdate(paramUserNCodeVO);
+
                 if(userSecretCodeVO !=null) {
 
                     //userSecretCodeVO.setIs_confirm(1);
@@ -286,6 +294,13 @@ public class WebAPIController {
 
                     resultVO.setResult_str("변경했습니다.");
                     resultVO.setResult_code("SUCCESS");
+
+
+                    SimpleDateFormat fm = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
+                    Calendar time = Calendar.getInstance();
+                    String now_date = fm.format(time.getTime());
+                    pwHistoryVO.setReg_date(now_date);
+                    userPwHistoryService.insertPwHisrory(pwHistoryVO);
                 }
             }
             else {
