@@ -191,7 +191,7 @@
                         </div>
                     </div>
                     <div class="popup__btn">
-                        <button id="btn_change_password" href="#popup_find_pw_complete" class="btn submit btn-lg  js-modal-next">비밀번호 변경</button>
+                        <button id="btn_change_password" class="btn submit btn-lg  js-modal-next">비밀번호 변경</button>
                     </div>
                 </div>
             </div>
@@ -224,7 +224,10 @@
         $('#login').css('background', 'url(resources/assets/image/img_bglogo.jpg) no-repeat 50% 50%');
     }
 
+    var user_data;
+
     $("#btn_id_find").click(function(){
+        user_data = '';
         $("#find_id_result *").remove("");
         //$("#text_guide_id").removeClass("is-alert");
 
@@ -233,7 +236,6 @@
 
         var param = {user_name:user_name,
             mphone_num:mphone_num};
-        console.log(param);
         $.ajax({
             type: 'post',
             url :'user_id_find', //데이터를 주고받을 파일 주소 입력
@@ -242,10 +244,9 @@
             dataType:'json',//받는 데이터 타입
             success: function(result){
                 //작업이 성공적으로 발생했을 경우
-                console.log(result);
                 if(result.result_code=="SUCCESS"){
 
-                    var user_data = result["userVO"];
+                    user_data = result["userVO"];
                     var txt = "<p class='popup__text'>"+user_data.user_name+"님의 아이디는</p>"
                     +"<strong class='popup__detail'>"+user_data.user_id+"</strong>입니다.";
 
@@ -277,10 +278,9 @@
         });
     });
 
-    var user_data;
 
     $("#btn_id_check").click(function(){
-
+        user_data;
         $("#span_not_found").hide();
 
         var param = {user_id:$("#user_id").val()};
@@ -292,7 +292,6 @@
             dataType:'json',//받는 데이터 타입
             success: function(result){
                 //작업이 성공적으로 발생했을 경우
-                console.log(result);
                 if(result.result_code=="SUCCESS"){
 
                     $("#span_not_found").show();
@@ -339,7 +338,6 @@
             dataType:'json',//받는 데이터 타입
             success: function(result){
                 //작업이 성공적으로 발생했을 경우
-                console.log(result);
                 if(result.result_code=="SUCCESS"){
 
                     $("#popup_find_pw_next_close").click();
@@ -377,8 +375,9 @@
 
         $("#span_code_not_found").hide();
 
-        var param = {user_id:$("#user_id").val(),
-            secret_code:$("#secret_code").val()
+        var param = {
+                user_id: user_data.user_id,
+                secret_code: $("#secret_code").val()
              };
 
         $.ajax({
@@ -389,7 +388,6 @@
             dataType:'json',//받는 데이터 타입
             success: function(result){
                 //작업이 성공적으로 발생했을 경우
-                console.log(result);
                 if(result.result_code=="SUCCESS"){
                     $("#secret_code").attr("disabled", true);
                     $("#btn_code_confirm").attr("disabled", true);
@@ -398,8 +396,9 @@
                     $("#span_code_not_found").show();
                     $("#timer").removeClass("is-alert");
                     $("#timer").hide();
-                    if(AuthTimer!=null)
+                    if(AuthTimer!=null){
                         AuthTimer.fnStop();
+                    }
 
                     $("#password").attr("disabled", false);
                     $("#password_confirm").attr("disabled", false);
@@ -433,8 +432,9 @@
         }
 
 
-        var param = {user_id:$("#user_id").val(),
-            user_pw:$("#password").val(),
+        var param = {
+            user_id: user_data.user_id,
+            user_pw: passwd,
             secret_code:$("#secret_code").val()
         };
 
@@ -446,10 +446,7 @@
             dataType:'json',//받는 데이터 타입
             success: function(result){
                 //작업이 성공적으로 발생했을 경우
-                console.log(result);
                 if(result.result_code=="SUCCESS"){
-
-
 
                     $("#secret_code").val("");
                     $("#secret_code").attr("disabled", false);
