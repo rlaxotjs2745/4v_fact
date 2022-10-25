@@ -27,7 +27,7 @@
             SEQ_MAIL_RESERVED.NEXTVAL,
             #{receiver},
             'send',
-            TO_DATE(sysdate, 'yyyy-MM-dd HH:mi:ss'),
+            TO_DATE(#{sendTime}, 'yyyy-MM-dd HH24:mi:ss'),
             #{title},
             #{content}
         )
