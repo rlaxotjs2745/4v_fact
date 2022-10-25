@@ -250,4 +250,5 @@ public class UserServiceImpl implements UserService {
     public int updateUserApplicant(UserVO userVO){
         return userMapper.updateUserApplicant(userVO);
     }
+
 }

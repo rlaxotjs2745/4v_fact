@@ -56,4 +56,5 @@ public interface UserService {
     ArrayList<UserVO> getUserListInCorp(long idx_corp);
 
     int updateUserApplicant(UserVO userVO);
+
 }

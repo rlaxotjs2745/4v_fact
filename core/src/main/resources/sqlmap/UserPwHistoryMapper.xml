@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.fact.core.model.UserPwHistoryMapper">
+
+    <insert id="insertNewPwHistory">
+        insert into TB_USER_PW_HISTORY (
+            IDX_USER_PW_HISTORY,
+            IDX_USER,
+            PAST_USER_PW,
+            REG_DATE
+        ) values (
+            SEQ_USER_PW_HISTORY.NEXTVAL,
+            #{idx_user},
+            #{past_user_pw},
+            to_date(#{reg_date}, 'yyyy-MM-dd hh24:mi:ss')
+        )
+    </insert>
+</mapper>
