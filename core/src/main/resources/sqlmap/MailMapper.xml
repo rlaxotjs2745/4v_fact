@@ -15,7 +15,21 @@
         WHERE PAGE = #{tag}
     </select>
 
-    <insert id="insertPWEmail" >
-        insert
+    <insert id="insertPWEmail" parameterType="kr.or.fact.core.model.DTO.ReservedMailVO">
+        insert into TB_MAIL_RESERVED (
+            IDX_MAIL_RESERVED,
+            RECEIVER,
+            STATUS,
+            SENDTIME,
+            TITLE,
+            CONTENT
+        ) values (
+            SEQ_MAIL_RESERVED.NEXTVAL,
+            #{receiver},
+            'send',
+            TO_DATE(sysdate, 'yyyy-MM-dd HH:mi:ss'),
+            #{title},
+            #{content}
+        )
     </insert>
 </mapper>

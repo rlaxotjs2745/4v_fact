@@ -174,16 +174,12 @@ public class WebAPIController {
                 }
                 else if(paramUserNCodeVO.getCode_type()==2){
                     String secure_code=Utils.generateAuthNo();
-                    String smsMessage = "비밀번호 초기화를 위한 인증번호 입니다. 로그인 후 비밀번호를 변경하세요 ["+secure_code+"]";
+                    String smsMessage = "비밀번호찾기 인증번호 ["+secure_code+"]";
 
                     ReservedMailVO mailSendVO = new ReservedMailVO();
-                    mailSendVO.setReceiver(resultUserVO.getEmail());
-                    mailSendVO.setTitle("[농업기술진흥원] 임시 비밀번호");
+                    mailSendVO.setReceiver(resultUserVO.getUser_id());
+                    mailSendVO.setTitle("[농업기술진흥원] 인증번호");
                     mailSendVO.setContent(smsMessage);
-
-                    DateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    String now_date = fm.format(new Date());
-                    mailSendVO.setSendTime(now_date);
 
                     mailService.insertPasswdEmail(mailSendVO);
 
