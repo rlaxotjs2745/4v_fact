@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-sm-6 col-xl-3">
                 <div class="card mb-3">
-                    <button id="btn_filter1" class="card-body btn btn-white" onclick="javascript:pageLoad('b10_demo_bs_announce_doc_mng?page=1&filter1=9999&filter2=9998','사업공고문 관리');">
+                    <button id="btn_filter1" class="card-body btn btn-white" onclick="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{page_num:1, filter1:9999, filter2:9998},'사업공고문 관리');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="resources/assets/img/img_business_all.png" alt=""></div>
                             <div class="ml-3">
@@ -69,7 +69,7 @@
             <h6 class="card-header font-weight-bold with-elements">
                 <div class="card-header-title">사업 공고문 목록</div>
                 <div class="card-header-elements ml-auto">
-<%--                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals-business" data-what="mode-new">+ 신규 공고문 작성</button>--%>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals-business" data-what="mode-new">+ 신규 공고문 작성</button>
                 </div>
             </h6>
             <div class="card-datatable table-responsive pt-0 pb-3">
@@ -80,7 +80,7 @@
                                 <thead class="bg-success text-white font-weight-bold">
                                 <tr role="row">
                                     <th class="text-center" style="width:60px">상태</th>
-                                    <th class="text-center" style="width:100px">공고 번호</th>
+                                    <th class="text-center" style="width:100px">문서 번호</th>
                                     <th class="text-center" style="width:250px">공고문 제목</th>
                                     <th class="text-center" style="width:170px">사업 제목</th>
                                     <th class="text-center" style="width:90px">게시 시작일</th>
@@ -115,7 +115,7 @@
                                         </td>
                                         <td class="text-center">${item.bs_announcement_code}</td>
                                         <td class=""><a href="#none" data-toggle="modal" data-target="#modals-business" data-what="mode-view">${item.subject}</a></td>
-                                        <td class="text-right">${item.view_count}</td>
+                                        <td id="demo_id_${item.idx_demo_business}" class="text-right"></td>
                                         <fmt:formatDate value="${item.posting_start_date}" var="pstart_date" pattern="yyyy-MM-dd"/>
                                         <fmt:formatDate value="${item.posting_end_date}" var="pend_date" pattern="yyyy-MM-dd"/>
                                         <td class="text-center">${pstart_date}</td>
@@ -217,6 +217,20 @@
                                 <div id="view_idx_demo_business" class="form-control-plaintext mode-view"></div>
 
                                 <div id="datepicker-open" class="input-daterange input-group mode-edit mode-new">
+                                    <select id="select_demo_bs" class="custom-select form-control" style="width: 100%;">
+                                        <c:forEach items="${demoStateBsVOList}" var="demo" varStatus="status">
+                                            <option value="${demo.idx_demo_business}">${demo.demo_subject}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">게시 기간</label>
+                            <div class="col-md-10">
+                                <div id="view_posting_date" class="form-control-plaintext mode-view">2022-01-01 9:00 AM - 2022-02-01 6:00 PM</div>
+
+                                <div id="datepicker-show" class="input-daterange input-group mode-edit mode-new">
                                     <input type="text" class="form-control" name="start">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">~</span>
@@ -226,33 +240,31 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">게시 기간</label>
-                            <div class="col-md-10">
-                                <div class="form-control-plaintext mode-view">2022-01-01 9:00 AM - 2022-02-01 6:00 PM</div>
-
-                                <div id="datepicker-show" class="input-daterange input-group mode-edit mode-new">
-                                    <input type="text" class="form-control mr-1" name="start">
-                                    <input type="text" class="form-control" placeholder="9:00 AM" id="flatpickr-time-start">
-                                </div>
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-view mode-edit mode-new">공고 상태</label>
+                            <div class="col-md-10 mode-edit mode-new">
+                                <select id="edit_bs_status" class="custom-select form-control" style="width: 100%;">
+                                    <option value="0">대기</option>
+                                    <option value="1">신청 중</option>
+                                    <option value="2">신청 마감</option>
+                                    <option value="3">사업 종료</option>
+                                    <option value="99">기타</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mode-view">
+                                <div id="view_bs_status" class="form-control-plaintext mode-view">신청 중</div>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">모집 수</label>
-                            <div class="col-md-6 mode-edit mode-new">
-                                <input type="text" class="form-control form-control-md text-md-right" placeholder="0">
-                                <p class="form-control-plaintext">명(기업)</p>
-                            </div>
-
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-view">포털 노출</label>
                             <div class="col-md-10 mode-view">
                                 <div class="col-md-2">
-                                    <div id="view_is_new" class="form-control-plaintext"></div>
+                                    <div id="view_is_new" class="form-control-plaintext">새로운 공고 등록</div>
                                 </div>
                                 <div class="col-md-2">
-                                    <div id="view_is_main_page" class="form-control-plaintext">지원 수 540 명(기업)</div>
+                                    <div id="view_is_main_page" class="form-control-plaintext">포털 메인페이지 노출</div>
                                 </div>
                                 <div class="col-md-2">
-                                    <div id="view_is_show" class="form-control-plaintext">경쟁율 2.7:1</div>
+                                    <div id="view_is_show" class="form-control-plaintext">게시 중</div>
                                 </div>
                             </div>
                         </div>
@@ -291,15 +303,8 @@
                         <div class="form-row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">작성자</label>
                             <div class="form-group col col-md-10">
-                                <input type="text" class="form-control mode-edit mode-new" value="#스마트팜,#사업공고" data-role="tagsinput">
-                                <div id="view_author" class="form-control-plaintext mode-view"></div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메모</label>
-                            <div class="form-group col col-md-10">
-                                <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
-                                <textarea id="view_memo" class="form-control mode-view" readonly rows="5"></textarea>
+                                <div id="view_author" class="form-control-plaintext mode-view mode-edit mode-new"></div>
+                                <div id="edit_author" class="form-control-plaintext mode-edit mode-new">${admin.admin_name}</div>
                             </div>
                         </div>
 
@@ -439,6 +444,8 @@
             last_upd_date: '${bsa.last_upd_date}'
         })
         </c:forEach>
+
+
 
         $('.summernote').summernote({
             toolbar: [

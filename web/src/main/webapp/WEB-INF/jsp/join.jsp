@@ -539,6 +539,8 @@
 
     <script>
 
+        console.log('${profile}')
+
         if('${profile}' == 'sangju-prod'){
             $('#login').css('background', 'url(resources/assets/image/img_bglogo.png) no-repeat 50% 50%');
         }else {
