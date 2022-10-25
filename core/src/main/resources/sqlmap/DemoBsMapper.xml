@@ -78,8 +78,8 @@
                         <if test="filter2 != 9998">
                             OR DEMO_BS_STATUS = #{filter2}
                         </if>
+                        ORDER BY IDX_DEMO_BUSINESS DESC
                       )
-
                  WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
              )
         WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}

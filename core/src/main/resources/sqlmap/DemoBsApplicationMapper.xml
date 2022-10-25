@@ -39,11 +39,12 @@
                 (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION WHERE A.IDX_DEMO_BUSINESS = C.IDX_DEMO_BUSINESS AND APPLICANT_STATUS = 2) AS APPL_RECOMM
 
                 FROM TB_DEMO_BUSINESS A
-                INNER JOIN TB_BS_ANNOUNCEMENT B
+                LEFT OUTER JOIN TB_BS_ANNOUNCEMENT B
                     ON A.IDX_DEMO_BUSINESS = B.IDX_DEMO_BUSINESS
-                LEFT OUTER  JOIN TB_DEMO_BS_APPLICAION C
+                LEFT OUTER JOIN TB_DEMO_BS_APPLICAION C
                            ON A.IDX_DEMO_BUSINESS = C.IDX_DEMO_BUSINESS
                 WHERE A.DEMO_BS_STATUS > 2
+                ORDER BY IDX_DEMO_BUSINESS DESC
             )
             WHERE ROWNUM <![CDATA[<=]]> #{page_num} * #{amount}
         )
@@ -150,11 +151,12 @@
                                  (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION WHERE A.IDX_DEMO_BUSINESS = C.IDX_DEMO_BUSINESS AND APPLICANT_STATUS = 2) AS APPL_RECOMM
 
                           FROM TB_DEMO_BUSINESS A
-                                   INNER JOIN TB_BS_ANNOUNCEMENT B
+                                   LEFT OUTER JOIN TB_BS_ANNOUNCEMENT B
                                               ON A.IDX_DEMO_BUSINESS = B.IDX_DEMO_BUSINESS
                                    LEFT OUTER  JOIN TB_DEMO_BS_APPLICAION C
                                                     ON A.IDX_DEMO_BUSINESS = C.IDX_DEMO_BUSINESS
                           WHERE A.DEMO_BS_STATUS > 2
+                          ORDER BY IDX_DEMO_BUSINESS DESC
                       )
                  WHERE ROWNUM <![CDATA[<=]]> #{page_num} * #{amount}
              )
