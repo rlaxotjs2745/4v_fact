@@ -35,6 +35,6 @@ public interface BsAnnouncementService {
     //List<BsAnnouncementVO> getAvailibleBsAnnouncement();
     //admin
     AdminAnnounceFilterVO getAdminBsAnnouncementFilter();
-    List<BsAnnounceHeaderVO> getBsAnnounceHeaderVOPagingList(ParamPageListFilteredVO paramPageListFilteredVO);
+    List<BsAnnounceHeaderVO> getBsAnnounceVOPagingList(ParamPageListFilteredVO paramPageListFilteredVO);
 
 }

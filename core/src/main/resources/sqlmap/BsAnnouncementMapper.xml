@@ -239,41 +239,66 @@
         FROM TB_BS_ANNOUNCEMENT WHERE ROWNUM = 1
     </select>
 
-    <select id="getBsAnnounceHeaderVOPagingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.BsAnnounceHeaderVO">
+    <select id="getBsAnnounceVOPagingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
         SELECT *
         FROM (
                  SELECT ROW_NUMBER() OVER(ORDER BY #{order_field} DESC) AS row_num,
-                        IDX_BS_ANNOUNCEMENT,
-                        BS_ANNOUNCEMENT_CODE,
-                        ANNOUNCE_NUM,
-                        ANNOUNCE_STATUS,
-                        SUBJECT,
-                        VIEW_COUNT,
-                        APPLICANT_COUNT,
-                        POSTING_START_DATE,
-                        POSTING_END_DATE,
-                        AUTHOR
+        IDX_BS_ANNOUNCEMENT,
+        BS_ANNOUNCEMENT_CODE,
+        ANNOUNCE_NUM,
+        SUBJECT,
+        ANNOUNCE_CONTENTS,
+        BS_STATUS,
+        IS_FILE,
+        IS_NEW,
+        IS_MAIN_PAGE,
+        IS_IMPORTANT,
+        IS_SHOW,
+        VIEW_COUNT,
+        ANNOUNCE_STATUS,
+        POSTING_START_DATE,
+        POSTING_END_DATE,
+        DOC_VERSION,
+        MEMO,
+        SEARCH_TAG,
+        AUTHOR,
+        IDX_DEMO_BUSINESS,
+        CONFIRM_ADMIN_IDX,
+        IDX_ADMIN,
+        REG_DATE,
+        LAST_UPD_DATE
                  FROM (
-                          SELECT A.IDX_BS_ANNOUNCEMENT  AS IDX_BS_ANNOUNCEMENT,
-                                 A.BS_ANNOUNCEMENT_CODE AS BS_ANNOUNCEMENT_CODE,
-                                 A.ANNOUNCE_NUM         AS ANNOUNCE_NUM,
-                                 A.ANNOUNCE_STATUS      AS ANNOUNCE_STATUS,
-                                 A.SUBJECT              AS SUBJECT,
-                                 A.VIEW_COUNT           AS VIEW_COUNT,
-                                 B.APPLICANT_COUNT      AS APPLICANT_COUNT,
-                                 A.POSTING_START_DATE   AS POSTING_START_DATE,
-                                 A.POSTING_END_DATE     AS POSTING_END_DATE,
-                                 A.AUTHOR               AS AUTHOR
-
+                         SELECT A.IDX_BS_ANNOUNCEMENT,
+                                A.BS_ANNOUNCEMENT_CODE,
+                                A.ANNOUNCE_NUM,
+                                A.SUBJECT,
+                                A.ANNOUNCE_CONTENTS,
+                                A.BS_STATUS,
+                                A.IS_FILE,
+                                A.IS_NEW,
+                                A.IS_MAIN_PAGE,
+                                A.IS_IMPORTANT,
+                                A.IS_SHOW,
+                                A.VIEW_COUNT,
+                                A.ANNOUNCE_STATUS,
+                                A.POSTING_START_DATE,
+                                A.POSTING_END_DATE,
+                                A.DOC_VERSION,
+                                A.MEMO,
+                                A.SEARCH_TAG,
+                                A.AUTHOR,
+                                A.IDX_DEMO_BUSINESS,
+                                A.CONFIRM_ADMIN_IDX,
+                                A.IDX_ADMIN,
+                                A.REG_DATE,
+                                A.LAST_UPD_DATE
                           FROM TB_BS_ANNOUNCEMENT A
-                                   JOIN TB_DEMO_BUSINESS B
-                                        ON A.IDX_DEMO_BUSINESS = B.IDX_DEMO_BUSINESS
-                                            <if test="filter1 != 9999">
-                                                WHERE A.ANNOUNCE_STATUS = #{filter1}
-                                            </if>
-                                            <if test="filter2 != 9998">
-                                                OR A.ANNOUNCE_STATUS = #{filter2}
-                                            </if>
+        <if test="filter1 != 9999">
+                                            WHERE A.ANNOUNCE_STATUS = #{filter1}
+                                        </if>
+                                        <if test="filter2 != 9998">
+                                            OR A.ANNOUNCE_STATUS = #{filter2}
+                                        </if>
                       )
                  WHERE ROWNUM <![CDATA[<=]]> #{page_num} * #{amount}
              )

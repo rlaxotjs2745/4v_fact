@@ -28,7 +28,7 @@
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="resources/assets/img/img_business_on.png" alt=""></div>
                             <div class="ml-3">
-                                <div class="text-muted small">전시중</div>
+                                <div class="text-muted small">공고 중</div>
                                 <div class="text-large">${adminAnnounceFilterVO.status_on_count}</div>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="resources/assets/img/img_business_week.png" alt=""></div>
                             <div class="ml-3">
-                                <div class="text-muted small">대기중</div>
+                                <div class="text-muted small">대기 중</div>
                                 <div class="text-large">${adminAnnounceFilterVO.wait_count}</div>
                             </div>
                         </div>
@@ -80,10 +80,10 @@
                                 <thead class="bg-success text-white font-weight-bold">
                                 <tr role="row">
                                     <th class="text-center" style="width:60px">상태</th>
-                                    <th class="text-center" style="width:100px">공고문 번호</th>
+                                    <th class="text-center" style="width:100px">사업 제목</th>
                                     <th class="text-center" style="width:300px">공고문 제목</th>
-                                    <th class="text-center" style="width:80px">열람 수(회)</th>
-                                    <th class="text-center" style="width:80px">지원 현황</th>
+                                    <th class="text-center" style="width:80px">작성자</th>
+                                    <th class="text-center" style="width:80px"></th>
                                     <th class="text-center" style="width:110px">전시 시작일, 시간</th>
                                     <th class="text-center" style="width:110px">전시 종료일, 시간</th>
                                     <th class="text-center" style="width:80px">작성자</th>
@@ -185,15 +185,15 @@
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">문서버전</label>
 
                             <div class="col-md-2">
-                                <div id="edit_doc" class="form-control-plaintext">1</div>
+                                <div id="view_doc_version" class="form-control-plaintext">1</div>
                             </div>
                             <div class="col-md-2 mode-view">
-                                <div class="form-control-plaintext">전시전</div>
+                                <div id="view_announce_status" class="form-control-plaintext">전시전</div>
                             </div>
                             <div class="col-md-4 mode-new mode-edit">
                                 <label class="col-form-label form-check">
                                     <input class="form-check-input" type="checkbox" value>
-                                    <div class="form-check-label">
+                                    <div id="view_is_important" class="form-check-label">
                                         중요
                                     </div>
                                 </label>
@@ -203,7 +203,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">문서번호</label>
                             <div class="col-md-10">
-                                <div class="form-control-plaintext mode-edit mode-view">12345678901234</div>
+                                <div id="view_bs_announcement_code" class="form-control-plaintext mode-edit mode-view">12345678901234</div>
                                 <div class="input-group mode-new">
                                     <input type="text" id="announcementCode" class="form-control form-control-md" placeholder="문서번호를 입력해 주세요...">
                                     <span class="input-group-append">
@@ -214,9 +214,9 @@
                         </div>
                         <hr>
                         <div class="form-group row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">모집 기간</label>
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">사업 제목</label>
                             <div class="col-md-10">
-                                <div class="form-control-plaintext mode-view">2022-01-01 - 2022-02-01</div>
+                                <div id="view_idx_demo_business" class="form-control-plaintext mode-view"></div>
 
                                 <div id="datepicker-open" class="input-daterange input-group mode-edit mode-new">
                                     <input type="text" class="form-control" name="start">
@@ -245,16 +245,16 @@
                                 <p class="form-control-plaintext">명(기업)</p>
                             </div>
 
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-view">지원 현황</label>
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-view">포털 노출</label>
                             <div class="col-md-10 mode-view">
                                 <div class="col-md-2">
-                                    <div class="form-control-plaintext">모집 수 200 명(기업)</div>
+                                    <div id="view_is_new" class="form-control-plaintext"></div>
                                 </div>
                                 <div class="col-md-2">
-                                    <div class="form-control-plaintext">지원 수 540 명(기업)</div>
+                                    <div id="view_is_main_page" class="form-control-plaintext">지원 수 540 명(기업)</div>
                                 </div>
                                 <div class="col-md-2">
-                                    <div class="form-control-plaintext">경쟁율 2.7:1</div>
+                                    <div id="view_is_show" class="form-control-plaintext">경쟁율 2.7:1</div>
                                 </div>
                             </div>
                         </div>
@@ -265,7 +265,7 @@
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">제목</label>
                             <div class="col-md-10">
                                 <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요">
-                                <div class="form-control-plaintext mode-view">공고문 제목제목제목제목 1</div>
+                                <div id="view_subject" class="form-control-plaintext mode-view">공고문 제목제목제목제목 1</div>
                             </div>
                         </div>
 
@@ -275,7 +275,7 @@
                                 <div class="summernote"></div>
                             </div>
                             <div class="col-md-10 mode-view">
-                                <div class="form-control-plaintext mode-view">자세히 보기</div>
+                                <div id="view_announce_contents" class="form-control-plaintext mode-view">자세히 보기</div>
                             </div>
                         </div>
 
@@ -286,51 +286,50 @@
                                 <input type="file" class="form-control-file d-block py-1">
                             </div>
                             <div class="form-group col col-md-10 col-form-label mode-view">
-                                <a href="file.doc">공고문.pdf</a>
-                                <a href="file.doc">공고문 상세.pdf</a>
+                                <a id="view_is_file" href="file.doc">공고문.pdf</a>
                             </div>
                         </div>
 
                         <div class="form-row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">키워드</label>
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">작성자</label>
                             <div class="form-group col col-md-10">
                                 <input type="text" class="form-control mode-edit mode-new" value="#스마트팜,#사업공고" data-role="tagsinput">
-                                <div class="form-control-plaintext mode-view">#스마트팜,#사업공고</div>
+                                <div id="view_author" class="form-control-plaintext mode-view"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메모</label>
                             <div class="form-group col col-md-10">
                                 <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
-                                <textarea class="form-control mode-view" readonly rows="5"></textarea>
+                                <textarea id="view_memo" class="form-control mode-view" readonly rows="5"></textarea>
                             </div>
                         </div>
 
                         <div class="modal-footer justify-content-between mode-new">
                             <div>
                                 <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
-                                <button type="button" class="btn btn-secondary">미리보기</button>
+<%--                                <button type="button" class="btn btn-secondary">미리보기</button>--%>
                             </div>
                             <div>
-                                <button type="button" class="btn btn-outline-primary mr-2">임시저장</button>
-                                <button type="button" class="btn btn-primary">게시&저장</button>
+<%--                                <button type="button" class="btn btn-outline-primary mr-2">임시저장</button>--%>
+                                <button type="button" id="new_submit" class="btn btn-primary">게시&저장</button>
                             </div>
                         </div>
 
                         <div class="modal-footer justify-content-between mode-edit d-none">
                             <div>
                                 <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
-                                <button type="button" class="btn btn-secondary">미리보기</button>
+<%--                                <button type="button" class="btn btn-secondary">미리보기</button>--%>
                             </div>
                             <div>
-                                <button type="button" class="btn btn-primary">게시&저장</button>
+                                <button type="button" id="edit_submit" class="btn btn-primary">게시&저장</button>
                             </div>
                         </div>
 
                         <div class="modal-footer justify-content-between mode-view">
                             <div>
                                 <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">닫기</button>
-                                <button type="button" class="btn btn-secondary">미리보기</button>
+<%--                                <button type="button" class="btn btn-secondary">미리보기</button>--%>
                             </div>
 
                             <div>
@@ -410,9 +409,35 @@
     </div>--%>
 <!-- Layout footer -->
 <%@include file ="layouts/frame_footer.jsp" %>
-
     <!-- / Layout footer -->
     <script>
+        console.log('${bsAnnounceHeaderVOList}')
+<%--        <c:forEach items=""--%>
+<%--        idx_bs_announcement--%>
+<%--        bs_announcement_code--%>
+<%--        announce_num--%>
+<%--        subject--%>
+<%--        announce_contents--%>
+<%--        bs_status--%>
+<%--        is_file--%>
+<%--        is_new--%>
+<%--        is_main_page--%>
+<%--        is_important--%>
+<%--        is_show--%>
+<%--        view_count--%>
+<%--        announce_status--%>
+<%--        posting_start_date--%>
+<%--        posting_end_date--%>
+<%--        doc_version--%>
+<%--        memo--%>
+<%--        search_tag--%>
+<%--        author--%>
+<%--        idx_demo_business--%>
+<%--        confirm_admin_idx--%>
+<%--        idx_admin--%>
+<%--        reg_date--%>
+<%--        last_upd_date--%>
+
         $('.summernote').summernote({
             toolbar: [
                 // [groupName, [list of button]]
