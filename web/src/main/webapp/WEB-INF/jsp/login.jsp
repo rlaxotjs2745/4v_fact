@@ -277,6 +277,7 @@
         });
     });
 
+    var user_data;
 
     $("#btn_id_check").click(function(){
 
@@ -297,7 +298,7 @@
                     $("#span_not_found").show();
                 }
                 else {
-                    var user_data = result["userVO"];
+                    user_data = result["userVO"];
                     $("#find-1").next().text("회원정보에 등록한 휴대전화로 인증 ("+user_data.mphone_num+")");
                     $("#find-2").next().text("회원정보에 등록한 이메일로 인증 ("+user_data.email+")");
 
@@ -327,7 +328,7 @@
         $("#span_code_not_found").hide();
 
 
-        var param = {user_id:$("#user_id").val(),
+        var param = {user_id: user_data.user_id,
         code_type:$("input:radio[name='find-pw']:checked").val( ) };
 
         $.ajax({

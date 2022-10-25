@@ -217,8 +217,10 @@
                                 <div id="view_idx_demo_business" class="form-control-plaintext mode-view"></div>
 
                                 <div id="datepicker-open" class="input-daterange input-group mode-edit mode-new">
-                                    <select id="select_demo_bs">
-
+                                    <select id="select_demo_bs" class="custom-select form-control" style="width: 100%;">
+                                        <c:forEach items="${demoStateBsVOList}" var="demo" varStatus="status">
+                                            <option value="${demo.idx_demo_business}">${demo.demo_subject}</option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>
@@ -226,31 +228,43 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">게시 기간</label>
                             <div class="col-md-10">
-                                <div class="form-control-plaintext mode-view">2022-01-01 9:00 AM - 2022-02-01 6:00 PM</div>
+                                <div id="view_posting_date" class="form-control-plaintext mode-view">2022-01-01 9:00 AM - 2022-02-01 6:00 PM</div>
 
                                 <div id="datepicker-show" class="input-daterange input-group mode-edit mode-new">
-                                    <input type="text" class="form-control mr-1" name="start">
-                                    <input type="text" class="form-control" placeholder="9:00 AM" id="flatpickr-time-start">
+                                    <input type="text" class="form-control" name="start">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">~</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="end">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">모집 수</label>
-                            <div class="col-md-6 mode-edit mode-new">
-                                <input type="text" class="form-control form-control-md text-md-right" placeholder="0">
-                                <p class="form-control-plaintext">명(기업)</p>
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-view mode-edit mode-new">공고 상태</label>
+                            <div class="col-md-10 mode-edit mode-new">
+                                <select id="edit_bs_status" class="custom-select form-control" style="width: 100%;">
+                                    <option value="0">대기</option>
+                                    <option value="1">신청 중</option>
+                                    <option value="2">신청 마감</option>
+                                    <option value="3">사업 종료</option>
+                                    <option value="99">기타</option>
+                                </select>
                             </div>
-
+                            <div class="col-md-4 mode-view">
+                                <div id="view_bs_status" class="form-control-plaintext mode-view">신청 중</div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-view">포털 노출</label>
                             <div class="col-md-10 mode-view">
                                 <div class="col-md-2">
-                                    <div id="view_is_new" class="form-control-plaintext"></div>
+                                    <div id="view_is_new" class="form-control-plaintext">새로운 공고 등록</div>
                                 </div>
                                 <div class="col-md-2">
-                                    <div id="view_is_main_page" class="form-control-plaintext">지원 수 540 명(기업)</div>
+                                    <div id="view_is_main_page" class="form-control-plaintext">포털 메인페이지 노출</div>
                                 </div>
                                 <div class="col-md-2">
-                                    <div id="view_is_show" class="form-control-plaintext">경쟁율 2.7:1</div>
+                                    <div id="view_is_show" class="form-control-plaintext">게시 중</div>
                                 </div>
                             </div>
                         </div>
@@ -289,15 +303,8 @@
                         <div class="form-row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">작성자</label>
                             <div class="form-group col col-md-10">
-                                <input type="text" class="form-control mode-edit mode-new" value="#스마트팜,#사업공고" data-role="tagsinput">
-                                <div id="view_author" class="form-control-plaintext mode-view"></div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메모</label>
-                            <div class="form-group col col-md-10">
-                                <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
-                                <textarea id="view_memo" class="form-control mode-view" readonly rows="5"></textarea>
+                                <div id="view_author" class="form-control-plaintext mode-view mode-edit mode-new"></div>
+                                <div id="edit_author" class="form-control-plaintext mode-edit mode-new">${admin.admin_name}</div>
                             </div>
                         </div>
 

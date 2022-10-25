@@ -295,11 +295,15 @@ public class IndexController {
     //사업공고문 관리
     @RequestMapping(value = "/b10_demo_bs_announce_doc_mng",method = RequestMethod.POST)
     public String b10_demo_bs_announce_doc_mng(@RequestBody ParamPageListFilteredVO param,
+                                               Principal principal,
                                                 /*@RequestParam("page") int page,
                                                @RequestParam("filter1") int filter1,
                                                @RequestParam("filter2") int filter2,*/
 
                                                ModelMap model){
+
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+        model.addAttribute("admin", adminInfo);
 
         int list_amount = 10;;
         int page_amount = 10;

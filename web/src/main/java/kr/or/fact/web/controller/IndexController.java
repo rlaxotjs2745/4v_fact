@@ -1230,13 +1230,18 @@ public class IndexController {
     }
 
     @RequestMapping("/join")
-    public String join() {
+    public String join(Model model) {
 
+        getHomepageInfo(model);
+        setProfile(model);
         return "join";
     }
 
     @RequestMapping("/join_2")
-    public String join_2() {
+    public String join_2(Model model) {
+
+        getHomepageInfo(model);
+        setProfile(model);
         return "join_2";
     }
 
@@ -1785,7 +1790,7 @@ return "spt_visit";
         String[] activeProfiles = env.getActiveProfiles();
         if (activeProfiles.length != 0) {
             String activeProfile = activeProfiles[0];
-
+            System.out.println(activeProfile);
             if (activeProfile.equals("local")) {
                 model.addAttribute("profile", "gimje-prod");
             } else {
