@@ -332,7 +332,7 @@ public class IndexController {
         listPagingParamVO.setFilter2(filter2);
         listPagingParamVO.setOrder_field("IDX_BS_ANNOUNCEMENT");*/
 
-        List<BsAnnounceHeaderVO> bsAnnounceHeaderVOList = bsAnnouncementService.getBsAnnounceVOPagingList(param);
+        List<BsAnnouncementVO> bsAnnounceHeaderVOList = bsAnnouncementService.getBsAnnounceVOPagingList(param);
 
         model.addAttribute("bsAnnounceHeaderVOList",bsAnnounceHeaderVOList);
         model.addAttribute("filter1",filter1);

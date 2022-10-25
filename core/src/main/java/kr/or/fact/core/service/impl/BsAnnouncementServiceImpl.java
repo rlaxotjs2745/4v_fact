@@ -121,7 +121,7 @@ public class BsAnnouncementServiceImpl implements BsAnnouncementService {
         return bsAnnouncementMapper.getAvailibleBsAnnouncement();
     }*/
     @Override
-    public List<BsAnnounceHeaderVO> getBsAnnounceVOPagingList(ParamPageListFilteredVO paramPageListFilteredVO){
+    public List<BsAnnouncementVO> getBsAnnounceVOPagingList(ParamPageListFilteredVO paramPageListFilteredVO){
         return bsAnnouncementMapper.getBsAnnounceVOPagingList(paramPageListFilteredVO);
     }
 

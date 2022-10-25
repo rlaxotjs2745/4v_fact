@@ -31,7 +31,7 @@ public interface BsAnnouncementMapper {
 
     //List<BsAnnouncementVO> getAvailibleBsAnnouncement();
 
-    List<BsAnnounceHeaderVO> getBsAnnounceVOPagingList(ParamPageListFilteredVO paramPageListFilteredVO);
+    List<BsAnnouncementVO> getBsAnnounceVOPagingList(ParamPageListFilteredVO paramPageListFilteredVO);
     int getBsAnnounceViewCount(@Param("idx_bs_announcement") long idx_bs_announcement);
     void updateBsAnnounceViewCount (BsAnnouncementVO bsAnnouncementVO);
 }

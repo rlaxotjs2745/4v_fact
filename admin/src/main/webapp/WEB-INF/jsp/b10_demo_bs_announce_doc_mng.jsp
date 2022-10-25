@@ -80,12 +80,11 @@
                                 <thead class="bg-success text-white font-weight-bold">
                                 <tr role="row">
                                     <th class="text-center" style="width:60px">상태</th>
-                                    <th class="text-center" style="width:100px">사업 제목</th>
-                                    <th class="text-center" style="width:300px">공고문 제목</th>
-                                    <th class="text-center" style="width:80px">작성자</th>
-                                    <th class="text-center" style="width:80px"></th>
-                                    <th class="text-center" style="width:110px">전시 시작일, 시간</th>
-                                    <th class="text-center" style="width:110px">전시 종료일, 시간</th>
+                                    <th class="text-center" style="width:100px">공고 번호</th>
+                                    <th class="text-center" style="width:250px">공고문 제목</th>
+                                    <th class="text-center" style="width:170px">사업 제목</th>
+                                    <th class="text-center" style="width:90px">게시 시작일</th>
+                                    <th class="text-center" style="width:90px">게시 종료일</th>
                                     <th class="text-center" style="width:80px">작성자</th>
                                 </tr>
                                 </thead>
@@ -103,21 +102,20 @@
                                 </c:if>
                                 <c:if test="${total_count ne 0}">
                                     <c:forEach items="${bsAnnounceHeaderVOList}" var="item" varStatus="status">
-                                    <tr class="">
+                                    <tr id="" class="">
                                         <td class="text-center">
                                         <c:choose>
                                             <c:when test="${item.announce_status eq 0}">임시저장</c:when>
                                             <c:when test="${item.announce_status eq 1}">게시전 수동게시</c:when>
                                             <c:when test="${item.announce_status eq 2}">게시전 자동게시</c:when>
                                             <c:when test="${item.announce_status eq 3}">게시중</c:when>
-                                            <c:when test="${item.announce_status eq 4}">게시 일지 중지</c:when>
+                                            <c:when test="${item.announce_status eq 4}">게시 일시 중지</c:when>
                                             <c:when test="${item.announce_status eq 5}">게시 기간 종료</c:when>
                                         </c:choose>
                                         </td>
                                         <td class="text-center">${item.bs_announcement_code}</td>
                                         <td class=""><a href="#none" data-toggle="modal" data-target="#modals-business" data-what="mode-view">${item.subject}</a></td>
                                         <td class="text-right">${item.view_count}</td>
-                                        <td class="text-right">${item.applicant_count}</td>
                                         <fmt:formatDate value="${item.posting_start_date}" var="pstart_date" pattern="yyyy-MM-dd"/>
                                         <fmt:formatDate value="${item.posting_end_date}" var="pend_date" pattern="yyyy-MM-dd"/>
                                         <td class="text-center">${pstart_date}</td>
@@ -412,31 +410,35 @@
     <!-- / Layout footer -->
     <script>
         console.log('${bsAnnounceHeaderVOList}')
-<%--        <c:forEach items=""--%>
-<%--        idx_bs_announcement--%>
-<%--        bs_announcement_code--%>
-<%--        announce_num--%>
-<%--        subject--%>
-<%--        announce_contents--%>
-<%--        bs_status--%>
-<%--        is_file--%>
-<%--        is_new--%>
-<%--        is_main_page--%>
-<%--        is_important--%>
-<%--        is_show--%>
-<%--        view_count--%>
-<%--        announce_status--%>
-<%--        posting_start_date--%>
-<%--        posting_end_date--%>
-<%--        doc_version--%>
-<%--        memo--%>
-<%--        search_tag--%>
-<%--        author--%>
-<%--        idx_demo_business--%>
-<%--        confirm_admin_idx--%>
-<%--        idx_admin--%>
-<%--        reg_date--%>
-<%--        last_upd_date--%>
+        var bsaArr = [];
+        <c:forEach items="${bsAnnounceHeaderVOList}" var="bsa">
+        bsaArr.push({
+            idx_bs_announcement: '${bsa.idx_bs_announcement}',
+            bs_announcement_code: '${bsa.bs_announcement_code}',
+            announce_num: '${bsa.announce_num}',
+            subject: '${bsa.subject}',
+            announce_contents: '${bsa.announce_contents}',
+            bs_status: '${bsa.bs_status}',
+            is_file: '${bsa.is_file}',
+            is_new: '${bsa.is_new}',
+            is_main_page: '${bsa.is_main_page}',
+            is_important: '${bsa.is_important}',
+            is_show: '${bsa.is_show}',
+            view_count: '${bsa.view_count}',
+            announce_status: '${bsa.announce_status}',
+            posting_start_date: '${bsa.posting_start_date}',
+            posting_end_date: '${bsa.posting_end_date}',
+            doc_version: '${bsa.doc_version}',
+            memo: '${bsa.memo}',
+            search_tag: '${bsa.search_tag}',
+            author: '${bsa.author}',
+            idx_demo_business: '${bsa.idx_demo_business}',
+            confirm_admin_idx: '${bsa.confirm_admin_idx}',
+            idx_admin: '${bsa.idx_admin}',
+            reg_date: '${bsa.reg_date}',
+            last_upd_date: '${bsa.last_upd_date}'
+        })
+        </c:forEach>
 
         $('.summernote').summernote({
             toolbar: [
