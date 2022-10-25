@@ -241,5 +241,9 @@
         SELECT * FROM TB_DEMO_BUSINESS  WHERE DEMO_BS_STATUS = 3
     </select>
 
+    <select id="getStausDemoBs" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
+        SELECT * FROM TB_DEMO_BUSINESS  WHERE DEMO_BS_STATUS >= 2
+    </select>
+
 
 </mapper>

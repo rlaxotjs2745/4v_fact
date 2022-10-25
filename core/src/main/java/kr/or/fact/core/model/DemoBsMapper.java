@@ -33,4 +33,6 @@ public interface DemoBsMapper {
     void updateBsApproval(DemoBusinessVO demoBusinessVO);
 
     void updateBsContent(DemoBusinessVO demoBusinessVO);
+
+    List<DemoBusinessVO> getStausDemoBs();
 }

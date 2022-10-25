@@ -34,4 +34,6 @@ public interface DemoBsService {
     void updateBsApproval(DemoBusinessVO demoBusinessVO);
 
     void updateBsContent(DemoBusinessVO demoBusinessVO);
+
+    List<DemoBusinessVO> getDemoBsstatusList();
 }

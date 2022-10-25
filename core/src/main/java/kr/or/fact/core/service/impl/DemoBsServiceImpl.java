@@ -87,4 +87,9 @@ public class DemoBsServiceImpl implements DemoBsService {
     public void updateBsContent(DemoBusinessVO demoBusinessVO) {
         demoBsMapper.updateBsContent(demoBusinessVO);
     }
+
+    @Override
+    public List<DemoBusinessVO> getDemoBsstatusList() {
+        return demoBsMapper.getStausDemoBs();
+    }
 }
