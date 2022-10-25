@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-sm-6 col-xl-3">
                 <div class="card mb-3">
-                    <button id="btn_filter1" class="card-body btn btn-white" onclick="javascript:pageLoad('b10_demo_bs_announce_doc_mng?page=1&filter1=9999&filter2=9998','사업공고문 관리');">
+                    <button id="btn_filter1" class="card-body btn btn-white" onclick="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{page_num:1, filter1:9999, filter2:9998},'사업공고문 관리');">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><img src="resources/assets/img/img_business_all.png" alt=""></div>
                             <div class="ml-3">
@@ -69,7 +69,7 @@
             <h6 class="card-header font-weight-bold with-elements">
                 <div class="card-header-title">사업 공고문 목록</div>
                 <div class="card-header-elements ml-auto">
-<%--                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals-business" data-what="mode-new">+ 신규 공고문 작성</button>--%>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals-business" data-what="mode-new">+ 신규 공고문 작성</button>
                 </div>
             </h6>
             <div class="card-datatable table-responsive pt-0 pb-3">
@@ -80,7 +80,7 @@
                                 <thead class="bg-success text-white font-weight-bold">
                                 <tr role="row">
                                     <th class="text-center" style="width:60px">상태</th>
-                                    <th class="text-center" style="width:100px">공고 번호</th>
+                                    <th class="text-center" style="width:100px">문서 번호</th>
                                     <th class="text-center" style="width:250px">공고문 제목</th>
                                     <th class="text-center" style="width:170px">사업 제목</th>
                                     <th class="text-center" style="width:90px">게시 시작일</th>
@@ -115,7 +115,7 @@
                                         </td>
                                         <td class="text-center">${item.bs_announcement_code}</td>
                                         <td class=""><a href="#none" data-toggle="modal" data-target="#modals-business" data-what="mode-view">${item.subject}</a></td>
-                                        <td class="text-right">${item.view_count}</td>
+                                        <td id="demo_id_${item.idx_demo_business}" class="text-right"></td>
                                         <fmt:formatDate value="${item.posting_start_date}" var="pstart_date" pattern="yyyy-MM-dd"/>
                                         <fmt:formatDate value="${item.posting_end_date}" var="pend_date" pattern="yyyy-MM-dd"/>
                                         <td class="text-center">${pstart_date}</td>
@@ -217,11 +217,9 @@
                                 <div id="view_idx_demo_business" class="form-control-plaintext mode-view"></div>
 
                                 <div id="datepicker-open" class="input-daterange input-group mode-edit mode-new">
-                                    <input type="text" class="form-control" name="start">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">~</span>
-                                    </div>
-                                    <input type="text" class="form-control" name="end">
+                                    <select id="select_demo_bs">
+
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -439,6 +437,8 @@
             last_upd_date: '${bsa.last_upd_date}'
         })
         </c:forEach>
+
+
 
         $('.summernote').summernote({
             toolbar: [
