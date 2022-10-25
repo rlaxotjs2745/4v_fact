@@ -181,6 +181,11 @@ public class WebAPIController {
                     mailSendVO.setTitle("[농업기술진흥원] 인증번호");
                     mailSendVO.setContent(smsMessage);
 
+                    SimpleDateFormat fm = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
+                    Calendar time = Calendar.getInstance();
+                    String now_date = fm.format(time.getTime());
+                    mailSendVO.setSendTime(now_date);
+
                     mailService.insertPasswdEmail(mailSendVO);
 
                     UserSecretCodeVO userSecretCodeVO = new UserSecretCodeVO();
