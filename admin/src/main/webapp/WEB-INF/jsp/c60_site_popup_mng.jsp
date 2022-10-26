@@ -142,7 +142,6 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                            <!-- 제목 -->
                             <div class="form-group row">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">제목</label>
                                 <div class="col-md-10">
@@ -247,7 +246,6 @@
             language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
         });
 
-
     });
     $(function () {
         // Time
@@ -319,8 +317,6 @@
                 $('.'+what+'').removeClass('d-none');
                 console.log(what);
             }
-
-
 
             // 모달 팝업에 데이터 집어넣기
             //var modal = $(this);

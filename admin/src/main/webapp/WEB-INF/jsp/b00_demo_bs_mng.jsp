@@ -1011,7 +1011,7 @@
                                 initSummerNote();
                             }
                         } else {
-                            alert("이미 사용 중이거나 사용이 불가능한 사업 m번호입니다.");
+                            alert("이미 사용 중이거나 사용이 불가능한 사업 번호입니다.");
                         }
                     }
                 })
@@ -1104,7 +1104,7 @@
                         $('#demo_bs_main_type, #demo_bs_sub_type, #demo_bs_detail_type, #demo_subject, #demo_start, #demo_end, #demo_appl_start, #demo_appl_end, #demo_eval_start, #demo_eval_end, #demo_modify_start, #demo_modify_end, #demo_arrange_start, #demo_arrange_end, #recruit_count_limit, #memo').val('');
                         $('#bs_content_edit').summernote('code', '');
                     } else {
-                        alert("이미 사용 중이거나 사용이 불가능한 사업 m번호입니다.");
+                        alert("이미 사용 중이거나 사용이 불가능한 사업 번호입니다.");
                     }
                 }
             })
