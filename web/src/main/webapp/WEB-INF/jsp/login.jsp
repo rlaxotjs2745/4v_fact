@@ -37,15 +37,15 @@
                             <a href="index" class="btn-login-close"><img src="resources/assets/image/ico_close.svg" alt="레이어닫기"></a>
                             <div class="login__title">LOGIN</div>
                             <div class="login__input">
-                                <input name="id" type="text" class="text" placeholder="아이디를 입력해주세요">
+                                <input name="id" id="id" type="text" class="text" placeholder="아이디를 입력해주세요">
                             </div>
                             <div class="login__input">
                                 <input name="pw" type="password" class="text" placeholder="비밀번호를 입력해주세요">
                             </div>
                             <div class="login__checkbox">
                                 <div class="checkbox">
-                                    <input type="checkbox" id="login-1" name="id_save">
-                                    <label for="login-1">아이디 저장</label>
+                                    <input type="checkbox" id="id_save" name="id_save">
+                                    <label for="id_save">아이디 저장</label>
                                 </div>
                                 <div class="checkbox">
                                     <input type="checkbox" id="login-2" name="uji">
@@ -222,6 +222,57 @@
         $('#login').css('background', 'url(resources/assets/image/img_bglogo.png) no-repeat 50% 50%');
     }else {
         $('#login').css('background', 'url(resources/assets/image/img_bglogo.jpg) no-repeat 50% 50%');
+    }
+
+    //페이지 띄울 때 저장된 아이디 보이게
+    $(function(){
+        // 쿠키값 읽어오기
+        var id = getCookie("Cookie_id");
+
+        if(id!=null && id.length!=""){
+            $("#id").val(id);
+            $("#id_save").prop('checked', true);
+        }
+    });
+
+    function getCookie(cookieName) {
+        cookieName = cookieName + '=';
+        var cookieData = document.cookie;
+        var start = cookieData.indexOf(cookieName);
+        var cookieValue = '';
+
+        if(start != -1){
+            start += cookieName.length;
+            var end = cookieData.indexOf(';', start);
+            if(end == -1)end = cookieData.length;
+            cookieValue = cookieData.substring(start, end);
+        }
+        return unescape(cookieValue);
+    }
+
+    //체크박스 여부에 따라 쿠키 저장삭제
+    $("#id_save").change(function(){
+
+        let id = $("#id").val();
+
+        if($("#id_save").is(":checked")){
+            setCookie("Cookie_id", id, 50000);
+        }else{
+            deleteCookie("Cookie_id");
+        }
+    });
+
+    function setCookie(cookieName, value, exdays){
+        var exdate = new Date();
+        exdate.setDate(exdate.getDate() + exdays);	// 쿠키 저장 기간
+        var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
+        document.cookie = cookieName + "=" + cookieValue;
+    }
+
+    function deleteCookie(cookieName){
+        var expireDate = new Date();
+        expireDate.setDate(expireDate.getDate() - 1);
+        document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
     }
 
     var user_data;
@@ -524,7 +575,6 @@
             return true;
         }
     }
-
 
 </script>
     <!-- Initialize Swiper -->
