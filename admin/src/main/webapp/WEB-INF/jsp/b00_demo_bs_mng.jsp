@@ -373,7 +373,7 @@
                                     명(기업)
                                 </small>
                             </div>
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">게시여부</label>
+<%--                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">게시여부</label>--%>
                             <div class="col-md-4 mode-edit mode-new">
                                 <div class="form-control-plaintext mode-view" id="is_announce">아니오</div>
                             </div>
