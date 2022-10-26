@@ -114,8 +114,8 @@
                                         </c:choose>
                                         </td>
                                         <td class="text-center">${item.bs_announcement_code}</td>
-                                        <td class=""><a href="#none" data-toggle="modal" data-target="#modals-business" data-what="mode-view">${item.subject}</a></td>
-                                        <td id="demo_id_${item.idx_demo_business}" class="text-right"></td>
+                                        <td class=""><a href="#none" id="bsAnno_${item.idx_bs_announcement}" class="open_modal_business" data-toggle="modal" data-target="#modals-business" data-what="mode-view">${item.subject}</a></td>
+                                        <td id="demo_id_${item.idx_demo_business}" class="text-right demo_bs_title"></td>
                                         <fmt:formatDate value="${item.posting_start_date}" var="pstart_date" pattern="yyyy-MM-dd"/>
                                         <fmt:formatDate value="${item.posting_end_date}" var="pend_date" pattern="yyyy-MM-dd"/>
                                         <td class="text-center">${pstart_date}</td>
@@ -416,6 +416,7 @@
     <script>
         console.log('${bsAnnounceHeaderVOList}')
         var bsaArr = [];
+        var demoBsArr = [];
         <c:forEach items="${bsAnnounceHeaderVOList}" var="bsa">
         bsaArr.push({
             idx_bs_announcement: '${bsa.idx_bs_announcement}',
@@ -431,8 +432,10 @@
             is_show: '${bsa.is_show}',
             view_count: '${bsa.view_count}',
             announce_status: '${bsa.announce_status}',
-            posting_start_date: '${bsa.posting_start_date}',
-            posting_end_date: '${bsa.posting_end_date}',
+            <fmt:formatDate value="${bsa.posting_start_date}" var="pstart_date"  pattern="yyyy-MM-dd"/>
+            <fmt:formatDate value="${bsa.posting_end_date}" var="pend_date"  pattern="yyyy-MM-dd"/>
+            posting_start_date: '${pstart_date}',
+            posting_end_date: '${pend_date}',
             doc_version: '${bsa.doc_version}',
             memo: '${bsa.memo}',
             search_tag: '${bsa.search_tag}',
@@ -440,11 +443,43 @@
             idx_demo_business: '${bsa.idx_demo_business}',
             confirm_admin_idx: '${bsa.confirm_admin_idx}',
             idx_admin: '${bsa.idx_admin}',
-            reg_date: '${bsa.reg_date}',
-            last_upd_date: '${bsa.last_upd_date}'
         })
         </c:forEach>
 
+        <c:forEach items="${demoStateBsVOList}" var="demoBs">
+        demoBsArr.push({
+            demo_subject: '${demoBs.demo_subject}'
+        })
+
+        $('#demo_id_${demoBs.idx_demo_business}').text('${demoBs.demo_subject}');
+        </c:forEach>
+
+        $('.open_modal_business').click(function (){
+            var bsIdx = $(this).attr('id').split('_')[1];
+
+            for(var bsa of bsaArr){
+                if(bsa.idx_bs_announcement == bsIdx){
+                    $('#view_doc_version').text('')
+                    $('#')
+                }
+            }
+        })
+
+
+        function fillDataView (bs){
+            $('#view_doc_version').text(bs.doc_version);
+            $('#view_announce_status').text(bs.announce_status);
+            $('#view_bs_announcement_code').text(bs.bs_announcement_code);
+            $('#view_idx_demo_business').text($('#demo_id_' + bs.idx_demo_business).text());
+            $('#view_posting_date').text(bs.posting_start_date + ' - ' + bs.posting_end_date);
+            $('#view_bs_status').text(bs.bs_status == '0' ? '대기' : bs.bs_status == '1' ? '신청 중' : '')
+        }
+
+        // "0">대기</
+        // "1">신청 중
+        // "2">신청 마감
+        // "3">사업 종료
+        // "99">기타</
 
 
         $('.summernote').summernote({

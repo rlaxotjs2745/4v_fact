@@ -22,14 +22,12 @@ public class DemoBusinessVO {
     Date end_date;//	date						사업 종료 일시분초
     Date recruit_start_date;//	date						모집 시작 일시분초
     Date recruit_end_date;//	date						모집 종료 일시분초
-
     Date exam_start;//	date 서류검사 시작일
     Date exam_end;//	date 서류검사 종료일
     Date plan_review_start;//	date 이용계획 조정 시작일
     Date plan_review_end;//	date 이용계획 조정 종료일
     Date convention_start;//	date 협약 업무 시작일
     Date convention_end;//	date 협약 업무 종료일
-
     int recruit_count_limit;//	number	10		99999999			모집 수
     String memo;//	varchar2	1000					메모
     long idx_admin;//	number	32				◯	작성자	idx_admin index pk
