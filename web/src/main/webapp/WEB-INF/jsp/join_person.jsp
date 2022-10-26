@@ -384,6 +384,31 @@
             }
         });
     });
+
+    $( "#user_id" ).change(function() {
+        if(user_id.value && id_select_box.value) {
+            id_check.disabled = false;
+            $("#text_guide_id").html("변경된 아이디로 중복확인을 다시 진행해주세요.");
+            confirmIdBool = 0;
+        }
+    });
+
+    $( "#user_id2" ).change(function() {
+        if(user_id.value && id_select_box.value) {
+            id_check.disabled = false;
+            $("#text_guide_id").html("변경된 아이디로 중복확인을 다시 진행해주세요.");
+            confirmIdBool = 0;
+        }
+    });
+
+    $( "#id_select_box" ).change(function() {
+        if($('#id_check').is(':disabled')) {
+            id_check.disabled = false;
+            $("#text_guide_id").html("변경된 아이디로 중복확인을 다시 진행해주세요.");
+            confirmIdBool = 0;
+        }
+    });
+
     $("#find_corp").click(function () {
         $("#corp_search_result").load('search_corp_list', {"corp_name": $("#corp_name").val()}).trigger("create");
     });
