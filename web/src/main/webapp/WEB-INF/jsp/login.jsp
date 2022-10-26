@@ -52,7 +52,7 @@
                                     <label for="login-2">로그인 상태 유지</label>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-login" onclick="login();">로그인</button>
+                            <button type="submit" class="btn btn-login">로그인</button>
                             <div class="login__util">
                                 <a href="#popup_find_id" class="js-modal-detail">아이디 찾기</a>
                                 <a href="#popup_find_pw" class="js-modal-detail">비밀번호 찾기</a>
@@ -231,7 +231,7 @@
 
         if(id!=null && id.length!=""){
             $("#id").val(id);
-            ${"id_save"}.checked = true;
+            $("#id_save").prop('checked', true);
         }
     });
 
@@ -250,18 +250,17 @@
         return unescape(cookieValue);
     }
 
-    //아이디 쿠키 저장,삭제
-    function login(){
-        var id = $("#id").val();
-        var Ch = $("#id_save").is(":checked");
+    //체크박스 여부에 따라 쿠키 저장삭제
+    $("#id_save").change(function(){
 
-        if(Ch){
-            setCookie("Cookie_id", id, 7);
-        }else{				// 체크가 해제 된 경우 (false)
+        let id = $("#id").val();
+
+        if($("#id_save").is(":checked")){
+            setCookie("Cookie_id", id, 50000);
+        }else{
             deleteCookie("Cookie_id");
         }
-        $("#loginForm").submit();
-    };
+    });
 
     function setCookie(cookieName, value, exdays){
         var exdate = new Date();
