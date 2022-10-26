@@ -9,88 +9,130 @@
             <div>실증사업 관리</div>
         </h4>
 
-        <div class="row">
-            <div class="col-sm-4 col-xl-2">
-                <div class="card mb-3">
-                    <button id="btn_filter1" class="card-body btn btn-white" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:9999,filter2:9998},'실증사업 목록');">
-                        <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="resources/assets/img/img_business_all.png" alt=""></div>
-                            <div class="ml-3">
-                                <div class="text-muted small">전체</div>
-                                <div class="text-large">${adminDemoBsFilter.tot_count}</div>
-                            </div>
+<%--        <div class="row">--%>
+<%--            <div class="col-sm-4 col-xl-2">--%>
+<%--                <div class="card mb-3">--%>
+<%--                    <button id="btn_filter1" class="card-body btn btn-white" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:9999,filter2:9998},'실증사업 목록');">--%>
+<%--                        <div class="d-flex align-items-center">--%>
+<%--                            <div class="display-4"><img src="resources/assets/img/img_business_all.png" alt=""></div>--%>
+<%--                            <div class="ml-3">--%>
+<%--                                <div class="text-muted small">전체</div>--%>
+<%--                                <div class="text-large">${adminDemoBsFilter.tot_count}</div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-sm-4 col-xl-2">--%>
+<%--                <div class="card mb-3">--%>
+<%--                    <button id="btn_filter2" class="card-body  btn btn-white" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:3,filter2:4},'실증사업 목록');">--%>
+<%--                        <div class="d-flex align-items-center">--%>
+<%--                            <div class="display-4"><img src="resources/assets/img/img_business_on.png" alt=""></div>--%>
+<%--                            <div class="ml-3">--%>
+<%--                                <div class="text-muted small">모집중 & 모집종료</div>--%>
+<%--                                <div class="text-large">${adminDemoBsFilter.appl_count}</div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-sm-4 col-xl-2">--%>
+<%--                <div class="card mb-3">--%>
+<%--                    <button id="btn_filter3" class="card-body btn btn-white" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:5,filter2:6},'실증사업 목록');">--%>
+<%--                        <div class="d-flex align-items-center">--%>
+<%--                            <div class="display-4"><img src="resources/assets/img/img_business_week.png" alt=""></div>--%>
+<%--                            <div class="ml-3">--%>
+<%--                                <div class="text-muted small">심사중 & 심사종료</div>--%>
+<%--                                <div class="text-large">${adminDemoBsFilter.revuiew_count}</div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-sm-4 col-xl-2">--%>
+<%--                <div class="card mb-3">--%>
+<%--                    <button id="btn_filter4" class="card-body btn btn-white" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:7,filter2:8},'실증사업 목록');">--%>
+<%--                        <div class="d-flex align-items-center">--%>
+<%--                            <div class="display-4"><img src="resources/assets/img/img_business_off.png" alt=""></div>--%>
+<%--                            <div class="ml-3">--%>
+<%--                                <div class="text-muted small">이용계획 조정</div>--%>
+<%--                                <div class="text-large">${adminDemoBsFilter.agree_count}</div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-sm-4 col-xl-2">--%>
+<%--                <div class="card mb-3">--%>
+<%--                    <button id="btn_filter5" class="card-body btn btn-white" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:9,filter2:10},'실증사업 목록');">--%>
+<%--                        <div class="d-flex align-items-center">--%>
+<%--                            <div class="display-4"><img src="resources/assets/img/img_business_off.png" alt=""></div>--%>
+<%--                            <div class="ml-3">--%>
+<%--                                <div class="text-muted small">협약중 & 협약완료</div>--%>
+<%--                                <div class="text-large">${adminDemoBsFilter.demo_count}</div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-sm-4 col-xl-2">--%>
+<%--                <div class="card mb-3">--%>
+<%--                    <button id="btn_filter6" class="card-body btn btn-white" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:11,filter2:12},'실증사업 목록');">--%>
+<%--                        <div class="d-flex align-items-center">--%>
+<%--                            <div class="display-4"><img src="resources/assets/img/img_business_off.png" alt=""></div>--%>
+<%--                            <div class="ml-3">--%>
+<%--                                <div class="text-muted small">사업중 & 사업종료</div>--%>
+<%--                                <div class="text-large">${adminDemoBsFilter.result_count}</div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+
+        <div class="card px-4 pt-4 mb-4">
+            <div class="form-row mb-4">
+
+
+                <div class="col-md-5 ">
+                    <label class="form-label text-muted">승인 상태</label>
+                    <div class="form-inline">
+                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons" id="category_change">
+                            <label class="btn btn-secondary
+                            <c:if test="${filter1 eq 9999}">
+                            active
+                            </c:if>
+                            ">
+                                <input type="radio" name="btn-radio" class="category_change" id="all" value="0" checked onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:9999,filter2:9998},'실증사업 목록');">전체
+                            </label>
+                            <label class="btn btn-secondary
+<c:if test="${filter1 eq 0}">
+                            active
+                            </c:if>
+">
+                                <input type="radio" name="btn-radio" class="category_change" id="new" value="0" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:0,filter2:9998},'실증사업 목록');">임시 저장
+                            </label>
+                            <label class="btn btn-secondary
+<c:if test="${filter1 eq 1}">
+                            active
+                            </c:if>
+">
+                                <input type="radio" name="btn-radio" class="category_change" id="register" value="1" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:1,filter2:9998},'실증사업 목록');">작성 완료
+                            </label>
+                            <label class="btn btn-secondary
+<c:if test="${filter1 eq 2}">
+                            active
+                            </c:if>
+">
+                                <input type="radio" name="btn-radio" class="category_change" id="approval" value="2" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:2,filter2:9998},'실증사업 목록');"> 승인 완료
+                            </label>
                         </div>
-                    </button>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-4 col-xl-2">
-                <div class="card mb-3">
-                    <button id="btn_filter2" class="card-body  btn btn-white" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:3,filter2:4},'실증사업 목록');">
-                        <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="resources/assets/img/img_business_on.png" alt=""></div>
-                            <div class="ml-3">
-                                <div class="text-muted small">모집중 & 모집종료</div>
-                                <div class="text-large">${adminDemoBsFilter.appl_count}</div>
-                            </div>
-                        </div>
-                    </button>
-                </div>
-            </div>
-            <div class="col-sm-4 col-xl-2">
-                <div class="card mb-3">
-                    <button id="btn_filter3" class="card-body btn btn-white" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:5,filter2:6},'실증사업 목록');">
-                        <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="resources/assets/img/img_business_week.png" alt=""></div>
-                            <div class="ml-3">
-                                <div class="text-muted small">심사중 & 심사종료</div>
-                                <div class="text-large">${adminDemoBsFilter.revuiew_count}</div>
-                            </div>
-                        </div>
-                    </button>
-                </div>
-            </div>
-            <div class="col-sm-4 col-xl-2">
-                <div class="card mb-3">
-                    <button id="btn_filter4" class="card-body btn btn-white" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:7,filter2:8},'실증사업 목록');">
-                        <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="resources/assets/img/img_business_off.png" alt=""></div>
-                            <div class="ml-3">
-                                <div class="text-muted small">이용계획 조정</div>
-                                <div class="text-large">${adminDemoBsFilter.agree_count}</div>
-                            </div>
-                        </div>
-                    </button>
-                </div>
-            </div>
-            <div class="col-sm-4 col-xl-2">
-                <div class="card mb-3">
-                    <button id="btn_filter5" class="card-body btn btn-white" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:9,filter2:10},'실증사업 목록');">
-                        <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="resources/assets/img/img_business_off.png" alt=""></div>
-                            <div class="ml-3">
-                                <div class="text-muted small">협약중 & 협약완료</div>
-                                <div class="text-large">${adminDemoBsFilter.demo_count}</div>
-                            </div>
-                        </div>
-                    </button>
-                </div>
-            </div>
-            <div class="col-sm-4 col-xl-2">
-                <div class="card mb-3">
-                    <button id="btn_filter6" class="card-body btn btn-white" onclick="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,filter1:11,filter2:12},'실증사업 목록');">
-                        <div class="d-flex align-items-center">
-                            <div class="display-4"><img src="resources/assets/img/img_business_off.png" alt=""></div>
-                            <div class="ml-3">
-                                <div class="text-muted small">사업중 & 사업종료</div>
-                                <div class="text-large">${adminDemoBsFilter.result_count}</div>
-                            </div>
-                        </div>
-                    </button>
-                </div>
+
             </div>
         </div>
-
-        <hr class="mt-0">
+<%--        <hr class="mt-0">--%>
 
         <div class="card mt-4">
             <h6 class="card-header font-weight-bold with-elements">
@@ -597,6 +639,7 @@
 
         $(".demo_entity").on("click", function(){
             var selectedIdx = $(this).attr("id").split("_")[1];
+            $('#btn_edit_mode').hide();
 
             demoArr.forEach(function(demo){
                 if(demo.idx_demo_business == selectedIdx){
@@ -662,6 +705,10 @@
                     } else {
                         $('#confirm_message').text('승인됨');
                         $('#is_confirm').hide();
+                    }
+
+                    if(demo.demo_bs_status < 4){
+                        $('#btn_edit_mode').show();
                     }
 
                     if(demo.idx_admin == '${admin.idx_admin}'){

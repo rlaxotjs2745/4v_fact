@@ -235,7 +235,14 @@
         FROM TB_DEMO_BUSINESS WHERE ROWNUM = 1
     </select>
 
-
+    <update id="updateDemoBsStatus">
+        UPDATE TB_DEMO_BUSINESS SET
+            DEMO_BS_STATUS = 3,
+            LAST_UPD_DATE = SYSDATE
+        WHERE DEMO_BS_STATUS = 2
+            AND SYSDATE <![CDATA[>=]]> RECRUIT_START_DATE
+            AND SYSDATE <![CDATA[<]]> RECRUIT_END_DATE
+    </update>
 
     <select id="getAvailibleDemoBs" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
         SELECT * FROM TB_DEMO_BUSINESS  WHERE DEMO_BS_STATUS = 3

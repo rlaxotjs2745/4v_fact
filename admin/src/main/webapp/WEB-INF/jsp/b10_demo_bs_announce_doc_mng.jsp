@@ -114,8 +114,8 @@
                                         </c:choose>
                                         </td>
                                         <td class="text-center">${item.bs_announcement_code}</td>
-                                        <td class=""><a href="#none" id="bsAnno_${item.idx_bs_announcement}" class="open_modal_business" data-toggle="modal" data-target="#modals-business" data-what="mode-view">${item.subject}</a></td>
-                                        <td id="demo_id_${item.idx_demo_business}" class="text-right demo_bs_title"></td>
+                                        <td class=""><a href="#none" id="bsAnno_${item.idx_bs_announcement}" class="open_modal_business text-center" data-toggle="modal" data-target="#modals-business" data-what="mode-view">${item.subject}</a></td>
+                                        <td id="demo_id_${item.idx_demo_business}" class="text-center demo_bs_title"></td>
                                         <fmt:formatDate value="${item.posting_start_date}" var="pstart_date" pattern="yyyy-MM-dd"/>
                                         <fmt:formatDate value="${item.posting_end_date}" var="pend_date" pattern="yyyy-MM-dd"/>
                                         <td class="text-center">${pstart_date}</td>
@@ -182,18 +182,24 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">문서버전</label>
 
-                            <div class="col-md-2">
-                                <div id="view_doc_version" class="form-control-plaintext">1</div>
+                            <div class="col-md-4">
+                                <div id="view_doc_version" class="form-control-plaintext"></div>
                             </div>
+
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">사업공고 상태</label>
                             <div class="col-md-2 mode-view">
-                                <div id="view_announce_status" class="form-control-plaintext">전시전</div>
+                                <div id="view_announce_status" class="form-control-plaintext"></div>
                             </div>
                             <div class="col-md-4 mode-new mode-edit">
                                 <label class="col-form-label form-check">
-                                    <input class="form-check-input" type="checkbox" value>
-                                    <div id="view_is_important" class="form-check-label">
-                                        중요
-                                    </div>
+                                    <select id="edit_" class="custom-select form-control" style="width: 100%;">
+                                        <option value="0">임시 저장</option>
+                                        <option value="1">게시전, 수동 게시</option>
+                                        <option value="2">게시전, 자동 게시</option>
+                                        <option value="3">게시</option>
+                                        <option value="4">게시 일시 중지</option>
+                                        <option value="5">게시 기간 종료</option>
+                                    </select>
                                 </label>
                             </div>
                         </div>
@@ -201,7 +207,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">문서번호</label>
                             <div class="col-md-10">
-                                <div id="view_bs_announcement_code" class="form-control-plaintext mode-edit mode-view">12345678901234</div>
+                                <div id="view_bs_announcement_code" class="form-control-plaintext mode-edit mode-view"></div>
                                 <div class="input-group mode-new">
                                     <input type="text" id="announcementCode" class="form-control form-control-md" placeholder="문서번호를 입력해 주세요...">
                                     <span class="input-group-append">
@@ -228,7 +234,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">게시 기간</label>
                             <div class="col-md-10">
-                                <div id="view_posting_date" class="form-control-plaintext mode-view">2022-01-01 9:00 AM - 2022-02-01 6:00 PM</div>
+                                <div id="view_posting_date" class="form-control-plaintext mode-view"></div>
 
                                 <div id="datepicker-show" class="input-daterange input-group mode-edit mode-new">
                                     <input type="text" class="form-control" name="start">
@@ -251,21 +257,45 @@
                                 </select>
                             </div>
                             <div class="col-md-4 mode-view">
-                                <div id="view_bs_status" class="form-control-plaintext mode-view">신청 중</div>
+                                <div id="view_bs_status" class="form-control-plaintext mode-view"></div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-view">포털 노출</label>
                             <div class="col-md-10 mode-view">
-                                <div class="col-md-2">
+                                <div class="col-md-4">
                                     <div id="view_is_new" class="form-control-plaintext">새로운 공고 등록</div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-4">
                                     <div id="view_is_main_page" class="form-control-plaintext">포털 메인페이지 노출</div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-4">
                                     <div id="view_is_show" class="form-control-plaintext">게시 중</div>
                                 </div>
+                            </div>
+
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">신규 공고 여부</label>
+                            <div class="col-md-10 mode-edit mode-new">
+                                <select id="edit_is_new" class="custom-select form-control" style="width: 100%;">
+                                    <option value="0">일반 공고</option>
+                                    <option value="1">신규 공고</option>
+                                </select>
+                            </div>
+
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">메인페이지 게시 여부</label>
+                            <div class="col-md-10 mode-edit mode-new">
+                                <select id="edit_is_main_page" class="custom-select form-control" style="width: 100%;">
+                                    <option value="0">사업 공고에만 게시</option>
+                                    <option value="1">포털 메인페이지에 함께 게시</option>
+                                </select>
+                            </div>
+
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">공고 숨기기 여부</label>
+                  부         <div class="col-md-10 mode-edit mode-new">
+                                <select id="edit_is_show" class="custom-select form-control" style="width: 100%;">
+                                    <option value="0">공고 숨기기</option>
+                                    <option value="1">공고 보이기</option>
+                                </select>
                             </div>
                         </div>
 
@@ -285,14 +315,13 @@
                                 <div class="summernote"></div>
                             </div>
                             <div class="col-md-10 mode-view">
-                                <div id="view_announce_contents" class="form-control-plaintext mode-view">자세히 보기</div>
+                                <div id="view_announce_contents" class="form-control-plaintext mode-view"></div>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">파일 첨부</label>
                             <div class="form-group col col-md-10 mode-edit mode-new">
-                                <input type="file" class="form-control-file d-block py-1">
                                 <input type="file" class="form-control-file d-block py-1">
                             </div>
                             <div class="form-group col col-md-10 col-form-label mode-view">
@@ -414,9 +443,9 @@
 <%@include file ="layouts/frame_footer.jsp" %>
     <!-- / Layout footer -->
     <script>
-        console.log('${bsAnnounceHeaderVOList}')
         var bsaArr = [];
         var demoBsArr = [];
+        var curEntity = null;
         <c:forEach items="${bsAnnounceHeaderVOList}" var="bsa">
         bsaArr.push({
             idx_bs_announcement: '${bsa.idx_bs_announcement}',
@@ -459,27 +488,31 @@
 
             for(var bsa of bsaArr){
                 if(bsa.idx_bs_announcement == bsIdx){
-                    $('#view_doc_version').text('')
-                    $('#')
+                    fillDataView(bsa);
+                    break;
                 }
             }
         })
 
 
+
         function fillDataView (bs){
+            curEntity = bs;
             $('#view_doc_version').text(bs.doc_version);
-            $('#view_announce_status').text(bs.announce_status);
+            $('#view_announce_status').text(bs.announce_status == '0' ? '임시 저장' :bs.announce_status == '1' ? '수동 게시 예정' : bs.announce_status == '2' ? '자동 게시 예정' : bs.announce_status == '3' ? '게시 중' : bs.announce_status == '4' ? '게시 일시 중지' : bs.announce_status == '5' ? '게시 기간 종료' : '기타');
             $('#view_bs_announcement_code').text(bs.bs_announcement_code);
             $('#view_idx_demo_business').text($('#demo_id_' + bs.idx_demo_business).text());
             $('#view_posting_date').text(bs.posting_start_date + ' - ' + bs.posting_end_date);
-            $('#view_bs_status').text(bs.bs_status == '0' ? '대기' : bs.bs_status == '1' ? '신청 중' : '')
+            $('#view_bs_status').text(bs.bs_status == '0' ? '대기' : bs.bs_status == '1' ? '신청 중' : bs.bs_status == '2' ? '신청 마감' : bs.bs_status == '3' ? '사업 종료' : '기타');
+            $('#view_is_new').text(bs.is_new == '1' ? '신규 공고' : '신규 아님');
+            $('#view_is_main_page').text(bs.is_main_page == '1' ? '포털 메인 페이지 노출' : '사업 공고 카테고리에만 노출');
+            $('#view_is_show').text(bs.is_show == '1' ? '게시 중' : '미게시');
+            $('#view_subject').text(bs.subject);
+            $('#view_announce_contents').html(bs.announce_contents);
+            bs.is_file == '1' ? $('#view_is_file').attr('href', '')//은진매니저님께 여기에 들어갈 링크 얻어오기
+             : $('#view_is_file').text('업로드한 파일이 없습니다.');
+            $('#view_author').text(bs.author);
         }
-
-        // "0">대기</
-        // "1">신청 중
-        // "2">신청 마감
-        // "3">사업 종료
-        // "99">기타</
 
 
         $('.summernote').summernote({
