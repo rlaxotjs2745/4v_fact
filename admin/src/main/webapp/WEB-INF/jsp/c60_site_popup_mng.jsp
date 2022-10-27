@@ -4,12 +4,13 @@
     <div class="container-fluid flex-grow-1 container-p-y">
 
         <h4 class="d-flex justify-content-between align-items-center w-100 mt-4">
-            <div>팝업공지 관리</div>
+            <div>포털 팝업 관리</div>
         </h4>
 
+        <!-- 등록된 팝업창 목록 테이블 -->
         <div class="card">
             <h6 class="card-header with-elements">
-                <div class="card-header-title">등록된 팝업 목록</div>
+                <div class="card-header-title">등록된 팝업</div>
                 <div class="card-header-elements ml-auto">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modals-popup"  data-what="mode-new">+ 팝업 등록</button>
                 </div>
@@ -21,27 +22,31 @@
                             <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
                                 <thead class="bg-success text-white font-weight-bold">
                                 <tr role="row">
-                                    <th class="text-center px-2" style="width:10%">No</th>
-                                    <th class="text-center sorting" style="width:38%">팝업 제목</th>
-                                    <th class="text-center sorting" style="width:12%">게시기간 시작</th>
-                                    <th class="text-center sorting" style="width:12%">게시기간 종료</th>
-                                    <th class="text-center sorting" style="width:8%">게시 여부</th>
-                                    <th class="text-center px-2" style="width:10%">등록자</th>
-                                    <th class="text-center px-2" style="width:12%">등록일</th>
+                                    <th class="text-center px-2"    >   No</th>
+                                    <th class="text-center sorting" >   팝업 제목</th>
+                                    <th class="text-center sorting" >   URL</th>
+                                    <th class="text-center sorting" >   게시 기간</th>
+                                    <th class="text-center sorting" >   게시 여/부</th>
+                                    <th class="text-center px-2"    >   게시 상태</th>
+                                    <th class="text-center px-2"    >   등록일</th>
+                                    <th class="text-center px-2"    >   게시자</th>
+                                    <th class="text-center px-2"    >   업로드 이미지</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr class="">
                                     <td class="text-center">1</td>
-                                    <td class="text-center"><a href="#none" data-toggle="modal" data-target="#modals-popup" data-what="mode-view">실증단지 방문신청 예약 안내</a></td>
-                                    <td class="text-center">2022-04-05 00:00:00</td>
-                                    <td class="text-center">2022-08-23 00:00:00</td>
-                                    <td class="text-center">게시중</td>
-                                    <td class="text-center">김관리</td>
-                                    <td class="text-center">2022-04-12</td>
-
+                                    <td class="text-center">
+                                        <a href="#none" data-toggle="modal" data-target="#modals-popup" data-what="mode-view">축제 홍보 건</a>
+                                    </td>
+                                    <td class="text-center">http://www.insamfe…</td>
+                                    <td class="text-center">2021년 10월 25일 오전 10:00 ~ 2021년 10월 26일 오후 10:00</td>
+                                    <td class="text-center">숨김</td>
+                                    <td class="text-center">진행중</td>
+                                    <td class="text-center">2021년 10월 25일</td>
+                                    <td class="text-center">minjeoing@4thevision.com</td>
+                                    <td class="text-center">보기</td>
                                 </tr>
-
                                 </tbody>
                             </table>
                         </div>
@@ -68,7 +73,64 @@
             </div>
         </div>
 
-        <!-- new demo bs-->
+        <!-- 등록된 메인 홈 브랜드 이미지 (3) 목록 테이블 -->
+        <div class="card" style="margin-top: 32px">
+            <h6 class="card-header with-elements">
+                <div class="card-header-title">브랜드 이미지 (포털 홈의 상단 이미지, 3개)</div>
+            </h6>
+            <div class="card-datatable table-responsive pt-0 pb-3">
+                <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
+                                <thead class="bg-success text-white font-weight-bold">
+                                <tr role="row">
+                                    <th class="text-center px-2"    >   No</th>
+                                    <th class="text-center px-2"    >   베너 순서</th>
+                                    <th class="text-center px-2"    >   URL</th>
+                                    <th class="text-center px-2"    >   등록일</th>
+                                    <th class="text-center px-2"    >   게시자</th>
+                                    <th class="text-center px-2"    >   업로드 이미지</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="">
+                                    <td class="text-center">1</td>
+                                    <td class="text-center">
+                                        <a href="#none" data-toggle="modal" data-target="#modals-popup" data-what="mode-view">첫 번째</a>
+                                    </td>
+                                    <td class="text-center">http://www.insamfe…</td>
+                                    <td class="text-center">2021년 10월 25일</td>
+                                    <td class="text-center">minjeoing@4thevision.com</td>
+                                    <td class="text-center">보기</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5">
+                            <div class="dataTables_info" id="" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
+                                <ul class="pagination">
+                                    <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
+                                    <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
+                                    <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 등록된 팝업창 목록 [추가하기] 테이블 -->
         <div id="modals-popup" class="modal fade">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -80,8 +142,6 @@
                     </div>
                     <div class="modal-body">
                         <form>
-
-                            <!-- 제목 -->
                             <div class="form-group row">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">제목</label>
                                 <div class="col-md-10">
@@ -186,7 +246,6 @@
             language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
         });
 
-
     });
     $(function () {
         // Time
@@ -258,8 +317,6 @@
                 $('.'+what+'').removeClass('d-none');
                 console.log(what);
             }
-
-
 
             // 모달 팝업에 데이터 집어넣기
             //var modal = $(this);
