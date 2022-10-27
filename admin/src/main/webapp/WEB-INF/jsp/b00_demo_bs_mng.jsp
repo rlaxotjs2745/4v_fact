@@ -373,7 +373,7 @@
                                     명(기업)
                                 </small>
                             </div>
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">게시여부</label>
+<%--                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">게시여부</label>--%>
                             <div class="col-md-4 mode-edit mode-new">
                                 <div class="form-control-plaintext mode-view" id="is_announce">아니오</div>
                             </div>
@@ -1011,7 +1011,7 @@
                                 initSummerNote();
                             }
                         } else {
-                            alert("이미 사용 중이거나 사용이 불가능한 사업 m번호입니다.");
+                            alert("이미 사용 중이거나 사용이 불가능한 사업 번호입니다.");
                         }
                     }
                 })
@@ -1104,7 +1104,7 @@
                         $('#demo_bs_main_type, #demo_bs_sub_type, #demo_bs_detail_type, #demo_subject, #demo_start, #demo_end, #demo_appl_start, #demo_appl_end, #demo_eval_start, #demo_eval_end, #demo_modify_start, #demo_modify_end, #demo_arrange_start, #demo_arrange_end, #recruit_count_limit, #memo').val('');
                         $('#bs_content_edit').summernote('code', '');
                     } else {
-                        alert("이미 사용 중이거나 사용이 불가능한 사업 m번호입니다.");
+                        alert("이미 사용 중이거나 사용이 불가능한 사업 번호입니다.");
                     }
                 }
             })
