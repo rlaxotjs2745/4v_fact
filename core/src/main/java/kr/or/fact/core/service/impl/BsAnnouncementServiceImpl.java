@@ -131,5 +131,10 @@ public class BsAnnouncementServiceImpl implements BsAnnouncementService {
         return bsAnnouncementMapper.selectNewIdx();
     }
 
+    @Override
+    public BsAnnouncementVO findBsAnnouncement(String code) {
+        return bsAnnouncementMapper.selectCodeBsAnnouncement(code);
+    }
+
 
 }

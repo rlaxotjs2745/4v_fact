@@ -37,4 +37,6 @@ public interface BsAnnouncementMapper {
 
     void insertNewbsAnnouncement(BsAnnouncementVO bsAnnouncementVO);
     int selectNewIdx();
+
+    BsAnnouncementVO selectCodeBsAnnouncement(String code);
 }

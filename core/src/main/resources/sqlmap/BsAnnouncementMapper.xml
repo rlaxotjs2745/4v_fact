@@ -361,4 +361,9 @@
         SELECT SEQ_BS_ANNOUNCEMENT.currval FROM dual
     </select>
 
+    <select id="selectCodeBsAnnouncement" resultType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
+        SELECT *
+        FROM TB_BS_ANNOUNCEMENT
+        WHERE BS_ANNOUNCEMENT_CODE = #{code}
+    </select>
 </mapper>

@@ -1528,5 +1528,26 @@ public class APIController {
         return resultVO;
     }
 
+    @RequestMapping(value ="/anno_code_dupl_check",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO anno_code_dupl_check(@RequestBody String code){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("문서 번호를 사용할 수 없습니다.");
+        resultVO.setResult_code("ERROR_1000");
+
+        code = code.replaceAll("\"","");
+
+        if(code!=null){
+            BsAnnouncementVO bsAnnouncementVO = bsAnnouncementService.findBsAnnouncement(code);
+            if(bsAnnouncementVO == null){
+                resultVO.setResult_str("문서번호를 사용할 수 있습니다");
+                resultVO.setResult_code("SUCCESS");
+            } else {
+                resultVO.setResult_str("문서 번호를 사용할 수 없습니다.");
+                resultVO.setResult_code("ERROR_1000");
+            }
+        }
+        return resultVO;
+    }
 }
 

@@ -38,4 +38,6 @@ public interface BsAnnouncementService {
     List<BsAnnouncementVO> getBsAnnounceVOPagingList(ParamPageListFilteredVO paramPageListFilteredVO);
 
     int addNewbsAnnouncement(BsAnnouncementVO bsAnnouncementVO);
+
+    BsAnnouncementVO findBsAnnouncement(String code);
 }

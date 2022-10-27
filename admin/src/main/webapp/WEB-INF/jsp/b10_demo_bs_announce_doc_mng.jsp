@@ -689,7 +689,7 @@
             var code = $("#announcementCode").val();
 
             if(code.length < 1){
-                alert('문번호가 비어있습니다.');
+                alert('문서번호가 비어있습니다.');
             }
             else if(code.match(/[^a-z|A-Z|0-9|ㄱ-ㅎ|가-힣\s]/g)){
                 alert('특수문자는 포함할 수 없습니다.');
@@ -698,7 +698,7 @@
                 $.ajax({
                     url: 'anno_code_dupl_check',
                     method: 'post',
-                    data: JSON.stringify({user_id: code}),//보내는 데이터
+                    data: JSON.stringify(code),//보내는 데이터
                     contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
                     dataType: 'json',//받는 데이터 타입
                     success: function (result) {
