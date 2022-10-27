@@ -366,4 +366,23 @@
         FROM TB_BS_ANNOUNCEMENT
         WHERE BS_ANNOUNCEMENT_CODE = #{code}
     </select>
+
+    <update id="updateBsAnnouncementContent" parameterType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
+    UPDATE TB_BS_ANNOUNCEMENT SET
+        <if test="announce_status != null"> ANNOUNCE_STATUS=#{announce_status},</if>
+        <if test="idx_demo_business != null"> IDX_DEMO_BUSINESS=#{idx_demo_business},</if>
+        <if test="posting_start_date != null"> POSTING_START_DATE=#{posting_start_date},</if>
+        <if test="posting_end_date != null"> POSTING_END_DATE=#{posting_end_date},</if>
+        <if test="is_new != null"> IS_NEW=#{is_new},</if>
+        <if test="is_main_page != null"> IS_MAIN_PAGE=#{is_main_page},</if>
+        <if test="is_show != null"> IS_SHOW=#{is_show},</if>
+        <if test="subject != null"> SUBJECT=#{subject},</if>
+
+        <if test="announce_contents != null"> ANNOUNCE_CONTENTS=#{announce_contents},</if>
+        <if test="bs_announcement_code != null"> BS_ANNOUNCEMENT_CODE=#{bs_announcement_code},</if>
+        <if test="is_file != null"> IS_FILE=#{is_file},</if>
+        <if test="idx_admin != null"> IDX_ADMIN=#{idx_admin},</if>
+        LAST_UPD_DATE = SYSDATE
+    WHERE IDX_BS_ANNOUNCEMENT = #{idx_bs_announcement}
+</update>
 </mapper>

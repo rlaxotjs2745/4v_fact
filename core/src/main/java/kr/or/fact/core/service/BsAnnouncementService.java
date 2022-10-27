@@ -40,4 +40,6 @@ public interface BsAnnouncementService {
     int addNewbsAnnouncement(BsAnnouncementVO bsAnnouncementVO);
 
     BsAnnouncementVO findBsAnnouncement(String code);
+
+    void updateBsAnnouncementContent(BsAnnouncementVO bsAnnouncementVO);
 }

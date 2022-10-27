@@ -136,5 +136,10 @@ public class BsAnnouncementServiceImpl implements BsAnnouncementService {
         return bsAnnouncementMapper.selectCodeBsAnnouncement(code);
     }
 
+    @Override
+    public void updateBsAnnouncementContent(BsAnnouncementVO bsAnnouncementVO) {
+        bsAnnouncementMapper.updateBsAnnouncementContent(bsAnnouncementVO);
+    }
+
 
 }
