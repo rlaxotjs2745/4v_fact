@@ -316,7 +316,49 @@
         UPDATE TB_BS_ANNOUNCEMENT SET VIEW_COUNT = VIEW_COUNT + 1 WHERE IDX_BS_ANNOUNCEMENT =#{idx_bs_announcement}
     </update>
 
+    <insert id="insertNewbsAnnouncement" parameterType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
 
+        INSERT INTO TB_BS_ANNOUNCEMENT (
+            IDX_BS_ANNOUNCEMENT,
+            BS_ANNOUNCEMENT_CODE,
+            IS_FILE,
+            SUBJECT,
+            ANNOUNCE_CONTENTS,
+            IS_NEW,
+            IS_MAIN_PAGE,
+            IS_SHOW,
+            VIEW_COUNT,
+            ANNOUNCE_STATUS,
+            POSTING_START_DATE,
+            POSTING_END_DATE,
+            AUTHOR,
+            IDX_DEMO_BUSINESS,
+            IDX_ADMIN,
+            REG_DATE,
+            LAST_UPD_DATE
+        ) VALUES (
+                     SEQ_BS_ANNOUNCEMENT.NEXTVAL,
+                     #{bs_announcement_code},
+                     #{is_file},
+                     #{subject},
+                     #{announce_contents},
+                     #{is_new},
+                     #{is_main_page},
+                     #{is_show},
+                     0,
+                     #{announce_status},
+                     #{posting_start_date},
+                     #{posting_end_date},
+                     #{author},
+                     #{idx_demo_business},
+                     #{idx_admin},
+                     SYSDATE,
+                     SYSDATE
+                 )
+    </insert>
 
+    <select id="selectNewIdx" resultType="int">
+        SELECT SEQ_BS_ANNOUNCEMENT.currval FROM dual
+    </select>
 
 </mapper>

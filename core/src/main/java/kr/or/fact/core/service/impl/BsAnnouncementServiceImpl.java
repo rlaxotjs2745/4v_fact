@@ -125,6 +125,11 @@ public class BsAnnouncementServiceImpl implements BsAnnouncementService {
         return bsAnnouncementMapper.getBsAnnounceVOPagingList(paramPageListFilteredVO);
     }
 
+    @Override
+    public int addNewbsAnnouncement(BsAnnouncementVO bsAnnouncementVO) {
+        bsAnnouncementMapper.insertNewbsAnnouncement(bsAnnouncementVO);
+        return bsAnnouncementMapper.selectNewIdx();
+    }
 
 
 }

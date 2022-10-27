@@ -94,6 +94,9 @@ public class APIController {
     @Autowired
     private FACTConfig factConfig;
 
+    @Resource(name = "bsAnnouncementService")
+    public BsAnnouncementService bsAnnouncementService;
+
 
     @RequestMapping(value = "/admin_login",method = RequestMethod.POST)
     public @ResponseBody ResultVO admin_login(HttpSession session
@@ -1504,6 +1507,25 @@ public class APIController {
     FileInfoVO demo_bs_file(@RequestParam int idx_demo_bs){
 
         return fileService.selectBsFile(idx_demo_bs);
+    }
+
+    @RequestMapping(value = "/insert_bs_announcement", method = RequestMethod.POST)
+    @ResponseBody
+    ResultVO insert_bs_announcement(@RequestBody BsAnnouncementVO bsAnnouncementVO, Model model){
+        ResultVO resultVO = new ResultVO();
+
+        if(bsAnnouncementVO!=null) {
+            int idx = bsAnnouncementService.addNewbsAnnouncement(bsAnnouncementVO);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("등록이 완료되었습니다.");
+
+            model.addAttribute("idx", idx);
+        } else  {
+            resultVO.setResult_code("ERR_001");
+            resultVO.setResult_code("등록에 실패했습니다.");
+        }
+
+        return resultVO;
     }
 
 }
