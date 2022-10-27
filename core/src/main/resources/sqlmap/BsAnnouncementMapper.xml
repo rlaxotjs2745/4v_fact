@@ -293,12 +293,13 @@
                                 A.REG_DATE,
                                 A.LAST_UPD_DATE
                           FROM TB_BS_ANNOUNCEMENT A
-        <if test="filter1 != 9999">
+                                        <if test="filter1 != 9999">
                                             WHERE A.ANNOUNCE_STATUS = #{filter1}
                                         </if>
                                         <if test="filter2 != 9998">
                                             OR A.ANNOUNCE_STATUS = #{filter2}
                                         </if>
+                         ORDER BY REG_DATE DESC
                       )
                  WHERE ROWNUM <![CDATA[<=]]> #{page_num} * #{amount}
              )
