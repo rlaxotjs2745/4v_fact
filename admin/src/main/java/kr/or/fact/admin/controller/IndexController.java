@@ -454,6 +454,7 @@ public class IndexController {
             page_amount = tot_page;
         }
 
+        model.addAttribute("cur_page", param.getPage_num());
         model.addAttribute("tot_page",tot_page);
         model.addAttribute("tot_sector",tot_sector);
         model.addAttribute("cur_sector",cur_sector);

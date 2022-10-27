@@ -14,11 +14,11 @@
                 <div class="card-header-title">사업 공고 등록 (총 450 건)</div>
             </h6>
             <div class="card-datatable table-responsive pt-0 pb-3">
-                <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                <div class="dataTables_wrapper dt-bootstrap4 no-footer">
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
+                            <table class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
                                 <thead class="bg-success text-white font-weight-bold">
                                 <tr role="row">
                                     <th class="text-center px-2" style="width:60px">No</th>
@@ -47,10 +47,10 @@
 <c:if test="${total_count ne 0}">
     <c:forEach items="${adminApplHeaderListVOS}" var="item" varStatus="status">
 
-
                                 <tr class="" onClick="getUserApplList(${item.idx_demo_business},1,9999)">
-                                    <td class="text-center">${item.idx_demo_business}</td>
-                                    <td class="text-center">${item.exam_end}</td>
+                                    <td class="text-center">${cur_page > 1 ? 5 * (cur_page - 1) + status.count : status.count}</td>
+                                    <fmt:formatDate value="${item.exam_end}" var="pend_date" pattern="yyyy-MM-dd"/>
+                                    <td class="text-center">${pend_date}</td>
                                     <td class="">${item.demo_bs_code}</td>
                                     <td class="">${item.demo_subject}</td>
                                     <td class="text-right">${item.applicant_count} / ${item.recruit_count_limit}</td>
@@ -72,7 +72,7 @@
                             <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${total_count}개 중 ${list_amount*(cur_page-1)+1}에서 ${list_amount*page_amount}까지</div>
                         </div>
                         <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers" id="">
+                            <div class="dataTables_paginate paging_simple_numbers">
                                 <ul class="pagination">
 
                                     <c:set var="name" value="${total_count/amount}" />

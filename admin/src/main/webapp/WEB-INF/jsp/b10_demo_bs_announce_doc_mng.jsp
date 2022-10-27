@@ -740,13 +740,19 @@
                 dataType: 'json',//받는 데이터 타입
                 success: function (result) {
                     if (result.result_code == "SUCCESS") {
-                        fileUpload(null,
-                            function(){
-                                alert('입력이 완료되었습니다.');
-                                fillDataNew();
-                                $('#modals-business').modal('hide');
-                            }
-                        )
+                        if(isFile){
+                            fileUpload(null,
+                                function(){
+                                    alert('입력이 완료되었습니다.');
+                                    fillDataNew();
+                                    $('#modals-business').modal('hide');
+                                }
+                            )
+                        } else {
+                            alert('입력이 완료되었습니다.');
+                            fillDataNew();
+                            $('#modals-business').modal('hide');
+                        }
 
                     } else {
                         alert("수정에 실패했습니다.");
@@ -814,6 +820,10 @@
                                 fillDataNew();
                                 $('#modals-business').modal('hide');
                             })
+                        } else {
+                            alert('수정이 완료되었습니다.');
+                            fillDataNew();
+                            $('#modals-business').modal('hide');
                         }
 
                     } else {
