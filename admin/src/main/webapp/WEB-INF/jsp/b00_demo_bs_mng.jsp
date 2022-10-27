@@ -1147,7 +1147,7 @@
                 success: function (result) {
                     if (result.result_code == "SUCCESS") {
                         alert('수정이 완료되었습니다.');
-                        $('#modals-business').hide();
+                        $('#close_button').click();
                         $('#demo_bs_main_type, #demo_bs_sub_type, #demo_bs_detail_type, #demo_subject, #demo_start, #demo_end, #demo_appl_start, #demo_appl_end, #demo_eval_start, #demo_eval_end, #demo_modify_start, #demo_modify_end, #demo_arrange_start, #demo_arrange_end, #recruit_count_limit, #memo').val('');
                         $('#bs_content_edit').summernote('code', '');
                     } else {

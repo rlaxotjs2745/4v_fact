@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import javax.annotation.Resource;
 
@@ -26,6 +28,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+//
+//    @Bean
+//    public PersistentTokenRepository persistentTokenRepository() {
+//        JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();
+//        repo.setDataSource(dataSource);
+//        return repo;
+//    }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -47,10 +56,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);
+
 */
+
         http.exceptionHandling()
                 .accessDeniedPage("/denied");
-    }
+//
+//        http.rememberMe()
+//                .key("factfactfact")
+//                .
+                    }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
