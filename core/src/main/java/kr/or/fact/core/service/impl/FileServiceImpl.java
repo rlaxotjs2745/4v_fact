@@ -273,4 +273,9 @@ public class FileServiceImpl implements FileService {
         return fileServiceMapper.selectBsFile(idx_demo_bs);
     }
 
+    @Override
+    public FileInfoVO selectBsAnnouncementFile(int index_bs_announcement) {
+        return fileServiceMapper.selectBsAnnouncementFile(index_bs_announcement);
+    }
+
 }

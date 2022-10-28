@@ -238,4 +238,87 @@ public class FileController {
         return new FileUploadResponseVO(fileName, fileDownloadUri, file.getContentType(), file.getSize());
 
     }
+
+
+
+
+
+    //파일 업로드 (카테고리별)
+    @RequestMapping(value = "/upload_file_category",method = RequestMethod.POST)
+    @ResponseBody
+    public ResultVO upload_file_category(@ModelAttribute FileRequestVO fileRequestVO, HttpSession session, HttpServletRequest request) throws IOException {
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("파일 첨부가 실패하였습니다.");
+
+        //전달되는 값
+        int fileLength = Integer.parseInt(fileRequestVO.getFileLength());
+        int fileCategory = fileRequestVO.getFileCategory();
+        int idx = fileRequestVO.getFileIndex();
+
+        File[] files = new File[5];
+
+        if(fileLength > 0){
+            files[0] = fileService.convertMultipartToFile(fileRequestVO.getFiles1());
+            MultipartFile file = fileRequestVO.getFiles1();
+            filesave(file, idx, fileCategory);
+
+            if(fileLength >= 2){
+                files[1] = fileService.convertMultipartToFile(fileRequestVO.getFiles2());
+                file = fileRequestVO.getFiles2();
+                filesave(file, idx, fileCategory);
+
+                if(fileLength >= 3){
+                    files[2] = fileService.convertMultipartToFile(fileRequestVO.getFiles3());
+                    file = fileRequestVO.getFiles3();
+                    filesave(file, idx, fileCategory);
+
+                    if(fileLength >= 4){
+                        files[3] = fileService.convertMultipartToFile(fileRequestVO.getFiles4());
+                        file = fileRequestVO.getFiles4();
+                        filesave(file, idx, fileCategory);
+
+                        if(fileLength == 5){
+                            files[4] = fileService.convertMultipartToFile(fileRequestVO.getFiles5());
+                            file = fileRequestVO.getFiles5();
+                            filesave(file, idx, fileCategory);
+                        }
+                    }
+                }
+            }
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("파일 첨부를 성공했습니다.");
+        } else {
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("파일 첨부가 실패하였습니다.");
+        }
+
+        return resultVO;
+    }
+
+    //파일 저장
+    private void filesave(MultipartFile file, int idx, int fileCategory) {
+
+        String fileName = fileService.storeFileInfo(file);
+        String fileDownloadUri =
+                ServletUriComponentsBuilder.fromUriString("")
+//                    .fromCurrentContextPath()
+                        .path("/downloadFile/")
+                        .path(fileName)
+                        .toUriString();
+        FileUploadResponseVO filepespons= new FileUploadResponseVO(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+        FileInfoVO fileInfoVO =new FileInfoVO();
+        fileInfoVO.setFile_name(filepespons.getFileName());
+        fileInfoVO.setFile_size(filepespons.getSize());
+        fileInfoVO.setMime_type(filepespons.getFileType());
+        fileInfoVO.setFile_path(filepespons.getFileDownloadUri());
+        fileInfoVO.setIdx_file_usage(idx);
+        fileInfoVO.setFile_type(fileCategory);
+
+        fileService.insertFileInfo(fileInfoVO);
+
+    }
+
+
 }

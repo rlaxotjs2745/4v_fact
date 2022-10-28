@@ -42,4 +42,6 @@ public interface FileService {
     int insertDemoBsFile(MultipartFile file, long adminIdx);
 
     FileInfoVO selectBsFile(int idx_demo_bs);
+
+    FileInfoVO selectBsAnnouncementFile(int index_bs_announcement);
 }
