@@ -37,4 +37,9 @@ public interface BsAnnouncementService {
     AdminAnnounceFilterVO getAdminBsAnnouncementFilter();
     List<BsAnnouncementVO> getBsAnnounceVOPagingList(ParamPageListFilteredVO paramPageListFilteredVO);
 
+    int addNewbsAnnouncement(BsAnnouncementVO bsAnnouncementVO);
+
+    BsAnnouncementVO findBsAnnouncement(String code);
+
+    void updateBsAnnouncementContent(BsAnnouncementVO bsAnnouncementVO);
 }

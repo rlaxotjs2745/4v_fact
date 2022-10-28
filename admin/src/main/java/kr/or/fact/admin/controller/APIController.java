@@ -94,6 +94,9 @@ public class APIController {
     @Autowired
     private FACTConfig factConfig;
 
+    @Resource(name = "bsAnnouncementService")
+    public BsAnnouncementService bsAnnouncementService;
+
 
     @RequestMapping(value = "/admin_login",method = RequestMethod.POST)
     public @ResponseBody ResultVO admin_login(HttpSession session
@@ -1506,5 +1509,67 @@ public class APIController {
         return fileService.selectBsFile(idx_demo_bs);
     }
 
+    @RequestMapping(value = "/insert_bs_announcement", method = RequestMethod.POST)
+    @ResponseBody
+    ResultVO insert_bs_announcement(@RequestBody BsAnnouncementVO bsAnnouncementVO, Model model){
+        ResultVO resultVO = new ResultVO();
+
+        if(bsAnnouncementVO!=null) {
+            int idx = bsAnnouncementService.addNewbsAnnouncement(bsAnnouncementVO);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("등록이 완료되었습니다.");
+
+            model.addAttribute("idx", idx);
+        } else  {
+            resultVO.setResult_code("ERR_001");
+            resultVO.setResult_code("등록에 실패했습니다.");
+        }
+
+        return resultVO;
+    }
+
+    @RequestMapping(value ="/anno_code_dupl_check",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO anno_code_dupl_check(@RequestBody String code){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("문서 번호를 사용할 수 없습니다.");
+        resultVO.setResult_code("ERROR_1000");
+
+        code = code.replaceAll("\"","");
+
+        if(code!=null){
+            BsAnnouncementVO bsAnnouncementVO = bsAnnouncementService.findBsAnnouncement(code);
+            if(bsAnnouncementVO == null){
+                resultVO.setResult_str("문서번호를 사용할 수 있습니다");
+                resultVO.setResult_code("SUCCESS");
+            } else {
+                resultVO.setResult_str("문서 번호를 사용할 수 없습니다.");
+                resultVO.setResult_code("ERROR_1000");
+            }
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value="/update_bs_announcement",method = RequestMethod.POST)
+    @ResponseBody
+    ResultVO update_bs_announcement(@RequestBody BsAnnouncementVO bsAnnouncementVO){
+
+        ResultVO resultVO = new ResultVO();
+
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("수정 실패");
+
+        try {
+            bsAnnouncementService.updateBsAnnouncementContent(bsAnnouncementVO);
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("수정이 완료되었습니다.");
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("수정이 실패하였습니다.");
+        }
+
+        return resultVO;
+    }
 }
 

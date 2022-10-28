@@ -293,12 +293,13 @@
                                 A.REG_DATE,
                                 A.LAST_UPD_DATE
                           FROM TB_BS_ANNOUNCEMENT A
-        <if test="filter1 != 9999">
+                                        <if test="filter1 != 9999">
                                             WHERE A.ANNOUNCE_STATUS = #{filter1}
                                         </if>
                                         <if test="filter2 != 9998">
                                             OR A.ANNOUNCE_STATUS = #{filter2}
                                         </if>
+                         ORDER BY REG_DATE DESC
                       )
                  WHERE ROWNUM <![CDATA[<=]]> #{page_num} * #{amount}
              )
@@ -316,7 +317,73 @@
         UPDATE TB_BS_ANNOUNCEMENT SET VIEW_COUNT = VIEW_COUNT + 1 WHERE IDX_BS_ANNOUNCEMENT =#{idx_bs_announcement}
     </update>
 
+    <insert id="insertNewbsAnnouncement" parameterType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
 
+        INSERT INTO TB_BS_ANNOUNCEMENT (
+            IDX_BS_ANNOUNCEMENT,
+            BS_ANNOUNCEMENT_CODE,
+            IS_FILE,
+            SUBJECT,
+            ANNOUNCE_CONTENTS,
+            IS_NEW,
+            IS_MAIN_PAGE,
+            IS_SHOW,
+            VIEW_COUNT,
+            ANNOUNCE_STATUS,
+            POSTING_START_DATE,
+            POSTING_END_DATE,
+            AUTHOR,
+            IDX_DEMO_BUSINESS,
+            IDX_ADMIN,
+            REG_DATE,
+            LAST_UPD_DATE
+        ) VALUES (
+                     SEQ_BS_ANNOUNCEMENT.NEXTVAL,
+                     #{bs_announcement_code},
+                     #{is_file},
+                     #{subject},
+                     #{announce_contents},
+                     #{is_new},
+                     #{is_main_page},
+                     #{is_show},
+                     0,
+                     #{announce_status},
+                     #{posting_start_date},
+                     #{posting_end_date},
+                     #{author},
+                     #{idx_demo_business},
+                     #{idx_admin},
+                     SYSDATE,
+                     SYSDATE
+                 )
+    </insert>
 
+    <select id="selectNewIdx" resultType="int">
+        SELECT SEQ_BS_ANNOUNCEMENT.currval FROM dual
+    </select>
 
+    <select id="selectCodeBsAnnouncement" resultType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
+        SELECT *
+        FROM TB_BS_ANNOUNCEMENT
+        WHERE BS_ANNOUNCEMENT_CODE = #{code}
+    </select>
+
+    <update id="updateBsAnnouncementContent" parameterType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
+    UPDATE TB_BS_ANNOUNCEMENT SET
+        <if test="announce_status != null"> ANNOUNCE_STATUS=#{announce_status},</if>
+        <if test="idx_demo_business != null"> IDX_DEMO_BUSINESS=#{idx_demo_business},</if>
+        <if test="posting_start_date != null"> POSTING_START_DATE=#{posting_start_date},</if>
+        <if test="posting_end_date != null"> POSTING_END_DATE=#{posting_end_date},</if>
+        <if test="is_new != null"> IS_NEW=#{is_new},</if>
+        <if test="is_main_page != null"> IS_MAIN_PAGE=#{is_main_page},</if>
+        <if test="is_show != null"> IS_SHOW=#{is_show},</if>
+        <if test="subject != null"> SUBJECT=#{subject},</if>
+
+        <if test="announce_contents != null"> ANNOUNCE_CONTENTS=#{announce_contents},</if>
+        <if test="bs_announcement_code != null"> BS_ANNOUNCEMENT_CODE=#{bs_announcement_code},</if>
+        <if test="is_file != null"> IS_FILE=#{is_file},</if>
+        <if test="idx_admin != null"> IDX_ADMIN=#{idx_admin},</if>
+        LAST_UPD_DATE = SYSDATE
+    WHERE IDX_BS_ANNOUNCEMENT = #{idx_bs_announcement}
+</update>
 </mapper>
