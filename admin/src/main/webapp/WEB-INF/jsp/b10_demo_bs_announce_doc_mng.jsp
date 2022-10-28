@@ -653,7 +653,7 @@
                 //modal.find('.modal-title').text('New message to ' + what)
                 //modal.find('.modal-body input').val(what)
         });
-        $('#file_upload').change(function(){
+        $('#edit_file').change(function(){
             if(document.querySelector('#edit_file').files.length){
                 isFile = true;
             } else {
@@ -663,7 +663,7 @@
 
         function fileUpload(idx_anno, callback){
             var fileForm = new FormData();
-            var files = document.querySelector('#file_upload').files;
+            var files = document.querySelector('#edit_file').files;
 
             for(var i = 0; i < files.length; i++){
                 var num = i + 1;
