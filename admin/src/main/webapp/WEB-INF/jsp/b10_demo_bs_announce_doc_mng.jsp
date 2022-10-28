@@ -755,7 +755,7 @@
                         }
 
                     } else {
-                        alert("수정에 실패했습니다.");
+                        alert("입력에 실패했습니다.");
                     }
                 }
             })
@@ -771,6 +771,7 @@
             }
 
             if($('#select_demo_bs').val().split('_')[1] != curEntity.idx_demo_business){
+                console.log( $('#select_demo_bs').val())
                 param.idx_demo_business = $('#select_demo_bs').val().split('_')[1];
             }
 

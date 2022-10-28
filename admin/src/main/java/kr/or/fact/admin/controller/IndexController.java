@@ -419,7 +419,7 @@ public class IndexController {
 
 
         List<AdminApplDemoBsHeaderListVO>  adminApplHeaderListVOS = demoBsApplicationService.getAvailableDemoBsApplPagingList(param);
-
+        System.out.println(adminApplHeaderListVOS);
         model.addAttribute("adminApplHeaderListVOS",adminApplHeaderListVOS);
 
         model.addAttribute("cur_page",page);
