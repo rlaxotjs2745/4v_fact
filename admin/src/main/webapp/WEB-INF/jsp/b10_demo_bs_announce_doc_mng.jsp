@@ -172,8 +172,8 @@
             <div class="modal-content">
                 <div class="modal-header bg-success">
                     <h5 class="modal-title text-white font-weight-bold mode-new">사업 공고문 작성</h5>
-                    <h5 class="modal-title text-white font-weight-bold mode-edit d-none">사업 공고문 수정</h5>
-                    <h5 class="modal-title text-white font-weight-bold mode-view d-none">사업 공고 현황</h5>
+                    <h5 class="modal-title text-white font-weight-bold mode-edit">사업 공고문 수정</h5>
+                    <h5 class="modal-title text-white font-weight-bold mode-view">사업 공고 현황</h5>
                     <button type="button" id="modal_close_button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
                 </div>
                 <div class="modal-body">
@@ -333,7 +333,7 @@
                             </div>
                         </div>
 
-                        <div class="modal-footer justify-content-between mode-edit d-none">
+                        <div class="modal-footer justify-content-between mode-edit">
                             <div>
                                 <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
 <%--                                <button type="button" class="btn btn-secondary">미리보기</button>--%>
@@ -582,46 +582,51 @@
 
             //$('.mode-edit').removeClass('d-non');
             //$('.mode-view').addClass('d-non');
-            if($('.mode-view').hasClass('d-none') == false){
+            // if($('.mode-view').hasClass('d-none') == false){
                 $('.mode-view').addClass('d-none');
-            }
+            // }
 
-            if($('.mode-edit').hasClass('d-none') == false){
+            // if($('.mode-edit').hasClass('d-none') == false){
                 console.log("실행했어요..")
                 $('.mode-edit').addClass('d-none');
-            }
+            // }
 
-            if($('.mode-new').hasClass('d-none') == false){
+            // if($('.mode-new').hasClass('d-none') == false){
                 $('.mode-new').addClass('d-none');
-            }
+            // }
 
             $('.mode-edit').removeClass('d-none');
             fillDataEdit(curEntity);
         });
-            $('#modals-business').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget);
-                var what = button.data('what');
-                if(what=='mode-view' || what=='mode-edit'||what=='mode-new'){
-                    console.log("시작");
-                    if($('.mode-view').hasClass('d-none') == false){
-                        $('.mode-view').addClass('d-none');
-                    }
 
-                    if($('.mode-edit').hasClass('d-none') == false){
-                        console.log("실행했어요..")
-                        $('.mode-edit').addClass('d-none');
-                    }
 
-                    if($('.mode-new').hasClass('d-none') == false){
-                        $('.mode-new').addClass('d-none');
-                    }
-
-                    $('.'+what+'').removeClass('d-none');
-                    console.log(what);
-                }
         $(function() {
 
 
+            $('#modals-business').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                console.log(button.data('what'))
+                var what = button.data('what');
+                if (what == 'mode-view' || what == 'mode-edit' || what == 'mode-new') {
+                    console.log("시작");
+                    // if ($('.mode-view').hasClass('d-none') == false) {
+                        $('.mode-view').addClass('d-none');
+                    // }
+
+                    // if ($('.mode-edit').hasClass('d-none') == false) {
+                        console.log("실행했어요..")
+                        $('.mode-edit').addClass('d-none');
+                    // }
+
+                    // if ($('.mode-new').hasClass('d-none') == false) {
+                        $('.mode-new').addClass('d-none');
+                    // }
+
+                    $('.' + what + '').removeClass('d-none');
+                    console.log(what);
+
+                }
+            })
             // $('#btn_mode_new').on('click', function() {
             //
             //     if($('.mode-view').hasClass('d-non') === false){
@@ -647,7 +652,6 @@
                 //var modal = $(this);
                 //modal.find('.modal-title').text('New message to ' + what)
                 //modal.find('.modal-body input').val(what)
-            })
         });
         $('#file_upload').change(function(){
             if(document.querySelector('#edit_file').files.length){
@@ -716,6 +720,10 @@
         })
 
         $('#new_submit').click(function (){
+            if(!duplBool){
+                return alert('문서번호 중복 체크 후 등록이 가능합니다.');
+            }
+
             var param = {
                 announce_status: $('#edit_announce_status').val(),
                 bs_announcement_code: $("#announcementCode").val(),
@@ -755,7 +763,7 @@
                         }
 
                     } else {
-                        alert("수정에 실패했습니다.");
+                        alert("입력에 실패했습니다.");
                     }
                 }
             })
@@ -771,6 +779,7 @@
             }
 
             if($('#select_demo_bs').val().split('_')[1] != curEntity.idx_demo_business){
+                console.log( $('#select_demo_bs').val())
                 param.idx_demo_business = $('#select_demo_bs').val().split('_')[1];
             }
 
