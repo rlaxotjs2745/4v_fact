@@ -487,6 +487,21 @@
             fillDataNew();
         })
 
+        function getFileInfo(idx){
+
+            return $.ajax({
+                url: 'get_bs_anno_file_info?idx_bs_announcement=' + bsIdx,
+                method: 'get',
+                // data: JSON.stringify(code),//보내는 데이터
+                contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+                dataType: 'json',//받는 데이터 타입
+                success: function (result) {
+                    $('#view_is_file').attr('href', result.file_path);
+                    $('#view_is_file').text(result.file_name);
+                }
+            })
+        }
+
 
         function fillDataView (bs){
             curEntity = bs;
