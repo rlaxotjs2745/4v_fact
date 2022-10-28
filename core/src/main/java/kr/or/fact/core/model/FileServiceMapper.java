@@ -41,5 +41,5 @@ public interface FileServiceMapper {
 
     FileInfoVO selectBsFile(@Param("idx_demo_bs") int idx_demo_bs);
 
-    FileInfoVO selectBsAnnouncementFile(int index_bs_announcement);
+    FileInfoVO selectBsAnnouncementFile(@Param("index_bs_announcement") int index_bs_announcement);
 }

@@ -1574,9 +1574,9 @@ public class APIController {
 
     @RequestMapping(value ="/get_bs_anno_file_info",method = RequestMethod.GET)
     public @ResponseBody
-    FileInfoVO get_bs_anno_file_info(@RequestParam int index_bs_announcement){
+    FileInfoVO get_bs_anno_file_info(@RequestParam int idx_bs_announcement){
 
-        return fileService.selectBsAnnouncementFile(index_bs_announcement);
+        return fileService.selectBsAnnouncementFile(idx_bs_announcement);
     }
 
 }
