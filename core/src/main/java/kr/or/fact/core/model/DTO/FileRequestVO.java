@@ -18,4 +18,7 @@ public class FileRequestVO {
     MultipartFile files4;
     MultipartFile files5;
     String fileLength;
+
+    int fileCategory;
+    int fileIndex;
 }
