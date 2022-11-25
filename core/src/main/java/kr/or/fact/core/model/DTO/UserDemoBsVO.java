@@ -1,7 +1,12 @@
 package kr.or.fact.core.model.DTO;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Setter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -115,11 +120,11 @@ public class UserDemoBsVO {
 
     String costat_code;//	varchar2	20					표준산업분류코드	네자리
     int is_office_ower;//	number	4		0			본사 자가여부	0:임차, 1:자가
-    int is_lab_ower;//	number	4		0			연구소 자가여부	0:임차, 1:자가
+    int is_lab_ower;//	number	4		0			연구소 자가여부	0:없음, 1:자가, 2:임차
     int man_total;//	number	4		0			총임직원 수
     int man_officer_count;//	number	4		0			사무직원 수
     int man_lab_count;//	number	4		0			연구직원 수
-    int man_etc_count;//	number	4		0			키타지원 수
+    int man_etc_count;//	number	4		0			기타직원 수
 
     String lab_est_date;//	VARCHAR2	20					연구소 설립일수
     int rnd_rate;//	NUMBER	4					연구개발투자비율
@@ -150,13 +155,20 @@ public class UserDemoBsVO {
     int is_indi_info_agree;//	NUMBER	4		0			개인정보처리 위탁에관한 동의	0:동의 안함, 1:동의
 
     Date reg_date;//	date						최초 등록 일시
+
+
     String reg_date_s;//	date						최초 등록 일시
     Date last_upd_date;//	date						최종 수정 일시
     String last_upd_date_s;//	date						최종 수정 일시
 
     String demo_subject;//	varchar2	100					사업 제목
     String demo_bs_applicaion_code;//	varchar2	40					지원번호
+
     Date applicaion_reg_date;
     DemoBsMsgVO demoBsMsgVo;
     CorpInfoVO corpInfoVO;
+
+
+
+
 }
