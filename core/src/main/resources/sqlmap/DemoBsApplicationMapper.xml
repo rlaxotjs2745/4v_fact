@@ -335,4 +335,12 @@
 
     </select>
 
+    <update id="updateDemoBsApplicantStatus" parameterType="hashmap">
+        update TB_DEMO_BS_APPLICAION set applicant_status = #{optionVal}
+        where idx_user_demo_bs = #{idx}
+
+
+    </update>
+
+
 </mapper>

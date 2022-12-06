@@ -7,6 +7,7 @@ import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Mapper
@@ -30,5 +31,8 @@ public interface DemoBsApplicationMapper {
     int getAvailableDemoBsConsultTotalCount();
     List<AdminApplDemoBsHeaderListVO> getAvailableDemoBsConsultPagingList(ParamPageListFilteredVO paramPageListFilteredVO);
     List<AdminApplHeaderListVO> getConsultPagingFilteredList(ParamPageListFilteredVO paramPageListFilteredVO);
+
+    void updateDemoBsApplicantStatus(HashMap<String,Integer> param);
+
 
 }

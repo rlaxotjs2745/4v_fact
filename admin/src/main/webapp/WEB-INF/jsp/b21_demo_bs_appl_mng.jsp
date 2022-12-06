@@ -226,17 +226,9 @@
                     </li>
 
                 </ul>
-                <div class="tab-content">
-                    <input id="idx_corp_info" value="0" hidden>
-                    <input id="is_saved" value="0" hidden>
-
-
-
-
-
-
-                    <div id="b21_modal">
-                    </div>
+                <input id="idx_corp_info" value="0" hidden>
+                <input id="is_saved" value="0" hidden>
+                <div class="tab-content" id="b21_modal" >
 
                     <!--
                     <div class="form-row">
@@ -521,9 +513,49 @@
                 //에러가 났을 경우 실행시킬 코드
                 console.log('ajax appl_list_by_b21_filtered 에러발생');
             }
-        });
-        //});
+        }); //ajax 끝
     }
+
+
+
+    //서류검토상태변경
+
+    function btn_save_change(idx){
+        let optionVal=$("#appl_status_selected option:selected").val();
+        console.log("idx : " +  idx);
+        console.log("optionVal : "  + optionVal);
+        let param={
+            idx:idx,
+            optionVal:optionVal
+        }
+
+        if(confirm("서류검토 상태를 변경하시겠습니까?")){
+            $.ajax({
+                type: 'post',
+                url: '/change_applicant_status', //데이터를 주고받을 파일 주소 입력
+                data:  JSON.stringify(param),//보내는 데이터
+                contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+                dataType: 'text',//받는 데이터 타입
+                success: function (result) {
+                    //작업이 성공적으로 발생했을 경우
+                    alert('성공');
+                }
+            });//ajax 끝
+        }else{
+            return false;
+        }
+
+
+
+
+        // alert('hi');
+    };
+
+
+
+
+
+
 
     //
     $("#modify").on('click', function () {

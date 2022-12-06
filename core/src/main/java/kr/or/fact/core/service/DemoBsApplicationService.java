@@ -5,6 +5,7 @@ import kr.or.fact.core.model.DTO.AdminApplHeaderListVO;
 import kr.or.fact.core.model.DTO.DemoBSApplicationVO;
 import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface DemoBsApplicationService {
@@ -27,6 +28,8 @@ public interface DemoBsApplicationService {
     List<AdminApplDemoBsHeaderListVO> getAvailableDemoBsConsultPagingList(ParamPageListFilteredVO paramPageListFilteredVO);
     List<AdminApplHeaderListVO> getConsultPagingFilteredList(ParamPageListFilteredVO paramPageListFilteredVO);
 
+
+    void updateDemoBsApplicantStatus(HashMap<String,Integer> param);
 
 
 

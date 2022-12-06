@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.annotation.Resource;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,7 +28,7 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -245,16 +244,49 @@ public class APIController {
     public String demo_bs_list_by_filter(HttpSession session,
                                          @RequestBody ParamPageListFilteredVO param,
                                          Model model){
+
+
         int page = param.getPage_num();
         int filter1 = param.getFilter1();
-        int filter2 = param.getFilter2();
+        System.out.println("filter1:" + filter1);// default : 9999(전체) ,검토전(0) ,검토중(1),검토완료(3)
+        int filter2 = param.getFilter2(); // default:9998
 
-        int list_amount = param.getAmount();;
+        //검토중
+        if(filter1 ==1){
+            filter2=2;
+        }
+        System.out.println("filter2 : "  + filter2 );
+
+        int list_amount = param.getAmount();
         int page_amount = param.getAmount();
 
+        System.out.println(filter2);//9998
 
         AdminDemoBSFilterVO adminDemoBSFilterVO = demoBsService.getAdminDemoBsFilter();
-        //리스트 총갯수를 이때 빼야 함
+        System.out.println(adminDemoBSFilterVO.getTot_count());//33
+        System.out.println(adminDemoBSFilterVO.getAppl_count());//23
+        System.out.println(adminDemoBSFilterVO.getRevuiew_count());//0
+        System.out.println(adminDemoBSFilterVO.getAgree_count());//0
+        System.out.println(adminDemoBSFilterVO.getDemo_count());//0
+        System.out.println(adminDemoBSFilterVO.getResult_count());//0
+
+//        int tot_count;//전체
+//        int appl_count;//모집중
+//        int revuiew_count;//심사중
+//        int agree_count;//협약중
+//        int demo_count;//사업중
+//        int result_count;//결산중
+        //이걸왜 가져오는걸까..
+
+
+        //리스트 총갯수를 이때 빼야 함          <<이게뭘말하는거지
+        /*
+        *   public static int DEMOBS_FILTER_APPL = 3;
+            public static int DEMOBS_FILTER_REVUIEW = 5;
+            public static int DEMOBS_FILTER_AGREE = 7;
+            public static int DEMOBS_FILTER_DEMO = 9;
+            public static int DEMOBS_FILTER_RESULT = 11;
+        * */
         int filtered_item_total = adminDemoBSFilterVO.getTot_count();
         if(filter1==CONSTANT.DEMOBS_FILTER_APPL)
             filtered_item_total = adminDemoBSFilterVO.getAppl_count();
@@ -272,7 +304,7 @@ public class APIController {
         model.addAttribute("idx_demo_business",param.getIdx());
 
         param.setOrder_field("IDX_DEMO_BUSINESS");
-/*        ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
+/*      ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
         listPagingParamVO.setPage_num(page);
         listPagingParamVO.setAmount(list_amount);
         listPagingParamVO.setFilter1(filter1);
@@ -281,6 +313,8 @@ public class APIController {
         listPagingParamVO.setIdx(param.getIdx());*/
 
         List<AdminApplHeaderListVO> adminApplHeaderListVOS =  demoBsApplicationService.getApplPagingFilteredList(param);
+
+
         //List<DemoBusinessVO>  demoBusinessVOList = demoBsService.getDemoBsPagingList(listPagingParamVO);
 
         model.addAttribute("adminApplHeaderListVOS",adminApplHeaderListVOS);
@@ -416,10 +450,25 @@ public class APIController {
     public @ResponseBody
     ResultVO  join_confirm(HttpSession session,
                            @RequestBody ParamUserDemoBSInfoVO userDemoBSInfoVO){
+
+        System.out.println("idx_user_demo_bs :" + userDemoBSInfoVO.getIdx_user_demo_bs());
+
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("성공");
         resultVO.setResult_code("SUCCESS");
+
         UserDemoBsVO userDemoBsVO = userDemoBsService.getUserDemoBsByIdx(userDemoBSInfoVO.getIdx_user_demo_bs());
+
+        /*
+        * <select id="getUserDemoBsByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.UserDemoBsVO">
+        SELECT
+            *
+        FROM TB_USER_DEMO_BS
+        WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
+            </select>
+        *
+        * */
+
 
         if(userDemoBsVO==null){
             resultVO.setResult_str("해당 신청정보를 찾을수 없습니다");
@@ -430,8 +479,17 @@ public class APIController {
         DemoBusinessVO demoBusinessVO = demoBsService.getDemoBsByIdx(userDemoBsVO.getIdx_demo_business());
         userDemoBsVO.setDemo_subject(demoBusinessVO.getDemo_subject());
 
-        DemoBSApplicationVO demoBSApplicationVO = demoBsApplicationService.getDemoBsApplByIdx( userDemoBsVO.getIdx_user_demo_bs());
+        /*
+        *  SELECT * FROM TB_DEMO_BUSINESS  WHERE IDX_DEMO_BUSINESS = #{idx}
+        * */
+
+        /*
+        DemoBSApplicationVO demoBSApplicationVO = demoBsApplicationService.getDemoBsApplByIdx(userDemoBsVO.getIdx_user_demo_bs());
+        System.out.println(demoBSApplicationVO.getDemo_bs_applicaion_code());
+
+        userDemoBsVO.setDemo_bs_applicaion_code(demoBSApplicationVO.getDemo_bs_applicaion_code());
         userDemoBsVO.setDemo_bs_applicaion_code(demoBSApplicationVO.getDemo_bs_applicaion_code()==null?"":demoBSApplicationVO.getDemo_bs_applicaion_code());
+
         if(demoBSApplicationVO.getApplicaion_reg_date()==null)
         {
             Date date = new Date();
@@ -439,18 +497,76 @@ public class APIController {
         }
         userDemoBsVO.setApplicaion_reg_date(demoBSApplicationVO.getApplicaion_reg_date());
 
+        /*
         CorpInfoVO corpInfoVO = corpService.getCorpInfo(userDemoBsVO.getIdx_corp_info());
         if(corpInfoVO==null){
             corpInfoVO = new CorpInfoVO();
             corpInfoVO.setIdx_corp_info(0);
             corpInfoVO.setIs_saved(0);
         }
-        userDemoBsVO.setCorpInfoVO(corpInfoVO);
+        userDemoBsVO.setCorpInfoVO(corpInfoVO);*/
 
         resultVO.setUserDemoBsVO(userDemoBsVO);
 
+        UserDemoBsDetailVO userDemoBsDetailVO=userDemoBsService.getUserDemoBsDetail(userDemoBSInfoVO.getIdx_user_demo_bs());
+        resultVO.setUserDemoBsDetailVO(userDemoBsDetailVO);
+
+        UserVO userVO=userService.getUserInfo(userDemoBsVO.getIdx_user());
+        resultVO.setUserVO(userVO);
+
+        List<UserBsHumanResourceVO> userBsHumanResourceVOS=userDemoBsService.getUserDemoBsHumanResourceList(userDemoBSInfoVO.getIdx_user_demo_bs());
+        resultVO.setUserBsHumanResourceVOS(userBsHumanResourceVOS);
+
         return  resultVO;
     }
+
+    @RequestMapping(value="/b21_modal",method = RequestMethod.POST)
+    public String b21_modal(HttpSession session,Model model,
+                            @RequestBody ParamUserDemoBSInfoVO userDemoBSInfoVO) {
+
+        UserDemoBsVO  UserDemoBsVOmodify=userDemoBsService.getUserDemoBsByIdx(userDemoBSInfoVO.getIdx_user_demo_bs());
+        UserDemoBsDetailVO userDemoBsDetailVOModify=userDemoBsService.getUserDemoBsDetail(userDemoBSInfoVO.getIdx_user_demo_bs());
+        UserVO userVO=userService.getUserInfo(UserDemoBsVOmodify.getIdx_user());
+        DemoBSApplicationVO demoBSApplicationVO=demoBsApplicationService.getDemoBsEvalByIdx(userDemoBSInfoVO.getIdx_user_demo_bs());
+
+
+        DemoBusinessVO demoBusinessVO = demoBsService.getDemoBsByIdx(UserDemoBsVOmodify.getIdx_demo_business());
+        UserDemoBsVOmodify.setDemo_subject(demoBusinessVO.getDemo_subject());
+
+        List<UserDemoBsFileResultVO> fileList = fileService.getUserDemoFileList(UserDemoBsVOmodify.getIdx_user_demo_bs());
+
+        model.addAttribute("fileArr", fileList);
+        model.addAttribute("modifyUserDemoBsVO",UserDemoBsVOmodify);
+        model.addAttribute("modifyUserDemoBsDetailVO",userDemoBsDetailVOModify);
+        model.addAttribute("userVO",userVO);
+        model.addAttribute("demoBSApplicationVO",demoBSApplicationVO);
+
+
+
+
+        return "pages/b21_modal";
+    }
+
+    @RequestMapping(value = "/change_applicant_status",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO change_applicant_status(HttpSession session, @RequestBody HashMap<String,Integer> param){
+        ResultVO resultVO=new ResultVO();
+        resultVO.setResult_str("성공");
+        resultVO.setResult_code("SUCCESS");
+
+
+
+        int idx =param.get("idx");
+        int optionVal=param.get("optionVal");
+        System.out.println("idx : " + idx);
+        System.out.println("optionVal : " + optionVal);
+
+        demoBsApplicationService.updateDemoBsApplicantStatus(param);
+
+
+        return resultVO;
+    }
+
 
     @RequestMapping(value = "/save_corp_info",method = RequestMethod.POST)
     public @ResponseBody

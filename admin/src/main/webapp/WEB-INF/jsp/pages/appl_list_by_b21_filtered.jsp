@@ -139,17 +139,6 @@
     function popup_apple_manage(idx_user_demo_bs){
         console.log(idx_user_demo_bs);
 
-        //radio select 함수
-        // $.fn.radioSelect = function(val) {
-        //     this.each(function() {
-        //         let $this = $(this);
-        //         if($this.val() === val)
-        //             $this.attr('checked', true);
-        //     });
-        //     return this;
-        // };
-
-
         let param = {
             idx_user_demo_bs: idx_user_demo_bs
         }
@@ -195,19 +184,19 @@
 
 
                 //라디오값 설정
-                console.log("user_demo_bs_type :  "  +  data["userDemoBsVO"].user_demo_bs_type);
-                console.log("is_office_ower :  "  +  data["userDemoBsVO"].is_office_ower);
-                console.log("is_lab_ower :  "  +  data["userDemoBsVO"].is_lab_ower);
-                console.log("req_facility :  "  +  data["userDemoBsVO"].req_facility);
-                console.log("user_demo_type :  "  +  data["userDemoBsVO"].user_demo_type);
-                console.log("user_demo_facility :  "  +  data["userDemoBsVO"].user_demo_facility);
-                console.log("user_demo_way :  "  +  data["userDemoBsVO"].user_demo_way);
-                console.log("user_demo_goal :  "  +  data["userDemoBsVO"].user_demo_goal);
-                console.log("user_demo_repeat :  "  +  data["userDemoBsVO"].user_demo_repeat);
-                console.log("user_demo_is_crops :  "  +  data["userDemoBsVO"].user_demo_is_crops);
-                console.log("user_demo_option :  "  +  data["userDemoBsVO"].user_demo_option);
-                console.log("culture_soil :  "  +  data["userDemoBsVO"].culture_soil);
-                console.log("demo_type :  "  +  data["userDemoBsVO"].demo_type);
+                // console.log("user_demo_bs_type :  "  +  data["userDemoBsVO"].user_demo_bs_type);
+                // console.log("is_office_ower :  "  +  data["userDemoBsVO"].is_office_ower);
+                // console.log("is_lab_ower :  "  +  data["userDemoBsVO"].is_lab_ower);
+                // console.log("req_facility :  "  +  data["userDemoBsVO"].req_facility);
+                // console.log("user_demo_type :  "  +  data["userDemoBsVO"].user_demo_type);
+                // console.log("user_demo_facility :  "  +  data["userDemoBsVO"].user_demo_facility);
+                // console.log("user_demo_way :  "  +  data["userDemoBsVO"].user_demo_way);
+                // console.log("user_demo_goal :  "  +  data["userDemoBsVO"].user_demo_goal);
+                // console.log("user_demo_repeat :  "  +  data["userDemoBsVO"].user_demo_repeat);
+                // console.log("user_demo_is_crops :  "  +  data["userDemoBsVO"].user_demo_is_crops);
+                // console.log("user_demo_option :  "  +  data["userDemoBsVO"].user_demo_option);
+                // console.log("culture_soil :  "  +  data["userDemoBsVO"].culture_soil);
+                // console.log("demo_type :  "  +  data["userDemoBsVO"].demo_type);
 
                 //스키마 파일 기준
                 /*
@@ -260,8 +249,10 @@
                 $("#b21_modal").html(result);
 
                 $('input').prop('readonly',true);
-
                 $('#modals-application-view').modal('show');
+            },
+            error:function (){
+                //에러코드
             }
 
         }); //AJAX 끝
