@@ -204,7 +204,7 @@
 
     <!-- Modal template -->
     <div class="modal fade" id="modals-application-view">
-        <div class="modal-dialog modal-xl modal-content">
+        <div class="modal-dialog modal-xl modal-content modal-dialog-scrollable">
 
             <div class="modal-header bg-success">
                 <h5 class="modal-title text-white font-weight-bold mode-new">신청서 접수 관리</h5>
@@ -212,8 +212,7 @@
                     ×
                 </button>
             </div>
-            <!--style="height : 60vh; overflow : auto;" -->
-            <div class="modal-body" >
+            <div class="modal-body">
                 <ul class="nav nav-sm nav-tabs">
                     <li class="nav-item btn-outline-primary"><a class="nav-link font-weight-bold active"
                                                                 data-toggle="tab" href="#navs-tap1">이용신청서</a>
@@ -400,7 +399,7 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
                 <div>
                     <button type="button" class="btn btn-outline-primary">임시저장</button>
-                    <button type="button" class="btn btn-primary" id="">고객공유</button>
+                    <button type="button" class="btn btn-primary">고객공유</button>
                     <button type="button" class="btn btn-primary">저장</button>
                     <button type="button" class="btn btn-primary" id="modify">수정하기</button>
                     <button type="button" class="btn btn-primary" id="modify-cancel" style="display: none">취소</button>
@@ -584,6 +583,13 @@
         $(":radio").prop("disabled", true);
         alert('수정완료')
     });
+
+    //모달창 닫힐때 nav tab 초기화.
+    $('#modals-application-view').on('hidden.bs.modal', function (e) {
+        // reset multi-tab modal to initial state
+        $(this).find('.nav-tabs a:first').tab('show');
+        alert('모달창닫힘');
+    })
 
 
 </script>
