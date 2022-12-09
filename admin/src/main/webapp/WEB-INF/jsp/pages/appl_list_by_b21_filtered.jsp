@@ -248,7 +248,10 @@
             success:function (result){
                 $("#b21_modal").html(result);
 
-                $('input').prop('readonly',true);
+                // $('input').prop('readonly',true);
+                $("input,textarea,select").each(function(){
+                    $(this).attr("readonly",true);
+                });
                 $('#modals-application-view').modal('show');
             },
             error:function (){

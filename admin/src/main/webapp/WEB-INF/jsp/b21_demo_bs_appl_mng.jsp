@@ -588,7 +588,7 @@
     $('#modals-application-view').on('hidden.bs.modal', function (e) {
         // reset multi-tab modal to initial state
         $(this).find('.nav-tabs a:first').tab('show');
-        alert('모달창닫힘');
+        // alert('모달창닫힘');
     })
 
 
