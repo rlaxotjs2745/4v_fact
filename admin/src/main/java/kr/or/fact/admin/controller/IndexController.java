@@ -779,7 +779,13 @@ public class IndexController {
     //자원예약 관리
     @RequestMapping(value = "/c22_site_visit_mng",method = RequestMethod.POST)
     public String c22_site_visit_mng(@RequestParam(value = "tag", required = false) String tagValue,
+                                     Principal principal,
                                      ModelMap model){
+
+
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+        model.addAttribute("admin", adminInfo);
+
 
 
         return "c22_site_visit_mng";

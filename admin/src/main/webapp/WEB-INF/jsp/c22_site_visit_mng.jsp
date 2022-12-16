@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <!-- Page content -->
 <div class="container-fluid flex-grow-1 container-p-y">
 
@@ -48,17 +50,17 @@
                     <!--반복 없이 기간등록-->
                     <div class="form-group row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">선택기간</label>
-<%--                        <div class="col-md-10">--%>
-<%--                            <div id="repeat_none_datepicker" class="input-daterange input-group" style="width: 80%;">--%>
-<%--                                <input type="text" class="form-control" name="start">--%>
-<%--                                <div class="input-group-prepend repeat__none">--%>
-<%--                                    <span class="input-group-text">~</span>--%>
-<%--                                </div>--%>
-<%--                                <input type="text" class="form-control repeat__none" name="end">--%>
-<%--                                <span class="form-text repeat__none">동안 매일</span>--%>
-<%--                                <span class="form-text repeat__weekly repeat_date_monthly repeat_week_monthly">부터</span>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
+                        <div class="col-md-10">
+                            <div id="repeat_none_datepicker" class="input-daterange input-group" style="width: 80%;">
+                                <input type="text" class="form-control" name="start">
+                                <div class="input-group-prepend repeat__none">
+                                    <span class="input-group-text">~</span>
+                                </div>
+                                <input type="text" class="form-control repeat__none" name="end">
+                                <span class="form-text repeat__none">동안 매일</span>
+                                <span class="form-text repeat__weekly repeat_date_monthly repeat_week_monthly">부터</span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group row repeat_date_monthly repeat_week_monthly d-none">
@@ -347,92 +349,434 @@
         </div>
     </form>
 
-    <div class="modal fade" id="modal_reservation_now">
+<%--    <div class="modal fade" id="modal_reservation_now">--%>
+<%--            <div class="modal-dialog modal-lg">--%>
+<%--                <div class="modal-content">--%>
+<%--                    <div class="modal-header bg-success">--%>
+<%--                        <h5 class="modal-title text-white font-weight-bold">코드 작성</h5>--%>
+<%--                        <button id="modals-code-new-close" type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>--%>
+<%--                    </div>--%>
+<%--                    <div class="modal-body">--%>
+<%--                        <form>--%>
+<%--                            <div class="form-group row">--%>
+<%--                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 예약 일자</label>--%>
+<%--                                    <div class="col-md-4">--%>
+<%--                                        <div id="repeat_none_datepicker" class="input-daterange input-group" style="width: 80%;">--%>
+<%--                                            <input type="text" class="form-control" name="start">--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">오전/오후</label>--%>
+<%--                                <div class="col-md-4">--%>
+<%--                                    <select class="form-control form-control-md">--%>
+<%--                                        <option value="am" selected>오전</option>--%>
+<%--                                        <option value="pm">오후</option>--%>
+<%--                                    </select>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+
+<%--                            <hr>--%>
+
+<%--                            <div id="exist_req">--%>
+<%--                                <div class="form-group row">--%>
+<%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">구분</label>--%>
+<%--                                    <div class="col-md-4">--%>
+<%--                                        <div class="form-control-plaintext">개인</div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div id="team_name_row" class="form-group row">--%>
+<%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">단체명</label>--%>
+<%--                                    <div class="col-md-4">--%>
+<%--                                        <div class="form-control-plaintext" id="team_name">이름</div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group row">--%>
+<%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">신청인</label>--%>
+<%--                                    <div class="col-md-4">--%>
+<%--                                        <div class="form-control-plaintext">김태선</div>--%>
+<%--                                    </div>--%>
+<%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 인원</label>--%>
+<%--                                    <div class="col-md-4">--%>
+<%--                                        <div class="form-control-plaintext">4명</div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+
+<%--                                <div class="form-group row">--%>
+<%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">연락처</label>--%>
+<%--                                    <div class="col-md-4">--%>
+<%--                                        <div class="form-control-plaintext">010-0000-0000</div>--%>
+<%--                                    </div>--%>
+<%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">이메일</label>--%>
+<%--                                    <div class="col-md-4">--%>
+<%--                                        <div class="form-control-plaintext">tarfsnfl@sdlkfm.com</div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+
+<%--                                <div class="form-group row">--%>
+<%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">거주지 주소</label>--%>
+<%--                                    <div class="col-md-10">--%>
+<%--                                        <div class="form-control-plaintext">(08099) 경기 뭐시 어떻구 그랬동 123 202동 2020호</div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+
+<%--                                <div class="form-group row">--%>
+<%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 목적</label>--%>
+<%--                                    <div class="col-md-10">--%>
+<%--                                        <div class="form-control-plaintext">밥먹으러</div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+
+<%--                                <div class="form-group row">--%>
+<%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">기타사전 질문</label>--%>
+<%--                                    <div class="col-md-10">--%>
+<%--                                        <div class="form-control-plaintext">화장실이 어디예요?</div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--&lt;%&ndash;                            <div id="none_req">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <div class=""&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            </div>&ndash;%&gt;--%>
+
+
+<%--                            <div class="modal-footer justify-content-between">--%>
+<%--                                <div>--%>
+<%--                                    <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>--%>
+<%--                                </div>--%>
+<%--                                <div>--%>
+<%--                                    <button id="btn_save_new" type="button" class="btn btn-primary">저장</button>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+
+
+<%--                        </form>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+
+        <div class="modal fade" id="saveVisitData">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header bg-success">
-                        <h5 class="modal-title text-white font-weight-bold">코드 작성</h5>
+                        <h5 class="modal-title text-white font-weight-bold">신청일 추가/변경</h5>
                         <button id="modals-code-new-close" type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form id="saveVisitForm">
+
+                            <!--반복 선택-->
                             <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 예약 일자</label>
-                                    <div class="col-md-4">
-                                        <div id="repeat_none_datepicker" class="input-daterange input-group" style="width: 80%;">
-                                            <input type="text" class="form-control" name="start">
-                                        </div>
-                                    </div>
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">오전/오후</label>
-                                <div class="col-md-4">
-                                    <select class="form-control form-control-md">
-                                        <option value="am" selected>오전</option>
-                                        <option value="pm">오후</option>
-                                    </select>
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">반복</label>
+                                <div class="form-inline col-md-10">
+                                    <label class="custom-control custom-radio d-inline-block">
+                                        <input name="repeat_type_new" type="radio" class="custom-control-input" value="0" checked>
+                                        <span class="custom-control-label">없음</span>
+                                    </label>
+                                    <label class="custom-control custom-radio d-inline-block">
+                                        <input name="repeat_type_new" type="radio" class="custom-control-input" value="1">
+                                        <span class="custom-control-label">매주</span>
+                                    </label>
+                                    <label class="custom-control custom-radio d-inline-block">
+                                        <input name="repeat_type_new" type="radio" class="custom-control-input" value="2">
+                                        <span class="custom-control-label">매월</span>
+                                    </label>
                                 </div>
+                            </div>
+
+                            <input type="hidden" id="idx_admin" name="idx_admin" value="${admin.idx_admin}">
+                            <div class="form-group row">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">시작 날짜</label>
+                                <div class="col-md-3">
+                                    <div id="sDate" class="input-daterange input-group" style="width: 80%;">
+                                        <input type="text" class="form-control" name="sDate" >
+                                    </div>
+                                </div>
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">종료 날짜</label>
+                                <div class="col-md-3">
+                                    <div id="eDate" class="input-daterange input-group" style="width: 80%;">
+                                        <input type="text" class="form-control" name="eDate">
+                                    </div>
+                                </div>
+
                             </div>
 
                             <hr>
 
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">오전 / 오후 선택</label>
+                                <div class="form-inline col-md-10">
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="ampm_new"  type="checkbox" class="custom-control-input" value="1" checked>
+                                        <span class="custom-control-label">오전</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="ampm_new"  type="checkbox" class="custom-control-input" value="2" checked>
+                                        <span class="custom-control-label">오후</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group row repeat_date_monthly_new repeat_week_monthly_new d-none">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold ">날짜/요일 반복</label>
+                                <div class="form-inline col-md-10">
+                                    <label class="custom-control custom-radio d-inline-block">
+                                        <input name="repeat_dnw_new" type="radio" class="custom-control-input" value="0" checked>
+                                        <span class="custom-control-label">날짜</span>
+                                    </label>
+                                    <label class="custom-control custom-radio d-inline-block">
+                                        <input name="repeat_dnw_new" type="radio" class="custom-control-input" value="1">
+                                        <span class="custom-control-label">요일</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group row repeat_date_monthly_new d-none ">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">날짜</label>
+                                <div class="form-inline col-md-10">
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="01">
+                                        <span class="custom-control-label">1  </span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="02">
+                                        <span class="custom-control-label">2  </span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="03">
+                                        <span class="custom-control-label">3  </span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="04">
+                                        <span class="custom-control-label">4  </span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="05">
+                                        <span class="custom-control-label">5  </span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="06">
+                                        <span class="custom-control-label">6  </span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="07">
+                                        <span class="custom-control-label">7  </span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="08">
+                                        <span class="custom-control-label">8  </span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="09">
+                                        <span class="custom-control-label">9  </span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="10">
+                                        <span class="custom-control-label">10</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="11">
+                                        <span class="custom-control-label">11</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="12">
+                                        <span class="custom-control-label">12</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="13">
+                                        <span class="custom-control-label">13</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="14">
+                                        <span class="custom-control-label">14</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="15">
+                                        <span class="custom-control-label">15</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="16">
+                                        <span class="custom-control-label">16</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="17">
+                                        <span class="custom-control-label">17</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="18">
+                                        <span class="custom-control-label">18</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="19">
+                                        <span class="custom-control-label">19</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="20">
+                                        <span class="custom-control-label">20</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="21">
+                                        <span class="custom-control-label">21</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="22">
+                                        <span class="custom-control-label">22</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="23">
+                                        <span class="custom-control-label">23</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="24">
+                                        <span class="custom-control-label">24</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="25">
+                                        <span class="custom-control-label">25</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="26">
+                                        <span class="custom-control-label">26</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="27">
+                                        <span class="custom-control-label">27</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="28">
+                                        <span class="custom-control-label">28</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="29">
+                                        <span class="custom-control-label">29</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="30">
+                                        <span class="custom-control-label">30</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="31">
+                                        <span class="custom-control-label">31</span>
+                                    </label>
+
+                                </div>
+                            </div>
+
+                            <!--매주 반복 선택-->
+                            <div class="form-group row repeat_week_monthly_new d-none ">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">주간</label>
+                                <div class="form-inline col-md-10">
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="weekNum" type="checkbox" class="custom-control-input" value="1">
+                                        <span class="custom-control-label">첫째주</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="weekNum" type="checkbox" class="custom-control-input" value="2">
+                                        <span class="custom-control-label">둘째주</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="weekNum" type="checkbox" class="custom-control-input" value="3">
+                                        <span class="custom-control-label">셋째주</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="weekNum" type="checkbox" class="custom-control-input" value="4">
+                                        <span class="custom-control-label">넷째주</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="weekNum" type="checkbox" class="custom-control-input" value="5">
+                                        <span class="custom-control-label">다섯째주</span>
+                                    </label>
+
+
+                                </div>
+                            </div>
+
+                            <!--매주 반복 선택-->
+                            <div class="form-group row repeat__weekly_new repeat_week_monthly_new d-none">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">요일</label>
+                                <div class="form-inline col-md-10">
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="day_new" type="checkbox" class="custom-control-input" value="1">
+                                        <span class="custom-control-label">월요일</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="day_new" type="checkbox" class="custom-control-input" value="2">
+                                        <span class="custom-control-label">화요일</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="day_new" type="checkbox" class="custom-control-input" value="3">
+                                        <span class="custom-control-label">수요일</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="day_new" type="checkbox" class="custom-control-input" value="4">
+                                        <span class="custom-control-label">목요일</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="day_new" type="checkbox" class="custom-control-input" value="5">
+                                        <span class="custom-control-label">금요일</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="day_new" type="checkbox" class="custom-control-input" value="6">
+                                        <span class="custom-control-label">토요일</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="day_new" type="checkbox" class="custom-control-input" value="0">
+                                        <span class="custom-control-label">일요일</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group row repeat__weekly_new repeat_date_monthly_new repeat_week_monthly_new d-none">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">규칙 적용기간</label>
+                                <div class="form-inline col-md-6">
+
+                                    <label class="custom-control custom-radio d-inline-block">
+                                        <input name="ruleTerm" type="radio" class="custom-control-input" value="99" checked>
+                                        <span class="custom-control-label">직접 선택</span>
+                                    </label>
+
+                                    <label class="custom-control custom-radio d-inline-block">
+                                        <input name="ruleTerm" type="radio" class="custom-control-input"  value="1">
+                                        <span class="custom-control-label">1개월</span>
+                                    </label>
+                                    <label class="custom-control custom-radio d-inline-block">
+                                        <input name="ruleTerm" type="radio" class="custom-control-input" value="3">
+                                        <span class="custom-control-label">3개월</span>
+                                    </label>
+                                    <label class="custom-control custom-radio d-inline-block">
+                                        <input name="ruleTerm" type="radio" class="custom-control-input" value="6">
+                                        <span class="custom-control-label">6개월</span>
+                                    </label>
+
+                                </div>
+                            </div>
+
+
+
                             <div id="exist_req">
                                 <div class="form-group row">
-                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">구분</label>
+                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수</label>
                                     <div class="col-md-4">
-                                        <div class="form-control-plaintext">개인</div>
-                                    </div>
-                                </div>
-                                <div id="team_name_row" class="form-group row">
-                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">단체명</label>
-                                    <div class="col-md-4">
-                                        <div class="form-control-plaintext" id="team_name">이름</div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">신청인</label>
-                                    <div class="col-md-4">
-                                        <div class="form-control-plaintext">김태선</div>
-                                    </div>
-                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 인원</label>
-                                    <div class="col-md-4">
-                                        <div class="form-control-plaintext">4명</div>
+                                        <input type="text" id="possible_count" name="possible_count"  placeholder="숫자만 입력가능합니다" oninput="this.value = this.value.replace(/[^0-9]/g,'');">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">연락처</label>
-                                    <div class="col-md-4">
-                                        <div class="form-control-plaintext">010-0000-0000</div>
-                                    </div>
-                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">이메일</label>
-                                    <div class="col-md-4">
-                                        <div class="form-control-plaintext">tarfsnfl@sdlkfm.com</div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">거주지 주소</label>
+                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메모</label>
                                     <div class="col-md-10">
-                                        <div class="form-control-plaintext">(08099) 경기 뭐시 어떻구 그랬동 123 202동 2020호</div>
+                                        <textarea id="memo" name="memo"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 목적</label>
+                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">작성자</label>
                                     <div class="col-md-10">
-                                        <div class="form-control-plaintext">밥먹으러</div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">기타사전 질문</label>
-                                    <div class="col-md-10">
-                                        <div class="form-control-plaintext">화장실이 어디예요?</div>
+                                        <div class="form-control-plaintext">${admin.admin_name}</div>
                                     </div>
                                 </div>
                             </div>
-<%--                            <div id="none_req">--%>
-<%--                                <div class=""--%>
-<%--                            </div>--%>
+                            <%--                            <div id="none_req">--%>
+                            <%--                                <div class=""--%>
+                            <%--                            </div>--%>
 
 
                             <div class="modal-footer justify-content-between">
@@ -450,7 +794,9 @@
                 </div>
             </div>
         </div>
-    <!-- / Event modal -->
+
+
+
 </div>
 
 <!-- Layout footer -->
@@ -458,43 +804,110 @@
 <!-- / Layout footer -->
 <script>
 
+    $(document).ready(function(){
 
-    $(function() {
         var isRtl = $('html').attr('dir') === 'rtl';
         $('.datepickers').datepicker({
             orientation: isRtl ? 'auto right' : 'auto left'
         });
 
 
-        var today = new Date();
-        var y = today.getFullYear();
-        var m = today.getMonth();
-        var d = today.getDate();
+        let momthlyGettedData = function getEventVal(dateFormat){
+
+            let cal_data= new Array();
+
+            let start_date = new Date(dateFormat);
+            let end_date = new Date();
+
+            let today = {
+                start_date : start_date,
+                end_date : end_date
+            };
+
+            $.ajax({
+                type: 'post',
+                url: 'get_monthly_visit_data', //데이터를 주고받을 파일 주소 입력
+                data: JSON.stringify(today),//보내는 데이터
+                contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+                dataType: 'text',//받는 데이터 타입
+                async:false,
+                success:function (result){
+                    let data=JSON.parse(result);
+                    let array_data=data["visitDataVOList"];
+                    $.each(array_data, function(key, item) {
+                        var item1 = new Object();
+                        var item2 = new Object();
+
+                        var cur_date = new Date(item.cur_date);
+                        var y = cur_date.getFullYear();
+                        var m = cur_date.getMonth();
+                        var d = cur_date.getDate();
+
+                        var ampm = item.visit_data_type;
+                        if (ampm == 1) {
+                            item1.title = "방문:";
+                            item1.start = new Date(y, m, d, 8, 0);
+                            item1.classNames = 'fc-event-success';
+
+                            cal_data.push(item1);
+                        } else if (ampm == 2) {
+                            item1.title = "방문:";
+                            item1.start = new Date(y, m, d, 13, 0);
+                            item1.classNames = 'fc-event-success';
+                            cal_data.push(item1);
+                        } else {
+                            item1.title = "방문:";
+                            item1.start = new Date(y, m, d, 8, 0);
+                            item1.classNames = 'fc-event-success';
+                            cal_data.push(item1);
+                            item2.title = "방문:";
+                            item2.start = new Date(y, m, d, 13, 0);
+                            item2.classNames = 'fc-event-success';
+                            cal_data.push(item2);
+                        }
+                    });
+                }
+            });
+
+            return cal_data;
+        };
 
 
+        // var request=$.ajax({
+        //    url:'get_monthly_visit_data'
+        // });
+
+        let today = new Date();
+        let y = today.getFullYear();
+        let m = today.getMonth();
+        let d = today.getDate();
+        console.log("y : "  + y);
+        console.log("m : " +  m);
+        console.log("d : "  + d);
 
         // Default view
         // color classes: [ fc-event-success | fc-event-info | fc-event-warning | fc-event-danger | fc-event-dark ]
-        var defaultCalendar = new Calendar($('#fullcalendar-default-view')[0], {
-
-            /*customButtons: {
-                myWeekButton: {
-                    text: 'week',
-                    click: function() {
-                        //alert("Custom Button");
-                        $("#list_calendar").show();
-                        $("#month_calendar").hide();
-                    }
-                },
-                myDayButton: {
-                    text: 'day',
-                    click: function() {
-                        //alert("Custom Button");
-                        $("#list_calendar").show();
-                        $("#month_calendar").hide();
-                    }
-                }
-            },*/
+        let defaultCalendar = new Calendar($('#fullcalendar-default-view')[0], {
+            //여기부터
+            // customButtons: {
+            //     myWeekButton: {
+            //         text: 'week',
+            //         click: function() {
+            //             //alert("Custom Button");
+            //             $("#list_calendar").show();
+            //             $("#month_calendar").hide();
+            //         }
+            //     },
+            //     myDayButton: {
+            //         text: 'day',
+            //         click: function() {
+            //             //alert("Custom Button");
+            //             $("#list_calendar").show();
+            //             $("#month_calendar").hide();
+            //         }
+            //     }
+            // },
+            //여기까지
             plugins: [
                 calendarPlugins.bootstrap,
                 calendarPlugins.dayGrid,
@@ -513,13 +926,42 @@
                 nextYear: ' ion ion-ios-arrow-dropright-circle scaleX--1-rtl'
             },
 
-            /*headerToolbar: {
-                start: 'title',
-                center: 'dayGridMonth,myWeekButton,myDayButton',
-                end: 'prev,next today'
-            },*/
+            //여기부터
 
-            initialDate: today,
+            // headerToolbar: {
+            //     start: 'title',
+            //     center: 'dayGridMonth,myWeekButton,myDayButton',
+            //     end: 'prev,next today'
+            // },
+            //여기까지
+
+            // JK
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                // right: 'addEventButton dayGridMonth,timeGridWeek,timeGridDay'
+                right : 'addEventButton'
+            },
+
+            customButtons: {
+                addEventButton: {
+                    text:'일정 추가하기',
+                    click : function(){
+                        alert ('버튼클릭');
+                        alert(today);
+                        var x = new Date();
+
+                        $("#saveVisitData").find("input[name='sDate']").val(x.yyyymmdd());
+                        $("#saveVisitData").find("input[name='eDate']").val(x.yyyymmdd());
+                        $("#saveVisitData").modal('show');
+
+
+                    }
+                }
+            },
+            //
+
+            // initialDate: today,
             navLinks: true, // can click day/week names to navigate views
             selectable: true,
             weekNumbers: false, // Show week numbers
@@ -536,6 +978,7 @@
             aspectRatio: 2.0,
 
             locale: 'ko',
+
             views: {
                 dayGrid: {
                     dayMaxEventRows: 5
@@ -543,13 +986,15 @@
             },
             select: function (selectionData) {
 
-/*                var isOneDay = function (startStr, endStr) {
-                    var start = new Date(startStr);
-                    start.setDate(start.getDate() + 1);
-                    return start.toString() === new Date(endStr).toString();
-                }*/
+                //여기부터
+                // var isOneDay = function (startStr, endStr) {
+                //     var start = new Date(startStr);
+                //     start.setDate(start.getDate() + 1);
+                //     return start.toString() === new Date(endStr).toString();
+                // }
+                //여기까지
 
-
+                //여기부터
                 // $('#visit-req-modal').on('shown.bs.modal', function() {
                 //
                 //         //달력 날짜 선택했을때
@@ -619,8 +1064,6 @@
                 //
                 //
                 //
-                //
-                //
                 //     })
                 //     .on('hidden.bs.modal', function() {
                 //
@@ -633,8 +1076,9 @@
                 //         e.preventDefault();
                 //         var title = $(this).find('input[type="text"]').val();
                 //         var className = $(this).find('select').val() || null;
-                //
-                //         /*if (title) {
+                //         //여기부터
+                //         /*
+                //         if (title) {
                 //             var eventData = {
                 //                 title: title,
                 //                 start: selectionData.startStr,
@@ -644,92 +1088,116 @@
                 //             }
                 //             defaultCalendar.addEvent(eventData);
                 //         }*/
-                //
+                //         //여기까지
                 //         $(this).modal('hide');
                 //     })
                 //     .modal('show');
+                //여기까지
                 console.log(selectionData);
-                $('#modal_reservation_now').modal('show');
-                var startDate = new Date(selectionData.startStr);
-                $('#repeat_none_datepicker').children('input[name="start"]').val(startDate.yyyymmdd());
+                alert('달력날짜클릭');
+                // $('#modal_reservation_now').modal('show');
+                // var startDate = new Date(selectionData.startStr);
+                // $('#repeat_none_datepicker').children('input[name="start"]').val(startDate.yyyymmdd());
             },
-            eventSources: [{
-                events: function(info, successCallback, failureCallback) {
 
-                    var cal_data= new Array();
+            events : momthlyGettedData(new Date())
+            ,
 
-                    var today = {
-                        start_date: new Date(),
-                        end_date: new Date()
-                    }
-                    $.ajax({
-                        type: 'post',
-                        url: 'get_monthly_visit_data', //데이터를 주고받을 파일 주소 입력
-                        data: JSON.stringify(today),//보내는 데이터
-                        contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
-                        dataType: 'text',//받는 데이터 타입
-                        success: function (result) {
-                            //작업이 성공적으로 발생했을 경우
-                            var data = JSON.parse(result);
-                            var array_data = data["visitDataVOList"];
+            // eventSources: [{
+            //     events: function(info, successCallback, failureCallback) {
+            //         console.log("info : json.stringify(info ) : " + JSON.stringify(info));
+            //         console.log(info["startStr"]);
+            //         console.log(info["end"]);
+            //         console.log("startStr new date () : "  + new Date(info["startStr"]));
+            //         console.log("timezone : " +  info["timeZone"]);
+            //         console.log("info.start.valueof : " +  info.start.valueOf());
+            //         // console.log(defaultCalendar.getDate());
+            //
+            //         let cal_data= new Array();
+            //
+            //         // let start_date = new Date(defaultCalendar.getDate());
+            //         let start_date = new Date();
+            //         let end_date = new Date();
+            //
+            //         let today = {
+            //             // start_date: new Date(),
+            //             // end_date: new Date()
+            //             start_date : start_date,
+            //             end_date : end_date
+            //         }
+            //
+            //         // var today = {
+            //         //     start_date :  new Date("2022-01-01"),
+            //         //     end_date : new Date("2022-01-10")
+            //         // }
+            //
+            //         $.ajax({
+            //             type: 'post',
+            //             url: 'get_monthly_visit_data', //데이터를 주고받을 파일 주소 입력
+            //             data: JSON.stringify(today),//보내는 데이터
+            //             contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+            //             dataType: 'text',//받는 데이터 타입
+            //             success: function (result) {
+            //                 //작업이 성공적으로 발생했을 경우
+            //                 var data = JSON.parse(result);
+            //                 var array_data = data["visitDataVOList"];
+            //
+            //
+            //                 $.each(array_data, function(key, item)
+            //                 {
+            //                     var item1 = new Object();
+            //                     var item2 = new Object();
+            //
+            //                     var cur_date = new Date(item.cur_date);
+            //                     var y = cur_date.getFullYear();
+            //                     var m = cur_date.getMonth();
+            //                     var d = cur_date.getDate();
+            //
+            //                     var ampm=item.visit_data_type;
+            //                     if(ampm==1){
+            //                         item1.title="방문:";
+            //                         item1.start= new Date(y, m, d, 8, 0);
+            //                         item1.classNames='fc-event-success';
+            //
+            //                         cal_data.push(item1);
+            //                     }else if(ampm==2){
+            //                         item1.title="방문:";
+            //                         item1.start= new Date(y, m, d, 13, 0);
+            //                         item1.classNames='fc-event-success';
+            //                         cal_data.push(item1);
+            //                     }else{
+            //                         item1.title="방문:";
+            //                         item1.start= new Date(y, m, d, 8, 0);
+            //                         item1.classNames='fc-event-success';
+            //                         cal_data.push(item1);
+            //                         item2.title="방문:";
+            //                         item2.start= new Date(y, m, d, 13, 0);
+            //                         item2.classNames='fc-event-success';
+            //                         cal_data.push(item2);
+            //                     }
+            //                 });
+            //                 console.log("defaultCalendar : " +  defaultCalendar.getDate());
+            //                 successCallback(cal_data);
+            //                 console.log(cal_data);
+            //             },
+            //             error: function () {
+            //                 //에러가 났을 경우 실행시킬 코드
+            //             }
+            //         });
+            //     }
+            // }],
 
-                            $.each(array_data, function(key, item)
-                            {
-                                var item1 = new Object();
-                                var item2 = new Object();
 
-                                var cur_date = new Date(item.cur_date);
-                                var y = cur_date.getFullYear();
-                                var m = cur_date.getMonth();
-                                var d = cur_date.getDate();
-
-                                var ampm=item.visit_data_type;
-                                if(ampm==1){
-                                    item1.title="방문:";
-                                    item1.start= new Date(y, m, d, 8, 0);
-                                    item1.classNames='fc-event-success';
-
-                                    cal_data.push(item1);
-                                }else if(ampm==2){
-                                    item1.title="방문:";
-                                    item1.start= new Date(y, m, d, 13, 0);
-                                    item1.classNames='fc-event-success';
-                                    cal_data.push(item1);
-                                }else{
-                                    item1.title="방문:";
-                                    item1.start= new Date(y, m, d, 8, 0);
-                                    item1.classNames='fc-event-success';
-                                    cal_data.push(item1);
-                                    item2.title="방문:";
-                                    item2.start= new Date(y, m, d, 13, 0);
-                                    item2.classNames='fc-event-success';
-                                    cal_data.push(item2);
-                                }
-                            });
-                            successCallback(cal_data);
-                        },
-                        error: function () {
-                            //에러가 났을 경우 실행시킬 코드
-                        }
-                    });
-                }
-            }],
             eventClick: function(calEvent) {
 
-                //alert('Event: ' + calEvent.event.title);
+                alert('Event: ' + calEvent.event.title);
 
-            }
+            },
+
+
+
+
         });
-
-
-
-
-
-
-
-
-
-
 
         defaultCalendar.render();
 
@@ -743,18 +1211,27 @@
             }
         });
 
+        $("button.fc-today-button").click(function(){
+
+            defaultCalendar.removeAllEvents();
+            defaultCalendar.addEventSource(momthlyGettedData(defaultCalendar.getDate()));
+            defaultCalendar.refetchEvents();
+
+
+        });
+
         $("button.fc-next-button").click(function(){
 
-            //var date = new Date($('#fullcalendar-default-view').fullCalendar("getDate"));
+            defaultCalendar.removeAllEvents();
+            defaultCalendar.addEventSource(momthlyGettedData(defaultCalendar.getDate()));
+            defaultCalendar.refetchEvents();
+        });
 
-            //alert();
-            //console.log(date.yyyymmdd());
-            var currentDate = defaultCalendar.getDate();
-            //var calDate = currentDate.format('DD.MM.YYYY');
-            console.log(currentDate.yyyymmdd());
+        $("button.fc-prev-button").click(function (){
+            defaultCalendar.removeAllEvents();
+            defaultCalendar.addEventSource(momthlyGettedData(defaultCalendar.getDate()));
+            defaultCalendar.refetchEvents();
 
-            enableRequest = false;
-            setTimeout(setEnabled(), 2000);
         });
 
 
@@ -785,8 +1262,6 @@
             });
         }
 
-
-
         $('#datepicker-base').datepicker({
             format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
             startDate: '-1d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
@@ -816,231 +1291,263 @@
         });//datepicker end
 
 
-        $("input:radio[name=repeat_type]").click(function()
-        {
-            var repeat_type = $("input:radio[name='repeat_type']:checked").val( ) ;
-           if(repeat_type=='0'){
-               $(".repeat__weekly").addClass('d-none');
-               $(".repeat_date_monthly").addClass('d-none');
-               $(".repeat_week_monthly").addClass('d-none');
-               $(".repeat__none").removeClass('d-none');
-           }else if(repeat_type=='1'){
-               $(".repeat_date_monthly").addClass('d-none');
-               $(".repeat_week_monthly").addClass('d-none');
-               $(".repeat__none").addClass('d-none');
-               $(".repeat__weekly").removeClass('d-none');
-           }else if(repeat_type=='2'){
-
-               $(".repeat__weekly").addClass('d-none');
-               $(".repeat__none").addClass('d-none');
-
-               var repeat_date_n_week = $("input:radio[name='repeat_dnw']:checked").val( ) ;
-
-               if(repeat_date_n_week=='0'){
-
-                   $(".repeat_week_monthly").addClass('d-none');
-                   $(".repeat_date_monthly").removeClass('d-none');
-               }else {
-                   $(".repeat_date_monthly").addClass('d-none');
-                   $(".repeat_week_monthly").removeClass('d-none');
-               }
-           }
-        });
-        $("input:radio[name=repeat_dnw]").click(function()
-        {
-            var repeat_date_n_week = $("input:radio[name='repeat_dnw']:checked").val( ) ;
-            if(repeat_date_n_week=='0'){
-                $(".repeat_week_monthly").addClass('d-none');
-                $(".repeat_date_monthly").removeClass('d-none');
-            }else if(repeat_date_n_week=='1'){
-
-                $(".repeat_date_monthly").addClass('d-none');
-                $(".repeat_week_monthly").removeClass('d-none');
-
-            }
-        });
-
-
-        $("#btn_add_date").click(function()
-        {
-            var repeat_type = $("input:radio[name='repeat_type']:checked").val( );
-
-            if(repeat_type=='0'){
+        // $("input:radio[name=repeat_type]").click(function()
+        // {
+        //     var repeat_type = $("input:radio[name='repeat_type']:checked").val();
+        //    if(repeat_type=='0'){
+        //        $(".repeat__weekly").addClass('d-none');
+        //        $(".repeat_date_monthly").addClass('d-none');
+        //        $(".repeat_week_monthly").addClass('d-none');
+        //        $(".repeat__none").removeClass('d-none');
+        //    }else if(repeat_type=='1'){
+        //        $(".repeat_date_monthly").addClass('d-none');
+        //        $(".repeat_week_monthly").addClass('d-none');
+        //        $(".repeat__none").addClass('d-none');
+        //        $(".repeat__weekly").removeClass('d-none');
+        //    }else if(repeat_type=='2'){
+        //
+        //        $(".repeat__weekly").addClass('d-none');
+        //        $(".repeat__none").addClass('d-none');
+        //
+        //        var repeat_date_n_week = $("input:radio[name='repeat_dnw']:checked").val( ) ;
+        //
+        //        if(repeat_date_n_week=='0'){
+        //
+        //            $(".repeat_week_monthly").addClass('d-none');
+        //            $(".repeat_date_monthly").removeClass('d-none');
+        //        }else {
+        //            $(".repeat_date_monthly").addClass('d-none');
+        //            $(".repeat_week_monthly").removeClass('d-none');
+        //        }
+        //    }
+        // });
+        // $("input:radio[name=repeat_dnw]").click(function()
+        // {
+        //     var repeat_date_n_week = $("input:radio[name='repeat_dnw']:checked").val( ) ;
+        //     if(repeat_date_n_week=='0'){
+        //         $(".repeat_week_monthly").addClass('d-none');
+        //         $(".repeat_date_monthly").removeClass('d-none');
+        //     }else if(repeat_date_n_week=='1'){
+        //
+        //         $(".repeat_date_monthly").addClass('d-none');
+        //         $(".repeat_week_monthly").removeClass('d-none');
+        //
+        //     }
+        // });
 
 
-                var sDate = new Date($('#repeat_none_datepicker').children('input[name="start"]').val());
-                var eDate = new Date($('#repeat_none_datepicker').children('input[name="end"]').val());
+        // $("#btn_add_date").click(function()
+        // {
+        //     var repeat_type = $("input:radio[name='repeat_type']:checked").val( );
+        //
+        //     if(repeat_type=='0'){
+        //
+        //
+        //         var sDate = new Date($('#repeat_none_datepicker').children('input[name="start"]').val());
+        //         var eDate = new Date($('#repeat_none_datepicker').children('input[name="end"]').val());
+        //
+        //         let diffDate = eDate.getTime()-sDate.getTime();
+        //         const dateDays = Math.abs(diffDate / (1000 * 3600 * 24));
+        //
+        //         for(var i=0;i<dateDays;i++){
+        //
+        //             var ampm=0;
+        //             $('input:checkbox[name="ampm"]:checked').each(function() {
+        //                 ampm+=$(this).val();
+        //             });
+        //
+        //             var ampm_text = "오전, 오후";
+        //             if(ampm==1){
+        //                 ampm_text = "오전";
+        //             }else if(ampm==2){
+        //                 ampm_text = "오후";
+        //             }else{
+        //                 ampm_text = "오전, 오후";
+        //                 ampm=3;
+        //             }
+        //             var keyvalue_txt = sDate.yyyymmdd() + ", " + ampm_text;
+        //             var saved = "no";
+        //             var keyvalue=[sDate,ampm,saved];
+        //
+        //             if(isNotDuple(sDate)=="yes"){
+        //                 $("#available_visit_date_list")
+        //                     .append($("<option></option>")
+        //                         .attr("value", keyvalue)
+        //                         .text(keyvalue_txt));
+        //             }
+        //
+        //             //다음 날 셋팅
+        //             sDate.setHours(sDate.getHours()+24);
+        //         }
+        //
+        //         //console.log(dateDays);
+        //
+        //
+        //     }else if(repeat_type=='1'){
+        //
+        //
+        //
+        //
+        //
+        //     }else if(repeat_type=='2'){
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //     }
+        //
+        //
+        //
+        // });
 
-                let diffDate = eDate.getTime()-sDate.getTime();
-                const dateDays = Math.abs(diffDate / (1000 * 3600 * 24));
+        // function isNotDuple(sDate){
+        //
+        //     var result = "yes";
+        //     $('#available_visit_date_list').children().each(function() {
+        //
+        //         var keyvalue=$(this).val(h).split(',');//[sDate,ampm,var saved];
+        //         let list_item_date = new Date(keyvalue[0]);//	date						해당일
+        //         let saved = keyvalue[2];
+        //
+        //         if(sDate.yyyymmdd() == list_item_date.yyyymmdd() && saved =='yes'){
+        //             //console.log("찾았다. "+sDate.yyyymmdd() +","+list_item_date.yyyymmdd()+","+saved);
+        //             result = "no";
+        //             return false;
+        //         }
+        //     });
+        //     return result;
+        // }
 
-                for(var i=0;i<dateDays;i++){
-
-                    var ampm=0;
-                    $('input:checkbox[name="ampm"]:checked').each(function() {
-                        ampm+=$(this).val();
-                    });
-
-                    var ampm_text = "오전, 오후";
-                    if(ampm==1){
-                        ampm_text = "오전";
-                    }else if(ampm==2){
-                        ampm_text = "오후";
-                    }else{
-                        ampm_text = "오전, 오후";
-                        ampm=3;
-                    }
-                    var keyvalue_txt = sDate.yyyymmdd() + ", " + ampm_text;
-                    var saved = "no";
-                    var keyvalue=[sDate,ampm,saved];
-
-                    if(isNotDuple(sDate)=="yes"){
-                        $("#available_visit_date_list")
-                            .append($("<option></option>")
-                                .attr("value", keyvalue)
-                                .text(keyvalue_txt));
-                    }
-
-                    //다음 날 셋팅
-                    sDate.setHours(sDate.getHours()+24);
-                }
-
-                //console.log(dateDays);
+        // $('#available_visit_date_list').on('change',function (){
+        //     console.log('선택했다');
+        //     if($(this).children(":selected").length>0){
+        //         $("#btn_del_selected").attr('disabled', false);
+        //     }
+        //     else {
+        //         $("#btn_del_selected").attr('disabled', true);
+        //     }
+        // });
 
 
-            }else if(repeat_type=='1'){
+        // $("#btn_del_selected").click(function()
+        // {
+        //     var isSaved = "no";
+        //
+        //     $('#available_visit_date_list').children(":selected").each(function() {
+        //
+        //         var keyvalue=$(this).val().split(',');//[sDate,ampm,var saved];
+        //
+        //         let saved = keyvalue[2];
+        //         if(saved=='yes'){
+        //             isSaved="yes";
+        //             return false;
+        //         }
+        //     });
+        //
+        //     if(isSaved=="yes"){
+        //         if(confirm("DB에 저장된 데이터가 포함되어 있습니다. DB에서 삭제할까요?"))
+        //         {
+        //             //예
+        //             $('#available_visit_date_list').children(":selected").each(function() {
+        //                 $(this).remove();
+        //             });
+        //         }
+        //         else
+        //         {
+        //             return;
+        //         }
+        //     }else {
+        //         $('#available_visit_date_list').children(":selected").each(function() {
+        //             $(this).remove();
+        //         });
+        //     }
+        // });
 
-
-
-
-
-            }else if(repeat_type=='2'){
-
-
-
-
-
-
-
-            }
-
-
-
-        });
-
-        function isNotDuple(sDate){
-
-            var result = "yes";
-            $('#available_visit_date_list').children().each(function() {
-
-                var keyvalue=$(this).val().split(',');//[sDate,ampm,var saved];
-                let list_item_date = new Date(keyvalue[0]);//	date						해당일
-                let saved = keyvalue[2];
-
-                if(sDate.yyyymmdd() == list_item_date.yyyymmdd() && saved =='yes'){
-                    //console.log("찾았다. "+sDate.yyyymmdd() +","+list_item_date.yyyymmdd()+","+saved);
-                    result = "no";
-                    return false;
-                }
-            });
-            return result;
-        }
-
-        $('#available_visit_date_list').on('change',function (){
-            console.log('선택했다');
-            if($(this).children(":selected").length>0){
-                $("#btn_del_selected").attr('disabled', false);
-            }
-            else {
-                $("#btn_del_selected").attr('disabled', true);
-            }
-        });
-
-
-        $("#btn_del_selected").click(function()
-        {
-            var isSaved = "no";
-
-            $('#available_visit_date_list').children(":selected").each(function() {
-
-                var keyvalue=$(this).val().split(',');//[sDate,ampm,var saved];
-
-                let saved = keyvalue[2];
-                if(saved=='yes'){
-                    isSaved="yes";
-                    return false;
-                }
-            });
-
-            if(isSaved=="yes"){
-                if(confirm("DB에 저장된 데이터가 포함되어 있습니다. DB에서 삭제할까요?"))
-                {
-                    //예
-                    $('#available_visit_date_list').children(":selected").each(function() {
-                        $(this).remove();
-                    });
-                }
-                else
-                {
-                    return;
-                }
-            }else {
-                $('#available_visit_date_list').children(":selected").each(function() {
-                    $(this).remove();
-                });
-            }
-        });
-
-        $('#repeat_none_datepicker').datepicker({
+        $('#sDate').datepicker({
             orientation: 'auto left',
             format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
-            startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
-            language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+            // startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
+            language : "ko",	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+            startDate: new Date(),
+            autoclose : true,
+            onSelect:function (selected){
+                // $("#eDate").datepicker("option","minDate",selected)
+            }
+
+        });
+        $("#eDate").datepicker({
+            orientation: 'auto left',
+            startDate: new Date(),
+            format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
+            // startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
+            language : "ko"	,//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.})
+            autoclose : true
         });
 
 
-        $("#btn_visit_save").click(function()
-        {
-            let visitDataVOList = Array();
 
-            $('#available_visit_date_list').children().each(function() {
-                let item = new Object();
-                var keyvalue=$(this).val().split(',');//[sDate,ampm];
+        // $("#btn_visit_save").click(function()
+        // {
+        //     let visitDataVOList = Array();
+        //
+        //     $('#available_visit_date_list').children().each(function() {
+        //         let item = new Object();
+        //         var keyvalue=$(this).val().split(',');//[sDate,ampm];
+        //
+        //         item.cur_date = new Date(keyvalue[0]);//	date						해당일
+        //         item.visit_data_type = keyvalue[1]*1;//	number	4		0			0:관리자 취소, 1:오전, 2:오후, 3:오전오후(1+2), 4:전일
+        //         var possible_count = 0;
+        //         if(item.visit_data_type==1) possible_count = 1;
+        //         else if((item.visit_data_type==2)) possible_count = 1000;
+        //         else if((item.visit_data_type==3)) possible_count = 1001;
+        //         item.possible_count = possible_count;
+        //         visitDataVOList.push(item);
+        //     });
+        //
+        //
+        //     $.ajax({
+        //         type: 'post',
+        //         url: 'save_visit_date', //데이터를 주고받을 파일 주소 입력
+        //         data: JSON.stringify(visitDataVOList),//보내는 데이터
+        //         contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+        //         dataType: 'text',//받는 데이터 타입
+        //         success: function (result) {
+        //             //작업이 성공적으로 발생했을 경우
+        //
+        //             alert(result.result_str);
+        //
+        //
+        //             //STATUS_001 :
+        //         },
+        //         error: function () {
+        //             //에러가 났을 경우 실행시킬 코드
+        //         }
+        //     });
+        //
+        // });
 
-                item.cur_date = new Date(keyvalue[0]);//	date						해당일
-                item.visit_data_type = keyvalue[1]*1;//	number	4		0			0:관리자 취소, 1:오전, 2:오후, 3:오전오후(1+2), 4:전일
-                var possible_count = 0;
-                if(item.visit_data_type==1) possible_count = 1;
-                else if((item.visit_data_type==2)) possible_count = 1000;
-                else if((item.visit_data_type==3)) possible_count = 1001;
-                item.possible_count = possible_count;
-                visitDataVOList.push(item);
-            });
+        $('#saveVisitData').on('hidden.bs.modal', function (e) {
 
+            $(".repeat__weekly_new").addClass('d-none');
+            $(".repeat_date_monthly_new").addClass('d-none');
+            $(".repeat_week_monthly_new").addClass('d-none');
+            $(".repeat__none_new").removeClass('d-none');
+            defaultCalendar.refetchEvents();
+            $(this).find('form')[0].reset();
+            // $("#defaultCalendar").fullCalendar('refetchEvents');
+            // $("#defaultCalendar").fullCalendar('destroy');
+            // defaultCalendar.destroy();
 
-            $.ajax({
-                type: 'post',
-                url: 'save_visit_date', //데이터를 주고받을 파일 주소 입력
-                data: JSON.stringify(visitDataVOList),//보내는 데이터
-                contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
-                dataType: 'text',//받는 데이터 타입
-                success: function (result) {
-                    //작업이 성공적으로 발생했을 경우
-
-                    alert(result.result_str);
-
-
-                    //STATUS_001 :
-                },
-                error: function () {
-                    //에러가 났을 경우 실행시킬 코드
-                }
-            });
-
+            // defaultCalendar.fullCalendar('rerenderEvents');
+            // var defaultCalendar = new Calendar($('#fullcalendar-default-view')[0], {
         });
 
+    }); //document ready 의 끝
 
-    });
+
     Date.prototype.yyyymmdd = function() {
         var mm = this.getMonth() + 1; // getMonth() is zero-based
         var dd = this.getDate();
@@ -1050,6 +1557,365 @@
             (dd>9 ? '' : '0') + dd
         ].join('-');
     };
+
+    function convertDate(date){
+        let cDate=new Date(date);
+        alert(cDate.yyyymmdd());
+    }
+
+    //jk
+    //MODAL 초기화
+    // $('#saveVisitData').on('hidden.bs.modal', function (e) {
+    //
+    //     $(".repeat__weekly_new").addClass('d-none');
+    //     $(".repeat_date_monthly_new").addClass('d-none');
+    //     $(".repeat_week_monthly_new").addClass('d-none');
+    //     $(".repeat__none_new").removeClass('d-none');
+    //     defaultCalendar.refetchEvents();
+    //     $(this).find('form')[0].reset();
+    //     // $("#defaultCalendar").fullCalendar('refetchEvents');
+    //     // $("#defaultCalendar").fullCalendar('destroy');
+    //     // defaultCalendar.destroy();
+    //
+    //     // defaultCalendar.fullCalendar('rerenderEvents');
+    //     // var defaultCalendar = new Calendar($('#fullcalendar-default-view')[0], {
+    // });
+
+
+
+    //x개월 기간별
+    $("input:radio[name='ruleTerm']").on('click',function (){
+        let tempRuleTerm=$(this).val();
+        let ss_temp_date=new Date($("#saveVisitData").find("input[name='sDate']").val());
+        let temp_year=ss_temp_date.getFullYear();
+        let temp_date =ss_temp_date.getDate();
+        let temp_mon=ss_temp_date.getMonth();
+
+        if(tempRuleTerm=='1'){
+            temp_mon+=1;
+            let temp_dateVal=new Date(temp_year,temp_mon,temp_date);
+            $("#saveVisitData").find("input[name='eDate']").val(temp_dateVal.yyyymmdd());
+            $("#saveVisitData").find("input[name='eDate']").attr('readonly',true);
+
+        }else if(tempRuleTerm=='3'){
+            temp_mon+=3;
+            let temp_dateVal=new Date(temp_year,temp_mon,temp_date);
+            $("#saveVisitData").find("input[name='eDate']").val(temp_dateVal.yyyymmdd());
+            $("#saveVisitData").find("input[name='eDate']").attr('readonly',true);
+
+        }else if(tempRuleTerm=='6'){
+            temp_mon+=6;
+            let temp_dateVal=new Date(temp_year,temp_mon,temp_date);
+            $("#saveVisitData").find("input[name='eDate']").val(temp_dateVal.yyyymmdd());
+            $("#saveVisitData").find("input[name='eDate']").attr('readonly',true);
+
+        }else if(tempRuleTerm=='99'){
+            $("#saveVisitData").find("input[name='eDate']").val(new Date($("#saveVisitData").find("input[name='sDate']").val()).yyyymmdd());
+            $("#saveVisitData").find("input[name='eDate']").attr('readonly',false);
+        }
+
+
+
+    });
+
+
+    //견학관리일정 저장
+    $("#btn_save_new").on('click',function (){
+
+        var ssDate=new Date($("#saveVisitData").find("input[name='sDate']").val());
+        var eeDate=new Date($("#saveVisitData").find("input[name='eDate']").val());
+        var result=getDatesStartToLast(ssDate,eeDate);
+
+
+        $("#possible_count").keyup(function (event){
+            var inputVal = $(this).val();
+            $(this).val(inputVal.replace(/[^0-9]/gi,''));
+
+        });
+        let possible_count=$("#possible_count").val();
+        let memo=$("#memo").val();
+        let visit_data_type=0;
+
+        $("input:checkbox[name='ampm_new']:checked").each(function (){
+            visit_data_type+=parseInt($(this).val());
+        });
+
+        let visitDataVoNewList=new Array();
+        let repeat_type_new = $("input:radio[name='repeat_type_new']:checked").val();
+
+
+        if(repeat_type_new=='0'){
+
+            for(let i=0;i<result.length;i++){
+                let visitDataVoNew={"memo":memo,"possible_count" :possible_count,"visit_data_type" : visit_data_type,"cur_date":""};
+                visitDataVoNew.cur_date=result[i];
+                visitDataVoNewList.push(visitDataVoNew);
+            }
+
+        }else if(repeat_type_new=='1'){
+
+            let dayChecked="";
+            $("input:checkbox[name='day_new']:checked").each(function (){
+                dayChecked+=$(this).val();
+            });
+
+            let tempDate_arr=[];
+            for(let i=0;i<result.length;i++){
+                let tempDate=new Date(result[i]);
+
+                for(let j=0;j<=6;j++){
+                    if(dayChecked.includes(j)){
+                        if(tempDate.getDay()==j)tempDate_arr.push(result[i]);
+                    }
+
+                }
+                console.log(tempDate_arr);
+
+            };
+
+            for(let k=0;k<tempDate_arr.length;k++){
+                let visitDataVoNew={"memo":memo,"possible_count" :possible_count,"visit_data_type" : visit_data_type,"cur_date":""};
+                visitDataVoNew.cur_date=tempDate_arr[k];
+                visitDataVoNewList.push(visitDataVoNew);
+            }
+            console.log("visitDataVoNewList : " + visitDataVoNewList);
+            console.log("tempDate_arr : "  + tempDate_arr);
+
+        }else if(repeat_type_new=='2'){
+
+            if($("input:radio[name='repeat_dnw_new']:checked").val()=='0'){
+
+                alert('날짜별 함수호출');
+                let dateSelectedList="";
+                let tempDate_arr=[];
+
+                $("input:checkbox[name='dateNew']:checked").each(function(){
+                    dateSelectedList +=$(this).val()+",";
+                });
+
+                console.log("dateSelectedList : " + dateSelectedList);
+
+                for(let i=0;i<result.length;i++){
+                    let tempDate=new Date(result[i]);
+
+                    for(let j=1;j<=31;j++){
+                        if(dateSelectedList.includes(j)){
+                            if(tempDate.getDate()==j) tempDate_arr.push(result[i]);
+                        }
+                    }
+                }
+
+                console.log("tempDate_arr : " + tempDate_arr);
+
+                for(let k=0;k<tempDate_arr.length;k++){
+                    let visitDataVoNew={"memo":memo,"possible_count" :possible_count,"visit_data_type" : visit_data_type,"cur_date":""};
+                    visitDataVoNew.cur_date=tempDate_arr[k];
+                    visitDataVoNewList.push (visitDataVoNew);
+                }
+
+            }else if($("input:radio[name='repeat_dnw_new']:checked").val()=='1'){
+                alert('요일별호출');
+                let dayChecked="";
+                let weekNumChecked="";
+                let tempDate_arr=[];
+                $("input:checkbox[name='weekNum']:checked").each(function (){
+                    weekNumChecked+=$(this).val();
+                });
+
+                $("input:checkbox[name='day_new']:checked").each(function (){
+                    dayChecked+=$(this).val();
+                });
+
+                for(let i=0;i<result.length;i++){
+                    let tempDate=new Date(result[i]);
+
+                    if(weekNumChecked.includes(weekNumberByMonth(tempDate))&& dayChecked.includes(tempDate.getDay())){
+                        tempDate_arr.push(result[i]);
+                    }
+                }
+                console.log("dayChecked : "  + dayChecked);
+                console.log("weekNumChecked : " + weekNumChecked);
+
+                for(let k=0;k<tempDate_arr.length;k++){
+                    let visitDataVoNew={"memo":memo,"possible_count" :possible_count,"visit_data_type" : visit_data_type,"cur_date":""};
+                    visitDataVoNew.cur_date=tempDate_arr[k];
+                    visitDataVoNewList.push(visitDataVoNew);
+                }
+
+
+            };
+
+        }
+
+        console.log(visitDataVoNewList);
+
+        $.ajax({
+            type:'post',
+            url: 'save_visit_date', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(visitDataVoNewList),//보내는 데이터
+            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType: 'text',//받는 데이터 타입
+            success: function (result) {
+                //작업이 성공적으로 발생했을 경우
+                alert(result.result_str);
+                //STATUS_001 :
+            },
+            error: function (request,status,error) {
+                // alert(result.result_str);
+                //에러가 났을 경우 실행시킬 코드
+                alert("code : " + request.status + "\n" +  "message: "+  request.responseText +  "\n" + "error:" + error);
+
+            }
+
+
+        }); //ajax의 끝
+
+        alert('저장');
+    });
+
+    //데이트 구간값
+    function getDatesStartToLast(ssDate,eeDate){
+        // if(!(ssDate instanceof Date && eeDate instanceof Date)) return "Not Date Object";
+        var result =[];
+        while(ssDate.getTime() <= eeDate.getTime()){
+
+            var mon=(ssDate.getMonth()+1);
+            var day=(ssDate.getDate());
+
+            if(mon<10)mon="0"+mon;
+            if(day<10)day ="0"+day;
+
+            result.push(ssDate.getFullYear()+'-'+mon+'-'+day);
+            ssDate.setDate(ssDate.getDate()+1);
+
+        }
+        console.log("getDatesStartToLast : " + result);
+        return result;
+    }
+
+
+    //모달창 화면 상세설정
+    $("input:radio[name=repeat_type_new]").on('click',function (){
+
+        let repeat_type_new = $("input:radio[name='repeat_type_new']:checked").val();
+
+        if(repeat_type_new=='0'){
+
+            $(".repeat__weekly_new").addClass('d-none');
+            $(".repeat_date_monthly_new").addClass('d-none');
+            $(".repeat_week_monthly_new").addClass('d-none');
+            $(".repeat__none_new").removeClass('d-none');
+            alert('0');
+        }else if(repeat_type_new=='1'){
+            $(".repeat_date_monthly_new").addClass('d-none');
+            $(".repeat_week_monthly_new").addClass('d-none');
+            $(".repeat__none_new").addClass('d-none');
+            $(".repeat__weekly_new").removeClass('d-none');
+            alert('1');
+        }else if(repeat_type_new=='2'){
+
+            $(".repeat__weekly_new").addClass('d-none');
+            $(".repeat__none_new").addClass('d-none');
+
+            var repeat_date_n_week_new = $("input:radio[name='repeat_dnw_new']:checked").val() ;
+
+            if(repeat_date_n_week_new=='0'){
+
+                $(".repeat_week_monthly_new").addClass('d-none');
+                $(".repeat_date_monthly_new").removeClass('d-none');
+            }else {
+                $(".repeat_date_monthly_new").addClass('d-none');
+                $(".repeat_week_monthly_new").removeClass('d-none');
+            }
+            alert('2');
+        }
+
+        alert('버튼클릭 : ' + $(this).val());
+
+    });
+
+    $("input:radio[name=repeat_dnw_new]").click(function()
+    {
+        var repeat_date_n_week_new = $("input:radio[name='repeat_dnw_new']:checked").val( ) ;
+        if(repeat_date_n_week_new=='0'){
+            $(".repeat_week_monthly_new").addClass('d-none');
+            $(".repeat_date_monthly_new").removeClass('d-none');
+        }else if(repeat_date_n_week_new=='1'){
+
+            $(".repeat_date_monthly_new").addClass('d-none');
+            $(".repeat_week_monthly_new").removeClass('d-none');
+
+        }
+    });
+
+
+    function weekNumberByMonth(dateFormat) {
+        const inputDate = new Date(dateFormat);
+
+        // 인풋의 년, 월
+        let year = inputDate.getFullYear();
+        let month = inputDate.getMonth() + 1;
+
+        // 목요일 기준 주차 구하기
+        const weekNumberByThurFnc = (paramDate) => {
+
+            const year = paramDate.getFullYear();
+            const month = paramDate.getMonth();
+            const date = paramDate.getDate();
+
+            // 인풋한 달의 첫 날과 마지막 날의 요일
+            const firstDate = new Date(year, month, 1);
+            const lastDate = new Date(year, month+1, 0);
+            const firstDayOfWeek = firstDate.getDay() === 0 ? 7 : firstDate.getDay();
+            const lastDayOfweek = lastDate.getDay();
+
+            // 인풋한 달의 마지막 일
+            const lastDay = lastDate.getDate();
+
+            // 첫 날의 요일이 금, 토, 일요일 이라면 true
+            const firstWeekCheck = firstDayOfWeek === 5 || firstDayOfWeek === 6 || firstDayOfWeek === 7;
+            // 마지막 날의 요일이 월, 화, 수라면 true
+            const lastWeekCheck = lastDayOfweek === 1 || lastDayOfweek === 2 || lastDayOfweek === 3;
+
+            // 해당 달이 총 몇주까지 있는지
+            const lastWeekNo = Math.ceil((firstDayOfWeek - 1 + lastDay) / 7);
+
+            // 날짜 기준으로 몇주차 인지
+            let weekNo = Math.ceil((firstDayOfWeek - 1 + date) / 7);
+
+            // 인풋한 날짜가 첫 주에 있고 첫 날이 월, 화, 수로 시작한다면 'prev'(전달 마지막 주)
+            if(weekNo === 1 && firstWeekCheck) weekNo = 'prev';
+            // 인풋한 날짜가 마지막 주에 있고 마지막 날이 월, 화, 수로 끝난다면 'next'(다음달 첫 주)
+            else if(weekNo === lastWeekNo && lastWeekCheck) weekNo = 'next';
+            // 인풋한 날짜의 첫 주는 아니지만 첫날이 월, 화 수로 시작하면 -1;
+            else if(firstWeekCheck) weekNo = weekNo -1;
+
+            return weekNo;
+        };
+
+        // 목요일 기준의 주차
+        let weekNo = weekNumberByThurFnc(inputDate);
+
+        // 이전달의 마지막 주차일 떄
+        if(weekNo === 'prev') {
+            // 이전 달의 마지막날
+            const afterDate = new Date(year, month-1, 0);
+            year = month === 1 ? year - 1 : year;
+            month = month === 1 ? 12 : month - 1;
+            weekNo = weekNumberByThurFnc(afterDate);
+        }
+        // 다음달의 첫 주차일 때
+        if(weekNo === 'next') {
+            year = month === 12 ? year + 1 : year;
+            month = month === 12 ? 1 : month + 1;
+            weekNo = 1;
+        }
+
+        return weekNo;
+    }
+
+
+    //jk
 
 </script>
 
