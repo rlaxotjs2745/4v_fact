@@ -78,7 +78,7 @@
 
                 <div class="cnt__btn type--topborder">
                     <div class="btn__group">
-                        <c:if test="${is_login eq true}"><a href="#popup_visit" class="btn submit btn-jumbo  js-modal-detail">견학 신청서 작성</a></c:if>
+                        <c:if test="${is_login eq true}"><a href="#popup_visit" id="visit_not_warning"  class="btn submit btn-jumbo  js-modal-detail">견학 신청서 작성</a></c:if>
                         <c:if test="${is_login eq false}"><button href="void(0);" id="visit_warning" class="btn submit btn-jumbo  js-modal-detail">견학 신청서 작성</button></c:if>
 
                     </div>
@@ -145,7 +145,7 @@
                                 </tr>
                                 <tr>
                                     <th class="th__left">견학 인원<span class="text__essential">*</span></th>
-                                    <td class="td__left"><div class="input--group"><input id="visitor_count" type="number" placeholder="" style="width:80px;" class="user__input" /><span class="user__text">명</span></div></td>
+                                    <td class="td__left"><div class="input--group"><input id="visitor_count" type="number" placeholder="" min="1" style="width:80px;" class="user__input" /><span class="user__text">명</span></div></td>
                                 </tr>
                                 <tr>
                                     <th class="th__left">연락처<span class="text__essential">*</span></th>
@@ -351,15 +351,44 @@
         setVisitCalendar(today);
 
         $('#demoEvoCalendar').on('selectEvent', function(event, activeEvent) {
-            //alert("1");
+            // alert("1");
+
+
+            alert('evocalendar date 클릭 ');
             // code here...
         });
 
+
+        // getActiveDate
+        $('#demoEvoCalendar').on('selectDate',function (event,newDate,oldDate){
+            console.log("event : "  + event);
+            console.log("newDate : "  +  newDate);
+            console.log("oldDate :  " +oldDate);
+
+            let active_date = $ ("#demoEvoCalendar").evoCalendar('getActiveDate');
+
+            // getActiveEvents
+            let active_events = $('#demoEvoCalendar').evoCalendar('getActiveEvents');
+
+            console.log(active_events);
+
+            console.log(active_date);
+
+            // let json12345=JSON.stringify(event);
+            // console.log("json12345 : " + json12345);
+
+            // for (var key in event){
+            //     console.log("attr: " + key + ", value: " + event[key]);
+            // }
+
+
+            alert ('hi');
+        });
         getUserVisitList(1);
 
         $('#group_name_row').hide();
 
-    });
+    }); //document ready 의 끝
 
     function getUserVisitList(page){
         console.log(${idx_user});
@@ -498,21 +527,33 @@
             dataType: 'text',//받는 데이터 타입
             success: function (result) {
                 //작업이 성공적으로 발생했을 경우
-                var data = JSON.parse(result);
-                var array_data = data["visitDataVOList"];
+                let data = JSON.parse(result);
+                let array_data = data["visitDataVOList"];
 
                 $.each(array_data, function(key, item)
                 {
-                    var item1 = new Object();
-                    var item2 = new Object();
+                    let item1 = new Object();
+                    let item2 = new Object();
 
-                    var cur_date = new Date(item.cur_date);
-                    var y = cur_date.getFullYear();
-                    var m = cur_date.getMonth();
-                    var d = cur_date.getDate();
+                    let cur_date = new Date(item.cur_date);
+                    let y = cur_date.getFullYear();
+                    let m = cur_date.getMonth();
+                    let d = cur_date.getDate();
 
-                    var ampm=item.visit_data_type;
+                    let ampm=item.visit_data_type;
+
+                    // let possible_count=item.possible_count;
+                    // let resulvation_count=item.resulvation_count;
+                    //
+                    // console.log("possible_count : " + possible_count);
+                    // console.log("resulvation count  : " + resulvation_count );
+
+
                     if(ampm==1){
+
+                        // if(possible_count <=resulvation_count){
+                        //     item1.description="예약 불가";
+                        // }
                         item1.id= ""+Math.random();
                         item1.name="오전 방문";
                         item1.description="예약 가능";

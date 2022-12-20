@@ -673,6 +673,8 @@ public class APIController {
     public @ResponseBody
     ResultVO  get_monthly_visit_data(HttpSession session,
                              @RequestBody VisitDateVO visitDateVO){
+        System.out.println("-------------------------------------------");
+        System.out.println("hi : visitDateVO.getStart_date() : " + visitDateVO.getStart_date());
 
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("성공");
@@ -688,14 +690,28 @@ public class APIController {
     ResultVO  save_visit_date(HttpSession session,
                              @RequestBody List<VisitDataVO> visitDataVOList){
 
+        System.out.println(visitDataVOList.toString());
+
+
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("성공");
         resultVO.setResult_code("SUCCESS");
+
+        int groupIdx=visitService.getGroupIdx();
+        System.out.println("================================");
+        System.out.println("groupIdx : " +  groupIdx);
+        System.out.println("================================");
+
 
         if(visitDataVOList == null || visitDataVOList.isEmpty()){
             resultVO.setResult_str("저장할 데이터가 없습니다");
             resultVO.setResult_code("ERROR_1001");
             return resultVO;
+        }else{
+            for(VisitDataVO visitDataVO:visitDataVOList){
+                visitDataVO.setGroup_idx(groupIdx);
+                System.out.println(" visitDataVO.getGroup_idx : " +  visitDataVO.getGroup_idx());
+            }
         }
 
         visitService.saveOrUpdateHugeVisitData(visitDataVOList);

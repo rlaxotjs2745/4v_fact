@@ -109,6 +109,7 @@ public class VisitServiceImpl implements VisitService {
                 findVisitData.setVisit_data_type(visitDataVO.getVisit_data_type());
                 findVisitData.setMemo(visitDataVO.getMemo()==null?"":visitDataVO.getMemo());
                 findVisitData.setIdx_admin(visitDataVO.getIdx_admin());
+                findVisitData.setGroup_idx(visitDataVO.getGroup_idx());
 
                 this.sqlsession.update("kr.or.fact.core.model.VisitMapper.updateVisitData",findVisitData);
             }
@@ -121,6 +122,7 @@ public class VisitServiceImpl implements VisitService {
                 findVisitData.setImpossible_reason("");
                 findVisitData.setVisit_data_type(visitDataVO.getVisit_data_type());
                 findVisitData.setMemo(visitDataVO.getMemo()==null?"":visitDataVO.getMemo());
+                findVisitData.setGroup_idx(visitDataVO.getGroup_idx());
                 findVisitData.setIdx_admin(0);//idx_admin 추후 권한 관리에서 추가하는것으로
                 this.sqlsession.insert("kr.or.fact.core.model.VisitMapper.saveVisitData",findVisitData);
             }
@@ -184,6 +186,13 @@ public class VisitServiceImpl implements VisitService {
 
         return visitMapper.getDateVisitReqList(visitReqVO.getResulvation_date(), visitReqVO.getIs_duration());
     }
+
+    @Override
+    public int getGroupIdx() {
+        return visitMapper.getGroupIdx();
+    }
+
+
 }
 
 

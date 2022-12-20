@@ -453,6 +453,126 @@
 <%--            </div>--%>
 <%--        </div>--%>
 
+
+
+        <div class="modal fade" id="modifyOrDeleteVisitData">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-success">
+                        <h5 class="modal-title text-white font-weight-bold">일정 상세</h5>
+                        <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="modifyOrDeleteVisitDataForm">
+                            <div class="form-group row">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">조건</label>
+                                <div class="form-inline col-md-10">
+
+                                    <label class="custom-control custom-radio d-inline-block">
+                                        <input name="dayOrGroup" type="radio" class="custom-control-input" value="1" checked>
+                                        <span class="custom-control-label">해당일</span>
+                                    </label>
+                                    <label class="custom-control custom-radio d-inline-block">
+                                        <input name="dayOrGroup" type="radio" class="custom-control-input" value="2">
+                                        <span class="custom-control-label">그룹</span>
+                                    </label>
+                                </div>
+                            </div>
+                           인덱스 <input type="text" name="idx_visit_data"> <!--인덱스 -->
+                            해당일 <input type="text" name="cur_date">   <!--해당일 -->
+                            <div class="form-group-row">
+
+
+
+
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수</label>
+                                <div class="col-md-4">
+                                    <input type="text" id="" name="possible_count"  placeholder="숫자만 입력가능합니다" oninput="this.value = this.value.replace(/[^0-9]/g,'');">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">예약 수</label>
+                                <div class="col-md-4">
+                                    <input type="text"  name="resulvation_count"  placeholder="숫자만 입력가능합니다" oninput="this.value = this.value.replace(/[^0-9]/g,'');">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">관리자 강제 취소</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="id_admin_cancel"  >
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">불가 이유</label>
+                                <div class="col-md-4">
+                                    <input type="text"  name="impossible_reason"  >
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">오전 / 오후 선택</label>
+                                <div class="form-inline col-md-10">
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="visit_data_type"  type="checkbox" class="custom-control-input" value="1" checked>
+                                        <span class="custom-control-label">오전</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="visit_data_type"  type="checkbox" class="custom-control-input" value="2" checked>
+                                        <span class="custom-control-label">오후</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메모</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="memo"  >
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">group_idx</label>
+                                <div class="col-md-4">
+                                    <input type="text" id="" name="group_idx"  >
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">작성자</label>
+                                <div class="col-md-4">
+                                    <input type="text" id="" name="">
+                                </div>
+                            </div>
+
+
+
+
+                        </form>
+                    </div>
+
+                    <div class="modal-footer justify-content-between">
+                        <div>
+                            <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
+                        </div>
+                        <div>
+                            <button id="btn_modify_new" type="button" class="btn btn-primary">수정</button>
+                            <button id="btn_delete_new" type="button" class="btn btn-primary">삭제</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade" id="saveVisitData">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -812,7 +932,7 @@
         });
 
 
-        let momthlyGettedData = function getEventVal(dateFormat){
+        let getMonthlyData = function getEventVal(dateFormat){
 
             let cal_data= new Array();
 
@@ -835,34 +955,119 @@
                     let data=JSON.parse(result);
                     let array_data=data["visitDataVOList"];
                     $.each(array_data, function(key, item) {
-                        var item1 = new Object();
-                        var item2 = new Object();
+                        let item1 = new Object();
+                        let item2 = new Object();
 
-                        var cur_date = new Date(item.cur_date);
-                        var y = cur_date.getFullYear();
-                        var m = cur_date.getMonth();
-                        var d = cur_date.getDate();
+                        let cur_date = new Date(item.cur_date);
+                        let y = cur_date.getFullYear();
+                        let m = cur_date.getMonth();
+                        let d = cur_date.getDate();
 
-                        var ampm = item.visit_data_type;
+                        let ampm = item.visit_data_type;
+
+                        let idx_visit_data=item.idx_visit_data;
+                        let visit_data_type=item.visit_data_type;
+                        let possible_count=item.possible_count;
+                        let resulvation_count=item.resulvation_count;
+                        let is_admin_cancel=item.is_admin_cancel;
+                        let impossible_reason=item.impossible_reason;
+                        let memo = item.memo;
+                        let group_idx=item.group_idx;
+                        let idx_admin=item.idx_admin;
+
+                        console.log("possible_count : " +  possible_count);
+                        console.log("resulvation_count : " + resulvation_count);
+                        console.log("is_admin_cancel : "  +is_admin_cancel);
+                        console.log("impossible_reason : " + impossible_reason);
+                        console.log("memo  :" +memo);
+                        console.log("group_idx : " + group_idx);
+                        console.log("idx_admin : " +idx_admin);
+
+
+                        //     long idx_visit_data;//	number	32			◯		인덱스	auto increase
+                        // Date cur_date;//	date						해당일
+                        // int possible_count;//	number	10		0			오전, 오후 각각에 해당, 별도로 설정하기 위해 1단위는 오전 천단위는 오후
+                        // int resulvation_count;//	number	10		0			오전, 오후 각각에 해당, 별도로 설정하기 위해 1단위는 오전 천단위는 오후
+                        // int is_admin_cancel;//	number	4		0			관리자 강제 취소	0:해당 없음, 1:강제취소, 강제 취소 시 예약자에게 알리는 업무를 위함
+                        // String impossible_reason;//	varchar2	400					불가 이유
+                        // int visit_data_type;//	number	4		0			0:관리자 취소, 1:오전, 2:오후, 3:오전오후(1+2), 4:전일
+                        // String memo;//	varchar2	1000					메모
+                        // long group_idx;//	number	32		0		◯	일괄 등록 시 그룹으로 묶기	그룹 삭제를 위해
+                        // long idx_admin;//	number	32				◯	작성자	idx_admin index pk
+                        // Date reg_date;//	date						최초 등록 일시
+
+
                         if (ampm == 1) {
+                            item1.id='a';
                             item1.title = "방문:";
                             item1.start = new Date(y, m, d, 8, 0);
-                            item1.classNames = 'fc-event-success';
+                            item1.color ='red';
+                            // item1.classNames = 'fc-event-success';
+
+                            item1.extendedProps = {
+                                idx_visit_data : idx_visit_data,
+                                cur_date : cur_date,
+                                visit_data_type : visit_data_type,
+                                possible_count : possible_count,
+                                resulvation_count: resulvation_count,
+                                is_admin_cancel : is_admin_cancel,
+                                impossible_reason :impossible_reason ,
+                                memo : memo,
+                                group_idx : group_idx,
+                                idx_admin: idx_admin
+                            };
 
                             cal_data.push(item1);
                         } else if (ampm == 2) {
+
                             item1.title = "방문:";
                             item1.start = new Date(y, m, d, 13, 0);
-                            item1.classNames = 'fc-event-success';
+                            // item1.classNames = 'fc-event-success';
+                            item1.extendedProps = {
+                                idx_visit_data : idx_visit_data,
+                                cur_date : cur_date,
+                                visit_data_type : visit_data_type,
+                                possible_count : possible_count,
+                                resulvation_count: resulvation_count,
+                                is_admin_cancel : is_admin_cancel,
+                                impossible_reason :impossible_reason ,
+                                memo : memo,
+                                group_idx : group_idx,
+                                idx_admin: idx_admin
+                            };
                             cal_data.push(item1);
                         } else {
                             item1.title = "방문:";
                             item1.start = new Date(y, m, d, 8, 0);
-                            item1.classNames = 'fc-event-success';
+                            // item1.classNames = 'fc-event-success';
+                            item1.extendedProps = {
+                                idx_visit_data : idx_visit_data,
+                                cur_date : cur_date,
+                                visit_data_type : visit_data_type,
+                                possible_count : possible_count,
+                                resulvation_count: resulvation_count,
+                                is_admin_cancel : is_admin_cancel,
+                                impossible_reason :impossible_reason ,
+                                memo : memo,
+                                group_idx : group_idx,
+                                idx_admin: idx_admin
+                            };
                             cal_data.push(item1);
                             item2.title = "방문:";
                             item2.start = new Date(y, m, d, 13, 0);
-                            item2.classNames = 'fc-event-success';
+                            // item2.classNames = 'fc-event-success';
+                            item2.extendedProps = {
+                                idx_visit_data : idx_visit_data,
+                                cur_date : cur_date,
+                                visit_data_type : visit_data_type,
+                                possible_count : possible_count,
+                                resulvation_count: resulvation_count,
+                                is_admin_cancel : is_admin_cancel,
+                                impossible_reason :impossible_reason ,
+                                memo : memo,
+                                group_idx : group_idx,
+                                idx_admin: idx_admin
+                            };
                             cal_data.push(item2);
                         }
                     });
@@ -908,6 +1113,7 @@
             //     }
             // },
             //여기까지
+
             plugins: [
                 calendarPlugins.bootstrap,
                 calendarPlugins.dayGrid,
@@ -926,16 +1132,6 @@
                 nextYear: ' ion ion-ios-arrow-dropright-circle scaleX--1-rtl'
             },
 
-            //여기부터
-
-            // headerToolbar: {
-            //     start: 'title',
-            //     center: 'dayGridMonth,myWeekButton,myDayButton',
-            //     end: 'prev,next today'
-            // },
-            //여기까지
-
-            // JK
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
@@ -1093,106 +1289,45 @@
                 //     })
                 //     .modal('show');
                 //여기까지
-                console.log(selectionData);
-                alert('달력날짜클릭');
+                // console.log(selectionData);
+                // alert('달력날짜클릭');
+
+                // console.log("getDate : "  + defaultCalendar.getDate());
+                // alert("GETdate : " +  defaultCalendar.getDate());
                 // $('#modal_reservation_now').modal('show');
                 // var startDate = new Date(selectionData.startStr);
                 // $('#repeat_none_datepicker').children('input[name="start"]').val(startDate.yyyymmdd());
             },
 
-            events : momthlyGettedData(new Date())
-            ,
-
-            // eventSources: [{
-            //     events: function(info, successCallback, failureCallback) {
-            //         console.log("info : json.stringify(info ) : " + JSON.stringify(info));
-            //         console.log(info["startStr"]);
-            //         console.log(info["end"]);
-            //         console.log("startStr new date () : "  + new Date(info["startStr"]));
-            //         console.log("timezone : " +  info["timeZone"]);
-            //         console.log("info.start.valueof : " +  info.start.valueOf());
-            //         // console.log(defaultCalendar.getDate());
-            //
-            //         let cal_data= new Array();
-            //
-            //         // let start_date = new Date(defaultCalendar.getDate());
-            //         let start_date = new Date();
-            //         let end_date = new Date();
-            //
-            //         let today = {
-            //             // start_date: new Date(),
-            //             // end_date: new Date()
-            //             start_date : start_date,
-            //             end_date : end_date
-            //         }
-            //
-            //         // var today = {
-            //         //     start_date :  new Date("2022-01-01"),
-            //         //     end_date : new Date("2022-01-10")
-            //         // }
-            //
-            //         $.ajax({
-            //             type: 'post',
-            //             url: 'get_monthly_visit_data', //데이터를 주고받을 파일 주소 입력
-            //             data: JSON.stringify(today),//보내는 데이터
-            //             contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
-            //             dataType: 'text',//받는 데이터 타입
-            //             success: function (result) {
-            //                 //작업이 성공적으로 발생했을 경우
-            //                 var data = JSON.parse(result);
-            //                 var array_data = data["visitDataVOList"];
-            //
-            //
-            //                 $.each(array_data, function(key, item)
-            //                 {
-            //                     var item1 = new Object();
-            //                     var item2 = new Object();
-            //
-            //                     var cur_date = new Date(item.cur_date);
-            //                     var y = cur_date.getFullYear();
-            //                     var m = cur_date.getMonth();
-            //                     var d = cur_date.getDate();
-            //
-            //                     var ampm=item.visit_data_type;
-            //                     if(ampm==1){
-            //                         item1.title="방문:";
-            //                         item1.start= new Date(y, m, d, 8, 0);
-            //                         item1.classNames='fc-event-success';
-            //
-            //                         cal_data.push(item1);
-            //                     }else if(ampm==2){
-            //                         item1.title="방문:";
-            //                         item1.start= new Date(y, m, d, 13, 0);
-            //                         item1.classNames='fc-event-success';
-            //                         cal_data.push(item1);
-            //                     }else{
-            //                         item1.title="방문:";
-            //                         item1.start= new Date(y, m, d, 8, 0);
-            //                         item1.classNames='fc-event-success';
-            //                         cal_data.push(item1);
-            //                         item2.title="방문:";
-            //                         item2.start= new Date(y, m, d, 13, 0);
-            //                         item2.classNames='fc-event-success';
-            //                         cal_data.push(item2);
-            //                     }
-            //                 });
-            //                 console.log("defaultCalendar : " +  defaultCalendar.getDate());
-            //                 successCallback(cal_data);
-            //                 console.log(cal_data);
-            //             },
-            //             error: function () {
-            //                 //에러가 났을 경우 실행시킬 코드
-            //             }
-            //         });
-            //     }
-            // }],
-
+            events : getMonthlyData(new Date()),
 
             eventClick: function(calEvent) {
+                alert('event 클릭 ' ) ;
 
-                alert('Event: ' + calEvent.event.title);
+                let visitData=calEvent.event.extendedProps;
+
+
+                $("#modifyOrDeleteVisitData").find("input[name='idx_visit_data']").val(visitData.idx_visit_data);
+                $("#modifyOrDeleteVisitData").find("input[name='cur_date']").val(new Date(visitData.cur_date).yyyymmdd());
+                $("#modifyOrDeleteVisitData").find("input[name='possible_count']").val(visitData.possible_count);
+                $("#modifyOrDeleteVisitData").find("input[name='resulvation_count']").val(visitData.resulvation_count);
+                $("#modifyOrDeleteVisitData").find("input[name='id_admin_cancel']").val(visitData.id_admin_cancel);
+                $("#modifyOrDeleteVisitData").find("input[name='impossible_reason']").val(visitData.impossible_reason);
+                $("#modifyOrDeleteVisitData").find("input[name='visit_data_type']").val(visitData.visit_data_type);
+                $("#modifyOrDeleteVisitData").find("input[name='memo']").val(visitData.memo);
+                $("#modifyOrDeleteVisitData").find("input[name='group_idx']").val(visitData.group_idx);
+
+                $("#modifyOrDeleteVisitData").modal('show');
+
+                // alert('Event: title' + calEvent.event.title);
+                console.log('calEvent : title ' +  calEvent.event.title);
+                console.log('calEvent : start  '  +  calEvent.event.start);
+                console.log("calEvent  id :  "  + calEvent.event.id);
+                console.log("calEvent  : " + calEvent.event.extendedProps);
 
             },
+
+
 
 
 
@@ -1201,66 +1336,61 @@
 
         defaultCalendar.render();
 
-        var enableRequest = true;
+        // var enableRequest = true;
+        //
+        // $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+        //     // Modify options, control originalOptions, store jqXHR, etc
+        //
+        //     if (!enableRequest ){
+        //         jqXHR.abort();
+        //     }
+        // });
 
-        $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-            // Modify options, control originalOptions, store jqXHR, etc
-
-            if (!enableRequest ){
-                jqXHR.abort();
-            }
-        });
-
-        $("button.fc-today-button").click(function(){
-
+        $("button.fc-today-button").on("click",function(){
             defaultCalendar.removeAllEvents();
-            defaultCalendar.addEventSource(momthlyGettedData(defaultCalendar.getDate()));
+            defaultCalendar.addEventSource(getMonthlyData(defaultCalendar.getDate()));
             defaultCalendar.refetchEvents();
-
-
         });
 
         $("button.fc-next-button").click(function(){
-
             defaultCalendar.removeAllEvents();
-            defaultCalendar.addEventSource(momthlyGettedData(defaultCalendar.getDate()));
+            defaultCalendar.addEventSource(getMonthlyData(defaultCalendar.getDate()));
             defaultCalendar.refetchEvents();
         });
 
         $("button.fc-prev-button").click(function (){
             defaultCalendar.removeAllEvents();
-            defaultCalendar.addEventSource(momthlyGettedData(defaultCalendar.getDate()));
+            defaultCalendar.addEventSource(getMonthlyData(defaultCalendar.getDate()));
             defaultCalendar.refetchEvents();
-
         });
 
+        //
+        // function setEnabled()
+        // {
+        //     enableRequest = true;
+        // }
 
-        function setEnabled()
-        {
-            enableRequest = true;
-        }
-
-        function getReservationInfo(date, dur){
-            var param = {
-                is_duration: dur,
-                resulvation_date: date
-            }
-
-            $.ajax({
-                type: 'get',
-                url: 'get_date_visit_req', //데이터를 주고받을 파일 주소 입력
-                data: JSON.stringify(param),//보내는 데이터
-                contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
-                dataType: 'json',//받는 데이터 타입
-                success: function (result) {
-                    console.log(result);
-
-                },
-                error: function (res) {
-                    console.log(res)
-                }
-            });
-        }
+        // function getReservationInfo(date, dur){
+        //     var param = {
+        //         is_duration: dur,
+        //         resulvation_date: date
+        //     }
+        //
+        //     $.ajax({
+        //         type: 'get',
+        //         url: 'get_date_visit_req', //데이터를 주고받을 파일 주소 입력
+        //         data: JSON.stringify(param),//보내는 데이터
+        //         contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+        //         dataType: 'json',//받는 데이터 타입
+        //         success: function (result) {
+        //             console.log(result);
+        //
+        //         },
+        //         error: function (res) {
+        //             console.log(res)
+        //         }
+        //     });
+        // }
 
         $('#datepicker-base').datepicker({
             format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
@@ -1535,15 +1665,21 @@
             $(".repeat_date_monthly_new").addClass('d-none');
             $(".repeat_week_monthly_new").addClass('d-none');
             $(".repeat__none_new").removeClass('d-none');
-            defaultCalendar.refetchEvents();
-            $(this).find('form')[0].reset();
-            // $("#defaultCalendar").fullCalendar('refetchEvents');
-            // $("#defaultCalendar").fullCalendar('destroy');
-            // defaultCalendar.destroy();
 
-            // defaultCalendar.fullCalendar('rerenderEvents');
-            // var defaultCalendar = new Calendar($('#fullcalendar-default-view')[0], {
+            defaultCalendar.removeAllEvents();
+            defaultCalendar.addEventSource(getMonthlyData(defaultCalendar.getDate()));
+            defaultCalendar.refetchEvents();
+
+            $(this).find('form')[0].reset();
         });
+
+        $("#modifyOrDeleteVisitData").on('hidden.bs.modal',function (){
+            defaultCalendar.removeAllEvents();
+            defaultCalendar.addEventSource(getMonthlyData(defaultCalendar.getDate()));
+            defaultCalendar.refetchEvents();
+        });
+
+
 
     }); //document ready 의 끝
 
@@ -1562,26 +1698,6 @@
         let cDate=new Date(date);
         alert(cDate.yyyymmdd());
     }
-
-    //jk
-    //MODAL 초기화
-    // $('#saveVisitData').on('hidden.bs.modal', function (e) {
-    //
-    //     $(".repeat__weekly_new").addClass('d-none');
-    //     $(".repeat_date_monthly_new").addClass('d-none');
-    //     $(".repeat_week_monthly_new").addClass('d-none');
-    //     $(".repeat__none_new").removeClass('d-none');
-    //     defaultCalendar.refetchEvents();
-    //     $(this).find('form')[0].reset();
-    //     // $("#defaultCalendar").fullCalendar('refetchEvents');
-    //     // $("#defaultCalendar").fullCalendar('destroy');
-    //     // defaultCalendar.destroy();
-    //
-    //     // defaultCalendar.fullCalendar('rerenderEvents');
-    //     // var defaultCalendar = new Calendar($('#fullcalendar-default-view')[0], {
-    // });
-
-
 
     //x개월 기간별
     $("input:radio[name='ruleTerm']").on('click',function (){
@@ -1614,10 +1730,7 @@
             $("#saveVisitData").find("input[name='eDate']").attr('readonly',false);
         }
 
-
-
     });
-
 
     //견학관리일정 저장
     $("#btn_save_new").on('click',function (){
@@ -1644,133 +1757,138 @@
         let repeat_type_new = $("input:radio[name='repeat_type_new']:checked").val();
 
 
-        if(repeat_type_new=='0'){
-
-            for(let i=0;i<result.length;i++){
-                let visitDataVoNew={"memo":memo,"possible_count" :possible_count,"visit_data_type" : visit_data_type,"cur_date":""};
-                visitDataVoNew.cur_date=result[i];
-                visitDataVoNewList.push(visitDataVoNew);
-            }
-
-        }else if(repeat_type_new=='1'){
-
-            let dayChecked="";
-            $("input:checkbox[name='day_new']:checked").each(function (){
-                dayChecked+=$(this).val();
-            });
-
-            let tempDate_arr=[];
-            for(let i=0;i<result.length;i++){
-                let tempDate=new Date(result[i]);
-
-                for(let j=0;j<=6;j++){
-                    if(dayChecked.includes(j)){
-                        if(tempDate.getDay()==j)tempDate_arr.push(result[i]);
-                    }
-
-                }
-                console.log(tempDate_arr);
-
-            };
-
-            for(let k=0;k<tempDate_arr.length;k++){
-                let visitDataVoNew={"memo":memo,"possible_count" :possible_count,"visit_data_type" : visit_data_type,"cur_date":""};
-                visitDataVoNew.cur_date=tempDate_arr[k];
-                visitDataVoNewList.push(visitDataVoNew);
-            }
-            console.log("visitDataVoNewList : " + visitDataVoNewList);
-            console.log("tempDate_arr : "  + tempDate_arr);
-
-        }else if(repeat_type_new=='2'){
-
-            if($("input:radio[name='repeat_dnw_new']:checked").val()=='0'){
-
-                alert('날짜별 함수호출');
-                let dateSelectedList="";
-                let tempDate_arr=[];
-
-                $("input:checkbox[name='dateNew']:checked").each(function(){
-                    dateSelectedList +=$(this).val()+",";
-                });
-
-                console.log("dateSelectedList : " + dateSelectedList);
+        if(confirm("저장하시겠습니까?")==true){
+            if(repeat_type_new=='0'){
 
                 for(let i=0;i<result.length;i++){
-                    let tempDate=new Date(result[i]);
-
-                    for(let j=1;j<=31;j++){
-                        if(dateSelectedList.includes(j)){
-                            if(tempDate.getDate()==j) tempDate_arr.push(result[i]);
-                        }
-                    }
-                }
-
-                console.log("tempDate_arr : " + tempDate_arr);
-
-                for(let k=0;k<tempDate_arr.length;k++){
                     let visitDataVoNew={"memo":memo,"possible_count" :possible_count,"visit_data_type" : visit_data_type,"cur_date":""};
-                    visitDataVoNew.cur_date=tempDate_arr[k];
-                    visitDataVoNewList.push (visitDataVoNew);
+                    visitDataVoNew.cur_date=result[i];
+                    visitDataVoNewList.push(visitDataVoNew);
                 }
 
-            }else if($("input:radio[name='repeat_dnw_new']:checked").val()=='1'){
-                alert('요일별호출');
-                let dayChecked="";
-                let weekNumChecked="";
-                let tempDate_arr=[];
-                $("input:checkbox[name='weekNum']:checked").each(function (){
-                    weekNumChecked+=$(this).val();
-                });
+            }else if(repeat_type_new=='1'){
 
+                let dayChecked="";
                 $("input:checkbox[name='day_new']:checked").each(function (){
                     dayChecked+=$(this).val();
                 });
 
+                let tempDate_arr=[];
                 for(let i=0;i<result.length;i++){
                     let tempDate=new Date(result[i]);
 
-                    if(weekNumChecked.includes(weekNumberByMonth(tempDate))&& dayChecked.includes(tempDate.getDay())){
-                        tempDate_arr.push(result[i]);
+                    for(let j=0;j<=6;j++){
+                        if(dayChecked.includes(j)){
+                            if(tempDate.getDay()==j)tempDate_arr.push(result[i]);
+                        }
+
                     }
-                }
-                console.log("dayChecked : "  + dayChecked);
-                console.log("weekNumChecked : " + weekNumChecked);
+                    console.log(tempDate_arr);
+
+                };
 
                 for(let k=0;k<tempDate_arr.length;k++){
                     let visitDataVoNew={"memo":memo,"possible_count" :possible_count,"visit_data_type" : visit_data_type,"cur_date":""};
                     visitDataVoNew.cur_date=tempDate_arr[k];
                     visitDataVoNewList.push(visitDataVoNew);
                 }
+                console.log("visitDataVoNewList : " + visitDataVoNewList);
+                console.log("tempDate_arr : "  + tempDate_arr);
+
+            }else if(repeat_type_new=='2'){
+
+                if($("input:radio[name='repeat_dnw_new']:checked").val()=='0'){
+
+                    let dateSelectedList="";
+                    let tempDate_arr=[];
+
+                    $("input:checkbox[name='dateNew']:checked").each(function(){
+                        dateSelectedList +=$(this).val()+",";
+                    });
+
+                    console.log("dateSelectedList : " + dateSelectedList);
+
+                    for(let i=0;i<result.length;i++){
+                        let tempDate=new Date(result[i]);
+
+                        for(let j=1;j<=31;j++){
+                            if(dateSelectedList.includes(j)){
+                                if(tempDate.getDate()==j) tempDate_arr.push(result[i]);
+                            }
+                        }
+                    }
+
+                    console.log("tempDate_arr : " + tempDate_arr);
+
+                    for(let k=0;k<tempDate_arr.length;k++){
+                        let visitDataVoNew={"memo":memo,"possible_count" :possible_count,"visit_data_type" : visit_data_type,"cur_date":""};
+                        visitDataVoNew.cur_date=tempDate_arr[k];
+                        visitDataVoNewList.push (visitDataVoNew);
+                    }
+
+                }else if($("input:radio[name='repeat_dnw_new']:checked").val()=='1'){
+                    alert('요일별호출');
+                    let dayChecked="";
+                    let weekNumChecked="";
+                    let tempDate_arr=[];
+                    $("input:checkbox[name='weekNum']:checked").each(function (){
+                        weekNumChecked+=$(this).val();
+                    });
+
+                    $("input:checkbox[name='day_new']:checked").each(function (){
+                        dayChecked+=$(this).val();
+                    });
+
+                    for(let i=0;i<result.length;i++){
+                        let tempDate=new Date(result[i]);
+
+                        if(weekNumChecked.includes(weekNumberByMonth(tempDate))&& dayChecked.includes(tempDate.getDay())){
+                            tempDate_arr.push(result[i]);
+                        }
+                    }
+                    console.log("dayChecked : "  + dayChecked);
+                    console.log("weekNumChecked : " + weekNumChecked);
+
+                    for(let k=0;k<tempDate_arr.length;k++){
+                        let visitDataVoNew={"memo":memo,"possible_count" :possible_count,"visit_data_type" : visit_data_type,"cur_date":""};
+                        visitDataVoNew.cur_date=tempDate_arr[k];
+                        visitDataVoNewList.push(visitDataVoNew);
+                    }
 
 
-            };
-
-        }
-
-        console.log(visitDataVoNewList);
-
-        $.ajax({
-            type:'post',
-            url: 'save_visit_date', //데이터를 주고받을 파일 주소 입력
-            data: JSON.stringify(visitDataVoNewList),//보내는 데이터
-            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
-            dataType: 'text',//받는 데이터 타입
-            success: function (result) {
-                //작업이 성공적으로 발생했을 경우
-                alert(result.result_str);
-                //STATUS_001 :
-            },
-            error: function (request,status,error) {
-                // alert(result.result_str);
-                //에러가 났을 경우 실행시킬 코드
-                alert("code : " + request.status + "\n" +  "message: "+  request.responseText +  "\n" + "error:" + error);
+                };
 
             }
 
+            console.log(visitDataVoNewList);
 
-        }); //ajax의 끝
+            $.ajax({
+                type:'post',
+                url: 'save_visit_date', //데이터를 주고받을 파일 주소 입력
+                data: JSON.stringify(visitDataVoNewList),//보내는 데이터
+                contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+                dataType: 'text',//받는 데이터 타입
+                success: function (result) {
+                    //작업이 성공적으로 발생했을 경우
+                    alert(result.result_str);
+                    //STATUS_001 :
+                },
+                error: function (request,status,error) {
+                    // alert(result.result_str);
+                    //에러가 났을 경우 실행시킬 코드
+                    alert("code : " + request.status + "\n" +  "message: "+  request.responseText +  "\n" + "error:" + error);
 
-        alert('저장');
+                }
+
+
+            }); //ajax의 끝
+
+            alert('저장');
+        }else{
+            return false;
+        }
+
+
     });
 
     //데이트 구간값
@@ -1915,7 +2033,85 @@
     }
 
 
-    //jk
+    //해당일 그룹 구분
+
+    $("#modifyOrDeleteVisitData").find("input:radio[name='dayOrGroup']").on('change',function (){
+
+        alert($(this).val());
+
+        if($(this).val()==1){
+
+        }else if($(this).val()==2){
+
+        }
+
+    });
+
+
+    $("#btn_delete_new").on('click',function (){
+
+        if(confirm("삭제하시겠습니까?")){
+
+            let idx_visit_data=$("#modifyOrDeleteVisitData").find("input[name='idx_visit_data']").val();
+
+            let visitDataVoDelList=new Array();
+
+            let visitDataVoDel={
+                idx_visit_data : idx_visit_data
+            }
+
+
+            visitDataVoDelList.push(visitDataVoDel);
+
+            $.ajax({
+                type:'post',
+                url: '/delete_visit_date', //데이터를 주고받을 파일 주소 입력
+                data: JSON.stringify(visitDataVoDelList),//보내는 데이터
+                contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+                dataType: 'text',//받는 데이터 타입
+                success: function (result) {
+                    //작업이 성공적으로 발생했을 경우
+                    alert(result.result_str);
+                    //STATUS_001 :
+
+                },
+                error: function (request,status,error) {
+                    // alert(result.result_str);
+                    //에러가 났을 경우 실행시킬 코드
+                    alert("code : " + request.status + "\n" +  "message: "+  request.responseText +  "\n" + "error:" + error);
+
+                }
+
+
+            }); //ajax의 끝
+
+
+
+        }else{
+            return false;
+        }
+
+
+    });
+
+
+
+
+
+    $("#saveVisitData").find("input[name='sDate']").on('change',function(){
+
+        let sDate=$("#saveVisitData").find("input[name='sDate']").val();
+        let eDate=$("#saveVisitData").find("input[name='eDate']").val();
+
+        if(new Date(sDate).getTime() > new Date(eDate).getTime()){
+            $("#saveVisitData").find("input[name='eDate']").val(new Date(sDate).yyyymmdd());
+        }
+    });
+
+
+
+
+
 
 </script>
 

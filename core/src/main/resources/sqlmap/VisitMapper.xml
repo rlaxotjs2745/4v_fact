@@ -260,4 +260,10 @@
     <select id="getDateVisitReqList" resultType="kr.or.fact.core.model.DTO.VisitReqVO">
         SELECT * FROM TB_VISIT_REQ WHERE IS_DURATION = #{is_duration} AND RESULVATION_DATE = #{resulvation_date}
     </select>
+
+    <select id="getGroupIdx" resultType="int">
+        select seq_visit_data_group.nextval from dual
+    </select>
+
+
 </mapper>
