@@ -1039,6 +1039,7 @@
                             item1.title = "방문:44";
                             item1.start = new Date(y, m, d, 8, 0);
                             item1.borderColor = 'red';
+                            item2.textColor = 'black';
                             // item1.classNames = 'fc-event-success';
                             item1.extendedProps = {
                                 idx_visit_data : idx_visit_data,
@@ -1060,6 +1061,7 @@
                             item2.end = new Date('2022-12-23');
                             item2.backgroundColor = '#ffff00';
                             item2.borderColor = 'red';
+                            item2.textColor = 'red';
                             // item2.borderColor = '#ff0000';
                             item2.extendedProps = {
                                 idx_visit_data : idx_visit_data,
