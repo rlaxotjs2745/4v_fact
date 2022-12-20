@@ -953,7 +953,7 @@
                 async:false,
                 success:function (result){
                     let data=JSON.parse(result);
-                    let array_data=data["visitDataVOList"];
+                    let array_data=data["visitDataVOList"]
                     $.each(array_data, function(key, item) {
                         let item1 = new Object();
                         let item2 = new Object();
@@ -999,10 +999,9 @@
 
                         if (ampm == 1) {
                             item1.id='a';
-                            item1.title = "방문:";
+                            item1.title = "방문:22";
                             item1.start = new Date(y, m, d, 8, 0);
-                            item1.color ='red';
-                            // item1.classNames = 'fc-event-success';
+                             // item1.classNames = 'fc-event-success';
 
                             item1.extendedProps = {
                                 idx_visit_data : idx_visit_data,
@@ -1020,7 +1019,7 @@
                             cal_data.push(item1);
                         } else if (ampm == 2) {
 
-                            item1.title = "방문:";
+                            item1.title = "방문:33";
                             item1.start = new Date(y, m, d, 13, 0);
                             // item1.classNames = 'fc-event-success';
                             item1.extendedProps = {
@@ -1037,8 +1036,9 @@
                             };
                             cal_data.push(item1);
                         } else {
-                            item1.title = "방문:";
+                            item1.title = "방문:44";
                             item1.start = new Date(y, m, d, 8, 0);
+                            item1.borderColor = 'red';
                             // item1.classNames = 'fc-event-success';
                             item1.extendedProps = {
                                 idx_visit_data : idx_visit_data,
@@ -1052,10 +1052,15 @@
                                 group_idx : group_idx,
                                 idx_admin: idx_admin
                             };
+
                             cal_data.push(item1);
-                            item2.title = "방문:";
+                            item2.id='a';
+                            item2.title = "방문:55";
                             item2.start = new Date(y, m, d, 13, 0);
-                            // item2.classNames = 'fc-event-success';
+                            item2.end = new Date('2022-12-23');
+                            item2.backgroundColor = '#ffff00';
+                            item2.borderColor = 'red';
+                            // item2.borderColor = '#ff0000';
                             item2.extendedProps = {
                                 idx_visit_data : idx_visit_data,
                                 cur_date : cur_date,
@@ -1115,7 +1120,7 @@
             //여기까지
 
             plugins: [
-                calendarPlugins.bootstrap,
+                // calendarPlugins.bootstrap,
                 calendarPlugins.dayGrid,
                 calendarPlugins.timeGrid,
                 calendarPlugins.interaction
@@ -1123,7 +1128,7 @@
             direction: $('html').attr('dir') || 'ltr',
 
             // Bootstrap styling
-            themeSystem: 'bootstrap',
+            // themeSystem: 'bootstrap',
             bootstrapFontAwesome: {
                 close: ' ion ion-md-close',
                 prev: ' ion ion-ios-arrow-back scaleX--1-rtl',
@@ -1174,7 +1179,6 @@
             aspectRatio: 2.0,
 
             locale: 'ko',
-
             views: {
                 dayGrid: {
                     dayMaxEventRows: 5
@@ -1300,6 +1304,7 @@
             },
 
             events : getMonthlyData(new Date()),
+
 
             eventClick: function(calEvent) {
                 alert('event 클릭 ' ) ;
