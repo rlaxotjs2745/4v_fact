@@ -479,8 +479,20 @@
                                     </label>
                                 </div>
                             </div>
-                           인덱스 <input type="text" name="idx_visit_data"> <!--인덱스 -->
-                            해당일 <input type="text" name="cur_date">   <!--해당일 -->
+                            <div class="form-group row">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">인덱스</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="idx_visit_data"> <!--인덱스 -->
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">해당일</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="cur_date"> <!--해당일 -->
+                                </div>
+                            </div>
+
+
                             <div class="form-group-row">
 
 
@@ -491,7 +503,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수</label>
                                 <div class="col-md-4">
-                                    <input type="text" id="" name="possible_count"  placeholder="숫자만 입력가능합니다" oninput="this.value = this.value.replace(/[^0-9]/g,'');">
+                                    <input type="text" name="possible_count"  placeholder="숫자만 입력가능합니다" oninput="this.value = this.value.replace(/[^0-9]/g,'');">
                                 </div>
                             </div>
 
@@ -542,7 +554,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">group_idx</label>
                                 <div class="col-md-4">
-                                    <input type="text" id="" name="group_idx"  >
+                                    <input type="text" name="group_idx"  >
                                 </div>
                             </div>
 
@@ -550,7 +562,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">작성자</label>
                                 <div class="col-md-4">
-                                    <input type="text" id="" name="">
+                                    <input type="text" name="">
                                 </div>
                             </div>
 
