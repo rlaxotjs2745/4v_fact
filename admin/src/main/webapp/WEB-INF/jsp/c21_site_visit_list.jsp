@@ -16,29 +16,29 @@
                     <label class="form-label text-muted">견학접수</label>
                     <div class="form-inline">
                         <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons" id="category_change">
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio" class="category_change" id="all" onclick="javascript:pageLoad('c21_site_visit_listpage=1&filter1=9999&filter2=9998','견학신청 목록');" checked="">전체
+                            <label class="btn btn-secondary<c:if test="${filter1 eq null}"> active</c:if>">
+                                <input type="radio" name="btn-radio" class="category_change" id="all" onclick="pageLoad('c21_site_visit_list',null,'견학신청 목록');" checked="">전체
                             </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio" class="category_change" id="new" value="0"  onclick="javascript:pageLoad('c21_site_visit_list',{page_num:1,filter1:0,filter2:9998},'견학신청 목록');"> 신규
+                            <label class="btn btn-secondary<c:if test="${filter1 eq '0'}"> active</c:if>">
+                                <input type="radio" name="btn-radio" class="category_change" id="new" value="0" onclick="pageLoad('c21_site_visit_list',{page_num:1,fil1:0,fil2:9998},'견학신청 목록');"> 신규
                             </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio" class="category_change" id="register" value="1" onclick="javascript:pageLoad('c21_site_visit_list',{page_num:1,filter1:1,filter2:9998},'견학신청 목록');" > 접수
+                            <label class="btn btn-secondary<c:if test="${filter1 eq '1'}"> active</c:if>">
+                                <input type="radio" name="btn-radio" class="category_change" id="register" value="1" onclick="pageLoad('c21_site_visit_list',{page_num:1,fil1:1,fil2:9998},'견학신청 목록');" > 접수
                             </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio" class="category_change" id="approval" value="2" onclick="javascript:pageLoad('c21_site_visit_list',{page_num:1,filter1:2,filter2:9998},'견학신청 목록');"> 승인
+                            <label class="btn btn-secondary<c:if test="${filter1 eq '2'}"> active</c:if>">
+                                <input type="radio" name="btn-radio" class="category_change" id="approval" value="2" onclick="pageLoad('c21_site_visit_list',{page_num:1,fil1:2,fil2:9998},'견학신청 목록');"> 승인
                             </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio" class="category_change" id="visit" value="3" onclick="javascript:pageLoad('c21_site_visit_list',{page_num:1,filter1:3,filter2:9998},'견학신청 목록');"> 방문
+                            <label class="btn btn-secondary<c:if test="${filter1 eq '3'}"> active</c:if>">
+                                <input type="radio" name="btn-radio" class="category_change" id="visit" value="3" onclick="pageLoad('c21_site_visit_list',{page_num:1,fil1:3,fil2:9998},'견학신청 목록');"> 방문
                             </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio" class="category_change" id="visited" value="4" onclick="javascript:pageLoad('c21_site_visit_list',{page_num:1,filter1:4,filter2:9998},'견학신청 목록');"> 방문완료
+                            <label class="btn btn-secondary<c:if test="${filter1 eq '4'}"> active</c:if>">
+                                <input type="radio" name="btn-radio" class="category_change" id="visited" value="4" onclick="pageLoad('c21_site_visit_list',{page_num:1,fil1:4,fil2:9998},'견학신청 목록');"> 방문완료
                             </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio" class="category_change" id="cancle" value="5" onclick="javascript:pageLoad('c21_site_visit_list',{page_num:1,filter1:5,filter2:9998},'견학신청 목록');"> 방문취소
+                            <label class="btn btn-secondary<c:if test="${filter1 eq '5'}"> active</c:if>">
+                                <input type="radio" name="btn-radio" class="category_change" id="cancle" value="5" onclick="pageLoad('c21_site_visit_list',{page_num:1,fil1:5,fil2:9998},'견학신청 목록');"> 방문취소
                             </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio" class="category_change" id="refuse" value="6" onclick="javascript:pageLoad('c21_site_visit_list',{page_num:1,filter1:6,filter2:9998},'견학신청 목록');"> 승인거절
+                            <label class="btn btn-secondary<c:if test="${filter1 eq '6'}"> active</c:if>">
+                                <input type="radio" name="btn-radio" class="category_change" id="refuse" value="6" onclick="pageLoad('c21_site_visit_list',{page_num:1,fil1:6,fil2:9998},'견학신청 목록');"> 승인거절
                             </label>
                         </div>
                     </div>

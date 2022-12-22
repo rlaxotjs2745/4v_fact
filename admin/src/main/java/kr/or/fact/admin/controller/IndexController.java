@@ -708,26 +708,20 @@ public class IndexController {
 //
         param.setAmount(10);
         param.setOrder_field("IDX_VISIT_REQ");
+        int visitCount = visitService.getVisitReqCount(param);
+        List<VisitReqVO> visitReqList = visitService.getVisitList(param);
+
         int list_amount = 10;
         int page_amount = param.getAmount();
         int page = param.getPage_num();
-        int filter1 = param.getFilter1();
-        int filter2 = param.getFilter2();
-        int visitCount = visitService.getVisitReqCount(filter1);
-        System.out.println(visitCount);
-       /*
-        if(visitCount==0){
-            return"c21_site_visit_list";
-        }*/
-
+        String filter1 = param.getFil1();
+        String filter2 = param.getFil2();
         model.addAttribute("filter1",filter1);
         model.addAttribute("filter2",filter2);
         model.addAttribute("total_count",visitCount);
-        List<VisitReqVO> visitReqList = visitService.getVisitList(param);
         model.addAttribute("visitReqList",visitReqList);
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
-
 
         int tot_page = visitCount/list_amount+1;
         if(visitCount%list_amount==0) tot_page-=1;

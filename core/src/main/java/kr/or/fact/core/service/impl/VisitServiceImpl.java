@@ -72,8 +72,8 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public int getVisitReqCount(int filter1) {
-        return visitMapper.getVisitReqCount(filter1);
+    public int getVisitReqCount(ParamPageListFilteredVO paramVo) {
+        return visitMapper.getVisitReqCount(paramVo);
     }
 
     @Override

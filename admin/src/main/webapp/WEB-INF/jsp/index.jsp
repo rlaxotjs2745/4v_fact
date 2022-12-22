@@ -151,13 +151,34 @@
     //int amount;
     //String order_field;
 
+    var filter1 = null;
+    var filter2 = null;
     function pageLoad(url,param,title,usage){
 /*      State : 브라우저 이동 시 넘겨줄 데이터 (popstate 에서 받아서 원하는 처리를 해줄 수 있음)
         Title : 변경할 브라우저 제목 (변경 원치 않으면 null)
         Url : 변경할 주소*/
-        // console.log(param)
-        if(param==null)
-            param={page_num:1};
+        if(param==null) {
+            param = {'page_num':1};
+            filter1 = null;
+            filter2 = null;
+        }else{
+            if (param['page_num'] == null) {
+                param['page_num'] = 1;
+            }
+            if (param['fil1'] == null && filter1 != null) {
+                param['fil1'] = filter1;
+            }
+            if (param['fil2'] == null && filter2 != null) {
+                param['fil2'] = filter2;
+            }
+
+            if (param['fil1'] != null) {
+                filter1 = param['fil1'];
+            }
+            if (param['fil2'] != null) {
+                filter2 = param['fil2'];
+            }
+        }
 
         if(cur!=url+param.page_num || usage == "asset_list"){
             cur = url+param.page;
