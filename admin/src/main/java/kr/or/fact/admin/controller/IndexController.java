@@ -723,6 +723,21 @@ public class IndexController {
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
 
+        // 신규 카운트
+        param.setFil1("0");
+        int count_new = visitService.getVisitReqCount(param);
+        model.addAttribute("count_new",count_new);
+
+        // 접수 카운트
+        param.setFil1("1");
+        int count_req = visitService.getVisitReqCount(param);
+        model.addAttribute("count_req",count_req);
+
+        // 승인 카운트
+        param.setFil1("2");
+        int count_agree = visitService.getVisitReqCount(param);
+        model.addAttribute("count_agree",count_agree);
+
         int tot_page = visitCount/list_amount+1;
         if(visitCount%list_amount==0) tot_page-=1;
 

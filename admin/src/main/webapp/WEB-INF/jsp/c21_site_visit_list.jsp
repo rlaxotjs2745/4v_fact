@@ -20,10 +20,10 @@
                                 <input type="radio" name="btn-radio" class="category_change" id="all" onclick="pageLoad('c21_site_visit_list',null,'견학신청 목록');" checked="">전체
                             </label>
                             <label class="btn btn-secondary<c:if test="${filter1 eq '0'}"> active</c:if>">
-                                <input type="radio" name="btn-radio" class="category_change" id="new" value="0" onclick="pageLoad('c21_site_visit_list',{page_num:1,fil1:0,fil2:9998},'견학신청 목록');"> 신규
+                                <input type="radio" name="btn-radio" class="category_change" id="new" value="0" onclick="pageLoad('c21_site_visit_list',{page_num:1,fil1:0,fil2:9998},'견학신청 목록');"> 신청
                             </label>
                             <label class="btn btn-secondary<c:if test="${filter1 eq '1'}"> active</c:if>">
-                                <input type="radio" name="btn-radio" class="category_change" id="register" value="1" onclick="pageLoad('c21_site_visit_list',{page_num:1,fil1:1,fil2:9998},'견학신청 목록');" > 접수
+                                <input type="radio" name="btn-radio" class="category_change" id="register" value="1" onclick="pageLoad('c21_site_visit_list',{page_num:1,fil1:1,fil2:9998},'견학신청 목록');"> 접수
                             </label>
                             <label class="btn btn-secondary<c:if test="${filter1 eq '2'}"> active</c:if>">
                                 <input type="radio" name="btn-radio" class="category_change" id="approval" value="2" onclick="pageLoad('c21_site_visit_list',{page_num:1,fil1:2,fil2:9998},'견학신청 목록');"> 승인
@@ -55,7 +55,7 @@
                 <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
                     <div class="row p-3">
                         <div class="col-sm-12 col-md-12">
-                            <label class="mr-3  mb-0">총 : <strong>${total_count}</strong>건</label><label class="mr-3  mb-0">신규 : <strong>70</strong>건</label><label class="mr-3  mb-0">추가 : <strong>70</strong>건</label><label class="mr-3  mb-0">해결 : <strong>70</strong>건</label>
+                            <label class="mr-3  mb-0">총 : <strong>${total_count}</strong>건</label><label class="mr-3  mb-0">신청 : <strong>${count_new}</strong>건</label><label class="mr-3  mb-0">접수 : <strong>${count_req}</strong>건</label><label class="mr-3  mb-0">승인 : <strong>${count_agree}</strong>건</label>
                         </div>
                     </div>
                     <div class="row">
