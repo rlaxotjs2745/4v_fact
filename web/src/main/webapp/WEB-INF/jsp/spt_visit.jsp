@@ -10,6 +10,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file ="header.jsp" %>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <div class="content" id="content">
     <div class="page__body">
@@ -79,6 +80,7 @@
                 <div class="cnt__btn type--topborder">
                     <div class="btn__group">
                         <c:if test="${is_login eq true}"><a href="#popup_visit" id="visit_not_warning"  class="btn submit btn-jumbo  js-modal-detail">견학 신청서 작성</a></c:if>
+
                         <c:if test="${is_login eq false}"><button href="void(0);" id="visit_warning" class="btn submit btn-jumbo  js-modal-detail">견학 신청서 작성</button></c:if>
 
                     </div>
@@ -96,12 +98,13 @@
 
         <div id="popup_visit" class="pop__detail">
             <div class="section">
-                <button id="popup_visit_close" class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></button>
+                <button id="popup_visit_close"  class="js-modal-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></button>
                 <div class="popup__cnt">
                     <h5 class="popup__title">견학신청서 작성</h5>
 
                     <div class="popup__scroll--area">
                         <div class="table__type">
+<%--                            <form>--%>
                             <table class="table__type--normal">
                                 <colgroup>
                                     <col style="width:20%">
@@ -112,11 +115,11 @@
                                     <th class="th__left">구분<span class="text__essential">*</span></th>
                                     <td class="td__left">
                                         <div class="radio radio--inline">
-                                            <input type="radio" id="people-1" name="is_group" value="1" checked>
+                                            <input type="radio" id="people-1" name="is_group" value="0" checked>
                                             <label for="people-1">개인</label>
                                         </div>
                                         <div class="radio radio--inline">
-                                            <input type="radio" id="people-2" name="is_group" value="2">
+                                            <input type="radio" id="people-2" name="is_group" value="1">
                                             <label for="people-2">단체</label>
                                         </div>
                                     </td>
@@ -125,16 +128,18 @@
                                     <th class="th__left">단체명<span class="text__essential">*</span></th>
                                     <td class="td__left"><input id="group_name" type="text" placeholder="단체명을 입력해주세요." style="width:350px;">
                                         <br><span class="text--guide">개인의 경우 입력을 하지 않으셔도 됩니다.</span></td>
+<%--                                        <br><span id="text_guide_group" class="text--guide"></span></td>--%>
                                 </tr>
                                 <tr>
                                     <th class="th__left">신청인 성명<span class="text__essential">*</span></th>
-                                    <td class="td__left"><input id="visitor" type="text" placeholder="신청인에 이름을 입력해 주세요." style="width:350px;"></td>
+                                    <td class="td__left"><input id="visitor" type="text" placeholder="신청인에 이름을 입력해 주세요." style="width:350px;">
+                                    <span id="text_guide_name" class="text--guide" style="color:red;"></span></td>
                                 </tr>
                                 <tr>
                                     <th class="th__left">견학 희망일<span class="text__essential">*</span></th>
-                                    <td class="td__left"><input id="resulvation_date" type="text" class="datepicker"><!--<span class="text&#45;&#45;guide">최소 10일 전에 신청해 주세요.</span>-->
+                                    <td class="td__left"><input id="resulvation_date" type="text" style="width: 150px;" value="<%=now%>" readonly> <!-- class="datepicker"--><!--<span class="text&#45;&#45;guide">최소 10일 전에 신청해 주세요.</span>-->
                                         &nbsp;&nbsp;&nbsp;&nbsp;<div class="radio radio--inline">
-                                            <input type="radio" id="day-1" name="is_duration" value="1">
+                                            <input type="radio" id="day-1" name="is_duration" value="1" checked>
                                             <label for="day-1">오전</label>
                                         </div>
                                         <div class="radio radio--inline">
@@ -145,11 +150,12 @@
                                 </tr>
                                 <tr>
                                     <th class="th__left">견학 인원<span class="text__essential">*</span></th>
-                                    <td class="td__left"><div class="input--group"><input id="visitor_count" type="number" placeholder="" min="1" style="width:80px;" class="user__input" /><span class="user__text">명</span></div></td>
+                                    <td class="td__left"><div class="input--group"><input id="visitor_count" type="number" placeholder="" value="1" min="1" style="width:80px;" class="user__input" /><span class="user__text">명</span></div></td>
                                 </tr>
                                 <tr>
                                     <th class="th__left">연락처<span class="text__essential">*</span></th>
-                                    <td class="td__left"><input id="pnum1" type="tel" style="width:80px;" /><span class="text__dash">-</span><input id="pnum2" type="tel" style="width:80px;" /><span class="text__dash">-</span><input id="pnum3" type="tel" style="width:80px;" /></td>
+                                    <td class="td__left"><input id="pnum1" type="tel" style="width:80px;" /><span class="text__dash">-</span><input id="pnum2" type="tel" style="width:80px;" /><span class="text__dash">-</span><input id="pnum3" type="tel" style="width:80px;" />
+                                        <span id="text_guide_mp" class="text--guide" style="color:red;"></span></td>
                                 </tr>
                                 <tr>
                                     <th class="th__left">이메일<span class="text__essential">*</span></th>
@@ -163,12 +169,15 @@
                                             <option value="6">daum.net</option>
                                         </select>
                                         <br><span class="text--guide">확정 메일 및 확정 결과를 메일로 알려 드립니다. 정확히 입력해 주세요.</span>
+                                        <br><span id="text_guide_email" class="text--guide" style="color:red;"></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th class="th__left">거주지 주소</th>
-                                    <td class="td__left"><input id="addr1" type="text" placeholder="우편번호" style="width:180px;" /> <span class="text__zipcode"><a href="#" class="btn dark btn-lg">주소검색</a></span>
+<%--                                    <td class="td__left"><input id="addr1" type="text" placeholder="우편번호" style="width:180px;" /> <span class="text__zipcode"><a href="#" class="btn dark btn-lg">주소검색</a></span>--%>
+                                    <td class="td__left"><input id="addr1" type="text" placeholder="우편번호" style="width:180px;" /> <span class="text__zipcode"><button id="search_location" class="btn dark btn-lg">주소검색</button></span>
                                         <input id="addr2" type="text" placeholder="상세주소">
+
                                         <input id="addr3" type="text" placeholder="나머지 주소">
                                     </td>
                                 </tr>
@@ -182,6 +191,7 @@
                                 </tr>
                                 </tbody>
                             </table>
+<%--                            </form>--%>
                         </div>
 
                         <div class="table__agree">'센터 단체견학' 서비스 제공을 위한 개인정보 수집·이용을 위하여 개인정보 보호법 제15조 및 제22조에 따라 귀하의 동의를 받고자 합니다. 만일 다음 사항 중 어느 하나의 사항을 변경하는 경우에는 이를 사전에 알리고 동의를 받도록 하겠습니다.<br>
@@ -203,6 +213,7 @@
 
                 </div>
                 <div class="popup__btn">
+<%--                    <a href="#" class="btn light btn-lg  js-btn-close">취소</a>--%>
                     <a href="#" class="btn light btn-lg  js-btn-close">취소</a>
                     <button id="save_visit_req" class="btn btn-lg submit">신청</button>
                 </div>
@@ -310,6 +321,74 @@
 <%@include file ="footer.jsp" %>
 <%@include file ="script.jsp" %>
 <script>
+
+    let y=new Date().getFullYear();
+    let m="";
+    let d="";
+
+    let confirmNameBool = 0;
+    let confirmPhoneBool = 0;
+    let confirmEmailBool = 0;
+
+    $('#visitor').change(function () {
+        if (!CheckName($('#visitor').val())) {
+            $('#text_guide_name').text("적절한 이름 형식이 아닙니다.(특수문자 등)");
+            confirmNameBool = 0;
+        } else {
+            $('#text_guide_name').text("");
+            confirmNameBool = 1;
+        }
+    });
+
+    $('#pnum1').change(function () {
+        if (!CheckMphone($(this).val())) {
+            $('#text_guide_mp').text("연락처는 숫자만 입력이 가능합니다.");
+            confirmPhoneBool = 0;
+        } else {
+            $('#text_guide_mp').text("");
+            confirmPhoneBool = 1;
+        }
+    });
+
+    $('#pnum2').change(function () {
+        if (!CheckMphone($(this).val())) {
+            $('#text_guide_mp').text("연락처는 숫자만 입력이 가능합니다.");
+            confirmPhoneBool = 0;
+        } else {
+            $('#text_guide_mp').text("");
+            confirmPhoneBool = 1;
+        }
+    });
+    $('#pnum3').change(function () {
+        if (!CheckMphone($(this).val())) {
+            $('#text_guide_mp').text("연락처는 숫자만 입력이 가능합니다.");
+            confirmPhoneBool = 0;
+        } else {
+            $('#text_guide_mp').text("");
+            confirmPhoneBool = 1;
+        }
+    });
+
+    $("#sel_email").change(function (){
+       if($(this).val()==1){$("#email2").val("");}
+       else if($(this).val()==2){$("#email2").val("naver.com");}
+       else if($(this).val()==3){$("#email2").val("hanmail.net");}
+       else if($(this).val()==4){$("#email2").val("gmail.com");}
+       else if($(this).val()==5){$("#email2").val("nate.com");}
+       else if($(this).val()==6){$("#email2").val("daum.net");}
+    });
+
+
+
+
+
+
+
+
+
+
+
+
     $("#visit_warning").click(function() {
         var result = confirm('신청하려면 로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까');
         if(result) {
@@ -336,7 +415,6 @@
     }
 
 
-
     $(document).ready(function() {
         $("#demoEvoCalendar").evoCalendar({
             format: "yyyy MM dd",
@@ -344,46 +422,55 @@
 
         });
 
-        var today = {
+        let today = {
             start_date: new Date(),
             end_date: new Date()
         }
-        setVisitCalendar(today);
 
+        setVisitCalendar(today);
         $('#demoEvoCalendar').on('selectEvent', function(event, activeEvent) {
             // alert("1");
-
-
-            alert('evocalendar date 클릭 ');
             // code here...
         });
 
+        $("#demoEvoCalendar").on('selectYear',function (event, activeYear){
+           alert('년도 클릭 : '  + activeYear);
+           y=activeYear;
 
-        // getActiveDate
+        });
+
+        $("#demoEvoCalendar").on('selectMonth',function (event,activeMonth,monthIndex){
+
+            let selectedMonth= new Date(y,monthIndex,1).yyyymmdd();
+
+            let selectedMonthDate={
+                start_date : new Date(selectedMonth),
+                end_date : new Date()
+            }
+
+            let removeIdVal=new Date(selectedMonth).getFullYear()+""+new Date(selectedMonth).getMonth();
+
+            for(let i=0;i<=31;i++){
+                $("#demoEvoCalendar").evoCalendar('removeCalendarEvent',removeIdVal);
+            }
+            setVisitCalendar(selectedMonthDate);
+
+        });
+
         $('#demoEvoCalendar').on('selectDate',function (event,newDate,oldDate){
-            console.log("event : "  + event);
-            console.log("newDate : "  +  newDate);
-            console.log("oldDate :  " +oldDate);
-
-            let active_date = $ ("#demoEvoCalendar").evoCalendar('getActiveDate');
-
-            // getActiveEvents
             let active_events = $('#demoEvoCalendar').evoCalendar('getActiveEvents');
 
-            console.log(active_events);
+            //견학 신청서 작성 버튼 비활성화
+            if(active_events.length==0){
+                $("#visit_not_warning").addClass('disabled').attr('aria-disabled',true).bind('click',false);
+            }else{
+                $("#visit_not_warning").removeClass('disabled').attr('aria-disabled',false).unbind('click',false);
 
-            console.log(active_date);
-
-            // let json12345=JSON.stringify(event);
-            // console.log("json12345 : " + json12345);
-
-            // for (var key in event){
-            //     console.log("attr: " + key + ", value: " + event[key]);
-            // }
-
-
-            alert ('hi');
+                //날짜 클릭시 신청서안의 견학희망일 설정
+                $("#resulvation_date").val(new Date(newDate).yyyymmdd());
+            }
         });
+
         getUserVisitList(1);
 
         $('#group_name_row').hide();
@@ -396,7 +483,7 @@
     }
 
     $("input:radio[name='is_group']").change(function(){
-        if($("input:radio[name='is_group']:checked").val() == 1){
+        if($("input:radio[name='is_group']:checked").val() == 0){
             $('#group_name_row').hide();
         } else {
             $('#group_name_row').show();
@@ -404,29 +491,38 @@
     })
 
 
-    $('[data-go*="#"]').on("click", function(a) {
-        a.preventDefault();
-        var b = $(this).data().go;
-        if ("#top" === b) {
-            $("html, body").animate({
-                scrollTop: 0
-            }, 500);
-            return;
-        } else var c = $(b)[0].offsetTop - $("header")[0].offsetHeight - 10;
-        $("html, body").animate({
-            scrollTop: c
-        }, 500);
-    });
+    // $('[data-go*="#"]').on("click", function(a) {
+    //     a.preventDefault();
+    //     var b = $(this).data().go;
+    //     if ("#top" === b) {
+    //         $("html, body").animate({
+    //             scrollTop: 0
+    //         }, 500);
+    //         return;
+    //     } else var c = $(b)[0].offsetTop - $("header")[0].offsetHeight - 10;
+    //     $("html, body").animate({
+    //         scrollTop: c
+    //     }, 500);
+    // });
 
     $('#save_visit_req').on("click", function(a) {
 
-        var email2 = $("#email2").val();
+        let email=$("#email1").val() + "@" + $("#email2").val();
 
-        $('#sel_email').children(":selected").each(function() {
+        if (!confirmNameBool) return alert('적절한 이름 형식이 아닙니다.\n(특수문자 등)');
+        if (!confirmPhoneBool) return alert('연락처는 숫자만 입력이 가능합니다.');
+        if (!CheckEmail(email)){
+            alert("적절한 이메일 형식이 아닙니다.");
+            return;
+        }
 
-            if($(this).val()!=1)
-                email2 = $(this).text();
-        });
+        // var email2 = $("#email2").val();
+        //
+        // $('#sel_email').children(":selected").each(function() {
+        //
+        //     if($(this).val()!=1)
+        //         email2 = $(this).text();
+        // });
 
         let param={
             idx_user:$("#idx_user").val(),
@@ -435,7 +531,8 @@
             resulvation_date:new Date($("#resulvation_date").val()),//	date						예약일
             visitor_count:$("#visitor_count").val(),//	number	10					방문자 수
             visitor_mphone_num:$("#pnum1").val()+"-"+$("#pnum2").val()+"-"+$("#pnum3").val(),//	varchar2	20					연락처
-            visitor_email:$("#email1").val()+email2,//	varchar2	250					방문자 이메일
+            visitor_email: email,//	varchar2	250					방문자 이메일
+            // visitor_email:$("#email1").val()+"@"+email2,//	varchar2	250					방문자 이메일
             visitor_adress: "("+$("#addr1").val()+") "+$("#addr2").val()+" "+$("#addr3").val(),//	varchar2	250					방문자 주소	0:상담요청등록, 1:상담자 지정, 2:상담 계획 보냄, 3: 상담계획 변경, 4:상담완료, 99:상담불가
             visit_goal:$("#visit_goal").val(),//	varchar2	400					방문목표
             question:$("#question").val(),//	varchar2	400					방문전 질문사항
@@ -465,7 +562,6 @@
                     $('#popup_visit_close').click();
                     getUserVisitList(1);
 
-
                 }
                 else {
                     alert(result.result_str);
@@ -480,7 +576,6 @@
     });
 
     $('#btn_book_cancel_ok').on("click", function(a) {
-
 
         param={
             idx_visit_req:$("#idx_visit_req").val()
@@ -518,7 +613,6 @@
     });
 
     function setVisitCalendar(param){
-
         $.ajax({
             type: 'post',
             url: 'get_monthly_visit_data', //데이터를 주고받을 파일 주소 입력
@@ -529,6 +623,14 @@
                 //작업이 성공적으로 발생했을 경우
                 let data = JSON.parse(result);
                 let array_data = data["visitDataVOList"];
+
+                // console.log("array_data.length :" + array_data.length);
+
+                let id=new Date(param.start_date).getFullYear()+""+new Date(param.start_date).getMonth();
+                console.log(" set id : "   + id );
+
+
+
 
                 $.each(array_data, function(key, item)
                 {
@@ -542,19 +644,8 @@
 
                     let ampm=item.visit_data_type;
 
-                    // let possible_count=item.possible_count;
-                    // let resulvation_count=item.resulvation_count;
-                    //
-                    // console.log("possible_count : " + possible_count);
-                    // console.log("resulvation count  : " + resulvation_count );
-
-
                     if(ampm==1){
-
-                        // if(possible_count <=resulvation_count){
-                        //     item1.description="예약 불가";
-                        // }
-                        item1.id= ""+Math.random();
+                        item1.id=id;
                         item1.name="오전 방문";
                         item1.description="예약 가능";
                         item1.date= new Date(y, m, d, 8, 0);
@@ -562,7 +653,7 @@
 
                         $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
                     }else if(ampm==2){
-                        item1.id= ""+Math.random();
+                        item1.id=id;
                         item1.name="오후 방문";
                         item1.description="예약 가능";
                         item1.date= new Date(y, m, d, 13, 0);
@@ -571,7 +662,7 @@
                         $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
                     }else if(ampm==3){
 
-                        item1.id= ""+Math.random();
+                        item1.id=id;
                         item1.name="오전 방문";
                         item1.description="예약 가능";
                         item1.date= new Date(y, m, d, 8, 0);
@@ -579,7 +670,7 @@
 
                         $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
 
-                        item2.id= ""+Math.random();
+                        item2.id=id;
                         item2.name="오후 방문";
                         item2.description="예약 가능";
                         item2.date= new Date(y, m, d, 13, 0);
@@ -588,7 +679,7 @@
                     }
                     else if(ampm==5){
 
-                        item1.id= ""+Math.random();
+                        item1.id=id;
                         item1.name="오전 예약됨";
                         item1.description="예약 불가";
                         item1.date= new Date(y, m, d, 8, 0);
@@ -598,7 +689,7 @@
                     }
                     else if(ampm==6){
 
-                        item1.id= ""+Math.random();
+                        item1.id=id;
                         item1.name="오후 예약됨";
                         item1.description="예약 불가";
                         item1.date= new Date(y, m, d, 13, 0);
@@ -608,7 +699,7 @@
                     }
                     else if(ampm==7){
 
-                        item1.id= ""+Math.random();
+                        item1.id=id;
                         item1.name="오전 예약됨";
                         item1.description="예약 불가";
                         item1.date= new Date(y, m, d, 8, 0);
@@ -616,7 +707,7 @@
 
                         $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
 
-                        item2.id= ""+Math.random();
+                        item2.id=id;
                         item2.name="오후 방문";
                         item2.description="예약 가능";
                         item2.date= new Date(y, m, d, 13, 0);
@@ -625,7 +716,7 @@
                     }
                     else if(ampm==8){
 
-                        item1.id= ""+Math.random();
+                        item1.id=id;
                         item1.name="오전 방문";
                         item1.description="예약 가능";
                         item1.date= new Date(y, m, d, 8, 0);
@@ -633,7 +724,7 @@
 
                         $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
 
-                        item2.id= ""+Math.random();
+                        item2.id=id;
                         item2.name="오후 예약됨";
                         item2.description="예약 불가";
                         item2.date= new Date(y, m, d, 13, 0);
@@ -641,8 +732,7 @@
                         $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item2);
                     }
                     else if(ampm==9){
-
-                        item1.id= ""+Math.random();
+                        item1.id=id;
                         item1.name="오전 예약됨";
                         item1.description="예약 불가";
                         item1.date= new Date(y, m, d, 8, 0);
@@ -650,7 +740,7 @@
 
                         $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
 
-                        item2.id= ""+Math.random();
+                        item2.id=id;
                         item2.name="오후 예약됨";
                         item2.description="예약 불가";
                         item2.date= new Date(y, m, d, 13, 0);
@@ -707,9 +797,18 @@
                 $("#visitor_text").text(visitReqVo.visitor);//	varchar2	40					신청자이름
 
                 var resulvation_date = new Date(visitReqVo.resulvation_date);
-                var ampm = visitReqVo.is_duration=0?" 오전":" 오후";
+                console.log("resulvation_date : " +  resulvation_date);
+                // var ampm = visitReqVo.is_duration=0?" 오전":" 오후";
 
-                $("#resulvation_date_text").text(resulvation_date.yyyymmdd() + ampm);//	date						예약일
+                let ampm="";
+                if(visitReqVo.is_duration=='1') {
+                    ampm = "오전";
+                }else if(visitReqVo.is_duration=='2'){
+                    ampm = "오후";
+                }
+
+                // $("#resulvation_date_text").text(resulvation_date.yyyymmdd() +""+ ampm);//	date						예약일
+                $("#resulvation_date_text").text(resulvation_date.yyyymmdd() +" : "+ ampm);//	date						예약일
                 $("#visitor_count_text").text(visitReqVo.visitor_count);//	number	10					방문자 수
                 $("#visitor_mphone_num_text").text(visitReqVo.visitor_mphone_num);//	varchar2	20					연락처
                 $("#visitor_email_text").text(visitReqVo.visitor_email);//	varchar2	250					방문자 이메일
@@ -735,6 +834,69 @@
             }
         });
     }
+
+    Date.prototype.yyyymmdd = function() {
+        var mm = this.getMonth() + 1; // getMonth() is zero-based
+        var dd = this.getDate();
+
+        return [this.getFullYear(),
+            (mm>9 ? '' : '0') + mm,
+            (dd>9 ? '' : '0') + dd
+        ].join('-');
+    };
+
+    function convertDate(date){
+        let cDate=new Date(date);
+        alert(cDate.yyyymmdd());
+    }
+
+
+    //유효성
+    function CheckName(str) {
+        let reg_name = /^[가-힣]{2,7}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}|[a-zA-Z]{2,30}$/;
+        return reg_name.test(str);
+    }
+
+    function CheckEmail(str) {
+        let reg_email = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+        return reg_email.test(str);
+    }
+
+    function CheckMphone(str) {
+        let reg_mp = /^[0-9]+$/;
+        return reg_mp.test(str);
+    }
+
+
+
+
+    $("#search_location").on('click',function (){
+
+        new daum.Postcode({
+            oncomplete: function (data) {
+                $("#addr1").val(data.zonecode);
+                $("#addr2").val(data.roadAddress + " " + data.buildingName);
+                $("#addr3").focus();
+                // console.log(data);
+            }
+        }).open();
+    });
+
+
+    //모달팝업 인풋값 초기화
+
+    $("#popup_visit_close").on('click',function (){
+
+        if(confirm("작성을 취소하시겠습니까?")){
+
+        }else{
+            return false;
+        }
+        //form 태그가있을시에 다음주소검색시에 파라미터 들어가서 페이지 리로딩하는 오류발생함.
+        // $("#popup_visit").find('form')[0].reset();
+        $("input:checkbox[id='is_privacy_accept']").attr("checked",false);
+
+    });
 
 
 </script>

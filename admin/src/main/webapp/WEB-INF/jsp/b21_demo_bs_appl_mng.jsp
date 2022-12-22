@@ -510,7 +510,7 @@
             },
             error: function () {
                 //에러가 났을 경우 실행시킬 코드
-                console.log('ajax appl_list_by_b21_filtered 에러발생');
+
             }
         }); //ajax 끝
     }
@@ -589,7 +589,7 @@
         // reset multi-tab modal to initial state
         $(this).find('.nav-tabs a:first').tab('show');
         // alert('모달창닫힘');
-    })
+    });
 
 
 </script>

@@ -276,10 +276,9 @@ public class APIController {
 //        int agree_count;//협약중
 //        int demo_count;//사업중
 //        int result_count;//결산중
-        //이걸왜 가져오는걸까..
 
 
-        //리스트 총갯수를 이때 빼야 함          <<이게뭘말하는거지
+        //리스트 총갯수를 이때 빼야 함
         /*
         *   public static int DEMOBS_FILTER_APPL = 3;
             public static int DEMOBS_FILTER_REVUIEW = 5;

@@ -983,7 +983,6 @@
                         console.log("group_idx : " + group_idx);
                         console.log("idx_admin : " +idx_admin);
 
-
                         //     long idx_visit_data;//	number	32			◯		인덱스	auto increase
                         // Date cur_date;//	date						해당일
                         // int possible_count;//	number	10		0			오전, 오후 각각에 해당, 별도로 설정하기 위해 1단위는 오전 천단위는 오후
@@ -999,7 +998,7 @@
 
                         if (ampm == 1) {
                             item1.id='a';
-                            item1.title = "방문:22";
+                            item1.title = "방문:";
                             item1.start = new Date(y, m, d, 8, 0);
                              // item1.classNames = 'fc-event-success';
 
@@ -1036,9 +1035,9 @@
                             };
                             cal_data.push(item1);
                         } else {
-                            item1.title = "방문:44";
+                            item1.title = "방문:";
                             item1.start = new Date(y, m, d, 8, 0);
-                            item1.borderColor = 'red';
+                            item1.borderColor = 'green';
                             item2.textColor = 'black';
                             // item1.classNames = 'fc-event-success';
                             item1.extendedProps = {
@@ -1056,10 +1055,10 @@
 
                             cal_data.push(item1);
                             item2.id='a';
-                            item2.title = "방문:55";
+                            item2.title = "방문:";
                             item2.start = new Date(y, m, d, 13, 0);
-                            item2.end = new Date('2022-12-23');
-                            item2.backgroundColor = '#ffff00';
+                            // item2.end = new Date('2022-12-23');
+                            // item2.backgroundColor = '#ffff00';
                             item2.borderColor = 'red';
                             item2.textColor = 'red';
                             // item2.borderColor = '#ff0000';
@@ -1152,7 +1151,7 @@
                     click : function(){
                         alert ('버튼클릭');
                         alert(today);
-                        var x = new Date();
+                        let x = new Date();
 
                         $("#saveVisitData").find("input[name='sDate']").val(x.yyyymmdd());
                         $("#saveVisitData").find("input[name='eDate']").val(x.yyyymmdd());

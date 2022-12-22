@@ -1137,8 +1137,7 @@ public class WebAPIController {
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("SUCCESS");
         resultVO.setResult_str("신청했습니다");
-
-        //1.신청 Usser 파악
+        //1.신청 User 파악
 
 
         //2.기 신청이 있는지 체크

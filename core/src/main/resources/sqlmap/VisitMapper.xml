@@ -64,7 +64,7 @@
                       )
 
                  WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
-                <if test="filter1 != null">
+                <if test="filter1 != 9999">
                     AND visit_req_status = #{filter1}
                 </if>
              )
@@ -72,7 +72,7 @@
     </select>
     <select id="getVisitReqCount" resultType="int">
         SELECT COUNT (*) FROM TB_VISIT_REQ
-        <if test="filter1 != null">
+        <if test="filter1 != 9999">
             WHERE visit_req_status = #{filter1}
         </if>
         ORDER BY VISIT_REQ_NUM ASC
@@ -109,7 +109,7 @@
                              VISIT_REQ_NUM,
                      GROUP_NAME,
                      VISITOR,
-                     TO_DATE(RESULVATION_DATE,'YYYY-MM-DD hh:mm'),
+                     RESULVATION_DATE,
                      VISITOR_COUNT,
                      VISITOR_MPHONE_NUM,
                      VISITOR_EMAIL,
