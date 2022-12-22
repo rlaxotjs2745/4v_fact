@@ -81,10 +81,10 @@
                                 </thead>
                                 <tbody>
 <c:if test="${total_count ne 0}">
-                            <c:forEach items="${visitReqList}" var="visit">
+<c:forEach items="${visitReqList}" var="visit">
                             <tr class="visit-entity" id="${visit.idx_visit_req}" >
 
-                                    <td class="text-center" id="visit_req_num">${visit.visit_req_num}</td>
+                                    <td class="text-center" id="visit_req_num">${visit.idx_row_num}</td>
                                     <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view" class="visit-status">${visit.visit_req_status eq 0 ? "신청" : visit.visit_req_status eq 1 ? "접수" : visit.visit_req_status eq 3 ? "방문" : visit.visit_req_status eq 4 ? "방문 완료" : visit.visit_req_status eq 5 ? "방문취소": visit.visit_req_status eq 6 ? "승인거절" : "기타"}</a></td>
                                     <td class="text-center" id="visit_visitor">${visit.visitor}</td>
                                     <td class="text-center" id="visit_idx_user">${visit.idx_user}</td>

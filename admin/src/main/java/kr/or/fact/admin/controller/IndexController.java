@@ -707,12 +707,14 @@ public class IndexController {
 //        param.setOrder_field("IDX_BS_ANNOUNCEMENT");
 //
         param.setAmount(10);
+        param.setOrder_field("IDX_VISIT_REQ");
         int list_amount = 10;
         int page_amount = param.getAmount();
         int page = param.getPage_num();
         int filter1 = param.getFilter1();
         int filter2 = param.getFilter2();
         int visitCount = visitService.getVisitReqCount(filter1);
+        System.out.println(visitCount);
        /*
         if(visitCount==0){
             return"c21_site_visit_list";
