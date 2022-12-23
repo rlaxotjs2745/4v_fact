@@ -1579,5 +1579,44 @@ public class APIController {
         return fileService.selectBsAnnouncementFile(idx_bs_announcement);
     }
 
+    @RequestMapping(value ="/delete_form_file",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO delete_form_file(@RequestBody FormFileInfoVO formFileInfoVO){
+        ResultVO resultVO = new ResultVO();
+
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("양식 제거를 완료했습니다.");
+
+        try {
+            fileService.deleteFormFile(formFileInfoVO);
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("제거에 실패하였습니다.");
+        }
+
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/modify_form_file",method = RequestMethod.POST)
+    public ResultVO modify_form_file(@ModelAttribute FileRequestVO fileRequestVO, HttpSession session, HttpServletRequest request) throws Exception {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("양식 파일 변경에 완료했습니다.");
+
+        System.out.println(fileRequestVO);
+        try{
+            fileService.updateFormFile(fileRequestVO);
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("변경에 실패하였습니다.");
+        }
+
+        return resultVO;
+    }
+
+
+
 }
 

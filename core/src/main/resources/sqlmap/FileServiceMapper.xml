@@ -388,4 +388,27 @@
         WHERE IDX_FILE_USAGE = #{index_bs_announcement}
           AND FILE_TYPE = 3
     </select>
+
+    <delete id="deleteFormFile">
+        DELETE FROM TB_FORM_FILE_INFO WHERE IDX_FORM_FILE_INFO = #{idx_form_file}
+    </delete>
+
+    <select id="getFormFile" resultType="kr.or.fact.core.model.DTO.FormFileInfoVO">
+        SELECT * FROM TB_FORM_FILE_INFO WHERE IDX_FORM_FILE_INFO = #{idx_form_file_info}
+    </select>
+
+    <select id="getFileIdx">
+        SELECT IDX_FILE_INFO FROM TB_FILE_INFO WHERE FILE_NAME = #{file_name}
+    </select>
+
+    <update id="updateFormFile">
+        UPDATE TB_FORM_FILE_INFO SET
+            SUBJECT=#{subject},
+            USAGE_DETAIL=#{usage_detail},
+            IDX_ADMIN=${idx_admin},
+            ORDER_NUM=#{order_num},
+            IDX_FILE_INFO=#{idx_file_info},
+            REG_DATE=SYSDATE,
+        WHERE IDX_FORM_FILE_INFO = #{idx_form_file_info}
+    </update>
 </mapper>
