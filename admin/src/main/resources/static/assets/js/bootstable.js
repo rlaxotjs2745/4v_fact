@@ -215,7 +215,7 @@ function rowElim(but) {  //Elimina la fila actual
 }
 
 function rowApllySet(but) {  //Elimina la fila actual
-    let $row = $(but);  //accede a la fila
+    let $row = $(but).parents('tr');  //accede a la fila
     console.log($row)
 
     let param = {
