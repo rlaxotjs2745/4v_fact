@@ -697,20 +697,21 @@ public class APIController {
         resultVO.setResult_str("해당되는 데이터가 없습니다.");
         resultVO.setResult_code("ERROR001");
 
-        if(homepageInfoVO.getIdx_homepage_info()>0){
+        HomepageInfoVO resultHomepageInfo = homepageInfoService.getHomepageInfo();
 
-            HomepageInfoVO resultHomepageInfo = homepageInfoService.getHomepageInfo();
-            if(resultHomepageInfo==null){
-                homepageInfoService.setCurrentHomepageInfo(homepageInfoVO.getIdx_homepage_info());
-            } else {
-                homepageInfoService.setWaitingHomepageInfo(resultHomepageInfo);
-                homepageInfoService.setCurrentHomepageInfo(homepageInfoVO.getIdx_homepage_info());
-            }
+        if(resultHomepageInfo!=null && resultHomepageInfo.getIs_current()==1){
+            homepageInfoService.setWaitingHomepageInfo(resultHomepageInfo.getIdx_homepage_info());
+            homepageInfoService.setCurrentHomepageInfo(homepageInfoVO.getIdx_homepage_info());
 
-            resultVO.setResult_str("메인 프로필로 설정 했습니다.");
+            resultVO.setResult_str("메인 프로필을 변경했습니다.");
+            resultVO.setResult_code("SUCCESS");
+        } else {
+            homepageInfoService.setCurrentHomepageInfo(homepageInfoVO.getIdx_homepage_info());
+
+            resultVO.setResult_str("메인 프로필로 설정했습니다.");
             resultVO.setResult_code("SUCCESS");
         }
-        return  resultVO;
+        return resultVO;
     }
 
     @RequestMapping(value = "/save_system_code",method = RequestMethod.POST)
@@ -1318,8 +1319,7 @@ public class APIController {
         return resultVO;
     }
     @RequestMapping(value = "/insert_coworker",method = RequestMethod.POST)
-    public @ResponseBody
-    ResultVO insertCoworker (@RequestBody CoWorkerVO coWorkerVO){
+    public @ResponseBody ResultVO insertCoworker (@RequestBody CoWorkerVO coWorkerVO){
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
         resultVO.setResult_str("업데이트 실패");

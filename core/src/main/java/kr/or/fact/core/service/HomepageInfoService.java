@@ -16,7 +16,7 @@ public interface HomepageInfoService {
 
     void setCurrentHomepageInfo(long idx);
 
-    void setWaitingHomepageInfo(HomepageInfoVO resultHomepageInfo);
+    void setWaitingHomepageInfo(long idx);
 
     int getHomepageInfoCount();
 }

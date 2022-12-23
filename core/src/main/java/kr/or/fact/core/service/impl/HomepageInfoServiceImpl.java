@@ -50,7 +50,7 @@ public class HomepageInfoServiceImpl implements HomepageInfoService {
     }
 
     @Override
-    public void setWaitingHomepageInfo(HomepageInfoVO resultHomepageInfo) {
+    public void setWaitingHomepageInfo(long idx) {
 
     }
 
