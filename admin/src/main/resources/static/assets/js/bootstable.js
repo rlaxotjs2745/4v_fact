@@ -135,9 +135,9 @@ function rowAcep(but) {
         success: function(result){
             //작업이 성공적으로 발생했을 경우
             console.log(result);
-            alert(result.result_str);
+
             if (result.result_code === "SUCCESS") {
-                alert("수정 했습니다.");
+                alert(result.result_str);
                 pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
             }
             else {
@@ -216,11 +216,11 @@ function rowElim(but) {  //Elimina la fila actual
 
 function rowApllySet(but) {  //Elimina la fila actual
     let $row = $(but).parents('tr');  //accede a la fila
-    console.log($row)
 
     let param = {
         idx_homepage_info:$row.attr('data-idx'), //idx 값
     }
+    console.log(param)
 
     $.ajax({
         type: 'post',

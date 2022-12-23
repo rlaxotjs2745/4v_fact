@@ -16,29 +16,32 @@
     </h4>
 
     <div class="card px-4 pt-4 mb-4">
-        <h6 class="card-header with-elements">
-            <div class="card-header-title">푸터 정보</div>
+        <h6 class="with-elements">
+            <div class="card-header-title">푸터 정보 입력</div>
         </h6>
         <form>
             <div class="form-group row mb-4">
                 <div class="col-md-3 ">
                     <label class="form-label text-muted">담당자</label>
                     <div class="">
-                        <input id="homepage_admin" type="text" class="form-control form-control-md" value="${homepageInfo.homepage_admin}">
+                        <input id="homepage_admin" type="text" class="form-control form-control-md">
+<%--                        <input id="homepage_admin" type="text" class="form-control form-control-md" value="${homepageInfo.homepage_admin}">--%>
                         <%--<input class="mr-sm-4 mb-2 mb-sm-0" value="${homepageInfo.homepage_admin}">--%>
                     </div>
                 </div>
                 <div class="col-md-3 ">
                     <label class="form-label text-muted">연락처</label>
                     <div class="">
-                        <input id="homepage_admin_pnum" type="text" class="form-control form-control-md" value="${homepageInfo.homepage_admin_pnum}">
+                        <input id="homepage_admin_pnum" type="text" class="form-control form-control-md">
+<%--                        <input id="homepage_admin_pnum" type="text" class="form-control form-control-md" value="${homepageInfo.homepage_admin_pnum}">--%>
                         <%--<input class="mr-sm-4 mb-2 mb-sm-0" value="${homepageInfo.homepage_admin_pnum}">--%>
                     </div>
                 </div>
                 <div class="col-md-3 ">
                     <label class="form-label text-muted">이메일</label>
                     <div class="">
-                        <input id="email" type="text" class="form-control form-control-md" value="${homepageInfo.email}">
+                        <input id="email" type="text" class="form-control form-control-md">
+<%--                        <input id="email" type="text" class="form-control form-control-md" value="${homepageInfo.email}">--%>
                         <%--<input class="mr-sm-4 mb-2 mb-sm-0" value="${homepageInfo.homepage_admin_pnum}">--%>
                     </div>
                 </div>
@@ -472,9 +475,11 @@
             success: function(result){
                 //작업이 성공적으로 발생했을 경우
                 console.log(result);
-                alert(result.result_str);
                 if (result.result_code === "SUCCESS") {
-                    alert("상태 변경에 성공하였습니다");
+                    alert(result.result_str);
+                    $("#homepage_admin").val('')
+                    $("#homepage_admin_pnum").val('')
+                    $("#email").val('')
                     pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
                 }
                 else {
@@ -605,10 +610,10 @@
             success: function (result) {
                 console.log(result)
                 if (result.result_code === "SUCCESS") {
-                    alert("상태 변경에 성공하였습니다");
+                    // alert("상태 변경에 성공하였습니다");
                     pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
                 } else {
-                    alert("상태 변경에 실패하였습니다")
+                    // alert("상태 변경에 실패하였습니다")
                     console.log(result)
                 }
 
