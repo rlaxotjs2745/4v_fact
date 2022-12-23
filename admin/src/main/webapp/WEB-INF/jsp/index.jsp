@@ -186,7 +186,7 @@
 
         if(cur!=url+param.page_num || usage == "asset_list"){
             cur = url+param.page;
-            history.pushState(param, title,url);
+            history.pushState(param, title, url);
 
             $.ajaxSetup({
                 headers:

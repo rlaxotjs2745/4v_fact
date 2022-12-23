@@ -59,8 +59,8 @@ public class ConsultingServiceImpl implements ConsultingService {
     }
 
     @Override
-    public int getCountConsulting() {
-        return consultingMapper.getCountConsulting();
+    public int getCountConsulting(DemoBsConsultingVO param) {
+        return consultingMapper.getCountConsulting(param);
     }
 
     @Override

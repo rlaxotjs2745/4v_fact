@@ -13,7 +13,7 @@ public interface ConsultingMapper {
     int getWebpageMyConsultingCount(@Param("idx_user") long idx_user);
     int getAdminConsultingCount(@Param("idx_admin") long idx_admin);
     List<DemoBsConsultingVO>getCunsultingList1(int page, int list_amount);
-    int getCountConsulting();
+    int getCountConsulting(DemoBsConsultingVO param);
     List<DemoBsConsultingVO> getUserConsultingList(ParamPageListFilteredVO paramPageListFilteredVO);
     List<DemoBsConsultingVO> getAdminConsultingList(ParamPageListFilteredVO paramPageListFilteredVO);
     void saveDemoBsConsulting(DemoBsConsultingVO demoBsConsultingVO);

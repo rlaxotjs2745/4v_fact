@@ -1,6 +1,7 @@
 package kr.or.fact.admin.controller;
 
 import kr.or.fact.core.model.DTO.*;
+import kr.or.fact.core.model.PRContentsMapper;
 import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.*;
 import lombok.SneakyThrows;
@@ -83,6 +84,9 @@ public class IndexController {
 
     @Resource(name="prContentService")
     public PRContentsService prContentService;
+
+    @Autowired
+    public PRContentsMapper prContentsMapper;
 
     @Autowired
     Environment env;
@@ -618,13 +622,15 @@ public class IndexController {
 
     //문의상담신청 관리
     @RequestMapping(value = "/c10_site_mng_consult_mng",method = RequestMethod.POST)
-    public String c10_site_mng_consult_mng(ModelMap model,@RequestBody ParamPageListFilteredVO param,Principal principal){
+    public String c10_site_mng_consult_mng(ModelMap model, @RequestBody ParamPageListFilteredVO param, Principal principal){
 //접수목록 가져오기 (db table) DemoBsConsultingVO get 요청으로 가져오기
         param.setAmount(10);
         int list_amount = 10;
         int page_amount = param.getAmount();
         int page = param.getPage_num();
-        int consultingCount = consultingService.getCountConsulting();
+        DemoBsConsultingVO param0 = new DemoBsConsultingVO();
+        param0.setConsulting_status(-1);
+        int consultingCount = consultingService.getCountConsulting(param0);
         if(consultingCount==0){
             return "c10_site_mng_consult_mng";
         }
@@ -673,7 +679,6 @@ public class IndexController {
         model.addAttribute("is_last",is_last);
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
-
 
         AdminVO adminInfo = adminService.findAdminById(principal.getName());
         model.addAttribute("admin", adminInfo);
@@ -940,16 +945,16 @@ public class IndexController {
         int list_amount = 10;
         int page_amount = param.getAmount();
         int page = param.getPage_num();
-        int prCount = prContentService.getMainPRContentCount();
+        int prCount = prContentService.getPRContentCount();
 //        if(prCount==0){
 //            return "brd_adver_blank";
 //        }
         model.addAttribute("total_count",prCount);
 
-List<PRContentVO> prlist =prContentService.getPRContentList( page, list_amount);
-//        List<PRContentVO> prlist1 = prContentService.getMainPRContentList();
-model.addAttribute("prlist",prlist);
-    model.addAttribute("prcontent",prlist);
+        List<PRContentVO> prlist = prContentService.getPRContentList( page, list_amount);
+        //        List<PRContentVO> prlist1 = prContentService.getMainPRContentList();
+        model.addAttribute("prlist",prlist);
+        model.addAttribute("prcontent",prlist);
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
 
@@ -992,21 +997,24 @@ model.addAttribute("prlist",prlist);
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
+        int count_req = prContentsMapper.getPRContentCount2(param);
+        model.addAttribute("count_req",count_req);
+
+        int count_comp = prContentsMapper.getPRContentCount2(param);
+        model.addAttribute("count_comp",count_comp);
+
         return "c43_site_adver_mng";
     }
 
     @RequestMapping(value = "/pr_contents",method = RequestMethod.POST)
     public String pr_contents(@RequestParam(value = "page_num", required = false) String tagValue,
-                                     @RequestBody ParamPageListFilteredVO param,   ModelMap model){
+                                     @RequestBody ParamPageListFilteredVO param, ModelMap model){
 
         String content = "";
-        List<PRContentVO> prlist = prContentService.getMainPRContentList();
-        for (PRContentVO prContentVO : prlist) {
-            if (param.getIdx() == Integer.parseInt("" + prContentVO.getIdx_pr_content())) {
-                content = prContentVO.getPr_contents();
-            }
+        PRContentVO prContentVO = prContentService.getMainPRContent(param);
+        if(prContentVO!=null) {
+            content = prContentVO.getPr_contents();
         }
-
         model.addAttribute("contentFuck",  content);
 
         return "pr_contents";
