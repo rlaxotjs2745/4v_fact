@@ -54,6 +54,10 @@
     <link rel="stylesheet" type="text/css" href="resources/assets/css/demo.css">
     <link rel="stylesheet" type="text/css" href="resources/assets/vendor/libs/summernote/summernote.css">
 
+    <!-- 공통 css 추가 -->
+    <link rel="stylesheet" href="resources/assets/css/common.css">
+
+
 </head>
 
 <body>

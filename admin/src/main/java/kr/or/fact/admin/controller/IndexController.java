@@ -1056,19 +1056,70 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
 
     //사이트 정보관리
     @RequestMapping(value = "/c80_site_mng",method = RequestMethod.POST)
-    public String c80_site_mng(@RequestParam(value = "tag", required = false) String tagValue
+    public String c80_site_mng(@RequestParam(value = "tag", required = false) String tagValue, @RequestBody ParamPageListFilteredVO param
             , Model model){
 
         //푸터 정보
         HomepageInfoVO homepageInfoVO = homepageInfoService.getHomepageInfo();
         model.addAttribute("homepageInfo",homepageInfoVO);
 
-        List<HomepageInfoVO> homepageInfoList = homepageInfoService.getHomepageInfoList(homepageInfoVO);
+        param.setAmount(10);
+        int list_amount = 10;
+        int page_amount = param.getAmount();
+        int page = param.getPage_num();
+
+        int homepageInfoCount = homepageInfoService.getHomepageInfoCount();
+        model.addAttribute("hi_total_count",homepageInfoCount);
+
+        List<HomepageInfoVO> homepageInfoList = homepageInfoService.getHomepageInfoList(param);
         model.addAttribute("homepageInfoList",homepageInfoList);
+        model.addAttribute("hi_cur_page",page);
+        model.addAttribute("hi_amount",list_amount);
+
+
+        int tot_page = homepageInfoCount/list_amount+1;
+        if(homepageInfoCount%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+        boolean is_active = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+
+        model.addAttribute("hi_tot_page",tot_page);
+        model.addAttribute("hi_tot_sector",tot_sector);
+        model.addAttribute("hi_cur_sector",cur_sector);
+        model.addAttribute("hi_is_past",is_past);
+        model.addAttribute("hi_is_prev",is_prev);
+        model.addAttribute("hi_is_next",is_next);
+        model.addAttribute("hi_is_last",is_last);
+        model.addAttribute("hi_list_amount",list_amount);
+        model.addAttribute("hi_page_amount",page_amount);
 
         //조직도, 직원 정보
         List<CoWorkerVO> coWorkerVOList = coWorkerNService.getCoWorkerList();
         model.addAttribute("coWorkerVOList",coWorkerVOList);
+
         return "c80_site_mng";
     }
 

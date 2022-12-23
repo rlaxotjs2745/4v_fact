@@ -11,4 +11,6 @@ public class HomepageInfoVO {
     String homepage_admin_pnum;//	varchar2	40					홈페이지 정보 담당자 연락처	연락처(내선번호)
     String email;//varchar2 이메일
     Date reg_date;//	date
+
+    int is_current; // 0:미반영 1:반영 2:삭제
 }

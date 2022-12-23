@@ -7,40 +7,83 @@
         SELECT * FROM TB_HOMEPAGE_INFO  WHERE IS_CURRENT=1
     </select>
     <insert id="insertHomepageInfo" parameterType="kr.or.fact.core.model.DTO.HomepageInfoVO">
-        INSERT INTO TB_HOMEPAGE_INFO(
-            IDX_HOMEPAGE_INFO,
-            HOMEPAGE_ADMIN,
-            HOMEPAGE_ADMIN_PNUM,
-            IS_CURRENT,
-            EMAIL,
-            REG_DATE,
-            VALUES (
-                SEQ_HOMEPAGE_INFO.NEXTVAL,
+        INSERT INTO TB_HOMEPAGE_INFO( IDX_HOMEPAGE_INFO,
+                                      HOMEPAGE_ADMIN,
+                                      HOMEPAGE_ADMIN_PNUM,
+                                      IS_CURRENT,
+                                      EMAIL,
+                                      REG_DATE)
+        VALUES (SEQ_HOMEPAGE_INFO.NEXTVAL,
                 #{homepage_admin},
                 #{homepage_admin_pnum},
                 #{is_current},
                 #{email},
                 SYSDATE
-                )
-
+               )
     </insert>
     <update id="updateHomepageInfo" parameterType="kr.or.fact.core.model.DTO.HomepageInfoVO">
         UPDATE TB_HOMEPAGE_INFO SET
-            HOMEPAGE_ADMIN = #{homepage_admin},
-            HOMEPAGE_ADMIN_PNUM = #{homepage_admin_pnum},
-            IS_CURRENT = 1,
-                                    EMAIL=#{email},
-            REG_DATE = SYSDATE
+                                    HOMEPAGE_ADMIN = #{homepage_admin},
+                                    HOMEPAGE_ADMIN_PNUM = #{homepage_admin_pnum},
+                                    EMAIL=#{email}
         WHERE IDX_HOMEPAGE_INFO = #{idx_homepage_info}
 
     </update>
-    <delete id="deleteHomepageInfo" parameterType="long">
-        DELETE FROM TB_HOMEPAGE_INFO WHERE IDX_HOMEPAGE_INFO = #{idx_homepage_info}
-    </delete>
+    <update id="deleteHomepageInfo" parameterType="long">
+        UPDATE TB_HOMEPAGE_INFO SET
+            IS_CURRENT = 2
+        WHERE IDX_HOMEPAGE_INFO = #{idx_homepage_info}
+    </update>
 
-<select id="getHomepageInfoList" resultType="kr.or.fact.core.model.DTO.HomepageInfoVO">
-    SELECT * FROM TB_HOMEPAGE_INFO
-</select>
+    <update id="setCurrentHomepageInfo" parameterType="long">
+        UPDATE TB_HOMEPAGE_INFO SET
+            IS_CURRENT = 1
+        WHERE IDX_HOMEPAGE_INFO = #{idx_homepage_info}
+    </update>
 
+    <update id="setWaitingHomepageInfo" parameterType="long">
+        UPDATE TB_HOMEPAGE_INFO SET
+            IS_CURRENT = 0
+        WHERE IDX_HOMEPAGE_INFO = #{idx_homepage_info}
+    </update>
+
+    <select id="getHomepageInfoList" resultType="kr.or.fact.core.model.DTO.HomepageInfoVO">
+        SELECT
+            IDX_HOMEPAGE_INFO,
+            HOMEPAGE_ADMIN,
+            HOMEPAGE_ADMIN_PNUM,
+            IS_CURRENT,
+            EMAIL,
+            REG_DATE
+        FROM (
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+                        ,IDX_HOMEPAGE_INFO,
+                        HOMEPAGE_ADMIN,
+                        HOMEPAGE_ADMIN_PNUM,
+                        IS_CURRENT,
+                        EMAIL,
+                        REG_DATE
+                 FROM (
+                          SELECT * FROM TB_HOMEPAGE_INFO
+                          WHERE IS_CURRENT = 0 OR IS_CURRENT = 1
+                          order by IDX_HOMEPAGE_INFO desc
+                      )
+                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+             )
+        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+
+    </select>
+
+    <select id="getHomepageInfoIdx" resultType="kr.or.fact.core.model.DTO.HomepageInfoVO">
+        SELECT *
+        FROM TB_HOMEPAGE_INFO
+        WHERE IDX_HOMEPAGE_INFO = #{idx_homepage_info}
+    </select>
+
+    <select id="getHomepageInfoCount" resultType="int">
+        SELECT COUNT (*) FROM TB_HOMEPAGE_INFO
+        WHERE IS_CURRENT = 0 OR IS_CURRENT = 1
+    </select>
 
 </mapper>
+
