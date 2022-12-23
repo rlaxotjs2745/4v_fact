@@ -100,6 +100,7 @@ function ModoEdicion($row) {
 }
 function rowAcep(but) {
 //Acepta los cambios de la edición
+
     var $row = $(but).parents('tr');  //accede a la fila
     var $cols = $row.find('td');  //lee campos
     if (!ModoEdicion($row)) return;  //Ya está en edición
@@ -110,6 +111,37 @@ function rowAcep(but) {
     });
     FijModoNormal(but);
     params.onEdit($row);
+
+    let param = {
+        idx_homepage_info:$row.attr('data-idx'), //idx 값
+        homepage_admin:$cols[0].textContent,
+        homepage_admin_pnum:$cols[1].textContent,
+        email:$cols[2].textContent
+    }
+
+    console.log(param);
+    $.ajax({
+        type: 'post',
+        url :'modify_homepage_info', //데이터를 주고받을 파일 주소 입력
+        data: JSON.stringify(param),//보내는 데이터
+        contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+        dataType:'json',//받는 데이터 타입
+        success: function(result){
+            //작업이 성공적으로 발생했을 경우
+            console.log(result);
+            alert(result.result_str);
+            if (result.result_code === "SUCCESS") {
+                alert("수정 했습니다.");
+                pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
+            }
+            else {
+
+            }
+        },
+        error:function(){
+            //에러가 났을 경우 실행시킬 코드
+        }
+    });
 }
 function rowCancel(but) {
 //Rechaza los cambios de la edición
@@ -137,11 +169,82 @@ function rowEdit(but) {  //Inicia la edición de una fila
     FijModoEdit(but);
 }
 function rowElim(but) {  //Elimina la fila actual
-    var $row = $(but).parents('tr');  //accede a la fila
-    params.onBeforeDelete($row);
-    $row.remove();
-    params.onDelete();
+    let $row = $(but).parents('tr');  //accede a la fila
+
+    let param = {
+        idx_homepage_info:$row.attr('data-idx'), //idx 값
+    }
+
+    $.ajax({
+        type: 'post',
+        url :'delete_homepage_info', //데이터를 주고받을 파일 주소 입력
+        data: JSON.stringify(param),//보내는 데이터
+        contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+        dataType:'json',//받는 데이터 타입
+        success: function(result){
+            //작업이 성공적으로 발생했을 경우
+            console.log(result);
+            if (result.result_code === "SUCCESS") {
+                alert(result.result_str);
+                pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
+                // params.onBeforeDelete($row);
+                // $row.remove();
+                // params.onDelete();
+            }
+            else {
+                alert(result.result_str);
+            }
+        },
+        error:function(err){
+            console.log(err);
+            //에러가 났을 경우 실행시킬 코드
+        }
+    });
+
+    // params.onBeforeDelete($row);
+    // $row.remove();
+    // params.onDelete();
 }
+
+function rowAplly(but) {  //Elimina la fila actual
+    let $row = $(but);  //accede a la fila
+    console.log($row)
+
+    let param = {
+        idx_homepage_info:$row.attr('data-idx'), //idx 값
+    }
+
+    $.ajax({
+        type: 'post',
+        url :'delete_homepage_info', //데이터를 주고받을 파일 주소 입력
+        data: JSON.stringify(param),//보내는 데이터
+        contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+        dataType:'json',//받는 데이터 타입
+        success: function(result){
+            //작업이 성공적으로 발생했을 경우
+            console.log(result);
+            if (result.result_code === "SUCCESS") {
+                alert(result.result_str);
+                pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
+                // params.onBeforeDelete($row);
+                // $row.remove();
+                // params.onDelete();
+            }
+            else {
+                alert(result.result_str);
+            }
+        },
+        error:function(err){
+            console.log(err);
+            //에러가 났을 경우 실행시킬 코드
+        }
+    });
+
+    // params.onBeforeDelete($row);
+    // $row.remove();
+    // params.onDelete();
+}
+
 function rowAddNew(tabId) {  //Agrega fila a la tabla indicada.
     var $tab_en_edic = $("#" + tabId);  //Table to edit
     var $filas = $tab_en_edic.find('tbody tr');
