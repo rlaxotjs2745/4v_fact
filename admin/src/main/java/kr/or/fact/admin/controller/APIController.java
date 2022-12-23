@@ -607,35 +607,112 @@ public class APIController {
         return  resultVO;
     }
     @RequestMapping(value = "/save_homepage_info",method = RequestMethod.POST)
-    public @ResponseBody
-    ResultVO  save_homepage_info(HttpSession session,
-                                @RequestBody HomepageInfoVO homepageInfoVO){
+    public @ResponseBody ResultVO save_homepage_info(HttpSession session, @RequestBody HomepageInfoVO homepageInfoVO){
 
         ResultVO resultVO = new ResultVO();
-        resultVO.setResult_str("저장했습니다");
-        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("필수 데이터가 없습니다.");
+        resultVO.setResult_code("ERROR001");
 
         if(homepageInfoVO.getHomepage_admin() != null &&
                 homepageInfoVO.getHomepage_admin_pnum()!= null &&
-                homepageInfoVO.getEmail()!= null
-        ){
+                homepageInfoVO.getEmail()!= null){
+
             HomepageInfoVO resultHomepageInfo = homepageInfoService.getHomepageInfo();
-            resultHomepageInfo.setHomepage_admin(homepageInfoVO.getHomepage_admin());
-            resultHomepageInfo.setHomepage_admin_pnum(homepageInfoVO.getHomepage_admin_pnum());
-            resultHomepageInfo.setEmail(homepageInfoVO.getEmail());
 
-            homepageInfoService.updateHomepageInfo(resultHomepageInfo);
+            HomepageInfoVO newInfo = new HomepageInfoVO();
+            newInfo.setHomepage_admin(homepageInfoVO.getHomepage_admin());
+            newInfo.setHomepage_admin_pnum(homepageInfoVO.getHomepage_admin_pnum());
+            newInfo.setEmail(homepageInfoVO.getEmail());
 
+            if(resultHomepageInfo==null){
+                newInfo.setIs_current(1);
+                homepageInfoService.insertHomepageInfo(newInfo);
+            } else {
+                newInfo.setIs_current(0);
+                homepageInfoService.insertHomepageInfo(newInfo);
+            }
+
+            resultVO.setResult_str("저장했습니다");
+            resultVO.setResult_code("SUCCESS");
         }
-        else {
-            resultVO.setResult_str("필수 데이터가 없습니다.");
-            resultVO.setResult_code("ERROR001");
-        }
-
-
 
         return  resultVO;
     }
+
+    @RequestMapping(value = "/modify_homepage_info",method = RequestMethod.POST)
+    public @ResponseBody ResultVO modify_homepage_info(HttpSession session, @RequestBody HomepageInfoVO homepageInfoVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("필수 데이터가 없습니다.");
+        resultVO.setResult_code("ERROR001");
+
+        if(homepageInfoVO.getIdx_homepage_info()>0){
+
+            HomepageInfoVO resultInfo = homepageInfoService.getHomepageInfoIdx(homepageInfoVO);
+
+            if(homepageInfoVO.getHomepage_admin()!=null){
+                resultInfo.setHomepage_admin(homepageInfoVO.getHomepage_admin());
+            }
+            if(homepageInfoVO.getHomepage_admin_pnum()!=null){
+                resultInfo.setHomepage_admin_pnum(homepageInfoVO.getHomepage_admin_pnum());
+            }
+            if(homepageInfoVO.getEmail()!=null){
+                resultInfo.setEmail(homepageInfoVO.getEmail());
+            }
+
+            homepageInfoService.updateHomepageInfo(resultInfo);
+
+            resultVO.setResult_str("수정했습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+        return  resultVO;
+    }
+
+    @RequestMapping(value = "/delete_homepage_info",method = RequestMethod.POST)
+    public @ResponseBody ResultVO delete_homepage_info(HttpSession session, @RequestBody HomepageInfoVO homepageInfoVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("해당되는 데이터가 없습니다.");
+        resultVO.setResult_code("ERROR001");
+
+        if(homepageInfoVO.getIdx_homepage_info()>0){
+
+            HomepageInfoVO resultInfo = homepageInfoService.getHomepageInfoIdx(homepageInfoVO);
+
+            if(resultInfo.getIs_current()==1){
+                resultVO.setResult_str("현재 관리자는 삭제 할 수 없습니다.");
+            } else {
+                homepageInfoService.deleteHomepageInfo(homepageInfoVO.getIdx_homepage_info());
+                resultVO.setResult_str("삭제했습니다.");
+                resultVO.setResult_code("SUCCESS");
+            }
+        }
+        return  resultVO;
+    }
+
+    @RequestMapping(value = "/set_homepage_info",method = RequestMethod.POST)
+    public @ResponseBody ResultVO set_homepage_info(HttpSession session, @RequestBody HomepageInfoVO homepageInfoVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("해당되는 데이터가 없습니다.");
+        resultVO.setResult_code("ERROR001");
+
+        if(homepageInfoVO.getIdx_homepage_info()>0){
+
+            HomepageInfoVO resultHomepageInfo = homepageInfoService.getHomepageInfo();
+            if(resultHomepageInfo==null){
+                homepageInfoService.setCurrentHomepageInfo(homepageInfoVO.getIdx_homepage_info());
+            } else {
+                homepageInfoService.setWaitingHomepageInfo(resultHomepageInfo);
+                homepageInfoService.setCurrentHomepageInfo(homepageInfoVO.getIdx_homepage_info());
+            }
+
+            resultVO.setResult_str("메인 프로필로 설정 했습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+        return  resultVO;
+    }
+
     @RequestMapping(value = "/save_system_code",method = RequestMethod.POST)
     public @ResponseBody
     ResultVO  save_system_code(HttpSession session,

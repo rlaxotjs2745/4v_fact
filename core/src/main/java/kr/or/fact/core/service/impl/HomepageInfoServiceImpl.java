@@ -1,8 +1,7 @@
 package kr.or.fact.core.service.impl;
 
-import kr.or.fact.core.model.DTO.CoWorkerVO;
 import kr.or.fact.core.model.DTO.HomepageInfoVO;
-import kr.or.fact.core.model.EventContentMapper;
+import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 import kr.or.fact.core.model.HomepageMapper;
 import kr.or.fact.core.service.HomepageInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +35,30 @@ public class HomepageInfoServiceImpl implements HomepageInfoService {
     }
 
     @Override
-    public List<HomepageInfoVO> getHomepageInfoList(HomepageInfoVO homepageInfoVO) {
-        return homepageMapper.getHomepageInfoList(homepageInfoVO);
+    public List<HomepageInfoVO> getHomepageInfoList(ParamPageListFilteredVO param) {
+        return homepageMapper.getHomepageInfoList(param);
+    }
+
+    @Override
+    public HomepageInfoVO getHomepageInfoIdx(HomepageInfoVO homepageInfoVO) {
+        return homepageMapper.getHomepageInfoIdx(homepageInfoVO);
+    }
+
+    @Override
+    public void setCurrentHomepageInfo(long idx) {
+        homepageMapper.setCurrentHomepageInfo(idx);
+    }
+
+    @Override
+    public void setWaitingHomepageInfo(HomepageInfoVO resultHomepageInfo) {
+
+    }
+
+    @Override
+    public int getHomepageInfoCount() {
+        return homepageMapper.getHomepageInfoCount();
     }
 
 
 }
+
