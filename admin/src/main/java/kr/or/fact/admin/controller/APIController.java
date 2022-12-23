@@ -697,22 +697,24 @@ public class APIController {
         resultVO.setResult_str("해당되는 데이터가 없습니다.");
         resultVO.setResult_code("ERROR001");
 
-        HomepageInfoVO resultHomepageInfo = homepageInfoService.getHomepageInfo();
-        long resultIdx = resultHomepageInfo.getIdx_homepage_info();
+        if(homepageInfoVO.getIdx_homepage_info()>0){
+            HomepageInfoVO resultHomepageInfo = homepageInfoService.getHomepageInfo();
 
-        if(resultHomepageInfo!=null && resultHomepageInfo.getIs_current()==1){
+            if(resultHomepageInfo!=null && resultHomepageInfo.getIs_current()==1){
+                long resultIdx = resultHomepageInfo.getIdx_homepage_info();
+                homepageInfoService.setWaitingHomepageInfo(resultIdx);
+                homepageInfoService.setCurrentHomepageInfo(homepageInfoVO.getIdx_homepage_info());
 
-            homepageInfoService.setWaitingHomepageInfo(resultIdx);
-            homepageInfoService.setCurrentHomepageInfo(homepageInfoVO.getIdx_homepage_info());
+                resultVO.setResult_str("메인 프로필을 변경했습니다.");
+                resultVO.setResult_code("SUCCESS");
+            } else {
+                homepageInfoService.setCurrentHomepageInfo(homepageInfoVO.getIdx_homepage_info());
 
-            resultVO.setResult_str("메인 프로필을 변경했습니다.");
-            resultVO.setResult_code("SUCCESS");
-        } else {
-            homepageInfoService.setCurrentHomepageInfo(homepageInfoVO.getIdx_homepage_info());
-
-            resultVO.setResult_str("메인 프로필로 설정했습니다.");
-            resultVO.setResult_code("SUCCESS");
+                resultVO.setResult_str("메인 프로필로 설정했습니다.");
+                resultVO.setResult_code("SUCCESS");
+            }
         }
+
         return resultVO;
     }
 
