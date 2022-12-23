@@ -50,9 +50,7 @@ public class HomepageInfoServiceImpl implements HomepageInfoService {
     }
 
     @Override
-    public void setWaitingHomepageInfo(long idx) {
-
-    }
+    public void setWaitingHomepageInfo(long idx) { homepageMapper.setWaitingHomepageInfo(idx); }
 
     @Override
     public int getHomepageInfoCount() {

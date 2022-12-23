@@ -698,9 +698,11 @@ public class APIController {
         resultVO.setResult_code("ERROR001");
 
         HomepageInfoVO resultHomepageInfo = homepageInfoService.getHomepageInfo();
+        long resultIdx = resultHomepageInfo.getIdx_homepage_info();
 
         if(resultHomepageInfo!=null && resultHomepageInfo.getIs_current()==1){
-            homepageInfoService.setWaitingHomepageInfo(resultHomepageInfo.getIdx_homepage_info());
+
+            homepageInfoService.setWaitingHomepageInfo(resultIdx);
             homepageInfoService.setCurrentHomepageInfo(homepageInfoVO.getIdx_homepage_info());
 
             resultVO.setResult_str("메인 프로필을 변경했습니다.");

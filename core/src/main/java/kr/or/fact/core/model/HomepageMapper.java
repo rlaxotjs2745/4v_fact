@@ -19,5 +19,7 @@ public interface HomepageMapper {
     void setCurrentHomepageInfo(long idx);
 
     int getHomepageInfoCount();
+
+    void setWaitingHomepageInfo(long idx);
 }
 
