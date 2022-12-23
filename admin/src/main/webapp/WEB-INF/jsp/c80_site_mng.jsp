@@ -62,7 +62,7 @@
                                 <th class="text-center sorting" style="width:10%">성명</th>
                                 <th class="text-center sorting" style="width:20%">전화번호</th>
                                 <th class="text-center sorting" style="width:auto">이메일</th>
-                                <th class="text-center sorting" style="width:10%">변경</th>
+<%--                                <th class="text-center sorting" style="width:10%">변경</th>--%>
                             </tr>
                             </thead>
                             <tbody>
@@ -73,7 +73,7 @@
                                             <td class="text-center">${homepageinfo.homepage_admin}</td>
                                             <td class="text-center">${homepageinfo.homepage_admin_pnum}</td>
                                             <td class="text-center">${homepageinfo.email}</td>
-                                            <td class="text-center"><button onclick="rowApllySet(this)" class="btn btn-success" data-idx="${homepageinfo.idx_homepage_info}">적용</button></td>
+<%--                                            <td data-name="button" class="text-center"><button data-type="button" onclick="rowApllySet(this)" class="btn btn-success" data-idx="${homepageinfo.idx_homepage_info}">적용</button></td>--%>
                                         </tr>
                                     </c:forEach>
                                 </c:when>

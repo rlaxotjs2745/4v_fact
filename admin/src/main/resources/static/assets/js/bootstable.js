@@ -22,6 +22,9 @@ var newColHtml = '<div class="btn-group pull-right">'+
     '<button id="bCanc" type="button" class="btn btn-sm btn-default" style="display:none;" onclick="rowCancel(this);">' +
     '<span class="far fa-window-close" > </span>'+
     '</button>'+
+    '<button id="bSet" type="button" class="btn btn-sm btn-default" onclick="rowApllySet(this);">' +
+    '<span class="fas fa-check" > </span>'+
+    '</button>'+
     '</div>';
 var colEdicHtml = '<td name="buttons">'+newColHtml+'</td>';
 
@@ -56,6 +59,7 @@ function IterarCamposEdit($cols, tarea) {
     var n = 0;
     $cols.each(function() {
         n++;
+        if ($(this).attr('data-type')=='buttons') return;
         if ($(this).attr('name')=='buttons') return;  //excluye columna de botones
         if ($(this).attr('name')=='checkbox') return;
         if (!EsEditable(n-1)) return;   //noe s campo editable
@@ -80,10 +84,12 @@ function FijModoNormal(but) {
     $(but).parent().find('#bCanc').hide();
     $(but).parent().find('#bEdit').show();
     $(but).parent().find('#bElim').show();
+    $(but).parent().find('#bSet').show();
     var $row = $(but).parents('tr');  //accede a la fila
     $row.attr('id', '');  //quita marca
 }
 function FijModoEdit(but) {
+    $(but).parent().find('#bSet').hide();
     $(but).parent().find('#bAcep').show();
     $(but).parent().find('#bCanc').show();
     $(but).parent().find('#bEdit').hide();
