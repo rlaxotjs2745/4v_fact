@@ -1,0 +1,3 @@
+/* 사이트 관리 - 사이트 정보 관리 - 현재 등록되어있는 관리자 표시 체크 해주는 css */
+.layout-wrapper .homepageinfo_entity_1 {background-color: #02BC77 !important; color: #fff;}
+.layout-wrapper .homepageinfo_entity_1 .btn-default {color:#fff; border-color: #fff !important;}
