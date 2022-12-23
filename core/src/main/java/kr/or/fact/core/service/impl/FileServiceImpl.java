@@ -278,4 +278,64 @@ public class FileServiceImpl implements FileService {
         return fileServiceMapper.selectBsAnnouncementFile(index_bs_announcement);
     }
 
+    @Override
+    public void deleteFormFile(FormFileInfoVO formFileInfoVO){
+        fileServiceMapper.deleteFormFile(formFileInfoVO.getIdx_form_file_info());
+        fileServiceMapper.deleteFileInfo(formFileInfoVO.getIdx_file_info());
+    }
+
+    @Override
+    public void updateFormFile(FileRequestVO fileRequestVO){
+        FormFileInfoVO formFileInfoVO = fileServiceMapper.getFormFile(fileRequestVO.getFileIndex());
+
+        fileServiceMapper.deleteFileInfo(formFileInfoVO.getIdx_file_info());
+
+        MultipartFile file = fileRequestVO.getFiles1();
+        try {
+            convertMultipartToFile(file);
+        } catch (Exception e){
+            System.out.println(e);
+        }
+
+        FileInfoVO fileInfoVO = new FileInfoVO();
+
+        fileInfoVO.setFile_name(file.getOriginalFilename());
+        fileInfoVO.setFile_type(3);
+        fileInfoVO.setFile_status(0);
+        fileInfoVO.setMime_type(file.getContentType());
+        fileInfoVO.setEncoding(1);
+        fileInfoVO.setExtention(StringUtils.getFilenameExtension(file.getOriginalFilename()));
+        fileInfoVO.setFile_secure_type(0);
+        fileInfoVO.setFile_path("downloadFile/" + file.getOriginalFilename());
+        fileInfoVO.setFile_size(file.getSize());
+        fileInfoVO.setOwner(1);
+        fileInfoVO.setIdx_admin(fileRequestVO.getIdx_admin());
+
+        fileServiceMapper.insertFileInfo(fileInfoVO);
+
+        long fileIdx = fileServiceMapper.getFileIdx(file.getOriginalFilename());
+
+
+        if(fileRequestVO.getSubject() != "" && fileRequestVO.getSubject() != null && formFileInfoVO.getSubject() != fileRequestVO.getSubject()){
+            formFileInfoVO.setSubject(fileRequestVO.getSubject());
+        }
+
+        if(fileRequestVO.getUsage_detail() != "" && fileRequestVO.getUsage_detail() != null && formFileInfoVO.getUsage_detail() != fileRequestVO.getUsage_detail()){
+            formFileInfoVO.setUsage_detail(fileRequestVO.getUsage_detail());
+        }
+
+        if(fileRequestVO.getIdx_admin() != 0 && formFileInfoVO.getIdx_admin() != fileRequestVO.getIdx_admin()){
+            formFileInfoVO.setIdx_admin(fileRequestVO.getIdx_admin());
+        }
+
+        if(fileRequestVO.getFileVersion() != 0 && fileRequestVO.getFileVersion() != formFileInfoVO.getOrder_num()){
+            formFileInfoVO.setOrder_num(fileRequestVO.getFileVersion());
+        }
+
+        formFileInfoVO.setIdx_file_info(fileIdx);
+
+        fileServiceMapper.updateFormFile(formFileInfoVO);
+
+    }
+
 }

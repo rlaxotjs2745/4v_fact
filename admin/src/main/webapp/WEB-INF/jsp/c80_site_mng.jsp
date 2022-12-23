@@ -94,18 +94,18 @@
                 <c:if test="${hi_total_count ne 0}">
                     <div class="row">
                         <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${hi_total_count}개 중 ${hi_list_amount*(hi_cur_page-1)+1}에서 ${hi_total_count}까지</div>
+                            <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${hi_total_count}개 중 ${hi_list_amount*(cur_page-1)+1}에서 ${hi_total_count}까지</div>
                         </div>
                         <div class="col-sm-12 col-md-7">
                             <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                                 <ul class="pagination">
-                                    <c:set var="name" value="${hi_total_count/hi_amount}" />
+                                    <c:set var="name" value="${hi_total_count/hi_list_amount}" />
                                     <c:if test="${hi_is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{page_num:1},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
-                                    <c:if test="${hi_is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{page_num:${hi_cur_page-1}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+                                    <c:if test="${hi_is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{page_num:${cur_page-1}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
                                     <c:forEach var="i" begin="1" end="${hi_page_amount}">
-                                        <li class="paginate_button page-item <c:if test="${(hi_cur_sector-1)*hi_page_amount+i eq hi_cur_page}">active</c:if>"><a href="javascript:pageLoad('c80_site_mng',{page_num:${(hi_cur_sector-1)*hi_page_amount+i}},'홈페이지 정보 관리');" class="page-link">${(hi_cur_sector-1)*hi_page_amount+i}</a></li>
+                                        <li class="paginate_button page-item <c:if test="${(hi_cur_sector-1)*hi_page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('c80_site_mng',{page_num:${(hi_cur_sector-1)*hi_page_amount+i}},'홈페이지 정보 관리');" class="page-link">${(hi_cur_sector-1)*hi_page_amount+i}</a></li>
                                     </c:forEach>
-                                    <c:if test="${hi_is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c80_site_mng',{page_num:${hi_cur_page+1}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                    <c:if test="${hi_is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c80_site_mng',{page_num:${cur_page+1}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
                                     <c:if test="${hi_is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c80_site_mng',{page_num:${hi_tot_page}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
                                 </ul>
                             </div>
@@ -133,33 +133,38 @@
                             <thead class="bg-success text-white font-weight-bold">
                             <tr role="row">
                                 <th class="text-center px-2" style="width:6%">순서</th>
-                                <th class="text-center px-2" style="width:4%">표시</th>
                                 <th class="text-center sorting" style="width:10%">소속</th>
                                 <th class="text-center sorting" style="width:10%">성명</th>
                                 <th class="text-center sorting" style="width:auto">담당 업무</th>
                                 <th class="text-center sorting" style="width:10%">직위</th>
                                 <th class="text-center sorting" style="width:16%">전화번호</th>
                                 <th class="text-center px-2" style="width:16%">이메일</th>
+                                <th class="text-center px-2" style="width:10%">변경</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:choose>
                                 <c:when test="${fn:length(coWorkerVOList)>0}">
                                     <c:forEach items = "${coWorkerVOList}" var ="coworker">
-                                        <tr class="">
+                                        <tr class="<c:if test="${coworker.is_show eq 1}">checked_show</c:if>">
                                             <td class="text-center">${coworker.co_worker_oder}</td>
-                                            <td class="text-center" name="checkbox">
-                                                <label class="form-check">
-                                                    <input type="checkbox" class="form-check-input" <c:if test="${coworker.is_show eq 1}">checked</c:if>>
-                                                </label>
-                                            </td>
+<%--                                            <td class="text-center" name="checkbox">--%>
+<%--                                                <label class="form-check">--%>
+<%--                                                    <input type="checkbox" class="form-check-input" <c:if test="${coworker.is_show eq 1}">checked</c:if>>--%>
+<%--                                                </label>--%>
+<%--                                            </td>--%>
                                             <td class="text-center">${coworker.devision}</td>
                                             <td class="text-center">${coworker.coworker_name}</td>
                                             <td class="text-center">${coworker.job_role}</td>
                                             <td class="text-center">${coworker.job_title}</td>
                                             <td class="text-center">${coworker.tel_num}</td>
                                             <td class="text-center">${coworker.email}</td>
-
+                                            <td class="text-center">
+                                                <div class="btn-group">
+                                                    <button class="btn btn-sm btn-default" data-toggle="modal" data-target="#modals-modify"><span class="fas fa-pen" > </span></button>
+                                                    <button class="btn btn-sm btn-default"><span class="fas fa-trash-alt" > </span></button>
+                                                </div>
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                 </c:when>
@@ -183,22 +188,22 @@
                     </div>
                 </div>
             </div>
-            <c:if test="${total_count ne 0}">
+            <c:if test="${cw_total_count ne 0}">
                 <div class="row">
                     <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${total_count}개 중 ${list_amount*(cur_page-1)+1}에서 ${total_count}까지</div>
+                        <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${cw_total_count}개 중 ${cw_list_amount*(cur_page-1)+1}에서 ${cw_total_count}까지</div>
                     </div>
                     <div class="col-sm-12 col-md-7">
                         <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                             <ul class="pagination">
-                                <c:set var="name" value="${total_count/amount}" />
-                                <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c21_site_visit_list',{page_num:1},'견학신청 목록');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
-                                <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c21_site_visit_list',{page_num:${cur_page-1}},'견학신청 목록');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
-                                <c:forEach var="i" begin="1" end="${page_amount}">
-                                    <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('c21_site_visit_list',{page_num:${(cur_sector-1)*page_amount+i}},'견학신청 목록');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
+                                <c:set var="name" value="${cw_total_count/cw_list_amount}" />
+                                <c:if test="${cw_is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{page_num:1},'홈페이지 조직도');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                <c:if test="${cw_is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{page_num:${cur_page-1}},'홈페이지 정보 조직도');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+                                <c:forEach var="i" begin="1" end="${cw_page_amount}">
+                                    <li class="paginate_button page-item <c:if test="${(cw_cur_sector-1)*cw_page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('c80_site_mng',{page_num:${(cw_cur_sector-1)*cw_page_amount+i}},'홈페이지 조직도');" class="page-link">${(cw_cur_sector-1)*cw_page_amount+i}</a></li>
                                 </c:forEach>
-                                <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c21_site_visit_list',{page_num:${cur_page+1}},'견학신청 목록');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
-                                <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c21_site_visit_list',{page_num:${tot_page}},'견학신청 목록');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+                                <c:if test="${cw_is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c80_site_mng',{page_num:${cur_page+1}},'홈페이지 조직도');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                <c:if test="${cw_is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c80_site_mng',{page_num:${cw_tot_page}},'홈페이지 조직도');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
                             </ul>
                         </div>
                     </div>
@@ -336,7 +341,113 @@
         </div>
     </div>
 
-</div>
+
+
+
+<%--  모달 수정 팝업  --%>
+
+    <div class="modal fade" id="modals-modify">
+        <div class="modal-dialog modal-lg">
+            <form class="modal-content" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title">직원 정보 수정</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+                </div>
+                <div class="modal-body pb-2">
+                    <div class="form-row">
+                        <div class="form-group col col-md-12">
+                            <c:choose>
+                                <c:when test="${fn:length(coWorkerVOList)>0}">
+                                    <table class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info">
+                                        <tbody>
+                                        <tr class="">
+                                            <th class="text-center align-middle bg-light" rowspan="3" style="width:12%">개인정보</th>
+                                            <th class="text-center bg-light" style="width:12%">이름</th>
+                                            <td class="text-center" style="width:24%"><input type="text" class="form-control form-control-sm" value="${coworker.coworker_name}" id="coworker_name"></td>
+                                            <th class="text-center bg-light" style="width:13%">일반전화번호</th>
+                                            <td class="text-center" style="width:29%"><input type="text" class="form-control form-control-sm" value="" id="tel_num"></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center bg-light">휴대폰 번호</th>
+                                            <td class="text-center"><input type="text" class="form-control form-control-sm" value="${coworker.tel_num}" id="mphone_num"></td>
+                                            <th class="text-center bg-light">순서 번호</th>
+                                            <td class="text-center">
+                                                <input type="text" class="form-control form-control-sm" value="${coworker.co_worker_oder}" id="co_worker_oder">
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <th class="text-center bg-light">직책</th>
+                                            <td class="text-center"><input type="text" class="form-control form-control-sm" id="job_title" value="${coworker.job_title}"></td>
+                                            <th class="text-center bg-light">담당 권한</th>
+                                            <td class="text-center"><input type="text" class="form-control form-control-sm" id="job_role" value=""></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th class="text-center bg-light">소속정보</th>
+                                            <th class="text-center bg-light">부서</th>
+                                            <td class="text-center"><input type="text" class="form-control form-control-sm" value="${coworker.devision}" id="devision"></td>
+                                            <th class="text-center bg-light">소속</th>
+                                            <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="department"></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center bg-light">센터정보</th>
+                                            <th class="text-center bg-light">소속부서</th>
+                                            <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="main_part"></td>
+                                            <th class="text-center bg-light">담당업무</th>
+                                            <td class="text-center"><input type="text" class="form-control form-control-sm" value="${coworker.job_role}" id="manage_num"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info" style="">
+                                        <tbody>
+                                        <tr>
+                                            <th class="text-center align-middle bg-light" style="width: 4.5%" rowspan="2">시스템 정보</th>
+                                            <th class="text-center bg-light" style="width: 4.5%; vertical-align: middle;" >웹ID</th>
+                                            <td class="" style="width: 25%" colspan="3">
+                                                <input type="text" id="web_id" class="form-control form-control-sm d-inline-block align-middle mr-1" value="${coworker.email}" style="width: 100px" name="email">
+                                                @
+                                                <input type="text" id="web_id2" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width: 100px" name="">
+                                                <select id="admin_id_select_box" class="form-control form-control-sm d-inline-block align-middle mr-1" style="width: 100px">
+                                                    <option value="" selected>직접입력</option>
+                                                    <option value="naver.com">naver.com</option>
+                                                    <option value="gmail.com">gmail.com</option>
+                                                    <option value="hanmail.net">hanmail.net</option>
+                                                    <option value="daum.net">daum.net</option>
+                                                    <option value="nate.com">nate.com</option>
+                                                </select>
+
+                                                <br>
+                                                <small id="web_id_guide"></small>
+                                            </td>
+                                            <%--                                    <th class="text-center bg-light" style="width:13%">비밀번호</th>--%>
+                                            <%--                                    <td class="" colspan="2" style="width:34%"><small>등록한 이메일로 초기 비밀번호가 발송됩니다.</small></td>--%>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center bg-light">보이기</th>
+                                            <td class="" colspan="5">
+                                                <select id="is_show" class="custom-select custom-select-sm w-auto">
+                                                    <option value="1">보임</option>
+                                                    <option value="0">안보임</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </c:when>
+                            </c:choose>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                    <button type="button" id="btn-coworker" class="btn btn-primary" >저장</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </div>
 <!-- Layout footer -->
 

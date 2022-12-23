@@ -11,10 +11,18 @@
     <div class="charge__part">
         <div class="part__inner">
             <div class="part__message">본 콘텐츠의 담당자를 안내해 드립니다.  문의사항이 있는 경우, <a href="spt_consulting">여기</a>를 눌러 상담신청을 하시거나 연락을 주십시오.</div>
-            <div class="part__member">
-                <em>윤여민</em><strong>${homepageInfo.homepage_admin}</strong>
-                <em>010-5695-9919</em><strong>${homepageInfo.homepage_admin_pnum}</strong>
-            </div>
+            <c:if test="${profile == 'sangju-prod'}">
+                <em>실증단지(상주)</em><strong>${homepageInfo.homepage_admin}</strong>
+                <em>054-537-6431</em><strong>${homepageInfo.homepage_admin_pnum}</strong>
+            </c:if>
+            <c:if test="${profile == 'gimje-prod'}">
+                <em>실증단지(김제)</em><strong>${homepageInfo.homepage_admin}</strong>
+                <em>063-540-3600</em><strong>${homepageInfo.homepage_admin_pnum}</strong>
+            </c:if>
+            <c:if test="${profile == 'local'}">
+                <em>실증단지(상주)</em><strong>${homepageInfo.homepage_admin}</strong>
+                <em>054-537-6431</em><strong>${homepageInfo.homepage_admin_pnum}</strong>
+            </c:if>
         </div>
     </div>
 </c:if>
