@@ -175,6 +175,7 @@ function rowElim(but) {  //Elimina la fila actual
         idx_homepage_info:$row.attr('data-idx'), //idx 값
     }
 
+    console.log(param);
     $.ajax({
         type: 'post',
         url :'delete_homepage_info', //데이터를 주고받을 파일 주소 입력
@@ -197,6 +198,7 @@ function rowElim(but) {  //Elimina la fila actual
         },
         error:function(err){
             console.log(err);
+            console.log('확인점 잘 안되여..')
             //에러가 났을 경우 실행시킬 코드
         }
     });
@@ -206,7 +208,7 @@ function rowElim(but) {  //Elimina la fila actual
     // params.onDelete();
 }
 
-function rowAplly(but) {  //Elimina la fila actual
+function rowApllySet(but) {  //Elimina la fila actual
     let $row = $(but);  //accede a la fila
     console.log($row)
 
@@ -216,7 +218,7 @@ function rowAplly(but) {  //Elimina la fila actual
 
     $.ajax({
         type: 'post',
-        url :'delete_homepage_info', //데이터를 주고받을 파일 주소 입력
+        url :'set_homepage_info', //데이터를 주고받을 파일 주소 입력
         data: JSON.stringify(param),//보내는 데이터
         contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
         dataType:'json',//받는 데이터 타입
@@ -244,6 +246,8 @@ function rowAplly(but) {  //Elimina la fila actual
     // $row.remove();
     // params.onDelete();
 }
+
+
 
 function rowAddNew(tabId) {  //Agrega fila a la tabla indicada.
     var $tab_en_edic = $("#" + tabId);  //Table to edit
@@ -279,6 +283,9 @@ function rowAddNew(tabId) {  //Agrega fila a la tabla indicada.
     }
     params.onAdd();
 }
+
+
+
 function TableToCSV(tabId, separator) {  //Convierte tabla a CSV
     var datFil = '';
     var tmp = '';

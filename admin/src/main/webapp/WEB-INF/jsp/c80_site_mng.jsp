@@ -53,10 +53,10 @@
             </div>
         </form>
         <div class="card-datatable table-responsive pt-0 pb-3">
-            <div id="table-list2" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            <div id="table-list" class="dataTables_wrapper dt-bootstrap4 no-footer">
                 <div class="row">
                     <div class="col-sm-12">
-                        <table class="table table-striped table-bordered dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="" data-minimum-count-columns="10" >
+                        <table id="" class="table table-striped table-bordered dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="" data-minimum-count-columns="10" >
                             <thead class="bg-success text-white font-weight-bold">
                             <tr role="row">
                                 <th class="text-center sorting" style="width:10%">성명</th>
@@ -73,7 +73,7 @@
                                             <td class="text-center">${homepageinfo.homepage_admin}</td>
                                             <td class="text-center">${homepageinfo.homepage_admin_pnum}</td>
                                             <td class="text-center">${homepageinfo.email}</td>
-                                            <td class="text-center"><button class="btn btn-success" onclick="rowAplly(this)" data-idx="${homepageinfo.idx_homepage_info}">적용</button></td>
+                                            <td class="text-center"><button onclick="rowApllySet(this)" class="btn btn-success" data-idx="${homepageinfo.idx_homepage_info}">적용</button></td>
                                         </tr>
                                     </c:forEach>
                                 </c:when>
@@ -91,10 +91,10 @@
                 <c:if test="${hi_total_count ne 0}">
                     <div class="row">
                         <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" role="status" aria-live="polite">총 ${hi_total_count}개 중 ${hi_list_amount*(hi_cur_page-1)+1}에서 ${hi_total_count}까지</div>
+                            <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${hi_total_count}개 중 ${hi_list_amount*(hi_cur_page-1)+1}에서 ${hi_total_count}까지</div>
                         </div>
                         <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate2">
+                            <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                                 <ul class="pagination">
                                     <c:set var="name" value="${hi_total_count/hi_amount}" />
                                     <c:if test="${hi_is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{page_num:1},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
@@ -126,7 +126,7 @@
             <div id="table-list" class="dataTables_wrapper dt-bootstrap4 no-footer">
                 <div class="row">
                     <div class="col-sm-12">
-                        <table class="table table-striped table-bordered dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="" data-minimum-count-columns="10" >
+                        <table id="" class="table table-striped table-bordered dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="" data-minimum-count-columns="10" >
                             <thead class="bg-success text-white font-weight-bold">
                             <tr role="row">
                                 <th class="text-center px-2" style="width:6%">순서</th>
@@ -183,10 +183,10 @@
             <c:if test="${total_count ne 0}">
                 <div class="row">
                     <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" role="status" aria-live="polite">총 ${total_count}개 중 ${list_amount*(cur_page-1)+1}에서 ${total_count}까지</div>
+                        <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${total_count}개 중 ${list_amount*(cur_page-1)+1}에서 ${total_count}까지</div>
                     </div>
                     <div class="col-sm-12 col-md-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate3">
+                        <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                             <ul class="pagination">
                                 <c:set var="name" value="${total_count/amount}" />
                                 <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c21_site_visit_list',{page_num:1},'견학신청 목록');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
