@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- Page content -->
     <div class="container-fluid flex-grow-1 container-p-y">
 
@@ -77,7 +78,7 @@
 
         <div class="card">
             <h6 class="card-header with-elements">
-                <div class="card-header-title">접수 목록</div>
+                <div class="card-header-title">양식 목록</div>
             </h6>
             <div class="card-datatable table-responsive pt-0 pb-3">
                 <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -91,22 +92,30 @@
                             <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
                                 <thead class="bg-success text-white font-weight-bold">
                                 <tr role="row">
-                                    <th class="text-center px-2" style="width:60px">No</th>
-                                    <th class="text-center sorting" style="width:80px">양식제목</th>
-                                    <th class="text-center sorting" style="width:60px">양식용도</th>
-                                    <th class="text-center sorting" style="width:100px">중요도 순서</th>
-                                    <th class="text-center sorting" style="width:100px">최초 등록 일시</th>
-                                    <th class="text-center sorting" style="width:150px">등록자</th>
+                                    <th class="text-center px-2" style="width:30px">No</th>
+                                    <th class="text-center sorting" style="width:300px">양식 제목</th>
+                                    <th class="text-center sorting" style="width:300px">용도</th>
+                                    <th class="text-center sorting" style="width:70px">등록일</th>
+                                    <th class="text-center sorting" style="width:30px">문서 버전</th>
+                                    <th class="text-center sorting" style="width:50px">파일</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-<c:forEach items="${formfilelist}" var="formfile">
-    <tr class="formfile-entity" id="${formfile.idx_form_file_info}">
-        <td class="text-center">${formfile.order_num}</td>
+<c:forEach items="${formfilelist}" var="formfile" varStatus="status">
+    <tr class="formfile-entity" id="${formfile.idx_form_file_info}" onclick="modalShow({
+            idx_form_file_info: '${formfile.idx_form_file_info}',
+            subject: '${formfile.subject}',
+            usage_detail: '${formfile.usage_detail}',
+            file_path: '${formfile.file_path}',
+            reg_date: '${formfile.reg_date}',
+            row_num: '${formfile.row_num}',
+            order_num: '${formfile.order_num}'
+            });">
+        <td class="text-center">${status.count}</td>
                                     <td class="text-center">${formfile.subject}</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm">${formfile.usage_detail}</a></td>
-                                    <td class="text-center">${formfile.row_num}</td>
-                                    <td class="text-center"><fmt:formatDate value="${formfile.reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                                    <td class="text-center">${formfile.usage_detail}</td>
+                                    <td class="text-center"><fmt:formatDate value="${formfile.reg_date}" pattern="yyyy-MM-dd"/></td>
+                                    <td class="text-center">${formfile.order_num}</td>
                                     <td class="text-center">${formfile.idx_admin}</td>
 
                                 </tr>
@@ -139,378 +148,85 @@
         </div>
 
         <!-- Modal template -->
-        <div class="modal fade" id="modals-counsel-view">
+        <div class="modal show" id="modals-counsel-view">
             <div class="modal-dialog modal-lg">
-                <form class="modal-content">
+                <form class="modal-content" id="modal_view_mode">
                     <div class="modal-header">
-                        <h5 class="modal-title">상담내용 입력</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+                        <h5 class="modal-title">양식 편집</h5>
+                        <button type="button" class="close" onclick="modalFade();" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
                     <div class="modal-body pb-2">
-
-                        <div class="form-row">
-                            <div class="form-group col col-md-12 text-right">
-                                <a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modals-counsel-history">상담 이력</a>
-                            </div>
-                        </div>
-                        <hr class="mt-0">
                         <div class="form-row">
                             <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">신청자</label>
-                                <span>김홍삼</span>
-                            </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">소속</label>
-                                <span>맛있는 농부</span>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">ID</label>
-                                <span>000-00-00000</span>
-                            </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">연락처</label>
-                                <span>000-0000-0000</span>
-                            </div>
-                        </div>
-                        <hr class="mt-0">
-                        <div class="form-row">
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">상담 구분</label>
-                                <span>사전 상담</span>
-                            </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">상담 접수</label>
-                                <span>추가</span>
-                            </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">신청 목적</label>
-                                <span>이용 신청서 작성</span>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">수신일</label>
-                                <span>2021.00.00</span>
-                            </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">요청일/변경일</label>
-                                <span>2021.00.00 HH:MM</span>
-                            </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">상담 방법</label>
-                                <span>방문 상담</span>
+                                <label class="form-label d-block text-muted">양식 제목</label>
+                                <span id="modal_view_subject"></span>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">내용</label>
-                                <span>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                          Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
-                          Accusantium consequuntur dignissimos iusto magnam provident, ratione reiciendis
-                          repellat. Aut, doloribus, enim.
-                        </span>
+                                <label class="form-label d-block text-muted">양식 용도</label>
+                                <span id="modal_view_usage_detail"></span>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">이용료 납부</label>
-                                <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-6" type="radio" class="custom-control-input">
-                                    <span class="custom-control-label">미납</span>
-                                </label>
-                                <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-6" type="radio" class="custom-control-input">
-                                    <span class="custom-control-label">납부</span>
-                                </label>
-                                <span class="font-weight-semibold">납부액 : 90,000,000원</span>
+                                <label class="form-label d-block text-muted">문서 버전</label>
+                                <span id="modal_view_order_num"></span>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col col-md-12 mb-0">
-                                <label class="form-label d-block text-muted">상담일 변경</label>
-                                <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-7" type="radio" class="custom-control-input">
-                                    <span class="custom-control-label">변경 없음</span>
-                                </label>
-                                <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-7" type="radio" class="custom-control-input">
-                                    <span class="custom-control-label">변경</span>
-                                </label>
-                            </div>
-                            <div class="form-group col col-md-12 mb-1">
-                                <span class="text-muted">2021.00 00 HH:MM 에서</span> <input type="text" class="form-control d-inline-block datepickers" style="width:120px;"> <input type="text" id="timepicker-2" class="form-control d-inline-block ui-timepicker-input" autocomplete="off" style="width:90px;" placeholder="00:00 AM">
-                            </div>
                             <div class="form-group col col-md-12">
-                                <span class="text-muted">신청자에게</span>
-                                <label class="custom-control custom-checkbox d-inline-block">
-                                    <input type="checkbox" class="custom-control-input" name="check-3">
-                                    <span class="custom-control-label">SMS</span>
-                                </label>
-                                <label class="custom-control custom-checkbox d-inline-block">
-                                    <input type="checkbox" class="custom-control-input" name="check-3">
-                                    <span class="custom-control-label">이메일</span>
-                                </label>
-                                <a href="#none" class="btn btn-outline-secondary">안내</a>
-                            </div>
-                        </div>
-                        <hr class="mt-0">
-                        <div class="form-row">
-                            <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">상담일지</label>
-                                <input type="file" class="form-control-file d-block">
-                                <small class="form-text text-muted">상담 일지 등록, 피 상담자에게는 전달이 안됩니다.</small>
+                                <label class="form-label d-block text-muted">업로드 파일</label>
+                                <a id="modal_view_form_file"></a>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                        <button type="button" class="btn btn-default" onclick="modalFade();" data-dismiss="modal">취소</button>
                         <div>
-                            <button type="button" class="btn btn-primary">저장</button>
+                            <button type="button" class="btn btn-default" onclick="deleteEntity();" data-dismiss="modal">삭제</button>
+                            <button type="button" class="btn btn-primary" onclick="switchModal();">변경</button>
                         </div>
                     </div>
                 </form>
-            </div>
-        </div>
 
-        <div class="modal fade" id="modals-counsel-history">
-            <div class="modal-dialog modal-lg">
-                <form class="modal-content">
+                <form class="modal-content" id="modal_edit_mode">
                     <div class="modal-header">
-                        <h5 class="modal-title">상담 이력</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+                        <h5 class="modal-title">양식 편집</h5>
+                        <button type="button" class="close" onclick="modalFade();" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
                     <div class="modal-body pb-2">
-
-                        <div class="form-row">
-                            <div class="form-group col col-md-12 text-right">
-                                <a href="#none" class="btn btn-underline">상담 이력</a>
-                            </div>
-                        </div>
-                        <hr class="mt-0">
                         <div class="form-row">
                             <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">신청자</label>
-                                <span>김홍삼</span>
-                            </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">소속</label>
-                                <span>맛있는 농부</span>
+                                <label class="form-label d-block text-muted">양식 제목</label>
+                                <input id="modal_edit_subject" onchange="changeFormFileInfo(this.value, 'subject');"/>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">ID</label>
-                                <span>000-00-00000</span>
-                            </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">연락처</label>
-                                <span>000-0000-0000</span>
+                            <div class="form-group col col-md-12">
+                                <label class="form-label d-block text-muted">양식 용도</label>
+                                <input id="modal_edit_usage_detail" onchange="changeFormFileInfo(this.value, 'usage_detail');" />
                             </div>
                         </div>
-                        <hr class="mt-0">
-
-                        <div id="ac2">
-                            <div class="card mb-2">
-
-                                <div class="card-header">
-                                    <a class="d-flex justify-content-between text-body" data-toggle="collapse" aria-expanded="true" href="#ac2-1">
-                                        <span class="pr-2">신규 해결 YYYY.DD.MM</span>
-                                        <div class="collapse-icon"></div>
-                                    </a>
-                                </div>
-
-                                <div id="ac2-1" class="collapse show" data-parent="#ac2" style="">
-                                    <div class="card-body">
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">상담 구분</label>
-                                                <span>사전 상담</span>
-                                            </div>
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">상담 접수</label>
-                                                <span>신규</span>
-                                            </div>
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">신청 목적</label>
-                                                <span>이용 신청서 작성</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">수신일</label>
-                                                <span>2021.00.00</span>
-                                            </div>
-                                            <div class="form-group col col-md-8">
-                                                <label class="form-label d-block text-muted">요청일/변경일</label>
-                                                <span>2021.00.00 HH:MM / 2021.00.00 HH:MM</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">상담 방법</label>
-                                                <span>방문 상담</span>
-                                            </div>
-                                            <div class="form-group col col-md-8">
-                                                <label class="form-label d-block text-muted">상담일</label>
-                                                <span>2021.00.00</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-12">
-                                                <label class="form-label d-block text-muted">방문상담</label>
-                                                <span>
-                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                  Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
-                                  Accusantium consequuntur dignissimos iusto magnam provident, ratione reiciendis
-                                  repellat. Aut, doloribus, enim.
-                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-12 mb-0">
-                                                <label class="form-label d-block text-muted">상담일지</label>
-                                                <span>XXXXXXXX.hwp</span><a href="#none" class="btn btn-outline-default ml-2"><i class="lnr lnr-download"></i> 내려받기</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card mb-2">
-                                <div class="card-header">
-                                    <a class="d-flex justify-content-between text-body collapsed" data-toggle="collapse" href="#ac2-2" aria-expanded="false">
-                                        <span class="pr-2">신규 해결 YYYY.DD.MM</span>
-                                        <div class="collapse-icon"></div>
-                                    </a>
-                                </div>
-                                <div id="ac2-2" class="collapse" data-parent="#ac2" style="">
-                                    <div class="card-body">
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">상담 구분</label>
-                                                <span>사전 상담</span>
-                                            </div>
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">상담 접수</label>
-                                                <span>신규</span>
-                                            </div>
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">신청 목적</label>
-                                                <span>이용 신청서 작성</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">수신일</label>
-                                                <span>2021.00.00</span>
-                                            </div>
-                                            <div class="form-group col col-md-8">
-                                                <label class="form-label d-block text-muted">요청일/변경일</label>
-                                                <span>2021.00.00 HH:MM / 2021.00.00 HH:MM</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">상담 방법</label>
-                                                <span>방문 상담</span>
-                                            </div>
-                                            <div class="form-group col col-md-8">
-                                                <label class="form-label d-block text-muted">상담일</label>
-                                                <span>2021.00.00</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-12">
-                                                <label class="form-label d-block text-muted">방문상담</label>
-                                                <span>
-                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                  Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
-                                  Accusantium consequuntur dignissimos iusto magnam provident, ratione reiciendis
-                                  repellat. Aut, doloribus, enim.
-                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-12 mb-0">
-                                                <label class="form-label d-block text-muted">상담일지</label>
-                                                <span>XXXXXXXX.hwp</span><a href="#none" class="btn btn-outline-default ml-2"><i class="lnr lnr-download"></i> 내려받기</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card mb-2">
-                                <div class="card-header">
-                                    <a class="collapsed d-flex justify-content-between text-body" data-toggle="collapse" href="#ac2-3">
-                                        <span class="pr-2">신규 해결 YYYY.DD.MM</span>
-                                        <div class="collapse-icon"></div>
-                                    </a>
-                                </div>
-                                <div id="ac2-3" class="collapse" data-parent="#ac2">
-                                    <div class="card-body">
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">상담 구분</label>
-                                                <span>사전 상담</span>
-                                            </div>
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">상담 접수</label>
-                                                <span>신규</span>
-                                            </div>
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">신청 목적</label>
-                                                <span>이용 신청서 작성</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">수신일</label>
-                                                <span>2021.00.00</span>
-                                            </div>
-                                            <div class="form-group col col-md-8">
-                                                <label class="form-label d-block text-muted">요청일/변경일</label>
-                                                <span>2021.00.00 HH:MM / 2021.00.00 HH:MM</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-4">
-                                                <label class="form-label d-block text-muted">상담 방법</label>
-                                                <span>방문 상담</span>
-                                            </div>
-                                            <div class="form-group col col-md-8">
-                                                <label class="form-label d-block text-muted">상담일</label>
-                                                <span>2021.00.00</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-12">
-                                                <label class="form-label d-block text-muted">방문상담</label>
-                                                <span>
-                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                  Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
-                                  Accusantium consequuntur dignissimos iusto magnam provident, ratione reiciendis
-                                  repellat. Aut, doloribus, enim.
-                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col col-md-12 mb-0">
-                                                <label class="form-label d-block text-muted">상담일지</label>
-                                                <span>XXXXXXXX.hwp</span><a href="#none" class="btn btn-outline-default ml-2"><i class="lnr lnr-download"></i> 내려받기</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="form-row">
+                            <div class="form-group col col-md-12">
+                                <label class="form-label d-block text-muted">문서 버전</label>
+                                <input id="modal_edit_order_num" onchange="changeFormFileInfo(this.value, 'order_num');" />
                             </div>
                         </div>
-
+                        <div class="form-row">
+                            <div class="form-group col col-md-12">
+                                <label class="form-label d-block text-muted">업로드 파일</label>
+                                <input type="file" id="modal_edit_form_file" />
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                        <button type="button" class="btn btn-default" onclick="modalFade();" data-dismiss="modal">취소</button>
+                        <div>
+                            <button type="button" class="btn btn-default" onclick="deleteEntity();" data-dismiss="modal">삭제</button>
+                            <button type="button" class="btn btn-primary" onclick="modifyFormFile();">저장</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -518,7 +234,105 @@
 
     </div>
 <script>
+    var formFileModalInfo = {};
 
+    function modalShow(formfile){
+        $('#modals-counsel-view').show();
+        $('#modal_view_mode').hide();
+        $('#modal_edit_mode').show();
+
+        formFileModalInfo = formfile;
+        fillModalInfo();
+    }
+
+    function modalFade(){
+        $('#modals-counsel-view').hide();
+    }
+
+    function switchModal(){
+        $('#modal_view_mode').hide();
+        $('#modal_edit_mode').show();
+    }
+
+    function fillModalInfo(){
+        $('#modal_view_subject').text(formFileModalInfo.subject);
+        $('#modal_view_usage_detail').text(formFileModalInfo.usage_detail);
+        $('#modal_view_form_file').attr('href', formFileModalInfo.file_path).text(formFileModalInfo.subject);
+
+        $('#modal_edit_subject').val(formFileModalInfo.subject);
+        $('#modal_edit_usage_detail').val(formFileModalInfo.usage_detail);
+        $('#modal_edit_order_num').val(formFileModalInfo.row_num);
+        $('#modal_edit_form_file').val('');
+        $('#modal_edit_form_file').replaceWith($('#modal_edit_form_file').clone(true));
+    }
+
+    function deleteEntity(){
+        $.ajax({
+            type: 'post',
+            url: 'delete_form_file', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(formFileModalInfo),//보내는 데이터
+            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType: 'text',//받는 데이터 타입
+            success: function (result) {
+                //작업이 성공적으로 발생했을 경우
+                result = JSON.parse(result);
+                alert(result.result_str);
+                if(result.result_code === 'SUCCESS'){
+                    pageLoad('c71_site_form_doc_mng',{page_num:1},'상담');
+                }
+                //STATUS_001 :
+            },
+            error: function () {
+                //에러가 났을 경우 실행시킬 코드
+            }
+        });
+    }
+
+    function changeFormFileInfo(val, category){
+        formFileModalInfo[category] = val;
+    }
+
+    function modifyFormFile(){
+        var formdata = new FormData();
+
+        if(!document.querySelector('#modal_edit_form_file').files[0]){
+            return alert('변경할 파일이 없습니다.');
+        }
+
+        formdata.append('subject', formFileModalInfo.subject);
+        formdata.append('usage_detail', formFileModalInfo.usage_detail);
+        formdata.append('fileVersion', formFileModalInfo.order_num);
+        formdata.append('file1', document.querySelector('#modal_edit_form_file').files[0]);
+        formdata.append('fileIndex', formFileModalInfo.idx_form_file_info);
+        formdata.append('idx_admin', '${admin.idx_admin}');
+
+        var files = document.querySelector('#file_upload').files;
+
+        $.ajax({
+            type: 'post',
+            url :'modify_form_file', //데이터를 주고받을 파일 주소 입력
+            data: formdata,//보내는 데이터
+            contentType: false,//보내는 데이터 타입
+            processData: false,//Jquery 내부에서 파일을 queryString 형태로 전달하는 것을 방지
+            dataType:'json',//받는 데이터 타입
+            enctype: 'multipart/form-data',
+            success: function(result){
+                console.log(result)
+                // if(result.result_code=="SUCCESS"){
+                //     // alert(result.result_str);
+                //
+                // }
+                // else {
+                //     returnObj.returnStr = result.result_str;
+                //     returnObj.bool = 0;
+                // }
+            },
+            error:function(err){
+                console.log(err);
+                // returnObj.bool = 0;
+            }
+        });
+    }
 
 
 
