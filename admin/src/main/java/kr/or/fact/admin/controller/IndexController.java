@@ -1056,66 +1056,109 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     public String c80_site_mng(@RequestParam(value = "tag", required = false) String tagValue, @RequestBody ParamPageListFilteredVO param
             , Model model){
 
-        //푸터 정보
-        HomepageInfoVO homepageInfoVO = homepageInfoService.getHomepageInfo();
-        model.addAttribute("homepageInfo",homepageInfoVO);
-
         param.setAmount(10);
         int list_amount = 10;
         int page_amount = param.getAmount();
         int page = param.getPage_num();
+
+        model.addAttribute("cur_page",page);
+        model.addAttribute("vamount",list_amount);
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+
+        //푸터 정보
+        HomepageInfoVO homepageInfoVO = homepageInfoService.getHomepageInfo();
+        model.addAttribute("homepageInfo",homepageInfoVO);
 
         int homepageInfoCount = homepageInfoService.getHomepageInfoCount();
         model.addAttribute("hi_total_count",homepageInfoCount);
 
         List<HomepageInfoVO> homepageInfoList = homepageInfoService.getHomepageInfoList(param);
         model.addAttribute("homepageInfoList",homepageInfoList);
-        model.addAttribute("hi_cur_page",page);
-        model.addAttribute("hi_amount",list_amount);
 
+        int hi_tot_page = homepageInfoCount/list_amount+1;
+        if(homepageInfoCount%list_amount==0) hi_tot_page-=1;
 
-        int tot_page = homepageInfoCount/list_amount+1;
-        if(homepageInfoCount%list_amount==0) tot_page-=1;
+        int hi_tot_sector = hi_tot_page/page_amount+1;
+        if(hi_tot_page%page_amount==0) hi_tot_sector-=1;
 
-        int tot_sector = tot_page/page_amount+1;
-        if(tot_page%page_amount==0) tot_sector-=1;
-
-        int cur_sector = page/page_amount+1;
-        if(page%page_amount==0) cur_sector-=1;
-
-        boolean is_past = false;
-        boolean is_prev = false;
-        boolean is_next = false;
-        boolean is_last = false;
+        boolean hi_is_past = false;
+        boolean hi_is_prev = false;
+        boolean hi_is_next = false;
+        boolean hi_is_last = false;
         boolean is_active = false;
 
-        if(page!=tot_page && tot_page>1) is_next = true;
+        if(page!=hi_tot_page && hi_tot_page>1) hi_is_next = true;
 
-        if(page!=1 && tot_page>1) is_prev = true;
+        if(page!=1 && hi_tot_page>1) hi_is_prev = true;
 
-        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+        if(cur_sector!=hi_tot_sector && hi_tot_sector>1 ) hi_is_last = true;
 
-        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+        if(cur_sector!=1 && hi_tot_sector>1 ) hi_is_past = true;
 
-        if(tot_page<=page_amount){
-            is_past = false;
-            is_last = false;
-            page_amount = tot_page;
+        if(hi_tot_page<=page_amount){
+            hi_is_past = false;
+            hi_is_last = false;
+            page_amount = hi_tot_page;
         }
 
-        model.addAttribute("hi_tot_page",tot_page);
-        model.addAttribute("hi_tot_sector",tot_sector);
+        model.addAttribute("hi_tot_page",hi_tot_page);
+        model.addAttribute("hi_tot_sector",hi_tot_sector);
         model.addAttribute("hi_cur_sector",cur_sector);
-        model.addAttribute("hi_is_past",is_past);
-        model.addAttribute("hi_is_prev",is_prev);
-        model.addAttribute("hi_is_next",is_next);
-        model.addAttribute("hi_is_last",is_last);
+        model.addAttribute("hi_is_past",hi_is_past);
+        model.addAttribute("hi_is_prev",hi_is_prev);
+        model.addAttribute("hi_is_next",hi_is_next);
+        model.addAttribute("hi_is_last",hi_is_last);
         model.addAttribute("hi_list_amount",list_amount);
         model.addAttribute("hi_page_amount",page_amount);
 
+
+
         //조직도, 직원 정보
-        List<CoWorkerVO> coWorkerVOList = coWorkerNService.getCoWorkerList();
+        page_amount = 10;
+
+        int coWorkerCount = coWorkerNService.getCoWorkerCount();
+        model.addAttribute("cw_total_count", coWorkerCount);
+
+        List<CoWorkerVO> coWorkerVOList = coWorkerNService.getCoWorkerListPage(param);
         model.addAttribute("coWorkerVOList",coWorkerVOList);
+
+        int cw_tot_page = coWorkerCount/list_amount+1;
+        if(coWorkerCount%list_amount==0) cw_tot_page-=1;
+
+        int cw_tot_sector = cw_tot_page/page_amount+1;
+        if(cw_tot_page%page_amount==0) cw_tot_sector-=1;
+
+        boolean cw_is_past = false;
+        boolean cw_is_prev = false;
+        boolean cw_is_next = false;
+        boolean cw_is_last = false;
+
+        if(page!=cw_tot_page && cw_tot_page>1) cw_is_next = true;
+
+        if(page!=1 && cw_tot_page>1) cw_is_prev = true;
+
+        if(cur_sector!=cw_tot_sector && cw_tot_sector>1 ) cw_is_last = true;
+
+        if(cur_sector!=1 && cw_tot_sector>1 ) cw_is_past = true;
+
+        if(cw_tot_page<=page_amount){
+            cw_is_past = false;
+            cw_is_last = false;
+            page_amount = cw_tot_page;
+        }
+
+        model.addAttribute("cw_tot_page",cw_tot_page);
+        model.addAttribute("cw_tot_sector",cw_tot_sector);
+        model.addAttribute("cw_cur_sector",cur_sector);
+        model.addAttribute("cw_is_past",cw_is_past);
+        model.addAttribute("cw_is_prev",cw_is_prev);
+        model.addAttribute("cw_is_next",cw_is_next);
+        model.addAttribute("cw_is_last",cw_is_last);
+        model.addAttribute("cw_list_amount",list_amount);
+        model.addAttribute("cw_page_amount",page_amount);
 
         return "c80_site_mng";
     }

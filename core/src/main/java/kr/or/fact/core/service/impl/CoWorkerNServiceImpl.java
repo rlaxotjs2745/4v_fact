@@ -2,6 +2,7 @@ package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.CoWorkerNMapper;
 import kr.or.fact.core.model.DTO.CoWorkerVO;
+import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 import kr.or.fact.core.model.HomepageMapper;
 import kr.or.fact.core.service.CoWorkerNService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,12 @@ public class CoWorkerNServiceImpl implements CoWorkerNService {
     public List<CoWorkerVO> getCoWorkerList(){
         return coWorkerNMapper.getCoWorkerList();
     }
+
+    @Override
+    public List<CoWorkerVO> getCoWorkerListPage(ParamPageListFilteredVO param) {
+        return coWorkerNMapper.getCoWorkerListPage(param);
+    }
+
     @Override
     public CoWorkerVO getCoWorkerInfo(long idx){
         return coWorkerNMapper.getCoWorkerInfo(idx);
@@ -36,5 +43,10 @@ public class CoWorkerNServiceImpl implements CoWorkerNService {
     @Override
     public void deleteCoWorkerInfo(long idx){
         coWorkerNMapper.deleteCoWorkerInfo(idx);
+    }
+
+    @Override
+    public int getCoWorkerCount() {
+        return coWorkerNMapper.getCoWorkerCount();
     }
 }
