@@ -42,4 +42,12 @@ public interface FileServiceMapper {
     FileInfoVO selectBsFile(@Param("idx_demo_bs") int idx_demo_bs);
 
     FileInfoVO selectBsAnnouncementFile(@Param("index_bs_announcement") int index_bs_announcement);
+
+    void deleteFormFile(long idx_form_file);
+
+    FormFileInfoVO getFormFile(long idx_form_file_info);
+
+    long getFileIdx(String file_name);
+
+    void updateFormFile(FormFileInfoVO formFileInfoVO);
 }

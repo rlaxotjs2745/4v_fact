@@ -1033,11 +1033,14 @@ model.addAttribute("prlist",prlist);
 
     //재배사 관리
     @RequestMapping(value = "/c71_site_form_doc_mng",method = RequestMethod.POST)
-    public String c71_site_form_doc_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String c71_site_form_doc_mng(@RequestParam(value = "tag", required = false) String tagValue, Principal principal,
                                         ModelMap model){
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+        model.addAttribute("admin", adminInfo);
 
-    List<FormFileInfoVO> formFileList =fileService.getFormFileList();
-    model.addAttribute("formfilelist",formFileList);
+        List<FormFileInfoVO> formFileList = fileService.getFormFileList();
+        model.addAttribute("formfilelist",formFileList);
+
         return "c71_site_form_doc_mng";
     }
 
@@ -1943,7 +1946,6 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
                 model.addAttribute("profile", activeProfile);
             }
         }
-//                model.addAttribute("profile", "sangju-prod");
     }
 
 }
