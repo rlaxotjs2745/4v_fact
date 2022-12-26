@@ -369,8 +369,9 @@
 <!-- / Page content -->
 <script>
     var reservation;
-
-    pageLoad("cur_asset_index", {page_num: 1, filter1: 100}, "자산 현황 보드", "cur_asset_index");
+    $().ready(function(){
+        pageLoad("cur_asset_index", {page_num: 1, filter1: 100}, "자산 현황 보드", "cur_asset_index");
+    });
 
     $('input[name="reservation"]').change(function(){
         reservation = $('input[name="reservation"]:checked').val();

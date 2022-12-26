@@ -113,10 +113,13 @@ public class IndexController {
 
     @PreAuthorize("hasRole('ROLE_MEMBER')")
     @RequestMapping("/")
-    public String root(Principal principal, ModelMap model){
+    public String root(HttpServletRequest req, Principal principal, ModelMap model){
+        String _path = req.getRequestURI();
         AdminVO adminInfo = adminService.findAdminById(principal.getName());
         model.addAttribute("admin", adminInfo);
         setProfile(model);
+
+        model.addAttribute("path", _path);
         return "index";
     }
 
