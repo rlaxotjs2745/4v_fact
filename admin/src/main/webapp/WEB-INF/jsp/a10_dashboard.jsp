@@ -62,7 +62,7 @@
         <div class="col-md-6 col-lg-12 col-xl-6">
             <div class="card mb-4" style="min-height: 550px">
                 <h6 class="card-header with-elements">
-                    <div class="card-header-title">공고별 이용신청 현황</div>
+                    <div class="card-header-title">사업별 이용신청 현황</div>
 
                     <div class="card-header-elements ml-auto">
 <%--                        <button type="button" class="btn btn-default btn-xs md-btn-flat">Show more</button>--%>
@@ -80,75 +80,29 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="">
-                            <td class="">12345678901</td>
-                            <td class=""><a href="#none" data-toggle="modal" data-target="#modals-business-view">공고문제목 제목 공고문 공고문제목 제목 공고문</a></td>
-                            <td class="text-right">1,234</td>
-                            <td class="text-right">58</td>
-                        </tr>
-                        <tr class="">
-                            <td class="">12345678901</td>
-                            <td class="">공고문제목 제목 공고문 공고문제목 제목 공고문</td>
-                            <td class="text-right">1,234</td>
-                            <td class="text-right">58</td>
-                        </tr>
-                        <tr class="">
-                            <td class="">12345678901</td>
-                            <td class="">공고문제목 제목 공고문 공고문제목 제목 공고문</td>
-                            <td class="text-right">1,234</td>
-                            <td class="text-right">58</td>
-                        </tr>
-                        <tr class="">
-                            <td class="">12345678901</td>
-                            <td class="">공고문제목 제목 공고문 공고문제목 제목 공고문</td>
-                            <td class="text-right">1,234</td>
-                            <td class="text-right">58</td>
-                        </tr>
-                        <tr class="">
-                            <td class="">12345678901</td>
-                            <td class="">공고문제목 제목 공고문 공고문제목 제목 공고문</td>
-                            <td class="text-right">1,234</td>
-                            <td class="text-right">58</td>
-                        </tr>
-                        <tr class="">
-                            <td class="">12345678901</td>
-                            <td class="">공고문제목 제목 공고문 공고문제목 제목 공고문</td>
-                            <td class="text-right">1,234</td>
-                            <td class="text-right">58</td>
-                        </tr>
-                        <tr class="">
-                            <td class="">12345678901</td>
-                            <td class="">공고문제목 제목 공고문 공고문제목 제목 공고문</td>
-                            <td class="text-right">1,234</td>
-                            <td class="text-right">58</td>
-                        </tr>
-                        <tr class="">
-                            <td class="">12345678901</td>
-                            <td class="">공고문제목 제목 공고문 공고문제목 제목 공고문</td>
-                            <td class="text-right">1,234</td>
-                            <td class="text-right">58</td>
-                        </tr>
-                        <tr class="">
-                            <td class="">12345678901</td>
-                            <td class="">공고문제목 제목 공고문 공고문제목 제목 공고문</td>
-                            <td class="text-right">1,234</td>
-                            <td class="text-right">58</td>
-                        </tr>
+                        <c:forEach items="${applicationList}" var="app">
+                            <tr class="">
+                                <td class="">${app.demo_bs_code}</td>
+                                <td class="text-right">${app.demo_subject}</td>
+                                <td class="text-right">${app.applicant_count}</td>
+                                <td class="text-right">${app.recruit_count_limit}</td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
                 <div class="card-footer d-flex justify-content-center" >
-                    <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate" style="float: bottom;alignment: center;">
-                        <ul class="pagination">
-                            <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                            <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                            <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
-                        </ul>
-                    </div>
+<%--                    <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate" style="float: bottom;alignment: center;">--%>
+<%--                        <ul class="pagination">--%>
+<%--                            <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>--%>
+<%--                            <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>--%>
+<%--                            <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>--%>
+<%--                            <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>--%>
+<%--                            <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>--%>
+<%--                            <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>--%>
+<%--                            <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>--%>
+<%--                        </ul>--%>
+<%--                    </div>--%>
                 </div>
             </div>
         </div>
@@ -180,7 +134,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="text-muted small mt-2">입주 기업 수</div>
-                        <div class="text-large">133</div>
+                        <div class="text-large">${corpCount}</div>
                     </div>
                 </div>
             </div>
@@ -208,69 +162,69 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-sm-4 col-xl-2">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="text-muted small mt-2">시설자재</div>
-                        <div class="text-large">000</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<%--    <div class="row">--%>
+<%--        <div class="col-sm-4 col-xl-2">--%>
+<%--            <div class="card mb-3">--%>
+<%--                <div class="card-body">--%>
+<%--                    <div class="d-flex justify-content-between">--%>
+<%--                        <div class="text-muted small mt-2">시설자재</div>--%>
+<%--                        <div class="text-large">000</div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
 
-        <div class="col-sm-4 col-xl-2">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="text-muted small mt-2">ICT 실증장비</div>
-                        <div class="text-large">000</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-xl-2">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="text-muted small mt-2">작물보호제/비료</div>
-                        <div class="text-large">000</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-xl-2">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="text-muted small mt-2">스마트팜SW</div>
-                        <div class="text-large">000</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-xl-2">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="text-muted small mt-2">생육모델</div>
-                        <div class="text-large">000</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-xl-2">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="text-muted small mt-2">로봇</div>
-                        <div class="text-large">000</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<%--        <div class="col-sm-4 col-xl-2">--%>
+<%--            <div class="card mb-3">--%>
+<%--                <div class="card-body">--%>
+<%--                    <div class="d-flex justify-content-between">--%>
+<%--                        <div class="text-muted small mt-2">ICT 실증장비</div>--%>
+<%--                        <div class="text-large">000</div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="col-sm-4 col-xl-2">--%>
+<%--            <div class="card mb-3">--%>
+<%--                <div class="card-body">--%>
+<%--                    <div class="d-flex justify-content-between">--%>
+<%--                        <div class="text-muted small mt-2">작물보호제/비료</div>--%>
+<%--                        <div class="text-large">000</div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="col-sm-4 col-xl-2">--%>
+<%--            <div class="card mb-3">--%>
+<%--                <div class="card-body">--%>
+<%--                    <div class="d-flex justify-content-between">--%>
+<%--                        <div class="text-muted small mt-2">스마트팜SW</div>--%>
+<%--                        <div class="text-large">000</div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="col-sm-4 col-xl-2">--%>
+<%--            <div class="card mb-3">--%>
+<%--                <div class="card-body">--%>
+<%--                    <div class="d-flex justify-content-between">--%>
+<%--                        <div class="text-muted small mt-2">생육모델</div>--%>
+<%--                        <div class="text-large">000</div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="col-sm-4 col-xl-2">--%>
+<%--            <div class="card mb-3">--%>
+<%--                <div class="card-body">--%>
+<%--                    <div class="d-flex justify-content-between">--%>
+<%--                        <div class="text-muted small mt-2">로봇</div>--%>
+<%--                        <div class="text-large">000</div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
 <%--    <div class="row d-flex justify-content-center">--%>
 <%--        <div class="col-sm-6 col-xl-3">--%>
 <%--            <div class="btn btn-lg btn-block btn-success w-100">--%>

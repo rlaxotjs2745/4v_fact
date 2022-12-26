@@ -208,6 +208,23 @@ public class IndexController {
     @SneakyThrows
     @RequestMapping(value = "/a10_dashboard" ,method = RequestMethod.POST)
     public String a10_dashboard(@RequestParam(value = "tag", required = false) String tagValue, ModelMap model){
+
+        ParamPageListFilteredVO param = new ParamPageListFilteredVO();
+
+        param.setOrder_field("IDX_DEMO_BUSINESS");
+        param.setPage_num(1);
+        param.setAmount(5);
+
+        List<AdminApplDemoBsHeaderListVO> adminApplHeaderListVOS = demoBsApplicationService.getAvailableDemoBsApplPagingList(param);
+        model.addAttribute("applicationList", adminApplHeaderListVOS);
+
+        Integer corpCount = corpService.getCorpCount();
+        model.addAttribute("corpCount", corpCount);
+
+
+
+
+
         return "a10_dashboard";
     }
 
