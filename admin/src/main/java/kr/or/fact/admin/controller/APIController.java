@@ -1732,6 +1732,26 @@ public class APIController {
         return resultVO;
     }
 
+    @RequestMapping(value ="/delete_rule_file",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO delete_rule_file(@RequestBody RuleFileInfoVO ruleFileInfoVO){
+        ResultVO resultVO = new ResultVO();
+        System.out.println(ruleFileInfoVO);
+
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("규정 제거를 완료했습니다.");
+
+        try {
+            fileService.deleteRuleFile(ruleFileInfoVO);
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("제거에 실패하였습니다.");
+        }
+
+        return resultVO;
+    }
+
 
 
 

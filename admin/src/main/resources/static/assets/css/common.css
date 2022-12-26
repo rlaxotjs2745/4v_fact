@@ -4,3 +4,23 @@
 
 .table-striped tbody tr.checked_show { color:#00c300;}
 /*.table-striped tbody tr.checked_show .btn-default {border-color: #00c300 !important;}*/
+
+.file_upload_box {display: flex}
+
+.file_upload_box .upload-name {
+    margin-right:5px;
+}
+
+.file_upload_box input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+    border: 0;
+}
+.file_upload_box label {white-space: nowrap}
+
+#preview-image {display: block; max-width: 100%;}

@@ -47,7 +47,11 @@ public interface FileService {
 
     void deleteFormFile(FormFileInfoVO formFileInfoVO);
 
+    void deleteRuleFile(RuleFileInfoVO ruleFileInfoVO);
+
     void updateFormFile(FileRequestVO fileRequestVO);
+
+    void updateRuleFile(FileRequestVO fileRequestVO);
 
     int insertPopupFile(MultipartFile file, long adminIdx);
 }
