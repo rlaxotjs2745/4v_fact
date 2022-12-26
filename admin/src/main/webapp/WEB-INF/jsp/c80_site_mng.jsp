@@ -162,7 +162,7 @@
                                             <td class="text-center">
                                                 <div class="btn-group">
                                                     <button class="btn btn-sm btn-default" data-toggle="modal" data-target="#modals-modify"><span class="fas fa-pen" > </span></button>
-                                                    <button class="btn btn-sm btn-default"><span class="fas fa-trash-alt" > </span></button>
+                                                    <button onclick="organizationDelete(this)" class="btn btn-sm btn-default"><span class="fas fa-trash-alt" > </span></button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -354,6 +354,7 @@
                 </div>
                 <div class="modal-body pb-2">
                     <div class="form-row">
+                        <input type="hidden" class="idx_co_worker">
                         <div class="form-group col col-md-12">
                             <table class="table table-bordered no-footer m-0" role="grid" aria-describedby="article-list_info">
                                 <tbody>
@@ -411,7 +412,7 @@
                                         <input type="text" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width: 100px" name="email" id="mo_email">
                                         @
                                         <input type="text" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width: 100px" name="" id="mo_email2">
-                                        <select id="admin_id_select_box" class="form-control form-control-sm d-inline-block align-middle mr-1" style="width: 100px">
+                                        <select id="admin_id_select_box2" class="form-control form-control-sm d-inline-block align-middle mr-1" style="width: 100px">
                                             <option value="" selected>직접입력</option>
                                             <option value="naver.com">naver.com</option>
                                             <option value="gmail.com">gmail.com</option>
@@ -543,6 +544,10 @@
     $('#admin_id_select_box').change(function(){
         $('#web_id2').val($(this).val());
     })
+    $('#admin_id_select_box2').change(function(){
+        $('#mo_email2').val($(this).val());
+    })
+
 
     $('#btn_edit_mode').on('click', function() {
 
@@ -766,7 +771,7 @@
         }
 
         var param ={
-            idx_co_worker:$("#idx_co_worker").val(),
+            // idx_co_worker:$("#idx_co_worker").val(),
             co_worker_oder:$("#co_worker_oder").val(),
             coworker_name:$("#coworker_name").val(),
             devision:$("#devision").val(),
@@ -806,6 +811,154 @@
             }
         });
     })
+
+
+    $('#btn-coworker-update').on('click',function() {
+
+        if(isValid($("#mo_coworker_name").val()).match('2')){
+            alert("관리자의 이름이 너무 짧습니다.");
+            return;
+        }
+        if(isValid($("#mo_coworker_name").val()).match('3')){
+            alert("관리자 이름에는 특수문자가 포함될 수 없습니다.");
+            return;
+        }
+        if(isValid($("#mo_coworker_name").val()).match('4')){
+            alert("관리자 이름에는 숫자가 포함될 수 없습니다.");
+            return;
+        }
+        if(isValid($("#mo_coworker_name").val()).match('6')){
+            alert("관리자 이름에는 공백이 포함될 수 없습니다.");
+            return;
+        }
+        if(isValid($("#mo_devision").val()).match('2')){
+            alert("관리자의 이름이 너무 짧습니다.");
+            return;
+        }
+
+        if(isValid($("#mo_devision").val()).match('3')){
+            alert("부서에는 특수문자가 포함될 수 없습니다.");
+            return;
+        }
+        if(isValid($("#mo_devision").val()).match('5')){
+            alert("부서이름은 숫자로 시작될 수 없습니다.");
+            return;
+        }
+        if(isValid($("#mo_devision").val()).match('2')){
+            alert("부서이름이 너무 짧습니다.");
+            return;
+        }
+        if(isValid($("#mo_devision").val()).match('6')){
+            alert("부서이름은 공백이 포함될 수 없습니다.");
+            return;
+        }
+
+        if(isValid($("#mo_job_role").val()).match('5')){
+            alert("담당업무는 숫자로 시작될 수 없습니다.");
+            return;
+        }
+        if(isValid($("#mo_job_role").val()).match('2')){
+            alert("담당업무의 이름이 너무 짧습니다.");
+            return;
+        }
+        if(isValid($("#mo_job_role").val()).match('3')){
+            alert("담당업무는 특수문자가 포함될 수 없습니다.");
+            return;
+        }
+
+        if(isValid($("#mo_job_title").val()).match('5')){
+            alert("직위는 숫자로 시작될 수 없습니다.");
+            return;
+        }
+        if(isValid($("#mo_job_title").val()).match('2')){
+            alert("직위가 너무 짧습니다.");
+            return;
+        }
+
+
+        if(isValid($("#mo_mphone_num").val()).match('2')){
+            alert("휴대폰 번호가 너무 짧습니다.");
+            return;
+        }
+
+        if($("#mo_email").val() === '' || $("#mo_email2").val() === ''){
+            alert("이메일 형식에 맞지 않는 이메일입니다.")
+            return;
+        }
+
+        var param ={
+            idx_co_worker:$(".idx_co_worker").attr('id'),
+            co_worker_oder:$("#mo_co_worker_oder").val(),
+            coworker_name:$("#mo_coworker_name").val(),
+            devision:$("#mo_devision").val(),
+            department:$("#mo_department").val(),
+            // department_sub:$("#mo_department_sub").val(),
+            job_title:$("#mo_job_title").val(),
+            job_role:$("#mo_job_role").val(),
+            tel_num:$("#mo_tel_num").val(),
+            mphone_num:$("#mo_mphone_num").val(),
+            email:$("#mo_email").val() + "@" + $("#mo_email2").val(),
+            is_show:$("#mo_is_show").val()
+        }
+
+        $.ajax({
+            type: 'post',
+            url: 'modify_coworker', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(param),//보내는 데이터
+            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType: 'json',//받는 데이터 타입
+            success: function (result) {
+                console.log(result)
+                if (result.result_code === "SUCCESS") {
+                    alert(result.result_str);
+                    pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
+                    $('body').removeClass('modal-open');
+                    $('body').css('padding-right', '');
+                    $('#modals-modify').modal("hide")
+                    $(".modal-backdrop").remove();
+                } else {
+                    // alert("상태 변경에 실패하였습니다")
+                    console.log(result)
+                }
+
+            },
+            error: function (res) {
+                console.log(res)
+            }
+        });
+    })
+
+    function organizationDelete(but){
+
+        var $row = $(but).parents('tr');  //accede a la fila
+        var $cols = $row.find('td');  //lee campos
+
+        var param ={
+            idx_co_worker:$row.attr('id'),
+        }
+
+        $.ajax({
+            type: 'post',
+            url: 'delete_coworker', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(param),//보내는 데이터
+            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType: 'json',//받는 데이터 타입
+            success: function (result) {
+                console.log(result)
+                if (result.result_code === "SUCCESS") {
+                    alert(result.result_str);
+                    pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
+                } else {
+                    // alert("상태 변경에 실패하였습니다")
+                    console.log(result)
+                }
+
+            },
+            error: function (res) {
+                console.log(res)
+            }
+        });
+    }
 </script>
 
 <!-- / Layout footer -->
