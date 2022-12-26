@@ -344,8 +344,7 @@
 
 
 
-<%--  모달 수정 팝업  --%>
-
+    <%--  모달 수정 팝업  --%>
     <div class="modal fade" id="modals-modify">
         <div class="modal-dialog modal-lg">
             <form class="modal-content" method="post">
@@ -673,6 +672,8 @@
 
     $('#btn-coworker').on('click',function() {
 
+
+
         if(isValid($("#coworker_name").val()).match('2')){
             alert("관리자의 이름이 너무 짧습니다.");
             return;
@@ -770,6 +771,10 @@
                 if (result.result_code === "SUCCESS") {
                     // alert("상태 변경에 성공하였습니다");
                     pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
+                    $('body').removeClass('modal-open');
+                    $('body').css('padding-right', '');
+                    $('#modals-modify').modal("hide")
+                    $(".modal-backdrop").remove();
                 } else {
                     // alert("상태 변경에 실패하였습니다")
                     console.log(result)
