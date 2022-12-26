@@ -34,6 +34,42 @@
             </choose>
         </if>
     </sql>
+
+<!--    fil1 value = 0,1-->
+<!--    fil2 value = 일자 검색-->
+    <sql id="searchFilter1">
+        <if test="fil1 != null">
+            AND IS_NEW = #{fil1}
+        </if>
+        <if test="fil2 != null">
+        <choose>
+            <when test="fil2 == 1">
+            AND TO_DATE(REG_DATE,'YYYYMMDD') = TO_DATE(SYSDATE,'YYYYMMDD')
+            </when>
+            <when test="fil2 == 2">
+                AND ((TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[<]]> 7
+                    AND (TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[>=]]> 0)
+            </when>
+            <when test="fil2 == 3">
+                AND ((TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[<]]> 31
+                    AND (TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[>=]]> 0)
+            </when>
+            <when test="fil2 == 4">
+                AND ((TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[<]]> 63
+                    AND (TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[>=]]> 0)
+            </when>
+            <when test="fil2 == 5">
+                AND ((TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[<]]> 186
+                    AND (TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[>=]]> 0)
+            </when>
+            <when test="fil2 == 6">
+                AND ((TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[<]]> 365
+                    AND (TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[>=]]> 0)
+            </when>
+        </choose>
+        </if>
+    </sql>
+
     <select id="getOpenPRContentCount" resultType="int">
         SELECT COUNT(*)
         FROM TB_PR_CONTENT
@@ -41,6 +77,7 @@
             AND SHOW_START_DATE <![CDATA[<=]]> SYSDATE AND SHOW_END_DATE <![CDATA[>=]]> SYSDATE
             <include refid="searchPromotionCondition"></include>
     </select>
+
     <select id="getOpenPRContentList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.PRContentVO">
         SELECT
             *
@@ -63,8 +100,13 @@
         WHERE row_num BETWEEN #{count} * (#{page} - 1) + 1 AND #{count} * #{page}
     </select>
 
+    <select id="getPRContentCount" resultType="int">
+        SELECT COUNT(*) FROM TB_PR_CONTENT  WHERE IS_SHOW=1
+    </select>
+
     <select id="getPRContentList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.PRContentVO">
         SELECT
+            idx_row_num,
             IDX_PR_CONTENT
              ,PR_CONTENT_NUM
              ,SUBJECT
@@ -74,84 +116,85 @@
              ,SHOW_START_DATE
              ,VIEW_COUNT
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field}  DESC) AS row_num
-        ,IDX_PR_CONTENT
-                      ,PR_CONTENT_NUM
-                      ,SUBJECT
-                      ,IS_FILE
-                      ,IS_NEW
-                      ,AUTHOR
-                      ,SHOW_START_DATE
-                      ,VIEW_COUNT
-                 FROM (
-                          SELECT * FROM TB_PR_CONTENT WHERE IS_SHOW=1 AND PR_CONTENT_STATUS=1 ORDER by PR_CONTENT_NUM ASC
-                      )
-
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
-             )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+             SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS idx_row_num
+                ,IDX_PR_CONTENT
+                ,PR_CONTENT_NUM
+                ,SUBJECT
+                ,IS_FILE
+                ,IS_NEW
+                ,AUTHOR
+                ,SHOW_START_DATE
+                ,VIEW_COUNT
+             FROM (
+                  SELECT * FROM TB_PR_CONTENT WHERE IS_SHOW=1 ORDER BY PR_CONTENT_NUM DESC, IDX_PR_CONTENT DESC
+            )
+            WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+        )
+        WHERE idx_row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
     </select>
-<insert id="insertPRContent" parameterType="kr.or.fact.core.model.DTO.PRContentVO">
-    INSERT INTO TB_PR_CONTENT(
-        IDX_PR_CONTENT,
+
+    <insert id="insertPRContent" parameterType="kr.or.fact.core.model.DTO.PRContentVO">
+        INSERT INTO TB_PR_CONTENT(
+            IDX_PR_CONTENT,
             PR_CONTENT_CODE,
-PR_CONTENT_NUM,
-SUBJECT,
-PR_CONTENTS,
-IS_FILE,
-IS_NEW,
-IS_MAIN_PAGE,
-IS_IMPORTANT,
-IS_SHOW,
-VIEW_COUNT,
-PR_CONTENT_STATUS,
-SHOW_START_DATE,
-SHOW_END_DATE,
-DOC_VERSION,
-MEMO,
-SEARCH_TAG,
-AUTHOR,
-THUMB_IMG_FILE_IDX,
-IDX_ADMIN,
-CONFIRM_ADMIN_IDX,
-REG_DATE,
-LAST_UPD_DATE
+            PR_CONTENT_NUM,
+            SUBJECT,
+            PR_CONTENTS,
+            IS_FILE,
+            IS_NEW,
+            IS_MAIN_PAGE,
+            IS_IMPORTANT,
+            IS_SHOW,
+            VIEW_COUNT,
+            PR_CONTENT_STATUS,
+            SHOW_START_DATE,
+            SHOW_END_DATE,
+            DOC_VERSION,
+            MEMO,
+            SEARCH_TAG,
+            AUTHOR,
+            THUMB_IMG_FILE_IDX,
+            IDX_ADMIN,
+            CONFIRM_ADMIN_IDX,
+            REG_DATE,
+            LAST_UPD_DATE
+        )VALUES (
+            SEQ_PR_CONTENT.NEXTVAL,
+            #{pr_content_code},
+            #{pr_content_num},
+            #{subject},
+            #{pr_contents},
+            #{is_file},
+            #{is_new},
+            #{is_main_page},
+            #{is_important},
+            #{is_show},
+            #{view_count},
+            #{pr_content_status},
+            #{show_start_date},
+            #{show_end_date},
+            #{doc_version},
+            #{memo},
+            #{search_tag},
+            #{author},
+            SEQ_FILE_INFO.CURRVAL,
+            #{idx_admin},
+            #{confirm_admin_idx},
+            SYSDATE,
+            #{last_upd_date}
+        )
+    </insert>
 
-    )VALUES (
-                    SEQ_PR_CONTENT.NEXTVAL,
-                    #{pr_content_code},
-                    #{pr_content_num},
-                    #{subject},
-                    #{pr_contents},
-                    #{is_file},
-                    #{is_new},
-                    #{is_main_page},
-                    #{is_important},
-                    #{is_show},
-                    #{view_count},
-                    #{pr_content_status},
-                    #{show_start_date},
-                    #{show_end_date},
-                    #{doc_version},
-                    #{memo},
-                    #{search_tag},
-                    #{author},
-                    SEQ_FILE_INFO.CURRVAL,
-                    #{idx_admin},
-                    #{confirm_admin_idx},
-                    SYSDATE,
-                    #{last_upd_date}
+    <select id="getThumb" resultType="kr.or.fact.core.model.DTO.PRContentVO">
+        SELECT IDX_PR_CONTENT, FILE_PATH FROM TB_FILE_INFO JOIN TB_PR_CONTENT ON THUMB_IMG_FILE_IDX=IDX_FILE_INFO
+    </select>
 
-                )
-</insert>
-
-<select id="getThumb" resultType="kr.or.fact.core.model.DTO.PRContentVO">
-    SELECT IDX_PR_CONTENT, FILE_PATH FROM TB_FILE_INFO JOIN TB_PR_CONTENT ON THUMB_IMG_FILE_IDX=IDX_FILE_INFO
-</select>
-
+    <select id="getMainPRContent" resultType="kr.or.fact.core.model.DTO.PRContentVO">
+        SELECT * FROM TB_PR_CONTENT WHERE IS_MAIN_PAGE=1 AND IDX_PR_CONTENT = #{idx}
+    </select>
 
     <select id="getMainPRContentList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.PRContentVO">
-        SELECT * FROM TB_PR_CONTENT  WHERE  IS_MAIN_PAGE=1
+        SELECT * FROM TB_PR_CONTENT WHERE IS_MAIN_PAGE=1
     </select>
 
     <select id="getPRContent" parameterType="Long" resultType="kr.or.fact.core.model.DTO.PRContentVO">
@@ -169,13 +212,11 @@ LAST_UPD_DATE
             IDX_FILE_INFO,
             REG_DATE
         )VALUES (
-                    SEQ_PR_CONTENT_FILE_JOIN.NEXTVAL,
-                    SEQ_PR_CONTENT.CURRVAL,
-                    SEQ_FILE_INFO.CURRVAL-1,
-
-                    SYSDATE
-
-                )
+            SEQ_PR_CONTENT_FILE_JOIN.NEXTVAL,
+            SEQ_PR_CONTENT.CURRVAL,
+            SEQ_FILE_INFO.CURRVAL-1,
+            SYSDATE
+        )
     </insert>
 
     <resultMap id="promotionDetailMap" type="kr.or.fact.core.model.DTO.PRContentVO">
@@ -202,9 +243,9 @@ LAST_UPD_DATE
         <result property="confirm_admin_idx" column="CONFIRM_ADMIN_IDX" />
         <result property="reg_date" column="REG_DATE" />
         <result property="last_upd_date" column="LAST_UPD_DATE" />
-
         <collection property="attachments" resultMap="Attachments"/>
     </resultMap>
+
     <resultMap id="Attachments" type="kr.or.fact.core.model.DTO.FileInfoVO">
         <id column="IDX_FILE_INFO" property="idx_file_info"/>
         <result column="FILE_NAME" property="file_name"/>
@@ -222,75 +263,84 @@ LAST_UPD_DATE
         <result column="IDX_ADMIN" property="idx_admin"/>
         <result column="REG_DATE" property="reg_date"/>
     </resultMap>
+
     <select id="getPRContentFileJoin" resultMap="promotionDetailMap">
-        SELECT     A.IDX_PR_CONTENT,
-                   A.PR_CONTENT_CODE,
-                   A.PR_CONTENT_NUM,
-                   A.SUBJECT,
-                   A.PR_CONTENTS,
-                   A.IS_FILE,
-                   A.IS_NEW,
-                   A.IS_MAIN_PAGE,
-                   A.IS_IMPORTANT,
-                   A.IS_SHOW,
-                   A.VIEW_COUNT,
-                   A.PR_CONTENT_STATUS,
-                   A.SHOW_START_DATE,
-                   A.SHOW_END_DATE,
-                   A.DOC_VERSION,
-                   A.MEMO,
-                   A.SEARCH_TAG,
-                   A.AUTHOR,
-                   A.THUMB_IMG_FILE_IDX,
-                   A.IDX_ADMIN,
-                   A.CONFIRM_ADMIN_IDX,
-                   A.REG_DATE,
-                   A.LAST_UPD_DATE,
-                   C.IDX_FILE_INFO,
-                   C.FILE_NAME,
-                   C.MIME_TYPE,
-                   C.FILE_PATH,
-                   C.FILE_SIZE
-        FROM TB_PR_CONTENT A JOIN TB_PR_CONTENT_FILE_JOIN B ON A.IDX_PR_CONTENT=B.IDX_PR_CONTENT
-                             JOIN TB_FILE_INFO C ON B.IDX_FILE_INFO=C.IDX_FILE_INFO WHERE A.IDX_PR_CONTENT=#{idx_pr_content}
+        SELECT
+            A.IDX_PR_CONTENT,
+            A.PR_CONTENT_CODE,
+            A.PR_CONTENT_NUM,
+            A.SUBJECT,
+            A.PR_CONTENTS,
+            A.IS_FILE,
+            A.IS_NEW,
+            A.IS_MAIN_PAGE,
+            A.IS_IMPORTANT,
+            A.IS_SHOW,
+            A.VIEW_COUNT,
+            A.PR_CONTENT_STATUS,
+            A.SHOW_START_DATE,
+            A.SHOW_END_DATE,
+            A.DOC_VERSION,
+            A.MEMO,
+            A.SEARCH_TAG,
+            A.AUTHOR,
+            A.THUMB_IMG_FILE_IDX,
+            A.IDX_ADMIN,
+            A.CONFIRM_ADMIN_IDX,
+            A.REG_DATE,
+            A.LAST_UPD_DATE,
+            C.IDX_FILE_INFO,
+            C.FILE_NAME,
+            C.MIME_TYPE,
+            C.FILE_PATH,
+            C.FILE_SIZE
+        FROM TB_PR_CONTENT A
+            JOIN TB_PR_CONTENT_FILE_JOIN B ON A.IDX_PR_CONTENT=B.IDX_PR_CONTENT
+            JOIN TB_FILE_INFO C ON B.IDX_FILE_INFO=C.IDX_FILE_INFO
+        WHERE A.IDX_PR_CONTENT=#{idx_pr_content}
     </select>
+
     <select id="getPrViewCount" parameterType="long" resultType="int">
         SELECT VIEW_COUNT FROM TB_PR_CONTENT WHERE IDX_PR_CONTENT=#{idx_pr_content}
     </select>
+
     <update id="updatePrViewCount" parameterType="kr.or.fact.core.model.DTO.PRContentVO">
         UPDATE TB_PR_CONTENT SET VIEW_COUNT = VIEW_COUNT + 1 WHERE IDX_PR_CONTENT =#{idx_pr_content}
     </update>
+
     <update id="updatePrContent" parameterType="kr.or.fact.core.model.DTO.PRContentVO">
         UPDATE TB_PR_CONTENT SET
-
-                                 PR_CONTENT_CODE=#{pr_content_code},
-                                 PR_CONTENT_NUM=#{pr_content_num},
-                                 SUBJECT=#{subject},
-                                 PR_CONTENTS=#{pr_contents},
-                                 IS_FILE=#{is_file},
-                                 IS_NEW=#{is_new},
-                                 IS_MAIN_PAGE=#{is_main_page},
-                                 IS_IMPORTANT=#{is_important},
-                                 IS_SHOW=#{is_show},
-                                 VIEW_COUNT=#{view_count},
-                                 PR_CONTENT_STATUS=#{pr_content_status},
-                                 SHOW_START_DATE=#{show_start_date},
-                                 SHOW_END_DATE=#{show_end_date},
-                                 DOC_VERSION=#{doc_version},
-                                 MEMO=#{memo},
-                                 SEARCH_TAG=#{search_tag},
-                                 AUTHOR=#{author},
-                                 THUMB_IMG_FILE_IDX=#{thumb_img_file_idx},
-                                 IDX_ADMIN=#{idx_admin},
-                                 CONFIRM_ADMIN_IDX=#{confirm_admin_idx},
-                                 REG_DATE=#{reg_date},
-                                 LAST_UPD_DATE=SYSDATE WHERE IDX_PR_CONTENT =#{idx_pr_content}
+             PR_CONTENT_CODE=#{pr_content_code},
+             PR_CONTENT_NUM=#{pr_content_num},
+             SUBJECT=#{subject},
+             PR_CONTENTS=#{pr_contents},
+             IS_FILE=#{is_file},
+             IS_NEW=#{is_new},
+             IS_MAIN_PAGE=#{is_main_page},
+             IS_IMPORTANT=#{is_important},
+             IS_SHOW=#{is_show},
+             VIEW_COUNT=#{view_count},
+             PR_CONTENT_STATUS=#{pr_content_status},
+             SHOW_START_DATE=#{show_start_date},
+             SHOW_END_DATE=#{show_end_date},
+             DOC_VERSION=#{doc_version},
+             MEMO=#{memo},
+             SEARCH_TAG=#{search_tag},
+             AUTHOR=#{author},
+             THUMB_IMG_FILE_IDX=#{thumb_img_file_idx},
+             IDX_ADMIN=#{idx_admin},
+             CONFIRM_ADMIN_IDX=#{confirm_admin_idx},
+             REG_DATE=#{reg_date},
+             LAST_UPD_DATE=SYSDATE
+        WHERE IDX_PR_CONTENT =#{idx_pr_content}
     </update>
+
     <update id="updatePRContentFileJoin" parameterType="kr.or.fact.core.model.DTO.PRContentFileJoinVO">
-UPDATE TB_PR_CONTENT_FILE_JOIN SET
-IDX_PR_CONTENT_FILE_JOIN=#{IDX_PR_CONTENT_FILE_JOIN},
-IDX_PR_CONTENT=#{IDX_PR_CONTENT},
-IDX_FILE_INFO=#{IDX_FILE_INFO},
-REG_DATE=SYSDATE
+        UPDATE TB_PR_CONTENT_FILE_JOIN
+            SET
+                IDX_PR_CONTENT_FILE_JOIN=#{IDX_PR_CONTENT_FILE_JOIN},
+                IDX_PR_CONTENT=#{IDX_PR_CONTENT},
+                IDX_FILE_INFO=#{IDX_FILE_INFO},
+                REG_DATE=SYSDATE
     </update>
 </mapper>

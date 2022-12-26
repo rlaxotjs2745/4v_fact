@@ -17,6 +17,6 @@ public class CoWorkerVO {
     String tel_num;//	varchar2(60),
     String mphone_num;//	varchar2(20),
     String email;//	varchar2(255),
-    int is_show;//	number(4) default 1,
+    int is_show;//	number(4) default 1, 0:안보임 1:보임 2:삭제
     Date reg_date;//	date,
 }

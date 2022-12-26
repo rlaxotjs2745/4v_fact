@@ -14,38 +14,40 @@
                 <div class="card-header-elements ml-auto">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modals-popup"  data-what="mode-new">+ 팝업 등록</button>
                 </div>
+
             </h6>
             <div class="card-datatable table-responsive pt-0 pb-3">
                 <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
+                            <table class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
                                 <thead class="bg-success text-white font-weight-bold">
                                 <tr role="row">
-                                    <th class="text-center px-2"    >   No</th>
-                                    <th class="text-center sorting" >   팝업 제목</th>
-                                    <th class="text-center sorting" >   URL</th>
-                                    <th class="text-center sorting" >   게시 기간</th>
-                                    <th class="text-center sorting" >   게시 여/부</th>
-                                    <th class="text-center px-2"    >   게시 상태</th>
-                                    <th class="text-center px-2"    >   등록일</th>
-                                    <th class="text-center px-2"    >   게시자</th>
-                                    <th class="text-center px-2"    >   업로드 이미지</th>
+                                    <th class="text-center sorting">팝업 제목</th>
+                                    <th class="text-center sorting">링크</th>
+                                    <th class="text-center sorting">게시 기간</th>
+                                    <th class="text-center px-2">게시 상태</th>
+                                    <th class="text-center px-2">등록일</th>
+                                    <th class="text-center px-2">게시자</th>
+                                    <th class="text-center px-2">변경</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr class="">
-                                    <td class="text-center">1</td>
                                     <td class="text-center">
                                         <a href="#none" data-toggle="modal" data-target="#modals-popup" data-what="mode-view">축제 홍보 건</a>
                                     </td>
-                                    <td class="text-center">http://www.insamfe…</td>
-                                    <td class="text-center">2021년 10월 25일 오전 10:00 ~ 2021년 10월 26일 오후 10:00</td>
+                                    <td class="text-center">http://www.insamfe</td>
+                                    <td class="text-center">2021년 10월 25일 ~ 2021년 10월 26일</td>
                                     <td class="text-center">숨김</td>
-                                    <td class="text-center">진행중</td>
                                     <td class="text-center">2021년 10월 25일</td>
                                     <td class="text-center">minjeoing@4thevision.com</td>
-                                    <td class="text-center">보기</td>
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-default" data-toggle="modal" data-target="#modals-modify"><span class="fas fa-pen" > </span></button>
+                                            <button onclick="organizationDelete(this)" class="btn btn-sm btn-default"><span class="fas fa-trash-alt" > </span></button>
+                                        </div>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -85,24 +87,27 @@
                             <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
                                 <thead class="bg-success text-white font-weight-bold">
                                 <tr role="row">
-                                    <th class="text-center px-2"    >   No</th>
-                                    <th class="text-center px-2"    >   베너 순서</th>
-                                    <th class="text-center px-2"    >   URL</th>
-                                    <th class="text-center px-2"    >   등록일</th>
-                                    <th class="text-center px-2"    >   게시자</th>
-                                    <th class="text-center px-2"    >   업로드 이미지</th>
+                                    <th class="text-center px-2">베너 순서</th>
+                                    <th class="text-center px-2">URL</th>
+                                    <th class="text-center px-2">등록일</th>
+                                    <th class="text-center px-2">게시자</th>
+                                    <th class="text-center px-2">변경</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr class="">
-                                    <td class="text-center">1</td>
                                     <td class="text-center">
-                                        <a href="#none" data-toggle="modal" data-target="#modals-popup" data-what="mode-view">첫 번째</a>
+                                        <a href="#none" data-toggle="modal" data-target="#modals-popup" data-what="mode-view">1</a>
                                     </td>
                                     <td class="text-center">http://www.insamfe…</td>
                                     <td class="text-center">2021년 10월 25일</td>
                                     <td class="text-center">minjeoing@4thevision.com</td>
-                                    <td class="text-center">보기</td>
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-default" data-toggle="modal" data-target="#modals-modify"><span class="fas fa-pen" > </span></button>
+                                            <button onclick="organizationDelete(this)" class="btn btn-sm btn-default"><span class="fas fa-trash-alt" > </span></button>
+                                        </div>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -141,19 +146,17 @@
                         <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form id="popupForm">
+                            <input type="hidden" name="idx_popup_img" value="${admin.idx_admin}">
                             <div class="form-group row">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">제목</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요">
-                                    <div class="form-control-plaintext mode-view">공고문 제목제목제목제목 1</div>
+                                    <input type="text" name="subject" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">게시 기간</label>
                                 <div class="col-md-10">
-                                    <div class="form-control-plaintext mode-view">2022-01-01 - 2022-02-01</div>
-
                                     <div id="datepicker-open" class="input-daterange input-group mode-edit mode-new">
                                         <input type="text" class="form-control" name="start">
                                         <div class="input-group-prepend">
@@ -163,45 +166,42 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">내용</label>
-                                <div class="col-md-10 mode-edit mode-new">
-                                    <div class="summernote"></div>
-                                </div>
-                                <div class="col-md-10 mode-view">
-                                    <div class="form-control-plaintext mode-view">자세히 보기</div>
-                                </div>
-                            </div>
-
-                            <div class="modal-footer justify-content-between mode-new">
-                                <div>
-                                    <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
-                                    <button type="button" class="btn btn-secondary">미리보기</button>
-                                </div>
-                                <div>
-                                    <button type="button" class="btn btn-primary">저장</button>
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">게시 상태</label>
+                                <div class="col-md-10" style="padding-top: 5px">
+                                    <select id="is_show" name="is_show" class="custom-select custom-select-sm w-auto">
+                                        <option value="1" selected>보임</option>
+                                        <option value="2">안보임</option>
+                                    </select>
                                 </div>
                             </div>
-
-                            <div class="modal-footer justify-content-between mode-edit d-none">
-                                <div>
-                                    <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
-                                    <button type="button" class="btn btn-secondary">미리보기</button>
-                                </div>
-                                <div>
-                                    <button type="button" class="btn btn-danger">삭제</button>
-                                    <button type="button" class="btn btn-primary">저장&게시</button>
+                            <div class="form-group row">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">링크</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="popup_url" class="form-control form-control-md mode-edit mode-new" placeholder="링크를 입력해 주세요">
                                 </div>
                             </div>
-
+                            <div class="form-group row">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">이미지</label>
+                                <div class="col-md-10 file_upload_box">
+                                    <input class="form-control form-control-md mode-edit mode-new upload-name" value="파일선택" disabled="disabled">
+                                    <input type="file" id="image_upload" name="file1" class="upload-hidden" accept="image/*">
+                                    <label for="image_upload" class="btn btn-success">이미지 업로드</label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold"></label>
+                                <div class="col-md-10 file_upload_box">
+                                    <img id="preview-image" src="" />
+                                </div>
+                            </div>
                             <div class="modal-footer justify-content-between mode-view">
                                 <div>
                                     <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">닫기</button>
                                 </div>
 
                                 <div>
-                                    <button id="btn_edit_mode" type="button" class="btn btn-primary">수정</button>
+                                    <button id="popup_submit" type="button" class="btn btn-primary">등록</button>
                                 </div>
 
                             </div>
@@ -218,6 +218,44 @@
 <%@include file ="layouts/frame_footer.jsp" %>
 <!-- / Layout footer -->
 <script>
+
+    $(document).ready(function(){
+        var fileTarget = $('.file_upload_box .upload-hidden');
+
+        fileTarget.on('change', function(){
+            if(window.FileReader){
+                var filename = $(this)[0].files[0].name;
+            } else {
+                var filename = $(this).val().split('/').pop().split('\\').pop();
+            }
+
+            $(this).siblings('.upload-name').val(filename);
+        });
+
+
+    });
+
+    function readImage(input) {
+        // 인풋 태그에 파일이 있는 경우
+        if(input.files && input.files[0]) {
+            // 이미지 파일인지 검사 (생략)
+            // FileReader 인스턴스 생성
+            const reader = new FileReader()
+            // 이미지가 로드가 된 경우
+            reader.onload = e => {
+                const previewImage = document.getElementById("preview-image")
+                previewImage.src = e.target.result
+            }
+            // reader가 이미지 읽도록 하기
+            reader.readAsDataURL(input.files[0])
+        }
+    }
+    // input file에 change 이벤트 부여
+    const inputImage = document.getElementById("image_upload")
+    inputImage.addEventListener("change", e => {
+        readImage(e.target)
+    })
+
     $('.summernote').summernote({
         toolbar: [
             // [groupName, [list of button]]
@@ -256,76 +294,65 @@
             static:true
         });
     });
-    $('#btn_edit_mode').on('click', function() {
-
-        //$('.mode-edit').removeClass('d-non');
-        //$('.mode-view').addClass('d-non');
-        if($('.mode-view').hasClass('d-none') == false){
-            $('.mode-view').addClass('d-none');
-        }
-
-        if($('.mode-edit').hasClass('d-none') == false){
-            console.log("실행했어요..")
-            $('.mode-edit').addClass('d-none');
-        }
-
-        if($('.mode-new').hasClass('d-none') == false){
-            $('.mode-new').addClass('d-none');
-        }
-
-        $('.mode-edit').removeClass('d-none');
-    });
 
     $(function() {
 
-        /*$('#btn_mode_new').on('click', function() {
-
-            if($('.mode-view').hasClass('d-non') === false){
-                $('.mode-view').addClass('d-non');
-            }
-            if($('.mode-edit').hasClass('d-non') === false){
-                $('.mode-edit').addClass('d-non');
-            }
-            if($('.mode-new').hasClass('d-non') === true){
-                $('.mode-new').removeClass('d-non');
-            }
-
-            $('#modals-business').modal('show');
-
-
-        });*/
 
         // 모달 팝업 띄울 시 발생하는 이벤트 (이벤트명 : show.bs.modal)
         $('#modals-popup').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
             var what = button.data('what');
-            if(what=='mode-view' || what=='mode-edit'||what=='mode-new'){
-                console.log("시작");
-                if($('.mode-view').hasClass('d-none') == false){
-                    $('.mode-view').addClass('d-none');
-                }
 
-                if($('.mode-edit').hasClass('d-none') == false){
-                    console.log("실행했어요..")
-                    $('.mode-edit').addClass('d-none');
-                }
-
-                if($('.mode-new').hasClass('d-none') == false){
-                    $('.mode-new').addClass('d-none');
-                }
-
-                $('.'+what+'').removeClass('d-none');
-                console.log(what);
-            }
-
-            // 모달 팝업에 데이터 집어넣기
-            //var modal = $(this);
-            //modal.find('.modal-title').text('New message to ' + what)
-            //modal.find('.modal-body input').val(what)
         })
     });
 
+    $("#is_show").change(function(){
+        $('#is_show').val($(this).val());
+    })
 
+    $('#popup_submit').on('click',function(data){
+        let myform = new FormData();
+        const startDate =  $("input[name=start]").val()
+        const endDate =  $("input[name=end]").val()
+
+        myform.append('subject', $("input[name=subject]").val());
+        myform.append('content_type', '1'); // 타입 1:팝업 , 2:배너
+        myform.append('popup_url', $("input[name=popup_url]").val());
+        myform.append('startDate', startDate + ' 00:00:00');
+        myform.append('endDate', endDate + ' 00:00:00');
+        myform.append('is_show', $("#is_show").val()); // 타입 1:팝업 , 2:배너
+        myform.append('idx_admin', $("input[name=idx_popup_img]").val());
+        myform.append('file1', document.getElementById('image_upload').files[0]) ;
+
+
+        console.log(myform)
+        $.ajax({
+            type: 'post',
+            url :'insert_popup', //데이터를 주고받을 파일 주소 입력
+            data: myform,//보내는 데이터
+            contentType:false,
+            processData:false,
+            success: function(result){
+                //작업이 성공적으로 발생했을 경우
+                console.log(result);
+                if (result.result_code === "SUCCESS") {
+                    alert(result.result_str);
+                    $("#homepage_admin").val('')
+                    $("#homepage_admin_pnum").val('')
+                    $("#email").val('')
+                    pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
+                }
+                else {
+
+                }
+            },
+            error:function(){
+                //에러가 났을 경우 실행시킬 코드
+            }
+        });
+
+    })
 
 </script>
 <!-- / Page content -->
+

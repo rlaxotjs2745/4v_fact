@@ -19,11 +19,11 @@
                         </label>
                         <label class="custom-control custom-checkbox mr-2">
                             <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-label">XX이벤트</span>
+                            <span class="custom-control-label">신규 이벤트</span>
                         </label>
                         <label class="custom-control custom-checkbox mr-2">
                             <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-label">XXX이벤트</span>
+                            <span class="custom-control-label">끝난 이벤트</span>
                         </label>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                                 <input type="radio" name="btn-radio"> 신규
                             </label>
                             <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 끝난이벤트
+                                <input type="radio" name="btn-radio"> 끝난 이벤트
                             </label>
                         </div>
                     </div>

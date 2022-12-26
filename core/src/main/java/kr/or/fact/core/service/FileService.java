@@ -44,4 +44,14 @@ public interface FileService {
     FileInfoVO selectBsFile(int idx_demo_bs);
 
     FileInfoVO selectBsAnnouncementFile(int index_bs_announcement);
+
+    void deleteFormFile(FormFileInfoVO formFileInfoVO);
+
+    void deleteRuleFile(RuleFileInfoVO ruleFileInfoVO);
+
+    void updateFormFile(FileRequestVO fileRequestVO);
+
+    void updateRuleFile(FileRequestVO fileRequestVO);
+
+    int insertPopupFile(MultipartFile file, long adminIdx);
 }

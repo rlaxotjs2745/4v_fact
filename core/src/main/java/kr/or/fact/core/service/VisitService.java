@@ -19,7 +19,7 @@ public interface VisitService {
 
     List<VisitReqVO> getMonthlyVisitReq();
     List<VisitReqVO> getUserVisitReq(long idx_user,int page,int list_amount);
-    int getVisitReqCount(int filter1);
+    int getVisitReqCount(ParamPageListFilteredVO paramVo);
     long saveVisitData(VisitDataVO visitDataVO);
     void updateVisitData(VisitDataVO visitDataVO);
     void deleteVisitData(@Param("idx_visit_data") long idx_visit_data);

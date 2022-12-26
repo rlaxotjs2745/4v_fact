@@ -21,4 +21,5 @@ public class FileRequestVO {
 
     int fileCategory;
     int fileIndex;
+    int fileVersion;
 }

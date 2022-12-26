@@ -16,15 +16,15 @@
                     <label class="form-label text-muted">상담 구분</label>
                     <div class="form-inline mt-2">
                         <label class="custom-control custom-checkbox mr-2">
-                            <input type="checkbox" class="custom-control-input">
+                            <input type="checkbox" name="advertype" class="custom-control-input">
                             <span class="custom-control-label">전체</span>
                         </label>
                         <label class="custom-control custom-checkbox mr-2">
-                            <input type="checkbox" class="custom-control-input">
+                            <input type="checkbox" name="advertype" class="custom-control-input">
                             <span class="custom-control-label">사전상담</span>
                         </label>
                         <label class="custom-control custom-checkbox mr-2">
-                            <input type="checkbox" class="custom-control-input">
+                            <input type="checkbox" name="advertype" class="custom-control-input">
                             <span class="custom-control-label">사용승인 후 상담</span>
                         </label>
                     </div>
@@ -103,12 +103,12 @@
     color: #262626;">홍보 안내 진행 중인 데이터가 없습니다.</div>
                 </div>
             </c:if>
-                                <c:if test="${total_count ne 0}">
+            <c:if test="${total_count ne 0}">
             <div class="card-datatable table-responsive pt-0 pb-3">
                 <div class="dataTables_wrapper dt-bootstrap4 no-footer">
                     <div class="row p-3">
                         <div class="col-sm-12 col-md-12">
-                            <label class="mr-3  mb-0">총 : <strong>999</strong>건</label><label class="mr-3  mb-0">신규 : <strong>70</strong>건</label><label class="mr-3  mb-0">추가 : <strong>70</strong>건</label><label class="mr-3  mb-0">해결 : <strong>70</strong>건</label>
+                            <label class="mr-3  mb-0">총 : <strong>${total_count}</strong>건</label><label class="mr-3  mb-0">신규 : <strong>70</strong>건</label><label class="mr-3  mb-0">해결 : <strong>70</strong>건</label>
                         </div>
                     </div>
                     <div class="row">
@@ -117,11 +117,11 @@
                                 <thead class="bg-success text-white font-weight-bold">
                                 <tr role="row">
                                     <th class="text-center px-2" style="width:60px">No</th>
-                                    <th class="text-center sorting" style="width:80px">홍보자료 제목</th>
-                                    <th class="text-center sorting" style="width:60px">홍보자료 내용</th>
-                                    <th class="text-center sorting" style="width:100px">파일포함여부</th>
-                                    <th class="text-center sorting" style="width:100px">신규등록여부</th>
-                                    <th class="text-center sorting" style="width:150px">메인페이지 노출여부</th>
+                                    <th class="text-center px-2" style="width:80px">홍보자료 제목</th>
+                                    <th class="text-center px-2" style="width:60px">홍보자료 내용</th>
+                                    <th class="text-center px-2" style="width:100px">파일포함여부</th>
+                                    <th class="text-center px-2" style="width:100px">신규등록여부</th>
+                                    <th class="text-center px-2" style="width:150px">메인페이지 노출여부</th>
                                     <th class="text-center px-2" style="width:80px">조회수</th>
                                     <th class="text-center px-2" style="width:120px">홍보게시 프로세스상태</th>
                                     <th class="text-center px-2" style="width:120px">시작일시</th>
@@ -132,7 +132,7 @@
                                 <tbody>
                                <c:forEach items="${prlist}" var="pr" varStatus="status">
                                 <tr class="pr_entity" id="${pr.idx_pr_content}">
-                                    <td class="text-center">${pr.pr_content_num}</td>
+                                    <td class="text-center">${pr.idx_row_num}</td>
                                     <td class="text-center"><a href="#none" id="data" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view" >${pr.subject}</a></td>
                                     <td class="text-center"><a href="#none" id="${pr.idx_pr_content}" class="btn btn-outline-default  btn-sm btn_content_modal"  data-toggle="modal" data-target="#modals-content" >컨텐츠 보기</a></td>
                                     <td class="text-center">${pr.is_file eq 0 ? "포함안함" : pr.is_file eq 1 ? "포함" :""}</td>
@@ -188,7 +188,7 @@
                     </div>
                 </div>
             </div>
-                                </c:if>
+            </c:if>
         </div>
 
         <!-- Modal template -->
@@ -200,7 +200,6 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
                     <div class="modal-body pb-2">
-
                         <div class="form-row">
                             <div class="form-group col col-md-12 text-right">
                                 <a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modals-counsel-history">홍보자료 수정</a>
@@ -821,7 +820,6 @@
 <%@include file ="layouts/frame_footer.jsp" %>
 
         <script>
-
             var curPRdata;
             var prList=[];
             <c:forEach items="${prlist}" var="pr" varStatus="status">

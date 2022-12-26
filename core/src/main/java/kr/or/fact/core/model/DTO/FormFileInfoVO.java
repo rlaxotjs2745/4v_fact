@@ -6,9 +6,7 @@ import java.util.Date;
 
 @Data
 public class FormFileInfoVO {
-
     int row_num;
-
     long idx_form_file_info;//	number	32			◯		인덱스	auto increase
     String subject;//	varchar2	100		0			양식 제목
     String usage_detail;//	varchar2	300					양식 사용 용도 내용
@@ -26,5 +24,4 @@ public class FormFileInfoVO {
     String file_path;//	varchar2	256					파일 경로
     //long file_size;//	number	32					파일 크기
     //int checksum;//	number	20					파일 무결성 체크 첵섬
-
   }

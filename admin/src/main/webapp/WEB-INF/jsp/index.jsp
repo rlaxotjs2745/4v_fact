@@ -54,6 +54,10 @@
     <link rel="stylesheet" type="text/css" href="resources/assets/css/demo.css">
     <link rel="stylesheet" type="text/css" href="resources/assets/vendor/libs/summernote/summernote.css">
 
+    <!-- 공통 css 추가 -->
+    <link rel="stylesheet" href="resources/assets/css/common.css">
+
+
 </head>
 
 <body>
@@ -117,8 +121,8 @@
 
 
 <script>
-    var curMyIdx = ${admin.idx_admin};
-
+    let _pageReload = '${pageOnLoad}';
+    let curMyIdx = ${admin.idx_admin};
 
     $("li.sidenav-item").on('click',function(){
         if( $("li.sidenav-item").has('a')!=null){
@@ -126,7 +130,7 @@
         }
     });
     $(function(){
-        var sBtn = $("ul > li");    //  ul > li 이를 sBtn으로 칭한다. (클릭이벤트는 li에 적용 된다.)
+        let sBtn = $("ul > li");    //  ul > li 이를 sBtn으로 칭한다. (클릭이벤트는 li에 적용 된다.)
         sBtn.find("a").click(function(){   // sBtn에 속해 있는  a 찾아 클릭 하면.
             sBtn.removeClass("active");     // sBtn 속에 (active) 클래스를 삭제 한다.
             $(this).parent().addClass("active"); // 클릭한 a에 (active)클래스를 넣는다.
@@ -134,15 +138,11 @@
 
     });
 
-    var csrfParameter = $("meta[name='_csrf_parameter']").attr("content");
-    var csrfHeader = $("meta[name='_csrf_header']").attr("content");
-    var csrfToken = $("meta[name='_csrf']").attr("content");
+    let csrfParameter = $("meta[name='_csrf_parameter']").attr("content");
+    let csrfHeader = $("meta[name='_csrf_header']").attr("content");
+    let csrfToken = $("meta[name='_csrf']").attr("content");
     //최초 진입시 호출되는 ajax 페이지 초기값
-    var cur = "";
-
-
-
-
+    let cur = "";
 
     //int page_num;
     //int filter1;
@@ -151,52 +151,73 @@
     //int amount;
     //String order_field;
 
-    function pageLoad(url,param,title,usage){
+    let filter1 = null;
+    let filter2 = null;
+    function pageLoad(url, param, title, usage){
 /*      State : 브라우저 이동 시 넘겨줄 데이터 (popstate 에서 받아서 원하는 처리를 해줄 수 있음)
         Title : 변경할 브라우저 제목 (변경 원치 않으면 null)
         Url : 변경할 주소*/
-        // console.log(param)
-        if(param==null)
-            param={page_num:1};
+        if(param==null) {
+            param = {'page_num':1};
+            filter1 = null;
+            filter2 = null;
+        }else{
+            if (param['page_num'] == null) {
+                param['page_num'] = 1;
+            }
+            if (param['fil1'] == null && filter1 != null) {
+                param['fil1'] = filter1;
+            }
+            if (param['fil2'] == null && filter2 != null) {
+                param['fil2'] = filter2;
+            }
 
-        if(cur!=url+param.page_num || usage == "asset_list"){
-            cur = url+param.page;
-            history.pushState(param, title,url);
+            if (param['fil1'] != null) {
+                filter1 = param['fil1'];
+            }
+            if (param['fil2'] != null) {
+                filter2 = param['fil2'];
+            }
+        }
+
+        if(cur !== url+param['page_num'] || usage === "asset_list"){
+            cur = url+param['page_num'];
+            if(url.indexOf('cur_asset_index') === -1 && url.indexOf('user_index') === -1 && url.indexOf('dormant_user_index') === -1 && url.indexOf('admin_corporate') === -1) {
+                history.pushState(param, title, url);
+            }
 
             $.ajaxSetup({
                 headers:
                     { 'X-CSRF-TOKEN': csrfToken }
             });
-            var request = $.ajax({
+            $.ajax({
                 url: url,
                 method: 'post',
                 data: JSON.stringify(param),//보내는 데이터
                 contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
                 dataType:'html',//받는 데이터 타입
                 success:function(result){
-                    if(usage == "admin"){
+                    if(usage === "admin"){
                         $("#admin_index").html(result);
-                    } else if(usage == "user"){
+                    } else if(usage === "user"){
                         $("#user_index").html(result);
-                    } else if(usage == "dormant_user"){
+                    } else if(usage === "dormant_user"){
                         $("#dormant_user_index").html(result);
-                    } else if(usage == "cur_asset_index"){
+                    } else if(usage === "cur_asset_index"){
                         $("#cur_asset_index").html(result);
-                    } else if(usage == "codeSelect"){
+                    } else if(usage === "codeSelect"){
                         $("#code_select").append(result);
-                    } else if(usage == "asset_list"){
+                    } else if(usage === "asset_list"){
                         $("#asset_list").html(result);
-                    } else if(usage == "asset_reservation_list"){
+                    } else if(usage === "asset_reservation_list"){
                         $("#asset_reservation_list").html(result);
-                    } else if(usage == "asset_reservation_items_list"){
+                    } else if(usage === "asset_reservation_items_list"){
                         $("#asset_reservation_items_list").html(result);
-                    } else if(usage == "pr_contents"){
+                    } else if(usage === "pr_contents"){
                         $("#modals-content").html(result);
-                    } else if(usage == "reserve_view"){
+                    } else if(usage === "reserve_view"){
                         $("#reserve_view_comp").html(result);
-                    }
-
-                    else{
+                    }else{
                         $("#contents").html(result);
                     }
                 },
@@ -218,8 +239,7 @@
                 //alert(a);
 
         }else{//현재 주소 클릭시 변화 없음
-
-            return;
+            return false;
         }
     }
     //문서 로드 완료 후 이벤트 처리
@@ -257,14 +277,12 @@
     })();
     $(document).ready(function() {
         //ajax로 호출되는 첫번째 페이지
-        pageLoad('a10_dashboard','{tag:1}','대시보드');
-
+        if(_pageReload !== ''){
+            pageLoad('${path}', null);
+        }else{
+            pageLoad('a10_dashboard','{tag:1}','대시보드');
+        }
     });
-
-
-
-
-
 </script>
 <style>
     #loading_symbol{
@@ -274,5 +292,4 @@
     }
 </style>
 </body>
-
 </html>

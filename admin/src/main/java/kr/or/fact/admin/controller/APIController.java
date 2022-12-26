@@ -90,6 +90,9 @@ public class APIController {
     @Resource(name = "consultingService")
     public ConsultingService consultingService;
 
+    @Resource(name = "webMainPopupService")
+    public WebMainPopupService webMainPopupService;
+
     @Autowired
     private FACTConfig factConfig;
 
@@ -741,35 +744,117 @@ public class APIController {
         return  resultVO;
     }
     @RequestMapping(value = "/save_homepage_info",method = RequestMethod.POST)
-    public @ResponseBody
-    ResultVO  save_homepage_info(HttpSession session,
-                                @RequestBody HomepageInfoVO homepageInfoVO){
+    public @ResponseBody ResultVO save_homepage_info(HttpSession session, @RequestBody HomepageInfoVO homepageInfoVO){
 
         ResultVO resultVO = new ResultVO();
-        resultVO.setResult_str("저장했습니다");
-        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("필수 데이터가 없습니다.");
+        resultVO.setResult_code("ERROR001");
 
-        if(homepageInfoVO.getHomepage_admin() != null &&
-                homepageInfoVO.getHomepage_admin_pnum()!= null &&
-                homepageInfoVO.getEmail()!= null
-        ){
+        if(homepageInfoVO.getHomepage_admin() != null && homepageInfoVO.getHomepage_admin() != "" &&
+                homepageInfoVO.getHomepage_admin_pnum()!= null && homepageInfoVO.getHomepage_admin_pnum()!= "" &&
+                homepageInfoVO.getEmail()!= null && homepageInfoVO.getEmail()!= ""){
+
             HomepageInfoVO resultHomepageInfo = homepageInfoService.getHomepageInfo();
-            resultHomepageInfo.setHomepage_admin(homepageInfoVO.getHomepage_admin());
-            resultHomepageInfo.setHomepage_admin_pnum(homepageInfoVO.getHomepage_admin_pnum());
-            resultHomepageInfo.setEmail(homepageInfoVO.getEmail());
 
-            homepageInfoService.updateHomepageInfo(resultHomepageInfo);
+            HomepageInfoVO newInfo = new HomepageInfoVO();
+            newInfo.setHomepage_admin(homepageInfoVO.getHomepage_admin());
+            newInfo.setHomepage_admin_pnum(homepageInfoVO.getHomepage_admin_pnum());
+            newInfo.setEmail(homepageInfoVO.getEmail());
 
+            if(resultHomepageInfo==null){
+                newInfo.setIs_current(1);
+                homepageInfoService.insertHomepageInfo(newInfo);
+            } else {
+                newInfo.setIs_current(0);
+                homepageInfoService.insertHomepageInfo(newInfo);
+            }
+
+            resultVO.setResult_str("저장했습니다");
+            resultVO.setResult_code("SUCCESS");
         }
-        else {
-            resultVO.setResult_str("필수 데이터가 없습니다.");
-            resultVO.setResult_code("ERROR001");
-        }
-
-
 
         return  resultVO;
     }
+
+    @RequestMapping(value = "/modify_homepage_info",method = RequestMethod.POST)
+    public @ResponseBody ResultVO modify_homepage_info(HttpSession session, @RequestBody HomepageInfoVO homepageInfoVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("필수 데이터가 없습니다.");
+        resultVO.setResult_code("ERROR001");
+
+        if(homepageInfoVO.getIdx_homepage_info()>0){
+
+            HomepageInfoVO resultInfo = homepageInfoService.getHomepageInfoIdx(homepageInfoVO);
+
+            if(homepageInfoVO.getHomepage_admin()!=null){
+                resultInfo.setHomepage_admin(homepageInfoVO.getHomepage_admin());
+            }
+            if(homepageInfoVO.getHomepage_admin_pnum()!=null){
+                resultInfo.setHomepage_admin_pnum(homepageInfoVO.getHomepage_admin_pnum());
+            }
+            if(homepageInfoVO.getEmail()!=null){
+                resultInfo.setEmail(homepageInfoVO.getEmail());
+            }
+
+            homepageInfoService.updateHomepageInfo(resultInfo);
+
+            resultVO.setResult_str("수정했습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+        return  resultVO;
+    }
+
+    @RequestMapping(value = "/delete_homepage_info",method = RequestMethod.POST)
+    public @ResponseBody ResultVO delete_homepage_info(HttpSession session, @RequestBody HomepageInfoVO homepageInfoVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("해당되는 데이터가 없습니다.");
+        resultVO.setResult_code("ERROR001");
+
+        if(homepageInfoVO.getIdx_homepage_info()>0){
+
+            HomepageInfoVO resultInfo = homepageInfoService.getHomepageInfoIdx(homepageInfoVO);
+
+            if(resultInfo.getIs_current()==1){
+                resultVO.setResult_str("현재 관리자는 삭제 할 수 없습니다.");
+            } else {
+                homepageInfoService.deleteHomepageInfo(homepageInfoVO.getIdx_homepage_info());
+                resultVO.setResult_str("삭제했습니다.");
+                resultVO.setResult_code("SUCCESS");
+            }
+        }
+        return  resultVO;
+    }
+
+    @RequestMapping(value = "/set_homepage_info",method = RequestMethod.POST)
+    public @ResponseBody ResultVO set_homepage_info(HttpSession session, @RequestBody HomepageInfoVO homepageInfoVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("해당되는 데이터가 없습니다.");
+        resultVO.setResult_code("ERROR001");
+
+        if(homepageInfoVO.getIdx_homepage_info()>0){
+            HomepageInfoVO resultHomepageInfo = homepageInfoService.getHomepageInfo();
+
+            if(resultHomepageInfo!=null && resultHomepageInfo.getIs_current()==1){
+                long resultIdx = resultHomepageInfo.getIdx_homepage_info();
+                homepageInfoService.setWaitingHomepageInfo(resultIdx);
+                homepageInfoService.setCurrentHomepageInfo(homepageInfoVO.getIdx_homepage_info());
+
+                resultVO.setResult_str("메인 프로필을 변경했습니다.");
+                resultVO.setResult_code("SUCCESS");
+            } else {
+                homepageInfoService.setCurrentHomepageInfo(homepageInfoVO.getIdx_homepage_info());
+
+                resultVO.setResult_str("메인 프로필로 설정했습니다.");
+                resultVO.setResult_code("SUCCESS");
+            }
+        }
+
+        return resultVO;
+    }
+
     @RequestMapping(value = "/save_system_code",method = RequestMethod.POST)
     public @ResponseBody
     ResultVO  save_system_code(HttpSession session,
@@ -1317,7 +1402,7 @@ public class APIController {
 
 
             if(prcontensVO.getFiles1() == null){
-               prContentService.insertPRContent(prcontensVO);
+                prContentService.insertPRContent(prcontensVO);
             }else {
                 if (prcontensVO.getFiles1() != null) {
                     files[0] = fileService.convertMultipartToFile(prcontensVO.getFiles1());
@@ -1375,23 +1460,68 @@ public class APIController {
         return resultVO;
     }
     @RequestMapping(value = "/insert_coworker",method = RequestMethod.POST)
-    public @ResponseBody
-    ResultVO insertCoworker (@RequestBody CoWorkerVO coWorkerVO){
+    public @ResponseBody ResultVO insertCoworker (@RequestBody CoWorkerVO coWorkerVO){
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
-        resultVO.setResult_str("업데이트 실패");
-        try {
-           coWorkerNService.insertCoWorkerInfo(coWorkerVO);
-            resultVO.setResult_str("업데이트에 성공하였습니다.");
-            resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("등록 실패");
 
-        }catch(Exception e) {
-            resultVO.setResult_code("ERROR_1000");
-            resultVO.setResult_str("업데이트 실패");
-            System.out.println(e);
+        if(coWorkerVO.getCoworker_name()!=null
+                && coWorkerVO.getDevision()!=null && coWorkerVO.getJob_title()!=null) {
+
+            coWorkerNService.insertCoWorkerInfo(coWorkerVO);
+            resultVO.setResult_str("저장했습니다.");
+            resultVO.setResult_code("SUCCESS");
         }
         return resultVO;
     }
+
+    @RequestMapping(value = "/modify_coworker",method = RequestMethod.POST)
+    public @ResponseBody ResultVO modifyCoworker (@RequestBody CoWorkerVO coWorkerVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("업데이트 실패");
+
+        if(coWorkerVO.getIdx_co_worker() > 0) {
+            coWorkerNService.updateCoWorkerInfo(coWorkerVO);
+            resultVO.setResult_str("수정했습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/delete_coworker",method = RequestMethod.POST)
+    public @ResponseBody ResultVO deleteCoworker (@RequestBody CoWorkerVO coWorkerVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("삭제 실패");
+
+        if(coWorkerVO.getIdx_co_worker() > 0) {
+            coWorkerNService.deleteCoWorkerInfo(coWorkerVO.getIdx_co_worker());
+            resultVO.setResult_str("삭제했습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/insert_popup",method = RequestMethod.POST)
+    public @ResponseBody ResultVO insertPopupContent (@ModelAttribute WebMainPopupVO webMainPopupVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("데이터를 다시 입력해주세요");
+
+        if(webMainPopupVO.getSubject() != null || webMainPopupVO.getSubject() != "" && webMainPopupVO.getFile1() != null){
+            webMainPopupService.insertPopupContent(webMainPopupVO);
+
+            fileService.convertMultipartToFile(webMainPopupVO.getFile1());
+            fileService.insertPopupFile(webMainPopupVO.getFile1(), webMainPopupVO.getIdx_admin());
+
+            resultVO.setResult_str("업데이트에 성공하였습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+
+        return resultVO;
+    }
+
 
     @RequestMapping(value ="/delete_notice",method = RequestMethod.POST)
     public @ResponseBody
@@ -1712,6 +1842,49 @@ public class APIController {
 
         return fileService.selectBsAnnouncementFile(idx_bs_announcement);
     }
+
+    @RequestMapping(value ="/delete_form_file",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO delete_form_file(@RequestBody FormFileInfoVO formFileInfoVO){
+        ResultVO resultVO = new ResultVO();
+
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("양식 제거를 완료했습니다.");
+
+        try {
+            fileService.deleteFormFile(formFileInfoVO);
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("제거에 실패하였습니다.");
+        }
+
+        return resultVO;
+    }
+
+    @RequestMapping(value ="/delete_rule_file",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO delete_rule_file(@RequestBody RuleFileInfoVO ruleFileInfoVO){
+        ResultVO resultVO = new ResultVO();
+        System.out.println(ruleFileInfoVO);
+
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("규정 제거를 완료했습니다.");
+
+        try {
+            fileService.deleteRuleFile(ruleFileInfoVO);
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("제거에 실패하였습니다.");
+        }
+
+        return resultVO;
+    }
+
+
+
+
 
 }
 

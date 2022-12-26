@@ -6,8 +6,10 @@
     <select id="getUserVisitReqCount" parameterType="long" resultType="int">
         SELECT COUNT(*) FROM TB_VISIT_REQ  WHERE IDX_USER = #{idx_user}
     </select>
-    <select id="getVisitList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.VisitReqVO">
+
+    <select id="getVisitList" resultType="kr.or.fact.core.model.DTO.VisitReqVO">
         SELECT
+            idx_row_num,
             IDX_VISIT_REQ,
             VISIT_REQ_NUM,
             GROUP_NAME,
@@ -33,49 +35,54 @@
             IDX_ADMIN,
             REG_DATE
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
-        ,IDX_VISIT_REQ,
-                        VISIT_REQ_NUM,
-                        GROUP_NAME,
-                        VISITOR,
-                        RESULVATION_DATE,
-                        VISITOR_COUNT,
-                        VISITOR_MPHONE_NUM,
-                        VISITOR_EMAIL,
-                        VISITOR_ADRESS,
-                        VISIT_GOAL,
-                        QUESTION,
-                        VISIT_REQ_STATUS,
-                        IS_PRIVACY_ACCEPT,
-                        IS_GROUP,
-                        IS_CANCEL,
-                        IS_MANAGER,
-                        IDX_MANAGER,
-                        IS_DURATION,
-                        DURATION_AMOUNT,
-                        MEMO,
-                        IDX_VISIT_DATA,
-                        IDX_USER,
-                        IDX_ADMIN,
-                        REG_DATE
+            SELECT * FROM (
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS idx_row_num
+                    , IDX_VISIT_REQ
+                    , VISIT_REQ_NUM
+                    , GROUP_NAME
+                    , VISITOR
+                    , RESULVATION_DATE
+                    , VISITOR_COUNT
+                    , VISITOR_MPHONE_NUM
+                    , VISITOR_EMAIL
+                    , VISITOR_ADRESS
+                    , VISIT_GOAL
+                    , QUESTION
+                    , VISIT_REQ_STATUS
+                    , IS_PRIVACY_ACCEPT
+                    , IS_GROUP
+                    , IS_CANCEL
+                    , IS_MANAGER
+                    , IDX_MANAGER
+                    , IS_DURATION
+                    , DURATION_AMOUNT
+                    , MEMO
+                    , IDX_VISIT_DATA
+                    , IDX_USER
+                    , IDX_ADMIN
+                    , REG_DATE
                  FROM (
-                          SELECT * FROM TB_VISIT_REQ
-                          order by IDX_VISIT_REQ desc
-                      )
-
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
-                <if test="filter1 != 9999">
-                    AND visit_req_status = #{filter1}
-                </if>
-             )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+                      SELECT * FROM TB_VISIT_REQ
+                        <if test="fil1 != null">
+                            WHERE VISIT_REQ_STATUS = #{fil1}
+                        </if>
+                      ORDER BY IDX_VISIT_REQ DESC
+                )
+            )
+            WHERE 1=1
+            <if test="page_num != null and amount != null">
+                AND idx_row_num <![CDATA[<=]]> #{page_num}*#{amount}
+            </if>
+        )
+        <if test="page_num != null and amount != null">
+            WHERE idx_row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+        </if>
     </select>
     <select id="getVisitReqCount" resultType="int">
         SELECT COUNT (*) FROM TB_VISIT_REQ
-        <if test="filter1 != 9999">
-            WHERE visit_req_status = #{filter1}
+        <if test="fil1 != null">
+            WHERE visit_req_status = #{fil1}
         </if>
-        ORDER BY VISIT_REQ_NUM ASC
     </select>
 
     <select id="getVisitData" parameterType="Date" resultType="kr.or.fact.core.model.DTO.VisitDataVO">
@@ -109,7 +116,7 @@
                              VISIT_REQ_NUM,
                      GROUP_NAME,
                      VISITOR,
-                     RESULVATION_DATE,
+                     TO_DATE(RESULVATION_DATE,'YYYY-MM-DD hh:mm'),
                      VISITOR_COUNT,
                      VISITOR_MPHONE_NUM,
                      VISITOR_EMAIL,
@@ -174,7 +181,7 @@
 
     </insert>
 
-    <update id="updateVisitData" parameterType="kr.or.fact.core.model.DTO.VisitDataVO">
+    <update id="updateVisitData" parameterType="kr.or.fact.core.model.DTO.DemoBusinessVO">
         UPDATE TB_VISIT_DATA SET
              CUR_DATE = #{cur_date},
              POSSIBLE_COUNT = #{possible_count},
@@ -188,7 +195,7 @@
         WHERE IDX_VISIT_DATA = #{idx_visit_data}
     </update>
 
-    <update id="updateStatusInVisitData" parameterType="kr.or.fact.core.model.DTO.VisitDataVO">
+    <update id="updateStatusInVisitData" parameterType="kr.or.fact.core.model.DTO.DemoBusinessVO">
         UPDATE TB_VISIT_DATA SET
                                  VISIT_DATA_TYPE = #{visit_data_type}
         WHERE IDX_VISIT_DATA = #{idx_visit_data}
