@@ -192,7 +192,10 @@ public class VisitServiceImpl implements VisitService {
         return visitMapper.getGroupIdx();
     }
 
-
+    @Override
+    public List<VisitDataVO> getVisitDataListByGroupIdx(long group_idx) {
+        return visitMapper.getVisitDataListByGroupIdx(group_idx);
+    }
 }
 
 

@@ -770,8 +770,6 @@
     </div>
 </div>
 
-<%--<strong>=====================================================탭구분=========================================================</strong>--%>
-
 <div class="tab-pane "  id="navs-tap2">
     <div class="card-body">
         <form:form modelAttribute="modifyUserDemoBsDetailVO">
@@ -1983,7 +1981,6 @@
 
 </div>
 
-<%--<strong>=====================================================탭구분=========================================================</strong>--%>
 
 <div class="tab-pane "  id="navs-tap3">
     <div class="card-body">
@@ -1994,88 +1991,8 @@
         </div>
         <br>
 
-        <div class="check-box">
-            <input type="checkbox" id="is_use_agree" name="is_use_agree" <c:if test="${modifyUserDemoBsVO.is_use_agree eq 1 }">checked</c:if> onClick="return false;">
-            <label for="is_use_agree">실증단지 이용약관 동의(필수)</label>
-        </div>
-        <div class="app__terms">제1장 총 칙
-            제 1조 (목적)
-            본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은XXXXX XXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트
-        </div>
 
-        <div class="check-box">
-            <input type="checkbox" id="is_indi_use_agree" name="is_indi_use_agree" <c:if test="${modifyUserDemoBsVO.is_indi_use_agree eq 1 }">checked</c:if> onClick="return false;">
-            <label for="is_indi_use_agree">개인정보 수집 및 이용동의(필수)</label>
-        </div>
-        <div class="app__terms">제1장 총 칙
-            제 1조 (목적)
-            본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은XXXXX XXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트
-        </div>
 
-        <div class="check-box">
-            <input type="checkbox" id="is_indi_info_agree" name="is_indi_info_agree" <c:if test="${modifyUserDemoBsVO.is_indi_info_agree eq 1 }">checked</c:if> onClick="return false;">
-            <label for="is_indi_info_agree">개인정보처리 위탁에 관한 사항 동의(필수))</label>
-        </div>
-        <div class="app__terms">제1장 총 칙
-            제 1조 (목적)
-            본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은XXXXX XXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트스트본 약관은 XXXXXXXXXX텍스트본 약관은 XXXXXXXXXX텍스트
-        </div>
-
-        <div class="form-row">
-             <span class="form-label
-                text-success-custom font-weight-bold text-muted">서류</span>
-        </div>
-        <div class="form-row">
-            <div class="app__fileupload">
-                <div class="fileupload__title" >사업자등록증 사본 (해당자에 한함)</div>
-                <input type="file" id="bs_license" class="fileupload" value="">
-                <a id="bs_license_title" class="text-info"></a>
-            </div>
-            <div class="app__fileupload">
-                <div class="fileupload__title">등기부등본 사본 (해당자에 한함, 원본은 차후 요청시,제출해 주십시오.)</div>
-                <input type="file" id="corp_register" class="fileupload">
-                <a id="corp_register_title" class="text-info"></a>
-            </div>
-            <div class="app__fileupload">
-                <div class="fileupload__title">법인인감증명서 (해당자에 한함, 원본은 차후 요청시,제출해 주십시오.)</div>
-                <input type="file" id="corp_sign" class="fileupload">
-                <a id="corp_sign_title" class="text-info"></a>
-            </div>
-            <div class="app__fileupload">
-                <div class="fileupload__title">4대보험 완납증명서 (해당자에 한함, 원본은 차후 요청시,제출해 주십시오.)</div>
-                <input type="file" id="insure_cert" class="fileupload">
-                <a id="insure_cert_title" class="text-info"></a>
-            </div>
-            <div class="app__fileupload">
-                <div class="fileupload__title" >최근 2년간 재무제표 또는 회계감사 보고서 (해당자에 한함, 원본은 차후 요청시,제출해 주십시오.)</div>
-                <input type="file" id="fine_state" class="fileupload">
-                <a id="fine_state_title" class="text-info"></a>
-            </div>
-            <div class="app__fileupload">
-                <div class="fileupload__title" >기타 (가점서류 및 기업역량을 보여줄 수 있는 자료, 자유 양식)</div>
-                <input type="file" id="other_data" class="fileupload">
-                <a id="other_data_title" class="text-info"></a>
-            </div>
-        </div>
-
-        <div class="form-row">
-               <span class="form-label
-                text-success-custom font-weight-bold text-muted">기타 서류 등록</span>
-        </div>
-
-        <div class="app__register">
-            <div class="register__title" style="display: block">
-                <div>
-                    <p>기타서류</p>
-                </div>
-                <c:forEach items="${fileArr}" var="file" varStatus="status">
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px">
-                        <span>${file.fileInfoVO.file_name}</span>
-                        <a href="${file.fileInfoVO.file_path}" class="btn dark">내려받기</a>
-                    </div>
-                </c:forEach>
-            </div>
-        </div>
 
 
     </div>

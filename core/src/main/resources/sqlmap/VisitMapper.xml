@@ -266,4 +266,9 @@
     </select>
 
 
+    <select id="getVisitDataListByGroupIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.VisitDataVO">
+        SELECT * FROM TB_VISIT_DATA WHERE GROUP_IDX=#{group_idx};
+    </select>
+
+
 </mapper>
