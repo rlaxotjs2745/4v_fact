@@ -3,6 +3,7 @@ package kr.or.fact.core.service.impl;
 import kr.or.fact.core.model.DTO.AdminResVO;
 import kr.or.fact.core.model.DTO.NoticeVO;
 import kr.or.fact.core.model.DTO.PRContentVO;
+import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 import kr.or.fact.core.model.PRContentsMapper;
 import kr.or.fact.core.service.PRContentsService;
 import org.apache.ibatis.session.SqlSession;
@@ -61,6 +62,11 @@ public class PRContentServiceImpl implements PRContentsService {
     }
 
     @Override
+    public int getPRContentCount(){
+        return prContentsMapper.getPRContentCount();
+    }
+
+    @Override
     public List<PRContentVO> getPRContentList(int page, int list_amount){
         List<PRContentVO> prContentList= prContentsMapper.getPRContentList(page,list_amount,"ANNOUNCE_NUM");
 
@@ -112,6 +118,16 @@ public class PRContentServiceImpl implements PRContentsService {
 prContentsMapper.updatePrContent(prContentVO);
     }
 
+    @Override
+    public PRContentVO getMainPRContent(ParamPageListFilteredVO paramVo){
+        PRContentVO result = null;
+        try{
+            result = prContentsMapper.getMainPRContent(paramVo);
+        } catch (Exception e){
+            System.out.println("prContentsMapper.getMainPRContentListt: " + e.toString());
+        }
+        return result;
+    }
 
     @Override
     public List<PRContentVO> getMainPRContentList(){

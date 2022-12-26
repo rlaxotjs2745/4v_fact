@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Data
 public class DemoBsConsultingVO {
-
+    int idx_row_num;
     long idx_demo_bs_consulting;//	number	32			◯		인덱스	auto increase
     int consulting_num;//	NUMBER	20					상담번호	1시작 1증가
     long idx_demo_bs_applicaion;//	number	32				◯	지원번호

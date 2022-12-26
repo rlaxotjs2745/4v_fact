@@ -84,7 +84,7 @@
                 <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
                     <div class="row p-3">
                         <div class="col-sm-12 col-md-12">
-                            <label class="mr-3  mb-0">총 : <strong>999</strong>건</label><label class="mr-3  mb-0">신규 : <strong>70</strong>건</label><label class="mr-3  mb-0">추가 : <strong>70</strong>건</label><label class="mr-3  mb-0">해결 : <strong>70</strong>건</label>
+                            <label class="mr-3  mb-0">총 : <strong>${total_count}</strong>건</label>
                         </div>
                     </div>
                     <div class="row">
@@ -93,12 +93,12 @@
                                 <thead class="bg-success text-white font-weight-bold">
                                 <tr role="row">
                                     <th class="text-center px-2" style="width:60px">No</th>
-                                    <th class="text-center sorting" style="width:80px">상담일지</th>
+                                    <th class="text-center px-2" style="width:80px">상담일지</th>
                                     <th class="text-center px-2" style="width:100px">상담 형식</th>
-                                    <th class="text-center sorting" style="width:60px">상담 상황</th>
-                                    <th class="text-center sorting" style="width:100px">신청자</th>
-                                    <th class="text-center sorting" style="width:100px">상담목표</th>
-                                    <th class="text-center sorting" style="width:150px">상담파일 여부</th>
+                                    <th class="text-center px-2" style="width:60px">상담 상황</th>
+                                    <th class="text-center px-2" style="width:100px">신청자</th>
+                                    <th class="text-center px-2" style="width:100px">상담목표</th>
+                                    <th class="text-center px-2" style="width:150px">상담파일 여부</th>
                                     <th class="text-center px-2" style="width:80px">메모</th>
                                     <th class="text-center px-2" style="width:120px">최초등록일시</th>
                                     <th class="text-center px-2" style="width:120px">상담예정일</th>
@@ -111,8 +111,8 @@
 <c:if test="${total_count ne 0}">
                                 <c:forEach items="${consultingList}" var="consulting" varStatus="status">
                                     <tr class="consulting-entity" id="${consulting.idx_demo_bs_consulting}">
-                                    <td class="text-center">${consulting.consulting_num}</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view" >상담일지</a></td>
+                                    <td class="text-center">${consulting.idx_row_num}</td>
+                                    <td class="text-center"><a href="#none" class="btn btn-outline-default btn-sm" data-toggle="modal" data-target="#modals-counsel-view" >상담일지</a></td>
                                         <td class="text-center">${consulting.consult_answer_type eq 0 ? "전화" : consulting.consult_answer_type eq 1 ? "이메일" :consulting.consult_answer_type eq 2 ? "대면상담" : "기타"}</td>
                                     <td class="text-center">${consulting.consulting_status eq 0 ? "상담 요청 등록" : consulting.consulting_status eq 1 ? "상담자 지정" : consulting.consulting_status eq 2 ? "상담 계획 전송완료" :consulting.consulting_status eq 3 ? "상담 계획보냄" : consulting.consulting_status eq 4 ? "상담완료": consulting.consulting_status eq 99 ? "상담 불가" : "기타"}</td>
                                     <td class="text-center">${consulting.user_name}</td>

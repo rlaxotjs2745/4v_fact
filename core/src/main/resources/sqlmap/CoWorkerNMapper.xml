@@ -4,10 +4,49 @@
 
 <mapper namespace="kr.or.fact.core.model.CoWorkerNMapper">
 
-
-
     <select id="getCoWorkerList" resultType="kr.or.fact.core.model.DTO.CoWorkerVO">
         SELECT * FROM TB_CO_WORKER ORDER BY CO_WORKER_ODER ASC
+    </select>
+
+    <select id="getCoWorkerListPage" resultType="kr.or.fact.core.model.DTO.CoWorkerVO">
+        SELECT
+            IDX_CO_WORKER,
+            DEVISION,
+            DEPARTMENT,
+            DEPARTMENT_SUB,
+            JOB_TITLE,
+            JOB_ROLE,
+            TEL_NUM,
+            MPHONE_NUM,
+            EMAIL,
+            IS_SHOW,
+            REG_DATE,
+            COWORKER_NAME,
+            CO_WORKER_ODER
+        FROM (
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+                ,IDX_CO_WORKER,
+                        DEVISION,
+                        DEPARTMENT,
+                        DEPARTMENT_SUB,
+                        JOB_TITLE,
+                        JOB_ROLE,
+                        TEL_NUM,
+                        MPHONE_NUM,
+                        EMAIL,
+                        IS_SHOW,
+                        REG_DATE,
+                        COWORKER_NAME,
+                        CO_WORKER_ODER
+                 FROM (
+                          SELECT * FROM TB_CO_WORKER
+                          WHERE IS_SHOW = 0 OR IS_SHOW = 1
+                          order by IDX_CO_WORKER desc
+                      )
+                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+             )
+        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+
     </select>
 
     <select id="getCoWorkerInfo" resultType="kr.or.fact.core.model.DTO.CoWorkerVO">
@@ -58,14 +97,18 @@
                                 TEL_NUM = #{tel_num},
                                 MPHONE_NUM = #{mphone_num},
                                 EMAIL = #{email},
-                                IS_SHOW = #{is_show},
-                                REG_DATE = SYSDATE,
+                                IS_SHOW = #{is_show}
                                 WHERE IDX_CO_WORKER = #{idx_co_worker}
 
     </update>
-    <delete id="deleteCoWorkerInfo" parameterType="long">
-        DELETE FROM TB_CO_WORKER WHERE IDX_CO_WORKER = #{idx_co_worker}
-    </delete>
 
+    <update id="deleteCoWorkerInfo" parameterType="long">
+        UPDATE TB_CO_WORKER SET IS_SHOW = 2 WHERE IDX_CO_WORKER = #{idx_co_worker}
+    </update>
+
+    <select id="getCoWorkerCount" resultType="int">
+        SELECT COUNT (*) FROM TB_CO_WORKER
+        WHERE IS_SHOW = 0 OR IS_SHOW = 1
+    </select>
 
 </mapper>
