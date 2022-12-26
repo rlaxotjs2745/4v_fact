@@ -1029,7 +1029,7 @@ public class IndexController {
         int list_amount = 10;
         int page_amount = param.getAmount();
         int page = param.getPage_num();
-        int prCount = prContentService.getPRContentCount(param);
+        int prCount = prContentsMapper.getPRContentCount2(param);
         model.addAttribute("total_count",prCount);
 
         List<PRContentVO> prlist = prContentService.getPRContentList(param);
