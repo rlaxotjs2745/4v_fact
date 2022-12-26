@@ -1081,7 +1081,7 @@ public class IndexController {
         model.addAttribute("admin", adminInfo);
         model.addAttribute("page_num", param.getPage_num());
 
-        Integer maxPageNum = fileService.getFormFileTotalCount();
+        Integer maxPageNum = fileService.getRuleFileTotalCount();
         model.addAttribute("max_page_num", maxPageNum);
 
         return "c72_site_rule_doc_mng";
