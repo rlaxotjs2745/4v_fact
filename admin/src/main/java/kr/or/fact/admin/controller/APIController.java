@@ -1370,7 +1370,7 @@ public class APIController {
     }
 
     @RequestMapping(value = "/insert_popup",method = RequestMethod.POST)
-    public @ResponseBody ResultVO insertPopupContent (@RequestBody WebMainPopupVO webMainPopupVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
+    public @ResponseBody ResultVO insertPopupContent (@ModelAttribute WebMainPopupVO webMainPopupVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
         resultVO.setResult_str("데이터를 다시 입력해주세요");
