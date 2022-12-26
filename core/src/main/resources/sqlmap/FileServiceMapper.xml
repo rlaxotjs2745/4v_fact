@@ -393,13 +393,26 @@
         DELETE FROM TB_FORM_FILE_INFO WHERE IDX_FORM_FILE_INFO = #{idx_form_file}
     </delete>
 
+    <delete id="deleteRuleFile">
+        DELETE FROM TB_RULE_FILE_INFO WHERE IDX_RULE_FILE_INFO = #{idx_rule_file}
+    </delete>
+
     <select id="getFormFile" resultType="kr.or.fact.core.model.DTO.FormFileInfoVO">
         SELECT * FROM TB_FORM_FILE_INFO WHERE IDX_FORM_FILE_INFO = #{idx_form_file_info}
+    </select>
+
+    <select id="getRuleFile" resultType="kr.or.fact.core.model.DTO.RuleFileInfoVO">
+        SELECT * FROM TB_RULE_FILE_INFO WHERE IDX_RULE_FILE_INFO = #{idx_rule_file_info}
     </select>
 
     <select id="getFileIdx" resultType="long">
         SELECT IDX_FILE_INFO FROM TB_FILE_INFO WHERE FILE_NAME = #{file_name}
     </select>
+
+    <select id="getFileListAsName" resultType="kr.or.fact.core.model.DTO.FileInfoVO">
+        SELECT * FROM TB_FILE_INFO WHERE FILE_NAME = #{file_name} ORDER BY REG_DATE DESC
+    </select>
+
 
     <update id="updateFormFile" parameterType="kr.or.fact.core.model.DTO.FormFileInfoVO">
         UPDATE TB_FORM_FILE_INFO SET
@@ -410,5 +423,16 @@
             IDX_FILE_INFO=#{idx_file_info},
             REG_DATE=SYSDATE
         WHERE IDX_FORM_FILE_INFO = #{idx_form_file_info}
+    </update>
+
+    <update id="updateRuleFile" parameterType="kr.or.fact.core.model.DTO.RuleFileInfoVO">
+        UPDATE TB_RULE_FILE_INFO SET
+            SUBJECT=#{subject},
+            USAGE_DETAIL=#{usage_detail},
+            IDX_ADMIN=#{idx_admin},
+            ORDER_NUM=#{order_num},
+            IDX_FILE_INFO=#{idx_file_info},
+            REG_DATE=SYSDATE
+        WHERE IDX_RULE_FILE_INFO = #{idx_rule_file_info}
     </update>
 </mapper>
