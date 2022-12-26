@@ -1326,13 +1326,41 @@ public class APIController {
     public @ResponseBody ResultVO insertCoworker (@RequestBody CoWorkerVO coWorkerVO){
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
-        resultVO.setResult_str("업데이트 실패");
+        resultVO.setResult_str("등록 실패");
 
         if(coWorkerVO.getCoworker_name()!=null
                 && coWorkerVO.getDevision()!=null && coWorkerVO.getJob_title()!=null) {
 
             coWorkerNService.insertCoWorkerInfo(coWorkerVO);
+            resultVO.setResult_str("저장했습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/modify_coworker",method = RequestMethod.POST)
+    public @ResponseBody ResultVO modifyCoworker (@RequestBody CoWorkerVO coWorkerVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("업데이트 실패");
+
+        if(coWorkerVO.getIdx_co_worker() > 0) {
+            coWorkerNService.updateCoWorkerInfo(coWorkerVO);
             resultVO.setResult_str("업데이트에 성공하였습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/delete_coworker",method = RequestMethod.POST)
+    public @ResponseBody ResultVO deleteCoworker (@RequestBody CoWorkerVO coWorkerVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("삭제 실패");
+
+        if(coWorkerVO.getIdx_co_worker() > 0) {
+            coWorkerNService.deleteCoWorkerInfo(coWorkerVO.getIdx_co_worker());
+            resultVO.setResult_str("삭제에 성공하였습니다.");
             resultVO.setResult_code("SUCCESS");
         }
         return resultVO;

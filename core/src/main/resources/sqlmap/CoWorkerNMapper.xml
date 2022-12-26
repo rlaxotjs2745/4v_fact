@@ -102,9 +102,10 @@
                                 WHERE IDX_CO_WORKER = #{idx_co_worker}
 
     </update>
-    <delete id="deleteCoWorkerInfo" parameterType="long">
-        DELETE FROM TB_CO_WORKER WHERE IDX_CO_WORKER = #{idx_co_worker}
-    </delete>
+
+    <update id="deleteCoWorkerInfo" parameterType="long">
+        UPDATE TB_CO_WORKER IS_SHOW = 2 WHERE IDX_CO_WORKER = #{idx_co_worker}
+    </update>
 
     <select id="getCoWorkerCount" resultType="int">
         SELECT COUNT (*) FROM TB_CO_WORKER
