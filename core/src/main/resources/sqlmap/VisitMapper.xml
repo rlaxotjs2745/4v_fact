@@ -174,7 +174,7 @@
 
     </insert>
 
-    <update id="updateVisitData" parameterType="kr.or.fact.core.model.DTO.DemoBusinessVO">
+    <update id="updateVisitData" parameterType="kr.or.fact.core.model.DTO.VisitDataVO">
         UPDATE TB_VISIT_DATA SET
              CUR_DATE = #{cur_date},
              POSSIBLE_COUNT = #{possible_count},
@@ -188,7 +188,7 @@
         WHERE IDX_VISIT_DATA = #{idx_visit_data}
     </update>
 
-    <update id="updateStatusInVisitData" parameterType="kr.or.fact.core.model.DTO.DemoBusinessVO">
+    <update id="updateStatusInVisitData" parameterType="kr.or.fact.core.model.DTO.VisitDataVO">
         UPDATE TB_VISIT_DATA SET
                                  VISIT_DATA_TYPE = #{visit_data_type}
         WHERE IDX_VISIT_DATA = #{idx_visit_data}

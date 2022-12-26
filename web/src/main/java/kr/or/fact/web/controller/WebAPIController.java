@@ -1141,12 +1141,14 @@ public class WebAPIController {
 
 
         //2.기 신청이 있는지 체크
+        
         VisitDataVO visitDataVO = visitService.getVisitData(visitReqVO.getResulvation_date());
         if(visitDataVO==null){
             resultVO.setResult_str("예약가능한 날이 아닙니다");
             resultVO.setResult_code("ERROR_1001");
             return resultVO;
         }
+
 
         if((visitReqVO.getIs_duration()==1 && (visitDataVO.getVisit_data_type()==5 || visitDataVO.getVisit_data_type()==7 ) )||
                 (visitReqVO.getIs_duration()==2 && (visitDataVO.getVisit_data_type()==6|| visitDataVO.getVisit_data_type()==8))||
@@ -1161,40 +1163,141 @@ public class WebAPIController {
         visitReqVO.setIs_cancel(0);
         visitReqVO.setIs_manager(0);
         visitReqVO.setMemo("");
-        visitReqVO.setIdx_visit_req(visitDataVO.getIdx_visit_data());
+//        visitReqVO.setIdx_visit_req(visitDataVO.getIdx_visit_data());
         //visitReqVO.setIdx_user(visitDataVO.getidx);
+
+        visitReqVO.setIdx_visit_data(visitDataVO.getIdx_visit_data());
         visitReqVO.setIdx_admin(0);
         if(visitReqVO.getVisit_goal()==null || visitReqVO.getVisit_goal().isEmpty())
         {
             visitReqVO.setVisit_goal("목적 없음");
         }
-
+    
+        //신청정보저장
         visitService.saveVisitReq(visitReqVO);
 
+//        IS_DURATION	NUMBER	4		0			여러날 여부	1:오전, 2:오후, 3:종일, 4, 여러날
         //저장후 예약관련 데이터 변경해야 함
+//        if(visitReqVO.getIs_duration()==1){
+//            if(visitDataVO.getVisit_data_type()==1){
+//                visitDataVO.setVisit_data_type(5);
+//            }
+//            else if(visitDataVO.getVisit_data_type()==3){
+//                visitDataVO.setVisit_data_type(7);
+//            }
+//            else if(visitDataVO.getVisit_data_type()==8){
+//                visitDataVO.setVisit_data_type(9);
+//            }
+//        }
+//        else if(visitReqVO.getIs_duration()==2){
+//            if(visitDataVO.getVisit_data_type()==2){
+//                visitDataVO.setVisit_data_type(6);
+//            }
+//            else if(visitDataVO.getVisit_data_type()==3){
+//                visitDataVO.setVisit_data_type(8);
+//            }
+//            else if(visitDataVO.getVisit_data_type()==7){
+//                visitDataVO.setVisit_data_type(9);
+//            }
+//        }
 
-        if(visitReqVO.getIs_duration()==1){
-            if(visitDataVO.getVisit_data_type()==1){
-                visitDataVO.setVisit_data_type(5);
-            }
-            else if(visitDataVO.getVisit_data_type()==3){
-                visitDataVO.setVisit_data_type(7);
-            }
-            else if(visitDataVO.getVisit_data_type()==8){
-                visitDataVO.setVisit_data_type(9);
-            }
+        //type 변경
+
+        int possible_count = visitDataVO.getPossible_count(); // 견학 가능수
+        String str_possible_count = Integer.toString(possible_count);
+        int pos_length = str_possible_count.length(); //견학가능수의 길이 1 or 4
+
+        int possible_count_am=0;
+        int possible_count_pm=0;
+
+        if(pos_length==1){
+            possible_count_am=possible_count;
+        }else{
+            possible_count_am=Integer.parseInt(str_possible_count.substring(2));
+            possible_count_pm=Integer.parseInt(str_possible_count.substring(0,pos_length-3));
         }
-        else if(visitReqVO.getIs_duration()==2){
-            if(visitDataVO.getVisit_data_type()==2){
-                visitDataVO.setVisit_data_type(6);
-            }
-            else if(visitDataVO.getVisit_data_type()==3){
-                visitDataVO.setVisit_data_type(8);
-            }
-            else if(visitDataVO.getVisit_data_type()==7){
-                visitDataVO.setVisit_data_type(9);
-            }
+
+        System.out.println("possible_count _ am : " +possible_count_am); //견학 가능수 오전
+        System.out.println("possible_count _ pm : " +possible_count_pm); //견학 가능수 오후
+
+
+        int resulvation_count= visitDataVO.getResulvation_count(); //예약수
+        String str_resulvation_count=Integer.toString(resulvation_count);//예약수의 길이 1 or 4
+        int res_length = str_resulvation_count.length();
+
+        int resulvation_count_am=0;
+        int resulvation_count_pm=0;
+
+        if(res_length==1){
+            resulvation_count_am=resulvation_count;
+        }else{
+            resulvation_count_am=Integer.parseInt(str_resulvation_count.substring(2));
+            resulvation_count_pm=Integer.parseInt(str_resulvation_count.substring(0,res_length-3));
         }
+
+        System.out.println(" resulvation_count_am : " + resulvation_count_am); //예약수 오전
+        System.out.println(" resulvation_count_pm: " + resulvation_count_pm); //예약수 오후
+
+        if(visitReqVO.getIs_duration()==1) { //오전 신청
+
+            if(visitDataVO.getVisit_data_type()==2||visitDataVO.getVisit_data_type()==5||visitDataVO.getVisit_data_type()==6||visitDataVO.getVisit_data_type()==7
+                    ||visitDataVO.getVisit_data_type()==9){
+
+                resultVO.setResult_str("예약가능한 시간대가 아닙니다 확인 후 다시 신청해주세요");
+                resultVO.setResult_code("ERROR_1001");
+                return resultVO;
+            }
+
+
+            //tb_visit_data에 resulvation_count +1 해줘야함
+            visitDataVO.setResulvation_count(resulvation_count + 1);
+            System.out.println("증가된 예약수 getResulvation_count : " + visitDataVO.getResulvation_count());
+            visitService.updateVisitData(visitDataVO); 
+
+            if(possible_count_am == resulvation_count_am + 1 ){ // 오전 신청 가능수 == 1증가된 오전 예약가능수
+                if(visitDataVO.getVisit_data_type()==1){
+                    visitDataVO.setVisit_data_type(5);
+                }
+                else if(visitDataVO.getVisit_data_type()==3){
+                    visitDataVO.setVisit_data_type(7);
+                }
+                else if(visitDataVO.getVisit_data_type()==8){
+                    visitDataVO.setVisit_data_type(9);
+                }
+            }
+
+
+
+        }else if(visitReqVO.getIs_duration()==2){//오후 신청
+
+            if(visitDataVO.getVisit_data_type()==1||visitDataVO.getVisit_data_type()==5||visitDataVO.getVisit_data_type()==6||visitDataVO.getVisit_data_type()==8
+            ||visitDataVO.getVisit_data_type()==9){
+
+                resultVO.setResult_str("예약가능한 시간대가 아닙니다 확인 후 다시 신청해주세요");
+                resultVO.setResult_code("ERROR_1001");
+                return resultVO;
+            }
+
+
+
+            visitDataVO.setResulvation_count(resulvation_count + 1000);
+            System.out.println("증가된 예약수 getResulvation_count : " + visitDataVO.getResulvation_count());
+            visitService.updateVisitData(visitDataVO);
+
+            if(possible_count_pm == resulvation_count_pm + 1){ // 오후 신청 가능수 == 증가된 오후 예약가능수
+                if(visitDataVO.getVisit_data_type()==2){
+                    visitDataVO.setVisit_data_type(6);
+                }
+                else if(visitDataVO.getVisit_data_type()==3){
+                    visitDataVO.setVisit_data_type(8);
+                }
+                else if(visitDataVO.getVisit_data_type()==7){
+                    visitDataVO.setVisit_data_type(9);
+                }
+            }
+
+        }
+
 
 
         visitService.updateStatusInVisitData(visitDataVO);

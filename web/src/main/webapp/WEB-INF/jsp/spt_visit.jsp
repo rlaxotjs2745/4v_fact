@@ -104,7 +104,6 @@
 
                     <div class="popup__scroll--area">
                         <div class="table__type">
-<%--                            <form>--%>
                             <table class="table__type--normal">
                                 <colgroup>
                                     <col style="width:20%">
@@ -146,6 +145,7 @@
                                             <input type="radio" id="day-2" name="is_duration" value="2">
                                             <label for="day-2">오후</label>
                                         </div>
+                                        <span class="text&#45;&#45;guide">최소 10일 전에 신청해 주세요.</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -174,7 +174,6 @@
                                 </tr>
                                 <tr>
                                     <th class="th__left">거주지 주소</th>
-<%--                                    <td class="td__left"><input id="addr1" type="text" placeholder="우편번호" style="width:180px;" /> <span class="text__zipcode"><a href="#" class="btn dark btn-lg">주소검색</a></span>--%>
                                     <td class="td__left"><input id="addr1" type="text" placeholder="우편번호" style="width:180px;" /> <span class="text__zipcode"><button id="search_location" class="btn dark btn-lg">주소검색</button></span>
                                         <input id="addr2" type="text" placeholder="상세주소">
 
@@ -191,7 +190,6 @@
                                 </tr>
                                 </tbody>
                             </table>
-<%--                            </form>--%>
                         </div>
 
                         <div class="table__agree">'센터 단체견학' 서비스 제공을 위한 개인정보 수집·이용을 위하여 개인정보 보호법 제15조 및 제22조에 따라 귀하의 동의를 받고자 합니다. 만일 다음 사항 중 어느 하나의 사항을 변경하는 경우에는 이를 사전에 알리고 동의를 받도록 하겠습니다.<br>
@@ -213,7 +211,6 @@
 
                 </div>
                 <div class="popup__btn">
-<%--                    <a href="#" class="btn light btn-lg  js-btn-close">취소</a>--%>
                     <a href="#" class="btn light btn-lg  js-btn-close">취소</a>
                     <button id="save_visit_req" class="btn btn-lg submit">신청</button>
                 </div>
@@ -241,7 +238,7 @@
                                 <th class="th__left">구분</th>
                                 <td id="is_group_text" class="td__left">단체</td>
                             </tr>
-                            <tr>
+                            <tr id="group_name_text_tr">
                                 <th class="th__left">단체명</th>
                                 <td id="group_name_text" class="td__left">도레미파솔라시도</td>
                             </tr>
@@ -468,6 +465,12 @@
 
                 //날짜 클릭시 신청서안의 견학희망일 설정
                 $("#resulvation_date").val(new Date(newDate).yyyymmdd());
+
+                console.log("event : " + event.toString());
+
+                for (var key in event){
+                    console.log("attr: " + key + ", value: " + event[key]);
+                }
             }
         });
 
@@ -475,6 +478,7 @@
 
         $('#group_name_row').hide();
 
+        $("#visit_not_warning").addClass('disabled').attr('aria-disabled',true).bind('click',false);
     }); //document ready 의 끝
 
     function getUserVisitList(page){
@@ -532,7 +536,6 @@
             visitor_count:$("#visitor_count").val(),//	number	10					방문자 수
             visitor_mphone_num:$("#pnum1").val()+"-"+$("#pnum2").val()+"-"+$("#pnum3").val(),//	varchar2	20					연락처
             visitor_email: email,//	varchar2	250					방문자 이메일
-            // visitor_email:$("#email1").val()+"@"+email2,//	varchar2	250					방문자 이메일
             visitor_adress: "("+$("#addr1").val()+") "+$("#addr2").val()+" "+$("#addr3").val(),//	varchar2	250					방문자 주소	0:상담요청등록, 1:상담자 지정, 2:상담 계획 보냄, 3: 상담계획 변경, 4:상담완료, 99:상담불가
             visit_goal:$("#visit_goal").val(),//	varchar2	400					방문목표
             question:$("#question").val(),//	varchar2	400					방문전 질문사항
@@ -541,10 +544,10 @@
             is_duration:$("input:radio[name='is_duration']:checked").val( )//	number	4		0			1:오전, 2:오후, 3:종일, 4, 여러날
         }
 
-        var req_dt = {
-            start_date: param.resulvation_date,
-            end_date: param.resulvation_date
-        }
+        // var req_dt = {
+        //     start_date: param.resulvation_date,
+        //     end_date: param.resulvation_date
+        // }
 
         $.ajax({
             type: 'post',
@@ -557,7 +560,7 @@
                 if(result.result_code=="SUCCESS"){
                     alert(result.result_str);
 
-                    setVisitCalendar(req_dt);
+                    // setVisitCalendar(req_dt);
 
                     $('#popup_visit_close').click();
                     getUserVisitList(1);
@@ -634,6 +637,7 @@
 
                 $.each(array_data, function(key, item)
                 {
+
                     let item1 = new Object();
                     let item2 = new Object();
 
@@ -644,109 +648,117 @@
 
                     let ampm=item.visit_data_type;
 
-                    if(ampm==1){
-                        item1.id=id;
-                        item1.name="오전 방문";
-                        item1.description="예약 가능";
-                        item1.date= new Date(y, m, d, 8, 0);
-                        item1.type="birthday";
+                    if(new Date(y,m,d)< new Date()){
 
-                        $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
-                    }else if(ampm==2){
-                        item1.id=id;
-                        item1.name="오후 방문";
-                        item1.description="예약 가능";
-                        item1.date= new Date(y, m, d, 13, 0);
-                        item1.type="birthday";
+                    }else{
 
-                        $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
-                    }else if(ampm==3){
+                        if(ampm==1){
+                            item1.id=id;
+                            item1.name="오전 방문";
+                            item1.description="예약 가능";
+                            item1.date= new Date(y, m, d, 8, 0);
+                            item1.type="birthday";
 
-                        item1.id=id;
-                        item1.name="오전 방문";
-                        item1.description="예약 가능";
-                        item1.date= new Date(y, m, d, 8, 0);
-                        item1.type="birthday";
+                            $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
+                        }else if(ampm==2){
+                            item1.id=id;
+                            item1.name="오후 방문";
+                            item1.description="예약 가능";
+                            item1.date= new Date(y, m, d, 13, 0);
+                            item1.type="birthday";
 
-                        $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
+                            $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
+                        }else if(ampm==3){
 
-                        item2.id=id;
-                        item2.name="오후 방문";
-                        item2.description="예약 가능";
-                        item2.date= new Date(y, m, d, 13, 0);
-                        item2.type="birthday";
-                        $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item2);
+                            item1.id=id;
+                            item1.name="오전 방문";
+                            item1.description="예약 가능";
+                            item1.date= new Date(y, m, d, 8, 0);
+                            item1.type="birthday";
+
+                            $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
+
+                            item2.id=id;
+                            item2.name="오후 방문";
+                            item2.description="예약 가능";
+                            item2.date= new Date(y, m, d, 13, 0);
+                            item2.type="birthday";
+                            $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item2);
+                        }
+                        else if(ampm==5){
+
+                            item1.id=id;
+                            item1.name="오전 예약됨";
+                            item1.description="예약 불가";
+                            item1.date= new Date(y, m, d, 8, 0);
+                            item1.type="event";
+
+                            $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
+                        }
+                        else if(ampm==6){
+
+                            item1.id=id;
+                            item1.name="오후 예약됨";
+                            item1.description="예약 불가";
+                            item1.date= new Date(y, m, d, 13, 0);
+                            item1.type="event";
+
+                            $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
+                        }
+                        else if(ampm==7){
+
+                            item1.id=id;
+                            item1.name="오전 예약됨";
+                            item1.description="예약 불가";
+                            item1.date= new Date(y, m, d, 8, 0);
+                            item1.type="event";
+
+                            $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
+
+                            item2.id=id;
+                            item2.name="오후 방문";
+                            item2.description="예약 가능";
+                            item2.date= new Date(y, m, d, 13, 0);
+                            item2.type="holiday";
+                            $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item2);
+                        }
+                        else if(ampm==8){
+
+                            item1.id=id;
+                            item1.name="오전 방문";
+                            item1.description="예약 가능";
+                            item1.date= new Date(y, m, d, 8, 0);
+                            item1.type="holiday";
+
+                            $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
+
+                            item2.id=id;
+                            item2.name="오후 예약됨";
+                            item2.description="예약 불가";
+                            item2.date= new Date(y, m, d, 13, 0);
+                            item2.type="event";
+                            $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item2);
+                        }
+                        else if(ampm==9){
+                            item1.id=id;
+                            item1.name="오전 예약됨";
+                            item1.description="예약 불가";
+                            item1.date= new Date(y, m, d, 8, 0);
+                            item1.type="event";
+
+                            $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
+
+                            item2.id=id;
+                            item2.name="오후 예약됨";
+                            item2.description="예약 불가";
+                            item2.date= new Date(y, m, d, 13, 0);
+                            item2.type="event";
+                            $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item2);
+                        }
                     }
-                    else if(ampm==5){
 
-                        item1.id=id;
-                        item1.name="오전 예약됨";
-                        item1.description="예약 불가";
-                        item1.date= new Date(y, m, d, 8, 0);
-                        item1.type="event";
 
-                        $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
-                    }
-                    else if(ampm==6){
 
-                        item1.id=id;
-                        item1.name="오후 예약됨";
-                        item1.description="예약 불가";
-                        item1.date= new Date(y, m, d, 13, 0);
-                        item1.type="event";
-
-                        $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
-                    }
-                    else if(ampm==7){
-
-                        item1.id=id;
-                        item1.name="오전 예약됨";
-                        item1.description="예약 불가";
-                        item1.date= new Date(y, m, d, 8, 0);
-                        item1.type="event";
-
-                        $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
-
-                        item2.id=id;
-                        item2.name="오후 방문";
-                        item2.description="예약 가능";
-                        item2.date= new Date(y, m, d, 13, 0);
-                        item2.type="holiday";
-                        $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item2);
-                    }
-                    else if(ampm==8){
-
-                        item1.id=id;
-                        item1.name="오전 방문";
-                        item1.description="예약 가능";
-                        item1.date= new Date(y, m, d, 8, 0);
-                        item1.type="holiday";
-
-                        $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
-
-                        item2.id=id;
-                        item2.name="오후 예약됨";
-                        item2.description="예약 불가";
-                        item2.date= new Date(y, m, d, 13, 0);
-                        item2.type="event";
-                        $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item2);
-                    }
-                    else if(ampm==9){
-                        item1.id=id;
-                        item1.name="오전 예약됨";
-                        item1.description="예약 불가";
-                        item1.date= new Date(y, m, d, 8, 0);
-                        item1.type="event";
-
-                        $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item1);
-
-                        item2.id=id;
-                        item2.name="오후 예약됨";
-                        item2.description="예약 불가";
-                        item2.date= new Date(y, m, d, 13, 0);
-                        item2.type="event";
-                        $("#demoEvoCalendar").evoCalendar("addCalendarEvent", item2);
-                    }
                 });
             },
             error: function () {
@@ -793,11 +805,17 @@
                     visit_req_status = "확인 요망";
 
                 $("#visit_req_status_text").text(visit_req_status);
-                $("#group_name_text").text(visitReqVo.group_name);//	varchar2	40					단체이름
+
+                if(visitReqVo.group_name !=null){
+                    $("#group_name_text_tr").show();
+                    $("#group_name_text").text(visitReqVo.group_name);//	varchar2	40					단체이름
+                }else{
+                    $("#group_name_text_tr").hide();
+                }
+
                 $("#visitor_text").text(visitReqVo.visitor);//	varchar2	40					신청자이름
 
                 var resulvation_date = new Date(visitReqVo.resulvation_date);
-                console.log("resulvation_date : " +  resulvation_date);
                 // var ampm = visitReqVo.is_duration=0?" 오전":" 오후";
 
                 let ampm="";
@@ -807,7 +825,6 @@
                     ampm = "오후";
                 }
 
-                // $("#resulvation_date_text").text(resulvation_date.yyyymmdd() +""+ ampm);//	date						예약일
                 $("#resulvation_date_text").text(resulvation_date.yyyymmdd() +" : "+ ampm);//	date						예약일
                 $("#visitor_count_text").text(visitReqVo.visitor_count);//	number	10					방문자 수
                 $("#visitor_mphone_num_text").text(visitReqVo.visitor_mphone_num);//	varchar2	20					연락처
@@ -816,7 +833,15 @@
                 $("#visit_goal_text").text(visitReqVo.visit_goal);//	varchar2	400					방문목표
                 $("#question_text").text(visitReqVo.question);//	varchar2	400					방문전 질문사항
 
-                $('#is_group_text').text(visitReqVo.is_group=0?"개인":"그룹");//	number	4		1			개인정보 수집 이용동의	0:동의안함, 1:동의
+                console.log("개인 0 or 그룹  1 : " + visitReqVo.is_group);
+
+                // $('#is_group_text').text(visitReqVo.is_group="0"?"개인" : "그룹");//	number	4		1			개인정보 수집 이용동의	0:동의안함, 1:동의
+                if(visitReqVo.is_group==0){
+                    $("#is_group_text").text("개인");
+                }else{
+                    $("#is_group_text").text("단체");
+                }
+
 
                 $('#idx_visit_req').val(idx_visit_req);
 
@@ -882,18 +907,11 @@
         }).open();
     });
 
+    //견학신청서 작성시에 오전 오후에 따른 라디오 비활성화
+
 
     //모달팝업 인풋값 초기화
-
     $("#popup_visit_close").on('click',function (){
-
-        if(confirm("작성을 취소하시겠습니까?")){
-
-        }else{
-            return false;
-        }
-        //form 태그가있을시에 다음주소검색시에 파라미터 들어가서 페이지 리로딩하는 오류발생함.
-        // $("#popup_visit").find('form')[0].reset();
         $("input:checkbox[id='is_privacy_accept']").attr("checked",false);
 
     });
