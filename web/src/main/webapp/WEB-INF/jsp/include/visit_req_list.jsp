@@ -24,6 +24,7 @@
         <th>견학 희망일</th>
         <th>견학 목적</th>
         <th>상태</th>
+        <th>상세보기</th>
     </tr>
     </thead>
     <tbody>
@@ -35,6 +36,7 @@
             </td>
             <td>${visit.visitor}</td>
             <td><fmt:formatDate value="${visit.resulvation_date}" pattern="yyyy-MM-dd" /></td>
+
             <td class="td__left"><a onclick="javascript:visit_req_view(${visit.idx_visit_req});" class="js-modal-detail">${visit.visit_goal}</a></td>
             <td>
                 <c:if test="${visit.visit_req_status eq 0}">신청</c:if>
@@ -45,6 +47,7 @@
                 <c:if test="${visit.visit_req_status eq 5}">방문취소</c:if>
                 <c:if test="${visit.visit_req_status eq 6}">승인거절</c:if>
             </td>
+            <td><a onclick="javascript:visit_req_view(${visit.idx_visit_req});" class="js-modal-detail">보기</a></td>
         </tr>
     </c:forEach>
     <%--                        <tr>

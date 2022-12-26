@@ -1030,12 +1030,12 @@ li.ui-timepicker-selected,
 
 .fc-h-event,
 .fc-v-event {
-    background: rgba(38, 180, 255, 0.3) !important
+    background: rgba(38, 180, 255, 0.3)
 }
 
 .fc-daygrid-event-dot,
 .fc .fc-list-event-dot {
-    border-color: rgba(38, 180, 255, 0.75) !important
+    border-color: rgba(38, 180, 255, 0.75)
 }
 
 .fc-bgevent:not(.fc-nonbusiness) {

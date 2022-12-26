@@ -38,12 +38,14 @@
         FROM TB_USER_DEMO_BS
         WHERE IDX_DEMO_BUSINESS = #{idx_demo_business} AND IDX_USER=#{idx_user}
     </select>
+
     <select id="getUserDemoBsByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.UserDemoBsVO">
         SELECT
             *
         FROM TB_USER_DEMO_BS
         WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
     </select>
+
 
 
 

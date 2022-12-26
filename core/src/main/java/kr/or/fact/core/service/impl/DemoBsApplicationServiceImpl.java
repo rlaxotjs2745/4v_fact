@@ -9,6 +9,7 @@ import kr.or.fact.core.service.DemoBsApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service("demoBsApplicationService")
@@ -78,4 +79,11 @@ public class DemoBsApplicationServiceImpl implements DemoBsApplicationService {
     public List<AdminApplHeaderListVO> getConsultPagingFilteredList(ParamPageListFilteredVO paramPageListFilteredVO){
         return demoBsApplicationMapper.getConsultPagingFilteredList(paramPageListFilteredVO);
     }
+
+    @Override
+    public void updateDemoBsApplicantStatus(HashMap<String, Integer> param) {
+        demoBsApplicationMapper.updateDemoBsApplicantStatus(param);
+    }
+
+
 }

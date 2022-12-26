@@ -34,4 +34,8 @@ int updateVisitReq(VisitReqVO visitReqVO);
     List<VisitReqVO> getVisitList(ParamPageListFilteredVO param);
 
     List<VisitReqVO> getDateVisitReqList(@Param("resulvation_date") Date resulvation_date, @Param("is_duration") int is_duration);
+
+    int getGroupIdx();
+
+    List<VisitDataVO> getVisitDataListByGroupIdx(@Param("group_idx") long group_idx);
 }

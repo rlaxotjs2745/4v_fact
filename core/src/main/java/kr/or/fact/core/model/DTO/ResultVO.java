@@ -11,6 +11,9 @@ public class ResultVO{
     String result_str;
     long result_idx;
     UserDemoBsVO userDemoBsVO;
+    UserDemoBsDetailVO userDemoBsDetailVO;
+
+    List<UserBsHumanResourceVO> userBsHumanResourceVOS;
 
     List<VisitDataVO> visitDataVOList;
 

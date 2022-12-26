@@ -6,16 +6,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:forEach items="${assetList}" var="asset" varStatus="status">
-    <c:if test="${asset.asset_status eq 0 or asset.asset_status eq 1}">
-        <tr class="asset_entity" id="assetNum${asset.asset_code}">
-            <td class="text-center">${status.count}</td>
-            <td class="text-center">${asset.asset_code}</td>
-            <td class="text-center">${asset.asset_name}</td>
-            <td class="text-center">${asset.asset_model_name}</td>
-            <td class="text-center">${asset.asset_manufacture}</td>
+        <c:forEach items="${assetList}" var="asset" varStatus="status">
+            <c:if test="${asset.asset_status eq 0 or asset.asset_status eq 1}">
+                <tr class="asset_entity" id="assetNum${asset.asset_code}">
+                    <td class="text-center">${status.count}</td>
+                    <td class="text-center">${asset.asset_code}</td>
+                    <td class="text-center">${asset.asset_name}</td>
+                    <td class="text-center">${asset.asset_model_name}</td>
+                    <td class="text-center">${asset.asset_manufacture}</td>
             <td class="text-center"><a class="btn btn-sm btn-outline-default asset_request_btn checked_asset">신청</a></td>
         </tr>
     </c:if>

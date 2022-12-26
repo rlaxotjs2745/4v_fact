@@ -12,15 +12,15 @@ public class UserDemoBsDetailVO {
     String ceo_rnd_result1;//varchar2	100					대표자의 연구개발 과제, 논문명
     String ceo_rnd_result1_org;//varchar2	40					연구개발 기관
     String ceo_rnd_result1_dur;//varchar2	40					연구개발 기간
-    String     ceo_rnd_result1_role;//varchar2	40					연구개발 역할
-    String     ceo_rnd_result1_result;//varchar2	100					연구개발 주요성과
-    String     ceo_rnd_result2;//varchar2	100					대표자의 연구개발 과제, 논문명
-    String     ceo_rnd_result2_org;//varchar2	40					연구개발 기관
-    String    ceo_rnd_result2_dur;//varchar2	40					연구개발 기간
-    String   ceo_rnd_result2_role;//varchar2	40					연구개발 역할
-    String     ceo_rnd_result2_result;//varchar2	100					연구개발 주요성과
-    String     rnd_effort1;//varchar2	200					연구개발추진현황
-    int   rnd_effort1_type;//number	4					연구개발 타입	0:자체개발, 1:국가과제
+    String ceo_rnd_result1_role;//varchar2	40					연구개발 역할
+    String ceo_rnd_result1_result;//varchar2	100					연구개발 주요성과
+    String ceo_rnd_result2;//varchar2	100					대표자의 연구개발 과제, 논문명
+    String ceo_rnd_result2_org;//varchar2	40					연구개발 기관
+    String ceo_rnd_result2_dur;//varchar2	40					연구개발 기간
+    String ceo_rnd_result2_role;//varchar2	40					연구개발 역할
+    String ceo_rnd_result2_result;//varchar2	100					연구개발 주요성과
+    String rnd_effort1;//varchar2	200					연구개발추진현황
+    int rnd_effort1_type;//number	4					연구개발 타입	0:자체개발, 1:국가과제
     String     rnd_effort1_etc;//varchar2	40					연구개발 비고, 특허, 인증
     String    rnd_effort2;//varchar2	200					연구개발추진현황
     int    rnd_effort2_type;//number	4					연구개발 타입	0:자체개발, 1:국가과제
