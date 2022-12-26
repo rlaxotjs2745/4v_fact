@@ -256,9 +256,22 @@ public class FileController {
         return resultVO;
     }
 
+    @RequestMapping(value = "/modify_rule_file",method = RequestMethod.POST)
+    public ResultVO modify_rule_file(@ModelAttribute FileRequestVO fileRequestVO, HttpSession session, HttpServletRequest request) throws Exception {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("양식 파일 변경에 완료했습니다.");
 
+        try{
+            fileService.updateRuleFile(fileRequestVO);
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("변경에 실패하였습니다.");
+        }
 
-
+        return resultVO;
+    }
 
     //파일 업로드 (카테고리별)
     @RequestMapping(value = "/upload_file_category",method = RequestMethod.POST)
