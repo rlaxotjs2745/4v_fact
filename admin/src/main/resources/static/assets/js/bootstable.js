@@ -106,6 +106,9 @@ function ModoEdicion($row) {
 }
 function rowAcep(but) {
 //Acepta los cambios de la edición
+    const namePattern = /^[가-힣]{2,}$/;
+    const phonePattern = /^01[016789]\d{3,4}\d{4}$/;
+    const emailPattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 
     var $row = $(but).parents('tr');  //accede a la fila
     var $cols = $row.find('td');  //lee campos
@@ -124,6 +127,25 @@ function rowAcep(but) {
         homepage_admin_pnum:$cols[1].textContent,
         email:$cols[2].textContent
     }
+
+    if(!namePattern.test($cols[0].textContent)){
+        alert("담당자 이름 형식을 확인해주세요. 담당자 이름은 특수문자가 포함되지 않은 두글자 이상이여야 합니다.");
+        pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
+        return;
+    }
+
+    if(!phonePattern.test($cols[1].textContent)){
+        alert("담당자 연락처 형식을 확인해주세요 예)01012345678");
+        pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
+        return;
+    }
+
+    if(!emailPattern.test($cols[2].textContent)){
+        alert("담당자 이메일 형식을 확인해주세요 예)smartFarm@smartFarm.com");
+        pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
+        return;
+    }
+
 
     console.log(param);
     $.ajax({
