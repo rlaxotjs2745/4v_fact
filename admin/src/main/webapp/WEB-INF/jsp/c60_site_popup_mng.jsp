@@ -147,7 +147,7 @@
                     </div>
                     <div class="modal-body">
                         <form id="popupForm">
-                            <input type="hidden" name="idx_popup_img" value="${admin.admin_name}">
+                            <input type="hidden" name="idx_popup_img" value="${admin.idx_admin}">
                             <div class="form-group row">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">제목</label>
                                 <div class="col-md-10">
@@ -328,7 +328,7 @@
         console.log(myform)
         $.ajax({
             type: 'post',
-            url :'save_homepage_info', //데이터를 주고받을 파일 주소 입력
+            url :'insert_popup', //데이터를 주고받을 파일 주소 입력
             data: myform,//보내는 데이터
             contentType:false,
             processData:false,
