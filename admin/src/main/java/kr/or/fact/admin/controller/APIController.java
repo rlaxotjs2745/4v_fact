@@ -613,9 +613,9 @@ public class APIController {
         resultVO.setResult_str("필수 데이터가 없습니다.");
         resultVO.setResult_code("ERROR001");
 
-        if(homepageInfoVO.getHomepage_admin() != null &&
-                homepageInfoVO.getHomepage_admin_pnum()!= null &&
-                homepageInfoVO.getEmail()!= null){
+        if(homepageInfoVO.getHomepage_admin() != null && homepageInfoVO.getHomepage_admin() != "" &&
+                homepageInfoVO.getHomepage_admin_pnum()!= null && homepageInfoVO.getHomepage_admin_pnum()!= "" &&
+                homepageInfoVO.getEmail()!= null && homepageInfoVO.getEmail()!= ""){
 
             HomepageInfoVO resultHomepageInfo = homepageInfoService.getHomepageInfo();
 
@@ -1327,15 +1327,13 @@ public class APIController {
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
         resultVO.setResult_str("업데이트 실패");
-        try {
-           coWorkerNService.insertCoWorkerInfo(coWorkerVO);
+
+        if(coWorkerVO.getCoworker_name()!=null
+                && coWorkerVO.getDevision()!=null && coWorkerVO.getJob_title()!=null) {
+
+            coWorkerNService.insertCoWorkerInfo(coWorkerVO);
             resultVO.setResult_str("업데이트에 성공하였습니다.");
             resultVO.setResult_code("SUCCESS");
-
-        }catch(Exception e) {
-            resultVO.setResult_code("ERROR_1000");
-            resultVO.setResult_str("업데이트 실패");
-            System.out.println(e);
         }
         return resultVO;
     }
