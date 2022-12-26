@@ -1034,12 +1034,19 @@ model.addAttribute("prlist",prlist);
     //재배사 관리
     @RequestMapping(value = "/c71_site_form_doc_mng",method = RequestMethod.POST)
     public String c71_site_form_doc_mng(@RequestParam(value = "tag", required = false) String tagValue, Principal principal,
+                                        @RequestBody ParamPageListFilteredVO param,
                                         ModelMap model){
         AdminVO adminInfo = adminService.findAdminById(principal.getName());
         model.addAttribute("admin", adminInfo);
 
+
         List<FormFileInfoVO> formFileList = fileService.getFormFileList();
         model.addAttribute("formfilelist",formFileList);
+
+        Integer maxPageNum = fileService.getFormFileTotalCount();
+
+        model.addAttribute("page_num", param.getPage_num());
+        model.addAttribute("max_page_num", maxPageNum);
 
         return "c71_site_form_doc_mng";
     }
@@ -1048,8 +1055,8 @@ model.addAttribute("prlist",prlist);
     @RequestMapping(value = "/c72_site_rule_doc_mng",method = RequestMethod.POST)
     public String c72_site_rule_doc_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                         ModelMap model){
-List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
-model.addAttribute("rulefileinfolist",ruleFileInfoList);
+        List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
+        model.addAttribute("rulefileinfolist",ruleFileInfoList);
 
         return "c72_site_rule_doc_mng";
     }

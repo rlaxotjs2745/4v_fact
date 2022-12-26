@@ -239,6 +239,23 @@ public class FileController {
 
     }
 
+    @RequestMapping(value = "/modify_form_file",method = RequestMethod.POST)
+    public ResultVO modify_form_file(@ModelAttribute FileRequestVO fileRequestVO, HttpSession session, HttpServletRequest request) throws Exception {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("양식 파일 변경에 완료했습니다.");
+
+        try{
+            fileService.updateFormFile(fileRequestVO);
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("변경에 실패하였습니다.");
+        }
+
+        return resultVO;
+    }
+
 
 
 

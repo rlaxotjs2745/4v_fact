@@ -95,7 +95,7 @@
                         B.FILE_PATH
                     FROM TB_FORM_FILE_INFO A
                     JOIN TB_FILE_INFO B
-                        ON A.IDX_FILE_INFO = B.IDX_FILE_INFO AND B.FILE_TYPE = 3 AND B.FILE_STATUS=0
+                        ON A.IDX_FILE_INFO = B.IDX_FILE_INFO AND B.FILE_TYPE = 4 AND B.FILE_STATUS=0
                      )
                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
                 )
@@ -140,7 +140,7 @@
            B.FILE_PATH
        FROM TB_FORM_FILE_INFO A
                 JOIN TB_FILE_INFO B
-                     ON A.IDX_FILE_INFO = B.IDX_FILE_INFO AND B.FILE_TYPE = 3 AND B.FILE_STATUS=0 AND A.IDX_FORM_FILE_INFO=#{idx_form_file_info}
+                     ON A.IDX_FILE_INFO = B.IDX_FILE_INFO AND B.FILE_TYPE = 4 AND B.FILE_STATUS=0 AND A.IDX_FORM_FILE_INFO=#{idx_form_file_info}
 
 
     </select>
@@ -178,7 +178,7 @@
                                        B.FILE_PATH
                                    FROM TB_RULE_FILE_INFO A
                                             JOIN TB_FILE_INFO B
-                                                 ON A.IDX_FILE_INFO = B.IDX_FILE_INFO AND B.FILE_TYPE = 4 AND B.FILE_STATUS=0
+                                                 ON A.IDX_FILE_INFO = B.IDX_FILE_INFO AND B.FILE_TYPE = 5 AND B.FILE_STATUS=0
                                )
                           WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
                       )
@@ -224,7 +224,7 @@
             B.FILE_PATH
         FROM TB_RULE_FILE_INFO A
                  JOIN TB_FILE_INFO B
-                      ON A.IDX_FILE_INFO = B.IDX_FILE_INFO AND B.FILE_TYPE = 4 AND B.FILE_STATUS=0 AND A.IDX_RULE_FILE_INFO=#{idx_rule_file_info}
+                      ON A.IDX_FILE_INFO = B.IDX_FILE_INFO AND B.FILE_TYPE = 5 AND B.FILE_STATUS=0 AND A.IDX_RULE_FILE_INFO=#{idx_rule_file_info}
 
 
     </select>
@@ -242,7 +242,7 @@
             COUNT(*)
         FROM TB_RULE_FILE_INFO A
                  JOIN TB_FILE_INFO B
-                      ON A.IDX_FILE_INFO = B.IDX_FILE_INFO AND B.FILE_TYPE = 4 AND B.FILE_STATUS=0
+                      ON A.IDX_FILE_INFO = B.IDX_FILE_INFO AND B.FILE_TYPE = 5 AND B.FILE_STATUS=0
     </select>
 <select id="getFormFileList" resultType="kr.or.fact.core.model.DTO.FormFileInfoVO">
     SELECT A.IDX_FORM_FILE_INFO,
@@ -397,18 +397,18 @@
         SELECT * FROM TB_FORM_FILE_INFO WHERE IDX_FORM_FILE_INFO = #{idx_form_file_info}
     </select>
 
-    <select id="getFileIdx">
+    <select id="getFileIdx" resultType="long">
         SELECT IDX_FILE_INFO FROM TB_FILE_INFO WHERE FILE_NAME = #{file_name}
     </select>
 
-    <update id="updateFormFile">
+    <update id="updateFormFile" parameterType="kr.or.fact.core.model.DTO.FormFileInfoVO">
         UPDATE TB_FORM_FILE_INFO SET
             SUBJECT=#{subject},
             USAGE_DETAIL=#{usage_detail},
-            IDX_ADMIN=${idx_admin},
+            IDX_ADMIN=#{idx_admin},
             ORDER_NUM=#{order_num},
             IDX_FILE_INFO=#{idx_file_info},
-            REG_DATE=SYSDATE,
+            REG_DATE=SYSDATE
         WHERE IDX_FORM_FILE_INFO = #{idx_form_file_info}
     </update>
 </mapper>

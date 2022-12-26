@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -285,6 +286,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
+    @Transactional
     public void updateFormFile(FileRequestVO fileRequestVO){
         FormFileInfoVO formFileInfoVO = fileServiceMapper.getFormFile(fileRequestVO.getFileIndex());
 
@@ -292,7 +294,7 @@ public class FileServiceImpl implements FileService {
 
         MultipartFile file = fileRequestVO.getFiles1();
         try {
-            convertMultipartToFile(file);
+            convertMultipartToFile2(file);
         } catch (Exception e){
             System.out.println(e);
         }
@@ -300,7 +302,7 @@ public class FileServiceImpl implements FileService {
         FileInfoVO fileInfoVO = new FileInfoVO();
 
         fileInfoVO.setFile_name(file.getOriginalFilename());
-        fileInfoVO.setFile_type(3);
+        fileInfoVO.setFile_type(4);
         fileInfoVO.setFile_status(0);
         fileInfoVO.setMime_type(file.getContentType());
         fileInfoVO.setEncoding(1);
