@@ -116,7 +116,7 @@
                              VISIT_REQ_NUM,
                      GROUP_NAME,
                      VISITOR,
-                     TO_DATE(RESULVATION_DATE,'YYYY-MM-DD hh:mm'),
+                     RESULVATION_DATE,
                      VISITOR_COUNT,
                      VISITOR_MPHONE_NUM,
                      VISITOR_EMAIL,
