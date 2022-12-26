@@ -248,7 +248,6 @@
     SELECT A.IDX_FORM_FILE_INFO,
            A.SUBJECT,
            A.USAGE_DETAIL,
-
            B.FILE_PATH
     FROM TB_FORM_FILE_INFO A JOIN TB_FILE_INFO B ON A.IDX_FILE_INFO=B.IDX_FILE_INFO
 </select>
@@ -343,7 +342,7 @@
             CHECKSUM,
             OWNER,
             IDX_USER,
-            <if test="file_type == 70 or file_type == 3">
+            <if test="file_type == 70 or file_type == 3 or file_type == 6">
                 IDX_FILE_USAGE,
             </if>
             IDX_ADMIN,
@@ -367,6 +366,9 @@
                     </if>
                     <if test="file_type == 3">
                         SEQ_BS_ANNOUNCEMENT.CURRVAL,
+                    </if>
+                    <if test="file_type == 6">
+                        SEQ_WEB_MAIN_POPUP.CURRVAL,
                     </if>
                      #{idx_admin},
                      SYSDATE

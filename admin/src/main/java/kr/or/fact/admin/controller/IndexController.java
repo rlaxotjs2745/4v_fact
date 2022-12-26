@@ -86,6 +86,9 @@ public class IndexController {
     @Resource(name="prContentService")
     public PRContentsService prContentService;
 
+    @Resource(name="webMainPopupService")
+    public WebMainPopupService webMainPopupService;
+
     @Autowired
     public PRContentsMapper prContentsMapper;
 
@@ -1037,9 +1040,66 @@ public class IndexController {
 
     //협약담당자 관리
     @RequestMapping(value = "/c60_site_popup_mng",method = RequestMethod.POST)
-    public String c60_site_popup_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String c60_site_popup_mng(@RequestParam(value = "tag", required = false) String tagValue, Principal principal,
+                                     @RequestBody ParamPageListFilteredVO param,
                                      ModelMap model){
 
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+        model.addAttribute("admin", adminInfo);
+
+        param.setAmount(10);
+        int list_amount = 10;
+        int page_amount = param.getAmount();
+        int page = param.getPage_num();
+
+        model.addAttribute("cur_page",page);
+        model.addAttribute("vamount",list_amount);
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        //푸터 정보
+        int popupInfoCount = webMainPopupService.getWebMainPopupCount();
+        model.addAttribute("pop_total_count", popupInfoCount);
+
+        List<WebMainPopupVO> webMainPopupList = webMainPopupService.getWebMainPopupList(param);
+        model.addAttribute("webMainPopupList", webMainPopupList);
+
+        int pop_tot_page = popupInfoCount/list_amount+1;
+        if(popupInfoCount%list_amount==0) pop_tot_page-=1;
+
+        int pop_tot_sector = pop_tot_page/page_amount+1;
+        if(pop_tot_page%page_amount==0) pop_tot_sector-=1;
+
+        boolean pop_is_past = false;
+        boolean pop_is_prev = false;
+        boolean pop_is_next = false;
+        boolean pop_is_last = false;
+        boolean is_active = false;
+
+        if(page!=pop_tot_page && pop_tot_page>1) pop_is_next = true;
+
+        if(page!=1 && pop_tot_page>1) pop_is_prev = true;
+
+        if(cur_sector!=pop_tot_sector && pop_tot_sector>1 ) pop_is_last = true;
+
+        if(cur_sector!=1 && pop_tot_sector>1 ) pop_is_past = true;
+
+        if(pop_tot_page<=page_amount){
+            pop_is_past = false;
+            pop_is_last = false;
+            page_amount = pop_tot_page;
+        }
+
+        model.addAttribute("pop_tot_page",pop_tot_page);
+        model.addAttribute("pop_tot_sector",pop_tot_sector);
+        model.addAttribute("pop_cur_sector",cur_sector);
+        model.addAttribute("pop_is_past",pop_is_past);
+        model.addAttribute("pop_is_prev",pop_is_prev);
+        model.addAttribute("pop_is_next",pop_is_next);
+        model.addAttribute("pop_is_last",pop_is_last);
+        model.addAttribute("pop_list_amount",list_amount);
+        model.addAttribute("pop_page_amount",page_amount);
 
         return "c60_site_popup_mng";
     }

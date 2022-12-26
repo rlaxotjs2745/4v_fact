@@ -91,6 +91,9 @@ public class APIController {
     @Resource(name = "consultingService")
     public ConsultingService consultingService;
 
+    @Resource(name = "webMainPopupService")
+    public WebMainPopupService webMainPopupService;
+
     @Autowired
     private FACTConfig factConfig;
 
@@ -1265,7 +1268,7 @@ public class APIController {
 
 
             if(prcontensVO.getFiles1() == null){
-               prContentService.insertPRContent(prcontensVO);
+                prContentService.insertPRContent(prcontensVO);
             }else {
                 if (prcontensVO.getFiles1() != null) {
                     files[0] = fileService.convertMultipartToFile(prcontensVO.getFiles1());
@@ -1346,7 +1349,7 @@ public class APIController {
 
         if(coWorkerVO.getIdx_co_worker() > 0) {
             coWorkerNService.updateCoWorkerInfo(coWorkerVO);
-            resultVO.setResult_str("업데이트에 성공하였습니다.");
+            resultVO.setResult_str("수정했습니다.");
             resultVO.setResult_code("SUCCESS");
         }
         return resultVO;
@@ -1360,11 +1363,35 @@ public class APIController {
 
         if(coWorkerVO.getIdx_co_worker() > 0) {
             coWorkerNService.deleteCoWorkerInfo(coWorkerVO.getIdx_co_worker());
-            resultVO.setResult_str("삭제에 성공하였습니다.");
+            resultVO.setResult_str("삭제했습니다.");
             resultVO.setResult_code("SUCCESS");
         }
         return resultVO;
     }
+
+    @RequestMapping(value = "/insert_popup",method = RequestMethod.POST)
+    public @ResponseBody ResultVO insertPopupContent (@ModelAttribute WebMainPopupVO webMainPopupVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("데이터를 다시 입력해주세요");
+
+        if(webMainPopupVO.getSubject() != null || webMainPopupVO.getSubject() != "" && webMainPopupVO.getFiles1() != null){
+            webMainPopupService.insertPopupContent(webMainPopupVO);
+
+            fileService.convertMultipartToFile(webMainPopupVO.getFiles1());
+            fileService.insertDemoBsFile(webMainPopupVO.getFiles1(), webMainPopupVO.getIdx_admin());
+
+            resultVO.setResult_str("업데이트에 성공하였습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+
+        return resultVO;
+    }
+
+
+
+
+
 
     @RequestMapping(value ="/delete_notice",method = RequestMethod.POST)
     public @ResponseBody

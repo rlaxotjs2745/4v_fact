@@ -270,6 +270,29 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
+    public int insertPopupFile(MultipartFile file, long adminIdx){
+        FileInfoVO fileInfoVO = new FileInfoVO();
+
+        fileInfoVO.setFile_name(file.getOriginalFilename());
+        fileInfoVO.setFile_type(6);
+        fileInfoVO.setFile_status(0);
+        fileInfoVO.setMime_type(file.getContentType());
+        fileInfoVO.setEncoding(1);
+        fileInfoVO.setExtention(StringUtils.getFilenameExtension(file.getOriginalFilename()));
+        fileInfoVO.setFile_secure_type(0);
+        fileInfoVO.setFile_path(("downloadFile/" + file.getOriginalFilename()));
+        fileInfoVO.setFile_size(file.getSize());
+        fileInfoVO.setOwner(0);
+        fileInfoVO.setIdx_user(adminIdx);
+        try{
+            return fileServiceMapper.insertFileInfo(fileInfoVO);
+        } catch (Exception e){
+            System.out.println(e);
+            return 0;
+        }
+    }
+
+    @Override
     public FileInfoVO selectBsFile(int idx_demo_bs) {
         return fileServiceMapper.selectBsFile(idx_demo_bs);
     }
