@@ -1379,7 +1379,7 @@ public class APIController {
             webMainPopupService.insertPopupContent(webMainPopupVO);
 
             fileService.convertMultipartToFile(webMainPopupVO.getFiles1());
-            fileService.insertDemoBsFile(webMainPopupVO.getFiles1(), webMainPopupVO.getIdx_admin());
+            fileService.insertPopupFile(webMainPopupVO.getFiles1(), webMainPopupVO.getIdx_admin());
 
             resultVO.setResult_str("업데이트에 성공하였습니다.");
             resultVO.setResult_code("SUCCESS");
@@ -1387,10 +1387,6 @@ public class APIController {
 
         return resultVO;
     }
-
-
-
-
 
 
     @RequestMapping(value ="/delete_notice",method = RequestMethod.POST)
