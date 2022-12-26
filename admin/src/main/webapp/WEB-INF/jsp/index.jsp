@@ -121,8 +121,9 @@
 
 
 <script>
-    var curMyIdx = ${admin.idx_admin};
+    var _pageReload = '${pageOnLoad}';
 
+    var curMyIdx = ${admin.idx_admin};
 
     $("li.sidenav-item").on('click',function(){
         if( $("li.sidenav-item").has('a')!=null){
@@ -144,10 +145,6 @@
     //최초 진입시 호출되는 ajax 페이지 초기값
     var cur = "";
 
-
-
-
-
     //int page_num;
     //int filter1;
     //int filter2;
@@ -157,7 +154,7 @@
 
     var filter1 = null;
     var filter2 = null;
-    function pageLoad(url,param,title,usage){
+    function pageLoad(url, param, title, usage){
 /*      State : 브라우저 이동 시 넘겨줄 데이터 (popstate 에서 받아서 원하는 처리를 해줄 수 있음)
         Title : 변경할 브라우저 제목 (변경 원치 않으면 null)
         Url : 변경할 주소*/
@@ -282,14 +279,12 @@
     })();
     $(document).ready(function() {
         //ajax로 호출되는 첫번째 페이지
-        pageLoad('a10_dashboard','{tag:1}','대시보드');
-
+        if(_pageReload != ''){
+            pageLoad('${path}', null);
+        }else{
+            pageLoad('a10_dashboard','{tag:1}','대시보드');
+        }
     });
-
-
-
-
-
 </script>
 <style>
     #loading_symbol{
@@ -299,5 +294,4 @@
     }
 </style>
 </body>
-
 </html>

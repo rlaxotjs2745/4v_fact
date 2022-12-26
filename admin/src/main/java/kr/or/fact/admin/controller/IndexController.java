@@ -21,6 +21,7 @@ import javax.annotation.Resource;
 import javax.mail.*;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.search.*;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.text.ParseException;
@@ -97,26 +98,34 @@ public class IndexController {
 
     private Folder folder;
 
-
-
     @PreAuthorize("hasRole('ROLE_MEMBER')")
-    @RequestMapping("/")
-    public String root(Principal principal, ModelMap model){
-
+    @GetMapping("/*")
+    public String getPublic(HttpServletRequest req, Principal principal, ModelMap model){
+        String _path = req.getRequestURI();
         AdminVO adminInfo = adminService.findAdminById(principal.getName());
         model.addAttribute("admin", adminInfo);
         setProfile(model);
 
+        model.addAttribute("pageOnLoad", "1");
+        model.addAttribute("path", _path);
         return "index";
     }
+
+    @PreAuthorize("hasRole('ROLE_MEMBER')")
+    @RequestMapping("/")
+    public String root(Principal principal, ModelMap model){
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+        model.addAttribute("admin", adminInfo);
+        setProfile(model);
+        return "index";
+    }
+
     @PreAuthorize("hasRole('ROLE_MEMBER')")
     @RequestMapping("/home")
     public String home(){
-
-
-
         return "redirect:/";
     }
+
     @RequestMapping(value = "/api_post_login",method = RequestMethod.POST)
     public String api_post_login(HttpSession session,
                                  ModelMap model,
@@ -191,20 +200,14 @@ public class IndexController {
 
     //대시보드
     @SneakyThrows
-    @RequestMapping(value = "/a10_dashboard",method = RequestMethod.POST)
-    public String a10_dashboard(@RequestParam(value = "tag", required = false) String tagValue,
-                                 ModelMap model
-                                ){
-        return "/a10_dashboard";
+    @RequestMapping(value = "/a10_dashboard" ,method = RequestMethod.POST)
+    public String a10_dashboard(@RequestParam(value = "tag", required = false) String tagValue, ModelMap model){
+        return "a10_dashboard";
     }
 
     //사업공고문 관리
     @RequestMapping(value = "/b00_demo_bs_mng",method = RequestMethod.POST)
-    public String b00_demo_bs_mng(@RequestBody ParamPageListFilteredVO param,
-            Principal principal,
-            ModelMap model){
-
-
+    public String b00_demo_bs_mng(@RequestBody ParamPageListFilteredVO param, Principal principal, ModelMap model){
         AdminVO adminInfo = adminService.findAdminById(principal.getName());
         model.addAttribute("admin", adminInfo);
 
@@ -937,7 +940,7 @@ public class IndexController {
         return "c42_site_event_mng";
     }
 
-    @RequestMapping(value = "/c43_site_adver_mng",method = RequestMethod.POST)
+    @RequestMapping(value = "/c43_site_adver_mng" ,method = RequestMethod.POST)
     public String c43_site_adver_mng(@RequestParam(value = "page_num", required = false) String tagValue,
                                      @RequestBody ParamPageListFilteredVO param,   ModelMap model){
 
@@ -997,9 +1000,11 @@ public class IndexController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
+        param.setFil1("1");
         int count_req = prContentsMapper.getPRContentCount2(param);
         model.addAttribute("count_req",count_req);
 
+        param.setFil1("2");
         int count_comp = prContentsMapper.getPRContentCount2(param);
         model.addAttribute("count_comp",count_comp);
 
