@@ -443,7 +443,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                    <button type="button" id="btn-coworker" class="btn btn-primary" >저장</button>
+                    <button type="button" id="btn-coworker-update" class="btn btn-primary" >저장</button>
                 </div>
             </form>
         </div>
@@ -618,6 +618,25 @@
     });
 
     $('#btn_save_homepage_info').on('click', function() {
+        const namePattern = /^[가-힣]{2,}$/;
+        const phonePattern = /^01[016789]\d{3,4}\d{4}$/;
+        const emailPattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+
+        if(!namePattern.test($("#homepage_admin").val())){
+            alert("담당자 이름 형식을 확인해주세요. 담당자 이름은 특수문자가 포함되지 않은 두글자 이상이여야 합니다.");
+            return;
+        }
+
+        if(!phonePattern.test($("#homepage_admin_pnum").val())){
+            alert("담당자 연락처 형식을 확인해주세요 예)01012345678");
+            return;
+        }
+
+        if(!emailPattern.test($("#email").val())){
+            alert("담당자 이메일 형식을 확인해주세요 예)smartFarm@smartFarm.com");
+            return;
+        }
+
 
         var param = {homepage_admin:$("#homepage_admin").val(),
             homepage_admin_pnum:$("#homepage_admin_pnum").val(),
@@ -652,7 +671,7 @@
 
     function isValid(string){
         var val = '';
-        if(string.length < 2){ //2글자 초과
+        if(string.length < 2){ //2글자 미만일 경우
             val += 2;
         }
         if(string.match(/[^a-z|A-Z|ㄱ-ㅎ|가-힣|0-9\s]/g)){ // 특수문자
@@ -667,6 +686,7 @@
         if(string.match(/\s/g)){ // 공백
             val += 6;
         }
+
         return val;
     }
 
