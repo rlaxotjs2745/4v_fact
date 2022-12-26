@@ -374,7 +374,7 @@
                                 </tr>
 
                                 <tr>
-                                    <th class="text-center bg-light">직책</th>job_title
+                                    <th class="text-center bg-light">직책</th>
                                     <td class="text-center">
                                         <input type="text" class="form-control form-control-sm" value="" id="mo_job_title" ></td>
                                     <th class="text-center bg-light">담당 권한</th>

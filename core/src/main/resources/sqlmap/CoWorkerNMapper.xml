@@ -97,14 +97,13 @@
                                 TEL_NUM = #{tel_num},
                                 MPHONE_NUM = #{mphone_num},
                                 EMAIL = #{email},
-                                IS_SHOW = #{is_show},
-                                REG_DATE = SYSDATE,
+                                IS_SHOW = #{is_show}
                                 WHERE IDX_CO_WORKER = #{idx_co_worker}
 
     </update>
 
     <update id="deleteCoWorkerInfo" parameterType="long">
-        UPDATE TB_CO_WORKER IS_SHOW = 2 WHERE IDX_CO_WORKER = #{idx_co_worker}
+        UPDATE TB_CO_WORKER SET IS_SHOW = 2 WHERE IDX_CO_WORKER = #{idx_co_worker}
     </update>
 
     <select id="getCoWorkerCount" resultType="int">
