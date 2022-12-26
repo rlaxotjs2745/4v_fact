@@ -180,9 +180,9 @@
             }
         }
 
-        if(cur !== url+param['page_num'] || usage === "asset_list"){
+        if(cur !== url+param['page_num'] || usage === "asset_list" || usage==='site_adver_mng'){
             cur = url+param['page_num'];
-            if(url.indexOf('cur_asset_index') === -1 && url.indexOf('user_index') === -1 && url.indexOf('dormant_user_index') === -1 && url.indexOf('admin_corporate') === -1) {
+            if(url.indexOf('cur_asset_index') === -1 && url.indexOf('user_index') === -1 && url.indexOf('dormant_user_index') === -1 && url.indexOf('admin_corporate') === -1 && url.indexOf('c431_site_adver_mng') === -1) {
                 history.pushState(param, title, url);
             }
 
@@ -215,8 +215,10 @@
                         $("#asset_reservation_items_list").html(result);
                     } else if(usage === "pr_contents"){
                         $("#modals-content").html(result);
-                    } else if(usage === "reserve_view"){
+                    } else if(usage === "reserve_view") {
                         $("#reserve_view_comp").html(result);
+                    } else if(usage === 'site_adver_mng'){
+                        $("#site_adver_mng").html(result);
                     }else{
                         $("#contents").html(result);
                     }

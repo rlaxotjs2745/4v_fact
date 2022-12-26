@@ -62,15 +62,16 @@ public class PRContentServiceImpl implements PRContentsService {
     }
 
     @Override
-    public int getPRContentCount(){
-        return prContentsMapper.getPRContentCount();
+    public int getPRContentCount(ParamPageListFilteredVO paramVo){
+        return prContentsMapper.getPRContentCount(paramVo);
     }
 
     @Override
-    public List<PRContentVO> getPRContentList(int page, int list_amount){
-        List<PRContentVO> prContentList= prContentsMapper.getPRContentList(page,list_amount,"ANNOUNCE_NUM");
+    public List<PRContentVO> getPRContentList(ParamPageListFilteredVO paramVo){
+        paramVo.setOrder_field("ANNOUNCE_NUM");
+        List<PRContentVO> prContentList = prContentsMapper.getPRContentList(paramVo);
 
-        List<PRContentVO> thumbList =prContentsMapper.getThumb();
+        List<PRContentVO> thumbList = prContentsMapper.getThumb();
 
         for (int i = 0; i < prContentList.size(); i++){
             for(int l = 0; l < thumbList.size(); l++){

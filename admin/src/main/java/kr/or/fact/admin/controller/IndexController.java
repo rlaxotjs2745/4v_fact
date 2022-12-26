@@ -948,19 +948,19 @@ public class IndexController {
 
     @RequestMapping(value = "/c43_site_adver_mng" ,method = RequestMethod.POST)
     public String c43_site_adver_mng(@RequestParam(value = "page_num", required = false) String tagValue,
-                                     @RequestBody ParamPageListFilteredVO param,   ModelMap model){
+                                     @RequestBody ParamPageListFilteredVO param, ModelMap model){
 
         param.setAmount(10);
         int list_amount = 10;
         int page_amount = param.getAmount();
         int page = param.getPage_num();
-        int prCount = prContentService.getPRContentCount();
+        int prCount = prContentService.getPRContentCount(param);
 //        if(prCount==0){
 //            return "brd_adver_blank";
 //        }
         model.addAttribute("total_count",prCount);
 
-        List<PRContentVO> prlist = prContentService.getPRContentList( page, list_amount);
+        List<PRContentVO> prlist = prContentService.getPRContentList(param);
         //        List<PRContentVO> prlist1 = prContentService.getMainPRContentList();
         model.addAttribute("prlist",prlist);
         model.addAttribute("prcontent",prlist);
@@ -1006,15 +1006,90 @@ public class IndexController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
+        model.addAttribute("fil1",param.getFil1());
+        model.addAttribute("fil2",param.getFil2());
+
         param.setFil1("1");
+        param.setFil2(null);
         int count_req = prContentsMapper.getPRContentCount2(param);
         model.addAttribute("count_req",count_req);
 
-        param.setFil1("2");
+        param.setFil1("0");
         int count_comp = prContentsMapper.getPRContentCount2(param);
         model.addAttribute("count_comp",count_comp);
 
         return "c43_site_adver_mng";
+    }
+
+    @RequestMapping(value = "/c431_site_adver_mng" ,method = RequestMethod.POST)
+    public String c431_site_adver_mng(@RequestParam(value = "page_num", required = false) String tagValue,
+                                     @RequestBody ParamPageListFilteredVO param, ModelMap model){
+
+        param.setAmount(10);
+        int list_amount = 10;
+        int page_amount = param.getAmount();
+        int page = param.getPage_num();
+        int prCount = prContentService.getPRContentCount(param);
+        model.addAttribute("total_count",prCount);
+
+        List<PRContentVO> prlist = prContentService.getPRContentList(param);
+        model.addAttribute("prlist",prlist);
+        model.addAttribute("prcontent",prlist);
+        model.addAttribute("cur_page",page);
+        model.addAttribute("amount",list_amount);
+
+        int tot_page = prCount/list_amount+1;
+        if(prCount%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+        boolean is_active = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("page_amount",page_amount);
+
+        model.addAttribute("fil1",param.getFil1());
+        model.addAttribute("fil2",param.getFil2());
+
+        param.setFil1("1");
+        param.setFil2(null);
+        int count_req = prContentsMapper.getPRContentCount2(param);
+        model.addAttribute("count_req",count_req);
+
+        param.setFil1("0");
+        int count_comp = prContentsMapper.getPRContentCount2(param);
+        model.addAttribute("count_comp",count_comp);
+
+        return "c431_site_adver_mng";
     }
 
     @RequestMapping(value = "/pr_contents",method = RequestMethod.POST)

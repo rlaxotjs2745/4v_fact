@@ -12,75 +12,58 @@
 
         <div class="card px-4 pt-4 mb-4">
             <div class="form-row mb-4">
-                <div class="col-md-3 ">
-                    <label class="form-label text-muted">상담 구분</label>
-                    <div class="form-inline mt-2">
-                        <label class="custom-control custom-checkbox mr-2">
-                            <input type="checkbox" name="advertype" class="custom-control-input">
-                            <span class="custom-control-label">전체</span>
-                        </label>
-                        <label class="custom-control custom-checkbox mr-2">
-                            <input type="checkbox" name="advertype" class="custom-control-input">
-                            <span class="custom-control-label">사전상담</span>
-                        </label>
-                        <label class="custom-control custom-checkbox mr-2">
-                            <input type="checkbox" name="advertype" class="custom-control-input">
-                            <span class="custom-control-label">사용승인 후 상담</span>
-                        </label>
-                    </div>
-                </div>
                 <div class="col-md-2 ">
-                    <label class="form-label text-muted">상담 접수</label>
+                    <label class="form-label text-muted">홍보 구분</label>
                     <div class="form-inline">
-                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio" checked="">전체
+                        <div class="btn-group btn-group-sm btn-group-toggle srch_filtp1" data-toggle="buttons">
+                            <label class="btn btn-secondary active">
+                                <input type="radio" name="filtp1" value="" checked="">전체
                             </label>
                             <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio"> 신규
+                                <input type="radio" name="filtp1" value="1"> 신규
                             </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 해결
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="filtp1" value="0"> 신규아님
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-5 ">
-                    <label class="form-label text-muted">상담 접수일</label>
+                    <label class="form-label text-muted">홍보 등록일</label>
                     <div class="form-inline">
-                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+                        <div class="btn-group btn-group-sm btn-group-toggle srch_filtp2" data-toggle="buttons">
                             <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio" checked="">오늘
+                                <input type="radio" name="filtp2" value="1">오늘
                             </label>
                             <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio"> 1주일
+                                <input type="radio" name="filtp2" value="2"> 1주일
                             </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 1개월
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="filtp2" value="3"> 1개월
                             </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 3개월
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="filtp2" value="4"> 3개월
                             </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 6개월
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="filtp2" value="5"> 6개월
                             </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 1년이상
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="filtp2" value="6"> 1년이상
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-2 text-right">
                     <label class="form-label d-none d-md-block">&nbsp;</label>
-                    <button type="button" class="btn btn-outline-default">초기화</button>
-                    <button type="button" class="btn btn-success">조회</button>
+                    <button type="button" class="btn btn-outline-default btn_reset">초기화</button>
+                    <button type="button" class="btn btn-success btn_search">조회</button>
                 </div>
             </div>
         </div>
 
         <div class="card">
             <h6 class="card-header with-elements">
-                <div class="card-header-title">접수 목록</div>
+                <div class="card-header-title">홍보자료 목록</div>
                 <div class="card-header-elements ml-auto">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals-business" data-what="mode-new">신규 홍보자료작성</button>
                 </div>
@@ -104,11 +87,11 @@
                 </div>
             </c:if>
             <c:if test="${total_count ne 0}">
-            <div class="card-datatable table-responsive pt-0 pb-3">
+            <div class="card-datatable table-responsive pt-0 pb-3" id="site_adver_mng">
                 <div class="dataTables_wrapper dt-bootstrap4 no-footer">
                     <div class="row p-3">
                         <div class="col-sm-12 col-md-12">
-                            <label class="mr-3  mb-0">총 : <strong>${total_count}</strong>건</label><label class="mr-3  mb-0">신규 : <strong>70</strong>건</label><label class="mr-3  mb-0">해결 : <strong>70</strong>건</label>
+                            <label class="mr-3  mb-0">총 : <strong>${total_count}</strong>건</label><label class="mr-3  mb-0">신규 : <strong>${count_req}</strong>건</label><label class="mr-3  mb-0">신규아님 : <strong>${count_comp}</strong>건</label>
                         </div>
                     </div>
                     <div class="row">
@@ -133,7 +116,7 @@
                                <c:forEach items="${prlist}" var="pr" varStatus="status">
                                 <tr class="pr_entity" id="${pr.idx_pr_content}">
                                     <td class="text-center">${pr.idx_row_num}</td>
-                                    <td class="text-center"><a href="#none" id="data" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view" >${pr.subject}</a></td>
+                                    <td class="text-center"><a href="#none" id="data" class="btn btn-outline-default btn-sm" data-toggle="modal" data-target="#modals-counsel-view" >${pr.subject}</a></td>
                                     <td class="text-center"><a href="#none" id="${pr.idx_pr_content}" class="btn btn-outline-default  btn-sm btn_content_modal"  data-toggle="modal" data-target="#modals-content" >컨텐츠 보기</a></td>
                                     <td class="text-center">${pr.is_file eq 0 ? "포함안함" : pr.is_file eq 1 ? "포함" :""}</td>
                                     <td class="text-center">${pr.is_new eq 0 ? "신규아님" : pr.is_new eq 1 ? "신규" :""}</td>
@@ -167,13 +150,13 @@
                                             <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                                                 <ul class="pagination">
                                                     <c:set var="name" value="${total_count/amount}" />
-                                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c43_site_adver_mng',{page_num:1},'홍보자료 목록');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
-                                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c43_site_adver_mng',{page_num:${cur_page-1}},'홍보자료 목록');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+                                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c431_site_adver_mng',{page_num:1},'홍보자료 목록','site_adver_mng');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c431_site_adver_mng',{page_num:${cur_page-1}},'홍보자료 목록','site_adver_mng');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
                                                     <c:forEach var="i" begin="1" end="${page_amount}">
-                                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('c43_site_adver_mng',{page_num:${(cur_sector-1)*page_amount+i}},'홍보자료 목록');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
+                                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('c431_site_adver_mng',{page_num:${(cur_sector-1)*page_amount+i}},'홍보자료 목록','site_adver_mng');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
                                                     </c:forEach>
-                                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c43_site_adver_mng',{page_num:${cur_page+1}},'홍보자료 목록');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
-                                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c43_site_adver_mng',{page_num:${tot_page}},'홍보자료 목록');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+                                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c431_site_adver_mng',{page_num:${cur_page+1}},'홍보자료 목록','site_adver_mng');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c431_site_adver_mng',{page_num:${tot_page}},'홍보자료 목록','site_adver_mng');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
                                                     </c:if>
 <%--                                    <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>--%>
 <%--                                    <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>--%>
@@ -835,58 +818,81 @@
                 last_upd_date:"<fmt:formatDate value="${pr.last_upd_date}" pattern="yyyy-MM-dd HH:MM"/>",
                 veiw_count:"${pr.view_count}",
                 memo:"${pr.memo}"
-
             })
             </c:forEach>
 
+            function _saveCont() {
+                $("tbody tr.pr_entity").off().click(function () {
+                    let _i = $(this).index($("tbody tr.pr_entity"));
+                    let selectId = $(this).attr('id');
+                    curPRdata = selectId;
+                    // for(var pr of prList){
+                    //     if(selectId === pr.idx_pr_content){
+                    $(".idx_pr_content").attr("id", selectId);
+                    $("#subject span").text(prList[_i].subject);
+                    $("#is_new span").text(prList[_i].is_new);
+                    $("#is_file span").text(prList[_i].is_file);
+                    $("#pr_content_code span").text(prList[_i].pr_content_code);
+                    $("#show_start_date span").text(prList[_i].show_start_date);
+                    $("#show_end_date span").text(prList[_i].show_end_date);
+                    $("#pr_content_status span").text(prList[_i].pr_content_status);
+                    $("#last_upd_date span").text(prList[_i].last_upd_date);
+                    $("#veiw_count span").text(prList[_i].veiw_count);
+                    $("#memo span").text(prList[_i].memo);
 
-            $(".pr_entity").click(function(){
-                console.log(prList)
-                var selectId = $(this).attr('id');
-                curPRdata = selectId;
-                for(var pr of prList){
-                    if(selectId === pr.idx_pr_content){
-                        $(".idx_pr_content").attr("id", selectId);
-                        $("#subject span").text(pr.subject);
-                        $("#is_new span").text(pr.is_new);
-                        $("#is_file span").text(pr.is_file);
-                        $("#pr_content_code span").text(pr.pr_content_code);
-                        $("#show_start_date span").text(pr.show_start_date);
-                        $("#show_end_date span").text(pr.show_end_date);
-                        $("#pr_content_status span").text(pr.pr_content_status);
-                        $("#last_upd_date span").text(pr.last_upd_date);
-                        $("#veiw_count span").text(pr.veiw_count);
-                        $("#memo span").text(pr.memo);
+                    $("#subject_modify span").val(prList[_i].subject);
+                    $("#is_new_modify span").val(prList[_i].is_new);
+                    $("#is_file_modify span").val(prList[_i].is_file);
+                    $("#pr_content_code_modify span").val(prList[_i].pr_content_code);
+                    $("#show_start_date_modify span").val(prList[_i].show_start_date);
+                    $("#show_end_date_modify span").val(prList[_i].show_end_date);
+                    $("#pr_content_status_modify span").val(prList[_i].pr_content_status);
+                    $("#last_upd_date_modify span").val(prList[_i].last_upd_date);
+                    $("#veiw_count_modify span").val(prList[_i].veiw_count);
+                    $("#memo_modify span").val(prList[_i].memo);
+                    // break;
+                    // }
+                    // }
+                });
 
+                $(".btn_content_modal").off().click(function (){
+                    var idx = $(this).attr("id");
+                    pageLoad("pr_contents", {idx: parseInt(idx)}, "홍보자료 모달컨텐츠", "pr_contents");
+                })
 
-                        $("#subject_modify span").val(pr.subject);
-                        $("#is_new_modify span").val(pr.is_new);
-                        $("#is_file_modify span").val(pr.is_file);
-                        $("#pr_content_code_modify span").val(pr.pr_content_code);
-                        $("#show_start_date_modify span").val(pr.show_start_date);
-                        $("#show_end_date_modify span").val(pr.show_end_date);
-                        $("#pr_content_status_modify span").val(pr.pr_content_status);
-                        $("#last_upd_date_modify span").val(pr.last_upd_date);
-                        $("#veiw_count_modify span").val(pr.veiw_count);
-                        $("#memo_modify span").val(pr.memo);
-                        break;
+                $("#delete_pr").off().click(function () {
+                    if(confirm("이 홍보자료를 삭제하시겟습까?")){
+                        $.ajax({
+                            type: 'post',
+                            url :'delete_pr', //데이터를 주고받을 파일 주소 입력
+                            data: JSON.stringify(parseInt(curPRdata)),//보내는 데이터
+                            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+                            dataType:'json',//받는 데이터 타입
+                            success: function(result){
+                                //작업이 성공적으로 발생했을 경우
+                                alert(result.result_str);
+                                $("#modals-counsel-view").modal("hide");
+                                pageLoad('c431_site_adver_mng');
+                            },
+                            error:function(){
+                                //에러가 났을 경우 실행시킬 코드
+                            }
+                        });
                     }
-                }
-            });
+                })
+            }
+
             $(function() {
                 var isRtl = $('html').attr('dir') === 'rtl';
-
                 $('#datepicker-show,#datepicker-open,#datepicker-open_update').datepicker({
                     orientation: isRtl ? 'auto right' : 'auto left',
                     format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
                     startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
                     language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
                 });
-
-
             });
+
             $(function () {
-                // Time
                 $('#flatpickr-time-start,#flatpickr-time-end').flatpickr({
                     enableTime: true,
                     noCalendar: true,
@@ -894,12 +900,6 @@
                     static:true
                 });
             });
-
-            $(".btn_content_modal").click(function (){
-                var idx = $(this).attr("id");
-                pageLoad("pr_contents", {idx: parseInt(idx)}, "홍보자료 모달컨텐츠", "pr_contents");
-            })
-
 
             function event_pass1() {
 // let result = document.getElementsByName('custom-6');
@@ -937,27 +937,6 @@
                 });
             }
 
-
-            $("#delete_pr").click(function () {
-                if(confirm("이 홍보자료를 삭제하시겟습까?")){
-                    $.ajax({
-                        type: 'post',
-                        url :'delete_pr', //데이터를 주고받을 파일 주소 입력
-                        data: JSON.stringify(parseInt(curPRdata)),//보내는 데이터
-                        contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
-                        dataType:'json',//받는 데이터 타입
-                        success: function(result){
-                            //작업이 성공적으로 발생했을 경우
-                            alert(result.result_str);
-                            $("#modals-counsel-view").modal("hide");
-                            pageLoad('c43_site_adver_mng');
-                        },
-                        error:function(){
-                            //에러가 났을 경우 실행시킬 코드
-                        }
-                    });
-                }
-            })
             var prContent=[];
 <%--            <c:forEach items="${prcontent}" var="prcontents" varStatus="contentstatus">--%>
 <%--            prContent.push({--%>
@@ -965,9 +944,6 @@
 <%--                pr_contents:"${prcontents.pr_contents}"--%>
 <%--            })--%>
 <%--            </c:forEach>--%>
-
-
-
             <%--$(".modals-content").click(function(){--%>
             <%--    console.log(prContent)--%>
             <%--    var selectId = $(this).attr('id');--%>
@@ -986,7 +962,6 @@
             <%--    }--%>
             <%--});--%>
 
-
             var saveNewBtn = document.querySelectorAll('.btn_save_new');
             saveNewBtn.forEach(btn=>btn.addEventListener('click', saveForm));
 
@@ -1003,10 +978,7 @@
                 fileForm.append("event_start_date",new Date(document.querySelector("#show_start_date_insert").value));
                 fileForm.append("event_end_date",new Date(document.querySelector("#show_end_date_insert").value));
 
-
                 // var files = document.querySelector('#file_upload').files;
-                //
-                //
                 // for(var i = 0; i < files.length; i++){
                 //     var num = i + 1;
                 //     fileForm.append("files" + num, files[i]);
@@ -1027,7 +999,6 @@
                     dataType:'json',//받는 데이터 타입
                     enctype: 'multipart/form-data',
                     success: function(result){
-
                         alert("업로드에 성공했습니다", () => window.redirect("/"))
                     },
                     error: function (res) {
@@ -1035,9 +1006,6 @@
                     }
                 });
             }
-
-
-
 
             $('.summernote').summernote({
                 toolbar: [
@@ -1058,10 +1026,17 @@
                 lang: "ko-KR"
             });
 
-
-
-
+            $('.btn_reset').off().on('click',function(){
+                $('.srch_filtp1 label').removeClass('active');
+                $('.srch_filtp1 input').attr('checked',false);
+                $('.srch_filtp1 label').eq(0).addClass('active');
+                $('.srch_filtp1 input').eq(0).attr('checked',true);
+                $('.srch_filtp2 label').removeClass('active');
+                $('.srch_filtp2 input').attr('checked',false);
+            });
+            $('.btn_search').off().on('click',function(){
+                pageLoad("c431_site_adver_mng", {page_num:1,fil1:$('.srch_filtp1 label.active input').val(),fil2:$('.srch_filtp2 label.active input').val()}, "홍보자료 관리",'site_adver_mng');
+            });
         </script>
 <!-- / Layout footer -->
-
 <!-- / Page content -->
