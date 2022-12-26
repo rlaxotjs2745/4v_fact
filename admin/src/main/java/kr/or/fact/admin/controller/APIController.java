@@ -1370,16 +1370,16 @@ public class APIController {
     }
 
     @RequestMapping(value = "/insert_popup",method = RequestMethod.POST)
-    public @ResponseBody ResultVO insertPopupContent (@ModelAttribute WebMainPopupVO webMainPopupVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
+    public @ResponseBody ResultVO insertPopupContent (@RequestBody WebMainPopupVO webMainPopupVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
         resultVO.setResult_str("데이터를 다시 입력해주세요");
 
-        if(webMainPopupVO.getSubject() != null || webMainPopupVO.getSubject() != "" && webMainPopupVO.getFiles1() != null){
+        if(webMainPopupVO.getSubject() != null || webMainPopupVO.getSubject() != "" && webMainPopupVO.getFile1() != null){
             webMainPopupService.insertPopupContent(webMainPopupVO);
 
-            fileService.convertMultipartToFile(webMainPopupVO.getFiles1());
-            fileService.insertPopupFile(webMainPopupVO.getFiles1(), webMainPopupVO.getIdx_admin());
+            fileService.convertMultipartToFile(webMainPopupVO.getFile1());
+            fileService.insertPopupFile(webMainPopupVO.getFile1(), webMainPopupVO.getIdx_admin());
 
             resultVO.setResult_str("업데이트에 성공하였습니다.");
             resultVO.setResult_code("SUCCESS");

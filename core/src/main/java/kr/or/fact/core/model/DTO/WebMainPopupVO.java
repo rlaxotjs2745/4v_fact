@@ -19,5 +19,5 @@ public class WebMainPopupVO {
     Date last_upd_date; // 마지막 수정일
     long idx_file_info;
 
-    MultipartFile files1;
+    MultipartFile file1;
 }
