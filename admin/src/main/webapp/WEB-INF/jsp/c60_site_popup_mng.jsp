@@ -40,7 +40,7 @@
                                         <c:forEach items = "${webMainPopupList}" var ="popupinfo">
                                             <fmt:parseDate value="${popupinfo.startDate}" var="startDate" pattern="yyyy-MM-dd"/>
                                             <fmt:parseDate value="${popupinfo.endDate}" var="endDate" pattern="yyyy-MM-dd"/>
-                                            <tr class="popup-entity" id="${popupinfo.idx_popup_img}">
+                                            <tr class="popup-entity" id="${popupinfo.idx_popup_img}" data-contents-type="1">
                                                 <td class="text-center">${popupinfo.subject}</td>
                                                 <td class="text-center">${popupinfo.popup_url}</td>
                                                 <td class="text-center"><fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd"/></td>
@@ -100,7 +100,7 @@
                 </div>
             </h6>
             <div class="card-datatable table-responsive pt-0 pb-3">
-                <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                <div class="dataTables_wrapper dt-bootstrap4 no-footer">
                     <div class="row">
                         <div class="col-sm-12">
                             <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
@@ -117,15 +117,15 @@
                                 <c:choose>
                                     <c:when test="${fn:length(webMainBannerList)>0}">
                                         <c:forEach items = "${webMainBannerList}" var ="bannerinfo">
-                                            <tr class="popup-entity" data-idx="${bannerinfo.idx_popup_img}">
+                                            <tr class="popup-entity" id="${bannerinfo.idx_popup_img}" data-contents-type="2">
                                                 <td class="text-center">${bannerinfo.is_show}</td>
                                                 <td class="text-center">${bannerinfo.popup_url}</td>
                                                 <td class="text-center"><fmt:formatDate value="${bannerinfo.reg_date}" pattern="yyyy년 MM월 dd일"/></td>
                                                 <td class="text-center">${bannerinfo.admin_name}</td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
-                                                        <button class="btn btn-sm btn-default" data-toggle="modal" data-target="#modals-modify"><span class="fas fa-pen" > </span></button>
-                                                        <button onclick="organizationDelete(this)" class="btn btn-sm btn-default"><span class="fas fa-trash-alt" > </span></button>
+                                                        <button class="btn btn-sm btn-default" data-toggle="modal" data-target="#modals-brand-popup" data-what="mode-update"><span class="fas fa-pen" > </span></button>
+                                                        <button onclick="sitePopupDelete(this)" class="btn btn-sm btn-default"><span class="fas fa-trash-alt" > </span></button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -226,23 +226,23 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header bg-success">
-                        <h5 class="modal-title text-white font-weight-bold mode-new">브랜드 이미지 등록</h5>
+                        <h5 id="brand-modal-title" class="modal-title text-white font-weight-bold mode-new">브랜드 이미지 등록</h5>
                         <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
                     <div class="modal-body">
-                        <form>
-                            <input type="hidden" name="idx_popup_img" value="${admin.idx_admin}">
+                        <form id="brandPopupForm">
+                            <input type="hidden" name="idx_brand_admin" value="${admin.idx_admin}">
                             <div class="form-group row">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">제목</label>
                                 <div class="col-md-10">
-                                    <input type="text" name="subject" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요">
+                                    <input type="text" name="brand_subject" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">배너 순서</label>
                                 <div class="col-md-10" style="padding-top: 5px">
-                                    <select id="" name="" class="custom-select custom-select-sm w-auto">
+                                    <select id="brand_is_show" name="brand_is_show" class="custom-select custom-select-sm w-auto">
                                         <option value="1" selected>1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -252,7 +252,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">링크</label>
                                 <div class="col-md-10">
-                                    <input type="text" name="popup_url" class="form-control form-control-md mode-edit mode-new" placeholder="링크를 입력해 주세요">
+                                    <input type="text" name="brand_popup_url" class="form-control form-control-md mode-edit mode-new" placeholder="링크를 입력해 주세요">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -275,7 +275,7 @@
                                 </div>
 
                                 <div>
-                                    <button id="" type="button" class="btn btn-primary">등록</button>
+                                    <button id="brand_popup_submit" type="button" class="btn btn-primary">등록</button>
                                 </div>
 
                             </div>
@@ -430,10 +430,32 @@
                 $('#modal-title').text('팝업 등록')
                 $('#popup_submit').text('등록')
                 $('#popupForm')[0].reset()
+                $('#preview-image').attr('src', '')
             } else if (what === 'mode-update') {
                 console.log('수정')
                 $('#modal-title').text('팝업 수정')
                 $('#popup_submit').text('수정')
+            }
+
+        })
+    });
+
+    $(function() {
+        // 모달 팝업 띄울 시 발생하는 이벤트 (이벤트명 : show.bs.modal)
+        $('#modals-brand-popup').on('show.bs.modal', function (event) {
+            let button = $(event.relatedTarget);
+            let what = button.data('what');
+
+            if (what === 'mode-new') {
+                console.log('새로작성')
+                $('#brand-modal-title').text('브랜드 이미지 등록')
+                $('#brand_popup_submit').text('등록')
+                $('#brandPopupForm')[0].reset()
+                $('#brand-preview-image').attr('src', '')
+            } else if (what === 'mode-update') {
+                console.log('수정')
+                $('#brand-modal-title').text('브랜드 이미지 수정')
+                $('#brand_popup_submit').text('수정')
             }
 
         })
@@ -498,11 +520,11 @@
                     console.log(result);
                     if (result.result_code === "SUCCESS") {
                         alert(result.result_str);
-                        $('body').removeClass('modal-open');
-                        $('body').css('padding-right', '');
-                        $('#modals-modify').modal("hide")
-                        $(".modal-backdrop").remove();
-                        pageLoad('c60_site_popup_mng',{page_num:1},'포탈 팝업관리');
+                        // $('body').removeClass('modal-open');
+                        // $('body').css('padding-right', '');
+                        // $('#modals-modify').modal("hide")
+                        // $(".modal-backdrop").remove();
+                        window.location.reload()
                     }
                     else {
 
@@ -529,11 +551,7 @@
                     console.log(result);
                     if (result.result_code === "SUCCESS") {
                         alert(result.result_str);
-                        $('body').removeClass('modal-open');
-                        $('body').css('padding-right', '');
-                        $('#modals-modify').modal("hide")
-                        $(".modal-backdrop").remove();
-                        pageLoad('c60_site_popup_mng',{page_num:1},'포탈 팝업관리');
+                        window.location.reload()
                     }
                     else {
 
@@ -549,36 +567,150 @@
 
     function sitePopupDelete(but){
 
-        var $row = $(but).parents('tr');  //accede a la fila
-        var $cols = $row.find('td');  //lee campos
+        let $row = $(but).parents('tr');  //accede a la fila
+        let $cols = $row.find('td');  //lee campos
 
-        var param ={
-            idx_popup_img:$row.attr('id'),
-            contents_type:1
+        let dataType = $row.attr('data-contents-type')
+        console.log($row.attr('id'))
+
+        if(dataType === "1") {
+            let param = {
+                idx_popup_img: $row.attr('id'),
+                contents_type: 1
+            }
+            $.ajax({
+                type: 'post',
+                url: 'delete_popup', //데이터를 주고받을 파일 주소 입력
+                data: JSON.stringify(param),//보내는 데이터
+                contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+                dataType: 'json',//받는 데이터 타입
+                success: function (result) {
+                    console.log(result)
+                    if (result.result_code === "SUCCESS") {
+                        alert(result.result_str);
+                        window.location.reload()
+                    } else {
+                        // alert("상태 변경에 실패하였습니다")
+                        console.log(result)
+                    }
+
+                },
+                error: function (res) {
+                    console.log(res)
+                }
+            });
         }
 
-        $.ajax({
-            type: 'post',
-            url: 'delete_popup', //데이터를 주고받을 파일 주소 입력
-            data: JSON.stringify(param),//보내는 데이터
-            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
-            dataType: 'json',//받는 데이터 타입
-            success: function (result) {
-                console.log(result)
-                if (result.result_code === "SUCCESS") {
-                    alert(result.result_str);
-                    pageLoad('c60_site_popup_mng',{page_num:1},'포털 팝업관리');
-                } else {
-                    // alert("상태 변경에 실패하였습니다")
-                    console.log(result)
-                }
 
-            },
-            error: function (res) {
-                console.log(res)
+        if(dataType === "2") {
+            let param ={
+                idx_popup_img:$row.attr('id'),
+                contents_type:2
             }
-        });
+            $.ajax({
+                type: 'post',
+                url: 'delete_popup', //데이터를 주고받을 파일 주소 입력
+                data: JSON.stringify(param),//보내는 데이터
+                contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+                dataType: 'json',//받는 데이터 타입
+                success: function (result) {
+                    console.log(result)
+                    if (result.result_code === "SUCCESS") {
+                        alert(result.result_str);
+                        window.location.reload()
+                    } else {
+                        // alert("상태 변경에 실패하였습니다")
+                        console.log(result)
+                    }
+
+                },
+                error: function (res) {
+                    console.log(res)
+                }
+            });
+        }
+
+
+
+
     }
+
+    $('#brand_popup_submit').on('click',function(event){
+        // console.log(this.innerText, '버튼 클릭한 텍스트 값')
+        const btnTextState = this.innerText;
+
+        if(btnTextState === '등록') {
+            if(document.getElementById('brand_image_upload').files[0] === null || document.getElementById('brand_image_upload').files[0] === undefined){
+                return alert('이미지 파일은 필수입니다')
+            }
+        }
+
+        let formData = new FormData();
+
+        formData.append('subject', $("input[name=brand_subject]").val());
+        formData.append('contents_type', '2'); // 타입 1:팝업 , 2:배너
+        formData.append('popup_url', $("input[name=brand_popup_url]").val());
+        formData.append('is_show', $("#brand_is_show").val()); // 타입 1:팝업 , 2:배너
+        formData.append('idx_admin', $("input[name=idx_brand_admin]").val());
+        if(document.getElementById('brand_image_upload').files.length > 0) {
+            formData.append('file1', document.getElementById('brand_image_upload').files[0]);
+        }
+
+
+        if(btnTextState === '등록') {
+
+            $.ajax({
+                type: 'post',
+                url :'insert_banner', //데이터를 주고받을 파일 주소 입력
+                data: formData,//보내는 데이터
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(result){
+                    //작업이 성공적으로 발생했을 경우
+                    console.log(result);
+                    if (result.result_code === "SUCCESS") {
+                        alert(result.result_str);
+                        window.location.reload()
+                    }
+                    else {
+
+                    }
+                },
+                error:function(error){
+                    //에러가 났을 경우 실행시킬 코드
+                }
+            });
+        }
+
+        if (btnTextState === '수정') {
+            // formData.append('idx_popup_img', $("input[name=idx_popup]").val());
+
+            $.ajax({
+                type: 'post',
+                url :'modify_banner', //데이터를 주고받을 파일 주소 입력
+                data: formData,//보내는 데이터
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(result){
+                    //작업이 성공적으로 발생했을 경우
+                    console.log(result);
+                    if (result.result_code === "SUCCESS") {
+                        alert(result.result_str);
+                        window.location.reload()
+                    }
+                    else {
+
+                    }
+                },
+                error:function(error){
+                    //에러가 났을 경우 실행시킬 코드
+                }
+            });
+        }
+
+    })
 </script>
 <!-- / Page content -->
 
