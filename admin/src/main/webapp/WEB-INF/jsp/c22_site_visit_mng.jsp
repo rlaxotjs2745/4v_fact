@@ -1019,26 +1019,6 @@
                         let possible_count_pm=Math.trunc(possible_count/1000);
 
 
-                        // console.log("possible_count : " +  possible_count);
-                        // console.log("resulvation_count : " + resulvation_count);
-                        // console.log("is_admin_cancel : "  +is_admin_cancel);
-                        // console.log("impossible_reason : " + impossible_reason);
-                        // console.log("memo  :" +memo);
-                        // console.log("group_idx : " + group_idx);
-                        // console.log("idx_admin : " +idx_admin);
-
-                        //     long idx_visit_data;//	number	32			◯		인덱스	auto increase
-                        // Date cur_date;//	date						해당일
-                        // int possible_count;//	number	10		0			오전, 오후 각각에 해당, 별도로 설정하기 위해 1단위는 오전 천단위는 오후
-                        // int resulvation_count;//	number	10		0			오전, 오후 각각에 해당, 별도로 설정하기 위해 1단위는 오전 천단위는 오후
-                        // int is_admin_cancel;//	number	4		0			관리자 강제 취소	0:해당 없음, 1:강제취소, 강제 취소 시 예약자에게 알리는 업무를 위함
-                        // String impossible_reason;//	varchar2	400					불가 이유
-                        // int visit_data_type;//	number	4		0			0:관리자 취소, 1:오전, 2:오후, 3:오전오후(1+2), 4:전일
-                        // String memo;//	varchar2	1000					메모
-                        // long group_idx;//	number	32		0		◯	일괄 등록 시 그룹으로 묶기	그룹 삭제를 위해
-                        // long idx_admin;//	number	32				◯	작성자	idx_admin index pk
-                        // Date reg_date;//	date						최초 등록 일시
-
 
                         if (ampm == 1) {
                             item1.id='a';
@@ -1478,8 +1458,36 @@
 
                 let group_idx=visitData.group_idx;
 
+                let param={
+                    group_idx: group_idx
+                }
 
-             
+                $.ajax({
+                    type: 'post',
+                    url: 'get_visit_data_byGroupIdx', //데이터를 주고받을 파일 주소 입력
+                    data: JSON.stringify(param),//보내는 데이터
+                    contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+                    dataType: 'text',//받는 데이터 타입
+                    success:function (result){
+                        let data=JSON.parse(result);
+                        let array_data=data["visitDataVOList"]
+                        $.each(array_data, function(key, item) {
+
+                            let cur_date = new Date(item.cur_date);
+
+                            console.log("cur_date  : " +cur_date);
+
+
+                        });
+                    }
+                });
+
+
+
+
+
+
+
 
 
 
@@ -1525,11 +1533,11 @@
             defaultCalendar.refetchEvents();
         });
 
-        //
-        // function setEnabled()
-        // {
-        //     enableRequest = true;
-        // }
+
+        function setEnabled()
+        {
+            enableRequest = true;
+        }
 
         // function getReservationInfo(date, dur){
         //     var param = {

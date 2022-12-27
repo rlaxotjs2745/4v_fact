@@ -42,5 +42,5 @@ public interface VisitService {
 
     int getGroupIdx();
 
-    List<VisitDataVO> getVisitDataListByGroupIdx(@Param("group_idx") long group_idx);
+    List<VisitDataVO> getVisitDataListByGroupIdx(long group_idx);
 }
