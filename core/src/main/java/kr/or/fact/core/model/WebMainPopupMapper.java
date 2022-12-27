@@ -1,6 +1,5 @@
 package kr.or.fact.core.model;
 
-import kr.or.fact.core.model.DTO.HomepageInfoVO;
 import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 import kr.or.fact.core.model.DTO.WebMainPopupVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -18,5 +17,13 @@ public interface WebMainPopupMapper {
     void updatePopupContent(WebMainPopupVO webMainPopupVO);
 
     void deletePopupContent(WebMainPopupVO webMainPopupVO);
+
+    void insertBannerContent(WebMainPopupVO webMainPopupVO);
+
+    void updateBannerContent(WebMainPopupVO webMainPopupVO);
+
+    WebMainPopupVO getBannerOrder(int is_show);
+
+    void deleteBannerOrder(WebMainPopupVO bannerOri);
 }
 
