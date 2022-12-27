@@ -58,7 +58,7 @@
                                     </c:when>
                                     <c:otherwise>
                                         <tr class="">
-                                            <td colspan="7" class="text-center">아이템이 없어요</td>
+                                            <td colspan="7" class="text-center">등록된 팝업이 없습니다.</td>
                                         </tr>
                                     </c:otherwise>
                                 </c:choose>
@@ -117,7 +117,7 @@
                                 <c:choose>
                                     <c:when test="${fn:length(webMainBannerList)>0}">
                                         <c:forEach items = "${webMainBannerList}" var ="bannerinfo">
-                                            <tr class="popup-entity" id="${bannerinfo.idx_popup_img}" data-contents-type="2">
+                                            <tr class="banner-entity" id="${bannerinfo.idx_popup_img}" data-contents-type="2">
                                                 <td class="text-center">${bannerinfo.is_show}</td>
                                                 <td class="text-center">${bannerinfo.popup_url}</td>
                                                 <td class="text-center"><fmt:formatDate value="${bannerinfo.reg_date}" pattern="yyyy년 MM월 dd일"/></td>
@@ -133,7 +133,7 @@
                                     </c:when>
                                     <c:otherwise>
                                         <tr class="">
-                                            <td colspan="7" class="text-center">아이템이 없어요</td>
+                                            <td colspan="7" class="text-center">등록된 브랜드 이미지가 없습니다.</td>
                                         </tr>
                                     </c:otherwise>
                                 </c:choose>
@@ -231,6 +231,7 @@
                     </div>
                     <div class="modal-body">
                         <form id="brandPopupForm">
+                            <input type="hidden" name="brand_idx_popup" value="">
                             <input type="hidden" name="idx_brand_admin" value="${admin.idx_admin}">
                             <div class="form-group row">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">제목</label>
@@ -258,7 +259,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">이미지</label>
                                 <div class="col-md-10 file_upload_box">
-                                    <input class="form-control form-control-md mode-edit mode-new upload-name" value="파일선택" disabled="disabled">
+                                    <input class="form-control form-control-md mode-edit mode-new upload-name" name="brand-upload-name" value="파일선택" disabled="disabled">
                                     <input type="file" id="brand_image_upload" name="file2" class="upload-hidden" accept="image/*">
                                     <label for="brand_image_upload" class="btn btn-success">이미지 업로드</label>
                                 </div>
@@ -338,7 +339,38 @@
         }
     });
 
-    console.log(popupList)
+    const bannerList=[];
+    <c:forEach items="${webMainBannerList}" var="banner" varStatus="status">
+    bannerList.push({
+        idx_popup_img :"${banner.idx_popup_img}",
+        subject :"${banner.subject}",
+        popup_url :"${banner.popup_url}",
+        is_show :"${banner.is_show}",
+        reg_date :"${banner.reg_date}",
+        idx_admin :"${banner.idx_admin}",
+        idx_file_info :"${banner.idx_file_info}",
+        admin_name :"${banner.admin_name}",
+        file_path :"${banner.file_path}"
+    })
+    </c:forEach>
+
+    $(".banner-entity").click(function(){
+        var selectId = $(this).attr("id");
+        for(var banner of bannerList){
+            if(selectId === banner.idx_popup_img){
+                $("input[name=brand_idx_popup]").val(banner.idx_popup_img);
+                $("input[name=brand_subject]").val(banner.subject);
+                $("input[name=brand-upload-name]").val(banner.file_path);
+
+                $("input[name=brand_popup_url]").val(banner.popup_url);
+                $("#brand_is_show").val(banner.is_show);
+                $("#brand-preview-image").attr("src", banner.file_path);
+
+                break;
+            }
+        }
+    });
+
 
     $(document).ready(function(){
         var fileTarget = $('.file_upload_box .upload-hidden');
@@ -684,8 +716,7 @@
         }
 
         if (btnTextState === '수정') {
-            // formData.append('idx_popup_img', $("input[name=idx_popup]").val());
-
+            formData.append('idx_popup_img', $("input[name=brand_idx_popup]").val());
             $.ajax({
                 type: 'post',
                 url :'modify_banner', //데이터를 주고받을 파일 주소 입력
