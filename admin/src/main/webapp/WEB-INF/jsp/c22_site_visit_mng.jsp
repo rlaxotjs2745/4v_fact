@@ -480,7 +480,7 @@
                                     </label>
                                 </div>
                             </div>
-<%--                           인덱스 <input type="text" name="idx_visit_data"> <!--인덱스 -->--%>
+                           <input type="hidden" name="idx_visit_data"> <!--인덱스 -->
 
 
 
@@ -490,9 +490,23 @@
 
                             <div class="form-group row">
 
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold d-block">해당 날짜</label>
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold d-block">선택 날짜</label>
                                 <div class="col-md-4">
                                     <input type="text" name="cur_date" class="form-control form-control-md" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">오전 / 오후 </label>
+                                <div class="form-inline col-md-10">
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="visit_data_type"  type="checkbox" class="custom-control-input" value="1" checked>
+                                        <span class="custom-control-label">오전</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox mr-16">
+                                        <input name="visit_data_type"  type="checkbox" class="custom-control-input" value="2" checked>
+                                        <span class="custom-control-label">오후</span>
+                                    </label>
                                 </div>
                             </div>
 
@@ -522,34 +536,7 @@
                             </div>
 
 
-<%--                            <div class="form-group row">--%>
-<%--                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">관리자 강제 취소</label>--%>
-<%--                                <div class="col-md-4">--%>
-<%--                                    <input type="text" name="id_admin_cancel"  >--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
 
-
-                            <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">불가 이유</label>
-                                <div class="col-md-4">
-                                    <input type="text"  name="impossible_reason" class="form-control form-control-md" readonly >
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">오전 / 오후 </label>
-                                <div class="form-inline col-md-10">
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="visit_data_type"  type="checkbox" class="custom-control-input" value="1" checked>
-                                        <span class="custom-control-label">오전</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="visit_data_type"  type="checkbox" class="custom-control-input" value="2" checked>
-                                        <span class="custom-control-label">오후</span>
-                                    </label>
-                                </div>
-                            </div>
 
                             <div class="form-group row">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메모</label>
@@ -566,21 +553,30 @@
                                 </div>
                             </div>
 
-
                             <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">작성자</label>
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">불가 이유</label>
                                 <div class="col-md-4">
-                                    <input type="text" id="" name="" class="form-control form-control-md" readonly>
+                                    <input type="text"  name="impossible_reason" class="form-control form-control-md" readonly >
                                 </div>
                             </div>
 
+<%--                            <div class="form-group row" id="checkboxDiv">--%>
+
+<%--                            </div>--%>
+
+
                             <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2  font-weight-bold">같은 그룹 날짜</label>
-                                <textarea  class="form-control" readonly="true" style="resize:none"/>
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">해당 그룹 날짜 </label>
+                                <div class="form-inline col-md-10"  id="checkboxDiv">
+
+
+                                </div>
                             </div>
 
-
-
+<%--                            <div class="form-group row">--%>
+<%--                                <label class="col-form-label col-form-label-md col-md-2  font-weight-bold">같은 그룹 날짜</label>--%>
+<%--                                <textarea  class="form-control" readonly="true" style="resize:none"/>--%>
+<%--                            </div>--%>
 
 
                         </form>
@@ -593,6 +589,7 @@
                         <div>
                             <button id="btn_modify_new" type="button" class="btn btn-primary">수정</button>
                             <button id="btn_delete_new" type="button" class="btn btn-primary">삭제</button>
+
                         </div>
                     </div>
                 </div>
@@ -603,7 +600,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header bg-success">
-                        <h5 class="modal-title text-white font-weight-bold">신청일 추가/변경</h5>
+                        <h5 class="modal-title text-white font-weight-bold">신청일 추가</h5>
                         <button id="modals-code-new-close" type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
                     <div class="modal-body">
@@ -628,7 +625,7 @@
                                 </div>
                             </div>
 
-                            <input type="hidden" id="idx_admin" name="idx_admin" value="${admin.idx_admin}">
+<%--                            <input type="hidden" id="idx_admin" name="idx_admin" value="${admin.idx_admin}">--%>
                             <div class="form-group row">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">시작 날짜</label>
                                 <div class="col-md-3">
@@ -652,11 +649,11 @@
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">오전 / 오후 선택</label>
                                 <div class="form-inline col-md-10">
                                     <label class="custom-control custom-checkbox mr-16">
-                                        <input name="ampm_new"  type="checkbox" class="custom-control-input" value="1" checked>
+                                        <input id="ampm_am" name="ampm_new"  type="checkbox" class="custom-control-input" value="1" checked>
                                         <span class="custom-control-label">오전</span>
                                     </label>
                                     <label class="custom-control custom-checkbox mr-16">
-                                        <input name="ampm_new"  type="checkbox" class="custom-control-input" value="2" checked>
+                                        <input id="ampm_pm" name="ampm_new"  type="checkbox" class="custom-control-input" value="2" checked>
                                         <span class="custom-control-label">오후</span>
                                     </label>
                                 </div>
@@ -902,30 +899,30 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수 오전</label>
                                     <div class="col-md-4">
-                                        <input type="text" id="possible_count_am" name="possible_count_am"  placeholder="숫자만 입력가능합니다" oninput="this.value = this.value.replace(/[^0-9]/g,'');">
+                                        <input type="text" id="possible_count_am" name="possible_count_am"  placeholder="숫자만 입력가능합니다"  class="form-control form-control-md" checked  oninput="this.value = this.value.replace(/[^0-9]/g,'');">
                                     </div>
                                 </div>
+
+
+
 
                                 <div class="form-group row">
                                     <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수 오후</label>
                                     <div class="col-md-4">
-                                        <input type="text" id="possible_count_pm" name="possible_count_pm"  placeholder="숫자만 입력가능합니다" oninput="this.value = this.value.replace(/[^0-9]/g,'');">
+                                        <input type="text" id="possible_count_pm" name="possible_count_pm"  placeholder="숫자만 입력가능합니다"  class="form-control form-control-md"   oninput="this.value = this.value.replace(/[^0-9]/g,'');">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메모</label>
                                     <div class="col-md-10">
-                                        <textarea id="memo" name="memo"></textarea>
+                                        <textarea id="memo" name="memo" class="form-control" style="resize:none"></textarea>
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">작성자</label>
-                                    <div class="col-md-10">
-                                        <div class="form-control-plaintext">${admin.admin_name}</div>
-                                    </div>
-                                </div>
+
+
+
                             </div>
                             <%--                            <div id="none_req">--%>
                             <%--                                <div class=""--%>
@@ -958,6 +955,7 @@
 </div>
 <!-- / Layout footer -->
 <script>
+
 
     $(document).ready(function(){
 
@@ -1015,9 +1013,6 @@
                         let group_idx=item.group_idx;
                         let idx_admin=item.idx_admin;
 
-                        console.log("possible_count : " + possible_count);
-                        console.log("resulvation_count : " + resulvation_count);
-
                         let resulvation_count_am=resulvation_count%1000;
                         let resulvation_count_pm=Math.trunc(resulvation_count/1000);
 
@@ -1037,12 +1032,10 @@
                                 idx_visit_data : idx_visit_data,
                                 cur_date : cur_date,
                                 visit_data_type : visit_data_type,
-                                // possible_count : possible_count,
                                 possible_count_am : possible_count_am ,
                                 possible_count_pm : possible_count_pm,
                                 resulvation_count_am : resulvation_count_am,
                                 resulvation_count_pm : resulvation_count_pm,
-                                // resulvation_count: resulvation_count,
                                 is_admin_cancel : is_admin_cancel,
                                 impossible_reason :impossible_reason ,
                                 memo : memo,
@@ -1060,12 +1053,10 @@
                                 idx_visit_data : idx_visit_data,
                                 cur_date : cur_date,
                                 visit_data_type : visit_data_type,
-                                // possible_count : possible_count,
                                 possible_count_am : possible_count_am ,
                                 possible_count_pm : possible_count_pm,
                                 resulvation_count_am : resulvation_count_am,
                                 resulvation_count_pm : resulvation_count_pm,
-                                resulvation_count: resulvation_count,
                                 is_admin_cancel : is_admin_cancel,
                                 impossible_reason :impossible_reason ,
                                 memo : memo,
@@ -1083,12 +1074,10 @@
                                 idx_visit_data : idx_visit_data,
                                 cur_date : cur_date,
                                 visit_data_type : visit_data_type,
-                                // possible_count : possible_count,
                                 possible_count_am : possible_count_am ,
                                 possible_count_pm : possible_count_pm,
                                 resulvation_count_am : resulvation_count_am,
                                 resulvation_count_pm : resulvation_count_pm,
-                                resulvation_count: resulvation_count,
                                 is_admin_cancel : is_admin_cancel,
                                 impossible_reason :impossible_reason ,
                                 memo : memo,
@@ -1109,7 +1098,6 @@
                                 idx_visit_data : idx_visit_data,
                                 cur_date : cur_date,
                                 visit_data_type : visit_data_type,
-                                // possible_count : possible_count,
 
                                 possible_count_am : possible_count_am ,
                                 possible_count_pm : possible_count_pm,
@@ -1192,7 +1180,7 @@
                 left: window.location.pathname != '/a10_dashboard' ? 'prev,next today' : null,
                 // right: 'addEventButton dayGridMonth,timeGridWeek,timeGridDay'
                 right : window.location.pathname != '/a10_dashboard' ? 'addEventButton' : null
-            
+
             },
 
             customButtons:
@@ -1202,8 +1190,6 @@
                     {
                     text:'일정 추가하기',
                     click : function(){
-                            alert ('버튼클릭');
-                            alert(today);
                             let x = new Date();
                             $("#saveVisitData").find("input[name='sDate']").val(x.yyyymmdd());
                             $("#saveVisitData").find("input[name='eDate']").val(x.yyyymmdd());
@@ -1482,35 +1468,34 @@
                     success:function (result){
                         let data=JSON.parse(result);
                         let array_data=data["visitDataVOList"]
+
+                        let inputval="";
+
                         $.each(array_data, function(key, item) {
 
-                            let cur_date = new Date(item.cur_date);
+                            let cur_date = new Date(item.cur_date).yyyymmdd();
+                            let idx_visit_data=item.idx_visit_data;
 
-                            console.log("cur_date  : " +cur_date);
+
+
+                            // inputval +="<input type='checkbox' value='" + cur_date + "'>"+cur_date + "&emsp;"
+
+                            inputval +="<input type='hidden' name='idx_visit_data_temp' value='" + idx_visit_data + "'>"
+                            inputval+=cur_date + "&emsp;"
+                            // inputval+=cur_date + "&emsp;" + idx_visit_data + "&emsp;"
+
+
+
 
 
                         });
+                        $("#checkboxDiv").html(inputval);
                     }
                 });
-
-
-
-
-
-
-
-
-
-
 
                 $("#modifyOrDeleteVisitData").modal('show');
 
             }: null,
-
-
-
-
-
 
         });
 
@@ -1861,7 +1846,10 @@
 
 
 
-    }); //document ready 의 끝
+
+
+
+        }); //document ready 의 끝
 
 
     Date.prototype.yyyymmdd = function() {
@@ -2050,11 +2038,18 @@
                 dataType: 'text',//받는 데이터 타입
                 success: function (result) {
                     //작업이 성공적으로 발생했을 경우
-                    alert(result.result_str);
+
+                    let data=JSON.parse(result);
+
+                    console.log("result.result_str : " + data.result_str);
+                    alert(data.result_str);
+
                     //STATUS_001 :
                 },
                 error: function (request,status,error) {
-                    // alert(result.result_str);
+                    console.log("result.result_str error : " + result.result_str);
+                    alert(result.result_str);
+
                     //에러가 났을 경우 실행시킬 코드
                     alert("code : " + request.status + "\n" +  "message: "+  request.responseText +  "\n" + "error:" + error);
 
@@ -2092,7 +2087,19 @@
     }
 
 
-    //모달창 화면 상세설정
+
+    // //일정 추가 모달창 오전 오후
+    // $("#ampm_am").change(function(){
+    //     if($("#ampm_am").is(":checked")){
+    //         alert('체크');
+    //     }else{
+    //         alert('체크해제 ');
+    //     }
+    //
+    // });
+
+
+    //일정 추가 모달창 화면 상세설정
     $("input:radio[name=repeat_type_new]").on('click',function (){
 
         let repeat_type_new = $("input:radio[name='repeat_type_new']:checked").val();
@@ -2214,7 +2221,7 @@
     //해당일 그룹 구분
     $("#modifyOrDeleteVisitData").find("input:radio[name='dayOrGroup']").on('change',function (){
 
-        alert($(this).val());
+
         if($(this).val()==1){
 
 
@@ -2228,18 +2235,43 @@
 
     $("#btn_delete_new").on('click',function (){
 
+        //그룹삭제
+        let radioVal=$("#modifyOrDeleteVisitData").find("input:radio[name='dayOrGroup']:checked").val();
+
         if(confirm("삭제하시겠습니까?")){
 
-            let idx_visit_data=$("#modifyOrDeleteVisitData").find("input[name='idx_visit_data']").val();
 
+            let idx_visit_data=$("#modifyOrDeleteVisitData").find("input[name='idx_visit_data']").val();
             let visitDataVoDelList=new Array();
 
-            let visitDataVoDel={
-                idx_visit_data : idx_visit_data
+            if(radioVal==1){
+
+                let visitDataVoDel={
+                    idx_visit_data : idx_visit_data
+
+                }
+
+                visitDataVoDelList.push(visitDataVoDel);
+
+
+
+            }else if(radioVal==2){
+
+                let idx_visit_data_arr=new Array();
+
+                $("input[name='idx_visit_data_temp']").each(function (){
+
+                   var tempValue=$(this).val();
+                   idx_visit_data_arr.push(tempValue);
+                    let visitDataVoDel= {
+                        idx_visit_data: $(this).val()
+                    }
+
+                    visitDataVoDelList.push(visitDataVoDel);
+                });
+
             }
 
-
-            visitDataVoDelList.push(visitDataVoDel);
 
             $.ajax({
                 type:'post',
@@ -2249,19 +2281,20 @@
                 dataType: 'text',//받는 데이터 타입
                 success: function (result) {
                     //작업이 성공적으로 발생했을 경우
-                    alert(result.result_str);
+                    let data = JSON.parse(result);
+                    alert(data.result_str);
                     //STATUS_001 :
 
                 },
                 error: function (request,status,error) {
-                    // alert(result.result_str);
+
                     //에러가 났을 경우 실행시킬 코드
                     alert("code : " + request.status + "\n" +  "message: "+  request.responseText +  "\n" + "error:" + error);
 
                 }
 
 
-            }); //ajax의 끝
+            });
 
 
 
@@ -2285,9 +2318,6 @@
             $("#saveVisitData").find("input[name='eDate']").val(new Date(sDate).yyyymmdd());
         }
     });
-
-
-
 
 
 

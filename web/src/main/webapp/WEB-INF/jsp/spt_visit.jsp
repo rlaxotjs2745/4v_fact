@@ -426,12 +426,10 @@
 
         setVisitCalendar(today);
         $('#demoEvoCalendar').on('selectEvent', function(event, activeEvent) {
-            // alert("1");
             // code here...
         });
 
         $("#demoEvoCalendar").on('selectYear',function (event, activeYear){
-           alert('년도 클릭 : '  + activeYear);
            y=activeYear;
 
         });
@@ -907,7 +905,6 @@
         }).open();
     });
 
-    //견학신청서 작성시에 오전 오후에 따른 라디오 비활성화
 
 
     //모달팝업 인풋값 초기화
