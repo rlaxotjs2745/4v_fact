@@ -221,6 +221,19 @@ public class IndexController {
         Integer corpCount = corpService.getCorpCount();
         model.addAttribute("corpCount", corpCount);
 
+        DemoBsConsultingVO param0 = new DemoBsConsultingVO();
+        param0.setConsulting_status(-1);
+        int consultingCount = consultingService.getCountConsulting(param0);
+
+        model.addAttribute("consultingCount", consultingCount);
+
+        param = new ParamPageListFilteredVO();
+
+        int visitCount = visitService.getVisitReqCount(param);
+
+        model.addAttribute("visitCount", visitCount);
+
+
 
 
 
