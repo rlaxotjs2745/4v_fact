@@ -10,7 +10,7 @@
                                        USAGE_DETAIL,
                                        IDX_ADMIN,
                                        IDX_FILE_INFO,
-                                       REG_DATE
+                                       REG_DATE)
         VALUES (SEQ_FORM_FILE_INFO.NEXTVAL,
                 #{subject},
                 #{usage_detail},
