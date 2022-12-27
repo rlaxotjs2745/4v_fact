@@ -1545,7 +1545,7 @@ public class APIController {
 
         if(webMainPopupVO.getIdx_popup_img() > 0){
 
-            if(webMainPopupVO.getFile1() != null){
+            if(webMainPopupVO.getFile1() != null && webMainPopupVO.getFile1().getSize() > 0){
                 fileService.convertMultipartToFile(webMainPopupVO.getFile1());
                 long fileIdx = fileService.insertPopupFile(webMainPopupVO.getFile1(), webMainPopupVO.getIdx_admin());
 
@@ -1560,7 +1560,7 @@ public class APIController {
     }
 
     @RequestMapping(value = "/delete_popup",method = RequestMethod.POST)
-    public @ResponseBody ResultVO deletePopupContent (@ModelAttribute WebMainPopupVO webMainPopupVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
+    public @ResponseBody ResultVO deletePopupContent (@RequestBody WebMainPopupVO webMainPopupVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
         resultVO.setResult_str("데이터를 다시 입력해주세요");
@@ -1608,7 +1608,7 @@ public class APIController {
 
         if(webMainPopupVO.getIdx_popup_img() > 0){
 
-            if(webMainPopupVO.getFile1() != null){
+            if(webMainPopupVO.getFile1() != null && webMainPopupVO.getFile1().getSize() > 0){
                 fileService.convertMultipartToFile(webMainPopupVO.getFile1());
                 long fileIdx = fileService.insertPopupFile(webMainPopupVO.getFile1(), webMainPopupVO.getIdx_admin());
 

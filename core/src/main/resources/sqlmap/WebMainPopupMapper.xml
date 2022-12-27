@@ -111,14 +111,14 @@
                                      ENDDATE = TO_DATE(#{endDate},'YYYY-MM-DD HH24-MI-SS'),
                                      IS_SHOW = #{is_show},
                                      IDX_ADMIN = #{idx_admin},
-                                     LAST_UPD_DATE = SYSDATE,
+                                     LAST_UPD_DATE = SYSDATE
                                     <if test='idx_file_info != null'>
-                                     IDX_FILE_INFO = #{idx_file_info}
+                                     ,IDX_FILE_INFO = #{idx_file_info}
                                     </if>
         WHERE IDX_POPUP_IMG = #{idx_popup_img}
     </update>
 
-    <update id="deletePopupContent" parameterType="long">
+    <update id="deletePopupContent" parameterType="kr.or.fact.core.model.DTO.WebMainPopupVO">
         UPDATE TB_WEB_MAIN_POPUP SET
             IS_SHOW = 99
         WHERE IDX_POPUP_IMG = #{idx_popup_img} AND CONTENTS_TYPE = #{contents_type}
@@ -130,9 +130,9 @@
                                     POPUP_URL = #{popup_url},
                                     IS_SHOW = #{is_show},
                                     IDX_ADMIN = #{idx_admin},
-                                    LAST_UPD_DATE = SYSDATE,
+                                    LAST_UPD_DATE = SYSDATE
                                     <if test='idx_file_info != null'>
-                                    IDX_FILE_INFO = #{idx_file_info}
+                                    ,IDX_FILE_INFO = #{idx_file_info}
                                     </if>
         WHERE IDX_POPUP_IMG = #{idx_popup_img}
     </update>
