@@ -1537,6 +1537,43 @@ public class APIController {
         return resultVO;
     }
 
+    @RequestMapping(value = "/modify_popup",method = RequestMethod.POST)
+    public @ResponseBody ResultVO modifyPopupContent (@ModelAttribute WebMainPopupVO webMainPopupVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("데이터를 다시 입력해주세요");
+
+        if(webMainPopupVO.getIdx_popup_img() > 0){
+
+            if(webMainPopupVO.getFile1() != null){
+                fileService.convertMultipartToFile(webMainPopupVO.getFile1());
+                long fileIdx = fileService.insertPopupFile(webMainPopupVO.getFile1(), webMainPopupVO.getIdx_admin());
+
+                webMainPopupVO.setIdx_file_info(fileIdx);
+            }
+            webMainPopupService.updatePopupContent(webMainPopupVO);
+
+            resultVO.setResult_str("수정했습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/delete_popup",method = RequestMethod.POST)
+    public @ResponseBody ResultVO deletePopupContent (@ModelAttribute WebMainPopupVO webMainPopupVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("데이터를 다시 입력해주세요");
+
+        if(webMainPopupVO.getIdx_popup_img() > 0){
+            webMainPopupService.deletePopupContent(webMainPopupVO);
+
+            resultVO.setResult_str("삭제했습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+        return resultVO;
+    }
+
     @RequestMapping(value ="/delete_notice",method = RequestMethod.POST)
     public @ResponseBody
     ResultVO deleteNotice(@RequestBody int idx_notice){

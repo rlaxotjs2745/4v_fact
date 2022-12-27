@@ -5,8 +5,10 @@
 <mapper namespace="kr.or.fact.core.model.WebMainPopupMapper">
 
     <select id="getWebMainPopupCount" resultType="int">
-        SELECT COUNT (*) FROM TB_WEB_MAIN_POPUP
-        WHERE IS_SHOW = 1 OR IS_SHOW = 9
+        SELECT COUNT (*) FROM TB_WEB_MAIN_POPUP A
+                                  INNER JOIN TB_ADMIN B ON A.idx_admin = B.idx_admin
+                                  INNER JOIN TB_FILE_INFO C ON A.IDX_FILE_INFO = C.IDX_FILE_INFO
+        WHERE IS_SHOW = 1 OR IS_SHOW = 9 AND A.CONTENTS_TYPE = 1 AND C.FILE_TYPE = 6
     </select>
 
     <select id="getWebMainPopupList" resultType="kr.or.fact.core.model.DTO.WebMainPopupVO">
@@ -42,6 +44,7 @@
                                         INNER JOIN TB_ADMIN B ON A.idx_admin = B.idx_admin
                                         INNER JOIN TB_FILE_INFO C ON A.IDX_FILE_INFO = C.IDX_FILE_INFO
                           WHERE IS_SHOW = 1 OR IS_SHOW = 9
+                            AND A.CONTENTS_TYPE = 1
                             AND C.FILE_TYPE = 6
                           order by IDX_POPUP_IMG desc
                       )
@@ -75,5 +78,25 @@
                 #{idx_file_info}
                )
     </insert>
+
+    <update id="updatePopupContent" parameterType="long">
+        UPDATE TB_WEB_MAIN_POPUP SET
+                                     SUBJECT = #{subject},
+                                     CONTENTS_TYPE = #{content_type},
+                                     POPUP_URL = #{popup_url},
+                                     STARTDATE = TO_DATE(#{startDate},'YYYY-MM-DD HH24-MI-SS'),
+                                     ENDDATE = TO_DATE(#{endDate},'YYYY-MM-DD HH24-MI-SS'),
+                                     IS_SHOW = #{is_show},
+                                     IDX_ADMIN = #{idx_admin},
+                                     LAST_UPD_DATE = SYSDATE,
+                                     IDX_FILE_INFO = #{idx_file_info}
+        WHERE IDX_POPUP_IMG = #{idx_popup_img}
+    </update>
+
+    <update id="deletePopupContent" parameterType="long">
+        UPDATE TB_HOMEPAGE_INFO SET
+            IS_SHOW = 99
+        WHERE IDX_POPUP_IMG = #{idx_popup_img}
+    </update>
 </mapper>
 

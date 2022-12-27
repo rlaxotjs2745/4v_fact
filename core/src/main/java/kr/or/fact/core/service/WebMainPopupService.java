@@ -12,5 +12,9 @@ public interface WebMainPopupService {
     List<WebMainPopupVO> getWebMainPopupList(ParamPageListFilteredVO param);
 
     void insertPopupContent(WebMainPopupVO webMainPopupVO);
+
+    void updatePopupContent(WebMainPopupVO webMainPopupVO);
+
+    void deletePopupContent(WebMainPopupVO webMainPopupVO);
 }
 
