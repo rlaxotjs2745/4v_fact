@@ -3,16 +3,16 @@
 
 
 <!-- Page content -->
-<div class="container-fluid flex-grow-1 container-p-y">
+<div class="">
 
-    <h4 class="d-flex justify-content-between align-items-center w-100 mt-4">
-        <div>견학일정 관리</div>
-    </h4>
+    <div class="d-flex justify-content-between align-items-center w-100" class="visit_calendar_big_title">
+        <div class="visit_calendar_big_title">견학일정 관리</div>
+    </div>
     <!--//-->
 
-    <div id="month_calendar" class="card mb-4">
+    <div id="month_calendar" class="card mb-4" style="min-height: 550px;">
         <div class="card-body">
-            <div id="fullcalendar-default-view"></div>
+            <div id="fullcalendar-default-view" style="min-height: 500px;"></div>
         </div>
     </div>
 
@@ -953,11 +953,18 @@
 </div>
 
 <!-- Layout footer -->
-<%@include file ="layouts/frame_footer.jsp" %>
+<div id="footer_in_calendar">
+    <%@include file ="layouts/frame_footer.jsp" %>
+</div>
 <!-- / Layout footer -->
 <script>
 
     $(document).ready(function(){
+
+        if(window.location.pathname == '/a10_dashboard'){
+            $('.visit_calendar_big_title').hide();
+            $('#footer_in_calendar').hide();
+        }
 
         var isRtl = $('html').attr('dir') === 'rtl';
         $('.datepickers').datepicker({
@@ -1179,29 +1186,31 @@
                 nextYear: ' ion ion-ios-arrow-dropright-circle scaleX--1-rtl'
             },
 
+
             headerToolbar: {
-                left: 'prev,next today',
                 center: 'title',
+                left: window.location.pathname != '/a10_dashboard' ? 'prev,next today' : null,
                 // right: 'addEventButton dayGridMonth,timeGridWeek,timeGridDay'
-                right : 'addEventButton'
+                right : window.location.pathname != '/a10_dashboard' ? 'addEventButton' : null
+            
             },
 
-            customButtons: {
-                addEventButton: {
+            customButtons:
+                window.location.pathname != '/a10_dashboard' ?
+                {
+                addEventButton:
+                    {
                     text:'일정 추가하기',
                     click : function(){
-                        alert ('버튼클릭');
-                        alert(today);
-                        let x = new Date();
-
-                        $("#saveVisitData").find("input[name='sDate']").val(x.yyyymmdd());
-                        $("#saveVisitData").find("input[name='eDate']").val(x.yyyymmdd());
-                        $("#saveVisitData").modal('show');
-
-
+                            alert ('버튼클릭');
+                            alert(today);
+                            let x = new Date();
+                            $("#saveVisitData").find("input[name='sDate']").val(x.yyyymmdd());
+                            $("#saveVisitData").find("input[name='eDate']").val(x.yyyymmdd());
+                            $("#saveVisitData").modal('show');
+                        }
                     }
-                }
-            },
+                } : {},
             //
 
             // initialDate: today,
@@ -1434,7 +1443,9 @@
             events : getMonthlyData(new Date()),
 
 
-            eventClick: function(calEvent) {
+            eventClick:
+                window.location.pathname != '/a10_dashboard' ?
+                function(calEvent) {
 
                 let visitData=calEvent.event.extendedProps;
 
@@ -1494,7 +1505,7 @@
 
                 $("#modifyOrDeleteVisitData").modal('show');
 
-            },
+            }: null,
 
 
 

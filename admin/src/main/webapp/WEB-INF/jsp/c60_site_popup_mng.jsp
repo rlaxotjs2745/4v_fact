@@ -300,7 +300,7 @@
 <script>
 
     $(document).ready(function(){
-        var fileTarget = $('.file_upl₩oad_box .upload-hidden');
+        var fileTarget = $('.file_upload_box .upload-hidden');
 
         fileTarget.on('change', function(){
             if(window.FileReader){
