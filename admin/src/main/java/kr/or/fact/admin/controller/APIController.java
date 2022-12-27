@@ -93,6 +93,9 @@ public class APIController {
     @Resource(name = "webMainPopupService")
     public WebMainPopupService webMainPopupService;
 
+    @Resource(name = "formFileService")
+    public FormFileService formFileService;
+
     @Autowired
     private FACTConfig factConfig;
 
@@ -726,7 +729,6 @@ public class APIController {
     ResultVO  save_visit_date(HttpSession session,
                              @RequestBody List<VisitDataVO> visitDataVOList){
 
-        System.out.println(visitDataVOList.toString());
 
 
         ResultVO resultVO = new ResultVO();
@@ -742,8 +744,18 @@ public class APIController {
             return resultVO;
         }else{
             for(VisitDataVO visitDataVO:visitDataVOList){
-                visitDataVO.setGroup_idx(groupIdx);
-                System.out.println(" visitDataVO.getGroup_idx : " +  visitDataVO.getGroup_idx());
+
+
+                if(visitService.getVisitData(visitDataVO.getCur_date())!=null){
+                    resultVO.setResult_str("해당 날짜에 이미 존재하는 일정이 있습니다.");
+                    resultVO.setResult_code("ERROR_");
+
+                    return resultVO;
+                }else{
+                    visitDataVO.setGroup_idx(groupIdx);
+
+                }
+
             }
         }
 
@@ -1427,8 +1439,6 @@ public class APIController {
         ResultVO resultVO = new ResultVO();
         File[] files = new File[5];
         try {
-
-
             if(prcontensVO.getFiles1() == null){
                 prContentService.insertPRContent(prcontensVO);
             }else {
@@ -1436,11 +1446,9 @@ public class APIController {
                     files[0] = fileService.convertMultipartToFile(prcontensVO.getFiles1());
                     if (prcontensVO.getFiles2() != null) {
                         files[1] = fileService.convertMultipartToFile2(prcontensVO.getFiles2());
-
                     }
                 }
             }
-
 
             MultipartFile file = prcontensVO.getFiles1();
             String fileName = fileService.storeFileInfo(prcontensVO.getFiles1());
@@ -1456,8 +1464,6 @@ public class APIController {
             fileInfoVO.setFile_path(fileDownloadUri);
             fileService.storeFileInfo(file);
             fileService.insertFileInfo(fileInfoVO);
-
-
 
             MultipartFile fileThum = prcontensVO.getFiles2();
             String fileThumName = fileService.storeFileInfo(prcontensVO.getFiles2());
@@ -1558,8 +1564,7 @@ public class APIController {
         resultVO.setResult_str("데이터를 다시 입력해주세요");
 
         if(webMainPopupVO.getIdx_popup_img() > 0){
-
-            if(webMainPopupVO.getFile1() != null){
+            if(webMainPopupVO.getFile1() != null && webMainPopupVO.getFile1().getSize() > 0){
                 fileService.convertMultipartToFile(webMainPopupVO.getFile1());
                 long fileIdx = fileService.insertPopupFile(webMainPopupVO.getFile1(), webMainPopupVO.getIdx_admin());
 
@@ -1574,7 +1579,7 @@ public class APIController {
     }
 
     @RequestMapping(value = "/delete_popup",method = RequestMethod.POST)
-    public @ResponseBody ResultVO deletePopupContent (@ModelAttribute WebMainPopupVO webMainPopupVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
+    public @ResponseBody ResultVO deletePopupContent (@RequestBody WebMainPopupVO webMainPopupVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
         resultVO.setResult_str("데이터를 다시 입력해주세요");
@@ -1583,6 +1588,59 @@ public class APIController {
             webMainPopupService.deletePopupContent(webMainPopupVO);
 
             resultVO.setResult_str("삭제했습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/insert_banner",method = RequestMethod.POST)
+    public @ResponseBody ResultVO insertBannerContent (@ModelAttribute WebMainPopupVO webMainPopupVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("데이터를 다시 입력해주세요");
+
+        if((webMainPopupVO.getSubject() != null || webMainPopupVO.getSubject() != "") && webMainPopupVO.getFile1() != null){
+
+            WebMainPopupVO bannerOri = webMainPopupService.getBannerOrder(webMainPopupVO.getIs_show());
+
+            if(bannerOri != null){
+                webMainPopupService.deleteBannerOrder(bannerOri);
+            }
+
+            fileService.convertMultipartToFile(webMainPopupVO.getFile1());
+            long fileIdx = fileService.insertPopupFile(webMainPopupVO.getFile1(), webMainPopupVO.getIdx_admin());
+
+            webMainPopupVO.setIdx_file_info(fileIdx);
+            webMainPopupService.insertBannerContent(webMainPopupVO);
+
+            resultVO.setResult_str("등록했습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/modify_banner",method = RequestMethod.POST)
+    public @ResponseBody ResultVO modifyBannerContent (@ModelAttribute WebMainPopupVO webMainPopupVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("데이터를 다시 입력해주세요");
+
+        WebMainPopupVO bannerOri = webMainPopupService.getBannerOrder(webMainPopupVO.getIs_show());
+
+        if(bannerOri != null && bannerOri.getIdx_popup_img() != webMainPopupVO.getIdx_popup_img()){
+            webMainPopupService.deleteBannerOrder(bannerOri);
+        }
+
+        if(webMainPopupVO.getIdx_popup_img() > 0){
+            if(webMainPopupVO.getFile1() != null && webMainPopupVO.getFile1().getSize() > 0){
+                fileService.convertMultipartToFile(webMainPopupVO.getFile1());
+                long fileIdx = fileService.insertPopupFile(webMainPopupVO.getFile1(), webMainPopupVO.getIdx_admin());
+
+                webMainPopupVO.setIdx_file_info(fileIdx);
+            }
+            webMainPopupService.updateBannerContent(webMainPopupVO);
+
+            resultVO.setResult_str("수정했습니다.");
             resultVO.setResult_code("SUCCESS");
         }
         return resultVO;
@@ -1635,7 +1693,7 @@ public class APIController {
             resultVO.setResult_code("SUCCESS");
             resultVO.setResult_str("삭제가 완료되었습니다.");
         } catch (Exception e){
-            System.out.println(e);
+//            System.out.println(e);
             resultVO.setResult_code("ERROR_1000");
             resultVO.setResult_str("없는 홍보자료입니다.");
         }
@@ -1906,6 +1964,27 @@ public class APIController {
     FileInfoVO get_bs_anno_file_info(@RequestParam int idx_bs_announcement){
 
         return fileService.selectBsAnnouncementFile(idx_bs_announcement);
+    }
+
+    @RequestMapping(value ="/insert_form_file",method = RequestMethod.POST)
+    public @ResponseBody ResultVO insert_form_file(@ModelAttribute FormFileInfoVO formFileInfoVO) throws IOException {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("데이터를 다시 입력해주세요");
+
+        if((formFileInfoVO.getSubject() != null || formFileInfoVO.getSubject() != "") && formFileInfoVO.getFile1() != null){
+
+            fileService.convertMultipartToFile(formFileInfoVO.getFile1());
+            long fileIdx = fileService.insertFormFile(formFileInfoVO.getFile1(), formFileInfoVO.getIdx_admin());
+
+            formFileInfoVO.setIdx_file_info(fileIdx);
+            formFileService.insertFormFile(formFileInfoVO);
+
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("양식을 등록했습니다.");
+        }
+
+        return resultVO;
     }
 
     @RequestMapping(value ="/delete_form_file",method = RequestMethod.POST)

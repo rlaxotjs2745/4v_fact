@@ -180,9 +180,9 @@
             }
         }
 
-        if(cur !== url+param['page_num'] || usage === "asset_list" || usage==='site_adver_mng'){
+        if(cur !== url+param['page_num'] || usage === "asset_list" || usage==='site_adver_mng' || usage==='pr_contents'){
             cur = url+param['page_num'];
-            if(url.indexOf('cur_asset_index') === -1 && url.indexOf('user_index') === -1 && url.indexOf('dormant_user_index') === -1 && url.indexOf('admin_corporate') === -1 && url.indexOf('c431_site_adver_mng') === -1) {
+            if(url.indexOf('cur_asset_index') === -1 && url.indexOf('user_index') === -1 && url.indexOf('dormant_user_index') === -1 && url.indexOf('admin_corporate') === -1 && url.indexOf('c431_site_adver_mng') === -1 && url.indexOf('pr_contents') === -1) {
                 history.pushState(param, title, url);
             }
 

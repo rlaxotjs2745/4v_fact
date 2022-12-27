@@ -9,7 +9,7 @@ import java.util.Date;
 public class WebMainPopupVO {
     long idx_popup_img; // 인덱스 NUMBER(32)
     String subject; // 제목 VARCHAR2(100)
-    int content_type; // 타입 1:팝업 2:배너
+    int contents_type; // 타입 1:팝업 2:배너
     String popup_url; // url VARCHAR2(1000)
     String startDate; // 게시시작일
     String endDate; // 게시종료일
@@ -22,4 +22,5 @@ public class WebMainPopupVO {
 
     String admin_name;
     String file_path;
+    String file_name;
 }

@@ -141,7 +141,7 @@ public class FileController {
         } catch(Exception e){} return reFileNm;
     }
 
-@RequestMapping(value = "/upload_form_file",method = RequestMethod.POST)
+/*@RequestMapping(value = "/upload_form_file",method = RequestMethod.POST)
     public FileUploadResponseVO uploadFormFile(@ModelAttribute FileRequestVO fileRequestVO, HttpSession session, HttpServletRequest request) throws Exception, IOException {
     String subject = fileRequestVO.getSubject();
     String usage_detail =fileRequestVO.getUsage_detail();
@@ -205,7 +205,7 @@ public class FileController {
     fileService.insertFormFileInfo(formFileInfoVO);
 
     return new FileUploadResponseVO(fileName, fileDownloadUri, file.getContentType(), file.getSize());
-    }
+    }*/
 
 
     @RequestMapping(value = "/upload_rule_file",method = RequestMethod.POST)

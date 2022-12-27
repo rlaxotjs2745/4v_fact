@@ -8,7 +8,7 @@
         SELECT COUNT (*) FROM TB_WEB_MAIN_POPUP A
                                   INNER JOIN TB_ADMIN B ON A.idx_admin = B.idx_admin
                                   INNER JOIN TB_FILE_INFO C ON A.IDX_FILE_INFO = C.IDX_FILE_INFO
-        WHERE IS_SHOW = 1 OR IS_SHOW = 9 AND A.CONTENTS_TYPE = 1 AND C.FILE_TYPE = 6
+        WHERE (IS_SHOW = 1 OR IS_SHOW = 9) AND A.CONTENTS_TYPE = 1 AND C.FILE_TYPE = 6
     </select>
 
     <select id="getWebMainPopupList" resultType="kr.or.fact.core.model.DTO.WebMainPopupVO">
@@ -24,7 +24,8 @@
             ADMIN_NAME,
             LAST_UPD_DATE,
             IDX_FILE_INFO,
-            FILE_PATH
+            FILE_PATH,
+            FILE_NAME
         FROM (
                  SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
                 ,IDX_POPUP_IMG,
@@ -38,12 +39,13 @@
                         ADMIN_NAME,
                         LAST_UPD_DATE,
                         IDX_FILE_INFO,
-                        FILE_PATH
+                        FILE_PATH,
+                        FILE_NAME
                  FROM (
-                          SELECT A.*, B.admin_name, C.FILE_PATH FROM TB_WEB_MAIN_POPUP A
+                          SELECT A.*, B.admin_name, C.FILE_PATH, C.FILE_NAME FROM TB_WEB_MAIN_POPUP A
                                         INNER JOIN TB_ADMIN B ON A.idx_admin = B.idx_admin
                                         INNER JOIN TB_FILE_INFO C ON A.IDX_FILE_INFO = C.IDX_FILE_INFO
-                          WHERE IS_SHOW = 1 OR IS_SHOW = 9
+                          WHERE (IS_SHOW = 1 OR IS_SHOW = 9)
                             AND A.CONTENTS_TYPE = 1
                             AND C.FILE_TYPE = 6
                           order by IDX_POPUP_IMG desc
@@ -67,7 +69,7 @@
                                       IDX_FILE_INFO)
         VALUES (SEQ_WEB_MAIN_POPUP.NEXTVAL,
                 #{subject},
-                #{content_type},
+                1,
                 #{popup_url},
                 TO_DATE(#{startDate},'YYYY-MM-DD HH24-MI-SS'),
                 TO_DATE(#{endDate},'YYYY-MM-DD HH24-MI-SS'),
@@ -79,24 +81,90 @@
                )
     </insert>
 
+    <insert id="insertBannerContent" parameterType="kr.or.fact.core.model.DTO.WebMainPopupVO">
+        INSERT INTO TB_WEB_MAIN_POPUP( IDX_POPUP_IMG,
+                                       SUBJECT,
+                                       CONTENTS_TYPE,
+                                       POPUP_URL,
+                                       IS_SHOW,
+                                       REG_DATE,
+                                       IDX_ADMIN,
+                                       LAST_UPD_DATE,
+                                       IDX_FILE_INFO)
+        VALUES (SEQ_WEB_MAIN_POPUP.NEXTVAL,
+                #{subject},
+                2,
+                #{popup_url},
+                #{is_show},
+                SYSDATE,
+                #{idx_admin},
+                SYSDATE,
+                #{idx_file_info}
+               )
+    </insert>
+
     <update id="updatePopupContent" parameterType="long">
         UPDATE TB_WEB_MAIN_POPUP SET
                                      SUBJECT = #{subject},
-                                     CONTENTS_TYPE = #{content_type},
                                      POPUP_URL = #{popup_url},
                                      STARTDATE = TO_DATE(#{startDate},'YYYY-MM-DD HH24-MI-SS'),
                                      ENDDATE = TO_DATE(#{endDate},'YYYY-MM-DD HH24-MI-SS'),
                                      IS_SHOW = #{is_show},
                                      IDX_ADMIN = #{idx_admin},
-                                     LAST_UPD_DATE = SYSDATE,
-                                     IDX_FILE_INFO = #{idx_file_info}
+                                     LAST_UPD_DATE = SYSDATE
+                                    <if test='idx_file_info != 0'>
+                                     ,IDX_FILE_INFO = #{idx_file_info}
+                                    </if>
         WHERE IDX_POPUP_IMG = #{idx_popup_img}
     </update>
 
-    <update id="deletePopupContent" parameterType="long">
-        UPDATE TB_HOMEPAGE_INFO SET
+    <update id="deletePopupContent" parameterType="kr.or.fact.core.model.DTO.WebMainPopupVO">
+        UPDATE TB_WEB_MAIN_POPUP SET
             IS_SHOW = 99
+        WHERE IDX_POPUP_IMG = #{idx_popup_img} AND CONTENTS_TYPE = #{contents_type}
+    </update>
+
+    <update id="updateBannerContent" parameterType="long">
+        UPDATE TB_WEB_MAIN_POPUP SET
+                                    SUBJECT = #{subject},
+                                    POPUP_URL = #{popup_url},
+                                    IS_SHOW = #{is_show},
+                                    IDX_ADMIN = #{idx_admin},
+                                    LAST_UPD_DATE = SYSDATE
+                                    <if test='idx_file_info != 0'>
+                                    ,IDX_FILE_INFO = #{idx_file_info}
+                                    </if>
         WHERE IDX_POPUP_IMG = #{idx_popup_img}
     </update>
+
+    <select id="getBannerOrder" resultType="kr.or.fact.core.model.DTO.WebMainPopupVO">
+        SELECT * FROM TB_WEB_MAIN_POPUP
+        WHERE CONTENTS_TYPE = 2 AND IS_SHOW = #{is_show}
+    </select>
+
+    <update id="deleteBannerOrder" parameterType="kr.or.fact.core.model.DTO.WebMainPopupVO">
+        UPDATE TB_WEB_MAIN_POPUP SET
+            IS_SHOW = 4
+        WHERE IDX_POPUP_IMG = #{idx_popup_img} AND CONTENTS_TYPE = 2 AND IS_SHOW = #{is_show}
+    </update>
+
+    <select id="getWebMainBannerList" resultType="kr.or.fact.core.model.DTO.WebMainPopupVO">
+        SELECT A.*, B.admin_name, C.FILE_PATH, C.FILE_NAME
+        FROM TB_WEB_MAIN_POPUP A
+            INNER JOIN TB_ADMIN B ON A.idx_admin = B.idx_admin
+            INNER JOIN TB_FILE_INFO C ON A.IDX_FILE_INFO = C.IDX_FILE_INFO
+        WHERE (IS_SHOW = 1 OR IS_SHOW = 2 OR IS_SHOW = 3)
+            AND A.CONTENTS_TYPE = 2
+            AND C.FILE_TYPE = 6
+            order by IDX_POPUP_IMG desc
+    </select>
+
+    <select id="getWebMainBannerCount" resultType="int">
+        SELECT COUNT (*)
+        FROM TB_WEB_MAIN_POPUP A
+            INNER JOIN TB_ADMIN B ON A.idx_admin = B.idx_admin
+            INNER JOIN TB_FILE_INFO C ON A.IDX_FILE_INFO = C.IDX_FILE_INFO
+        WHERE (IS_SHOW = 1 OR IS_SHOW = 2 OR IS_SHOW = 3) AND A.CONTENTS_TYPE = 2 AND C.FILE_TYPE = 6
+    </select>
 </mapper>
 

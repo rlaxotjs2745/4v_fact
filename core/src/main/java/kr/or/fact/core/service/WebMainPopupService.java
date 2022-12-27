@@ -16,5 +16,17 @@ public interface WebMainPopupService {
     void updatePopupContent(WebMainPopupVO webMainPopupVO);
 
     void deletePopupContent(WebMainPopupVO webMainPopupVO);
+
+    void insertBannerContent(WebMainPopupVO webMainPopupVO);
+
+    void updateBannerContent(WebMainPopupVO webMainPopupVO);
+
+    WebMainPopupVO getBannerOrder(int is_show);
+
+    void deleteBannerOrder(WebMainPopupVO bannerOri);
+
+    List<WebMainPopupVO> getWebMainBannerList();
+
+    int getWebMainBannerCount();
 }
 
