@@ -116,8 +116,8 @@
                                <c:forEach items="${prlist}" var="pr" varStatus="status">
                                 <tr class="pr_entity" id="${pr.idx_pr_content}">
                                     <td class="text-center">${pr.idx_row_num}</td>
-                                    <td class="text-center"><a href="#none" id="data" class="btn btn-outline-default btn-sm" data-toggle="modal" data-target="#modals-counsel-view" >${pr.subject}</a></td>
-                                    <td class="text-center"><a href="#none" id="${pr.idx_pr_content}" class="btn btn-outline-default  btn-sm btn_content_modal"  data-toggle="modal" data-target="#modals-content" >컨텐츠 보기</a></td>
+                                    <td class="text-center"><a href="#none" id="data" class="btn btn-outline-default btn-sm btn_content_view" data-toggle="modal" data-target="#modals-counsel-view" data-whatever="${pr.idx_row_num}">${pr.subject}</a></td>
+                                    <td class="text-center"><a href="#none" id="${pr.idx_pr_content}" class="btn btn-outline-default btn-sm btn_content_modal"  data-toggle="modal" data-target="#modals-content" data-whatever="${pr.idx_row_num}">컨텐츠 보기</a></td>
                                     <td class="text-center">${pr.is_file eq 0 ? "포함안함" : pr.is_file eq 1 ? "포함" :""}</td>
                                     <td class="text-center">${pr.is_new eq 0 ? "신규아님" : pr.is_new eq 1 ? "신규" :""}</td>
                                     <td class="text-center">${pr.is_show eq 0 ? "노출안함" : pr.is_show eq 1 ? "노출함" :""}</td>
@@ -806,7 +806,7 @@
             var curPRdata;
             var prList=[];
             <c:forEach items="${prlist}" var="pr" varStatus="status">
-            prList.push({
+            prList[${pr.idx_row_num}] = {
                 idx_pr_content :"${pr.idx_pr_content}",
                 subject:"${pr.subject}",
                 is_new:"${pr.is_new eq 0 ? "신규아님" : pr.is_new eq 1 ? "신규" :""}",
@@ -818,17 +818,23 @@
                 last_upd_date:"<fmt:formatDate value="${pr.last_upd_date}" pattern="yyyy-MM-dd HH:MM"/>",
                 veiw_count:"${pr.view_count}",
                 memo:"${pr.memo}"
-            })
+            }
             </c:forEach>
 
-            function _saveCont() {
-                $("tbody tr.pr_entity").off().click(function () {
-                    let _i = $(this).index($("tbody tr.pr_entity"));
-                    let selectId = $(this).attr('id');
-                    curPRdata = selectId;
-                    // for(var pr of prList){
-                    //     if(selectId === pr.idx_pr_content){
-                    $(".idx_pr_content").attr("id", selectId);
+            $('#modals-counsel-view').on('show.bs.modal', function (event) {
+                _saveCont($(event.relatedTarget).data('whatever'))
+            })
+
+            function _saveCont(_i) {
+                // $("a.btn_content_view").off().click(function () {
+                //     let _i = $(this).index($('a.btn_content_view'));
+                //     console.log(_i);
+                //     let selectId = $(this).attr('id');
+                //     curPRdata = selectId;
+                // for(var pr of prList){
+                //     if(selectId === pr.idx_pr_content){
+                    curPRdata = prList[_i].idx_pr_content;
+                    $(".idx_pr_content").attr("id", prList[_i].idx_pr_content);
                     $("#subject span").text(prList[_i].subject);
                     $("#is_new span").text(prList[_i].is_new);
                     $("#is_file span").text(prList[_i].is_file);
@@ -851,30 +857,30 @@
                     $("#veiw_count_modify span").val(prList[_i].veiw_count);
                     $("#memo_modify span").val(prList[_i].memo);
                     // break;
+                // }
                     // }
-                    // }
-                });
-
+                // });
+            }
+            function _contents() {
                 $(".btn_content_modal").off().click(function (){
                     var idx = $(this).attr("id");
                     pageLoad("pr_contents", {idx: parseInt(idx)}, "홍보자료 모달컨텐츠", "pr_contents");
                 })
-
                 $("#delete_pr").off().click(function () {
-                    if(confirm("이 홍보자료를 삭제하시겟습까?")){
+                    if (confirm("이 홍보자료를 삭제하시겠습니까?")) {
                         $.ajax({
                             type: 'post',
-                            url :'delete_pr', //데이터를 주고받을 파일 주소 입력
+                            url: 'delete_pr', //데이터를 주고받을 파일 주소 입력
                             data: JSON.stringify(parseInt(curPRdata)),//보내는 데이터
-                            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
-                            dataType:'json',//받는 데이터 타입
-                            success: function(result){
+                            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+                            dataType: 'json',//받는 데이터 타입
+                            success: function (result) {
                                 //작업이 성공적으로 발생했을 경우
                                 alert(result.result_str);
                                 $("#modals-counsel-view").modal("hide");
-                                pageLoad('c431_site_adver_mng');
+                                _search()
                             },
-                            error:function(){
+                            error: function () {
                                 //에러가 났을 경우 실행시킬 코드
                             }
                         });
@@ -926,6 +932,7 @@
                     success: function (result) {
                         if (result.result_code === "SUCCESS") {
                             alert("상태 변경에 성공하였습니다")
+                            $("#modals-counsel-history").modal("hide");
                         } else {
                             alert("상태 변경에 실패하였습니다")
                         }
@@ -999,7 +1006,9 @@
                     dataType:'json',//받는 데이터 타입
                     enctype: 'multipart/form-data',
                     success: function(result){
-                        alert("업로드에 성공했습니다", () => window.redirect("/"))
+                        alert("업로드에 성공했습니다")
+                        $("#modals-business").modal("hide");
+                        _search()
                     },
                     error: function (res) {
                         console.log(res)
@@ -1028,15 +1037,36 @@
 
             $('.btn_reset').off().on('click',function(){
                 $('.srch_filtp1 label').removeClass('active');
-                $('.srch_filtp1 input').attr('checked',false);
+                $('.srch_filtp1 input').each(function(){
+                    $(this).attr('checked',false);
+                    $(this).removeAttr('checked')
+                });
                 $('.srch_filtp1 label').eq(0).addClass('active');
                 $('.srch_filtp1 input').eq(0).attr('checked',true);
                 $('.srch_filtp2 label').removeClass('active');
-                $('.srch_filtp2 input').attr('checked',false);
+                $('.srch_filtp2 input').each(function(){
+                    $(this).attr('checked', false);
+                    $(this).removeAttr('checked');
+                });
+                _search()
             });
             $('.btn_search').off().on('click',function(){
-                pageLoad("c431_site_adver_mng", {page_num:1,fil1:$('.srch_filtp1 label.active input').val(),fil2:$('.srch_filtp2 label.active input').val()}, "홍보자료 관리",'site_adver_mng');
+                _search()
             });
+
+            function _search(){
+                let _fil1 = $('.srch_filtp1 label.active input:checked').val()
+                let _fil2 = $('.srch_filtp2 label.active input:checked').val()
+                if(_fil1 === undefined){
+                    _fil1 = '';
+                }
+                if(_fil2 === undefined){
+                    _fil2 = '';
+                }
+                pageLoad("c431_site_adver_mng", {page_num:1,fil1:_fil1,fil2:_fil2}, "홍보자료 관리",'site_adver_mng');
+            }
+
+            _contents()
         </script>
 <!-- / Layout footer -->
 <!-- / Page content -->

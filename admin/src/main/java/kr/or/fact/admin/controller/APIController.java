@@ -1265,8 +1265,6 @@ public class APIController {
         ResultVO resultVO = new ResultVO();
         File[] files = new File[5];
         try {
-
-
             if(prcontensVO.getFiles1() == null){
                 prContentService.insertPRContent(prcontensVO);
             }else {
@@ -1274,11 +1272,9 @@ public class APIController {
                     files[0] = fileService.convertMultipartToFile(prcontensVO.getFiles1());
                     if (prcontensVO.getFiles2() != null) {
                         files[1] = fileService.convertMultipartToFile2(prcontensVO.getFiles2());
-
                     }
                 }
             }
-
 
             MultipartFile file = prcontensVO.getFiles1();
             String fileName = fileService.storeFileInfo(prcontensVO.getFiles1());
@@ -1294,8 +1290,6 @@ public class APIController {
             fileInfoVO.setFile_path(fileDownloadUri);
             fileService.storeFileInfo(file);
             fileService.insertFileInfo(fileInfoVO);
-
-
 
             MultipartFile fileThum = prcontensVO.getFiles2();
             String fileThumName = fileService.storeFileInfo(prcontensVO.getFiles2());
@@ -1436,7 +1430,7 @@ public class APIController {
             resultVO.setResult_code("SUCCESS");
             resultVO.setResult_str("삭제가 완료되었습니다.");
         } catch (Exception e){
-            System.out.println(e);
+//            System.out.println(e);
             resultVO.setResult_code("ERROR_1000");
             resultVO.setResult_str("없는 홍보자료입니다.");
         }
