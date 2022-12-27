@@ -116,8 +116,8 @@
                                <c:forEach items="${prlist}" var="pr" varStatus="status">
                                 <tr class="pr_entity" id="${pr.idx_pr_content}">
                                     <td class="text-center">${pr.idx_row_num}</td>
-                                    <td class="text-center"><a href="#none" id="data" class="btn btn-outline-default btn-sm btn_content_view" data-toggle="modal" data-target="#modals-counsel-view" data-whatever="${pr.idx_row_num}">${pr.subject}</a></td>
-                                    <td class="text-center"><a href="#none" id="${pr.idx_pr_content}" class="btn btn-outline-default btn-sm btn_content_modal"  data-toggle="modal" data-target="#modals-content" data-whatever="${pr.idx_row_num}">컨텐츠 보기</a></td>
+                                    <td class="text-center"><a href="#none" id="data" class="btn btn-outline-default btn-sm btn_content_view" data-toggle="modal" data-target="#modals-counsel-view" data-idx="${pr.idx_row_num}">${pr.subject}</a></td>
+                                    <td class="text-center"><a href="#none" id="${pr.idx_pr_content}" class="btn btn-outline-default btn-sm btn_content_modal"  data-toggle="modal" data-target="#modals-content" data-idx="${pr.idx_row_num}">컨텐츠 보기</a></td>
                                     <td class="text-center">${pr.is_file eq 0 ? "포함안함" : pr.is_file eq 1 ? "포함" :""}</td>
                                     <td class="text-center">${pr.is_new eq 0 ? "신규아님" : pr.is_new eq 1 ? "신규" :""}</td>
                                     <td class="text-center">${pr.is_show eq 0 ? "노출안함" : pr.is_show eq 1 ? "노출함" :""}</td>
@@ -561,7 +561,7 @@
                         <div class="form-row" >
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">컨텐츠</label>
                             <div class="form-group col col-md-10" >
-                                <textarea class="summernote" rows="3"  id="pr_contents_update"></textarea>
+                                <textarea class="summernote" rows="3" id="pr_contents_update"></textarea>
                             </div>
                         </div>
                         <hr>
@@ -586,15 +586,14 @@
                         <div class="form-group row" id="admin_name_update">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">등록자</label>
                             <div class="col-md-4 mode-edit mode-new">
-                                <span class="px-1 mr-lg-2 ml-2 ml-lg-0">${admin.admin_name}</span>
-
+                                <span class="px-1 mr-lg-2 ml-2 ml-lg-0"></span>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col col-md-12" id="is_file_update">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">파일여부</label>
                                 <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-6" type="radio" class="custom-control-input"  value="0">
+                                    <input name="custom-6" type="radio" class="custom-control-input" value="0">
                                     <span class="custom-control-label">포함안함</span>
                                 </label>
                                 <label class="custom-control custom-radio d-inline-block">
@@ -622,7 +621,7 @@
                             <div class="form-group col col-md-12" id="is_main_page_update">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메인페이지 노출여부</label>
                                 <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-8" type="radio" class="custom-control-input"  value="0">
+                                    <input name="custom-8" type="radio" class="custom-control-input" value="0">
                                     <span class="custom-control-label">노출안함</span>
                                 </label>
                                 <label class="custom-control custom-radio d-inline-block">
@@ -636,7 +635,7 @@
                             <div class="form-group col col-md-12" id="pr_content_status_update">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">홍보자료 프로세스 상태</label>
                                 <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-9" type="radio" class="custom-control-input"  value="0">
+                                    <input name="custom-9" type="radio" class="custom-control-input" value="0">
                                     <span class="custom-control-label">임시저장</span>
                                 </label>
                                 <label class="custom-control custom-radio d-inline-block">
@@ -691,17 +690,6 @@
             </div>
         </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
 
 <div class="modal fade" id="modals-content">
     <div class="modal-dialog modal-xl">
@@ -811,18 +799,21 @@
                 subject:"${pr.subject}",
                 is_new:"${pr.is_new eq 0 ? "신규아님" : pr.is_new eq 1 ? "신규" :""}",
                 is_file:"${pr.is_file eq 0 ? "포함안함" : pr.is_file eq 1 ? "포함" :""}",
+                is_main_page:${pr.is_main_page},
                 pr_content_code:"${pr.pr_content_code}",
                 show_start_date:"<fmt:formatDate value="${pr.show_start_date}" pattern="yyyy-MM-dd HH:MM"/>",
                 show_end_date:"<fmt:formatDate value="${pr.show_end_date}" pattern="yyyy-MM-dd HH:MM"/>",
                 pr_content_status:"${pr.pr_content_status eq 0 ? "임시저장" :pr.pr_content_status eq 1 ? "허락" :pr.pr_content_status eq 2 ? "수정발행": pr.pr_content_status eq 3 ? "게시종료" :"기타"}",
+                pr_content_status_no:${pr.pr_content_status},
                 last_upd_date:"<fmt:formatDate value="${pr.last_upd_date}" pattern="yyyy-MM-dd HH:MM"/>",
                 veiw_count:"${pr.view_count}",
-                memo:"${pr.memo}"
+                memo:"${pr.memo}",
+                writer:"${pr.author}"
             }
             </c:forEach>
 
             $('#modals-counsel-view').on('show.bs.modal', function (event) {
-                _saveCont($(event.relatedTarget).data('whatever'))
+                _saveCont($(event.relatedTarget).data('idx'))
             })
 
             function _saveCont(_i) {
@@ -833,33 +824,48 @@
                 //     curPRdata = selectId;
                 // for(var pr of prList){
                 //     if(selectId === pr.idx_pr_content){
-                    curPRdata = prList[_i].idx_pr_content;
-                    $(".idx_pr_content").attr("id", prList[_i].idx_pr_content);
-                    $("#subject span").text(prList[_i].subject);
-                    $("#is_new span").text(prList[_i].is_new);
-                    $("#is_file span").text(prList[_i].is_file);
-                    $("#pr_content_code span").text(prList[_i].pr_content_code);
-                    $("#show_start_date span").text(prList[_i].show_start_date);
-                    $("#show_end_date span").text(prList[_i].show_end_date);
-                    $("#pr_content_status span").text(prList[_i].pr_content_status);
-                    $("#last_upd_date span").text(prList[_i].last_upd_date);
-                    $("#veiw_count span").text(prList[_i].veiw_count);
-                    $("#memo span").text(prList[_i].memo);
+                curPRdata = prList[_i].idx_pr_content;
+                // $(".idx_pr_content").attr("id", prList[_i].idx_pr_content);
+                $("#subject span").text(prList[_i].subject);
+                $("#is_new span").text(prList[_i].is_new);
+                $("#is_file span").text(prList[_i].is_file);
+                $("#pr_content_code span").text(prList[_i].pr_content_code);
+                $("#show_start_date span").text(prList[_i].show_start_date);
+                $("#show_end_date span").text(prList[_i].show_end_date);
+                $("#pr_content_status span").text(prList[_i].pr_content_status);
+                $("#last_upd_date span").text(prList[_i].last_upd_date);
+                $("#veiw_count span").text(prList[_i].veiw_count);
+                $("#memo span").text(prList[_i].memo);
 
-                    $("#subject_modify span").val(prList[_i].subject);
-                    $("#is_new_modify span").val(prList[_i].is_new);
-                    $("#is_file_modify span").val(prList[_i].is_file);
-                    $("#pr_content_code_modify span").val(prList[_i].pr_content_code);
-                    $("#show_start_date_modify span").val(prList[_i].show_start_date);
-                    $("#show_end_date_modify span").val(prList[_i].show_end_date);
-                    $("#pr_content_status_modify span").val(prList[_i].pr_content_status);
-                    $("#last_upd_date_modify span").val(prList[_i].last_upd_date);
-                    $("#veiw_count_modify span").val(prList[_i].veiw_count);
-                    $("#memo_modify span").val(prList[_i].memo);
-                    // break;
-                // }
-                    // }
-                // });
+                $("#subject_modify span").val(prList[_i].subject);
+                $("#is_new_modify span").val(prList[_i].is_new);
+                $("#is_file_modify span").val(prList[_i].is_file);
+                $("#pr_content_code_modify span").val(prList[_i].pr_content_code);
+                $("#show_start_date_modify span").val(prList[_i].show_start_date);
+                $("#show_end_date_modify span").val(prList[_i].show_end_date);
+                $("#pr_content_status_modify span").val(prList[_i].pr_content_status);
+                $("#last_upd_date_modify span").val(prList[_i].last_upd_date);
+                $("#veiw_count_modify span").val(prList[_i].veiw_count);
+                $("#memo_modify span").val(prList[_i].memo);
+
+                // 수정 모달용
+                $("#pr_subject_update input").val(prList[_i].subject);
+                $("#pr_content_code_update textarea").val(prList[_i].pr_content_code);
+                $("#show_start_date_update").val(prList[_i].show_start_date);
+                $("#show_end_date_update").val(prList[_i].show_end_date);
+
+                $("#pr_content_status_update input[name=custom-9]").each(function (){
+                    if($(this).val() === prList[_i].pr_content_status_no){
+                        $(this).attr('checked',true)
+                    }
+                });
+                $("#memo_update textarea").val(prList[_i].memo);
+                $("#pr_contents_update").val(prList[_i].memo);
+                let _is_file = prList[_i].is_file === '포함안함' ? 0 : 1
+                let _is_new = prList[_i].is_new === '신규아님' ? 0 : 1
+                $('#is_file_update input[name=custom-7]').eq(_is_file).attr('checked',true)
+                $('#is_new_update input[name=custom-7]').eq(_is_new).attr('checked',true)
+                $('#is_main_page_update input[name=custom-8]').eq(prList[_i].is_main_page).attr('checked',true)
             }
             function _contents() {
                 $(".btn_content_modal").off().click(function (){

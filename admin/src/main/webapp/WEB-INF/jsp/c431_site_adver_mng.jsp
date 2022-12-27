@@ -31,8 +31,8 @@
                                <c:forEach items="${prlist}" var="pr" varStatus="status">
                                 <tr class="pr_entity" id="${pr.idx_pr_content}">
                                     <td class="text-center">${pr.idx_row_num}</td>
-                                    <td class="text-center"><a href="#none" id="data" class="btn btn-outline-default btn-sm btn_content_view" data-toggle="modal" data-target="#modals-counsel-view" data-whatever="${pr.idx_row_num}">${pr.subject}</a></td>
-                                    <td class="text-center"><a href="#none" id="${pr.idx_pr_content}" class="btn btn-outline-default btn-sm btn_content_modal"  data-toggle="modal" data-target="#modals-content" data-whatever="${pr.idx_row_num}">컨텐츠 보기</a></td>
+                                    <td class="text-center"><a href="#none" id="data" class="btn btn-outline-default btn-sm btn_content_view" data-toggle="modal" data-target="#modals-counsel-view" data-idx="${pr.idx_row_num}">${pr.subject}</a></td>
+                                    <td class="text-center"><a href="#none" id="${pr.idx_pr_content}" class="btn btn-outline-default btn-sm btn_content_modal"  data-toggle="modal" data-target="#modals-content" data-idx="${pr.idx_row_num}">컨텐츠 보기</a></td>
                                     <td class="text-center">${pr.is_file eq 0 ? "포함안함" : pr.is_file eq 1 ? "포함" :""}</td>
                                     <td class="text-center">${pr.is_new eq 0 ? "신규아님" : pr.is_new eq 1 ? "신규" :""}</td>
                                     <td class="text-center">${pr.is_show eq 0 ? "노출안함" : pr.is_show eq 1 ? "노출함" :""}</td>
@@ -79,13 +79,16 @@
                 subject:"${pr.subject}",
                 is_new:"${pr.is_new eq 0 ? "신규아님" : pr.is_new eq 1 ? "신규" :""}",
                 is_file:"${pr.is_file eq 0 ? "포함안함" : pr.is_file eq 1 ? "포함" :""}",
+                is_main_page:${pr.is_main_page},
                 pr_content_code:"${pr.pr_content_code}",
                 show_start_date:"<fmt:formatDate value="${pr.show_start_date}" pattern="yyyy-MM-dd HH:MM"/>",
                 show_end_date:"<fmt:formatDate value="${pr.show_end_date}" pattern="yyyy-MM-dd HH:MM"/>",
                 pr_content_status:"${pr.pr_content_status eq 0 ? "임시저장" :pr.pr_content_status eq 1 ? "허락" :pr.pr_content_status eq 2 ? "수정발행": pr.pr_content_status eq 3 ? "게시종료" :"기타"}",
+                pr_content_status_no:${pr.pr_content_status},
                 last_upd_date:"<fmt:formatDate value="${pr.last_upd_date}" pattern="yyyy-MM-dd HH:MM"/>",
                 veiw_count:"${pr.view_count}",
-                memo:"${pr.memo}"
+                memo:"${pr.memo}",
+                writer:"${pr.author}"
             }
             </c:forEach>
 

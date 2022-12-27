@@ -120,6 +120,7 @@
              ,SUBJECT
              ,IS_FILE
              ,IS_NEW
+             ,IS_MAIN_PAGE
              ,AUTHOR
              ,SHOW_START_DATE
              ,VIEW_COUNT
@@ -131,6 +132,7 @@
                     ,SUBJECT
                     ,IS_FILE
                     ,IS_NEW
+                    ,IS_MAIN_PAGE
                     ,AUTHOR
                     ,SHOW_START_DATE
                     ,VIEW_COUNT
