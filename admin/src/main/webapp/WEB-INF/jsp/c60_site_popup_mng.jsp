@@ -50,7 +50,7 @@
                                                 <td class="text-center">
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#modals-popup" data-what="mode-update"><span class="fas fa-pen" > </span></button>
-                                                        <button onclick="organizationDelete(this)" class="btn btn-sm btn-default"><span class="fas fa-trash-alt" > </span></button>
+                                                        <button onclick="sitePopupDelete(this)" class="btn btn-sm btn-default"><span class="fas fa-trash-alt" > </span></button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -445,6 +445,7 @@
 
     $('#popup_submit').on('click',function(event){
         // console.log(this.innerText, '버튼 클릭한 텍스트 값')
+        const btnTextState = this.innerText;
 
         if($("input[name=subject]").val() === ''){
             return alert('제목을 입력해 주세요.')
@@ -454,8 +455,15 @@
             return alert('게시기간을 입력해 주세요.')
         }
 
+        if($("input[name=popup_url]").val() === ''){
+            return alert('링크를 입력해주세요.')
+        }
 
-        const btnTextState = this.innerText;
+        if(btnTextState === '등록') {
+            if(document.getElementById('image_upload').files[0] === null || document.getElementById('image_upload').files[0] === undefined){
+                return alert('이미지 파일은 필수입니다')
+            }
+        }
 
         let formData = new FormData();
         const startDate =  $("input[name=start]").val()
@@ -468,9 +476,9 @@
         formData.append('endDate', endDate + ' 00:00:00');
         formData.append('is_show', $("#is_show").val()); // 타입 1:팝업 , 2:배너
         formData.append('idx_admin', $("input[name=idx_popup_img]").val());
-        formData.append('file1', document.getElementById('image_upload').files[0]);
 
         if(btnTextState === '등록') {
+            formData.append('file1', document.getElementById('image_upload').files[0]);
             $.ajax({
                 type: 'post',
                 url :'insert_popup', //데이터를 주고받을 파일 주소 입력
@@ -530,7 +538,7 @@
 
     })
 
-    function organizationDelete(but){
+    function sitePopupDelete(but){
 
         var $row = $(but).parents('tr');  //accede a la fila
         var $cols = $row.find('td');  //lee campos
