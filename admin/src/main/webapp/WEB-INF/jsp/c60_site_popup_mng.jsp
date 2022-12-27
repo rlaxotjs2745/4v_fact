@@ -40,7 +40,7 @@
                                         <c:forEach items = "${webMainPopupList}" var ="popupinfo">
                                             <fmt:parseDate value="${popupinfo.startDate}" var="startDate" pattern="yyyy-MM-dd"/>
                                             <fmt:parseDate value="${popupinfo.endDate}" var="endDate" pattern="yyyy-MM-dd"/>
-                                            <tr class="popup-entity" data-idx="${popupinfo.idx_popup_img}">
+                                            <tr class="popup-entity" id="${popupinfo.idx_popup_img}">
                                                 <td class="text-center">${popupinfo.subject}</td>
                                                 <td class="text-center">${popupinfo.popup_url}</td>
                                                 <td class="text-center"><fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd"/></td>
@@ -156,6 +156,7 @@
                     <div class="modal-body">
                         <form id="popupForm">
                             <input type="hidden" name="idx_popup_img" value="${admin.idx_admin}">
+                            <input type="hidden" name="idx_popup" value="">
                             <div class="form-group row">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">제목</label>
                                 <div class="col-md-10">
@@ -192,7 +193,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">이미지</label>
                                 <div class="col-md-10 file_upload_box">
-                                    <input class="form-control form-control-md mode-edit mode-new upload-name" value="파일선택" disabled="disabled">
+                                    <input class="form-control form-control-md mode-edit mode-new upload-name" name="upload-name" value="파일선택" disabled="disabled">
                                     <input type="file" id="image_upload" name="file1" class="upload-hidden" accept="image/*">
                                     <label for="image_upload" class="btn btn-success">이미지 업로드</label>
                                 </div>
@@ -291,6 +292,53 @@
 <%@include file ="layouts/frame_footer.jsp" %>
 <!-- / Layout footer -->
 <script>
+    // const curPopupdata = '';
+    const popupList=[];
+    <c:forEach items="${webMainPopupList}" var="popup" varStatus="status">
+        popupList.push({
+            idx_popup_img :"${popup.idx_popup_img}",
+            subject :"${popup.subject}",
+            popup_url :"${popup.popup_url}",
+            startDate :"${popup.startDate}",
+            endDate :"${popup.endDate}",
+            is_show :"${popup.is_show}",
+            reg_date :"${popup.reg_date}",
+            idx_admin :"${popup.idx_admin}",
+            idx_file_info :"${popup.idx_file_info}",
+            admin_name :"${popup.admin_name}",
+            file_path :"${popup.file_path}"
+        })
+    </c:forEach>
+
+    $(".popup-entity").click(function(){
+        var selectId = $(this).attr("id");
+        // console.log(selectId, '누른 열값')
+        // const curPopupdata = selectId;
+        for(var popup of popupList){
+            if(selectId === popup.idx_popup_img){
+                let dateStartString = popup.startDate
+                let dateStart = dateStartString.split(' ')[0]
+
+                let dateEndString = popup.endDate
+                let dateEnd = dateEndString.split(' ')[0]
+
+                $("input[name=idx_popup]").val(popup.idx_popup_img);
+                $("input[name=subject]").val(popup.subject);
+                $("input[name=start]").val(dateStart);
+                $("input[name=end]").val(dateEnd);
+                $("input[name=upload-name]").val(popup.file_path);
+
+
+                $("input[name=popup_url]").val(popup.popup_url);
+                $("#is_show").val(popup.is_show);
+                $("#preview-image").attr("src", popup.file_path);
+
+                break;
+            }
+        }
+    });
+
+    console.log(popupList)
 
     $(document).ready(function(){
         var fileTarget = $('.file_upload_box .upload-hidden');
@@ -397,6 +445,16 @@
 
     $('#popup_submit').on('click',function(event){
         // console.log(this.innerText, '버튼 클릭한 텍스트 값')
+
+        if($("input[name=subject]").val() === ''){
+            return alert('제목을 입력해 주세요.')
+        }
+
+        if($("input[name=start]").val() === '' || $("input[name=end]").val() === ''){
+            return alert('게시기간을 입력해 주세요.')
+        }
+
+
         const btnTextState = this.innerText;
 
         let formData = new FormData();
@@ -404,7 +462,7 @@
         const endDate =  $("input[name=end]").val()
 
         formData.append('subject', $("input[name=subject]").val());
-        formData.append('content_type', '1'); // 타입 1:팝업 , 2:배너
+        formData.append('contents_type', '1'); // 타입 1:팝업 , 2:배너
         formData.append('popup_url', $("input[name=popup_url]").val());
         formData.append('startDate', startDate + ' 00:00:00');
         formData.append('endDate', endDate + ' 00:00:00');
@@ -441,6 +499,8 @@
         }
 
         if (btnTextState === '수정') {
+            formData.append('idx_popup', $("input[name=idx_popup]").val());
+
             $.ajax({
                 type: 'post',
                 url :'modify_popup', //데이터를 주고받을 파일 주소 입력
@@ -470,6 +530,38 @@
 
     })
 
+    function organizationDelete(but){
+
+        var $row = $(but).parents('tr');  //accede a la fila
+        var $cols = $row.find('td');  //lee campos
+
+        var param ={
+            idx_popup_img:$row.attr('id'),
+            contents_type:1
+        }
+
+        $.ajax({
+            type: 'post',
+            url: 'delete_popup', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(param),//보내는 데이터
+            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType: 'json',//받는 데이터 타입
+            success: function (result) {
+                console.log(result)
+                if (result.result_code === "SUCCESS") {
+                    alert(result.result_str);
+                    pageLoad('c60_site_popup_mng',{page_num:1},'포털 팝업관리');
+                } else {
+                    // alert("상태 변경에 실패하였습니다")
+                    console.log(result)
+                }
+
+            },
+            error: function (res) {
+                console.log(res)
+            }
+        });
+    }
 </script>
 <!-- / Page content -->
 
