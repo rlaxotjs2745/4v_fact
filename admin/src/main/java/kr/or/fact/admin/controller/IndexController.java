@@ -89,6 +89,9 @@ public class IndexController {
     @Resource(name="webMainPopupService")
     public WebMainPopupService webMainPopupService;
 
+    @Resource(name = "formFileService")
+    public FormFileService formFileService;
+
     @Autowired
     public PRContentsMapper prContentsMapper;
 
@@ -2004,8 +2007,59 @@ public class IndexController {
     @RequestMapping(value = "/l11_document_form_mng",method = RequestMethod.POST)
     public String l11_document_form_mng(@RequestBody ParamPageListFilteredVO param,
                                            ModelMap model, Principal principal){
-        List<FormFileInfoVO> formFileList =fileService.getFormFileList();
+
+        int list_amount = 10;
+        int page_amount = 10;
+        int page = param.getPage_num();
+
+        param.setAmount(10);
+        int formFileCountCount = formFileService.getFormFileCount();
+        model.addAttribute("total_count",formFileCountCount);
+
+        List<FormFileInfoVO> formFileList = formFileService.getFormFileList(param);
         model.addAttribute("formfilelist",formFileList);
+
+        model.addAttribute("cur_page",page);
+        model.addAttribute("amount",list_amount);
+
+        int tot_page = formFileCountCount/list_amount+1;
+        if(formFileCountCount%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("page_amount",page_amount);
+
         AdminVO adminInfo = adminService.findAdminById(principal.getName());
         model.addAttribute("admin", adminInfo);
 

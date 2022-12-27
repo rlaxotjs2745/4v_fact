@@ -1962,6 +1962,9 @@ public class APIController {
 
             formFileInfoVO.setIdx_file_info(fileIdx);
             formFileService.insertFormFile(formFileInfoVO);
+
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("양식을 등록했습니다.");
         }
 
         return resultVO;

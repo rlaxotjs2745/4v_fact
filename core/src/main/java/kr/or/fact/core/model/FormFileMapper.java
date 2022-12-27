@@ -10,5 +10,9 @@ import java.util.List;
 @Mapper
 public interface FormFileMapper {
     void insertFormFile(FormFileInfoVO formFileInfoVO);
+
+    List<FormFileInfoVO> getFormFileList(ParamPageListFilteredVO param);
+
+    int getFormFileCount();
 }
 

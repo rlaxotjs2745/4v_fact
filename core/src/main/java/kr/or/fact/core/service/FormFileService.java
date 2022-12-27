@@ -9,5 +9,9 @@ import java.util.List;
 public interface FormFileService {
 
     void insertFormFile(FormFileInfoVO formFileInfoVO);
+
+    List<FormFileInfoVO> getFormFileList(ParamPageListFilteredVO param);
+
+    int getFormFileCount();
 }
 
