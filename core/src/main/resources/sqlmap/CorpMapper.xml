@@ -157,4 +157,8 @@
             MPHONE_NUM = #{mphone_num}
         WHERE IDX_CORP_MANAGER = #{idx_corp_manager}
     </update>
+
+    <select id="getCorpCount" resultType="Integer">
+        SELECT COUNT(*) FROM TB_CORP_INFO
+    </select>
 </mapper>

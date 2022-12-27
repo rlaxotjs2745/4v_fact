@@ -25,9 +25,9 @@
                                 <th class="text-center px-2" style="width:6%">순서</th>
                                 <th class="text-center px-2" style="width:16%">제목</th>
                                 <th class="text-center sorting" style="width:36%">용도</th>
-                                <th class="text-center sorting" style="width:10%">관련 조직</th>
+                                <th class="text-center sorting" style="width:10%">작성자</th>
                                 <th class="text-center sorting" style="width:14%">파일이름</th>
-                                <th class="text-center sorting" style="width:6%">파일형식</th>
+                                <th class="text-center sorting" style="width:7%">파일형식</th>
                                 <th class="text-center sorting" style="width:12%">등록일</th>
                             </tr>
                             </thead>
@@ -40,7 +40,7 @@
                                     <td class="text-center">${formfile.row_num}</td>
                                     <td class="text-center"><fmt:formatDate value="${formfile.reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                                     <td class="text-center">${formfile.idx_admin}</td>
-
+                                    <td class="text-center">${formfile.idx_admin}</td>
                                 </tr>
                             </c:forEach>
                             <%--<c:choose>
@@ -113,23 +113,17 @@
                 </div>
                 <div class="modal-body">
                     <form>
+                        <input type="hidden" name="idx_admin" value="${admin.idx_admin}">
                         <div class="form-group row" id="form_title">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">양식 제목</label>
                             <div class="col-md-10">
                                 <input id="subject" type="text" class="form-control form-control-md">
                             </div>
-
                         </div>
                         <div class="form-group row" id="form_usage">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">양식 사용 용도</label>
                             <div class="col-md-10">
                                 <textarea id="usage_detail" type="text" class="form-control form-control-md"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group row" id="form_corp_name">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">관련조직 이름</label>
-                            <div class="col-md-10">
-                                <input id="detail" type="text" class="form-control form-control-md">
                             </div>
                         </div>
                         <div class="form-group row" id="file">
@@ -159,193 +153,41 @@
 <!-- Layout footer -->
 
 <%@include file ="layouts/frame_footer.jsp" %>
-<script src="resources/assets/js/bootstable.js"></script>
+<%--<script src="resources/assets/js/bootstable.js"></script>--%>
 <script>
-    $('.summernote').summernote({
-        toolbar: [
-            // [groupName, [list of button]]
-            ['fontname', ['fontname']],
-            ['fontsize', ['fontsize']],
-            ['style', ['bold', 'italic', 'underline']],
-            ['color', ['color']],
-            ['table', ['table']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['height', ['height']],
-            ['insert',['picture','link']],
-            ['view', ['fullscreen','codeview']],
-        ],
-        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-        fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-        height: 300                 // 에디터 높이
-    });
 
-    $(function() {
-        var isRtl = $('html').attr('dir') === 'rtl';
+    $('#btn_save_new').on('click', function() {
 
-        $('#datepicker-show,#datepicker-open').datepicker({
-            orientation: isRtl ? 'auto right' : 'auto left',
-            format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
-            startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
-            language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
-        });
-
-
-    });
-    $(function () {
-        // Time
-        $('#flatpickr-time-start,#flatpickr-time-end').flatpickr({
-            enableTime: true,
-            noCalendar: true,
-            altInput: true,
-            static:true
-        });
-    });
-    $('#btn_edit_mode').on('click', function() {
-
-        //$('.mode-edit').removeClass('d-non');
-        //$('.mode-view').addClass('d-non');
-        if($('.mode-view').hasClass('d-none') == false){
-            $('.mode-view').addClass('d-none');
+        let formData = new FormData();
+        formData.append('subject', $("#subject").val());
+        formData.append('usage_detail', $("#usage_detail").val());
+        formData.append('idx_admin', $("input[name=idx_admin]").val());
+        if (document.getElementById('file_upload').files.length > 0) {
+            formData.append('file1', document.getElementById('file_upload').files[0]);
         }
 
-        if($('.mode-edit').hasClass('d-none') == false){
-            console.log("실행했어요..")
-            $('.mode-edit').addClass('d-none');
-        }
-
-        if($('.mode-new').hasClass('d-none') == false){
-            $('.mode-new').addClass('d-none');
-        }
-
-        $('.mode-edit').removeClass('d-none');
-    });
-
-    $(function() {
-
-        /*$('#btn_mode_new').on('click', function() {
-
-            if($('.mode-view').hasClass('d-non') === false){
-                $('.mode-view').addClass('d-non');
-            }
-            if($('.mode-edit').hasClass('d-non') === false){
-                $('.mode-edit').addClass('d-non');
-            }
-            if($('.mode-new').hasClass('d-non') === true){
-                $('.mode-new').removeClass('d-non');
-            }
-
-            $('#modals-business').modal('show');
-
-
-        });*/
-
-        // 모달 팝업 띄울 시 발생하는 이벤트 (이벤트명 : show.bs.modal)
-        $('#modals-business').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            var what = button.data('what');
-            if(what=='mode-view' || what=='mode-edit'||what=='mode-new'){
-                console.log("시작");
-                if($('.mode-view').hasClass('d-none') == false){
-                    $('.mode-view').addClass('d-none');
-                }
-
-                if($('.mode-edit').hasClass('d-none') == false){
-                    console.log("실행했어요..")
-                    $('.mode-edit').addClass('d-none');
-                }
-
-                if($('.mode-new').hasClass('d-none') == false){
-                    $('.mode-new').addClass('d-none');
-                }
-
-                $('.'+what+'').removeClass('d-none');
-                console.log(what);
-            }
-
-
-
-            // 모달 팝업에 데이터 집어넣기
-            //var modal = $(this);
-            //modal.find('.modal-title').text('New message to ' + what)
-            //modal.find('.modal-body input').val(what)
-        });
-
-
-    });
-
-    $('#btn_save_homepage_info').on('click', function() {
-
-        var param = {homepage_admin:$("#homepage_admin").val(),
-            homepage_admin_pnum:$("#homepage_admin_pnum").val(),
-            email:$("#email").val()};
-        console.log(param);
         $.ajax({
             type: 'post',
-            url :'save_homepage_info', //데이터를 주고받을 파일 주소 입력
-            data: JSON.stringify(param),//보내는 데이터
-            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
-            dataType:'json',//받는 데이터 타입
-            success: function(result){
+            url: 'insert_form_file', //데이터를 주고받을 파일 주소 입력
+            data: formData,//보내는 데이터
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (result) {
                 //작업이 성공적으로 발생했을 경우
                 console.log(result);
-                if(result.result_code=="SUCCESS"){
-                    alert("양식 등록에 성공하였습니다.")
+                if (result.result_code === "SUCCESS") {
+                    alert(result.result_str);
+                    window.location.reload()
+                } else {
 
                 }
-                else {
-
-                }
-                alert(result.result_str);
-
             },
-            error:function(){
+            error: function (error) {
                 //에러가 났을 경우 실행시킬 코드
             }
         });
-    });
-
-
-
-    var saveNewBtn = document.querySelectorAll('.btn_save_new');
-    saveNewBtn.forEach(btn=>btn.addEventListener('click', saveForm));
-
-    function saveForm(){
-    event.preventDefault();
-    var fileForm = new FormData();
-    fileForm.append("subject",document.querySelector('#subject').value);
-    fileForm.append("usage_detail",document.querySelector('#usage_detail').value);
-
-    var files = document.querySelector('#file_upload').files;
-
-
-    for(var i = 0; i < files.length; i++){
-        var num = i + 1;
-        fileForm.append("files" + num, files[i]);
-    }
-    fileForm.append("fileLength", files.length);
-
-    $.ajax({
-        type: 'post',
-        url :'upload_form_file', //데이터를 주고받을 파일 주소 입력
-        data: fileForm,//보내는 데이터
-        contentType: false,//보내는 데이터 타입
-        processData: false,//Jquery 내부에서 파일을 queryString 형태로 전달하는 것을 방지
-        dataType:'json',//받는 데이터 타입
-        enctype: 'multipart/form-data',
-        success: function(result){
-            console.log(result);
-            alert("업로드에 성공했습니다", () => window.redirect("/"))
-        },
-        error:function(err){
-            console.log(err);
-            alert("업로드에 실패했습니다")
-        }
-    });
-     // event.preventDefault();
-    }
-
-
-
+    })
 
 
 </script>

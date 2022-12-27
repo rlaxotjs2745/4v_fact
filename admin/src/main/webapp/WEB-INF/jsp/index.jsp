@@ -219,7 +219,9 @@
                         $("#reserve_view_comp").html(result);
                     } else if(usage === 'site_adver_mng'){
                         $("#site_adver_mng").html(result);
-                    }else{
+                    } else if(usage === '#dashboard_calendar_view'){
+                        $(usage).html(result);
+                    } else{
                         $("#contents").html(result);
                     }
                 },

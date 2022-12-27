@@ -35,4 +35,6 @@ public interface CorpMapper {
     CorpManagerVO getCorpManagerUserIdx(@Param("idx_user") long idx_user);
 
     int updateCorpManager(CorpManagerVO corpManagerVO);
+
+    Integer getCorpCount();
 }

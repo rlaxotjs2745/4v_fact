@@ -1,6 +1,7 @@
 package kr.or.fact.core.model.DTO;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 
@@ -24,4 +25,6 @@ public class FormFileInfoVO {
     String file_path;//	varchar2	256					파일 경로
     //long file_size;//	number	32					파일 크기
     //int checksum;//	number	20					파일 무결성 체크 첵섬
+
+    MultipartFile file1;
   }

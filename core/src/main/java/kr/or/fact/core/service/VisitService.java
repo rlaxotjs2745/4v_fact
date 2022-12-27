@@ -39,4 +39,8 @@ public interface VisitService {
     List<VisitReqVO> getVisitList(ParamPageListFilteredVO param);
 
     List<VisitReqVO> getDateVisitReqList(VisitReqVO visitReqVO);
+
+    int getGroupIdx();
+
+    List<VisitDataVO> getVisitDataListByGroupIdx(long group_idx);
 }

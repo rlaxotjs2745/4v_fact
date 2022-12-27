@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.fact.core.model.FormFileMapper">
+
+    <insert id="insertFormFile" parameterType="kr.or.fact.core.model.DTO.FormFileInfoVO">
+        INSERT INTO TB_FORM_FILE_INFO( IDX_FORM_FILE_INFO,
+                                       SUBJECT,
+                                       USAGE_DETAIL,
+                                       IDX_ADMIN,
+                                       IDX_FILE_INFO,
+                                       REG_DATE)
+        VALUES (SEQ_FORM_FILE_INFO.NEXTVAL,
+                #{subject},
+                #{usage_detail},
+                #{idx_admin},
+                #{idx_file_info},
+                SYSDATE
+               )
+    </insert>
+
+    <select id="getFormFileList" resultType="kr.or.fact.core.model.DTO.FormFileInfoVO">
+        SELECT
+            IDX_FORM_FILE_INFO,
+            SUBJECT,
+            USAGE_DETAIL,
+            IDX_ADMIN,
+            IDX_FILE_INFO,
+            REG_DATE
+        FROM (
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+                        ,IDX_FORM_FILE_INFO,
+                        SUBJECT,
+                        USAGE_DETAIL,
+                        IDX_ADMIN,
+                        IDX_FILE_INFO,
+                        REG_DATE
+                 FROM (
+                          SELECT A.*, B.admin_name, C.EXTENTION, C.FILE_NAME
+                          FROM TB_FORM_FILE_INFO A
+                                 INNER JOIN TB_ADMIN B ON A.idx_admin = B.idx_admin
+                                 INNER JOIN TB_FILE_INFO C ON A.IDX_FILE_INFO = C.IDX_FILE_INFO
+                          order by IDX_FORM_FILE_INFO desc
+                      )
+                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+             )
+        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+    </select>
+
+    <select id="getFormFileCount" resultType="int">
+        SELECT COUNT (*) FROM TB_FORM_FILE_INFO A
+                                  INNER JOIN TB_ADMIN B ON A.idx_admin = B.idx_admin
+                                  INNER JOIN TB_FILE_INFO C ON A.IDX_FILE_INFO = C.IDX_FILE_INFO
+    </select>
+
+</mapper>
+

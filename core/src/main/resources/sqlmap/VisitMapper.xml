@@ -116,7 +116,7 @@
                              VISIT_REQ_NUM,
                      GROUP_NAME,
                      VISITOR,
-                     TO_DATE(RESULVATION_DATE,'YYYY-MM-DD hh:mm'),
+                     RESULVATION_DATE,
                      VISITOR_COUNT,
                      VISITOR_MPHONE_NUM,
                      VISITOR_EMAIL,
@@ -181,7 +181,7 @@
 
     </insert>
 
-    <update id="updateVisitData" parameterType="kr.or.fact.core.model.DTO.DemoBusinessVO">
+    <update id="updateVisitData" parameterType="kr.or.fact.core.model.DTO.VisitDataVO">
         UPDATE TB_VISIT_DATA SET
              CUR_DATE = #{cur_date},
              POSSIBLE_COUNT = #{possible_count},
@@ -195,7 +195,7 @@
         WHERE IDX_VISIT_DATA = #{idx_visit_data}
     </update>
 
-    <update id="updateStatusInVisitData" parameterType="kr.or.fact.core.model.DTO.DemoBusinessVO">
+    <update id="updateStatusInVisitData" parameterType="kr.or.fact.core.model.DTO.VisitDataVO">
         UPDATE TB_VISIT_DATA SET
                                  VISIT_DATA_TYPE = #{visit_data_type}
         WHERE IDX_VISIT_DATA = #{idx_visit_data}
@@ -267,4 +267,15 @@
     <select id="getDateVisitReqList" resultType="kr.or.fact.core.model.DTO.VisitReqVO">
         SELECT * FROM TB_VISIT_REQ WHERE IS_DURATION = #{is_duration} AND RESULVATION_DATE = #{resulvation_date}
     </select>
+
+    <select id="getGroupIdx" resultType="int">
+        select seq_visit_data_group.nextval from dual
+    </select>
+
+
+    <select id="getVisitDataListByGroupIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.VisitDataVO">
+        SELECT * FROM TB_VISIT_DATA WHERE GROUP_IDX= #{group_idx}
+    </select>
+
+
 </mapper>

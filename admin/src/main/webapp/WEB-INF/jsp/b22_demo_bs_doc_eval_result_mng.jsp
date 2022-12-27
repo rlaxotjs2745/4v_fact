@@ -9,7 +9,7 @@
 
         <div class="card">
             <h6 class="card-header with-elements">
-                <div class="card-header-title">사업 공고 등록 (총 450 건)</div>
+                <div class="card-header-title">사업 공고 등록 (총 ${total_count} 건)</div>
             </h6>
             <div class="card-datatable table-responsive pt-0 pb-3">
                 <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -45,7 +45,6 @@
                                 <c:if test="${total_count ne 0}">
                                     <c:forEach items="${adminApplHeaderListVOS}" var="item" varStatus="status">
 
-
                                         <tr class="" onClick="getUserApplList(${item.idx_demo_business},1,9999)">
                                             <td class="text-center">${item.idx_demo_business}</td>
                                             <td class="text-center">${item.exam_end}</td>
@@ -57,7 +56,6 @@
                                             <td class="text-right">${item.appl_review_done}</td>
                                             <td class="text-center"><a href="#none" class="btn btn-underline" data-toggle="modal" data-target="#modals-result-view">보기</a></td>
                                         </tr>
-
                                     </c:forEach>
                                 </c:if>
                                 </tbody>
