@@ -19,9 +19,10 @@
             ENDDATE,
             IS_SHOW,
             REG_DATE,
-            IDX_ADMIN,
+            ADMIN_NAME,
             LAST_UPD_DATE,
-            IDX_FILE_INFO
+            IDX_FILE_INFO,
+            FILE_PATH
         FROM (
                  SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
                 ,IDX_POPUP_IMG,
@@ -32,12 +33,16 @@
                         ENDDATE,
                         IS_SHOW,
                         REG_DATE,
-                        IDX_ADMIN,
+                        ADMIN_NAME,
                         LAST_UPD_DATE,
-                        IDX_FILE_INFO
+                        IDX_FILE_INFO,
+                        FILE_PATH
                  FROM (
-                          SELECT * FROM TB_WEB_MAIN_POPUP
+                          SELECT A.*, B.admin_name, C.FILE_PATH FROM TB_WEB_MAIN_POPUP A
+                                        INNER JOIN TB_ADMIN B ON A.idx_admin = B.idx_admin
+                                        INNER JOIN TB_FILE_INFO C ON A.idx_popup_img = C.IDX_FILE_USAGE
                           WHERE IS_SHOW = 1 OR IS_SHOW = 9
+                            AND C.FILE_TYPE = 6
                           order by IDX_POPUP_IMG desc
                       )
                  WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
@@ -46,7 +51,7 @@
     </select>
 
     <insert id="insertPopupContent" parameterType="kr.or.fact.core.model.DTO.WebMainPopupVO">
-        INSERT INTO TB_HOMEPAGE_INFO( IDX_POPUP_IMG,
+        INSERT INTO TB_WEB_MAIN_POPUP( IDX_POPUP_IMG,
                                       SUBJECT,
                                       CONTENTS_TYPE,
                                       POPUP_URL,
@@ -61,8 +66,8 @@
                 #{subject},
                 #{content_type},
                 #{popup_url},
-                #{startDate},
-                #{endDate},
+                TO_DATE(#{startDate},'YYYY-MM-DD HH24-MI-SS'),
+                TO_DATE(#{endDate},'YYYY-MM-DD HH24-MI-SS'),
                 #{is_show},
                 SYSDATE,
                 #{idx_admin},

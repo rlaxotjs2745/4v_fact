@@ -1523,16 +1523,16 @@ public class APIController {
         resultVO.setResult_code("ERROR_1000");
         resultVO.setResult_str("데이터를 다시 입력해주세요");
 
-        if(webMainPopupVO.getSubject() != null || webMainPopupVO.getSubject() != "" && webMainPopupVO.getFile1() != null){
+        if((webMainPopupVO.getSubject() != null || webMainPopupVO.getSubject() != "") && webMainPopupVO.getFile1() != null){
+
             webMainPopupService.insertPopupContent(webMainPopupVO);
 
             fileService.convertMultipartToFile(webMainPopupVO.getFile1());
             fileService.insertPopupFile(webMainPopupVO.getFile1(), webMainPopupVO.getIdx_admin());
 
-            resultVO.setResult_str("업데이트에 성공하였습니다.");
+            resultVO.setResult_str("등록했습니다.");
             resultVO.setResult_code("SUCCESS");
         }
-
         return resultVO;
     }
 
