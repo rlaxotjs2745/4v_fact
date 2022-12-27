@@ -93,6 +93,9 @@ public class APIController {
     @Resource(name = "webMainPopupService")
     public WebMainPopupService webMainPopupService;
 
+    @Resource(name = "formFileService")
+    public FormFileService formFileService;
+
     @Autowired
     private FACTConfig factConfig;
 
@@ -1605,8 +1608,13 @@ public class APIController {
         resultVO.setResult_code("ERROR_1000");
         resultVO.setResult_str("데이터를 다시 입력해주세요");
 
-        if(webMainPopupVO.getIdx_popup_img() > 0){
+        WebMainPopupVO bannerOri = webMainPopupService.getBannerOrder(webMainPopupVO.getIs_show());
 
+        if(bannerOri != null && bannerOri.getIdx_popup_img() != webMainPopupVO.getIdx_popup_img()){
+            webMainPopupService.deleteBannerOrder(bannerOri);
+        }
+
+        if(webMainPopupVO.getIdx_popup_img() > 0){
             if(webMainPopupVO.getFile1() != null && webMainPopupVO.getFile1().getSize() > 0){
                 fileService.convertMultipartToFile(webMainPopupVO.getFile1());
                 long fileIdx = fileService.insertPopupFile(webMainPopupVO.getFile1(), webMainPopupVO.getIdx_admin());
@@ -1939,6 +1947,24 @@ public class APIController {
     FileInfoVO get_bs_anno_file_info(@RequestParam int idx_bs_announcement){
 
         return fileService.selectBsAnnouncementFile(idx_bs_announcement);
+    }
+
+    @RequestMapping(value ="/insert_form_file",method = RequestMethod.POST)
+    public @ResponseBody ResultVO insert_form_file(@ModelAttribute FormFileInfoVO formFileInfoVO) throws IOException {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("데이터를 다시 입력해주세요");
+
+        if((formFileInfoVO.getSubject() != null || formFileInfoVO.getSubject() != "") && formFileInfoVO.getFile1() != null){
+
+            fileService.convertMultipartToFile(formFileInfoVO.getFile1());
+            long fileIdx = fileService.insertFormFile(formFileInfoVO.getFile1(), formFileInfoVO.getIdx_admin());
+
+            formFileInfoVO.setIdx_file_info(fileIdx);
+            formFileService.insertFormFile(formFileInfoVO);
+        }
+
+        return resultVO;
     }
 
     @RequestMapping(value ="/delete_form_file",method = RequestMethod.POST)
