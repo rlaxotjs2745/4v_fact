@@ -266,12 +266,6 @@ public class APIController {
         System.out.println(filter2);//9998
 
         AdminDemoBSFilterVO adminDemoBSFilterVO = demoBsService.getAdminDemoBsFilter();
-        System.out.println(adminDemoBSFilterVO.getTot_count());//33
-        System.out.println(adminDemoBSFilterVO.getAppl_count());//23
-        System.out.println(adminDemoBSFilterVO.getRevuiew_count());//0
-        System.out.println(adminDemoBSFilterVO.getAgree_count());//0
-        System.out.println(adminDemoBSFilterVO.getDemo_count());//0
-        System.out.println(adminDemoBSFilterVO.getResult_count());//0
 
 //        int tot_count;//전체
 //        int appl_count;//모집중
@@ -315,6 +309,7 @@ public class APIController {
         listPagingParamVO.setIdx(param.getIdx());*/
 
         List<AdminApplHeaderListVO> adminApplHeaderListVOS =  demoBsApplicationService.getApplPagingFilteredList(param);
+
 
 
         //List<DemoBusinessVO>  demoBusinessVOList = demoBsService.getDemoBsPagingList(listPagingParamVO);
@@ -450,7 +445,7 @@ public class APIController {
 
     @RequestMapping(value = "/get_user_demo_bs_info",method = RequestMethod.POST)
     public @ResponseBody
-    ResultVO  join_confirm(HttpSession session,
+    ResultVO  get_user_demo_bs_info(HttpSession session,
                            @RequestBody ParamUserDemoBSInfoVO userDemoBSInfoVO){
 
         System.out.println("idx_user_demo_bs :" + userDemoBSInfoVO.getIdx_user_demo_bs());
@@ -565,6 +560,25 @@ public class APIController {
 
         demoBsApplicationService.updateDemoBsApplicantStatus(param);
 
+
+        return resultVO;
+    }
+
+
+    @RequestMapping(value = "/modify_user_demo_bs_status",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  modify_user_demo_bs_status(HttpSession session,
+                             @RequestBody UserDemoBsVO userDemoBsVO) {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("성공");
+        resultVO.setResult_code("SUCCESS");
+
+
+        try {
+            userDemoBsService.updateUserDemoBsStatus(userDemoBsVO.getIdx_user_demo_bs(), userDemoBsVO.getUser_demobs_status());
+        } catch (Exception e){
+            System.out.println(e);
+        }
 
         return resultVO;
     }

@@ -107,7 +107,7 @@ public class CorpServiceImpl implements CorpService {
     }
 
     @Override
-    public Integer getCorpCount(){
-        return corpMapper.getCorpCount();
+    public Integer getCorpCount(int is_applicant){
+        return corpMapper.getCorpCount(is_applicant);
     }
 }

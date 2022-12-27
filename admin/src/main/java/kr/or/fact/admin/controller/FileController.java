@@ -3,6 +3,7 @@ package kr.or.fact.admin.controller;
 import kr.or.fact.core.config.FACTConfig;
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.FileService;
+import kr.or.fact.core.service.UserDemoBsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class FileController {
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
     @Autowired
     private FileService fileService;
+
+    @Autowired
+    private UserDemoBsService userDemoBsService;
 
     @Autowired
     private FACTConfig factConfig;
@@ -268,6 +272,34 @@ public class FileController {
             System.out.println(e);
             resultVO.setResult_code("ERROR_1000");
             resultVO.setResult_str("변경에 실패하였습니다.");
+        }
+
+        return resultVO;
+    }
+
+
+    @RequestMapping(value = "/modify_user_demo_bs_status_with_file",method = RequestMethod.POST)
+    public ResultVO modify_user_demo_bs_status_with_file(@ModelAttribute FileRequestVO fileRequestVO, HttpSession session, HttpServletRequest request) throws Exception {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("보완요청서 업로드에 완료했습니다.");
+
+        FileInfoVO fileInfoVO = new FileInfoVO();
+
+        System.out.println(fileRequestVO.getFileIndex());
+        System.out.println(fileRequestVO.getOtherwise());
+        fileInfoVO.setIdx_admin(fileRequestVO.getIdx_admin());
+        fileInfoVO.setFile_type(7);
+        fileInfoVO.setIdx_file_usage(fileRequestVO.getOtherwise());
+
+        try {
+            userDemoBsService.updateUserDemoBsStatus(fileRequestVO.getFileIndex(),Integer.parseInt("" + fileRequestVO.getOtherwise()));
+            System.out.println(1);
+            fileService.insertFileOutIdx(fileRequestVO, fileInfoVO);
+        } catch (Exception e) {
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("보완요청서 업로드에 실패하였습니다.");
         }
 
         return resultVO;

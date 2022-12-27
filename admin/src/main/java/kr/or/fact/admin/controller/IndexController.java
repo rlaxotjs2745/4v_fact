@@ -218,8 +218,11 @@ public class IndexController {
         List<AdminApplDemoBsHeaderListVO> adminApplHeaderListVOS = demoBsApplicationService.getAvailableDemoBsApplPagingList(param);
         model.addAttribute("applicationList", adminApplHeaderListVOS);
 
-        Integer corpCount = corpService.getCorpCount();
+        Integer corpCount = corpService.getCorpCount(0);
         model.addAttribute("corpCount", corpCount);
+
+        Integer directCorpCount = corpService.getCorpCount(1);
+        model.addAttribute("directCorpCount", directCorpCount);
 
         DemoBsConsultingVO param0 = new DemoBsConsultingVO();
         param0.setConsulting_status(-1);
@@ -232,6 +235,7 @@ public class IndexController {
         int visitCount = visitService.getVisitReqCount(param);
 
         model.addAttribute("visitCount", visitCount);
+
 
 
 
@@ -437,7 +441,7 @@ public class IndexController {
 
     //신청접수 관리
     @RequestMapping(value = "/b21_demo_bs_appl_mng",method = RequestMethod.POST)
-    public String b21_demo_bs_appl_mng(@RequestBody ParamPageListFilteredVO param,
+    public String b21_demo_bs_appl_mng(@RequestBody ParamPageListFilteredVO param, Principal principal,
                                        /*@RequestParam("page") int page,*/
                                        ModelMap model){
 
@@ -467,6 +471,9 @@ public class IndexController {
 
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
+
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+        model.addAttribute("admin", adminInfo);
 
         int tot_page = filtered_item_total/list_amount+1;
         if(filtered_item_total%list_amount==0) tot_page-=1;

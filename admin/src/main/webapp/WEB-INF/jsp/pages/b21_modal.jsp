@@ -23,36 +23,6 @@
                 <span class="text-muted ml-3 mr-2">2차</span><span>요청중</span>
             </div>
         </div>
-        <div class="form-row">
-            <div class="form-group col col-md-8">
-                <label class="form-label text-success-custom font-weight-bold d-block text-muted">검토 결과<span
-                        class="text__essential">*</span></label>
-                <span class="mb-2 d-inline-block">신청서 접수 완료 &gt; </span><span
-                    class="text-hero"> 보완(신청서 보완 요청)</span>
-                <input type="file" class="custom-file">
-                <small class="form-text mb-2 text-muted">신청서 보완 요청서 등록이 필요합니다.</small>
-            </div>
-            <div class="form-group col col-md-4 text-right">
-                <label class="form-label text-success-custom font-weight-bold d-block text-muted">&nbsp;</label>
-                <a href="#none" class="btn btn-underline">보완 요청서 다운로드</a>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col col-md-8">
-                <select class="custom-select" id="appl_status_selected">
-                    <option value="0" <c:if test="${demoBSApplicationVO.applicant_status eq 0}">selected</c:if>>신규 등록</option>
-                    <option value="1" <c:if test="${demoBSApplicationVO.applicant_status eq 1}">selected</c:if>>서류 검토 중</option>
-                    <option value="2" <c:if test="${demoBSApplicationVO.applicant_status eq 2}">selected</c:if>>서류 보완요청</option>
-                    <option value="3" <c:if test="${demoBSApplicationVO.applicant_status eq 3}">selected</c:if>>서류 검토 완료</option>
-                    <option value="4" <c:if test="${demoBSApplicationVO.applicant_status eq 4}">selected</c:if>>서류 부적격</option>
-                </select>
-            </div>
-            <div class="form-group col col-md-4">
-                <label class="form-label text-success-custom font-weight-bold d-block text-muted align-items-md-end"></label>
-                <button id="btn_save_change" onclick="btn_save_change(${modifyUserDemoBsVO.idx_user_demo_bs})" class="btn btn-outline-primary">서류검토상태 변경</button>
-            </div>
-        </div>
-
 
         <form:form modelAttribute="modifyUserDemoBsVO">
             <div class="form-row">
@@ -201,17 +171,17 @@
                 </div>
             </div>
 
-            <div class="form-row">
-                <div class="form-group col col-md-4">
-                    <form:label path="email" class="form-label text-success-custom font-weight-bold d-block">대표 이메일</form:label>
-                    <form:input path="email" class="form-control form-control-md"/>
-                </div>
+<%--            <div class="form-row">--%>
+<%--                <div class="form-group col col-md-4">--%>
+<%--                    <form:label path="email" class="form-label text-success-custom font-weight-bold d-block">대표 이메일</form:label>--%>
+<%--                    <form:input path="email" class="form-control form-control-md"/>--%>
+<%--                </div>--%>
 
-                <div class="form-group col col-md-4">
-                    <form:label path="homepage" class="form-label text-success-custom font-weight-bold d-block">홈페이지</form:label>
-                    <form:input path="homepage" class="form-control form-control-md"/>
-                </div>
-            </div>
+<%--                <div class="form-group col col-md-4">--%>
+<%--                    <form:label path="homepage" class="form-label text-success-custom font-weight-bold d-block">홈페이지</form:label>--%>
+<%--                    <form:input path="homepage" class="form-control form-control-md"/>--%>
+<%--                </div>--%>
+<%--            </div>--%>
     <hr>
             <div class="form-row">
                        <span class="form-label
@@ -243,17 +213,17 @@
 
             <div class="form-row">
                 <div class="form-group col col-md-3">
-                    <form:label path="capital_amount" class="col-form-label col-form-label-md font-weight-bold">자본금</form:label>
+                    <form:label path="capital_amount" class="col-form-label col-form-label-md font-weight-bold">자본금(만원)</form:label>
                     <form:input path="capital_amount" class="form-control form-control-md"/>
                 </div>
 
                 <div class="form-group col col-md-3">
-                    <form:label path="corp_er" class="col-form-label col-form-label-md font-weight-bold">자기 자본 비율</form:label>
+                    <form:label path="corp_er" class="col-form-label col-form-label-md font-weight-bold">자기 자본 비율(%)</form:label>
                     <form:input path="corp_er" class="form-control form-control-md"/>
                 </div>
 
                 <div class="form-group col col-md-3">
-                    <form:label path="corp_sales_amount" class="col-form-label col-form-label-md font-weight-bold">전년도 매출액</form:label>
+                    <form:label path="corp_sales_amount" class="col-form-label col-form-label-md font-weight-bold">전년도 매출액(만원)</form:label>
                     <form:input path="corp_sales_amount" class="form-control form-control-md"/>
                 </div>
 
@@ -524,7 +494,9 @@
             <div class="form-row">
                 <div class="form-group col col-md-8">
                     <label class="form-label text-success-custom font-weight-bold d-block text-muted">실증기간</label>
-                    <input type="text">
+                    <fmt:formatDate value="${modifyUserDemoBsVO.demo_start_date}" var="sio_stt_date" pattern="yyyy-MM-dd"/>
+                    <fmt:formatDate value="${modifyUserDemoBsVO.demo_end_date}" var="sio_end_date" pattern="yyyy-MM-dd"/>
+                    <input type="text" disabled value="${sio_stt_date} - ${sio_end_date}">
                 </div>
             </div>
             <div class="form-row">
@@ -1998,6 +1970,19 @@
     </div>
 </div>
 
+
+<script>
+
+    curUserDemoBsIdx = ${modifyUserDemoBsVO.idx_user_demo_bs};
+
+    if('${modifyUserDemoBsVO.user_demobs_status}' == '6' || '${modifyUserDemoBsVO.user_demobs_status}' == '7'){
+        $('#confirm_plz').addClass('active');
+        $('#confirm_fin').removeClass('active');
+    } else if('${modifyUserDemoBsVO.user_demobs_status}' == '6'){
+        $('#confirm_fin').addClass('active');
+        $('#confirm_plz').removeClass('active');
+    }
+</script>
 
 
 

@@ -372,6 +372,38 @@ public class FileServiceImpl implements FileService {
 
     }
 
+    @Override
+    @Transactional
+    public long insertFileOutIdx(FileRequestVO fileRequestVO, FileInfoVO fileInfoVO){
+        MultipartFile file = fileRequestVO.getFiles1();
+
+        try {
+            convertMultipartToFile2(file);
+        } catch (Exception e){
+            System.out.println(e);
+        }
+
+
+        fileInfoVO.setFile_name(file.getOriginalFilename());
+        fileInfoVO.setFile_status(0);
+        fileInfoVO.setMime_type(file.getContentType());
+        fileInfoVO.setEncoding(1);
+        fileInfoVO.setExtention(StringUtils.getFilenameExtension(file.getOriginalFilename()));
+        fileInfoVO.setFile_secure_type(0);
+        fileInfoVO.setFile_path("downloadFile/" + file.getOriginalFilename());
+        fileInfoVO.setFile_size(file.getSize());
+        fileInfoVO.setOwner(1);
+        fileInfoVO.setIdx_admin(fileRequestVO.getIdx_admin());
+
+        fileServiceMapper.insertFileInfo(fileInfoVO);
+
+        List<FileInfoVO> fileList = fileServiceMapper.getFileListAsName(file.getOriginalFilename());
+
+        long fileIdx = fileList.get(0).getIdx_file_info();
+
+        return fileIdx;
+    }
+
 
     @Override
     @Transactional

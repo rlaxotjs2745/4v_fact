@@ -36,5 +36,5 @@ public interface CorpMapper {
 
     int updateCorpManager(CorpManagerVO corpManagerVO);
 
-    Integer getCorpCount();
+    Integer getCorpCount(int is_applicant);
 }

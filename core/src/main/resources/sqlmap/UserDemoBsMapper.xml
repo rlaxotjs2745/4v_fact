@@ -49,6 +49,8 @@
 
 
 
+
+
     <insert id="saveUserDemoBs" parameterType="kr.or.fact.core.model.DTO.UserDemoBsVO">
         INSERT INTO TB_USER_DEMO_BS (
             IDX_USER_DEMO_BS,
@@ -272,6 +274,12 @@
          )
 
     </insert>
+
+    <update id="updateUserDemoBsStatus" parameterType="kr.or.fact.core.model.DTO.UserDemoBsVO">
+        UPDATE TB_USER_DEMO_BS SET
+            USER_DEMOBS_STATUS = #{user_demobs_status}
+        WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
+    </update>
 
 
     <update id="updateUserDemoBs" parameterType="kr.or.fact.core.model.DTO.UserDemoBsVO">

@@ -22,4 +22,5 @@ public class AdminApplHeaderListVO {
     Date applicaion_reg_date;
     String admin_name;//	VARCHAR2	100					상담자 이름
     long idx_admin;
+    int user_demobs_status;
 }

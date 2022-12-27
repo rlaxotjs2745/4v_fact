@@ -146,7 +146,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="text-muted small mt-2">자율참여 수</div>
-                        <div class="text-large">43</div>
+                        <div class="text-large">${directCorpCount}</div>
                     </div>
                 </div>
             </div>
@@ -156,7 +156,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="text-muted small mt-2">위탁참여 기업 수</div>
-                        <div class="text-large">90</div>
+                        <div class="text-large">${corpCount - directCorpCount}</div>
                     </div>
                 </div>
             </div>
