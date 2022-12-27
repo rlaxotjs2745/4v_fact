@@ -459,6 +459,8 @@
             return alert('링크를 입력해주세요.')
         }
 
+        console.log(document.getElementById('image_upload').files.length, '파일 길이')
+
         if(btnTextState === '등록') {
             if(document.getElementById('image_upload').files[0] === null || document.getElementById('image_upload').files[0] === undefined){
                 return alert('이미지 파일은 필수입니다')
@@ -469,6 +471,7 @@
         const startDate =  $("input[name=start]").val()
         const endDate =  $("input[name=end]").val()
 
+
         formData.append('subject', $("input[name=subject]").val());
         formData.append('contents_type', '1'); // 타입 1:팝업 , 2:배너
         formData.append('popup_url', $("input[name=popup_url]").val());
@@ -476,9 +479,13 @@
         formData.append('endDate', endDate + ' 00:00:00');
         formData.append('is_show', $("#is_show").val()); // 타입 1:팝업 , 2:배너
         formData.append('idx_admin', $("input[name=idx_popup_img]").val());
+        if(document.getElementById('image_upload').files.length > 0) {
+            formData.append('file1', document.getElementById('image_upload').files[0]);
+        }
+
 
         if(btnTextState === '등록') {
-            formData.append('file1', document.getElementById('image_upload').files[0]);
+
             $.ajax({
                 type: 'post',
                 url :'insert_popup', //데이터를 주고받을 파일 주소 입력
@@ -491,9 +498,10 @@
                     console.log(result);
                     if (result.result_code === "SUCCESS") {
                         alert(result.result_str);
-                        $("#homepage_admin").val('')
-                        $("#homepage_admin_pnum").val('')
-                        $("#email").val('')
+                        $('body').removeClass('modal-open');
+                        $('body').css('padding-right', '');
+                        $('#modals-modify').modal("hide")
+                        $(".modal-backdrop").remove();
                         pageLoad('c60_site_popup_mng',{page_num:1},'포탈 팝업관리');
                     }
                     else {
@@ -507,7 +515,7 @@
         }
 
         if (btnTextState === '수정') {
-            formData.append('idx_popup', $("input[name=idx_popup]").val());
+            formData.append('idx_popup_img', $("input[name=idx_popup]").val());
 
             $.ajax({
                 type: 'post',
@@ -521,9 +529,10 @@
                     console.log(result);
                     if (result.result_code === "SUCCESS") {
                         alert(result.result_str);
-                        $("#homepage_admin").val('')
-                        $("#homepage_admin_pnum").val('')
-                        $("#email").val('')
+                        $('body').removeClass('modal-open');
+                        $('body').css('padding-right', '');
+                        $('#modals-modify').modal("hide")
+                        $(".modal-backdrop").remove();
                         pageLoad('c60_site_popup_mng',{page_num:1},'포탈 팝업관리');
                     }
                     else {
