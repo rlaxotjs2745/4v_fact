@@ -108,7 +108,7 @@
         </div>
 
 
-        <div class="col-md-6 col-lg-12 col-xl-6" id="dashboard_calendar_view">
+        <div class="col-md-6 col-lg-12 col-xl-6" id="dashboard_calendar_view" onclick="pageLoad('c22_site_visit_mng','1:1문의');">
             <%@ include file="./c22_site_visit_mng.jsp"%>
             <!-- Comments -->
 <%--            <div id="list_calendar" class="card mb-4" style="display:none;">--%>

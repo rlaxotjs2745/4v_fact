@@ -1443,7 +1443,9 @@
             events : getMonthlyData(new Date()),
 
 
-            eventClick: function(calEvent) {
+            eventClick:
+                window.location.pathname != '/a10_dashboard' ?
+                function(calEvent) {
 
                 let visitData=calEvent.event.extendedProps;
 
@@ -1503,7 +1505,7 @@
 
                 $("#modifyOrDeleteVisitData").modal('show');
 
-            },
+            }: null,
 
 
 
