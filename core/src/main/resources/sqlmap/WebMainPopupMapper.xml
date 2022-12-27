@@ -40,7 +40,7 @@
                  FROM (
                           SELECT A.*, B.admin_name, C.FILE_PATH FROM TB_WEB_MAIN_POPUP A
                                         INNER JOIN TB_ADMIN B ON A.idx_admin = B.idx_admin
-                                        INNER JOIN TB_FILE_INFO C ON A.idx_popup_img = C.IDX_FILE_USAGE
+                                        INNER JOIN TB_FILE_INFO C ON A.IDX_FILE_INFO = C.IDX_FILE_INFO
                           WHERE IS_SHOW = 1 OR IS_SHOW = 9
                             AND C.FILE_TYPE = 6
                           order by IDX_POPUP_IMG desc

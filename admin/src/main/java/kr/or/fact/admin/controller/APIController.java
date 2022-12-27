@@ -678,8 +678,7 @@ public class APIController {
     public @ResponseBody
     ResultVO  get_monthly_visit_data(HttpSession session,
                              @RequestBody VisitDateVO visitDateVO){
-        System.out.println("-------------------------------------------");
-        System.out.println("hi : visitDateVO.getStart_date() : " + visitDateVO.getStart_date());
+
 
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("성공");
@@ -689,6 +688,24 @@ public class APIController {
         resultVO.setVisitDataVOList(visitDataVOList);
         return  resultVO;
     }
+
+    @RequestMapping(value = "/get_visit_data_byGroupIdx",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO get_visit_data_byGroupIdx(HttpSession session,
+                                       @RequestBody VisitDataVO visitDataVO){
+
+        System.out.println("group_idx : " + visitDataVO.getGroup_idx());
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("성공");
+        resultVO.setResult_code("SUCCESS");
+
+        List<VisitDataVO> visitDataVOList=visitService.getVisitDataListByGroupIdx(visitDataVO.getGroup_idx());
+        resultVO.setVisitDataVOList(visitDataVOList);
+
+        return  resultVO;
+    }
+
 
     @RequestMapping(value = "/save_visit_date",method = RequestMethod.POST)
     public @ResponseBody
@@ -703,9 +720,6 @@ public class APIController {
         resultVO.setResult_code("SUCCESS");
 
         int groupIdx=visitService.getGroupIdx();
-        System.out.println("================================");
-        System.out.println("groupIdx : " +  groupIdx);
-        System.out.println("================================");
 
 
         if(visitDataVOList == null || visitDataVOList.isEmpty()){
@@ -1511,17 +1525,17 @@ public class APIController {
 
         if((webMainPopupVO.getSubject() != null || webMainPopupVO.getSubject() != "") && webMainPopupVO.getFile1() != null){
 
-            webMainPopupService.insertPopupContent(webMainPopupVO);
-
             fileService.convertMultipartToFile(webMainPopupVO.getFile1());
-            fileService.insertPopupFile(webMainPopupVO.getFile1(), webMainPopupVO.getIdx_admin());
+            long fileIdx = fileService.insertPopupFile(webMainPopupVO.getFile1(), webMainPopupVO.getIdx_admin());
+
+            webMainPopupVO.setIdx_file_info(fileIdx);
+            webMainPopupService.insertPopupContent(webMainPopupVO);
 
             resultVO.setResult_str("등록했습니다.");
             resultVO.setResult_code("SUCCESS");
         }
         return resultVO;
     }
-
 
     @RequestMapping(value ="/delete_notice",method = RequestMethod.POST)
     public @ResponseBody
