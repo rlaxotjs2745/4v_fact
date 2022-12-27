@@ -806,7 +806,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <table id="article-list" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="article-list_info" style="">
-                            <thead>
+                            <thead class="bg-success">
                             <tr role="row">
                                 <th class="sorting" style="width:20px">ID</th>
                                 <th class="sorting" style="width:150px">기업명</th>

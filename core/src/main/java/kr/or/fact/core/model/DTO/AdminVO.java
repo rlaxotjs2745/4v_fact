@@ -27,5 +27,7 @@ public class AdminVO {
     String admin_addr; // varchar2 255 주소
     Date reg_date;//	date						최초 등록 일시
     Date last_upd_date;//	date						최종 수정 일시
+    String refresh_token;
+    boolean is_expired;
 //주소, 이메일, 담당업무, 관리번호
 }

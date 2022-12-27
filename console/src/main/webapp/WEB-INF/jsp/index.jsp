@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko" class="light-style">
 <head>
@@ -53,7 +55,7 @@
     <link rel="stylesheet" href="resources/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css">
     <link rel="stylesheet" href="resources/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
     <link rel="stylesheet" href="resources/assets/vendor/libs/fullcalendar/fullcalendar.css">
-
+    <link rel="stylesheet" href="resources/assets/vendor/libs/flot/flot.css">
 
 
 </head>
@@ -103,6 +105,8 @@
 <script src="resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 <script src="resources/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
 <script src="resources/assets/vendor/libs/fullcalendar/fullcalendar.js"></script>
+<script src="resources/assets/vendor/libs/flot/flot.js"></script>
+<script src="resources/assets/vendor/libs/flot/jquery.flot.time.js"></script>
 
 <!-- Demo -->
 <script src="resources/assets/js/demo.js"></script>

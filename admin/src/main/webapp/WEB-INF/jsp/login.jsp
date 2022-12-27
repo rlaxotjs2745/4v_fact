@@ -58,10 +58,44 @@
     <script src="resources/assets/vendor/js/pace.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+
+
     <!-- Libs -->
     <link rel="stylesheet" href="resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css">
     <!-- Page -->
     <link rel="stylesheet" href="resources/assets/vendor/css/pages/authentication.css">
+
+    <sec:authorize access="isAuthenticated()">
+        <!-- csrf 처리 -->
+        <sec:csrfMetaTags />
+        <script>
+            try {
+                let csrfParameter = $("meta[name='_csrf_parameter']").attr("content");
+                let csrfHeader = $("meta[name='_csrf_header']").attr("content");
+                let csrfToken = $("meta[name='_csrf']").attr("content");
+
+                // ajax가 호출 되는 전역
+                $.ajaxSetup({
+                    beforeSend: function(xhr, settings) {
+                        if (!/^(GET|HEAD|OPTIONS)$/i.test(settings.type) && !this.crossDomain) {
+                            xhr.setRequestHeader(csrfHeader, csrfToken)
+                        }
+                    }
+                });
+
+                // form
+                $("form").each(function() {
+                    let input = $("<input/>").attr({name:csrfParameter, type:"hidden", value:csrfToken});
+                    $(this).append(input);
+                });
+            } catch(e) {
+                console.log(e);
+            }
+        </script>
+        <!-- csrf 처리 -->
+    </sec:authorize>
 </head>
 
 <body>
@@ -91,8 +125,8 @@
                 <h3 class="text-center text-muted font-weight-bolder mb-4">관리자 로그인</h3>
 
                 <!-- Form -->
-                <form action="login" method="post">
-                    <sec:csrfInput />
+                <%--<form action="login" method="post">--%>
+                   <%-- <sec:csrfInput />--%>
                     <div class="form-group">
                         <label class="form-label">아이디</label>
                         <input id="input_id" name="username" type="text" class="form-control">
@@ -100,7 +134,7 @@
                     <div class="form-group">
                         <label class="form-label d-flex justify-content-between align-items-end">
                             <div>패스워드</div>
-                           <a href="password_reset" class="d-block small">비밀번호를 잊어버리셨나요?</a>
+                           <%--<a href="password_reset" class="d-block small">비밀번호를 잊어버리셨나요?</a>--%>
                         </label>
                         <input id="input_pw" name="password" type="password" class="form-control">
                     </div>
@@ -110,9 +144,9 @@
 <%--                            <input type="checkbox" class="custom-control-input">--%>
 <%--                            <span class="custom-control-label">자동 로그인</span>--%>
                         </label>
-                        <button id="btn_login" type="submit" class="btn btn-primary">로그인</button>
+                        <button id="btn_login" type="button" class="btn btn-primary">로그인</button>
                     </div>
-                </form>
+                <%--</form>--%>
                 <!-- / Form -->
 
 
@@ -135,7 +169,7 @@
     $(window).ready(function(){
         $("#theme-settings").hide();
     });
-    /*
+
          $("#btn_login").click(function(){
 
              var param = {
@@ -146,15 +180,23 @@
 
              $.ajax({
                  type: 'post',
-                 url :'login', //데이터를 주고받을 파일 주소 입력
+                 url :'admin_login', //데이터를 주고받을 파일 주소 입력
                  data: JSON.stringify(param),//보내는 데이터
                  contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
                  dataType:'json',//받는 데이터 타입
                  success: function(result){
                      //작업이 성공적으로 발생했을 경우
                      if(result.result_code=="SUCCESS"){
-                         // location.replace('/');
-                         console.log("여기까지와요>???")
+                         //access_token을 받았으니 사용해야지
+
+                         if($.cookie('access_token')!='undefined')
+                         {
+                             $.removeCookie('access_token', { path: '/' }); // => true
+                             $.removeCookie('refresh_token', { path: '/' }); // => true
+                         }
+                         $.cookie('access_token', result.access_token, { expires: 1, path: '/' });
+                         $.cookie('refresh_token', result.refresh_token, { expires: 365, path: '/' });
+                         location.replace('/');
                      }
                      else {
                          $("#span_result").show();
@@ -172,7 +214,7 @@
         $("#input_pw").on("propertychange change keyup paste input", function() {
             $("#span_result").hide();
         });
-    */
+
 </script>
 </body>
 

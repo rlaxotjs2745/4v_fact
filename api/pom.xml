@@ -22,18 +22,7 @@
         <maven.compiler.target>8</maven.compiler.target>
         <start-class>kr.or.fact.api.ApiApplication</start-class>
     </properties>
-<!--    <repositories>-->
-<!--        <repository>-->
-<!--            <id>mvn2s</id>-->
-<!--            <url>https://repo1.maven.org/maven2/</url>-->
-<!--            <releases>-->
-<!--                <enabled>true</enabled>-->
-<!--            </releases>-->
-<!--            <snapshots>-->
-<!--                <enabled>false</enabled>-->
-<!--            </snapshots>-->
-<!--        </repository>-->
-<!--    </repositories>-->
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -115,13 +104,12 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
-
-
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.6.2</version>
             </plugin>
         </plugins>
 

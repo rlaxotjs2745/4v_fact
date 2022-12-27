@@ -23,16 +23,16 @@
 
             <div class="card-body">
                 <p class="text-center">
-                    <button type="button" class="btn icon-btn btn-primary"><span class="fas fa-temperature-high"></span></button>
-                    <button type="button" class="btn icon-btn btn-outline-secondary"><span class="fas fa-tint"></span></button>
-                    <button type="button" class="btn icon-btn btn-outline-secondary"><span class="fab fa-codiepie"></span></button>
-                    <button type="button" class="btn icon-btn btn-outline-secondary"><span class="fas fa-sun"></span></button>
-                    <button type="button" class="btn icon-btn btn-outline-secondary"><span class="fas fa-lightbulb"></span></button>
-                    <button type="button" class="btn icon-btn btn-outline-secondary"><span class="fas fa-faucet"></span></button>
-                    <button type="button" class="btn icon-btn btn-outline-secondary"><span class="fas fa-water"></span></button>
-                    <button type="button" class="btn icon-btn btn-outline-secondary"><span class="fab fa-pagelines"></span></button>
-                    <button type="button" class="btn icon-btn btn-outline-secondary"><span class="fas fa-eye-dropper"></span></button>
-                    <button type="button" class="btn icon-btn btn-outline-secondary"><span class="fas fa-thermometer-empty"></span></button>
+                    <button id="btn_sensor1_1" onclick="onDataButtonClick(1, 1)" type="button" class="btn icon-btn btn-primary btn_sensor1" data-toggle="tooltip" data-placement="bottom" data-state="success" title="온도"><span class="fas fa-temperature-high"></span></button>
+                    <button id="btn_sensor1_2" onclick="onDataButtonClick(1, 2)" type="button" class="btn icon-btn btn-outline-secondary btn_sensor1" data-toggle="tooltip" data-placement="bottom" data-state="success" title="습도"><span class="fas fa-tint"></span></button>
+                    <button id="btn_sensor1_3" onclick="onDataButtonClick(1, 3)" type="button" class="btn icon-btn btn-outline-secondary btn_sensor1" data-toggle="tooltip" data-placement="bottom" data-state="success" title="CO²">CO²</button>
+                    <button id="btn_sensor1_4" onclick="onDataButtonClick(1, 4)" type="button" class="btn icon-btn btn-outline-secondary btn_sensor1" data-toggle="tooltip" data-placement="bottom" data-state="success" title="일사량"><span class="fas fa-sun"></span></button>
+                    <button id="btn_sensor1_5" onclick="onDataButtonClick(1, 5)" type="button" class="btn icon-btn btn-outline-secondary btn_sensor1" data-toggle="tooltip" data-placement="bottom" data-state="success" title="광량"><span class="fas fa-lightbulb"></span></button>
+                    <button id="btn_sensor1_6" onclick="onDataButtonClick(1, 6)" type="button" class="btn icon-btn btn-outline-secondary btn_sensor1" data-toggle="tooltip" data-placement="bottom" data-state="success" title="수분"><span class="fas fa-faucet"></span></button>
+                    <button id="btn_sensor1_7" onclick="onDataButtonClick(1, 7)" type="button" class="btn icon-btn btn-outline-secondary btn_sensor1" data-toggle="tooltip" data-placement="bottom" data-state="success" title="수분장력"><span class="fas fa-water"></span></button>
+                    <button id="btn_sensor1_8" onclick="onDataButtonClick(1, 8)" type="button" class="btn icon-btn btn-outline-secondary btn_sensor1" data-toggle="tooltip" data-placement="bottom" data-state="success" title="EC"><span class="fab fa-pagelines"></span></button>
+                    <button id="btn_sensor1_9" onclick="onDataButtonClick(1, 9)" type="button" class="btn icon-btn btn-outline-secondary btn_sensor1" data-toggle="tooltip" data-placement="bottom" data-state="success" title="PH"><span class="fas fa-eye-dropper"></span></button>
+                    <button id="btn_sensor1_10" onclick="onDataButtonClick(1, 10)" type="button" class="btn icon-btn btn-outline-secondary btn_sensor1" data-toggle="tooltip" data-placement="bottom" data-state="success" title="지온"><span class="fas fa-thermometer-empty"></span></button>
                 </p>
             </div>
         </div>
@@ -729,5 +729,13 @@
         });
 
     });
+
+    function onDataButtonClick(gb_num, sensor_num){
+        if($(".btn_sensor"+gb_num).hasClass("btn-primary")){
+            $(".btn_sensor"+gb_num).removeClass("btn-primary");
+            $(".btn_sensor"+gb_num).addClass("btn-outline-secondary");
+        }
+        $("#btn_sensor"+gb_num+"_"+sensor_num).addClass("btn-primary");
+    }
 </script>
 <!-- / Page content -->

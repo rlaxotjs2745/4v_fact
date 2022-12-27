@@ -16,4 +16,6 @@ public class ResultVO{
 
     VisitReqVO visitReqVO;
     UserVO userVO;
+    String access_token;
+    String refresh_token;
 }

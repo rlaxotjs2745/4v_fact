@@ -56,7 +56,35 @@
 
     <!-- 공통 css 추가 -->
     <link rel="stylesheet" href="resources/assets/css/common.css">
+    <sec:authorize access="isAuthenticated()">
+        <!-- csrf 처리 -->
+        <sec:csrfMetaTags />
+        <script>
+            try {
+                let csrfParameter = $("meta[name='_csrf_parameter']").attr("content");
+                let csrfHeader = $("meta[name='_csrf_header']").attr("content");
+                let csrfToken = $("meta[name='_csrf']").attr("content");
 
+                // ajax가 호출 되는 전역
+                $.ajaxSetup({
+                    beforeSend: function(xhr, settings) {
+                        if (!/^(GET|HEAD|OPTIONS)$/i.test(settings.type) && !this.crossDomain) {
+                            xhr.setRequestHeader(csrfHeader, csrfToken)
+                        }
+                    }
+                });
+
+                // form
+                $("form").each(function() {
+                    let input = $("<input/>").attr({name:csrfParameter, type:"hidden", value:csrfToken});
+                    $(this).append(input);
+                });
+            } catch(e) {
+                console.log(e);
+            }
+        </script>
+        <!-- csrf 처리 -->
+    </sec:authorize>
 
 </head>
 
@@ -137,11 +165,6 @@
         });
 
     });
-
-    var csrfParameter = $("meta[name='_csrf_parameter']").attr("content");
-    var csrfHeader = $("meta[name='_csrf_header']").attr("content");
-    var csrfToken = $("meta[name='_csrf']").attr("content");
-    //최초 진입시 호출되는 ajax 페이지 초기값
     var cur = "";
 
 
@@ -188,10 +211,6 @@
             cur = url+param.page;
             history.pushState(param, title, url);
 
-            $.ajaxSetup({
-                headers:
-                    { 'X-CSRF-TOKEN': csrfToken }
-            });
             var request = $.ajax({
                 url: url,
                 method: 'post',
@@ -199,6 +218,10 @@
                 contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
                 dataType:'html',//받는 데이터 타입
                 success:function(result){
+
+
+
+
                     if(usage == "admin"){
                         $("#admin_index").html(result);
                     } else if(usage == "user"){
@@ -247,7 +270,8 @@
             return;
         }
     }
-    //문서 로드 완료 후 이벤트 처리
+
+    //뒤로가기 했을 때 처리
     (function() {
         // There's nothing to do for older browsers ;)
         if (!window.addEventListener)

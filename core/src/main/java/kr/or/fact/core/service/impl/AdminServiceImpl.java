@@ -54,7 +54,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public AdminVO login(String admin_id, String admin_pw){
+
         AdminVO findAdminVO =adminMapper.getAuthAdmin(admin_id,admin_pw);
+
         return findAdminVO;
     }
     @Override

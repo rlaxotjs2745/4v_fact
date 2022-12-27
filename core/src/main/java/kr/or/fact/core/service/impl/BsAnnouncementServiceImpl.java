@@ -20,13 +20,6 @@ public class BsAnnouncementServiceImpl implements BsAnnouncementService {
     @Autowired
     public BsAnnouncementServiceImpl(BsAnnouncementMapper bsAnnouncementMapper){this.bsAnnouncementMapper = bsAnnouncementMapper;}
 
-    //@Autowired
-    //private SqlSession sqlsession;
-
-    //@Autowired
-    //private DataSourceTransactionManager dataSourceTransactionManager;
-
-
     @Override
     public int getMainBsAnnouncementCount(){
         return bsAnnouncementMapper.getMainBsAnnouncementCount();

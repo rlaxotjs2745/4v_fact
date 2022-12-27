@@ -88,103 +88,57 @@ public class IndexController {
     @Autowired
     public PRContentsMapper prContentsMapper;
 
+    @Resource(name="adminSessionService")
+    AdminSessionService adminSessionService;
+
     @Autowired
     Environment env;
 
-    private Session session;
+    public AdminVO getVerityAuth(String access_token){
+        AdminVO adminVO = null;
 
-    private Store store;
+        //1. access_token 찾기
+        AdminSessionVO adminSessionVO = adminSessionService.getAdminSessionInfoByToken(access_token);
+        if(adminSessionVO!=null)
+        {
+            //2.access_token expire 검토
+            SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
 
-    private Folder folder;
+            Date cur = new Date();
+            String today = format.format(cur);
+            String expire = format.format(adminSessionVO.getAccess_expire_date());
+            int compare = expire.compareTo(today);
+            if(compare>=0){//오늘보다 크면
+                adminVO = adminService.getAdminInfo(adminSessionVO.getIdx_admin());
+            }else {//토큰 만료
+                adminVO = new AdminVO();
+                adminVO.set_expired(true);
+            }
+        }
 
+        return adminVO;
+    }
 
+    @RequestMapping(value = "/",method = RequestMethod.GET)
+    public String root(ModelMap model,
+                       @CookieValue(name = "access_token",required = true) String access_token){
 
-    @PreAuthorize("hasRole('ROLE_MEMBER')")
-    @RequestMapping("/")
-    public String root(Principal principal, ModelMap model){
-
-        AdminVO adminInfo = adminService.findAdminById(principal.getName());
-        model.addAttribute("admin", adminInfo);
-        setProfile(model);
+        if(access_token!=null){
+            AdminVO adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         return "index";
     }
-    @PreAuthorize("hasRole('ROLE_MEMBER')")
-    @RequestMapping("/home")
-    public String home(){
 
-
-
-        return "redirect:/";
-    }
-    @RequestMapping(value = "/api_post_login",method = RequestMethod.POST)
-    public String api_post_login(HttpSession session,
-                                 ModelMap model,
-                                 @RequestParam(value="id") String admin_id,
-                                 @RequestParam(value="pw") String admin_pw){
-
-         if(admin_id == null || admin_pw == null){
-            return "redirect:/login";
-        }
-        //UserVO findUser = userService.getAuthUser(id,pw);
-        //UserVO findUser = userService.getUserInfo(3);
-
-        AdminVO findAdmin = adminService.login(admin_id,admin_pw);
-
-        if(findAdmin!=null){
-            model.addAttribute("adminVo",findAdmin);
-            session.setAttribute("loginCheck1",true);
-            session.setAttribute("admin_id",admin_id);
-            session.setAttribute("name",findAdmin.getAdmin_name());
-            session.setAttribute("isCorpMember",findAdmin.getAdmin_type());
-            return "redirect:/";
-        }
-        else {
-            session.setAttribute("loginCheck1",false);
-        }
-
-        return "redirect:/login";
-    }
-
-/*    @RequestMapping("/frame_lnb")
-    public String frame_lnb(){
-
-
-        return "frame_lnb";
-    }
-    @RequestMapping("/frame_gnb")
-    public String frame_gnb(){
-
-
-        return "frame_gnb";
-    }
-    @RequestMapping("/frame_footer")
-    public String frame_footer(){
-
-
-        return "frame_footer";
-    }*/
-
-
-
-    @GetMapping("/login")
-    public String login(HttpSession session, Model model, @RequestBody(required = false) ParamVO paramVO){
-        session.setAttribute("CSRF_TOKEN", UUID.randomUUID().toString());
-//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//        String hashedPassword = passwordEncoder.encode("123123");
-//        System.out.println(paramVO);
-//
-//        AdminVO adminVo = new AdminVO();
-//        adminVo.setAdmin_id("aa@aa.com");
-//        adminVo.setAdmin_pw("123123");
-
-////        if(adminVo !=null)
-////        {
-//            adminVo.setAdmin_pw(passwordEncoder.encode("123123"));
-//            adminService.join(adminVo);
-////        }
-//        System.out.println("confirm");
-//        model.addAttribute("init", hashedPassword);
+    @RequestMapping(value="/login",method = RequestMethod.GET)
+    public String login( Model model,
+                         @RequestBody(required = false) ParamVO paramVO){
 
         return "login";
     }
@@ -193,20 +147,40 @@ public class IndexController {
     @SneakyThrows
     @RequestMapping(value = "/a10_dashboard",method = RequestMethod.POST)
     public String a10_dashboard(@RequestParam(value = "tag", required = false) String tagValue,
-                                 ModelMap model
-                                ){
+                                ModelMap model,
+                                @CookieValue(name = "access_token",required = true) String access_token){
+
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
+
         return "/a10_dashboard";
     }
 
     //사업공고문 관리
     @RequestMapping(value = "/b00_demo_bs_mng",method = RequestMethod.POST)
     public String b00_demo_bs_mng(@RequestBody ParamPageListFilteredVO param,
-            Principal principal,
-            ModelMap model){
+                                  ModelMap model,
+                                  @CookieValue(name = "access_token",required = true) String access_token){
 
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
-        AdminVO adminInfo = adminService.findAdminById(principal.getName());
-        model.addAttribute("admin", adminInfo);
 
         int list_amount = 10;;
         int page_amount = 10;
@@ -299,15 +273,19 @@ public class IndexController {
     //사업공고문 관리
     @RequestMapping(value = "/b10_demo_bs_announce_doc_mng",method = RequestMethod.POST)
     public String b10_demo_bs_announce_doc_mng(@RequestBody ParamPageListFilteredVO param,
-                                               Principal principal,
-                                                /*@RequestParam("page") int page,
-                                               @RequestParam("filter1") int filter1,
-                                               @RequestParam("filter2") int filter2,*/
+                                               ModelMap model,
+                                               @CookieValue(name = "access_token",required = true) String access_token){
 
-                                               ModelMap model){
-
-        AdminVO adminInfo = adminService.findAdminById(principal.getName());
-        model.addAttribute("admin", adminInfo);
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         int list_amount = 10;;
         int page_amount = 10;
@@ -390,18 +368,24 @@ public class IndexController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-
-
-
         return "b10_demo_bs_announce_doc_mng";
     }
 
     //신청접수 관리
     @RequestMapping(value = "/b21_demo_bs_appl_mng",method = RequestMethod.POST)
     public String b21_demo_bs_appl_mng(@RequestBody ParamPageListFilteredVO param,
-                                       /*@RequestParam("page") int page,*/
-                                       ModelMap model){
-
+                                       ModelMap model,
+                                       @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         //사업 기준
         int list_amount = 5;
@@ -475,8 +459,18 @@ public class IndexController {
     //심사결과 관리
     @RequestMapping(value = "/b22_demo_bs_doc_eval_result_mng",method = RequestMethod.POST)
     public String b22_demo_bs_doc_eval_result_mng(@RequestBody ParamPageListFilteredVO param,
-                                                  /*@RequestParam("page") int page,*/
-                                                  ModelMap model){
+                                                  ModelMap model,
+                                                  @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         //사업 기준
         int list_amount = 5;
@@ -497,7 +491,6 @@ public class IndexController {
         listPagingParamVO.setFilter2(CONSTANT.FILTER_NOT_USED);
         listPagingParamVO.setOrder_field("IDX_DEMO_BUSINESS");
 */
-
 
         List<AdminApplDemoBsHeaderListVO>  adminApplHeaderListVOS = demoBsApplicationService.getAvailableDemoBsEvalPagingList(param);
 
@@ -550,9 +543,18 @@ public class IndexController {
     //협약 전 업무관리
     @RequestMapping(value = "/b23_demo_bs_pre_contract_mng",method = RequestMethod.POST)
     public String b23_demo_bs_pre_contract_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                               ModelMap model){
-
-
+                                               ModelMap model,
+                                               @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         return "b23_demo_bs_pre_contract_mng";
     }
@@ -560,7 +562,18 @@ public class IndexController {
     //협약관리
     @RequestMapping(value = "/b30_demo_bs_usage_ext_mng",method = RequestMethod.POST)
     public String b30_demo_bs_usage_ext_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                            ModelMap model){
+                                            ModelMap model,
+                                            @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
 
         return "b30_demo_bs_usage_ext_mng";
@@ -569,8 +582,18 @@ public class IndexController {
     //실증성적서
     @RequestMapping(value = "/b40_demo_bs_contract_mng",method = RequestMethod.POST)
     public String b40_demo_bs_contract_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                           ModelMap model){
-
+                                           ModelMap model,
+                                           @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         return "b40_demo_bs_contract_mng";
     }
@@ -578,8 +601,18 @@ public class IndexController {
     //현황보고서 작성
     @RequestMapping(value = "/b50_demo_bs_corp_cur_list",method = RequestMethod.POST)
     public String b50_demo_bs_corp_cur_list(@RequestParam(value = "tag", required = false) String tagValue,
-                                            ModelMap model){
-
+                                            ModelMap model,
+                                            @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         return "b50_demo_bs_corp_cur_list";
     }
@@ -587,7 +620,18 @@ public class IndexController {
     //분야별 기업현황
     @RequestMapping(value = "/b60_demo_bs_consign_corp_list",method = RequestMethod.POST)
     public String b60_demo_bs_consign_corp_list(@RequestParam(value = "tag", required = false) String tagValue,
-                                                ModelMap model){
+                                                ModelMap model,
+                                                @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
 
         return "b60_demo_bs_consign_corp_list";
@@ -596,8 +640,18 @@ public class IndexController {
     //위탁기업 목록
     @RequestMapping(value = "/b70_demo_bs_usage_pee_mng",method = RequestMethod.POST)
     public String b70_demo_bs_usage_pee_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                            ModelMap model){
-
+                                            ModelMap model,
+                                            @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         return "b70_demo_bs_usage_pee_mng";
     }
@@ -605,8 +659,18 @@ public class IndexController {
     //연장신청 접수
     @RequestMapping(value = "/b80_demo_bs_corp_cur_report_write",method = RequestMethod.POST)
     public String b80_demo_bs_corp_cur_report_write(@RequestParam(value = "tag", required = false) String tagValue,
-                                                    ModelMap model){
-
+                                                    ModelMap model,
+                                                    @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         return "b80_demo_bs_corp_cur_report_write";
     }
@@ -614,15 +678,37 @@ public class IndexController {
     //상담
     @RequestMapping(value = "/b90_demo_bs_cert_mng",method = RequestMethod.POST)
     public String b90_demo_bs_cert_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                       ModelMap model){
-
+                                       ModelMap model,
+                                       @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         return "b90_demo_bs_cert_mng";
     }
 
     //문의상담신청 관리
     @RequestMapping(value = "/c10_site_mng_consult_mng",method = RequestMethod.POST)
-    public String c10_site_mng_consult_mng(ModelMap model, @RequestBody ParamPageListFilteredVO param, Principal principal){
+    public String c10_site_mng_consult_mng(@RequestBody ParamPageListFilteredVO param, ModelMap model,
+                                           @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
+
 //접수목록 가져오기 (db table) DemoBsConsultingVO get 요청으로 가져오기
         param.setAmount(10);
         int list_amount = 10;
@@ -680,15 +766,26 @@ public class IndexController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-        AdminVO adminInfo = adminService.findAdminById(principal.getName());
-        model.addAttribute("admin", adminInfo);
         return "c10_site_mng_consult_mng";
     }
 
     //자산현황
     @RequestMapping(value = "/c21_site_visit_list",method = RequestMethod.POST)
     public String c21_site_visit_list(@RequestParam(value = "tag", required = false) String tagValue,
-                                      ModelMap model,@RequestBody ParamPageListFilteredVO param){
+                                      @RequestBody ParamPageListFilteredVO param,
+                                      ModelMap model,
+                                      @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
+
 
 
 
@@ -787,7 +884,18 @@ public class IndexController {
     //자원예약 관리
     @RequestMapping(value = "/c22_site_visit_mng",method = RequestMethod.POST)
     public String c22_site_visit_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                     ModelMap model){
+                                     ModelMap model,
+                                     @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
 
         return "c22_site_visit_mng";
@@ -796,7 +904,18 @@ public class IndexController {
     //자원예약
     @RequestMapping(value = "/c30_site_faq_mng",method = RequestMethod.POST)
     public String c30_site_faq_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                   ModelMap model){
+                                   ModelMap model,
+                                   @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
 
         return "c30_site_faq_mng";
@@ -805,7 +924,18 @@ public class IndexController {
     //일정관리
     @RequestMapping(value = "/c41_site_notice_mng",method = RequestMethod.POST)
     public String c41_site_notice_mng(@RequestBody ParamPageListFilteredVO param,
-                                      ModelMap model){
+                                      ModelMap model,
+                                      @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         int list_amount = 10;
         int page_amount = 10;
@@ -865,17 +995,25 @@ public class IndexController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-
-
-
-
         return "c41_site_notice_mng";
     }
 
     //고객관리진행중
     @RequestMapping(value = "/c42_site_event_mng",method = RequestMethod.POST)
     public String c42_site_event_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                     ModelMap model,@RequestBody ParamPageListFilteredVO param){
+                                     @RequestBody ParamPageListFilteredVO param,
+                                     ModelMap model,
+                                     @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
         //행사관리 테이블 추가 .tb_event_content
 
         param.setAmount(10);
@@ -939,7 +1077,19 @@ public class IndexController {
 
     @RequestMapping(value = "/c43_site_adver_mng",method = RequestMethod.POST)
     public String c43_site_adver_mng(@RequestParam(value = "page_num", required = false) String tagValue,
-                                     @RequestBody ParamPageListFilteredVO param,   ModelMap model){
+                                     @RequestBody ParamPageListFilteredVO param,
+                                     ModelMap model,
+                                     @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         param.setAmount(10);
         int list_amount = 10;
@@ -1008,7 +1158,19 @@ public class IndexController {
 
     @RequestMapping(value = "/pr_contents",method = RequestMethod.POST)
     public String pr_contents(@RequestParam(value = "page_num", required = false) String tagValue,
-                                     @RequestBody ParamPageListFilteredVO param, ModelMap model){
+                              @RequestBody ParamPageListFilteredVO param,
+                              ModelMap model,
+                              @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         String content = "";
         PRContentVO prContentVO = prContentService.getMainPRContent(param);
@@ -1024,7 +1186,18 @@ public class IndexController {
     //직원관리
     @RequestMapping(value = "/c50_site_banner_mng",method = RequestMethod.POST)
     public String c50_site_banner_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                      ModelMap model){
+                                      ModelMap model,
+                                      @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
 
         return "c50_site_banner_mng";
@@ -1033,7 +1206,18 @@ public class IndexController {
     //협약담당자 관리
     @RequestMapping(value = "/c60_site_popup_mng",method = RequestMethod.POST)
     public String c60_site_popup_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                     ModelMap model){
+                                     ModelMap model,
+                                     @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
 
         return "c60_site_popup_mng";
@@ -1041,10 +1225,19 @@ public class IndexController {
 
     //재배사 관리
     @RequestMapping(value = "/c71_site_form_doc_mng",method = RequestMethod.POST)
-    public String c71_site_form_doc_mng(@RequestParam(value = "tag", required = false) String tagValue, Principal principal,
-                                        ModelMap model){
-        AdminVO adminInfo = adminService.findAdminById(principal.getName());
-        model.addAttribute("admin", adminInfo);
+    public String c71_site_form_doc_mng(@RequestParam(value = "tag", required = false) String tagValue,
+                                        ModelMap model,
+                                        @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         List<FormFileInfoVO> formFileList = fileService.getFormFileList();
         model.addAttribute("formfilelist",formFileList);
@@ -1055,17 +1248,39 @@ public class IndexController {
     //sms 작성
     @RequestMapping(value = "/c72_site_rule_doc_mng",method = RequestMethod.POST)
     public String c72_site_rule_doc_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                        ModelMap model){
-List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
-model.addAttribute("rulefileinfolist",ruleFileInfoList);
+                                        ModelMap model,
+                                        @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
+        List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
+        model.addAttribute("rulefileinfolist",ruleFileInfoList);
 
         return "c72_site_rule_doc_mng";
     }
 
     //사이트 정보관리
     @RequestMapping(value = "/c80_site_mng",method = RequestMethod.POST)
-    public String c80_site_mng(@RequestParam(value = "tag", required = false) String tagValue, @RequestBody ParamPageListFilteredVO param
-            , Model model){
+    public String c80_site_mng(@RequestParam(value = "tag", required = false) String tagValue, @RequestBody ParamPageListFilteredVO param,
+                               ModelMap model,
+                               @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         param.setAmount(10);
         int list_amount = 10;
@@ -1125,8 +1340,6 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
         model.addAttribute("hi_list_amount",list_amount);
         model.addAttribute("hi_page_amount",page_amount);
 
-
-
         //조직도, 직원 정보
         page_amount = 10;
 
@@ -1177,8 +1390,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //자동 sms 관리
     @RequestMapping(value = "/d10_schedule_mng",method = RequestMethod.POST)
     public String d10_schedule_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                   ModelMap model){
-
+                                   ModelMap model,
+                                   @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         return "d10_schedule_mng";
     }
@@ -1186,8 +1409,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //예약된 SMS
     @RequestMapping(value = "/e10_document_issued_req_list",method = RequestMethod.POST)
     public String e10_document_issued_req_list(@RequestParam(value = "tag", required = false) String tagValue,
-                                               ModelMap model){
-
+                                               ModelMap model,
+                                               @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         return "e10_document_issued_req_list";
     }
@@ -1195,8 +1428,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //보낸 sms
     @RequestMapping(value = "/e20_document_issued",method = RequestMethod.POST)
     public String e20_document_issued(@RequestParam(value = "tag", required = false) String tagValue,
-                                      ModelMap model){
-
+                                      ModelMap model,
+                                      @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         return "e20_document_issued";
     }
@@ -1204,8 +1447,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //자동 email 관리
     @RequestMapping(value = "/e30_document_issued_history",method = RequestMethod.POST)
     public String e30_document_issued_history(@RequestParam(value = "tag", required = false) String tagValue,
-                                              ModelMap model){
-
+                                              ModelMap model,
+                                              @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         return "e30_document_issued_history";
     }
@@ -1220,8 +1473,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //예약된 이메일
     @RequestMapping(value = "/f10_gh_data_mng",method = RequestMethod.POST)
     public String f10_gh_data_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                         ModelMap model){
-
+                                  ModelMap model,
+                                  @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         return "f10_gh_data_mng";
     }
@@ -1229,7 +1492,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //보낸 email
     @RequestMapping(value = "/f20_asset_data_mng",method = RequestMethod.POST)
     public String f20_asset_data_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                      ModelMap model){
+                                     ModelMap model,
+                                     @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
 
         return "f20_asset_data_mng";
@@ -1238,7 +1512,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //웹 프론트 메인 페이지 관리
     @RequestMapping(value = "/f30_data_req_history",method = RequestMethod.POST)
     public String f30_data_req_history(@RequestParam(value = "tag", required = false) String tagValue,
-                                              ModelMap model){
+                                       ModelMap model,
+                                       @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
 
         return "f30_data_req_history";
@@ -1261,7 +1546,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //관리자 프론트 대시보드 관리
     @RequestMapping(value = "/g10_cur_asset_mng",method = RequestMethod.POST)
     public String g10_cur_asset_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                    ModelMap model){
+                                    ModelMap model,
+                                    @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
         List<SystemCodeVO> systemCodeVOList = systemService.getAllSystemCodeList();
         List<SystemCodeVO> mainAssetCodeList = new ArrayList<>();
         List<SystemCodeVO> subAssetCodeList = new ArrayList<>();
@@ -1291,7 +1587,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     @RequestMapping(value = "/asset_reservation_list",method = RequestMethod.POST)
     public String asset_reservation_list(@RequestParam(value = "tag", required = false) String tagValue,
                                          @RequestBody ParamPageListFilteredVO param,
-                                    ModelMap model){
+                                         ModelMap model,
+                                         @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         List<AssetReservationVO> assetReservationVOList = assetService.getAssetReservationList(param);
         int count = assetService.getAssetReservationCount(param);
@@ -1315,7 +1622,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     @RequestMapping(value = "/asset_reservation_items_list",method = RequestMethod.POST)
     public String asset_reservation_items_list(@RequestParam(value = "tag", required = false) String tagValue,
                                                @RequestBody ParamPageListFilteredVO param,
-                                    ModelMap model){
+                                               ModelMap model,
+                                               @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
         List<AssetReservationItemVO> assetReservationItemVOList = assetService.getAssetReservationItemList(Long.parseLong("" + param.getFilter1()));
         ParamPageListFilteredVO newParam = new ParamPageListFilteredVO();
         newParam.setPage_num(0);
@@ -1334,7 +1652,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     @RequestMapping(value = "/cur_asset_index",method = RequestMethod.POST)
     public String cur_asset_index(@RequestParam(value = "tag", required = false) String tagValue,
                                   @RequestBody ParamPageListFilteredVO param,
-                                    ModelMap model){
+                                  ModelMap model,
+                                  @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
         List<AssetVO> assetVOList = assetService.getAssetList(param);
         List<SystemCodeVO> systemCodeList = systemService.getAllSystemCodeList();
 
@@ -1353,7 +1682,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     @RequestMapping(value = "/asset_category",method = RequestMethod.POST)
     public String asset_category(@RequestParam(value = "tag", required = false) String tagValue,
                                  @RequestBody SystemCodeVO param,
-                                  ModelMap model){
+                                 ModelMap model,
+                                 @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
         List<SystemCodeVO> systemCodeVOList = systemService.getAllSystemCodeList();
         List<SystemCodeVO> mainAssetCodeList = new ArrayList<>();
         List<SystemCodeVO> subAssetCodeList = new ArrayList<>();
@@ -1418,7 +1758,19 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     @RequestMapping(value = "/g20_asset_booking",method = RequestMethod.POST)
     public String g20_asset_booking(@RequestParam(value = "tag", required = false) String tagValue,
                                     Principal principal,
-                                    ModelMap model){
+
+                                    ModelMap model,
+                                    @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         AdminVO adminInfo = adminService.findAdminById(principal.getName());
 
@@ -1447,7 +1799,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     @RequestMapping(value = "/get_asset_list",method = RequestMethod.POST)
     public String get_asset_list (@RequestParam(value = "tag", required = false) String tagValue,
                                   @RequestBody ParamPageListFilteredVO param,
-                                  ModelMap model){
+                                  ModelMap model,
+                                  @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
         List<AssetVO> assetVOList = assetService.getAssetList(param);
         model.addAttribute("assetList", assetVOList);
 
@@ -1457,10 +1820,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //서식관리
     @RequestMapping(value = "/g30_asset_book_mng",method = RequestMethod.POST)
     public String g30_asset_book_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                     Principal principal,
-                                     ModelMap model){
-
-        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+                                     ModelMap model,
+                                     @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         List<SystemCodeVO> systemCodeVOList = systemService.getAllSystemCodeList();
         List<SystemCodeVO> mainAssetCodeList = new ArrayList<>();
@@ -1475,7 +1846,7 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
                 detailAssetCodeList.add(systemCodeVO);
             }
         });
-        model.addAttribute("myInfo", adminInfo);
+        model.addAttribute("myInfo", adminVO);
         model.addAttribute("adminList", adminService.getAdminList());
         model.addAttribute("main_cate", mainAssetCodeList);
         model.addAttribute("sub_cate", subAssetCodeList);
@@ -1486,21 +1857,31 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
 
     @RequestMapping(value = "/reserve_view",method = RequestMethod.POST)
     public String reserve_view (@RequestParam(value = "tag", required = false) String tagValue,
-                                  @RequestBody ParamPageListFilteredVO param,
-                                  Principal principal,
-                                  ModelMap model){
+                                @RequestBody ParamPageListFilteredVO param,
+                                ModelMap model,
+                                @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
         AssetReservationVO assetReservationVO = assetService.getAssetReservation(param.getIdx());
         List<AssetReservationItemVO> assetReservationItemVOList = assetService.getAssetReservationItemList(param.getIdx());
         AdminVO applicant = adminService.getAdminInfo(assetReservationVO.getIdx_user());
         param.setFilter1(100);
         List<AssetVO> assetVOList = assetService.getAssetList(param);
-        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+
 
         model.addAttribute("assetList", assetVOList);
         model.addAttribute("curReservation", assetReservationVO);
         model.addAttribute("itemList", assetReservationItemVOList);
         model.addAttribute("applicant", applicant);
-        model.addAttribute("myIdx", adminInfo.getIdx_admin());
+        model.addAttribute("myIdx", adminVO.getIdx_admin());
 
         return "reserve_view";
     }
@@ -1508,7 +1889,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //시스템 코드 관리
     @RequestMapping(value = "/h11_write_sms",method = RequestMethod.POST)
     public String h11_write_sms(@RequestParam(value = "tag", required = false) String tagValue,
-                                ModelMap model){
+                                ModelMap model,
+                                @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
 
         return "h11_write_sms";
@@ -1516,15 +1908,36 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //시스템 코드 관리
     @RequestMapping(value = "/h12_auto_sms_mng",method = RequestMethod.POST)
     public String h20_auto_sms_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                   ModelMap model){
-
+                                   ModelMap model,
+                                   @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         return "h12_auto_sms_mng";
     }
     //시스템 코드 관리
     @RequestMapping(value = "/h13_reserved_sms_list",method = RequestMethod.POST)
     public String h13_reserved_sms_list(@RequestParam(value = "tag", required = false) String tagValue,
-                                        ModelMap model){
+                                        ModelMap model,
+                                        @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         ArrayList<SmsSendVO> smsReservearr = smsSendService.selectReserveMessage();
         model.addAttribute("reserveSms",smsReservearr);
@@ -1533,7 +1946,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //시스템 코드 관리
     @RequestMapping(value = "/h14_sent_sms_list",method = RequestMethod.POST)
     public String h14_sent_sms_list(@RequestParam(value = "tag", required = false) String tagValue,
-                                    ModelMap model){
+                                    ModelMap model,
+                                    @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         ArrayList<SmsSentVO> smsarr = smsSendService.selectSentmeesage1();
         model.addAttribute("sentSms",smsarr);
@@ -1541,7 +1965,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     }
     @RequestMapping(value = "/h21_write_mail",method = RequestMethod.POST)
     public String h21_write_mail(@RequestParam(value = "tag", required = false) String tagValue,
-                                 ModelMap model){
+                                 ModelMap model,
+                                 @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
 
         return "h21_write_mail";
@@ -1549,7 +1984,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //시스템 코드 관리
     @RequestMapping(value = "/h22_auto_email_mng",method = RequestMethod.POST)
     public String h22_auto_email_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                     ModelMap model){
+                                     ModelMap model,
+                                     @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
 
         return "h22_auto_email_mng";
@@ -1557,7 +2003,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //시스템 코드 관리
     @RequestMapping(value = "/h23_reserved_email_list",method = RequestMethod.POST)
     public String h23_reserved_email_list(@RequestParam(value = "tag", required = false) String tagValue,
-                                          ModelMap model){
+                                          ModelMap model,
+                                          @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         ArrayList<ReservedMailVO> resultArr;
         if(tagValue == null){
@@ -1569,11 +2026,17 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
         model.addAttribute("reservedMails", resultArr);
         return "h23_reserved_email_list";
     }
+
+
     //시스템 코드 관리
     @RequestMapping(value = "/h24_sent_email_list",method = RequestMethod.POST)
     public String h24_sent_email_list(@RequestParam(value = "tag", required = false) String tagValue,
                                       ModelMap model) throws MessagingException, IOException {
-        session = null;
+/*
+
+        Store store;
+        Folder folder;
+
 //        URLName url = new URLName("imaps", "imap.gmail.com", 993, "INBOX", "seeshow202106", "27452745ts~~");
         URLName url = new URLName("imaps", "imap.gmail.com", 993, "INBOX", "seeshow202106", "gcyqljnhdzyascpg");
         if (session == null) {
@@ -1589,6 +2052,7 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
             session = Session.getInstance(props, null);
         }
         store = session.getStore(url);
+
         store.connect();
         System.out.println(store.toString());
         folder = store.getFolder("inbox"); //inbox는 받은 메일함을 의미
@@ -1617,6 +2081,7 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
                 System.out.println(String.format("메일 내용: %s", msg.getContent()));
             }
         }
+*/
 
 
 
@@ -1626,15 +2091,39 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //시스템 코드 관리
     @RequestMapping(value = "/i11_user_mng",method = RequestMethod.POST)
     public String i11_user_mng(@RequestBody ParamPageListFilteredVO param,
-                               ModelMap model){
+                               ModelMap model,
+                               @CookieValue(name = "access_token",required = true) String access_token){
+
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
         model.addAttribute("allCount", userService.getAllUserListCount());
         return "i11_user_mng";
     }
 
     @RequestMapping(value = "/user_index",method = RequestMethod.POST)
     public String user_index(@RequestParam(value = "tag", required = false) String tagValue,
-                               @RequestBody ParamPageListFilteredVO param,
-                               ModelMap model){
+                             @RequestBody ParamPageListFilteredVO param,
+                             ModelMap model,
+                             @CookieValue(name = "access_token",required = true) String access_token){
+
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
         boolean maxBool = false;
         List<UserVO> userVOList = userService.selectUserbyPage(param.getFilter1(), param.getPage_num());
         model.addAttribute("maxvalue", 0);
@@ -1657,8 +2146,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //시스템 코드 관리
     @RequestMapping(value = "/i12_dormant_user_mng",method = RequestMethod.POST)
     public String i12_dormant_user_mng(@RequestParam(value = "tag", required = false) String tagValue,
-
-                                       ModelMap model){
+                                       ModelMap model,
+                                       @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         return "i12_dormant_user_mng";
     }
@@ -1666,7 +2165,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     @RequestMapping(value = "/dormant_user_index",method = RequestMethod.POST)
     public String dormant_user_index(@RequestParam(value = "tag", required = false) String tagValue,
                                      @RequestBody ParamPageListFilteredVO param,
-                                       ModelMap model){
+                                     ModelMap model,
+                                     @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
         boolean maxBool = false;
         List<UserVO> userVOList = userService.selectDormantUserbyPage(param.getFilter1(), param.getPage_num());
         model.addAttribute("maxvalue", 0);
@@ -1691,7 +2201,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     @RequestMapping(value = "/i21_admin_mng" ,method = RequestMethod.POST)
     public String i21_admin_mng(@RequestParam(value = "page_num", required = false) String tagValue,
                                 @RequestBody ParamPageListFilteredVO param,
-                                ModelMap model){
+                                ModelMap model,
+                                @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
         ArrayList<CorpInfoVO> resultArray;
         resultArray = corpService.selectCorpInfo();
 
@@ -1718,7 +2239,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     @RequestMapping(value = "/admin_corporate" ,method = RequestMethod.POST)
     public String admin_corporate(@RequestParam(value = "page_num", required = false) String tagValue,
                                 @RequestBody ParamPageListFilteredVO param,
-                                ModelMap model){
+                                  ModelMap model,
+                                  @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
         ArrayList<CorpInfoVO> resultArray;
         resultArray = corpService.selectCorpInfo();
 
@@ -1765,7 +2297,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //시스템 코드 관리
     @RequestMapping(value = "/k11_system_authority_mng",method = RequestMethod.POST)
     public String k11_system_authority_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                           ModelMap model){
+                                           ModelMap model,
+                                           @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
 
         return "k11_system_authority_mng";
@@ -1774,7 +2317,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //시스템 코드 관리
     @RequestMapping(value = "/k21_admin_dashboad_mng",method = RequestMethod.POST)
     public String k21_admin_dashboad_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                            ModelMap model){
+                                         ModelMap model,
+                                         @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
 
         return "k21_admin_dashboad_mng";
@@ -1782,7 +2336,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //시스템 코드 관리
     @RequestMapping(value = "/k31_console_dashboad_mng",method = RequestMethod.POST)
     public String k31_console_dashboad_mng(@RequestParam(value = "tag", required = false) String tagValue,
-                                      ModelMap model){
+                                           ModelMap model,
+                                           @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
 
         return "k31_console_dashboad_mng";
@@ -1806,17 +2371,39 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //서식 관리
     @RequestMapping(value = "/l11_document_form_mng",method = RequestMethod.POST)
     public String l11_document_form_mng(@RequestBody ParamPageListFilteredVO param,
-                                           ModelMap model, Principal principal){
+                                        ModelMap model,
+                                        @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
         List<FormFileInfoVO> formFileList =fileService.getFormFileList();
         model.addAttribute("formfilelist",formFileList);
-        AdminVO adminInfo = adminService.findAdminById(principal.getName());
-        model.addAttribute("admin", adminInfo);
+
+        model.addAttribute("admin", adminVO);
 
         return "l11_document_form_mng";
     }
     @RequestMapping(value = "/l12_document_rule_mng",method = RequestMethod.POST)
     public String l12_document_rule_mng(@RequestBody ParamPageListFilteredVO param,
-                                   ModelMap model){
+                                        ModelMap model,
+                                        @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
         int page = param.getPage_num();
         List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
         model.addAttribute("rulefileinfolist",ruleFileInfoList);
@@ -1883,7 +2470,18 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
     //시스템 코드 관리
     @RequestMapping(value = "/l20_code_mng",method = RequestMethod.POST)
     public String l20_code_mng(@RequestBody ParamPageListFilteredVO param,
-                                           ModelMap model){
+                               ModelMap model,
+                               @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
         int page_num = param.getPage_num();
 
         int list_amount = 10;
@@ -1894,10 +2492,8 @@ model.addAttribute("rulefileinfolist",ruleFileInfoList);
         int filtered_item_total = systemService.getSystemTotalCount();
         List<SystemCodeVO> systemCodeList = systemService.getSystemCodeList(param);
 
-
         model.addAttribute("total_count",filtered_item_total);
         model.addAttribute("systemCodeList",systemCodeList);
-
 
         model.addAttribute("cur_page",page_num);
         model.addAttribute("amount",list_amount);

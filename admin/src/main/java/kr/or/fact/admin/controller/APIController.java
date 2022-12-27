@@ -28,9 +28,7 @@ import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class APIController {
@@ -91,6 +89,9 @@ public class APIController {
     @Resource(name = "consultingService")
     public ConsultingService consultingService;
 
+    @Resource(name="adminSessionService")
+    AdminSessionService adminSessionService;
+
     @Autowired
     private FACTConfig factConfig;
 
@@ -99,31 +100,75 @@ public class APIController {
 
 
     @RequestMapping(value = "/admin_login",method = RequestMethod.POST)
-    public @ResponseBody ResultVO admin_login(HttpSession session
-            ,ModelMap model
-            ,@RequestBody AdminVO adminVo) {
+    public @ResponseBody ResultVO admin_login(@RequestBody AdminVO adminVo) {
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("아이디 또는 비밀번호를 찾을수 없습니다");
         resultVO.setResult_code("ERROR_1000");
-        session.setAttribute("loginCheck", false);
+        //session.setAttribute("loginCheck", false);
 
         if (adminVo.getAdmin_id() != null && adminVo.getAdmin_pw() != null) {
-            AdminVO findAdmin = adminService.login(adminVo.getAdmin_id(), adminVo.getAdmin_pw());
-            if(findAdmin.getAuth_status() == 0){
-                resultVO.setResult_str("로그인 성공");
-                resultVO.setResult_code("first_login");
-            }
-            if (findAdmin != null) {
-                model.addAttribute("adminVo", findAdmin);
-                session.setAttribute("loginCheck", true);
-                session.setAttribute("admin_id", findAdmin.getAdmin_id());
-                session.setAttribute("name", findAdmin.getAdmin_name());
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+            AdminVO findAdmin = adminService.findAdminById(adminVo.getAdmin_id());
+            //임시코드
+/*            if (findAdmin != null){
+                String hashedPassword = passwordEncoder.encode(adminVo.getAdmin_pw());
+                ChangePwVO changePwVO = new ChangePwVO();
+                changePwVO.setAdmin_id(findAdmin.getAdmin_id());
+                changePwVO.setModPW(hashedPassword);
+                adminService.updateAdminPassword(changePwVO);
+
+                findAdmin.setAdmin_pw(hashedPassword);
+            }*/
+            //임시코드 끝
+            if (findAdmin != null && passwordEncoder.matches(adminVo.getAdmin_pw(),findAdmin.getAdmin_pw())) {
+                AdminSessionVO adminSessionVO = new AdminSessionVO();
+                adminSessionVO.setIdx_admin(findAdmin.getIdx_admin());
+                adminSessionVO.setAccess_token(UUID.randomUUID().toString());
+                Calendar cal = Calendar.getInstance();
+                cal.add(Calendar.DATE, 1);
+                adminSessionVO.setAccess_expire_date(cal.getTime());
+                adminSessionVO.setRefresh_token(UUID.randomUUID().toString());
+                cal.add(Calendar.DATE, 365);
+                adminSessionVO.setRefresh_expire_date(cal.getTime());
+                adminSessionVO.setIs_valid(1);
+                adminSessionService.insertAdminSessionInfo(adminSessionVO);
+                resultVO.setAccess_token(adminSessionVO.getAccess_token());
+                resultVO.setRefresh_token(adminSessionVO.getRefresh_token());
+
+                //model.addAttribute("adminVo", findAdmin);
+                //session.setAttribute("loginCheck", true);
+                //session.setAttribute("admin_id", findAdmin.getAdmin_id());
+                //session.setAttribute("name", findAdmin.getAdmin_name());
 
                 resultVO.setResult_str("로그인 성공");
                 resultVO.setResult_code(CONSTANT.Success);
             }
         }
 
+        return resultVO;
+    }
+
+    //리프레시 토큰으로 엑세스 토큰 재발급
+    @RequestMapping(value = "/access_token",method = RequestMethod.POST)
+    public @ResponseBody ResultVO access_token_refresh(@RequestBody AdminSessionVO adminSessionVO) {
+
+        ResultVO resultVO = new ResultVO();
+
+        resultVO.setResult_str("세션이 만료되었습니다");
+        resultVO.setResult_code("ERROR_1000");
+
+        if(adminSessionVO!=null && adminSessionVO.getAccess_token()!=null && adminSessionVO.getRefresh_token()!=null){
+            AdminSessionVO findAdminSessionVO = adminSessionService.getAdminSessionInfoByToken(adminSessionVO.getAccess_token());
+            if(findAdminSessionVO!=null&&findAdminSessionVO.getRefresh_token().equals(adminSessionVO.getRefresh_token())){
+                String uuid = UUID.randomUUID().toString();
+                findAdminSessionVO.setAccess_token(uuid);
+                adminSessionService.updateAdminSessionInfo(findAdminSessionVO);
+                resultVO.setAccess_token(uuid);
+                resultVO.setResult_str("키발급 성공");
+                resultVO.setResult_code("success");
+            }
+        }
         return resultVO;
     }
 

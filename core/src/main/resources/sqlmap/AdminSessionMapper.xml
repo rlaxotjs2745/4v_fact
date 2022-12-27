@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.fact.core.model.AdminSessionMapper">
+    <select id="getAdminSessionInfoByToken" parameterType="String" resultType="kr.or.fact.core.model.DTO.AdminSessionVO">
+        SELECT *
+        FROM TB_ADMIN_SESSION
+        WHERE ACCESS_TOKEN = #{access_token,jdbcType=VARCHAR} AND IS_VALID = 1
+    </select>
+
+    <insert id="insertAdminSessionInfo" parameterType="kr.or.fact.core.model.DTO.AdminSessionVO">
+        INSERT INTO TB_ADMIN_SESSION (
+            IDX_ADMIN_SESSION,
+            IDX_ADMIN,
+            ACCESS_TOKEN,
+            REFRESH_TOKEN,
+            IS_VALID,
+            ACCESS_EXPIRE_DATE,
+            REFRESH_EXPIRE_DATE,
+            REG_DATE)
+        VALUES (SEQ_ADMIN_SESSION.NEXTVAL,
+                #{idx_admin},
+                #{access_token},
+                #{refresh_token},
+                #{is_valid},
+                #{access_expire_date},
+                #{refresh_expire_date},
+                SYSDATE)
+    </insert>
+
+
+    <update id="updateAdminSessionInfo" parameterType="kr.or.fact.core.model.DTO.AdminSessionVO">
+        UPDATE TB_ADMIN_SESSION
+        SET ACCESS_TOKEN = #{access_token},
+            ACCESS_EXPIRE_DATE = #{access_expire_date}
+        WHERE REFRESH_TOKEN = #{refresh_token}
+    </update>
+
+    <update id="deleteAdminSessionInfo" parameterType="kr.or.fact.core.model.DTO.AdminSessionVO">
+        UPDATE TB_ADMIN_SESSION
+        SET IS_VALID = 0
+            WHERE REFRESH_TOKEN = #{refresh_token}
+    </update>
+
+</mapper>
