@@ -697,8 +697,6 @@
 
     $('#btn-coworker').on('click',function() {
 
-
-
         if(isValid($("#coworker_name").val()).match('2')){
             alert("관리자의 이름이 너무 짧습니다.");
             return;

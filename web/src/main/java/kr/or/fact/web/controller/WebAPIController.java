@@ -1108,22 +1108,7 @@ public class WebAPIController {
         return  resultVO;
     }
 
-    @RequestMapping(value = "/get_visit_data_byGroupIdx",method = RequestMethod.POST )
-    public @ResponseBody
-    ResultVO get_visit_data_byGroupIdx(HttpSession session,
-                                     @RequestBody long group_idx){
 
-        ResultVO resultVO = new ResultVO();
-        resultVO.setResult_str("성공");
-        resultVO.setResult_code("SUCCESS");
-
-        System.out.println("group_idx : " + group_idx);
-
-        List<VisitDataVO> visitDataVOList=visitService.getVisitDataListByGroupIdx(group_idx);
-        resultVO.setVisitDataVOList(visitDataVOList);
-
-        return  resultVO;
-    }
 
 
     @RequestMapping(value = "/cancel_user_visit_req",method = RequestMethod.POST)

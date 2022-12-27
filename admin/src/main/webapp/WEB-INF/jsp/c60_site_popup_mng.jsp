@@ -19,7 +19,7 @@
                 </div>
             </h6>
             <div class="card-datatable table-responsive pt-0 pb-3">
-                <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                <div class="dataTables_wrapper dt-bootstrap4 no-footer">
                     <div class="row">
                         <div class="col-sm-12">
                             <table class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
@@ -49,7 +49,7 @@
                                                 <td class="text-center">${popupinfo.admin_name}</td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
-                                                        <button class="btn btn-sm btn-default" data-toggle="modal" data-target="#modals-modify"><span class="fas fa-pen" > </span></button>
+                                                        <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#modals-popup" data-what="mode-update"><span class="fas fa-pen" > </span></button>
                                                         <button onclick="organizationDelete(this)" class="btn btn-sm btn-default"><span class="fas fa-trash-alt" > </span></button>
                                                     </div>
                                                 </td>
@@ -157,7 +157,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header bg-success">
-                        <h5 class="modal-title text-white font-weight-bold mode-new">팝업 작성</h5>
+                        <h5 id="modal-title" class="modal-title text-white font-weight-bold mode-new">팝업 작성</h5>
                         <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
                     <div class="modal-body">
@@ -360,15 +360,14 @@
 
     $(function() {
         var isRtl = $('html').attr('dir') === 'rtl';
-
         $('#datepicker-show,#datepicker-open').datepicker({
             orientation: isRtl ? 'auto right' : 'auto left',
             format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
             startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
             language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
         });
-
     });
+
     $(function () {
         // Time
         $('#flatpickr-time-start,#flatpickr-time-end').flatpickr({
@@ -382,8 +381,19 @@
     $(function() {
         // 모달 팝업 띄울 시 발생하는 이벤트 (이벤트명 : show.bs.modal)
         $('#modals-popup').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            var what = button.data('what');
+            let button = $(event.relatedTarget);
+            let what = button.data('what');
+
+            if (what === 'mode-new') {
+                console.log('새로작성')
+                $('#modal-title').text('팝업 등록')
+                $('#popup_submit').text('등록')
+                $('#popupForm')[0].reset()
+            } else if (what === 'mode-update') {
+                console.log('수정')
+                $('#modal-title').text('팝업 수정')
+                $('#popup_submit').text('수정')
+            }
 
         })
     });
@@ -392,7 +402,10 @@
         $('#is_show').val($(this).val());
     })
 
-    $('#popup_submit').on('click',function(data){
+    $('#popup_submit').on('click',function(event){
+        // console.log(this.innerText, '버튼 클릭한 텍스트 값')
+        const btnTextState = this.innerText;
+
         let formData = new FormData();
         const startDate =  $("input[name=start]").val()
         const endDate =  $("input[name=end]").val()
@@ -404,34 +417,63 @@
         formData.append('endDate', endDate + ' 00:00:00');
         formData.append('is_show', $("#is_show").val()); // 타입 1:팝업 , 2:배너
         formData.append('idx_admin', $("input[name=idx_popup_img]").val());
-        formData.append('file1', document.getElementById('image_upload').files[0]) ;
-        console.log(formData)
-        $.ajax({
-            type: 'post',
-            url :'insert_popup', //데이터를 주고받을 파일 주소 입력
-            data: formData,//보내는 데이터
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function(result){
-                //작업이 성공적으로 발생했을 경우
-                console.log(result);
-                if (result.result_code === "SUCCESS") {
-                    alert(result.result_str);
-                    $("#homepage_admin").val('')
-                    $("#homepage_admin_pnum").val('')
-                    $("#email").val('')
-                    pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
-                }
-                else {
+        formData.append('file1', document.getElementById('image_upload').files[0]);
 
+        if(btnTextState === '등록') {
+            $.ajax({
+                type: 'post',
+                url :'insert_popup', //데이터를 주고받을 파일 주소 입력
+                data: formData,//보내는 데이터
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(result){
+                    //작업이 성공적으로 발생했을 경우
+                    console.log(result);
+                    if (result.result_code === "SUCCESS") {
+                        alert(result.result_str);
+                        $("#homepage_admin").val('')
+                        $("#homepage_admin_pnum").val('')
+                        $("#email").val('')
+                        pageLoad('c60_site_popup_mng',{page_num:1},'포탈 팝업관리');
+                    }
+                    else {
+
+                    }
+                },
+                error:function(error){
+                    //에러가 났을 경우 실행시킬 코드
                 }
-            },
-            error:function(error){
-                //에러가 났을 경우 실행시킬 코드
-                console.log(error)
-            }
-        });
+            });
+        }
+
+        if (btnTextState === '수정') {
+            $.ajax({
+                type: 'post',
+                url :'modify_popup', //데이터를 주고받을 파일 주소 입력
+                data: formData,//보내는 데이터
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(result){
+                    //작업이 성공적으로 발생했을 경우
+                    console.log(result);
+                    if (result.result_code === "SUCCESS") {
+                        alert(result.result_str);
+                        $("#homepage_admin").val('')
+                        $("#homepage_admin_pnum").val('')
+                        $("#email").val('')
+                        pageLoad('c60_site_popup_mng',{page_num:1},'포탈 팝업관리');
+                    }
+                    else {
+
+                    }
+                },
+                error:function(error){
+                    //에러가 났을 경우 실행시킬 코드
+                }
+            });
+        }
 
     })
 
