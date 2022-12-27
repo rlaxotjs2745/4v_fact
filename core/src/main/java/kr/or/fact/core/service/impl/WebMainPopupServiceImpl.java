@@ -63,5 +63,15 @@ public class WebMainPopupServiceImpl implements WebMainPopupService {
     public void deleteBannerOrder(WebMainPopupVO bannerOri) {
         webMainPopupMapper.deleteBannerOrder(bannerOri);
     }
+
+    @Override
+    public List<WebMainPopupVO> getWebMainBannerList() {
+        return webMainPopupMapper.getWebMainBannerList();
+    }
+
+    @Override
+    public int getWebMainBannerCount() {
+        return webMainPopupMapper.getWebMainBannerCount();
+    }
 }
 

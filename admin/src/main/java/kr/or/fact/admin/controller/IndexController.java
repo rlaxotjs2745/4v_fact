@@ -1166,7 +1166,7 @@ public class IndexController {
         int cur_sector = page/page_amount+1;
         if(page%page_amount==0) cur_sector-=1;
 
-        //푸터 정보
+        //팝업 정보
         int popupInfoCount = webMainPopupService.getWebMainPopupCount();
         model.addAttribute("pop_total_count", popupInfoCount);
 
@@ -1208,6 +1208,13 @@ public class IndexController {
         model.addAttribute("pop_is_last",pop_is_last);
         model.addAttribute("pop_list_amount",list_amount);
         model.addAttribute("pop_page_amount",page_amount);
+
+        //배너 정보
+        int bannerInfoCount = webMainPopupService.getWebMainBannerCount();
+        model.addAttribute("banner_total_count", bannerInfoCount);
+
+        List<WebMainPopupVO> webMainBannerList = webMainPopupService.getWebMainBannerList();
+        model.addAttribute("webMainBannerList", webMainBannerList);
 
         return "c60_site_popup_mng";
     }

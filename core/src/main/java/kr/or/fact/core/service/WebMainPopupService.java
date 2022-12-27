@@ -24,5 +24,9 @@ public interface WebMainPopupService {
     WebMainPopupVO getBannerOrder(int is_show);
 
     void deleteBannerOrder(WebMainPopupVO bannerOri);
+
+    List<WebMainPopupVO> getWebMainBannerList();
+
+    int getWebMainBannerCount();
 }
 
