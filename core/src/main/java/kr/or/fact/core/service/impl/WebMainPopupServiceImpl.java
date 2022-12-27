@@ -33,5 +33,15 @@ public class WebMainPopupServiceImpl implements WebMainPopupService {
     public void insertPopupContent(WebMainPopupVO webMainPopupVO) {
         webMainPopupMapper.insertPopupContent(webMainPopupVO);
     }
+
+    @Override
+    public void updatePopupContent(WebMainPopupVO webMainPopupVO) {
+        webMainPopupMapper.updatePopupContent(webMainPopupVO);
+    }
+
+    @Override
+    public void deletePopupContent(WebMainPopupVO webMainPopupVO) {
+        webMainPopupMapper.deletePopupContent(webMainPopupVO);
+    }
 }
 

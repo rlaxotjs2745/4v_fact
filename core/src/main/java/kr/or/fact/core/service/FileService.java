@@ -53,5 +53,5 @@ public interface FileService {
 
     void updateRuleFile(FileRequestVO fileRequestVO);
 
-    int insertPopupFile(MultipartFile file, long adminIdx);
+    long insertPopupFile(MultipartFile file, long adminIdx);
 }

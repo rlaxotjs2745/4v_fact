@@ -270,7 +270,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public int insertPopupFile(MultipartFile file, long adminIdx){
+    public long insertPopupFile(MultipartFile file, long adminIdx){
         FileInfoVO fileInfoVO = new FileInfoVO();
 
         fileInfoVO.setFile_name(file.getOriginalFilename());
@@ -285,7 +285,8 @@ public class FileServiceImpl implements FileService {
         fileInfoVO.setOwner(0);
         fileInfoVO.setIdx_user(adminIdx);
         try{
-            return fileServiceMapper.insertFileInfo(fileInfoVO);
+            fileServiceMapper.insertFileInfo(fileInfoVO);
+            return fileServiceMapper.getFileIdxToUser(fileInfoVO);
         } catch (Exception e){
             System.out.println(e);
             return 0;

@@ -44,7 +44,7 @@
                                                 <td class="text-center">${popupinfo.subject}</td>
                                                 <td class="text-center">${popupinfo.popup_url}</td>
                                                 <td class="text-center"><fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd"/></td>
-                                                <td class="text-center"><c:if test="${popupinfo.is_show == 1}">보임</c:if><c:if test="${popupinfo.is_show == 9} ">안보임</c:if></td>
+                                                <td class="text-center"><c:if test="${popupinfo.is_show == 1}">보임</c:if><c:if test="${popupinfo.is_show == 9}">안보임</c:if></td>
                                                 <td class="text-center"><fmt:formatDate value="${popupinfo.reg_date}" pattern="yyyy년 MM월 dd일"/></td>
                                                 <td class="text-center">${popupinfo.admin_name}</td>
                                                 <td class="text-center">
@@ -300,7 +300,7 @@
 <script>
 
     $(document).ready(function(){
-        var fileTarget = $('.file_upload_box .upload-hidden');
+        var fileTarget = $('.file_upl₩oad_box .upload-hidden');
 
         fileTarget.on('change', function(){
             if(window.FileReader){

@@ -342,7 +342,7 @@
             CHECKSUM,
             OWNER,
             IDX_USER,
-            <if test="file_type == 70 or file_type == 3 or file_type == 6">
+            <if test="file_type == 70 or file_type == 3">
                 IDX_FILE_USAGE,
             </if>
             IDX_ADMIN,
@@ -366,9 +366,6 @@
                     </if>
                     <if test="file_type == 3">
                         SEQ_BS_ANNOUNCEMENT.CURRVAL,
-                    </if>
-                    <if test="file_type == 6">
-                        SEQ_WEB_MAIN_POPUP.CURRVAL,
                     </if>
                      #{idx_admin},
                      SYSDATE
@@ -409,6 +406,15 @@
 
     <select id="getFileIdx" resultType="long">
         SELECT IDX_FILE_INFO FROM TB_FILE_INFO WHERE FILE_NAME = #{file_name}
+    </select>
+
+    <select id="getFileIdxToUser" resultType="long">
+        SELECT IDX_FILE_INFO
+        FROM ( SELECT IDX_FILE_INFO
+               FROM TB_FILE_INFO
+               WHERE FILE_NAME = #{file_name} AND IDX_USER = #{idx_user} AND FILE_TYPE = #{file_type}
+               ORDER BY REG_DATE DESC)
+        WHERE ROWNUM = 1
     </select>
 
     <select id="getFileListAsName" resultType="kr.or.fact.core.model.DTO.FileInfoVO">
