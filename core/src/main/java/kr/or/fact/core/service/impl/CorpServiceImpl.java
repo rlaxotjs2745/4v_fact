@@ -105,4 +105,9 @@ public class CorpServiceImpl implements CorpService {
     public int updateCorpManager(CorpManagerVO corpManagerVO){
         return corpMapper.updateCorpManager(corpManagerVO);
     }
+
+    @Override
+    public Integer getCorpCount(int is_applicant){
+        return corpMapper.getCorpCount(is_applicant);
+    }
 }

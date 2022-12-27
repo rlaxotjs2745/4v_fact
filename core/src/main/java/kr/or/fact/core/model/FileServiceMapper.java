@@ -45,9 +45,19 @@ public interface FileServiceMapper {
 
     void deleteFormFile(long idx_form_file);
 
+    void deleteRuleFile(long idx_rule_file);
+
     FormFileInfoVO getFormFile(long idx_form_file_info);
+
+    RuleFileInfoVO getRuleFile(long idx_rule_file_info);
 
     long getFileIdx(String file_name);
 
+    List<FileInfoVO> getFileListAsName(String file_name);
+
     void updateFormFile(FormFileInfoVO formFileInfoVO);
+
+    void updateRuleFile(RuleFileInfoVO ruleFileInfoVO);
+
+    long getFileIdxToUser(FileInfoVO fileInfoVO);
 }

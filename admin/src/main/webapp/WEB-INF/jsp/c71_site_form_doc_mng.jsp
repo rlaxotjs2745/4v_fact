@@ -8,73 +8,73 @@
             <div>관련양식 관리</div>
         </h4>
 
-        <div class="card px-4 pt-4 mb-4">
-            <div class="form-row mb-4">
-                <div class="col-md-3 ">
-                    <label class="form-label text-muted">상담 구분</label>
-                    <div class="form-inline mt-2">
-                        <label class="custom-control custom-checkbox mr-2">
-                            <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-label">전체</span>
-                        </label>
-                        <label class="custom-control custom-checkbox mr-2">
-                            <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-label">사전상담</span>
-                        </label>
-                        <label class="custom-control custom-checkbox mr-2">
-                            <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-label">사용승인 후 상담</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-2 ">
-                    <label class="form-label text-muted">상담 접수</label>
-                    <div class="form-inline">
-                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio" checked="">전체
-                            </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio"> 신규
-                            </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 해결
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-5 ">
-                    <label class="form-label text-muted">상담 접수일</label>
-                    <div class="form-inline">
-                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio" checked="">오늘
-                            </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="btn-radio"> 1주일
-                            </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 1개월
-                            </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 3개월
-                            </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 6개월
-                            </label>
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="btn-radio"> 1년이상
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2 text-right">
-                    <label class="form-label d-none d-md-block">&nbsp;</label>
-                    <button type="button" class="btn btn-outline-default">초기화</button>
-                    <button type="button" class="btn btn-success">조회</button>
-                </div>
-            </div>
-        </div>
+<%--        <div class="card px-4 pt-4 mb-4">--%>
+<%--            <div class="form-row mb-4">--%>
+<%--                <div class="col-md-3 ">--%>
+<%--                    <label class="form-label text-muted">상담 구분</label>--%>
+<%--                    <div class="form-inline mt-2">--%>
+<%--                        <label class="custom-control custom-checkbox mr-2">--%>
+<%--                            <input type="checkbox" class="custom-control-input">--%>
+<%--                            <span class="custom-control-label">전체</span>--%>
+<%--                        </label>--%>
+<%--                        <label class="custom-control custom-checkbox mr-2">--%>
+<%--                            <input type="checkbox" class="custom-control-input">--%>
+<%--                            <span class="custom-control-label">사전상담</span>--%>
+<%--                        </label>--%>
+<%--                        <label class="custom-control custom-checkbox mr-2">--%>
+<%--                            <input type="checkbox" class="custom-control-input">--%>
+<%--                            <span class="custom-control-label">사용승인 후 상담</span>--%>
+<%--                        </label>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="col-md-2 ">--%>
+<%--                    <label class="form-label text-muted">상담 접수</label>--%>
+<%--                    <div class="form-inline">--%>
+<%--                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">--%>
+<%--                            <label class="btn btn-secondary">--%>
+<%--                                <input type="radio" name="btn-radio" checked="">전체--%>
+<%--                            </label>--%>
+<%--                            <label class="btn btn-secondary">--%>
+<%--                                <input type="radio" name="btn-radio"> 신규--%>
+<%--                            </label>--%>
+<%--                            <label class="btn btn-secondary ">--%>
+<%--                                <input type="radio" name="btn-radio"> 해결--%>
+<%--                            </label>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="col-md-5 ">--%>
+<%--                    <label class="form-label text-muted">상담 접수일</label>--%>
+<%--                    <div class="form-inline">--%>
+<%--                        <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">--%>
+<%--                            <label class="btn btn-secondary">--%>
+<%--                                <input type="radio" name="btn-radio" checked="">오늘--%>
+<%--                            </label>--%>
+<%--                            <label class="btn btn-secondary">--%>
+<%--                                <input type="radio" name="btn-radio"> 1주일--%>
+<%--                            </label>--%>
+<%--                            <label class="btn btn-secondary ">--%>
+<%--                                <input type="radio" name="btn-radio"> 1개월--%>
+<%--                            </label>--%>
+<%--                            <label class="btn btn-secondary ">--%>
+<%--                                <input type="radio" name="btn-radio"> 3개월--%>
+<%--                            </label>--%>
+<%--                            <label class="btn btn-secondary ">--%>
+<%--                                <input type="radio" name="btn-radio"> 6개월--%>
+<%--                            </label>--%>
+<%--                            <label class="btn btn-secondary ">--%>
+<%--                                <input type="radio" name="btn-radio"> 1년이상--%>
+<%--                            </label>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="col-md-2 text-right">--%>
+<%--                    <label class="form-label d-none d-md-block">&nbsp;</label>--%>
+<%--                    <button type="button" class="btn btn-outline-default">초기화</button>--%>
+<%--                    <button type="button" class="btn btn-success">조회</button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
 
         <div class="card">
             <h6 class="card-header with-elements">
@@ -82,11 +82,11 @@
             </h6>
             <div class="card-datatable table-responsive pt-0 pb-3">
                 <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                    <div class="row p-3">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="mr-3  mb-0">총 : <strong>999</strong>건</label><label class="mr-3  mb-0">신규 : <strong>70</strong>건</label><label class="mr-3  mb-0">추가 : <strong>70</strong>건</label><label class="mr-3  mb-0">해결 : <strong>70</strong>건</label>
-                        </div>
-                    </div>
+<%--                    <div class="row p-3">--%>
+<%--                        <div class="col-sm-12 col-md-12">--%>
+<%--                            <label class="mr-3  mb-0">총 : <strong>999</strong>건</label><label class="mr-3  mb-0">신규 : <strong>70</strong>건</label><label class="mr-3  mb-0">추가 : <strong>70</strong>건</label><label class="mr-3  mb-0">해결 : <strong>70</strong>건</label>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                     <div class="row">
                         <div class="col-sm-12">
                             <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
@@ -110,14 +110,13 @@
             reg_date: '${formfile.reg_date}',
             row_num: '${formfile.row_num}',
             order_num: '${formfile.order_num}'
-            });">
-        <td class="text-center">${status.count}</td>
+            }, event.target);">
+        <td class="text-center" >${status.count}</td>
                                     <td class="text-center">${formfile.subject}</td>
                                     <td class="text-center">${formfile.usage_detail}</td>
                                     <td class="text-center"><fmt:formatDate value="${formfile.reg_date}" pattern="yyyy-MM-dd"/></td>
                                     <td class="text-center">${formfile.order_num}</td>
-                                    <td class="text-center">${formfile.idx_admin}</td>
-
+                                    <td class="text-center"><a href="${formfile.file_path}" aria-controls="article-list" data-dt-idx="1" tabindex="0" id="file_path_button" class="btn btn-outline-default  btn-sm">다운로드</a></td>
                                 </tr>
 </c:forEach>
 
@@ -127,18 +126,28 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
+<%--                            <div class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>--%>
                         </div>
                         <div class="col-sm-12 col-md-7">
                             <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                                 <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                    <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
+                                    <c:if test="${page_num == 1}">
+                                        <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="javascript:pageLoad('c71_site_form_doc_mng',{page_num: '${page_num - 1}'},'상담');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li>
+                                    </c:if>
+                                    <c:if test="${page_num != 1}">
+                                        <li class="paginate_button page-item previous" id="article-list_previous"><a href="javascript:pageLoad('c71_site_form_doc_mng',{page_num: '${page_num - 1}'},'상담');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li>
+                                    </c:if>
+<%--                                    <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>--%>
+<%--                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>--%>
+<%--                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>--%>
+<%--                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>--%>
+<%--                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>--%>
+                                    <c:if test="${page_num < max_page_num / 10}">
+                                        <li class="paginate_button page-item next" id="article-list_next"><a href="javascript:pageLoad('c71_site_form_doc_mng',{page_num: '${page_num + 1}'},'상담');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li>
+                                    </c:if>
+                                    <c:if test="${page_num >= max_page_num / 10}">
+                                        <li class="paginate_button page-item next disabled" id="article-list_next"><a href="javascript:pageLoad('c71_site_form_doc_mng',{page_num: '${page_num + 1}'},'상담');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li>
+                                    </c:if>
                                 </ul>
                             </div>
                         </div>
@@ -236,7 +245,10 @@
 <script>
     var formFileModalInfo = {};
 
-    function modalShow(formfile){
+    function modalShow(formfile, node){
+        if($(node).attr('id')){
+            return;
+        }
         $('#modals-counsel-view').show();
         $('#modal_view_mode').hide();
         $('#modal_edit_mode').show();
@@ -302,11 +314,9 @@
         formdata.append('subject', formFileModalInfo.subject);
         formdata.append('usage_detail', formFileModalInfo.usage_detail);
         formdata.append('fileVersion', formFileModalInfo.order_num);
-        formdata.append('file1', document.querySelector('#modal_edit_form_file').files[0]);
+        formdata.append('files1', document.querySelector('#modal_edit_form_file').files[0]);
         formdata.append('fileIndex', formFileModalInfo.idx_form_file_info);
         formdata.append('idx_admin', '${admin.idx_admin}');
-
-        var files = document.querySelector('#file_upload').files;
 
         $.ajax({
             type: 'post',
@@ -317,15 +327,10 @@
             dataType:'json',//받는 데이터 타입
             enctype: 'multipart/form-data',
             success: function(result){
-                console.log(result)
-                // if(result.result_code=="SUCCESS"){
-                //     // alert(result.result_str);
-                //
-                // }
-                // else {
-                //     returnObj.returnStr = result.result_str;
-                //     returnObj.bool = 0;
-                // }
+                alert(result.result_str);
+                if(result.result_code === 'SUCCESS'){
+                    pageLoad('c71_site_form_doc_mng',{page_num:1},'상담');
+                }
             },
             error:function(err){
                 console.log(err);

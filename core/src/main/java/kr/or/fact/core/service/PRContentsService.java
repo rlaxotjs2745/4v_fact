@@ -12,9 +12,9 @@ public interface PRContentsService {
     int getOpenPRContentCount(String filter, String query);
     List<PRContentVO> getOpenPRContentList(Integer page, int list_amount, String filter, String query);
 
-    public int getPRContentCount();
+    public int getPRContentCount(ParamPageListFilteredVO paramVo);
 
-    public List<PRContentVO> getPRContentList(int page, int list_amount);
+    public List<PRContentVO> getPRContentList(ParamPageListFilteredVO paramVo);
     public List<PRContentVO> getMainPRContentList();
 
     public PRContentVO getMainPRContent(ParamPageListFilteredVO paramVo);

@@ -2,6 +2,7 @@ package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.model.UserDemoBsMapper;
+import kr.or.fact.core.service.FileService;
 import kr.or.fact.core.service.UserDemoBsService;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
@@ -24,7 +25,6 @@ public class UserDemoBsServiceImpl implements UserDemoBsService {
     @Autowired
     public UserDemoBsServiceImpl(UserDemoBsMapper userDemoBsMapper){
         this.userDemoBsMapper = userDemoBsMapper;
-
     }
     @Autowired
     private SqlSession sqlsession;
@@ -53,8 +53,15 @@ public class UserDemoBsServiceImpl implements UserDemoBsService {
         return userDemoBsMapper.getUserDemoBs(userDemoBsCheckVo);
     }
     @Override
+    @Transactional
     public UserDemoBsVO getUserDemoBsByIdx(long idx_user_demo_bs){
-        return userDemoBsMapper.getUserDemoBsByIdx(idx_user_demo_bs);
+        UserDemoBsVO userDemoBsVO = userDemoBsMapper.getUserDemoBsByIdx(idx_user_demo_bs);
+        if(userDemoBsVO.getUser_demobs_status() <= 4){
+            userDemoBsVO.setUser_demobs_status(5);
+        }
+
+        userDemoBsMapper.updateUserDemoBsStatus(userDemoBsVO);
+        return userDemoBsVO;
     }
 
     @Override
@@ -125,6 +132,15 @@ userDemoBsMapper.deleteUserDemoBsHumanResource(idx_user_demo_bs);
     public List<UserDemoBsVO> getUserDemoBsPagingList(int page_num,int amount,String order_field, int filter1, int filter2){
         return userDemoBsMapper.getUserDemoBsPagingList(page_num, amount, order_field,filter1,filter2);
     }
+
+    @Override
+    @Transactional
+    public void updateUserDemoBsStatus(long user_demobs_idx, int status){
+        UserDemoBsVO userDemoBsVO = userDemoBsMapper.getUserDemoBsByIdx(user_demobs_idx);
+        userDemoBsVO.setUser_demobs_status(status);
+        userDemoBsMapper.updateUserDemoBsStatus(userDemoBsVO);
+    }
+
 
     @Override
     public int submitUserDemoBs(long idx_user_demo_bs){

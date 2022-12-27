@@ -14,11 +14,11 @@ public interface PRContentsMapper {
     int getOpenPRContentCount(@Param("filter") String filter, @Param("query") String query);
     List<PRContentVO> getOpenPRContentList(@Param("page") int page, @Param("count") int count, @Param("filter") String filter, @Param("query") String query);
 
-    int getPRContentCount();
+    int getPRContentCount(ParamPageListFilteredVO paramVo);
 
     int getPRContentCount2(ParamPageListFilteredVO paramVo);
 
-    List<PRContentVO> getPRContentList(@Param("page_num") int page_num, @Param("amount") int amount, @Param("order_field") String order_field);
+    List<PRContentVO> getPRContentList(ParamPageListFilteredVO paramVo);
     List<PRContentVO> getMainPRContentList();
 
     PRContentVO getMainPRContent(ParamPageListFilteredVO paramVo);

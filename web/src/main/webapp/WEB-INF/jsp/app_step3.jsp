@@ -2213,6 +2213,8 @@ function save_temp(){
         userBsHumanResourceVOList:userBsHumanResourceVOList
     }
 
+    console.log(param_detail)
+
     //console.log(JSON.stringify(param_detail));
 
     $.ajax({

@@ -21,6 +21,7 @@ import javax.annotation.Resource;
 import javax.mail.*;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.search.*;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.text.ParseException;
@@ -85,6 +86,12 @@ public class IndexController {
     @Resource(name="prContentService")
     public PRContentsService prContentService;
 
+    @Resource(name="webMainPopupService")
+    public WebMainPopupService webMainPopupService;
+
+    @Resource(name = "formFileService")
+    public FormFileService formFileService;
+
     @Autowired
     public PRContentsMapper prContentsMapper;
 
@@ -120,9 +127,10 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
-    public String root(ModelMap model,
+    public String root(HttpServletRequest req,
+                       ModelMap model,
                        @CookieValue(name = "access_token",required = true) String access_token){
-
+        String _path = req.getRequestURI();
         if(access_token!=null){
             AdminVO adminVO = getVerityAuth(access_token);
             if(adminVO==null || adminVO.is_expired())
@@ -133,6 +141,7 @@ public class IndexController {
             setProfile(model);
         }
 
+        model.addAttribute("path", _path);
         return "index";
     }
 
@@ -145,7 +154,7 @@ public class IndexController {
 
     //대시보드
     @SneakyThrows
-    @RequestMapping(value = "/a10_dashboard",method = RequestMethod.POST)
+    @RequestMapping(value = "/a10_dashboard" ,method = RequestMethod.POST)
     public String a10_dashboard(@RequestParam(value = "tag", required = false) String tagValue,
                                 ModelMap model,
                                 @CookieValue(name = "access_token",required = true) String access_token){
@@ -161,7 +170,40 @@ public class IndexController {
             setProfile(model);
         }
 
-        return "/a10_dashboard";
+        ParamPageListFilteredVO param = new ParamPageListFilteredVO();
+
+        param.setOrder_field("IDX_DEMO_BUSINESS");
+        param.setPage_num(1);
+        param.setAmount(5);
+
+        List<AdminApplDemoBsHeaderListVO> adminApplHeaderListVOS = demoBsApplicationService.getAvailableDemoBsApplPagingList(param);
+        model.addAttribute("applicationList", adminApplHeaderListVOS);
+
+        Integer corpCount = corpService.getCorpCount(0);
+        model.addAttribute("corpCount", corpCount);
+
+        Integer directCorpCount = corpService.getCorpCount(1);
+        model.addAttribute("directCorpCount", directCorpCount);
+
+        DemoBsConsultingVO param0 = new DemoBsConsultingVO();
+        param0.setConsulting_status(-1);
+        int consultingCount = consultingService.getCountConsulting(param0);
+
+        model.addAttribute("consultingCount", consultingCount);
+
+        param = new ParamPageListFilteredVO();
+
+        int visitCount = visitService.getVisitReqCount(param);
+
+        model.addAttribute("visitCount", visitCount);
+
+
+
+
+
+
+
+        return "a10_dashboard";
     }
 
     //사업공고문 관리
@@ -180,7 +222,6 @@ public class IndexController {
             model.addAttribute("admin", adminVO);
             setProfile(model);
         }
-
 
         int list_amount = 10;;
         int page_amount = 10;
@@ -1075,7 +1116,7 @@ public class IndexController {
         return "c42_site_event_mng";
     }
 
-    @RequestMapping(value = "/c43_site_adver_mng",method = RequestMethod.POST)
+    @RequestMapping(value = "/c43_site_adver_mng" ,method = RequestMethod.POST)
     public String c43_site_adver_mng(@RequestParam(value = "page_num", required = false) String tagValue,
                                      @RequestBody ParamPageListFilteredVO param,
                                      ModelMap model,
@@ -1095,13 +1136,13 @@ public class IndexController {
         int list_amount = 10;
         int page_amount = param.getAmount();
         int page = param.getPage_num();
-        int prCount = prContentService.getPRContentCount();
+        int prCount = prContentService.getPRContentCount(param);
 //        if(prCount==0){
 //            return "brd_adver_blank";
 //        }
         model.addAttribute("total_count",prCount);
 
-        List<PRContentVO> prlist = prContentService.getPRContentList( page, list_amount);
+        List<PRContentVO> prlist = prContentService.getPRContentList(param);
         //        List<PRContentVO> prlist1 = prContentService.getMainPRContentList();
         model.addAttribute("prlist",prlist);
         model.addAttribute("prcontent",prlist);
@@ -1147,13 +1188,90 @@ public class IndexController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
+        model.addAttribute("fil1",param.getFil1());
+        model.addAttribute("fil2",param.getFil2());
+
+        param.setFil1("1");
+        param.setFil2(null);
         int count_req = prContentsMapper.getPRContentCount2(param);
         model.addAttribute("count_req",count_req);
 
+        param.setFil1("0");
         int count_comp = prContentsMapper.getPRContentCount2(param);
         model.addAttribute("count_comp",count_comp);
 
         return "c43_site_adver_mng";
+    }
+
+    @RequestMapping(value = "/c431_site_adver_mng" ,method = RequestMethod.POST)
+    public String c431_site_adver_mng(@RequestParam(value = "page_num", required = false) String tagValue,
+                                     @RequestBody ParamPageListFilteredVO param, ModelMap model){
+
+        param.setAmount(10);
+        int list_amount = 10;
+        int page_amount = param.getAmount();
+        int page = param.getPage_num();
+        int prCount = prContentsMapper.getPRContentCount2(param);
+        model.addAttribute("total_count",prCount);
+
+        List<PRContentVO> prlist = prContentService.getPRContentList(param);
+        model.addAttribute("prlist",prlist);
+        model.addAttribute("prcontent",prlist);
+        model.addAttribute("cur_page",page);
+        model.addAttribute("amount",list_amount);
+
+        int tot_page = prCount/list_amount+1;
+        if(prCount%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+        boolean is_active = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("page_amount",page_amount);
+
+        model.addAttribute("fil1",param.getFil1());
+        model.addAttribute("fil2",param.getFil2());
+
+        param.setFil1("1");
+        param.setFil2(null);
+        int count_req = prContentsMapper.getPRContentCount2(param);
+        model.addAttribute("count_req",count_req);
+
+        param.setFil1("0");
+        int count_comp = prContentsMapper.getPRContentCount2(param);
+        model.addAttribute("count_comp",count_comp);
+
+        return "c431_site_adver_mng";
     }
 
     @RequestMapping(value = "/pr_contents",method = RequestMethod.POST)
@@ -1219,6 +1337,69 @@ public class IndexController {
             setProfile(model);
         }
 
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+        model.addAttribute("admin", adminInfo);
+
+        param.setAmount(10);
+        int list_amount = 10;
+        int page_amount = param.getAmount();
+        int page = param.getPage_num();
+
+        model.addAttribute("cur_page",page);
+        model.addAttribute("vamount",list_amount);
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        //팝업 정보
+        int popupInfoCount = webMainPopupService.getWebMainPopupCount();
+        model.addAttribute("pop_total_count", popupInfoCount);
+
+        List<WebMainPopupVO> webMainPopupList = webMainPopupService.getWebMainPopupList(param);
+        model.addAttribute("webMainPopupList", webMainPopupList);
+
+        int pop_tot_page = popupInfoCount/list_amount+1;
+        if(popupInfoCount%list_amount==0) pop_tot_page-=1;
+
+        int pop_tot_sector = pop_tot_page/page_amount+1;
+        if(pop_tot_page%page_amount==0) pop_tot_sector-=1;
+
+        boolean pop_is_past = false;
+        boolean pop_is_prev = false;
+        boolean pop_is_next = false;
+        boolean pop_is_last = false;
+        boolean is_active = false;
+
+        if(page!=pop_tot_page && pop_tot_page>1) pop_is_next = true;
+
+        if(page!=1 && pop_tot_page>1) pop_is_prev = true;
+
+        if(cur_sector!=pop_tot_sector && pop_tot_sector>1 ) pop_is_last = true;
+
+        if(cur_sector!=1 && pop_tot_sector>1 ) pop_is_past = true;
+
+        if(pop_tot_page<=page_amount){
+            pop_is_past = false;
+            pop_is_last = false;
+            page_amount = pop_tot_page;
+        }
+
+        model.addAttribute("pop_tot_page",pop_tot_page);
+        model.addAttribute("pop_tot_sector",pop_tot_sector);
+        model.addAttribute("pop_cur_sector",cur_sector);
+        model.addAttribute("pop_is_past",pop_is_past);
+        model.addAttribute("pop_is_prev",pop_is_prev);
+        model.addAttribute("pop_is_next",pop_is_next);
+        model.addAttribute("pop_is_last",pop_is_last);
+        model.addAttribute("pop_list_amount",list_amount);
+        model.addAttribute("pop_page_amount",page_amount);
+
+        //배너 정보
+        int bannerInfoCount = webMainPopupService.getWebMainBannerCount();
+        model.addAttribute("banner_total_count", bannerInfoCount);
+
+        List<WebMainPopupVO> webMainBannerList = webMainPopupService.getWebMainBannerList();
+        model.addAttribute("webMainBannerList", webMainBannerList);
 
         return "c60_site_popup_mng";
     }
@@ -1239,8 +1420,8 @@ public class IndexController {
             setProfile(model);
         }
 
-        List<FormFileInfoVO> formFileList = fileService.getFormFileList();
-        model.addAttribute("formfilelist",formFileList);
+        Integer maxPageNum = fileService.getFormFileTotalCount();
+        model.addAttribute("max_page_num", maxPageNum);
 
         return "c71_site_form_doc_mng";
     }
@@ -1262,7 +1443,16 @@ public class IndexController {
         }
         List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
         model.addAttribute("rulefileinfolist",ruleFileInfoList);
+        List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
+        model.addAttribute("rulefilelist",ruleFileInfoList);
+        System.out.println(ruleFileInfoList.size());
 
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+        model.addAttribute("admin", adminInfo);
+        model.addAttribute("page_num", param.getPage_num());
+
+        Integer maxPageNum = fileService.getRuleFileTotalCount();
+        model.addAttribute("max_page_num", maxPageNum);
         return "c72_site_rule_doc_mng";
     }
 
@@ -2383,10 +2573,60 @@ public class IndexController {
             model.addAttribute("admin", adminVO);
             setProfile(model);
         }
-        List<FormFileInfoVO> formFileList =fileService.getFormFileList();
+        int list_amount = 10;
+        int page_amount = 10;
+        int page = param.getPage_num();
+
+        param.setAmount(10);
+        int formFileCountCount = formFileService.getFormFileCount();
+        model.addAttribute("total_count",formFileCountCount);
+
+        List<FormFileInfoVO> formFileList = formFileService.getFormFileList(param);
         model.addAttribute("formfilelist",formFileList);
 
-        model.addAttribute("admin", adminVO);
+        model.addAttribute("cur_page",page);
+        model.addAttribute("amount",list_amount);
+
+        int tot_page = formFileCountCount/list_amount+1;
+        if(formFileCountCount%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("page_amount",page_amount);
+
+        AdminVO adminInfo = adminService.findAdminById(principal.getName());
+        model.addAttribute("admin", adminInfo);
 
         return "l11_document_form_mng";
     }

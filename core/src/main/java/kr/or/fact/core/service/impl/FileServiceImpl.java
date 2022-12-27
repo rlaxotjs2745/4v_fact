@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -269,6 +270,54 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
+    public long insertPopupFile(MultipartFile file, long adminIdx){
+        FileInfoVO fileInfoVO = new FileInfoVO();
+
+        fileInfoVO.setFile_name(file.getOriginalFilename());
+        fileInfoVO.setFile_type(6);
+        fileInfoVO.setFile_status(0);
+        fileInfoVO.setMime_type(file.getContentType());
+        fileInfoVO.setEncoding(1);
+        fileInfoVO.setExtention(StringUtils.getFilenameExtension(file.getOriginalFilename()));
+        fileInfoVO.setFile_secure_type(0);
+        fileInfoVO.setFile_path(("downloadFile/" + file.getOriginalFilename()));
+        fileInfoVO.setFile_size(file.getSize());
+        fileInfoVO.setOwner(0);
+        fileInfoVO.setIdx_user(adminIdx);
+        try{
+            fileServiceMapper.insertFileInfo(fileInfoVO);
+            return fileServiceMapper.getFileIdxToUser(fileInfoVO);
+        } catch (Exception e){
+            System.out.println(e);
+            return 0;
+        }
+    }
+
+    @Override
+    public long insertFormFile(MultipartFile file, long idx_admin) {
+        FileInfoVO fileInfoVO = new FileInfoVO();
+
+        fileInfoVO.setFile_name(file.getOriginalFilename());
+        fileInfoVO.setFile_type(4);
+        fileInfoVO.setFile_status(0);
+        fileInfoVO.setMime_type(file.getContentType());
+        fileInfoVO.setEncoding(1);
+        fileInfoVO.setExtention(StringUtils.getFilenameExtension(file.getOriginalFilename()));
+        fileInfoVO.setFile_secure_type(0);
+        fileInfoVO.setFile_path(("downloadFile/" + file.getOriginalFilename()));
+        fileInfoVO.setFile_size(file.getSize());
+        fileInfoVO.setOwner(0);
+        fileInfoVO.setIdx_user(idx_admin);
+        try{
+            fileServiceMapper.insertFileInfo(fileInfoVO);
+            return fileServiceMapper.getFileIdxToUser(fileInfoVO);
+        } catch (Exception e){
+            System.out.println(e);
+            return 0;
+        }
+    }
+
+    @Override
     public FileInfoVO selectBsFile(int idx_demo_bs) {
         return fileServiceMapper.selectBsFile(idx_demo_bs);
     }
@@ -285,6 +334,13 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
+    public void deleteRuleFile(RuleFileInfoVO ruleFileInfoVO){
+        fileServiceMapper.deleteRuleFile(ruleFileInfoVO.getIdx_rule_file_info());
+        fileServiceMapper.deleteFileInfo(ruleFileInfoVO.getIdx_file_info());
+    }
+
+    @Override
+    @Transactional
     public void updateFormFile(FileRequestVO fileRequestVO){
         FormFileInfoVO formFileInfoVO = fileServiceMapper.getFormFile(fileRequestVO.getFileIndex());
 
@@ -292,7 +348,7 @@ public class FileServiceImpl implements FileService {
 
         MultipartFile file = fileRequestVO.getFiles1();
         try {
-            convertMultipartToFile(file);
+            convertMultipartToFile2(file);
         } catch (Exception e){
             System.out.println(e);
         }
@@ -300,7 +356,7 @@ public class FileServiceImpl implements FileService {
         FileInfoVO fileInfoVO = new FileInfoVO();
 
         fileInfoVO.setFile_name(file.getOriginalFilename());
-        fileInfoVO.setFile_type(3);
+        fileInfoVO.setFile_type(4);
         fileInfoVO.setFile_status(0);
         fileInfoVO.setMime_type(file.getContentType());
         fileInfoVO.setEncoding(1);
@@ -313,7 +369,9 @@ public class FileServiceImpl implements FileService {
 
         fileServiceMapper.insertFileInfo(fileInfoVO);
 
-        long fileIdx = fileServiceMapper.getFileIdx(file.getOriginalFilename());
+        List<FileInfoVO> fileList = fileServiceMapper.getFileListAsName(file.getOriginalFilename());
+
+        long fileIdx = fileList.get(0).getIdx_file_info();
 
 
         if(fileRequestVO.getSubject() != "" && fileRequestVO.getSubject() != null && formFileInfoVO.getSubject() != fileRequestVO.getSubject()){
@@ -338,4 +396,93 @@ public class FileServiceImpl implements FileService {
 
     }
 
+    @Override
+    @Transactional
+    public long insertFileOutIdx(FileRequestVO fileRequestVO, FileInfoVO fileInfoVO){
+        MultipartFile file = fileRequestVO.getFiles1();
+
+        try {
+            convertMultipartToFile2(file);
+        } catch (Exception e){
+            System.out.println(e);
+        }
+
+
+        fileInfoVO.setFile_name(file.getOriginalFilename());
+        fileInfoVO.setFile_status(0);
+        fileInfoVO.setMime_type(file.getContentType());
+        fileInfoVO.setEncoding(1);
+        fileInfoVO.setExtention(StringUtils.getFilenameExtension(file.getOriginalFilename()));
+        fileInfoVO.setFile_secure_type(0);
+        fileInfoVO.setFile_path("downloadFile/" + file.getOriginalFilename());
+        fileInfoVO.setFile_size(file.getSize());
+        fileInfoVO.setOwner(1);
+        fileInfoVO.setIdx_admin(fileRequestVO.getIdx_admin());
+
+        fileServiceMapper.insertFileInfo(fileInfoVO);
+
+        List<FileInfoVO> fileList = fileServiceMapper.getFileListAsName(file.getOriginalFilename());
+
+        long fileIdx = fileList.get(0).getIdx_file_info();
+
+        return fileIdx;
+    }
+
+
+    @Override
+    @Transactional
+    public void updateRuleFile(FileRequestVO fileRequestVO){
+        RuleFileInfoVO ruleFileInfoVO = fileServiceMapper.getRuleFile(fileRequestVO.getFileIndex());
+
+        fileServiceMapper.deleteFileInfo(ruleFileInfoVO.getIdx_file_info());
+
+        MultipartFile file = fileRequestVO.getFiles1();
+        try {
+            convertMultipartToFile2(file);
+        } catch (Exception e){
+            System.out.println(e);
+        }
+
+        FileInfoVO fileInfoVO = new FileInfoVO();
+
+        fileInfoVO.setFile_name(file.getOriginalFilename());
+        fileInfoVO.setFile_type(5);
+        fileInfoVO.setFile_status(0);
+        fileInfoVO.setMime_type(file.getContentType());
+        fileInfoVO.setEncoding(1);
+        fileInfoVO.setExtention(StringUtils.getFilenameExtension(file.getOriginalFilename()));
+        fileInfoVO.setFile_secure_type(0);
+        fileInfoVO.setFile_path("downloadFile/" + file.getOriginalFilename());
+        fileInfoVO.setFile_size(file.getSize());
+        fileInfoVO.setOwner(1);
+        fileInfoVO.setIdx_admin(fileRequestVO.getIdx_admin());
+
+        fileServiceMapper.insertFileInfo(fileInfoVO);
+
+        List<FileInfoVO> fileList = fileServiceMapper.getFileListAsName(file.getOriginalFilename());
+
+        long fileIdx = fileList.get(0).getIdx_file_info();
+
+
+        if(fileRequestVO.getSubject() != "" && fileRequestVO.getSubject() != null && ruleFileInfoVO.getSubject() != fileRequestVO.getSubject()){
+            ruleFileInfoVO.setSubject(fileRequestVO.getSubject());
+        }
+
+        if(fileRequestVO.getUsage_detail() != "" && fileRequestVO.getUsage_detail() != null && ruleFileInfoVO.getUsage_detail() != fileRequestVO.getUsage_detail()){
+            ruleFileInfoVO.setUsage_detail(fileRequestVO.getUsage_detail());
+        }
+
+        if(fileRequestVO.getIdx_admin() != 0 && ruleFileInfoVO.getIdx_admin() != fileRequestVO.getIdx_admin()){
+            ruleFileInfoVO.setIdx_admin(fileRequestVO.getIdx_admin());
+        }
+
+        if(fileRequestVO.getFileVersion() != 0 && fileRequestVO.getFileVersion() != ruleFileInfoVO.getOrder_num()){
+            ruleFileInfoVO.setOrder_num(fileRequestVO.getFileVersion());
+        }
+
+        ruleFileInfoVO.setIdx_file_info(fileIdx);
+
+        fileServiceMapper.updateRuleFile(ruleFileInfoVO);
+
+    }
 }

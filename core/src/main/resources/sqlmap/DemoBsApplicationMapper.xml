@@ -15,39 +15,39 @@
     <select id="getAvailableDemoBsApplPagingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.AdminApplDemoBsHeaderListVO">
         SELECT *
         FROM (
-            SELECT ROW_NUMBER() OVER(ORDER BY #{order_field} DESC) AS row_num,
-            IDX_DEMO_BUSINESS,
-            DEMO_BS_CODE,
-            DEMO_SUBJECT,
-            APPLICANT_COUNT,
-            RECRUIT_COUNT_LIMIT,
-            EXAM_START,
-            EXAM_END,
-            IDX_BS_ANNOUNCEMENT,
-            APPL_REVIEW_DONE,
-            APPL_RECOMM
-            FROM (
-                SELECT A.IDX_DEMO_BUSINESS AS IDX_DEMO_BUSINESS,
-                A.DEMO_BS_CODE AS DEMO_BS_CODE,
-                A.DEMO_SUBJECT AS DEMO_SUBJECT,
-                A.APPLICANT_COUNT AS APPLICANT_COUNT,
-                A.RECRUIT_COUNT_LIMIT AS RECRUIT_COUNT_LIMIT,
-                A.EXAM_START AS EXAM_START,
-                A.EXAM_END AS EXAM_END,
-                B.IDX_BS_ANNOUNCEMENT AS IDX_BS_ANNOUNCEMENT,
-                (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION WHERE A.IDX_DEMO_BUSINESS = C.IDX_DEMO_BUSINESS AND APPLICANT_STATUS = 3) AS APPL_REVIEW_DONE,
-                (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION WHERE A.IDX_DEMO_BUSINESS = C.IDX_DEMO_BUSINESS AND APPLICANT_STATUS = 2) AS APPL_RECOMM
+                 SELECT ROW_NUMBER() OVER(ORDER BY #{order_field} DESC) AS row_num,
+                         IDX_DEMO_BUSINESS,
+                        DEMO_BS_CODE,
+                        DEMO_SUBJECT,
+                        APPLICANT_COUNT,
+                        RECRUIT_COUNT_LIMIT,
+                        EXAM_START,
+                        EXAM_END,
+                        IDX_BS_ANNOUNCEMENT,
+                        APPL_REVIEW_DONE,
+                        APPL_RECOMM
+                 FROM (
+                          SELECT A.IDX_DEMO_BUSINESS AS IDX_DEMO_BUSINESS,
+                                 A.DEMO_BS_CODE AS DEMO_BS_CODE,
+                                 A.DEMO_SUBJECT AS DEMO_SUBJECT,
+                                 A.APPLICANT_COUNT AS APPLICANT_COUNT,
+                                 A.RECRUIT_COUNT_LIMIT AS RECRUIT_COUNT_LIMIT,
+                                 A.EXAM_START AS EXAM_START,
+                                 A.EXAM_END AS EXAM_END,
+                                 B.IDX_BS_ANNOUNCEMENT AS IDX_BS_ANNOUNCEMENT,
+                                 (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION WHERE A.IDX_DEMO_BUSINESS = C.IDX_DEMO_BUSINESS AND APPLICANT_STATUS = 3) AS APPL_REVIEW_DONE,
+                                 (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION WHERE A.IDX_DEMO_BUSINESS = C.IDX_DEMO_BUSINESS AND APPLICANT_STATUS = 2) AS APPL_RECOMM
 
-                FROM TB_DEMO_BUSINESS A
-                LEFT OUTER JOIN TB_BS_ANNOUNCEMENT B
-                    ON A.IDX_DEMO_BUSINESS = B.IDX_DEMO_BUSINESS
-                LEFT OUTER JOIN TB_DEMO_BS_APPLICAION C
-                           ON A.IDX_DEMO_BUSINESS = C.IDX_DEMO_BUSINESS
-                WHERE A.DEMO_BS_STATUS > 2
-                ORDER BY IDX_DEMO_BUSINESS DESC
-            )
-            WHERE ROWNUM <![CDATA[<=]]> #{page_num} * #{amount}
-        )
+                          FROM TB_DEMO_BUSINESS A
+                                   LEFT OUTER JOIN TB_BS_ANNOUNCEMENT B
+                                                   ON A.IDX_DEMO_BUSINESS = B.IDX_DEMO_BUSINESS
+                                   LEFT OUTER JOIN TB_DEMO_BS_APPLICAION C
+                                                   ON A.IDX_DEMO_BUSINESS = C.IDX_DEMO_BUSINESS
+                          WHERE A.DEMO_BS_STATUS > 2
+                          ORDER BY IDX_DEMO_BUSINESS DESC
+                      )
+                 WHERE ROWNUM <![CDATA[<=]]> #{page_num} * #{amount}
+             )
         WHERE row_num <![CDATA[>]]> (#{page_num} - 1) * #{amount}
 
 
@@ -55,64 +55,64 @@
 
     <select id="getApplPagingFilteredList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.AdminApplHeaderListVO">
         SELECT
-            *
-            FROM (
-                SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num,
-                IDX_DEMO_BS_APPLICAION,
-                IDX_USER_DEMO_BS,
-                IDX_DEMO_BUSINESS,
-                IDX_CORP_INFO,
-                IDX_USER,
-                MAN_NAME,
+        *
+        FROM (
+        SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num,
+        IDX_DEMO_BS_APPLICAION,
+        IDX_USER_DEMO_BS,
+        IDX_DEMO_BUSINESS,
+        IDX_CORP_INFO,
+        IDX_USER,
+        MAN_NAME,
         CORP_NAME,
-                CEO_NAME,
-                CEO_MNUMBER,
-                APPLICANT_STATUS,
-                IS_FILE,
-                IS_IMPROVE,
-                IS_IMPROVE_FILE,
-                APPLICAION_REG_DATE,
-                ADMIN_NAME,
-                IDX_ADMIN
-                FROM (
-                    SELECT
-                        A.IDX_DEMO_BS_APPLICAION AS IDX_DEMO_BS_APPLICAION,
-        A.IDX_USER_DEMO_BS AS IDX_USER_DEMO_BS,
+        CEO_NAME,
+        CEO_MNUMBER,
+        APPLICANT_STATUS,
+        IS_FILE,
+        IS_IMPROVE,
+        IS_IMPROVE_FILE,
+        APPLICAION_REG_DATE,
+        ADMIN_NAME,
+        IDX_ADMIN,
+        USER_DEMOBS_STATUS
+        FROM (
+        SELECT
+        A.IDX_USER AS IDX_USER,
+        A.MAN_NAME AS MAN_NAME,
+        A.CORP_NAME AS CORP_NAME,
+        A.CEO_NAME AS CEO_NAME,
+        A.CEO_MNUMBER AS CEO_MNUMBER,
         A.IDX_DEMO_BUSINESS AS IDX_DEMO_BUSINESS,
-        A.IDX_CORP_INFO AS IDX_CORP_INFO,
-                        B.IDX_USER AS IDX_USER,
-                        B.MAN_NAME AS MAN_NAME,
-                           B.CORP_NAME AS CORP_NAME,
-                        B.CEO_NAME AS CEO_NAME,
-                        B.CEO_MNUMBER AS CEO_MNUMBER,
-                        A.APPLICANT_STATUS AS APPLICANT_STATUS,
-                        A.IS_FILE AS IS_FILE,
-                        A.IS_IMPROVE AS IS_IMPROVE,
-                        A.IS_IMPROVE_FILE AS IS_IMPROVE_FILE,
-                        A.APPLICAION_REG_DATE AS APPLICAION_REG_DATE,
-                        ADMIN_NAME AS ADMIN_NAME,
-                        A.IDX_ADMIN AS IDX_ADMIN
-                    FROM TB_DEMO_BS_APPLICAION A
-                        INNER JOIN TB_USER_DEMO_BS B
-                            ON A.IDX_USER_DEMO_BS = B.IDX_USER_DEMO_BS
-                        LEFT OUTER JOIN TB_ADMIN C
-                            ON A.IDX_ADMIN=C.IDX_ADMIN
+        A.IDX_USER_DEMO_BS AS IDX_USER_DEMO_BS,
+        A.USER_DEMOBS_STATUS AS USER_DEMOBS_STATUS,
+        B.IDX_DEMO_BS_APPLICAION AS IDX_DEMO_BS_APPLICAION,
+        B.IDX_CORP_INFO AS IDX_CORP_INFO,
+        B.APPLICANT_STATUS AS APPLICANT_STATUS,
+        B.IS_FILE AS IS_FILE,
+        B.IS_IMPROVE AS IS_IMPROVE,
+        B.IS_IMPROVE_FILE AS IS_IMPROVE_FILE,
+        B.APPLICAION_REG_DATE AS APPLICAION_REG_DATE,
+        B.IDX_ADMIN AS IDX_ADMIN,
+        C.ADMIN_NAME AS ADMIN_NAME
+        FROM    TB_USER_DEMO_BS A
+        LEFT OUTER JOIN TB_DEMO_BS_APPLICAION B
+        ON A.IDX_USER_DEMO_BS = B.IDX_USER_DEMO_BS
+        LEFT OUTER JOIN TB_ADMIN C
+        ON B.IDX_ADMIN = C.IDX_ADMIN
+        WHERE A.IDX_DEMO_BUSINESS = #{idx}
+        <if test="filter1 != 9999 and filter2 != 9998">
+            AND B.APPLICANT_STATUS = #{filter1} OR B.APPLICANT_STATUS = #{filter2}
+        </if>
+        <if test="filter1 != 9999 and filter2 == 9998">
+            AND B.APPLICANT_STATUS = #{filter1}
+        </if>
+        )
 
-                    WHERE A.IDX_DEMO_BUSINESS = #{idx}
-
-                        <if test="filter1 != 9999 and filter2 != 9998">
-                            AND (APPLICANT_STATUS = #{filter1} OR APPLICANT_STATUS = #{filter2})
-                        </if>
-                        <if test="filter1 != 9999 and filter2 == 9998">
-                            AND APPLICANT_STATUS = #{filter1})
-                        </if>
-                )
-
-            WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
-            )
+        WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+        )
         WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
-    </select>
 
+    </select>
 
 
     <select id="getDemoBsEvalByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.DemoBSApplicationVO">
@@ -152,7 +152,7 @@
 
                           FROM TB_DEMO_BUSINESS A
                                    LEFT OUTER JOIN TB_BS_ANNOUNCEMENT B
-                                              ON A.IDX_DEMO_BUSINESS = B.IDX_DEMO_BUSINESS
+                                                   ON A.IDX_DEMO_BUSINESS = B.IDX_DEMO_BUSINESS
                                    LEFT OUTER  JOIN TB_DEMO_BS_APPLICAION C
                                                     ON A.IDX_DEMO_BUSINESS = C.IDX_DEMO_BUSINESS
                           WHERE A.DEMO_BS_STATUS > 2
@@ -309,7 +309,7 @@
         B.CEO_MNUMBER AS CEO_MNUMBER,
         A.APPLICANT_STATUS AS APPLICANT_STATUS,
         A.IS_FILE AS IS_FILE,
-        A.IS_IMPROVE AS IS_IMPROVE,
+        A.IS_IMPROVE AS IS_IMPR OVE,
         A.IS_IMPROVE_FILE AS IS_IMPROVE_FILE,
         A.APPLICAION_REG_DATE AS APPLICAION_REG_DATE,
         ADMIN_NAME AS ADMIN_NAME,
@@ -333,5 +333,15 @@
         WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
         )
         WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+
     </select>
+
+    <update id="updateDemoBsApplicantStatus" parameterType="hashmap">
+        update TB_DEMO_BS_APPLICAION set applicant_status = #{optionVal}
+        where idx_user_demo_bs = #{idx}
+
+
+    </update>
+
+
 </mapper>

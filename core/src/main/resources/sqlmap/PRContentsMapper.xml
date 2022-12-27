@@ -38,34 +38,37 @@
 <!--    fil1 value = 0,1-->
 <!--    fil2 value = 일자 검색-->
     <sql id="searchFilter1">
-        <if test="fil1 != null">
+        <if test="fil1 != null and fil1 != ''">
             AND IS_NEW = #{fil1}
         </if>
-        <if test="fil2 != null">
+        <if test="fil2 != null and fil2 != ''">
         <choose>
-            <when test="fil2 == 1">
-            AND TO_DATE(REG_DATE,'YYYYMMDD') = TO_DATE(SYSDATE,'YYYYMMDD')
+            <when test='fil2 == "1"'>
+                AND TRUNC(REG_DATE) = TRUNC(SYSDATE)
             </when>
-            <when test="fil2 == 2">
+            <when test='fil2 == "2"'>
                 AND ((TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[<]]> 7
                     AND (TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[>=]]> 0)
             </when>
-            <when test="fil2 == 3">
+            <when test='fil2 == "3"'>
                 AND ((TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[<]]> 31
                     AND (TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[>=]]> 0)
             </when>
-            <when test="fil2 == 4">
+            <when test='fil2 == "4"'>
                 AND ((TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[<]]> 63
                     AND (TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[>=]]> 0)
             </when>
-            <when test="fil2 == 5">
+            <when test='fil2 == "5"'>
                 AND ((TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[<]]> 186
                     AND (TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[>=]]> 0)
             </when>
-            <when test="fil2 == 6">
+            <when test='fil2 == "6"'>
                 AND ((TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[<]]> 365
                     AND (TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[>=]]> 0)
             </when>
+            <otherwise>
+                AND 1=1
+            </otherwise>
         </choose>
         </if>
     </sql>
@@ -104,7 +107,12 @@
         SELECT COUNT(*) FROM TB_PR_CONTENT  WHERE IS_SHOW=1
     </select>
 
-    <select id="getPRContentList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.PRContentVO">
+    <select id="getPRContentCount2" resultType="int">
+        SELECT COUNT(*) FROM TB_PR_CONTENT  WHERE IS_SHOW=1
+        <include refid="searchFilter1"></include>
+    </select>
+
+    <select id="getPRContentList" resultType="kr.or.fact.core.model.DTO.PRContentVO">
         SELECT
             idx_row_num,
             IDX_PR_CONTENT
@@ -112,23 +120,30 @@
              ,SUBJECT
              ,IS_FILE
              ,IS_NEW
+             ,IS_MAIN_PAGE
              ,AUTHOR
              ,SHOW_START_DATE
              ,VIEW_COUNT
         FROM (
-             SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS idx_row_num
-                ,IDX_PR_CONTENT
-                ,PR_CONTENT_NUM
-                ,SUBJECT
-                ,IS_FILE
-                ,IS_NEW
-                ,AUTHOR
-                ,SHOW_START_DATE
-                ,VIEW_COUNT
-             FROM (
-                  SELECT * FROM TB_PR_CONTENT WHERE IS_SHOW=1 ORDER BY PR_CONTENT_NUM DESC, IDX_PR_CONTENT DESC
+             SELECT * FROM (
+                 SELECT ROW_NUMBER() OVER(ORDER by IDX_PR_CONTENT DESC) AS idx_row_num
+                    ,IDX_PR_CONTENT
+                    ,PR_CONTENT_NUM
+                    ,SUBJECT
+                    ,IS_FILE
+                    ,IS_NEW
+                    ,IS_MAIN_PAGE
+                    ,AUTHOR
+                    ,SHOW_START_DATE
+                    ,VIEW_COUNT
+                    ,REG_DATE
+                 FROM (
+                      SELECT * FROM TB_PR_CONTENT WHERE IS_SHOW=1
+                        <include refid="searchFilter1"></include>
+                        ORDER BY PR_CONTENT_NUM DESC, IDX_PR_CONTENT DESC
+                    )
             )
-            WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+            WHERE idx_row_num <![CDATA[<=]]> #{page_num}*#{amount}
         )
         WHERE idx_row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
     </select>

@@ -32,4 +32,6 @@ public interface CorpService {
     CorpManagerVO getCorpManagerUserIdx(long idx_user);
 
     int updateCorpManager(CorpManagerVO corpManagerVO);
+
+    Integer getCorpCount(int is_applicant);
 }

@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.annotation.Resource;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -91,6 +90,14 @@ public class APIController {
 
     @Resource(name="adminSessionService")
     AdminSessionService adminSessionService;
+
+
+
+    @Resource(name = "webMainPopupService")
+    public WebMainPopupService webMainPopupService;
+
+    @Resource(name = "formFileService")
+    public FormFileService formFileService;
 
     @Autowired
     private FACTConfig factConfig;
@@ -292,14 +299,38 @@ public class APIController {
                                          Model model){
         int page = param.getPage_num();
         int filter1 = param.getFilter1();
-        int filter2 = param.getFilter2();
+        System.out.println("filter1:" + filter1);// default : 9999(전체) ,검토전(0) ,검토중(1),검토완료(3)
+        int filter2 = param.getFilter2(); // default:9998
 
-        int list_amount = param.getAmount();;
+        //검토중
+        if(filter1 ==1){
+            filter2=2;
+        }
+        System.out.println("filter2 : "  + filter2 );
+
+        int list_amount = param.getAmount();
         int page_amount = param.getAmount();
 
+        System.out.println(filter2);//9998
 
         AdminDemoBSFilterVO adminDemoBSFilterVO = demoBsService.getAdminDemoBsFilter();
+
+//        int tot_count;//전체
+//        int appl_count;//모집중
+//        int revuiew_count;//심사중
+//        int agree_count;//협약중
+//        int demo_count;//사업중
+//        int result_count;//결산중
+
+
         //리스트 총갯수를 이때 빼야 함
+        /*
+        *   public static int DEMOBS_FILTER_APPL = 3;
+            public static int DEMOBS_FILTER_REVUIEW = 5;
+            public static int DEMOBS_FILTER_AGREE = 7;
+            public static int DEMOBS_FILTER_DEMO = 9;
+            public static int DEMOBS_FILTER_RESULT = 11;
+        * */
         int filtered_item_total = adminDemoBSFilterVO.getTot_count();
         if(filter1==CONSTANT.DEMOBS_FILTER_APPL)
             filtered_item_total = adminDemoBSFilterVO.getAppl_count();
@@ -317,7 +348,7 @@ public class APIController {
         model.addAttribute("idx_demo_business",param.getIdx());
 
         param.setOrder_field("IDX_DEMO_BUSINESS");
-/*        ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
+/*      ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
         listPagingParamVO.setPage_num(page);
         listPagingParamVO.setAmount(list_amount);
         listPagingParamVO.setFilter1(filter1);
@@ -326,6 +357,9 @@ public class APIController {
         listPagingParamVO.setIdx(param.getIdx());*/
 
         List<AdminApplHeaderListVO> adminApplHeaderListVOS =  demoBsApplicationService.getApplPagingFilteredList(param);
+
+
+
         //List<DemoBusinessVO>  demoBusinessVOList = demoBsService.getDemoBsPagingList(listPagingParamVO);
 
         model.addAttribute("adminApplHeaderListVOS",adminApplHeaderListVOS);
@@ -459,12 +493,27 @@ public class APIController {
 
     @RequestMapping(value = "/get_user_demo_bs_info",method = RequestMethod.POST)
     public @ResponseBody
-    ResultVO  join_confirm(HttpSession session,
+    ResultVO  get_user_demo_bs_info(HttpSession session,
                            @RequestBody ParamUserDemoBSInfoVO userDemoBSInfoVO){
+
+        System.out.println("idx_user_demo_bs :" + userDemoBSInfoVO.getIdx_user_demo_bs());
+
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("성공");
         resultVO.setResult_code("SUCCESS");
+
         UserDemoBsVO userDemoBsVO = userDemoBsService.getUserDemoBsByIdx(userDemoBSInfoVO.getIdx_user_demo_bs());
+
+        /*
+        * <select id="getUserDemoBsByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.UserDemoBsVO">
+        SELECT
+            *
+        FROM TB_USER_DEMO_BS
+        WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
+            </select>
+        *
+        * */
+
 
         if(userDemoBsVO==null){
             resultVO.setResult_str("해당 신청정보를 찾을수 없습니다");
@@ -475,8 +524,17 @@ public class APIController {
         DemoBusinessVO demoBusinessVO = demoBsService.getDemoBsByIdx(userDemoBsVO.getIdx_demo_business());
         userDemoBsVO.setDemo_subject(demoBusinessVO.getDemo_subject());
 
-        DemoBSApplicationVO demoBSApplicationVO = demoBsApplicationService.getDemoBsApplByIdx( userDemoBsVO.getIdx_user_demo_bs());
+        /*
+        *  SELECT * FROM TB_DEMO_BUSINESS  WHERE IDX_DEMO_BUSINESS = #{idx}
+        * */
+
+        /*
+        DemoBSApplicationVO demoBSApplicationVO = demoBsApplicationService.getDemoBsApplByIdx(userDemoBsVO.getIdx_user_demo_bs());
+        System.out.println(demoBSApplicationVO.getDemo_bs_applicaion_code());
+
+        userDemoBsVO.setDemo_bs_applicaion_code(demoBSApplicationVO.getDemo_bs_applicaion_code());
         userDemoBsVO.setDemo_bs_applicaion_code(demoBSApplicationVO.getDemo_bs_applicaion_code()==null?"":demoBSApplicationVO.getDemo_bs_applicaion_code());
+
         if(demoBSApplicationVO.getApplicaion_reg_date()==null)
         {
             Date date = new Date();
@@ -484,18 +542,95 @@ public class APIController {
         }
         userDemoBsVO.setApplicaion_reg_date(demoBSApplicationVO.getApplicaion_reg_date());
 
+        /*
         CorpInfoVO corpInfoVO = corpService.getCorpInfo(userDemoBsVO.getIdx_corp_info());
         if(corpInfoVO==null){
             corpInfoVO = new CorpInfoVO();
             corpInfoVO.setIdx_corp_info(0);
             corpInfoVO.setIs_saved(0);
         }
-        userDemoBsVO.setCorpInfoVO(corpInfoVO);
+        userDemoBsVO.setCorpInfoVO(corpInfoVO);*/
 
         resultVO.setUserDemoBsVO(userDemoBsVO);
 
+        UserDemoBsDetailVO userDemoBsDetailVO=userDemoBsService.getUserDemoBsDetail(userDemoBSInfoVO.getIdx_user_demo_bs());
+        resultVO.setUserDemoBsDetailVO(userDemoBsDetailVO);
+
+        UserVO userVO=userService.getUserInfo(userDemoBsVO.getIdx_user());
+        resultVO.setUserVO(userVO);
+
+        List<UserBsHumanResourceVO> userBsHumanResourceVOS=userDemoBsService.getUserDemoBsHumanResourceList(userDemoBSInfoVO.getIdx_user_demo_bs());
+        resultVO.setUserBsHumanResourceVOS(userBsHumanResourceVOS);
+
         return  resultVO;
     }
+
+    @RequestMapping(value="/b21_modal",method = RequestMethod.POST)
+    public String b21_modal(HttpSession session,Model model,
+                            @RequestBody ParamUserDemoBSInfoVO userDemoBSInfoVO) {
+
+        UserDemoBsVO  UserDemoBsVOmodify=userDemoBsService.getUserDemoBsByIdx(userDemoBSInfoVO.getIdx_user_demo_bs());
+        UserDemoBsDetailVO userDemoBsDetailVOModify=userDemoBsService.getUserDemoBsDetail(userDemoBSInfoVO.getIdx_user_demo_bs());
+        UserVO userVO=userService.getUserInfo(UserDemoBsVOmodify.getIdx_user());
+        DemoBSApplicationVO demoBSApplicationVO=demoBsApplicationService.getDemoBsEvalByIdx(userDemoBSInfoVO.getIdx_user_demo_bs());
+
+
+        DemoBusinessVO demoBusinessVO = demoBsService.getDemoBsByIdx(UserDemoBsVOmodify.getIdx_demo_business());
+        UserDemoBsVOmodify.setDemo_subject(demoBusinessVO.getDemo_subject());
+
+        List<UserDemoBsFileResultVO> fileList = fileService.getUserDemoFileList(UserDemoBsVOmodify.getIdx_user_demo_bs());
+
+        model.addAttribute("fileArr", fileList);
+        model.addAttribute("modifyUserDemoBsVO",UserDemoBsVOmodify);
+        model.addAttribute("modifyUserDemoBsDetailVO",userDemoBsDetailVOModify);
+        model.addAttribute("userVO",userVO);
+        model.addAttribute("demoBSApplicationVO",demoBSApplicationVO);
+
+
+
+
+        return "pages/b21_modal";
+    }
+
+    @RequestMapping(value = "/change_applicant_status",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO change_applicant_status(HttpSession session, @RequestBody HashMap<String,Integer> param){
+        ResultVO resultVO=new ResultVO();
+        resultVO.setResult_str("성공");
+        resultVO.setResult_code("SUCCESS");
+
+
+
+        int idx =param.get("idx");
+        int optionVal=param.get("optionVal");
+        System.out.println("idx : " + idx);
+        System.out.println("optionVal : " + optionVal);
+
+        demoBsApplicationService.updateDemoBsApplicantStatus(param);
+
+
+        return resultVO;
+    }
+
+
+    @RequestMapping(value = "/modify_user_demo_bs_status",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  modify_user_demo_bs_status(HttpSession session,
+                             @RequestBody UserDemoBsVO userDemoBsVO) {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("성공");
+        resultVO.setResult_code("SUCCESS");
+
+
+        try {
+            userDemoBsService.updateUserDemoBsStatus(userDemoBsVO.getIdx_user_demo_bs(), userDemoBsVO.getUser_demobs_status());
+        } catch (Exception e){
+            System.out.println(e);
+        }
+
+        return resultVO;
+    }
+
 
     @RequestMapping(value = "/save_corp_info",method = RequestMethod.POST)
     public @ResponseBody
@@ -598,10 +733,14 @@ public class APIController {
         return  resultVO;
     }
 
+
+
+
     @RequestMapping(value = "/get_monthly_visit_data",method = RequestMethod.POST)
     public @ResponseBody
     ResultVO  get_monthly_visit_data(HttpSession session,
                              @RequestBody VisitDateVO visitDateVO){
+
 
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("성공");
@@ -612,19 +751,57 @@ public class APIController {
         return  resultVO;
     }
 
-    @RequestMapping(value = "/save_visit_date",method = RequestMethod.POST)
+    @RequestMapping(value = "/get_visit_data_byGroupIdx",method = RequestMethod.POST)
     public @ResponseBody
-    ResultVO  save_visit_date(HttpSession session,
-                             @RequestBody List<VisitDataVO> visitDataVOList){
+    ResultVO get_visit_data_byGroupIdx(HttpSession session,
+                                       @RequestBody VisitDataVO visitDataVO){
+
+        System.out.println("group_idx : " + visitDataVO.getGroup_idx());
 
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("성공");
         resultVO.setResult_code("SUCCESS");
 
+        List<VisitDataVO> visitDataVOList=visitService.getVisitDataListByGroupIdx(visitDataVO.getGroup_idx());
+        resultVO.setVisitDataVOList(visitDataVOList);
+
+        return  resultVO;
+    }
+
+
+    @RequestMapping(value = "/save_visit_date",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO  save_visit_date(HttpSession session,
+                             @RequestBody List<VisitDataVO> visitDataVOList){
+
+
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("성공");
+        resultVO.setResult_code("SUCCESS");
+
+        int groupIdx=visitService.getGroupIdx();
+
+
         if(visitDataVOList == null || visitDataVOList.isEmpty()){
             resultVO.setResult_str("저장할 데이터가 없습니다");
             resultVO.setResult_code("ERROR_1001");
             return resultVO;
+        }else{
+            for(VisitDataVO visitDataVO:visitDataVOList){
+
+
+                if(visitService.getVisitData(visitDataVO.getCur_date())!=null){
+                    resultVO.setResult_str("해당 날짜에 이미 존재하는 일정이 있습니다.");
+                    resultVO.setResult_code("ERROR_");
+
+                    return resultVO;
+                }else{
+                    visitDataVO.setGroup_idx(groupIdx);
+
+                }
+
+            }
         }
 
         visitService.saveOrUpdateHugeVisitData(visitDataVOList);
@@ -658,9 +835,9 @@ public class APIController {
         resultVO.setResult_str("필수 데이터가 없습니다.");
         resultVO.setResult_code("ERROR001");
 
-        if(homepageInfoVO.getHomepage_admin() != null &&
-                homepageInfoVO.getHomepage_admin_pnum()!= null &&
-                homepageInfoVO.getEmail()!= null){
+        if(homepageInfoVO.getHomepage_admin() != null && homepageInfoVO.getHomepage_admin() != "" &&
+                homepageInfoVO.getHomepage_admin_pnum()!= null && homepageInfoVO.getHomepage_admin_pnum()!= "" &&
+                homepageInfoVO.getEmail()!= null && homepageInfoVO.getEmail()!= ""){
 
             HomepageInfoVO resultHomepageInfo = homepageInfoService.getHomepageInfo();
 
@@ -1307,20 +1484,16 @@ public class APIController {
         ResultVO resultVO = new ResultVO();
         File[] files = new File[5];
         try {
-
-
             if(prcontensVO.getFiles1() == null){
-               prContentService.insertPRContent(prcontensVO);
+                prContentService.insertPRContent(prcontensVO);
             }else {
                 if (prcontensVO.getFiles1() != null) {
                     files[0] = fileService.convertMultipartToFile(prcontensVO.getFiles1());
                     if (prcontensVO.getFiles2() != null) {
                         files[1] = fileService.convertMultipartToFile2(prcontensVO.getFiles2());
-
                     }
                 }
             }
-
 
             MultipartFile file = prcontensVO.getFiles1();
             String fileName = fileService.storeFileInfo(prcontensVO.getFiles1());
@@ -1336,8 +1509,6 @@ public class APIController {
             fileInfoVO.setFile_path(fileDownloadUri);
             fileService.storeFileInfo(file);
             fileService.insertFileInfo(fileInfoVO);
-
-
 
             MultipartFile fileThum = prcontensVO.getFiles2();
             String fileThumName = fileService.storeFileInfo(prcontensVO.getFiles2());
@@ -1371,16 +1542,151 @@ public class APIController {
     public @ResponseBody ResultVO insertCoworker (@RequestBody CoWorkerVO coWorkerVO){
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
-        resultVO.setResult_str("업데이트 실패");
-        try {
-           coWorkerNService.insertCoWorkerInfo(coWorkerVO);
-            resultVO.setResult_str("업데이트에 성공하였습니다.");
-            resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("등록 실패");
 
-        }catch(Exception e) {
-            resultVO.setResult_code("ERROR_1000");
-            resultVO.setResult_str("업데이트 실패");
-            System.out.println(e);
+        if(coWorkerVO.getCoworker_name()!=null
+                && coWorkerVO.getDevision()!=null && coWorkerVO.getJob_title()!=null) {
+
+            coWorkerNService.insertCoWorkerInfo(coWorkerVO);
+            resultVO.setResult_str("저장했습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/modify_coworker",method = RequestMethod.POST)
+    public @ResponseBody ResultVO modifyCoworker (@RequestBody CoWorkerVO coWorkerVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("업데이트 실패");
+
+        if(coWorkerVO.getIdx_co_worker() > 0) {
+            coWorkerNService.updateCoWorkerInfo(coWorkerVO);
+            resultVO.setResult_str("수정했습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/delete_coworker",method = RequestMethod.POST)
+    public @ResponseBody ResultVO deleteCoworker (@RequestBody CoWorkerVO coWorkerVO){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("삭제 실패");
+
+        if(coWorkerVO.getIdx_co_worker() > 0) {
+            coWorkerNService.deleteCoWorkerInfo(coWorkerVO.getIdx_co_worker());
+            resultVO.setResult_str("삭제했습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/insert_popup",method = RequestMethod.POST)
+    public @ResponseBody ResultVO insertPopupContent (@ModelAttribute WebMainPopupVO webMainPopupVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("데이터를 다시 입력해주세요");
+
+        if((webMainPopupVO.getSubject() != null || webMainPopupVO.getSubject() != "") && webMainPopupVO.getFile1() != null){
+
+            fileService.convertMultipartToFile(webMainPopupVO.getFile1());
+            long fileIdx = fileService.insertPopupFile(webMainPopupVO.getFile1(), webMainPopupVO.getIdx_admin());
+
+            webMainPopupVO.setIdx_file_info(fileIdx);
+            webMainPopupService.insertPopupContent(webMainPopupVO);
+
+            resultVO.setResult_str("등록했습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/modify_popup",method = RequestMethod.POST)
+    public @ResponseBody ResultVO modifyPopupContent (@ModelAttribute WebMainPopupVO webMainPopupVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("데이터를 다시 입력해주세요");
+
+        if(webMainPopupVO.getIdx_popup_img() > 0){
+            if(webMainPopupVO.getFile1() != null && webMainPopupVO.getFile1().getSize() > 0){
+                fileService.convertMultipartToFile(webMainPopupVO.getFile1());
+                long fileIdx = fileService.insertPopupFile(webMainPopupVO.getFile1(), webMainPopupVO.getIdx_admin());
+
+                webMainPopupVO.setIdx_file_info(fileIdx);
+            }
+            webMainPopupService.updatePopupContent(webMainPopupVO);
+
+            resultVO.setResult_str("수정했습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/delete_popup",method = RequestMethod.POST)
+    public @ResponseBody ResultVO deletePopupContent (@RequestBody WebMainPopupVO webMainPopupVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("데이터를 다시 입력해주세요");
+
+        if(webMainPopupVO.getIdx_popup_img() > 0){
+            webMainPopupService.deletePopupContent(webMainPopupVO);
+
+            resultVO.setResult_str("삭제했습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/insert_banner",method = RequestMethod.POST)
+    public @ResponseBody ResultVO insertBannerContent (@ModelAttribute WebMainPopupVO webMainPopupVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("데이터를 다시 입력해주세요");
+
+        if((webMainPopupVO.getSubject() != null || webMainPopupVO.getSubject() != "") && webMainPopupVO.getFile1() != null){
+
+            WebMainPopupVO bannerOri = webMainPopupService.getBannerOrder(webMainPopupVO.getIs_show());
+
+            if(bannerOri != null){
+                webMainPopupService.deleteBannerOrder(bannerOri);
+            }
+
+            fileService.convertMultipartToFile(webMainPopupVO.getFile1());
+            long fileIdx = fileService.insertPopupFile(webMainPopupVO.getFile1(), webMainPopupVO.getIdx_admin());
+
+            webMainPopupVO.setIdx_file_info(fileIdx);
+            webMainPopupService.insertBannerContent(webMainPopupVO);
+
+            resultVO.setResult_str("등록했습니다.");
+            resultVO.setResult_code("SUCCESS");
+        }
+        return resultVO;
+    }
+
+    @RequestMapping(value = "/modify_banner",method = RequestMethod.POST)
+    public @ResponseBody ResultVO modifyBannerContent (@ModelAttribute WebMainPopupVO webMainPopupVO, HttpSession session, HttpServletRequest request)throws Exception, IOException {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("데이터를 다시 입력해주세요");
+
+        WebMainPopupVO bannerOri = webMainPopupService.getBannerOrder(webMainPopupVO.getIs_show());
+
+        if(bannerOri != null && bannerOri.getIdx_popup_img() != webMainPopupVO.getIdx_popup_img()){
+            webMainPopupService.deleteBannerOrder(bannerOri);
+        }
+
+        if(webMainPopupVO.getIdx_popup_img() > 0){
+            if(webMainPopupVO.getFile1() != null && webMainPopupVO.getFile1().getSize() > 0){
+                fileService.convertMultipartToFile(webMainPopupVO.getFile1());
+                long fileIdx = fileService.insertPopupFile(webMainPopupVO.getFile1(), webMainPopupVO.getIdx_admin());
+
+                webMainPopupVO.setIdx_file_info(fileIdx);
+            }
+            webMainPopupService.updateBannerContent(webMainPopupVO);
+
+            resultVO.setResult_str("수정했습니다.");
+            resultVO.setResult_code("SUCCESS");
         }
         return resultVO;
     }
@@ -1432,7 +1738,7 @@ public class APIController {
             resultVO.setResult_code("SUCCESS");
             resultVO.setResult_str("삭제가 완료되었습니다.");
         } catch (Exception e){
-            System.out.println(e);
+//            System.out.println(e);
             resultVO.setResult_code("ERROR_1000");
             resultVO.setResult_str("없는 홍보자료입니다.");
         }
@@ -1705,6 +2011,27 @@ public class APIController {
         return fileService.selectBsAnnouncementFile(idx_bs_announcement);
     }
 
+    @RequestMapping(value ="/insert_form_file",method = RequestMethod.POST)
+    public @ResponseBody ResultVO insert_form_file(@ModelAttribute FormFileInfoVO formFileInfoVO) throws IOException {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("데이터를 다시 입력해주세요");
+
+        if((formFileInfoVO.getSubject() != null || formFileInfoVO.getSubject() != "") && formFileInfoVO.getFile1() != null){
+
+            fileService.convertMultipartToFile(formFileInfoVO.getFile1());
+            long fileIdx = fileService.insertFormFile(formFileInfoVO.getFile1(), formFileInfoVO.getIdx_admin());
+
+            formFileInfoVO.setIdx_file_info(fileIdx);
+            formFileService.insertFormFile(formFileInfoVO);
+
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("양식을 등록했습니다.");
+        }
+
+        return resultVO;
+    }
+
     @RequestMapping(value ="/delete_form_file",method = RequestMethod.POST)
     public @ResponseBody
     ResultVO delete_form_file(@RequestBody FormFileInfoVO formFileInfoVO){
@@ -1724,23 +2051,27 @@ public class APIController {
         return resultVO;
     }
 
-    @RequestMapping(value = "/modify_form_file",method = RequestMethod.POST)
-    public ResultVO modify_form_file(@ModelAttribute FileRequestVO fileRequestVO, HttpSession session, HttpServletRequest request) throws Exception {
+    @RequestMapping(value ="/delete_rule_file",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO delete_rule_file(@RequestBody RuleFileInfoVO ruleFileInfoVO){
         ResultVO resultVO = new ResultVO();
-        resultVO.setResult_code("SUCCESS");
-        resultVO.setResult_str("양식 파일 변경에 완료했습니다.");
+        System.out.println(ruleFileInfoVO);
 
-        System.out.println(fileRequestVO);
-        try{
-            fileService.updateFormFile(fileRequestVO);
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("규정 제거를 완료했습니다.");
+
+        try {
+            fileService.deleteRuleFile(ruleFileInfoVO);
         } catch (Exception e){
             System.out.println(e);
             resultVO.setResult_code("ERROR_1000");
-            resultVO.setResult_str("변경에 실패하였습니다.");
+            resultVO.setResult_str("제거에 실패하였습니다.");
         }
 
         return resultVO;
     }
+
+
 
 
 

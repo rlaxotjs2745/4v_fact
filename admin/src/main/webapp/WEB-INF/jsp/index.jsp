@@ -149,8 +149,8 @@
 
 
 <script>
-    var curMyIdx = ${admin.idx_admin};
-
+    let _pageReload = '${pageOnLoad}';
+    let curMyIdx = ${admin.idx_admin};
 
     $("li.sidenav-item").on('click',function(){
         if( $("li.sidenav-item").has('a')!=null){
@@ -158,7 +158,7 @@
         }
     });
     $(function(){
-        var sBtn = $("ul > li");    //  ul > li 이를 sBtn으로 칭한다. (클릭이벤트는 li에 적용 된다.)
+        let sBtn = $("ul > li");    //  ul > li 이를 sBtn으로 칭한다. (클릭이벤트는 li에 적용 된다.)
         sBtn.find("a").click(function(){   // sBtn에 속해 있는  a 찾아 클릭 하면.
             sBtn.removeClass("active");     // sBtn 속에 (active) 클래스를 삭제 한다.
             $(this).parent().addClass("active"); // 클릭한 a에 (active)클래스를 넣는다.
@@ -178,9 +178,9 @@
     //int amount;
     //String order_field;
 
-    var filter1 = null;
-    var filter2 = null;
-    function pageLoad(url,param,title,usage){
+    let filter1 = null;
+    let filter2 = null;
+    function pageLoad(url, param, title, usage){
 /*      State : 브라우저 이동 시 넘겨줄 데이터 (popstate 에서 받아서 원하는 처리를 해줄 수 있음)
         Title : 변경할 브라우저 제목 (변경 원치 않으면 null)
         Url : 변경할 주소*/
@@ -207,9 +207,11 @@
             }
         }
 
-        if(cur!=url+param.page_num || usage == "asset_list"){
-            cur = url+param.page;
-            history.pushState(param, title, url);
+        if(cur !== url+param['page_num'] || usage === "asset_list" || usage==='site_adver_mng' || usage==='pr_contents'){
+            cur = url+param['page_num'];
+            if(url.indexOf('cur_asset_index') === -1 && url.indexOf('user_index') === -1 && url.indexOf('dormant_user_index') === -1 && url.indexOf('admin_corporate') === -1 && url.indexOf('c431_site_adver_mng') === -1 && url.indexOf('pr_contents') === -1) {
+                history.pushState(param, title, url);
+            }
 
             var request = $.ajax({
                 url: url,
@@ -223,28 +225,31 @@
 
 
                     if(usage == "admin"){
+                    if(usage === "admin"){
                         $("#admin_index").html(result);
-                    } else if(usage == "user"){
+                    } else if(usage === "user"){
                         $("#user_index").html(result);
-                    } else if(usage == "dormant_user"){
+                    } else if(usage === "dormant_user"){
                         $("#dormant_user_index").html(result);
-                    } else if(usage == "cur_asset_index"){
+                    } else if(usage === "cur_asset_index"){
                         $("#cur_asset_index").html(result);
-                    } else if(usage == "codeSelect"){
+                    } else if(usage === "codeSelect"){
                         $("#code_select").append(result);
-                    } else if(usage == "asset_list"){
+                    } else if(usage === "asset_list"){
                         $("#asset_list").html(result);
-                    } else if(usage == "asset_reservation_list"){
+                    } else if(usage === "asset_reservation_list"){
                         $("#asset_reservation_list").html(result);
-                    } else if(usage == "asset_reservation_items_list"){
+                    } else if(usage === "asset_reservation_items_list"){
                         $("#asset_reservation_items_list").html(result);
-                    } else if(usage == "pr_contents"){
+                    } else if(usage === "pr_contents"){
                         $("#modals-content").html(result);
-                    } else if(usage == "reserve_view"){
+                    } else if(usage === "reserve_view") {
                         $("#reserve_view_comp").html(result);
-                    }
-
-                    else{
+                    } else if(usage === 'site_adver_mng'){
+                        $("#site_adver_mng").html(result);
+                    } else if(usage === '#dashboard_calendar_view'){
+                        $(usage).html(result);
+                    } else{
                         $("#contents").html(result);
                     }
                 },
@@ -266,8 +271,7 @@
                 //alert(a);
 
         }else{//현재 주소 클릭시 변화 없음
-
-            return;
+            return false;
         }
     }
 
@@ -306,14 +310,12 @@
     })();
     $(document).ready(function() {
         //ajax로 호출되는 첫번째 페이지
-        pageLoad('a10_dashboard','{tag:1}','대시보드');
-
+        if(_pageReload !== ''){
+            pageLoad('${path}', null);
+        }else{
+            pageLoad('a10_dashboard','{tag:1}','대시보드');
+        }
     });
-
-
-
-
-
 </script>
 <style>
     #loading_symbol{
@@ -323,5 +325,4 @@
     }
 </style>
 </body>
-
 </html>
