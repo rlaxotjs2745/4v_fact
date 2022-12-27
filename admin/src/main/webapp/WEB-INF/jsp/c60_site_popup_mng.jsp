@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!-- Page content -->
     <div class="container-fluid flex-grow-1 container-p-y">
 
@@ -33,44 +36,60 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="">
-                                    <td class="text-center">
-                                        <a href="#none" data-toggle="modal" data-target="#modals-popup" data-what="mode-view">축제 홍보 건</a>
-                                    </td>
-                                    <td class="text-center">http://www.insamfe</td>
-                                    <td class="text-center">2021년 10월 25일 ~ 2021년 10월 26일</td>
-                                    <td class="text-center">숨김</td>
-                                    <td class="text-center">2021년 10월 25일</td>
-                                    <td class="text-center">minjeoing@4thevision.com</td>
-                                    <td class="text-center">
-                                        <div class="btn-group">
-                                            <button class="btn btn-sm btn-default" data-toggle="modal" data-target="#modals-modify"><span class="fas fa-pen" > </span></button>
-                                            <button onclick="organizationDelete(this)" class="btn btn-sm btn-default"><span class="fas fa-trash-alt" > </span></button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <c:choose>
+                                    <c:when test="${fn:length(webMainPopupList)>0}">
+                                        <c:forEach items = "${webMainPopupList}" var ="popupinfo">
+                                            <fmt:parseDate value="${popupinfo.startDate}" var="startDate" pattern="yyyy-MM-dd"/>
+                                            <fmt:parseDate value="${popupinfo.endDate}" var="endDate" pattern="yyyy-MM-dd"/>
+                                            <tr class="popup-entity" data-idx="${popupinfo.idx_popup_img}">
+                                                <td class="text-center">
+                                                    <a href="#none" data-toggle="modal" data-target="#modals-popup" data-what="mode-view">${popupinfo.subject}</a>
+                                                </td>
+                                                <td class="text-center">${popupinfo.popup_url}</td>
+                                                <td class="text-center"><fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd"/></td>
+                                                <td class="text-center"><c:if test="${popupinfo.is_show == 1}">보임</c:if><c:if test="${popupinfo.is_show == 9} ">안보임</c:if></td>
+                                                <td class="text-center"><fmt:formatDate value="${popupinfo.reg_date}" pattern="yyyy년 MM월 dd일"/></td>
+                                                <td class="text-center">${popupinfo.admin_name}</td>
+                                                <td class="text-center">
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-sm btn-default" data-toggle="modal" data-target="#modals-modify"><span class="fas fa-pen" > </span></button>
+                                                        <button onclick="organizationDelete(this)" class="btn btn-sm btn-default"><span class="fas fa-trash-alt" > </span></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <tr class="">
+                                            <td colspan="7" class="text-center">아이템이 없어요</td>
+                                        </tr>
+                                    </c:otherwise>
+                                </c:choose>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
-                        </div>
-                        <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                    <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
-                                </ul>
+                    <c:if test="${pop_total_count ne 0}">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${pop_total_count}개 중 ${pop_list_amount*(cur_page-1)+1}에서 ${pop_total_count}까지</div>
+                            </div>
+                            <div class="col-sm-12 col-md-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
+                                    <ul class="pagination">
+                                        <c:set var="name" value="${pop_total_count/pop_list_amount}" />
+                                        <c:if test="${pop_is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{page_num:1},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                        <c:if test="${pop_is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{page_num:${cur_page-1}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+                                        <c:forEach var="i" begin="1" end="${pop_page_amount}">
+                                            <li class="paginate_button page-item <c:if test="${(pop_cur_sector-1)*pop_page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('c80_site_mng',{page_num:${(pop_cur_sector-1)*pop_page_amount+i}},'홈페이지 정보 관리');" class="page-link">${(pop_cur_sector-1)*pop_page_amount+i}</a></li>
+                                        </c:forEach>
+                                        <c:if test="${pop_is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c80_site_mng',{page_num:${cur_page+1}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                        <c:if test="${pop_is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c80_site_mng',{page_num:${pop_tot_page}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </c:if>
                 </div>
             </div>
         </div>
