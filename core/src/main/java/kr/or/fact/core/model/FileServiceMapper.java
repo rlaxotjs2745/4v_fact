@@ -58,4 +58,6 @@ public interface FileServiceMapper {
     void updateFormFile(FormFileInfoVO formFileInfoVO);
 
     void updateRuleFile(RuleFileInfoVO ruleFileInfoVO);
+
+    long getFileIdxToUser(FileInfoVO fileInfoVO);
 }
