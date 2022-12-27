@@ -3,16 +3,16 @@
 
 
 <!-- Page content -->
-<div class="container-fluid flex-grow-1 container-p-y">
+<div class="">
 
-    <h4 class="d-flex justify-content-between align-items-center w-100 mt-4" class="visit_calendar_big_title">
+    <div class="d-flex justify-content-between align-items-center w-100" class="visit_calendar_big_title">
         <div class="visit_calendar_big_title">견학일정 관리</div>
-    </h4>
+    </div>
     <!--//-->
 
-    <div id="month_calendar" class="card mb-4">
+    <div id="month_calendar" class="card mb-4" style="min-height: 550px;">
         <div class="card-body">
-            <div id="fullcalendar-default-view"></div>
+            <div id="fullcalendar-default-view" style="min-height: 500px;"></div>
         </div>
     </div>
 
