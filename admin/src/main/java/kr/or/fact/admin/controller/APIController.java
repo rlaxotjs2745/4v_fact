@@ -1544,7 +1544,6 @@ public class APIController {
         resultVO.setResult_str("데이터를 다시 입력해주세요");
 
         if(webMainPopupVO.getIdx_popup_img() > 0){
-
             if(webMainPopupVO.getFile1() != null && webMainPopupVO.getFile1().getSize() > 0){
                 fileService.convertMultipartToFile(webMainPopupVO.getFile1());
                 long fileIdx = fileService.insertPopupFile(webMainPopupVO.getFile1(), webMainPopupVO.getIdx_admin());
