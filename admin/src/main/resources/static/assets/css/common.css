@@ -35,6 +35,7 @@ table.dataTable>thead>tr>th:not(.sorting_disabled), table.dataTable>thead>tr>td:
 tr.no_data td[name='buttons'] {display: none !important}
 
 html:not([dir=rtl]) .sms_write_form {padding-top: 0 !important;}
+html:not([dir=rtl]) .sms_write_form.email_form_write {padding-top: 2rem !important;}
 html:not([dir=rtl]) .sms_write_form .modal-body .form-group.row {margin-left:0; align-items: center}
 html:not([dir=rtl]) .sms_write_form .modal-body .form-group.row + .form-group {margin-top: 20px;}
 html:not([dir=rtl]) .sms_write_form .modal-body .form-group.row.label > label + label {margin-left:10px; margin-bottom: 0;}
@@ -47,3 +48,6 @@ html:not([dir=rtl]) .sms_write_form .form-control {max-width: 550px; text-align:
 html:not([dir=rtl]) .sms_write_form #datepicker-show {max-width: 550px;}
 html:not([dir=rtl]) .sms_write_form textarea.form-control {min-height: 100px; resize: none; overflow-y: auto;}
 html:not([dir=rtl]) .sms_write_form .modal-body {}
+
+.email_form_write {padding: 2rem 2rem 0rem; margin:-1rem 2rem 0 2rem; background: #fff;}
+.email_form_write .modal-footer {padding-left: 0;}
