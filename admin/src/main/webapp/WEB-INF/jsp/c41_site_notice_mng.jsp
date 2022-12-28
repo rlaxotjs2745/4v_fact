@@ -769,11 +769,11 @@
     function saveForm(){
 
         if($("#subject").val() === ''){
-            return alert('규정 제목을 입력해 주세요.')
+            return alert('제목을 입력해 주세요.')
         }
 
-        if($("#form_usage").val() === ''){
-            return alert('규정 사용 용도를 입력해 주세요.')
+        if($("#notice_code").val() === ''){
+            return alert('소제목을 입력해주세요.')
         }
 
         if($("#form_corp_name").val() === ''){
