@@ -793,17 +793,16 @@ public class APIController {
         }else{
             for(VisitDataVO visitDataVO:visitDataVOList){
 
-
-                if(visitService.getVisitData(visitDataVO.getCur_date())!=null){
-                    resultVO.setResult_str("해당 날짜에 이미 존재하는 일정이 있습니다.");
-                    resultVO.setResult_code("ERROR_");
-
-                    return resultVO;
-                }else{
-                    visitDataVO.setGroup_idx(groupIdx);
-
-                }
-
+//                if(visitService.getVisitData(visitDataVO.getCur_date())!=null){
+//                    resultVO.setResult_str("해당 날짜에 이미 존재하는 일정이 있습니다.");
+//                    resultVO.setResult_code("ERROR_");
+//
+//                    return resultVO;
+//                }else{
+//                    visitDataVO.setGroup_idx(groupIdx);
+//
+//                }
+                visitDataVO.setGroup_idx(groupIdx);
             }
         }
 
