@@ -154,9 +154,9 @@ public class IndexController extends BaseController {
     }
 
     @RequestMapping(value="/login",method = RequestMethod.GET)
-    public String login( Model model,
+    public String login( ModelMap model,
                          @RequestBody(required = false) ParamVO paramVO){
-
+        setProfile(model);
         return "login";
     }
 

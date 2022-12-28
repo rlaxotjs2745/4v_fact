@@ -176,7 +176,7 @@
                  "admin_id":$("#input_id").val(),
                  "admin_pw":$("#input_pw").val()
              };
-             console.log(JSON.stringify(param));
+             console.log('${profile}');
 
              $.ajax({
                  type: 'post',
