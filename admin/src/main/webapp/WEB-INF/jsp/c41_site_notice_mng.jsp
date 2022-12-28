@@ -767,6 +767,19 @@
 
     // GOTO
     function saveForm(){
+
+        if($("#subject").val() === ''){
+            return alert('규정 제목을 입력해 주세요.')
+        }
+
+        if($("#form_usage").val() === ''){
+            return alert('규정 사용 용도를 입력해 주세요.')
+        }
+
+        if($("#form_corp_name").val() === ''){
+            return alert('관련조직 이름을 입력해 주세요.')
+        }
+
         var fileForm = new FormData();
         fileForm.append('notice_code', $('#notice_code').val());
         fileForm.append('subject', $('#subject').val());

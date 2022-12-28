@@ -25,62 +25,62 @@
                             <thead class="bg-success text-white font-weight-bold">
                             <tr role="row">
                                 <th class="text-center px-2" style="width:6%">순서</th>
-                                <th class="text-center px-2" style="width:16%">제목</th>
-                                <th class="text-center sorting" style="width:36%">용도</th>
+                                <th class="text-center px-2" style="width:auto">제목</th>
+                                <th class="text-center sorting" style="width:30%">용도</th>
+                                <th class="text-center sorting" style="width:10%">작성자</th>
                                 <th class="text-center sorting" style="width:10%">관련 조직</th>
-                                <th class="text-center sorting" style="width:12%">등록일</th>
+                                <th class="text-center sorting" style="width:13%">파일이름</th>
+                                <th class="text-center sorting" style="width:5%">파일형식</th>
+                                <th class="text-center sorting" style="width:15%">등록일</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:choose>
-                                <c:when test="${fn:length(rulefileinfolist)>0}">
-                                    <c:forEach items="${rulefileinfolist}" var="rulefile" varStatus="status">
+                                <c:when test="${fn:length(rulefilelist)>0}">
+                                    <c:forEach items="${rulefilelist}" var="rulefile" varStatus="status">
                                         <tr class="rulefile-entity" id="${rulefile.idx_rule_file_info}">
                                             <td class="text-center">${status.count}</td>
                                             <td class="text-center">${rulefile.subject}</td>
-                                            <td class="text-center"><a href="#none" data-toggle="modal" data-target="#modals-counsel-view" class="btn btn-outline-default  btn-sm">${rulefile.usage_detail}</a></td>
+                                            <td class="text-center">${rulefile.usage_detail}</td>
+                                            <td class="text-center">${rulefile.admin_name}</td>
                                             <td class="text-center">${rulefile.depart_name}</td>
-                                            <td class="text-center"><fmt:formatDate value="${rulefile.reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                                            <td class="text-center">${rulefile.file_name}</td>
+                                            <td class="text-center">${rulefile.extention}</td>
+                                            <td class="text-center"><fmt:formatDate value="${rulefile.reg_date}" pattern="yyyy년 MM월 dd일"/></td>
                                         </tr>
                                     </c:forEach>
                                 </c:when>
                                 <c:otherwise>
-
                                     <tr class="">
-                                        <td colspan="8" class="text-center">아이템이 없어요</td>
+                                        <td colspan="8" class="text-center">규정 문서 목록이 없습니다.</td>
                                     </tr>
-
-
-
                                 </c:otherwise>
-
-
-
-
                             </c:choose>
-
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="article-list_info" role="status" aria-live="polite">총 50개 중 1에서 10까지</div>
-                    </div>
-                    <div class="col-sm-12 col-md-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                                <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
-                            </ul>
+                <c:if test="${total_count ne 0}">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5">
+                            <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${total_count}개 중 ${list_amount*(cur_page-1)+1}에서 ${total_count}까지</div>
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
+                                <ul class="pagination">
+                                    <c:set var="name" value="${total_count/list_amount}" />
+                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('l12_document_rule_mng',{page_num:1},'규정 문서 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('l12_document_rule_mng',{page_num:${cur_page-1}},'규정 문서 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+                                    <c:forEach var="i" begin="1" end="${page_amount}">
+                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('l12_document_rule_mng',{page_num:${(cur_sector-1)*page_amount+i}},'규정 문서 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
+                                    </c:forEach>
+                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('l12_document_rule_mng',{page_num:${cur_page+1}},'규정 문서 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('l12_document_rule_mng',{page_num:${tot_page}},'규정 문서 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </c:if>
             </div>
         </div>
     </div>
@@ -93,6 +93,7 @@
                 </div>
                 <div class="modal-body">
                     <form>
+                        <input type="hidden" name="idx_admin" value="${admin.idx_admin}">
                         <div class="form-group row" id="form_title">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">규정 제목</label>
                             <div class="col-md-10">
@@ -124,7 +125,7 @@
                                 <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
                             </div>
                             <div>
-                                <button id="btn_save_new" type="button" class="btn btn-primary" onclick="saveForm();">저장</button>
+                                <button id="btn_save_new" type="button" class="btn btn-primary" >저장</button>
                             </div>
                         </div>
 
@@ -140,157 +141,60 @@
 <%@include file ="layouts/frame_footer.jsp" %>
 <script>
 <c:forEach items="${rulefileinfolist}" var="rulefil">
-console.log('${rulefil}');
+<%--console.log('${rulefil}');--%>
 </c:forEach>
 
-    $('#btn_edit_mode').on('click', function() {
+// 규정 문서 등록
 
-        //$('.mode-edit').removeClass('d-non');
-        //$('.mode-view').addClass('d-non');
-        if($('.mode-view').hasClass('d-none') == false){
-            $('.mode-view').addClass('d-none');
-        }
+$('#btn_save_new').on('click', function() {
 
-        if($('.mode-edit').hasClass('d-none') == false){
-            console.log("실행했어요..")
-            $('.mode-edit').addClass('d-none');
-        }
+    if($("#subject").val() === ''){
+        return alert('규정 제목을 입력해 주세요.')
+    }
 
-        if($('.mode-new').hasClass('d-none') == false){
-            $('.mode-new').addClass('d-none');
-        }
+    if($("#usage_detail").val() === ''){
+        return alert('규정 사용 용도를 입력해 주세요.')
+    }
 
-        $('.mode-edit').removeClass('d-none');
-    });
+    if($("#form_corp_name").val() === ''){
+        return alert('관련조직 이름을 입력해 주세요.')
+    }
 
-    $(function() {
-
-        /*$('#btn_mode_new').on('click', function() {
-
-            if($('.mode-view').hasClass('d-non') === false){
-                $('.mode-view').addClass('d-non');
-            }
-            if($('.mode-edit').hasClass('d-non') === false){
-                $('.mode-edit').addClass('d-non');
-            }
-            if($('.mode-new').hasClass('d-non') === true){
-                $('.mode-new').removeClass('d-non');
-            }
-
-            $('#modals-business').modal('show');
-
-
-        });*/
-
-        // 모달 팝업 띄울 시 발생하는 이벤트 (이벤트명 : show.bs.modal)
-        $('#modals-rule-file').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            var what = button.data('what');
-            if(what=='mode-view' || what=='mode-edit'||what=='mode-new'){
-                console.log("시작");
-                if($('.mode-view').hasClass('d-none') == false){
-                    $('.mode-view').addClass('d-none');
-                }
-
-                if($('.mode-edit').hasClass('d-none') == false){
-                    console.log("실행했어요..")
-                    $('.mode-edit').addClass('d-none');
-                }
-
-                if($('.mode-new').hasClass('d-none') == false){
-                    $('.mode-new').addClass('d-none');
-                }
-
-                $('.'+what+'').removeClass('d-none');
-                console.log(what);
-            }
-
-
-
-            // 모달 팝업에 데이터 집어넣기
-            //var modal = $(this);
-            //modal.find('.modal-title').text('New message to ' + what)
-            //modal.find('.modal-body input').val(what)
-        });
-
-
-    });
-
-    $('#btn_save_rule_file_info').on('click', function() {
-
-        var param = {
-            subject:$("#subject").val(),
-            usage_detail:$("#usage_detail").val(),
-            depart_name:$("#depart_name").val(),
-            idx_file_info:$("#idx_file_info").val()*1.0
-        };
-        console.log(param);
-        $.ajax({
-            type: 'post',
-            url :'save_rule_file_info', //데이터를 주고받을 파일 주소 입력
-            data: JSON.stringify(param),//보내는 데이터
-            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
-            dataType:'json',//받는 데이터 타입
-            success: function(result){
-                //작업이 성공적으로 발생했을 경우
-
-                if(result.result_code=="SUCCESS"){
-                    alert("규정 등록에 성공하였습니다")
-
-                }
-                else {
-
-                }
-                alert(result.result_str);
-
-            },
-            error:function(){
-                //에러가 났을 경우 실행시킬 코드
-            }
-        });
-    });
-
-
-
-    var saveNewBtn = document.querySelectorAll('.btn_save_new');
-    saveNewBtn.forEach(btn=>btn.addEventListener('click', saveForm));
-
-    function saveForm(){
-        event.preventDefault();
-        var fileForm = new FormData();
-        fileForm.append("subject",document.querySelector('#subject').value);
-        fileForm.append("usage_detail",document.querySelector('#usage_detail').value);
-
-        var files = document.querySelector('#file_upload').files;
-
-
-        for(var i = 0; i < files.length; i++){
-            var num = i + 1;
-            fileForm.append("files" + num, files[i]);
-        }
-        fileForm.append("fileLength", files.length);
-
-        console.log(fileForm);
-        $.ajax({
-            type: 'post',
-            url :'upload_rule_file', //데이터를 주고받을 파일 주소 입력
-            data: fileForm,//보내는 데이터
-            contentType: false,//보내는 데이터 타입
-            processData: false,//Jquery 내부에서 파일을 queryString 형태로 전달하는 것을 방지
-            dataType:'json',//받는 데이터 타입
-            enctype: 'multipart/form-data',
-            success: function(result){
-                console.log(result);
-                alert("업로드에 성공했습니다", () => window.redirect("/"))
-            },
-            error:function(err){
-                console.log(err);
-                alert("업로드에 실패했습니다")
-            }
-        });
-        // event.preventDefault();
+    if(document.getElementById('file_upload').files[0] === null || document.getElementById('file_upload').files[0] === undefined){
+        return alert('파일을 업로드 해주세요.')
     }
 
 
+    let formData = new FormData();
+    formData.append('subject', $("#subject").val()); // 규정 제목
+    formData.append('usage_detail', $("#usage_detail").val()); // 규정 사용 용도
+    formData.append('depart_name', $("#form_corp_name").val()); // 관련조직 이름
+    formData.append('idx_admin', $("input[name=idx_admin]").val());
+    if (document.getElementById('file_upload').files.length > 0) {
+        formData.append('file1', document.getElementById('file_upload').files[0]);
+    }
+
+    $.ajax({
+        type: 'post',
+        url: 'insert_rule_file', //데이터를 주고받을 파일 주소 입력
+        data: formData,//보내는 데이터
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (result) {
+            //작업이 성공적으로 발생했을 경우
+            console.log(result);
+            if (result.result_code === "SUCCESS") {
+                alert(result.result_str);
+                window.location.reload()
+            } else {
+
+            }
+        },
+        error: function (error) {
+            //에러가 났을 경우 실행시킬 코드
+        }
+    });
+})
 
 </script>
