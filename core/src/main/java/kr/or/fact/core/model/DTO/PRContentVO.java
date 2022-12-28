@@ -44,7 +44,8 @@ public class PRContentVO {
     MultipartFile files5;
     String fileLength;
     String file_path;
+    String file_name;
     String thumb_img_file_path;
 
-    List<FileInfoVO> Attachments;
+    List<FileInfoVO> attachments;
 }
