@@ -294,7 +294,7 @@
 <!-- / Layout footer -->
 <script>
     // const curPopupdata = '';
-    const popupList=[];
+    var popupList=[];
     <c:forEach items="${webMainPopupList}" var="popup" varStatus="status">
         popupList.push({
             idx_popup_img :"${popup.idx_popup_img}",
@@ -339,7 +339,7 @@
         }
     });
 
-    const bannerList=[];
+    var bannerList=[];
     <c:forEach items="${webMainBannerList}" var="banner" varStatus="status">
     bannerList.push({
         idx_popup_img :"${banner.idx_popup_img}",
@@ -404,7 +404,7 @@
         }
     }
     // input file에 change 이벤트 부여
-    const inputImage = document.getElementById("brand_image_upload")
+    var inputImage = document.getElementById("brand_image_upload")
     inputImage.addEventListener("change", e => {
         readImage(e.target)
     })
@@ -425,7 +425,7 @@
         }
     }
     // input file에 change 이벤트 부여
-    const inputImageBrand = document.getElementById("image_upload")
+    var inputImageBrand = document.getElementById("image_upload")
     inputImageBrand.addEventListener("change", e => {
         readImageBrand(e.target)
     })
