@@ -502,4 +502,11 @@ public class FileServiceImpl implements FileService {
         System.out.println(fileInfoVO);
         return fileInfoVO.getFile_path();
     }
+
+    public void delFile(String fname){
+        File f = new File(this.fileLocation + fname);
+        if(f.exists()){
+            f.delete();
+        }
+    }
 }

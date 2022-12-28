@@ -245,7 +245,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" style="gap: 15px 0">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-view">포털 노출</label>
                             <div class="col-md-10 mode-view">
                                 <div class="col-md-4">

@@ -55,15 +55,24 @@
 
     <update id="updateFileInfo" parameterType="kr.or.fact.core.model.DTO.FileInfoVO">
         UPDATE TB_FILE_INFO SET
-                                FILE_NAME=#{file_name},
-                                FILE_TYPE=#{file_type},
-                                FILE_STATUS=#{file_status},
-                                MIME_TYPE=#{mime_type},
+            FILE_NAME=#{file_name}
+            <if test="file_type != null">
+            , FILE_TYPE=#{file_type}
+            </if>
+            <if test="file_size != null">
+            , FILE_SIZE=#{file_size}
+            </if>
+            <if test="file_status != null">
+            , FILE_STATUS=#{file_status}
+            </if>
+            , MIME_TYPE=#{mime_type}
+            <if test="file_path != null">
+            , FILE_PATH=#{file_path}
+            </if>
         WHERE IDX_FILE_INFO = #{idx_file_info}
     </update>
 
     <delete id="deleteFileInfo" parameterType="long">
-
         DELETE FROM TB_FILE_INFO WHERE IDX_FILE_INFO = #{idx_file_info}
     </delete>
 

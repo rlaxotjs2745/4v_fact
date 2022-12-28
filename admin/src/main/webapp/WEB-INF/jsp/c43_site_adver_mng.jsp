@@ -185,7 +185,7 @@
                     <div class="modal-body pb-2">
                         <div class="form-row">
                             <div class="form-group col col-md-12 text-right">
-                                <a href="#none" class="btn btn-underline this_idx" data-toggle="modal" data-target="#modals-counsel-history" data-idx="">홍보자료 수정</a>
+                                <a href="#none" class="btn btn-underline" onclick="open_modify()">홍보자료 수정</a>
                             </div>
                         </div>
                         <hr class="mt-0">
@@ -372,10 +372,10 @@
                             <!-- 사업번호 / 사업 상태-->
 
                             <!-- 사업 제목-->
-                            <div class="form-group row" id="pr_subject_insert">
+                            <div class="form-group row">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">홍보자료 제목</label>
                                 <div class="col-md-10">
-                                    <input type="text" id="pr_subject" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" >
+                                    <input type="text" id="pr_subject_insert" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" >
                                     <div class="form-control-plaintext mode-view"></div>
                                 </div>
                             </div>
@@ -383,32 +383,32 @@
                             <hr>
                             <div class="form-row" >
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">컨텐츠 코드</label>
-                                <div class="form-group col col-md-10" id="pr_content_code_insert">
-                                    <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
+                                <div class="form-group col col-md-10">
+                                    <textarea class="form-control mode-edit mode-new" rows="3" id="pr_content_code_insert"></textarea>
                                 </div>
                             </div>
                             <div class="form-row" >
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">컨텐츠</label>
-                                <div class="form-group col col-md-10" id="pr_contents_insert">
-                                    <textarea class="summernote" rows="3"></textarea>
+                                <div class="form-group col col-md-10">
+                                    <textarea class="summernote" rows="3" id="pr_contents_insert"></textarea>
                                 </div>
                             </div>
                             <hr>
                             <div class="form-row" >
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">내용</label>
-                                <div class="form-group col col-md-10" id="memo_insert">
-                                    <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
+                                <div class="form-group col col-md-10">
+                                    <textarea class="form-control mode-edit mode-new" rows="3" id="memo_insert"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row" id="time">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">게시 기간</label>
                                 <div class="col-md-10">
                                     <div id="datepicker-open" class="input-daterange input-group mode-edit mode-new">
-                                        <input type="text" class="form-control" name="show_start_date" id="show_start_date_insert">
+                                        <input type="text" class="form-control date_picker" name="show_start_date" id="show_start_date_insert">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">~</span>
                                         </div>
-                                        <input type="text" class="form-control" name="show_end_date" id="show_end_date_insert">
+                                        <input type="text" class="form-control date_picker" name="show_end_date" id="show_end_date_insert">
                                     </div>
                                 </div>
                             </div>
@@ -487,18 +487,18 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" for="file_upload1">파일 첨부</label>
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" for="file_upload1_insert">파일 첨부</label>
                                 <div class="form-group col col-md-10 mode-edit mode-new">
-                                    <input type="file" class="form-control-file d-block py-1" id="file_upload1" name="file_upload" multiple>
+                                    <input type="file" class="form-control-file d-block py-1" id="file_upload1_insert" name="file_upload">
                                 </div>
                                 <div class="form-group col col-md-10 col-form-label mode-view">
                                     <a href="file.doc"></a>
                                 </div>
                             </div>
                             <div class="form-row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" for="file_upload2">썸네일 파일 첨부</label>
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" for="file_upload2_insert">썸네일 파일 첨부</label>
                                 <div class="form-group col col-md-10 mode-edit mode-new">
-                                    <input type="file" class="form-control-file d-block py-1" id="file_upload2" name="file_upload" multiple>
+                                    <input type="file" class="form-control-file d-block py-1" id="file_upload2_insert" name="file_upload">
                                 </div>
                                 <div class="form-group col col-md-10 col-form-label mode-view">
                                     <a href="file.doc"></a>
@@ -510,7 +510,7 @@
                                 </div>
                                 <div>
                                     <button type="button" class="btn btn-outline-primary mr-2">임시저장</button>
-                                    <button id="btn_save_new" type="button" class="btn btn-primary" onclick="saveForm();">작성완료</button>
+                                    <button id="btn_save_new" type="button" class="btn btn-primary" onclick="saveForm('insert_pr')">작성완료</button>
                                 </div>
                             </div>
 
@@ -543,10 +543,10 @@
                         <!-- 사업번호 / 사업 상태-->
 
                         <!-- 사업 제목-->
-                        <div class="form-group row" id="pr_subject_update">
+                        <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">홍보자료 제목</label>
                             <div class="col-md-10">
-                                <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" >
+                                <input type="text" id="pr_subject_update" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" >
                                 <div class="form-control-plaintext mode-view"></div>
                             </div>
                         </div>
@@ -554,8 +554,8 @@
                         <hr>
                         <div class="form-row" >
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">컨텐츠 코드</label>
-                            <div class="form-group col col-md-10" id="pr_content_code_update">
-                                <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
+                            <div class="form-group col col-md-10">
+                                <textarea class="form-control mode-edit mode-new" rows="3" id="pr_content_code_update"></textarea>
                             </div>
                         </div>
                         <div class="form-row" >
@@ -567,19 +567,19 @@
                         <hr>
                         <div class="form-row" >
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">내용</label>
-                            <div class="form-group col col-md-10" id="memo_update">
-                                <textarea class="form-control mode-edit mode-new" rows="3"></textarea>
+                            <div class="form-group col col-md-10">
+                                <textarea class="form-control mode-edit mode-new" rows="3" id="memo_update"></textarea>
                             </div>
                         </div>
                         <div class="form-group row" id="time_update">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">게시 기간</label>
                             <div class="col-md-10">
                                 <div id="datepicker-open_update" class="input-daterange input-group mode-edit mode-new">
-                                    <input type="text" class="form-control" name="show_start_date" id="show_start_date_update">
+                                    <input type="text" class="form-control date_picker" name="show_start_date" id="show_start_date_update">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">~</span>
                                     </div>
-                                    <input type="text" class="form-control" name="show_end_date" id="show_end_date_update">
+                                    <input type="text" class="form-control date_picker" name="show_end_date" id="show_end_date_update">
                                 </div>
                             </div>
                         </div>
@@ -657,12 +657,21 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" for="file_upload">파일 첨부</label>
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" for="file_upload1_update">파일 첨부</label>
                             <div class="form-group col col-md-10 mode-edit mode-new">
-                                <input type="file" class="form-control-file d-block py-1" id="file_upload_update" name="file_upload" multiple>
+                                <input type="file" class="form-control-file d-block py-1" id="file_upload1_update" name="file_upload">
                             </div>
-                            <div class="form-group col col-md-10 col-form-label mode-view">
+                            <div class="form-group col col-md-10 col-form-label mode-view filelist1">
                                 <a href="file.doc">123132</a>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" for="file_upload2_update">썸네일 파일 첨부</label>
+                            <div class="form-group col col-md-10 mode-edit mode-new">
+                                <input type="file" class="form-control-file d-block py-1" id="file_upload2_update" name="file_upload">
+                            </div>
+                            <div class="form-group col col-md-10 col-form-label mode-view filelist2">
+                                <a href="file.doc"></a>
                             </div>
                         </div>
 
@@ -672,7 +681,7 @@
                             </div>
                             <div>
                                 <button type="button" class="btn btn-outline-primary mr-2">임시저장</button>
-                                <button id="btn_save_update" type="button" class="btn btn-primary" onclick="event_pass1()">작성완료</button>
+                                <button id="btn_save_update" type="button" class="btn btn-primary" onclick="saveForm('update_pr')">작성완료</button>
                             </div>
                         </div>
 
@@ -792,6 +801,7 @@
         <script>
             var curPRdata;
             var prList=[];
+            var _page = 1;
             <c:forEach items="${prlist}" var="pr" varStatus="status">
             prList[${pr.idx_row_num}] = {
                 idx_pr_content :"${pr.idx_pr_content}",
@@ -800,8 +810,8 @@
                 is_file:"${pr.is_file eq 0 ? "포함안함" : pr.is_file eq 1 ? "포함" :""}",
                 is_main_page:${pr.is_main_page},
                 pr_content_code:"${pr.pr_content_code}",
-                show_start_date:"<fmt:formatDate value="${pr.show_start_date}" pattern="yyyy-MM-dd HH:MM"/>",
-                show_end_date:"<fmt:formatDate value="${pr.show_end_date}" pattern="yyyy-MM-dd HH:MM"/>",
+                show_start_date:"<fmt:formatDate value="${pr.show_start_date}" pattern="yyyy-MM-dd"/>",
+                show_end_date:"<fmt:formatDate value="${pr.show_end_date}" pattern="yyyy-MM-dd"/>",
                 pr_content_status:"${pr.pr_content_status eq 0 ? "임시저장" :pr.pr_content_status eq 1 ? "허락" :pr.pr_content_status eq 2 ? "수정발행": pr.pr_content_status eq 3 ? "게시종료" :"기타"}",
                 pr_content_status_no:${pr.pr_content_status},
                 last_upd_date:"<fmt:formatDate value="${pr.last_upd_date}" pattern="yyyy-MM-dd HH:MM"/>",
@@ -813,9 +823,10 @@
             $('#modals-counsel-view').on('show.bs.modal', function (event) {
                 _saveCont($(event.relatedTarget).data('idx'))
             })
-            $('#modals-counsel-history').on('show.bs.modal', function (event) {
-                _getCont(curPRdata)
-            })
+            function open_modify(){
+                $('#modals-counsel-history').modal('show');
+                _getCont(curPRdata);
+            }
 
             function _getCont(_idx) {
                 $.ajax({
@@ -826,8 +837,8 @@
                     success: function (result) {
                         let _data = result.data.rs;
                         // 수정 모달용
-                        $("#pr_subject_update input").val(_data.subject);
-                        $("#pr_content_code_update textarea").val(_data.pr_content_code);
+                        $("#pr_subject_update").val(_data.subject);
+                        $("#pr_content_code_update").val(_data.pr_content_code);
                         $("#show_start_date_update").val(_data.show_start_date_str);
                         $("#show_end_date_update").val(_data.show_end_date_str);
 
@@ -836,19 +847,30 @@
                                 $(this).attr('checked',true)
                             }
                         });
-                        $("#memo_update textarea").val(_data.memo);
+                        $("#memo_update").val(_data.memo);
                         $("#pr_contents_update").summernote('code', _data.pr_contents);
                         $('#is_file_update input[name=custom-6]').eq(_data.is_file).attr('checked',true)
                         $('#is_new_update input[name=custom-7]').eq(_data.is_new).attr('checked',true)
                         $('#is_main_page_update input[name=custom-8]').eq(_data.is_main_page).attr('checked',true)
                         $('#admin_name_update span').text(_data.author);
+
+                        let file1 = _data.attachments;
+                        let file2 = result.data.thumb;
+                        $('.filelist1').empty();
+                        $('.filelist2').empty();
+                        for(let i=0;i<file1.length;i++){
+                            $('.filelist1').append('<a href="'+ file1[i].file_path +'">'+file1[i].file_name+'</a>')
+                        }
+                        if(file2!=null){
+                            $('.filelist2').append('<a href="'+ file2.file_path +'">'+file2.file_name+'</a>')
+                        }
                     }
                 });
             }
 
             function _saveCont(_i) {
                 curPRdata = prList[_i].idx_pr_content;
-                $('#modals-counsel-view a.this_idx').attr('data-idx',curPRdata)
+                // $('#modals-counsel-view a.this_idx').attr('data-idx',curPRdata)
                 $("#subject span").text(prList[_i].subject);
                 $("#is_new span").text(prList[_i].is_new);
                 $("#is_file span").text(prList[_i].is_file);
@@ -901,7 +923,7 @@
 
             $(function() {
                 var isRtl = $('html').attr('dir') === 'rtl';
-                $('#datepicker-show,#datepicker-open,#datepicker-open_update').datepicker({
+                $('.date_picker').datepicker({
                     orientation: isRtl ? 'auto right' : 'auto left',
                     format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
                     startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
@@ -944,6 +966,8 @@
                         if (result.result_code === "SUCCESS") {
                             alert("상태 변경에 성공하였습니다")
                             $("#modals-counsel-history").modal("hide");
+                            $("#modals-counsel-view").modal("hide");
+                            _search(_page)
                         } else {
                             alert("상태 변경에 실패하였습니다")
                         }
@@ -981,37 +1005,41 @@
             <%--});--%>
 
             var saveNewBtn = document.querySelectorAll('.btn_save_new');
-            saveNewBtn.forEach(btn=>btn.addEventListener('click', saveForm));
+            saveNewBtn.forEach(btn=>btn.addEventListener('click', saveForm('insert_pr')));
 
-            function saveForm(message){
-
-                if($("#pr_subject").val() === ''){
+            function saveForm(_url){
+                let _u = '_update';
+                if(_url=='insert_pr'){
+                    _u = '_insert';
+                }
+                if($("#pr_subject"+_u).val() === ''){
                     return alert('제목을 입력해 주세요.')
                 }
 
-                if($("#pr_content_code_insert textarea").val() === ''){
+                if($("#pr_content_code"+_u).val() === ''){
                     return alert('컨텐츠 코드를 입력해주세요.')
                 }
 
-                if($("#memo_insert textarea").val() === ''){
+                if($("#memo"+_u).val() === ''){
                     return alert('내용을 입력해 주세요.')
                 }
 
-                if($("#show_start_date_insert").val() === '' || $("#show_end_date_insert").val() === ''){
+                if($("#show_start_date"+_u).val() === '' || $("#show_end_date"+_u).val() === ''){
                     return alert('게시기간을 입력해주세요.')
                 }
 
                 event.preventDefault();
                 var fileForm = new FormData();
-                fileForm.append("pr_content_code",document.querySelector('#pr_content_code_insert textarea').value);
-                fileForm.append("subject",document.querySelector('#pr_subject_insert input').value);
-                fileForm.append("pr_contents",document.querySelector('#pr_contents_insert textarea').value);
-                fileForm.append("is_file",document.querySelector('input[name=custom-6]:checked').value);
-                fileForm.append("is_new",document.querySelector('input[name=custom-7]:checked').value);
-                fileForm.append("is_main_page",document.querySelector('input[name=custom-8]:checked').value);
-                fileForm.append("pr_content_status",document.querySelector('input[name=custom-9]:checked').value);
-                fileForm.append("event_start_date",new Date(document.querySelector("#show_start_date_insert").value));
-                fileForm.append("event_end_date",new Date(document.querySelector("#show_end_date_insert").value));
+                fileForm.append("pr_content_code",document.querySelector('#pr_content_code'+_u).value);
+                fileForm.append("subject",document.querySelector('#pr_subject'+_u).value);
+                fileForm.append("pr_contents",document.querySelector('#pr_contents'+_u).value);
+                fileForm.append("is_file",document.querySelector('#is_file'+_u+' input[name=custom-6]:checked').value);
+                fileForm.append("is_new",document.querySelector('#is_new'+_u+' input[name=custom-7]:checked').value);
+                fileForm.append("is_main_page",document.querySelector('#is_main_page'+_u+' input[name=custom-8]:checked').value);
+                fileForm.append("pr_content_status",document.querySelector('#pr_content_status'+_u+' input[name=custom-9]:checked').value);
+                fileForm.append("show_start_date",new Date(document.querySelector("#show_start_date"+_u).value));
+                fileForm.append("show_end_date",new Date(document.querySelector("#show_end_date"+_u).value));
+                fileForm.append("memo",document.querySelector('#memo'+_u).value);
 
                 // var files = document.querySelector('#file_upload').files;
                 // for(var i = 0; i < files.length; i++){
@@ -1019,24 +1047,39 @@
                 //     fileForm.append("files" + num, files[i]);
                 // }
                 // fileForm.append("fileLength", files.length);
-                if(document.querySelector('#file_upload1').files[0]){
-                    fileForm.append("files1", document.querySelector('#file_upload1').files[0]);
+                if(document.querySelector('#file_upload1'+_u).files[0]){
+                    fileForm.append("files1", document.querySelector('#file_upload1'+_u).files[0]);
                 }
-                if(document.querySelector('#file_upload2').files[0]){
-                    fileForm.append("files2", document.querySelector('#file_upload2').files[0]);
+                if(document.querySelector('#file_upload2'+_u).files[0]){
+                    fileForm.append("files2", document.querySelector('#file_upload2'+_u).files[0]);
                 }
+                if (_url == 'update_pr') {
+                    fileForm.append("idx_pr_content",curPRdata);
+                }
+                fileForm.append("is_show",1);
                 $.ajax({
                     type: 'post',
-                    url :'insert_pr', //데이터를 주고받을 파일 주소 입력
+                    url :_url, //데이터를 주고받을 파일 주소 입력
                     data: fileForm,//보내는 데이터
                     contentType: false,//보내는 데이터 타입
                     processData: false,//Jquery 내부에서 파일을 queryString 형태로 전달하는 것을 방지
                     dataType:'json',//받는 데이터 타입
                     enctype: 'multipart/form-data',
                     success: function(result){
-                        alert("업로드에 성공했습니다")
-                        $("#modals-business").modal("hide");
-                        _search()
+                        if(result.result_code=='ERROR_1000'){
+                            alert(result.result_str);
+                        }else {
+                            if (_url == 'insert_pr') {
+                                alert(result.result_str)
+                                $("#modals-business").modal("hide");
+                                _search(1)
+                            } else {
+                                alert(result.result_str)
+                                $("#modals-counsel-history").modal("hide");
+                                $("#modals-counsel-view").modal("hide");
+                                _search(_page)
+                            }
+                        }
                     },
                     error: function (res) {
                         console.log(res)
@@ -1076,13 +1119,14 @@
                     $(this).attr('checked', false);
                     $(this).removeAttr('checked');
                 });
-                _search()
+                _search(1)
             });
             $('.btn_search').off().on('click',function(){
-                _search()
+                _search(1)
             });
 
-            function _search(){
+            function _search(_p){
+                _page = _p;
                 let _fil1 = $('.srch_filtp1 label.active input:checked').val()
                 let _fil2 = $('.srch_filtp2 label.active input:checked').val()
                 if(_fil1 === undefined){
@@ -1091,7 +1135,7 @@
                 if(_fil2 === undefined){
                     _fil2 = '';
                 }
-                pageLoad("c431_site_adver_mng", {page_num:1,fil1:_fil1,fil2:_fil2}, "홍보자료 관리",'site_adver_mng');
+                pageLoad("c431_site_adver_mng", {page_num:_page,fil1:_fil1,fil2:_fil2}, "홍보자료 관리",'site_adver_mng');
             }
 
             _contents()

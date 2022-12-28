@@ -81,14 +81,13 @@
                 is_file:"${pr.is_file eq 0 ? "포함안함" : pr.is_file eq 1 ? "포함" :""}",
                 is_main_page:${pr.is_main_page},
                 pr_content_code:"${pr.pr_content_code}",
-                show_start_date:"<fmt:formatDate value="${pr.show_start_date}" pattern="yyyy-MM-dd HH:MM"/>",
-                show_end_date:"<fmt:formatDate value="${pr.show_end_date}" pattern="yyyy-MM-dd HH:MM"/>",
+                show_start_date:"<fmt:formatDate value="${pr.show_start_date}" pattern="yyyy-MM-dd"/>",
+                show_end_date:"<fmt:formatDate value="${pr.show_end_date}" pattern="yyyy-MM-dd"/>",
                 pr_content_status:"${pr.pr_content_status eq 0 ? "임시저장" :pr.pr_content_status eq 1 ? "허락" :pr.pr_content_status eq 2 ? "수정발행": pr.pr_content_status eq 3 ? "게시종료" :"기타"}",
                 pr_content_status_no:${pr.pr_content_status},
                 last_upd_date:"<fmt:formatDate value="${pr.last_upd_date}" pattern="yyyy-MM-dd HH:MM"/>",
                 veiw_count:"${pr.view_count}",
-                memo:"${pr.memo}",
-                writer:"${pr.author}"
+                memo:"${pr.memo}"
             }
             </c:forEach>
 

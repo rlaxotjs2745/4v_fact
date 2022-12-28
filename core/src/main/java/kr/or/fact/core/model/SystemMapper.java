@@ -13,4 +13,8 @@ public interface SystemMapper {
     List<SystemCodeVO> getAllSystemCodeList();
     SystemCodeVO getSystemCode(@Param("idx_system_code") long idx_system_code);
     int getSystemTotalCount();
+
+    void updateSystemCode(SystemCodeVO systemCodeVO);
+
+    void deleteSystemCode(long idx_system_code);
 }

@@ -1,5 +1,6 @@
 package kr.or.fact.core.service;
 
+import kr.or.fact.core.model.DTO.PRContentFileJoinVO;
 import kr.or.fact.core.model.DTO.PRContentVO;
 import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 import org.apache.ibatis.annotations.Param;
@@ -25,8 +26,16 @@ public interface PRContentsService {
     PRContentVO getPRContent(long idx);
 
     int insertPRContentFileJoin();
+
+    int updatePRContentFileJoin(PRContentFileJoinVO prcontensVO);
+
+    PRContentFileJoinVO getPRContentFile(PRContentVO prcontensVO);
+    PRContentVO getPRContentThumbFile(PRContentVO prcontensVO);
+    List<PRContentVO> getThumb();
+    PRContentVO getThumbFile(PRContentVO prcontensVO);
+
     PRContentVO getPRContentFileJoin(long idx_pr_content);
-     List<PRContentVO> selectPRContentList(String tagValue);
+    List<PRContentVO> selectPRContentList(String tagValue);
 
     int getPrViewCount(long idx_pr_content);
     void updatePrViewCount(PRContentVO prContentVO);
