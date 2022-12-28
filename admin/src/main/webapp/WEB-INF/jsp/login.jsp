@@ -170,6 +170,7 @@
         $("#theme-settings").hide();
     });
 
+
          $("#btn_login").click(function(){
 
              var param = {
@@ -196,6 +197,7 @@
                          }
                          $.cookie('access_token', result.access_token, { expires: 1, path: '/' });
                          $.cookie('refresh_token', result.refresh_token, { expires: 365, path: '/' });
+
                          location.replace('/');
                      }
                      else {

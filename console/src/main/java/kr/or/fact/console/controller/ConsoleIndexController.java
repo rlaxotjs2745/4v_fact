@@ -36,8 +36,8 @@ public class ConsoleIndexController {
     @Resource(name = "consoleSessionService")
     ConsoleSessionService consoleSessionService;
 
-    public UserVO getVerityAuth(String console_token){
-        UserVO userVO = null;
+    public ConsoleSessionVO getVerityAuth(String console_token){
+        //UserVO userVO = null;
 
         //1. access_token 찾기
         ConsoleSessionVO consoleSessionVO = consoleSessionService.getConsoleSessionInfoByToken(console_token);
@@ -50,15 +50,12 @@ public class ConsoleIndexController {
             String today = format.format(cur);
             String expire = format.format(consoleSessionVO.getConsole_expire_date());
             int compare = expire.compareTo(today);
-            if(compare>=0){//오늘보다 크면
-                userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
-            }else {//토큰 만료
-                userVO = new UserVO();
-                userVO.set_expired(true);
+            if(compare<0){//오늘보다 크면
+                consoleSessionService.deleteConsoleSessionInfo(consoleSessionVO);
+                consoleSessionVO.setIs_valid(0);
             }
         }
-
-        return userVO;
+        return consoleSessionVO;
     }
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
@@ -67,13 +64,19 @@ public class ConsoleIndexController {
                        @CookieValue(name = "console_token",required = false) String console_token){
         String _path = req.getRequestURI();
         if(console_token!=null){
-            UserVO userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
@@ -81,6 +84,34 @@ public class ConsoleIndexController {
 
         model.addAttribute("path", _path);
         return "index";
+    }
+
+    @RequestMapping(value = "admin_console",method = RequestMethod.GET)
+    public String admin_console_root(HttpServletRequest req,
+                       ModelMap model,
+                       @CookieValue(name = "console_token",required = false) String console_token){
+        String _path = req.getRequestURI();
+        if(console_token!=null){
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
+            {
+                return "redirect:/login";
+            }
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
+        }
+        else {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("path", _path);
+        return "index_admin";
     }
 
     @RequestMapping(value="/login",method = RequestMethod.GET)
@@ -98,13 +129,19 @@ public class ConsoleIndexController {
 
         String _path = req.getRequestURI();
         if(console_token!=null){
-            UserVO userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
@@ -127,13 +164,19 @@ public class ConsoleIndexController {
 
         String _path = req.getRequestURI();
         if(console_token!=null){
-            UserVO userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
@@ -155,13 +198,19 @@ public class ConsoleIndexController {
 
         String _path = req.getRequestURI();
         if(console_token!=null){
-            UserVO userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
@@ -184,16 +233,22 @@ public class ConsoleIndexController {
                          HttpServletRequest req,
                          ModelMap model,
                          @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
@@ -296,16 +351,22 @@ public class ConsoleIndexController {
                                    HttpServletRequest req,
                                    ModelMap model,
                                    @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
@@ -322,16 +383,22 @@ public class ConsoleIndexController {
                            HttpServletRequest req,
                            ModelMap model,
                            @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
@@ -348,16 +415,22 @@ public class ConsoleIndexController {
                            HttpServletRequest req,
                            ModelMap model,
                            @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
@@ -374,16 +447,22 @@ public class ConsoleIndexController {
                                 HttpServletRequest req,
                                 ModelMap model,
                                 @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
@@ -401,20 +480,27 @@ public class ConsoleIndexController {
                              HttpServletRequest req,
                              ModelMap model,
                              @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -427,20 +513,27 @@ public class ConsoleIndexController {
                                 HttpServletRequest req,
                                 ModelMap model,
                                 @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -453,20 +546,27 @@ public class ConsoleIndexController {
                             HttpServletRequest req,
                             ModelMap model,
                             @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -479,20 +579,27 @@ public class ConsoleIndexController {
                                    HttpServletRequest req,
                                    ModelMap model,
                                    @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -505,20 +612,27 @@ public class ConsoleIndexController {
                                    HttpServletRequest req,
                                    ModelMap model,
                                    @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -533,20 +647,27 @@ public class ConsoleIndexController {
                               HttpServletRequest req,
                               ModelMap model,
                               @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -560,20 +681,27 @@ public class ConsoleIndexController {
                                  HttpServletRequest req,
                                  ModelMap model,
                                  @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -587,20 +715,27 @@ public class ConsoleIndexController {
                            HttpServletRequest req,
                            ModelMap model,
                            @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -613,20 +748,27 @@ public class ConsoleIndexController {
                               HttpServletRequest req,
                               ModelMap model,
                               @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -639,20 +781,27 @@ public class ConsoleIndexController {
                                 HttpServletRequest req,
                                 ModelMap model,
                                 @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -665,20 +814,27 @@ public class ConsoleIndexController {
                                HttpServletRequest req,
                                ModelMap model,
                                @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -691,20 +847,27 @@ public class ConsoleIndexController {
                             HttpServletRequest req,
                             ModelMap model,
                             @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -717,16 +880,22 @@ public class ConsoleIndexController {
                                    HttpServletRequest req,
                                    ModelMap model,
                                    @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
@@ -743,20 +912,27 @@ public class ConsoleIndexController {
                                       HttpServletRequest req,
                                       ModelMap model,
                                       @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -769,20 +945,27 @@ public class ConsoleIndexController {
                                     HttpServletRequest req,
                                     ModelMap model,
                                     @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -797,20 +980,27 @@ public class ConsoleIndexController {
                                  HttpServletRequest req,
                                  ModelMap model,
                                  @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -823,20 +1013,27 @@ public class ConsoleIndexController {
                                 HttpServletRequest req,
                                 ModelMap model,
                                 @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -849,20 +1046,27 @@ public class ConsoleIndexController {
                                    HttpServletRequest req,
                                    ModelMap model,
                                    @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -875,20 +1079,27 @@ public class ConsoleIndexController {
                                 HttpServletRequest req,
                                 ModelMap model,
                                 @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -901,20 +1112,27 @@ public class ConsoleIndexController {
                                    HttpServletRequest req,
                                    ModelMap model,
                                    @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -927,20 +1145,27 @@ public class ConsoleIndexController {
                                      HttpServletRequest req,
                                      ModelMap model,
                                      @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -953,20 +1178,27 @@ public class ConsoleIndexController {
                              HttpServletRequest req,
                              ModelMap model,
                              @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 
@@ -979,20 +1211,27 @@ public class ConsoleIndexController {
                             HttpServletRequest req,
                             ModelMap model,
                             @CookieValue(name = "console_token",required = false) String console_token){
-        UserVO userVO = null;
+
         String _path = req.getRequestURI();
         if(console_token!=null){
-            userVO = getVerityAuth(console_token);
-            if(userVO==null || userVO.is_expired())
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
-            model.addAttribute("user", userVO);
-            //setProfile(model);
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
         }
         else {
             return "redirect:/login";
         }
+
 
         model.addAttribute("path", _path);
 

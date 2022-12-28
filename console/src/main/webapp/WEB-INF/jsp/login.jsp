@@ -62,6 +62,7 @@
     <!-- Core scripts -->
     <script src="resources/assets/vendor/js/pace.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
     <!-- Libs -->
     <link rel="stylesheet" href="resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css">
@@ -168,8 +169,11 @@
                     }
                     $.cookie('console_token', result.element.console_token, { expires: 1, path: '/' });
                     $.cookie('console_refresh_token', result.element.console_refresh_token, { expires: 365, path: '/' });
-                    location.replace('/');
 
+                    if($("#is_admin").is(':checked'))
+                        location.replace('/admin_console');
+                    else
+                        location.replace('/');
 /*                    setCookie("auth_code",result.element.auth_code,"1"); //변수, 변수값, 저장기간
                     setCookie("idx_console_user",result.element.idx_console_user,"1"); //변수, 변수값, 저장기간
                     var checkEvent = getCookie("Ck_01");

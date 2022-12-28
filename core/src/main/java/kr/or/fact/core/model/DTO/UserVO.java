@@ -38,8 +38,4 @@ public class UserVO {
     Date last_upd_date;//	date						최종 수정 일시
     int maxvalue;
     int page;
-    //long idx_admin; //console 과 연결을 위해 필요, 회원정보 가입 시 값을 갖게 됨
-    String console_refresh_token;
-    boolean is_expired;
-
 }
