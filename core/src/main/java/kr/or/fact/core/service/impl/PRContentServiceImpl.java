@@ -27,9 +27,6 @@ public class PRContentServiceImpl implements PRContentsService {
     @Autowired
     private SqlSession sqlsession;
 
-
-
-
     @Override
     public int getMainPRContentCount(){
         return prContentsMapper.getMainPRContentCount();
@@ -47,7 +44,6 @@ public class PRContentServiceImpl implements PRContentsService {
     @Override
     public List<PRContentVO> getOpenPRContentList(Integer page, int count, String filter, String query) {
         List<PRContentVO> prContentList= prContentsMapper.getOpenPRContentList(page,count,filter, query);
-
         List<PRContentVO> thumbList =prContentsMapper.getThumb();
 
         for (int i = 0; i < prContentList.size(); i++){
@@ -57,7 +53,6 @@ public class PRContentServiceImpl implements PRContentsService {
                 }
             }
         }
-
         return prContentList;
     }
 
@@ -70,7 +65,6 @@ public class PRContentServiceImpl implements PRContentsService {
     public List<PRContentVO> getPRContentList(ParamPageListFilteredVO paramVo){
         paramVo.setOrder_field("ANNOUNCE_NUM");
         List<PRContentVO> prContentList = prContentsMapper.getPRContentList(paramVo);
-
         List<PRContentVO> thumbList = prContentsMapper.getThumb();
 
         for (int i = 0; i < prContentList.size(); i++){
@@ -80,11 +74,8 @@ public class PRContentServiceImpl implements PRContentsService {
                 }
             }
         }
-
         return prContentList;
     }
-
-
 
     @Override
     public List<PRContentVO> selectPRContentList(String tagValue) {
@@ -93,14 +84,8 @@ public class PRContentServiceImpl implements PRContentsService {
     }
 
     @Override
-    public int getPrViewCount(int idx_pr_content) {
-
-
-
-
-
-        long newIdx = Long.parseLong("" + idx_pr_content);
-        return prContentsMapper.getPrViewCount(newIdx);
+    public int getPrViewCount(long idx_pr_content) {
+        return prContentsMapper.getPrViewCount(idx_pr_content);
     }
 
     @Override
@@ -156,14 +141,13 @@ prContentsMapper.updatePrContent(prContentVO);
     }
 
     @Override
-    public int deletePR(int idx_pr_content) {
+    public int deletePR(long idx_pr_content) {
         return prContentsMapper.deletePR(idx_pr_content);
     }
 
     @Override
-    public PRContentVO getPRContent(int idx){
-        Long newIdx = Long.parseLong("" + idx);
-        return prContentsMapper.getPRContent(newIdx);
+    public PRContentVO getPRContent(long idx){
+        return prContentsMapper.getPRContent(idx);
     }
 
     @Override
@@ -172,9 +156,8 @@ prContentsMapper.updatePrContent(prContentVO);
     }
 
     @Override
-    public PRContentVO getPRContentFileJoin(int idx_pr_content) {
-        long newIdx = Long.parseLong("" + idx_pr_content);
-        return prContentsMapper.getPRContentFileJoin(newIdx);
+    public PRContentVO getPRContentFileJoin(long idx_pr_content) {
+        return prContentsMapper.getPRContentFileJoin(idx_pr_content);
     }
 
 }
