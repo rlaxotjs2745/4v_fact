@@ -1,5 +1,6 @@
 package kr.or.fact.core.model;
 
+import kr.or.fact.core.model.DTO.PRContentFileJoinVO;
 import kr.or.fact.core.model.DTO.PRContentVO;
 import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -28,6 +29,12 @@ public interface PRContentsMapper {
 
     PRContentVO getPRContent(@Param("idx") long idx);
     int insertPRContentFileJoin();
+
+    PRContentFileJoinVO getPRContentFile(PRContentVO prcontensVO);
+
+    PRContentVO getPRContentThumbFile(PRContentVO prcontensVO);
+
+    int updatePRContentFileJoin(PRContentFileJoinVO prcontensVO);
     PRContentVO getPRContentFileJoin(@Param("idx_pr_content") long idx_pr_content);
     List<PRContentVO> selectPRContentList(@Param("pageNum") int pageNum, @Param("count") int count);
 
@@ -35,4 +42,6 @@ public interface PRContentsMapper {
     void updatePrViewCount(PRContentVO prContentVO);
     void updatePrContent(PRContentVO prContentVO);
     List<PRContentVO> getThumb();
+
+    PRContentVO getThumbFile(PRContentVO prcontensVO);
 }

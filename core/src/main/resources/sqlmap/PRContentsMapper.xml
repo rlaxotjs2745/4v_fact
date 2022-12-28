@@ -201,7 +201,11 @@
     </insert>
 
     <select id="getThumb" resultType="kr.or.fact.core.model.DTO.PRContentVO">
-        SELECT IDX_PR_CONTENT, FILE_PATH FROM TB_FILE_INFO JOIN TB_PR_CONTENT ON THUMB_IMG_FILE_IDX=IDX_FILE_INFO
+        SELECT IDX_PR_CONTENT, FILE_PATH FROM TB_FILE_INFO JOIN TB_PR_CONTENT ON TB_PR_CONTENT.THUMB_IMG_FILE_IDX=TB_FILE_INFO.IDX_FILE_INFO
+    </select>
+
+    <select id="getThumbFile" resultType="kr.or.fact.core.model.DTO.PRContentVO">
+        SELECT * FROM TB_FILE_INFO JOIN TB_PR_CONTENT ON TB_PR_CONTENT.THUMB_IMG_FILE_IDX=TB_FILE_INFO.IDX_FILE_INFO WHERE TB_PR_CONTENT.IDX_PR_CONTENT=#{idx_pr_content}
     </select>
 
     <select id="getMainPRContent" resultType="kr.or.fact.core.model.DTO.PRContentVO">
@@ -280,39 +284,38 @@
     </resultMap>
 
     <select id="getPRContentFileJoin" resultMap="promotionDetailMap">
-        SELECT
-            A.IDX_PR_CONTENT,
-            A.PR_CONTENT_CODE,
-            A.PR_CONTENT_NUM,
-            A.SUBJECT,
-            A.PR_CONTENTS,
-            A.IS_FILE,
-            A.IS_NEW,
-            A.IS_MAIN_PAGE,
-            A.IS_IMPORTANT,
-            A.IS_SHOW,
-            A.VIEW_COUNT,
-            A.PR_CONTENT_STATUS,
-            A.SHOW_START_DATE,
-            A.SHOW_END_DATE,
-            A.DOC_VERSION,
-            A.MEMO,
-            A.SEARCH_TAG,
-            A.AUTHOR,
-            A.THUMB_IMG_FILE_IDX,
-            A.IDX_ADMIN,
-            A.CONFIRM_ADMIN_IDX,
-            A.REG_DATE,
-            A.LAST_UPD_DATE,
-            C.IDX_FILE_INFO,
-            C.FILE_NAME,
-            C.MIME_TYPE,
-            C.FILE_PATH,
-            C.FILE_SIZE
-        FROM TB_PR_CONTENT A
-            JOIN TB_PR_CONTENT_FILE_JOIN B ON A.IDX_PR_CONTENT=B.IDX_PR_CONTENT
-            JOIN TB_FILE_INFO C ON B.IDX_FILE_INFO=C.IDX_FILE_INFO
-        WHERE A.IDX_PR_CONTENT=#{idx_pr_content}
+        SELECT A.IDX_PR_CONTENT,
+             A.PR_CONTENT_CODE,
+             A.PR_CONTENT_NUM,
+             A.SUBJECT,
+             A.PR_CONTENTS,
+             A.IS_FILE,
+             A.IS_NEW,
+             A.IS_MAIN_PAGE,
+             A.IS_IMPORTANT,
+             A.IS_SHOW,
+             A.VIEW_COUNT,
+             A.PR_CONTENT_STATUS,
+             A.SHOW_START_DATE,
+             A.SHOW_END_DATE,
+             A.DOC_VERSION,
+             A.MEMO,
+             A.SEARCH_TAG,
+             A.AUTHOR,
+             A.THUMB_IMG_FILE_IDX,
+             A.IDX_ADMIN,
+             A.CONFIRM_ADMIN_IDX,
+             A.REG_DATE,
+             A.LAST_UPD_DATE,
+             C.IDX_FILE_INFO,
+             C.FILE_NAME,
+             C.MIME_TYPE,
+             C.FILE_PATH,
+             C.FILE_SIZE
+      FROM TB_PR_CONTENT A
+               JOIN TB_PR_CONTENT_FILE_JOIN B ON A.IDX_PR_CONTENT = B.IDX_PR_CONTENT
+               JOIN TB_FILE_INFO C ON B.IDX_FILE_INFO = C.IDX_FILE_INFO
+      WHERE A.IDX_PR_CONTENT = #{idx_pr_content}
     </select>
 
     <select id="getPrViewCount" parameterType="long" resultType="int">
@@ -325,37 +328,71 @@
 
     <update id="updatePrContent" parameterType="kr.or.fact.core.model.DTO.PRContentVO">
         UPDATE TB_PR_CONTENT SET
+        <if test="pr_content_code != null">
              PR_CONTENT_CODE=#{pr_content_code},
+        </if>
+        <if test="pr_content_num != null">
              PR_CONTENT_NUM=#{pr_content_num},
+        </if>
              SUBJECT=#{subject},
              PR_CONTENTS=#{pr_contents},
              IS_FILE=#{is_file},
              IS_NEW=#{is_new},
              IS_MAIN_PAGE=#{is_main_page},
+        <if test="is_important != null">
              IS_IMPORTANT=#{is_important},
+        </if>
+         <if test="is_show != null">
              IS_SHOW=#{is_show},
+         </if>
+        <if test="view_count != null">
              VIEW_COUNT=#{view_count},
+        </if>
+        <if test="pr_content_status != null">
              PR_CONTENT_STATUS=#{pr_content_status},
+        </if>
+        <if test="show_start_date != null">
              SHOW_START_DATE=#{show_start_date},
+        </if>
+        <if test="show_end_date != null">
              SHOW_END_DATE=#{show_end_date},
+        </if>
+        <if test="doc_version != null">
              DOC_VERSION=#{doc_version},
+        </if>
+        <if test="memo != null">
              MEMO=#{memo},
+        </if>
+        <if test="search_tag != null">
              SEARCH_TAG=#{search_tag},
+        </if>
+        <if test="author != null">
              AUTHOR=#{author},
+        </if>
+        <if test="author != null">
              THUMB_IMG_FILE_IDX=#{thumb_img_file_idx},
+        </if>
+        <if test="idx_admin != null">
              IDX_ADMIN=#{idx_admin},
-             CONFIRM_ADMIN_IDX=#{confirm_admin_idx},
-             REG_DATE=#{reg_date},
+        </if>
              LAST_UPD_DATE=SYSDATE
-        WHERE IDX_PR_CONTENT =#{idx_pr_content}
+        WHERE IDX_PR_CONTENT = #{idx_pr_content}
     </update>
+
+    <select id="getPRContentFile" resultType="kr.or.fact.core.model.DTO.PRContentFileJoinVO">
+        SELECT IDX_PR_CONTENT_FILE_JOIN, IDX_FILE_INFO FROM TB_PR_CONTENT_FILE_JOIN WHERE IDX_PR_CONTENT=#{idx_pr_content}
+    </select>
+
+    <select id="getPRContentThumbFile" resultType="kr.or.fact.core.model.DTO.PRContentVO">
+        SELECT THUMB_IMG_FILE_IDX FROM TB_PR_CONTENT WHERE IDX_PR_CONTENT=#{idx_pr_content}
+    </select>
 
     <update id="updatePRContentFileJoin" parameterType="kr.or.fact.core.model.DTO.PRContentFileJoinVO">
         UPDATE TB_PR_CONTENT_FILE_JOIN
             SET
-                IDX_PR_CONTENT_FILE_JOIN=#{IDX_PR_CONTENT_FILE_JOIN},
-                IDX_PR_CONTENT=#{IDX_PR_CONTENT},
-                IDX_FILE_INFO=#{IDX_FILE_INFO},
+                IDX_PR_CONTENT=#{idx_pr_content},
+                IDX_FILE_INFO=#{idx_file_info},
                 REG_DATE=SYSDATE
+            WHERE IDX_PR_CONTENT_FILE_JOIN=#{idx_pr_content_file_join}
     </update>
 </mapper>

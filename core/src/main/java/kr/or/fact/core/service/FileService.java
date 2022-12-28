@@ -62,4 +62,6 @@ public interface FileService {
     long insertRuleFile(MultipartFile file1, long idx_admin);
 
     String getFileUrlByUsageIdxType(long usageIdx, int type);
+
+    void delFile(String path);
 }

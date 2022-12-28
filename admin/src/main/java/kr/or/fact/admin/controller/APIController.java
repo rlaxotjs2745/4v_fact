@@ -1539,16 +1539,15 @@ public class APIController {
             fileService.storeFileInfo(fileThum);
             fileService.insertFileInfo(thumFileInfoVO);
 
-
             prContentService.insertPRContent(prcontensVO);
             prContentService.insertPRContentFileJoin();
 
-            resultVO.setResult_str("업데이트에 성공하였습니다.");
+            resultVO.setResult_str("등록이 완료되었습니다.");
             resultVO.setResult_code("SUCCESS");
 
         } catch (Exception e) {
             resultVO.setResult_code("ERROR_1000");
-            resultVO.setResult_str("업데이트 실패");
+            resultVO.setResult_str("등록 실패");
         }
         return resultVO;
     }
@@ -1864,20 +1863,89 @@ public class APIController {
 
 
     @RequestMapping(value="/update_pr",method = RequestMethod.POST)
+    @Transactional
     @ResponseBody
-    ResultVO updatePrContent(@RequestBody PRContentVO prContentVO){
+    ResultVO updatePrContent(@ModelAttribute PRContentVO prcontensVO, HttpSession session, HttpServletRequest request) throws Exception, IOException{
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
         resultVO.setResult_str("업데이트 실패");
+        File[] files = new File[5];
 
         try {
-            prContentService.updatePrContent(prContentVO);
+            if(prcontensVO.getFiles1() == null && prcontensVO.getFiles2() == null){
+                prContentService.updatePrContent(prcontensVO);
+            }else {
+                if (prcontensVO.getFiles1() != null) {
+                    // 파일삭제
+                    PRContentFileJoinVO _file0 = prContentService.getPRContentFile(prcontensVO);
+                    if(_file0!=null) {
+                        FileInfoVO _fileinfo0 = fileService.getFileInfo(_file0.getIdx_file_info());
+                        if (_fileinfo0 != null) {
+                            fileService.delFile(_fileinfo0.getFile_name());
+                        }
+                    }
+
+                    files[0] = fileService.convertMultipartToFile(prcontensVO.getFiles1());
+
+                    MultipartFile file = prcontensVO.getFiles1();
+                    String fileName = fileService.storeFileInfo(prcontensVO.getFiles1());
+                    String fileDownloadUri = "downloadFile/" + fileName;
+                    FileUploadResponseVO filepespons = new FileUploadResponseVO(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+                    FileInfoVO fileInfoVO = new FileInfoVO();
+                    fileInfoVO.setFile_name(filepespons.getFileName());
+                    fileInfoVO.setFile_size(filepespons.getSize());
+                    fileInfoVO.setMime_type(filepespons.getFileType());
+                    fileInfoVO.setFile_path(fileDownloadUri);
+                    fileInfoVO.setIdx_file_info(_file0.getIdx_file_info());
+                    fileService.storeFileInfo(file);
+                    fileService.updateFileInfo(fileInfoVO);
+
+                    if (prcontensVO.getFiles2() != null) {
+                        PRContentVO _file1 = prContentService.getPRContentThumbFile(prcontensVO);
+                        if(_file1!=null) {
+                            FileInfoVO _fileinfo1 = fileService.getFileInfo(_file1.getThumb_img_file_idx());
+                            if (_fileinfo1 != null) {
+                                fileService.delFile(_fileinfo1.getFile_name());
+                            }
+                        }
+
+                        files[1] = fileService.convertMultipartToFile2(prcontensVO.getFiles2());
+
+                        MultipartFile fileThum = prcontensVO.getFiles2();
+                        String fileThumName = fileService.storeFileInfo(prcontensVO.getFiles2());
+                        String fileThumDownloadUri = "downloadFile/" + fileThumName;
+                        FileUploadResponseVO thumFilepespons = new FileUploadResponseVO(fileThumName, fileThumDownloadUri, fileThum.getContentType(),fileThum.getSize());
+                        FileInfoVO thumFileInfoVO = new FileInfoVO();
+                        thumFileInfoVO.setFile_name(fileThumName);
+                        thumFileInfoVO.setFile_size(thumFilepespons.getSize());
+                        thumFileInfoVO.setMime_type(thumFilepespons.getFileType());
+                        thumFileInfoVO.setFile_path(fileThumDownloadUri);
+                        thumFileInfoVO.setIdx_file_info(_file1.getThumb_img_file_idx());
+                        fileService.storeFileInfo(fileThum);
+                        fileService.updateFileInfo(thumFileInfoVO);
+                        _file1 = prContentService.getPRContentThumbFile(prcontensVO);
+                        if(_file1!=null) {
+                            prcontensVO.setThumb_img_file_idx(_file1.getThumb_img_file_idx());
+                        }
+                    }
+                }
+                prContentService.updatePrContent(prcontensVO);
+//                PRContentFileJoinVO file1 = prContentService.getPRContentFile(prcontensVO);
+//                if(file1!=null) {
+//                    PRContentFileJoinVO paramVo = new PRContentFileJoinVO();
+//                    paramVo.setIdx_pr_content_file_join(file1.getIdx_pr_content_file_join());
+//                    paramVo.setIdx_pr_content(prcontensVO.getIdx_pr_content());
+//                    paramVo.setIdx_file_info(file1.getIdx_file_info());
+//                    prContentService.updatePRContentFileJoin(paramVo);
+//                }
+            }
+
             resultVO.setResult_code("SUCCESS");
-            resultVO.setResult_str("업데이트가 완료되었습니다.");
+            resultVO.setResult_str("수정을 완료하였습니다.");
         } catch (Exception e){
             System.out.println(e);
             resultVO.setResult_code("ERROR_1000");
-            resultVO.setResult_str("없는 상담일지입니다.");
+            resultVO.setResult_str("수정 실패");
         }
 
         return resultVO;
