@@ -129,7 +129,7 @@ public class IndexController {
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String root(HttpServletRequest req,
                        ModelMap model,
-                       @CookieValue(name = "access_token",required = true) String access_token){
+                       @CookieValue(name = "access_token",required = false) String access_token){
         String _path = req.getRequestURI();
         if(access_token!=null){
             AdminVO adminVO = getVerityAuth(access_token);
@@ -157,7 +157,7 @@ public class IndexController {
     @RequestMapping(value = "/a10_dashboard" ,method = RequestMethod.POST)
     public String a10_dashboard(@RequestParam(value = "tag", required = false) String tagValue,
                                 ModelMap model,
-                                @CookieValue(name = "access_token",required = true) String access_token){
+                                @CookieValue(name = "access_token",required = false) String access_token){
 
         AdminVO adminVO = null;
         if(access_token!=null){
@@ -168,6 +168,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         ParamPageListFilteredVO param = new ParamPageListFilteredVO();
@@ -210,7 +212,7 @@ public class IndexController {
     @RequestMapping(value = "/b00_demo_bs_mng",method = RequestMethod.POST)
     public String b00_demo_bs_mng(@RequestBody ParamPageListFilteredVO param,
                                   ModelMap model,
-                                  @CookieValue(name = "access_token",required = true) String access_token){
+                                  @CookieValue(name = "access_token",required = false) String access_token){
 
         AdminVO adminVO = null;
         if(access_token!=null){
@@ -221,6 +223,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         int list_amount = 10;;
@@ -315,7 +319,7 @@ public class IndexController {
     @RequestMapping(value = "/b10_demo_bs_announce_doc_mng",method = RequestMethod.POST)
     public String b10_demo_bs_announce_doc_mng(@RequestBody ParamPageListFilteredVO param,
                                                ModelMap model,
-                                               @CookieValue(name = "access_token",required = true) String access_token){
+                                               @CookieValue(name = "access_token",required = false) String access_token){
 
         AdminVO adminVO = null;
         if(access_token!=null){
@@ -326,6 +330,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         int list_amount = 10;;
@@ -416,7 +422,7 @@ public class IndexController {
     @RequestMapping(value = "/b21_demo_bs_appl_mng",method = RequestMethod.POST)
     public String b21_demo_bs_appl_mng(@RequestBody ParamPageListFilteredVO param,
                                        ModelMap model,
-                                       @CookieValue(name = "access_token",required = true) String access_token){
+                                       @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -426,6 +432,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         //사업 기준
@@ -501,7 +509,7 @@ public class IndexController {
     @RequestMapping(value = "/b22_demo_bs_doc_eval_result_mng",method = RequestMethod.POST)
     public String b22_demo_bs_doc_eval_result_mng(@RequestBody ParamPageListFilteredVO param,
                                                   ModelMap model,
-                                                  @CookieValue(name = "access_token",required = true) String access_token){
+                                                  @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -511,6 +519,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         //사업 기준
@@ -585,7 +595,7 @@ public class IndexController {
     @RequestMapping(value = "/b23_demo_bs_pre_contract_mng",method = RequestMethod.POST)
     public String b23_demo_bs_pre_contract_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                                ModelMap model,
-                                               @CookieValue(name = "access_token",required = true) String access_token){
+                                               @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -595,6 +605,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         return "b23_demo_bs_pre_contract_mng";
@@ -604,7 +616,7 @@ public class IndexController {
     @RequestMapping(value = "/b30_demo_bs_usage_ext_mng",method = RequestMethod.POST)
     public String b30_demo_bs_usage_ext_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                             ModelMap model,
-                                            @CookieValue(name = "access_token",required = true) String access_token){
+                                            @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -614,6 +626,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
 
@@ -624,7 +638,7 @@ public class IndexController {
     @RequestMapping(value = "/b40_demo_bs_contract_mng",method = RequestMethod.POST)
     public String b40_demo_bs_contract_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                            ModelMap model,
-                                           @CookieValue(name = "access_token",required = true) String access_token){
+                                           @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -634,6 +648,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         return "b40_demo_bs_contract_mng";
@@ -643,7 +659,7 @@ public class IndexController {
     @RequestMapping(value = "/b50_demo_bs_corp_cur_list",method = RequestMethod.POST)
     public String b50_demo_bs_corp_cur_list(@RequestParam(value = "tag", required = false) String tagValue,
                                             ModelMap model,
-                                            @CookieValue(name = "access_token",required = true) String access_token){
+                                            @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -653,6 +669,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         return "b50_demo_bs_corp_cur_list";
@@ -662,7 +680,7 @@ public class IndexController {
     @RequestMapping(value = "/b60_demo_bs_consign_corp_list",method = RequestMethod.POST)
     public String b60_demo_bs_consign_corp_list(@RequestParam(value = "tag", required = false) String tagValue,
                                                 ModelMap model,
-                                                @CookieValue(name = "access_token",required = true) String access_token){
+                                                @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -672,6 +690,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
 
@@ -682,7 +702,7 @@ public class IndexController {
     @RequestMapping(value = "/b70_demo_bs_usage_pee_mng",method = RequestMethod.POST)
     public String b70_demo_bs_usage_pee_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                             ModelMap model,
-                                            @CookieValue(name = "access_token",required = true) String access_token){
+                                            @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -692,6 +712,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         return "b70_demo_bs_usage_pee_mng";
@@ -701,7 +723,7 @@ public class IndexController {
     @RequestMapping(value = "/b80_demo_bs_corp_cur_report_write",method = RequestMethod.POST)
     public String b80_demo_bs_corp_cur_report_write(@RequestParam(value = "tag", required = false) String tagValue,
                                                     ModelMap model,
-                                                    @CookieValue(name = "access_token",required = true) String access_token){
+                                                    @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -711,6 +733,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         return "b80_demo_bs_corp_cur_report_write";
@@ -720,7 +744,7 @@ public class IndexController {
     @RequestMapping(value = "/b90_demo_bs_cert_mng",method = RequestMethod.POST)
     public String b90_demo_bs_cert_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                        ModelMap model,
-                                       @CookieValue(name = "access_token",required = true) String access_token){
+                                       @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -730,6 +754,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         return "b90_demo_bs_cert_mng";
@@ -738,7 +764,7 @@ public class IndexController {
     //문의상담신청 관리
     @RequestMapping(value = "/c10_site_mng_consult_mng",method = RequestMethod.POST)
     public String c10_site_mng_consult_mng(@RequestBody ParamPageListFilteredVO param, ModelMap model,
-                                           @CookieValue(name = "access_token",required = true) String access_token){
+                                           @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -748,6 +774,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
 //접수목록 가져오기 (db table) DemoBsConsultingVO get 요청으로 가져오기
@@ -815,7 +843,7 @@ public class IndexController {
     public String c21_site_visit_list(@RequestParam(value = "tag", required = false) String tagValue,
                                       @RequestBody ParamPageListFilteredVO param,
                                       ModelMap model,
-                                      @CookieValue(name = "access_token",required = true) String access_token){
+                                      @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -825,6 +853,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
 
@@ -926,7 +956,7 @@ public class IndexController {
     @RequestMapping(value = "/c22_site_visit_mng",method = RequestMethod.POST)
     public String c22_site_visit_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                      ModelMap model,
-                                     @CookieValue(name = "access_token",required = true) String access_token){
+                                     @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -936,6 +966,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
 
@@ -946,7 +978,7 @@ public class IndexController {
     @RequestMapping(value = "/c30_site_faq_mng",method = RequestMethod.POST)
     public String c30_site_faq_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                    ModelMap model,
-                                   @CookieValue(name = "access_token",required = true) String access_token){
+                                   @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -956,6 +988,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
 
@@ -966,7 +1000,7 @@ public class IndexController {
     @RequestMapping(value = "/c41_site_notice_mng",method = RequestMethod.POST)
     public String c41_site_notice_mng(@RequestBody ParamPageListFilteredVO param,
                                       ModelMap model,
-                                      @CookieValue(name = "access_token",required = true) String access_token){
+                                      @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -976,6 +1010,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         int list_amount = 10;
@@ -1044,7 +1080,7 @@ public class IndexController {
     public String c42_site_event_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                      @RequestBody ParamPageListFilteredVO param,
                                      ModelMap model,
-                                     @CookieValue(name = "access_token",required = true) String access_token){
+                                     @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1054,6 +1090,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
         //행사관리 테이블 추가 .tb_event_content
 
@@ -1120,7 +1158,7 @@ public class IndexController {
     public String c43_site_adver_mng(@RequestParam(value = "page_num", required = false) String tagValue,
                                      @RequestBody ParamPageListFilteredVO param,
                                      ModelMap model,
-                                     @CookieValue(name = "access_token",required = true) String access_token){
+                                     @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1130,6 +1168,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         param.setAmount(10);
@@ -1278,7 +1318,7 @@ public class IndexController {
     public String pr_contents(@RequestParam(value = "page_num", required = false) String tagValue,
                               @RequestBody ParamPageListFilteredVO param,
                               ModelMap model,
-                              @CookieValue(name = "access_token",required = true) String access_token){
+                              @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1288,6 +1328,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         String content = "";
@@ -1305,7 +1347,7 @@ public class IndexController {
     @RequestMapping(value = "/c50_site_banner_mng",method = RequestMethod.POST)
     public String c50_site_banner_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                       ModelMap model,
-                                      @CookieValue(name = "access_token",required = true) String access_token){
+                                      @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1315,6 +1357,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
 
@@ -1326,7 +1370,7 @@ public class IndexController {
     public String c60_site_popup_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                      @RequestBody ParamPageListFilteredVO param,
                                      ModelMap model,
-                                     @CookieValue(name = "access_token",required = true) String access_token){
+                                     @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1336,6 +1380,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
 //        AdminVO adminInfo = adminService.findAdminById(principal.getName());
@@ -1409,7 +1455,7 @@ public class IndexController {
     @RequestMapping(value = "/c71_site_form_doc_mng",method = RequestMethod.POST)
     public String c71_site_form_doc_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                         ModelMap model,
-                                        @CookieValue(name = "access_token",required = true) String access_token){
+                                        @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1419,6 +1465,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         Integer maxPageNum = fileService.getFormFileTotalCount();
@@ -1432,7 +1480,7 @@ public class IndexController {
     public String c72_site_rule_doc_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                         @RequestBody ParamPageListFilteredVO param,
                                         ModelMap model,
-                                        @CookieValue(name = "access_token",required = true) String access_token){
+                                        @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1442,6 +1490,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
@@ -1459,7 +1509,7 @@ public class IndexController {
     @RequestMapping(value = "/c80_site_mng",method = RequestMethod.POST)
     public String c80_site_mng(@RequestParam(value = "tag", required = false) String tagValue, @RequestBody ParamPageListFilteredVO param,
                                ModelMap model,
-                               @CookieValue(name = "access_token",required = true) String access_token){
+                               @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1469,6 +1519,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         param.setAmount(10);
@@ -1580,7 +1632,7 @@ public class IndexController {
     @RequestMapping(value = "/d10_schedule_mng",method = RequestMethod.POST)
     public String d10_schedule_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                    ModelMap model,
-                                   @CookieValue(name = "access_token",required = true) String access_token){
+                                   @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1590,6 +1642,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         return "d10_schedule_mng";
@@ -1599,7 +1653,7 @@ public class IndexController {
     @RequestMapping(value = "/e10_document_issued_req_list",method = RequestMethod.POST)
     public String e10_document_issued_req_list(@RequestParam(value = "tag", required = false) String tagValue,
                                                ModelMap model,
-                                               @CookieValue(name = "access_token",required = true) String access_token){
+                                               @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1609,6 +1663,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         return "e10_document_issued_req_list";
@@ -1618,7 +1674,7 @@ public class IndexController {
     @RequestMapping(value = "/e20_document_issued",method = RequestMethod.POST)
     public String e20_document_issued(@RequestParam(value = "tag", required = false) String tagValue,
                                       ModelMap model,
-                                      @CookieValue(name = "access_token",required = true) String access_token){
+                                      @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1628,6 +1684,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         return "e20_document_issued";
@@ -1637,7 +1695,7 @@ public class IndexController {
     @RequestMapping(value = "/e30_document_issued_history",method = RequestMethod.POST)
     public String e30_document_issued_history(@RequestParam(value = "tag", required = false) String tagValue,
                                               ModelMap model,
-                                              @CookieValue(name = "access_token",required = true) String access_token){
+                                              @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1647,6 +1705,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         return "e30_document_issued_history";
@@ -1663,7 +1723,7 @@ public class IndexController {
     @RequestMapping(value = "/f10_gh_data_mng",method = RequestMethod.POST)
     public String f10_gh_data_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                   ModelMap model,
-                                  @CookieValue(name = "access_token",required = true) String access_token){
+                                  @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1673,6 +1733,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         return "f10_gh_data_mng";
@@ -1682,7 +1744,7 @@ public class IndexController {
     @RequestMapping(value = "/f20_asset_data_mng",method = RequestMethod.POST)
     public String f20_asset_data_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                      ModelMap model,
-                                     @CookieValue(name = "access_token",required = true) String access_token){
+                                     @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1692,6 +1754,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
 
@@ -1702,7 +1766,7 @@ public class IndexController {
     @RequestMapping(value = "/f30_data_req_history",method = RequestMethod.POST)
     public String f30_data_req_history(@RequestParam(value = "tag", required = false) String tagValue,
                                        ModelMap model,
-                                       @CookieValue(name = "access_token",required = true) String access_token){
+                                       @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1712,6 +1776,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
 
@@ -1736,7 +1802,7 @@ public class IndexController {
     @RequestMapping(value = "/g10_cur_asset_mng",method = RequestMethod.POST)
     public String g10_cur_asset_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                     ModelMap model,
-                                    @CookieValue(name = "access_token",required = true) String access_token){
+                                    @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1746,6 +1812,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
         List<SystemCodeVO> systemCodeVOList = systemService.getAllSystemCodeList();
         List<SystemCodeVO> mainAssetCodeList = new ArrayList<>();
@@ -1777,7 +1845,7 @@ public class IndexController {
     public String asset_reservation_list(@RequestParam(value = "tag", required = false) String tagValue,
                                          @RequestBody ParamPageListFilteredVO param,
                                          ModelMap model,
-                                         @CookieValue(name = "access_token",required = true) String access_token){
+                                         @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1787,6 +1855,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         List<AssetReservationVO> assetReservationVOList = assetService.getAssetReservationList(param);
@@ -1812,7 +1882,7 @@ public class IndexController {
     public String asset_reservation_items_list(@RequestParam(value = "tag", required = false) String tagValue,
                                                @RequestBody ParamPageListFilteredVO param,
                                                ModelMap model,
-                                               @CookieValue(name = "access_token",required = true) String access_token){
+                                               @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1822,6 +1892,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
         List<AssetReservationItemVO> assetReservationItemVOList = assetService.getAssetReservationItemList(Long.parseLong("" + param.getFilter1()));
         ParamPageListFilteredVO newParam = new ParamPageListFilteredVO();
@@ -1842,7 +1914,7 @@ public class IndexController {
     public String cur_asset_index(@RequestParam(value = "tag", required = false) String tagValue,
                                   @RequestBody ParamPageListFilteredVO param,
                                   ModelMap model,
-                                  @CookieValue(name = "access_token",required = true) String access_token){
+                                  @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1852,6 +1924,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
         List<AssetVO> assetVOList = assetService.getAssetList(param);
         List<SystemCodeVO> systemCodeList = systemService.getAllSystemCodeList();
@@ -1872,7 +1946,7 @@ public class IndexController {
     public String asset_category(@RequestParam(value = "tag", required = false) String tagValue,
                                  @RequestBody SystemCodeVO param,
                                  ModelMap model,
-                                 @CookieValue(name = "access_token",required = true) String access_token){
+                                 @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1882,6 +1956,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
         List<SystemCodeVO> systemCodeVOList = systemService.getAllSystemCodeList();
         List<SystemCodeVO> mainAssetCodeList = new ArrayList<>();
@@ -1949,7 +2025,7 @@ public class IndexController {
                                     Principal principal,
 
                                     ModelMap model,
-                                    @CookieValue(name = "access_token",required = true) String access_token){
+                                    @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1959,6 +2035,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         AdminVO adminInfo = adminService.findAdminById(principal.getName());
@@ -1989,7 +2067,7 @@ public class IndexController {
     public String get_asset_list (@RequestParam(value = "tag", required = false) String tagValue,
                                   @RequestBody ParamPageListFilteredVO param,
                                   ModelMap model,
-                                  @CookieValue(name = "access_token",required = true) String access_token){
+                                  @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -1999,6 +2077,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
         List<AssetVO> assetVOList = assetService.getAssetList(param);
         model.addAttribute("assetList", assetVOList);
@@ -2010,7 +2090,7 @@ public class IndexController {
     @RequestMapping(value = "/g30_asset_book_mng",method = RequestMethod.POST)
     public String g30_asset_book_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                      ModelMap model,
-                                     @CookieValue(name = "access_token",required = true) String access_token){
+                                     @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -2020,6 +2100,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         List<SystemCodeVO> systemCodeVOList = systemService.getAllSystemCodeList();
@@ -2048,7 +2130,7 @@ public class IndexController {
     public String reserve_view (@RequestParam(value = "tag", required = false) String tagValue,
                                 @RequestBody ParamPageListFilteredVO param,
                                 ModelMap model,
-                                @CookieValue(name = "access_token",required = true) String access_token){
+                                @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -2058,6 +2140,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
         AssetReservationVO assetReservationVO = assetService.getAssetReservation(param.getIdx());
         List<AssetReservationItemVO> assetReservationItemVOList = assetService.getAssetReservationItemList(param.getIdx());
@@ -2079,7 +2163,7 @@ public class IndexController {
     @RequestMapping(value = "/h11_write_sms",method = RequestMethod.POST)
     public String h11_write_sms(@RequestParam(value = "tag", required = false) String tagValue,
                                 ModelMap model,
-                                @CookieValue(name = "access_token",required = true) String access_token){
+                                @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -2089,6 +2173,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
 
@@ -2098,7 +2184,7 @@ public class IndexController {
     @RequestMapping(value = "/h12_auto_sms_mng",method = RequestMethod.POST)
     public String h20_auto_sms_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                    ModelMap model,
-                                   @CookieValue(name = "access_token",required = true) String access_token){
+                                   @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -2108,6 +2194,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         return "h12_auto_sms_mng";
@@ -2116,7 +2204,7 @@ public class IndexController {
     @RequestMapping(value = "/h13_reserved_sms_list",method = RequestMethod.POST)
     public String h13_reserved_sms_list(@RequestParam(value = "tag", required = false) String tagValue,
                                         ModelMap model,
-                                        @CookieValue(name = "access_token",required = true) String access_token){
+                                        @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -2126,6 +2214,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         ArrayList<SmsSendVO> smsReservearr = smsSendService.selectReserveMessage();
@@ -2136,7 +2226,7 @@ public class IndexController {
     @RequestMapping(value = "/h14_sent_sms_list",method = RequestMethod.POST)
     public String h14_sent_sms_list(@RequestParam(value = "tag", required = false) String tagValue,
                                     ModelMap model,
-                                    @CookieValue(name = "access_token",required = true) String access_token){
+                                    @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -2146,6 +2236,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         ArrayList<SmsSentVO> smsarr = smsSendService.selectSentmeesage1();
@@ -2155,7 +2247,7 @@ public class IndexController {
     @RequestMapping(value = "/h21_write_mail",method = RequestMethod.POST)
     public String h21_write_mail(@RequestParam(value = "tag", required = false) String tagValue,
                                  ModelMap model,
-                                 @CookieValue(name = "access_token",required = true) String access_token){
+                                 @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -2165,6 +2257,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
 
@@ -2174,7 +2268,7 @@ public class IndexController {
     @RequestMapping(value = "/h22_auto_email_mng",method = RequestMethod.POST)
     public String h22_auto_email_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                      ModelMap model,
-                                     @CookieValue(name = "access_token",required = true) String access_token){
+                                     @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -2184,6 +2278,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
 
@@ -2193,7 +2289,7 @@ public class IndexController {
     @RequestMapping(value = "/h23_reserved_email_list",method = RequestMethod.POST)
     public String h23_reserved_email_list(@RequestParam(value = "tag", required = false) String tagValue,
                                           ModelMap model,
-                                          @CookieValue(name = "access_token",required = true) String access_token){
+                                          @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -2203,6 +2299,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         ArrayList<ReservedMailVO> resultArr;
@@ -2281,7 +2379,7 @@ public class IndexController {
     @RequestMapping(value = "/i11_user_mng",method = RequestMethod.POST)
     public String i11_user_mng(@RequestBody ParamPageListFilteredVO param,
                                ModelMap model,
-                               @CookieValue(name = "access_token",required = true) String access_token){
+                               @CookieValue(name = "access_token",required = false) String access_token){
 
         AdminVO adminVO = null;
         if(access_token!=null){
@@ -2292,6 +2390,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
         model.addAttribute("allCount", userService.getAllUserListCount());
         return "i11_user_mng";
@@ -2301,7 +2401,7 @@ public class IndexController {
     public String user_index(@RequestParam(value = "tag", required = false) String tagValue,
                              @RequestBody ParamPageListFilteredVO param,
                              ModelMap model,
-                             @CookieValue(name = "access_token",required = true) String access_token){
+                             @CookieValue(name = "access_token",required = false) String access_token){
 
         AdminVO adminVO = null;
         if(access_token!=null){
@@ -2312,6 +2412,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
         boolean maxBool = false;
         List<UserVO> userVOList = userService.selectUserbyPage(param.getFilter1(), param.getPage_num());
@@ -2336,7 +2438,7 @@ public class IndexController {
     @RequestMapping(value = "/i12_dormant_user_mng",method = RequestMethod.POST)
     public String i12_dormant_user_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                        ModelMap model,
-                                       @CookieValue(name = "access_token",required = true) String access_token){
+                                       @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -2346,6 +2448,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         return "i12_dormant_user_mng";
@@ -2355,7 +2459,7 @@ public class IndexController {
     public String dormant_user_index(@RequestParam(value = "tag", required = false) String tagValue,
                                      @RequestBody ParamPageListFilteredVO param,
                                      ModelMap model,
-                                     @CookieValue(name = "access_token",required = true) String access_token){
+                                     @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -2365,6 +2469,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
         boolean maxBool = false;
         List<UserVO> userVOList = userService.selectDormantUserbyPage(param.getFilter1(), param.getPage_num());
@@ -2391,7 +2497,7 @@ public class IndexController {
     public String i21_admin_mng(@RequestParam(value = "page_num", required = false) String tagValue,
                                 @RequestBody ParamPageListFilteredVO param,
                                 ModelMap model,
-                                @CookieValue(name = "access_token",required = true) String access_token){
+                                @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -2401,6 +2507,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
         ArrayList<CorpInfoVO> resultArray;
         resultArray = corpService.selectCorpInfo();
@@ -2429,7 +2537,7 @@ public class IndexController {
     public String admin_corporate(@RequestParam(value = "page_num", required = false) String tagValue,
                                 @RequestBody ParamPageListFilteredVO param,
                                   ModelMap model,
-                                  @CookieValue(name = "access_token",required = true) String access_token){
+                                  @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -2439,6 +2547,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
         ArrayList<CorpInfoVO> resultArray;
         resultArray = corpService.selectCorpInfo();
@@ -2487,7 +2597,7 @@ public class IndexController {
     @RequestMapping(value = "/k11_system_authority_mng",method = RequestMethod.POST)
     public String k11_system_authority_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                            ModelMap model,
-                                           @CookieValue(name = "access_token",required = true) String access_token){
+                                           @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -2497,6 +2607,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
 
@@ -2507,7 +2619,7 @@ public class IndexController {
     @RequestMapping(value = "/k21_admin_dashboad_mng",method = RequestMethod.POST)
     public String k21_admin_dashboad_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                          ModelMap model,
-                                         @CookieValue(name = "access_token",required = true) String access_token){
+                                         @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -2517,6 +2629,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
 
@@ -2526,7 +2640,7 @@ public class IndexController {
     @RequestMapping(value = "/k31_console_dashboad_mng",method = RequestMethod.POST)
     public String k31_console_dashboad_mng(@RequestParam(value = "tag", required = false) String tagValue,
                                            ModelMap model,
-                                           @CookieValue(name = "access_token",required = true) String access_token){
+                                           @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -2536,6 +2650,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
 
@@ -2561,7 +2677,7 @@ public class IndexController {
     @RequestMapping(value = "/l11_document_form_mng",method = RequestMethod.POST)
     public String l11_document_form_mng(@RequestBody ParamPageListFilteredVO param,
                                         ModelMap model,
-                                        @CookieValue(name = "access_token",required = true) String access_token){
+                                        @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -2571,6 +2687,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
         int list_amount = 10;
         int page_amount = 10;
@@ -2630,7 +2748,7 @@ public class IndexController {
     @RequestMapping(value = "/l12_document_rule_mng",method = RequestMethod.POST)
     public String l12_document_rule_mng(@RequestBody ParamPageListFilteredVO param,
                                         ModelMap model,
-                                        @CookieValue(name = "access_token",required = true) String access_token){
+                                        @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -2640,6 +2758,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
         int page = param.getPage_num();
         List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
@@ -2708,7 +2828,7 @@ public class IndexController {
     @RequestMapping(value = "/l20_code_mng",method = RequestMethod.POST)
     public String l20_code_mng(@RequestBody ParamPageListFilteredVO param,
                                ModelMap model,
-                               @CookieValue(name = "access_token",required = true) String access_token){
+                               @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
             adminVO = getVerityAuth(access_token);
@@ -2718,6 +2838,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
         int page_num = param.getPage_num();
 
