@@ -410,7 +410,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">모집 수</label>
                             <div class="form-inline col-md-4 mode-edit mode-new">
-                                <input type="text" class="form-control form-control-md text-md-right" id="recruit_count_limit" style="width: 50%;" placeholder="0">
+                                <input type="text" class="form-control form-control-md text-md-right" onkeyup="chkOnlyNum(event)" id="recruit_count_limit" style="width: 50%;" placeholder="0">
                                 <small class="form-text text-muted">
                                     명(기업)
                                 </small>
@@ -563,6 +563,14 @@
 
     <!-- / Layout footer -->
     <script>
+
+        function chkOnlyNum(event) {
+            let regExp = /[^0-9]/g;
+            let ele = event.target;
+            if (regExp.test(ele.value)) {
+                ele.value = ele.value.replace(regExp, '');
+            }
+        };
 
         // $(document).ready(function() {
         //     initSummerNote();
