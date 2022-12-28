@@ -29,64 +29,58 @@
                                 <th class="text-center sorting" style="width:30%">용도</th>
                                 <th class="text-center sorting" style="width:10%">작성자</th>
                                 <th class="text-center sorting" style="width:10%">관련 조직</th>
-                                <th class="text-center sorting" style="width:10%">파일이름</th>
-                                <th class="text-center sorting" style="width:7%">파일형식</th>
-                                <th class="text-center sorting" style="width:12%">등록일</th>
+                                <th class="text-center sorting" style="width:13%">파일이름</th>
+                                <th class="text-center sorting" style="width:5%">파일형식</th>
+                                <th class="text-center sorting" style="width:15%">등록일</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:choose>
-                                <c:when test="${fn:length(rulefileinfolist)>0}">
-                                    <c:forEach items="${rulefileinfolist}" var="rulefile" varStatus="status">
+                                <c:when test="${fn:length(rulefilelist)>0}">
+                                    <c:forEach items="${rulefilelist}" var="rulefile" varStatus="status">
                                         <tr class="rulefile-entity" id="${rulefile.idx_rule_file_info}">
                                             <td class="text-center">${status.count}</td>
                                             <td class="text-center">${rulefile.subject}</td>
-                                            <td class="text-center"><a href="#none" data-toggle="modal" data-target="#modals-counsel-view" class="btn btn-outline-default  btn-sm">${rulefile.usage_detail}</a></td>
+                                            <td class="text-center">${rulefile.usage_detail}</td>
+                                            <td class="text-center">${rulefile.admin_name}</td>
                                             <td class="text-center">${rulefile.depart_name}</td>
-                                            <td class="text-center"><fmt:formatDate value="${rulefile.reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                                            <td class="text-center">${status.count}</td>
-                                            <td class="text-center">${rulefile.subject}</td>
-                                            <td class="text-center">${rulefile.subject}</td>
+                                            <td class="text-center">${rulefile.file_name}</td>
+                                            <td class="text-center">${rulefile.extention}</td>
+                                            <td class="text-center"><fmt:formatDate value="${rulefile.reg_date}" pattern="yyyy년 MM월 dd일"/></td>
                                         </tr>
                                     </c:forEach>
                                 </c:when>
                                 <c:otherwise>
-
                                     <tr class="">
                                         <td colspan="8" class="text-center">규정 문서 목록이 없습니다.</td>
                                     </tr>
-
-
-
                                 </c:otherwise>
-
-
-
-
                             </c:choose>
-
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="article-list_info" role="status" aria-live="polite">총 50개 중 1에서 10까지</div>
-                    </div>
-                    <div class="col-sm-12 col-md-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                                <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
-                            </ul>
+                <c:if test="${total_count ne 0}">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5">
+                            <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${total_count}개 중 ${list_amount*(cur_page-1)+1}에서 ${total_count}까지</div>
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
+                                <ul class="pagination">
+                                    <c:set var="name" value="${total_count/list_amount}" />
+                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('l12_document_rule_mng',{page_num:1},'규정 문서 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('l12_document_rule_mng',{page_num:${cur_page-1}},'규정 문서 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+                                    <c:forEach var="i" begin="1" end="${page_amount}">
+                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('l12_document_rule_mng',{page_num:${(cur_sector-1)*page_amount+i}},'규정 문서 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
+                                    </c:forEach>
+                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('l12_document_rule_mng',{page_num:${cur_page+1}},'규정 문서 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('l12_document_rule_mng',{page_num:${tot_page}},'규정 문서 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </c:if>
             </div>
         </div>
     </div>
@@ -158,11 +152,11 @@ $('#btn_save_new').on('click', function() {
         return alert('규정 제목을 입력해 주세요.')
     }
 
-    if($("#form_usage").val() === ''){
+    if($("#usage_detail").val() === ''){
         return alert('규정 사용 용도를 입력해 주세요.')
     }
 
-    if($("#form_corp_name").val() === ''){
+    if($("#detail").val() === ''){
         return alert('관련조직 이름을 입력해 주세요.')
     }
 
@@ -173,8 +167,8 @@ $('#btn_save_new').on('click', function() {
 
     let formData = new FormData();
     formData.append('subject', $("#subject").val()); // 규정 제목
-    formData.append('usage_detail', $("#form_usage").val()); // 규정 사용 용도
-    formData.append('usage_detail', $("#form_corp_name").val()); // 관련조직 이름
+    formData.append('usage_detail', $("#usage_detail").val()); // 규정 사용 용도
+    formData.append('depart_name', $("#detail").val()); // 관련조직 이름
     formData.append('idx_admin', $("input[name=idx_admin]").val());
     if (document.getElementById('file_upload').files.length > 0) {
         formData.append('file1', document.getElementById('file_upload').files[0]);
@@ -182,7 +176,7 @@ $('#btn_save_new').on('click', function() {
 
     $.ajax({
         type: 'post',
-        url: 'insert_form_file', //데이터를 주고받을 파일 주소 입력
+        url: 'insert_rule_file', //데이터를 주고받을 파일 주소 입력
         data: formData,//보내는 데이터
         cache: false,
         contentType: false,
