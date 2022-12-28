@@ -13,7 +13,7 @@
                                        ORDER_NUM,
                                        IDX_FILE_INFO,
                                        REG_DATE)
-        VALUES (SEQ_FORM_FILE_INFO.NEXTVAL,
+        VALUES (SEQ_RULE_FILE_INFO.NEXTVAL,
                 #{subject},
                 #{usage_detail},
                 #{depart_name},
