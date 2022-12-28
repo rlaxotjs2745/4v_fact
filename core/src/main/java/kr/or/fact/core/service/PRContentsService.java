@@ -20,15 +20,15 @@ public interface PRContentsService {
     public PRContentVO getMainPRContent(ParamPageListFilteredVO paramVo);
 
     int insertPRContent(PRContentVO prContentVO);
-    int deletePR(int idx_pr_content);
+    int deletePR(long idx_pr_content);
 
-    PRContentVO getPRContent(int idx);
+    PRContentVO getPRContent(long idx);
 
     int insertPRContentFileJoin();
-    PRContentVO getPRContentFileJoin(int idx_pr_content);
+    PRContentVO getPRContentFileJoin(long idx_pr_content);
      List<PRContentVO> selectPRContentList(String tagValue);
 
-    int getPrViewCount(int idx_pr_content);
+    int getPrViewCount(long idx_pr_content);
     void updatePrViewCount(PRContentVO prContentVO);
     void updatePrContent(PRContentVO prContentVO);
 

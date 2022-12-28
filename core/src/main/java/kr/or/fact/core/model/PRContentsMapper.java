@@ -24,7 +24,7 @@ public interface PRContentsMapper {
     PRContentVO getMainPRContent(ParamPageListFilteredVO paramVo);
 
     int insertPRContent(PRContentVO prContentVO);
-    int deletePR(@Param("idx_pr_content") int idx_pr_content);
+    int deletePR(@Param("idx_pr_content") long idx_pr_content);
 
     PRContentVO getPRContent(@Param("idx") long idx);
     int insertPRContentFileJoin();

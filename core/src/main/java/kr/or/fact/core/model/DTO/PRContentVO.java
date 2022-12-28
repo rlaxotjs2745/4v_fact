@@ -23,7 +23,9 @@ public class PRContentVO {
     int view_count;//	number	20					조회수
     int pr_content_status;//	number	4		0			홍보자료 게시 프로세스 상태	0:임시저장, 1:허락, 2:수정 발행, 3:게시 종료, 99:기타
     Date show_start_date;//	date						노출 시작 일시분초
+    String show_start_date_str;
     Date show_end_date;//	date						노출 종료 일시분초
+    String show_end_date_str;
     int doc_version;//	number	4		1			홍보자료 버전	default:1, increase 1
     String memo;//	varchar2	1000					메모	공고 관련 내용
     long search_tag;//	number	32					검색 태그

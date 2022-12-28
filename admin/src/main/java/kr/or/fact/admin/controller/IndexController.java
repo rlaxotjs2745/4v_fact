@@ -30,7 +30,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
-public class IndexController {
+public class IndexController extends BaseController {
 
     @Resource(name = "adminService")
     AdminService adminService;
@@ -104,31 +104,6 @@ public class IndexController {
     @Autowired
     Environment env;
 
-    public AdminVO getVerityAuth(String access_token){
-        AdminVO adminVO = null;
-
-        //1. access_token 찾기
-        AdminSessionVO adminSessionVO = adminSessionService.getAdminSessionInfoByToken(access_token);
-        if(adminSessionVO!=null)
-        {
-            //2.access_token expire 검토
-            SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-
-            Date cur = new Date();
-            String today = format.format(cur);
-            String expire = format.format(adminSessionVO.getAccess_expire_date());
-            int compare = expire.compareTo(today);
-            if(compare>=0){//오늘보다 크면
-                adminVO = adminService.getAdminInfo(adminSessionVO.getIdx_admin());
-            }else {//토큰 만료
-                adminVO = new AdminVO();
-                adminVO.set_expired(true);
-            }
-        }
-
-        return adminVO;
-    }
-
     @RequestMapping(value = "/*",method = RequestMethod.GET)
     public String rootContents(HttpServletRequest req,
                        ModelMap model,
@@ -181,7 +156,6 @@ public class IndexController {
         }else{
             return "login";
         }
-        System.out.println("_path:"+_path);
         if(!_path.equals("/") && !_path.equals("")) {
             model.addAttribute("pageOnLoad", 1);
         }
