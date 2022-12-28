@@ -32,7 +32,7 @@
                 <div class="col-md-3 ">
                     <label class="form-label text-muted">연락처</label>
                     <div class="">
-                        <input id="homepage_admin_pnum" type="text" class="form-control form-control-md">
+                        <input id="homepage_admin_pnum" type="text" class="form-control form-control-md" onkeyup="chkPhone(event)">
 <%--                        <input id="homepage_admin_pnum" type="text" class="form-control form-control-md" value="${homepageInfo.homepage_admin_pnum}">--%>
                         <%--<input class="mr-sm-4 mb-2 mb-sm-0" value="${homepageInfo.homepage_admin_pnum}">--%>
                     </div>
@@ -40,7 +40,7 @@
                 <div class="col-md-3 ">
                     <label class="form-label text-muted">이메일</label>
                     <div class="">
-                        <input id="email" type="text" class="form-control form-control-md">
+                        <input id="email" type="text" class="form-control form-control-md" onkeyup="chkEmail(event)">
 <%--                        <input id="email" type="text" class="form-control form-control-md" value="${homepageInfo.email}">--%>
                         <%--<input class="mr-sm-4 mb-2 mb-sm-0" value="${homepageInfo.homepage_admin_pnum}">--%>
                     </div>
@@ -458,6 +458,29 @@
 <script>
 
     var ranN = Math.floor(Math.random() * 10000)+1000;
+
+    // const namePattern = /^[가-힣]{2,}$/;
+    // const phonePattern = /^01[016789]\d{3,4}\d{4}$/;
+    // const emailPattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+
+    function chkPhone(event) {
+        let phoneRegex = /\b01[016789]\d{3,4}\d{4}\b/g;
+        let ele = event.target;
+        if (!phoneRegex.test(ele.value)) {
+            console.log(ele.value)
+            ele.value = ele.value.replace(/[^0-9]/gi, '');
+        }
+    };
+
+
+    function chkEmail(event) {
+        let phoneRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/g;
+        let ele = event.target;
+        if (!phoneRegex.test(ele.value)) {
+            console.log(ele.value)
+            ele.value = ele.value.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/gi, '');
+        }
+    };
 
     var curCoworkerdata;
     var coworkerList=[];
