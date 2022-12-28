@@ -2022,12 +2022,11 @@ public class APIController {
 
         if((formFileInfoVO.getSubject() != null || formFileInfoVO.getSubject() != "") && formFileInfoVO.getFile1() != null){
 
-            fileService.convertMultipartToFile(formFileInfoVO.getFile1());
-            long fileIdx = fileService.insertFormFile(formFileInfoVO.getFile1(), formFileInfoVO.getIdx_admin());
-
             formFileInfoVO.setOrder_num(0);
-            formFileInfoVO.setIdx_file_info(fileIdx);
             formFileService.insertFormFile(formFileInfoVO);
+
+            fileService.convertMultipartToFile(formFileInfoVO.getFile1());
+            fileService.insertFormFile(formFileInfoVO.getFile1(), formFileInfoVO.getIdx_admin());
 
             resultVO.setResult_code("SUCCESS");
             resultVO.setResult_str("양식을 등록했습니다.");
@@ -2062,12 +2061,11 @@ public class APIController {
 
         if((ruleFileInfoVO.getSubject() != null || ruleFileInfoVO.getSubject() != "") && ruleFileInfoVO.getFile1() != null){
 
+            ruleFileInfoVO.setOrder_num(0);
+            ruleFileService.insertRuleFile(ruleFileInfoVO);
+
             fileService.convertMultipartToFile(ruleFileInfoVO.getFile1());
             long fileIdx = fileService.insertRuleFile(ruleFileInfoVO.getFile1(), ruleFileInfoVO.getIdx_admin());
-
-            ruleFileInfoVO.setOrder_num(0);
-            ruleFileInfoVO.setIdx_file_info(fileIdx);
-            ruleFileService.insertRuleFile(ruleFileInfoVO);
 
             resultVO.setResult_code("SUCCESS");
             resultVO.setResult_str("양식을 등록했습니다.");
