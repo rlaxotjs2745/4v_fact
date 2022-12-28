@@ -83,7 +83,7 @@
                                 <c:otherwise>
 
                                     <tr class="">
-                                        <td colspan="8" class="text-center">아이템이 없어요</td>
+                                        <td colspan="8" class="text-center">등록된 푸터의 내용이 없습니다.</td>
                                     </tr>
                                 </c:otherwise>
                             </c:choose>
@@ -171,7 +171,7 @@
                                 <c:otherwise>
 
                                     <tr class="">
-                                        <td colspan="8" class="text-center">아이템이 없어요</td>
+                                        <td colspan="8" class="text-center">등록된 조직도의 내용이 없습니다.</td>
                                     </tr>
 
 
