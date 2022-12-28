@@ -67,8 +67,8 @@
         UPDATE TB_SYSTEM_CODE SET CODE_NAME = #{code_name},
                                   CODE_VALUE = #{code_value},
                                   DETAIL = #{detail},
-                                  ORDER_NUM = #{order_num},
-                                  WHERE IDX_SYSTEM_CODE=#{idx_system_code}
+                                  ORDER_NUM = #{order_num}
+                    WHERE IDX_SYSTEM_CODE=#{idx_system_code}
     </update>
 
     <delete id="deleteSystemCode" parameterType="long" >

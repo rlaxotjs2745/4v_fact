@@ -999,13 +999,10 @@ public class APIController {
     public @ResponseBody ResultVO update_system_code(HttpSession session, @RequestBody SystemCodeVO systemCodeVO){
 
         ResultVO resultVO = new ResultVO();
-        resultVO.setResult_str("저장했습니다");
+        resultVO.setResult_str("수정했습니다");
         resultVO.setResult_code("SUCCESS");
 
-        if(systemCodeVO.getCode_name() != null &&
-                systemCodeVO.getCode_value()!= null &&
-                systemCodeVO.getDetail()!= null
-        ){
+        if(systemCodeVO.getIdx_system_code() > 0){
             systemService.updateSystemCode(systemCodeVO);
         }
         else {
@@ -1019,7 +1016,7 @@ public class APIController {
     public @ResponseBody ResultVO delete_system_code(HttpSession session, @RequestBody SystemCodeVO systemCodeVO){
 
         ResultVO resultVO = new ResultVO();
-        resultVO.setResult_str("저장했습니다");
+        resultVO.setResult_str("삭제했습니다");
         resultVO.setResult_code("SUCCESS");
 
         if(systemCodeVO.getIdx_system_code() > 0){
