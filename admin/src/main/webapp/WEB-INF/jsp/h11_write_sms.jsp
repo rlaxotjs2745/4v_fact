@@ -3,7 +3,7 @@
 <!-- Page content -->
 <div class="container-fluid flex-grow-1 container-p-y">
     <h4 class="font-weight-bold py-3 mb-4">SMS 작성</h4>
-    <div class="card px-4 pt-4 mb-4">
+    <div class="sms_write_form card px-4 pt-4 mb-4">
         <div>
             <form name="smssend" method="post" >
                 <div class="modal-body">
@@ -18,19 +18,19 @@
 
 
                 <div class="form-group row">
-                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">수신 번호</label>
+                    <label class="col-form-label col-form-label-md col-md-0 text-md-right font-weight-bold mode-edit mode-new">수신 번호</label>
                     <div class="col-md-6 mode-edit mode-new">
                         <input id="callback" type="text" class="form-control form-control-md text-md-right" placeholder="010부터작성" onkeyup="chkEmail(event)">
                     </div>
                 </div>
     <div class="form-group row">
-        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">수신자 이름</label>
+        <label class="col-form-label col-form-label-md col-md-0 text-md-right font-weight-bold mode-edit mode-new">수신자 이름</label>
         <div class="col-md-6 mode-edit mode-new">
             <label for="user_id"></label><input id="dest_info" type="text" class="form-control form-control-md text-md-right" placeholder="받는사람">
         </div>
     </div>
-                <div class="form-group row">
-                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" id="sms">문자 내용</label>
+                <div class="form-group row" style="align-items: baseline">
+                    <label class="col-form-label col-form-label-md col-md-0 text-md-right font-weight-bold" id="sms">문자 내용</label>
 
                     <div class="form-group col col-md-10">
                         <span id="counter">글자수:###</span>
@@ -39,21 +39,20 @@
                     </div>
                 </div>
 <%--                <div class="form-group row">--%>
-<%--                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">보내는 사람</label>--%>
+<%--                    <label class="col-form-label col-form-label-md col-md-0 text-md-right font-weight-bold mode-edit mode-new">보내는 사람</label>--%>
 <%--                    <div class="col-md-6 mode-edit mode-new">--%>
 <%--                        <label for="user_id"></label><input id="user_id" type="text" class="form-control form-control-md text-md-right" placeholder="보내는사람">--%>
 <%--                    </div>--%>
 <%--                </div>--%>
 
+                <div class="form-group row label">
+                    <label class="col-form-label col-form-label-md col-md-0 text-md-right font-weight-bold mode-edit mode-new">예약여부</label>
+                    <label><input id="send_now" type="radio" name="sendtype" value="0" onchange="changeSendType(this);" > 바로보내기</label>
+                    <label><input id="send_reserve" type="radio" name="sendtype" value="1" onchange="changeSendType(this);" > 보내기 예약</label>
+                </div>
 
-
-                <br>
-                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">예약여부</label>
-                <label><input id="send_now" type="radio" name="sendtype" value="0" onchange="changeSendType(this);" > 바로보내기</label>
-                <label><input id="send_reserve" type="radio" name="sendtype" value="1" onchange="changeSendType(this);" > 보내기 예약</label>
-                <br>
                 <div class="form-group row" id="choose_send_type">
-                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">예약일시</label>
+                    <label class="col-form-label col-form-label-md col-md-0 text-md-right font-weight-bold mode-edit mode-new">예약일시</label>
                     <div class="col-md-10">
                         <div id="datepicker-show" class="input-daterange input-group mode-edit mode-new">
                             <input id ="date" type="text" class="form-control mr-1" name="start">
