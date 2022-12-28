@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -380,7 +381,7 @@ public class MobileIndexController {
     }
 
     @RequestMapping("/brd_promotion")
-    public String brd_promotion(@RequestParam("page") int page,
+    public String brd_promotion(@RequestBody ParamPageListFilteredVO param,
                                 Model model){
         int list_amount = 10;
         int page_amount = 10;
@@ -390,12 +391,9 @@ public class MobileIndexController {
             return "brd_announce_blank";
         }
         model.addAttribute("total_count",promotionCount);
-        ParamPageListFilteredVO paramVo = new ParamPageListFilteredVO();
-        paramVo.setPage_num(page);
-        paramVo.setAmount(list_amount);
-        List<PRContentVO> prContentList = prContentService.getPRContentList(paramVo);
+        List<PRContentVO> prContentList = prContentService.getPRContentList(param);
         model.addAttribute("prContentList",prContentList);
-
+        int page = param.getPage_num();
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
 

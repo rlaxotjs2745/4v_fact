@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.fact.core.model.ConsoleSessionMapper">
+    <select id="getConsoleSessionInfoByToken" parameterType="String" resultType="kr.or.fact.core.model.DTO.ConsoleSessionVO">
+        SELECT *
+        FROM TB_CONSOLE_SESSION
+        WHERE ACCESS_TOKEN = #{access_token,jdbcType=VARCHAR} AND IS_VALID = 1
+    </select>
+
+    <select id="getConsoleSessionValidToken" parameterType="long" resultType="kr.or.fact.core.model.DTO.ConsoleSessionVO">
+        SELECT *
+        FROM TB_CONSOLE_SESSION
+        WHERE IDX_USER = #{idx_user} AND IS_VALID = 1
+    </select>
+
+    <select id="getAdminConsoleSessionValidToken" parameterType="long" resultType="kr.or.fact.core.model.DTO.ConsoleSessionVO">
+        SELECT *
+        FROM TB_CONSOLE_SESSION
+        WHERE IDX_ADMIN = #{idx_admin} AND IS_VALID = 1
+    </select>
+
+    <insert id="insertConsoleSessionInfo" parameterType="kr.or.fact.core.model.DTO.ConsoleSessionVO">
+        INSERT INTO TB_CONSOLE_SESSION (
+            IDX_CONSOLE_SESSION,
+            IDX_USER,
+            IDX_ADMIN,
+            CONSOLE_TOKEN,
+            CONSOLE_REFRESH_TOKEN,
+            IS_VALID,
+            IS_ADMIN,
+            CONSOLE_EXPIRE_DATE,
+            CONSOLE_REFRESH_DATE,
+            REG_DATE)
+        VALUES (SEQ_CONSOLE_SESSION.NEXTVAL,
+                #{idx_user},
+                #{idx_admin},
+                #{console_token},
+                #{console_refresh_token},
+                #{is_valid},
+                #{is_admin},
+                #{console_expire_date},
+                #{console_refresh_date},
+                SYSDATE)
+    </insert>
+
+    <update id="updateConsoleSessionInfo" parameterType="kr.or.fact.core.model.DTO.ConsoleSessionVO">
+        UPDATE TB_CONSOLE_SESSION
+        SET CONSOLE_TOKEN = #{console_token},
+            CONSOLE_EXPIRE_DATE = #{console_expire_date}
+        WHERE CONSOLE_REFRESH_TOKEN = #{console_refresh_token}
+    </update>
+
+    <update id="deleteConsoleSessionInfo" parameterType="kr.or.fact.core.model.DTO.ConsoleSessionVO">
+        UPDATE TB_CONSOLE_SESSION
+        SET IS_VALID = 0
+        WHERE REFRESH_TOKEN = #{refresh_token}
+    </update>
+
+</mapper>

@@ -1263,7 +1263,22 @@ public class IndexController extends BaseController {
 
     @RequestMapping(value = "/c431_site_adver_mng" ,method = RequestMethod.POST)
     public String c431_site_adver_mng(@RequestParam(value = "page_num", required = false) String tagValue,
-                                     @RequestBody ParamPageListFilteredVO param, ModelMap model){
+                                      @RequestBody ParamPageListFilteredVO param,
+                                      ModelMap model,
+                                      @CookieValue(name = "access_token",required = false) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
+        else {
+            return "redirect:/login";
+        }
 
         param.setAmount(10);
         int list_amount = 10;

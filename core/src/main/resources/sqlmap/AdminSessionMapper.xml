@@ -8,6 +8,12 @@
         WHERE ACCESS_TOKEN = #{access_token,jdbcType=VARCHAR} AND IS_VALID = 1
     </select>
 
+    <select id="getAdminSessionValidToken" parameterType="long" resultType="kr.or.fact.core.model.DTO.AdminSessionVO">
+        SELECT *
+        FROM TB_ADMIN_SESSION
+        WHERE IDX_ADMIN = #{idx_admin} AND IS_VALID = 1
+    </select>
+
     <insert id="insertAdminSessionInfo" parameterType="kr.or.fact.core.model.DTO.AdminSessionVO">
         INSERT INTO TB_ADMIN_SESSION (
             IDX_ADMIN_SESSION,

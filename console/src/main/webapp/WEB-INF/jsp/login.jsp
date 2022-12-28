@@ -110,7 +110,7 @@
                     <span id = "span_result" class="is-alert" style="display: none">아이디 또는 비밀번호를 찾을 수 없습니다.</span>
                     <div class="d-flex justify-content-between align-items-center m-0">
                         <label class="custom-control custom-checkbox m-0">
-                            <input type="checkbox" class="custom-control-input">
+                            <input id="is_admin" type="checkbox" class="custom-control-input">
                             <span class="custom-control-label">관리자 로그인</span>
                         </label>
                         <button id="btn_login" type="button" class="btn btn-primary">로그인</button>
@@ -146,20 +146,38 @@
             "admin_id":$("#input_id").val(),
             "admin_pw":$("#input_pw").val()
         };
+        var url = 'console_login';
+        if($("#is_admin").is(':checked'))
+            url='admin_console_login'
 
         $.ajax({
             type: 'post',
-            url :'console_login', //데이터를 주고받을 파일 주소 입력
+            url :url, //데이터를 주고받을 파일 주소 입력
             data: JSON.stringify(param),//보내는 데이터
             contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
             dataType:'json',//받는 데이터 타입
             success: function(result){
                 if(result.result_code=="SUCCESS"){
-                    setCookie("auth_code",result.element.auth_code,"1"); //변수, 변수값, 저장기간
+                    //access_token을 받았으니 사용해야지
+
+
+                    if($.cookie('console_token')!='undefined')
+                    {
+                        $.removeCookie('console_token', { path: '/' }); // => true
+                        $.removeCookie('console_refresh_token', { path: '/' }); // => true
+                    }
+                    $.cookie('console_token', result.element.console_token, { expires: 1, path: '/' });
+                    $.cookie('console_refresh_token', result.element.console_refresh_token, { expires: 365, path: '/' });
+                    location.replace('/');
+
+/*                    setCookie("auth_code",result.element.auth_code,"1"); //변수, 변수값, 저장기간
                     setCookie("idx_console_user",result.element.idx_console_user,"1"); //변수, 변수값, 저장기간
                     var checkEvent = getCookie("Ck_01");
 
-                    location.href="/";
+                    location.href="/";*/
+
+
+
                 }
                 else {
                     alert(result.result_str);

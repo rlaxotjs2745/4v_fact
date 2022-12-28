@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface AdminSessionMapper {
 
     AdminSessionVO getAdminSessionInfoByToken(String access_token);
+    AdminSessionVO getAdminSessionValidToken(long idx_admin);
     void insertAdminSessionInfo(AdminSessionVO adminSessionVO);
     void updateAdminSessionInfo(AdminSessionVO adminSessionVO);
     void deleteAdminSessionInfo(AdminSessionVO adminSessionVO);
