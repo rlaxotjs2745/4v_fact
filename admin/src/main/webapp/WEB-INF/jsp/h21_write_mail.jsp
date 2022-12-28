@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row" style="align-items: baseline">
             <label class="col-form-label col-form-label-md col-md-0 text-md-right font-weight-bold" for="email_file">파일 첨부</label>
             <div class="form-group col col-md-10 mode-edit mode-new">
                 <input type="file" name="email_file" id="email_file" class="form-control-file d-block py-1" multiple>
@@ -33,7 +33,7 @@
             <%--                    </div>--%>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row" style="align-items: baseline">
             <label class="col-form-label col-form-label-md col-md-0 text-md-right font-weight-bold">내용</label>
             <div class="col-md-10 mode-edit mode-new">
                 <div style="background-color: #ffffff">
