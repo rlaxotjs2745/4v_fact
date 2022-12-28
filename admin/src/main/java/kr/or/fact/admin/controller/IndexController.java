@@ -1540,16 +1540,23 @@ public class IndexController extends BaseController {
             return "redirect:/login";
         }
 
+        if(param.getFilter1()<1){
+            param.setFilter1(1);
+        }
+        if(param.getFilter2()<1){
+            param.setFilter2(1);
+        }
+
         param.setAmount(10);
         int list_amount = 10;
         int page_amount = param.getAmount();
-        int page = param.getPage_num();
+        int hi_page = param.getFilter1();
 
-        model.addAttribute("cur_page",page);
+        model.addAttribute("hi_cur_page",hi_page);
         model.addAttribute("vamount",list_amount);
 
-        int cur_sector = page/page_amount+1;
-        if(page%page_amount==0) cur_sector-=1;
+        int hi_cur_sector = hi_page/page_amount+1;
+        if(hi_page%page_amount==0) hi_cur_sector-=1;
 
 
         //푸터 정보
@@ -1574,13 +1581,13 @@ public class IndexController extends BaseController {
         boolean hi_is_last = false;
         boolean is_active = false;
 
-        if(page!=hi_tot_page && hi_tot_page>1) hi_is_next = true;
+        if(hi_page!=hi_tot_page && hi_tot_page>1) hi_is_next = true;
 
-        if(page!=1 && hi_tot_page>1) hi_is_prev = true;
+        if(hi_page!=1 && hi_tot_page>1) hi_is_prev = true;
 
-        if(cur_sector!=hi_tot_sector && hi_tot_sector>1 ) hi_is_last = true;
+        if(hi_cur_sector!=hi_tot_sector && hi_tot_sector>1 ) hi_is_last = true;
 
-        if(cur_sector!=1 && hi_tot_sector>1 ) hi_is_past = true;
+        if(hi_cur_sector!=1 && hi_tot_sector>1 ) hi_is_past = true;
 
         if(hi_tot_page<=page_amount){
             hi_is_past = false;
@@ -1590,7 +1597,7 @@ public class IndexController extends BaseController {
 
         model.addAttribute("hi_tot_page",hi_tot_page);
         model.addAttribute("hi_tot_sector",hi_tot_sector);
-        model.addAttribute("hi_cur_sector",cur_sector);
+        model.addAttribute("hi_cur_sector",hi_cur_sector);
         model.addAttribute("hi_is_past",hi_is_past);
         model.addAttribute("hi_is_prev",hi_is_prev);
         model.addAttribute("hi_is_next",hi_is_next);
@@ -1600,6 +1607,12 @@ public class IndexController extends BaseController {
 
         //조직도, 직원 정보
         page_amount = 10;
+        int cw_page = param.getFilter2();
+
+        model.addAttribute("cw_cur_page",cw_page);
+
+        int cw_cur_sector = cw_page/page_amount+1;
+        if(cw_page%page_amount==0) cw_cur_sector-=1;
 
         int coWorkerCount = coWorkerNService.getCoWorkerCount();
         model.addAttribute("cw_total_count", coWorkerCount);
@@ -1618,13 +1631,13 @@ public class IndexController extends BaseController {
         boolean cw_is_next = false;
         boolean cw_is_last = false;
 
-        if(page!=cw_tot_page && cw_tot_page>1) cw_is_next = true;
+        if(cw_page!=cw_tot_page && cw_tot_page>1) cw_is_next = true;
 
-        if(page!=1 && cw_tot_page>1) cw_is_prev = true;
+        if(cw_page!=1 && cw_tot_page>1) cw_is_prev = true;
 
-        if(cur_sector!=cw_tot_sector && cw_tot_sector>1 ) cw_is_last = true;
+        if(cw_cur_sector!=cw_tot_sector && cw_tot_sector>1 ) cw_is_last = true;
 
-        if(cur_sector!=1 && cw_tot_sector>1 ) cw_is_past = true;
+        if(cw_cur_sector!=1 && cw_tot_sector>1 ) cw_is_past = true;
 
         if(cw_tot_page<=page_amount){
             cw_is_past = false;
@@ -1634,7 +1647,7 @@ public class IndexController extends BaseController {
 
         model.addAttribute("cw_tot_page",cw_tot_page);
         model.addAttribute("cw_tot_sector",cw_tot_sector);
-        model.addAttribute("cw_cur_sector",cur_sector);
+        model.addAttribute("cw_cur_sector",cw_cur_sector);
         model.addAttribute("cw_is_past",cw_is_past);
         model.addAttribute("cw_is_prev",cw_is_prev);
         model.addAttribute("cw_is_next",cw_is_next);
