@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service("adminSessionService")
 public class AdminSessionServiceImpl implements AdminSessionService {
     private final AdminSessionMapper adminSessionMapper;
@@ -21,7 +23,7 @@ public class AdminSessionServiceImpl implements AdminSessionService {
 
     }
     @Override
-    public AdminSessionVO getAdminSessionValidToken(long idx_admin){
+    public List<AdminSessionVO> getAdminSessionValidToken(long idx_admin){
         return adminSessionMapper.getAdminSessionValidToken(idx_admin);
     }
 
