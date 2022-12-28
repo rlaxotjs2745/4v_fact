@@ -48,7 +48,8 @@
                           SELECT A.*, B.admin_name, C.EXTENTION, C.FILE_NAME
                           FROM TB_FORM_FILE_INFO A
                                  INNER JOIN TB_ADMIN B ON A.idx_admin = B.idx_admin
-                                 INNER JOIN TB_FILE_INFO C ON A.IDX_FILE_INFO = C.IDX_FILE_INFO
+                                 INNER JOIN TB_FILE_INFO C ON A.IDX_FORM_FILE_INFO = C.IDX_FILE_USAGE
+                          WHERE C.FILE_TYPE = 4
                           order by IDX_FORM_FILE_INFO desc
                       )
                  WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
@@ -59,7 +60,8 @@
     <select id="getFormFileCount" resultType="int">
         SELECT COUNT (*) FROM TB_FORM_FILE_INFO A
                                   INNER JOIN TB_ADMIN B ON A.idx_admin = B.idx_admin
-                                  INNER JOIN TB_FILE_INFO C ON A.IDX_FILE_INFO = C.IDX_FILE_INFO
+                                  INNER JOIN TB_FILE_INFO C ON A.IDX_FORM_FILE_INFO = C.IDX_FILE_USAGE
+        WHERE C.FILE_TYPE = 4
     </select>
 
 </mapper>

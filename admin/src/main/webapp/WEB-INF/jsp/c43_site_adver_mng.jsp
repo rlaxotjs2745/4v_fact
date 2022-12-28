@@ -375,7 +375,7 @@
                             <div class="form-group row" id="pr_subject_insert">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">홍보자료 제목</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" >
+                                    <input type="text" id="pr_subject" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" >
                                     <div class="form-control-plaintext mode-view"></div>
                                 </div>
                             </div>
@@ -992,6 +992,23 @@
             saveNewBtn.forEach(btn=>btn.addEventListener('click', saveForm));
 
             function saveForm(message){
+
+                if($("#pr_subject").val() === ''){
+                    return alert('제목을 입력해 주세요.')
+                }
+
+                if($("#pr_content_code_insert textarea").val() === ''){
+                    return alert('컨텐츠 코드를 입력해주세요.')
+                }
+
+                if($("#memo_insert textarea").val() === ''){
+                    return alert('내용을 입력해 주세요.')
+                }
+
+                if($("#show_start_date_insert").val() === '' || $("#show_end_date_insert").val() === ''){
+                    return alert('게시기간을 입력해주세요.')
+                }
+
                 event.preventDefault();
                 var fileForm = new FormData();
                 fileForm.append("pr_content_code",document.querySelector('#pr_content_code_insert textarea').value);
