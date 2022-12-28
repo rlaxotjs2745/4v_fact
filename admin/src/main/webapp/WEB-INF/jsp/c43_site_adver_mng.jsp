@@ -814,7 +814,7 @@
                 _saveCont($(event.relatedTarget).data('idx'))
             })
             $('#modals-counsel-history').on('show.bs.modal', function (event) {
-                _getCont($(event.relatedTarget).data('idx'))
+                _getCont(curPRdata)
             })
 
             function _getCont(_idx) {
@@ -848,7 +848,7 @@
 
             function _saveCont(_i) {
                 curPRdata = prList[_i].idx_pr_content;
-                $('#modals-counsel-view .this_idx').attr('data-idx',curPRdata)
+                $('#modals-counsel-view a.this_idx').attr('data-idx',curPRdata)
                 $("#subject span").text(prList[_i].subject);
                 $("#is_new span").text(prList[_i].is_new);
                 $("#is_file span").text(prList[_i].is_file);

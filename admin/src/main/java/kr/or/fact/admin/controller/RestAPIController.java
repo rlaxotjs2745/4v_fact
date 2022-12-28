@@ -37,16 +37,20 @@ public class RestAPIController extends BaseController {
         }
 
         if(paramVo!=null){
-            PRContentVO rs = prContentService.getPRContent(paramVo.getIdx_pr_content());
+            PRContentVO rs = prContentService.getPRContentFileJoin(paramVo.getIdx_pr_content());
             if(rs!=null) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.KOREAN);
-                String sDate = dateFormat.format(rs.getShow_start_date());
-                String eDate = dateFormat.format(rs.getShow_end_date());
-
-                rs.setShow_start_date_str(sDate);
-                rs.setShow_end_date_str(eDate);
+                if(rs.getShow_start_date()!=null) {
+                    String sDate = dateFormat.format(rs.getShow_start_date());
+                    rs.setShow_start_date_str(sDate);
+                }
+                if(rs.getShow_end_date()!=null) {
+                    String eDate = dateFormat.format(rs.getShow_end_date());
+                    rs.setShow_end_date_str(eDate);
+                }
                 Map<String, Object> _rs = new HashMap<String, Object>();
                 _rs.put("rs", rs);
+
                 resultVO.setData(_rs);
                 resultVO.setResult_str("홍보자료를 불러왔습니다.");
                 resultVO.setResult_code("SUCCESS");
