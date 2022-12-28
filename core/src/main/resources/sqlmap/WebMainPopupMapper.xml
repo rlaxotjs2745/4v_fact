@@ -6,9 +6,9 @@
 
     <select id="getWebMainPopupCount" resultType="int">
         SELECT COUNT (*) FROM TB_WEB_MAIN_POPUP A
-                                  INNER JOIN TB_ADMIN B ON A.idx_admin = B.idx_admin
+                                  INNER JOIN TB_ADMIN B ON A.IDX_ADMIN = B.IDX_ADMIN
                                   INNER JOIN TB_FILE_INFO C ON A.IDX_FILE_INFO = C.IDX_FILE_INFO
-        WHERE (IS_SHOW = 1 OR IS_SHOW = 9) AND A.CONTENTS_TYPE = 1 AND C.FILE_TYPE = 6
+        WHERE (A.IS_SHOW = 1 OR A.IS_SHOW = 9) AND A.CONTENTS_TYPE = 1 AND C.FILE_TYPE = 6
     </select>
 
     <select id="getWebMainPopupList" resultType="kr.or.fact.core.model.DTO.WebMainPopupVO">
@@ -43,9 +43,9 @@
                         FILE_NAME
                  FROM (
                           SELECT A.*, B.admin_name, C.FILE_PATH, C.FILE_NAME FROM TB_WEB_MAIN_POPUP A
-                                        INNER JOIN TB_ADMIN B ON A.idx_admin = B.idx_admin
+                                        INNER JOIN TB_ADMIN B ON A.IDX_ADMIN = B.IDX_ADMIN
                                         INNER JOIN TB_FILE_INFO C ON A.IDX_FILE_INFO = C.IDX_FILE_INFO
-                          WHERE (IS_SHOW = 1 OR IS_SHOW = 9)
+                          WHERE (A.IS_SHOW = 1 OR A.IS_SHOW = 9)
                             AND A.CONTENTS_TYPE = 1
                             AND C.FILE_TYPE = 6
                           order by IDX_POPUP_IMG desc
