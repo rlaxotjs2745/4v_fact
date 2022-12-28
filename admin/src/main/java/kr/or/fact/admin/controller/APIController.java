@@ -792,7 +792,7 @@ public class APIController {
 
 
         ResultVO resultVO = new ResultVO();
-        resultVO.setResult_str("성공");
+        resultVO.setResult_str("저장에 성공했습니다");
         resultVO.setResult_code("SUCCESS");
 
         int groupIdx=visitService.getGroupIdx();
