@@ -31,7 +31,7 @@
                             <c:choose>
                                 <c:when test="${fn:length(systemCodeList)>0}">
                                     <c:forEach items = "${systemCodeList}" var ="code" varStatus="status">
-                                        <tr class="">
+                                        <tr class="" data-idx="">
                                             <td class="text-center">${status.count}</td>
                                             <td class="text-center">${code.code_name}</td>
                                             <td class="text-center">${code.code_value}</td>
@@ -126,7 +126,7 @@
 <!-- Layout footer -->
 
 <%@include file ="layouts/frame_footer.jsp" %>
-<script src="resources/assets/js/bootstable.js"></script>
+<script src="resources/assets/js/bootstable2.js"></script>
 <script>
 
     $('#btn_save_new').on('click', function() {
@@ -134,7 +134,8 @@
         var param = {
             code_name:$("#code_name").val(),
             code_value:$("#code_value").val(),
-            detail:$("#detail").val()
+            detail:$("#detail").val(),
+            order_num:0
         };
 
         $.ajax({
@@ -148,8 +149,9 @@
                 console.log(result);
                 if(result.result_code=="SUCCESS"){
                     alert(result.result_str);
-
-                    $("#modals-code-new-c").modal("hide");
+                    $('body').removeClass('modal-open');
+                    $('body').css('padding-right', '');
+                    $("#modals-code-new").modal("hide");
                     $(".modal-backdrop").removeClass();
                     pageLoad('l20_code_mng',{page_num:1},'시스템 코드 관리');
                 }
