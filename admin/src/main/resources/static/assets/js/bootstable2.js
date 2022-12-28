@@ -93,6 +93,7 @@ function FijModoEdit(but) {
     $(but).parent().find('#bElim').hide();
     var $row = $(but).parents('tr');  //accede a la fila
     $row.attr('id', 'editing');  //indica que está en edición
+    $row.children(':first-child').find('.input-sm').attr("disabled",true);
 }
 function ModoEdicion($row) {
     if ($row.attr('id')=='editing') {
