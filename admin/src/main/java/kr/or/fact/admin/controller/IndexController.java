@@ -73,10 +73,10 @@ public class IndexController extends BaseController {
     @Resource(name = "userService")
     public UserService userService;
 
-    @Resource(name="prContentService")
+    @Resource(name = "prContentService")
     public PRContentsService prContentService;
 
-    @Resource(name="webMainPopupService")
+    @Resource(name = "webMainPopupService")
     public WebMainPopupService webMainPopupService;
 
     @Resource(name = "formFileService")
@@ -88,7 +88,7 @@ public class IndexController extends BaseController {
     @Autowired
     public PRContentsMapper prContentsMapper;
 
-    @Resource(name="adminSessionService")
+    @Resource(name = "adminSessionService")
     AdminSessionService adminSessionService;
 
     @Autowired

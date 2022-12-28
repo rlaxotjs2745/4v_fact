@@ -1973,6 +1973,9 @@
 
 <script>
 
+    console.log('${reqSpplFileUrl}');
+    console.log(${hasToSppl});
+
     curUserDemoBsIdx = ${modifyUserDemoBsVO.idx_user_demo_bs};
 
     if('${modifyUserDemoBsVO.user_demobs_status}' == '6' || '${modifyUserDemoBsVO.user_demobs_status}' == '7'){
