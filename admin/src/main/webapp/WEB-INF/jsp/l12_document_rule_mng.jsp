@@ -29,9 +29,9 @@
                                 <th class="text-center sorting" style="width:30%">용도</th>
                                 <th class="text-center sorting" style="width:10%">작성자</th>
                                 <th class="text-center sorting" style="width:10%">관련 조직</th>
-                                <th class="text-center sorting" style="width:10%">파일이름</th>
-                                <th class="text-center sorting" style="width:7%">파일형식</th>
-                                <th class="text-center sorting" style="width:12%">등록일</th>
+                                <th class="text-center sorting" style="width:13%">파일이름</th>
+                                <th class="text-center sorting" style="width:5%">파일형식</th>
+                                <th class="text-center sorting" style="width:15%">등록일</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -42,11 +42,11 @@
                                             <td class="text-center">${status.count}</td>
                                             <td class="text-center">${rulefile.subject}</td>
                                             <td class="text-center">${rulefile.usage_detail}</td>
+                                            <td class="text-center">${rulefile.admin_name}</td>
                                             <td class="text-center">${rulefile.depart_name}</td>
-                                            <td class="text-center"><fmt:formatDate value="${rulefile.reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                                            <td class="text-center">${status.count}</td>
-                                            <td class="text-center">${rulefile.subject}</td>
-                                            <td class="text-center">${rulefile.subject}</td>
+                                            <td class="text-center">${rulefile.file_name}</td>
+                                            <td class="text-center">${rulefile.extention}</td>
+                                            <td class="text-center"><fmt:formatDate value="${rulefile.reg_date}" pattern="yyyy년 MM월 dd일"/></td>
                                         </tr>
                                     </c:forEach>
                                 </c:when>
