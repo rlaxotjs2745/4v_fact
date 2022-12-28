@@ -11,4 +11,8 @@ public interface SystemService {
     List<SystemCodeVO> getAllSystemCodeList();
     SystemCodeVO getSystemCode(long idx_system_code);
     int getSystemTotalCount();
+
+    void updateSystemCode(SystemCodeVO systemCodeVO);
+
+    void deleteSystemCode(long idx_system_code);
 }
