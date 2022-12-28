@@ -144,16 +144,14 @@
 
     $("#btn_login").click(function(){
         var param = {
-            "admin_id":$("#input_id").val(),
-            "admin_pw":$("#input_pw").val()
+            "user_id":$("#input_id").val(),
+            "user_pw":$("#input_pw").val(),
+            "is_admin":$("#is_admin").is(':checked')?1:0
         };
-        var url = 'console_login';
-        if($("#is_admin").is(':checked'))
-            url='admin_console_login'
 
         $.ajax({
             type: 'post',
-            url :url, //데이터를 주고받을 파일 주소 입력
+            url :'console_login', //데이터를 주고받을 파일 주소 입력
             data: JSON.stringify(param),//보내는 데이터
             contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
             dataType:'json',//받는 데이터 타입
@@ -170,17 +168,15 @@
                     $.cookie('console_token', result.element.console_token, { expires: 1, path: '/' });
                     $.cookie('console_refresh_token', result.element.console_refresh_token, { expires: 365, path: '/' });
 
-                    if($("#is_admin").is(':checked'))
-                        location.replace('/admin_console');
-                    else
-                        location.replace('/');
-/*                    setCookie("auth_code",result.element.auth_code,"1"); //변수, 변수값, 저장기간
-                    setCookie("idx_console_user",result.element.idx_console_user,"1"); //변수, 변수값, 저장기간
-                    var checkEvent = getCookie("Ck_01");
-
-                    location.href="/";*/
-
-
+                    <c:if test="${profile == 'gimje-prod'}">
+                    location.replace('https://innovalley.smartfarmkorea.net/gimje/Demonstration/console');
+                    </c:if>
+                    <c:if test="${profile == 'sangju-prod'}">
+                    location.replace('https://innovalley.smartfarmkorea.net/sangju/Demonstration/console');
+                    </c:if>
+                    <c:if test="${profile == 'local'}">
+                    location.replace('/');
+                    </c:if>
 
                 }
                 else {

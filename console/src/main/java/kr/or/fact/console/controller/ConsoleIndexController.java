@@ -3,6 +3,8 @@ package kr.or.fact.console.controller;
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.CONSTANT;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -36,6 +38,12 @@ public class ConsoleIndexController {
     @Resource(name = "consoleSessionService")
     ConsoleSessionService consoleSessionService;
 
+    @Resource(name = "corpService")
+    CorpService corpService;
+
+    @Autowired
+    Environment env;
+
     public ConsoleSessionVO getVerityAuth(String console_token){
         //UserVO userVO = null;
 
@@ -63,60 +71,71 @@ public class ConsoleIndexController {
                        ModelMap model,
                        @CookieValue(name = "console_token",required = false) String console_token){
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
             {
                 return "redirect:/login";
             }
+            //콘솔유저 생성, 일반 유저이면 일반 유저 정보로, 어드민이면 어드민 정보로
+
+
             if(consoleSessionVO.getIs_admin()==1){
+
                 AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
-                model.addAttribute("user", adminVO);
+
+                ConsoleUserVO findConsoleUserVO = consoleService.getConsoleUserByAdminIdx(consoleSessionVO.getIdx_admin());
+
+                findConsoleUserVO.setUser_id(adminVO.getAdmin_id());
+                findConsoleUserVO.setUser_name(adminVO.getAdmin_name());
+                findConsoleUserVO.setMphone_num(adminVO.getMphone_num());
+                findConsoleUserVO.setCorporate_name(adminVO.getCorporate_name());
+                findConsoleUserVO.setJob_title(adminVO.getJob_title());
+                findConsoleUserVO.setTel_num(adminVO.getTel_num());
+                findConsoleUserVO.setAuth_status(adminVO.getAuth_status());
+
+                model.addAttribute("user", findConsoleUserVO);
             }
             else {
                 UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
-                model.addAttribute("user", userVO);
+                ConsoleUserVO findConsoleUserVO = consoleService.getConsoleUserByUserIdx(consoleSessionVO.getIdx_user());
+
+                findConsoleUserVO.setUser_id(userVO.getUser_id());
+                findConsoleUserVO.setUser_name(userVO.getUser_name());
+                findConsoleUserVO.setMphone_num(userVO.getMphone_num());
+
+                CorpInfoVO corpVO = corpService.getCorpInfo(userVO.getIdx_corp_info());
+                if (corpVO != null) {
+                    findConsoleUserVO.setCorporate_name(corpVO.getCorp_name_kor());
+                } else {
+                    findConsoleUserVO.setCorporate_name("회사등록필요");
+                }
+                findConsoleUserVO.setJob_title("콘솔 관리자");
+                findConsoleUserVO.setTel_num(corpVO.getTel_num());
+                findConsoleUserVO.setAuth_status(1);
+
+                model.addAttribute("user", findConsoleUserVO);
             }
         }
         else {
             return "redirect:/login";
         }
 
-        model.addAttribute("path", _path);
+
+
         return "index";
     }
 
-    @RequestMapping(value = "admin_console",method = RequestMethod.GET)
-    public String admin_console_root(HttpServletRequest req,
-                       ModelMap model,
-                       @CookieValue(name = "console_token",required = false) String console_token){
-        String _path = req.getRequestURI();
-        if(console_token!=null){
-            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
-            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
-            {
-                return "redirect:/login";
-            }
-            if(consoleSessionVO.getIs_admin()==1){
-                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
-                model.addAttribute("user", adminVO);
-            }
-            else {
-                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
-                model.addAttribute("user", userVO);
-            }
-        }
-        else {
-            return "redirect:/login";
-        }
-
-        model.addAttribute("path", _path);
-        return "index_admin";
-    }
-
     @RequestMapping(value="/login",method = RequestMethod.GET)
-    public String login( Model model,
+    public String login( HttpServletRequest req,
+                         ModelMap model,
                          @RequestBody(required = false) ParamVO paramVO){
+
+        String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
 
         return "login";
     }
@@ -128,6 +147,9 @@ public class ConsoleIndexController {
                             @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -146,9 +168,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-        model.addAttribute("path", _path);
-
 
         return "a_dashboard/dashboard";
     }
@@ -163,6 +182,9 @@ public class ConsoleIndexController {
                          @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -181,10 +203,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-        model.addAttribute("path", _path);
-
-
 
         return "b_demobs_manage/notice";
     }
@@ -197,6 +215,9 @@ public class ConsoleIndexController {
                                     @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -215,10 +236,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-        model.addAttribute("path", _path);
-
-
 
         return "b_demobs_manage/bm_demo_corp_cur";
     }
@@ -235,6 +252,9 @@ public class ConsoleIndexController {
                          @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -253,8 +273,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-        model.addAttribute("path", _path);
 
         int list_amount = 10;;
         int page_amount = 10;
@@ -353,6 +371,9 @@ public class ConsoleIndexController {
                                    @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -372,7 +393,6 @@ public class ConsoleIndexController {
             return "redirect:/login";
         }
 
-        model.addAttribute("path", _path);
 
         return "c_center_manage/gh_total_monitor";
     }
@@ -385,6 +405,9 @@ public class ConsoleIndexController {
                            @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -403,8 +426,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-        model.addAttribute("path", _path);
 
         return "c_center_manage/gh_glass";
     }
@@ -417,6 +438,9 @@ public class ConsoleIndexController {
                            @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -435,8 +459,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-        model.addAttribute("path", _path);
 
         return "c_center_manage/gh_vinyl";
     }
@@ -449,6 +471,9 @@ public class ConsoleIndexController {
                                 @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -467,9 +492,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-        model.addAttribute("path", _path);
-
 
         return "c_center_manage/gh_silgle";
     }
@@ -482,6 +504,9 @@ public class ConsoleIndexController {
                              @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -500,9 +525,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
 
         return "c_center_manage/gh_complex";
     }
@@ -515,6 +537,9 @@ public class ConsoleIndexController {
                                 @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -533,9 +558,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
 
         return "c_center_manage/gh_sensor";
     }
@@ -548,6 +570,9 @@ public class ConsoleIndexController {
                             @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -566,9 +591,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
 
         return "c_center_manage/gh_sensor";
     }
@@ -581,6 +603,9 @@ public class ConsoleIndexController {
                                    @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -599,9 +624,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
 
         return "c_center_manage/facility_monitor";
     }
@@ -614,6 +636,9 @@ public class ConsoleIndexController {
                                    @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -632,10 +657,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
-
 
         return "c_center_manage/facility_history";
     }
@@ -649,6 +670,9 @@ public class ConsoleIndexController {
                               @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -667,10 +691,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
-
 
         return "d_event_manage/event_alert";
     }
@@ -683,6 +703,9 @@ public class ConsoleIndexController {
                                  @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -701,11 +724,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
-
-
 
         return "d_event_manage/event_facility";
     }
@@ -717,6 +735,9 @@ public class ConsoleIndexController {
                            @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -735,9 +756,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
 
         return "d_event_manage/event_bs";
     }
@@ -750,6 +768,9 @@ public class ConsoleIndexController {
                               @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -768,9 +789,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
 
         return "e_data_manage/gh_data";
     }
@@ -783,6 +801,9 @@ public class ConsoleIndexController {
                                 @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -801,9 +822,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
 
         return "e_data_manage/facility_data";
     }
@@ -816,6 +834,9 @@ public class ConsoleIndexController {
                                @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -834,9 +855,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
 
         return "e_data_manage/consign_data";
     }
@@ -849,6 +867,9 @@ public class ConsoleIndexController {
                             @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -867,9 +888,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
 
         return "e_data_manage/self_data";
     }
@@ -882,6 +900,9 @@ public class ConsoleIndexController {
                                    @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -900,8 +921,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-        model.addAttribute("path", _path);
 
         return "e_data_manage/big_data_log";
     }
@@ -914,6 +933,9 @@ public class ConsoleIndexController {
                                       @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -932,9 +954,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
 
         return "e_data_manage/big_data_manage";
     }
@@ -947,6 +966,9 @@ public class ConsoleIndexController {
                                     @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -965,9 +987,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
 
         return "f_assets_manage/cur_asset_mng";
     }
@@ -982,6 +1001,9 @@ public class ConsoleIndexController {
                                  @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -1000,9 +1022,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
 
         return "f_assets_manage/asset_book_mng";
     }
@@ -1015,6 +1034,9 @@ public class ConsoleIndexController {
                                 @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -1033,9 +1055,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
 
         return "f_assets_manage/asset_booking";
     }
@@ -1048,6 +1067,9 @@ public class ConsoleIndexController {
                                    @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -1066,9 +1088,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
 
         return "g_schedule_manage/schedule_mng";
     }
@@ -1081,6 +1100,9 @@ public class ConsoleIndexController {
                                 @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -1099,9 +1121,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
 
         return "h_comm_manage/write_sms";
     }
@@ -1114,6 +1133,9 @@ public class ConsoleIndexController {
                                    @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -1132,9 +1154,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
 
         return "h_comm_manage/auto_sms_mng";
     }
@@ -1147,6 +1166,9 @@ public class ConsoleIndexController {
                                      @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -1165,9 +1187,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
 
         return "h_comm_manage/reserved_sms_list";
     }
@@ -1180,6 +1199,9 @@ public class ConsoleIndexController {
                              @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -1198,9 +1220,6 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
-
-
-        model.addAttribute("path", _path);
 
         return "i_comm_manage/system_mng";
     }
@@ -1213,6 +1232,9 @@ public class ConsoleIndexController {
                             @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -1232,10 +1254,18 @@ public class ConsoleIndexController {
             return "redirect:/login";
         }
 
-
-        model.addAttribute("path", _path);
-
         return "i_comm_manage/admin_mng";
     }
+    private void setProfile(ModelMap model) {
+        String[] activeProfiles = env.getActiveProfiles();
+        if (activeProfiles.length != 0) {
+            String activeProfile = activeProfiles[0];
 
+            if (activeProfile.equals("local")) {
+                model.addAttribute("profile", "gimje-prod");
+            } else {
+                model.addAttribute("profile", activeProfile);
+            }
+        }
+    }
 }
