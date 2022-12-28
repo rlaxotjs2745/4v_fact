@@ -2065,7 +2065,7 @@ public class APIController {
             ruleFileService.insertRuleFile(ruleFileInfoVO);
 
             fileService.convertMultipartToFile(ruleFileInfoVO.getFile1());
-            long fileIdx = fileService.insertRuleFile(ruleFileInfoVO.getFile1(), ruleFileInfoVO.getIdx_admin());
+            fileService.insertRuleFile(ruleFileInfoVO.getFile1(), ruleFileInfoVO.getIdx_admin());
 
             resultVO.setResult_code("SUCCESS");
             resultVO.setResult_str("양식을 등록했습니다.");
