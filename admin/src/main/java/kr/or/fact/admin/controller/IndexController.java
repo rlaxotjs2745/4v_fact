@@ -152,17 +152,23 @@ public class IndexController extends BaseController {
             AdminVO adminVO = getVerityAuth(access_token);
             if(adminVO==null || adminVO.is_expired())
             {
-                return "login";
+                return "redirect:/login";
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
         }else{
-            return "login";
+            return "redirect:/login";
         }
-        if(!_path.equals("/") && !_path.equals("")) {
-            model.addAttribute("pageOnLoad", 1);
+        String[] activeProfiles = env.getActiveProfiles();
+        if (activeProfiles.length != 0) {
+            String activeProfile = activeProfiles[0];
+            if (activeProfile.equals("local")) {
+                if(!_path.equals("/") && !_path.equals("")) {
+                    model.addAttribute("pageOnLoad", 1);
+                    model.addAttribute("path", _path);
+                }
+            }
         }
-        model.addAttribute("path", _path);
         return "index";
     }
 
