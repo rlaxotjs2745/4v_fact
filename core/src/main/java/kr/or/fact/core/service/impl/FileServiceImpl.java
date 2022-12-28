@@ -509,4 +509,11 @@ public class FileServiceImpl implements FileService {
         fileServiceMapper.updateRuleFile(ruleFileInfoVO);
 
     }
+
+    @Override
+    public String getFileUrlByUsageIdxType(long usageIdx, int type){
+        FileInfoVO fileInfoVO = fileServiceMapper.getFileUrlByUsageIdxType(usageIdx, type);
+        System.out.println(fileInfoVO);
+        return fileInfoVO.getFile_path();
+    }
 }

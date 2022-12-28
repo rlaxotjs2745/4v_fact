@@ -60,4 +60,6 @@ public interface FileService {
     long insertFileOutIdx(FileRequestVO fileRequestVO, FileInfoVO fileInfoVO);
 
     long insertRuleFile(MultipartFile file1, long idx_admin);
+
+    String getFileUrlByUsageIdxType(long usageIdx, int type);
 }

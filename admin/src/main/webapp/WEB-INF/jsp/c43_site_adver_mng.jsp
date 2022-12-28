@@ -662,7 +662,7 @@
                                 <input type="file" class="form-control-file d-block py-1" id="file_upload_update" name="file_upload" multiple>
                             </div>
                             <div class="form-group col col-md-10 col-form-label mode-view">
-                                <a href="file.doc"></a>
+                                <a href="file.doc">123132</a>
                             </div>
                         </div>
 
@@ -824,20 +824,20 @@
                     data: {idx_pr_content:_idx},//보내는 데이터
                     dataType: 'json',//받는 데이터 타입
                     success: function (result) {
-                        let _data = result.data.result;
+                        let _data = result.data.rs;
                         // 수정 모달용
                         $("#pr_subject_update input").val(_data.subject);
                         $("#pr_content_code_update textarea").val(_data.pr_content_code);
-                        $("#show_start_date_update").val(_data.show_start_date);
-                        $("#show_end_date_update").val(_data.show_end_date);
+                        $("#show_start_date_update").val(_data.show_start_date_str);
+                        $("#show_end_date_update").val(_data.show_end_date_str);
 
                         $("#pr_content_status_update input[name=custom-9]").each(function (){
-                            if($(this).val() === _data.pr_content_status){
+                            if($(this).val() == _data.pr_content_status){
                                 $(this).attr('checked',true)
                             }
                         });
                         $("#memo_update textarea").val(_data.memo);
-                        $("#pr_contents_update").val(_data.pr_contents);
+                        $("#pr_contents_update").summernote('code', _data.pr_contents);
                         $('#is_file_update input[name=custom-6]').eq(_data.is_file).attr('checked',true)
                         $('#is_new_update input[name=custom-7]').eq(_data.is_new).attr('checked',true)
                         $('#is_main_page_update input[name=custom-8]').eq(_data.is_main_page).attr('checked',true)
@@ -847,16 +847,8 @@
             }
 
             function _saveCont(_i) {
-                // $("a.btn_content_view").off().click(function () {
-                //     let _i = $(this).index($('a.btn_content_view'));
-                //     console.log(_i);
-                //     let selectId = $(this).attr('id');
-                //     curPRdata = selectId;
-                // for(var pr of prList){
-                //     if(selectId === pr.idx_pr_content){
                 curPRdata = prList[_i].idx_pr_content;
                 $('#modals-counsel-view .this_idx').attr('data-idx',curPRdata)
-                // $(".idx_pr_content").attr("id", prList[_i].idx_pr_content);
                 $("#subject span").text(prList[_i].subject);
                 $("#is_new span").text(prList[_i].is_new);
                 $("#is_file span").text(prList[_i].is_file);

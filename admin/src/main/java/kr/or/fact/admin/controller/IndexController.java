@@ -7,27 +7,17 @@ import kr.or.fact.core.util.*;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.Reader;
-import java.net.URL;
 import javax.annotation.Resource;
 import javax.mail.*;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.search.*;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.security.Principal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 public class IndexController extends BaseController {
@@ -83,10 +73,10 @@ public class IndexController extends BaseController {
     @Resource(name = "userService")
     public UserService userService;
 
-    @Resource(name="prContentService")
+    @Resource(name = "prContentService")
     public PRContentsService prContentService;
 
-    @Resource(name="webMainPopupService")
+    @Resource(name = "webMainPopupService")
     public WebMainPopupService webMainPopupService;
 
     @Resource(name = "formFileService")
@@ -98,7 +88,7 @@ public class IndexController extends BaseController {
     @Autowired
     public PRContentsMapper prContentsMapper;
 
-    @Resource(name="adminSessionService")
+    @Resource(name = "adminSessionService")
     AdminSessionService adminSessionService;
 
     @Autowired
@@ -164,9 +154,9 @@ public class IndexController extends BaseController {
     }
 
     @RequestMapping(value="/login",method = RequestMethod.GET)
-    public String login( Model model,
+    public String login( ModelMap model,
                          @RequestBody(required = false) ParamVO paramVO){
-
+        setProfile(model);
         return "login";
     }
 
@@ -216,12 +206,6 @@ public class IndexController extends BaseController {
         int visitCount = visitService.getVisitReqCount(param);
 
         model.addAttribute("visitCount", visitCount);
-
-
-
-
-
-
 
         return "a10_dashboard";
     }

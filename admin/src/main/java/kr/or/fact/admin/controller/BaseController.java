@@ -3,89 +3,18 @@ package kr.or.fact.admin.controller;
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.model.PRContentsMapper;
 import kr.or.fact.core.service.*;
-import kr.or.fact.core.util.CONSTANT;
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.mail.MessagingException;
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.security.Principal;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Controller
 public class BaseController {
     @Resource(name = "adminService")
     AdminService adminService;
-
-    @Resource(name = "homepageInfoService")
-    HomepageInfoService homepageInfoService;
-
-    @Resource(name = "coWorkerNService")
-    CoWorkerNService coWorkerNService;
-
-    @Resource(name = "noticeService")
-    NoticeService noticeService;
-
-    @Resource(name = "demoBsService")
-    DemoBsService demoBsService;
-
-    @Resource(name = "mailService")
-    MailService mailService;
-
-    @Resource(name = "smsService")
-    public SmsSendService smsSendService;
-
-    @Resource(name = "bsAnnouncementService")
-    public BsAnnouncementService bsAnnouncementService;
-
-    @Resource(name = "demoBsApplicationService")
-    public DemoBsApplicationService demoBsApplicationService;
-
-    @Resource(name = "fileService")
-    public FileService fileService;
-
-    @Resource(name = "corpService")
-    public CorpService corpService;
-
-    @Resource(name = "systemService")
-    public SystemService systemService;
-
-    @Resource(name = "consultingService")
-    public ConsultingService consultingService;
-
-    @Resource(name = "eventContentService")
-    public EventContentService eventContentService;
-
-    @Resource(name = "visitService")
-    public VisitService visitService;
-
-    @Resource(name = "assetService")
-    public AssetService assetService;
-
-    @Resource(name = "userService")
-    public UserService userService;
-
-    @Resource(name="prContentService")
-    public PRContentsService prContentService;
-
-    @Resource(name="webMainPopupService")
-    public WebMainPopupService webMainPopupService;
-
-    @Resource(name = "formFileService")
-    public FormFileService formFileService;
-
-    @Resource(name = "ruleFileService")
-    public RuleFileService ruleFileService;
 
     @Autowired
     public PRContentsMapper prContentsMapper;

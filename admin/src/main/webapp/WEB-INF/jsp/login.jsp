@@ -170,14 +170,13 @@
         $("#theme-settings").hide();
     });
 
-
          $("#btn_login").click(function(){
 
              var param = {
                  "admin_id":$("#input_id").val(),
                  "admin_pw":$("#input_pw").val()
              };
-             console.log(JSON.stringify(param));
+             console.log('${profile}');
 
              $.ajax({
                  type: 'post',
@@ -197,8 +196,15 @@
                          }
                          $.cookie('access_token', result.access_token, { expires: 1, path: '/' });
                          $.cookie('refresh_token', result.refresh_token, { expires: 365, path: '/' });
-
-                         location.replace('/');
+                         <c:if test="${profile == 'gimje-prod'}">
+                            location.replace('https://innovalley.smartfarmkorea.net/gimje/Demonstration/admin/a10_dashboard');
+                         </c:if>
+                         <c:if test="${profile == 'sangju-prod'}">
+                            location.replace('https://innovalley.smartfarmkorea.net/sangju/Demonstration/admin/a10_dashboard');
+                         </c:if>
+                         <c:if test="${profile == 'local'}">
+                            location.replace('/');
+                         </c:if>
                      }
                      else {
                          $("#span_result").show();

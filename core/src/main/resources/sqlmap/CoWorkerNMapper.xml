@@ -41,7 +41,7 @@
                  FROM (
                           SELECT * FROM TB_CO_WORKER
                           WHERE IS_SHOW = 0 OR IS_SHOW = 1
-                          order by IDX_CO_WORKER desc
+                          order by CO_WORKER_ODER asc
                       )
                  WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
              )

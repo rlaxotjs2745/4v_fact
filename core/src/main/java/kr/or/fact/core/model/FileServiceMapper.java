@@ -60,4 +60,6 @@ public interface FileServiceMapper {
     void updateRuleFile(RuleFileInfoVO ruleFileInfoVO);
 
     long getFileIdxToUser(FileInfoVO fileInfoVO);
+
+    FileInfoVO getFileUrlByUsageIdxType(long idx_file_usage, int file_type);
 }

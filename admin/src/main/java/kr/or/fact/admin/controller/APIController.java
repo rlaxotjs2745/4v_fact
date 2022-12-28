@@ -1,6 +1,5 @@
 package kr.or.fact.admin.controller;
 
-import kr.or.fact.core.config.FACTConfig;
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.CONSTANT;
@@ -12,7 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -91,8 +89,6 @@ public class APIController {
     @Resource(name="adminSessionService")
     AdminSessionService adminSessionService;
 
-
-
     @Resource(name = "webMainPopupService")
     public WebMainPopupService webMainPopupService;
 
@@ -101,9 +97,6 @@ public class APIController {
 
     @Resource(name = "ruleFileService")
     public RuleFileService ruleFileService;
-
-    @Autowired
-    private FACTConfig factConfig;
 
     @Resource(name = "bsAnnouncementService")
     public BsAnnouncementService bsAnnouncementService;
@@ -121,7 +114,7 @@ public class APIController {
 
             AdminVO findAdmin = adminService.findAdminById(adminVo.getAdmin_id());
             //임시코드
-/*            if (findAdmin != null){
+            if (findAdmin != null){
                 String hashedPassword = passwordEncoder.encode(adminVo.getAdmin_pw());
                 ChangePwVO changePwVO = new ChangePwVO();
                 changePwVO.setAdmin_id(findAdmin.getAdmin_id());
@@ -129,7 +122,7 @@ public class APIController {
                 adminService.updateAdminPassword(changePwVO);
 
                 findAdmin.setAdmin_pw(hashedPassword);
-            }*/
+            }
             //임시코드 끝
             if (findAdmin != null && passwordEncoder.matches(adminVo.getAdmin_pw(),findAdmin.getAdmin_pw())) {
                 AdminSessionVO adminSessionVO = new AdminSessionVO();
@@ -143,10 +136,14 @@ public class APIController {
                 adminSessionVO.setRefresh_expire_date(cal.getTime());
                 adminSessionVO.setIs_valid(1);
 
-                AdminSessionVO findAdminSessionVO = adminSessionService.getAdminSessionValidToken(findAdmin.getIdx_admin());
-                if(findAdminSessionVO!=null){
-                    adminSessionService.deleteAdminSessionInfo(findAdminSessionVO);
-                }
+//                List<AdminSessionVO> findAdminSessionVO = adminSessionService.getAdminSessionValidToken(findAdmin.getIdx_admin());
+//                if(findAdminSessionVO!=null){
+//                    try {
+//                        for(AdminSessionVO param : findAdminSessionVO) {
+//                            adminSessionService.deleteAdminSessionInfo(param);
+//                        }
+//                    }catch(Exception e){}
+//                }
 
                 adminSessionService.insertAdminSessionInfo(adminSessionVO);
                 resultVO.setAccess_token(adminSessionVO.getAccess_token());
@@ -589,6 +586,15 @@ public class APIController {
 
         List<UserDemoBsFileResultVO> fileList = fileService.getUserDemoFileList(UserDemoBsVOmodify.getIdx_user_demo_bs());
 
+        boolean hasToSppl = false;
+        if(UserDemoBsVOmodify.getUser_demobs_status() == 6){
+            hasToSppl = true;
+            String reqSpplFileUrl = fileService.getFileUrlByUsageIdxType(UserDemoBsVOmodify.getIdx_user_demo_bs(), 7);
+            model.addAttribute("reqSpplFileUrl", reqSpplFileUrl);
+        }
+
+
+        model.addAttribute("hasToSppl", hasToSppl);
         model.addAttribute("fileArr", fileList);
         model.addAttribute("modifyUserDemoBsVO",UserDemoBsVOmodify);
         model.addAttribute("modifyUserDemoBsDetailVO",userDemoBsDetailVOModify);
