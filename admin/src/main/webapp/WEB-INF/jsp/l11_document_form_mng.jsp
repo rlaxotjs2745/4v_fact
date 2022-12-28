@@ -136,6 +136,19 @@
 
     $('#btn_save_new').on('click', function() {
 
+        if($("#subject").val() === ''){
+            return alert('제목을 입력해 주세요.')
+        }
+
+        if($("#usage_detail").val() === ''){
+            return alert('제목을 입력해 주세요.')
+        }
+
+        if(document.getElementById('file_upload').files[0] === null || document.getElementById('file_upload').files[0] === undefined){
+            return alert('파일을 업로드 해주세요.')
+        }
+
+
         let formData = new FormData();
         formData.append('subject', $("#subject").val());
         formData.append('usage_detail', $("#usage_detail").val());
