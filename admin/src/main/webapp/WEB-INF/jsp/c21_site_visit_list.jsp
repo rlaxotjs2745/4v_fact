@@ -63,20 +63,16 @@
                             <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
                                 <thead class="bg-success text-white font-weight-bold">
                                 <tr role="row">
-                                    <th class="text-center px-2" style="width:60px">No</th>
-                                    <th class="text-center sorting" style="width:80px">회신</th>
-                                    <th class="text-center sorting" style="width:80px">신청자</th>
-                                    <th class="text-center sorting" style="width:60px">ID</th>
-                                    <th class="text-center sorting" style="width:100px">신청일</th>
-                                    <th class="text-center sorting" style="width:150px">단체명</th>
-                                    <th class="text-center px-2" style="width:80px">견학 희망일</th>
-                                    <th class="text-center px-2" style="width:120px">인원</th>
-                                    <th class="text-center px-2" style="width:120px">연락처</th>
-                                    <th class="text-center px-2" style="width:120px">이메일</th>
-                                    <th class="text-center px-2" style="width:100px">주소</th>
-                                    <th class="text-center px-2" style="width:150px">목적</th>
-                                    <th class="text-center px-2" style="width:150px">질문</th>
-
+                                    <th class="text-center px-2" style="width:4%">No</th>
+                                    <th class="text-center sorting" style="width:6%">처리</th>
+                                    <th class="text-center sorting" style="width:8%">신청자</th>
+                                    <th class="text-center sorting" style="width:12%">신청일</th>
+                                    <th class="text-center sorting" style="width:10%">단체명</th>
+                                    <th class="text-center px-2" style="width:12%">견학 희망일</th>
+                                    <th class="text-center px-2" style="width:6%">인원</th>
+                                    <th class="text-center px-2" style="width:12%">연락처</th>
+                                    <th class="text-center px-2" style="width:12%">이메일</th>
+                                    <th class="text-center px-2" style="width:16%">목적</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -87,16 +83,16 @@
                                     <td class="text-center" id="visit_req_num">${visit.idx_row_num}</td>
                                     <td class="text-center"><a href="#none" class="btn btn-outline-default  btn-sm"  data-toggle="modal" data-target="#modals-counsel-view" class="visit-status">${visit.visit_req_status eq 0 ? "신청" : visit.visit_req_status eq 1 ? "접수" : visit.visit_req_status eq 3 ? "방문" : visit.visit_req_status eq 4 ? "방문 완료" : visit.visit_req_status eq 5 ? "방문취소": visit.visit_req_status eq 6 ? "승인거절" : "기타"}</a></td>
                                     <td class="text-center" id="visit_visitor">${visit.visitor}</td>
-                                    <td class="text-center" id="visit_idx_user">${visit.idx_user}</td>
+
                                     <td class=""><fmt:formatDate value="${visit.reg_date}" pattern="yyyy-MM-dd HH:MM"/></td>
                                     <td class="text-center">${visit.group_name}</td>
                                     <td class=""><fmt:formatDate value="${visit.resulvation_date}" pattern="yyyy-MM-dd HH:MM"/></td>
                                     <td class="text-center">${visit.visitor_count}</td>
                                     <td class="text-center">${visit.visitor_mphone_num}</td>
                                     <td class="text-center">${visit.visitor_email}</td>
-                                    <td class="text-center">${visit.visitor_adress}</td>
+
                                     <td class="text-center">${visit.visit_goal}</td>
-                                    <td class="text-center">${visit.question}</td>
+
                                 </tr>
 </c:forEach>
 </c:if>

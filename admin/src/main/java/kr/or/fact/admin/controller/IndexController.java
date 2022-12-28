@@ -2006,6 +2006,8 @@ public class IndexController extends BaseController {
         model.addAttribute("maxvalue", assetVOList.get(0).getMaxvalue());
         model.addAttribute("systemCodeList",systemCodeList);
 
+
+
         return "cur_asset_index";
     }
 
