@@ -913,7 +913,7 @@ public class IndexController {
     }
 
     @RequestMapping("/brd_promotion")
-    public String brd_promotion(@RequestParam("page") int page,
+    public String brd_promotion(@RequestBody ParamPageListFilteredVO param,
                                 Model model){
         int list_amount = 10;
         int page_amount = 10;
@@ -923,9 +923,9 @@ public class IndexController {
             return "brd_announce_blank";
         }
         model.addAttribute("total_count",promotionCount);
-        List<PRContentVO> prContentList = prContentService.getPRContentList(page,list_amount);
+        List<PRContentVO> prContentList = prContentService.getPRContentList(param);
         model.addAttribute("prContentList",prContentList);
-
+        int page = param.getPage_num();
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
 

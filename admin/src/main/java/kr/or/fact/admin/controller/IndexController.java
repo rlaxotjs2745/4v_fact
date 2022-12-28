@@ -1205,7 +1205,19 @@ public class IndexController {
 
     @RequestMapping(value = "/c431_site_adver_mng" ,method = RequestMethod.POST)
     public String c431_site_adver_mng(@RequestParam(value = "page_num", required = false) String tagValue,
-                                     @RequestBody ParamPageListFilteredVO param, ModelMap model){
+                                      @RequestBody ParamPageListFilteredVO param,
+                                      ModelMap model,
+                                      @CookieValue(name = "access_token",required = true) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }
 
         param.setAmount(10);
         int list_amount = 10;
@@ -1324,6 +1336,7 @@ public class IndexController {
     //협약담당자 관리
     @RequestMapping(value = "/c60_site_popup_mng",method = RequestMethod.POST)
     public String c60_site_popup_mng(@RequestParam(value = "tag", required = false) String tagValue,
+                                     @RequestBody ParamPageListFilteredVO param,
                                      ModelMap model,
                                      @CookieValue(name = "access_token",required = true) String access_token){
         AdminVO adminVO = null;
@@ -1336,9 +1349,6 @@ public class IndexController {
             model.addAttribute("admin", adminVO);
             setProfile(model);
         }
-
-        AdminVO adminInfo = adminService.findAdminById(principal.getName());
-        model.addAttribute("admin", adminInfo);
 
         param.setAmount(10);
         int list_amount = 10;
@@ -1429,6 +1439,7 @@ public class IndexController {
     //sms 작성
     @RequestMapping(value = "/c72_site_rule_doc_mng",method = RequestMethod.POST)
     public String c72_site_rule_doc_mng(@RequestParam(value = "tag", required = false) String tagValue,
+                                        @RequestBody ParamPageListFilteredVO param,
                                         ModelMap model,
                                         @CookieValue(name = "access_token",required = true) String access_token){
         AdminVO adminVO = null;
@@ -1441,14 +1452,11 @@ public class IndexController {
             model.addAttribute("admin", adminVO);
             setProfile(model);
         }
-        List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
-        model.addAttribute("rulefileinfolist",ruleFileInfoList);
+        //List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
+        //model.addAttribute("rulefileinfolist",ruleFileInfoList);
         List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
         model.addAttribute("rulefilelist",ruleFileInfoList);
         System.out.println(ruleFileInfoList.size());
-
-        AdminVO adminInfo = adminService.findAdminById(principal.getName());
-        model.addAttribute("admin", adminInfo);
         model.addAttribute("page_num", param.getPage_num());
 
         Integer maxPageNum = fileService.getRuleFileTotalCount();
@@ -2625,8 +2633,6 @@ public class IndexController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-        AdminVO adminInfo = adminService.findAdminById(principal.getName());
-        model.addAttribute("admin", adminInfo);
 
         return "l11_document_form_mng";
     }
