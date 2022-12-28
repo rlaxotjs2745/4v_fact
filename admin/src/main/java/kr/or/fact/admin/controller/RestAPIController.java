@@ -40,7 +40,7 @@ public class RestAPIController extends BaseController {
             PRContentVO rs = prContentService.getPRContent(paramVo.getIdx_pr_content());
             if(rs!=null) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.KOREAN);
-                String sDate = dateFormat.format(rs.getShow_end_date()));
+                String sDate = dateFormat.format(rs.getShow_end_date());
                 String eDate = dateFormat.format(rs.getShow_end_date());
 
                 rs.setShow_end_date_str(sDate);
