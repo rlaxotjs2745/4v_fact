@@ -995,6 +995,43 @@ public class APIController {
         return  resultVO;
     }
 
+    @RequestMapping(value = "/update_system_code",method = RequestMethod.POST)
+    public @ResponseBody ResultVO update_system_code(HttpSession session, @RequestBody SystemCodeVO systemCodeVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("저장했습니다");
+        resultVO.setResult_code("SUCCESS");
+
+        if(systemCodeVO.getCode_name() != null &&
+                systemCodeVO.getCode_value()!= null &&
+                systemCodeVO.getDetail()!= null
+        ){
+            systemService.updateSystemCode(systemCodeVO);
+        }
+        else {
+            resultVO.setResult_str("필수 데이터가 없습니다.");
+            resultVO.setResult_code("ERROR001");
+        }
+        return  resultVO;
+    }
+
+    @RequestMapping(value = "/delete_system_code",method = RequestMethod.POST)
+    public @ResponseBody ResultVO delete_system_code(HttpSession session, @RequestBody SystemCodeVO systemCodeVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("저장했습니다");
+        resultVO.setResult_code("SUCCESS");
+
+        if(systemCodeVO.getIdx_system_code() > 0){
+            systemService.deleteSystemCode(systemCodeVO.getIdx_system_code());
+        }
+        else {
+            resultVO.setResult_str("필수 데이터가 없습니다.");
+            resultVO.setResult_code("ERROR001");
+        }
+        return  resultVO;
+    }
+
     @RequestMapping(value = "/save_rule_file_info",method = RequestMethod.POST)
     public @ResponseBody
     ResultVO  save_rule_file_info(HttpSession session,

@@ -156,7 +156,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="text-muted small mt-2">전체</div>
                         <!-- 값 세팅필요-->
-                        <div class="text-large">520</div>
+                        <div class="text-large">34</div>
                     </div>
                 </div>
             </div>
@@ -167,7 +167,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="text-muted small mt-2">검토 필요</div>
                         <!-- 값 세팅필요-->
-                        <div class="text-large">000</div>
+                        <div class="text-large">7</div>
                     </div>
                 </div>
             </div>
@@ -178,7 +178,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="text-muted small mt-2">검토 보류</div>
                         <!-- 값 세팅필요-->
-                        <div class="text-large">000</div>
+                        <div class="text-large">0</div>
                     </div>
                 </div>
             </div>
@@ -189,7 +189,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="text-muted small mt-2">검토 완료</div>
                         <!-- 값 세팅필요-->
-                        <div class="text-large">000</div>
+                        <div class="text-large">27</div>
                     </div>
                 </div>
             </div>
