@@ -342,7 +342,7 @@
             CHECKSUM,
             OWNER,
             IDX_USER,
-            <if test="file_type == 70 or file_type == 3 or file_type == 4 or file_type == 5">
+            <if test="file_type == 70 or file_type == 3 or file_type == 4 or file_type == 5 or file_type == 7">
                 IDX_FILE_USAGE,
             </if>
             IDX_ADMIN,
@@ -449,4 +449,8 @@
             REG_DATE=SYSDATE
         WHERE IDX_RULE_FILE_INFO = #{idx_rule_file_info}
     </update>
+
+    <select id="getFileUrlByUsageIdxType" resultType="kr.or.fact.core.model.DTO.FileInfoVO">
+        SELECT * FROM TB_FILE_INFO WHERE IDX_FILE_USAGE = #{idx_file_usage} AND FILE_TYPE = #{file_type}
+    </select>
 </mapper>

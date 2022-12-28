@@ -1125,9 +1125,9 @@
         let y = today.getFullYear();
         let m = today.getMonth();
         let d = today.getDate();
-        console.log("y : "  + y);
-        console.log("m : " +  m);
-        console.log("d : "  + d);
+        // console.log("y : "  + y);
+        // console.log("m : " +  m);
+        // console.log("d : "  + d);
 
         // Default view
         // color classes: [ fc-event-success | fc-event-info | fc-event-warning | fc-event-danger | fc-event-dark ]
@@ -1409,7 +1409,7 @@
                 $("#modifyOrDeleteVisitData").find("input[name='resulvation_count_am']").val(visitData.resulvation_count_am);
                 $("#modifyOrDeleteVisitData").find("input[name='resulvation_count_pm']").val(visitData.resulvation_count_pm);
 
-                console.log("visitData.group_idx : " + visitData.group_idx);
+                // console.log("visitData.group_idx : " + visitData.group_idx);
 
 
                 let group_idx=visitData.group_idx;
@@ -1948,7 +1948,7 @@
                         }
 
                     }
-                    console.log(tempDate_arr);
+                    // console.log(tempDate_arr);
 
                 };
 
@@ -1957,8 +1957,8 @@
                     visitDataVoNew.cur_date=tempDate_arr[k];
                     visitDataVoNewList.push(visitDataVoNew);
                 }
-                console.log("visitDataVoNewList : " + visitDataVoNewList);
-                console.log("tempDate_arr : "  + tempDate_arr);
+                // console.log("visitDataVoNewList : " + visitDataVoNewList);
+                // console.log("tempDate_arr : "  + tempDate_arr);
 
             }else if(repeat_type_new=='2'){
 
@@ -1971,7 +1971,7 @@
                         dateSelectedList +=$(this).val()+",";
                     });
 
-                    console.log("dateSelectedList : " + dateSelectedList);
+                    // console.log("dateSelectedList : " + dateSelectedList);
 
                     if(!dateSelectedList){return alert('날짜를 선택해주세요');}
 
@@ -1985,7 +1985,7 @@
                         }
                     }
 
-                    console.log("tempDate_arr : " + tempDate_arr);
+                    // console.log("tempDate_arr : " + tempDate_arr);
 
                     for(let k=0;k<tempDate_arr.length;k++){
                         let visitDataVoNew={"memo":memo,"possible_count" :possible_count,"visit_data_type" : visit_data_type,"cur_date":""};
@@ -2016,8 +2016,8 @@
                             tempDate_arr.push(result[i]);
                         }
                     }
-                    console.log("dayChecked : "  + dayChecked);
-                    console.log("weekNumChecked : " + weekNumChecked);
+                    // console.log("dayChecked : "  + dayChecked);
+                    // console.log("weekNumChecked : " + weekNumChecked);
 
                     for(let k=0;k<tempDate_arr.length;k++){
                         let visitDataVoNew={"memo":memo,"possible_count" :possible_count,"visit_data_type" : visit_data_type,"cur_date":""};
@@ -2030,7 +2030,7 @@
 
             }
 
-            console.log(visitDataVoNewList);
+            // console.log(visitDataVoNewList);
 
         if(confirm("저장하시겠습니까?")){
 
@@ -2045,13 +2045,13 @@
 
                     let data=JSON.parse(result);
 
-                    console.log("result.result_str : " + data.result_str);
+                    // console.log("result.result_str : " + data.result_str);
                     alert(data.result_str);
 
                     //STATUS_001 :
                 },
                 error: function (request,status,error) {
-                    console.log("result.result_str error : " + result.result_str);
+                    // console.log("result.result_str error : " + result.result_str);
                     alert(result.result_str);
 
                     //에러가 났을 경우 실행시킬 코드
@@ -2085,7 +2085,7 @@
             ssDate.setDate(ssDate.getDate()+1);
 
         }
-        console.log("getDatesStartToLast : " + result);
+        // console.log("getDatesStartToLast : " + result);
         return result;
     }
 

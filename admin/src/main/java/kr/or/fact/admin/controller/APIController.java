@@ -114,7 +114,7 @@ public class APIController {
 
             AdminVO findAdmin = adminService.findAdminById(adminVo.getAdmin_id());
             //임시코드
-/*            if (findAdmin != null){
+            if (findAdmin != null){
                 String hashedPassword = passwordEncoder.encode(adminVo.getAdmin_pw());
                 ChangePwVO changePwVO = new ChangePwVO();
                 changePwVO.setAdmin_id(findAdmin.getAdmin_id());
@@ -122,7 +122,7 @@ public class APIController {
                 adminService.updateAdminPassword(changePwVO);
 
                 findAdmin.setAdmin_pw(hashedPassword);
-            }*/
+            }
             //임시코드 끝
             if (findAdmin != null && passwordEncoder.matches(adminVo.getAdmin_pw(),findAdmin.getAdmin_pw())) {
                 AdminSessionVO adminSessionVO = new AdminSessionVO();
@@ -586,6 +586,15 @@ public class APIController {
 
         List<UserDemoBsFileResultVO> fileList = fileService.getUserDemoFileList(UserDemoBsVOmodify.getIdx_user_demo_bs());
 
+        boolean hasToSppl = false;
+        if(UserDemoBsVOmodify.getUser_demobs_status() == 6){
+            hasToSppl = true;
+            String reqSpplFileUrl = fileService.getFileUrlByUsageIdxType(UserDemoBsVOmodify.getIdx_user_demo_bs(), 7);
+            model.addAttribute("reqSpplFileUrl", reqSpplFileUrl);
+        }
+
+
+        model.addAttribute("hasToSppl", hasToSppl);
         model.addAttribute("fileArr", fileList);
         model.addAttribute("modifyUserDemoBsVO",UserDemoBsVOmodify);
         model.addAttribute("modifyUserDemoBsDetailVO",userDemoBsDetailVOModify);
