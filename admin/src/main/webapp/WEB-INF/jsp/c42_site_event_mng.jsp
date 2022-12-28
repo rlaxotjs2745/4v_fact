@@ -827,7 +827,25 @@ var saveNewBtn = document.querySelectorAll('.btn_save_new');
 saveNewBtn.forEach(btn=>btn.addEventListener('click', saveForm));
 
 function saveForm(message){
+
     event.preventDefault();
+
+    if($("#event_content_code_insert").val() === ''){
+        return alert('제목을 입력해 주세요.')
+    }
+
+    if($("#subject_insert").val() === ''){
+        return alert('내용을 입력해주세요.')
+    }
+
+    if($("#memo").val() === ''){
+        return alert('메모를 입력해 주세요.')
+    }
+
+    if($("#event_start_date_insert").val() === '' || $("#event_end_date_insert").val() === ''){
+        return alert('게시기간을 입력해주세요.')
+    }
+
     var fileForm = new FormData();
     fileForm.append("event_content_code",document.querySelector('#event_content_code_insert').value);
     fileForm.append("subject",document.querySelector('#subject_insert').value);
