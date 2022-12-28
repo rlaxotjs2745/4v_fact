@@ -1,17 +1,12 @@
 package kr.or.fact.core.service.impl;
 
-import kr.or.fact.core.model.DTO.AdminResVO;
-import kr.or.fact.core.model.DTO.NoticeVO;
 import kr.or.fact.core.model.DTO.PRContentVO;
 import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 import kr.or.fact.core.model.PRContentsMapper;
 import kr.or.fact.core.service.PRContentsService;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.List;
 

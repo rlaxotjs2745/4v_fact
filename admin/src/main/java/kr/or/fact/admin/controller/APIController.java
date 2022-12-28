@@ -1,6 +1,5 @@
 package kr.or.fact.admin.controller;
 
-import kr.or.fact.core.config.FACTConfig;
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.CONSTANT;
@@ -12,7 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -91,8 +89,6 @@ public class APIController {
     @Resource(name="adminSessionService")
     AdminSessionService adminSessionService;
 
-
-
     @Resource(name = "webMainPopupService")
     public WebMainPopupService webMainPopupService;
 
@@ -101,9 +97,6 @@ public class APIController {
 
     @Resource(name = "ruleFileService")
     public RuleFileService ruleFileService;
-
-    @Autowired
-    private FACTConfig factConfig;
 
     @Resource(name = "bsAnnouncementService")
     public BsAnnouncementService bsAnnouncementService;
