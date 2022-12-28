@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <table class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
-                    <thead>
+                    <thead class="bg-success text-white font-weight-bold">
                     <tr role="row">
                         <th class="text-center px-2" style="width:40px">No</th>
                         <th class="text-center px-2" style="width:80px">직원명</th>

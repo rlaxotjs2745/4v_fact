@@ -24,26 +24,25 @@
     <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
         <div class="row p-3">
             <div class="col-sm-12 col-md-12">
-                <label class="mr-3  mb-0">총 : <strong>999</strong>개</label>
+                <label class="mr-3  mb-0">총 : <strong>8</strong>개</label>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
                 <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid"
                        aria-describedby="article-list_info" style="">
-                    <thead>
+                    <thead class="bg-success text-white font-weight-bold">
                     <tr role="row">
-                        <th class="text-center px-2" style="width:120px">대분류</th>
-                        <th class="text-center px-2" style="width:120px">중분류</th>
-                        <th class="text-center px-2" style="width:120px">세분류</th>
-                        <th class="text-center px-2" style="width:80px">상태</th>
-                        <th class="text-center px-2" style="width:80px">브랜드</th>
-                        <th class="text-center px-2" style="width:80px">모델명</th>
-                        <th class="text-center px-2" style="width:80px">대표용도</th>
-                        <th class="text-center px-2" style="width:80px">담당자</th>
-                        <th class="text-center px-2" style="width:80px">위치</th>
-                        <th class="text-center px-2" style="width:80px">메모</th>
-                        <th class="text-center px-2" style="width:80px">최종 변경 일자</th>
+                        <th class="text-center px-2" style="width:8%">대분류</th>
+                        <th class="text-center px-2" style="width:8%">중분류</th>
+                        <th class="text-center px-2" style="width:8%">세분류</th>
+                        <th class="text-center px-2" style="width:8%">상태</th>
+                        <th class="text-center px-2" style="width:12%">브랜드</th>
+                        <th class="text-center px-2" style="width:12%">모델명</th>
+                        <th class="text-center px-2" style="width:16%">대표용도</th>
+                        <th class="text-center px-2" style="width:8%">담당자</th>
+                        <th class="text-center px-2" style="width:10%">위치</th>
+                        <th class="text-center px-2" style="width:10%">최종 변경 일자</th>
                     </tr>
                     </thead>
                     <tbody id="assetList">
@@ -58,7 +57,6 @@
                             <td class="text-center">${asset.representative_use}</td>
                             <td class="text-center">${asset.asset_manager_name}</td>
                             <td class="text-center">${asset.asset_loc}</td>
-                            <td class="text-center">${asset.memo}</td>
                             <td class="text-center"><fmt:formatDate value="${asset.last_upd_date}" pattern="yyyy-MM-dd HH:MM"/></td>
                         </tr>
                     </c:forEach>
@@ -66,21 +64,27 @@
                 </table>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-5">
-                <div class="dataTables_info" id="" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
-            </div>
-            <div class="col-sm-12 col-md-7">
-                <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
-                    <ul class="pagination">
-                        <li class="paginate_button page-item previous category_change" id="article-list_previous"><a aria-controls="article-list" data-dt-idx="0" tabindex="0" id="article-list_previous_btn" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                        <li class="paginate_button page-item previous category_change" id="article-list_previous-one"><a aria-controls="article-list" data-dt-idx="0" tabindex="0" id="article-list_previous-one_btn" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li>
-                        <li class="paginate_button page-item next category_change" id="article-list_next-one"><a aria-controls="article-list" data-dt-idx="6" tabindex="0" id="article-list_next-one_btn" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li>
-                        <li class="paginate_button page-item next category_change" id="article-list_next"><a aria-controls="article-list" data-dt-idx="6" tabindex="0" id="article-list_next_btn" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
-                    </ul>
+        <%--<c:if test="${total_count ne 0}">
+            <div class="row">
+                <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${total_count}개 중 ${list_amount*(cur_page-1)+1}에서 ${total_count}까지</div>
+                </div>
+                <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
+                        <ul class="pagination">
+                            <c:set var="name" value="${total_count/amount}" />
+                            <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('cur_asset_index',{page_num:1},'자산현황');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                            <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('cur_asset_index',{page_num:${cur_page-1},'자산현황');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+                            <c:forEach var="i" begin="1" end="${page_amount}">
+                                <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('cur_asset_index',{page_num:${(cur_sector-1)*page_amount+i},'자산현황');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
+                            </c:forEach>
+                            <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('cur_asset_index',{page_num:${cur_page+1},'자산현황');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                            <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('cur_asset_index',{page_num:${tot_page},'자산현황');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
+        </c:if>--%>
     </div>
 </div>
 

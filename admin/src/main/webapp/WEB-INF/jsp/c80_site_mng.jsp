@@ -81,8 +81,7 @@
                                     </c:forEach>
                                 </c:when>
                                 <c:otherwise>
-
-                                    <tr class="">
+                                    <tr class="no_data">
                                         <td colspan="8" class="text-center">등록된 푸터의 내용이 없습니다.</td>
                                     </tr>
                                 </c:otherwise>

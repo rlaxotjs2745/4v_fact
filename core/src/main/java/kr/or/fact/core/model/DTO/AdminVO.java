@@ -29,5 +29,6 @@ public class AdminVO {
     Date last_upd_date;//	date						최종 수정 일시
     String refresh_token;
     boolean is_expired;
+    String access_token;
 //주소, 이메일, 담당업무, 관리번호
 }

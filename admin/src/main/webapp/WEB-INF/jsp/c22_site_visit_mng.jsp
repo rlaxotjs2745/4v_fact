@@ -19,925 +19,925 @@
 
     <!-- Event modal -->
 
-<%--    <form class="modal fade" id="visit-req-modal">--%>
-<%--        <div class="modal-dialog modal-lg">--%>
-<%--            <div class="modal-content">--%>
+    <%--    <form class="modal fade" id="visit-req-modal">--%>
+    <%--        <div class="modal-dialog modal-lg">--%>
+    <%--            <div class="modal-content">--%>
 
-<%--                <div class="modal-header bg-success">--%>
-<%--                    <h5 class="modal-title text-white font-weight-bold">신청 가능일 추가/변경</h5>--%>
-<%--                    <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>--%>
-<%--                </div>--%>
+    <%--                <div class="modal-header bg-success">--%>
+    <%--                    <h5 class="modal-title text-white font-weight-bold">신청 가능일 추가/변경</h5>--%>
+    <%--                    <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>--%>
+    <%--                </div>--%>
 
-<%--                <div class="modal-body">--%>
+    <%--                <div class="modal-body">--%>
 
-<%--                    <!--반복 선택-->--%>
-<%--                    <div class="form-group row">--%>
-<%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">반복</label>--%>
-<%--                        <div class="form-inline col-md-10">--%>
-<%--                            <label class="custom-control custom-radio d-inline-block">--%>
-<%--                                <input name="repeat_type" type="radio" class="custom-control-input" value="0" checked>--%>
-<%--                                <span class="custom-control-label">없음</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-radio d-inline-block">--%>
-<%--                                <input name="repeat_type" type="radio" class="custom-control-input" value="1">--%>
-<%--                                <span class="custom-control-label">매주</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-radio d-inline-block">--%>
-<%--                                <input name="repeat_type" type="radio" class="custom-control-input" value="2">--%>
-<%--                                <span class="custom-control-label">매월</span>--%>
-<%--                            </label>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <!--반복 없이 기간등록-->--%>
-<%--                    <div class="form-group row">--%>
-<%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">선택기간</label>--%>
-<%--                        <div class="col-md-10">--%>
-<%--                            <div id="repeat_none_datepicker" class="input-daterange input-group" style="width: 80%;">--%>
-<%--                                <input type="text" class="form-control" name="start">--%>
-<%--                                <div class="input-group-prepend repeat__none">--%>
-<%--                                    <span class="input-group-text">~</span>--%>
-<%--                                </div>--%>
-<%--                                <input type="text" class="form-control repeat__none" name="end">--%>
-<%--                                <span class="form-text repeat__none">동안 매일</span>--%>
-<%--                                <span class="form-text repeat__weekly repeat_date_monthly repeat_week_monthly">부터</span>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
+    <%--                    <!--반복 선택-->--%>
+    <%--                    <div class="form-group row">--%>
+    <%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">반복</label>--%>
+    <%--                        <div class="form-inline col-md-10">--%>
+    <%--                            <label class="custom-control custom-radio d-inline-block">--%>
+    <%--                                <input name="repeat_type" type="radio" class="custom-control-input" value="0" checked>--%>
+    <%--                                <span class="custom-control-label">없음</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-radio d-inline-block">--%>
+    <%--                                <input name="repeat_type" type="radio" class="custom-control-input" value="1">--%>
+    <%--                                <span class="custom-control-label">매주</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-radio d-inline-block">--%>
+    <%--                                <input name="repeat_type" type="radio" class="custom-control-input" value="2">--%>
+    <%--                                <span class="custom-control-label">매월</span>--%>
+    <%--                            </label>--%>
+    <%--                        </div>--%>
+    <%--                    </div>--%>
+    <%--                    <!--반복 없이 기간등록-->--%>
+    <%--                    <div class="form-group row">--%>
+    <%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">선택기간</label>--%>
+    <%--                        <div class="col-md-10">--%>
+    <%--                            <div id="repeat_none_datepicker" class="input-daterange input-group" style="width: 80%;">--%>
+    <%--                                <input type="text" class="form-control" name="start">--%>
+    <%--                                <div class="input-group-prepend repeat__none">--%>
+    <%--                                    <span class="input-group-text">~</span>--%>
+    <%--                                </div>--%>
+    <%--                                <input type="text" class="form-control repeat__none" name="end">--%>
+    <%--                                <span class="form-text repeat__none">동안 매일</span>--%>
+    <%--                                <span class="form-text repeat__weekly repeat_date_monthly repeat_week_monthly">부터</span>--%>
+    <%--                            </div>--%>
+    <%--                        </div>--%>
+    <%--                    </div>--%>
 
-<%--                    <div class="form-group row repeat_date_monthly repeat_week_monthly d-none">--%>
-<%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">날짜/요일 반복</label>--%>
-<%--                        <div class="form-inline col-md-10">--%>
-<%--                            <label class="custom-control custom-radio d-inline-block">--%>
-<%--                                <input name="repeat_dnw" type="radio" class="custom-control-input" value="0" checked>--%>
-<%--                                <span class="custom-control-label">날짜</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-radio d-inline-block">--%>
-<%--                                <input name="repeat_dnw" type="radio" class="custom-control-input" value="1">--%>
-<%--                                <span class="custom-control-label">요일</span>--%>
-<%--                            </label>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
+    <%--                    <div class="form-group row repeat_date_monthly repeat_week_monthly d-none">--%>
+    <%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">날짜/요일 반복</label>--%>
+    <%--                        <div class="form-inline col-md-10">--%>
+    <%--                            <label class="custom-control custom-radio d-inline-block">--%>
+    <%--                                <input name="repeat_dnw" type="radio" class="custom-control-input" value="0" checked>--%>
+    <%--                                <span class="custom-control-label">날짜</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-radio d-inline-block">--%>
+    <%--                                <input name="repeat_dnw" type="radio" class="custom-control-input" value="1">--%>
+    <%--                                <span class="custom-control-label">요일</span>--%>
+    <%--                            </label>--%>
+    <%--                        </div>--%>
+    <%--                    </div>--%>
 
-<%--                    <div class="form-group row repeat_date_monthly d-none">--%>
-<%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">날짜</label>--%>
-<%--                        <div class="form-inline col-md-10">--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">1  </span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">2  </span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">3  </span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">4  </span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">5  </span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">6  </span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">7  </span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">8  </span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">9  </span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">10</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">11</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">12</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">13</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">14</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">15</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">16</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">17</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">18</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">19</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">20</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">21</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">22</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">23</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">24</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">25</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">26</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">27</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">28</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">29</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">30</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">31</span>--%>
-<%--                            </label>--%>
+    <%--                    <div class="form-group row repeat_date_monthly d-none">--%>
+    <%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">날짜</label>--%>
+    <%--                        <div class="form-inline col-md-10">--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">1  </span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">2  </span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">3  </span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">4  </span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">5  </span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">6  </span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">7  </span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">8  </span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">9  </span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">10</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">11</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">12</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">13</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">14</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">15</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">16</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">17</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">18</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">19</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">20</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">21</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">22</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">23</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">24</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">25</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">26</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">27</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">28</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">29</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">30</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">31</span>--%>
+    <%--                            </label>--%>
 
-<%--                        </div>--%>
-<%--                    </div>--%>
+    <%--                        </div>--%>
+    <%--                    </div>--%>
 
-<%--                    <!--매주 반복 선택-->--%>
-<%--                    <div class="form-group row repeat_week_monthly d-none">--%>
-<%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">주간</label>--%>
-<%--                        <div class="form-inline col-md-10">--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">첫째주</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">둘째주</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">셋째주</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">넷째주</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">다섯째주</span>--%>
-<%--                            </label>--%>
+    <%--                    <!--매주 반복 선택-->--%>
+    <%--                    <div class="form-group row repeat_week_monthly d-none">--%>
+    <%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">주간</label>--%>
+    <%--                        <div class="form-inline col-md-10">--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">첫째주</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">둘째주</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">셋째주</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">넷째주</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">다섯째주</span>--%>
+    <%--                            </label>--%>
 
-<%--                        </div>--%>
-<%--                    </div>--%>
+    <%--                        </div>--%>
+    <%--                    </div>--%>
 
-<%--                    <!--매주 반복 선택-->--%>
-<%--                    <div class="form-group row repeat__weekly repeat_week_monthly d-none">--%>
-<%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">요일</label>--%>
-<%--                        <div class="form-inline col-md-10">--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">월요일</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">화요일</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">수요일</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">목요일</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">금요일</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">토요일</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">일요일</span>--%>
-<%--                            </label>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
+    <%--                    <!--매주 반복 선택-->--%>
+    <%--                    <div class="form-group row repeat__weekly repeat_week_monthly d-none">--%>
+    <%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">요일</label>--%>
+    <%--                        <div class="form-inline col-md-10">--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">월요일</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">화요일</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">수요일</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">목요일</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">금요일</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">토요일</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="week" type="checkbox" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">일요일</span>--%>
+    <%--                            </label>--%>
+    <%--                        </div>--%>
+    <%--                    </div>--%>
 
-<%--                    <div class="form-group row repeat__weekly repeat_date_monthly repeat_week_monthly d-none">--%>
-<%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">규칙 적용기간</label>--%>
-<%--                        <div class="form-inline col-md-6">--%>
-<%--                            <label class="custom-control custom-radio d-inline-block">--%>
-<%--                                <input name="custom-18" type="radio" class="custom-control-input" checked>--%>
-<%--                                <span class="custom-control-label">1개월</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-radio d-inline-block">--%>
-<%--                                <input name="custom-18" type="radio" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">3개월</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-radio d-inline-block">--%>
-<%--                                <input name="custom-18" type="radio" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">6개월</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-radio d-inline-block">--%>
-<%--                                <input name="custom-18" type="radio" class="custom-control-input">--%>
-<%--                                <span class="custom-control-label">직접 선택</span>--%>
-<%--                            </label>--%>
+    <%--                    <div class="form-group row repeat__weekly repeat_date_monthly repeat_week_monthly d-none">--%>
+    <%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">규칙 적용기간</label>--%>
+    <%--                        <div class="form-inline col-md-6">--%>
+    <%--                            <label class="custom-control custom-radio d-inline-block">--%>
+    <%--                                <input name="custom-18" type="radio" class="custom-control-input" checked>--%>
+    <%--                                <span class="custom-control-label">1개월</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-radio d-inline-block">--%>
+    <%--                                <input name="custom-18" type="radio" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">3개월</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-radio d-inline-block">--%>
+    <%--                                <input name="custom-18" type="radio" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">6개월</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-radio d-inline-block">--%>
+    <%--                                <input name="custom-18" type="radio" class="custom-control-input">--%>
+    <%--                                <span class="custom-control-label">직접 선택</span>--%>
+    <%--                            </label>--%>
 
-<%--                        </div>--%>
-<%--                        <div class="form-inline col-md-4 mode-edit mode-new">--%>
-<%--                            <input id="datepicker-base" type="text" class="form-control form-control-md text-md-right" style="width: 60%;" placeholder="0" value="">--%>
-<%--                            <small class="form-text text-muted">--%>
-<%--                                동안--%>
-<%--                            </small>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
+    <%--                        </div>--%>
+    <%--                        <div class="form-inline col-md-4 mode-edit mode-new">--%>
+    <%--                            <input id="datepicker-base" type="text" class="form-control form-control-md text-md-right" style="width: 60%;" placeholder="0" value="">--%>
+    <%--                            <small class="form-text text-muted">--%>
+    <%--                                동안--%>
+    <%--                            </small>--%>
+    <%--                        </div>--%>
+    <%--                    </div>--%>
 
-<%--                    <div class="form-group row">--%>
-<%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">오전 / 오후 선택</label>--%>
-<%--                        <div class="form-inline col-md-10">--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="ampm" type="checkbox" class="custom-control-input" value="1" checked>--%>
-<%--                                <span class="custom-control-label">오전</span>--%>
-<%--                            </label>--%>
-<%--                            <label class="custom-control custom-checkbox mr-16">--%>
-<%--                                <input name="ampm" type="checkbox" class="custom-control-input" value="2" checked>--%>
-<%--                                <span class="custom-control-label">오후</span>--%>
-<%--                            </label>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-
-
-<%--                    <div class="form-group row justify-content-between">--%>
-<%--                        <div class="col-md-12">--%>
-<%--                            <button id="btn_add_date" type="button" class="btn btn-primary float-right">추가</button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
+    <%--                    <div class="form-group row">--%>
+    <%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">오전 / 오후 선택</label>--%>
+    <%--                        <div class="form-inline col-md-10">--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="ampm" type="checkbox" class="custom-control-input" value="1" checked>--%>
+    <%--                                <span class="custom-control-label">오전</span>--%>
+    <%--                            </label>--%>
+    <%--                            <label class="custom-control custom-checkbox mr-16">--%>
+    <%--                                <input name="ampm" type="checkbox" class="custom-control-input" value="2" checked>--%>
+    <%--                                <span class="custom-control-label">오후</span>--%>
+    <%--                            </label>--%>
+    <%--                        </div>--%>
+    <%--                    </div>--%>
 
 
-<%--                    <hr>--%>
-
-<%--                        <!--입력 미리보기-->--%>
-<%--                    <div class="form-group row">--%>
-<%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">선택된 날짜</label>--%>
-<%--                        <div class="input-group col-md-10 mode-new">--%>
-<%--                            <select multiple id="available_visit_date_list" class="custom-select form-control" style="width: 100%;height: 200px;">--%>
-
-<%--                            </select>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="form-group row justify-content-between">--%>
-<%--                        <span class="text-muted">*Shift키를 누르고 선택하거나 마우스로 드래그하면 여러개를 선택할 수 있습니다</span>--%>
-<%--                        <div class="col-md-12">--%>
-<%--                            <button id="btn_del_selected" type="button" class="btn btn-default float-right" disabled>삭제</button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-
-<%--                </div>--%>
-<%--                <div class="modal-footer justify-content-between">--%>
-<%--                    <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>--%>
-<%--                    <button id="btn_visit_save" type="button" class="btn btn-primary">저장</button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </form>--%>
-
-<%--    <div class="modal fade" id="modal_reservation_now">--%>
-<%--            <div class="modal-dialog modal-lg">--%>
-<%--                <div class="modal-content">--%>
-<%--                    <div class="modal-header bg-success">--%>
-<%--                        <h5 class="modal-title text-white font-weight-bold">코드 작성</h5>--%>
-<%--                        <button id="modals-code-new-close" type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>--%>
-<%--                    </div>--%>
-<%--                    <div class="modal-body">--%>
-<%--                        <form>--%>
-<%--                            <div class="form-group row">--%>
-<%--                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 예약 일자</label>--%>
-<%--                                    <div class="col-md-4">--%>
-<%--                                        <div id="repeat_none_datepicker" class="input-daterange input-group" style="width: 80%;">--%>
-<%--                                            <input type="text" class="form-control" name="start">--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">오전/오후</label>--%>
-<%--                                <div class="col-md-4">--%>
-<%--                                    <select class="form-control form-control-md">--%>
-<%--                                        <option value="am" selected>오전</option>--%>
-<%--                                        <option value="pm">오후</option>--%>
-<%--                                    </select>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-
-<%--                            <hr>--%>
-
-<%--                            <div id="exist_req">--%>
-<%--                                <div class="form-group row">--%>
-<%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">구분</label>--%>
-<%--                                    <div class="col-md-4">--%>
-<%--                                        <div class="form-control-plaintext">개인</div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div id="team_name_row" class="form-group row">--%>
-<%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">단체명</label>--%>
-<%--                                    <div class="col-md-4">--%>
-<%--                                        <div class="form-control-plaintext" id="team_name">이름</div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="form-group row">--%>
-<%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">신청인</label>--%>
-<%--                                    <div class="col-md-4">--%>
-<%--                                        <div class="form-control-plaintext">김태선</div>--%>
-<%--                                    </div>--%>
-<%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 인원</label>--%>
-<%--                                    <div class="col-md-4">--%>
-<%--                                        <div class="form-control-plaintext">4명</div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-
-<%--                                <div class="form-group row">--%>
-<%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">연락처</label>--%>
-<%--                                    <div class="col-md-4">--%>
-<%--                                        <div class="form-control-plaintext">010-0000-0000</div>--%>
-<%--                                    </div>--%>
-<%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">이메일</label>--%>
-<%--                                    <div class="col-md-4">--%>
-<%--                                        <div class="form-control-plaintext">tarfsnfl@sdlkfm.com</div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-
-<%--                                <div class="form-group row">--%>
-<%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">거주지 주소</label>--%>
-<%--                                    <div class="col-md-10">--%>
-<%--                                        <div class="form-control-plaintext">(08099) 경기 뭐시 어떻구 그랬동 123 202동 2020호</div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-
-<%--                                <div class="form-group row">--%>
-<%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 목적</label>--%>
-<%--                                    <div class="col-md-10">--%>
-<%--                                        <div class="form-control-plaintext">밥먹으러</div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-
-<%--                                <div class="form-group row">--%>
-<%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">기타사전 질문</label>--%>
-<%--                                    <div class="col-md-10">--%>
-<%--                                        <div class="form-control-plaintext">화장실이 어디예요?</div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--&lt;%&ndash;                            <div id="none_req">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                <div class=""&ndash;%&gt;--%>
-<%--&lt;%&ndash;                            </div>&ndash;%&gt;--%>
+    <%--                    <div class="form-group row justify-content-between">--%>
+    <%--                        <div class="col-md-12">--%>
+    <%--                            <button id="btn_add_date" type="button" class="btn btn-primary float-right">추가</button>--%>
+    <%--                        </div>--%>
+    <%--                    </div>--%>
 
 
-<%--                            <div class="modal-footer justify-content-between">--%>
-<%--                                <div>--%>
-<%--                                    <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>--%>
-<%--                                </div>--%>
-<%--                                <div>--%>
-<%--                                    <button id="btn_save_new" type="button" class="btn btn-primary">저장</button>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
+    <%--                    <hr>--%>
+
+    <%--                        <!--입력 미리보기-->--%>
+    <%--                    <div class="form-group row">--%>
+    <%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">선택된 날짜</label>--%>
+    <%--                        <div class="input-group col-md-10 mode-new">--%>
+    <%--                            <select multiple id="available_visit_date_list" class="custom-select form-control" style="width: 100%;height: 200px;">--%>
+
+    <%--                            </select>--%>
+    <%--                        </div>--%>
+    <%--                    </div>--%>
+    <%--                    <div class="form-group row justify-content-between">--%>
+    <%--                        <span class="text-muted">*Shift키를 누르고 선택하거나 마우스로 드래그하면 여러개를 선택할 수 있습니다</span>--%>
+    <%--                        <div class="col-md-12">--%>
+    <%--                            <button id="btn_del_selected" type="button" class="btn btn-default float-right" disabled>삭제</button>--%>
+    <%--                        </div>--%>
+    <%--                    </div>--%>
+
+    <%--                </div>--%>
+    <%--                <div class="modal-footer justify-content-between">--%>
+    <%--                    <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>--%>
+    <%--                    <button id="btn_visit_save" type="button" class="btn btn-primary">저장</button>--%>
+    <%--                </div>--%>
+    <%--            </div>--%>
+    <%--        </div>--%>
+    <%--    </form>--%>
+
+    <%--    <div class="modal fade" id="modal_reservation_now">--%>
+    <%--            <div class="modal-dialog modal-lg">--%>
+    <%--                <div class="modal-content">--%>
+    <%--                    <div class="modal-header bg-success">--%>
+    <%--                        <h5 class="modal-title text-white font-weight-bold">코드 작성</h5>--%>
+    <%--                        <button id="modals-code-new-close" type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>--%>
+    <%--                    </div>--%>
+    <%--                    <div class="modal-body">--%>
+    <%--                        <form>--%>
+    <%--                            <div class="form-group row">--%>
+    <%--                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 예약 일자</label>--%>
+    <%--                                    <div class="col-md-4">--%>
+    <%--                                        <div id="repeat_none_datepicker" class="input-daterange input-group" style="width: 80%;">--%>
+    <%--                                            <input type="text" class="form-control" name="start">--%>
+    <%--                                        </div>--%>
+    <%--                                    </div>--%>
+    <%--                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">오전/오후</label>--%>
+    <%--                                <div class="col-md-4">--%>
+    <%--                                    <select class="form-control form-control-md">--%>
+    <%--                                        <option value="am" selected>오전</option>--%>
+    <%--                                        <option value="pm">오후</option>--%>
+    <%--                                    </select>--%>
+    <%--                                </div>--%>
+    <%--                            </div>--%>
+
+    <%--                            <hr>--%>
+
+    <%--                            <div id="exist_req">--%>
+    <%--                                <div class="form-group row">--%>
+    <%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">구분</label>--%>
+    <%--                                    <div class="col-md-4">--%>
+    <%--                                        <div class="form-control-plaintext">개인</div>--%>
+    <%--                                    </div>--%>
+    <%--                                </div>--%>
+    <%--                                <div id="team_name_row" class="form-group row">--%>
+    <%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">단체명</label>--%>
+    <%--                                    <div class="col-md-4">--%>
+    <%--                                        <div class="form-control-plaintext" id="team_name">이름</div>--%>
+    <%--                                    </div>--%>
+    <%--                                </div>--%>
+    <%--                                <div class="form-group row">--%>
+    <%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">신청인</label>--%>
+    <%--                                    <div class="col-md-4">--%>
+    <%--                                        <div class="form-control-plaintext">김태선</div>--%>
+    <%--                                    </div>--%>
+    <%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 인원</label>--%>
+    <%--                                    <div class="col-md-4">--%>
+    <%--                                        <div class="form-control-plaintext">4명</div>--%>
+    <%--                                    </div>--%>
+    <%--                                </div>--%>
+
+    <%--                                <div class="form-group row">--%>
+    <%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">연락처</label>--%>
+    <%--                                    <div class="col-md-4">--%>
+    <%--                                        <div class="form-control-plaintext">010-0000-0000</div>--%>
+    <%--                                    </div>--%>
+    <%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">이메일</label>--%>
+    <%--                                    <div class="col-md-4">--%>
+    <%--                                        <div class="form-control-plaintext">tarfsnfl@sdlkfm.com</div>--%>
+    <%--                                    </div>--%>
+    <%--                                </div>--%>
+
+    <%--                                <div class="form-group row">--%>
+    <%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">거주지 주소</label>--%>
+    <%--                                    <div class="col-md-10">--%>
+    <%--                                        <div class="form-control-plaintext">(08099) 경기 뭐시 어떻구 그랬동 123 202동 2020호</div>--%>
+    <%--                                    </div>--%>
+    <%--                                </div>--%>
+
+    <%--                                <div class="form-group row">--%>
+    <%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 목적</label>--%>
+    <%--                                    <div class="col-md-10">--%>
+    <%--                                        <div class="form-control-plaintext">밥먹으러</div>--%>
+    <%--                                    </div>--%>
+    <%--                                </div>--%>
+
+    <%--                                <div class="form-group row">--%>
+    <%--                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">기타사전 질문</label>--%>
+    <%--                                    <div class="col-md-10">--%>
+    <%--                                        <div class="form-control-plaintext">화장실이 어디예요?</div>--%>
+    <%--                                    </div>--%>
+    <%--                                </div>--%>
+    <%--                            </div>--%>
+    <%--&lt;%&ndash;                            <div id="none_req">&ndash;%&gt;--%>
+    <%--&lt;%&ndash;                                <div class=""&ndash;%&gt;--%>
+    <%--&lt;%&ndash;                            </div>&ndash;%&gt;--%>
 
 
-<%--                        </form>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
+    <%--                            <div class="modal-footer justify-content-between">--%>
+    <%--                                <div>--%>
+    <%--                                    <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>--%>
+    <%--                                </div>--%>
+    <%--                                <div>--%>
+    <%--                                    <button id="btn_save_new" type="button" class="btn btn-primary">저장</button>--%>
+    <%--                                </div>--%>
+    <%--                            </div>--%>
+
+
+    <%--                        </form>--%>
+    <%--                    </div>--%>
+    <%--                </div>--%>
+    <%--            </div>--%>
+    <%--        </div>--%>
 
 
 
-        <div class="modal fade" id="modifyOrDeleteVisitData">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header bg-success">
-                        <h5 class="modal-title text-white font-weight-bold">일정 상세</h5>
-                        <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
+    <div class="modal fade" id="modifyOrDeleteVisitData">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title text-white font-weight-bold">일정 상세</h5>
+                    <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="modifyOrDeleteVisitDataForm">
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">조건</label>
+                            <div class="form-inline col-md-10">
+
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="dayOrGroup" type="radio" class="custom-control-input" value="1" checked>
+                                    <span class="custom-control-label">해당일</span>
+                                </label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="dayOrGroup" type="radio" class="custom-control-input" value="2">
+                                    <span class="custom-control-label">그룹</span>
+                                </label>
+                            </div>
+                        </div>
+                        <input type="hidden" name="idx_visit_data"> <!--인덱스 -->
+
+
+
+                        <%--                            <label for="demo_subject"  class="form-label text-success-custom font-weight-bold d-block">지원사업 명</label>--%>
+                        <%--                            <form:input path="demo_subject" class="form-control form-control-md"/>--%>
+
+
+                        <div class="form-group row">
+
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold d-block">선택 날짜</label>
+                            <div class="col-md-4">
+                                <input type="text" name="cur_date" class="form-control form-control-md" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">오전 / 오후 </label>
+                            <div class="form-inline col-md-10">
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input id="visit_data_type_am"  name="visit_data_type"  type="checkbox" class="custom-control-input" value="1" checked>
+                                    <span class="custom-control-label">오전</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input id="visit_data_type_pm"  name="visit_data_type"  type="checkbox" class="custom-control-input" value="2" checked>
+                                    <span class="custom-control-label">오후</span>
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수(오전)</label>
+                            <div class="col-md-4">
+                                <input type="text" name="possible_count_am"  class="form-control form-control-md" oninput="this.value = this.value.replace(/[^0-9]/g,'');"  readonly>
+                            </div>
+
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수(오후)</label>
+                            <div class="col-md-4">
+                                <input type="text"  name="possible_count_pm" class="form-control form-control-md"  oninput="this.value = this.value.replace(/[^0-9]/g,'');" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">현재 예약 수(오전)</label>
+                            <div class="col-md-4">
+                                <input type="text"  name="resulvation_count_am" class="form-control form-control-md" oninput="this.value = this.value.replace(/[^0-9]/g,'');" readonly>
+                            </div>
+
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">현재 예약 수(오후)</label>
+                            <div class="col-md-4">
+                                <input type="text"  name="resulvation_count_pm" class="form-control form-control-md" oninput="this.value = this.value.replace(/[^0-9]/g,'');"  readonly>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메모</label>
+                            <div class="col-md-4">
+                                <input type="text" name="memo" class="form-control form-control-md" readonly >
+                            </div>
+                        </div>
+
+
+                        <%--                            <div class="form-group row">--%>
+                        <%--                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">group_idx</label>--%>
+                        <%--                                <div class="col-md-4">--%>
+                        <%--                                    <input type="text" id="" name="group_idx" class="form-control form-control-md" readonly>--%>
+                        <%--                                </div>--%>
+                        <%--                            </div>--%>
+
+                        <%--                            <div class="form-group row">--%>
+                        <%--                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">불가 이유</label>--%>
+                        <%--                                <div class="col-md-4">--%>
+                        <%--                                    <input type="text"  name="impossible_reason" class="form-control form-control-md" readonly >--%>
+                        <%--                                </div>--%>
+                        <%--                            </div>--%>
+
+                        <%--                            <div class="form-group row" id="checkboxDiv">--%>
+
+                        <%--                            </div>--%>
+
+
+                        <div class="form-group row" id="group_date">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">함께 등록된 일정 </label>
+                            <div class="form-inline col-md-10"  id="checkboxDiv">
+
+
+                            </div>
+                        </div>
+
+                        <%--                            <div class="form-group row">--%>
+                        <%--                                <label class="col-form-label col-form-label-md col-md-2  font-weight-bold">같은 그룹 날짜</label>--%>
+                        <%--                                <textarea  class="form-control" readonly="true" style="resize:none"/>--%>
+                        <%--                            </div>--%>
+
+
+                    </form>
+                </div>
+
+                <div class="modal-footer justify-content-between">
+                    <div>
+                        <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
                     </div>
+                    <div>
 
-                    <div class="modal-body">
-                        <form id="modifyOrDeleteVisitDataForm">
-                            <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">조건</label>
-                                <div class="form-inline col-md-10">
+                        <button id="btn_delete_new" type="button" class="btn btn-primary">삭제</button>
 
-                                    <label class="custom-control custom-radio d-inline-block">
-                                        <input name="dayOrGroup" type="radio" class="custom-control-input" value="1" checked>
-                                        <span class="custom-control-label">해당일</span>
-                                    </label>
-                                    <label class="custom-control custom-radio d-inline-block">
-                                        <input name="dayOrGroup" type="radio" class="custom-control-input" value="2">
-                                        <span class="custom-control-label">그룹</span>
-                                    </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="saveVisitData">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title text-white font-weight-bold">신청일 추가/변경</h5>
+                    <button id="modals-code-new-close" type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
+                </div>
+                <div class="modal-body">
+                    <form id="saveVisitForm">
+
+                        <!--반복 선택-->
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">반복</label>
+                            <div class="form-inline col-md-10">
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="repeat_type_new" type="radio" class="custom-control-input" value="0" checked>
+                                    <span class="custom-control-label">없음</span>
+                                </label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="repeat_type_new" type="radio" class="custom-control-input" value="1">
+                                    <span class="custom-control-label">매주</span>
+                                </label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="repeat_type_new" type="radio" class="custom-control-input" value="2">
+                                    <span class="custom-control-label">매월</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <%--                            <input type="hidden" id="idx_admin" name="idx_admin" value="${admin.idx_admin}">--%>
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">시작 날짜</label>
+                            <div class="col-md-3">
+                                <div id="sDate" class="input-daterange input-group" style="width: 80%;">
+                                    <input type="text" class="form-control" name="sDate" >
                                 </div>
                             </div>
-                           <input type="hidden" name="idx_visit_data"> <!--인덱스 -->
-
-
-
-<%--                            <label for="demo_subject"  class="form-label text-success-custom font-weight-bold d-block">지원사업 명</label>--%>
-<%--                            <form:input path="demo_subject" class="form-control form-control-md"/>--%>
-
-
-                            <div class="form-group row">
-
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold d-block">선택 날짜</label>
-                                <div class="col-md-4">
-                                    <input type="text" name="cur_date" class="form-control form-control-md" readonly>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">오전 / 오후 </label>
-                                <div class="form-inline col-md-10">
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input id="visit_data_type_am"  name="visit_data_type"  type="checkbox" class="custom-control-input" value="1" checked>
-                                        <span class="custom-control-label">오전</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input id="visit_data_type_pm"  name="visit_data_type"  type="checkbox" class="custom-control-input" value="2" checked>
-                                        <span class="custom-control-label">오후</span>
-                                    </label>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수(오전)</label>
-                                <div class="col-md-4">
-                                    <input type="text" name="possible_count_am"  class="form-control form-control-md" oninput="this.value = this.value.replace(/[^0-9]/g,'');"  readonly>
-                                </div>
-
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수(오후)</label>
-                                <div class="col-md-4">
-                                    <input type="text"  name="possible_count_pm" class="form-control form-control-md"  oninput="this.value = this.value.replace(/[^0-9]/g,'');" readonly>
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">종료 날짜</label>
+                            <div class="col-md-3">
+                                <div id="eDate" class="input-daterange input-group" style="width: 80%;">
+                                    <input type="text" class="form-control" name="eDate">
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">현재 예약 수(오전)</label>
-                                <div class="col-md-4">
-                                    <input type="text"  name="resulvation_count_am" class="form-control form-control-md" oninput="this.value = this.value.replace(/[^0-9]/g,'');" readonly>
-                                </div>
+                        </div>
 
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">현재 예약 수(오후)</label>
-                                <div class="col-md-4">
-                                    <input type="text"  name="resulvation_count_pm" class="form-control form-control-md" oninput="this.value = this.value.replace(/[^0-9]/g,'');"  readonly>
-                                </div>
+                        <hr>
+
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">오전 / 오후 선택</label>
+                            <div class="form-inline col-md-10">
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input id="ampm_am" name="ampm_new"  type="checkbox" class="custom-control-input" value="1" checked>
+                                    <span class="custom-control-label">오전</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input id="ampm_pm" name="ampm_new"  type="checkbox" class="custom-control-input" value="2">
+                                    <span class="custom-control-label">오후</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수 오전</label>
+                            <div class="col-md-2">
+                                <input type="text" id="possible_count_am" name="possible_count_am" max="99" placeholder="숫자만 입력"  class="form-control form-control-md" checked  oninput="this.value = this.value.replace(/[^0-9]/g,'');">
                             </div>
 
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수 오후</label>
+                            <div class="col-md-2">
+                                <input type="text" id="possible_count_pm" name="possible_count_pm" max="99" placeholder="숫자만 입력"  class="form-control form-control-md"   oninput="this.value = this.value.replace(/[^0-9]/g,'');">
+                            </div>
+                        </div>
 
+                        <div class="form-group row repeat_date_monthly_new repeat_week_monthly_new d-none">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold ">날짜/요일 반복</label>
+                            <div class="form-inline col-md-10">
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="repeat_dnw_new" type="radio" class="custom-control-input" value="0" checked>
+                                    <span class="custom-control-label">날짜</span>
+                                </label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="repeat_dnw_new" type="radio" class="custom-control-input" value="1">
+                                    <span class="custom-control-label">요일</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row repeat_date_monthly_new d-none ">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">날짜</label>
+                            <div class="form-inline col-md-10">
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="01">
+                                    <span class="custom-control-label">1  </span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="02">
+                                    <span class="custom-control-label">2  </span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="03">
+                                    <span class="custom-control-label">3  </span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="04">
+                                    <span class="custom-control-label">4  </span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="05">
+                                    <span class="custom-control-label">5  </span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="06">
+                                    <span class="custom-control-label">6  </span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="07">
+                                    <span class="custom-control-label">7  </span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="08">
+                                    <span class="custom-control-label">8  </span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="09">
+                                    <span class="custom-control-label">9  </span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="10">
+                                    <span class="custom-control-label">10</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="11">
+                                    <span class="custom-control-label">11</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="12">
+                                    <span class="custom-control-label">12</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="13">
+                                    <span class="custom-control-label">13</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="14">
+                                    <span class="custom-control-label">14</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="15">
+                                    <span class="custom-control-label">15</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="16">
+                                    <span class="custom-control-label">16</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="17">
+                                    <span class="custom-control-label">17</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="18">
+                                    <span class="custom-control-label">18</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="19">
+                                    <span class="custom-control-label">19</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="20">
+                                    <span class="custom-control-label">20</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="21">
+                                    <span class="custom-control-label">21</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="22">
+                                    <span class="custom-control-label">22</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="23">
+                                    <span class="custom-control-label">23</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="24">
+                                    <span class="custom-control-label">24</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="25">
+                                    <span class="custom-control-label">25</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="26">
+                                    <span class="custom-control-label">26</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="27">
+                                    <span class="custom-control-label">27</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="28">
+                                    <span class="custom-control-label">28</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="29">
+                                    <span class="custom-control-label">29</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="30">
+                                    <span class="custom-control-label">30</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="dateNew" type="checkbox" class="custom-control-input" value="31">
+                                    <span class="custom-control-label">31</span>
+                                </label>
+
+                            </div>
+                        </div>
+
+                        <!--매주 반복 선택-->
+                        <div class="form-group row repeat_week_monthly_new d-none ">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">주간</label>
+                            <div class="form-inline col-md-10">
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="weekNum" type="checkbox" class="custom-control-input" value="1">
+                                    <span class="custom-control-label">첫째주</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="weekNum" type="checkbox" class="custom-control-input" value="2">
+                                    <span class="custom-control-label">둘째주</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="weekNum" type="checkbox" class="custom-control-input" value="3">
+                                    <span class="custom-control-label">셋째주</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="weekNum" type="checkbox" class="custom-control-input" value="4">
+                                    <span class="custom-control-label">넷째주</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="weekNum" type="checkbox" class="custom-control-input" value="5">
+                                    <span class="custom-control-label">다섯째주</span>
+                                </label>
+
+
+                            </div>
+                        </div>
+
+                        <!--매주 반복 선택-->
+                        <div class="form-group row repeat__weekly_new repeat_week_monthly_new d-none">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">요일</label>
+                            <div class="form-inline col-md-10">
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="day_new" type="checkbox" class="custom-control-input" value="1">
+                                    <span class="custom-control-label">월요일</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="day_new" type="checkbox" class="custom-control-input" value="2">
+                                    <span class="custom-control-label">화요일</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="day_new" type="checkbox" class="custom-control-input" value="3">
+                                    <span class="custom-control-label">수요일</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="day_new" type="checkbox" class="custom-control-input" value="4">
+                                    <span class="custom-control-label">목요일</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="day_new" type="checkbox" class="custom-control-input" value="5">
+                                    <span class="custom-control-label">금요일</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="day_new" type="checkbox" class="custom-control-input" value="6">
+                                    <span class="custom-control-label">토요일</span>
+                                </label>
+                                <label class="custom-control custom-checkbox mr-16">
+                                    <input name="day_new" type="checkbox" class="custom-control-input" value="0">
+                                    <span class="custom-control-label">일요일</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row repeat__weekly_new repeat_date_monthly_new repeat_week_monthly_new d-none">
+                            <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">규칙 적용기간</label>
+                            <div class="form-inline col-md-6">
+
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="ruleTerm" type="radio" class="custom-control-input" value="99" checked>
+                                    <span class="custom-control-label">직접 선택</span>
+                                </label>
+
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="ruleTerm" type="radio" class="custom-control-input"  value="1">
+                                    <span class="custom-control-label">1개월</span>
+                                </label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="ruleTerm" type="radio" class="custom-control-input" value="3">
+                                    <span class="custom-control-label">3개월</span>
+                                </label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="ruleTerm" type="radio" class="custom-control-input" value="6">
+                                    <span class="custom-control-label">6개월</span>
+                                </label>
+
+                            </div>
+                        </div>
+
+
+
+                        <div id="exist_req">
 
 
                             <div class="form-group row">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메모</label>
-                                <div class="col-md-4">
-                                    <input type="text" name="memo" class="form-control form-control-md" readonly >
+                                <div class="col-md-10">
+                                    <textarea id="memo" name="memo" class="form-control" style="resize:none"></textarea>
                                 </div>
                             </div>
 
-
-<%--                            <div class="form-group row">--%>
-<%--                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">group_idx</label>--%>
-<%--                                <div class="col-md-4">--%>
-<%--                                    <input type="text" id="" name="group_idx" class="form-control form-control-md" readonly>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-
-<%--                            <div class="form-group row">--%>
-<%--                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">불가 이유</label>--%>
-<%--                                <div class="col-md-4">--%>
-<%--                                    <input type="text"  name="impossible_reason" class="form-control form-control-md" readonly >--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-
-<%--                            <div class="form-group row" id="checkboxDiv">--%>
-
-<%--                            </div>--%>
+                        </div>
+                        <%--                            <div id="none_req">--%>
+                        <%--                                <div class=""--%>
+                        <%--                            </div>--%>
 
 
-                            <div class="form-group row" id="group_date">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">함께 등록된 일정 </label>
-                                <div class="form-inline col-md-10"  id="checkboxDiv">
-
-
-                                </div>
+                        <div class="modal-footer justify-content-between">
+                            <div>
+                                <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
                             </div>
-
-<%--                            <div class="form-group row">--%>
-<%--                                <label class="col-form-label col-form-label-md col-md-2  font-weight-bold">같은 그룹 날짜</label>--%>
-<%--                                <textarea  class="form-control" readonly="true" style="resize:none"/>--%>
-<%--                            </div>--%>
-
-
-                        </form>
-                    </div>
-
-                    <div class="modal-footer justify-content-between">
-                        <div>
-                            <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
+                            <div>
+                                <button id="btn_save_new" type="button" class="btn btn-primary">저장</button>
+                            </div>
                         </div>
-                        <div>
 
-                            <button id="btn_delete_new" type="button" class="btn btn-primary">삭제</button>
 
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
-
-        <div class="modal fade" id="saveVisitData">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header bg-success">
-                        <h5 class="modal-title text-white font-weight-bold">신청일 추가/변경</h5>
-                        <button id="modals-code-new-close" type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="saveVisitForm">
-
-                            <!--반복 선택-->
-                            <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">반복</label>
-                                <div class="form-inline col-md-10">
-                                    <label class="custom-control custom-radio d-inline-block">
-                                        <input name="repeat_type_new" type="radio" class="custom-control-input" value="0" checked>
-                                        <span class="custom-control-label">없음</span>
-                                    </label>
-                                    <label class="custom-control custom-radio d-inline-block">
-                                        <input name="repeat_type_new" type="radio" class="custom-control-input" value="1">
-                                        <span class="custom-control-label">매주</span>
-                                    </label>
-                                    <label class="custom-control custom-radio d-inline-block">
-                                        <input name="repeat_type_new" type="radio" class="custom-control-input" value="2">
-                                        <span class="custom-control-label">매월</span>
-                                    </label>
-                                </div>
-                            </div>
-
-<%--                            <input type="hidden" id="idx_admin" name="idx_admin" value="${admin.idx_admin}">--%>
-                            <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">시작 날짜</label>
-                                <div class="col-md-3">
-                                    <div id="sDate" class="input-daterange input-group" style="width: 80%;">
-                                        <input type="text" class="form-control" name="sDate" >
-                                    </div>
-                                </div>
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">종료 날짜</label>
-                                <div class="col-md-3">
-                                    <div id="eDate" class="input-daterange input-group" style="width: 80%;">
-                                        <input type="text" class="form-control" name="eDate">
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <hr>
-
-
-                            <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">오전 / 오후 선택</label>
-                                <div class="form-inline col-md-10">
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input id="ampm_am" name="ampm_new"  type="checkbox" class="custom-control-input" value="1" checked>
-                                        <span class="custom-control-label">오전</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input id="ampm_pm" name="ampm_new"  type="checkbox" class="custom-control-input" value="2">
-                                        <span class="custom-control-label">오후</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수 오전</label>
-                                <div class="col-md-2">
-                                    <input type="text" id="possible_count_am" name="possible_count_am" max="99" placeholder="숫자만 입력"  class="form-control form-control-md" checked  oninput="this.value = this.value.replace(/[^0-9]/g,'');">
-                                </div>
-
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수 오후</label>
-                                <div class="col-md-2">
-                                    <input type="text" id="possible_count_pm" name="possible_count_pm" max="99" placeholder="숫자만 입력"  class="form-control form-control-md"   oninput="this.value = this.value.replace(/[^0-9]/g,'');">
-                                </div>
-                            </div>
-
-                            <div class="form-group row repeat_date_monthly_new repeat_week_monthly_new d-none">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold ">날짜/요일 반복</label>
-                                <div class="form-inline col-md-10">
-                                    <label class="custom-control custom-radio d-inline-block">
-                                        <input name="repeat_dnw_new" type="radio" class="custom-control-input" value="0" checked>
-                                        <span class="custom-control-label">날짜</span>
-                                    </label>
-                                    <label class="custom-control custom-radio d-inline-block">
-                                        <input name="repeat_dnw_new" type="radio" class="custom-control-input" value="1">
-                                        <span class="custom-control-label">요일</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="form-group row repeat_date_monthly_new d-none ">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">날짜</label>
-                                <div class="form-inline col-md-10">
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="01">
-                                        <span class="custom-control-label">1  </span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="02">
-                                        <span class="custom-control-label">2  </span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="03">
-                                        <span class="custom-control-label">3  </span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="04">
-                                        <span class="custom-control-label">4  </span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="05">
-                                        <span class="custom-control-label">5  </span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="06">
-                                        <span class="custom-control-label">6  </span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="07">
-                                        <span class="custom-control-label">7  </span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="08">
-                                        <span class="custom-control-label">8  </span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="09">
-                                        <span class="custom-control-label">9  </span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="10">
-                                        <span class="custom-control-label">10</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="11">
-                                        <span class="custom-control-label">11</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="12">
-                                        <span class="custom-control-label">12</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="13">
-                                        <span class="custom-control-label">13</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="14">
-                                        <span class="custom-control-label">14</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="15">
-                                        <span class="custom-control-label">15</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="16">
-                                        <span class="custom-control-label">16</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="17">
-                                        <span class="custom-control-label">17</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="18">
-                                        <span class="custom-control-label">18</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="19">
-                                        <span class="custom-control-label">19</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="20">
-                                        <span class="custom-control-label">20</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="21">
-                                        <span class="custom-control-label">21</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="22">
-                                        <span class="custom-control-label">22</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="23">
-                                        <span class="custom-control-label">23</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="24">
-                                        <span class="custom-control-label">24</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="25">
-                                        <span class="custom-control-label">25</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="26">
-                                        <span class="custom-control-label">26</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="27">
-                                        <span class="custom-control-label">27</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="28">
-                                        <span class="custom-control-label">28</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="29">
-                                        <span class="custom-control-label">29</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="30">
-                                        <span class="custom-control-label">30</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="dateNew" type="checkbox" class="custom-control-input" value="31">
-                                        <span class="custom-control-label">31</span>
-                                    </label>
-
-                                </div>
-                            </div>
-
-                            <!--매주 반복 선택-->
-                            <div class="form-group row repeat_week_monthly_new d-none ">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">주간</label>
-                                <div class="form-inline col-md-10">
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="weekNum" type="checkbox" class="custom-control-input" value="1">
-                                        <span class="custom-control-label">첫째주</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="weekNum" type="checkbox" class="custom-control-input" value="2">
-                                        <span class="custom-control-label">둘째주</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="weekNum" type="checkbox" class="custom-control-input" value="3">
-                                        <span class="custom-control-label">셋째주</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="weekNum" type="checkbox" class="custom-control-input" value="4">
-                                        <span class="custom-control-label">넷째주</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="weekNum" type="checkbox" class="custom-control-input" value="5">
-                                        <span class="custom-control-label">다섯째주</span>
-                                    </label>
-
-
-                                </div>
-                            </div>
-
-                            <!--매주 반복 선택-->
-                            <div class="form-group row repeat__weekly_new repeat_week_monthly_new d-none">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">요일</label>
-                                <div class="form-inline col-md-10">
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="day_new" type="checkbox" class="custom-control-input" value="1">
-                                        <span class="custom-control-label">월요일</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="day_new" type="checkbox" class="custom-control-input" value="2">
-                                        <span class="custom-control-label">화요일</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="day_new" type="checkbox" class="custom-control-input" value="3">
-                                        <span class="custom-control-label">수요일</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="day_new" type="checkbox" class="custom-control-input" value="4">
-                                        <span class="custom-control-label">목요일</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="day_new" type="checkbox" class="custom-control-input" value="5">
-                                        <span class="custom-control-label">금요일</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="day_new" type="checkbox" class="custom-control-input" value="6">
-                                        <span class="custom-control-label">토요일</span>
-                                    </label>
-                                    <label class="custom-control custom-checkbox mr-16">
-                                        <input name="day_new" type="checkbox" class="custom-control-input" value="0">
-                                        <span class="custom-control-label">일요일</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="form-group row repeat__weekly_new repeat_date_monthly_new repeat_week_monthly_new d-none">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">규칙 적용기간</label>
-                                <div class="form-inline col-md-6">
-
-                                    <label class="custom-control custom-radio d-inline-block">
-                                        <input name="ruleTerm" type="radio" class="custom-control-input" value="99" checked>
-                                        <span class="custom-control-label">직접 선택</span>
-                                    </label>
-
-                                    <label class="custom-control custom-radio d-inline-block">
-                                        <input name="ruleTerm" type="radio" class="custom-control-input"  value="1">
-                                        <span class="custom-control-label">1개월</span>
-                                    </label>
-                                    <label class="custom-control custom-radio d-inline-block">
-                                        <input name="ruleTerm" type="radio" class="custom-control-input" value="3">
-                                        <span class="custom-control-label">3개월</span>
-                                    </label>
-                                    <label class="custom-control custom-radio d-inline-block">
-                                        <input name="ruleTerm" type="radio" class="custom-control-input" value="6">
-                                        <span class="custom-control-label">6개월</span>
-                                    </label>
-
-                                </div>
-                            </div>
-
-
-
-                            <div id="exist_req">
-
-
-                                <div class="form-group row">
-                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메모</label>
-                                    <div class="col-md-10">
-                                        <textarea id="memo" name="memo" class="form-control" style="resize:none"></textarea>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <%--                            <div id="none_req">--%>
-                            <%--                                <div class=""--%>
-                            <%--                            </div>--%>
-
-
-                            <div class="modal-footer justify-content-between">
-                                <div>
-                                    <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
-                                </div>
-                                <div>
-                                    <button id="btn_save_new" type="button" class="btn btn-primary">저장</button>
-                                </div>
-                            </div>
-
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
 
 
 
@@ -1023,7 +1023,7 @@
                             item1.id='a';
                             item1.title = "방문: " + possible_count_am + "예약 : "+ resulvation_count_am;
                             item1.start = new Date(y, m, d, 8, 0);
-                             // item1.classNames = 'fc-event-success';
+                            // item1.classNames = 'fc-event-success';
 
                             item1.extendedProps = {
                                 idx_visit_data : idx_visit_data,
@@ -1182,18 +1182,18 @@
 
             customButtons:
                 window.location.pathname != '/a10_dashboard' ?
-                {
-                addEventButton:
                     {
-                    text:'일정 추가하기',
-                    click : function(){
-                            let x = new Date();
-                            $("#saveVisitData").find("input[name='sDate']").val(x.yyyymmdd());
-                            $("#saveVisitData").find("input[name='eDate']").val(x.yyyymmdd());
-                            $("#saveVisitData").modal('show');
-                        }
-                    }
-                } : {},
+                        addEventButton:
+                            {
+                                text:'일정 추가하기',
+                                click : function(){
+                                    let x = new Date();
+                                    $("#saveVisitData").find("input[name='sDate']").val(x.yyyymmdd());
+                                    $("#saveVisitData").find("input[name='eDate']").val(x.yyyymmdd());
+                                    $("#saveVisitData").modal('show');
+                                }
+                            }
+                    } : {},
             //
 
             // initialDate: today,
@@ -1373,80 +1373,80 @@
 
             eventClick:
                 window.location.pathname != '/a10_dashboard' ?
-                function(calEvent) {
+                    function(calEvent) {
 
-                let visitData=calEvent.event.extendedProps;
+                        let visitData=calEvent.event.extendedProps;
 
-                $("#modifyOrDeleteVisitData").find("input[name='idx_visit_data']").val(visitData.idx_visit_data);
+                        $("#modifyOrDeleteVisitData").find("input[name='idx_visit_data']").val(visitData.idx_visit_data);
 
-                $("#modifyOrDeleteVisitData").find("input[name='cur_date']").val(new Date(visitData.cur_date).yyyymmdd());
+                        $("#modifyOrDeleteVisitData").find("input[name='cur_date']").val(new Date(visitData.cur_date).yyyymmdd());
 
-                $("#modifyOrDeleteVisitData").find("input[name='id_admin_cancel']").val(visitData.id_admin_cancel);
-                $("#modifyOrDeleteVisitData").find("input[name='impossible_reason']").val(visitData.impossible_reason);
-                $("#modifyOrDeleteVisitData").find("input[name='visit_data_type']").val(visitData.visit_data_type);
-                $('input:checkbox[name="visit_data_type"]').prop('disabled',true);
-
-
-                if(visitData.visit_data_type == 1){
-                    $("input:checkbox[id='visit_data_type_am']").prop('checked',true);
-                    $("input:checkbox[id='visit_data_type_pm']").prop('checked',false);
-
-                }else if(visitData.visit_data_type == 2){
-                    $("input:checkbox[id='visit_data_type_am']").prop('checked',false);
-                    $("input:checkbox[id='visit_data_type_pm']").prop('checked',true);
-
-                }else if(visitData.visit_data_type == 3){
-                    $("input:checkbox[id='visit_data_type_am']").prop('checked',true);
-                    $("input:checkbox[id='visit_data_type_pm']").prop('checked',true);
-
-                };
-
-                $("#modifyOrDeleteVisitData").find("input[name='memo']").val(visitData.memo);
-                // $("#modifyOrDeleteVisitData").find("input[name='group_idx']").val(visitData.group_idx);
-
-                $("#modifyOrDeleteVisitData").find("input[name='possible_count_am']").val(visitData.possible_count_am);
-                $("#modifyOrDeleteVisitData").find("input[name='possible_count_pm']").val(visitData.possible_count_pm);
-                $("#modifyOrDeleteVisitData").find("input[name='resulvation_count_am']").val(visitData.resulvation_count_am);
-                $("#modifyOrDeleteVisitData").find("input[name='resulvation_count_pm']").val(visitData.resulvation_count_pm);
-
-                // console.log("visitData.group_idx : " + visitData.group_idx);
+                        $("#modifyOrDeleteVisitData").find("input[name='id_admin_cancel']").val(visitData.id_admin_cancel);
+                        $("#modifyOrDeleteVisitData").find("input[name='impossible_reason']").val(visitData.impossible_reason);
+                        $("#modifyOrDeleteVisitData").find("input[name='visit_data_type']").val(visitData.visit_data_type);
+                        $('input:checkbox[name="visit_data_type"]').prop('disabled',true);
 
 
-                let group_idx=visitData.group_idx;
+                        if(visitData.visit_data_type == 1){
+                            $("input:checkbox[id='visit_data_type_am']").prop('checked',true);
+                            $("input:checkbox[id='visit_data_type_pm']").prop('checked',false);
 
-                let param={
-                    group_idx: group_idx
-                }
+                        }else if(visitData.visit_data_type == 2){
+                            $("input:checkbox[id='visit_data_type_am']").prop('checked',false);
+                            $("input:checkbox[id='visit_data_type_pm']").prop('checked',true);
 
-                $.ajax({
-                    type: 'post',
-                    url: 'get_visit_data_byGroupIdx', //데이터를 주고받을 파일 주소 입력
-                    data: JSON.stringify(param),//보내는 데이터
-                    contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
-                    dataType: 'text',//받는 데이터 타입
-                    success:function (result){
-                        let data=JSON.parse(result);
-                        let array_data=data["visitDataVOList"]
+                        }else if(visitData.visit_data_type == 3){
+                            $("input:checkbox[id='visit_data_type_am']").prop('checked',true);
+                            $("input:checkbox[id='visit_data_type_pm']").prop('checked',true);
 
-                        let inputval="";
+                        };
 
-                        $.each(array_data, function(key, item) {
+                        $("#modifyOrDeleteVisitData").find("input[name='memo']").val(visitData.memo);
+                        // $("#modifyOrDeleteVisitData").find("input[name='group_idx']").val(visitData.group_idx);
 
-                            let cur_date = new Date(item.cur_date).yyyymmdd();
-                            let idx_visit_data=item.idx_visit_data;
-                            // inputval +="<input type='checkbox' value='" + cur_date + "'>"+cur_date + "&emsp;"
+                        $("#modifyOrDeleteVisitData").find("input[name='possible_count_am']").val(visitData.possible_count_am);
+                        $("#modifyOrDeleteVisitData").find("input[name='possible_count_pm']").val(visitData.possible_count_pm);
+                        $("#modifyOrDeleteVisitData").find("input[name='resulvation_count_am']").val(visitData.resulvation_count_am);
+                        $("#modifyOrDeleteVisitData").find("input[name='resulvation_count_pm']").val(visitData.resulvation_count_pm);
 
-                            inputval +="<input type='hidden' name='idx_visit_data_temp' value='" + idx_visit_data + "'>"
-                            inputval+=cur_date + "&emsp;"
-                            // inputval+=cur_date + "&emsp;" + idx_visit_data + "&emsp;"
+                        // console.log("visitData.group_idx : " + visitData.group_idx);
+
+
+                        let group_idx=visitData.group_idx;
+
+                        let param={
+                            group_idx: group_idx
+                        }
+
+                        $.ajax({
+                            type: 'post',
+                            url: 'get_visit_data_byGroupIdx', //데이터를 주고받을 파일 주소 입력
+                            data: JSON.stringify(param),//보내는 데이터
+                            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+                            dataType: 'text',//받는 데이터 타입
+                            success:function (result){
+                                let data=JSON.parse(result);
+                                let array_data=data["visitDataVOList"]
+
+                                let inputval="";
+
+                                $.each(array_data, function(key, item) {
+
+                                    let cur_date = new Date(item.cur_date).yyyymmdd();
+                                    let idx_visit_data=item.idx_visit_data;
+                                    // inputval +="<input type='checkbox' value='" + cur_date + "'>"+cur_date + "&emsp;"
+
+                                    inputval +="<input type='hidden' name='idx_visit_data_temp' value='" + idx_visit_data + "'>"
+                                    inputval+=cur_date + "&emsp;"
+                                    // inputval+=cur_date + "&emsp;" + idx_visit_data + "&emsp;"
+                                });
+                                $("#checkboxDiv").html(inputval);
+                            }
                         });
-                        $("#checkboxDiv").html(inputval);
-                    }
-                });
 
-                $("#modifyOrDeleteVisitData").modal('show');
+                        $("#modifyOrDeleteVisitData").modal('show');
 
-            }: null,
+                    }: null,
 
         });
 
@@ -1805,7 +1805,7 @@
 
 
 
-        }); //document ready 의 끝
+    }); //document ready 의 끝
 
 
     Date.prototype.yyyymmdd = function() {
@@ -1858,7 +1858,18 @@
 
         var ssDate=new Date($("#saveVisitData").find("input[name='sDate']").val());
         var eeDate=new Date($("#saveVisitData").find("input[name='eDate']").val());
+
+        let param={
+            start_date : new Date(ssDate),
+            end_date : new Date(eeDate)
+        }
+
         var result=getDatesStartToLast(ssDate,eeDate);
+
+
+        console.log("ss Date : " + ssDate);
+        console.log("eeDate : " +eeDate);
+
 
         let possible_count=0;
         let possible_count_am=$("#possible_count_am").val();
@@ -1866,6 +1877,8 @@
 
         let memo=$("#memo").val();
         let visit_data_type=0;
+
+
 
         if(result.length == 0){
             return alert('날짜를 확인해주세요');
@@ -1889,7 +1902,7 @@
 
             if(!possible_count_am){
                 $("#possible_count_am").focus();
-                return alert('값을 확인해주세요');
+                return alert('견학 가능 수를 입력해주세요');
             }
             possible_count=possible_count_am;
 
@@ -1897,7 +1910,7 @@
 
             if(!possible_count_pm){
                 $("#possible_count_pm").focus();
-                return alert('값을 확인해주세요');
+                return alert('견학 가능 수를 입력해주세요');
             }
 
             possible_count=possible_count_pm*1000;
@@ -1906,7 +1919,7 @@
 
             if(!possible_count_am || !possible_count_pm){
                 if(!possible_count_pm){$("#possible_count_pm").focus();};
-                return alert('값을 확인해주세요');
+                return alert('견학 가능 수를 입력해주세요');
             }
             possible_count=parseInt(possible_count_am) + (parseInt(possible_count_pm) * 1000);
         }
@@ -1918,122 +1931,167 @@
 
 
 
-            if(repeat_type_new=='0'){
+        if(repeat_type_new=='0'){
+
+            for(let i=0;i<result.length;i++){
+                let visitDataVoNew={"memo":memo,"possible_count" :possible_count,"visit_data_type" : visit_data_type,"cur_date":""};
+                visitDataVoNew.cur_date=result[i];
+                visitDataVoNewList.push(visitDataVoNew);
+            }
+
+        }else if(repeat_type_new=='1'){
+
+            let dayChecked="";
+            $("input:checkbox[name='day_new']:checked").each(function (){
+                dayChecked+=$(this).val();
+            });
+
+            if(!dayChecked){
+                return alert('요일을 선택해주세요');
+            }
+
+
+            let tempDate_arr=[];
+            for(let i=0;i<result.length;i++){
+                let tempDate=new Date(result[i]);
+
+                for(let j=0;j<=6;j++){
+                    if(dayChecked.includes(j)){
+                        if(tempDate.getDay()==j)tempDate_arr.push(result[i]);
+                    }
+
+                }
+                // console.log(tempDate_arr);
+
+            };
+
+            for(let k=0;k<tempDate_arr.length;k++){
+                let visitDataVoNew={"memo":memo,"possible_count" :possible_count,"visit_data_type" : visit_data_type,"cur_date":""};
+                visitDataVoNew.cur_date=tempDate_arr[k];
+                visitDataVoNewList.push(visitDataVoNew);
+            }
+            // console.log("visitDataVoNewList : " + visitDataVoNewList);
+            // console.log("tempDate_arr : "  + tempDate_arr);
+
+        }else if(repeat_type_new=='2'){
+
+            if($("input:radio[name='repeat_dnw_new']:checked").val()=='0'){
+
+                let dateSelectedList="";
+                let tempDate_arr=[];
+
+                $("input:checkbox[name='dateNew']:checked").each(function(){
+                    dateSelectedList +=$(this).val()+",";
+                });
+
+                // console.log("dateSelectedList : " + dateSelectedList);
+
+                if(!dateSelectedList){return alert('날짜를 선택해주세요');}
 
                 for(let i=0;i<result.length;i++){
-                    let visitDataVoNew={"memo":memo,"possible_count" :possible_count,"visit_data_type" : visit_data_type,"cur_date":""};
-                    visitDataVoNew.cur_date=result[i];
-                    visitDataVoNewList.push(visitDataVoNew);
+                    let tempDate=new Date(result[i]);
+
+                    for(let j=1;j<=31;j++){
+                        if(dateSelectedList.includes(j)){
+                            if(tempDate.getDate()==j) tempDate_arr.push(result[i]);
+                        }
+                    }
                 }
 
-            }else if(repeat_type_new=='1'){
+                // console.log("tempDate_arr : " + tempDate_arr);
+
+                for(let k=0;k<tempDate_arr.length;k++){
+                    let visitDataVoNew={"memo":memo,"possible_count" :possible_count,"visit_data_type" : visit_data_type,"cur_date":""};
+                    visitDataVoNew.cur_date=tempDate_arr[k];
+                    visitDataVoNewList.push (visitDataVoNew);
+                }
+
+            }else if($("input:radio[name='repeat_dnw_new']:checked").val()=='1'){
 
                 let dayChecked="";
+                let weekNumChecked="";
+                let tempDate_arr=[];
+                $("input:checkbox[name='weekNum']:checked").each(function (){
+                    weekNumChecked+=$(this).val();
+                });
+
                 $("input:checkbox[name='day_new']:checked").each(function (){
                     dayChecked+=$(this).val();
                 });
 
-                if(!dayChecked){
-                    return alert('요일을 체크해주세요');
-                }
+                if(!weekNumChecked){return alert('주간을 선택해주세요');}
+                if(!dayChecked){return alert('요일을 선택 해주세요'); }
 
-
-                let tempDate_arr=[];
                 for(let i=0;i<result.length;i++){
                     let tempDate=new Date(result[i]);
 
-                    for(let j=0;j<=6;j++){
-                        if(dayChecked.includes(j)){
-                            if(tempDate.getDay()==j)tempDate_arr.push(result[i]);
-                        }
-
+                    if(weekNumChecked.includes(weekNumberByMonth(tempDate))&& dayChecked.includes(tempDate.getDay())){
+                        tempDate_arr.push(result[i]);
                     }
-                    // console.log(tempDate_arr);
-
-                };
+                }
+                // console.log("dayChecked : "  + dayChecked);
+                // console.log("weekNumChecked : " + weekNumChecked);
 
                 for(let k=0;k<tempDate_arr.length;k++){
                     let visitDataVoNew={"memo":memo,"possible_count" :possible_count,"visit_data_type" : visit_data_type,"cur_date":""};
                     visitDataVoNew.cur_date=tempDate_arr[k];
                     visitDataVoNewList.push(visitDataVoNew);
                 }
-                // console.log("visitDataVoNewList : " + visitDataVoNewList);
-                // console.log("tempDate_arr : "  + tempDate_arr);
-
-            }else if(repeat_type_new=='2'){
-
-                if($("input:radio[name='repeat_dnw_new']:checked").val()=='0'){
-
-                    let dateSelectedList="";
-                    let tempDate_arr=[];
-
-                    $("input:checkbox[name='dateNew']:checked").each(function(){
-                        dateSelectedList +=$(this).val()+",";
-                    });
-
-                    // console.log("dateSelectedList : " + dateSelectedList);
-
-                    if(!dateSelectedList){return alert('날짜를 선택해주세요');}
-
-                    for(let i=0;i<result.length;i++){
-                        let tempDate=new Date(result[i]);
-
-                        for(let j=1;j<=31;j++){
-                            if(dateSelectedList.includes(j)){
-                                if(tempDate.getDate()==j) tempDate_arr.push(result[i]);
-                            }
-                        }
-                    }
-
-                    // console.log("tempDate_arr : " + tempDate_arr);
-
-                    for(let k=0;k<tempDate_arr.length;k++){
-                        let visitDataVoNew={"memo":memo,"possible_count" :possible_count,"visit_data_type" : visit_data_type,"cur_date":""};
-                        visitDataVoNew.cur_date=tempDate_arr[k];
-                        visitDataVoNewList.push (visitDataVoNew);
-                    }
-
-                }else if($("input:radio[name='repeat_dnw_new']:checked").val()=='1'){
-
-                    let dayChecked="";
-                    let weekNumChecked="";
-                    let tempDate_arr=[];
-                    $("input:checkbox[name='weekNum']:checked").each(function (){
-                        weekNumChecked+=$(this).val();
-                    });
-
-                    $("input:checkbox[name='day_new']:checked").each(function (){
-                        dayChecked+=$(this).val();
-                    });
-
-                    if(!weekNumChecked){return alert('주간을 선택해주세요');}
-                    if(!dayChecked){return alert('요일을 체크해주세요'); }
-
-                    for(let i=0;i<result.length;i++){
-                        let tempDate=new Date(result[i]);
-
-                        if(weekNumChecked.includes(weekNumberByMonth(tempDate))&& dayChecked.includes(tempDate.getDay())){
-                            tempDate_arr.push(result[i]);
-                        }
-                    }
-                    // console.log("dayChecked : "  + dayChecked);
-                    // console.log("weekNumChecked : " + weekNumChecked);
-
-                    for(let k=0;k<tempDate_arr.length;k++){
-                        let visitDataVoNew={"memo":memo,"possible_count" :possible_count,"visit_data_type" : visit_data_type,"cur_date":""};
-                        visitDataVoNew.cur_date=tempDate_arr[k];
-                        visitDataVoNewList.push(visitDataVoNew);
-                    }
 
 
-                };
+            };
+
+        }
+
+        var selected_date_arr =[];
+        $.each(visitDataVoNewList,function (key,item){
+            selected_date_arr.push(item.cur_date);
+        });
+
+        console.log("selected date _ arr : " + selected_date_arr);
+
+
+        var get_cur_date_arr=[];
+
+        $.ajax({
+            type : 'post',
+            url : '/get_visit_data', //날짜의 기간에따른 데이터값을 가져옴
+            data : JSON.stringify(param),
+            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType: 'text',//받는 데이터 타입
+            async:false,
+            success: function (result) {
+                //작업이 성공적으로 발생했을 경우
+                let data=JSON.parse(result);
+                let array_data=data["visitDataVOList"];
+
+                $.each(array_data,function (key,item){
+                    let cur_date=new Date(item.cur_date).yyyymmdd();
+                        get_cur_date_arr.push(cur_date);
+                });
+
+            },
+            error: function (request,status,error) {
+                //에러가 났을 경우 실행시킬 코드
+                console.log("code : " + request.status + "\n" +  "message: "+  request.responseText +  "\n" + "error:" + error);
 
             }
+        });
 
-            // console.log(visitDataVoNewList);
+        let intersection=get_cur_date_arr.filter(x => selected_date_arr.includes(x));
 
-        if(confirm("저장하시겠습니까?")){
+        console.log("asdf : " + get_cur_date_arr);
+        console.log("interaction length : " +intersection.length);
 
+
+        let agree=false;
+        if(intersection.length==0){
+            agree=confirm("저장하시겠습니까?");
+        }else{
+            agree=confirm("기존 일정이 존재합니다. 그래도 저장하시겠습니까?");
+        }
+
+        if(agree){
             $.ajax({
                 type:'post',
                 url: 'save_visit_date', //데이터를 주고받을 파일 주소 입력
@@ -2045,27 +2103,24 @@
 
                     let data=JSON.parse(result);
 
-                    // console.log("result.result_str : " + data.result_str);
+                    console.log("result.result_str : " + data.result_str);
                     alert(data.result_str);
+
+
+                    $("#saveVisitData").modal('hide');
 
                     //STATUS_001 :
                 },
                 error: function (request,status,error) {
-                    // console.log("result.result_str error : " + result.result_str);
+                    console.log("result.result_str error : " + result.result_str);
                     alert(result.result_str);
 
                     //에러가 났을 경우 실행시킬 코드
                     alert("code : " + request.status + "\n" +  "message: "+  request.responseText +  "\n" + "error:" + error);
-
                 }
 
-
             });
-
-        }else{
-            return false;
         }
-
 
     });
 
@@ -2248,8 +2303,8 @@
 
                 $("input[name='idx_visit_data_temp']").each(function (){
 
-                   var tempValue=$(this).val();
-                   idx_visit_data_arr.push(tempValue);
+                    var tempValue=$(this).val();
+                    idx_visit_data_arr.push(tempValue);
                     let visitDataVoDel= {
                         idx_visit_data: $(this).val()
                     }

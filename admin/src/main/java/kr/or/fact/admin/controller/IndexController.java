@@ -144,7 +144,7 @@ public class IndexController extends BaseController {
                                ModelMap model,
                                @CookieValue(name = "access_token",required = false) String access_token){
         if(access_token!=null){
-            AdminVO adminVO = getVerityAuth(access_token);
+            //AdminVO adminVO = getVerityAuth(access_token);
             AdminSessionVO adminSessionVO = adminSessionService.getAdminSessionInfoByToken(access_token);
             adminSessionService.deleteAdminSessionInfo(adminSessionVO);
         }
@@ -167,6 +167,7 @@ public class IndexController extends BaseController {
         }else{
             return "redirect:/login";
         }
+
         String[] activeProfiles = env.getActiveProfiles();
         if (activeProfiles.length != 0) {
             String activeProfile = activeProfiles[0];
@@ -177,13 +178,18 @@ public class IndexController extends BaseController {
                 }
             }
         }
+
         return "index";
     }
 
     @RequestMapping(value="/login",method = RequestMethod.GET)
-    public String login( ModelMap model,
+    public String login( HttpServletRequest req,
+                         ModelMap model,
                          @RequestBody(required = false) ParamVO paramVO){
+
         setProfile(model);
+        String _path = req.getRequestURI();
+        model.addAttribute("path", _path);
         return "login";
     }
 
@@ -2000,6 +2006,8 @@ public class IndexController extends BaseController {
         model.addAttribute("maxvalue", assetVOList.get(0).getMaxvalue());
         model.addAttribute("systemCodeList",systemCodeList);
 
+
+
         return "cur_asset_index";
     }
 
@@ -2894,40 +2902,40 @@ public class IndexController extends BaseController {
         }else{
             return "redirect:/login";
         }
-        int page_num = param.getPage_num();
 
         int list_amount = 10;
         int page_amount = 10;
+        int page = param.getPage_num();
 
         param.setAmount(10);
         param.setOrder_field("REG_DATE");
-        int filtered_item_total = systemService.getSystemTotalCount();
-        List<SystemCodeVO> systemCodeList = systemService.getSystemCodeList(param);
 
-        model.addAttribute("total_count",filtered_item_total);
+        int itemTotalCount = systemService.getSystemTotalCount();
+        model.addAttribute("total_count", itemTotalCount);
+
+        List<SystemCodeVO> systemCodeList = systemService.getSystemCodeList(param);
         model.addAttribute("systemCodeList",systemCodeList);
 
-        model.addAttribute("cur_page",page_num);
+        model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
 
-        int tot_page = filtered_item_total/list_amount+1;
-        if(filtered_item_total%list_amount==0) tot_page-=1;
+        int tot_page = itemTotalCount/list_amount+1;
+        if(itemTotalCount%list_amount==0) tot_page-=1;
 
         int tot_sector = tot_page/page_amount+1;
         if(tot_page%page_amount==0) tot_sector-=1;
 
-        int cur_sector = page_num/page_amount+1;
-        if(page_num%page_amount==0) cur_sector-=1;
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
 
         boolean is_past = false;
         boolean is_prev = false;
         boolean is_next = false;
         boolean is_last = false;
-        boolean is_active = false;
 
-        if(page_num!=tot_page && tot_page>1) is_next = true;
+        if(page!=tot_page && tot_page>1) is_next = true;
 
-        if(page_num!=1 && tot_page>1) is_prev = true;
+        if(page!=1 && tot_page>1) is_prev = true;
 
         if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
 
@@ -2961,6 +2969,7 @@ public class IndexController extends BaseController {
             } else {
                 model.addAttribute("profile", activeProfile);
             }
+            model.addAttribute("login_from", activeProfile);
         }
     }
 

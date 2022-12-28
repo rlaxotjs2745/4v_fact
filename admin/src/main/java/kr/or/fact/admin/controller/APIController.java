@@ -114,7 +114,7 @@ public class APIController {
 
             AdminVO findAdmin = adminService.findAdminById(adminVo.getAdmin_id());
             //임시코드
-            if (findAdmin != null){
+/*            if (findAdmin != null){
                 String hashedPassword = passwordEncoder.encode(adminVo.getAdmin_pw());
                 ChangePwVO changePwVO = new ChangePwVO();
                 changePwVO.setAdmin_id(findAdmin.getAdmin_id());
@@ -122,7 +122,7 @@ public class APIController {
                 adminService.updateAdminPassword(changePwVO);
 
                 findAdmin.setAdmin_pw(hashedPassword);
-            }
+            }*/
             //임시코드 끝
             if (findAdmin != null && passwordEncoder.matches(adminVo.getAdmin_pw(),findAdmin.getAdmin_pw())) {
                 AdminSessionVO adminSessionVO = new AdminSessionVO();
@@ -180,6 +180,25 @@ public class APIController {
                 resultVO.setAccess_token(uuid);
                 resultVO.setResult_str("키발급 성공");
                 resultVO.setResult_code("success");
+            }
+        }
+        return resultVO;
+    }
+
+
+    @RequestMapping(value = "/logout",method = RequestMethod.POST)
+    public @ResponseBody ResultVO logout(@RequestBody AdminVO adminVO,
+                                         @CookieValue(name = "access_token",required = false) String access_token) {
+
+        ResultVO resultVO = new ResultVO();
+
+        resultVO.setResult_str("로그아웃 되었습니다");
+        resultVO.setResult_code(CONSTANT.Success);
+
+        if(access_token!=null){
+            AdminSessionVO findAdminSessionVO = adminSessionService.getAdminSessionInfoByToken(access_token);
+            if(findAdminSessionVO!=null){
+                adminSessionService.deleteAdminSessionInfo(findAdminSessionVO);
             }
         }
         return resultVO;
@@ -792,7 +811,7 @@ public class APIController {
 
 
         ResultVO resultVO = new ResultVO();
-        resultVO.setResult_str("성공");
+        resultVO.setResult_str("저장에 성공했습니다");
         resultVO.setResult_code("SUCCESS");
 
         int groupIdx=visitService.getGroupIdx();
@@ -968,6 +987,43 @@ public class APIController {
                 systemCodeVO.getDetail()!= null
         ){
             systemService.insertSystemCode(systemCodeVO);
+        }
+        else {
+            resultVO.setResult_str("필수 데이터가 없습니다.");
+            resultVO.setResult_code("ERROR001");
+        }
+        return  resultVO;
+    }
+
+    @RequestMapping(value = "/update_system_code",method = RequestMethod.POST)
+    public @ResponseBody ResultVO update_system_code(HttpSession session, @RequestBody SystemCodeVO systemCodeVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("저장했습니다");
+        resultVO.setResult_code("SUCCESS");
+
+        if(systemCodeVO.getCode_name() != null &&
+                systemCodeVO.getCode_value()!= null &&
+                systemCodeVO.getDetail()!= null
+        ){
+            systemService.updateSystemCode(systemCodeVO);
+        }
+        else {
+            resultVO.setResult_str("필수 데이터가 없습니다.");
+            resultVO.setResult_code("ERROR001");
+        }
+        return  resultVO;
+    }
+
+    @RequestMapping(value = "/delete_system_code",method = RequestMethod.POST)
+    public @ResponseBody ResultVO delete_system_code(HttpSession session, @RequestBody SystemCodeVO systemCodeVO){
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_str("저장했습니다");
+        resultVO.setResult_code("SUCCESS");
+
+        if(systemCodeVO.getIdx_system_code() > 0){
+            systemService.deleteSystemCode(systemCodeVO.getIdx_system_code());
         }
         else {
             resultVO.setResult_str("필수 데이터가 없습니다.");

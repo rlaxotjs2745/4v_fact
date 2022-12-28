@@ -41,6 +41,16 @@ public class SystemServiceImpl implements SystemService {
     }
 
     @Override
+    public void updateSystemCode(SystemCodeVO systemCodeVO) {
+        systemMapper.updateSystemCode(systemCodeVO);
+    }
+
+    @Override
+    public void deleteSystemCode(long idx_system_code) {
+        systemMapper.deleteSystemCode(idx_system_code);
+    }
+
+    @Override
     public List<SystemCodeVO> getAllSystemCodeList(){
         return systemMapper.getAllSystemCodeList();
     }

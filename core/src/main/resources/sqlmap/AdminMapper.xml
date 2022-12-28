@@ -6,7 +6,7 @@
     <select id="getAdminInfoById" parameterType="String" resultType="kr.or.fact.core.model.DTO.AdminVO">
         SELECT *
         FROM TB_ADMIN
-        WHERE admin_id = #{admin_id,jdbcType=VARCHAR}
+        WHERE admin_id = #{admin_id}
     </select>
 
     <select id="getAdminInfoByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.AdminVO">
