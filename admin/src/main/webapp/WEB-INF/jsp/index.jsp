@@ -220,11 +220,6 @@
                 contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
                 dataType:'html',//받는 데이터 타입
                 success:function(result){
-
-
-
-
-                    if(usage == "admin"){
                     if(usage === "admin"){
                         $("#admin_index").html(result);
                     } else if(usage === "user"){

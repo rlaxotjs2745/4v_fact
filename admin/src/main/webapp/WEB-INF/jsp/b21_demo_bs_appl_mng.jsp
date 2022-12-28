@@ -302,7 +302,10 @@
                 enctype: 'multipart/form-data',
                 success: function (result) {
                     //작업이 성공적으로 발생했을 경우
-                    console.log(result);
+                    alert(result.result_str);
+                    if(result.result_code == 'SUCCESS'){
+                        pageLoad('b21_demo_bs_appl_mng',{page_num:1},'신규신청 접수');
+                    }
                 }
             })
 
@@ -315,7 +318,10 @@
                 dataType: 'text',//받는 데이터 타입
                 success: function (result) {
                     //작업이 성공적으로 발생했을 경우
-                    console.log(result);
+                    alert(result.result_str);
+                    if(result.result_code == 'SUCCESS'){
+                        pageLoad('b21_demo_bs_appl_mng',{page_num:1},'신규신청 접수');
+                    }
                 }
             })
         }
