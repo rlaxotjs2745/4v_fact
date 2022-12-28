@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.fact.core.model.RuleFileMapper">
+
+    <insert id="insertRuleFile" parameterType="kr.or.fact.core.model.DTO.RuleFileInfoVO">
+        INSERT INTO TB_RULE_FILE_INFO( IDX_RULE_FILE_INFO,
+                                       SUBJECT,
+                                       USAGE_DETAIL,
+                                       DEPART_NAME,
+                                       IDX_ADMIN,
+                                       ORDER_NUM,
+                                       IDX_FILE_INFO,
+                                       REG_DATE)
+        VALUES (SEQ_FORM_FILE_INFO.NEXTVAL,
+                #{subject},
+                #{usage_detail},
+                #{depart_name},
+                #{idx_admin},
+                #{order_num},
+                #{idx_file_info},
+                SYSDATE
+               )
+    </insert>
+
+    <select id="getRuleFileCount" resultType="int">
+        SELECT COUNT (*) FROM TB_RULE_FILE_INFO A
+                                  INNER JOIN TB_ADMIN B ON A.idx_admin = B.idx_admin
+                                  INNER JOIN TB_FILE_INFO C ON A.IDX_FILE_INFO = C.IDX_FILE_INFO
+    </select>
+
+    <select id="getRuleFileList" resultType="kr.or.fact.core.model.DTO.RuleFileInfoVO">
+        SELECT
+            IDX_RULE_FILE_INFO,
+            SUBJECT,
+            USAGE_DETAIL,
+            DEPART_NAME,
+            IDX_ADMIN,
+            IDX_FILE_INFO,
+            REG_DATE,
+            ADMIN_NAME,
+            FILE_NAME,
+            EXTENTION
+        FROM (
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+                        ,IDX_RULE_FILE_INFO,
+                        SUBJECT,
+                        USAGE_DETAIL,
+                        DEPART_NAME,
+                        IDX_ADMIN,
+                        IDX_FILE_INFO,
+                        REG_DATE,
+                        ADMIN_NAME,
+                        FILE_NAME,
+                        EXTENTION
+                 FROM (
+                          SELECT A.*, B.admin_name, C.EXTENTION, C.FILE_NAME
+                          FROM TB_RULE_FILE_INFO A
+                                   INNER JOIN TB_ADMIN B ON A.idx_admin = B.idx_admin
+                                   INNER JOIN TB_FILE_INFO C ON A.IDX_FILE_INFO = C.IDX_FILE_INFO
+                          order by IDX_RULE_FILE_INFO desc
+                      )
+                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+             )
+        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+    </select>
+
+</mapper>
+

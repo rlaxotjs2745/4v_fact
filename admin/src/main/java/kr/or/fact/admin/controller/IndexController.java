@@ -92,6 +92,9 @@ public class IndexController {
     @Resource(name = "formFileService")
     public FormFileService formFileService;
 
+    @Resource(name = "ruleFileService")
+    public RuleFileService ruleFileService;
+
     @Autowired
     public PRContentsMapper prContentsMapper;
 
@@ -2641,29 +2644,22 @@ public class IndexController {
             model.addAttribute("admin", adminVO);
             setProfile(model);
         }
-        int page = param.getPage_num();
-        List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
-        model.addAttribute("rulefileinfolist",ruleFileInfoList);
-        //int filter1 = param.getFilter1();
-        //int filter2 = param.getFilter2();
-
         int list_amount = 10;
         int page_amount = 10;
+        int page = param.getPage_num();
 
         param.setAmount(10);
-        param.setOrder_field("ORDER_NUM");
-        int filtered_item_total = fileService.getRuleFileTotalCount();
-        List<RuleFileInfoVO> ruleFileInfoVOList = fileService.getRuleFileInfoList(param);
+        int ruleFileCountCount = ruleFileService.getRuleFileCount();
+        model.addAttribute("total_count",ruleFileCountCount);
 
-        model.addAttribute("total_count",filtered_item_total);
-        model.addAttribute("ruleFileInfoVOList",ruleFileInfoVOList);
-
+        List<FormFileInfoVO> ruleFileList = ruleFileService.getRuleFileList(param);
+        model.addAttribute("rulefilelist",ruleFileList);
 
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
 
-        int tot_page = filtered_item_total/list_amount+1;
-        if(filtered_item_total%list_amount==0) tot_page-=1;
+        int tot_page = ruleFileCountCount/list_amount+1;
+        if(ruleFileCountCount%list_amount==0) tot_page-=1;
 
         int tot_sector = tot_page/page_amount+1;
         if(tot_page%page_amount==0) tot_sector-=1;
@@ -2675,7 +2671,6 @@ public class IndexController {
         boolean is_prev = false;
         boolean is_next = false;
         boolean is_last = false;
-        boolean is_active = false;
 
         if(page!=tot_page && tot_page>1) is_next = true;
 
