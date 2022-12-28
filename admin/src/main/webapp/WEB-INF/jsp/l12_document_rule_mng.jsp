@@ -156,7 +156,7 @@ $('#btn_save_new').on('click', function() {
         return alert('규정 사용 용도를 입력해 주세요.')
     }
 
-    if($("#form_corp_name").val() === ''){
+    if($("#detail").val() === ''){
         return alert('관련조직 이름을 입력해 주세요.')
     }
 
@@ -168,7 +168,7 @@ $('#btn_save_new').on('click', function() {
     let formData = new FormData();
     formData.append('subject', $("#subject").val()); // 규정 제목
     formData.append('usage_detail', $("#usage_detail").val()); // 규정 사용 용도
-    formData.append('depart_name', $("#form_corp_name").val()); // 관련조직 이름
+    formData.append('depart_name', $("#detail").val()); // 관련조직 이름
     formData.append('idx_admin', $("input[name=idx_admin]").val());
     if (document.getElementById('file_upload').files.length > 0) {
         formData.append('file1', document.getElementById('file_upload').files[0]);

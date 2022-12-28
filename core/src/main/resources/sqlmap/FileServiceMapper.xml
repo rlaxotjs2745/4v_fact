@@ -342,7 +342,7 @@
             CHECKSUM,
             OWNER,
             IDX_USER,
-            <if test="file_type == 70 or file_type == 3">
+            <if test="file_type == 70 or file_type == 3 or file_type == 4 or file_type == 5">
                 IDX_FILE_USAGE,
             </if>
             IDX_ADMIN,
@@ -366,6 +366,12 @@
                     </if>
                     <if test="file_type == 3">
                         SEQ_BS_ANNOUNCEMENT.CURRVAL,
+                    </if>
+                    <if test="file_type == 4">
+                        SEQ_FORM_FILE_INFO.CURRVAL,
+                    </if>
+                    <if test="file_type == 5">
+                        SEQ_RULE_FILE_INFO.CURRVAL,
                     </if>
                      #{idx_admin},
                      SYSDATE
