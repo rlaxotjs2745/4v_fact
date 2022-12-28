@@ -309,7 +309,7 @@
                                 <tr class="">
                                     <th class="text-center align-middle bg-light" rowspan="3" style="width:12%">개인정보</th>
                                     <th class="text-center bg-light" style="width:12%">이름</th>
-                                    <td class="text-center" style="width:24%"><input type="text" class="form-control form-control-sm" value="" id="admin_name"></td>
+                                    <td class="text-center" style="width:24%"><input type="text" class="form-control form-control-sm" value="" id="admin_name" onkeyup="chkOnlyName(event)"></td>
                                     <th class="text-center bg-light" style="width:13%">일반전화번호</th>
                                     <td class="text-center" style="width:29%"><input type="text" class="form-control form-control-sm" value="" onkeyup="chkOnlyNum(event)" id="tel_num"></td>
                                 </tr>
@@ -607,6 +607,22 @@
         }
     };
 
+    function chkEmail(event) {
+        let phoneRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/g;
+        let ele = event.target;
+        if (!phoneRegex.test(ele.value)) {
+            console.log(ele.value)
+            ele.value = ele.value.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/gi, '');
+        }
+    };
+
+    function chkOnlyName(event) {
+        let regExp = /[0-9]/g;
+        let ele = event.target;
+        if (regExp.test(ele.value)) {
+            ele.value = ele.value.replace(/[0-9]/g, '');
+        }
+    };
 
 
     $("#btn-admin-join").click(function(){
