@@ -2022,6 +2022,7 @@ public class APIController {
             fileService.convertMultipartToFile(formFileInfoVO.getFile1());
             long fileIdx = fileService.insertFormFile(formFileInfoVO.getFile1(), formFileInfoVO.getIdx_admin());
 
+            formFileInfoVO.setOrder_num(0);
             formFileInfoVO.setIdx_file_info(fileIdx);
             formFileService.insertFormFile(formFileInfoVO);
 
