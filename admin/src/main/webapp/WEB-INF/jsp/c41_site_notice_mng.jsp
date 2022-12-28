@@ -776,8 +776,12 @@
             return alert('소제목을 입력해주세요.')
         }
 
-        if($("#form_corp_name").val() === ''){
-            return alert('관련조직 이름을 입력해 주세요.')
+        if($("#memo").val() === ''){
+            return alert('메모를 입력해 주세요.')
+        }
+
+        if($("#posting_start_date").val() === '' || $("#posting_end_date").val() === ''){
+            return alert('게시기간을 입력해주세요.')
         }
 
         var fileForm = new FormData();
