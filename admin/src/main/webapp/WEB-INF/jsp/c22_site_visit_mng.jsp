@@ -659,6 +659,18 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수 오전</label>
+                                <div class="col-md-2">
+                                    <input type="text" id="possible_count_am" name="possible_count_am" max="99" placeholder="숫자만 입력"  class="form-control form-control-md" checked  oninput="this.value = this.value.replace(/[^0-9]/g,'');">
+                                </div>
+
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수 오후</label>
+                                <div class="col-md-2">
+                                    <input type="text" id="possible_count_pm" name="possible_count_pm" max="99" placeholder="숫자만 입력"  class="form-control form-control-md"   oninput="this.value = this.value.replace(/[^0-9]/g,'');">
+                                </div>
+                            </div>
+
                             <div class="form-group row repeat_date_monthly_new repeat_week_monthly_new d-none">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold ">날짜/요일 반복</label>
                                 <div class="form-inline col-md-10">
@@ -896,17 +908,7 @@
 
 
                             <div id="exist_req">
-                                <div class="form-group row">
-                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수 오전</label>
-                                    <div class="col-md-2">
-                                        <input type="text" id="possible_count_am" name="possible_count_am" max="99" placeholder="숫자만 입력"  class="form-control form-control-md" checked  oninput="this.value = this.value.replace(/[^0-9]/g,'');">
-                                    </div>
 
-                                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수 오후</label>
-                                    <div class="col-md-2">
-                                        <input type="text" id="possible_count_pm" name="possible_count_pm" max="99" placeholder="숫자만 입력"  class="form-control form-control-md"   oninput="this.value = this.value.replace(/[^0-9]/g,'');">
-                                    </div>
-                                </div>
 
                                 <div class="form-group row">
                                     <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">메모</label>
@@ -914,9 +916,6 @@
                                         <textarea id="memo" name="memo" class="form-control" style="resize:none"></textarea>
                                     </div>
                                 </div>
-
-
-
 
                             </div>
                             <%--                            <div id="none_req">--%>
@@ -1792,9 +1791,13 @@
         });
 
         $("#modifyOrDeleteVisitData").on('hidden.bs.modal',function (){
+
+
             defaultCalendar.removeAllEvents();
             defaultCalendar.addEventSource(getMonthlyData(defaultCalendar.getDate()));
             defaultCalendar.refetchEvents();
+            $("#group_date").hide();
+            $(this).find('form')[0].reset();
         });
 
 
@@ -1832,19 +1835,16 @@
             temp_mon+=1;
             let temp_dateVal=new Date(temp_year,temp_mon,temp_date);
             $("#saveVisitData").find("input[name='eDate']").val(temp_dateVal.yyyymmdd());
-            // $("#saveVisitData").find("input[name='eDate']").attr('readonly',true);
 
         }else if(tempRuleTerm=='3'){
             temp_mon+=3;
             let temp_dateVal=new Date(temp_year,temp_mon,temp_date);
             $("#saveVisitData").find("input[name='eDate']").val(temp_dateVal.yyyymmdd());
-            // $("#saveVisitData").find("input[name='eDate']").attr('readonly',true);
 
         }else if(tempRuleTerm=='6'){
             temp_mon+=6;
             let temp_dateVal=new Date(temp_year,temp_mon,temp_date);
             $("#saveVisitData").find("input[name='eDate']").val(temp_dateVal.yyyymmdd());
-            // $("#saveVisitData").find("input[name='eDate']").attr('readonly',true);
 
         }else if(tempRuleTerm=='99'){
             $("#saveVisitData").find("input[name='eDate']").val(new Date($("#saveVisitData").find("input[name='sDate']").val()).yyyymmdd());
@@ -1860,10 +1860,16 @@
         var eeDate=new Date($("#saveVisitData").find("input[name='eDate']").val());
         var result=getDatesStartToLast(ssDate,eeDate);
 
+        let possible_count=0;
+        let possible_count_am=$("#possible_count_am").val();
+        let possible_count_pm=$("#possible_count_pm").val();
+
+        let memo=$("#memo").val();
+        let visit_data_type=0;
+
         if(result.length == 0){
             return alert('날짜를 확인해주세요');
         }
-
 
         $("#possible_count_am #possible_count_pm").keyup(function (event){
             var inputVal = $(this).val();
@@ -1871,14 +1877,6 @@
 
         });
 
-
-
-        let possible_count=0;
-        let possible_count_am=$("#possible_count_am").val();
-        let possible_count_pm=$("#possible_count_pm").val();
-
-        let memo=$("#memo").val();
-        let visit_data_type=0;
 
         $("input:checkbox[name='ampm_new']:checked").each(function (){
             visit_data_type+=parseInt($(this).val());
@@ -1893,7 +1891,6 @@
                 $("#possible_count_am").focus();
                 return alert('값을 확인해주세요');
             }
-
             possible_count=possible_count_am;
 
         }else if(visit_data_type==2){
@@ -1919,7 +1916,7 @@
         let repeat_type_new = $("input:radio[name='repeat_type_new']:checked").val();
 
 
-        if(confirm("저장하시겠습니까?")){
+
 
             if(repeat_type_new=='0'){
 
@@ -1935,6 +1932,11 @@
                 $("input:checkbox[name='day_new']:checked").each(function (){
                     dayChecked+=$(this).val();
                 });
+
+                if(!dayChecked){
+                    return alert('요일을 체크해주세요');
+                }
+
 
                 let tempDate_arr=[];
                 for(let i=0;i<result.length;i++){
@@ -1971,6 +1973,8 @@
 
                     console.log("dateSelectedList : " + dateSelectedList);
 
+                    if(!dateSelectedList){return alert('날짜를 선택해주세요');}
+
                     for(let i=0;i<result.length;i++){
                         let tempDate=new Date(result[i]);
 
@@ -1990,7 +1994,7 @@
                     }
 
                 }else if($("input:radio[name='repeat_dnw_new']:checked").val()=='1'){
-                    alert('요일별호출');
+
                     let dayChecked="";
                     let weekNumChecked="";
                     let tempDate_arr=[];
@@ -2001,6 +2005,9 @@
                     $("input:checkbox[name='day_new']:checked").each(function (){
                         dayChecked+=$(this).val();
                     });
+
+                    if(!weekNumChecked){return alert('주간을 선택해주세요');}
+                    if(!dayChecked){return alert('요일을 체크해주세요'); }
 
                     for(let i=0;i<result.length;i++){
                         let tempDate=new Date(result[i]);
@@ -2024,6 +2031,8 @@
             }
 
             console.log(visitDataVoNewList);
+
+        if(confirm("저장하시겠습니까?")){
 
             $.ajax({
                 type:'post',
@@ -2081,16 +2090,6 @@
     }
 
 
-
-    // //일정 추가 모달창 오전 오후
-    // $("#ampm_am").change(function(){
-    //     if($("#ampm_am").is(":checked")){
-    //         alert('체크');
-    //     }else{
-    //         alert('체크해제 ');
-    //     }
-    //
-    // });
 
 
     //일정 추가 모달창 화면 상세설정
@@ -2212,14 +2211,6 @@
     }
 
 
-
-    // $("#input[name='dayOrGroup']").change(function (){
-    //    let temp=$("input[name='dayOrGroup']:checked").val();
-    //
-    //    alert(temp);
-    //
-    // });
-
     $("#modifyOrDeleteVisitData").find("input:radio[name='dayOrGroup']").on('change',function (){
         let temp=$(this).val();
         if(temp ==1) {
@@ -2230,13 +2221,12 @@
     });
 
 
+    //삭제
     $("#btn_delete_new").on('click',function (){
 
-        //그룹삭제
         let radioVal=$("#modifyOrDeleteVisitData").find("input:radio[name='dayOrGroup']:checked").val();
 
         if(confirm("삭제하시겠습니까?")){
-
 
             let idx_visit_data=$("#modifyOrDeleteVisitData").find("input[name='idx_visit_data']").val();
             let visitDataVoDelList=new Array();
@@ -2290,10 +2280,7 @@
 
                 }
 
-
             });
-
-
 
         }else{
             return false;
@@ -2305,7 +2292,6 @@
 
 
 
-
     $("#saveVisitData").find("input[name='sDate']").on('change',function(){
 
         let sDate=$("#saveVisitData").find("input[name='sDate']").val();
@@ -2313,7 +2299,26 @@
         if(new Date(sDate).getTime() > new Date(eDate).getTime()){
             $("#saveVisitData").find("input[name='eDate']").val(new Date(sDate).yyyymmdd());
         }
+
+
     });
+
+    $("#saveVisitData").find("input[name='eDate']").on('change',function(){
+
+        let sDate=$("#saveVisitData").find("input[name='sDate']").val();
+        let eDate=$("#saveVisitData").find("input[name='eDate']").val();
+
+        if(new Date(sDate).getTime() > new Date(eDate).getTime()){
+            $("#saveVisitData").find("input[name='sDate']").val(new Date(eDate).yyyymmdd());
+        }
+
+        $("input:radio[name='ruleTerm'][value='99']").prop('checked',true);
+
+    });
+
+
+
+
 
 
 
