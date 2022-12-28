@@ -309,13 +309,13 @@
                                 <tr class="">
                                     <th class="text-center align-middle bg-light" rowspan="3" style="width:12%">개인정보</th>
                                     <th class="text-center bg-light" style="width:12%">이름</th>
-                                    <td class="text-center" style="width:24%"><input type="text" class="form-control form-control-sm" value="" id="admin_name"></td>
+                                    <td class="text-center" style="width:24%"><input type="text" class="form-control form-control-sm" value="" id="admin_name" onkeyup="chkOnlyName(event)"></td>
                                     <th class="text-center bg-light" style="width:13%">일반전화번호</th>
-                                    <td class="text-center" style="width:29%"><input type="text" class="form-control form-control-sm" value="" id="tel_num"></td>
+                                    <td class="text-center" style="width:29%"><input type="text" class="form-control form-control-sm" value="" onkeyup="chkOnlyNum(event)" id="tel_num"></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">휴대폰 번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="mphone_num"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" onkeyup="chkOnlyNum(event)" id="mphone_num"></td>
                                     <th class="text-center bg-light">관리 유형</th>
                                     <td class="text-center">
                                         <select id="admin_type" class="form-control form-control-sm">
@@ -599,7 +599,34 @@
         });
     });
 
+    function chkOnlyNum(event) {
+        let regExp = /[^0-9]/g;
+        let ele = event.target;
+        if (regExp.test(ele.value)) {
+            ele.value = ele.value.replace(regExp, '');
+        }
+    };
+
+    function chkEmail(event) {
+        let phoneRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/g;
+        let ele = event.target;
+        if (!phoneRegex.test(ele.value)) {
+            console.log(ele.value)
+            ele.value = ele.value.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/gi, '');
+        }
+    };
+
+    function chkOnlyName(event) {
+        let regExp = /[0-9]/g;
+        let ele = event.target;
+        if (regExp.test(ele.value)) {
+            ele.value = ele.value.replace(/[0-9]/g, '');
+        }
+    };
+
+
     $("#btn-admin-join").click(function(){
+
         if(
             $("#web_id").val() == "" ||
             $("#web_id2").val() == "" ||
@@ -612,6 +639,8 @@
             alert("회원가입에 필요한 데이터가 모두 입력되지 않았습니다.");
             return;
         }
+
+
 
         var param = {
             admin_id: $("#web_id").val() + "@" + $("#web_id2").val(),

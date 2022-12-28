@@ -9,12 +9,12 @@
     <div class="form-group row">
         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">받는 사람</label>
         <div class="col-md-10">
-            <input type="text" id="email_receiver" name="email_receiver" class="form-control form-control-md mode-edit mode-new" placeholder="받는 분의 이메일을 입력해주세요.">
+            <input type="text" id="email_receiver" name="email_receiver" class="form-control form-control-md mode-edit mode-new" placeholder="받는 분의 이메일을 입력해주세요." onkeyup="chkEmail(event)">
         </div>
     </div>
 
     <div class="form-group row">
-        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" ">제목</label>
+        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">제목</label>
         <div class="col-md-10">
             <input type="text" id="email_title" name="email_title" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요">
         </div>
@@ -59,6 +59,16 @@
 </form>
 <%@include file ="layouts/frame_footer.jsp" %>
 <script>
+
+    function chkEmail(event) {
+        let phoneRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/g;
+        let ele = event.target;
+        if (!phoneRegex.test(ele.value)) {
+            console.log(ele.value)
+            ele.value = ele.value.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/gi, '');
+        }
+    };
+
     var sendMailBtn = document.querySelectorAll('.send_mail');
     sendMailBtn.forEach(btn=>btn.addEventListener('click', sendMailNow));
 

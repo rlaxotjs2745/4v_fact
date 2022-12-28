@@ -29,7 +29,7 @@
                 <div class="form-group row">
                     <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">보내는 전화번호</label>
                     <div class="col-md-6 mode-edit mode-new">
-                        <input id="callback" type="text" class="form-control form-control-md text-md-right" placeholder="010부터작성">
+                        <input id="callback" type="text" class="form-control form-control-md text-md-right" placeholder="010부터작성" onkeyup="chkEmail(event)">
                     </div>
                 </div>
                 <br>
@@ -71,7 +71,14 @@
             </form>
 
             <script>
-
+                function chkEmail(event) {
+                    let phoneRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/g;
+                    let ele = event.target;
+                    if (!phoneRegex.test(ele.value)) {
+                        console.log(ele.value)
+                        ele.value = ele.value.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/gi, '');
+                    }
+                };
 
                 $(function() {
                     var isRtl = $('html').attr('dir') === 'rtl';
