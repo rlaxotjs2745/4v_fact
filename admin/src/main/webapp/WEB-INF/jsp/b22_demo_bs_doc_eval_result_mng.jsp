@@ -144,130 +144,177 @@
         </div>
 
         <!-- Modal template -->
-        <div class="modal fade" id="modals-evaluation-write">
+        <div class="modal fade" id="modals-source-write">
             <div class="modal-dialog modal-lg">
                 <form class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">심사결과 입력</h5>
+                        <h5 class="modal-title">자산 등록</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
                     <div class="modal-body pb-2">
 
                         <div class="form-row">
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">신청자</label>
-                                <span>행복한 농장(주)</span>
-                            </div>
-                            <div class="form-group col col-md-4">
-                                <label class="form-label d-block text-muted">실증책임자</label>
-                                <span>지정 필요</span>
+                            <div class="form-group col col-md-6">
+                                <label class="form-label d-block text-muted">일련번호</label>
+                                <input type="text" class="form-control w-lg-auto" id="asset_code">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">공고명</label>
-                                <span>공고명 텍스트 공고명 텍스트 공고명 텍스트 공고명 텍스트 공고명 텍스트 공고명 텍스트 </span>
+                                <label class="form-label d-block text-muted">자산 분류</label>
+                                <div class="form-inline" id="code_select">
+                                    <select class="custom-select mr-sm-2 mb-2 mb-sm-0 code_select" id="main_code">
+                                        <option selected="" disabled>대분류 전체</option>
+                                        <c:forEach items="${main_cate}" var="cate" varStatus="status">
+                                            <option value="${cate.code_value}">${cate.code_name} ${cate.detail != null ?  cate.detail : ""}</option>
+                                        </c:forEach>
+                                    </select>
+                                    <select class="custom-select mr-sm-2 mb-2 mb-sm-0 code_select" id="sub_code" style="display: none">
+
+                                    </select>
+                                    <select class="custom-select mr-sm-2 mb-2 mb-sm-0 code_select" id="detail_code" style="display: none">
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col col-md-6">
+                                <label class="form-label d-block text-muted">자산이름</label>
+                                <input type="text" class="form-control" id="asset_name">
+                            </div>
+                            <div class="form-group col col-md-6">
+                                <label class="form-label d-block text-muted">관리 담당</label>
+                                <select class="custom-select mr-sm-2 mb-2 mb-sm-0" id="asset_manager">
+                                    <option selected="" disabled>관리자 선택</option>
+                                    <c:forEach items="${adminList}" var="admin" varStatus="status">
+                                        <option value="${admin.admin_name}">${admin.corporate_name == null ? "" : admin.corporate_name} ${admin.admin_name}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col col-md-12 mb-0">
+                                <label class="form-label d-block text-muted">자산 사진</label>
+
+                                <div class="media align-items-center">
+                                    <img src="../..resources/assets/img/bg/1.jpg" alt="" class="d-block ui-w-140">
+                                    <div class="media-body ml-4">
+                                        <div class="text-light small mt-1">- 신청서 보완 요청서 등록이 필요 합니다.<br>
+                                            - 파일 형식 : JPG, PNG</div>
+                                    </div>
+                                </div>
+                                <div class="d-block mt-1">
+                                    <input type="file" class="custom-file">
+                                </div>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">접수번호</label>
-                                <span>ㄷ-1234567890</span>
+                                <label class="form-label d-block text-muted">예약 가능</label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="reservation" type="radio" class="custom-control-input" value="0">
+                                    <span class="custom-control-label">예약 가능</span>
+                                </label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="reservation" type="radio" class="custom-control-input" value="2">
+                                    <span class="custom-control-label">사용 중</span>
+                                </label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="reservation" type="radio" class="custom-control-input" value="3">
+                                    <span class="custom-control-label">파손 수리 중</span>
+                                </label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="reservation" type="radio" class="custom-control-input" value="4">
+                                    <span class="custom-control-label">폐기</span>
+                                </label>
+                                <label class="custom-control custom-radio d-inline-block">
+                                    <input name="reservation" type="radio" class="custom-control-input" value="99">
+                                    <span class="custom-control-label">분실</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col col-md-6">
+                                <label class="form-label d-block text-muted">제조사</label>
+                                <input type="text" class="form-control" id="asset_manufacture">
+                            </div>
+                            <div class="form-group col col-md-6">
+                                <label class="form-label d-block text-muted">브랜드</label>
+                                <input type="text" class="form-control" id="asset_brand">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col col-md-6">
+                                <label class="form-label d-block text-muted">모델명</label>
+                                <input type="text" class="form-control" id="asset_model_name">
+                            </div>
+                            <div class="form-group col col-md-6">
+                                <label class="form-label d-block text-muted">보관 위치</label>
+                                <input type="text" class="form-control" id="asset_loc">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col col-md-6">
+                                <label class="form-label d-block text-muted">대표 사용처</label>
+                                <input type="text" class="form-control" id="representative_use">
+                            </div>
+                            <div class="form-group col col-md-6">
+                                <label class="form-label d-block text-muted">일련 번호</label>
+                                <input type="text" class="form-control" id="asset_pid">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">선정평가서</label>
-                                <input type="file" class="custom-file">
-                                <input type="file" class="custom-file">
+                                <label class="form-label d-block text-muted">메모</label>
+                                <textarea class="form-control" id="memo" rows="3" placeholder="메모는 고객에게 노출이 되지 않으며 관리자만 볼 수 있습니다."></textarea>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">선정평가 종합의견서</label>
-                                <input type="file" class="custom-file">
-                                <input type="file" class="custom-file">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">사용승인</label>
-                                <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-2" type="radio" class="custom-control-input">
-                                    <span class="custom-control-label">검토 보류</span>
-                                </label>
-                                <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-2" type="radio" class="custom-control-input">
-                                    <span class="custom-control-label">사용 승인</span>
-                                </label>
-                                <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-2" type="radio" class="custom-control-input">
-                                    <span class="custom-control-label">사용 불가</span>
-                                </label>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                        <button type="button" class="btn btn-primary" id="asset_submit">저장</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-                        <hr>
+        <div class="modal fade" id="modals-source-upload">
+            <div class="modal-dialog ">
+                <form class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">자산 일괄등록</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+                    </div>
+                    <div class="modal-body pb-2">
 
                         <div class="form-row">
-                            <div class="form-group col col-md-12">
-                                <label class="form-label d-block text-muted">실증 책임자 지정</label>
-                                <table class="table table-bordered mt-3 mb-0 ">
-                                    <thead>
-                                    <tr>
-                                        <th class="text-center">이름</th>
-                                        <th class="text-center">직무</th>
-                                        <th class="text-center">지정 건</th>
-                                        <th class="text-center">책임자 지정</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td class="text-center">김상담</td>
-                                        <td class="text-center">직무 직무 직무 직무</td>
-                                        <td class="text-center">5</td>
-                                        <td class="text-center">
-                                            <label class="custom-control custom-checkbox d-inline-block">
-                                                <input type="checkbox" class="custom-control-input" name="check-2">
-                                                <span class="custom-control-label">책임자 지정</span>
-                                            </label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">박상담</td>
-                                        <td class="text-center">직무 직무 직무 직무</td>
-                                        <td class="text-center">4</td>
-                                        <td class="text-center">
-                                            <label class="custom-control custom-checkbox d-inline-block">
-                                                <input type="checkbox" class="custom-control-input" name="check-2">
-                                                <span class="custom-control-label">책임자 지정</span>
-                                            </label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">최상담</td>
-                                        <td class="text-center">직무 직무 직무 직무</td>
-                                        <td class="text-center">4</td>
-                                        <td class="text-center">
-                                            <label class="custom-control custom-checkbox d-inline-block">
-                                                <input type="checkbox" class="custom-control-input" name="check-2">
-                                                <span class="custom-control-label">책임자 지정</span>
-                                            </label>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                            <div class="form-group col col-md-12 text-right">
+                                <a href="#none" class="btn btn-underline">일괄등록 양식 템플릿 다운로드</a>
+                            </div>
+                        </div>
+                        <hr class="mt-0">
+                        <div class="form-row">
+                            <div class="form-group col col-md-12 ">
+                                <label class="form-label d-block text-muted">파일등록</label>
+                                <input type="file" class="custom-file">
+                                <small class="text-muted">정보를 입력한 템플릿 XLS 파일을 등록하세요.</small>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col col-md-12 ">
+                                <label class="form-label d-block text-muted">사진 등록</label>
+                                <input type="file" class="custom-file">
+                                <small class="text-muted">템플릿에 기입한 사진 파일명과 같은 사진 파일을 선택하세요. </small>
                             </div>
                         </div>
 
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                        <div>
-                            <button type="button" class="btn btn-primary">고객공유</button>
-                            <button type="button" class="btn btn-primary">저장</button>
-                        </div>
+                        <button type="button" class="btn btn-primary">저장</button>
                     </div>
                 </form>
             </div>

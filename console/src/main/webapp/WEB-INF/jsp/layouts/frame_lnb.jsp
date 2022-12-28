@@ -275,11 +275,11 @@
                     </a>
 
                     <ul class="sidenav-menu">
-                        <li class="sidenav-item">
+<%--                        <li class="sidenav-item">
                             <a href="javascript:pageLoad('system_mng',{page_num:1},'시스템 관리');" class="sidenav-link">
                                 <div>시스템 관리</div>
                             </a>
-                        </li>
+                        </li>--%>
                         <li class="sidenav-item">
                             <a href="javascript:pageLoad('admin_mng',{page_num:1},'관리자 관리');" class="sidenav-link">
                                 <div>관리자 관리</div>

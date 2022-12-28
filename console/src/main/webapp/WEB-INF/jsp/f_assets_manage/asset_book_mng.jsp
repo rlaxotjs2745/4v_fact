@@ -19,7 +19,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="text-muted small mt-2">신규예약접수</div>
-                            <div class="text-large">5200</div>
+                            <div class="text-large">2</div>
                         </div>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="text-muted small mt-2">연장접수</div>
-                            <div class="text-large">2590</div>
+                            <div class="text-large">5</div>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="text-muted small mt-2">예약 취소</div>
-                            <div class="text-large">000</div>
+                            <div class="text-large">0</div>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="text-muted small mt-2">오늘 사용 종료</div>
-                            <div class="text-large">000</div>
+                            <div class="text-large">0</div>
                         </div>
                     </div>
                 </div>
@@ -148,7 +148,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
-                                <thead>
+                                <thead class="bg-success text-white font-weight-bold>
                                 <tr role="row">
                                     <th class="text-center px-2" style="width:40px">No</th>
                                     <th class="text-center px-2" style="width:60px">구분</th>
@@ -168,131 +168,131 @@
                                     <td class="text-center">1</td>
                                     <td class="text-center">신규</td>
                                     <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default"  data-toggle="modal" data-target="#modals-reserve-view">예약보기</a></td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-underline">각종 장비류:XXXXX외 2개</a></td>
+                                    <td class="text-center">김기숙</td>
+                                    <td class="text-center">팜한농</td>
+                                    <td class="text-center">2022.10.20</td>
+                                    <td class="text-center"><a href="#none" class="btn btn-underline">각종 장비류:농약살포기 외 2개</a></td>
                                     <td class="text-center">00</td>
                                     <td class="text-center">2021.00.00~2021.00.00</td>
                                     <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor</span></td>
+                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">신규 장비 사용 요청</span></td>
                                 </tr>
                                 <tr class="">
                                     <td class="text-center">2</td>
                                     <td class="text-center">연장</td>
                                     <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">예약보기</a></td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-underline">대분류-세부명칭</a></td>
+                                    <td class="text-center">성시훈</td>
+                                    <td class="text-center">진성농원</td>
+                                    <td class="text-center">2022.10.5</td>
+                                    <td class="text-center"><a href="#none" class="btn btn-underline">서지 시험기</a></td>
                                     <td class="text-center">00</td>
                                     <td class="text-center">2021.00.00~2021.00.00</td>
                                     <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor sit amet.</span></td>
+                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">서지 시험기</span></td>
                                 </tr>
                                 <tr class="">
                                     <td class="text-center">3</td>
-                                    <td class="text-center">취소</td>
+                                    <td class="text-center">신규</td>
                                     <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">예약보기</a></td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-underline">대분류-세부명칭</a></td>
+                                    <td class="text-center">박재권</td>
+                                    <td class="text-center">성운산업</td>
+                                    <td class="text-center">2022.09.08</td>
+                                    <td class="text-center"><a href="#none" class="btn btn-underline">물성시험기</a></td>
                                     <td class="text-center">00</td>
                                     <td class="text-center">2021.00.00~2021.00.00</td>
                                     <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
+                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">시험 후 데이터 필요</span></td>
                                 </tr>
                                 <tr class="">
                                     <td class="text-center">4</td>
                                     <td class="text-center">신규</td>
                                     <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">예약보기</a></td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-underline">대분류-세부명칭</a></td>
+                                    <td class="text-center">박기량</td>
+                                    <td class="text-center">성일</td>
+                                    <td class="text-center">2022.09.08</td>
+                                    <td class="text-center"><a href="#none" class="btn btn-underline">만능시험기</a></td>
                                     <td class="text-center">00</td>
                                     <td class="text-center">2021.00.00~2021.00.00</td>
                                     <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
+                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">경도 측정</span></td>
                                 </tr>
                                 <tr class="">
                                     <td class="text-center">5</td>
-                                    <td class="text-center">신규</td>
+                                    <td class="text-center">완료</td>
                                     <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">예약보기</a></td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-underline">대분류-세부명칭</a></td>
+                                    <td class="text-center">차지현</td>
+                                    <td class="text-center">성일</td>
+                                    <td class="text-center">2022.09.06</td>
+                                    <td class="text-center"><a href="#none" class="btn btn-underline">물성시험기</a></td>
                                     <td class="text-center">00</td>
                                     <td class="text-center">2021.00.00~2021.00.00</td>
                                     <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
+                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;"></span></td>
                                 </tr>
                                 <tr class="">
                                     <td class="text-center">6</td>
-                                    <td class="text-center">신규</td>
+                                    <td class="text-center">완료</td>
                                     <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">예약보기</a></td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-underline">대분류-세부명칭</a></td>
+                                    <td class="text-center">성웅</td>
+                                    <td class="text-center">당도측정계</td>
+                                    <td class="text-center">2022.09.03</td>
+                                    <td class="text-center"><a href="#none" class="btn btn-underline">생육 측정 시스템</a></td>
                                     <td class="text-center">00</td>
                                     <td class="text-center">2021.00.00~2021.00.00</td>
                                     <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
+                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;"></span></td>
                                 </tr>
                                 <tr class="">
                                     <td class="text-center">7</td>
-                                    <td class="text-center">신규</td>
+                                    <td class="text-center">완료</td>
                                     <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">예약보기</a></td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-underline">대분류-세부명칭</a></td>
+                                    <td class="text-center">정소담</td>
+                                    <td class="text-center">녹색나라</td>
+                                    <td class="text-center">2022.08.23</td>
+                                    <td class="text-center"><a href="#none" class="btn btn-underline">색도 측정계</a></td>
                                     <td class="text-center">00</td>
                                     <td class="text-center">2021.00.00~2021.00.00</td>
                                     <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
+                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">정확도 자료 필요</span></td>
                                 </tr>
                                 <tr class="">
                                     <td class="text-center">8</td>
-                                    <td class="text-center">신규</td>
+                                    <td class="text-center">완료</td>
                                     <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">예약보기</a></td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-underline">대분류-세부명칭</a></td>
+                                    <td class="text-center">신상훈</td>
+                                    <td class="text-center">농업센터</td>
+                                    <td class="text-center">2022.07.26</td>
+                                    <td class="text-center"><a href="#none" class="btn btn-underline">로봇 더스트 챔버</a></td>
                                     <td class="text-center">00</td>
                                     <td class="text-center">2021.00.00~2021.00.00</td>
                                     <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
+                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;"></span></td>
                                 </tr>
                                 <tr class="">
                                     <td class="text-center">9</td>
-                                    <td class="text-center">신규</td>
+                                    <td class="text-center">완료</td>
                                     <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">예약보기</a></td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-underline">대분류-세부명칭</a></td>
+                                    <td class="text-center">정인화</td>
+                                    <td class="text-center">(주)걸림</td>
+                                    <td class="text-center">2022.06.20</td>
+                                    <td class="text-center"><a href="#none" class="btn btn-underline">만능시험기</a></td>
                                     <td class="text-center">00</td>
                                     <td class="text-center">2021.00.00~2021.00.00</td>
                                     <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
+                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;"></span></td>
                                 </tr>
                                 <tr class="">
                                     <td class="text-center">10</td>
-                                    <td class="text-center">신규</td>
+                                    <td class="text-center">완료</td>
                                     <td class="text-center"><a href="#none" class="btn btn-sm btn-outline-default">예약보기</a></td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">XXXXXXX</td>
-                                    <td class="text-center">2021.00.00</td>
-                                    <td class="text-center"><a href="#none" class="btn btn-underline">대분류-세부명칭</a></td>
+                                    <td class="text-center">정의선</td>
+                                    <td class="text-center">현대</td>
+                                    <td class="text-center">2022.03.05</td>
+                                    <td class="text-center"><a href="#none" class="btn btn-underline">수분 측정기</a></td>
                                     <td class="text-center">00</td>
                                     <td class="text-center">2021.00.00~2021.00.00</td>
                                     <td class="text-center">00</td>
-                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span></td>
+                                    <td class=""><span class="text-truncate d-inline-block" style="width:300px;"></span></td>
                                 </tr>
                                 </tbody>
                             </table>

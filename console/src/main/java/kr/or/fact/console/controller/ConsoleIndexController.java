@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,6 +41,12 @@ public class ConsoleIndexController {
 
     @Resource(name = "corpService")
     CorpService corpService;
+
+    @Resource(name = "assetService")
+    AssetService assetService;
+
+    @Resource(name = "systemService")
+    SystemService systemService;
 
     @Autowired
     Environment env;
@@ -1073,7 +1080,52 @@ public class ConsoleIndexController {
 
         return "f_assets_manage/asset_booking";
     }
+    @RequestMapping(value = "/cur_asset_index",method = RequestMethod.POST)
+    public String cur_asset_index(@RequestParam(value = "tag", required = false) String tagValue,
+                                  @RequestBody ParamPageListFilteredVO param,
+                                  HttpServletRequest req,
+                                  ModelMap model,
+                                  @CookieValue(name = "console_token",required = false) String console_token){
 
+        String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
+        if(console_token!=null){
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
+            {
+                return "redirect:/login";
+            }
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
+        }
+        else {
+            return "redirect:/login";
+        }
+
+        List<AssetVO> assetVOList = assetService.getAssetList(param);
+        List<SystemCodeVO> systemCodeList = systemService.getAllSystemCodeList();
+
+        model.addAttribute("assetList", assetVOList);
+        model.addAttribute("filter1", param.getFilter1());
+        model.addAttribute("filter2", param.getFilter2());
+        model.addAttribute("filter3", param.getFilter3());
+        model.addAttribute("page_num", param.getPage_num());
+        model.addAttribute("count", assetService.getCount(param));
+        model.addAttribute("maxvalue", assetVOList.get(0).getMaxvalue());
+        model.addAttribute("systemCodeList",systemCodeList);
+
+
+
+        return "f_assets_manage/cur_asset_index";
+    }
     //일정 관리
     @RequestMapping(value = "/schedule_mng",method = RequestMethod.POST)
     public String f10_schedule_mng(@RequestBody ParamPageListFilteredVO param,
@@ -1236,7 +1288,7 @@ public class ConsoleIndexController {
             return "redirect:/login";
         }
 
-        return "i_comm_manage/system_mng";
+        return "i_system_manage/system_mng";
     }
 
     //보낸 SMS
@@ -1269,8 +1321,58 @@ public class ConsoleIndexController {
             return "redirect:/login";
         }
 
-        return "i_comm_manage/admin_mng";
+        return "i_system_manage/admin_mng";
     }
+
+
+    @RequestMapping(value = "/admin_corporate" ,method = RequestMethod.POST)
+    public String admin_corporate(@RequestParam(value = "page_num", required = false) String tagValue,
+                                  @RequestBody ParamPageListFilteredVO param,
+                                  HttpServletRequest req,
+                                  ModelMap model,
+                                  @CookieValue(name = "console_token",required = false) String console_token){
+        String _path = req.getRequestURI();
+        setProfile(model);
+        model.addAttribute("path", _path);
+
+        if(console_token!=null){
+            ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
+            if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
+            {
+                return "redirect:/login";
+            }
+            if(consoleSessionVO.getIs_admin()==1){
+                AdminVO adminVO = adminService.getAdminInfo(consoleSessionVO.getIdx_admin());
+                model.addAttribute("user", adminVO);
+            }
+            else {
+                UserVO userVO = userService.getUserInfo(consoleSessionVO.getIdx_user());
+                model.addAttribute("user", userVO);
+            }
+        }
+        else {
+            return "redirect:/login";
+        }
+
+        ArrayList<CorpInfoVO> resultArray;
+        resultArray = corpService.selectCorpInfo();
+
+        int pageBool = 4;
+        List<AdminResVO> adminVOList = adminService.selectAdminbyIdx(param.getPage_num() != 0 ? param.getPage_num() + "" : "1", param.getCorp());
+        if(adminVOList.size() != 0 && adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage() < 4){
+            pageBool = adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage();
+        }
+//        adminVOList.sort(Comparator.comparing(AdminResVO::getAdmin_name).thenComparing(AdminResVO::getAdmin_name));
+        model.addAttribute("pageBool", pageBool);
+        model.addAttribute("corpCategory", param.getCorp());
+        model.addAttribute("adminList", adminVOList);
+        model.addAttribute("corps", resultArray);
+        model.addAttribute("adminCount", adminService.selectCount(param.getCorp()));
+
+        return "i_system_manage/admin_index";
+    }
+
+
     private void setProfile(ModelMap model) {
         String[] activeProfiles = env.getActiveProfiles();
         if (activeProfiles.length != 0) {

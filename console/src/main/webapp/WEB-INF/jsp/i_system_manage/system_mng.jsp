@@ -10,6 +10,6 @@
 
 <!-- Page content -->
 <div class="container-fluid flex-grow-1 container-p-y">
-    <h4 class="font-weight-bold py-3 mb-4">SMS 작성</h4>
+    <h4 class="font-weight-bold py-3 mb-4">시스템 관리</h4>
 </div>
 <!-- / Page content -->
