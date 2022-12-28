@@ -139,6 +139,8 @@ public class IndexController {
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
+        }else{
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
