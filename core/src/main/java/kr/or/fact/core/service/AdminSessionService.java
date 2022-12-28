@@ -8,7 +8,7 @@ import java.util.List;
 public interface AdminSessionService {
 
     AdminSessionVO getAdminSessionInfoByToken(String access_token);
-    AdminSessionVO getAdminSessionValidToken(long idx_admin);
+    List<AdminSessionVO> getAdminSessionValidToken(long idx_admin);
 
     void insertAdminSessionInfo(AdminSessionVO adminSessionVO);
     void updateAdminSessionInfo(AdminSessionVO adminSessionVO);

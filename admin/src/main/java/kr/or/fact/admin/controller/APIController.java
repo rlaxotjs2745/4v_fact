@@ -136,9 +136,13 @@ public class APIController {
                 adminSessionVO.setRefresh_expire_date(cal.getTime());
                 adminSessionVO.setIs_valid(1);
 
-                AdminSessionVO findAdminSessionVO = adminSessionService.getAdminSessionValidToken(findAdmin.getIdx_admin());
+                List<AdminSessionVO> findAdminSessionVO = adminSessionService.getAdminSessionValidToken(findAdmin.getIdx_admin());
                 if(findAdminSessionVO!=null){
-                    adminSessionService.deleteAdminSessionInfo(findAdminSessionVO);
+                    try {
+                        for(AdminSessionVO param : findAdminSessionVO) {
+                            adminSessionService.deleteAdminSessionInfo(param);
+                        }
+                    }catch(Exception e){}
                 }
 
                 adminSessionService.insertAdminSessionInfo(adminSessionVO);
