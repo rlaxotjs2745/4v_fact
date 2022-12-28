@@ -500,11 +500,11 @@
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">오전 / 오후 </label>
                                 <div class="form-inline col-md-10">
                                     <label class="custom-control custom-checkbox mr-16">
-                                        <input name="visit_data_type"  type="checkbox" class="custom-control-input" value="1" checked>
+                                        <input id="visit_data_type_am"  name="visit_data_type"  type="checkbox" class="custom-control-input" value="1" checked>
                                         <span class="custom-control-label">오전</span>
                                     </label>
                                     <label class="custom-control custom-checkbox mr-16">
-                                        <input name="visit_data_type"  type="checkbox" class="custom-control-input" value="2" checked>
+                                        <input id="visit_data_type_pm"  name="visit_data_type"  type="checkbox" class="custom-control-input" value="2" checked>
                                         <span class="custom-control-label">오후</span>
                                     </label>
                                 </div>
@@ -546,27 +546,27 @@
                             </div>
 
 
-                            <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">group_idx</label>
-                                <div class="col-md-4">
-                                    <input type="text" id="" name="group_idx" class="form-control form-control-md" readonly>
-                                </div>
-                            </div>
+<%--                            <div class="form-group row">--%>
+<%--                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">group_idx</label>--%>
+<%--                                <div class="col-md-4">--%>
+<%--                                    <input type="text" id="" name="group_idx" class="form-control form-control-md" readonly>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
 
-                            <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">불가 이유</label>
-                                <div class="col-md-4">
-                                    <input type="text"  name="impossible_reason" class="form-control form-control-md" readonly >
-                                </div>
-                            </div>
+<%--                            <div class="form-group row">--%>
+<%--                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">불가 이유</label>--%>
+<%--                                <div class="col-md-4">--%>
+<%--                                    <input type="text"  name="impossible_reason" class="form-control form-control-md" readonly >--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
 
 <%--                            <div class="form-group row" id="checkboxDiv">--%>
 
 <%--                            </div>--%>
 
 
-                            <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">해당 그룹 날짜 </label>
+                            <div class="form-group row" id="group_date">
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">함께 등록된 일정 </label>
                                 <div class="form-inline col-md-10"  id="checkboxDiv">
 
 
@@ -587,7 +587,7 @@
                             <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
                         </div>
                         <div>
-                            <button id="btn_modify_new" type="button" class="btn btn-primary">수정</button>
+
                             <button id="btn_delete_new" type="button" class="btn btn-primary">삭제</button>
 
                         </div>
@@ -600,7 +600,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header bg-success">
-                        <h5 class="modal-title text-white font-weight-bold">신청일 추가</h5>
+                        <h5 class="modal-title text-white font-weight-bold">신청일 추가/변경</h5>
                         <button id="modals-code-new-close" type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
                     <div class="modal-body">
@@ -653,7 +653,7 @@
                                         <span class="custom-control-label">오전</span>
                                     </label>
                                     <label class="custom-control custom-checkbox mr-16">
-                                        <input id="ampm_pm" name="ampm_new"  type="checkbox" class="custom-control-input" value="2" checked>
+                                        <input id="ampm_pm" name="ampm_new"  type="checkbox" class="custom-control-input" value="2">
                                         <span class="custom-control-label">오후</span>
                                     </label>
                                 </div>
@@ -898,18 +898,13 @@
                             <div id="exist_req">
                                 <div class="form-group row">
                                     <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수 오전</label>
-                                    <div class="col-md-4">
-                                        <input type="text" id="possible_count_am" name="possible_count_am"  placeholder="숫자만 입력가능합니다"  class="form-control form-control-md" checked  oninput="this.value = this.value.replace(/[^0-9]/g,'');">
+                                    <div class="col-md-2">
+                                        <input type="text" id="possible_count_am" name="possible_count_am" max="99" placeholder="숫자만 입력"  class="form-control form-control-md" checked  oninput="this.value = this.value.replace(/[^0-9]/g,'');">
                                     </div>
-                                </div>
 
-
-
-
-                                <div class="form-group row">
                                     <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수 오후</label>
-                                    <div class="col-md-4">
-                                        <input type="text" id="possible_count_pm" name="possible_count_pm"  placeholder="숫자만 입력가능합니다"  class="form-control form-control-md"   oninput="this.value = this.value.replace(/[^0-9]/g,'');">
+                                    <div class="col-md-2">
+                                        <input type="text" id="possible_count_pm" name="possible_count_pm" max="99" placeholder="숫자만 입력"  class="form-control form-control-md"   oninput="this.value = this.value.replace(/[^0-9]/g,'');">
                                     </div>
                                 </div>
 
@@ -958,6 +953,9 @@
 
 
     $(document).ready(function(){
+
+
+        $("#group_date").hide();
 
         if(window.location.pathname == '/a10_dashboard'){
             $('.visit_calendar_big_title').hide();
@@ -1248,61 +1246,6 @@
                 //
                 // $("#modifyOrDeleteVisitData").find("input[name='cur_date']").val(new Date(selectionData.startStr).yyyymmdd());
 
-                // $.ajax({
-                //     type : 'post',
-                //     url : 'get_visit_data',
-                //     data :JSON.stringify(param),
-                //     contentType: "application/json; charset=utf-8;",
-                //     dataType: 'text',//받는 데이터 타입
-                //     success : function (result){
-                //
-                //
-                //         let data=JSON.parse(result);
-                //
-                //         let array_data=data["visitDataVOList"];
-                //
-                //         $.each(array_data,function (key,item){
-                //             let sDate=new Date(item.cur_date).yyyymmdd();
-                //
-                //
-                //             if(sDate == start_date){
-                //
-                //                 let resulvation_count=item.resulvation_count;
-                //                 let possible_count=item.possible_count;
-                //
-                //                 let resulvation_count_am=resulvation_count%1000;
-                //                 let resulvation_count_pm=Math.trunc(resulvation_count/1000);
-                //
-                //
-                //                 let possible_count_am=possible_count%1000;
-                //                 let possible_count_pm=Math.trunc(possible_count/1000);
-                //
-                //                 $("#modifyOrDeleteVisitData").find("input[name='idx_visit_data']").val(visitData.idx_visit_data);
-                //                 $("#modifyOrDeleteVisitData").find("input[name='cur_date']").val(new Date(visitData.cur_date).yyyymmdd());
-                //                 $("#modifyOrDeleteVisitData").find("input[name='resulvation_count']").val(visitData.resulvation_count);
-                //                 $("#modifyOrDeleteVisitData").find("input[name='id_admin_cancel']").val(visitData.id_admin_cancel);
-                //                 $("#modifyOrDeleteVisitData").find("input[name='impossible_reason']").val(visitData.impossible_reason);
-                //                 $("#modifyOrDeleteVisitData").find("input[name='visit_data_type']").val(visitData.visit_data_type);
-                //                 $("#modifyOrDeleteVisitData").find("input[name='memo']").val(visitData.memo);
-                //                 $("#modifyOrDeleteVisitData").find("input[name='group_idx']").val(visitData.group_idx);
-                //
-                //                 $("#modifyOrDeleteVisitData").find("input[name='possible_count_am']").val(visitData.possible_count_am);
-                //                 $("#modifyOrDeleteVisitData").find("input[name='possible_count_pm']").val(visitData.possible_count_pm);
-                //                 $("#modifyOrDeleteVisitData").find("input[name='resulvation_count_am']").val(visitData.resulvation_count_am);
-                //                 $("#modifyOrDeleteVisitData").find("input[name='resulvation_count_pm']").val(visitData.resulvation_count_pm);
-                //
-                //             }
-                //
-                //         });
-                //
-                //
-                //
-                //         $("#modifyOrDeleteVisitData").modal('show');
-                //
-                //     }
-                //
-                // });
-                // $("#modifyOrDeleteVisitData").modal('show');
 
 
 
@@ -1435,15 +1378,32 @@
 
                 let visitData=calEvent.event.extendedProps;
 
-
                 $("#modifyOrDeleteVisitData").find("input[name='idx_visit_data']").val(visitData.idx_visit_data);
+
                 $("#modifyOrDeleteVisitData").find("input[name='cur_date']").val(new Date(visitData.cur_date).yyyymmdd());
-                $("#modifyOrDeleteVisitData").find("input[name='resulvation_count']").val(visitData.resulvation_count);
+
                 $("#modifyOrDeleteVisitData").find("input[name='id_admin_cancel']").val(visitData.id_admin_cancel);
                 $("#modifyOrDeleteVisitData").find("input[name='impossible_reason']").val(visitData.impossible_reason);
                 $("#modifyOrDeleteVisitData").find("input[name='visit_data_type']").val(visitData.visit_data_type);
+                $('input:checkbox[name="visit_data_type"]').prop('disabled',true);
+
+
+                if(visitData.visit_data_type == 1){
+                    $("input:checkbox[id='visit_data_type_am']").prop('checked',true);
+                    $("input:checkbox[id='visit_data_type_pm']").prop('checked',false);
+
+                }else if(visitData.visit_data_type == 2){
+                    $("input:checkbox[id='visit_data_type_am']").prop('checked',false);
+                    $("input:checkbox[id='visit_data_type_pm']").prop('checked',true);
+
+                }else if(visitData.visit_data_type == 3){
+                    $("input:checkbox[id='visit_data_type_am']").prop('checked',true);
+                    $("input:checkbox[id='visit_data_type_pm']").prop('checked',true);
+
+                };
+
                 $("#modifyOrDeleteVisitData").find("input[name='memo']").val(visitData.memo);
-                $("#modifyOrDeleteVisitData").find("input[name='group_idx']").val(visitData.group_idx);
+                // $("#modifyOrDeleteVisitData").find("input[name='group_idx']").val(visitData.group_idx);
 
                 $("#modifyOrDeleteVisitData").find("input[name='possible_count_am']").val(visitData.possible_count_am);
                 $("#modifyOrDeleteVisitData").find("input[name='possible_count_pm']").val(visitData.possible_count_pm);
@@ -1475,19 +1435,11 @@
 
                             let cur_date = new Date(item.cur_date).yyyymmdd();
                             let idx_visit_data=item.idx_visit_data;
-
-
-
                             // inputval +="<input type='checkbox' value='" + cur_date + "'>"+cur_date + "&emsp;"
 
                             inputval +="<input type='hidden' name='idx_visit_data_temp' value='" + idx_visit_data + "'>"
                             inputval+=cur_date + "&emsp;"
                             // inputval+=cur_date + "&emsp;" + idx_visit_data + "&emsp;"
-
-
-
-
-
                         });
                         $("#checkboxDiv").html(inputval);
                     }
@@ -1907,13 +1859,23 @@
         var eeDate=new Date($("#saveVisitData").find("input[name='eDate']").val());
         var result=getDatesStartToLast(ssDate,eeDate);
 
+        if(result.length == 0){
+            return alert('날짜를 확인해주세요');
+        }
+
 
         $("#possible_count_am #possible_count_pm").keyup(function (event){
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^0-9]/gi,''));
 
         });
-        let possible_count=parseInt($("#possible_count_am").val()) + (parseInt($("#possible_count_pm").val())*1000);
+
+
+
+        let possible_count=0;
+        let possible_count_am=$("#possible_count_am").val();
+        let possible_count_pm=$("#possible_count_pm").val();
+
         let memo=$("#memo").val();
         let visit_data_type=0;
 
@@ -1921,11 +1883,44 @@
             visit_data_type+=parseInt($(this).val());
         });
 
+        if(visit_data_type==0){
+            return alert('오전,오후를 체크해주세요');
+
+        }else if(visit_data_type==1){
+
+            if(!possible_count_am){
+                $("#possible_count_am").focus();
+                return alert('값을 확인해주세요');
+            }
+
+            possible_count=possible_count_am;
+
+        }else if(visit_data_type==2){
+
+            if(!possible_count_pm){
+                $("#possible_count_pm").focus();
+                return alert('값을 확인해주세요');
+            }
+
+            possible_count=possible_count_pm*1000;
+
+        }else if(visit_data_type==3){
+
+            if(!possible_count_am || !possible_count_pm){
+                if(!possible_count_am){$("#possible_count_am").focus();};
+                if(!possible_count_pm){$("#possible_count_pm").focus();};
+                return alert('값을 확인해주세요');
+            }
+            possible_count=parseInt(possible_count_am) + (parseInt(possible_count_pm) * 1000);
+        }
+
+
         let visitDataVoNewList=new Array();
         let repeat_type_new = $("input:radio[name='repeat_type_new']:checked").val();
 
 
         if(confirm("저장하시겠습니까?")){
+
             if(repeat_type_new=='0'){
 
                 for(let i=0;i<result.length;i++){
@@ -2056,9 +2051,8 @@
                 }
 
 
-            }); //ajax의 끝
+            });
 
-            alert('저장');
         }else{
             return false;
         }
@@ -2218,18 +2212,21 @@
     }
 
 
-    //해당일 그룹 구분
+
+    // $("#input[name='dayOrGroup']").change(function (){
+    //    let temp=$("input[name='dayOrGroup']:checked").val();
+    //
+    //    alert(temp);
+    //
+    // });
+
     $("#modifyOrDeleteVisitData").find("input:radio[name='dayOrGroup']").on('change',function (){
-
-
-        if($(this).val()==1){
-
-
-        }else if($(this).val()==2){
-
-
+        let temp=$(this).val();
+        if(temp ==1) {
+            $("#group_date").hide();
+        }else{
+            $("#group_date").show();
         }
-
     });
 
 
@@ -2313,11 +2310,13 @@
 
         let sDate=$("#saveVisitData").find("input[name='sDate']").val();
         let eDate=$("#saveVisitData").find("input[name='eDate']").val();
-
         if(new Date(sDate).getTime() > new Date(eDate).getTime()){
             $("#saveVisitData").find("input[name='eDate']").val(new Date(sDate).yyyymmdd());
         }
     });
+
+
+
 
 
 
