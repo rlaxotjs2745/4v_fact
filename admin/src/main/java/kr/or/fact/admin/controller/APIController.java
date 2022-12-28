@@ -499,15 +499,18 @@ public class APIController {
     @RequestMapping(value = "/sms",method = RequestMethod.POST)
     public @ResponseBody
     long insertSmsMessage(@RequestBody SmsSendVO smsSendVO) {
+
         smsSendVO.setNow_date(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddhhmm")));
+        smsSendVO.setSend_date(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddhhmm")));
+
         return smsSendService.insertSmsMessage(smsSendVO);
     }
 
-    @RequestMapping(value = "/sent_sms", method = RequestMethod.GET)
-    public @ResponseBody
-    ArrayList<SmsSentVO> selectSentmeesage1(){
-        return smsSendService.selectSentmeesage1();
-    }
+//    @RequestMapping(value = "/sent_sms", method = RequestMethod.GET)
+//    public @ResponseBody
+//    List<SmsSentVO> selectSentmeesage1(){
+//        return smsSendService.selectSentmeesage1();
+//    }
 
     @RequestMapping(value = "/reserve_sms", method = RequestMethod.GET)
     public @ResponseBody
@@ -652,7 +655,7 @@ public class APIController {
     ResultVO  modify_user_demo_bs_status(HttpSession session,
                              @RequestBody UserDemoBsVO userDemoBsVO) {
         ResultVO resultVO = new ResultVO();
-        resultVO.setResult_str("성공");
+        resultVO.setResult_str("신청서 접수 처리가 완료되었습니다.");
         resultVO.setResult_code("SUCCESS");
 
 
@@ -660,6 +663,8 @@ public class APIController {
             userDemoBsService.updateUserDemoBsStatus(userDemoBsVO.getIdx_user_demo_bs(), userDemoBsVO.getUser_demobs_status());
         } catch (Exception e){
             System.out.println(e);
+            resultVO.setResult_str("신청서 접수 처리에 실패했습니다.");
+            resultVO.setResult_code("ERROR_1100");
         }
 
         return resultVO;
@@ -1089,16 +1094,18 @@ public class APIController {
                 newPw = newPw + (int)(dRd * 10);
             }
         }
-        adminVO.setAdmin_pw(newPw);
+
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashedPassword = passwordEncoder.encode(adminVO.getAdmin_pw());
+        String hashedPassword = passwordEncoder.encode(newPw);
         adminVO.setAdmin_pw(hashedPassword);
+        adminVO.setAdmin_name(newPw);
+
+        adminService.join(adminVO);
         try{
             if(adminService.adminIdCheck(adminVO.getAdmin_id())){
                 resultVO.setResult_str("이미 사용중인 아이디입니다.");
                 resultVO.setResult_code("ERROR002");
             } else{
-                adminService.join(adminVO);
 
                 MimeMessage mail = mailSender.createMimeMessage();
                 MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");

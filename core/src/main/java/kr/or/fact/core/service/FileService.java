@@ -57,7 +57,7 @@ public interface FileService {
 
     long insertFormFile(MultipartFile file1, long idx_admin);
 
-    long insertFileOutIdx(FileRequestVO fileRequestVO, FileInfoVO fileInfoVO);
+    String insertFileOutPath(FileRequestVO fileRequestVO, FileInfoVO fileInfoVO);
 
     long insertRuleFile(MultipartFile file1, long idx_admin);
 

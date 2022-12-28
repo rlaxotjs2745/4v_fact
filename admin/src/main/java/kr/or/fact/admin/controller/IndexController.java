@@ -2295,6 +2295,7 @@ public class IndexController extends BaseController {
     @RequestMapping(value = "/h14_sent_sms_list",method = RequestMethod.POST)
     public String h14_sent_sms_list(@RequestParam(value = "tag", required = false) String tagValue,
                                     ModelMap model,
+                                    @RequestBody ParamPageListFilteredVO param,
                                     @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
         if(access_token!=null){
@@ -2309,8 +2310,19 @@ public class IndexController extends BaseController {
             return "redirect:/login";
         }
 
-        ArrayList<SmsSentVO> smsarr = smsSendService.selectSentmeesage1();
-        model.addAttribute("sentSms",smsarr);
+        if(param.getPage_num() == 0){
+            param.setPage_num(1);
+        }
+
+        if(param.getAmount() == 0){
+            param.setAmount(10);
+        }
+
+
+
+        List<SmsSentVO> smsList = smsSendService.selectSentmeesage1(param.getPage_num(), param.getAmount());
+        model.addAttribute("sentSms",smsList);
+        model.addAttribute("page_num", param.getPage_num());
         return "h14_sent_sms_list";
     }
     @RequestMapping(value = "/h21_write_mail",method = RequestMethod.POST)

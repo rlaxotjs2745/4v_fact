@@ -5,10 +5,11 @@ import kr.or.fact.core.model.DTO.SmsSentVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Mapper
 public interface SmsSendMapper {
     public long insertSmsMessage(SmsSendVO smsSendVO);
-    public ArrayList<SmsSentVO> selectSentmeesage1();
+    public List<SmsSentVO> selectSentmeesage1(int page_num, int amount);
     public ArrayList<SmsSendVO> selectReserveMessage();
 }
