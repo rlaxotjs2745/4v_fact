@@ -546,19 +546,19 @@
                             </div>
 
 
-                            <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">group_idx</label>
-                                <div class="col-md-4">
-                                    <input type="text" id="" name="group_idx" class="form-control form-control-md" readonly>
-                                </div>
-                            </div>
+<%--                            <div class="form-group row">--%>
+<%--                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">group_idx</label>--%>
+<%--                                <div class="col-md-4">--%>
+<%--                                    <input type="text" id="" name="group_idx" class="form-control form-control-md" readonly>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
 
-                            <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">불가 이유</label>
-                                <div class="col-md-4">
-                                    <input type="text"  name="impossible_reason" class="form-control form-control-md" readonly >
-                                </div>
-                            </div>
+<%--                            <div class="form-group row">--%>
+<%--                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">불가 이유</label>--%>
+<%--                                <div class="col-md-4">--%>
+<%--                                    <input type="text"  name="impossible_reason" class="form-control form-control-md" readonly >--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
 
 <%--                            <div class="form-group row" id="checkboxDiv">--%>
 
@@ -566,7 +566,7 @@
 
 
                             <div class="form-group row">
-                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">해당 그룹 날짜 </label>
+                                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">함께 등록된 일정 </label>
                                 <div class="form-inline col-md-10"  id="checkboxDiv">
 
 
@@ -653,7 +653,7 @@
                                         <span class="custom-control-label">오전</span>
                                     </label>
                                     <label class="custom-control custom-checkbox mr-16">
-                                        <input id="ampm_pm" name="ampm_new"  type="checkbox" class="custom-control-input" value="2" checked>
+                                        <input id="ampm_pm" name="ampm_new"  type="checkbox" class="custom-control-input" value="2">
                                         <span class="custom-control-label">오후</span>
                                     </label>
                                 </div>
@@ -898,18 +898,13 @@
                             <div id="exist_req">
                                 <div class="form-group row">
                                     <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수 오전</label>
-                                    <div class="col-md-4">
-                                        <input type="text" id="possible_count_am" name="possible_count_am"  placeholder="숫자만 입력가능합니다"  class="form-control form-control-md" checked  oninput="this.value = this.value.replace(/[^0-9]/g,'');">
+                                    <div class="col-md-2">
+                                        <input type="text" id="possible_count_am" name="possible_count_am" max="99" placeholder="숫자만 입력"  class="form-control form-control-md" checked  oninput="this.value = this.value.replace(/[^0-9]/g,'');">
                                     </div>
-                                </div>
 
-
-
-
-                                <div class="form-group row">
                                     <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">견학 가능 수 오후</label>
-                                    <div class="col-md-4">
-                                        <input type="text" id="possible_count_pm" name="possible_count_pm"  placeholder="숫자만 입력가능합니다"  class="form-control form-control-md"   oninput="this.value = this.value.replace(/[^0-9]/g,'');">
+                                    <div class="col-md-2">
+                                        <input type="text" id="possible_count_pm" name="possible_count_pm" max="99" placeholder="숫자만 입력"  class="form-control form-control-md"   oninput="this.value = this.value.replace(/[^0-9]/g,'');">
                                     </div>
                                 </div>
 
@@ -1437,6 +1432,10 @@
 
 
                 $("#modifyOrDeleteVisitData").find("input[name='idx_visit_data']").val(visitData.idx_visit_data);
+
+
+
+
                 $("#modifyOrDeleteVisitData").find("input[name='cur_date']").val(new Date(visitData.cur_date).yyyymmdd());
                 $("#modifyOrDeleteVisitData").find("input[name='resulvation_count']").val(visitData.resulvation_count);
                 $("#modifyOrDeleteVisitData").find("input[name='id_admin_cancel']").val(visitData.id_admin_cancel);
@@ -1475,19 +1474,11 @@
 
                             let cur_date = new Date(item.cur_date).yyyymmdd();
                             let idx_visit_data=item.idx_visit_data;
-
-
-
                             // inputval +="<input type='checkbox' value='" + cur_date + "'>"+cur_date + "&emsp;"
 
                             inputval +="<input type='hidden' name='idx_visit_data_temp' value='" + idx_visit_data + "'>"
                             inputval+=cur_date + "&emsp;"
                             // inputval+=cur_date + "&emsp;" + idx_visit_data + "&emsp;"
-
-
-
-
-
                         });
                         $("#checkboxDiv").html(inputval);
                     }
@@ -1907,13 +1898,26 @@
         var eeDate=new Date($("#saveVisitData").find("input[name='eDate']").val());
         var result=getDatesStartToLast(ssDate,eeDate);
 
+        console.log("result : " + result);
+
+        if(result.length == 0){
+            return alert('날짜를 확인해주세요');
+
+        }
+
 
         $("#possible_count_am #possible_count_pm").keyup(function (event){
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^0-9]/gi,''));
 
         });
-        let possible_count=parseInt($("#possible_count_am").val()) + (parseInt($("#possible_count_pm").val())*1000);
+
+
+
+        let possible_count=0;
+        let possible_count_am=$("#possible_count_am").val();
+        let possible_count_pm=$("#possible_count_pm").val();
+
         let memo=$("#memo").val();
         let visit_data_type=0;
 
@@ -1921,11 +1925,47 @@
             visit_data_type+=parseInt($(this).val());
         });
 
+        if(visit_data_type==0){
+            return alert('오전,오후를 체크해주세요');
+
+        }else if(visit_data_type==1){
+
+            if(!possible_count_am){
+                $("#possible_count_am").focus();
+                return alert('값을 확인해주세요');
+            }
+
+            possible_count=possible_count_am;
+
+        }else if(visit_data_type==2){
+
+            if(!possible_count_pm){
+                $("#possible_count_pm").focus();
+                return alert('값을 확인해주세요');
+            }
+
+            possible_count=possible_count_pm*1000;
+
+        }else if(visit_data_type==3){
+
+            if(!possible_count_am || !possible_count_pm){
+                if(!possible_count_am){$("#possible_count_am").focus();};
+                if(!possible_count_pm){$("#possible_count_pm").focus();};
+                return alert('값을 확인해주세요');
+            }
+            possible_count=parseInt(possible_count_am) + (parseInt(possible_count_pm) * 1000);
+        }
+
+
         let visitDataVoNewList=new Array();
         let repeat_type_new = $("input:radio[name='repeat_type_new']:checked").val();
 
 
         if(confirm("저장하시겠습니까?")){
+
+            if(!possible_count)
+
+
             if(repeat_type_new=='0'){
 
                 for(let i=0;i<result.length;i++){
@@ -2030,33 +2070,33 @@
 
             console.log(visitDataVoNewList);
 
-            $.ajax({
-                type:'post',
-                url: 'save_visit_date', //데이터를 주고받을 파일 주소 입력
-                data: JSON.stringify(visitDataVoNewList),//보내는 데이터
-                contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
-                dataType: 'text',//받는 데이터 타입
-                success: function (result) {
-                    //작업이 성공적으로 발생했을 경우
-
-                    let data=JSON.parse(result);
-
-                    console.log("result.result_str : " + data.result_str);
-                    alert(data.result_str);
-
-                    //STATUS_001 :
-                },
-                error: function (request,status,error) {
-                    console.log("result.result_str error : " + result.result_str);
-                    alert(result.result_str);
-
-                    //에러가 났을 경우 실행시킬 코드
-                    alert("code : " + request.status + "\n" +  "message: "+  request.responseText +  "\n" + "error:" + error);
-
-                }
-
-
-            }); //ajax의 끝
+            // $.ajax({
+            //     type:'post',
+            //     url: 'save_visit_date', //데이터를 주고받을 파일 주소 입력
+            //     data: JSON.stringify(visitDataVoNewList),//보내는 데이터
+            //     contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+            //     dataType: 'text',//받는 데이터 타입
+            //     success: function (result) {
+            //         //작업이 성공적으로 발생했을 경우
+            //
+            //         let data=JSON.parse(result);
+            //
+            //         console.log("result.result_str : " + data.result_str);
+            //         alert(data.result_str);
+            //
+            //         //STATUS_001 :
+            //     },
+            //     error: function (request,status,error) {
+            //         console.log("result.result_str error : " + result.result_str);
+            //         alert(result.result_str);
+            //
+            //         //에러가 났을 경우 실행시킬 코드
+            //         alert("code : " + request.status + "\n" +  "message: "+  request.responseText +  "\n" + "error:" + error);
+            //
+            //     }
+            //
+            //
+            // }); //ajax의 끝
 
             alert('저장');
         }else{
@@ -2218,19 +2258,6 @@
     }
 
 
-    //해당일 그룹 구분
-    $("#modifyOrDeleteVisitData").find("input:radio[name='dayOrGroup']").on('change',function (){
-
-
-        if($(this).val()==1){
-
-
-        }else if($(this).val()==2){
-
-
-        }
-
-    });
 
 
     $("#btn_delete_new").on('click',function (){
@@ -2313,11 +2340,30 @@
 
         let sDate=$("#saveVisitData").find("input[name='sDate']").val();
         let eDate=$("#saveVisitData").find("input[name='eDate']").val();
-
         if(new Date(sDate).getTime() > new Date(eDate).getTime()){
             $("#saveVisitData").find("input[name='eDate']").val(new Date(sDate).yyyymmdd());
         }
     });
+    //
+    // $("input:checkbox[name='ampm_new']:checked").each(function (){
+    //     if($(this).val()==1){
+    //         $("#possible_count_am").attr('disabled',false);
+    //
+    //     }else if($(this).val()==2){}
+    //
+    // });
+
+
+    $("#btn_modify_new").on('click',function (){
+
+        $("#modifyOrDeleteVisitDataForm").find('input[name="possible_count_am"]').attr('readonly',false);
+        $("#modifyOrDeleteVisitDataForm").find('input[name="possible_count_pm"]').attr('readonly',false);
+        $("#modifyOrDeleteVisitDataForm").find('input[name="memo"]').attr('readonly',false);
+
+
+
+    });
+
 
 
 
