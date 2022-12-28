@@ -39,73 +39,107 @@ public class APIController {
 
     //일반 유저 로그인 처리
     @RequestMapping(value = "/console_login",method = RequestMethod.POST)
-    public @ResponseBody ResultWithDataVO console_login(@RequestBody UserVO userVO) {
+    public @ResponseBody ResultWithDataVO console_login(@RequestBody ConsoleUserVO consoleUserVO) {
 
         ResultWithDataVO resultWithDataVO = new ResultWithDataVO();
         resultWithDataVO.setResult_code(CONSTANT.fail);
         resultWithDataVO.setResult_str("아이디 혹은 비밀번호를 확인하세요");
 
-        if (userVO !=null) {
-            UserVO findUserVo = userService.findUserById(userVO.getUser_id());
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            if(findUserVo!=null && passwordEncoder.matches(userVO.getUser_pw(),findUserVo.getUser_pw())){
-                ConsoleUserVO consoleUserVO;
-                consoleUserVO = consoleService.getConsoleUserByUserIdx(findUserVo.getIdx_user());
+        if (consoleUserVO !=null) {
+            if(consoleUserVO.getIs_admin()==0){
 
-                if(consoleUserVO!=null){
+                UserVO findUserVo = userService.findUserById(consoleUserVO.getUser_id());
+                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                if(findUserVo!=null && passwordEncoder.matches(consoleUserVO.getUser_pw(),findUserVo.getUser_pw())){
 
-                   /* AuthVO authVO = new AuthVO();
-                    authVO.setIdx_console_user(consoleUserVO.getIdx_console_user());
-                    authVO.setAuth_code(UUID.randomUUID().toString());
-                    authVO.setIs_available(CONSTANT.yes);
-                    Date now = new Date();
-                    Calendar cal = Calendar.getInstance();
-                    cal.setTime(now);
-                    cal.add(Calendar.MINUTE,1);
+                    ConsoleUserVO findConsoleUserVO = consoleService.getConsoleUserByUserIdx(findUserVo.getIdx_user());
 
-                    authVO.setExpired_dt(cal.getTime());
+                    if(findConsoleUserVO!=null){
 
-                    authService.insertAuth(authVO);
-*/
-                    ConsoleSessionVO consoleSessionVO = new ConsoleSessionVO();
-                    consoleSessionVO.setIdx_user(findUserVo.getIdx_user());
-                    consoleSessionVO.setConsole_token(UUID.randomUUID().toString());
-                    Calendar cal = Calendar.getInstance();
-                    cal.add(Calendar.DATE, 1);
-                    consoleSessionVO.setConsole_expire_date(cal.getTime());
-                    consoleSessionVO.setConsole_refresh_token(UUID.randomUUID().toString());
-                    cal.add(Calendar.DATE, 365);
-                    consoleSessionVO.setConsole_refresh_date(cal.getTime());
-                    consoleSessionVO.setIs_valid(1);
-                    consoleSessionVO.setIs_admin(0);
+                        //콘솔 세션 생성
+                        ConsoleSessionVO consoleSessionVO = new ConsoleSessionVO();
+                        consoleSessionVO.setIdx_user(findUserVo.getIdx_user());
+                        consoleSessionVO.setConsole_token(UUID.randomUUID().toString());
+                        Calendar cal = Calendar.getInstance();
+                        cal.add(Calendar.DATE, 1);
+                        consoleSessionVO.setConsole_expire_date(cal.getTime());
+                        consoleSessionVO.setConsole_refresh_token(UUID.randomUUID().toString());
+                        cal.add(Calendar.DATE, 365);
+                        consoleSessionVO.setConsole_refresh_date(cal.getTime());
+                        consoleSessionVO.setIs_valid(1);
+                        consoleSessionVO.setIs_admin(0);
 
-/*                    ConsoleSessionVO findConsoleSessionVO = consoleSessionService.getAdminSessionValidToken(findAdmin.getIdx_admin());
-                    if(findAdminSessionVO!=null){
-                        adminSessionService.deleteAdminSessionInfo(findAdminSessionVO);
-                    }*/
+                        ConsoleSessionVO findConsoleSessionVO = consoleSessionService.getConsoleSessionValidToken(findConsoleUserVO.getIdx_user());
+                        if(findConsoleSessionVO!=null){
+                            consoleSessionService.deleteConsoleSessionInfo(findConsoleSessionVO);
+                        }
+                        consoleSessionService.insertConsoleSessionInfo(consoleSessionVO);
 
-                    consoleSessionService.insertConsoleSessionInfo(consoleSessionVO);
+                        resultWithDataVO.setResult_str("로그인 성공");
+                        resultWithDataVO.setResult_code(CONSTANT.Success);
 
-                    resultWithDataVO.setResult_str("로그인 성공");
-                    resultWithDataVO.setResult_code(CONSTANT.Success);
+                        resultWithDataVO.setElement(consoleSessionVO);
 
-                    resultWithDataVO.setElement(consoleSessionVO);
+                    }
+                    else {
+                        resultWithDataVO.setResult_str("콘솔이용이 가능하지 않습니다. 관리자에게 문의하세요.");
+                        resultWithDataVO.setResult_code(CONSTANT.fail);
+                    }
 
-                }
-                else {
-                    resultWithDataVO.setResult_str("콘솔이용이 가능하지 않습니다. 관리자에게 문의하세요.");
-                    resultWithDataVO.setResult_code(CONSTANT.fail);
                 }
             }
-            else {
-                resultWithDataVO.setResult_str("웹 회원 아이디 또는 비밀번호를 확인해주세요.");
-                resultWithDataVO.setResult_code(CONSTANT.fail);
+            else { //관리자로 접근
+                AdminVO findAdminVo = adminService.findAdminById(consoleUserVO.getUser_id());
+                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+                if(findAdminVo!=null && passwordEncoder.matches(consoleUserVO.getUser_pw(),findAdminVo.getAdmin_pw())){
+                    ConsoleUserVO findConsoleUserVO = consoleService.getConsoleUserByAdminIdx(findAdminVo.getIdx_admin());
+
+                    if(findConsoleUserVO!=null){
+                        ConsoleSessionVO consoleSessionVO = new ConsoleSessionVO();
+                        consoleSessionVO.setIdx_admin(findAdminVo.getIdx_admin());
+                        consoleSessionVO.setConsole_token(UUID.randomUUID().toString());
+                        Calendar cal = Calendar.getInstance();
+                        cal.add(Calendar.DATE, 1);
+                        consoleSessionVO.setConsole_expire_date(cal.getTime());
+                        consoleSessionVO.setConsole_refresh_token(UUID.randomUUID().toString());
+                        cal.add(Calendar.DATE, 365);
+                        consoleSessionVO.setConsole_refresh_date(cal.getTime());
+                        consoleSessionVO.setIs_valid(1);
+                        consoleSessionVO.setIs_admin(1);
+                        ConsoleSessionVO findConsoleSessionVO = consoleSessionService.getConsoleSessionValidToken(findConsoleUserVO.getIdx_admin());
+                        if(findConsoleSessionVO!=null){
+                            consoleSessionService.deleteConsoleSessionInfo(findConsoleSessionVO);
+                        }
+
+                        consoleSessionService.insertConsoleSessionInfo(consoleSessionVO);
+
+                        resultWithDataVO.setResult_str("로그인 성공");
+                        resultWithDataVO.setResult_code(CONSTANT.Success);
+
+                        resultWithDataVO.setElement(consoleSessionVO);
+
+                    }
+                    else {
+                        resultWithDataVO.setResult_str("콘솔 관리자로 등록되어있지 않습니다. 먼저 등록요청하세요.");
+                        resultWithDataVO.setResult_code(CONSTANT.fail);
+                    }
+                }
+                else {
+                    resultWithDataVO.setResult_str("관리자 아이디 또는 비밀번호를 확인해주세요.");
+                    resultWithDataVO.setResult_code(CONSTANT.fail);
+                }
+
             }
 
         }
+        else {
+            resultWithDataVO.setResult_str("아이디 또는 비밀번호가 틀렸습니다.");
+            resultWithDataVO.setResult_code(CONSTANT.fail);
+        }
         return resultWithDataVO;
     }
-
+/*
     @RequestMapping(value = "/admin_console_login",method = RequestMethod.POST)
     public @ResponseBody ResultWithDataVO admin_console_login(@RequestBody AdminVO adminVo) {
 
@@ -123,7 +157,7 @@ public class APIController {
 
                 if(consoleUserVO!=null){
 
-                   /* AuthVO authVO = new AuthVO();
+                   *//* AuthVO authVO = new AuthVO();
                     authVO.setIdx_console_user(consoleUserVO.getIdx_console_user());
                     authVO.setAuth_code(UUID.randomUUID().toString());
                     authVO.setIs_available(CONSTANT.yes);
@@ -135,7 +169,7 @@ public class APIController {
                     authVO.setExpired_dt(cal.getTime());
 
                     authService.insertAuth(authVO);
-*/
+*//*
                     ConsoleSessionVO consoleSessionVO = new ConsoleSessionVO();
                     consoleSessionVO.setIdx_admin(findAdminVo.getIdx_admin());
                     consoleSessionVO.setConsole_token(UUID.randomUUID().toString());
@@ -166,7 +200,7 @@ public class APIController {
 
         }
         return resultWithDataVO;
-    }
+    }*/
 
     @RequestMapping(value = "/user_id_check",method = RequestMethod.POST)
     public @ResponseBody

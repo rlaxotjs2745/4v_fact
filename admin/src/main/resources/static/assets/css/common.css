@@ -31,3 +31,5 @@ table.dataTable>thead>tr>th:not(.sorting_disabled), table.dataTable>thead>tr>td:
 
 /* 달력 ...처리 */
 .fc-daygrid-dot-event .fc-event-title {white-space: nowrap; text-overflow: ellipsis;}
+
+tr.no_data td[name='buttons'] {display: none !important}
