@@ -20,4 +20,5 @@ public class ConsoleUserVO {
     int auth_status;
     Date reg_date;//	date						등록일
     Date last_upd_date;//	date						마지막 업데이트
+    String console_token;
 }

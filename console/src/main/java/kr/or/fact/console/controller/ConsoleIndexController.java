@@ -96,6 +96,8 @@ public class ConsoleIndexController {
                 findConsoleUserVO.setTel_num(adminVO.getTel_num());
                 findConsoleUserVO.setAuth_status(adminVO.getAuth_status());
 
+                findConsoleUserVO.setConsole_token(console_token);
+
                 model.addAttribute("user", findConsoleUserVO);
             }
             else {
@@ -115,6 +117,8 @@ public class ConsoleIndexController {
                 findConsoleUserVO.setJob_title("콘솔 관리자");
                 findConsoleUserVO.setTel_num(corpVO.getTel_num());
                 findConsoleUserVO.setAuth_status(1);
+
+                findConsoleUserVO.setConsole_token(console_token);
 
                 model.addAttribute("user", findConsoleUserVO);
             }
