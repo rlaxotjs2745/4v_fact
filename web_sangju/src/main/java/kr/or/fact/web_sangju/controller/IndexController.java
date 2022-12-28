@@ -911,7 +911,10 @@ public class IndexController {
             return "brd_announce_blank";
         }
         model.addAttribute("total_count",promotionCount);
-        List<PRContentVO> prContentList = prContentService.getPRContentList(page,list_amount);
+        ParamPageListFilteredVO paramVo = new ParamPageListFilteredVO();
+        paramVo.setPage_num(page);
+        paramVo.setAmount(list_amount);
+        List<PRContentVO> prContentList = prContentService.getPRContentList(paramVo);
         model.addAttribute("prContentList",prContentList);
 
         model.addAttribute("cur_page",page);
