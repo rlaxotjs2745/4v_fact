@@ -102,7 +102,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="text-muted small mt-2">전체</div>
-                            <div class="text-large">520</div>
+                            <div class="text-large">0</div>
                         </div>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="text-muted small mt-2">경쟁률</div>
-                            <div class="text-large">85:1</div>
+                            <div class="text-large">0:0</div>
                         </div>
                     </div>
                 </div>
@@ -122,7 +122,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="text-muted small mt-2">검토 보류</div>
-                            <div class="text-large">25</div>
+                            <div class="text-large">0</div>
                         </div>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="text-muted small mt-2">사용 승인</div>
-                            <div class="text-large">000</div>
+                            <div class="text-large">0</div>
                         </div>
                     </div>
                 </div>

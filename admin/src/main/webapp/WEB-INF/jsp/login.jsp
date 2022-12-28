@@ -195,13 +195,13 @@
                          }
                          $.cookie('access_token', result.access_token, { expires: 1, path: '/' });
                          $.cookie('refresh_token', result.refresh_token, { expires: 365, path: '/' });
-                         <c:if test="${profile == 'gimje-prod'}">
+                         <c:if test="${login_from == 'gimje-prod'}">
                             location.replace('https://innovalley.smartfarmkorea.net/gimje/Demonstration/admin');
                          </c:if>
-                         <c:if test="${profile == 'sangju-prod'}">
+                         <c:if test="${login_from == 'sangju-prod'}">
                             location.replace('https://innovalley.smartfarmkorea.net/sangju/Demonstration/admin');
                          </c:if>
-                         <c:if test="${profile == 'local'}">
+                         <c:if test="${login_from == 'local'}">
                             location.replace('/');
                          </c:if>
                      }

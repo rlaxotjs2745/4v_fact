@@ -176,7 +176,7 @@
                     <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#modal-myinfo"><i class="ion ion-ios-person text-lightest"></i> &nbsp; 프로필</a>
 <%--                    <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#modal-message"><i class="ion ion-ios-mail text-lightest"></i> &nbsp; 메세지</a>--%>
                     <div class="dropdown-divider" data-toggle="modal" data-target="#modal-logout"></div>
-                    <a href="logout" class="dropdown-item"><i class="ion ion-ios-log-out text-danger"></i> &nbsp; 로그아웃</a>
+                    <button id="btn_logout" class="dropdown-item"><i class="ion ion-ios-log-out text-danger"></i> 로그아웃</button>
                 </div>
             </div>
         </div>
@@ -429,6 +429,7 @@
 </div>
 <div class="modal-backdrop fade" style="display: none"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script>
     if("${admin.auth_status}" == "0"){
         $("#modals-pw-modify-first").addClass("show").css("display", "block");
@@ -704,7 +705,49 @@
         // setTimeout(nowWeatherAndDust(location), 600000);
     }
 
+    $("#btn_logout").click(function(){
+
+        var param = {
+            "admin_id":'${admin.admin_id}'
+        };
+
+        $.ajax({
+            type: 'post',
+            url :'logout', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(param),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'json',//받는 데이터 타입
+            success: function(result){
+                if(result.result_code=="SUCCESS"){
+                    //access_token을 받았으니 사용해야지
+                    if($.cookie('access_token')!='undefined')
+                    {
+                        $.removeCookie('access_token', { path: '/' }); // => true
+                        $.removeCookie('refresh_token', { path: '/' }); // => true
+                    }
+                    alert(result.result_str);
+
+                    <c:if test="${login_from == 'gimje-prod'}">
+                    location.replace('https://innovalley.smartfarmkorea.net/gimje/Demonstration/admin/login');
+                    </c:if>
+                    <c:if test="${login_from == 'sangju-prod'}">
+                    location.replace('https://innovalley.smartfarmkorea.net/sangju/Demonstration/admin/login');
+                    </c:if>
+                    <c:if test="${login_from == 'local'}">
+                    location.replace('/login');
+                    </c:if>
+
+                }
+
+                //STATUS_001 :
+            },
+            error:function(){
+                //에러가 났을 경우 실행시킬 코드
+            }
+        });
+    });
     // console.log(weather);
+
 
 
 </script>

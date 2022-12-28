@@ -168,13 +168,13 @@
                     $.cookie('console_token', result.element.console_token, { expires: 1, path: '/' });
                     $.cookie('console_refresh_token', result.element.console_refresh_token, { expires: 365, path: '/' });
 
-                    <c:if test="${profile == 'gimje-prod'}">
+                    <c:if test="${login_from == 'gimje-prod'}">
                     location.replace('https://innovalley.smartfarmkorea.net/gimje/Demonstration/console');
                     </c:if>
-                    <c:if test="${profile == 'sangju-prod'}">
+                    <c:if test="${login_from == 'sangju-prod'}">
                     location.replace('https://innovalley.smartfarmkorea.net/sangju/Demonstration/console');
                     </c:if>
-                    <c:if test="${profile == 'local'}">
+                    <c:if test="${login_from == 'local'}">
                     location.replace('/');
                     </c:if>
 
