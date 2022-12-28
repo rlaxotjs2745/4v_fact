@@ -1469,6 +1469,7 @@
             defaultCalendar.refetchEvents();
         });
 
+
         $("button.fc-next-button").click(function(){
             defaultCalendar.removeAllEvents();
             defaultCalendar.addEventSource(getMonthlyData(defaultCalendar.getDate()));
@@ -1831,19 +1832,19 @@
             temp_mon+=1;
             let temp_dateVal=new Date(temp_year,temp_mon,temp_date);
             $("#saveVisitData").find("input[name='eDate']").val(temp_dateVal.yyyymmdd());
-            $("#saveVisitData").find("input[name='eDate']").attr('readonly',true);
+            // $("#saveVisitData").find("input[name='eDate']").attr('readonly',true);
 
         }else if(tempRuleTerm=='3'){
             temp_mon+=3;
             let temp_dateVal=new Date(temp_year,temp_mon,temp_date);
             $("#saveVisitData").find("input[name='eDate']").val(temp_dateVal.yyyymmdd());
-            $("#saveVisitData").find("input[name='eDate']").attr('readonly',true);
+            // $("#saveVisitData").find("input[name='eDate']").attr('readonly',true);
 
         }else if(tempRuleTerm=='6'){
             temp_mon+=6;
             let temp_dateVal=new Date(temp_year,temp_mon,temp_date);
             $("#saveVisitData").find("input[name='eDate']").val(temp_dateVal.yyyymmdd());
-            $("#saveVisitData").find("input[name='eDate']").attr('readonly',true);
+            // $("#saveVisitData").find("input[name='eDate']").attr('readonly',true);
 
         }else if(tempRuleTerm=='99'){
             $("#saveVisitData").find("input[name='eDate']").val(new Date($("#saveVisitData").find("input[name='sDate']").val()).yyyymmdd());
@@ -1907,7 +1908,6 @@
         }else if(visit_data_type==3){
 
             if(!possible_count_am || !possible_count_pm){
-                if(!possible_count_am){$("#possible_count_am").focus();};
                 if(!possible_count_pm){$("#possible_count_pm").focus();};
                 return alert('값을 확인해주세요');
             }
