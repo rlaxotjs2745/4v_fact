@@ -65,7 +65,17 @@ public class ConsoleIndexController {
         }
         return consoleSessionVO;
     }
-
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest req,
+                         ModelMap model,
+                         @CookieValue(name = "console_token",required = false) String console_token){
+        if(console_token!=null){
+            //AdminVO adminVO = getVerityAuth(access_token);
+            ConsoleSessionVO consoleSessionVO = consoleSessionService.getConsoleSessionInfoByToken(console_token);
+            consoleSessionService.deleteConsoleSessionInfo(consoleSessionVO);
+        }
+        return "redirect:/login";
+    }
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String root(HttpServletRequest req,
                        ModelMap model,
@@ -73,6 +83,7 @@ public class ConsoleIndexController {
         String _path = req.getRequestURI();
         setProfile(model);
         model.addAttribute("path", _path);
+
         if(console_token!=null){
             ConsoleSessionVO consoleSessionVO = getVerityAuth(console_token);
             if(consoleSessionVO==null || consoleSessionVO.getIs_valid()==0)
@@ -137,8 +148,8 @@ public class ConsoleIndexController {
                          ModelMap model,
                          @RequestBody(required = false) ParamVO paramVO){
 
-        String _path = req.getRequestURI();
         setProfile(model);
+        String _path = req.getRequestURI();
         model.addAttribute("path", _path);
 
         return "login";
@@ -1270,6 +1281,7 @@ public class ConsoleIndexController {
             } else {
                 model.addAttribute("profile", activeProfile);
             }
+            model.addAttribute("login_from", activeProfile);
         }
     }
 }

@@ -141,21 +141,23 @@ public class APIController {
     }
 
     @RequestMapping(value = "/logout",method = RequestMethod.POST)
-    public @ResponseBody ResultVO access_token_refresh(@RequestBody ConsoleSessionVO consoleSessionVO) {
+    public @ResponseBody ResultVO logout(@RequestBody ConsoleUserVO consoleUserVO,
+                                         @CookieValue(name = "console_token",required = false) String console_token) {
 
         ResultVO resultVO = new ResultVO();
 
         resultVO.setResult_str("로그아웃 되었습니다");
         resultVO.setResult_code(CONSTANT.Success);
 
-        if(consoleSessionVO!=null && consoleSessionVO.getConsole_token()!=null){
-            ConsoleSessionVO findConsoleSessionVO = consoleSessionService.getConsoleSessionInfoByToken(consoleSessionVO.getConsole_token());
+        if(console_token!=null){
+            ConsoleSessionVO findConsoleSessionVO = consoleSessionService.getConsoleSessionInfoByToken(console_token);
             if(findConsoleSessionVO!=null){
                 consoleSessionService.deleteConsoleSessionInfo(findConsoleSessionVO);
             }
         }
         return resultVO;
     }
+
     @RequestMapping(value = "/user_id_check",method = RequestMethod.POST)
     public @ResponseBody
     ResultVO user_id_check(HttpSession session,

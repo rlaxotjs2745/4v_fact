@@ -450,7 +450,7 @@
     $("#btn_logout").click(function(){
 
         var param = {
-            "console_token":'${user.console_token}'
+            "user_id":'${user.user_id}'
         };
 
         $.ajax({
@@ -469,13 +469,13 @@
                     }
                     alert(result.result_str);
 
-                    <c:if test="${profile == 'gimje-prod'}">
-                    location.replace('https://innovalley.smartfarmkorea.net/gimje/Demonstration/login');
+                    <c:if test="${login_from == 'gimje-prod'}">
+                    location.replace('https://innovalley.smartfarmkorea.net/gimje/Demonstration/console/login');
                     </c:if>
-                    <c:if test="${profile == 'sangju-prod'}">
-                    location.replace('https://innovalley.smartfarmkorea.net/sangju/Demonstration/login');
+                    <c:if test="${login_from == 'sangju-prod'}">
+                    location.replace('https://innovalley.smartfarmkorea.net/sangju/Demonstration/console/login');
                     </c:if>
-                    <c:if test="${profile == 'local'}">
+                    <c:if test="${login_from == 'local'}">
                     location.replace('/login');
                     </c:if>
 
