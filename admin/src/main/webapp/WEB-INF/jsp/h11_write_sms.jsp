@@ -186,7 +186,9 @@
                     });
                 }
             </script>
-
+        </div>
+    </div>
+</div>
 
             <!-- Layout footer -->
             <%@include file ="layouts/frame_footer.jsp" %>

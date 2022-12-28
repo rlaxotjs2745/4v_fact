@@ -216,7 +216,7 @@
         SELECT * FROM TB_PR_CONTENT  WHERE IDX_PR_CONTENT = #{idx}
     </select>
 
-    <delete id="deletePR" parameterType="int">
+    <delete id="deletePR" parameterType="long">
         DELETE FROM TB_PR_CONTENT WHERE  IDX_PR_CONTENT = #{idx_pr_content}
     </delete>
 

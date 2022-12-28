@@ -185,7 +185,7 @@
                     <div class="modal-body pb-2">
                         <div class="form-row">
                             <div class="form-group col col-md-12 text-right">
-                                <a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modals-counsel-history">홍보자료 수정</a>
+                                <a href="#none" class="btn btn-underline this_idx" data-toggle="modal" data-target="#modals-counsel-history" data-idx="">홍보자료 수정</a>
                             </div>
                         </div>
                         <hr class="mt-0">
@@ -375,7 +375,7 @@
                             <div class="form-group row" id="pr_subject_insert">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">홍보자료 제목</label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" >
+                                    <input type="text" id="pr_subject" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요" >
                                     <div class="form-control-plaintext mode-view"></div>
                                 </div>
                             </div>
@@ -789,7 +789,6 @@
 <%--        </div>--%>
         <!-- Layout footer -->
 <%@include file ="layouts/frame_footer.jsp" %>
-
         <script>
             var curPRdata;
             var prList=[];
@@ -807,14 +806,45 @@
                 pr_content_status_no:${pr.pr_content_status},
                 last_upd_date:"<fmt:formatDate value="${pr.last_upd_date}" pattern="yyyy-MM-dd HH:MM"/>",
                 veiw_count:"${pr.view_count}",
-                memo:"${pr.memo}",
-                writer:"${pr.author}"
+                memo:"${pr.memo}"
             }
             </c:forEach>
 
             $('#modals-counsel-view').on('show.bs.modal', function (event) {
                 _saveCont($(event.relatedTarget).data('idx'))
             })
+            $('#modals-counsel-history').on('show.bs.modal', function (event) {
+                _getCont($(event.relatedTarget).data('idx'))
+            })
+
+            function _getCont(_idx) {
+                $.ajax({
+                    type: 'post',
+                    url: 'get_prcontents', //데이터를 주고받을 파일 주소 입력
+                    data: {idx_pr_content:_idx},//보내는 데이터
+                    dataType: 'json',//받는 데이터 타입
+                    success: function (result) {
+                        let _data = result.data.result;
+                        // 수정 모달용
+                        $("#pr_subject_update input").val(_data.subject);
+                        $("#pr_content_code_update textarea").val(_data.pr_content_code);
+                        $("#show_start_date_update").val(_data.show_start_date);
+                        $("#show_end_date_update").val(_data.show_end_date);
+
+                        $("#pr_content_status_update input[name=custom-9]").each(function (){
+                            if($(this).val() === _data.pr_content_status){
+                                $(this).attr('checked',true)
+                            }
+                        });
+                        $("#memo_update textarea").val(_data.memo);
+                        $("#pr_contents_update").val(_data.pr_contents);
+                        $('#is_file_update input[name=custom-6]').eq(_data.is_file).attr('checked',true)
+                        $('#is_new_update input[name=custom-7]').eq(_data.is_new).attr('checked',true)
+                        $('#is_main_page_update input[name=custom-8]').eq(_data.is_main_page).attr('checked',true)
+                        $('#admin_name_update span').text(_data.author);
+                    }
+                });
+            }
 
             function _saveCont(_i) {
                 // $("a.btn_content_view").off().click(function () {
@@ -825,6 +855,7 @@
                 // for(var pr of prList){
                 //     if(selectId === pr.idx_pr_content){
                 curPRdata = prList[_i].idx_pr_content;
+                $('#modals-counsel-view .this_idx').attr('data-idx',curPRdata)
                 // $(".idx_pr_content").attr("id", prList[_i].idx_pr_content);
                 $("#subject span").text(prList[_i].subject);
                 $("#is_new span").text(prList[_i].is_new);
@@ -847,26 +878,8 @@
                 $("#last_upd_date_modify span").val(prList[_i].last_upd_date);
                 $("#veiw_count_modify span").val(prList[_i].veiw_count);
                 $("#memo_modify span").val(prList[_i].memo);
-
-                // 수정 모달용
-                $("#pr_subject_update input").val(prList[_i].subject);
-                $("#pr_content_code_update textarea").val(prList[_i].pr_content_code);
-                $("#show_start_date_update").val(prList[_i].show_start_date);
-                $("#show_end_date_update").val(prList[_i].show_end_date);
-
-                $("#pr_content_status_update input[name=custom-9]").each(function (){
-                    if($(this).val() === prList[_i].pr_content_status_no){
-                        $(this).attr('checked',true)
-                    }
-                });
-                $("#memo_update textarea").val(prList[_i].memo);
-                $("#pr_contents_update").val(prList[_i].memo);
-                let _is_file = prList[_i].is_file === '포함안함' ? 0 : 1
-                let _is_new = prList[_i].is_new === '신규아님' ? 0 : 1
-                $('#is_file_update input[name=custom-7]').eq(_is_file).attr('checked',true)
-                $('#is_new_update input[name=custom-7]').eq(_is_new).attr('checked',true)
-                $('#is_main_page_update input[name=custom-8]').eq(prList[_i].is_main_page).attr('checked',true)
             }
+
             function _contents() {
                 $(".btn_content_modal").off().click(function (){
                     var idx = $(this).attr("id");
@@ -979,6 +992,23 @@
             saveNewBtn.forEach(btn=>btn.addEventListener('click', saveForm));
 
             function saveForm(message){
+
+                if($("#pr_subject").val() === ''){
+                    return alert('제목을 입력해 주세요.')
+                }
+
+                if($("#pr_content_code_insert textarea").val() === ''){
+                    return alert('컨텐츠 코드를 입력해주세요.')
+                }
+
+                if($("#memo_insert textarea").val() === ''){
+                    return alert('내용을 입력해 주세요.')
+                }
+
+                if($("#show_start_date_insert").val() === '' || $("#show_end_date_insert").val() === ''){
+                    return alert('게시기간을 입력해주세요.')
+                }
+
                 event.preventDefault();
                 var fileForm = new FormData();
                 fileForm.append("pr_content_code",document.querySelector('#pr_content_code_insert textarea').value);

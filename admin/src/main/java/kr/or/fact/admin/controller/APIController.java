@@ -799,17 +799,16 @@ public class APIController {
         }else{
             for(VisitDataVO visitDataVO:visitDataVOList){
 
-
-                if(visitService.getVisitData(visitDataVO.getCur_date())!=null){
-                    resultVO.setResult_str("해당 날짜에 이미 존재하는 일정이 있습니다.");
-                    resultVO.setResult_code("ERROR_");
-
-                    return resultVO;
-                }else{
-                    visitDataVO.setGroup_idx(groupIdx);
-
-                }
-
+//                if(visitService.getVisitData(visitDataVO.getCur_date())!=null){
+//                    resultVO.setResult_str("해당 날짜에 이미 존재하는 일정이 있습니다.");
+//                    resultVO.setResult_code("ERROR_");
+//
+//                    return resultVO;
+//                }else{
+//                    visitDataVO.setGroup_idx(groupIdx);
+//
+//                }
+                visitDataVO.setGroup_idx(groupIdx);
             }
         }
 
@@ -2028,12 +2027,11 @@ public class APIController {
 
         if((formFileInfoVO.getSubject() != null || formFileInfoVO.getSubject() != "") && formFileInfoVO.getFile1() != null){
 
-            fileService.convertMultipartToFile(formFileInfoVO.getFile1());
-            long fileIdx = fileService.insertFormFile(formFileInfoVO.getFile1(), formFileInfoVO.getIdx_admin());
-
             formFileInfoVO.setOrder_num(0);
-            formFileInfoVO.setIdx_file_info(fileIdx);
             formFileService.insertFormFile(formFileInfoVO);
+
+            fileService.convertMultipartToFile(formFileInfoVO.getFile1());
+            fileService.insertFormFile(formFileInfoVO.getFile1(), formFileInfoVO.getIdx_admin());
 
             resultVO.setResult_code("SUCCESS");
             resultVO.setResult_str("양식을 등록했습니다.");
@@ -2068,12 +2066,11 @@ public class APIController {
 
         if((ruleFileInfoVO.getSubject() != null || ruleFileInfoVO.getSubject() != "") && ruleFileInfoVO.getFile1() != null){
 
-            fileService.convertMultipartToFile(ruleFileInfoVO.getFile1());
-            long fileIdx = fileService.insertRuleFile(ruleFileInfoVO.getFile1(), ruleFileInfoVO.getIdx_admin());
-
             ruleFileInfoVO.setOrder_num(0);
-            ruleFileInfoVO.setIdx_file_info(fileIdx);
             ruleFileService.insertRuleFile(ruleFileInfoVO);
+
+            fileService.convertMultipartToFile(ruleFileInfoVO.getFile1());
+            fileService.insertRuleFile(ruleFileInfoVO.getFile1(), ruleFileInfoVO.getIdx_admin());
 
             resultVO.setResult_code("SUCCESS");
             resultVO.setResult_str("양식을 등록했습니다.");
