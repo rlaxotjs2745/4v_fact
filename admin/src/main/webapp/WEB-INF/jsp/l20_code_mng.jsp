@@ -31,7 +31,7 @@
                             <c:choose>
                                 <c:when test="${fn:length(systemCodeList)>0}">
                                     <c:forEach items = "${systemCodeList}" var ="code" varStatus="status">
-                                        <tr class="" data-idx="">
+                                        <tr class="" data-idx="${code.idx_system_code}">
                                             <td class="text-center">${status.count}</td>
                                             <td class="text-center">${code.code_name}</td>
                                             <td class="text-center">${code.code_value}</td>
