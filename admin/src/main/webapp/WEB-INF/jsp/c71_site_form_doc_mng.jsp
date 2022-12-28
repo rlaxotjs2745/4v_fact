@@ -101,25 +101,24 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-<c:forEach items="${formfilelist}" var="formfile" varStatus="status">
-    <tr class="formfile-entity" id="${formfile.idx_form_file_info}" onclick="modalShow({
-            idx_form_file_info: '${formfile.idx_form_file_info}',
-            subject: '${formfile.subject}',
-            usage_detail: '${formfile.usage_detail}',
-            file_path: '${formfile.file_path}',
-            reg_date: '${formfile.reg_date}',
-            row_num: '${formfile.row_num}',
-            order_num: '${formfile.order_num}'
-            }, event.target);">
-        <td class="text-center" >${status.count}</td>
+                            <c:forEach items="${formfilelist}" var="formfile" varStatus="status">
+                                <tr class="formfile-entity" id="${formfile.idx_form_file_info}" onclick="modalShow({
+                                        idx_form_file_info: '${formfile.idx_form_file_info}',
+                                        subject: '${formfile.subject}',
+                                        usage_detail: '${formfile.usage_detail}',
+                                        file_path: '${formfile.file_path}',
+                                        reg_date: '${formfile.reg_date}',
+                                        row_num: '${formfile.row_num}',
+                                        order_num: '${formfile.order_num}'
+                                        }, event.target);">
+                                    <td class="text-center" >${status.count}</td>
                                     <td class="text-center">${formfile.subject}</td>
                                     <td class="text-center">${formfile.usage_detail}</td>
                                     <td class="text-center"><fmt:formatDate value="${formfile.reg_date}" pattern="yyyy-MM-dd"/></td>
                                     <td class="text-center">${formfile.order_num}</td>
                                     <td class="text-center"><a href="${formfile.file_path}" aria-controls="article-list" data-dt-idx="1" tabindex="0" id="file_path_button" class="btn btn-outline-default  btn-sm">다운로드</a></td>
                                 </tr>
-</c:forEach>
-
+                            </c:forEach>
                                 </tbody>
                             </table>
                         </div>
