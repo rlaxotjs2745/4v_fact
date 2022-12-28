@@ -126,6 +126,42 @@ public class IndexController {
         return adminVO;
     }
 
+    @RequestMapping(value = "/*",method = RequestMethod.GET)
+    public String rootContents(HttpServletRequest req,
+                       ModelMap model,
+                       @CookieValue(name = "access_token",required = false) String access_token){
+        String _path = req.getRequestURI();
+        String _uri = "index";
+        if(access_token!=null){
+            AdminVO adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                _uri = "login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }else{
+            _uri = "login";
+        }
+        System.out.println("_path:"+_path);
+
+        model.addAttribute("pageOnLoad", 1);
+        model.addAttribute("path", _path);
+        return _uri;
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest req,
+                               ModelMap model,
+                               @CookieValue(name = "access_token",required = false) String access_token){
+        if(access_token!=null){
+            AdminVO adminVO = getVerityAuth(access_token);
+            AdminSessionVO adminSessionVO = adminSessionService.getAdminSessionInfoByToken(access_token);
+            adminSessionService.deleteAdminSessionInfo(adminSessionVO);
+        }
+        return "redirect:/login";
+    }
+
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String root(HttpServletRequest req,
                        ModelMap model,
@@ -135,14 +171,17 @@ public class IndexController {
             AdminVO adminVO = getVerityAuth(access_token);
             if(adminVO==null || adminVO.is_expired())
             {
-                return "redirect:/login";
+                return "login";
             }
             model.addAttribute("admin", adminVO);
             setProfile(model);
         }else{
-            return "redirect:/login";
+            return "login";
         }
-
+        System.out.println("_path:"+_path);
+        if(!_path.equals("/") && !_path.equals("")) {
+            model.addAttribute("pageOnLoad", 1);
+        }
         model.addAttribute("path", _path);
         return "index";
     }
