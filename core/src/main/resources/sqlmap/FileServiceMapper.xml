@@ -38,6 +38,21 @@
         )
     </insert>
 
+    <update id="updateFileInfoForFormRuleFile" parameterType="kr.or.fact.core.model.DTO.FileInfoVO">
+        UPDATE TB_FILE_INFO SET
+            FILE_NAME=#{file_name},
+            FILE_STATUS=#{file_status},
+            MIME_TYPE=#{mime_type},
+            ENCODING=#{encoding},
+            EXTENTION=#{extention},
+            FILE_SECURE_TYPE=#{file_secure_type},
+            FILE_PATH=#{file_path},
+            FILE_SIZE=#{file_size},
+            OWNER=#{owner},
+            IDX_ADMIN=#{idx_admin}
+        WHERE FILE_TYPE=#{file_type} AND IDX_FILE_USAGE=#{idx_file_usage}
+    </update>
+
     <update id="updateFileInfo" parameterType="kr.or.fact.core.model.DTO.FileInfoVO">
         UPDATE TB_FILE_INFO SET
                                 FILE_NAME=#{file_name},
@@ -434,7 +449,6 @@
             USAGE_DETAIL=#{usage_detail},
             IDX_ADMIN=#{idx_admin},
             ORDER_NUM=#{order_num},
-            IDX_FILE_INFO=#{idx_file_info},
             REG_DATE=SYSDATE
         WHERE IDX_FORM_FILE_INFO = #{idx_form_file_info}
     </update>
@@ -445,7 +459,6 @@
             USAGE_DETAIL=#{usage_detail},
             IDX_ADMIN=#{idx_admin},
             ORDER_NUM=#{order_num},
-            IDX_FILE_INFO=#{idx_file_info},
             REG_DATE=SYSDATE
         WHERE IDX_RULE_FILE_INFO = #{idx_rule_file_info}
     </update>

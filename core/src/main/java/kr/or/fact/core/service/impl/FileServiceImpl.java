@@ -343,9 +343,7 @@ public class FileServiceImpl implements FileService {
     @Transactional
     public void updateFormFile(FileRequestVO fileRequestVO){
         FormFileInfoVO formFileInfoVO = fileServiceMapper.getFormFile(fileRequestVO.getFileIndex());
-
-        fileServiceMapper.deleteFileInfo(formFileInfoVO.getIdx_file_info());
-
+        System.out.println("@@@@@@@@@@@@@@@@@@@@"+formFileInfoVO);
         MultipartFile file = fileRequestVO.getFiles1();
         try {
             convertMultipartToFile2(file);
@@ -366,12 +364,9 @@ public class FileServiceImpl implements FileService {
         fileInfoVO.setFile_size(file.getSize());
         fileInfoVO.setOwner(1);
         fileInfoVO.setIdx_admin(fileRequestVO.getIdx_admin());
+        fileInfoVO.setIdx_file_usage(formFileInfoVO.getIdx_form_file_info());
 
-        fileServiceMapper.insertFileInfo(fileInfoVO);
-
-        List<FileInfoVO> fileList = fileServiceMapper.getFileListAsName(file.getOriginalFilename());
-
-        long fileIdx = fileList.get(0).getIdx_file_info();
+        fileServiceMapper.updateFileInfoForFormRuleFile(fileInfoVO);
 
 
         if(fileRequestVO.getSubject() != "" && fileRequestVO.getSubject() != null && formFileInfoVO.getSubject() != fileRequestVO.getSubject()){
@@ -390,7 +385,6 @@ public class FileServiceImpl implements FileService {
             formFileInfoVO.setOrder_num(fileRequestVO.getFileVersion());
         }
 
-        formFileInfoVO.setIdx_file_info(fileIdx);
 
         fileServiceMapper.updateFormFile(formFileInfoVO);
 
@@ -458,8 +452,6 @@ public class FileServiceImpl implements FileService {
     public void updateRuleFile(FileRequestVO fileRequestVO){
         RuleFileInfoVO ruleFileInfoVO = fileServiceMapper.getRuleFile(fileRequestVO.getFileIndex());
 
-        fileServiceMapper.deleteFileInfo(ruleFileInfoVO.getIdx_file_info());
-
         MultipartFile file = fileRequestVO.getFiles1();
         try {
             convertMultipartToFile2(file);
@@ -480,13 +472,9 @@ public class FileServiceImpl implements FileService {
         fileInfoVO.setFile_size(file.getSize());
         fileInfoVO.setOwner(1);
         fileInfoVO.setIdx_admin(fileRequestVO.getIdx_admin());
+        fileInfoVO.setIdx_file_usage(ruleFileInfoVO.getIdx_rule_file_info());
 
-        fileServiceMapper.insertFileInfo(fileInfoVO);
-
-        List<FileInfoVO> fileList = fileServiceMapper.getFileListAsName(file.getOriginalFilename());
-
-        long fileIdx = fileList.get(0).getIdx_file_info();
-
+        fileServiceMapper.updateFileInfoForFormRuleFile(fileInfoVO);
 
         if(fileRequestVO.getSubject() != "" && fileRequestVO.getSubject() != null && ruleFileInfoVO.getSubject() != fileRequestVO.getSubject()){
             ruleFileInfoVO.setSubject(fileRequestVO.getSubject());
@@ -503,8 +491,6 @@ public class FileServiceImpl implements FileService {
         if(fileRequestVO.getFileVersion() != 0 && fileRequestVO.getFileVersion() != ruleFileInfoVO.getOrder_num()){
             ruleFileInfoVO.setOrder_num(fileRequestVO.getFileVersion());
         }
-
-        ruleFileInfoVO.setIdx_file_info(fileIdx);
 
         fileServiceMapper.updateRuleFile(ruleFileInfoVO);
 

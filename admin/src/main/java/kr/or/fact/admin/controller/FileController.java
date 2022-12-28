@@ -249,6 +249,8 @@ public class FileController {
         resultVO.setResult_code("SUCCESS");
         resultVO.setResult_str("양식 파일 변경에 완료했습니다.");
 
+        System.out.println(fileRequestVO);
+
         try{
             fileService.updateFormFile(fileRequestVO);
         } catch (Exception e){

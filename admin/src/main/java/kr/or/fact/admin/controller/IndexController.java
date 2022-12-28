@@ -1,7 +1,9 @@
 package kr.or.fact.admin.controller;
 
 import kr.or.fact.core.model.DTO.*;
+import kr.or.fact.core.model.FormFileMapper;
 import kr.or.fact.core.model.PRContentsMapper;
+import kr.or.fact.core.model.RuleFileMapper;
 import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.*;
 import lombok.SneakyThrows;
@@ -87,6 +89,12 @@ public class IndexController extends BaseController {
 
     @Autowired
     public PRContentsMapper prContentsMapper;
+
+    @Autowired
+    public FormFileMapper formFileMapper;
+
+    @Autowired
+    public RuleFileMapper ruleFileMapper;
 
     @Resource(name = "adminSessionService")
     AdminSessionService adminSessionService;
@@ -1490,6 +1498,7 @@ public class IndexController extends BaseController {
     //재배사 관리
     @RequestMapping(value = "/c71_site_form_doc_mng",method = RequestMethod.POST)
     public String c71_site_form_doc_mng(@RequestParam(value = "tag", required = false) String tagValue,
+                                        @RequestBody ParamPageListFilteredVO param,
                                         ModelMap model,
                                         @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -1504,8 +1513,13 @@ public class IndexController extends BaseController {
         }else{
             return "redirect:/login";
         }
+        param.setAmount(10);
+        List<FormFileInfoVO> formFileList = formFileService.getFormFileList(param);
+        model.addAttribute("formfilelist",formFileList);
+        model.addAttribute("page_num", param.getPage_num());
 
-        Integer maxPageNum = fileService.getFormFileTotalCount();
+
+        Integer maxPageNum = formFileMapper.getFormFileCount();
         model.addAttribute("max_page_num", maxPageNum);
 
         return "c71_site_form_doc_mng";
@@ -1529,14 +1543,12 @@ public class IndexController extends BaseController {
         }else{
             return "redirect:/login";
         }
-
-        List<RuleFileInfoVO> ruleFileInfoList=fileService.getRuleFileInfoList1();
-        model.addAttribute("rulefilelist",ruleFileInfoList);
-        System.out.println(ruleFileInfoList.size());
-
+        param.setAmount(10);
+        List<FormFileInfoVO> ruleFileList = ruleFileService.getRuleFileList(param);
+        model.addAttribute("rulefilelist",ruleFileList);
         model.addAttribute("page_num", param.getPage_num());
 
-        Integer maxPageNum = fileService.getRuleFileTotalCount();
+        Integer maxPageNum = ruleFileMapper.getRuleFileCount();
         model.addAttribute("max_page_num", maxPageNum);
         return "c72_site_rule_doc_mng";
     }
