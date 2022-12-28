@@ -99,6 +99,9 @@ public class APIController {
     @Resource(name = "formFileService")
     public FormFileService formFileService;
 
+    @Resource(name = "ruleFileService")
+    public RuleFileService ruleFileService;
+
     @Autowired
     private FACTConfig factConfig;
 
@@ -2029,7 +2032,6 @@ public class APIController {
             resultVO.setResult_code("SUCCESS");
             resultVO.setResult_str("양식을 등록했습니다.");
         }
-
         return resultVO;
     }
 
@@ -2049,6 +2051,27 @@ public class APIController {
             resultVO.setResult_str("제거에 실패하였습니다.");
         }
 
+        return resultVO;
+    }
+
+    @RequestMapping(value ="/insert_rule_file",method = RequestMethod.POST)
+    public @ResponseBody ResultVO insert_rule_file(@ModelAttribute RuleFileInfoVO ruleFileInfoVO) throws IOException {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code("ERROR_1000");
+        resultVO.setResult_str("데이터를 다시 입력해주세요");
+
+        if((ruleFileInfoVO.getSubject() != null || ruleFileInfoVO.getSubject() != "") && ruleFileInfoVO.getFile1() != null){
+
+            fileService.convertMultipartToFile(ruleFileInfoVO.getFile1());
+            long fileIdx = fileService.insertRuleFile(ruleFileInfoVO.getFile1(), ruleFileInfoVO.getIdx_admin());
+
+            ruleFileInfoVO.setOrder_num(0);
+            ruleFileInfoVO.setIdx_file_info(fileIdx);
+            ruleFileService.insertRuleFile(ruleFileInfoVO);
+
+            resultVO.setResult_code("SUCCESS");
+            resultVO.setResult_str("양식을 등록했습니다.");
+        }
         return resultVO;
     }
 

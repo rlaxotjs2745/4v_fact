@@ -767,6 +767,23 @@
 
     // GOTO
     function saveForm(){
+
+        if($("#subject").val() === ''){
+            return alert('제목을 입력해 주세요.')
+        }
+
+        if($("#notice_code").val() === ''){
+            return alert('소제목을 입력해주세요.')
+        }
+
+        if($("#memo").val() === ''){
+            return alert('메모를 입력해 주세요.')
+        }
+
+        if($("#posting_start_date").val() === '' || $("#posting_end_date").val() === ''){
+            return alert('게시기간을 입력해주세요.')
+        }
+
         var fileForm = new FormData();
         fileForm.append('notice_code', $('#notice_code').val());
         fileForm.append('subject', $('#subject').val());
