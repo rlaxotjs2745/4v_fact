@@ -23,6 +23,17 @@ public class ConsoleSessionServiceImpl implements ConsoleSessionService {
 
     }
     @Override
+    public ConsoleSessionVO getConsoleSessionValidToken(long idx_user){
+        return consoleSessionMapper.getConsoleSessionValidToken(idx_user);
+
+    }
+    @Override
+    public ConsoleSessionVO getAdminConsoleSessionValidToken(long idx_admin){
+        return consoleSessionMapper.getAdminConsoleSessionValidToken(idx_admin);
+
+    }
+
+    @Override
     @Transactional
     public void insertConsoleSessionInfo(ConsoleSessionVO consoleSessionVO){
 

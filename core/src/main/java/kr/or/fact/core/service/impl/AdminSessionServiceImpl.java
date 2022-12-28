@@ -21,6 +21,11 @@ public class AdminSessionServiceImpl implements AdminSessionService {
 
     }
     @Override
+    public AdminSessionVO getAdminSessionValidToken(long idx_admin){
+        return adminSessionMapper.getAdminSessionValidToken(idx_admin);
+    }
+
+    @Override
     @Transactional
     public void insertAdminSessionInfo(AdminSessionVO adminSessionVO){
 
@@ -35,7 +40,6 @@ public class AdminSessionServiceImpl implements AdminSessionService {
     @Override
     @Transactional
     public void deleteAdminSessionInfo(AdminSessionVO adminSessionVO){
-
         adminSessionMapper.deleteAdminSessionInfo(adminSessionVO);
     }
 }

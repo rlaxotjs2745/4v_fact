@@ -1584,7 +1584,7 @@ public class WebAPIController {
             {
                 ConsoleUserVO consoleUserVO;
                 if(userVO.getIs_admin()==CONSTANT.yes)
-                    consoleUserVO = consoleService.getConsoleUserByAdminIdx(findUserVo.getIdx_admin());
+                    consoleUserVO = consoleService.getConsoleUserByUserIdx(findUserVo.getIdx_user());
                 else
                     consoleUserVO = consoleService.getConsoleUserByUserIdx(findUserVo.getIdx_user());
 

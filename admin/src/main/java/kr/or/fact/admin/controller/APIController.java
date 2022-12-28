@@ -142,6 +142,12 @@ public class APIController {
                 cal.add(Calendar.DATE, 365);
                 adminSessionVO.setRefresh_expire_date(cal.getTime());
                 adminSessionVO.setIs_valid(1);
+
+                AdminSessionVO findAdminSessionVO = adminSessionService.getAdminSessionValidToken(findAdmin.getIdx_admin());
+                if(findAdminSessionVO!=null){
+                    adminSessionService.deleteAdminSessionInfo(findAdminSessionVO);
+                }
+
                 adminSessionService.insertAdminSessionInfo(adminSessionVO);
                 resultVO.setAccess_token(adminSessionVO.getAccess_token());
                 resultVO.setRefresh_token(adminSessionVO.getRefresh_token());

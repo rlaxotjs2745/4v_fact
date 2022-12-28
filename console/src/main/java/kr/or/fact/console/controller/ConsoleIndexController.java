@@ -64,7 +64,7 @@ public class ConsoleIndexController {
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String root(HttpServletRequest req,
                        ModelMap model,
-                       @CookieValue(name = "console_token",required = true) String console_token){
+                       @CookieValue(name = "console_token",required = false) String console_token){
         String _path = req.getRequestURI();
         if(console_token!=null){
             UserVO userVO = getVerityAuth(console_token);
@@ -74,6 +74,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -91,7 +94,7 @@ public class ConsoleIndexController {
     @PostMapping(value = "/dashboard")
     public String dashboard(HttpServletRequest req,
                             ModelMap model,
-                            @CookieValue(name = "console_token",required = true) String console_token){
+                            @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -102,6 +105,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -117,7 +123,7 @@ public class ConsoleIndexController {
     public String notice(@RequestBody ParamPageListFilteredVO param,
                          HttpServletRequest req,
                          ModelMap model,
-                         @CookieValue(name = "console_token",required = true) String console_token){
+                         @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -128,6 +134,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -142,7 +151,7 @@ public class ConsoleIndexController {
     public String bm_demo_corp_list(@RequestBody ParamPageListFilteredVO param,
                                     HttpServletRequest req,
                                     ModelMap model,
-                                    @CookieValue(name = "console_token",required = true) String console_token){
+                                    @CookieValue(name = "console_token",required = false) String console_token){
 
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -153,6 +162,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -171,7 +183,7 @@ public class ConsoleIndexController {
     public String demobs(@RequestBody ParamPageListFilteredVO param,
                          HttpServletRequest req,
                          ModelMap model,
-                         @CookieValue(name = "console_token",required = true) String console_token){
+                         @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -182,6 +194,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -280,7 +295,7 @@ public class ConsoleIndexController {
     public String gh_total_monitor(@RequestBody ParamPageListFilteredVO param,
                                    HttpServletRequest req,
                                    ModelMap model,
-                                   @CookieValue(name = "console_token",required = true) String console_token){
+                                   @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -291,6 +306,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -303,7 +321,7 @@ public class ConsoleIndexController {
     public String gh_glass(@RequestBody ParamPageListFilteredVO param,
                            HttpServletRequest req,
                            ModelMap model,
-                           @CookieValue(name = "console_token",required = true) String console_token){
+                           @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -314,6 +332,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -326,7 +347,7 @@ public class ConsoleIndexController {
     public String gh_vinyl(@RequestBody ParamPageListFilteredVO param,
                            HttpServletRequest req,
                            ModelMap model,
-                           @CookieValue(name = "console_token",required = true) String console_token){
+                           @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -337,6 +358,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -349,7 +373,7 @@ public class ConsoleIndexController {
     public String b23_gh_silgle(@RequestBody ParamPageListFilteredVO param,
                                 HttpServletRequest req,
                                 ModelMap model,
-                                @CookieValue(name = "console_token",required = true) String console_token){
+                                @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -360,6 +384,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -373,7 +400,7 @@ public class ConsoleIndexController {
     public String gh_complex(@RequestBody ParamPageListFilteredVO param,
                              HttpServletRequest req,
                              ModelMap model,
-                             @CookieValue(name = "console_token",required = true) String console_token){
+                             @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -384,6 +411,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -396,7 +426,7 @@ public class ConsoleIndexController {
     public String b30_gh_sensor(@RequestBody ParamPageListFilteredVO param,
                                 HttpServletRequest req,
                                 ModelMap model,
-                                @CookieValue(name = "console_token",required = true) String console_token){
+                                @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -407,6 +437,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -419,7 +452,7 @@ public class ConsoleIndexController {
     public String gh_sensor(@RequestBody ParamPageListFilteredVO param,
                             HttpServletRequest req,
                             ModelMap model,
-                            @CookieValue(name = "console_token",required = true) String console_token){
+                            @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -430,6 +463,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -442,7 +478,7 @@ public class ConsoleIndexController {
     public String facility_monitor(@RequestBody ParamPageListFilteredVO param,
                                    HttpServletRequest req,
                                    ModelMap model,
-                                   @CookieValue(name = "console_token",required = true) String console_token){
+                                   @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -453,6 +489,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -465,7 +504,7 @@ public class ConsoleIndexController {
     public String facility_history(@RequestBody ParamPageListFilteredVO param,
                                    HttpServletRequest req,
                                    ModelMap model,
-                                   @CookieValue(name = "console_token",required = true) String console_token){
+                                   @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -476,6 +515,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -490,7 +532,7 @@ public class ConsoleIndexController {
     public String event_alert(@RequestBody ParamPageListFilteredVO param,
                               HttpServletRequest req,
                               ModelMap model,
-                              @CookieValue(name = "console_token",required = true) String console_token){
+                              @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -501,6 +543,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -514,7 +559,7 @@ public class ConsoleIndexController {
     public String event_facility(@RequestBody ParamPageListFilteredVO param,
                                  HttpServletRequest req,
                                  ModelMap model,
-                                 @CookieValue(name = "console_token",required = true) String console_token){
+                                 @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -525,6 +570,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -538,7 +586,7 @@ public class ConsoleIndexController {
     public String event_bs(@RequestBody ParamPageListFilteredVO param,
                            HttpServletRequest req,
                            ModelMap model,
-                           @CookieValue(name = "console_token",required = true) String console_token){
+                           @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -549,6 +597,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -561,7 +612,7 @@ public class ConsoleIndexController {
     public String d11_gh_data(@RequestBody ParamPageListFilteredVO param,
                               HttpServletRequest req,
                               ModelMap model,
-                              @CookieValue(name = "console_token",required = true) String console_token){
+                              @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -572,6 +623,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -584,7 +638,7 @@ public class ConsoleIndexController {
     public String facility_data(@RequestBody ParamPageListFilteredVO param,
                                 HttpServletRequest req,
                                 ModelMap model,
-                                @CookieValue(name = "console_token",required = true) String console_token){
+                                @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -595,6 +649,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -607,7 +664,7 @@ public class ConsoleIndexController {
     public String consign_data(@RequestBody ParamPageListFilteredVO param,
                                HttpServletRequest req,
                                ModelMap model,
-                               @CookieValue(name = "console_token",required = true) String console_token){
+                               @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -618,6 +675,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -630,7 +690,7 @@ public class ConsoleIndexController {
     public String self_data(@RequestBody ParamPageListFilteredVO param,
                             HttpServletRequest req,
                             ModelMap model,
-                            @CookieValue(name = "console_token",required = true) String console_token){
+                            @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -641,6 +701,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -653,7 +716,7 @@ public class ConsoleIndexController {
     public String d31_big_data_log(@RequestBody ParamPageListFilteredVO param,
                                    HttpServletRequest req,
                                    ModelMap model,
-                                   @CookieValue(name = "console_token",required = true) String console_token){
+                                   @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -664,6 +727,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -676,7 +742,7 @@ public class ConsoleIndexController {
     public String d32_big_data_manage(@RequestBody ParamPageListFilteredVO param,
                                       HttpServletRequest req,
                                       ModelMap model,
-                                      @CookieValue(name = "console_token",required = true) String console_token){
+                                      @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -687,6 +753,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -699,7 +768,7 @@ public class ConsoleIndexController {
     public String e10_cur_asset_mng(@RequestBody ParamPageListFilteredVO param,
                                     HttpServletRequest req,
                                     ModelMap model,
-                                    @CookieValue(name = "console_token",required = true) String console_token){
+                                    @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -710,6 +779,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -724,7 +796,7 @@ public class ConsoleIndexController {
     public String asset_book_mng(@RequestBody ParamPageListFilteredVO param,
                                  HttpServletRequest req,
                                  ModelMap model,
-                                 @CookieValue(name = "console_token",required = true) String console_token){
+                                 @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -735,6 +807,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -747,7 +822,7 @@ public class ConsoleIndexController {
     public String asset_booking(@RequestBody ParamPageListFilteredVO param,
                                 HttpServletRequest req,
                                 ModelMap model,
-                                @CookieValue(name = "console_token",required = true) String console_token){
+                                @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -758,6 +833,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -770,7 +848,7 @@ public class ConsoleIndexController {
     public String f10_schedule_mng(@RequestBody ParamPageListFilteredVO param,
                                    HttpServletRequest req,
                                    ModelMap model,
-                                   @CookieValue(name = "console_token",required = true) String console_token){
+                                   @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -781,6 +859,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -793,7 +874,7 @@ public class ConsoleIndexController {
     public String g10_write_sms(@RequestBody ParamPageListFilteredVO param,
                                 HttpServletRequest req,
                                 ModelMap model,
-                                @CookieValue(name = "console_token",required = true) String console_token){
+                                @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -804,6 +885,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -816,7 +900,7 @@ public class ConsoleIndexController {
     public String g20_auto_sms_mng(@RequestBody ParamPageListFilteredVO param,
                                    HttpServletRequest req,
                                    ModelMap model,
-                                   @CookieValue(name = "console_token",required = true) String console_token){
+                                   @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -827,6 +911,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -839,7 +926,7 @@ public class ConsoleIndexController {
     public String reserved_sms_list_(@RequestBody ParamPageListFilteredVO param,
                                      HttpServletRequest req,
                                      ModelMap model,
-                                     @CookieValue(name = "console_token",required = true) String console_token){
+                                     @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -850,6 +937,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -862,7 +952,7 @@ public class ConsoleIndexController {
     public String system_mng(@RequestBody ParamPageListFilteredVO param,
                              HttpServletRequest req,
                              ModelMap model,
-                             @CookieValue(name = "console_token",required = true) String console_token){
+                             @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -873,6 +963,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
@@ -885,7 +978,7 @@ public class ConsoleIndexController {
     public String admin_mng(@RequestBody ParamPageListFilteredVO param,
                             HttpServletRequest req,
                             ModelMap model,
-                            @CookieValue(name = "console_token",required = true) String console_token){
+                            @CookieValue(name = "console_token",required = false) String console_token){
         UserVO userVO = null;
         String _path = req.getRequestURI();
         if(console_token!=null){
@@ -896,6 +989,9 @@ public class ConsoleIndexController {
             }
             model.addAttribute("user", userVO);
             //setProfile(model);
+        }
+        else {
+            return "redirect:/login";
         }
 
         model.addAttribute("path", _path);
