@@ -500,11 +500,11 @@
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">오전 / 오후 </label>
                                 <div class="form-inline col-md-10">
                                     <label class="custom-control custom-checkbox mr-16">
-                                        <input name="visit_data_type"  type="checkbox" class="custom-control-input" value="1" checked>
+                                        <input id="visit_data_type_am"  name="visit_data_type"  type="checkbox" class="custom-control-input" value="1" checked>
                                         <span class="custom-control-label">오전</span>
                                     </label>
                                     <label class="custom-control custom-checkbox mr-16">
-                                        <input name="visit_data_type"  type="checkbox" class="custom-control-input" value="2" checked>
+                                        <input id="visit_data_type_pm"  name="visit_data_type"  type="checkbox" class="custom-control-input" value="2" checked>
                                         <span class="custom-control-label">오후</span>
                                     </label>
                                 </div>
@@ -565,7 +565,7 @@
 <%--                            </div>--%>
 
 
-                            <div class="form-group row">
+                            <div class="form-group row" id="group_date">
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">함께 등록된 일정 </label>
                                 <div class="form-inline col-md-10"  id="checkboxDiv">
 
@@ -587,7 +587,7 @@
                             <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
                         </div>
                         <div>
-                            <button id="btn_modify_new" type="button" class="btn btn-primary">수정</button>
+
                             <button id="btn_delete_new" type="button" class="btn btn-primary">삭제</button>
 
                         </div>
@@ -600,7 +600,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header bg-success">
-                        <h5 class="modal-title text-white font-weight-bold">신청일 추가</h5>
+                        <h5 class="modal-title text-white font-weight-bold">신청일 추가/변경</h5>
                         <button id="modals-code-new-close" type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
                     <div class="modal-body">
@@ -954,6 +954,9 @@
 
     $(document).ready(function(){
 
+
+        $("#group_date").hide();
+
         if(window.location.pathname == '/a10_dashboard'){
             $('.visit_calendar_big_title').hide();
             $('#footer_in_calendar').hide();
@@ -1243,61 +1246,6 @@
                 //
                 // $("#modifyOrDeleteVisitData").find("input[name='cur_date']").val(new Date(selectionData.startStr).yyyymmdd());
 
-                // $.ajax({
-                //     type : 'post',
-                //     url : 'get_visit_data',
-                //     data :JSON.stringify(param),
-                //     contentType: "application/json; charset=utf-8;",
-                //     dataType: 'text',//받는 데이터 타입
-                //     success : function (result){
-                //
-                //
-                //         let data=JSON.parse(result);
-                //
-                //         let array_data=data["visitDataVOList"];
-                //
-                //         $.each(array_data,function (key,item){
-                //             let sDate=new Date(item.cur_date).yyyymmdd();
-                //
-                //
-                //             if(sDate == start_date){
-                //
-                //                 let resulvation_count=item.resulvation_count;
-                //                 let possible_count=item.possible_count;
-                //
-                //                 let resulvation_count_am=resulvation_count%1000;
-                //                 let resulvation_count_pm=Math.trunc(resulvation_count/1000);
-                //
-                //
-                //                 let possible_count_am=possible_count%1000;
-                //                 let possible_count_pm=Math.trunc(possible_count/1000);
-                //
-                //                 $("#modifyOrDeleteVisitData").find("input[name='idx_visit_data']").val(visitData.idx_visit_data);
-                //                 $("#modifyOrDeleteVisitData").find("input[name='cur_date']").val(new Date(visitData.cur_date).yyyymmdd());
-                //                 $("#modifyOrDeleteVisitData").find("input[name='resulvation_count']").val(visitData.resulvation_count);
-                //                 $("#modifyOrDeleteVisitData").find("input[name='id_admin_cancel']").val(visitData.id_admin_cancel);
-                //                 $("#modifyOrDeleteVisitData").find("input[name='impossible_reason']").val(visitData.impossible_reason);
-                //                 $("#modifyOrDeleteVisitData").find("input[name='visit_data_type']").val(visitData.visit_data_type);
-                //                 $("#modifyOrDeleteVisitData").find("input[name='memo']").val(visitData.memo);
-                //                 $("#modifyOrDeleteVisitData").find("input[name='group_idx']").val(visitData.group_idx);
-                //
-                //                 $("#modifyOrDeleteVisitData").find("input[name='possible_count_am']").val(visitData.possible_count_am);
-                //                 $("#modifyOrDeleteVisitData").find("input[name='possible_count_pm']").val(visitData.possible_count_pm);
-                //                 $("#modifyOrDeleteVisitData").find("input[name='resulvation_count_am']").val(visitData.resulvation_count_am);
-                //                 $("#modifyOrDeleteVisitData").find("input[name='resulvation_count_pm']").val(visitData.resulvation_count_pm);
-                //
-                //             }
-                //
-                //         });
-                //
-                //
-                //
-                //         $("#modifyOrDeleteVisitData").modal('show');
-                //
-                //     }
-                //
-                // });
-                // $("#modifyOrDeleteVisitData").modal('show');
 
 
 
@@ -1430,19 +1378,32 @@
 
                 let visitData=calEvent.event.extendedProps;
 
-
                 $("#modifyOrDeleteVisitData").find("input[name='idx_visit_data']").val(visitData.idx_visit_data);
 
-
-
-
                 $("#modifyOrDeleteVisitData").find("input[name='cur_date']").val(new Date(visitData.cur_date).yyyymmdd());
-                $("#modifyOrDeleteVisitData").find("input[name='resulvation_count']").val(visitData.resulvation_count);
+
                 $("#modifyOrDeleteVisitData").find("input[name='id_admin_cancel']").val(visitData.id_admin_cancel);
                 $("#modifyOrDeleteVisitData").find("input[name='impossible_reason']").val(visitData.impossible_reason);
                 $("#modifyOrDeleteVisitData").find("input[name='visit_data_type']").val(visitData.visit_data_type);
+                $('input:checkbox[name="visit_data_type"]').prop('disabled',true);
+
+
+                if(visitData.visit_data_type == 1){
+                    $("input:checkbox[id='visit_data_type_am']").prop('checked',true);
+                    $("input:checkbox[id='visit_data_type_pm']").prop('checked',false);
+
+                }else if(visitData.visit_data_type == 2){
+                    $("input:checkbox[id='visit_data_type_am']").prop('checked',false);
+                    $("input:checkbox[id='visit_data_type_pm']").prop('checked',true);
+
+                }else if(visitData.visit_data_type == 3){
+                    $("input:checkbox[id='visit_data_type_am']").prop('checked',true);
+                    $("input:checkbox[id='visit_data_type_pm']").prop('checked',true);
+
+                };
+
                 $("#modifyOrDeleteVisitData").find("input[name='memo']").val(visitData.memo);
-                $("#modifyOrDeleteVisitData").find("input[name='group_idx']").val(visitData.group_idx);
+                // $("#modifyOrDeleteVisitData").find("input[name='group_idx']").val(visitData.group_idx);
 
                 $("#modifyOrDeleteVisitData").find("input[name='possible_count_am']").val(visitData.possible_count_am);
                 $("#modifyOrDeleteVisitData").find("input[name='possible_count_pm']").val(visitData.possible_count_pm);
@@ -1898,11 +1859,8 @@
         var eeDate=new Date($("#saveVisitData").find("input[name='eDate']").val());
         var result=getDatesStartToLast(ssDate,eeDate);
 
-        console.log("result : " + result);
-
         if(result.length == 0){
             return alert('날짜를 확인해주세요');
-
         }
 
 
@@ -1962,9 +1920,6 @@
 
 
         if(confirm("저장하시겠습니까?")){
-
-            if(!possible_count)
-
 
             if(repeat_type_new=='0'){
 
@@ -2070,35 +2025,34 @@
 
             console.log(visitDataVoNewList);
 
-            // $.ajax({
-            //     type:'post',
-            //     url: 'save_visit_date', //데이터를 주고받을 파일 주소 입력
-            //     data: JSON.stringify(visitDataVoNewList),//보내는 데이터
-            //     contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
-            //     dataType: 'text',//받는 데이터 타입
-            //     success: function (result) {
-            //         //작업이 성공적으로 발생했을 경우
-            //
-            //         let data=JSON.parse(result);
-            //
-            //         console.log("result.result_str : " + data.result_str);
-            //         alert(data.result_str);
-            //
-            //         //STATUS_001 :
-            //     },
-            //     error: function (request,status,error) {
-            //         console.log("result.result_str error : " + result.result_str);
-            //         alert(result.result_str);
-            //
-            //         //에러가 났을 경우 실행시킬 코드
-            //         alert("code : " + request.status + "\n" +  "message: "+  request.responseText +  "\n" + "error:" + error);
-            //
-            //     }
-            //
-            //
-            // }); //ajax의 끝
+            $.ajax({
+                type:'post',
+                url: 'save_visit_date', //데이터를 주고받을 파일 주소 입력
+                data: JSON.stringify(visitDataVoNewList),//보내는 데이터
+                contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+                dataType: 'text',//받는 데이터 타입
+                success: function (result) {
+                    //작업이 성공적으로 발생했을 경우
 
-            alert('저장');
+                    let data=JSON.parse(result);
+
+                    console.log("result.result_str : " + data.result_str);
+                    alert(data.result_str);
+
+                    //STATUS_001 :
+                },
+                error: function (request,status,error) {
+                    console.log("result.result_str error : " + result.result_str);
+                    alert(result.result_str);
+
+                    //에러가 났을 경우 실행시킬 코드
+                    alert("code : " + request.status + "\n" +  "message: "+  request.responseText +  "\n" + "error:" + error);
+
+                }
+
+
+            });
+
         }else{
             return false;
         }
@@ -2259,6 +2213,22 @@
 
 
 
+    // $("#input[name='dayOrGroup']").change(function (){
+    //    let temp=$("input[name='dayOrGroup']:checked").val();
+    //
+    //    alert(temp);
+    //
+    // });
+
+    $("#modifyOrDeleteVisitData").find("input:radio[name='dayOrGroup']").on('change',function (){
+        let temp=$(this).val();
+        if(temp ==1) {
+            $("#group_date").hide();
+        }else{
+            $("#group_date").show();
+        }
+    });
+
 
     $("#btn_delete_new").on('click',function (){
 
@@ -2344,25 +2314,8 @@
             $("#saveVisitData").find("input[name='eDate']").val(new Date(sDate).yyyymmdd());
         }
     });
-    //
-    // $("input:checkbox[name='ampm_new']:checked").each(function (){
-    //     if($(this).val()==1){
-    //         $("#possible_count_am").attr('disabled',false);
-    //
-    //     }else if($(this).val()==2){}
-    //
-    // });
 
 
-    $("#btn_modify_new").on('click',function (){
-
-        $("#modifyOrDeleteVisitDataForm").find('input[name="possible_count_am"]').attr('readonly',false);
-        $("#modifyOrDeleteVisitDataForm").find('input[name="possible_count_pm"]').attr('readonly',false);
-        $("#modifyOrDeleteVisitDataForm").find('input[name="memo"]').attr('readonly',false);
-
-
-
-    });
 
 
 
