@@ -64,22 +64,22 @@
                     </tbody>
                 </table>
                 <!--//-->
-                <div class="table__paging">
-                    <a href="#none" class="paging__prev2 disabled"><img src="resources/assets/image/ico_paging_prev_02.png" alt=""></a>
-                    <a href="#none" class="paging__prev disabled"><img src="resources/assets/image/ico_paging_prev.png" alt=""></a>
-                    <a href="#none" class="is-active">1</a>
-                    <a href="#none">2</a>
-                    <a href="#none">3</a>
-                    <a href="#none">4</a>
-                    <a href="#none">5</a>
-                    <a href="#none">6</a>
-                    <a href="#none">7</a>
-                    <a href="#none">8</a>
-                    <a href="#none">9</a>
-                    <a href="#none">10</a>
-                    <a href="#none" class="paging__next"><img src="resources/assets/image/ico_paging_next.png" alt=""></a>
-                    <a href="#none" class="paging__next2"><img src="resources/assets/image/ico_paging_next_02.png" alt=""></a>
-                </div>
+<%--                <div class="table__paging">--%>
+<%--                    <a href="#none" class="paging__prev2 disabled"><img src="resources/assets/image/ico_paging_prev_02.png" alt=""></a>--%>
+<%--                    <a href="#none" class="paging__prev disabled"><img src="resources/assets/image/ico_paging_prev.png" alt=""></a>--%>
+<%--                    <a href="#none" class="is-active">1</a>--%>
+<%--                    <a href="#none">2</a>--%>
+<%--                    <a href="#none">3</a>--%>
+<%--                    <a href="#none">4</a>--%>
+<%--                    <a href="#none">5</a>--%>
+<%--                    <a href="#none">6</a>--%>
+<%--                    <a href="#none">7</a>--%>
+<%--                    <a href="#none">8</a>--%>
+<%--                    <a href="#none">9</a>--%>
+<%--                    <a href="#none">10</a>--%>
+<%--                    <a href="#none" class="paging__next"><img src="resources/assets/image/ico_paging_next.png" alt=""></a>--%>
+<%--                    <a href="#none" class="paging__next2"><img src="resources/assets/image/ico_paging_next_02.png" alt=""></a>--%>
+<%--                </div>--%>
             </div>
             <!--//-->
         </div>

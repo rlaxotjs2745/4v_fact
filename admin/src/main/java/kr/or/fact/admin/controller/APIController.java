@@ -1096,9 +1096,9 @@ public class APIController {
         }
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashedPassword = passwordEncoder.encode(newPw);
+        String hashedPassword = passwordEncoder.encode("123123qq!!");
+//        String hashedPassword = passwordEncoder.encode(newPw);
         adminVO.setAdmin_pw(hashedPassword);
-        adminVO.setAdmin_name(newPw);
 
         adminService.join(adminVO);
         try{
