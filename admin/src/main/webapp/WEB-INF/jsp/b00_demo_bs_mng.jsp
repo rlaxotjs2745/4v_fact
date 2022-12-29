@@ -615,7 +615,7 @@
             demo_bs_code: "${demo.demo_bs_code}",
             demo_subject: "${demo.demo_subject}",
             <%--demo_bs_contents: `${demo.demo_bs_contents}`,--%>
-            demo_bs_contents: "${demo.demo_bs_contents}",
+            demo_bs_contents: '${demo.demo_bs_contents}',
             // demo_bs_contents: content,
             demo_bs_main_type: "${demo.demo_bs_main_type}",
             demo_bs_sub_type: "${demo.demo_bs_sub_type}",
