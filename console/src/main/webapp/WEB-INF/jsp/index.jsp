@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html lang="ko" class="light-style">
 <head>
-    <title>SMART FARM | ADMIN</title>
+    <title>SMART FARM | CONSOLE</title>
 
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">

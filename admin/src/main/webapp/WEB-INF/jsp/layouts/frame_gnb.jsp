@@ -486,6 +486,7 @@
 
         if($("#cur-pw").val() == "" || $("#mod-pw").val() == "" || $("#mod-pwcf").val() == ""){
             alert("비밀번호 변경에 필요한 정보가 모두 입력되지 않았습니다.");
+            return;
         }
 
         var newPw = {
@@ -508,10 +509,16 @@
                     $(".modal-backdrop").removeClass("show").css("display", "none");
                 }
                 else {
-                    alert(result.result_str);
-                    window.location.href = "/logout";
-                    //기존 비밀번호와 변경할 비밀번호가 같습니다.
-                    return;
+
+                    <c:if test="${login_from == 'gimje-prod'}">
+                    location.replace('https://innovalley.smartfarmkorea.net/gimje/Demonstration/admin/login');
+                    </c:if>
+                    <c:if test="${login_from == 'sangju-prod'}">
+                    location.replace('https://innovalley.smartfarmkorea.net/sangju/Demonstration/admin/login');
+                    </c:if>
+                    <c:if test="${login_from == 'local'}">
+                    location.replace('/login');
+                    </c:if>
                 }
             },
             error:function(){
@@ -534,6 +541,7 @@
 
         if($("#cur-pw-first").val() == "" || $("#mod-pw-first").val() == "" || $("#mod-pwcf-first").val() == ""){
             alert("비밀번호 변경에 필요한 정보가 모두 입력되지 않았습니다.");
+            return;
         }
 
         var newPw = {
@@ -557,8 +565,16 @@
                 }
                 else {
                     alert(result.result_str);
-                    // window.location.href = "/logout";
-                    return;
+
+                    <c:if test="${login_from == 'gimje-prod'}">
+                    location.replace('https://innovalley.smartfarmkorea.net/gimje/Demonstration/admin/login');
+                    </c:if>
+                    <c:if test="${login_from == 'sangju-prod'}">
+                    location.replace('https://innovalley.smartfarmkorea.net/sangju/Demonstration/admin/login');
+                    </c:if>
+                    <c:if test="${login_from == 'local'}">
+                    location.replace('/login');
+                    </c:if>
                     //기존 비밀번호와 변경할 비밀번호가 같습니다.
                 }
             },

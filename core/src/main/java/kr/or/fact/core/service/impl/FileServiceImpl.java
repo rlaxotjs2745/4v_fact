@@ -392,7 +392,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     @Transactional
-    public long insertFileOutIdx(FileRequestVO fileRequestVO, FileInfoVO fileInfoVO){
+    public String insertFileOutPath(FileRequestVO fileRequestVO, FileInfoVO fileInfoVO){
         MultipartFile file = fileRequestVO.getFiles1();
 
         try {
@@ -412,14 +412,13 @@ public class FileServiceImpl implements FileService {
         fileInfoVO.setFile_size(file.getSize());
         fileInfoVO.setOwner(1);
         fileInfoVO.setIdx_admin(fileRequestVO.getIdx_admin());
+        fileInfoVO.setIdx_file_usage(fileRequestVO.getFileIndex());
 
         fileServiceMapper.insertFileInfo(fileInfoVO);
 
-        List<FileInfoVO> fileList = fileServiceMapper.getFileListAsName(file.getOriginalFilename());
+        String filePath = "downloadFile/" + file.getOriginalFilename();
 
-        long fileIdx = fileList.get(0).getIdx_file_info();
-
-        return fileIdx;
+        return filePath;
     }
 
     @Override
@@ -498,8 +497,12 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public String getFileUrlByUsageIdxType(long usageIdx, int type){
-        FileInfoVO fileInfoVO = fileServiceMapper.getFileUrlByUsageIdxType(usageIdx, type);
-        System.out.println(fileInfoVO);
+        FileInfoVO fileInfoVO = null;
+        try {
+            fileInfoVO = fileServiceMapper.getFileUrlByUsageIdxType(usageIdx, type);
+        } catch(Exception e){
+            System.out.println(e);
+        }
         return fileInfoVO.getFile_path();
     }
 

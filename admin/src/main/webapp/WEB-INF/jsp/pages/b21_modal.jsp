@@ -1973,17 +1973,24 @@
 
 <script>
 
-    console.log('${reqSpplFileUrl}');
-    console.log(${hasToSppl});
-
     curUserDemoBsIdx = ${modifyUserDemoBsVO.idx_user_demo_bs};
 
     if('${modifyUserDemoBsVO.user_demobs_status}' == '6' || '${modifyUserDemoBsVO.user_demobs_status}' == '7'){
         $('#confirm_plz').addClass('active');
         $('#confirm_fin').removeClass('active');
-    } else if('${modifyUserDemoBsVO.user_demobs_status}' == '6'){
+        $('#plz_option_input').show();
+        if(${hasToSppl}){
+            $('#sppl_download').attr('href', '${reqSpplFileUrl}');
+            $('.is_empty_sppl').hide();
+        } else {
+            $('#sppl_download').hide();
+            $('.is_empty_sppl').show();
+        }
+        isConfirmFromAdmin = 6;
+    } else if('${modifyUserDemoBsVO.user_demobs_status}' == '8'){
         $('#confirm_fin').addClass('active');
         $('#confirm_plz').removeClass('active');
+        isConfirmFromAdmin = 8;
     }
 </script>
 

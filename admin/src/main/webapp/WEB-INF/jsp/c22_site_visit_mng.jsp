@@ -956,7 +956,7 @@
 
         $("#group_date").hide();
 
-        if(window.location.pathname == '/a10_dashboard'){
+        if(window.location.pathname.includes('/a10_dashboard')){
             $('.visit_calendar_big_title').hide();
             $('#footer_in_calendar').hide();
         }

@@ -838,9 +838,9 @@ function saveForm(message){
         return alert('내용을 입력해주세요.')
     }
 
-    if($("#memo").val() === ''){
-        return alert('메모를 입력해 주세요.')
-    }
+    // if($("#memo").val() === ''){
+    //     return alert('메모를 입력해 주세요.')
+    // }
 
     if($("#event_start_date_insert").val() === '' || $("#event_end_date_insert").val() === ''){
         return alert('게시기간을 입력해주세요.')

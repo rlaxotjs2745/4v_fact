@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service("smsService")
 public class SmsSendServiceImpl implements SmsSendService {
@@ -25,14 +26,14 @@ public class SmsSendServiceImpl implements SmsSendService {
         try{
             smsSendMapper.insertSmsMessage(smsSendVO);
         }catch(Exception e){
+            System.out.println(e);
             msg_id =0;
         }
         return msg_id;
     }
     @Override
-    public ArrayList<SmsSentVO> selectSentmeesage1() {
-        ArrayList<SmsSentVO> result = smsSendMapper.selectSentmeesage1();
-
+    public List<SmsSentVO> selectSentmeesage1(int page_num, int amount) {
+        List<SmsSentVO> result = smsSendMapper.selectSentmeesage1(page_num, amount);
 
         //ArrayList<SmsSentVO> result = smsSendMapper.selectSentmeesage1();
         return result;

@@ -3,22 +3,34 @@
 <!-- Page content -->
 <div class="container-fluid flex-grow-1 container-p-y">
     <h4 class="font-weight-bold py-3 mb-4">SMS 작성</h4>
-    <div class="card px-4 pt-4 mb-4">
+    <div class="sms_write_form card px-4 pt-4 mb-4">
         <div>
             <form name="smssend" method="post" >
                 <div class="modal-body">
 
-                    <div class="form-group row">
-                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">제목</label>
-                        <div class="col-md-6 mode-edit mode-new">
-                            <input id="subject" type="text" class="form-control form-control-md text-md-right" placeholder="제목">
-                        </div>
-                    </div>
+<%--                    <div class="form-group row">--%>
+<%--                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">제목</label>--%>
+<%--                        <div class="col-md-6 mode-edit mode-new">--%>
+<%--                            <input id="subject" type="text" class="form-control form-control-md text-md-right" placeholder="제목">--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
 
 
 
                 <div class="form-group row">
-                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" id="sms">내용</label>
+                    <label class="col-form-label col-form-label-md col-md-0 text-md-right font-weight-bold mode-edit mode-new">수신 번호</label>
+                    <div class="col-md-6 mode-edit mode-new">
+                        <input id="callback" type="text" class="form-control form-control-md text-md-right" placeholder="010부터작성" onkeyup="chkEmail(event)">
+                    </div>
+                </div>
+    <div class="form-group row">
+        <label class="col-form-label col-form-label-md col-md-0 text-md-right font-weight-bold mode-edit mode-new">수신자 이름</label>
+        <div class="col-md-6 mode-edit mode-new">
+            <label for="user_id"></label><input id="dest_info" type="text" class="form-control form-control-md text-md-right" placeholder="받는사람">
+        </div>
+    </div>
+                <div class="form-group row" style="align-items: baseline">
+                    <label class="col-form-label col-form-label-md col-md-0 text-md-right font-weight-bold" id="sms">문자 내용</label>
 
                     <div class="form-group col col-md-10">
                         <span id="counter">글자수:###</span>
@@ -26,34 +38,21 @@
 
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">보내는 전화번호</label>
-                    <div class="col-md-6 mode-edit mode-new">
-                        <input id="callback" type="text" class="form-control form-control-md text-md-right" placeholder="010부터작성" onkeyup="chkEmail(event)">
-                    </div>
-                </div>
-                <br>
-                <div class="form-group row">
-                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">보내는 사람</label>
-                    <div class="col-md-6 mode-edit mode-new">
-                        <label for="user_id"></label><input id="user_id" type="text" class="form-control form-control-md text-md-right" placeholder="보내는사람">
-                    </div>
+<%--                <div class="form-group row">--%>
+<%--                    <label class="col-form-label col-form-label-md col-md-0 text-md-right font-weight-bold mode-edit mode-new">보내는 사람</label>--%>
+<%--                    <div class="col-md-6 mode-edit mode-new">--%>
+<%--                        <label for="user_id"></label><input id="user_id" type="text" class="form-control form-control-md text-md-right" placeholder="보내는사람">--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+
+                <div class="form-group row label">
+                    <label class="col-form-label col-form-label-md col-md-0 text-md-right font-weight-bold mode-edit mode-new">예약여부</label>
+                    <label><input id="send_now" type="radio" name="sendtype" value="0" onchange="changeSendType(this);" > 바로보내기</label>
+                    <label><input id="send_reserve" type="radio" name="sendtype" value="1" onchange="changeSendType(this);" > 보내기 예약</label>
                 </div>
 
-
-                    <div class="form-group row">
-                        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">받는사람 선택</label>
-                        <div class="col-md-6 mode-edit mode-new">
-                            <label for="user_id"></label><input id="dest_info" type="text" class="form-control form-control-md text-md-right" placeholder="받는사람">
-                        </div>
-                    </div>
-                <br>
-                <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">예약여부</label>
-                <label><input id="send_now" type="checkbox" name="sendtype" value="1" > 바로보내기</label>
-                <label><input id="send_reserve" type="checkbox" name="sendtype" value="2" > 보내기 예약</label>
-                <br>
-                <div class="form-group row">
-                    <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">예약일시</label>
+                <div class="form-group row" id="choose_send_type">
+                    <label class="col-form-label col-form-label-md col-md-0 text-md-right font-weight-bold mode-edit mode-new">예약일시</label>
                     <div class="col-md-10">
                         <div id="datepicker-show" class="input-daterange input-group mode-edit mode-new">
                             <input id ="date" type="text" class="form-control mr-1" name="start">
@@ -62,6 +61,8 @@
                         </div>
                     </div>
                 </div>
+
+    <br>
                 <div>
                     <button type="button" class="btn btn-outline-dark mr-2 sms_cancel" data-dismiss="modal">취소</button>
                     <button type="button" class="btn btn-primary sms_send" id ="send" onclick="event_pass();">보내기</button>
@@ -71,6 +72,19 @@
             </form>
 
             <script>
+
+                var sendType = 0;
+
+                function changeSendType(node){
+                    if($(node).val() == 0){
+                        $('#choose_send_type').hide();
+                        sendType = 0;
+                    } else {
+                        $('#choose_send_type').show();
+                        sendType = 1;
+                    }
+                }
+
                 function chkEmail(event) {
                     let phoneRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/g;
                     let ele = event.target;
@@ -153,12 +167,9 @@
 
                     var user_id =$('#user_id').val();
                     var schedule_type =$('#send_now').val();
-                    var subject =$('#subject').val();
-                    var now_date = $('#now_date').val();
                     var send_date =$('#date').val() +$('#flatpickr-time-start').val();
-                    var callback =$('#callback').val();
 
-                    var dest_info =$('#dest_info').val();
+                    var dest_info = $('#dest_info').val() + '^' + $('#callback').val();
                     var sms_msg =$('#sms_msg').val();
 
 
@@ -167,15 +178,18 @@
                         url: 'sms',
                         data:JSON.stringify( {
                             "user_id": user_id,
-                            "schedule_type": schedule_type,
-                            "subject": subject,
-                            "now_date": now_date,
+                            "schedule_type": sendType,
                             "send_date": send_date,
-                            "callback": callback,
-                            //  "dest_count": dest_count,
+                            <c:if test="${profile == 'sangju-prod'}">
+                            "callback": '0545376431',
+                            </c:if>
+                            <c:if test="${profile == 'gimje-prod'}">
+                            "callback": '0635403600',
+                            </c:if>
+                             "dest_count": 1,
                             "dest_info": dest_info,
                             "sms_msg": sms_msg,
-                        }),
+                        }), // 개발환경에는 크로캅이 지정되어있지 않아 작동 안됩니다.
                         contentType:"application/json; charset=utf-8",
                         //  contentType: "application/json",
                         dataType: "json",
