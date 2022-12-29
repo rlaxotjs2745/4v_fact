@@ -1902,7 +1902,7 @@ public class APIController {
     ResultVO updateEventContent(@ModelAttribute EventContentVO eventContentVO, HttpSession session, HttpServletRequest request) throws Exception, IOException{
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
-        resultVO.setResult_str("업데이트 실패");
+        resultVO.setResult_str("수정 실패");
         File[] files = new File[5];
 
         try {
