@@ -25,7 +25,7 @@ public interface EventContentMapper {
     public List<EventContentVO> getThum();
 
     EventContentVO getThumbFile(EventContentVO eventContentVO);
-    EventFileJoinSelectVO getEventContentFile(EventContentVO eventContentVO);
+    EventContentFileJoinVO getEventContentFile(EventContentVO eventContentVO);
 
     EventContentVO getEventContentThumbFile(EventContentVO eventContentVO);
     int getEventContentCount(ParamPageListFilteredVO paramVo);

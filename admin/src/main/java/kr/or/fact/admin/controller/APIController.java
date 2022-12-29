@@ -1899,7 +1899,7 @@ public class APIController {
     @RequestMapping(value="/update_event",method = RequestMethod.POST)
     @Transactional
     @ResponseBody
-    ResultVO updatePrContent(@ModelAttribute EventContentVO eventContentVO, HttpSession session, HttpServletRequest request) throws Exception, IOException{
+    ResultVO updateEventContent(@ModelAttribute EventContentVO eventContentVO, HttpSession session, HttpServletRequest request) throws Exception, IOException{
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
         resultVO.setResult_str("업데이트 실패");
@@ -1910,7 +1910,7 @@ public class APIController {
                 eventContentService.updateEventContent(eventContentVO);
             }else {
                 // 파일삭제
-                EventFileJoinSelectVO _file0 = eventContentService.getEventContentFile(eventContentVO);
+                EventContentFileJoinVO _file0 = eventContentService.getEventContentFile(eventContentVO);
                 if(_file0!=null) {
                     FileInfoVO _fileinfo0 = fileService.getFileInfo(_file0.getIdx_file_info());
                     if (_fileinfo0 != null) {

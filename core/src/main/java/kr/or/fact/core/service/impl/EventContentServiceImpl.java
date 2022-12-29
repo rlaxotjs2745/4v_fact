@@ -148,8 +148,7 @@ public class EventContentServiceImpl implements EventContentService {
         }
     }
     @Override
-
-    public EventFileJoinSelectVO getEventContentFile(EventContentVO eventContentVO) {
+    public EventContentFileJoinVO getEventContentFile(EventContentVO eventContentVO) {
         return eventContentMapper.getEventContentFile(eventContentVO);
     }
 

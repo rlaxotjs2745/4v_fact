@@ -38,4 +38,6 @@ public class EventFileJoinSelectVO {
 
     String event_start_date_str;
     String event_end_date_str;
+
+    long idx_event_content_file_join;
 }
