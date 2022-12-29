@@ -1174,14 +1174,14 @@
 
             headerToolbar: {
                 center: 'title',
-                left: window.location.pathname != '/a10_dashboard' ? 'prev,next today' : null,
+                left: !window.location.pathname.includes('/a10_dashboard') ? 'prev,next today' : null,
                 // right: 'addEventButton dayGridMonth,timeGridWeek,timeGridDay'
-                right : window.location.pathname != '/a10_dashboard' ? 'addEventButton' : null
+                right : !window.location.pathname.includes('/a10_dashboard') ? 'addEventButton' : null
 
             },
 
             customButtons:
-                window.location.pathname != '/a10_dashboard' ?
+                !window.location.pathname.includes('/a10_dashboard') ?
                     {
                         addEventButton:
                             {
@@ -1372,7 +1372,7 @@
 
 
             eventClick:
-                window.location.pathname != '/a10_dashboard' ?
+                !window.location.pathname.includes('/a10_dashboard') ?
                     function(calEvent) {
 
                         let visitData=calEvent.event.extendedProps;
