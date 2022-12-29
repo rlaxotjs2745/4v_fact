@@ -75,7 +75,7 @@
                         <tr role="row">
                             <th class="text-center" style="width:100px">공고문 번호</th>
                             <th class="text-center" style="width:300px">공고문 제목</th>
-                            <th class="text-center" style="width:80px">지원 현환</th>
+                            <th class="text-center" style="width:80px">지원 현황</th>
                             <th class="text-center" style="width:80px">모집 수</th>
                         </tr>
                         </thead>
