@@ -2055,7 +2055,7 @@
 
         $.ajax({
             type : 'post',
-            url : '/get_visit_data', //날짜의 기간에따른 데이터값을 가져옴
+            url : 'get_visit_data', //날짜의 기간에따른 데이터값을 가져옴
             data : JSON.stringify(param),
             contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
             dataType: 'text',//받는 데이터 타입
@@ -2317,7 +2317,7 @@
 
             $.ajax({
                 type:'post',
-                url: '/delete_visit_date', //데이터를 주고받을 파일 주소 입력
+                url: 'delete_visit_date', //데이터를 주고받을 파일 주소 입력
                 data: JSON.stringify(visitDataVoDelList),//보내는 데이터
                 contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
                 dataType: 'text',//받는 데이터 타입

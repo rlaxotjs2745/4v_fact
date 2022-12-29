@@ -732,7 +732,7 @@
 
         $.ajax({
             type: 'post',
-            url: '/visit_update', //데이터를 주고받을 파일 주소 입력
+            url: 'visit_update', //데이터를 주고받을 파일 주소 입력
             data: JSON.stringify(param),//보내는 데이터
             contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
             dataType: 'json',//받는 데이터 타입
