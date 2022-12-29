@@ -443,7 +443,7 @@
         if(confirm("서류검토 상태를 변경하시겠습니까?")){
             $.ajax({
                 type: 'post',
-                url: '/change_applicant_status', //데이터를 주고받을 파일 주소 입력
+                url: 'change_applicant_status', //데이터를 주고받을 파일 주소 입력
                 data:  JSON.stringify(param),//보내는 데이터
                 contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
                 dataType: 'text',//받는 데이터 타입
