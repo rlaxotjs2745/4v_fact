@@ -241,7 +241,7 @@
                         <div>일정관리</div>
                     </a>
                 </li>
-                <li class="sidenav-item">
+                <%--<li class="sidenav-item">
                     <a href="javascript:void(0);" class="sidenav-link sidenav-toggle"><i class="sidenav-icon fas fa-tablet-alt"></i>
                         <div>SMS 관리</div>
                     </a>
@@ -267,7 +267,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li>--%>
                 <!--//-->
                 <li class="sidenav-item">
                     <a href="javascript:void(0);" class="sidenav-link sidenav-toggle"><i class="sidenav-icon ion ion-md-desktop"></i>

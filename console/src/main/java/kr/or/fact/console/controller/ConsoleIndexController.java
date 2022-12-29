@@ -48,6 +48,10 @@ public class ConsoleIndexController {
     @Resource(name = "systemService")
     SystemService systemService;
 
+    @Resource(name = "envDataService")
+    EnvDataService envDataService;
+
+
     @Autowired
     Environment env;
 
@@ -191,8 +195,102 @@ public class ConsoleIndexController {
             return "redirect:/login";
         }
 
+        List<ExternalEnvVO> externalEnvVOs = envDataService.getExternalEnvData(1,200);;
+        List<RootZoneEnvVO> rootZoneEnvVOs = envDataService.getRootZoneEnvData(1,200);
+
+
+
+        List<InternalEnvVO> internalEnvVOs = envDataService.getInternalEnvData(1,200);
+
+        List<InternalEnvVO> internalEnvVOs_1 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_2 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_3 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_4 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_5 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_6 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_7 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_8 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_9 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_10 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_11 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_12 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_13 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_14 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_15 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_16 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_17 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_18 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_19 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_20 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_21 = new ArrayList<InternalEnvVO>();
+        List<InternalEnvVO> internalEnvVOs_22 = new ArrayList<InternalEnvVO>();
+
+
+        for(int i=0;i<22;i++){
+
+            switch (internalEnvVOs.get(i).getGuyok()){
+                case 0: internalEnvVOs_1.add(internalEnvVOs.get(i)); break;
+                case 1: internalEnvVOs_2.add(internalEnvVOs.get(i)); break;
+                case 2: internalEnvVOs_3.add(internalEnvVOs.get(i)); break;
+                case 3: internalEnvVOs_4.add(internalEnvVOs.get(i)); break;
+                case 4: internalEnvVOs_5.add(internalEnvVOs.get(i)); break;
+                case 5: internalEnvVOs_6.add(internalEnvVOs.get(i)); break;
+                case 6: internalEnvVOs_7.add(internalEnvVOs.get(i)); break;
+                case 7: internalEnvVOs_8.add(internalEnvVOs.get(i)); break;
+                case 8: internalEnvVOs_9.add(internalEnvVOs.get(i)); break;
+                case 9: internalEnvVOs_10.add(internalEnvVOs.get(i)); break;
+                case 10: internalEnvVOs_11.add(internalEnvVOs.get(i)); break;
+                case 11: internalEnvVOs_12.add(internalEnvVOs.get(i)); break;
+                case 12: internalEnvVOs_13.add(internalEnvVOs.get(i)); break;
+                case 13: internalEnvVOs_14.add(internalEnvVOs.get(i)); break;
+                case 14: internalEnvVOs_15.add(internalEnvVOs.get(i)); break;
+                case 15: internalEnvVOs_16.add(internalEnvVOs.get(i)); break;
+                case 16: internalEnvVOs_17.add(internalEnvVOs.get(i)); break;
+                case 17: internalEnvVOs_18.add(internalEnvVOs.get(i)); break;
+                case 18: internalEnvVOs_19.add(internalEnvVOs.get(i)); break;
+                case 19: internalEnvVOs_20.add(internalEnvVOs.get(i)); break;
+                case 20: internalEnvVOs_21.add(internalEnvVOs.get(i)); break;
+                case 21: internalEnvVOs_22.add(internalEnvVOs.get(i)); break;
+            }
+        }
+        List<List<InternalEnvVO>> internalEnvVOs_List = new ArrayList<List<InternalEnvVO>>();
+        internalEnvVOs_List.add(internalEnvVOs_1);
+        internalEnvVOs_List.add(internalEnvVOs_2);
+        internalEnvVOs_List.add(internalEnvVOs_3);
+        internalEnvVOs_List.add(internalEnvVOs_4);
+        internalEnvVOs_List.add(internalEnvVOs_5);
+        internalEnvVOs_List.add(internalEnvVOs_6);
+        internalEnvVOs_List.add(internalEnvVOs_7);
+        internalEnvVOs_List.add(internalEnvVOs_8);
+        internalEnvVOs_List.add(internalEnvVOs_9);
+        internalEnvVOs_List.add(internalEnvVOs_10);
+        internalEnvVOs_List.add(internalEnvVOs_11);
+        internalEnvVOs_List.add(internalEnvVOs_12);
+        internalEnvVOs_List.add(internalEnvVOs_13);
+        internalEnvVOs_List.add(internalEnvVOs_14);
+        internalEnvVOs_List.add(internalEnvVOs_15);
+        internalEnvVOs_List.add(internalEnvVOs_16);
+        internalEnvVOs_List.add(internalEnvVOs_17);
+        internalEnvVOs_List.add(internalEnvVOs_18);
+        internalEnvVOs_List.add(internalEnvVOs_19);
+        internalEnvVOs_List.add(internalEnvVOs_20);
+        internalEnvVOs_List.add(internalEnvVOs_21);
+        internalEnvVOs_List.add(internalEnvVOs_22);
+
+
+
+        model.addAttribute("internalEnvVOs_L", internalEnvVOs_List);
+
+
+        model.addAttribute("exEnvs", externalEnvVOs);
+        model.addAttribute("rootEnvs", rootZoneEnvVOs);
+        model.addAttribute("inEnvs", internalEnvVOs);
+
+
+
         return "a_dashboard/dashboard";
     }
+
 
 
 

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- Page content -->
 
     <!-- Content -->
@@ -460,127 +461,127 @@
                         <tbody>
                             <tr class="">
                                 <td class="text-center">1</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">태화농장</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">2</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">정육당</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">3</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">선화</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">4</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">한농팜</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">5</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">자연농원</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">6</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">김천농협</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">7</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">서린상사</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">8</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">식품농장</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">9</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">야채야</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">10</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">하늘아래</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">11</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">뜰농원</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">12</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">정식당</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">13</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">숲의향기</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">8</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">농부팜</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">14</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">스마트코리아</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">15</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">착한가게</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">16</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">엘마리온</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">17</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">서유통상</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">18</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">신난식품</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">19</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">농가도생</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
                             <tr class="">
                                 <td class="text-center">20</td>
-                                <td class="text-center">XXXXXXX</td>
+                                <td class="text-center">치리오</td>
                                 <td class="text-center">육묘장(유리)</td>
                                 <td class="text-center">자율</td>
                             </tr>
@@ -592,33 +593,33 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-1 col-xl-1">
+            <div class="col-sm-2 col-xl-2">
                 <div class="card mb-3">
                     <div class="card-body" style="padding: 0.5rem;">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><i class="fas fa-thermometer-half"></i></div>
                             <div class="ml-3">
                                 <div class="text-muted small">온도</div>
-                                <div class="text-large float-right">42</div>
+                                <div class="text-large float-right"><c:if test="${exEnvs.size() >0}">${exEnvs[0].xouttemp}</c:if></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-1 col-xl-1">
+            <div class="col-sm-2 col-xl-2">
                 <div class="card mb-3">
                     <div class="card-body" style="padding: 0.5rem;">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><i class="fas fa-tint"></i></div>
                             <div class="ml-3">
-                                <div class="text-muted small">습도</div>
-                                <div class="text-large float-right">42</div>
+                                <div class="text-muted small">강우</div>
+                                <div class="text-large float-right"><c:if test="${exEnvs.size() >0}">${exEnvs[0].xrain}</c:if></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-1 col-xl-1">
+            <div class="col-sm-2 col-xl-2">
                 <div class="card mb-3">
                     <div class="card-body" style="padding: 0.5rem;">
                         <div class="d-flex align-items-center">
@@ -631,7 +632,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-1 col-xl-1">
+            <div class="col-sm-2 col-xl-2">
                 <div class="card mb-3">
                     <div class="card-body" style="padding: 0.5rem;">
                         <div class="d-flex align-items-center">
@@ -644,46 +645,21 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-1 col-xl-1">
-                <div class="card mb-3">
-                    <div class="card-body" style="padding: 0.5rem;">
-                        <div class="d-flex align-items-center">
-                            <div class="display-4"><i class="fas fa-vial"></i></div>
-                            <div class="ml-3">
-                                <div class="text-muted small">토양pH</div>
-                                <div class="text-large float-right">42</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-1 col-xl-1">
+            <div class="col-sm-2 col-xl-2">
                 <div class="card mb-3">
                     <div class="card-body" style="padding: 0.5rem;">
                         <div class="d-flex align-items-center">
                             <div class="display-4"><i class="fas fa-water"></i></div>
                             <div class="ml-3">
                                 <div class="text-muted small">토양수분</div>
-                                <div class="text-large float-right">42</div>
+                                <div class="text-large float-right"><c:if test="${rootEnvs.size() >0}">${rootEnvs[0].xgndhum}</c:if></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-1 col-xl-1">
-                <div class="card mb-3">
-                    <div class="card-body" style="padding: 0.5rem;">
-                        <div class="d-flex align-items-center">
-                            <div class="display-4"><i class="fas fa-atom"></i></div>
-                            <div class="ml-3">
-                                <div class="text-muted small">토양EC</div>
-                                <div class="text-large float-right">42</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-1 col-xl-1">
+
+            <div class="col-sm-2 col-xl-2">
                 <div class="card mb-3">
                     <div class="card-body" style="padding: 0.5rem;">
                         <div class="d-flex align-items-center">
@@ -696,58 +672,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-1 col-xl-1">
-                <div class="card mb-3">
-                    <div class="card-body" style="padding: 0.5rem;">
-                        <div class="d-flex align-items-center">
-                            <div class="display-4"><i class="fas fa-rainbow"></i></div>
-                            <div class="ml-3">
-                                <div class="text-muted small">천창 좌</div>
-                                <div class="text-large float-right">42</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-1 col-xl-1">
-                <div class="card mb-3">
-                    <div class="card-body" style="padding: 0.5rem;">
-                        <div class="d-flex align-items-center">
-                            <div class="display-4"><i class="fas fa-rainbow"></i></div>
-                            <div class="ml-3">
-                                <div class="text-muted small">천창 우</div>
-                                <div class="text-large float-right">42</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-1 col-xl-1">
-                <div class="card mb-3">
-                    <div class="card-body" style="padding: 0.5rem;">
-                        <div class="d-flex align-items-center">
-                            <div class="display-4"><i class="fas fa-campground"></i></div>
-                            <div class="ml-3">
-                                <div class="text-muted small">일중커튼</div>
-                                <div class="text-large float-right">42</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-1 col-xl-1">
-                <div class="card mb-3">
-                    <div class="card-body" style="padding: 0.5rem;">
-                        <div class="d-flex align-items-center">
-                            <div class="display-4"><i class="fas fa-campground"></i></div>
-                            <div class="ml-3">
-                                <div class="text-muted small">이중커튼</div>
-                                <div class="text-large float-right">42</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
 
         <div class="row">
@@ -756,7 +681,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="text-muted small mt-2">시설자재</div>
-                            <div class="text-large">000</div>
+                            <div class="text-large">34</div>
                         </div>
                     </div>
                 </div>
@@ -767,7 +692,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="text-muted small mt-2">ICT 실증장비</div>
-                            <div class="text-large">000</div>
+                            <div class="text-large">18</div>
                         </div>
                     </div>
                 </div>
@@ -777,7 +702,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="text-muted small mt-2">작물보호제/비료</div>
-                            <div class="text-large">000</div>
+                            <div class="text-large">32</div>
                         </div>
                     </div>
                 </div>
@@ -787,7 +712,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="text-muted small mt-2">스마트팜SW</div>
-                            <div class="text-large">000</div>
+                            <div class="text-large">4</div>
                         </div>
                     </div>
                 </div>
@@ -797,7 +722,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="text-muted small mt-2">생육모델</div>
-                            <div class="text-large">000</div>
+                            <div class="text-large">43</div>
                         </div>
                     </div>
                 </div>
@@ -807,63 +732,47 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div class="text-muted small mt-2">로봇</div>
-                            <div class="text-large">000</div>
+                            <div class="text-large">23</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row d-flex justify-content-center">
-            <div class="col-sm-6 col-xl-3">
-                <div class="btn btn-lg btn-block btn-success w-100">
-                    현황보고서 작성
-                    <span class="fas fa-arrow-right"></span>
-                </div>
-            </div>
-            <div class="col-sm-6 col-xl-3">
-                <div class="btn btn-lg btn-block btn-success">
-                    신청서 평가
-                    <span class="fas fa-arrow-right"></span>
-                </div>
-            </div>
-            <div class="col-sm-6 col-xl-3">
-                <div class="btn btn-lg btn-block btn-success">
-                    실증성적서 발급
-                    <span class="fas fa-arrow-right"></span>
-                </div>
-            </div>
-            <div class="col-sm-6 col-xl-3">
-                <div class="btn btn-lg btn-block btn-success">
-                    SMS 작성
-                    <span class="fas fa-arrow-right"></span>
-                </div>
-            </div>
-        </div>
+
     </div>
     <!-- / Content -->
 <script>
 
     function plotAccordingToChoices(){
-        var datasets = {
+<c:forEach var="k"  varStatus="status" begin="1" end="23">
+        <c:if test="${fn:length(internalEnvVOs_L[k-1])>0}">
+        datasets${k}= {
             "temperature": {
                 label: "온도",
-                data: [[ 6, 48 ], [ 7, 50 ], [ 8, 46 ], [ 9, 40 ], [ 10, 36 ], [ 11, 38 ]]
+                data: [<c:forEach var="i"  varStatus="status" begin="0" end="${fn:length(internalEnvVOs_L[k-1])-1}">
+                    [ ${i+1}, ${internalEnvVOs_L[k-1][i].xintemp1} ] <c:if test="${i<fn:length(internalEnvVOs_L[k-1])-1}">, </c:if>
+                    </c:forEach>]
             },
             "humidity": {
                 label: "습도",
-                data: [[ 6, 76 ], [ 7, 74 ], [ 8, 70 ], [ 9, 56 ], [ 10, 80 ], [ 11, 85 ]]
+                data: [<c:forEach var="i"  varStatus="status" begin="0" end="${fn:length(internalEnvVOs_L[k-1])-1}">
+                    [ ${i+1}, ${internalEnvVOs_L[k-1][i].xinhum1} ] <c:if test="${i<fn:length(internalEnvVOs_L[k-1])-1}">,</c:if>
+                    </c:forEach>]
             },
         };
-        var data = [];
+
+
+
+        var data${k}= [];
         $(".switcher-input:checked").each(function () {
             var key = $(this).attr("name");
-            if (key && datasets[key]) {
-                data.push(datasets[key]);
+            if (key && datasets${k}[key]) {
+                data${k}.push(datasets${k}[key]);
             }
         });
 
-        if (data.length > 0) {
-            for(var i=1;i<20;i++){
+        if (data${k}.length > 0) {
+
 
                 var isDark = true;
                 var gridColor = isDark ? '#383b40' : '#aaaaaa';
@@ -871,7 +780,7 @@
                 var tickFill = isDark ? '#383b40' : '#f5f5f5';
                 var transparent = isDark ? '#00000000' : '#00000000';
 
-                $.plot("#flot-graph"+i, data, {
+                $.plot("#flot-graph${k}", data${k}, {
                     series: {
                         lines: {
                             show: true,
@@ -893,7 +802,7 @@
                         timeBase: "milliseconds",
                         timeformat: "%m/%d"
                     },*/
-                    yaxis: { show:false, showTickLabels: 'none' },
+                    yaxis: { show:false, showTickLabels: 'none',range: [-20, 70] },
                     xaxis: {
                         show:false,
                         color: gridBorder,
@@ -910,8 +819,9 @@
                 });
 
             }
+        </c:if>
+        </c:forEach>
 
-        }
 
     }
     $(document).ready(function(){

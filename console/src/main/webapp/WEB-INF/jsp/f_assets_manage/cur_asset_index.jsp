@@ -12,10 +12,8 @@
 <h6 class="card-header with-elements">
     <div class="card-header-title">자산 목록</div>
     <div class="card-header-elements ml-auto">
-        <a href="#none" class="btn btn-outline-primary" data-toggle="modal" data-target="#modals-source-upload">XLS 일괄등록</a>
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modals-source-write">+ 자원등록
         </button>
-
     </div>
 </h6>
 

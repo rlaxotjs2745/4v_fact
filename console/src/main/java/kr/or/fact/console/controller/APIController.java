@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +35,9 @@ public class APIController {
 
     @Resource(name = "consoleSessionService")
     ConsoleSessionService consoleSessionService;
+
+    @Resource(name = "smsService")
+    SmsSendService smsSendService;
 
     @Resource(name = "authService")
     AuthService authService;
@@ -245,5 +250,11 @@ public class APIController {
             }
         }//필수 데이터 체크 if
         return resultVO;
+    }
+    @RequestMapping(value = "/sms",method = RequestMethod.POST)
+    public @ResponseBody
+    long insertSmsMessage(@RequestBody SmsSendVO smsSendVO) {
+        smsSendVO.setNow_date(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddhhmm")));
+        return smsSendService.insertSmsMessage(smsSendVO);
     }
 }
