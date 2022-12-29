@@ -725,7 +725,7 @@
             data: {idx_event_content:_idx},//보내는 데이터
             dataType: 'json',//받는 데이터 타입
             success: function (result) {
-                _form_reset();
+                // _form_reset();
                 $('#file_upload1_update').val('');
                 $('#file_upload2_update').val('');
                 $('.filelist1').empty();
@@ -950,7 +950,7 @@
                         $("#modals-counsel-view").modal("hide");
                         _search(_page)
                     }
-                    _form_reset();
+                    // _form_reset();
                 }
             },
             error: function (res) {

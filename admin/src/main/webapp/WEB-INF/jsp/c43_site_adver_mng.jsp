@@ -863,7 +863,7 @@
                     data: {idx_pr_content:_idx},//보내는 데이터
                     dataType: 'json',//받는 데이터 타입
                     success: function (result) {
-                        _form_reset();
+                        // _form_reset();
                         $('#file_upload1_update').val('');
                         $('#file_upload2_update').val('');
                         $('.filelist1').empty();
@@ -1086,7 +1086,7 @@
                 if($('#is_main_page'+_u+' input[name=custom-8]:checked').length==0){
                     return alert('메인페이지 노출여부를 골라주세요.')
                 }
-                if($('#event_content_status'+_u+' input[name=custom-9]:checked').length==0){
+                if($('#pr_content_status'+_u+' input[name=custom-9]:checked').length==0){
                     return alert('행사안내 프로세스 상태를 골라주세요.')
                 }
 
@@ -1140,7 +1140,7 @@
                                 $("#modals-counsel-view").modal("hide");
                                 _search(_page)
                             }
-                            _form_reset();
+                            // _form_reset();
                         }
                     },
                     error: function (res) {
