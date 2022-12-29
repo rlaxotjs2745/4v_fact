@@ -199,11 +199,11 @@
                                     <th class="text-center bg-light" style="width:12%">이름</th>
                                     <td class="text-center" style="width:24%"><input type="text" class="form-control form-control-sm" value="" id="admin_name_modify" readonly></td>
                                     <th class="text-center bg-light" style="width:13%">일반전화번호</th>
-                                    <td class="text-center" style="width:29%"><input type="text" class="form-control form-control-sm" value="" id="tel_num_modify"></td>
+                                    <td class="text-center" style="width:29%"><input type="text" class="form-control form-control-sm" value="" id="tel_num_modify"  maxlength="13" oninput="autoHyphen(this)"></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">휴대폰 번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="mphone_num_modify"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="mphone_num_modify" maxlength="13" oninput="autoHyphen2(this)"></td>
                                     <th class="text-center bg-light">관리 유형</th>
                                     <td class="text-center">
                                         <select id="admin_type_modify" class="form-control form-control-sm">
@@ -309,13 +309,13 @@
                                 <tr class="">
                                     <th class="text-center align-middle bg-light" rowspan="3" style="width:12%">개인정보</th>
                                     <th class="text-center bg-light" style="width:12%">이름</th>
-                                    <td class="text-center" style="width:24%"><input type="text" class="form-control form-control-sm" value="" id="admin_name" onkeyup="chkOnlyName(event)"></td>
-                                    <th class="text-center bg-light" style="width:13%">일반전화번호</th>
-                                    <td class="text-center" style="width:29%"><input type="text" class="form-control form-control-sm" value="" onkeyup="chkOnlyNum(event)" id="tel_num"></td>
+                                    <td class="text-center" style="width:24%"><input type="text" class="form-control form-control-sm" value="" id="admin_name" oninput="chkOnlyName(event)"></td>
+                                    <th class="text-center bg-light" style="width:13%"  >일반전화번호</th>
+                                    <td class="text-center" style="width:29%"><input type="text" class="form-control form-control-sm" value="" oninput="autoHyphen(this)" maxlength="13" id="tel_num"></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">휴대폰 번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" onkeyup="chkOnlyNum(event)" id="mphone_num"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" oninput="autoHyphen2(this)" maxlength="13"  id="mphone_num"></td>
                                     <th class="text-center bg-light">관리 유형</th>
                                     <td class="text-center">
                                         <select id="admin_type" class="form-control form-control-sm">
@@ -379,9 +379,9 @@
                                     <th class="text-center align-middle bg-light" style="width: 4.5%" rowspan="2">시스템 정보</th>
                                     <th class="text-center bg-light" style="width: 4.5%; vertical-align: middle;" >웹ID</th>
                                     <td class="" style="width: 25%" colspan="3">
-                                        <input type="text" id="web_id" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width: 100px" name="admin_id">
+                                        <input type="text" id="web_id" class="form-control form-control-sm d-inline-block align-middle mr-1" oninput="chkOnlyNum(event)" value="" style="width: 100px" name="admin_id">
                                         @
-                                        <input type="text" id="web_id2" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width: 100px" name="">
+                                        <input type="text" id="web_id2" class="form-control form-control-sm d-inline-block align-middle mr-1"  oninput="chkOnlyNum(event)" value="" style="width: 100px" name="">
                                         <select id="admin_id_select_box" class="form-control form-control-sm d-inline-block align-middle mr-1" style="width: 100px">
                                             <option value="0">직접입력</option>
                                             <option value="naver.com">naver.com</option>
@@ -457,6 +457,17 @@
 <%@include file ="layouts/frame_footer.jsp" %>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+    const autoHyphen = (target) => {
+        target.value = target.value
+            .replace(/[^0-9]/g, '')
+            .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+    }
+
+    const autoHyphen2 = (target) => {
+        target.value = target.value
+            .replace(/[^0-9]/g, '')
+            .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+    }
 
     var curPage = "${adminList[0].page}";
     var curUser;

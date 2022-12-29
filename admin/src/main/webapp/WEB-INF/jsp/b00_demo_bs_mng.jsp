@@ -410,7 +410,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">모집 수</label>
                             <div class="form-inline col-md-4 mode-edit mode-new">
-                                <input type="text" class="form-control form-control-md text-md-right" onkeyup="chkOnlyNum(event)" id="recruit_count_limit" style="width: 50%;" placeholder="0">
+                                <input type="text" class="form-control form-control-md text-md-right" oninput="this.value=this.value.replace(/[^-0-9]/g,'');" id="recruit_count_limit" style="width: 50%;" placeholder="0">
                                 <small class="form-text text-muted">
                                     명(기업)
                                 </small>
@@ -569,6 +569,15 @@
             let ele = event.target;
             if (regExp.test(ele.value)) {
                 ele.value = ele.value.replace(regExp, '');
+            }
+        };
+
+        function chkEmail(event) {
+            let phoneRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/g;
+            let ele = event.target;
+            if (!phoneRegex.test(ele.value)) {
+                console.log(ele.value)
+                ele.value = ele.value.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/gi, '');
             }
         };
 
