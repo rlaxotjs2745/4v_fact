@@ -433,7 +433,6 @@ public class FileServiceImpl implements FileService {
     @Override
     public long insertRuleFile(MultipartFile file, long idx_admin) {
         FileInfoVO fileInfoVO = new FileInfoVO();
-
         fileInfoVO.setFile_name(file.getOriginalFilename());
         fileInfoVO.setFile_type(5);
         fileInfoVO.setFile_status(0);
@@ -450,7 +449,7 @@ public class FileServiceImpl implements FileService {
             return fileServiceMapper.getFileIdxToUser(fileInfoVO);
         } catch (Exception e){
             System.out.println(e);
-            return 0;
+            return 0L;
         }
     }
 
@@ -520,5 +519,33 @@ public class FileServiceImpl implements FileService {
         if(f.exists()){
             f.delete();
         }
+    }
+
+    public String insertFileOutPath(FileRequestVO fileRequestVO, FileInfoVO fileInfoVO){
+        String filePath = "";
+        try {
+            MultipartFile file = fileRequestVO.getFiles1();
+            convertMultipartToFile2(file);
+
+            fileInfoVO.setFile_name(file.getOriginalFilename());
+            fileInfoVO.setFile_status(0);
+            fileInfoVO.setMime_type(file.getContentType());
+            fileInfoVO.setEncoding(1);
+            fileInfoVO.setExtention(StringUtils.getFilenameExtension(file.getOriginalFilename()));
+            fileInfoVO.setFile_secure_type(0);
+            fileInfoVO.setFile_path("downloadFile/" + file.getOriginalFilename());
+            fileInfoVO.setFile_size(file.getSize());
+            fileInfoVO.setOwner(1);
+            fileInfoVO.setIdx_admin(fileRequestVO.getIdx_admin());
+            fileInfoVO.setIdx_file_usage(fileRequestVO.getFileIndex());
+
+            fileServiceMapper.insertFileInfo(fileInfoVO);
+
+            List<FileInfoVO> fileList = fileServiceMapper.getFileListAsName(file.getOriginalFilename());
+            filePath = "downloadFile/" + file.getOriginalFilename();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return filePath;
     }
 }

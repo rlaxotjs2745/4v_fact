@@ -64,4 +64,6 @@ public interface FileService {
     String getFileUrlByUsageIdxType(long usageIdx, int type);
 
     void delFile(String path);
+
+    String insertFileOutPath(FileRequestVO fileRequestVO, FileInfoVO fileInfoVO);
 }
