@@ -157,16 +157,22 @@ public class PRContentServiceImpl implements PRContentsService {
     }
 
     public int updatePRContentFileJoin(PRContentFileJoinVO prcontensVO) {
-        return prContentsMapper.updatePRContentFileJoin(prcontensVO);
+        int rs = 0;
+        try {
+            rs = prContentsMapper.updatePRContentFileJoin(prcontensVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 
     @Override
-    public PRContentFileJoinVO getPRContentFile(PRContentVO prcontensVO) {
+    public PRContentFileJoinVO getPRContentFile(PRContentVO prcontensVO) throws Exception {
         return prContentsMapper.getPRContentFile(prcontensVO);
     }
 
     @Override
-    public PRContentVO getPRContentThumbFile(PRContentVO prcontensVO) {
+    public PRContentVO getPRContentThumbFile(PRContentVO prcontensVO) throws Exception {
         return prContentsMapper.getPRContentThumbFile(prcontensVO);
     }
 
@@ -176,7 +182,7 @@ public class PRContentServiceImpl implements PRContentsService {
     }
 
     @Override
-    public PRContentVO getThumbFile(PRContentVO prcontensVO) {
+    public PRContentVO getThumbFile(PRContentVO prcontensVO) throws Exception {
         return prContentsMapper.getThumbFile(prcontensVO);
     }
 

@@ -1898,7 +1898,7 @@ public class APIController {
 
     @RequestMapping(value="/update_event",method = RequestMethod.POST)
     @Transactional
-    @ResponseBody
+    public @ResponseBody
     ResultVO updateEventContent(@ModelAttribute EventContentVO eventContentVO, HttpSession session, HttpServletRequest request) throws Exception, IOException{
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
@@ -1908,6 +1908,8 @@ public class APIController {
         try {
             if(eventContentVO.getFiles1() == null && eventContentVO.getFiles2() == null){
                 eventContentService.updateEventContent(eventContentVO);
+                resultVO.setResult_code("SUCCESS");
+                resultVO.setResult_str("수정을 완료하였습니다.");
             }else {
                 // 파일삭제
                 EventContentFileJoinVO _file0 = eventContentService.getEventContentFile(eventContentVO);
@@ -1995,7 +1997,7 @@ public class APIController {
 
     @RequestMapping(value="/update_pr",method = RequestMethod.POST)
     @Transactional
-    @ResponseBody
+    public @ResponseBody
     ResultVO updatePrContent(@ModelAttribute PRContentVO prcontensVO, HttpSession session, HttpServletRequest request) throws Exception, IOException{
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
@@ -2005,6 +2007,8 @@ public class APIController {
         try {
             if(prcontensVO.getFiles1() == null && prcontensVO.getFiles2() == null){
                 prContentService.updatePrContent(prcontensVO);
+                resultVO.setResult_code("SUCCESS");
+                resultVO.setResult_str("수정을 완료하였습니다.");
             }else {
                 // 파일삭제
                 PRContentFileJoinVO _file0 = prContentService.getPRContentFile(prcontensVO);

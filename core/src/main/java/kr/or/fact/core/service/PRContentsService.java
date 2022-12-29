@@ -30,10 +30,10 @@ public interface PRContentsService {
 
     int updatePRContentFileJoin(PRContentFileJoinVO prcontensVO);
 
-    PRContentFileJoinVO getPRContentFile(PRContentVO prcontensVO);
-    PRContentVO getPRContentThumbFile(PRContentVO prcontensVO);
+    PRContentFileJoinVO getPRContentFile(PRContentVO prcontensVO) throws Exception;
+    PRContentVO getPRContentThumbFile(PRContentVO prcontensVO) throws Exception;
     List<PRContentVO> getThumb();
-    PRContentVO getThumbFile(PRContentVO prcontensVO);
+    PRContentVO getThumbFile(PRContentVO prcontensVO) throws Exception;
 
     PRContentVO getPRContentFileJoin(long idx_pr_content);
     List<PRContentVO> selectPRContentList(String tagValue);

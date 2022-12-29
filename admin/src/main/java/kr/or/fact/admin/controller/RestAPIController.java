@@ -21,7 +21,7 @@ public class RestAPIController extends BaseController {
 
     @PostMapping("/get_prcontents")
     public @ResponseBody ResultVO get_prcontents(@CookieValue(name = "access_token", required = false) String access_token
-            , PRContentVO paramVo) {
+            , PRContentVO paramVo) throws Exception {
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("홍보자료가 없습니다.");
         resultVO.setResult_code("ERROR_1000");
@@ -39,27 +39,31 @@ public class RestAPIController extends BaseController {
             return resultVO;
         }
 
-        if(paramVo!=null){
-            PRContentVO rs = prContentService.getPRContentFileJoin(paramVo.getIdx_pr_content());
-            if(rs!=null) {
-                PRContentVO thumb = prContentService.getThumbFile(paramVo);
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREAN);
-                if(rs.getShow_start_date()!=null) {
-                    String sDate = dateFormat.format(rs.getShow_start_date());
-                    rs.setShow_start_date_str(sDate);
-                }
-                if(rs.getShow_end_date()!=null) {
-                    String eDate = dateFormat.format(rs.getShow_end_date());
-                    rs.setShow_end_date_str(eDate);
-                }
-                Map<String, Object> _rs = new HashMap<String, Object>();
-                _rs.put("rs", rs);
-                _rs.put("thumb", thumb);
+        try {
+            if(paramVo!=null){
+                PRContentVO rs = prContentService.getPRContentFileJoin(paramVo.getIdx_pr_content());
+                if(rs!=null) {
+                    PRContentVO thumb = prContentService.getThumbFile(paramVo);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREAN);
+                    if(rs.getShow_start_date()!=null) {
+                        String sDate = dateFormat.format(rs.getShow_start_date());
+                        rs.setShow_start_date_str(sDate);
+                    }
+                    if(rs.getShow_end_date()!=null) {
+                        String eDate = dateFormat.format(rs.getShow_end_date());
+                        rs.setShow_end_date_str(eDate);
+                    }
+                    Map<String, Object> _rs = new HashMap<String, Object>();
+                    _rs.put("rs", rs);
+                    _rs.put("thumb", thumb);
 
-                resultVO.setData(_rs);
-                resultVO.setResult_str("홍보자료를 불러왔습니다.");
-                resultVO.setResult_code("SUCCESS");
+                    resultVO.setData(_rs);
+                    resultVO.setResult_str("홍보자료를 불러왔습니다.");
+                    resultVO.setResult_code("SUCCESS");
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return resultVO;
     }

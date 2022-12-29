@@ -369,56 +369,53 @@
 
     <update id="updatePrContent" parameterType="kr.or.fact.core.model.DTO.PRContentVO">
         UPDATE TB_PR_CONTENT SET
-        <if test="pr_content_code != null">
-             PR_CONTENT_CODE=#{pr_content_code},
-        </if>
-        <if test="pr_content_num != null">
-             PR_CONTENT_NUM=#{pr_content_num},
-        </if>
-             SUBJECT=#{subject},
-             PR_CONTENTS=#{pr_contents},
-             IS_FILE=#{is_file},
-             IS_NEW=#{is_new},
-             IS_MAIN_PAGE=#{is_main_page},
-        <if test="is_important != null">
-             IS_IMPORTANT=#{is_important},
-        </if>
-         <if test="is_show != null">
-             IS_SHOW=#{is_show},
-         </if>
-        <if test="view_count != null">
-             VIEW_COUNT=#{view_count},
-        </if>
-        <if test="pr_content_status != null">
-             PR_CONTENT_STATUS=#{pr_content_status},
-        </if>
-        <if test="show_start_date != null">
-             SHOW_START_DATE=#{show_start_date},
-        </if>
-        <if test="show_end_date != null">
-             SHOW_END_DATE=#{show_end_date},
-        </if>
-        <if test="doc_version != null">
-             DOC_VERSION=#{doc_version},
-        </if>
-        <if test="memo != null">
-             MEMO=#{memo},
-        </if>
-        <if test="search_tag != null">
-             SEARCH_TAG=#{search_tag},
-        </if>
-        <if test="author != null">
-             AUTHOR=#{author},
-        </if>
-        <if test="files2 != null and thumb_img_file_idx == null">
-            THUMB_IMG_FILE_IDX=SEQ_FILE_INFO.CURRVAL,
-        </if>
-        <if test="files2 != null and thumb_img_file_idx != null">
-            THUMB_IMG_FILE_IDX=#{thumb_img_file_idx},
-        </if>
-        <if test="idx_admin != null">
-             IDX_ADMIN=#{idx_admin},
-        </if>
+            SUBJECT=#{subject},
+            PR_CONTENTS=#{pr_contents},
+            IS_FILE=#{is_file},
+            IS_NEW=#{is_new},
+            IS_MAIN_PAGE=#{is_main_page},
+            <if test="pr_content_code != null">
+                PR_CONTENT_CODE=#{pr_content_code},
+            </if>
+            <if test="pr_content_num != null">
+                PR_CONTENT_NUM=#{pr_content_num},
+            </if>
+            <if test="is_important != null">
+                IS_IMPORTANT=#{is_important},
+            </if>
+            <if test="is_show != null">
+                IS_SHOW=#{is_show},
+            </if>
+            <if test="view_count != null">
+                VIEW_COUNT=#{view_count},
+            </if>
+            <if test="pr_content_status != null">
+                PR_CONTENT_STATUS=#{pr_content_status},
+            </if>
+            <if test="show_start_date != null">
+                SHOW_START_DATE=#{show_start_date},
+            </if>
+            <if test="show_end_date != null">
+                SHOW_END_DATE=#{show_end_date},
+            </if>
+            <if test="doc_version != null">
+                DOC_VERSION=#{doc_version},
+            </if>
+            <if test="memo != null">
+                MEMO=#{memo},
+            </if>
+            <if test="search_tag != null">
+                SEARCH_TAG=#{search_tag},
+            </if>
+            <if test="author != null">
+                AUTHOR=#{author},
+            </if>
+            <if test="files2 != null">
+                THUMB_IMG_FILE_IDX=#{thumb_img_file_idx},
+            </if>
+            <if test="idx_admin != null">
+                IDX_ADMIN=#{idx_admin},
+            </if>
              LAST_UPD_DATE=SYSDATE
         WHERE IDX_PR_CONTENT = #{idx_pr_content}
     </update>

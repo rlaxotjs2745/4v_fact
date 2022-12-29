@@ -31,9 +31,9 @@ public interface PRContentsMapper {
     PRContentVO getPRContent(@Param("idx") long idx);
     int insertPRContentFileJoin(FileInfoVO fileInfoVO);
 
-    PRContentFileJoinVO getPRContentFile(PRContentVO prcontensVO);
+    PRContentFileJoinVO getPRContentFile(PRContentVO prcontensVO) throws Exception;
 
-    PRContentVO getPRContentThumbFile(PRContentVO prcontensVO);
+    PRContentVO getPRContentThumbFile(PRContentVO prcontensVO) throws Exception;
 
     int updatePRContentFileJoin(PRContentFileJoinVO prcontensVO);
     PRContentVO getPRContentFileJoin(@Param("idx_pr_content") long idx_pr_content);
@@ -44,5 +44,5 @@ public interface PRContentsMapper {
     void updatePrContent(PRContentVO prContentVO) throws Exception;
     List<PRContentVO> getThumb();
 
-    PRContentVO getThumbFile(PRContentVO prcontensVO);
+    PRContentVO getThumbFile(PRContentVO prcontensVO) throws Exception;
 }
