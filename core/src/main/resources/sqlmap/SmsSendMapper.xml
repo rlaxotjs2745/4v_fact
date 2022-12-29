@@ -4,21 +4,20 @@
 
 <mapper namespace="kr.or.fact.core.model.SmsSendMapper">
     <insert id="insertSmsMessage" parameterType="kr.or.fact.core.model.DTO.SmsSendVO">
-        INSERT INTO "SDK_SMS_SEND"(
-            msg_id,
-            user_id,
-            schedule_type,
-            subject,
-            sms_msg,
-            now_date,
-            send_date,
-            callback,
-            dest_info
-
+        INSERT INTO SDK_SMS_SEND(
+            MSG_ID,
+            USER_ID,
+            SCHEDULE_TYPE,
+            SUBJECT,
+            SMS_MSG,
+            NOW_DATE,
+            SEND_DATE,
+            CALLBACK,
+            DEST_INFO
         ) VALUES(
                 SDK_SMS_SEQ.NEXTVAL,
-                #{user_id},
-                 #{schedule_type},
+                'test',
+                 0,
                 #{subject},
                 #{sms_msg},
                 #{now_date},
@@ -28,7 +27,18 @@
    )
     </insert>
     <select id="selectSentmeesage1" resultType="kr.or.fact.core.model.DTO.SmsSentVO">
-        SELECT * FROM SDK_SMS_REPORT ORDER BY msg_id DESC
+                SELECT
+                  ROW_NUMBER() OVER(ORDER by SEND_DATE DESC) AS ROW_NUM,
+                  MSG_ID,
+                  SCHEDULE_TYPE,
+                  SUBJECT,
+                  SEND_DATE,
+                  CALLBACK,
+                  DEST_COUNT,
+                  DEST_INFO,
+                  SMS_MSG
+                FROM SDK_SMS_REPORT
+            WHERE ROW_NUM <![CDATA[<=]]> #{page_num}*#{amount}
     </select>
     <select id="selectReserveMessage" resultType="kr.or.fact.core.model.DTO.SmsSendVO">
         SELECT * FROM SDK_SMS_SEND ORDER BY msg_id DESC

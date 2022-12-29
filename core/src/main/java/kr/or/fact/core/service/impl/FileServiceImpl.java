@@ -415,10 +415,12 @@ public class FileServiceImpl implements FileService {
             fileInfoVO.setFile_size(file.getSize());
             fileInfoVO.setOwner(1);
             fileInfoVO.setIdx_admin(fileRequestVO.getIdx_admin());
+        fileInfoVO.setIdx_file_usage(fileRequestVO.getFileIndex());
 
             fileServiceMapper.insertFileInfo(fileInfoVO);
 
             List<FileInfoVO> fileList = fileServiceMapper.getFileListAsName(file.getOriginalFilename());
+        String filePath = "downloadFile/" + file.getOriginalFilename();
 
             fileIdx = fileList.get(0).getIdx_file_info();
         } catch (Exception e){
@@ -504,8 +506,12 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public String getFileUrlByUsageIdxType(long usageIdx, int type){
-        FileInfoVO fileInfoVO = fileServiceMapper.getFileUrlByUsageIdxType(usageIdx, type);
-        System.out.println(fileInfoVO);
+        FileInfoVO fileInfoVO = null;
+        try {
+            fileInfoVO = fileServiceMapper.getFileUrlByUsageIdxType(usageIdx, type);
+        } catch(Exception e){
+            System.out.println(e);
+        }
         return fileInfoVO.getFile_path();
     }
 

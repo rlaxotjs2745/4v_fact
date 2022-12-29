@@ -6,56 +6,61 @@
         <h4 class="font-weight-bold py-3 mb-4">이메일 발송</h4>
     </div>
 
-    <div class="form-group row">
-        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">받는 사람</label>
-        <div class="col-md-10">
-            <input type="text" id="email_receiver" name="email_receiver" class="form-control form-control-md mode-edit mode-new" placeholder="받는 분의 이메일을 입력해주세요." onkeyup="chkEmail(event)">
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">제목</label>
-        <div class="col-md-10">
-            <input type="text" id="email_title" name="email_title" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요">
-        </div>
-    </div>
-
-    <div class="form-row">
-        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold" for="email_file">파일 첨부</label>
-        <div class="form-group col col-md-10 mode-edit mode-new">
-            <input type="file" name="email_file" id="email_file" class="form-control-file d-block py-1" multiple>
-            <div>최대 5개 파일, 200MB까지 첨부가 가능합니다.</div>
-            <%--                <input type="file" class="form-control-file d-block py-1">--%>
-        </div>
-        <%--                <div class="form-group col col-md-10 col-form-label mode-view">--%>
-        <%--                <a href="file.doc">공고문 상세.pdf</a>--%>
-        <%--                    </div>--%>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">내용</label>
-        <div class="col-md-10 mode-edit mode-new">
-            <div style="background-color: #ffffff">
-                <textarea id="email_content" name="email_content" class="summernote"></textarea>
+    <div class="email_form_write sms_write_form card">
+        <div class="form-group row">
+            <label class="col-form-label col-form-label-md col-md-0 text-md-right font-weight-bold">받는 사람</label>
+            <div class="col-md-10">
+                <input type="text" id="email_receiver" name="email_receiver" class="form-control form-control-md mode-edit mode-new" placeholder="받는 분의 이메일을 입력해주세요." onkeyup="chkEmail(event)">
             </div>
         </div>
-        <div class="col-md-10 mode-view">
-            <%--                <div class="form-control-plaintext mode-view">자세히 보기</div>--%>
+
+        <div class="form-group row">
+            <label class="col-form-label col-form-label-md col-md-0 text-md-right font-weight-bold">제목</label>
+            <div class="col-md-10">
+                <input type="text" id="email_title" name="email_title" class="form-control form-control-md mode-edit mode-new" placeholder="제목을 입력해 주세요">
+            </div>
         </div>
+
+        <div class="form-group row" style="align-items: baseline">
+            <label class="col-form-label col-form-label-md col-md-0 text-md-right font-weight-bold" for="email_file">파일 첨부</label>
+            <div class="form-group col col-md-10 mode-edit mode-new">
+                <input type="file" name="email_file" id="email_file" class="form-control-file d-block py-1" multiple>
+                <div>최대 5개 파일, 200MB까지 첨부가 가능합니다.</div>
+                <%--                <input type="file" class="form-control-file d-block py-1">--%>
+            </div>
+            <%--                <div class="form-group col col-md-10 col-form-label mode-view">--%>
+            <%--                <a href="file.doc">공고문 상세.pdf</a>--%>
+            <%--                    </div>--%>
+        </div>
+
+        <div class="form-group row" style="align-items: baseline">
+            <label class="col-form-label col-form-label-md col-md-0 text-md-right font-weight-bold">내용</label>
+            <div class="col-md-10 mode-edit mode-new">
+                <div style="background-color: #ffffff">
+                    <textarea id="email_content" name="email_content" class="summernote"></textarea>
+                </div>
+            </div>
+            <div class="col-md-10 mode-view">
+                <%--                <div class="form-control-plaintext mode-view">자세히 보기</div>--%>
+            </div>
+        </div>
+
+        <div class="modal-footer justify-content-between mode-new">
+            <div>
+                <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-outline-primary mr-2">보내기 예약</button>
+                <button type="submit" class="btn btn-primary send_mail" >바로 보내기</button>
+                <%--            <button type="submit" class="btn btn-primary send_mail" >바로 보내기<img src="https://acegif.com/wp-content/uploads/loading-34.gif" style="width: 20px"></button>--%>
+            </div>
+
+            <div>
+            </div>
+        </div>
+
+
     </div>
 
 
-    <div class="modal-footer justify-content-between mode-new">
-        <div>
-            <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
-            <button type="button" class="btn btn-outline-primary mr-2">보내기 예약</button>
-            <button type="submit" class="btn btn-primary send_mail" >바로 보내기</button>
-<%--            <button type="submit" class="btn btn-primary send_mail" >바로 보내기<img src="https://acegif.com/wp-content/uploads/loading-34.gif" style="width: 20px"></button>--%>
-        </div>
-
-        <div>
-        </div>
-    </div>
 </form>
 <%@include file ="layouts/frame_footer.jsp" %>
 <script>

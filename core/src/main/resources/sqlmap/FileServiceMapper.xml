@@ -397,6 +397,9 @@
                     <if test="file_type == 5">
                         SEQ_RULE_FILE_INFO.CURRVAL,
                     </if>
+        <if test="file_type == 7">
+            #{idx_file_usage},
+        </if>
                      #{idx_admin},
                      SYSDATE
                  )

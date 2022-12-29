@@ -12,10 +12,13 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -26,6 +29,8 @@ import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.apache.coyote.http11.Constants.a;
 
 @RestController
 public class FileController {
@@ -38,6 +43,9 @@ public class FileController {
 
     @Autowired
     private FACTConfig factConfig;
+
+    @Autowired
+    private JavaMailSender mailSender;
 
     @Autowired
     Environment env;
@@ -288,16 +296,35 @@ public class FileController {
 
         FileInfoVO fileInfoVO = new FileInfoVO();
 
-        System.out.println(fileRequestVO.getFileIndex());
-        System.out.println(fileRequestVO.getOtherwise());
         fileInfoVO.setIdx_admin(fileRequestVO.getIdx_admin());
         fileInfoVO.setFile_type(7);
         fileInfoVO.setIdx_file_usage(fileRequestVO.getOtherwise());
 
         try {
             userDemoBsService.updateUserDemoBsStatus(fileRequestVO.getFileIndex(),Integer.parseInt("" + fileRequestVO.getOtherwise()));
-            System.out.println(1);
-            fileService.insertFileOutIdx(fileRequestVO, fileInfoVO);
+            String filePath = fileService.insertFileOutPath(fileRequestVO, fileInfoVO);
+            UserDemoBsVO userDemoBsVO = userDemoBsService.getUserDemoBsByIdx(fileRequestVO.getFileIndex());
+
+            MimeMessage mail = mailSender.createMimeMessage();
+            MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+
+            mailHelper.setFrom("김태선 <taeseon@4thevision.com>"); // 보내는 사람 정보도 와야함
+            mailHelper.setTo(userDemoBsVO.getMan_email());
+            mailHelper.setSubject("스마트팜 혁신밸리");
+            String[] activeProfiles = env.getActiveProfiles();
+            String potalDomain = "http://localhost:10001/";
+            if (activeProfiles.length != 0) {
+                String activeProfile = activeProfiles[0];
+                if (activeProfile.equals("gimje-prod")) {
+                    potalDomain = "https://innovalley.smartfarmkorea.net/gimje/Demonstration/";
+                } else if (activeProfile.equals("sangju-prod")) {
+                    potalDomain = "https://innovalley.smartfarmkorea.net/sangju/Demonstration/";
+                }
+            }
+            String htmlText = "<p>안녕하세요." + userDemoBsVO.getMan_name() + "님. 스마트팜 혁신밸리에 접수해주신 사업에 대한 보완요청서입니다.</p><br/>" +
+                    "<a href=\"" + potalDomain + filePath + "\">보완 요청서 보기</a>";
+            mailHelper.setText(htmlText, true);
+            mailSender.send(mail);
         } catch (Exception e) {
             System.out.println(e);
             resultVO.setResult_code("ERROR_1000");

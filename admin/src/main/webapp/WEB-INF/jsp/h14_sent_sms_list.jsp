@@ -22,22 +22,26 @@
                                 <thead>
                                 <tr role="row">
                                     <th class="text-center px-2" style="width:40px">No</th>
-                                    <th class="text-center px-2" style="width:120px">보내는 번호</th>
                                     <th class="text-center px-2" style="width:120px">보낸시간</th>
-                                    <th class="text-center px-2" style="width:80px">구분</th>
-                                    <th class="text-center px-2" style="width:250px">수신자</th>
-                                    <th class="text-center px-2" style="width:250px">제목</th>
+                                    <th class="text-center px-2" style="width:80px">예약/즉시</th>
+                                    <th class="text-center px-2" style="width:250px">수신인</th>
+                                    <th class="text-center px-2" style="width:250px">수신 연락처</th>
                                     <th class="text-center px-2" style="width:300px">내용</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${sentSms}" var="smsSent" varStatus="status">
                                     <tr class="smsSent-entity" id="${sentSms.msg_id}">
-                                        <td class="text-center">${status.count}</td>
-                                        <td class="text-center">${smsSent.callback}</td>
+                                        <td class="text-center">${status.count + (page_num-1) * 10}</td>
                                         <td class="text-center">${smsSent.send_date}</td>
-                                        <td class="text-center"><span class="text-truncate d-inline-block" style="width:200px;">${smsSent.dest_info}</span></td>
-                                        <td class="text-center">${smsSent.subject}</td>
+                                        <c:if test="${smsSent.schedule_type == 0}">
+                                            <td class="text-center">즉시</td>
+                                        </c:if>
+                                        <c:if test="${smsSent.schedule_type == 1}">
+                                            <td class="text-center">예약</td>
+                                        </c:if>
+                                        <td class="text-center"><span class="text-truncate d-inline-block" style="width:200px;">${smsSent.dest_info.split('^')[0]}</span></td>
+                                        <td class="text-center">${smsSent.dest_info.split('^')[1]}</td>
                                         <td class=""><span class="text-truncate d-inline-block" style="width:300px;">${smsSent.sms_msg}</span></td>
                                     </tr>
                                 </c:forEach>

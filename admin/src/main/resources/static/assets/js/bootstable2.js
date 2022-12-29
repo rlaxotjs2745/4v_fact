@@ -93,6 +93,7 @@ function FijModoEdit(but) {
     $(but).parent().find('#bElim').hide();
     var $row = $(but).parents('tr');  //accede a la fila
     $row.attr('id', 'editing');  //indica que está en edición
+    $row.children(':first-child').find('.input-sm').attr("disabled",true);
 }
 function ModoEdicion($row) {
     if ($row.attr('id')=='editing') {
@@ -134,11 +135,11 @@ function rowAcep(but) {
         return;
     }
 
-    if($cols[3].textContent == ''){
-        alert("코드 설명을 입력해주세요.");
-        pageLoad('l20_code_mng',{page_num:1},'시스템 코드관리');
-        return;
-    }
+    // if($cols[3].textContent == ''){
+    //     alert("코드 설명을 입력해주세요.");
+    //     pageLoad('l20_code_mng',{page_num:1},'시스템 코드관리');
+    //     return;
+    // }
 
 
     console.log(param);

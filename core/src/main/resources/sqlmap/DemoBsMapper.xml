@@ -7,7 +7,7 @@
         SELECT COUNT (*) FROM TB_DEMO_BUSINESS
     </select>
 
-        <select id="getDemoBsList" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
+    <select id="getDemoBsList" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
         SELECT * FROM TB_DEMO_BUSINESS ORDER BY START_DATE DESC
     </select>
 

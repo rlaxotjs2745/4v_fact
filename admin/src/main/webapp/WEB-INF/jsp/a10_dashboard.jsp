@@ -75,7 +75,7 @@
                         <tr role="row">
                             <th class="text-center" style="width:100px">공고문 번호</th>
                             <th class="text-center" style="width:300px">공고문 제목</th>
-                            <th class="text-center" style="width:80px">지원 현환</th>
+                            <th class="text-center" style="width:80px">지원 현황</th>
                             <th class="text-center" style="width:80px">모집 수</th>
                         </tr>
                         </thead>
@@ -108,7 +108,7 @@
         </div>
 
 
-        <div class="col-md-6 col-lg-12 col-xl-6" id="dashboard_calendar_view" onclick="pageLoad('c22_site_visit_mng','1:1문의');">
+        <div class="main col-md-6 col-lg-12 col-xl-6" id="dashboard_calendar_view" onclick="pageLoad('c22_site_visit_mng','1:1문의');">
             <%@ include file="./c22_site_visit_mng.jsp"%>
             <!-- Comments -->
 <%--            <div id="list_calendar" class="card mb-4" style="display:none;">--%>

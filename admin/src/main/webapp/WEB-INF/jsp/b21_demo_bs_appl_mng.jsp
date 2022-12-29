@@ -233,9 +233,9 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
                 <div>
                     <span id="plz_option_input">
-                        <input type="file" class="custom-file" id="req_supple_file">
-                        <small class="form-text mb-2 text-muted">신청서 보완 요청서 등록이 필요합니다.</small>
-                        <a href="#none" class="btn btn-underline">보완 요청서 다운로드</a>
+                        <input type="file" class="custom-file is_empty_sppl" id="req_supple_file">
+                        <small class="form-text mb-2 text-muted is_empty_sppl">신청서 보완 요청서 등록이 필요합니다.</small>
+                        <a href="#none" class="btn btn-underline" id="sppl_download">보완 요청서 다운로드</a>
                     </span>
                     <div class="btn-group btn-group btn-group-toggle ml-2" data-toggle="buttons">
                         <label class="btn btn-secondary application_confirm" id="confirm_plz">
@@ -304,6 +304,7 @@
                     //작업이 성공적으로 발생했을 경우
                     alert(result.result_str);
                     if(result.result_code == 'SUCCESS'){
+
                         pageLoad('b21_demo_bs_appl_mng',{page_num:1},'신규신청 접수');
                     }
                 }
@@ -315,11 +316,13 @@
                 url: 'modify_user_demo_bs_status', //데이터를 주고받을 파일 주소 입력
                 data: JSON.stringify(param),//보내는 데이터
                 contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
-                dataType: 'text',//받는 데이터 타입
+                dataType: 'json',//받는 데이터 타입
                 success: function (result) {
                     //작업이 성공적으로 발생했을 경우
+                    console.log(result);
                     alert(result.result_str);
                     if(result.result_code == 'SUCCESS'){
+                        console.log(111)
                         pageLoad('b21_demo_bs_appl_mng',{page_num:1},'신규신청 접수');
                     }
                 }
