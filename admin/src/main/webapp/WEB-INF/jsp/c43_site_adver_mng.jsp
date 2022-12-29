@@ -417,7 +417,7 @@
                                     </label>
                                     <label class="custom-control custom-radio d-inline-block">
                                         <input name="custom-6" type="radio" class="custom-control-input" value="1">
-                                        <span class="custom-control-label">포함</span>
+                                        <span class="custom-control-label" checked="checked">포함</span>
                                     </label>
                                 </div>
                             </div>
@@ -586,7 +586,7 @@
                                     <span class="custom-control-label">포함안함</span>
                                 </label>
                                 <label class="custom-control custom-radio d-inline-block">
-                                    <input name="custom-6" type="radio" class="custom-control-input" value="1">
+                                    <input name="custom-6" type="radio" class="custom-control-input" value="1" checked="checked">
                                     <span class="custom-control-label">포함</span>
                                 </label>
                             </div>
@@ -809,9 +809,48 @@
             }
             </c:forEach>
 
+            $('#is_file_insert input[name=custom-6]').on('change',function(){
+                if($(this).index('#is_file_insert input[name=custom-6]') == 1){
+                    $('#file_upload1_insert').removeAttr('disabled');
+                    $('#file_upload2_insert').removeAttr('disabled');
+                }else{
+                    $('#file_upload1_insert').attr('disabled',true);
+                    $('#file_upload2_insert').attr('disabled',true);
+                }
+            });
+            $('#is_file_update input[name=custom-6]').on('change',function(){
+                if($(this).index('#is_file_update input[name=custom-6]') == 1){
+                    $('#file_upload1_update').removeAttr('disabled');
+                    $('#file_upload2_update').removeAttr('disabled');
+                }else{
+                    $('#file_upload1_update').attr('disabled',true);
+                    $('#file_upload2_update').attr('disabled',true);
+                }
+            });
+            $('#file_upload1_insert, #file_upload2_insert').on('change',function(){
+                if($('#is_file_insert input[name=custom-6]:checked').length==0){
+                    $('#is_file_insert input[name=custom-6]').eq(0).attr('checked',false);
+                    $('#is_file_insert input[name=custom-6]').eq(1).attr('checked',true);
+                }
+            });
+            $('#file_upload1_update, #file_upload2_update').on('change',function(){
+                if($('#is_file_update input[name=custom-6]:checked').length==0){
+                    $('#is_file_update input[name=custom-6]').eq(0).attr('checked',false);
+                    $('#is_file_update input[name=custom-6]').eq(1).attr('checked',true);
+                }
+            });
             $('#modals-counsel-view').on('show.bs.modal', function (event) {
                 _saveCont($(event.relatedTarget).data('idx'))
             })
+
+            function _form_reset(){
+                $('#file_upload1_insert, #file_upload2_insert, #file_upload1_update, #file_upload2_update').attr('disabled',false);
+                $('input[name=custom-6]').attr('checked',false);
+                $('input[name=custom-7]').attr('checked',false);
+                $('input[name=custom-8]').attr('checked',false);
+                $('input[name=custom-9]').attr('checked',false);
+                $('#modals-counsel-history input, #modals-business input, #modals-counsel-history textarea, #modals-business textarea').val('');
+            }
             function open_modify(){
                 $('#modals-counsel-history').modal('show');
                 _getCont(curPRdata);
@@ -824,6 +863,12 @@
                     data: {idx_pr_content:_idx},//보내는 데이터
                     dataType: 'json',//받는 데이터 타입
                     success: function (result) {
+                        _form_reset();
+                        $('#file_upload1_update').val('');
+                        $('#file_upload2_update').val('');
+                        $('.filelist1').empty();
+                        $('.filelist2').empty();
+
                         let _data = result.data.rs;
                         // 수정 모달용
                         $("#pr_subject_update").val(_data.subject);
@@ -845,8 +890,7 @@
 
                         let file1 = _data.attachments;
                         let file2 = result.data.thumb;
-                        $('.filelist1').empty();
-                        $('.filelist2').empty();
+                        
                         for(let i=0;i<file1.length;i++){
                             $('.filelist1').append('<a href="'+ file1[i].file_path +'">'+file1[i].file_name+'</a>')
                         }
@@ -1020,6 +1064,32 @@
                     return alert('게시기간을 입력해주세요.')
                 }
 
+                if($('#file_upload1'+_u).val()!=''){
+                    if($('#is_file'+_u+' input[name=custom-6]:checked').length==0 || !$('#is_file'+_u+' input[name=custom-6]').eq(0).attr('checked')){
+                        $('#is_file'+_u+' input[name=custom-6]').eq(0).attr('checked',false);
+                        $('#is_file'+_u+' input[name=custom-6]').eq(1).attr('checked',true);
+                    }
+                }
+                if($('#file_upload2'+_u).val()!=''){
+                    if($('#is_file'+_u+' input[name=custom-6]:checked').length==0 || !$('#is_file'+_u+' input[name=custom-6]').eq(0).attr('checked')){
+                        $('#is_file'+_u+' input[name=custom-6]').eq(1).attr('checked',false);
+                        $('#is_file'+_u+' input[name=custom-6]').eq(0).attr('checked',true);
+                    }
+                }
+
+                if($('#is_file'+_u+' input[name=custom-6]:checked').length==0){
+                    return alert('파일여부를 골라주세요.')
+                }
+                if($('#is_new'+_u+' input[name=custom-7]:checked').length==0){
+                    return alert('신규 등록여부를 골라주세요.')
+                }
+                if($('#is_main_page'+_u+' input[name=custom-8]:checked').length==0){
+                    return alert('메인페이지 노출여부를 골라주세요.')
+                }
+                if($('#event_content_status'+_u+' input[name=custom-9]:checked').length==0){
+                    return alert('행사안내 프로세스 상태를 골라주세요.')
+                }
+
                 var fileForm = new FormData();
                 fileForm.append("pr_content_code",document.querySelector('#pr_content_code'+_u).value);
                 fileForm.append("subject",document.querySelector('#pr_subject'+_u).value);
@@ -1070,6 +1140,7 @@
                                 $("#modals-counsel-view").modal("hide");
                                 _search(_page)
                             }
+                            _form_reset();
                         }
                     },
                     error: function (res) {
