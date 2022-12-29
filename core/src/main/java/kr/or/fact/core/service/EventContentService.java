@@ -23,7 +23,7 @@ public interface EventContentService {
     void updateEventViewCount(EventContentVO eventContentVO);
     void updateEventContent(EventContentVO eventContentVO) throws Exception;
 
-    EventFileJoinSelectVO getEventContentFile(EventContentVO eventContentVO);
+    EventContentFileJoinVO getEventContentFile(EventContentVO eventContentVO);
     EventContentVO getEventContentThumbFile(EventContentVO eventContentVO);
     EventContentVO getThumbFile(EventContentVO eventContentVO);
     public int getEventContentCount(ParamPageListFilteredVO paramVo);
