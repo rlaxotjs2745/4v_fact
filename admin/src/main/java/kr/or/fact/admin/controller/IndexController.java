@@ -1,6 +1,7 @@
 package kr.or.fact.admin.controller;
 
 import kr.or.fact.core.model.DTO.*;
+import kr.or.fact.core.model.EventContentMapper;
 import kr.or.fact.core.model.FormFileMapper;
 import kr.or.fact.core.model.PRContentsMapper;
 import kr.or.fact.core.model.RuleFileMapper;
@@ -89,6 +90,9 @@ public class IndexController extends BaseController {
 
     @Autowired
     public PRContentsMapper prContentsMapper;
+
+    @Autowired
+    public EventContentMapper eventContentMapper;
 
     @Autowired
     public FormFileMapper formFileMapper;
@@ -1110,9 +1114,9 @@ public class IndexController extends BaseController {
         return "c41_site_notice_mng";
     }
 
-    //고객관리진행중
+    //행사 관리
     @RequestMapping(value = "/c42_site_event_mng",method = RequestMethod.POST)
-    public String c42_site_event_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String c42_site_event_mng(@RequestParam(value = "page_num", required = false) String tagValue,
                                      @RequestBody ParamPageListFilteredVO param,
                                      ModelMap model,
                                      @CookieValue(name = "access_token",required = false) String access_token){
@@ -1134,15 +1138,14 @@ public class IndexController extends BaseController {
         int list_amount = 10;
         int page_amount = param.getAmount();
         int page = param.getPage_num();
-        int eventCount = eventContentService.getMainEventContentCount();
+        int eventCount = eventContentService.getEventContentCount(param);
 //        if(eventCount==0){
 //            return "brd_event_blank";
 //        }
         model.addAttribute("total_count",eventCount);
-        List<EventContentVO> eventContentList = eventContentService.getEventContentList(page,list_amount);
-        List<EventContentVO> eventContentList1 = eventContentService.getMainEventContentList();
+        List<EventContentVO> eventContentList = eventContentService.getEventContentList(param);
+//        List<EventContentVO> eventContentList1 = eventContentService.getMainEventContentList();
         model.addAttribute("eventcontentlist",eventContentList);
-
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
 
@@ -1184,9 +1187,101 @@ public class IndexController extends BaseController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
+        model.addAttribute("fil1",param.getFil1());
+        model.addAttribute("fil2",param.getFil2());
 
+        param.setFil1("1");
+        param.setFil2(null);
+        int count_req = eventContentMapper.getEventContentCount2(param);
+        model.addAttribute("count_req",count_req);
+
+        param.setFil1("0");
+        int count_comp = eventContentMapper.getEventContentCount2(param);
+        model.addAttribute("count_comp",count_comp);
 
         return "c42_site_event_mng";
+    }
+
+    @RequestMapping(value = "/c421_site_event_mng",method = RequestMethod.POST)
+    public String c421_site_event_mng(@RequestParam(value = "page_num", required = false) String tagValue,
+                                     @RequestBody ParamPageListFilteredVO param,
+                                     ModelMap model,
+                                     @CookieValue(name = "access_token",required = false) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }else{
+            return "redirect:/login";
+        }
+
+        param.setAmount(10);
+        int list_amount = 10;
+        int page_amount = param.getAmount();
+        int page = param.getPage_num();
+        int eventCount = eventContentMapper.getEventContentCount2(param);
+        model.addAttribute("total_count",eventCount);
+
+        List<EventContentVO> eventContentList = eventContentService.getEventContentList(param);
+        model.addAttribute("eventcontentlist",eventContentList);
+        model.addAttribute("cur_page",page);
+        model.addAttribute("amount",list_amount);
+
+        int tot_page = eventCount/list_amount+1;
+        if(eventCount%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("page_amount",page_amount);
+
+        model.addAttribute("fil1",param.getFil1());
+        model.addAttribute("fil2",param.getFil2());
+
+        param.setFil1("1");
+        param.setFil2(null);
+        int count_req = eventContentMapper.getEventContentCount2(param);
+        model.addAttribute("count_req",count_req);
+
+        param.setFil1("0");
+        int count_comp = eventContentMapper.getEventContentCount2(param);
+        model.addAttribute("count_comp",count_comp);
+
+        return "c421_site_event_mng";
     }
 
     @RequestMapping(value = "/c43_site_adver_mng" ,method = RequestMethod.POST)

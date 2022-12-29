@@ -148,55 +148,89 @@
         WHERE idx_row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
     </select>
 
-    <insert id="insertPRContent" parameterType="kr.or.fact.core.model.DTO.PRContentVO">
+    <insert id="insertPRContent" parameterType="kr.or.fact.core.model.DTO.PRContentVO" useGeneratedKeys="true" keyColumn="idx_pr_content" keyProperty="idx_pr_content">
         INSERT INTO TB_PR_CONTENT(
             IDX_PR_CONTENT,
             PR_CONTENT_CODE,
+            <if test="pr_content_num != null">
             PR_CONTENT_NUM,
+            </if>
             SUBJECT,
             PR_CONTENTS,
             IS_FILE,
             IS_NEW,
             IS_MAIN_PAGE,
+            <if test="is_important != null">
             IS_IMPORTANT,
+            </if>
             IS_SHOW,
+            <if test="view_count != null">
             VIEW_COUNT,
+            </if>
             PR_CONTENT_STATUS,
             SHOW_START_DATE,
             SHOW_END_DATE,
+            <if test="doc_version != null">
             DOC_VERSION,
+            </if>
             MEMO,
+            <if test="search_tag != null">
             SEARCH_TAG,
+            </if>
+            <if test="author != null">
             AUTHOR,
+            </if>
+            <if test="files2 != null">
             THUMB_IMG_FILE_IDX,
+            </if>
+            <if test="idx_admin != null">
             IDX_ADMIN,
+            </if>
+            <if test="confirm_admin_idx != null">
             CONFIRM_ADMIN_IDX,
-            REG_DATE,
-            LAST_UPD_DATE
+            </if>
+            REG_DATE
         )VALUES (
             SEQ_PR_CONTENT.NEXTVAL,
             #{pr_content_code},
+            <if test="pr_content_num != null">
             #{pr_content_num},
+            </if>
             #{subject},
             #{pr_contents},
             #{is_file},
             #{is_new},
             #{is_main_page},
+            <if test="is_important != null">
             #{is_important},
+            </if>
             #{is_show},
+            <if test="view_count != null">
             #{view_count},
+            </if>
             #{pr_content_status},
             #{show_start_date},
             #{show_end_date},
+            <if test="doc_version != null">
             #{doc_version},
+            </if>
             #{memo},
+            <if test="search_tag != null">
             #{search_tag},
+            </if>
+            <if test="author != null">
             #{author},
-            SEQ_FILE_INFO.CURRVAL,
+            </if>
+            <if test="files2 != null">
+                #{thumb_img_file_idx},
+            </if>
+            <if test="idx_admin != null">
             #{idx_admin},
+            </if>
+            <if test="confirm_admin_idx != null">
             #{confirm_admin_idx},
-            SYSDATE,
-            #{last_upd_date}
+            </if>
+            SYSDATE
         )
     </insert>
 
@@ -224,7 +258,7 @@
         DELETE FROM TB_PR_CONTENT WHERE  IDX_PR_CONTENT = #{idx_pr_content}
     </delete>
 
-    <insert id="insertPRContentFileJoin" parameterType="kr.or.fact.core.model.DTO.PRContentFileJoinVO">
+    <insert id="insertPRContentFileJoin">
         INSERT INTO TB_PR_CONTENT_FILE_JOIN (
             IDX_PR_CONTENT_FILE_JOIN,
             IDX_PR_CONTENT,
@@ -232,8 +266,15 @@
             REG_DATE
         )VALUES (
             SEQ_PR_CONTENT_FILE_JOIN.NEXTVAL,
-            SEQ_PR_CONTENT.CURRVAL,
-            SEQ_FILE_INFO.CURRVAL-1,
+            <choose>
+                 <when test="idx_pr_content != null">
+                    #{idx_pr_content},
+                 </when>
+                 <otherwise>
+                    SEQ_PR_CONTENT.CURRVAL,
+                 </otherwise>
+            </choose>
+            #{idx_file_info},
             SYSDATE
         )
     </insert>
@@ -313,8 +354,8 @@
              C.FILE_PATH,
              C.FILE_SIZE
       FROM TB_PR_CONTENT A
-               JOIN TB_PR_CONTENT_FILE_JOIN B ON A.IDX_PR_CONTENT = B.IDX_PR_CONTENT
-               JOIN TB_FILE_INFO C ON B.IDX_FILE_INFO = C.IDX_FILE_INFO
+               LEFT OUTER JOIN TB_PR_CONTENT_FILE_JOIN B ON A.IDX_PR_CONTENT = B.IDX_PR_CONTENT
+               LEFT OUTER JOIN TB_FILE_INFO C ON B.IDX_FILE_INFO = C.IDX_FILE_INFO
       WHERE A.IDX_PR_CONTENT = #{idx_pr_content}
     </select>
 
@@ -369,8 +410,11 @@
         <if test="author != null">
              AUTHOR=#{author},
         </if>
-        <if test="author != null">
-             THUMB_IMG_FILE_IDX=#{thumb_img_file_idx},
+        <if test="files2 != null and thumb_img_file_idx == null">
+            THUMB_IMG_FILE_IDX=SEQ_FILE_INFO.CURRVAL,
+        </if>
+        <if test="files2 != null and thumb_img_file_idx != null">
+            THUMB_IMG_FILE_IDX=#{thumb_img_file_idx},
         </if>
         <if test="idx_admin != null">
              IDX_ADMIN=#{idx_admin},

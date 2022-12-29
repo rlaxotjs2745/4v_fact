@@ -1,5 +1,6 @@
 package kr.or.fact.core.service;
 
+import kr.or.fact.core.model.DTO.FileInfoVO;
 import kr.or.fact.core.model.DTO.PRContentFileJoinVO;
 import kr.or.fact.core.model.DTO.PRContentVO;
 import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
@@ -25,7 +26,7 @@ public interface PRContentsService {
 
     PRContentVO getPRContent(long idx);
 
-    int insertPRContentFileJoin();
+    int insertPRContentFileJoin(FileInfoVO fileInfoVO);
 
     int updatePRContentFileJoin(PRContentFileJoinVO prcontensVO);
 
@@ -39,6 +40,6 @@ public interface PRContentsService {
 
     int getPrViewCount(long idx_pr_content);
     void updatePrViewCount(PRContentVO prContentVO);
-    void updatePrContent(PRContentVO prContentVO);
+    void updatePrContent(PRContentVO prContentVO) throws Exception;
 
 }

@@ -6,6 +6,8 @@ import java.util.Date;
 
 @Data
 public class FileInfoVO {
+    long idx_pr_content;
+    long idx_event_content;
 
     long idx_file_info;//	number	32			◯		인덱스	auto increase
     String file_name;//	varchar2	256					파일 이름
@@ -23,4 +25,5 @@ public class FileInfoVO {
     long idx_admin;//	number	32				◯	소유자가 관리자일경우
     Date reg_date;//	date						최초 등록 일시
     long idx_file_usage;
+    long thumb_img_file_idx;
 }

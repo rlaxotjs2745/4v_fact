@@ -6,9 +6,12 @@ import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class EventContentVO {
+    int idx_row_num;
+
     long idx_event_content;//	number	32			◯		인덱스	auto increase
     String event_content_code;//	varchar2	100					발행 코드	서브 타이틀 역할도 함
     int event_content_num;//	number	20					행사안내 넘버링	중복 허용함
@@ -42,4 +45,10 @@ public class EventContentVO {
     MultipartFile files5;
     String fileLength;
     String file_path;
+    String file_name;
+
+    String event_start_date_str;
+    String event_end_date_str;
+
+    List<FileInfoVO> attachments;
 }

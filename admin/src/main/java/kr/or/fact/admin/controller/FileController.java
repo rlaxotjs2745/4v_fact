@@ -310,7 +310,7 @@ public class FileController {
     //파일 업로드 (카테고리별)
     @RequestMapping(value = "/upload_file_category",method = RequestMethod.POST)
     @ResponseBody
-    public ResultVO upload_file_category(@ModelAttribute FileRequestVO fileRequestVO, HttpSession session, HttpServletRequest request) throws IOException {
+    public ResultVO upload_file_category(@ModelAttribute FileRequestVO fileRequestVO, HttpSession session, HttpServletRequest request) throws Exception, IOException {
 
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_code("ERROR_1000");
@@ -362,7 +362,7 @@ public class FileController {
     }
 
     //파일 저장
-    private void filesave(MultipartFile file, int idx, int fileCategory) {
+    private void filesave(MultipartFile file, int idx, int fileCategory) throws Exception {
 
         String fileName = fileService.storeFileInfo(file);
         String fileDownloadUri =

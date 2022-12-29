@@ -1,8 +1,6 @@
 package kr.or.fact.core.service.impl;
 
-import kr.or.fact.core.model.DTO.EventContentVO;
-import kr.or.fact.core.model.DTO.EventFileJoinSelectVO;
-import kr.or.fact.core.model.DTO.PRContentVO;
+import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.model.EventContentMapper;
 import kr.or.fact.core.service.EventContentService;
 import org.apache.ibatis.session.SqlSession;
@@ -61,9 +59,9 @@ public class EventContentServiceImpl implements EventContentService {
     }
 
     @Override
-    public List<EventContentVO> getEventContentList(int page_num, int list_amount){
-        List<EventContentVO> eventContentVOList = eventContentMapper.getEventContentList(page_num,list_amount,"ANNOUNCE_NUM");
-
+    public List<EventContentVO> getEventContentList(ParamPageListFilteredVO paramVo){
+        paramVo.setOrder_field("ANNOUNCE_NUM");
+        List<EventContentVO> eventContentVOList = eventContentMapper.getEventContentList(paramVo);
         List<EventContentVO> thumbList = eventContentMapper.getThum();
 
         for (int i = 0; i < eventContentVOList.size(); i++){
@@ -94,42 +92,39 @@ public class EventContentServiceImpl implements EventContentService {
     }
 
     @Override
-    public EventContentVO getEventContentByIdx(int idx_event_content) {
-        long newIdx = Long.parseLong("" + idx_event_content);
-        return eventContentMapper.getEventContentByIdx(newIdx);
+    public EventContentVO getEventContentByIdx(long idx_event_content) {
+        return eventContentMapper.getEventContentByIdx(idx_event_content);
     }
 
     @Override
-    public int insertEventContent(EventContentVO eventContentVO) {
+    public int insertEventContent(EventContentVO eventContentVO) throws Exception {
         int ret_idx = 0;
         try {
             ret_idx = eventContentMapper.insertEventContent(eventContentVO);
-
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return ret_idx;
     }
 
     @Override
-    public int deleteEvent(int idx_event_content) {
+    public int deleteEvent(long idx_event_content) {
         return eventContentMapper.deleteEvent(idx_event_content);
     }
 
     @Override
-    public int insertEventContentFileJoin() {
-        return eventContentMapper.insertEventContentFileJoin();
+    public int insertEventContentFileJoin(FileInfoVO fileInfoVO) {
+        return eventContentMapper.insertEventContentFileJoin(fileInfoVO);
     }
 
     @Override
-    public EventFileJoinSelectVO getEventContentFileJoin(int idx_event_content) {
-        long newIdx = Long.parseLong("" + idx_event_content);
-        return eventContentMapper.getEventContentFileJoin(newIdx);
+    public EventFileJoinSelectVO getEventContentFileJoin(long idx_event_content) {
+        return eventContentMapper.getEventContentFileJoin(idx_event_content);
     }
 
     @Override
-    public int getEventViewCount(int idx_event_content) {
-        long newIdx = Long.parseLong("" + idx_event_content);
-        return eventContentMapper.getEventViewCount(newIdx);
+    public int getEventViewCount(long idx_event_content) {
+        return eventContentMapper.getEventViewCount(idx_event_content);
     }
 
     @Override
@@ -145,10 +140,31 @@ public class EventContentServiceImpl implements EventContentService {
     }
 
     @Override
-    public void updateEventContent(EventContentVO eventContentVO) {
-        eventContentMapper.updateEventContent(eventContentVO);
+    public void updateEventContent(EventContentVO eventContentVO) throws Exception {
+        try {
+            eventContentMapper.updateEventContent(eventContentVO);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    @Override
+
+    public EventFileJoinSelectVO getEventContentFile(EventContentVO eventContentVO) {
+        return eventContentMapper.getEventContentFile(eventContentVO);
     }
 
+    @Override
+    public EventContentVO getThumbFile(EventContentVO eventContentVO) {
+        return eventContentMapper.getThumbFile(eventContentVO);
+    }
 
+    @Override
+    public EventContentVO getEventContentThumbFile(EventContentVO eventContentVO) {
+        return eventContentMapper.getEventContentThumbFile(eventContentVO);
+    }
 
+    @Override
+    public int getEventContentCount(ParamPageListFilteredVO paramVo){
+        return eventContentMapper.getEventContentCount(paramVo);
+    }
 }

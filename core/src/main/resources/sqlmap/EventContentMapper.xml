@@ -35,6 +35,7 @@
             </choose>
         </if>
     </sql>
+
     <select id="getOpenEventContentCount" resultType="int">
         SELECT COUNT(*)
         FROM TB_EVENT_CONTENT
@@ -79,12 +80,12 @@
         WHERE row_num BETWEEN #{count} * (#{page} - 1) + 1 AND #{count} * #{page}
     </select>
 
-    <select id="getEventContentList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.EventContentVO">
+    <select id="getEventContentList" resultType="kr.or.fact.core.model.DTO.EventContentVO">
         SELECT
             *
         FROM (
             SELECT
-                ROW_NUMBER() OVER(ORDER by EVENT_CONTENT_NUM ASC) AS row_num,
+                ROW_NUMBER() OVER(ORDER by IDX_EVENT_CONTENT ASC) AS idx_row_num,
                 IDX_EVENT_CONTENT,
                 EVENT_CONTENT_CODE,
                 EVENT_CONTENT_NUM,
@@ -110,9 +111,10 @@
             FROM TB_EVENT_CONTENT
             WHERE IS_SHOW=1
                 AND EVENT_CONTENT_STATUS=1
-            ORDER BY EVENT_CONTENT_NUM ASC
+                <include refid="searchFilter1"></include>
+            ORDER BY EVENT_CONTENT_NUM DESC, IDX_EVENT_CONTENT DESC
         )
-        WHERE row_num BETWEEN #{amount} * (#{page_num} - 1) + 1 AND #{amount} * #{page_num}
+        WHERE idx_row_num BETWEEN #{amount} * (#{page_num} - 1) + 1 AND #{amount} * #{page_num}
     </select>
 
     <select id="getMainEventContentList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.EventContentVO">
@@ -127,86 +129,129 @@
     <select id="getEventList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.EventContentVO">
         SELECT * FROM TB_EVENT_CONTENT  ORDER BY EVENT_CONTENT_NUM
     </select>
-<select id="getThum" resultType="kr.or.fact.core.model.DTO.EventContentVO">
-    SELECT IDX_EVENT_CONTENT, FILE_PATH FROM TB_FILE_INFO JOIN TB_EVENT_CONTENT ON THUMB_IMG_FILE_IDX=IDX_FILE_INFO
-</select>
-    <insert id="insertEventContent" parameterType="kr.or.fact.core.model.DTO.EventContentVO">
-INSERT INTO TB_EVENT_CONTENT (
-IDX_EVENT_CONTENT,
-EVENT_CONTENT_CODE,
-EVENT_CONTENT_NUM,
-SUBJECT,
-EVENT_CONTENTS,
-IS_FILE,
-IS_NEW,
-IS_MAIN_PAGE,
-IS_IMPORTANT,
-IS_SHOW,
-VIEW_COUNT,
-EVENT_CONTENT_STATUS,
-EVENT_START_DATE,
-EVENT_END_DATE,
-DOC_VERSION,
-MEMO,
-SEARCH_TAG,
-AUTHOR,
-THUMB_IMG_FILE_IDX,
-IDX_ADMIN,
-CONFIRM_ADMIN_IDX,
-REG_DATE,
-LAST_UPD_DATE
-)VALUES (
-SEQ_EVENT_CONTENT.NEXTVAL,
-#{event_content_code},
-#{event_content_num},
-#{subject},
-#{event_contents},
-#{is_file},
-#{is_new},
-#{is_main_page},
-#{is_important},
-#{is_show},
-#{view_count},
-#{event_content_status},
-#{event_start_date},
-#{event_end_date},
-#{doc_version},
-#{memo},
-#{search_tag},
-#{author},
-SEQ_FILE_INFO.CURRVAL,
-#{idx_admin},
-#{confirm_admin_idx},
-SYSDATE,
-#{last_upd_date}
-
-
+    <select id="getThum" resultType="kr.or.fact.core.model.DTO.EventContentVO">
+        SELECT IDX_EVENT_CONTENT, FILE_PATH FROM TB_FILE_INFO JOIN TB_EVENT_CONTENT ON THUMB_IMG_FILE_IDX=IDX_FILE_INFO
+    </select>
+    <insert id="insertEventContent" parameterType="kr.or.fact.core.model.DTO.EventContentVO" useGeneratedKeys="true" keyColumn="idx_event_content" keyProperty="idx_event_content">
+        INSERT INTO TB_EVENT_CONTENT (
+            IDX_EVENT_CONTENT,
+            <if test="event_content_code != null">
+            EVENT_CONTENT_CODE,
+            </if>
+            <if test="event_content_num != null">
+            EVENT_CONTENT_NUM,
+            </if>
+            SUBJECT,
+            EVENT_CONTENTS,
+            IS_FILE,
+            IS_NEW,
+            IS_MAIN_PAGE,
+            <if test="is_important != null">
+            IS_IMPORTANT,
+            </if>
+            IS_SHOW,
+            <if test="view_count != null">
+            VIEW_COUNT,
+            </if>
+            EVENT_CONTENT_STATUS,
+            EVENT_START_DATE,
+            EVENT_END_DATE,
+            <if test="doc_version != null">
+            DOC_VERSION,
+            </if>
+            <if test="memo != null">
+            MEMO,
+            </if>
+            <if test="search_tag != null">
+            SEARCH_TAG,
+            </if>
+            <if test="author != null">
+            AUTHOR,
+            </if>
+            <if test="files2 != null">
+            THUMB_IMG_FILE_IDX,
+            </if>
+            <if test="idx_admin != null">
+            IDX_ADMIN,
+            </if>
+            <if test="confirm_admin_idx != null">
+            CONFIRM_ADMIN_IDX,
+            </if>
+            REG_DATE
+        )VALUES (
+            SEQ_EVENT_CONTENT.NEXTVAL,
+            <if test="event_content_code != null">
+            #{event_content_code},
+            </if>
+            <if test="event_content_num != null">
+            #{event_content_num},
+            </if>
+            #{subject},
+            #{event_contents},
+            #{is_file},
+            #{is_new},
+            #{is_main_page},
+            <if test="is_important != null">
+            #{is_important},
+            </if>
+            #{is_show},
+            <if test="view_count != null">
+            #{view_count},
+            </if>
+            #{event_content_status},
+            #{event_start_date},
+            #{event_end_date},
+            <if test="doc_version != null">
+            #{doc_version},
+            </if>
+            <if test="memo != null">
+            #{memo},
+            </if>
+            <if test="search_tag != null">
+            #{search_tag},
+            </if>
+            <if test="author != null">
+            #{author},
+            </if>
+            <if test="files2 != null">
+                #{thumb_img_file_idx},
+            </if>
+            <if test="idx_admin != null">
+            #{idx_admin},
+            </if>
+            <if test="confirm_admin_idx != null">
+            #{confirm_admin_idx},
+            </if>
+            SYSDATE
         )
-
     </insert>
     <select id="getEventContentByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.EventContentVO">
         SELECT *
         FROM TB_EVENT_CONTENT WHERE IDX_EVENT_CONTENT = #{idx_event_content}
     </select>
-    <delete id="deleteEvent" parameterType="int">
+    <delete id="deleteEvent" parameterType="long">
         DELETE FROM TB_EVENT_CONTENT WHERE IDX_EVENT_CONTENT = #{idx_event_content}
     </delete>
 
-    <insert id="insertEventContentFileJoin" parameterType="kr.or.fact.core.model.DTO.EventContentFileJoinVO">
+    <insert id="insertEventContentFileJoin">
         INSERT INTO TB_EVENT_CONTENT_FILE_JOIN (
-
-IDX_EVENT_CONTENT_FILE_JOIN,
-IDX_EVENT_CONTENT,
-IDX_FILE_INFO,
-REG_DATE
+            IDX_EVENT_CONTENT_FILE_JOIN,
+            IDX_EVENT_CONTENT,
+            IDX_FILE_INFO,
+            REG_DATE
         )VALUES (
-                 SEQ_EVENT_CONTENT_FILE_JOIN.NEXTVAL,
-                 SEQ_EVENT_CONTENT.CURRVAL,
-                 SEQ_FILE_INFO.CURRVAL-1,
-
-                 SYSDATE
-
-                        )
+             SEQ_EVENT_CONTENT_FILE_JOIN.NEXTVAL,
+            <choose>
+                <when test="idx_event_content != null">
+                    #{idx_event_content},
+                </when>
+                <otherwise>
+                    SEQ_EVENT_CONTENT.CURRVAL,
+                </otherwise>
+            </choose>
+            #{idx_file_info},
+            SYSDATE
+        )
     </insert>
 
     <resultMap id="EventFileJoinSelectVO" type="kr.or.fact.core.model.DTO.EventFileJoinSelectVO">
@@ -289,19 +334,13 @@ REG_DATE
         LEFT JOIN TB_EVENT_CONTENT_FILE_JOIN B ON A.IDX_EVENT_CONTENT=B.IDX_EVENT_CONTENT
         LEFT JOIN TB_FILE_INFO C ON B.IDX_FILE_INFO=C.IDX_FILE_INFO
         WHERE A.IDX_EVENT_CONTENT=#{idx_event_content}
-
-
     </select>
     <select id="getEventContentThum" parameterType="String" resultType="kr.or.fact.core.model.DTO.EventFileJoinSelectVO">
         SELECT A.IDX_EVENT_CONTENT,
-
                A.THUMB_IMG_FILE_IDX,
-
                C.FILE_PATH
         FROM TB_EVENT_CONTENT A
-                                JOIN TB_FILE_INFO C ON A.THUMB_IMG_FILE_IDX=C.IDX_FILE_INFO
-
-
+            JOIN TB_FILE_INFO C ON A.THUMB_IMG_FILE_IDX=C.IDX_FILE_INFO
     </select>
     <select id="getEventViewCount" parameterType="long" resultType="int">
         SELECT VIEW_COUNT FROM TB_EVENT_CONTENT WHERE IDX_EVENT_CONTENT=#{idx_event_content}
@@ -309,32 +348,122 @@ REG_DATE
     <update id="updateEventViewCount" parameterType="kr.or.fact.core.model.DTO.EventContentVO">
         UPDATE TB_EVENT_CONTENT SET VIEW_COUNT = #{view_count} WHERE IDX_EVENT_CONTENT =#{idx_event_content}
     </update>
-<update id="updateEventContent" parameterType="kr.or.fact.core.model.DTO.EventContentVO">
-    UPDATE TB_EVENT_CONTENT SET
-                                IDX_EVENT_CONTENT=#{idx_event_content},
-                                EVENT_CONTENT_CODE=#{event_content_code},
-                                EVENT_CONTENT_NUM=#{event_content_num},
-                                SUBJECT=#{subject},
-                                EVENT_CONTENTS=#{event_contents},
-                                IS_FILE=#{is_file},
-                                IS_NEW=#{is_new},
-                                IS_MAIN_PAGE=#{is_main_page},
-                                IS_IMPORTANT=#{is_important},
-                                IS_SHOW=#{is_show},
-                                VIEW_COUNT=#{view_count},
-                                EVENT_CONTENT_STATUS=#{event_content_status},
-                                EVENT_START_DATE=#{event_start_date},
-                                EVENT_END_DATE=#{event_end_date},
-                                DOC_VERSION=#{doc_version},
-                                MEMO=#{memo},
-                                SEARCH_TAG=#{search_tag},
-                                AUTHOR=#{author},
-                                THUMB_IMG_FILE_IDX=#{thumb_img_file_idx},
-                                IDX_ADMIN=#{idx_admin},
-                                CONFIRM_ADMIN_IDX=#{confirm_admin_idx},
-                                REG_DATE=#{reg_date},
-                                LAST_UPD_DATE=SYSDATE WHERE IDX_EVENT_CONTENT=#{idx_event_content}
-</update>
+    <update id="updateEventContent" parameterType="kr.or.fact.core.model.DTO.EventContentVO">
+        UPDATE TB_EVENT_CONTENT SET
+            SUBJECT=#{subject},
+            <if test="event_content_code != null">
+            EVENT_CONTENT_CODE=#{event_content_code},
+            </if>
+        <if test="event_content_num != null">
+            EVENT_CONTENT_NUM=#{event_content_num},
+        </if>
+        <if test="event_contents != null">
+            EVENT_CONTENTS=#{event_contents},
+        </if>
+        <if test="is_file != null">
+            IS_FILE=#{is_file},
+        </if>
+        <if test="is_new != null">
+            IS_NEW=#{is_new},
+        </if>
+        <if test="is_main_page != null">
+            IS_MAIN_PAGE=#{is_main_page},
+        </if>
+        <if test="is_important != null">
+            IS_IMPORTANT=#{is_important},
+        </if>
+        <if test="is_show != null">
+            IS_SHOW=#{is_show},
+        </if>
+        <if test="view_count != null">
+            VIEW_COUNT=#{view_count},
+        </if>
+        <if test="event_content_status != null">
+            EVENT_CONTENT_STATUS=#{event_content_status},
+        </if>
+        <if test="event_start_date != null">
+            EVENT_START_DATE=#{event_start_date},
+        </if>
+        <if test="event_end_date != null">
+            EVENT_END_DATE=#{event_end_date},
+        </if>
+        <if test="doc_version != null">
+            DOC_VERSION=#{doc_version},
+        </if>
+        <if test="memo != null">
+            MEMO=#{memo},
+        </if>
+        <if test="search_tag != null">
+            SEARCH_TAG=#{search_tag},
+        </if>
+        <if test="author != null">
+            AUTHOR=#{author},
+        </if>
+        <if test="files2 != null">
+            THUMB_IMG_FILE_IDX=#{thumb_img_file_idx},
+        </if>
+        <if test="idx_admin != null">
+            IDX_ADMIN=#{idx_admin},
+        </if>
+        <if test="confirm_admin_idx != null">
+            CONFIRM_ADMIN_IDX=#{confirm_admin_idx},
+        </if>
+        LAST_UPD_DATE=SYSDATE
+        WHERE IDX_EVENT_CONTENT=#{idx_event_content}
+    </update>
 
+    <select id="getEventContentCount" resultType="int">
+        SELECT COUNT(*) FROM TB_EVENT_CONTENT  WHERE IS_SHOW=1 AND EVENT_CONTENT_STATUS=1
+    </select>
 
+    <select id="getEventContentCount2" resultType="int">
+        SELECT COUNT(*) FROM TB_EVENT_CONTENT  WHERE IS_SHOW=1 AND EVENT_CONTENT_STATUS=1
+        <include refid="searchFilter1"></include>
+    </select>
+    <select id="getEventContentFile" resultType="kr.or.fact.core.model.DTO.EventContentFileJoinVO">
+        SELECT IDX_EVENT_CONTENT_FILE_JOIN, IDX_FILE_INFO FROM TB_EVENT_CONTENT_FILE_JOIN WHERE IDX_EVENT_CONTENT=#{idx_event_content}
+    </select>
+    <select id="getEventContentThumbFile" resultType="kr.or.fact.core.model.DTO.EventContentVO">
+        SELECT THUMB_IMG_FILE_IDX FROM TB_EVENT_CONTENT WHERE IDX_EVENT_CONTENT=#{idx_event_content}
+    </select>
+    <select id="getThumbFile" resultType="kr.or.fact.core.model.DTO.EventContentVO">
+        SELECT * FROM TB_FILE_INFO JOIN TB_EVENT_CONTENT ON TB_EVENT_CONTENT.THUMB_IMG_FILE_IDX=TB_FILE_INFO.IDX_FILE_INFO WHERE TB_EVENT_CONTENT.IDX_EVENT_CONTENT=#{idx_event_content}
+    </select>
+    <!--    fil1 value = 0,1-->
+    <!--    fil2 value = 일자 검색-->
+    <sql id="searchFilter1">
+        <if test="fil1 != null and fil1 != ''">
+            AND IS_NEW = #{fil1}
+        </if>
+        <if test="fil2 != null and fil2 != ''">
+            <choose>
+                <when test='fil2 == "1"'>
+                    AND TRUNC(REG_DATE) = TRUNC(SYSDATE)
+                </when>
+                <when test='fil2 == "2"'>
+                    AND ((TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[<]]> 7
+                    AND (TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[>=]]> 0)
+                </when>
+                <when test='fil2 == "3"'>
+                    AND ((TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[<]]> 31
+                    AND (TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[>=]]> 0)
+                </when>
+                <when test='fil2 == "4"'>
+                    AND ((TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[<]]> 63
+                    AND (TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[>=]]> 0)
+                </when>
+                <when test='fil2 == "5"'>
+                    AND ((TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[<]]> 186
+                    AND (TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[>=]]> 0)
+                </when>
+                <when test='fil2 == "6"'>
+                    AND ((TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[<]]> 365
+                    AND (TRUNC(SYSDATE) - TRUNC(REG_DATE)) <![CDATA[>=]]> 0)
+                </when>
+                <otherwise>
+                    AND 1=1
+                </otherwise>
+            </choose>
+        </if>
+    </sql>
 </mapper>

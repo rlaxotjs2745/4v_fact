@@ -351,7 +351,7 @@
 
 
 
-    <insert id="insertFileInfo" parameterType="kr.or.fact.core.model.DTO.FileInfoVO" >
+    <insert id="insertFileInfo" parameterType="kr.or.fact.core.model.DTO.FileInfoVO" useGeneratedKeys="true" keyColumn="idx_file_info" keyProperty="idx_file_info">
         INSERT INTO TB_FILE_INFO (
             IDX_FILE_INFO,
             FILE_NAME,

@@ -35,4 +35,7 @@ public class EventFileJoinSelectVO {
     String file_path;
 
     List<FileInfoVO> attachments;
+
+    String event_start_date_str;
+    String event_end_date_str;
 }

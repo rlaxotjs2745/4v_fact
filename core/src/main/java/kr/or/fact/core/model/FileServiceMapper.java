@@ -38,7 +38,7 @@ public interface FileServiceMapper {
 
     List<UserDemoBsFileResultVO> getUserDemoBsFileJoin(@Param("idx_user_demo_bs") long idx);
 
-    int insertFileInfo(FileInfoVO fileInfoVO);
+    int insertFileInfo(FileInfoVO fileInfoVO) throws Exception;
 
     FileInfoVO selectBsFile(@Param("idx_demo_bs") int idx_demo_bs);
 

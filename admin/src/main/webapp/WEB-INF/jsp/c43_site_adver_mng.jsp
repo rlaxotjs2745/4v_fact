@@ -7,7 +7,6 @@
 
         <h4 class="d-flex justify-content-between align-items-center w-100 mt-4">
             <div>홍보자료 관리</div>
-            ${dd}
         </h4>
 
         <div class="card px-4 pt-4 mb-4">
@@ -17,7 +16,7 @@
                     <div class="form-inline">
                         <div class="btn-group btn-group-sm btn-group-toggle srch_filtp1" data-toggle="buttons">
                             <label class="btn btn-secondary active">
-                                <input type="radio" name="filtp1" value="" checked="">전체
+                                <input type="radio" name="filtp1" value="" checked="checked">전체
                             </label>
                             <label class="btn btn-secondary">
                                 <input type="radio" name="filtp1" value="1"> 신규
@@ -123,8 +122,8 @@
                                     <td class="text-center">${pr.is_show eq 0 ? "노출안함" : pr.is_show eq 1 ? "노출함" :""}</td>
                                     <td class="text-center">${pr.view_count}</td>
                                     <td class="text-center">${pr.pr_content_status eq 0 ? "임시저장" :pr.pr_content_status eq 1 ? "허락" :pr.pr_content_status eq 2 ? "수정발행": pr.pr_content_status eq 3 ? "게시종료" :"기타"}</td>
-                                    <td class="text-center"><fmt:formatDate value="${pr.show_start_date}" pattern="yyyy-MM-dd HH:MM"/></td>
-                                    <td class="text-center"><fmt:formatDate value="${pr.show_end_date}" pattern="yyyy-MM-dd HH:MM"/></td>
+                                    <td class="text-center"><fmt:formatDate value="${pr.show_start_date}" pattern="yyyy-MM-dd"/></td>
+                                    <td class="text-center"><fmt:formatDate value="${pr.show_end_date}" pattern="yyyy-MM-dd"/></td>
                                     <td class="text-center">${pr.memo}</td>
                                 </tr>
                                </c:forEach>
@@ -141,23 +140,21 @@
 <%--                                <ul class="pagination">--%>
 
 
-                                    <c:if test="${total_count ne 0}">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${total_count}개 중 ${list_amount*(cur_page-1)+1}에서 ${total_count}까지</div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-7">
-                                            <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
-                                                <ul class="pagination">
-                                                    <c:set var="name" value="${total_count/amount}" />
-                                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c431_site_adver_mng',{page_num:1},'홍보자료 목록','site_adver_mng');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
-                                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c431_site_adver_mng',{page_num:${cur_page-1}},'홍보자료 목록','site_adver_mng');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
-                                                    <c:forEach var="i" begin="1" end="${page_amount}">
-                                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('c431_site_adver_mng',{page_num:${(cur_sector-1)*page_amount+i}},'홍보자료 목록','site_adver_mng');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
-                                                    </c:forEach>
-                                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c431_site_adver_mng',{page_num:${cur_page+1}},'홍보자료 목록','site_adver_mng');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
-                                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c431_site_adver_mng',{page_num:${tot_page}},'홍보자료 목록','site_adver_mng');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
-                                                    </c:if>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5">
+                            <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${total_count}개 중 ${list_amount*(cur_page-1)+1}에서 ${total_count}까지</div>
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
+                                <ul class="pagination">
+                                    <c:set var="name" value="${total_count/amount}" />
+                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c431_site_adver_mng',{page_num:1},'홍보자료 목록','site_adver_mng');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c431_site_adver_mng',{page_num:${cur_page-1}},'홍보자료 목록','site_adver_mng');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+                                    <c:forEach var="i" begin="1" end="${page_amount}">
+                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('c431_site_adver_mng',{page_num:${(cur_sector-1)*page_amount+i}},'홍보자료 목록','site_adver_mng');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
+                                    </c:forEach>
+                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c431_site_adver_mng',{page_num:${cur_page+1}},'홍보자료 목록','site_adver_mng');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c431_site_adver_mng',{page_num:${tot_page}},'홍보자료 목록','site_adver_mng');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
 <%--                                    <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>--%>
 <%--                                    <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>--%>
 <%--                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>--%>
@@ -242,20 +239,13 @@
                         <div class="form-row">
                             <div class="form-group col col-md-12" id="memo">
                                 <label class="form-label d-block text-muted">홍보자료 관련 메모</label>
-                                <span>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                          Aliquam amet animi consequatur dicta dignissimos eius est odit recusandae?
-                          Accusantium consequuntur dignissimos iusto magnam provident, ratione reiciendis
-                          repellat. Aut, doloribus, enim.
-                        </span>
+                                <span></span>
                             </div>
                         </div>
                         <hr class="mt-0">
                     </div>
                     <div class="modal-footer justify-content-between">
-
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-
                         <div>
                             <button type="button" class="btn btn-outline-danger" data-dismiss="modal" id="delete_pr">삭제</button>
                             <button type="button" class="btn btn-primary">확인</button>
@@ -416,14 +406,13 @@
                                 <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold mode-edit mode-new">등록자</label>
                                 <div class="col-md-4 mode-edit mode-new">
                                     <span class="px-1 mr-lg-2 ml-2 ml-lg-0">${admin.admin_name}</span>
-
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col col-md-12" id="is_file_insert">
                                     <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">파일여부</label>
                                     <label class="custom-control custom-radio d-inline-block">
-                                        <input name="custom-6" type="radio" class="custom-control-input"  value="0">
+                                        <input name="custom-6" type="radio" class="custom-control-input" value="0">
                                         <span class="custom-control-label">포함안함</span>
                                     </label>
                                     <label class="custom-control custom-radio d-inline-block">
@@ -465,7 +454,7 @@
                                 <div class="form-group col col-md-12" id="pr_content_status_insert">
                                     <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">홍보자료 프로세스 상태</label>
                                     <label class="custom-control custom-radio d-inline-block">
-                                        <input name="custom-9" type="radio" class="custom-control-input"  value="0">
+                                        <input name="custom-9" type="radio" class="custom-control-input" value="0">
                                         <span class="custom-control-label">임시저장</span>
                                     </label>
                                     <label class="custom-control custom-radio d-inline-block">
@@ -531,7 +520,7 @@
 
 
 
-        <div class="modal fade" id="modals-counsel-history">
+    <div class="modal fade" id="modals-counsel-history">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header bg-success">
@@ -698,7 +687,7 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 
 <div class="modal fade" id="modals-content">
     <div class="modal-dialog modal-xl">
@@ -870,7 +859,6 @@
 
             function _saveCont(_i) {
                 curPRdata = prList[_i].idx_pr_content;
-                // $('#modals-counsel-view a.this_idx').attr('data-idx',curPRdata)
                 $("#subject span").text(prList[_i].subject);
                 $("#is_new span").text(prList[_i].is_new);
                 $("#is_file span").text(prList[_i].is_file);
@@ -911,7 +899,7 @@
                                 //작업이 성공적으로 발생했을 경우
                                 alert(result.result_str);
                                 $("#modals-counsel-view").modal("hide");
-                                _search()
+                                _search(1)
                             },
                             error: function () {
                                 //에러가 났을 경우 실행시킬 코드
@@ -1024,11 +1012,14 @@
                     return alert('내용을 입력해 주세요.')
                 }
 
+                if($("#pr_contents"+_u).val() === ''){
+                    return alert('컨텐츠를 입력해주세요.')
+                }
+
                 if($("#show_start_date"+_u).val() === '' || $("#show_end_date"+_u).val() === ''){
                     return alert('게시기간을 입력해주세요.')
                 }
 
-                event.preventDefault();
                 var fileForm = new FormData();
                 fileForm.append("pr_content_code",document.querySelector('#pr_content_code'+_u).value);
                 fileForm.append("subject",document.querySelector('#pr_subject'+_u).value);

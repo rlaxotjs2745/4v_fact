@@ -1,5 +1,6 @@
 package kr.or.fact.core.service.impl;
 
+import kr.or.fact.core.model.DTO.FileInfoVO;
 import kr.or.fact.core.model.DTO.PRContentFileJoinVO;
 import kr.or.fact.core.model.DTO.PRContentVO;
 import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
@@ -96,8 +97,12 @@ public class PRContentServiceImpl implements PRContentsService {
     }
 
     @Override
-    public void updatePrContent(PRContentVO prContentVO) {
-prContentsMapper.updatePrContent(prContentVO);
+    public void updatePrContent(PRContentVO prContentVO) throws Exception {
+        try {
+            prContentsMapper.updatePrContent(prContentVO);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -147,26 +152,30 @@ prContentsMapper.updatePrContent(prContentVO);
     }
 
     @Override
-    public int insertPRContentFileJoin() {
-        return prContentsMapper.insertPRContentFileJoin();
+    public int insertPRContentFileJoin(FileInfoVO fileInfoVO) {
+        return prContentsMapper.insertPRContentFileJoin(fileInfoVO);
     }
 
     public int updatePRContentFileJoin(PRContentFileJoinVO prcontensVO) {
         return prContentsMapper.updatePRContentFileJoin(prcontensVO);
     }
 
+    @Override
     public PRContentFileJoinVO getPRContentFile(PRContentVO prcontensVO) {
         return prContentsMapper.getPRContentFile(prcontensVO);
     }
 
+    @Override
     public PRContentVO getPRContentThumbFile(PRContentVO prcontensVO) {
         return prContentsMapper.getPRContentThumbFile(prcontensVO);
     }
 
+    @Override
     public List<PRContentVO> getThumb() {
         return prContentsMapper.getThumb();
     }
 
+    @Override
     public PRContentVO getThumbFile(PRContentVO prcontensVO) {
         return prContentsMapper.getThumbFile(prcontensVO);
     }

@@ -679,27 +679,29 @@
             .then(res => {
                 $('.now-dust-img-nav').removeClass('fa-laugh').removeClass('fa-tired').removeClass('fa-frown').removeClass('fa-smile');
                 $('.now-dust-nav').removeClass('text-info').removeClass('text-warning').removeClass('text-success').removeClass('text-danger').text('');
-                switch (res.data.current.pollution.mainus) {
-                    case 'p1':
-                        $('.now-dust-img-nav').addClass('fa-smile');
-                        $('.now-dust-nav').addClass('text-info').text(' 매우 좋음 ');
-                        break;
-                    case 'p2':
-                        $('.now-dust-img-nav').addClass('fa-laugh');
-                        $('.now-dust-nav').addClass('text-success').text(' 보통 ');
-                        break;
-                    case 'p3':
-                        $('.now-dust-img-nav').addClass('fa-tired');
-                        $('.now-dust-nav').addClass('text-warning').text(' 나쁨 ');
-                        break;
-                    case 'p4':
-                        $('.now-dust-img-nav').addClass('fa-frown');
-                        $('.now-dust-nav').addClass('text-danger').text(' 매우 나쁨 ')
-                        break;
-                    default:
-                        $('.now-dust-img-nav').addClass('fa-frown');
-                        $('.now-dust-nav').addClass('text-danger').text(' 매우 나쁨 ')
-                        break;
+                if(res.status!='fail') {
+                    switch (res.data.current.pollution.mainus) {
+                        case 'p1':
+                            $('.now-dust-img-nav').addClass('fa-smile');
+                            $('.now-dust-nav').addClass('text-info').text(' 매우 좋음 ');
+                            break;
+                        case 'p2':
+                            $('.now-dust-img-nav').addClass('fa-laugh');
+                            $('.now-dust-nav').addClass('text-success').text(' 보통 ');
+                            break;
+                        case 'p3':
+                            $('.now-dust-img-nav').addClass('fa-tired');
+                            $('.now-dust-nav').addClass('text-warning').text(' 나쁨 ');
+                            break;
+                        case 'p4':
+                            $('.now-dust-img-nav').addClass('fa-frown');
+                            $('.now-dust-nav').addClass('text-danger').text(' 매우 나쁨 ')
+                            break;
+                        default:
+                            $('.now-dust-img-nav').addClass('fa-frown');
+                            $('.now-dust-nav').addClass('text-danger').text(' 매우 나쁨 ')
+                            break;
+                    }
                 }
             })
         // setTimeout(nowWeatherAndDust(location), 600000);
