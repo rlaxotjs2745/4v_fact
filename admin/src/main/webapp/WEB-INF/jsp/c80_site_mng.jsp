@@ -24,7 +24,7 @@
                 <div class="col-md-3 ">
                     <label class="form-label text-muted">담당자</label>
                     <div class="">
-                        <input id="homepage_admin" type="text" class="form-control form-control-md">
+                        <input id="homepage_admin" type="text" class="form-control form-control-md" oninput="chkOnlyName(event)">
 <%--                        <input id="homepage_admin" type="text" class="form-control form-control-md" value="${homepageInfo.homepage_admin}">--%>
                         <%--<input class="mr-sm-4 mb-2 mb-sm-0" value="${homepageInfo.homepage_admin}">--%>
                     </div>
@@ -32,7 +32,7 @@
                 <div class="col-md-3 ">
                     <label class="form-label text-muted">연락처</label>
                     <div class="">
-                        <input id="homepage_admin_pnum" type="text" class="form-control form-control-md" onkeyup="chkPhone(event)">
+                        <input id="homepage_admin_pnum" type="text" class="form-control form-control-md" oninput="autoHyphen2(this)" maxlength="13">
 <%--                        <input id="homepage_admin_pnum" type="text" class="form-control form-control-md" value="${homepageInfo.homepage_admin_pnum}">--%>
                         <%--<input class="mr-sm-4 mb-2 mb-sm-0" value="${homepageInfo.homepage_admin_pnum}">--%>
                     </div>
@@ -226,13 +226,13 @@
                                 <tr class="">
                                     <th class="text-center align-middle bg-light" rowspan="3" style="width:12%">개인정보</th>
                                     <th class="text-center bg-light" style="width:12%">이름</th>
-                                    <td class="text-center" style="width:24%"><input type="text" class="form-control form-control-sm" value="" id="coworker_name"></td>
+                                    <td class="text-center" style="width:24%"><input type="text" class="form-control form-control-sm" value="" id="coworker_name" oninput="chkOnlyName(event)"></td>
                                     <th class="text-center bg-light" style="width:13%">일반전화번호</th>
-                                    <td class="text-center" style="width:29%"><input type="text" class="form-control form-control-sm" value="" id="tel_num"></td>
+                                    <td class="text-center" style="width:29%"><input type="text" class="form-control form-control-sm" value="" id="tel_num" oninput="autoHyphen(this)" maxlength="13"></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">휴대폰 번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="mphone_num"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="mphone_num" oninput="autoHyphen2(this)" maxlength="13"></td>
                                     <th class="text-center bg-light">순서 번호</th>
                                     <td class="text-center">
                                         <input type="text" class="form-control form-control-sm" value="" id="co_worker_oder">
@@ -268,9 +268,9 @@
                                     <th class="text-center align-middle bg-light" style="width: 4.5%" rowspan="2">시스템 정보</th>
                                     <th class="text-center bg-light" style="width: 4.5%; vertical-align: middle;" >웹ID</th>
                                     <td class="" style="width: 25%" colspan="3">
-                                        <input type="text" id="web_id" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width: 100px" name="email">
+                                        <input type="text" id="web_id" oninput="chkEmail(event)" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width: 100px" name="email">
                                         @
-                                        <input type="text" id="web_id2" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width: 100px" name="">
+                                        <input type="text" id="web_id2" oninput="chkEmail(event)" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width: 100px" name="">
                                         <select id="admin_id_select_box" class="form-control form-control-sm d-inline-block align-middle mr-1" style="width: 100px">
                                             <option value="" selected>직접입력</option>
                                             <option value="naver.com">naver.com</option>
@@ -360,13 +360,13 @@
                                 <tr class="">
                                     <th class="text-center align-middle bg-light" rowspan="3" style="width:12%">개인정보</th>
                                     <th class="text-center bg-light" style="width:12%">이름</th>
-                                    <td class="text-center" style="width:24%"><input type="text" class="form-control form-control-sm" value="" id="mo_coworker_name"></td>
+                                    <td class="text-center" style="width:24%"><input type="text" class="form-control form-control-sm" value="" id="mo_coworker_name" oninput="chkOnlyName(event)"></td>
                                     <th class="text-center bg-light" style="width:13%">일반전화번호</th>
-                                    <td class="text-center" style="width:29%"><input type="text" class="form-control form-control-sm" value="" id="mo_tel_num"></td>
+                                    <td class="text-center" style="width:29%"><input type="text" class="form-control form-control-sm" value="" id="mo_tel_num" oninput="autoHyphen(this)" maxlength="13"></td>
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">휴대폰 번호</th>
-                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="mo_mphone_num"></td>
+                                    <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="mo_mphone_num" oninput="autoHyphen2(this)" maxlength="13"></td>
                                     <th class="text-center bg-light">순서 번호</th>
                                     <td class="text-center">
                                         <input type="text" class="form-control form-control-sm" value="" id="mo_co_worker_oder">
@@ -408,9 +408,9 @@
                                     <th class="text-center align-middle bg-light" style="width: 4.5%" rowspan="2">시스템 정보</th>
                                     <th class="text-center bg-light" style="width: 4.5%; vertical-align: middle;" >웹ID</th>
                                     <td class="" style="width: 25%" colspan="3">
-                                        <input type="text" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width: 100px" name="email" id="mo_email">
+                                        <input type="text" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width: 100px" name="email" id="mo_email" oninput="chkEmail(event)">
                                         @
-                                        <input type="text" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width: 100px" name="" id="mo_email2">
+                                        <input type="text" class="form-control form-control-sm d-inline-block align-middle mr-1" value="" style="width: 100px" name="" id="mo_email2" oninput="chkEmail(event)">
                                         <select id="admin_id_select_box2" class="form-control form-control-sm d-inline-block align-middle mr-1" style="width: 100px">
                                             <option value="" selected>직접입력</option>
                                             <option value="naver.com">naver.com</option>
@@ -468,6 +468,14 @@
         if (!phoneRegex.test(ele.value)) {
             console.log(ele.value)
             ele.value = ele.value.replace(/[^0-9]/gi, '');
+        }
+    };
+
+    function chkOnlyName(event) {
+        let regExp = /[0-9]/g;
+        let ele = event.target;
+        if (regExp.test(ele.value)) {
+            ele.value = ele.value.replace(/[0-9]/g, '');
         }
     };
 
@@ -646,18 +654,24 @@
 
     });
 
+    const autoHyphen = (target) => {
+        target.value = target.value
+            .replace(/[^0-9]/g, '')
+            .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+    }
+
+    const autoHyphen2 = (target) => {
+        target.value = target.value
+            .replace(/[^0-9]/g, '')
+            .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+    }
+
     $('#btn_save_homepage_info').on('click', function() {
         const namePattern = /^[가-힣]{2,}$/;
-        const phonePattern = /^01[016789]\d{3,4}\d{4}$/;
         const emailPattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 
         if(!namePattern.test($("#homepage_admin").val())){
             alert("담당자 이름 형식을 확인해주세요. 담당자 이름은 특수문자가 포함되지 않은 두글자 이상이여야 합니다.");
-            return;
-        }
-
-        if(!phonePattern.test($("#homepage_admin_pnum").val())){
-            alert("담당자 연락처 형식을 확인해주세요 예)01012345678");
             return;
         }
 

@@ -107,7 +107,7 @@ function ModoEdicion($row) {
 function rowAcep(but) {
 //Acepta los cambios de la edición
     const namePattern = /^[가-힣]{2,}$/;
-    const phonePattern = /^01[016789]\d{3,4}\d{4}$/;
+    const phonePattern = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}/;
     const emailPattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 
     var $row = $(but).parents('tr');  //accede a la fila
@@ -135,7 +135,7 @@ function rowAcep(but) {
     }
 
     if(!phonePattern.test($cols[1].textContent)){
-        alert("담당자 연락처 형식을 확인해주세요 예)01012345678");
+        alert("담당자 연락처 형식을 확인해주세요 예)010-1234-5678");
         pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
         return;
     }

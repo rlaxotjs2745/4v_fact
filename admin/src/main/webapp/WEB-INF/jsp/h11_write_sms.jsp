@@ -20,7 +20,7 @@
                 <div class="form-group row">
                     <label class="col-form-label col-form-label-md col-md-0 text-md-right font-weight-bold mode-edit mode-new">수신 번호</label>
                     <div class="col-md-6 mode-edit mode-new">
-                        <input id="callback" type="text" class="form-control form-control-md text-md-right" placeholder="010부터작성" onkeyup="chkEmail(event)">
+                        <input id="callback" type="text" class="form-control form-control-md text-md-right" placeholder="010부터작성" maxlength="13" oninput="autoHyphen2(this)">
                     </div>
                 </div>
     <div class="form-group row">
@@ -72,6 +72,18 @@
             </form>
 
             <script>
+
+                const autoHyphen = (target) => {
+                    target.value = target.value
+                        .replace(/[^0-9]/g, '')
+                        .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+                }
+
+                const autoHyphen2 = (target) => {
+                    target.value = target.value
+                        .replace(/[^0-9]/g, '')
+                        .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+                }
 
                 var sendType = 0;
 

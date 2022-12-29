@@ -195,11 +195,11 @@
                                         <th class="text-center bg-light" style="width:12%">이름</th>
                                         <td class="text-center" style="width:27%"><input type="text" class="form-control form-control-sm" id="user_name_mod" readonly></td>
                                         <th class="text-center bg-light" style="width:13%">일반전화번호</th>
-                                        <td class="text-center" style="width:26%"><input type="text" class="form-control form-control-sm" id="user_num_mod"></td>
+                                        <td class="text-center" style="width:26%"><input type="text" class="form-control form-control-sm" id="user_num_mod" maxlength="13" oninput="autoHyphen(this)"></td>
                                     </tr>
                                     <tr>
                                         <th class="text-center bg-light">휴대폰 번호</th>
-                                        <td class="text-center"><input type="text" class="form-control form-control-sm" id="user_telnum_mod"></td>
+                                        <td class="text-center"><input type="text" class="form-control form-control-sm" id="user_telnum_mod" maxlength="13" oninput="autoHyphen2(this)"></td>
                                     </tr>
 <%--                                    <tr>--%>
 <%--                                        <th class="text-center bg-light">주소</th>--%>
@@ -272,6 +272,18 @@
 <!-- / Page content -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
+    const autoHyphen = (target) => {
+        target.value = target.value
+            .replace(/[^0-9]/g, '')
+            .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+    }
+
+    const autoHyphen2 = (target) => {
+        target.value = target.value
+            .replace(/[^0-9]/g, '')
+            .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+    }
 
     pageLoad("user_index", {page_num: 1, filter1: 100}, "유저 보드", "user");
 
