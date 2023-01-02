@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="col-md-5 ">
-                    <label class="form-label text-muted">상담 접수일</label>
+                    <label class="form-label text-muted">행사 등록일</label>
                     <div class="form-inline">
                         <div class="btn-group btn-group-sm btn-group-toggle srch_filtp2" data-toggle="buttons">
                             <label class="btn btn-secondary">
