@@ -9,19 +9,20 @@
 
         <!-- Layout sidenav -->
         <div id="layout-sidenav" class="layout-sidenav sidenav sidenav-vertical bg-sidenav-theme">
-
             <!-- Brand demo (see assets/css/demo/demo.css) -->
             <div class="app-brand demo">
                 <c:choose>
-                <c:when test="${profile eq 'gimje-prod'}">
-                    <a href="index" class="app-brand-text demo sidenav-text font-weight-normal ml-2 default"><img src="resources/assets/img/h1-logo.png" alt="스마트팜"></a>
-                    <a href="index" class="app-brand-text demo sidenav-text font-weight-normal ml-2 mini"><img src="resources/assets/img/logo.png" alt="김제"></a>
-                </c:when>
-                <c:when test="${profile eq 'sangju-prod'}">
-                <a href="index" class="app-brand-text demo sidenav-text font-weight-normal ml-2 default"><img src="resources/assets/img/logo_sj.png" alt="스마트팜">
-                    <a href="index" class="app-brand-text demo sidenav-text font-weight-normal ml-2 mini"><img src="resources/assets/img/logo_2.png" alt="상주"></a>
+                    <c:when test="${profile eq 'gimje-prod'}">
+                        <a href="index" class="app-brand-text demo sidenav-text font-weight-normal ml-2 default"><img src="resources/assets/img/samsung_logo.png" alt="VR EDU"></a>
+                        <a href="index" class="app-brand-text demo sidenav-text font-weight-normal ml-2 mini"><img src="resources/assets/img/logo.png" alt="김제"></a>
                     </c:when>
-                    </c:choose>
+                    <c:when test="${profile eq 'sangju-prod'}">
+                        <a href="index" class="app-brand-text demo sidenav-text font-weight-normal ml-2 default"><img src="resources/assets/img/logo_sj.png" alt="스마트팜">
+                        <a href="index" class="app-brand-text demo sidenav-text font-weight-normal ml-2 mini"><img src="resources/assets/img/logo_2.png" alt="상주"></a>
+                    </c:when>
+                </c:choose>
+                <%--<a href="index" class="app-brand-text demo sidenav-text font-weight-normal ml-2 default"><img src="resources/assets/img/h1-logo.png" alt="스마트팜"></a>--%>
+
                 <a href="javascript:void(0)" class="layout-sidenav-toggle sidenav-link text-large ml-auto">
                     <i class="ion ion-md-menu align-middle"></i>
                 </a>
@@ -40,7 +41,7 @@
                 <!--//-->
                 <li class="sidenav-item">
                     <a href="javascript:void(0);" class="sidenav-link sidenav-toggle"><i class="sidenav-icon far fa-address-card"></i>
-                        <div>실증사업 관리</div>
+                        <div>학습지원 관리</div>
                     </a>
                     <ul class="sidenav-menu">
                         <li class="sidenav-item">
@@ -50,7 +51,12 @@
                         </li>
                         <li class="sidenav-item">
                             <a href="javascript:pageLoad('bm_demo_corp_cur',{page_num:1},'실증사업 현황');" class="sidenav-link">
-                                <div>실증사업 현황</div>
+                                <div>학습자 현황</div>
+                            </a>
+                        </li>
+                        <li class="sidenav-item">
+                            <a href="javascript:pageLoad('bm_demo_corp_cur',{page_num:1},'실증사업 현황');" class="sidenav-link">
+                                <div>학습 일정 관리</div>
                             </a>
                         </li>
                     </ul>
@@ -61,13 +67,13 @@
                 <!-- 실증사업관리 -->
                 <li class="sidenav-item">
                     <a href="javascript:void(0);" class="sidenav-link sidenav-toggle"><i class="sidenav-icon lnr lnr-briefcase"></i>
-                        <div>실증센터</div>
+                        <div>콘텐츠 관리</div>
                     </a>
 
                     <ul class="sidenav-menu">
                         <li class="sidenav-item">
                             <a href="javascript:pageLoad('gh_total_monitor',{page_num:1},'온실 전체현황');" class="sidenav-link">
-                                <div>온실 전체현황</div>
+                                <div>콘텐츠 현황</div>
                             </a>
                         </li>
 <%--
@@ -100,7 +106,7 @@
                         </li>--%>
                         <li class="sidenav-item">
                             <a href="javascript:pageLoad('gh_sensor',{page_num:1},'센서별 정보');" class="sidenav-link">
-                                <div>센서별 정보</div>
+                                <div>콘텐츠별 정보</div>
                             </a>
                         </li>
                         <%--<li class="sidenav-item">
@@ -170,7 +176,7 @@
                     <ul class="sidenav-menu">
                         <li class="sidenav-item">
                             <a href="#none" class="sidenav-link sidenav-toggle">
-                                <div>온실 및 장비데이터</div>
+                                <div>콘텐츠별 학습 데이터</div>
                             </a>
                             <ul class="sidenav-menu">
                                 <li class="sidenav-item">
@@ -187,7 +193,7 @@
                         </li>
                         <li class="sidenav-item">
                             <a href="#none" class="sidenav-link sidenav-toggle">
-                                <div>사업별 데이터</div>
+                                <div>개인별 데이터</div>
                             </a>
                             <ul class="sidenav-menu">
                                 <li class="sidenav-item">
@@ -204,7 +210,7 @@
                         </li>
                         <li class="sidenav-item">
                             <a href="#none" class="sidenav-link sidenav-toggle">
-                                <div>데이터 전송관리</div>
+                                <div>학습 수행 데이터</div>
                             </a>
                             <ul class="sidenav-menu">
                                 <li class="sidenav-item">
@@ -229,12 +235,12 @@
                     <ul class="sidenav-menu">
                         <li class="sidenav-item">
                             <a href="javascript:pageLoad('cur_asset_mng',{page_num:1},'자산 현황');" class="sidenav-link">
-                                <div>자산 현황</div>
+                                <div>설비 현황</div>
                             </a>
                         </li>
                         <li class="sidenav-item">
                             <a href="javascript:pageLoad('asset_book_mng',{page_num:1},'자원 예약관리');" class="sidenav-link">
-                                <div>자원 예약관리</div>
+                                <div>설비 예약관리</div>
                             </a>
                         </li>
                         <li class="sidenav-item">

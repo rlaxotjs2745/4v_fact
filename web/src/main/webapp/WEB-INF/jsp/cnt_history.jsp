@@ -109,7 +109,7 @@
                                     </div>
                                     <div class="timeline-body">
                                         <ul>
-                                            <li><span class="timeline-date">07.20</span><span class="timeline-text">농업기술실용화재단 주사무동 이전(수원 ⇒ 익산)</span></li>
+                                            <li><span class="timeline-date">07.20</span><span class="timeline-text">한국농업기술진흥원 주사무동 이전(수원 ⇒ 익산)</span></li>
                                             <li><span class="timeline-date">07.01</span><span class="timeline-text">일자리센터 신설, 농생명ICT사업팀 확대개편</span></li>
                                             <li><span class="timeline-date">03.08</span><span class="timeline-text">서울/세종 농식품벤처 · 창업지원센터 설치</span></li>
                                         </ul>
@@ -236,7 +236,7 @@
                                     <div class="timeline-body">
                                         <ul>
                                             <li><span class="timeline-date">09.07</span><span class="timeline-text">설립등기 및 재단 업무 공식 개시(초대 이사장 : 전운성)</span></li>
-                                            <li><span class="timeline-date">03.05</span><span class="timeline-text">농촌진흥법 개정, 농업기술실용화재단 설립근거 마련</span></li>
+                                            <li><span class="timeline-date">03.05</span><span class="timeline-text">농촌진흥법 개정, 한국농업기술진흥원 설립근거 마련</span></li>
                                         </ul>
                                     </div>
                                 </div>

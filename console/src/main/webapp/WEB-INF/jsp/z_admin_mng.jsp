@@ -137,7 +137,7 @@
                                     <td class="text-center"><a href="#none" class="btn btn-underline"  data-toggle="modal" data-target="#modals-staff-view">가나다</a></td>
                                     <td class="text-center">재단</td>
                                     <td class="text-center">SA</td>
-                                    <td class="text-center">농업기술실용화재단</td>
+                                    <td class="text-center">한국농업기술진흥원</td>
                                     <td class="text-center">-</td>
                                     <td class="text-center">본부장</td>
                                     <td class="text-center">XXXXXX</td>
@@ -152,7 +152,7 @@
                                     <td class="text-center">가나다</td>
                                     <td class="text-center">재단</td>
                                     <td class="text-center">BM</td>
-                                    <td class="text-center">농업기술실용화재단</td>
+                                    <td class="text-center">한국농업기술진흥원</td>
                                     <td class="text-center">XXXXXX</td>
                                     <td class="text-center">XXXXXX</td>
                                     <td class="text-center">XXXXXX</td>
