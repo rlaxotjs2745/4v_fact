@@ -27,7 +27,8 @@
         <div class="page__full">
             <div class="page__floating">
 
-                <div class="tb__logo"><c:if test="${profile == 'gimje-prod'}">
+                <div class="tb__logo">
+                <c:if test="${profile == 'gimje-prod' or profile == 'local'}">
                     <h1><a href="/"><img src="resources/assets/image/img_loginLogo.png" alt="스마트팜 실증센터"></a></h1>
                 </c:if></div>
                 <form id="loginForm" action="api_post_login" method="post">
@@ -52,6 +53,9 @@
                                     <label for="login-2">로그인 상태 유지</label>
                                 </div>
                             </div>
+                            <c:if test="${redirect ne null}">
+                                <input name="redirect" type="hidden" value="${redirect}">
+                            </c:if>
                             <button type="submit" class="btn btn-login">로그인</button>
                             <div class="login__util">
                                 <a href="#popup_find_id" class="js-modal-detail">아이디 찾기</a>

@@ -38,8 +38,12 @@
         <div class="page__cnt">
             <div class="spt__container">
                 <div class="prevent__banner">
-                    <div class="prevent__banner--title"><strong>실증단지를 이용하고자 하는 고객</strong>께  실증단지의 시설과 장비를 소개하고<br>
-                        <strong>실증단지 이용목적과 얻고자 하는 실증결과에 <br>최적화된 실증계획을 도출</strong>할 수 있도록 지원합니다.</div>
+                    <div class="prevent__banner--title">스마트팜 혁신밸리 실증단지의 시설과 장비를 소개하고
+                        실증단지 이용자의 실증목적에 부합하는 최적화된 실증계획을 도출할 수 있도록 지원합니다.
+<%--
+                        <strong>실증단지를 이용하고자 하는 고객</strong>께  실증단지의 시설과 장비를 소개하고<br>
+                        <strong>실증단지 이용목적과 얻고자 하는 실증결과에 <br>최적화된 실증계획을 도출</strong>할 수 있도록 지원합니다.--%>
+                    </div>
 
                 </div>
 
@@ -218,7 +222,7 @@
     $("#consulting_warning").click(function() {
         var result = confirm('신청하려면 로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까');
         if(result) {
-            location.replace('login');
+            location.replace('login?redirect=spt_consulting');
         } else {
 
         }

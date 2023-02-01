@@ -16,22 +16,22 @@
                 <span>홈</span>
                 <span>실증 안내/신청</span>
                 <div class="under__depth">
-                    <a href="#" class="under__depth--anchor">실증서비스 이용료</a>
+                    <a href="#" class="under__depth--anchor">실증서비스 이용료 예시</a>
                     <div class="under__depth--list">
-                        <a href="prv_part">실증 분야</a>
+                        <%--<a href="prv_part">실증 분야</a>
                         <a href="prv_step">실증 절차</a>
                         <a href="prv_use">이용가능시설</a>
-                        <a href="prv_fee">실증서비스 이용료</a>
-                        <a href="prv_application">신청서 작성</a>
+                        <a href="prv_fee">실증서비스 이용료 예시</a>
+                        <a href="prv_application">신청서 작성</a>--%>
                     </div>
                 </div>
             </div>
         </div>
         <div class="page__menu--box">
             <div class="page__menu--inner">
-                <h2 class="page__title">실증서비스 이용료</h2>
+                <h2 class="page__title">실증서비스 이용료 예시</h2>
                 <div class="page__location">
-                    <div class="location__deco">실증 서비스 이용료를 안내해드립니다</div>
+                    <div class="location__deco">실증서비스 이용료의 예시 안내사항이므로 실제 소요 비용과 상이합니다.</div>
                     <div class="location__link">
                         <a href="prv_fee" class="location__link--anchor ">개요</a>
                         <a href="prv_facility" class="location__link--anchor ">실증시설</a>

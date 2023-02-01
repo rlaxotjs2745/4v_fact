@@ -15,13 +15,9 @@
                 <em>실증단지(상주)</em><strong>${homepageInfo.homepage_admin}</strong>
                 <em>054-537-6431</em><strong>${homepageInfo.homepage_admin_pnum}</strong>
             </c:if>
-            <c:if test="${profile == 'gimje-prod'}">
+            <c:if test="${profile == 'gimje-prod' or profile == 'local'}">
                 <em>실증단지(김제)</em><strong>${homepageInfo.homepage_admin}</strong>
                 <em>063-540-3600</em><strong>${homepageInfo.homepage_admin_pnum}</strong>
-            </c:if>
-            <c:if test="${profile == 'local'}">
-                <em>실증단지(상주)</em><strong>${homepageInfo.homepage_admin}</strong>
-                <em>054-537-6431</em><strong>${homepageInfo.homepage_admin_pnum}</strong>
             </c:if>
         </div>
     </div>
@@ -41,11 +37,7 @@
                     <h3 class="footer__logo"><img src="resources/assets/image/logo-footer-s.png" alt="상주"></h3>
                     <div class="footer__address">37127 경북 상주시 사벌국면 청룡길 302-96</div>
                 </c:if>
-                <c:if test="${profile == 'gimje-prod'}">
-                    <h3 class="footer__logo"><img src="resources/assets/image/logo_footer.svg" alt="김제"></h3>
-                    <div class="footer__address">54331 전라북도 김제시 백구면 황토로 1079</div>
-                </c:if>
-                <c:if test="${profile == 'local'}">
+                <c:if test="${profile == 'gimje-prod' or profile == 'local'}">
                     <h3 class="footer__logo"><img src="resources/assets/image/logo_footer.svg" alt="김제"></h3>
                     <div class="footer__address">54331 전라북도 김제시 백구면 황토로 1079</div>
                 </c:if>

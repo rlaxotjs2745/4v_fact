@@ -27,7 +27,8 @@
         <div class="page__full">
             <div class="page__floating">
 
-                <div class="tb__logo"><c:if test="${profile == 'gimje-prod'}">
+                <div class="tb__logo">
+                <c:if test="${profile == 'gimje-prod' or profile == 'local'}">
                     <img src="resources/assets/image/img_loginLogo.png" alt="스마트팜 실증센터">
                 </c:if></div>
                 <div class="tb__join">
@@ -57,11 +58,7 @@
                                             경북 상주 스마트팜 혁신밸리 실증단지 (이하실증단지) 이용약관,
                                             개인정보 수집 및 이용, 개인정보처리 위탁에 대한 사항에 모두 동의합니다.
                                         </c:if>
-                                        <c:if test="${profile == 'gimje-prod'}">
-                                            전북 김제 스마트팜 혁신밸리 실증단지 (이하실증단지) 이용약관,
-                                            개인정보 수집 및 이용, 개인정보처리 위탁에 대한 사항에 모두 동의합니다.
-                                        </c:if>
-                                        <c:if test="${profile == 'local'}">
+                                        <c:if test="${profile == 'gimje-prod' or profile == 'local'}">
                                             전북 김제 스마트팜 혁신밸리 실증단지 (이하실증단지) 이용약관,
                                             개인정보 수집 및 이용, 개인정보처리 위탁에 대한 사항에 모두 동의합니다.
                                         </c:if>

@@ -21,7 +21,7 @@
                         <a href="prv_part">실증 분야</a>
                         <a href="prv_step">실증 절차</a>
                         <a href="prv_use">이용가능시설</a>
-                        <a href="prv_fee">실증서비스 이용료</a>
+                        <a href="prv_fee">실증서비스 이용료 예시</a>
                         <a href="prv_application">신청서 작성</a>
                     </div>
                 </div>
@@ -35,13 +35,13 @@
                     <div class="location__link">
                         <a href="prv_use" class="location__link--anchor ">실증 온실</a>
                         <a href="prv_location" class="location__link--anchor ">실증 장비</a>
-                        <a href="prv_office" class="location__link--anchor is-selected">입주 사무실</a>
+                        <a href="prv_office" class="location__link--anchor is-selected">기업 사무실</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="page__cnt">
-            <h3 class="page__subject">입주 사무실</h3>
+            <h3 class="page__subject">기업 사무실</h3>
 
             <div class="use__container">
                 <div class="cnt__text">현장 사진 업데이트 예정</div>

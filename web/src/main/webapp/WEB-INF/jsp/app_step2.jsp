@@ -28,10 +28,10 @@
     <header class="header_app">
         <a href="/prv_application" class="close_window" onclick="javascript:window.close();"><img src="resources/assets/image/ico_close.svg" alt=""></a>
         <c:if test="${profile == 'sangju-prod'}">
-            <h1><a href="/"><img src="resources/assets/image/img-logo-s.png" alt="스마트팜 실증센터"></a></h1>
+            <h1><a href="index"><img src="resources/assets/image/img-logo-s.png" alt="스마트팜 실증센터"></a></h1>
         </c:if>
-        <c:if test="${profile == 'gimje-prod'}">
-            <h1><a href="/"><img src="resources/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
+        <c:if test="${profile == 'gimje-prod' or profile == 'local'}">
+            <h1><a href="index"><img src="resources/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
         </c:if>
         <h2>신청서 작성</h2>
         <div class="app__step">

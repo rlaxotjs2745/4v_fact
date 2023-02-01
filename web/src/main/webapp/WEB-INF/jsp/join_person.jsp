@@ -31,7 +31,7 @@
             <div class="page__floating">
 
                 <div class="tb__logo">
-                    <c:if test="${profile == 'gimje-prod'}">
+                    <c:if test="${profile == 'gimje-prod' or profile == 'local'}">
                         <img src="resources/assets/image/img_loginLogo.png" alt="스마트팜 실증센터">
                     </c:if>
                 </div>
@@ -166,14 +166,14 @@
                                     <%--                                    </tr>--%>
                                     <tr>
                                         <th class="th__left">정보수신동의<span class="text__essential">*</span></th>
-                                        <td class="td__register">전북 김제 스마트팜 실증밸리 실증단지의 정보를<br>
+                                        <td class="td__register">전북 김제 스마트팜 혁신밸리 실증단지 정보<br>
                                             <div class="radio radio--inline">
                                                 <input type="radio" id="ad-1" name="ad-range" value="1" checked>
-                                                <label for="ad-1">받고 싶습니다.</label>
+                                                <label for="ad-1">수신함.</label>
                                             </div>
                                             <div class="radio radio--inline">
                                                 <input type="radio" id="ad-2" name="ad-range" value="0">
-                                                <label for="ad-2">받고 싶지 않습니다.</label>
+                                                <label for="ad-2">수신하지 않음.</label>
                                             </div>
                                         </td>
                                     </tr>
@@ -411,6 +411,17 @@
 
     $("#find_corp").click(function () {
         $("#corp_search_result").load('search_corp_list', {"corp_name": $("#corp_name").val()}).trigger("create");
+    });
+
+    $("#ad-1").click(function () {
+        $("#type-1").attr('disabled', false);
+        $("#type-2").attr('disabled', false);
+    });
+    $("#ad-2").click(function () {
+        $( "#type-1" ).prop( "checked", false );
+        $( "#type-2" ).prop( "checked", false );
+        $("#type-1").attr('disabled', true);
+        $("#type-2").attr('disabled', true);
     });
 
     $("#join_confirm").click(function () {

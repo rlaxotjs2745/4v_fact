@@ -20,16 +20,16 @@
                     <div class="location__link">
                         <a href="prv_use" class="location__link--anchor ">실증 온실</a>
                         <a href="prv_location" class="location__link--anchor ">실증 장비</a>
-                        <a href="prv_office" class="location__link--anchor is-selected">입주 사무실</a>
+                        <a href="prv_office" class="location__link--anchor is-selected">기업 사무실</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="page__cnt">
-            <h3 class="page__subject">입주 사무실</h3>
+            <h3 class="page__subject">기업 사무실</h3>
 
             <div class="use__container">
-                <div class="cnt__text">입주 사무실 입주 사무실 입주 사무실</div>
+                <div class="cnt__text">기업 사무실</div>
 
                 text
 

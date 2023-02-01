@@ -21,7 +21,7 @@
                         <a href="prv_part">실증 분야</a>
                         <a href="prv_step">실증 절차</a>
                         <a href="prv_use">이용가능시설</a>
-                        <a href="prv_fee">실증서비스 이용료</a>
+                        <a href="prv_fee">실증서비스 이용료 예시</a>
                         <a href="prv_application">신청서 작성</a>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
         </div>
         <div class="page__cnt">
             <h3 class="page__subject">자율형</h3>
-            <div class="page__comment">실증의뢰인이 자율실증을 희망 시 아래 절차에 따라 서비스 제공</div>
+            <div class="page__comment">실증 이용자가 자율실증을 희망 시 아래 절차에 따라 서비스 제공</div>
 
             <div class="step__desc">
                 <div class="step__diagram">
@@ -51,15 +51,15 @@
                         <strong>STEP 01</strong>
                         <ul>
                             <li>(농진원) 실증항목(과제, 기술분야, 실증기간 등) 상담</li>
-                            <li>(농진원, 의뢰인) 필요항목(부지, 온실, 장비 등) 설정</li>
+                            <li>(농진원, 이용자) 필요항목(부지, 온실, 장비 등) 설정</li>
                             <li>(농진원) 공동운영비(폐작물 처리, 공동방제, 재배사 등)<br>사전 안내</li>
-                            <li>(농진원, 의뢰인) 임대계약 체결</li>
+                            <li>(농진원, 이용자) 임대계약 체결</li>
                         </ul>
                     </div>
                     <div class="step__autonomous--box box--02">
                         <strong>STEP 02</strong>
                         <ul>
-                            <li>(농진원, 의뢰인) 부지, 온실, 실증장비 등 임대 및 활용</li>
+                            <li>(농진원, 이용자) 부지, 온실, 실증장비 등 임대 및 활용</li>
                             <li>(농진원) 주 1회 시설 관리 및 점검</li>
                             <li>(농진원) 실증데이터 수집 및 관리, 제공</li>
                         </ul>
@@ -68,7 +68,7 @@
                         <strong>STEP 03</strong>
                         <ul>
                             <li>(농진원) Raw data 정리 및 제공</li>
-                            <li>(의뢰인) 시설 원상태 복구 및 임대 결과보고서 제출</li>
+                            <li>(이용자) 시설 원상태 복구 및 임대 결과보고서 제출</li>
                             <li>(농진원) 실증연계서비스<br>(전시·체험, 표준화, 검인증 등) 안내</li>
                         </ul>
                     </div>
@@ -77,7 +77,7 @@
             <!--//-->
 
             <h3 class="page__subject">위탁형</h3>
-            <div class="page__comment">실증의뢰인이 공공실증 의뢰 시 아래 절차에 따라 서비스 제공</div>
+            <div class="page__comment">실증 이용자가 공공실증 의뢰 시 아래 절차에 따라 서비스 제공</div>
 
             <div class="step__desc">
                 <div class="step__diagram--02">
@@ -91,8 +91,8 @@
                         <strong>STEP 01</strong>
                         <ul>
                             <li>(농진원) 실증항목(과제, 기술분야,<br>실증기간 등) 상담</li>
-                            <li>(농진원, 의뢰인) 실증진행방향(예상결과 등)<br>및 서비스료 협의</li>
-                            <li>(농진원, 의뢰인) 공공실증계약 체결</li>
+                            <li>(농진원, 이용자) 실증진행방향(예상결과 등)<br>및 서비스료 협의</li>
+                            <li>(농진원, 이용자) 공공실증계약 체결</li>
                         </ul>
                     </div>
                     <div class="step__autonomous--box box--02">
@@ -107,7 +107,7 @@
                         <strong>STEP 03</strong>
                         <ul>
                             <li>(농진원) 실증테스트(대조군 대비<br>비교실증, 반복 실증, 복합실증 등) 실시</li>
-                            <li>(농진원, 의뢰인) 중간보고(월 1회 이상)<br>를 통한 실증 중간점검 및 실증방향 재검토</li>
+                            <li>(농진원, 이용자) 중간보고(월 1회 이상)<br>를 통한 실증 중간점검 및 실증방향 재검토</li>
                         </ul>
                     </div>
                     <div class="step__autonomous--box box--04">

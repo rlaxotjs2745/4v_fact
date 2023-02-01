@@ -9,11 +9,10 @@ import kr.or.fact.core.service.VisitService;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.Date;
 import java.util.List;
@@ -28,10 +27,10 @@ public class VisitServiceImpl implements VisitService {
     public VisitServiceImpl(VisitMapper visitMapper){this.visitMapper = visitMapper;
 
     }
-    @Autowired
+/*    @Autowired
     private SqlSession sqlsession;
     @Autowired(required = false)
-    public DataSourceTransactionManager dataSourceTransactionManager;
+    public DataSourceTransactionManager dataSourceTransactionManager;*/
 
 
 
@@ -90,11 +89,12 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
+    @Transactional
     public void saveOrUpdateHugeVisitData(List<VisitDataVO> visitDataVOs){
 
 
-        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+        //DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        //TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
 
 
         for(VisitDataVO visitDataVO:visitDataVOs){
@@ -110,8 +110,9 @@ public class VisitServiceImpl implements VisitService {
                 findVisitData.setMemo(visitDataVO.getMemo()==null?"":visitDataVO.getMemo());
                 findVisitData.setIdx_admin(visitDataVO.getIdx_admin());
                 findVisitData.setGroup_idx(visitDataVO.getGroup_idx());
+                visitMapper.updateVisitData(findVisitData);
 
-                this.sqlsession.update("kr.or.fact.core.model.VisitMapper.updateVisitData",findVisitData);
+                //this.sqlsession.update("kr.or.fact.core.model.VisitMapper.updateVisitData",findVisitData);
             }
             else {
                 findVisitData = new VisitDataVO();
@@ -124,35 +125,42 @@ public class VisitServiceImpl implements VisitService {
                 findVisitData.setMemo(visitDataVO.getMemo()==null?"":visitDataVO.getMemo());
                 findVisitData.setGroup_idx(visitDataVO.getGroup_idx());
                 findVisitData.setIdx_admin(0);//idx_admin 추후 권한 관리에서 추가하는것으로
-                this.sqlsession.insert("kr.or.fact.core.model.VisitMapper.saveVisitData",findVisitData);
+                visitMapper.saveVisitData(findVisitData);
+                //this.sqlsession.insert("kr.or.fact.core.model.VisitMapper.saveVisitData",findVisitData);
             }
         }
 
-        dataSourceTransactionManager.commit(status);
+        //dataSourceTransactionManager.commit(status);
     }
 
 
     @Override
+    @Transactional
     public void updateStatusInVisitData(VisitDataVO visitDataVO){
+        visitMapper.updateStatusInVisitData(visitDataVO);
+        //DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        //TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
 
-        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+        //this.sqlsession.update("kr.or.fact.core.model.VisitMapper.updateStatusInVisitData",visitDataVO);
 
-        this.sqlsession.update("kr.or.fact.core.model.VisitMapper.updateStatusInVisitData",visitDataVO);
-
-        dataSourceTransactionManager.commit(status);
+        //dataSourceTransactionManager.commit(status);
     }
 
     @Override
+    @Transactional
     public void deleteHugeVisitData(List<VisitDataVO> visitDataVOs){
-        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-        TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
-
         for(VisitDataVO visitDataVO:visitDataVOs){
+            long idx_visit_data = visitDataVO.getIdx_visit_data();
+            visitMapper.deleteVisitData(idx_visit_data);
+        }
+        //DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        //TransactionStatus status = dataSourceTransactionManager.getTransaction(def);
+
+        /*for(VisitDataVO visitDataVO:visitDataVOs){
             long idx_visit_data = visitDataVO.getIdx_visit_data();
             this.sqlsession.delete("kr.or.fact.core.model.VisitMapper.deleteVisitData",idx_visit_data);
         }
-        dataSourceTransactionManager.commit(status);
+        dataSourceTransactionManager.commit(status);*/
     }
 
     @Override

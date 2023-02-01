@@ -21,7 +21,7 @@
                         <a href="prv_part">실증 분야</a>
                         <a href="prv_step">실증 절차</a>
                         <a href="prv_use">이용가능시설</a>
-                        <a href="prv_fee">실증서비스 이용료</a>
+                        <a href="prv_fee">실증서비스 이용료 예시</a>
                         <a href="prv_application">신청서 작성</a>
                     </div>
                 </div>
@@ -180,7 +180,7 @@
     $("#btn_fileupload").click(function() {
         var result = confirm('신청하려면 로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까');
         if(result) {
-            location.replace('login');
+            location.replace('login?redirect=prv_register');
         } else {
 
         }

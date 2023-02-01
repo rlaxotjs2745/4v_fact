@@ -164,10 +164,22 @@
     $(this).hide();
     $(this).prev(".is-active").removeClass("is-active");
   }); //breadcrumbs--box
+  $(document).on('mouseleave', '.nav', function (e) {
+    e.preventDefault();
+    $('.nav--depth2').hide();
+  });
 
+  $("#header").mouseleave(function() {
+    $('#header_links').stop(true, true).hide(400);
+  });
   $(document).on('mouseenter', '.under__depth--anchor', function (e) {
     e.preventDefault();
     $(this).next().addClass("is-show");
+  });
+  $(document).on('click', '.content', function (e) {
+    if($('.under__depth--list').hasClass("is-show")){
+      $('.under__depth--list').removeClass("is-show")
+    }
   });
   $(document).on('mouseleave', '.under__depth--list', function (e) {
     e.preventDefault();
@@ -197,6 +209,32 @@
       $(this).parent().next().addClass("is-fold").removeClass("is-extend");
     }
   });
+
+
+  $("#logout").click(function() {
+    var param  = {
+      "idx_user":"1",
+    };
+    $.ajax({
+      type: 'post',
+      url :'api_post_logout', //데이터를 주고받을 파일 주소 입력
+      data: JSON.stringify(param),//보내는 데이터
+      contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+      dataType:'json',//받는 데이터 타입
+      success: function(result){
+        //작업이 성공적으로 발생했을 경우
+        if(result.result_code=="SUCCESS"){
+          location.replace("index");
+        }
+      },
+      error:function(){
+        //에러가 났을 경우 실행시킬 코드
+        return;
+      }
+    });
+  });
+
+
   $(function () {
     //input을 datepicker로 선언
     $(".datepicker").datepicker({

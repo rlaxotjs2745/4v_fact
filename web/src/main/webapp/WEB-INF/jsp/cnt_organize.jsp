@@ -139,10 +139,7 @@
                     <c:if test="${profile == 'sangju-prod'}">
                         경북 상주 스마트팜 혁신밸리 실증단지 조직 및 직원
                     </c:if>
-                    <c:if test="${profile == 'gimje-prod'}">
-                        전북 김제 스마트팜 혁신밸리 실증단지 조직 및 직원
-                    </c:if>
-                    <c:if test="${profile == 'local'}">
+                    <c:if test="${profile == 'gimje-prod' or profile == 'local'}">
                         전북 김제 스마트팜 혁신밸리 실증단지 조직 및 직원
                     </c:if>
                 </h3>

@@ -20,7 +20,7 @@
                     <div class="location__link">
                         <a href="prv_use" class="location__link--anchor ">실증 온실</a>
                         <a href="prv_location" class="location__link--anchor is-selected">실증 장비</a>
-                        <a href="prv_office" class="location__link--anchor ">입주 사무실</a>
+                        <a href="prv_office" class="location__link--anchor ">기업 사무실</a>
                     </div>
                 </div>
             </div>

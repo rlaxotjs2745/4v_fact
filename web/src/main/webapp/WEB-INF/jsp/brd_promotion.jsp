@@ -33,10 +33,7 @@
                     <c:if test="${profile == 'sangju-prod'}">
                         <div class="location__deco">경북 상주 스마트팜 혁신밸리 실증단지의 다양한 홍보소식과 정보를 알려드립니다.</div>
                     </c:if>
-                    <c:if test="${profile == 'gimje-prod'}">
-                        <div class="location__deco">전북 김제 스마트팜 혁신밸리 실증단지의 다양한 홍보소식과 정보를 알려드립니다.</div>
-                    </c:if>
-                    <c:if test="${profile == 'local'}">
+                    <c:if test="${profile == 'gimje-prod' or profile == 'local'}">
                         <div class="location__deco">전북 김제 스마트팜 혁신밸리 실증단지의 다양한 홍보소식과 정보를 알려드립니다.</div>
                     </c:if>
                 </div>

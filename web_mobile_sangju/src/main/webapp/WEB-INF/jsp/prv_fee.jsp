@@ -10,7 +10,7 @@
 <%@include file ="header.jsp" %>
 
 
-<div class="page__h1">실증서비스 이용료</div>
+<div class="page__h1">실증서비스 이용료 예시</div>
 </header>
 <div class="content" id="content">
     <div class="page__body">

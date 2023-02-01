@@ -23,6 +23,7 @@ public interface VisitMapper {
 
     long saveVisitData(VisitDataVO visitDataVO);
     void updateVisitData(VisitDataVO visitDataVO);
+    void updateStatusInVisitData(VisitDataVO visitDataVO);
     void deleteVisitData(@Param("idx_visit_data") long idx_visit_data);
 int updateVisitReq(VisitReqVO visitReqVO);
     void saveVisitReq(VisitReqVO visitReqVO);

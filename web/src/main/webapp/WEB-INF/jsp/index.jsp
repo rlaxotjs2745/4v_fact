@@ -48,15 +48,15 @@
             <div class="quick__inner">
                 <a href="prv_part" class="quick__anchor">
                     <img src="resources/assets/image/img_demonstration.svg" alt="">
-                    <span>실증 분야</span>
+                    <span style="font-weight: bold;">실증 분야</span>
                 </a>
                 <a href="prv_application" class="quick__anchor">
                     <img src="resources/assets/image/img_application.svg" alt="">
-                    <span>실증 신청</span>
+                    <span style="font-weight: bold;">실증 신청</span>
                 </a>
                 <a href="prv_step" class="quick__anchor">
                     <img src="resources/assets/image/img_management.svg" alt="">
-                    <span>실증 절차 안내</span>
+                    <span style="font-weight: bold;">실증 절차 안내</span>
                 </a>
 <%--                <a href="spt_consulting" class="quick__anchor">
                     <img src="resources/assets/image/img_advance.svg" alt="">
@@ -64,7 +64,7 @@
                 </a>--%>
                 <a href="spt_consulting" class="quick__anchor">
                     <img src="resources/assets/image/img_inquire.svg" alt="">
-                    <span>상담 신청</span>
+                    <span style="font-weight: bold;">상담 신청</span>
                 </a>
             </div>
         </div>

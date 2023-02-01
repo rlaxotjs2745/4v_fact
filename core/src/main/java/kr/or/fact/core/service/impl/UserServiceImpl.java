@@ -7,7 +7,6 @@ import kr.or.fact.core.service.UserService;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.fact.core.util.CONSTANT;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.ArrayList;
@@ -74,7 +74,9 @@ public class UserServiceImpl implements UserService {
         UserVO findUserVO =userMapper.getAuthUser(user_id,user_pw);
         return findUserVO;
     }
+
     @Override
+    @Transactional
     public ResultVO logout(String user_id){
 
         ResultVO resultVO = new ResultVO();

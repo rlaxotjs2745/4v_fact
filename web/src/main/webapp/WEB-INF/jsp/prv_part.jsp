@@ -41,14 +41,15 @@
             <div class="part__container">
                 <div class="part__service bg--free">
                     <div class="part__service--title">자율형</div>
-                    <div class="part__service--desc">의뢰인이 부지, 온실, 장비 등을 임대하여 자체적으로 실증 추진 <br>고객 요청 시, 실증확인서(한국농업기술진흥원) 발급 가능</div>
-                    <div class="part__service__appendix">실비성 재료(육묘, 양액 등) 자체 수급</div>
+                    <div class="part__service--desc">실증단지 이용자가 부지, 온실, 장비등을 임대하여 자체적으로 실증 진행 <br>이용자 요청 시, 실증확인서(실증수행 및 입주사실 증명) 발급 가능</div>
+                    <div class="part__service__appendix">실비성 재료(육묘, 양액 등) 이용자 자체 수급</div>
                 </div>
                 <div class="part__service bg--lent">
                     <div class="part__service--title">위탁형</div>
-                    <div class="part__service--desc">의뢰인이 제품의 성능, 품질, 내구성, 호환성 등 R&D결과물에 대한 <br>
-                        실증 요청 시, 일련의 절차를 거쳐 실증결과서(한국농업기술진흥원) <br>까지 발급 </div>
-                    <div class="part__service__appendix">실비성 재료(육묘, 양액 등) 비용 별도 부과</div>
+                    <div class="part__service--desc">실증단지 이요자가 작성한 작물재배 및 데이터 수집계획서에 따라<br>
+                        농진원이 실증 진행<br>
+                        이용자 요청 시, 실증결과서(실증수행, 실증과정 중 도출된 수치 등의 객관적 내용) <br>발급 가능 </div>
+                    <div class="part__service__appendix">실비성 재료(육묘, 양액 등) 비용 별도 청구</div>
                 </div>
             </div>
             <!--//-->
@@ -72,23 +73,23 @@
                     <tr>
                         <td>단일제품 성능실증</td>
                         <td class="td__left">단일제품에 대한 내구성, 정밀도, 안정성 등 테스트·분석</td>
-                        <td>약 30일</td>
+                        <td>약 1개월</td>
                     </tr>
                     <tr>
-                        <td>반복 실증</td>
+                        <td>비교 실증</td>
                         <td class="td__left">대조군 대비 실험군의 실증 결과를 비교하여 결과 도출‧분석</td>
-                        <td>6개월 or 1년 단위</td>
+                        <td>약 6개월 ~ 12개월</td>
                     </tr>
                     <tr>
                         <td>반복 실증</td>
                         <td class="td__left">동일한 조건의 테스트 절차에 따라 3회 이상의 실증을 추진한 후 결과를 도출·분석</td>
-                        <td>6개월 or 1년 단위</td>
+                        <td>약 6개월 ~ 12개월</td>
                     </tr>
                     </tbody>
                 </table>
                 <div class="table__desc">
                     <ul>
-                        <li>실증 분야에 따른 세부 실증 매뉴얼 및 소요기간 개발‧검증 추진 中</li>
+                        <%--<li>실증 분야에 따른 세부 실증 매뉴얼 및 소요기간 개발‧검증 추진 中</li>--%>
                         <li>제품 및 성능 등 실증요구사항에 따라 소요기간은 유동적일 수 있음</li>
                     </ul>
                 </div>
@@ -97,26 +98,76 @@
 
 
             <h3 class="page__subject">지역별 특화분야</h3>
-            <!--김제-->
-            <div class="part__area">
-                <img src="resources/assets/image/img_area_gimje.png" alt="">
-            </div>
-            <div class="part__area--subscript">
-                <strong class="subscript--title">주요특징</strong>
-                <p class="subscript--text">· 스마트팜 ICT기자재 실증</p>
-                <p class="subscript--text">· 신품종, 약용작물, 기능성물질 실증 및 효과 분석</p>
-            </div>
-            <!--//-->
-            <!--상주-->
-            <div class="part__area">
-                <img src="resources/assets/image/img_area_sangju.png" alt="">
-            </div>
-            <div class="part__area--subscript">
-                <strong class="subscript--title">주요특징</strong>
-                <p class="subscript--text">· 농업용로봇, 수출 플랜트 거점화</p>
-                <p class="subscript--text">· 병해충 및 방제관련 실증</p>
-            </div>
-            <!--//-->
+
+            <c:if test="${profile == 'sangju-prod'}">
+                <!--상주-->
+                <div class="part__area">
+                    <img src="resources/assets/image/img_area_sangju2.png" alt="">
+                </div>
+                <div class="part__area--subscript">
+                    <strong class="subscript--title">주요특징</strong>
+                    <p class="subscript--text">· 농업용로봇, 수출 플랜트 거점화</p>
+                    <p class="subscript--text">· 병해충 및 방제관련 실증</p>
+                </div>
+                <!--//-->
+                <!--김제-->
+                <div class="part__area">
+                    <img src="resources/assets/image/img_area_gimje.png" alt="">
+                </div>
+                <div class="part__area--subscript">
+                    <strong class="subscript--title">주요특징</strong>
+                    <p class="subscript--text">· 스마트팜 ICT기자재 실증</p>
+                    <p class="subscript--text">· 신품종, 약용작물, 기능성물질 실증 및 효과 분석</p>
+                </div>
+                <!--//-->
+
+            </c:if>
+            <c:if test="${profile == 'gimje-prod' or profile == 'local'}">
+                <!--김제-->
+                <div class="part__area">
+                    <img src="resources/assets/image/img_area_gimje.png" alt="">
+                </div>
+                <div class="part__area--subscript">
+                    <strong class="subscript--title">주요특징</strong>
+                    <p class="subscript--text">· 스마트팜 ICT기자재 실증</p>
+                    <p class="subscript--text">· 신품종, 약용작물, 기능성물질 실증 및 효과 분석</p>
+                </div>
+                <!--//-->
+                <!--상주-->
+                <div class="part__area">
+                    <img src="resources/assets/image/img_area_sangju2.png" alt="">
+                </div>
+                <div class="part__area--subscript">
+                    <strong class="subscript--title">주요특징</strong>
+                    <p class="subscript--text">· 농업용로봇, 수출 플랜트 거점화</p>
+                    <p class="subscript--text">· 병해충 및 방제관련 실증</p>
+                </div>
+                <!--//-->
+            </c:if>
+            <%--<c:if test="${profile == 'local'}">
+                <!--김제-->
+                <div class="part__area">
+                    <img src="resources/assets/image/img_area_gimje.png" alt="">
+                </div>
+                <div class="part__area--subscript">
+                    <strong class="subscript--title">주요특징</strong>
+                    <p class="subscript--text">· 스마트팜 ICT기자재 실증</p>
+                    <p class="subscript--text">· 신품종, 약용작물, 기능성물질 실증 및 효과 분석</p>
+                </div>
+                <!--//-->
+                <!--상주-->
+                <div class="part__area">
+                    <img src="resources/assets/image/img_area_sangju2.png" alt="">
+                </div>
+                <div class="part__area--subscript">
+                    <strong class="subscript--title">주요특징</strong>
+                    <p class="subscript--text">· 농업용로봇, 수출 플랜트 거점화</p>
+                    <p class="subscript--text">· 병해충 및 방제관련 실증</p>
+                </div>
+                <!--//-->
+            </c:if>--%>
+
+
 
             <h3 class="page__subject">실증서비스 분야</h3>
             <div class="table__type">
@@ -172,9 +223,9 @@
                             -  인공광원의 효율성, 재배 실증</td>
                     </tr>
                     <tr>
-                        <td>육모</td>
+                        <td>육묘</td>
                         <td>파종, 접목 등</td>
-                        <td class="td__left">-  파종 성공률, 작업속도, 관수성능, 접목 성공률 등</td>
+                        <td class="td__left">-  발아율, 작업속도, 관수성능, 접목 활착률 등</td>
                     </tr>
                     <tr>
                         <td>생육모델</td>

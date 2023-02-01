@@ -86,13 +86,13 @@ input:focus, textarea:focus, button:focus {
 }
 .calendar-sidebar > .calendar-year > p {
     margin: 0;
-    font-size: 30px;
+    font-size: 16px;
     display: inline-block;
 }
 .calendar-sidebar > .calendar-year > button.icon-button {
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     overflow: visible;
 }
 .calendar-sidebar > .calendar-year > button.icon-button > span {
@@ -174,7 +174,7 @@ input:focus, textarea:focus, button:focus {
 }
 .calendar-inner .calendar-table {
     border-collapse: collapse;
-    font-size: 20px;
+    font-size: 16px;
     width: 100%;
     -webkit-user-select: none;
        -moz-user-select: none;
@@ -186,7 +186,7 @@ th[colspan="7"] {
     text-align: center;
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 30px;
+    font-size: 22px;
     color: #8773c1;
 }
 th[colspan="7"]::after {
@@ -294,7 +294,7 @@ tr.calendar-body .calendar-day .day[disabled] {
 }
 
 .calendar-events > .event-header > p {
-    font-size: 30px;
+    font-size: 18px;
     font-weight: 600;
     color: #5a5a5a;
 }
@@ -404,7 +404,7 @@ tr.calendar-body .calendar-day .day[disabled] {
 }
 .event-container > .event-info > p.event-title {
     position: relative;
-    font-size: 22px;
+    font-size: 16px;
     font-weight: 600;
 }
 .event-container > .event-info > p.event-title > span {
@@ -429,7 +429,7 @@ tr.calendar-body .calendar-day .day[disabled] {
 .event-indicator {
     position: absolute;
     width: -moz-max-content;
-    width: -webkit-fit-content;
+/*    width: -webkit-fit-content;*/
     width: -moz-fit-content;
     width: fit-content;
     top: 100%;

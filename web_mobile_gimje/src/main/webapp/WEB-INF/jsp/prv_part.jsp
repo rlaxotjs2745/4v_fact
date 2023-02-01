@@ -21,12 +21,12 @@
             <div class="part__container">
                 <div class="part__service bg--free">
                     <div class="part__service--title">자율형</div>
-                    <div class="part__service--desc">의뢰인이 부지, 온실, 장비 등을 임대하여 자체적으로 실증 추진 별도 요청 시, 스마트팜 혁신밸리 실증단지에서 자율실증을 하였다는 실증확인서(한국농업기술진흥원) 발급</div>
+                    <div class="part__service--desc">이용자 부지, 온실, 장비 등을 임대하여 자체적으로 실증 추진 별도 요청 시, 스마트팜 혁신밸리 실증단지에서 자율실증을 하였다는 실증확인서(한국농업기술진흥원) 발급</div>
                     <div class="part__service--text">부지, 온실, 장비 임대 가능. 이용에 따른 별도 비용을 부과</div>
                 </div>
                 <div class="part__service bg--lent">
                     <div class="part__service--title">위탁형</div>
-                    <div class="part__service--desc">의뢰인이 제품의 성능, 품질, 내구성, 호환성 등 R&D결과물에 대한 <br>
+                    <div class="part__service--desc">이용자 제품의 성능, 품질, 내구성, 호환성 등 R&D결과물에 대한 <br>
                         실증 요청 시, 일련의 절차를 거쳐 실증결과서(한국농업기술진흥원) 까지 발급 </div>
                     <div class="part__service--text">부지, 온실, 장비 임대 불가능</div>
                 </div>

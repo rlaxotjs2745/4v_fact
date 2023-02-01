@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.tags.Param;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -112,7 +113,8 @@ public class IndexController {
     public String api_post_login(HttpSession session,
                                  ModelMap model,
                                  @RequestParam(value = "id") String user_id,
-                                 @RequestParam(value = "pw") String user_pw) {
+                                 @RequestParam(value = "pw") String user_pw,
+                                 @RequestParam(required=false) String redirect) {
 
         /*UserVO userVO = new UserVO();
         userVO.setUser_id(id);
@@ -145,13 +147,41 @@ public class IndexController {
             }
             System.out.println(findUser);
             session.setAttribute("isApplicant", findUser.getIs_applicant());
+
+            if(redirect!=null)
+                return "redirect:"+redirect;
             return "redirect:/";
         } else {
             session.setAttribute("loginCheck", false);
         }
 
+
         return "redirect:login";
     }
+
+    @RequestMapping(value = "/api_post_logout", method = RequestMethod.POST)
+    public @ResponseBody ResultVO api_post_logout(HttpSession session,
+                                 UserVO userVO,
+                                 Model model) {
+
+        ResultVO resultVO = new ResultVO();
+        resultVO.setResult_code(CONSTANT.Success);
+        resultVO.setResult_str("로그아웃되었습니다");
+
+        if (session != null) {//로그인 필요
+            clearSessionAndRedirect(session);
+            setProfile(model);
+        }
+
+        if(session.getAttribute("userid") != null){
+            resultVO =  userService.logout(String.valueOf(session.getAttribute("userid")));
+
+        }
+
+
+        return resultVO;
+    }
+
 
     @RequestMapping("/app_step1")
     public String app_step1(HttpSession session
@@ -1311,10 +1341,12 @@ public class IndexController {
     }
 
     @RequestMapping("/login")
-    public String login(HttpSession session, Model model) {
+    public String login(HttpSession session, Model model, @RequestParam(required=false) String redirect ) {
         clearSessionAndRedirect(session);
         getHomepageInfo(model);
         setProfile(model);
+        if(redirect!=null)
+            model.addAttribute("redirect",redirect);
         return "login";
     }
 

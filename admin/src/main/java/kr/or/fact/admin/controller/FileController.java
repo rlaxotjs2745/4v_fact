@@ -315,7 +315,7 @@ public class FileController {
             String potalDomain = "http://localhost:10001/";
             if (activeProfiles.length != 0) {
                 String activeProfile = activeProfiles[0];
-                if (activeProfile.equals("gimje-prod")) {
+                if (activeProfile.equals("gimje-prod") || activeProfile.equals("local")) {
                     potalDomain = "https://innovalley.smartfarmkorea.net/gimje/Demonstration/";
                 } else if (activeProfile.equals("sangju-prod")) {
                     potalDomain = "https://innovalley.smartfarmkorea.net/sangju/Demonstration/";

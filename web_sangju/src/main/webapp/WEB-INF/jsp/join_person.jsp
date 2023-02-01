@@ -97,7 +97,7 @@
                                     </tr>
                                     <tr>
                                         <th class="th__left">정보수신동의<span class="text__essential">*</span></th>
-                                        <td class="td__register">경북 상주 스마트팜 실증밸리 실증단지의 정보를<br>
+                                        <td class="td__register">경북 상주 스마트팜 혁신밸리 실증단지의 정보를<br>
                                             <div class="radio radio--inline">
                                                 <input type="radio" id="ad-1" name="ad-range" value="1" checked>
                                                 <label for="ad-1">네에 받습니다.</label>

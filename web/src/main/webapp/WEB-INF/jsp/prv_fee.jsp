@@ -16,12 +16,12 @@
                 <span>홈</span>
                 <span>실증 안내/신청</span>
                 <div class="under__depth">
-                    <a href="#" class="under__depth--anchor">실증서비스 이용료</a>
+                    <a href="#" class="under__depth--anchor">실증서비스 이용료 예시</a>
                     <div class="under__depth--list">
                         <a href="prv_part">실증 분야</a>
                         <a href="prv_step">실증 절차</a>
                         <a href="prv_use">이용가능시설</a>
-                        <a href="prv_fee">실증서비스 이용료</a>
+                        <a href="prv_fee">실증서비스 이용료 예시</a>
                         <a href="prv_application">신청서 작성</a>
                     </div>
                 </div>
@@ -29,13 +29,13 @@
         </div>
         <div class="page__menu--box">
             <div class="page__menu--inner">
-                <h2 class="page__title">실증서비스 이용료</h2>
+                <h2 class="page__title">실증서비스 이용료 예시</h2>
                 <div class="page__location">
-                    <div class="location__deco">실증 서비스 이용료를 안내해드립니다</div>
+                    <div class="location__deco">실증서비스 이용료의 예시 안내사항이므로 실제 소요 비용과 상이합니다.</div>
                     <div class="location__link">
-                        <a href="prv_fee" class="location__link--anchor is-selected">개요</a>
+                        <%--<a href="prv_fee" class="location__link--anchor is-selected">개요</a>
                         <a href="prv_facility" class="location__link--anchor ">실증시설</a>
-                        <a href="prv_support" class="location__link--anchor ">지원시설</a>
+                        <a href="prv_support" class="location__link--anchor ">지원시설</a>--%>
 <%--                        <a href="prv_bill" class="location__link--anchor ">공과금</a>
                         <a href="prv_subsidy" class="location__link--anchor ">보증금</a>--%>
                     </div>
@@ -44,7 +44,7 @@
         </div>
         <div class="page__cnt">
             <h3 class="page__subject">이용료 구분</h3>
-            <div class="cnt__text">농진원은 실증단지 이용자에게 ‘실증시설 이용료, 지원시설 이용료, 사용공과금, 시설이용 보증금’을 받을 수 있습니다.</div>
+            <div class="cnt__text">농진원은 실증단지 이용자에게 실증시설 이용료, 지원시설 이용료, 사용공과금 등을 받을 수 있습니다.</div>
 
             <div class="fee__container">
                 <div class="fee__diagram">
@@ -80,10 +80,7 @@
                             <c:if test="${profile == 'sangju-prod'}">
                                 <th>경북 상주</th>
                             </c:if>
-                            <c:if test="${profile == 'gimje-prod'}">
-                                <th>전북 김제</th>
-                            </c:if>
-                            <c:if test="${profile == 'local'}">
+                            <c:if test="${profile == 'gimje-prod' or profile == 'local'}}">
                                 <th>전북 김제</th>
                             </c:if>
                             <th>값</th>
@@ -97,7 +94,7 @@
                             <td>촉성딸기</td>
                         </tr>
                         <tr>
-                            <td>Co2 발생기</td>
+                            <td>CO<sub>2</sub> 발생기</td>
                             <td>일 2시간 사용 (6개월)</td>
                             <td>지열사용</td>
                             <td>1일 8시간 (6개월)</td>
@@ -107,8 +104,8 @@
                 </div>
                 <div class="cnt__effect">
                     <ul>
-                        <li>경영비는 종묘, 비료, 농약, 기타재료비 등 포함된 비용</li>
-                        <li>보조난방은 지열(히트펌프)의 용량이 부족할 경우 입주자 의사에 따라 작동하고 온실 사용료를 제외한 지열, 보조난방, CO2발생기 등 사용량에 따라 비용이 청구 됨</li>
+                        <li>재료비는 종묘, 비료, 농약, 기타재료비 등 포함된 비용</li>
+                        <li>보조난방은 지열(히트펌프)의 용량이 부족할 경우 입주자 의사에 따라 작동하고 온실 사용료를 제외한 지열, 보조난방, CO<sub>2</sub>발생기 등 사용량에 따라 비용이 청구 됨</li>
                         <li>자율실증의 경우 경영비는 제외되며, 장비임대료·분석수수료 등은 입주자의 필요시 발생할 수 있음</li>
                     </ul>
                 </div>
@@ -134,12 +131,12 @@
                             <td colspan="2">47,624원×6개월×30일</td>
                         </tr>
                         <tr>
-                            <th>경영비</th>
+                            <th>재료비</th>
                             <td class="td__won">4,761,540원</td>
                             <td colspan="2">26,453원×6개월×30일</td>
                         </tr>
                         <tr>
-                            <th>CO2 발생기</th>
+                            <th>CO<sub>2</sub> 발생기</th>
                             <td class="td__won">1,094,400원</td>
                             <td colspan="2">3.2L/h×2시간×950원/L×6개월×30일</td>
                         </tr>

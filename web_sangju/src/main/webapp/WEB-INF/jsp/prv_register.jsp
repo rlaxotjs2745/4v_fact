@@ -21,7 +21,7 @@
                         <a href="prv_part">실증 분야</a>
                         <a href="prv_step">실증 절차</a>
                         <a href="prv_use">이용가능시설</a>
-                        <a href="prv_fee">실증서비스 이용료</a>
+                        <a href="prv_fee">실증서비스 이용료 예시</a>
                         <a href="prv_application">신청서 작성</a>
                     </div>
                 </div>

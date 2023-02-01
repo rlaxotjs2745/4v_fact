@@ -148,7 +148,7 @@
                                     <td class="text-center">가나다</td>
                                     <td class="text-center">휴면</td>
                                     <td class="text-center">재단</td>
-                                    <td class="text-center">농업기술실용화재단</td>
+                                    <td class="text-center">한국농업기술진흥원</td>
                                     <td class="text-center">XXXXXX</td>
                                     <td class="text-center">XXXXXX</td>
                                     <td class="text-center">XXXXXX</td>

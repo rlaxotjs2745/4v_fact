@@ -31,14 +31,14 @@
             <div class="page__menu--inner">
                 <h2 class="page__title">실증 절차</h2>
                 <div class="page__location">
-                    <div class="location__deco">실증 절차는 자율형과 위탁형으로 구분되어 있습니다.</div>
+                    <div class="location__deco">실증 절차는 <b>자율형</b>과 <b>위탁형</b>으로 구분되어 있습니다.</div>
 
                 </div>
             </div>
         </div>
         <div class="page__cnt">
             <h3 class="page__subject">자율형</h3>
-            <div class="page__comment">실증의뢰인이 자율실증을 희망 시 아래 절차에 따라 서비스 제공</div>
+            <div class="page__comment">실증단지 이용자가 자율실증을 희망 시 아래 절차에 따라 서비스 제공</div>
 
             <div class="step__desc">
                 <div class="step__diagram">
@@ -48,28 +48,28 @@
                 </div>
                 <div class="step__autonomous">
                     <div class="step__autonomous--box box--01">
-                        <strong>STEP 01</strong>
+                        <b>STEP 01</b>
                         <ul>
-                            <li>(농진원) 실증항목(과제, 기술분야, 실증기간 등) 상담</li>
-                            <li>(농진원, 의뢰인) 필요항목(부지, 온실, 장비 등) 설정</li>
-                            <li>(농진원) 공동운영비(폐작물 처리, 공동방제, 재배사 등)<br>사전 안내</li>
-                            <li>(농진원, 의뢰인) 임대계약 체결</li>
+                            <li><b>(농진원)</b> 실증항목(과제, 기술분야, 실증기간 등) 상담</li>
+                            <li><b>(농진원, 이용자)</b> 필요항목(부지, 온실, 장비 등) 설정</li>
+                            <li><b>(농진원)</b> 공동운영비(폐작물 처리, 공동방제 등) 사전 안내</li>
+                            <li><b>(농진원, 이용자)</b> 임대계약 체결</li>
                         </ul>
                     </div>
                     <div class="step__autonomous--box box--02">
-                        <strong>STEP 02</strong>
+                        <b>STEP 02</b>
                         <ul>
-                            <li>(농진원, 의뢰인) 부지, 온실, 실증장비 등 임대 및 활용</li>
-                            <li>(농진원) 주 1회 시설 관리 및 점검</li>
-                            <li>(농진원) 실증데이터 수집 및 관리, 제공</li>
+                            <li><b>(농진원, 이용자)</b> 부지, 온실, 실증장비 등 임대 및 활용</li>
+                            <li><b>(농진원)</b> 주 1회 시설 관리 및 점검</li>
+                            <li><b>(농진원)</b> 실증데이터 수집 및 관리, 제공</li>
                         </ul>
                     </div>
                     <div class="step__autonomous--box box--03">
-                        <strong>STEP 03</strong>
+                        <b>STEP 03</b>
                         <ul>
-                            <li>(농진원) Raw data 정리 및 제공</li>
-                            <li>(의뢰인) 시설 원상태 복구 및 임대 결과보고서 제출</li>
-                            <li>(농진원) 실증연계서비스<br>(전시·체험, 표준화, 검인증 등) 안내</li>
+                            <li><b>(농진원)</b> Raw data 정리 및 제공</li>
+                            <li><b>(이용자)</b> 시설 원상태 복구 및 임대 <br>결과보고서 제출</li>
+                            <li><b>(농진원)</b> 실증연계서비스(전시·체험, <br>표준화, 검정 등) 안내<br></li>
                         </ul>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
             <!--//-->
 
             <h3 class="page__subject">위탁형</h3>
-            <div class="page__comment">실증의뢰인이 공공실증 의뢰 시 아래 절차에 따라 서비스 제공</div>
+            <div class="page__comment">실증단지 이용자가 위탁실증 의뢰 시 아래 절차에 따라 서비스 제공</div>
 
             <div class="step__desc">
                 <div class="step__diagram--02">
@@ -88,33 +88,34 @@
                 </div>
                 <div class="step__autonomous--02">
                     <div class="step__autonomous--box box--01">
-                        <strong>STEP 01</strong>
+                        <b>STEP 01</b>
                         <ul>
-                            <li>(농진원) 실증항목(과제, 기술분야,<br>실증기간 등) 상담</li>
-                            <li>(농진원, 의뢰인) 실증진행방향(예상결과 등)<br>및 서비스료 협의</li>
-                            <li>(농진원, 의뢰인) 공공실증계약 체결</li>
+                            <li><b>(농진원)</b> 실증항목(과제, 기술분야,<br>실증기간 등) 상담</li>
+                            <li><b>(농진원, 이용자)</b> 실증진행방향(예상결과 등)<br>및 실증비용 협의</li>
+                            <li><b>(농진원, 이용자)</b> 위탁실증 계약체결</li>
                         </ul>
                     </div>
                     <div class="step__autonomous--box box--02">
-                        <strong>STEP 02</strong>
+                        <b>STEP 02</b>
                         <ul>
-                            <li>(농진원) 실증결과 창출을 위한<br>분석요건 도출 및 실증수행방안 수립</li>
-                            <li>(농진원) 유사환경·대조군 설정 및<br>예상결과 도출</li>
-                            <li>(농진원) Working model, 프로토타입<br>설계 및 사전 실증시범테스트 실시·확인</li>
+                            <li><b>(농진원)</b> 실증결과 창출을 위한<br>분석요건 도출 및 실증수행방안 수립</li>
+                            <li><b>(농진원)</b> 유사환경·대조군 설정 및<br>예상결과 도출</li>
+                            <li><b>(농진원)</b> Working model, 프로토타입<br>설계 및 사전 실증시범테스트 실시·확인</li>
                         </ul>
                     </div>
                     <div class="step__autonomous--box box--03">
-                        <strong>STEP 03</strong>
+                        <b>STEP 03</b>
                         <ul>
-                            <li>(농진원) 실증테스트(대조군 대비<br>비교실증, 반복 실증, 복합실증 등) 실시</li>
-                            <li>(농진원, 의뢰인) 중간보고(월 1회 이상)<br>를 통한 실증 중간점검 및 실증방향 재검토</li>
+                            <li><b>(농진원)</b> 실증테스트(대조군 대비<br>비교실증, 반복 실증, 복합실증 등) 실시</li>
+                            <li><b>(농진원, 이용자)</b> 중간보고(월 1회 이상)를<br>통한 실증 중간점검 및 실증방향 재검토</li>
                         </ul>
                     </div>
                     <div class="step__autonomous--box box--04">
-                        <strong>STEP 04</strong>
+                        <b>STEP 04</b>
                         <ul>
-                            <li>(농진원) Raw data 정리·제공,<br>실증데이터 관리·분석</li>
-                            <li>(농진원) 실증결과보고서 제공 및 실증<br>연계서비스(전시·체험,표준화,<br>검인증 등). 안내</li>
+                            <li><b>(농진원)</b> Raw data 정리·제공,<br>실증데이터 관리·분석</li>
+                            <li><b>(농진원)</b> 실증결과보고서 제공</li>
+                            <li><b>(농진원)</b> 실증연계서비스(전시·체험,<br>표준화, 검정 등) 안내</li>
                         </ul>
                     </div>
                 </div>

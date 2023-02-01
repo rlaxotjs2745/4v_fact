@@ -34,10 +34,7 @@
                     <c:if test="${profile == 'sangju-prod'}">
                         <div class="location__deco">경북 상주 스마트팜 혁신밸리 실증단지의 새로운 소식을 알려드릡니다.</div>
                     </c:if>
-                    <c:if test="${profile == 'gimje-prod'}">
-                        <div class="location__deco">전북 김제 스마트팜 혁신밸리 실증단지의 새로운 소식을 알려드릡니다.</div>
-                    </c:if>
-                    <c:if test="${profile == 'local'}">
+                    <c:if test="${profile == 'gimje-prod' or profile == 'local'}">
                         <div class="location__deco">전북 김제 스마트팜 혁신밸리 실증단지의 새로운 소식을 알려드릡니다.</div>
                     </c:if>
                     <div class="location__link">한국농업기술진흥원 홈페이지 <a href="https://fact.or.kr/action.do?action=eventno%24list" target="_blank">바로가기</a></div>

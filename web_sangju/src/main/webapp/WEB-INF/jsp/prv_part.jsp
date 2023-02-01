@@ -21,7 +21,7 @@
                         <a href="prv_part">실증 분야</a>
                         <a href="prv_step">실증 절차</a>
                         <a href="prv_use">이용가능시설</a>
-                        <a href="prv_fee">실증서비스 이용료</a>
+                        <a href="prv_fee">실증서비스 이용료 예시</a>
                         <a href="prv_application">신청서 작성</a>
                     </div>
                 </div>
@@ -41,12 +41,12 @@
             <div class="part__container">
                 <div class="part__service bg--free">
                     <div class="part__service--title">자율형</div>
-                    <div class="part__service--desc">의뢰인이 부지, 온실, 장비 등을 임대하여 자체적으로 실증 추진 <br>고객 요청 시, 실증확인서(한국농업기술진흥원) 발급 가능</div>
+                    <div class="part__service--desc">이용자가 부지, 온실, 장비 등을 임대하여 자체적으로 실증 추진 <br>고객 요청 시, 실증확인서(한국농업기술진흥원) 발급 가능</div>
                     <div class="part__service__appendix">실비성 재료(육묘, 양액 등) 자체 수급</div>
                 </div>
                 <div class="part__service bg--lent">
                     <div class="part__service--title">위탁형</div>
-                    <div class="part__service--desc">의뢰인이 제품의 성능, 품질, 내구성, 호환성 등 R&D결과물에 대한 <br>
+                    <div class="part__service--desc">이용자가 제품의 성능, 품질, 내구성, 호환성 등 R&D결과물에 대한 <br>
                         실증 요청 시, 일련의 절차를 거쳐 실증결과서(한국농업기술진흥원) <br>까지 발급 </div>
                     <div class="part__service__appendix">실비성 재료(육묘, 양액 등) 비용 별도 부과</div>
                 </div>

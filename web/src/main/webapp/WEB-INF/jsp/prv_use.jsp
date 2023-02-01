@@ -35,7 +35,7 @@
                     <div class="location__link">
                         <a href="prv_use" class="location__link--anchor is-selected">실증 온실</a>
                         <a href="prv_location" class="location__link--anchor ">실증 장비</a>
-                        <a href="prv_office" class="location__link--anchor ">입주 사무실</a>
+                        <a href="prv_office" class="location__link--anchor ">기업 사무실</a>
                     </div>
                 </div>
             </div>
@@ -398,11 +398,11 @@
                     <div class="cnt__title">실증온실 시설 사진 예시</div>
                     <div class="use__house">
                         <ul>
-                            <li><figure><img src="resources/assets/image/img_use_house_01.jpg" alt=""></figure><span>벤로형 온실</span></li>
-                            <li><figure><img src="resources/assets/image/img_use_house_02.jpg" alt=""></figure><span>행잉거터</span></li>
-                            <li><figure><img src="resources/assets/image/img_use_house_03.jpg" alt=""></figure><span>육묘 벤치</span></li>
-                            <li><figure><img src="resources/assets/image/img_use_house_04.jpg" alt=""></figure><span>단동온실</span></li>
-                            <li><figure><img src="resources/assets/image/img_use_house_05.jpg" alt=""></figure><span>EBB베드(저면관수베드)</span></li>
+                            <li><figure><img src="resources/assets/image/img_use_house_a_01.png" alt=""></figure><span>벤로형 온실</span></li>
+                            <li><figure><img src="resources/assets/image/img_use_house_a_02.png" alt=""></figure><span>행잉거터</span></li>
+                            <li><figure><img src="resources/assets/image/img_use_house_a_03.png" alt=""></figure><span>육묘 벤치</span></li>
+                            <li><figure><img src="resources/assets/image/img_use_house_a_04.png" alt=""></figure><span>단동온실</span></li>
+                            <li><figure><img src="resources/assets/image/img_use_house_a_05.png" alt=""></figure><span>EBB베드(저면관수베드)</span></li>
                             <li><figure><img src="resources/assets/image/img_use_house_06.jpg" alt=""></figure><span>포그(fog) 설비</span></li>
                         </ul>
                     </div>
@@ -411,7 +411,7 @@
 
             </div>
         </c:if>
-        <c:if test="${profile == 'gimje-prod'}">
+        <c:if test="${profile == 'gimje-prod' or profile == 'local'}">
             <div class="page__cnt">
                 <h3 class="page__subject">실증 온실 소개</h3>
 
@@ -733,12 +733,12 @@
                                 <td>-</td>
                             </tr>
                             <tr>
-                                <td>온식피복</td>
+                                <td>온실피복</td>
                                 <td>벽체, 지붕</td>
                                 <td>-</td>
                             </tr>
                             <tr>
-                                <td>행인거터</td>
+                                <td>행잉거터</td>
                                 <td>배지설치</td>
                                 <td>-</td>
                             </tr>
@@ -749,7 +749,7 @@
                             </tr>
                             <tr>
                                 <td>튜브레일</td>
-                                <td>운반구 레일</td>
+                                <td>난방, 작업차 레일</td>
                                 <td class="last-child" rowspan="11">전력 사용량에 따라 별도<br>비용 발생 및 청구</td>
                             </tr>
                             <tr>
@@ -757,8 +757,8 @@
                                 <td>구역별 환경제어</td>
                             </tr>
                             <tr>
-                                <td>유동휀</td>
-                                <td>실내 공기조화</td>
+                                <td>유동팬</td>
+                                <td>실내 공기순환</td>
                             </tr>
                             <tr>
                                 <td>FCU</td>
@@ -769,7 +769,7 @@
                                 <td>습도조절</td>
                             </tr>
                             <tr>
-                                <td>양액재처리시설</td>
+                                <td>배액살균순환설비</td>
                                 <td>양액재활용</td>
                             </tr>
                             <tr>
@@ -781,8 +781,8 @@
                                 <td>양액공급배관</td>
                             </tr>
                             <tr>
-                                <td>CO2 배관</td>
-                                <td>실내CO2량 조절</td>
+                                <td>CO<sub>2</sub> 공급설비</td>
+                                <td>실내 CO<sub>2</sub> 농도제어</td>
                             </tr>
                             <tr>
                                 <td>천 창</td>
@@ -794,21 +794,21 @@
                             </tr>
                             </tbody>
                         </table>
-                        <div class="table__desc">
+                        <%--<div class="table__desc">
                             <ul>
                                 <li>위 설비 현황은 실증온실 구축 진행상황에 따라 일부 변경될 수 있습니다.</li>
                             </ul>
-                        </div>
+                        </div>--%>
                     </div>
 
                     <div class="cnt__title">실증온실 시설 사진 예시</div>
                     <div class="use__house">
                         <ul>
-                            <li><figure><img src="resources/assets/image/img_use_house_01.jpg" alt=""></figure><span>벤로형 온실</span></li>
-                            <li><figure><img src="resources/assets/image/img_use_house_02.jpg" alt=""></figure><span>행잉거터</span></li>
-                            <li><figure><img src="resources/assets/image/img_use_house_03.jpg" alt=""></figure><span>육묘 벤치</span></li>
-                            <li><figure><img src="resources/assets/image/img_use_house_04.jpg" alt=""></figure><span>단동온실</span></li>
-                            <li><figure><img src="resources/assets/image/img_use_house_05.jpg" alt=""></figure><span>EBB베드(저면관수베드)</span></li>
+                            <li><figure><img src="resources/assets/image/img_use_house_a_01.png" alt=""></figure><span>벤로형 온실</span></li>
+                            <li><figure><img src="resources/assets/image/img_use_house_a_02.png" alt=""></figure><span>행잉거터</span></li>
+                            <li><figure><img src="resources/assets/image/img_use_house_a_03.png" alt=""></figure><span>육묘 벤치</span></li>
+                            <li><figure><img src="resources/assets/image/img_use_house_a_04.png" alt=""></figure><span>단동온실</span></li>
+                            <li><figure><img src="resources/assets/image/img_use_house_a_05.png" alt=""></figure><span>EBB베드(저면관수베드)</span></li>
                             <li><figure><img src="resources/assets/image/img_use_house_06.jpg" alt=""></figure><span>포그(fog) 설비</span></li>
                         </ul>
                     </div>
@@ -817,6 +817,7 @@
 
             </div>
         </c:if>
+        <%--
         <c:if test="${profile == 'local'}">
             <div class="page__cnt">
                 <h3 class="page__subject">실증 온실 소개</h3>
@@ -1210,11 +1211,11 @@
                     <div class="cnt__title">실증온실 시설 사진 예시</div>
                     <div class="use__house">
                         <ul>
-                            <li><figure><img src="resources/assets/image/img_use_house_01.jpg" alt=""></figure><span>벤로형 온실</span></li>
-                            <li><figure><img src="resources/assets/image/img_use_house_02.jpg" alt=""></figure><span>행잉거터</span></li>
-                            <li><figure><img src="resources/assets/image/img_use_house_03.jpg" alt=""></figure><span>육묘 벤치</span></li>
-                            <li><figure><img src="resources/assets/image/img_use_house_04.jpg" alt=""></figure><span>단동온실</span></li>
-                            <li><figure><img src="resources/assets/image/img_use_house_05.jpg" alt=""></figure><span>EBB베드(저면관수베드)</span></li>
+                            <li><figure><img src="resources/assets/image/img_use_house_a_01.png" alt=""></figure><span>벤로형 온실</span></li>
+                            <li><figure><img src="resources/assets/image/img_use_house_a_02.png" alt=""></figure><span>행잉거터</span></li>
+                            <li><figure><img src="resources/assets/image/img_use_house_a_03.png" alt=""></figure><span>육묘 벤치</span></li>
+                            <li><figure><img src="resources/assets/image/img_use_house_a_04.png" alt=""></figure><span>단동온실</span></li>
+                            <li><figure><img src="resources/assets/image/img_use_house_a_05.png" alt=""></figure><span>EBB베드(저면관수베드)</span></li>
                             <li><figure><img src="resources/assets/image/img_use_house_06.jpg" alt=""></figure><span>포그(fog) 설비</span></li>
                         </ul>
                     </div>
@@ -1223,7 +1224,7 @@
 
             </div>
         </c:if>
-
+--%>
 
     </div>
 </div>

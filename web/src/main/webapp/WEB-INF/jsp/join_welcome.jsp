@@ -30,7 +30,7 @@
                     <a href="main"><img src="resources/assets/image/ico_close.svg" alt=""></a>
                 </div>
                 <div class="tb__logo">
-                    <c:if test="${profile == 'gimje-prod'}">
+                    <c:if test="${profile == 'gimje-prod' or profile == 'local'}">
                         <img src="resources/assets/image/img_loginLogo.png" alt="스마트팜 실증센터">
                     </c:if>
                 </div>

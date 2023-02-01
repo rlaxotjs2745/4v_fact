@@ -171,7 +171,7 @@
                     </ul>
                 </div>
 
-                <div class="cnt__title">선정평가 점수산출</div>
+                <%--<div class="cnt__title">선정평가 점수산출</div>
                 <div class="cnt__text">최고점수와 최저점수를 제외한 위원의 평균점수에 가점을 부여하여 최종점수를 산정하며, 최종점수가 높은 이용 신청자를 선정.</div>
                 <div class="application__counseling">
                     <ul>
@@ -226,10 +226,7 @@
                                 <c:if test="${profile == 'sangju-prod'}">
                                     경상북도에 본사를 둔 기업
                                 </c:if>
-                                <c:if test="${profile == 'gimje-prod'}">
-                                    전라북도에 본사를 둔 기업
-                                </c:if>
-                                <c:if test="${profile == 'local'}">
+                                <c:if test="${profile == 'gimje-prod' or profile == 'local'}">
                                     전라북도에 본사를 둔 기업
                                 </c:if>
                             </td>
@@ -241,10 +238,7 @@
                                 <c:if test="${profile == 'sangju-prod'}">
                                     경상북도 상주시에 실증참여의향서를 기 제출한 기업
                                 </c:if>
-                                <c:if test="${profile == 'gimje-prod'}">
-                                    전라북도 김제시에 실증참여의향서를 기 제출한 기업
-                                </c:if>
-                                <c:if test="${profile == 'local'}">
+                                <c:if test="${profile == 'gimje-prod' or profile == 'local'}">
                                     전라북도 김제시에 실증참여의향서를 기 제출한 기업
                                 </c:if>
                             </td>
@@ -252,7 +246,7 @@
                         </tr>
                         </tbody>
                     </table>
-                </div>
+                </div>--%>
 <%--
 
 

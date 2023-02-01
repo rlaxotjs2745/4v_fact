@@ -29,10 +29,7 @@
         <c:if test="${profile == 'sangju-prod'}">
             <h1><a href="index"><img src="resources/assets/image/img-logo-s.png" alt="스마트팜 실증센터"></a></h1>
         </c:if>
-        <c:if test="${profile == 'gimje-prod'}">
-            <h1><a href="index"><img src="resources/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
-        </c:if>
-        <c:if test="${profile == 'local'}">
+        <c:if test="${profile == 'gimje-prod' or profile == 'local'}">
             <h1><a href="index"><img src="resources/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></a></h1>
         </c:if>
 
@@ -43,7 +40,7 @@
                         <li><a href="prv_part">실증 분야</a></li>
                         <li><a href="prv_step">실증 절차</a></li>
                         <li><a href="prv_use">이용가능시설</a></li>
-                        <li><a href="prv_fee">실증서비스 이용료</a></li>
+                        <li><a href="prv_fee">실증서비스 이용료 예시</a></li>
                         <li><a href="prv_application">신청서 작성</a></li>
                     </ul>
                 </li>
@@ -110,7 +107,7 @@
             <div class="login__anchor">
                 <c:choose>
                     <c:when test="${sessionScope.userid ne null}">
-                <a href="login"><img src="resources/assets/image/ico_exit.svg" alt="">로그아웃</a>
+                <a id="logout" href="#none"><img src="resources/assets/image/ico_exit.svg" alt="">로그아웃</a>
                     </c:when>
                     <c:when test="${sessionScope.userid eq null}">
                 <a href="login"><img src="resources/assets/image/ico_login_n.svg" alt="">로그인</a>
@@ -137,7 +134,16 @@
         <div class="nav__full--box ">
             <div class="nav_full--inner">
                 <a href="#none" class="btn-close-menu"><img src="resources/assets/image/ico_close.svg" alt="레이어닫기"></a>
-                <h2><img src="resources/assets/image/h1_logo@3x.png" alt="스마트팜 실증센터"></h2>
+
+                <%--<h2><img src="resources/assets/image/h1_logo@3x.png" alt="스마트팜 실증센터"></h2>--%>
+                <c:if test="${profile == 'sangju-prod'}">
+                    <h2><img src="resources/assets/image/img-logo-s.png" alt="스마트팜 실증센터"></h2>
+                </c:if>
+                <c:if test="${profile == 'gimje-prod' or profile == 'local'}">
+                    <h2><img src="resources/assets/image/h1_logo_gimje.png" alt="스마트팜 실증센터"></h2>
+                </c:if>
+
+
                 <nav class="nav__full">
                     <ul class="nav__full--depth1">
                         <li><a href="#">실증 안내/신청</a>
@@ -145,7 +151,7 @@
                                 <li><a href="prv_part">실증 분야</a></li>
                                 <li><a href="prv_step">실증 절차</a></li>
                                 <li><a href="prv_use">이용가능시설</a></li>
-                                <li><a href="prv_fee">실증서비스 이용료</a></li>
+                                <li><a href="prv_fee">실증서비스 이용료 예시</a></li>
                                 <li><a href="prv_application">신청서 작성</a></li>
                             </ul>
                         </li>

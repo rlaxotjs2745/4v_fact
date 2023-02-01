@@ -5546,6 +5546,31 @@ html {
     margin-bottom: 24px
 }
 
+.use__container .use__image ul {
+    float: left
+}
+.use__container .use__image ul li {
+    position: relative;
+    width: calc((100% - 32px)/ 2);
+    margin: 0 0 16px 16px;
+    float: left
+}
+.use__container .use__image ul li:nth-child(1)
+{
+    margin-left: 0
+}
+.use__container .use__image ul li figure {
+    position: relative
+}
+.use__container .use__image ul li span {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    color: #fff
+}
 .use__container .use__house ul {
     float: left
 }
@@ -5607,7 +5632,7 @@ html {
 }
 
 .fee__container .fee__diagram ul li+li {
-    margin-left: 324px
+    margin-left: 320px
 }
 
 .fee__container .fee__diagram ul li+li:after {
