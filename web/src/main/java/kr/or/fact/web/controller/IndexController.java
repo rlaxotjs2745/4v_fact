@@ -68,6 +68,9 @@ public class IndexController {
     @Resource(name = "fileService")
     FileService fileService;
 
+    @Resource(name = "webMainPopupService")
+    WebMainPopupService webMainPopupService;
+
     @Autowired
     Environment env;
 
@@ -82,9 +85,11 @@ public class IndexController {
 
         List<EventContentVO> eventContentVOList = eventContentService.getMainEventContentList();
 
+        List<WebMainPopupVO> popupVOList = webMainPopupService.getWebMainPopupListNow();
         model.addAttribute("noticeList", noticeVOList);
         model.addAttribute("annoList", bsAnnouncementVOList);
         model.addAttribute("eventList", eventContentVOList);
+        model.addAttribute("popupList", popupVOList);
         getHomepageInfo(model);
         setProfile(model);
         return "index";
@@ -100,9 +105,11 @@ public class IndexController {
 
         List<EventContentVO> eventContentVOList = eventContentService.getMainEventContentList();
 
+        List<WebMainPopupVO> popupVOList = webMainPopupService.getWebMainPopupListNow();
         model.addAttribute("noticeList", noticeVOList);
         model.addAttribute("annoList", bsAnnouncementVOList);
         model.addAttribute("eventList", eventContentVOList);
+        model.addAttribute("popupList", popupVOList);
 
         getHomepageInfo(model);
         setProfile(model);

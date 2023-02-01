@@ -28,5 +28,7 @@ public interface WebMainPopupService {
     List<WebMainPopupVO> getWebMainBannerList();
 
     int getWebMainBannerCount();
+
+    List<WebMainPopupVO> getWebMainPopupListNow();
 }
 

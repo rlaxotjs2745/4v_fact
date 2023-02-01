@@ -73,5 +73,10 @@ public class WebMainPopupServiceImpl implements WebMainPopupService {
     public int getWebMainBannerCount() {
         return webMainPopupMapper.getWebMainBannerCount();
     }
+
+    @Override
+    public List<WebMainPopupVO> getWebMainPopupListNow() {
+        return webMainPopupMapper.getWebMainPopupListNow();
+    }
 }
 

@@ -29,5 +29,7 @@ public interface WebMainPopupMapper {
     List<WebMainPopupVO> getWebMainBannerList();
 
     int getWebMainBannerCount();
+
+    List<WebMainPopupVO> getWebMainPopupListNow();
 }
 

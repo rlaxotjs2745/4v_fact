@@ -195,94 +195,32 @@
         </div>
     </div>
 
-    <%--<div id="popup_main1" class="pop__main is-on" style="margin:-220px 0 0 -240px">
-        <div class="section">
-            <a href="#none" class="js-main-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
-            <div class="popup__cnt">
-                <h5 class="popup__title">XXXX 공지</h5>
-                <div class="popup__main">
-                    내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.
+    <c:if test="${popupList != null && popupList.size() > 0}">
+        <c:forEach items="${popupList}" var="popup" varStatus="status">
+            <div id="popup_main${status.count}" class="pop__main is-on popup_main" style="margin:-220px 0 0 -240px">
+                <div class="section">
+                    <a href="#none" onclick="closePopup(${status.count})" class="js-main-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
+                    <div class="popup__cnt">
+                        <h5 class="popup__title">${popup.subject}</h5>
+                        <div class="popup__main">
+                            <a href="${popup.popup_url}">
+                                <img src="${popup.file_path}" alt="팝업1">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="popup__btn">
+                        <div class="checkbox">
+        <%--                    <input type="checkbox" id="today-1" name="logingroup">--%>
+        <%--                    <label for="today-1">오늘 하루 보지 않기</label>--%>
+                        </div>
+                        <a href="#none" onclick="closePopup(${status.count})" class="btn submit btn-lg">닫기</a>
+                    </div>
                 </div>
             </div>
-            <div class="popup__btn">
-                <div class="checkbox">
-                    <input type="checkbox" id="today-1" name="logingroup">
-                    <label for="today-1">오늘 하루 보지 않기</label>
-                </div>
-
-                <a href="#" class="btn submit btn-lg">닫기</a>
-            </div>
-
-        </div>
-    </div>--%>
+        </c:forEach>
 
 
-
-
-    <%--
-    <div id="popup_main2" class="pop__main is-on" style="margin:-220px 0 0 240px">
-        <div class="section">
-            <a href="#none" class="js-main-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
-            <div class="popup__cnt">
-                <h5 class="popup__title">XXXX 공지</h5>
-                <div class="popup__main">
-                    내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.
-                    내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.
-                    내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.
-                </div>
-            </div>
-            <div class="popup__btn">
-                <div class="checkbox">
-                    <input type="checkbox" id="today-2" name="logingroup">
-                    <label for="today-1">오늘 하루 보지 않기</label>
-                </div>
-
-                <a href="#" class="btn submit btn-lg">닫기</a>
-            </div>
-
-        </div>
-    </div>
-    <div id="popup_main3" class="pop__main is-on" style="margin:220px 0 0 -240px">
-        <div class="section">
-            <a href="#none" class="js-main-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
-            <div class="popup__cnt">
-                <h5 class="popup__title">XXXX 공지</h5>
-                <div class="popup__main">
-                    내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.
-                </div>
-            </div>
-            <div class="popup__btn">
-                <div class="checkbox">
-                    <input type="checkbox" id="today-3" name="logingroup">
-                    <label for="today-1">오늘 하루 보지 않기</label>
-                </div>
-
-                <a href="#" class="btn submit btn-lg">닫기</a>
-            </div>
-
-        </div>
-    </div>
-    <div id="popup_main4" class="pop__main is-on" style="margin:220px 0 0 240px">
-        <div class="section">
-            <a href="#none" class="js-main-close"><img src="resources/assets/image/ico_close.png" alt="닫기"></a>
-            <div class="popup__cnt">
-                <h5 class="popup__title">XXXX 공지</h5>
-                <div class="popup__main">
-                    내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.내용이 짧은 경우도 영역을 유지합니다.
-                </div>
-            </div>
-            <div class="popup__btn">
-                <div class="checkbox">
-                    <input type="checkbox" id="today-4" name="logingroup">
-                    <label for="today-1">오늘 하루 보지 않기</label>
-                </div>
-
-                <a href="#" class="btn submit btn-lg">닫기</a>
-            </div>
-
-        </div>
-
-    </div>--%>
+    </c:if>
 
 </div>
 
@@ -313,6 +251,10 @@
         $(".swiper-main-button-play").hide();
     });
     var cookiedata;
+
+    function closePopup(num){
+        $('#popup_main' + num).hide();
+    }
     // $(document).ready(function () {
     //     $('.popup').show();
     //     cookiedata = document.cookie;
