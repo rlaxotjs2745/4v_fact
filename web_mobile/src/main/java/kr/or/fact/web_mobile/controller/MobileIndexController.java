@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Controller
@@ -226,30 +229,41 @@ public class MobileIndexController {
 
 
     @RequestMapping("/brd_event")
-    public String brd_event(@RequestParam("page") int page,
-                            Model model){
+    public String brd_event(@RequestParam(name = "filter", required = false) String filter,
+                            @RequestParam(name = "query", required = false) String query,
+                            Model model) {
+
+        int page = 1;
+
         int list_amount = 10;
         int page_amount = 10;
 
-        int eventCount = eventContentService.getWebpageEventContentCount();
-        if(eventCount==0){
+        query = decodeUrlValue(query);
+
+        model.addAttribute("page", page);
+        model.addAttribute("filter", filter);
+        model.addAttribute("query", query);
+
+        int eventCount = eventContentService.getOpenEventContentCount(filter, query);
+        if (eventCount == 0) {
+            //setProfile(model);
             return "brd_event_blank";
         }
-        model.addAttribute("total_count",eventCount);
-        List<EventContentVO> eventContentVOList = eventContentService.getEventContentList(page,list_amount);
-        model.addAttribute("eventContentVOList",eventContentVOList);
+        model.addAttribute("total_count", eventCount);
+        List<EventContentVO> eventContentVOList = eventContentService.getOpenEventContentList(page, list_amount, filter, query);
+        model.addAttribute("eventContentVOList", eventContentVOList);
 
-        model.addAttribute("cur_page",page);
-        model.addAttribute("amount",list_amount);
+        model.addAttribute("cur_page", page);
+        model.addAttribute("amount", list_amount);
 
-        int tot_page = eventCount/list_amount+1;
-        if(eventCount%list_amount==0) tot_page-=1;
+        int tot_page = eventCount / list_amount + 1;
+        if (eventCount % list_amount == 0) tot_page -= 1;
 
-        int tot_sector = tot_page/page_amount+1;
-        if(tot_page%page_amount==0) tot_sector-=1;
+        int tot_sector = tot_page / page_amount + 1;
+        if (tot_page % page_amount == 0) tot_sector -= 1;
 
-        int cur_sector = page/page_amount+1;
-        if(page%page_amount==0) cur_sector-=1;
+        int cur_sector = page / page_amount + 1;
+        if (page % page_amount == 0) cur_sector -= 1;
 
         boolean is_past = false;
         boolean is_prev = false;
@@ -257,29 +271,32 @@ public class MobileIndexController {
         boolean is_last = false;
         boolean is_active = false;
 
-        if(page!=tot_page && tot_page>1) is_next = true;
+        if (page != tot_page && tot_page > 1) is_next = true;
 
-        if(page!=1 && tot_page>1) is_prev = true;
+        if (page != 1 && tot_page > 1) is_prev = true;
 
-        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+        if (cur_sector != tot_sector && tot_sector > 1) is_last = true;
 
-        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+        if (cur_sector != 1 && tot_sector > 1) is_past = true;
 
-        if(tot_page<=page_amount){
+        if (tot_page <= page_amount) {
             is_past = false;
             is_last = false;
             page_amount = tot_page;
         }
 
-        model.addAttribute("tot_page",tot_page);
-        model.addAttribute("tot_sector",tot_sector);
-        model.addAttribute("cur_sector",cur_sector);
-        model.addAttribute("is_past",is_past);
-        model.addAttribute("is_prev",is_prev);
-        model.addAttribute("is_next",is_next);
-        model.addAttribute("is_last",is_last);
-        model.addAttribute("list_amount",list_amount);
-        model.addAttribute("page_amount",page_amount);
+        model.addAttribute("tot_page", tot_page);
+        model.addAttribute("tot_sector", tot_sector);
+        model.addAttribute("cur_sector", cur_sector);
+        model.addAttribute("is_past", is_past);
+        model.addAttribute("is_prev", is_prev);
+        model.addAttribute("is_next", is_next);
+        model.addAttribute("is_last", is_last);
+        model.addAttribute("list_amount", list_amount);
+        model.addAttribute("page_amount", page_amount);
+
+        //getHomepageInfo(model);
+        //setProfile(model);
         return "brd_event";
     }
     @RequestMapping("/brd_event_detail")
@@ -854,5 +871,16 @@ public class MobileIndexController {
 
     //===========================================
 
+    private String decodeUrlValue(String value) {
 
+        if (value == null) {
+            return null;
+        }
+
+        try {
+            return URLDecoder.decode(value, StandardCharsets.UTF_8.toString());
+        } catch (UnsupportedEncodingException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
 }
