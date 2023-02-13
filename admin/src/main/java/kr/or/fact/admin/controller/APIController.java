@@ -101,6 +101,11 @@ public class APIController {
     @Resource(name = "bsAnnouncementService")
     public BsAnnouncementService bsAnnouncementService;
 
+    @RequestMapping(value = "/empty",method = RequestMethod.POST)
+    public String empty(HttpSession session){
+
+        return "pages/empty";
+    }
 
     @RequestMapping(value = "/admin_login",method = RequestMethod.POST)
     public @ResponseBody ResultVO admin_login(@RequestBody AdminVO adminVo) {
@@ -318,58 +323,134 @@ public class APIController {
         return resultVO;
     }
 
-    @RequestMapping(value = "/appl_list_by_b21_filtered",method = RequestMethod.POST)
-    public String demo_bs_list_by_filter(HttpSession session,
+    @RequestMapping(value = "/get_demobs_info",method = RequestMethod.POST)
+    public @ResponseBody ResultWithDataVO get_demobs_info(HttpSession session,
+                                         @RequestBody DemoBsInfoReqVO param){
+        ResultWithDataVO resultVO =new ResultWithDataVO();
+        resultVO.setResult_code(CONSTANT.fail);
+        resultVO.setResult_str("404 notfound");
+
+        if(param == null || param.getIdx_demo_business()==0){
+            return resultVO;
+        }
+
+        DemoBusinessVO demoBusinessVO = demoBsService.getDemoBsByIdx(param.getIdx_demo_business());
+        if(demoBusinessVO == null){
+            return resultVO;
+        }
+        resultVO.setResult_code(CONSTANT.Success);
+        resultVO.setResult_str("Success");
+        resultVO.setElement(demoBusinessVO);
+        //model.addAttribute("demoBusinessVO",demoBusinessVO);
+
+
+        return resultVO;
+    }
+
+
+    @RequestMapping(value = "/get_demobs_info_page",method = RequestMethod.POST)
+    public String get_demobs_info_page(HttpSession session,
+                                  @RequestBody DemoBsInfoReqVO param,
+                                  Model model){
+        if(param == null || param.getIdx_demo_business()==0){
+            return "pages/empty";
+        }
+
+        DemoBusinessVO demoBusinessVO = demoBsService.getDemoBsByIdx(param.getIdx_demo_business());
+        if(demoBusinessVO == null){
+            model.addAttribute("demoBs_Status",0);
+            return "page/empty";
+        }
+
+        model.addAttribute("demoBusinessVO",demoBusinessVO);
+
+        List<UserDemoBsVO> userDemoBsVOList = userDemoBsService.getUserDemoBsPagingListByFiltered(demoBusinessVO.getIdx_demo_business(),1,10000,"IDX_USER_DEMO_BS",0,99);
+
+        int appl_count = 0;//0:이용 신청서 작성, 1: 실증계획서 작성, 2:개인수집 동의서 작성, 3: 기타서류 등록, 4: 신청함, 5:서류 검토 중 , 6:신청서 보완요청, 7:서류 보완 중, 8:서류접수완료, 9:서류 부적격,
+        int eval_count = 0;// 10:서류 평가 심사 중 11:서류 심사통과, 12:서류 심사보류, 13:서류심사심사 부적격, 14:제안서 요청, 15:제안서 접수, 16:발표 요청, 17:발표 완료, 18:발표평가중, 19:발표 합격
+        int objection_count = 0;// 20:이의신청, 21:이의 검토중, 22:이의 기각, 23:이의 인용,
+        int contract_count = 0;// 30:계획확정중, 31:계획보완요청,32:계획확정, 33:협약중, 34:협약완료, 35:협약보류, 36:협약 실패,
+        int bs_start_count = 0;// 40:사업 중,
+        int bs_done_count = 0;// 50:사업 종료, 60:결산중, 61:결산 완료, 70:최종 완료
+        int exit_user_count = 0;//0:이용 신청서 작성, 1: 실증계획서 작성, 2:개인수집 동의서 작성, 3: 기타서류 등록, 99:최종 탈락
+
+        int filtered_item_total = userDemoBsVOList.size();
+        for(UserDemoBsVO item : userDemoBsVOList){
+            if(item.getUser_demobs_status()>=4 && item.getUser_demobs_status()<10)
+                appl_count++;
+            else if(item.getUser_demobs_status()>=10 && item.getUser_demobs_status()<20)
+                eval_count++;
+            else if(item.getUser_demobs_status()>=20 && item.getUser_demobs_status()<30)
+                objection_count++;
+            else if(item.getUser_demobs_status()>=30 && item.getUser_demobs_status()<40)
+                contract_count++;
+            else if(item.getUser_demobs_status()>=40 && item.getUser_demobs_status()<50)
+                bs_start_count++;
+            else if(item.getUser_demobs_status()>=50 && item.getUser_demobs_status()<80)
+                bs_done_count++;
+            else
+                exit_user_count++;
+        }
+
+        model.addAttribute("total_count",filtered_item_total);
+        model.addAttribute("userDemoBsVOList",userDemoBsVOList);
+
+        model.addAttribute("demoBs_Status",demoBusinessVO.getDemo_bs_status());
+
+        return "pages/demobs_info_page";
+    }
+
+
+    @RequestMapping(value = "/get_user_demobs_list_filtered",method = RequestMethod.POST)
+    public String get_user_demobs_list_filtered(HttpSession session,
                                          @RequestBody ParamPageListFilteredVO param,
                                          Model model){
+
+        if(param==null || param.getIdx()==0)
+            return "page/empty";
+
+        long idx_user_demobs = param.getIdx();
         int page = param.getPage_num();
+        int list_amount = param.getAmount();
+        String order_field = param.getOrder_field();
         int filter1 = param.getFilter1();
-        System.out.println("filter1:" + filter1);// default : 9999(전체) ,검토전(0) ,검토중(1),검토완료(3)
         int filter2 = param.getFilter2(); // default:9998
 
-        //검토중
-        if(filter1 ==1){
-            filter2=2;
-        }
-        System.out.println("filter2 : "  + filter2 );
 
-        int list_amount = param.getAmount();
-        int page_amount = param.getAmount();
+        int page_amount = 5;//아래 내비게에션에 표시할 페이지의 갯수
 
         System.out.println(filter2);//9998
 
-        AdminDemoBSFilterVO adminDemoBSFilterVO = demoBsService.getAdminDemoBsFilter();
+        List<UserDemoBsVO> userDemoBsVOList = userDemoBsService.getUserDemoBsPagingListByFiltered(idx_user_demobs,page,list_amount,order_field,filter1,filter2);
 
-//        int tot_count;//전체
-//        int appl_count;//모집중
-//        int revuiew_count;//심사중
-//        int agree_count;//협약중
-//        int demo_count;//사업중
-//        int result_count;//결산중
+        int appl_count = 0;//0:이용 신청서 작성, 1: 실증계획서 작성, 2:개인수집 동의서 작성, 3: 기타서류 등록, 4: 신청함, 5:서류 검토 중 , 6:신청서 보완요청, 7:서류 보완 중, 8:서류접수완료, 9:서류 부적격,
+        int eval_count = 0;// 10:서류 평가 심사 중 11:서류 심사통과, 12:서류 심사보류, 13:서류심사심사 부적격, 14:제안서 요청, 15:제안서 접수, 16:발표 요청, 17:발표 완료, 18:발표평가중, 19:발표 합격
+        int objection_count = 0;// 20:이의신청, 21:이의 검토중, 22:이의 기각, 23:이의 인용,
+        int contract_count = 0;// 30:계획확정중, 31:계획보완요청,32:계획확정, 33:협약중, 34:협약완료, 35:협약보류, 36:협약 실패,
+        int bs_start_count = 0;// 40:사업 중,
+        int bs_done_count = 0;// 50:사업 종료, 60:결산중, 61:결산 완료, 70:최종 완료
+        int exit_user_count = 0;//0:이용 신청서 작성, 1: 실증계획서 작성, 2:개인수집 동의서 작성, 3: 기타서류 등록, 99:최종 탈락
 
-
-        //리스트 총갯수를 이때 빼야 함
-        /*
-        *   public static int DEMOBS_FILTER_APPL = 3;
-            public static int DEMOBS_FILTER_REVUIEW = 5;
-            public static int DEMOBS_FILTER_AGREE = 7;
-            public static int DEMOBS_FILTER_DEMO = 9;
-            public static int DEMOBS_FILTER_RESULT = 11;
-        * */
-        int filtered_item_total = adminDemoBSFilterVO.getTot_count();
-        if(filter1==CONSTANT.DEMOBS_FILTER_APPL)
-            filtered_item_total = adminDemoBSFilterVO.getAppl_count();
-        else if(filter1==CONSTANT.DEMOBS_FILTER_REVUIEW)
-            filtered_item_total = adminDemoBSFilterVO.getRevuiew_count();
-        else if(filter1==CONSTANT.DEMOBS_FILTER_AGREE)
-            filtered_item_total = adminDemoBSFilterVO.getAgree_count();
-        else if(filter1==CONSTANT.DEMOBS_FILTER_DEMO)
-            filtered_item_total = adminDemoBSFilterVO.getDemo_count();
-        else if(filter1==CONSTANT.DEMOBS_FILTER_RESULT)
-            filtered_item_total = adminDemoBSFilterVO.getResult_count();
+        int filtered_item_total = userDemoBsVOList.size();
+        for(UserDemoBsVO item : userDemoBsVOList){
+            if(item.getUser_demobs_status()>=4 && item.getUser_demobs_status()<10)
+                appl_count++;
+            else if(item.getUser_demobs_status()>=10 && item.getUser_demobs_status()<20)
+                eval_count++;
+            else if(item.getUser_demobs_status()>=20 && item.getUser_demobs_status()<30)
+                objection_count++;
+            else if(item.getUser_demobs_status()>=30 && item.getUser_demobs_status()<40)
+                contract_count++;
+            else if(item.getUser_demobs_status()>=40 && item.getUser_demobs_status()<50)
+                bs_start_count++;
+            else if(item.getUser_demobs_status()>=50 && item.getUser_demobs_status()<80)
+                bs_done_count++;
+            else
+                exit_user_count++;
+        }
 
         model.addAttribute("total_count",filtered_item_total);
-        model.addAttribute("adminDemoBsFilter",adminDemoBSFilterVO);
+        model.addAttribute("userDemoBsVOList",userDemoBsVOList);
         model.addAttribute("idx_demo_business",param.getIdx());
 
         param.setOrder_field("IDX_DEMO_BUSINESS");
@@ -381,13 +462,14 @@ public class APIController {
         listPagingParamVO.setOrder_field("IDX_DEMO_BUSINESS");
         listPagingParamVO.setIdx(param.getIdx());*/
 
-        List<AdminApplHeaderListVO> adminApplHeaderListVOS =  demoBsApplicationService.getApplPagingFilteredList(param);
+        //List<AdminApplHeaderListVO> adminApplHeaderListVOS =  demoBsApplicationService.getApplPagingFilteredList(param);
 
 
 
         //List<DemoBusinessVO>  demoBusinessVOList = demoBsService.getDemoBsPagingList(listPagingParamVO);
 
-        model.addAttribute("adminApplHeaderListVOS",adminApplHeaderListVOS);
+        model.addAttribute("userDemoBsVOList",userDemoBsVOList);
+
         model.addAttribute("filter1",filter1);
         model.addAttribute("filter2",filter2);
 
@@ -403,19 +485,19 @@ public class APIController {
         int cur_sector = page/page_amount+1;
         if(page%page_amount==0) cur_sector-=1;
 
-        boolean is_past = false;
-        boolean is_prev = false;
-        boolean is_next = false;
-        boolean is_last = false;
-        boolean is_active = false;
+        boolean is_past = (cur_sector!=1 && tot_sector>1 )?true:false;
+        boolean is_prev = (page!=1 && tot_page>1)?true:false;
+        boolean is_next = (page!=tot_page && tot_page>1)?true:false;
+        boolean is_last = (cur_sector!=tot_sector && tot_sector>1 )?true:false;
+        //boolean is_active = false;
 
-        if(page!=tot_page && tot_page>1) is_next = true;
+        //if(page!=tot_page && tot_page>1) is_next = true;
 
-        if(page!=1 && tot_page>1) is_prev = true;
+        //if(page!=1 && tot_page>1) is_prev = true;
 
-        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+        //if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
 
-        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+        //if(cur_sector!=1 && tot_sector>1 ) is_past = true;
 
         if(tot_page<=page_amount){
             is_past = false;
@@ -433,8 +515,22 @@ public class APIController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-        return "pages/appl_list_by_b21_filtered";
+        return "pages/userDemobsFiltered";
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @RequestMapping(value = "/send_mail",method = RequestMethod.POST)
     public ResultVO send_mail(@ModelAttribute MailVO mailVO, HttpSession session, HttpServletRequest request) throws Exception, IOException {

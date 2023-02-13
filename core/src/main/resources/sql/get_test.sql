@@ -353,3 +353,47 @@ SELECT * FROM TB_VISIT_DATA WHERE CUR_DATE BETWEEN TO_DATE(TO_CHAR(SYSDATE, 'YYY
 SELECT *
 FROM TB_ADMIN
 WHERE admin_id = 'abeki@naver.com'
+
+SELECT
+    IDX_USER_DEMO_BS
+     ,IDX_DEMO_BUSINESS
+     ,USER_DEMOBS_STATUS
+     ,IDX_USER
+     ,USER_DEMO_BS_TYPE
+     ,IDX_CORP_INFO
+     ,CORP_NAME
+     ,CORP_NUM
+     ,CORP_PHONE
+     ,EMAIL
+     ,REQ_FACILITY
+     ,CEO_NAME
+     ,CEO_MNUMBER
+     ,CEO_EMAIL
+     ,MAN_NAME
+     ,MAN_MNUMBER
+     ,MAN_EMAIL
+     ,USER_DEMO_TYPE
+     ,USER_DEMO_FACILITY
+     ,USER_DEMO_WAY
+     ,USER_DEMO_GOAL
+     ,CULTURE_SOIL
+     ,USER_DEMO_IS_CROPS
+     ,DEMO_START_DATE
+     ,DEMO_END_DATE
+     ,RESIDENT_TYPE
+     ,REG_DATE
+     ,LAST_UPD_DATE
+FROM (
+         SELECT ROW_NUMBER() OVER(ORDER by IDX_USER_DEMO_BS DESC) AS row_num
+        ,A.*
+         FROM (
+                  SELECT * FROM TB_USER_DEMO_BS
+
+                  WHERE USER_DEMOBS_STATUS >= 3
+                     AND USER_DEMOBS_STATUS < 12
+
+              ) A
+
+         WHERE ROWNUM <= 5
+     )
+WHERE row_num > 1

@@ -7,12 +7,12 @@
             <!-- Brand demo (see assets/css/demo/demo.css) -->
             <div class="app-brand demo">
     <c:if test="${profile == 'sangju-prod'}">
-                <a href="javascript:pageLoad('a10_dashboard',{tag:1},'대시보드');" class="app-brand-text demo sidenav-text font-weight-normal ml-2 default"><img src="resources/assets/img/logo_sj.png" alt="스마트팜"></a>
-                <a href="javascript:pageLoad('a10_dashboard',{tag:1},'대시보드');" class="app-brand-text demo sidenav-text font-weight-normal ml-2 mini"><img src="resources/assets/img/logo_2.png" alt="상주"></a>
+                <a href="javascript:pageLoad('a10_dashboard',{page_num:1},'대시보드');" class="app-brand-text demo sidenav-text font-weight-normal ml-2 default"><img src="resources/assets/img/logo_sj.png" alt="스마트팜"></a>
+                <a href="javascript:pageLoad('a10_dashboard',{page_num:1},'대시보드');" class="app-brand-text demo sidenav-text font-weight-normal ml-2 mini"><img src="resources/assets/img/logo_2.png" alt="상주"></a>
     </c:if>
     <c:if test="${profile == 'gimje-prod'}">
-                <a href="javascript:pageLoad('a10_dashboard',{tag:1},'대시보드');" class="app-brand-text demo sidenav-text font-weight-normal ml-2 default"><img src="resources/assets/img/h1-logo.png" alt="스마트팜"></a>
-                <a href="javascript:pageLoad('a10_dashboard',{tag:1},'대시보드');" class="app-brand-text demo sidenav-text font-weight-normal ml-2 mini"><img src="resources/assets/img/logo.png" alt="김제"></a>
+                <a href="javascript:pageLoad('a10_dashboard',{page_num:1},'대시보드');" class="app-brand-text demo sidenav-text font-weight-normal ml-2 default"><img src="resources/assets/img/h1-logo.png" alt="스마트팜"></a>
+                <a href="javascript:pageLoad('a10_dashboard',{page_num:1},'대시보드');" class="app-brand-text demo sidenav-text font-weight-normal ml-2 mini"><img src="resources/assets/img/logo.png" alt="김제"></a>
     </c:if>
                 <a href="javascript:void(0)" class="layout-sidenav-toggle sidenav-link text-large ml-auto">
                     <i class="ion ion-md-menu align-middle"></i>
@@ -24,7 +24,7 @@
             <!-- Links -->
             <ul class="sidenav-inner">
                 <li class="sidenav-item<c:if test="${path == '/a10_dashboard'}"> active</c:if>">
-                    <a href="javascript:pageLoad('a10_dashboard',{tag:1},'대시보드');" class="sidenav-link"><i class="sidenav-icon oi oi-grid-two-up"></i>
+                    <a href="javascript:pageLoad('a10_dashboard',{page_num:1},'대시보드');" class="sidenav-link"><i class="sidenav-icon oi oi-grid-two-up"></i>
                         <div>대시보드</div>
                     </a>
                 </li>
@@ -39,7 +39,7 @@
                     <ul class="sidenav-menu">
                         <li class="sidenav-item<c:if test="${path == '/b00_demo_bs_mng'}"> active</c:if>">
                             <a href="javascript:pageLoad('b00_demo_bs_mng',{page_num:1,amount:10,filter1:9999,filter2:9998},'실증사업 관리');" class="sidenav-link">
-                                <div>실증사업 관리</div>
+                                <div>실증사업등록 및 관리</div>
                             </a>
                         </li>
                         <li class="sidenav-item<c:if test="${path == '/b10_demo_bs_announce_doc_mng'}"> active</c:if>">
@@ -48,7 +48,27 @@
                             </a>
                         </li>
 
-                        <li class="sidenav-item<c:if test="${path == '/b21_demo_bs_appl_mng' || path == '/b22_demo_bs_doc_eval_result_mng' || path == '/b23_demo_bs_pre_contract_mng'}"> active open</c:if>" style="">
+                        <li class="sidenav-item<c:if test="${path == '/b21_demo_bs_appl_mng'}"> active</c:if>">
+                            <a href="javascript:pageLoad('demobs_appl',{page_num:1},'실증사업 선정관리');" class="sidenav-link">
+                                <div>실증사업 선정관리</div>
+                            </a>
+                        </li>
+                        <li class="sidenav-item<c:if test="${path == '/b21_demo_bs_appl_mng'}"> active</c:if>">
+                            <a href="javascript:pageLoad('demobs_commitment',{page_num:1},'실증사업 수행관리');" class="sidenav-link">
+                                <div>실증사업 수행관리</div>
+                            </a>
+                        </li>
+                        <li class="sidenav-item<c:if test="${path == '/b21_demo_bs_appl_mng'}"> active</c:if>">
+                            <a href="javascript:pageLoad('demobs_maintenance',{page_num:1},'실증사업 사후관리');" class="sidenav-link">
+                                <div>실증사업 사후관리</div>
+                            </a>
+                        </li>
+
+                        <li class="sidenav-item" style="">
+
+
+
+
                             <a href="javascript:void(0);" class="sidenav-link sidenav-toggle">
                                 <div>선정업무 관리</div>
                             </a>
@@ -58,26 +78,26 @@
                                         <div>신청접수 관리</div>
                                     </a>
                                 </li>
-<%--                                <li class="sidenav-item<c:if test="${path == '/b22_demo_bs_doc_eval_result_mng'}"> active</c:if>">--%>
-<%--                                    <a href="javascript:pageLoad('b22_demo_bs_doc_eval_result_mng',{page_num:1},'심사결과 관리');" class="sidenav-link">--%>
-<%--                                        <div>심사업무 관리</div>--%>
-<%--                                    </a>--%>
-<%--                                </li>--%>
-<c:if test="${profile == 'testtest'}">
+                                <li class="sidenav-item<c:if test="${path == '/b22_demo_bs_doc_eval_result_mng'}"> active</c:if>">
+                                    <a href="javascript:pageload('b22_demo_bs_doc_eval_result_mng',{page_num:1},'심사결과 관리');" class="sidenav-link">
+                                        <div>심사업무 관리</div>
+                                    </a>
+                                </li>
+
                                 <li class="sidenav-item<c:if test="${path == '/b23_demo_bs_pre_contract_mng'}"> active</c:if>">
                                     <a href="javascript:pageLoad('b23_demo_bs_pre_contract_mng',{page_num:1},'협약 전 업무관리');" class="sidenav-link">
                                         <div>이용계획 확정</div>
                                     </a>
                                 </li>
-</c:if>
+
                             </ul>
                         </li>
-<c:if test="${profile == 'testtest'}">
-<%--                        <li class="sidenav-item">
+
+                        <li class="sidenav-item">
                             <a href="javascript:pageLoad('b30_demo_bs_usage_ext_mng','연장 신청 접수');" class="sidenav-link">
                                 <div>연장 신청 접수</div>
                             </a>
-                        </li>--%>
+                        </li>
                         <li class="sidenav-item">
                             <a href="javascript:pageLoad('b40_demo_bs_contract_mng',{page_num:1},'협약관리');" class="sidenav-link">
                                 <div>협약관리</div>
@@ -85,7 +105,7 @@
                         </li>
                         <li class="sidenav-item active">
                             <a href="javascript:pageLoad('b50_demo_bs_corp_cur_list',{page_num:1},'분야별 기업현황');" class="sidenav-link">
-                                <div>분야별 기업현황</div>
+                                <div>사업별 기업현황</div>
                             </a>
                         </li>
                         <li class="sidenav-item">
@@ -99,17 +119,17 @@
                                 <div>이용료 관리</div>
                             </a>
                         </li>
-<%--                        <li class="sidenav-item">
+                        <li class="sidenav-item">
                             <a href="javascript:pageLoad('b80_demo_bs_corp_cur_report_write','현황보고서 작성');" class="sidenav-link">
                                 <div>현황보고서 작성</div>
                             </a>
-                        </li>--%>
+                        </li>
                         <li class="sidenav-item">
                             <a href="javascript:pageLoad('b90_demo_bs_cert_mng',{page_num:1},'실증성적서');" class="sidenav-link">
                                 <div>실증성적서</div>
                             </a>
                         </li>
-</c:if>
+
 
                         <%--<li class="sidenav-item">
                             <a href="javascript:void(0);" class="sidenav-link sidenav-toggle">
@@ -231,7 +251,6 @@
                     </ul>
                 </li>
 
-<c:if test="${profile == 'testtest'}">
                 <li class="sidenav-item">
                     <a href="javascript:pageLoad('d10_schedule_mng',{page_num:1},'일정관리');" class="sidenav-link"><i class="sidenav-icon fas fa-calendar-alt"></i>
                         <div>일정관리</div>
@@ -284,7 +303,7 @@
                         </li>
                     </ul>
                 </li>
-</c:if>
+
                 <li class="sidenav-item<c:if test="${
                 path == '/g10_cur_asset_mng'
                 }"> active open</c:if>">
@@ -298,7 +317,7 @@
                                 <div>자산 현황</div>
                             </a>
                         </li>
-<c:if test="${profile == 'testtest'}">
+
                         <li class="sidenav-item">
                             <a href="javascript:pageLoad('g20_asset_booking',{page_num:1},'자원예약관리');" class="sidenav-link">
                                 <div>자원예약 목록</div>
@@ -309,7 +328,7 @@
                                 <div>자원예약</div>
                             </a>
                         </li>
-</c:if>
+
                     </ul>
                 </li>
                 <!--//-->
@@ -331,7 +350,7 @@
                                         <div>SMS 작성</div>
                                     </a>
                                 </li>
-<c:if test="${profile == 'testtest'}">
+
                                 <li class="sidenav-item">
                                     <a href="javascript:pageLoad('h12_auto_sms_mng',{page_num:1},'자동 SMS 관리');" class="sidenav-link">
                                         <div>자동 SMS 관리</div>
@@ -347,7 +366,7 @@
                                         <div>보낸 SMS</div>
                                     </a>
                                 </li>
-</c:if>
+
                             </ul>
                         </li>
                     </ul>
@@ -362,7 +381,7 @@
                                         <div>이메일 발송</div>
                                     </a>
                                 </li>
-<c:if test="${profile == 'testtest'}">
+
                                 <li class="sidenav-item">
                                     <a href="javascript:pageLoad('h22_auto_email_mng',{page_num:1},'자동 이메일 관리');" class="sidenav-link">
                                         <div>자동 이메일 관리</div>
@@ -378,7 +397,7 @@
                                         <div>보낸 이메일</div>
                                     </a>
                                 </li>
-</c:if>
+
                             </ul>
                         </li>
                     </ul>
@@ -461,7 +480,7 @@
                     </ul>
                 </li>--%>
                 <!--//-->
-<c:if test="${profile == 'testtest'}">
+
                 <li class="sidenav-item">
                     <a href="javascript:void(0);" class="sidenav-link sidenav-toggle"><i class="sidenav-icon ion ion-md-desktop"></i>
                         <div>시스템관리</div>
@@ -507,7 +526,7 @@
                         </li>
                     </ul>
                 </li>
-</c:if>
+
                 <!--//-->
                 <li class="sidenav-item<c:if test="${
                 path == '/l11_document_form_mng' || path == '/l12_document_rule_mng' || path == '/l20_code_mng'

@@ -145,4 +145,9 @@ userDemoBsMapper.deleteUserDemoBsHumanResource(idx_user_demo_bs);
     public int submitUserDemoBs(long idx_user_demo_bs){
         return userDemoBsMapper.submitUserDemoBs(idx_user_demo_bs);
     }
+
+    @Override
+    public List<UserDemoBsVO> getUserDemoBsPagingListByFiltered(long idx,int page_num,int amount,String order_field, int filter1, int filter2){
+        return userDemoBsMapper.getUserDemoBsPagingListByFiltered(idx,page_num, amount, order_field,filter1,filter2);
+    }
 }

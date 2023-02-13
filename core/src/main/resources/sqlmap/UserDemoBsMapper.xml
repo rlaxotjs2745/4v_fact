@@ -1101,4 +1101,58 @@
         WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
     </update>
 
+
+    <select id="getUserDemoBsPagingListByFiltered" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.UserDemoBsVO">
+        SELECT
+        IDX_USER_DEMO_BS
+        ,IDX_DEMO_BUSINESS
+        ,USER_DEMOBS_STATUS
+        ,IDX_USER
+        ,USER_DEMO_BS_TYPE
+        ,IDX_CORP_INFO
+        ,CORP_NAME
+         ,CORP_NUM
+        ,CORP_PHONE
+        ,EMAIL
+        ,REQ_FACILITY
+         ,CEO_NAME
+        ,CEO_MNUMBER
+        ,CEO_EMAIL
+        ,MAN_NAME
+        ,MAN_MNUMBER
+        ,MAN_EMAIL
+        ,USER_DEMO_TYPE
+        ,USER_DEMO_FACILITY
+        ,USER_DEMO_WAY
+        ,USER_DEMO_GOAL
+        ,CULTURE_SOIL
+        ,USER_DEMO_IS_CROPS
+        ,DEMO_START_DATE
+        ,DEMO_END_DATE
+        ,RESIDENT_TYPE
+        ,REG_DATE
+        ,LAST_UPD_DATE
+        FROM (
+        SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+        ,A.*
+
+        FROM (
+            SELECT * FROM TB_USER_DEMO_BS WHERE IDX_DEMO_BUSINESS =#{idx}
+        <if test="filter1 != 9999">
+            AND USER_DEMOBS_STATUS <![CDATA[>=]]> #{filter1}
+
+        </if>
+        <if test="filter2 != 9998">
+            AND USER_DEMOBS_STATUS <![CDATA[<]]> #{filter2}
+        </if>
+        ) A
+
+        WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+        )
+        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+    </select>
+
+
+
+
 </mapper>

@@ -7,7 +7,7 @@ body {
 }
 
 .text-primary {
-    color: #00c300 !important
+    color: #19A819 !important
 }
 
 a.text-primary:hover,
@@ -16,7 +16,7 @@ a.text-primary:focus {
 }
 
 .bg-primary {
-    background-color: #00c300 !important
+    background-color: #19A819 !important
 }
 
 a.bg-primary:hover,
@@ -44,11 +44,11 @@ a.bg-primary-darker:focus {
 
 html:not([dir=rtl]) .border-primary,
 html[dir=rtl] .border-primary {
-    border-color: #00c300 !important
+    border-color: #19A819 !important
 }
 
 .badge-primary {
-    background-color: #00c300;
+    background-color: #19A819;
     color: #fff
 }
 
@@ -60,27 +60,27 @@ html[dir=rtl] .border-primary {
 }
 
 .btn .badge-primary {
-    background: #00c300 !important;
-    border-color: #00c300 !important;
+    background: #19A819 !important;
+    border-color: #19A819 !important;
     color: #fff !important
 }
 
 .badge-outline-primary {
     background-color: transparent;
-    box-shadow: 0 0 0 1px #00c300 inset;
-    color: #00c300
+    box-shadow: 0 0 0 1px #19A819 inset;
+    color: #19A819
 }
 
 .badge-outline-primary[href]:hover,
 .badge-outline-primary[href]:focus {
-    color: #00c300;
+    color: #19A819;
     text-decoration: none
 }
 
 .btn .badge-outline-primary {
     background-color: transparent !important;
-    box-shadow: 0 0 0 1px #00c300 inset !important;
-    color: #00c300 !important
+    box-shadow: 0 0 0 1px #19A819 inset !important;
+    color: #19A819 !important
 }
 
 .page-item.active .page-link,
@@ -89,13 +89,13 @@ html[dir=rtl] .border-primary {
 .pagination li.active>a:not(.page-link),
 .pagination li.active>a:not(.page-link):hover,
 .pagination li.active>a:not(.page-link):focus {
-    border-color: #00c300;
-    background-color: #00c300;
+    border-color: #19A819;
+    background-color: #19A819;
     color: #fff
 }
 
 .progress-bar {
-    background-color: #00c300;
+    background-color: #19A819;
     color: #fff
 }
 
@@ -120,16 +120,16 @@ button.list-group-item-primary:focus {
 
 a.list-group-item-primary.active,
 button.list-group-item-primary.active {
-    border-color: #00c300;
-    background-color: #00c300;
+    border-color: #19A819;
+    background-color: #19A819;
     color: #fff
 }
 
 .list-group-item.active,
 .list-group-item.active:hover,
 .list-group-item.active:focus {
-    border-color: #00c300;
-    background-color: #00c300;
+    border-color: #19A819;
+    background-color: #19A819;
     color: #fff
 }
 
@@ -148,7 +148,7 @@ button.list-group-item-primary.active {
 }
 
 .alert-dark-primary {
-    background-color: #00c300;
+    background-color: #19A819;
     color: #fff
 }
 
@@ -162,8 +162,8 @@ button.list-group-item-primary.active {
 }
 
 .callout-primary {
-    border-color: #00c300 !important;
-    background-color: #e6f9e6;
+    border-color: #19a819 !important;
+    background-color: #f5fff5;
     color: #596266
 }
 
@@ -174,7 +174,7 @@ button.list-group-item-primary.active {
 .tooltip-primary .tooltip-inner,
 .tooltip-primary>.tooltip .tooltip-inner,
 .ngb-tooltip-primary+ngb-tooltip-window .tooltip-inner {
-    background: #00c300;
+    background: #19A819;
     color: #fff
 }
 
@@ -184,7 +184,7 @@ button.list-group-item-primary.active {
 .tooltip-primary>.tooltip.bs-tooltip-auto[x-placement^="top"] .arrow::before,
 .ngb-tooltip-primary+ngb-tooltip-window.bs-tooltip-top .arrow::before,
 .ngb-tooltip-primary+ngb-tooltip-window.bs-tooltip-auto[x-placement^="top"] .arrow::before {
-    border-top-color: #00c300
+    border-top-color: #19A819
 }
 
 .tooltip-primary.bs-tooltip-right .arrow::before,
@@ -193,7 +193,7 @@ button.list-group-item-primary.active {
 .tooltip-primary>.tooltip.bs-tooltip-auto[x-placement^="right"] .arrow::before,
 .ngb-tooltip-primary+ngb-tooltip-window.bs-tooltip-right .arrow::before,
 .ngb-tooltip-primary+ngb-tooltip-window.bs-tooltip-auto[x-placement^="right"] .arrow::before {
-    border-right-color: #00c300
+    border-right-color: #19A819
 }
 
 .tooltip-primary.bs-tooltip-bottom .arrow::before,
@@ -202,7 +202,7 @@ button.list-group-item-primary.active {
 .tooltip-primary>.tooltip.bs-tooltip-auto[x-placement^="bottom"] .arrow::before,
 .ngb-tooltip-primary+ngb-tooltip-window.bs-tooltip-bottom .arrow::before,
 .ngb-tooltip-primary+ngb-tooltip-window.bs-tooltip-auto[x-placement^="bottom"] .arrow::before {
-    border-bottom-color: #00c300
+    border-bottom-color: #19A819
 }
 
 .tooltip-primary.bs-tooltip-left .arrow::before,
@@ -211,14 +211,14 @@ button.list-group-item-primary.active {
 .tooltip-primary>.tooltip.bs-tooltip-auto[x-placement^="left"] .arrow::before,
 .ngb-tooltip-primary+ngb-tooltip-window.bs-tooltip-left .arrow::before,
 .ngb-tooltip-primary+ngb-tooltip-window.bs-tooltip-auto[x-placement^="left"] .arrow::before {
-    border-left-color: #00c300
+    border-left-color: #19A819
 }
 
 .popover-primary,
 .popover-primary>.popover,
 .ngb-popover-primary+ngb-popover-window {
     border-color: transparent;
-    background: #00c300
+    background: #19A819
 }
 
 .popover-primary .popover-header,
@@ -248,7 +248,7 @@ button.list-group-item-primary.active {
 .popover-primary>.popover.bs-popover-auto[x-placement^="top"]>.arrow::after,
 .ngb-popover-primary+ngb-popover-window.bs-popover-top>.arrow::after,
 .ngb-popover-primary+ngb-popover-window.bs-popover-auto[x-placement^="top"]>.arrow::after {
-    border-top-color: #00c300
+    border-top-color: #19A819
 }
 
 .popover-primary.bs-popover-right>.arrow::after,
@@ -257,7 +257,7 @@ button.list-group-item-primary.active {
 .popover-primary>.popover.bs-popover-auto[x-placement^="right"]>.arrow::after,
 .ngb-popover-primary+ngb-popover-window.bs-popover-right>.arrow::after,
 .ngb-popover-primary+ngb-popover-window.bs-popover-auto[x-placement^="right"]>.arrow::after {
-    border-right-color: #00c300
+    border-right-color: #19A819
 }
 
 .popover-primary.bs-popover-bottom>.arrow::after,
@@ -266,7 +266,7 @@ button.list-group-item-primary.active {
 .popover-primary>.popover.bs-popover-auto[x-placement^="bottom"]>.arrow::after,
 .ngb-popover-primary+ngb-popover-window.bs-popover-bottom>.arrow::after,
 .ngb-popover-primary+ngb-popover-window.bs-popover-auto[x-placement^="bottom"]>.arrow::after {
-    border-bottom-color: #00c300
+    border-bottom-color: #19A819
 }
 
 .popover-primary.bs-popover-left>.arrow::after,
@@ -275,7 +275,7 @@ button.list-group-item-primary.active {
 .popover-primary>.popover.bs-popover-auto[x-placement^="left"]>.arrow::after,
 .ngb-popover-primary+ngb-popover-window.bs-popover-left>.arrow::after,
 .ngb-popover-primary+ngb-popover-window.bs-popover-auto[x-placement^="left"]>.arrow::after {
-    border-left-color: #00c300
+    border-left-color: #19A819
 }
 
 .table .table-primary,
@@ -294,7 +294,7 @@ button.list-group-item-primary.active {
 
 .btn-primary {
     border-color: rgba(0, 0, 0, 0);
-    background: #00c300;
+    background: #19A819;
     color: #fff
 }
 
@@ -312,14 +312,14 @@ button.list-group-item-primary.active {
 .btn-primary.disabled,
 .btn-primary:disabled {
     border-color: rgba(0, 0, 0, 0) !important;
-    background: #00c300 !important;
+    background: #19A819 !important;
     box-shadow: none !important;
     color: #fff !important
 }
 
 .btn-primary .badge {
     background: #fff;
-    color: #00c300
+    color: #19A819
 }
 
 .btn-primary:active,
@@ -338,14 +338,14 @@ button.list-group-item-primary.active {
 }
 
 .btn-outline-primary {
-    border-color: #00c300;
+    border-color: #19A819;
     background: transparent;
-    color: #00c300
+    color: #19A819
 }
 
 .btn-outline-primary:hover {
     border-color: rgba(0, 0, 0, 0);
-    background: #00c300;
+    background: #19A819;
     color: #fff
 }
 
@@ -356,9 +356,9 @@ button.list-group-item-primary.active {
 
 .btn-outline-primary.disabled,
 .btn-outline-primary:disabled {
-    border-color: #00c300 !important;
+    border-color: #19A819 !important;
     background: transparent !important;
-    color: #00c300 !important
+    color: #19A819 !important
 }
 
 .btn-outline-primary:active,
@@ -371,8 +371,8 @@ button.list-group-item-primary.active {
 }
 
 .btn-outline-primary .badge {
-    background: #00c300;
-    border-color: #00c300;
+    background: #19A819;
+    border-color: #19A819;
     color: #fff
 }
 
@@ -383,25 +383,25 @@ button.list-group-item-primary.active {
 .show>.btn-outline-primary.dropdown-toggle .badge {
     background: #fff;
     border-color: #fff;
-    color: #00c300
+    color: #19A819
 }
 
 .dropdown-item:not(.disabled).active,
 .dropdown-item:not(.disabled):active {
-    background-color: #00c300;
+    background-color: #19A819;
     color: #fff
 }
 
 .dropdown-menu>li:not(.disabled)>a:not(.dropdown-item):active,
 .dropdown-menu>li.active:not(.disabled)>a:not(.dropdown-item) {
-    background-color: #00c300;
+    background-color: #19A819;
     color: #fff
 }
 
 .nav-pills .nav-link.active,
 .nav-pills .nav-link.active:hover,
 .nav-pills .nav-link.active:focus {
-    background-color: #00c300;
+    background-color: #19A819;
     color: #fff
 }
 
@@ -411,12 +411,12 @@ button.list-group-item-primary.active {
 .tabs-alt>.nav-tabs .nav-link.active,
 .tabs-alt>.nav-tabs .nav-link.active:hover,
 .tabs-alt>.nav-tabs .nav-link.active:focus {
-    box-shadow: 0 -2px 0 #00c300 inset
+    box-shadow: 0 -2px 0 #19A819 inset
 }
 
 .custom-control .custom-control-input:focus~.custom-control-label::before,
 .custom-control .custom-control-input:active~.custom-control-label::before {
-    border-color: #00c300
+    border-color: #19A819
 }
 
 .custom-control .custom-control-input:focus~.custom-control-label::before {
@@ -426,8 +426,8 @@ button.list-group-item-primary.active {
 .custom-control.custom-checkbox .custom-control-input:indeterminate~.custom-control-label::before,
 .custom-control.custom-checkbox .custom-control-input:checked~.custom-control-label::before,
 .custom-control.custom-radio .custom-control-input:checked~.custom-control-label::before {
-    border-color: #00c300;
-    background-color: #00c300
+    border-color: #19A819;
+    background-color: #19A819
 }
 
 .custom-control.custom-checkbox .custom-control-input:indeterminate~.custom-control-label::before {
@@ -443,7 +443,7 @@ button.list-group-item-primary.active {
 }
 
 .custom-file-input:focus~.custom-file-label {
-    border-color: #00c300
+    border-color: #19A819
 }
 
 .custom-file-input:focus~.custom-file-label::after {
@@ -453,11 +453,11 @@ button.list-group-item-primary.active {
 .form-control:focus,
 .form-control.focus,
 .custom-select:focus {
-    border-color: #00c300
+    border-color: #19A819
 }
 
 .switcher-input:checked~.switcher-indicator {
-    background: #00c300;
+    background: #19A819;
     color: #fff
 }
 
@@ -470,7 +470,7 @@ button.list-group-item-primary.active {
 }
 
 .navbar.bg-primary {
-    background-color: #00c300 !important;
+    background-color: #19A819 !important;
     color: #daf2ff
 }
 
@@ -530,7 +530,7 @@ button.list-group-item-primary.active {
 }
 
 .sidenav.bg-primary {
-    background-color: #00c300 !important;
+    background-color: #19A819 !important;
     color: #daf2ff
 }
 
@@ -623,7 +623,7 @@ button.list-group-item-primary.active {
 }
 
 .footer.bg-primary {
-    background-color: #00c300 !important;
+    background-color: #19A819 !important;
     color: #daf2ff
 }
 
@@ -666,40 +666,40 @@ button.list-group-item-primary.active {
 }
 
 .fill-primary {
-    fill: #00c300
+    fill: #19A819
 }
 
 .slider-primary .slider-selection,
 .slider-primary .slider-reversed .slider-track-high,
 .slider-primary.slider-reversed .slider-track-high {
-    background: #00c300
+    background: #19A819
 }
 
 .noUi-primary .noUi-base .noUi-connect {
-    background: #00c300 !important
+    background: #19A819 !important
 }
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background-color: #00c300 !important;
+    background-color: #19A819 !important;
     color: #fff !important
 }
 
 .select2-container--default.select2-container--focus .select2-selection,
 .select2-container--default.select2-container--open .select2-selection {
-    border-color: #00c300 !important
+    border-color: #19A819 !important
 }
 
 .select2-primary .select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background: #00c300 !important;
+    background: #19A819 !important;
     color: #fff !important
 }
 
 .bootstrap-tagsinput.focus {
-    border-color: #00c300 !important
+    border-color: #19A819 !important
 }
 
 .bootstrap-select .dropdown-menu.inner a[aria-selected=true] {
-    background: #00c300 !important;
+    background: #19A819 !important;
     color: #fff !important
 }
 
@@ -710,7 +710,7 @@ button.list-group-item-primary.active {
 .datepicker table tr td span.active.disabled,
 .datepicker table tr td.range-start,
 .datepicker table tr td.range-end {
-    background: #00c300 !important;
+    background: #19A819 !important;
     color: #fff !important
 }
 
@@ -744,17 +744,17 @@ button.list-group-item-primary.active {
 
 .flatpickr-month,
 span.flatpickr-weekday {
-    background: #00c300;
+    background: #19A819;
     color: #fff;
     fill: #fff
 }
 
 .flatpickr-weekdays {
-    background: #00c300
+    background: #19A819
 }
 
 .flatpickr-day.today {
-    border-color: #00c300
+    border-color: #19A819
 }
 
 .flatpickr-day.inRange,
@@ -787,13 +787,13 @@ span.flatpickr-weekday {
 .flatpickr-day.startRange.nextMonthDay,
 .flatpickr-day.endRange.nextMonthDay,
 .flatpickr-day.week.selected {
-    border-color: #00c300 !important;
-    background: #00c300 !important;
+    border-color: #19A819 !important;
+    background: #19A819 !important;
     color: #fff !important
 }
 
 .daterangepicker td.active {
-    background-color: #00c300 !important;
+    background-color: #19A819 !important;
     color: #fff !important
 }
 
@@ -803,17 +803,17 @@ span.flatpickr-weekday {
 }
 
 .daterangepicker .input-mini.active {
-    border-color: #00c300 !important
+    border-color: #19A819 !important
 }
 
 .ranges li.active {
-    background-color: #00c300 !important;
+    background-color: #19A819 !important;
     color: #fff !important
 }
 
 .dtp-date,
 .dtp-time {
-    background: #00c300;
+    background: #19A819;
     color: #fff
 }
 
@@ -827,29 +827,29 @@ header.dtp-header {
 }
 
 table.dtp-picker-days tr>td>a.selected {
-    background: #00c300;
+    background: #19A819;
     color: #fff !important
 }
 
 .dtp-actual-meridien a.selected {
-    background: #00c300 !important;
+    background: #19A819 !important;
     color: #fff !important
 }
 
 .dtp .year-picker-item:hover {
-    color: #00c300
+    color: #19A819
 }
 
 .dtp .year-picker-item.active {
-    color: #00c300
+    color: #19A819
 }
 
 .dtp .svg-clock [stroke="#8BC34A"] {
-    stroke: #00c300 !important
+    stroke: #19A819 !important
 }
 
 .dtp .svg-clock [fill="#8BC34A"] {
-    fill: #00c300 !important
+    fill: #19A819 !important
 }
 
 .dtp .svg-clock [fill="#fff"] {
@@ -858,17 +858,17 @@ table.dtp-picker-days tr>td>a.selected {
 
 li.ui-timepicker-selected,
 .ui-timepicker-list .ui-timepicker-selected:hover {
-    background: #00c300 !important;
+    background: #19A819 !important;
     color: #fff !important
 }
 
 .growl-default {
-    background: #00c300 !important;
+    background: #19A819 !important;
     color: #fff !important
 }
 
 .md-editor.active {
-    border-color: #00c300 !important
+    border-color: #19A819 !important
 }
 
 .ql-snow.ql-toolbar button:hover,
@@ -885,7 +885,7 @@ li.ui-timepicker-selected,
 .ql-snow .ql-toolbar .ql-picker-label.ql-active,
 .ql-snow .ql-toolbar .ql-picker-item:hover,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected {
-    color: #00c300 !important
+    color: #19A819 !important
 }
 
 .ql-snow.ql-toolbar button:hover .ql-fill,
@@ -916,7 +916,7 @@ li.ui-timepicker-selected,
 .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
 .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill {
-    fill: #00c300 !important
+    fill: #19A819 !important
 }
 
 .ql-snow.ql-toolbar button:hover .ql-stroke,
@@ -947,26 +947,26 @@ li.ui-timepicker-selected,
 .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter,
 .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter {
-    stroke: #00c300 !important
+    stroke: #19A819 !important
 }
 
 .ql-snow.ql-container .ql-editor:focus {
-    border-color: #00c300 !important
+    border-color: #19A819 !important
 }
 
 .tt-suggestion:active,
 .tt-cursor {
-    background: #00c300 !important;
+    background: #19A819 !important;
     color: #fff !important
 }
 
 .dropzone.dz-drag-hover {
-    border-color: #00c300 !important
+    border-color: #19A819 !important
 }
 
 .swiper-pagination-bullet.swiper-pagination-bullet-active,
 .swiper-pagination.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
-    background: #00c300 !important
+    background: #19A819 !important
 }
 
 .sk-primary.sk-plane,
@@ -979,13 +979,13 @@ li.ui-timepicker-selected,
 .sk-primary .sk-circle-fade-dot:before,
 .sk-primary .sk-grid-cube,
 .sk-primary .sk-fold-cube:before {
-    background-color: #00c300
+    background-color: #19A819
 }
 
 .sw-theme-default>.nav .active .sw-icon,
 .sw-theme-default>.nav .active .sw-number {
-    color: #00c300;
-    border-color: #00c300
+    color: #19A819;
+    border-color: #19A819
 }
 
 .plyr[class] .plyr__control--overlaid {
@@ -996,12 +996,12 @@ li.ui-timepicker-selected,
 .plyr[class] .plyr__control.plyr__tab-focus,
 .plyr[class] .plyr__control:hover,
 .plyr[class] .plyr__control[aria-expanded='true'] {
-    background: #00c300 !important;
+    background: #19A819 !important;
     color: #fff !important
 }
 
 .plyr[class] .plyr__menu__container .plyr__control[role='menuitemradio'][aria-checked='true']:not(.plyr__tab-focus):not(:hover)::before {
-    background: #00c300 !important
+    background: #19A819 !important
 }
 
 .plyr[class] .plyr__menu__container .plyr__control[role='menuitemradio'][aria-checked='true']:not(.plyr__tab-focus):not(:hover)::after {
@@ -1013,7 +1013,7 @@ li.ui-timepicker-selected,
 }
 
 .plyr--full-ui[class] input[type='range'] {
-    color: #00c300 !important
+    color: #19A819 !important
 }
 
 .plyr--full-ui[class] input[type='range'].plyr__tab-focus::-webkit-slider-runnable-track {
@@ -1039,7 +1039,7 @@ li.ui-timepicker-selected,
 }
 
 .fc-bgevent:not(.fc-nonbusiness) {
-    background: #00c300 !important
+    background: #19A819 !important
 }
 
 .fc-highlight {
@@ -1050,7 +1050,7 @@ li.ui-timepicker-selected,
 .swal2-progress-steps[class] .swal2-progress-step-line,
 .swal2-progress-steps[class] .swal2-active-progress-step,
 .swal2-progress-steps[class] .swal2-progress-step {
-    background: #00c300;
+    background: #19A819;
     color: #fff
 }
 
@@ -1060,7 +1060,7 @@ li.ui-timepicker-selected,
 }
 
 .ui-product-color.active {
-    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #00c300 !important
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #19A819 !important
 }
 
 .bg-navbar-theme {

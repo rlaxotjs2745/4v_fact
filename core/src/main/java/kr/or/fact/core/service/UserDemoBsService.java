@@ -37,6 +37,7 @@ public interface UserDemoBsService {
     List<UserDemoBsVO> getUserDemoBsPagingList(int page_num, int amount, String order_field, int filter1, int filter2);
 
     void updateUserDemoBsStatus(long user_demobs_idx, int status);
+    List<UserDemoBsVO> getUserDemoBsPagingListByFiltered(long idx, int page_num,int amount,String order_field, int filter1, int filter2);
 }
 
 

@@ -362,3 +362,6 @@ html:not(.material-style) .material-style-only {
 .uploaded-file-list span {
 
 }
+.empty-list{
+  height: 1.32rem;
+}

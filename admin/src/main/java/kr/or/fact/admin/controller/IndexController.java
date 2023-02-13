@@ -11,7 +11,6 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -200,7 +199,7 @@ public class IndexController extends BaseController {
     //대시보드
     @SneakyThrows
     @RequestMapping(value = "/a10_dashboard" ,method = RequestMethod.POST)
-    public String a10_dashboard(@RequestParam(value = "tag", required = false) String tagValue,
+    public String a10_dashboard(@RequestParam(value = "page_num", required = false) String page_num,
                                 ModelMap model,
                                 @CookieValue(name = "access_token",required = false) String access_token){
 
@@ -244,7 +243,7 @@ public class IndexController extends BaseController {
 
         model.addAttribute("visitCount", visitCount);
 
-        return "a10_dashboard";
+        return "/a_dashboard/a10_dashboard";
     }
 
     //사업공고문 관리
@@ -351,7 +350,7 @@ public class IndexController extends BaseController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-        return "b00_demo_bs_mng";
+        return "/b_demobs/b00_demo_bs_mng";
     }
 
     //사업공고문 관리
@@ -454,12 +453,12 @@ public class IndexController extends BaseController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-        return "b10_demo_bs_announce_doc_mng";
+        return "/b_demobs/b10_demo_bs_announce_doc_mng";
     }
 
     //신청접수 관리
-    @RequestMapping(value = "/b21_demo_bs_appl_mng",method = RequestMethod.POST)
-    public String b21_demo_bs_appl_mng(@RequestBody ParamPageListFilteredVO param,
+    @RequestMapping(value = "/demobs_appl",method = RequestMethod.POST)
+    public String demobs_appl(@RequestBody ParamPageListFilteredVO param,
                                        ModelMap model,
                                        @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -476,11 +475,11 @@ public class IndexController extends BaseController {
         }
 
         //사업 기준
-        int list_amount = 5;
+        int list_amount = 3;
         int page_amount = 10;
         int page = param.getPage_num();
 
-        param.setAmount(5);
+        param.setAmount(list_amount);
 
         int filtered_item_total = demoBsApplicationService.getAvailableDemoBsApplTotalCount();
         model.addAttribute("total_count",filtered_item_total);
@@ -541,7 +540,180 @@ public class IndexController extends BaseController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-        return "b21_demo_bs_appl_mng";
+        return "b_demobs/demobs_appl";
+    }
+
+    //신청접수 관리
+    @RequestMapping(value = "/demobs_commitment",method = RequestMethod.POST)
+    public String demobs_commitment(@RequestBody ParamPageListFilteredVO param,
+                                       ModelMap model,
+                                       @CookieValue(name = "access_token",required = false) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }else{
+            return "redirect:/login";
+        }
+
+        //사업 기준
+        int list_amount = 3;
+        int page_amount = 10;
+        int page = param.getPage_num();
+
+        param.setAmount(list_amount);
+
+        int filtered_item_total = demoBsApplicationService.getAvailableDemoBsApplTotalCount();
+        model.addAttribute("total_count",filtered_item_total);
+
+        param.setOrder_field("IDX_DEMO_BUSINESS");
+        /*ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
+        listPagingParamVO.setPage_num(page);
+        listPagingParamVO.setAmount(list_amount);
+        listPagingParamVO.setFilter1(CONSTANT.FILTER_NOT_USED);
+        listPagingParamVO.setFilter2(CONSTANT.FILTER_NOT_USED);
+        listPagingParamVO.setOrder_field("IDX_DEMO_BUSINESS");*/
+
+
+        List<AdminApplDemoBsHeaderListVO>  adminApplHeaderListVOS = demoBsApplicationService.getAvailableDemoBsApplPagingList(param);
+        System.out.println(adminApplHeaderListVOS);
+        model.addAttribute("adminApplHeaderListVOS",adminApplHeaderListVOS);
+
+        model.addAttribute("cur_page",page);
+        model.addAttribute("amount",list_amount);
+
+        int tot_page = filtered_item_total/list_amount+1;
+        if(filtered_item_total%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+        boolean is_active = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+
+        model.addAttribute("cur_page", param.getPage_num());
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("page_amount",page_amount);
+
+        return "b_demobs/demobs_commitment";
+    }
+    //신청접수 관리
+    @RequestMapping(value = "/demobs_maintenance",method = RequestMethod.POST)
+    public String demobs_maintenance(@RequestBody ParamPageListFilteredVO param,
+                                       ModelMap model,
+                                       @CookieValue(name = "access_token",required = false) String access_token){
+        AdminVO adminVO = null;
+        if(access_token!=null){
+            adminVO = getVerityAuth(access_token);
+            if(adminVO==null || adminVO.is_expired())
+            {
+                return "redirect:/login";
+            }
+            model.addAttribute("admin", adminVO);
+            setProfile(model);
+        }else{
+            return "redirect:/login";
+        }
+
+        //사업 기준
+        int list_amount = 3;
+        int page_amount = 10;
+        int page = param.getPage_num();
+
+        param.setAmount(list_amount);
+
+        int filtered_item_total = demoBsApplicationService.getAvailableDemoBsApplTotalCount();
+        model.addAttribute("total_count",filtered_item_total);
+
+        param.setOrder_field("IDX_DEMO_BUSINESS");
+        /*ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
+        listPagingParamVO.setPage_num(page);
+        listPagingParamVO.setAmount(list_amount);
+        listPagingParamVO.setFilter1(CONSTANT.FILTER_NOT_USED);
+        listPagingParamVO.setFilter2(CONSTANT.FILTER_NOT_USED);
+        listPagingParamVO.setOrder_field("IDX_DEMO_BUSINESS");*/
+
+
+        List<AdminApplDemoBsHeaderListVO>  adminApplHeaderListVOS = demoBsApplicationService.getAvailableDemoBsApplPagingList(param);
+        System.out.println(adminApplHeaderListVOS);
+        model.addAttribute("adminApplHeaderListVOS",adminApplHeaderListVOS);
+
+        model.addAttribute("cur_page",page);
+        model.addAttribute("amount",list_amount);
+
+        int tot_page = filtered_item_total/list_amount+1;
+        if(filtered_item_total%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = page/page_amount+1;
+        if(page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+        boolean is_active = false;
+
+        if(page!=tot_page && tot_page>1) is_next = true;
+
+        if(page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            page_amount = tot_page;
+        }
+
+        model.addAttribute("cur_page", param.getPage_num());
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("page_amount",page_amount);
+
+        return "b_demobs/demobs_maintenance";
     }
 
     //심사결과 관리
@@ -627,12 +799,12 @@ public class IndexController extends BaseController {
         model.addAttribute("is_last",is_last);
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
-        return "b22_demo_bs_doc_eval_result_mng";
+        return "/b_demobs/b22_demo_bs_doc_eval_result_mng";
     }
 
     //협약 전 업무관리
     @RequestMapping(value = "/b23_demo_bs_pre_contract_mng",method = RequestMethod.POST)
-    public String b23_demo_bs_pre_contract_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String b23_demo_bs_pre_contract_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                                ModelMap model,
                                                @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -648,12 +820,12 @@ public class IndexController extends BaseController {
             return "redirect:/login";
         }
 
-        return "b23_demo_bs_pre_contract_mng";
+        return "/b_demobs/b23_demo_bs_pre_contract_mng";
     }
 
     //협약관리
     @RequestMapping(value = "/b30_demo_bs_usage_ext_mng",method = RequestMethod.POST)
-    public String b30_demo_bs_usage_ext_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String b30_demo_bs_usage_ext_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                             ModelMap model,
                                             @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -670,12 +842,12 @@ public class IndexController extends BaseController {
         }
 
 
-        return "b30_demo_bs_usage_ext_mng";
+        return "/b_demobs/b30_demo_bs_usage_ext_mng";
     }
 
     //실증성적서
     @RequestMapping(value = "/b40_demo_bs_contract_mng",method = RequestMethod.POST)
-    public String b40_demo_bs_contract_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String b40_demo_bs_contract_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                            ModelMap model,
                                            @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -691,12 +863,12 @@ public class IndexController extends BaseController {
             return "redirect:/login";
         }
 
-        return "b40_demo_bs_contract_mng";
+        return "/b_demobs/b40_demo_bs_contract_mng";
     }
 
     //현황보고서 작성
     @RequestMapping(value = "/b50_demo_bs_corp_cur_list",method = RequestMethod.POST)
-    public String b50_demo_bs_corp_cur_list(@RequestParam(value = "tag", required = false) String tagValue,
+    public String b50_demo_bs_corp_cur_list(@RequestParam(value = "page_num", required = false) String page_num,
                                             ModelMap model,
                                             @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -712,12 +884,12 @@ public class IndexController extends BaseController {
             return "redirect:/login";
         }
 
-        return "b50_demo_bs_corp_cur_list";
+        return "/b_demobs/b50_demo_bs_corp_cur_list";
     }
 
     //분야별 기업현황
     @RequestMapping(value = "/b60_demo_bs_consign_corp_list",method = RequestMethod.POST)
-    public String b60_demo_bs_consign_corp_list(@RequestParam(value = "tag", required = false) String tagValue,
+    public String b60_demo_bs_consign_corp_list(@RequestParam(value = "page_num", required = false) String page_num,
                                                 ModelMap model,
                                                 @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -734,12 +906,12 @@ public class IndexController extends BaseController {
         }
 
 
-        return "b60_demo_bs_consign_corp_list";
+        return "/b_demobs/b60_demo_bs_consign_corp_list";
     }
 
     //위탁기업 목록
     @RequestMapping(value = "/b70_demo_bs_usage_pee_mng",method = RequestMethod.POST)
-    public String b70_demo_bs_usage_pee_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String b70_demo_bs_usage_pee_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                             ModelMap model,
                                             @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -755,12 +927,12 @@ public class IndexController extends BaseController {
             return "redirect:/login";
         }
 
-        return "b70_demo_bs_usage_pee_mng";
+        return "/b_demobs/b70_demo_bs_usage_pee_mng";
     }
 
     //연장신청 접수
     @RequestMapping(value = "/b80_demo_bs_corp_cur_report_write",method = RequestMethod.POST)
-    public String b80_demo_bs_corp_cur_report_write(@RequestParam(value = "tag", required = false) String tagValue,
+    public String b80_demo_bs_corp_cur_report_write(@RequestParam(value = "page_num", required = false) String page_num,
                                                     ModelMap model,
                                                     @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -776,12 +948,12 @@ public class IndexController extends BaseController {
             return "redirect:/login";
         }
 
-        return "b80_demo_bs_corp_cur_report_write";
+        return "/b_demobs/b80_demo_bs_corp_cur_report_write";
     }
 
     //상담
     @RequestMapping(value = "/b90_demo_bs_cert_mng",method = RequestMethod.POST)
-    public String b90_demo_bs_cert_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String b90_demo_bs_cert_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                        ModelMap model,
                                        @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -797,7 +969,7 @@ public class IndexController extends BaseController {
             return "redirect:/login";
         }
 
-        return "b90_demo_bs_cert_mng";
+        return "/b_demobs/b90_demo_bs_cert_mng";
     }
 
     //문의상담신청 관리
@@ -826,7 +998,7 @@ public class IndexController extends BaseController {
         param0.setConsulting_status(-1);
         int consultingCount = consultingService.getCountConsulting(param0);
         if(consultingCount==0){
-            return "c10_site_mng_consult_mng";
+            return "/c_site_mng/c10_site_mng_consult_mng";
         }
         model.addAttribute("cur_page",page);
         model.addAttribute("amount",list_amount);
@@ -874,12 +1046,12 @@ public class IndexController extends BaseController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-        return "c10_site_mng_consult_mng";
+        return "/c_site_mng/c10_site_mng_consult_mng";
     }
 
     //자산현황
     @RequestMapping(value = "/c21_site_visit_list",method = RequestMethod.POST)
-    public String c21_site_visit_list(@RequestParam(value = "tag", required = false) String tagValue,
+    public String c21_site_visit_list(@RequestParam(value = "page_num", required = false) String page_num,
                                       @RequestBody ParamPageListFilteredVO param,
                                       ModelMap model,
                                       @CookieValue(name = "access_token",required = false) String access_token){
@@ -989,11 +1161,11 @@ public class IndexController extends BaseController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-        return "c21_site_visit_list";
+        return "/c_site_mng/c21_site_visit_list";
     }
     //자원예약 관리
     @RequestMapping(value = "/c22_site_visit_mng",method = RequestMethod.POST)
-    public String c22_site_visit_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String c22_site_visit_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                      ModelMap model,
                                      @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -1010,12 +1182,12 @@ public class IndexController extends BaseController {
         }
 
 
-        return "c22_site_visit_mng";
+        return "/c_site_mng/c22_site_visit_mng";
     }
 
     //자원예약
     @RequestMapping(value = "/c30_site_faq_mng",method = RequestMethod.POST)
-    public String c30_site_faq_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String c30_site_faq_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                    ModelMap model,
                                    @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -1032,7 +1204,7 @@ public class IndexController extends BaseController {
         }
 
 
-        return "c30_site_faq_mng";
+        return "/c_site_mng/c30_site_faq_mng";
     }
 
     //일정관리
@@ -1111,12 +1283,12 @@ public class IndexController extends BaseController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-        return "c41_site_notice_mng";
+        return "/c_site_mng/c41_site_notice_mng";
     }
 
     //행사 관리
     @RequestMapping(value = "/c42_site_event_mng",method = RequestMethod.POST)
-    public String c42_site_event_mng(@RequestParam(value = "page_num", required = false) String tagValue,
+    public String c42_site_event_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                      @RequestBody ParamPageListFilteredVO param,
                                      ModelMap model,
                                      @CookieValue(name = "access_token",required = false) String access_token){
@@ -1199,11 +1371,11 @@ public class IndexController extends BaseController {
         int count_comp = eventContentMapper.getEventContentCount2(param);
         model.addAttribute("count_comp",count_comp);
 
-        return "c42_site_event_mng";
+        return "/c_site_mng/c42_site_event_mng";
     }
 
     @RequestMapping(value = "/c421_site_event_mng",method = RequestMethod.POST)
-    public String c421_site_event_mng(@RequestParam(value = "page_num", required = false) String tagValue,
+    public String c421_site_event_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                      @RequestBody ParamPageListFilteredVO param,
                                      ModelMap model,
                                      @CookieValue(name = "access_token",required = false) String access_token){
@@ -1281,11 +1453,11 @@ public class IndexController extends BaseController {
         int count_comp = eventContentMapper.getEventContentCount2(param);
         model.addAttribute("count_comp",count_comp);
 
-        return "c421_site_event_mng";
+        return "/c_site_mng/c421_site_event_mng";
     }
 
     @RequestMapping(value = "/c43_site_adver_mng" ,method = RequestMethod.POST)
-    public String c43_site_adver_mng(@RequestParam(value = "page_num", required = false) String tagValue,
+    public String c43_site_adver_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                      @RequestBody ParamPageListFilteredVO param,
                                      ModelMap model,
                                      @CookieValue(name = "access_token",required = false) String access_token){
@@ -1370,11 +1542,11 @@ public class IndexController extends BaseController {
         int count_comp = prContentsMapper.getPRContentCount2(param);
         model.addAttribute("count_comp",count_comp);
 
-        return "c43_site_adver_mng";
+        return "/c_site_mng/c43_site_adver_mng";
     }
 
     @RequestMapping(value = "/c431_site_adver_mng" ,method = RequestMethod.POST)
-    public String c431_site_adver_mng(@RequestParam(value = "page_num", required = false) String tagValue,
+    public String c431_site_adver_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                       @RequestBody ParamPageListFilteredVO param,
                                       ModelMap model,
                                       @CookieValue(name = "access_token",required = false) String access_token){
@@ -1456,11 +1628,11 @@ public class IndexController extends BaseController {
         int count_comp = prContentsMapper.getPRContentCount2(param);
         model.addAttribute("count_comp",count_comp);
 
-        return "c431_site_adver_mng";
+        return "/c_site_mng/c431_site_adver_mng";
     }
 
     @RequestMapping(value = "/pr_contents",method = RequestMethod.POST)
-    public String pr_contents(@RequestParam(value = "page_num", required = false) String tagValue,
+    public String pr_contents(@RequestParam(value = "page_num", required = false) String page_num,
                               @RequestBody ParamPageListFilteredVO param,
                               ModelMap model,
                               @CookieValue(name = "access_token",required = false) String access_token){
@@ -1490,7 +1662,7 @@ public class IndexController extends BaseController {
 
     //직원관리
     @RequestMapping(value = "/c50_site_banner_mng",method = RequestMethod.POST)
-    public String c50_site_banner_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String c50_site_banner_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                       ModelMap model,
                                       @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -1507,12 +1679,12 @@ public class IndexController extends BaseController {
         }
 
 
-        return "c50_site_banner_mng";
+        return "/c_site_mng/c50_site_banner_mng";
     }
 
     //협약담당자 관리
     @RequestMapping(value = "/c60_site_popup_mng",method = RequestMethod.POST)
-    public String c60_site_popup_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String c60_site_popup_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                      @RequestBody ParamPageListFilteredVO param,
                                      ModelMap model,
                                      @CookieValue(name = "access_token",required = false) String access_token){
@@ -1593,12 +1765,12 @@ public class IndexController extends BaseController {
         List<WebMainPopupVO> webMainBannerList = webMainPopupService.getWebMainBannerList();
         model.addAttribute("webMainBannerList", webMainBannerList);
 
-        return "c60_site_popup_mng";
+        return "/c_site_mng/c60_site_popup_mng";
     }
 
     //재배사 관리
     @RequestMapping(value = "/c71_site_form_doc_mng",method = RequestMethod.POST)
-    public String c71_site_form_doc_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String c71_site_form_doc_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                         @RequestBody ParamPageListFilteredVO param,
                                         ModelMap model,
                                         @CookieValue(name = "access_token",required = false) String access_token){
@@ -1623,12 +1795,12 @@ public class IndexController extends BaseController {
         Integer maxPageNum = formFileMapper.getFormFileCount();
         model.addAttribute("max_page_num", maxPageNum);
 
-        return "c71_site_form_doc_mng";
+        return "/c_site_mng/c71_site_form_doc_mng";
     }
 
     //sms 작성
     @RequestMapping(value = "/c72_site_rule_doc_mng",method = RequestMethod.POST)
-    public String c72_site_rule_doc_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String c72_site_rule_doc_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                         @RequestBody ParamPageListFilteredVO param,
                                         ModelMap model,
                                         @CookieValue(name = "access_token",required = false) String access_token){
@@ -1651,12 +1823,12 @@ public class IndexController extends BaseController {
 
         Integer maxPageNum = ruleFileMapper.getRuleFileCount();
         model.addAttribute("max_page_num", maxPageNum);
-        return "c72_site_rule_doc_mng";
+        return "/c_site_mng/c72_site_rule_doc_mng";
     }
 
     //사이트 정보관리
     @RequestMapping(value = "/c80_site_mng",method = RequestMethod.POST)
-    public String c80_site_mng(@RequestParam(value = "tag", required = false) String tagValue, @RequestBody ParamPageListFilteredVO param,
+    public String c80_site_mng(@RequestParam(value = "page_num", required = false) String page_num, @RequestBody ParamPageListFilteredVO param,
                                ModelMap model,
                                @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -1787,12 +1959,12 @@ public class IndexController extends BaseController {
         model.addAttribute("cw_list_amount",list_amount);
         model.addAttribute("cw_page_amount",page_amount);
 
-        return "c80_site_mng";
+        return "/c_site_mng/c80_site_mng";
     }
 
     //자동 sms 관리
     @RequestMapping(value = "/d10_schedule_mng",method = RequestMethod.POST)
-    public String d10_schedule_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String d10_schedule_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                    ModelMap model,
                                    @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -1808,12 +1980,12 @@ public class IndexController extends BaseController {
             return "redirect:/login";
         }
 
-        return "d10_schedule_mng";
+        return "/d_schedule/d10_schedule_mng";
     }
 
     //예약된 SMS
     @RequestMapping(value = "/e10_document_issued_req_list",method = RequestMethod.POST)
-    public String e10_document_issued_req_list(@RequestParam(value = "tag", required = false) String tagValue,
+    public String e10_document_issued_req_list(@RequestParam(value = "page_num", required = false) String page_num,
                                                ModelMap model,
                                                @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -1829,12 +2001,12 @@ public class IndexController extends BaseController {
             return "redirect:/login";
         }
 
-        return "e10_document_issued_req_list";
+        return "/e_document/e10_document_issued_req_list";
     }
 
     //보낸 sms
     @RequestMapping(value = "/e20_document_issued",method = RequestMethod.POST)
-    public String e20_document_issued(@RequestParam(value = "tag", required = false) String tagValue,
+    public String e20_document_issued(@RequestParam(value = "page_num", required = false) String page_num,
                                       ModelMap model,
                                       @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -1850,12 +2022,12 @@ public class IndexController extends BaseController {
             return "redirect:/login";
         }
 
-        return "e20_document_issued";
+        return "/e_document/e20_document_issued";
     }
 
     //자동 email 관리
     @RequestMapping(value = "/e30_document_issued_history",method = RequestMethod.POST)
-    public String e30_document_issued_history(@RequestParam(value = "tag", required = false) String tagValue,
+    public String e30_document_issued_history(@RequestParam(value = "page_num", required = false) String page_num,
                                               ModelMap model,
                                               @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -1871,19 +2043,19 @@ public class IndexController extends BaseController {
             return "redirect:/login";
         }
 
-        return "e30_document_issued_history";
+        return "/e_document/e30_document_issued_history";
     }
 
     // 이메일 작성
 /*    @RequestMapping(value = "/f21_write_email",method = RequestMethod.POST)
-    public String f21_write_email(@RequestParam(value = "tag", required = false) String tagValue){
+    public String f21_write_email(@RequestParam(value = "page_num", required = false) String page_num){
 
         return "f21_write_email";
     }*/
 
     //예약된 이메일
     @RequestMapping(value = "/f10_gh_data_mng",method = RequestMethod.POST)
-    public String f10_gh_data_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String f10_gh_data_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                   ModelMap model,
                                   @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -1899,12 +2071,12 @@ public class IndexController extends BaseController {
             return "redirect:/login";
         }
 
-        return "f10_gh_data_mng";
+        return "/f_data/f10_gh_data_mng";
     }
 
     //보낸 email
     @RequestMapping(value = "/f20_asset_data_mng",method = RequestMethod.POST)
-    public String f20_asset_data_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String f20_asset_data_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                      ModelMap model,
                                      @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -1921,12 +2093,12 @@ public class IndexController extends BaseController {
         }
 
 
-        return "f20_asset_data_mng";
+        return "/f_data/f20_asset_data_mng";
     }
 
     //웹 프론트 메인 페이지 관리
     @RequestMapping(value = "/f30_data_req_history",method = RequestMethod.POST)
-    public String f30_data_req_history(@RequestParam(value = "tag", required = false) String tagValue,
+    public String f30_data_req_history(@RequestParam(value = "page_num", required = false) String page_num,
                                        ModelMap model,
                                        @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -1943,26 +2115,26 @@ public class IndexController extends BaseController {
         }
 
 
-        return "f30_data_req_history";
+        return "/f_data/f30_data_req_history";
     }
 
     //시스템 모니터링
 /*    @RequestMapping(value = "/g12_system_monitoring",method = RequestMethod.POST)
-    public String g12_system_monitoring(@RequestParam(value = "tag", required = false) String tagValue){
+    public String g12_system_monitoring(@RequestParam(value = "page_num", required = false) String page_num){
 
         return "g12_system_monitoring";
     }*/
 
     //보안 관리
 /*    @RequestMapping(value = "/g13_security_mng",method = RequestMethod.POST)
-    public String g13_security_mng(@RequestParam(value = "tag", required = false) String tagValue){
+    public String g13_security_mng(@RequestParam(value = "page_num", required = false) String page_num){
 
         return "g13_security_mng";
     }*/
 
     //관리자 프론트 대시보드 관리
     @RequestMapping(value = "/g10_cur_asset_mng",method = RequestMethod.POST)
-    public String g10_cur_asset_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String g10_cur_asset_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                     ModelMap model,
                                     @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -2000,11 +2172,11 @@ public class IndexController extends BaseController {
         model.addAttribute("detail_cate", detailAssetCodeList);
 
 
-        return "g10_cur_asset_mng";
+        return "/g_asset/g10_cur_asset_mng";
     }
 
     @RequestMapping(value = "/asset_reservation_list",method = RequestMethod.POST)
-    public String asset_reservation_list(@RequestParam(value = "tag", required = false) String tagValue,
+    public String asset_reservation_list(@RequestParam(value = "page_num", required = false) String page_num,
                                          @RequestBody ParamPageListFilteredVO param,
                                          ModelMap model,
                                          @CookieValue(name = "access_token",required = false) String access_token){
@@ -2041,7 +2213,7 @@ public class IndexController extends BaseController {
     }
 
     @RequestMapping(value = "/asset_reservation_items_list",method = RequestMethod.POST)
-    public String asset_reservation_items_list(@RequestParam(value = "tag", required = false) String tagValue,
+    public String asset_reservation_items_list(@RequestParam(value = "page_num", required = false) String page_num,
                                                @RequestBody ParamPageListFilteredVO param,
                                                ModelMap model,
                                                @CookieValue(name = "access_token",required = false) String access_token){
@@ -2073,7 +2245,7 @@ public class IndexController extends BaseController {
     }
 
     @RequestMapping(value = "/cur_asset_index",method = RequestMethod.POST)
-    public String cur_asset_index(@RequestParam(value = "tag", required = false) String tagValue,
+    public String cur_asset_index(@RequestParam(value = "page_num", required = false) String page_num,
                                   @RequestBody ParamPageListFilteredVO param,
                                   ModelMap model,
                                   @CookieValue(name = "access_token",required = false) String access_token){
@@ -2107,7 +2279,7 @@ public class IndexController extends BaseController {
     }
 
     @RequestMapping(value = "/asset_category",method = RequestMethod.POST)
-    public String asset_category(@RequestParam(value = "tag", required = false) String tagValue,
+    public String asset_category(@RequestParam(value = "page_num", required = false) String page_num,
                                  @RequestBody SystemCodeVO param,
                                  ModelMap model,
                                  @CookieValue(name = "access_token",required = false) String access_token){
@@ -2185,7 +2357,7 @@ public class IndexController extends BaseController {
 
     //콘솔 프론트 대시보드 관리
     @RequestMapping(value = "/g20_asset_booking",method = RequestMethod.POST)
-    public String g20_asset_booking(@RequestParam(value = "tag", required = false) String tagValue,
+    public String g20_asset_booking(@RequestParam(value = "page_num", required = false) String page_num,
                                     Principal principal,
 
                                     ModelMap model,
@@ -2224,11 +2396,11 @@ public class IndexController extends BaseController {
         model.addAttribute("sub_cate", subAssetCodeList);
         model.addAttribute("detail_cate", detailAssetCodeList);
 
-        return "g20_asset_booking";
+        return "/g_asset/g20_asset_booking";
     }
 
     @RequestMapping(value = "/get_asset_list",method = RequestMethod.POST)
-    public String get_asset_list (@RequestParam(value = "tag", required = false) String tagValue,
+    public String get_asset_list (@RequestParam(value = "page_num", required = false) String page_num,
                                   @RequestBody ParamPageListFilteredVO param,
                                   ModelMap model,
                                   @CookieValue(name = "access_token",required = false) String access_token){
@@ -2252,7 +2424,7 @@ public class IndexController extends BaseController {
 
     //서식관리
     @RequestMapping(value = "/g30_asset_book_mng",method = RequestMethod.POST)
-    public String g30_asset_book_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String g30_asset_book_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                      ModelMap model,
                                      @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -2287,11 +2459,11 @@ public class IndexController extends BaseController {
         model.addAttribute("sub_cate", subAssetCodeList);
         model.addAttribute("detail_cate", detailAssetCodeList);
 
-        return "g30_asset_book_mng";
+        return "/g_asset/g30_asset_book_mng";
     }
 
     @RequestMapping(value = "/reserve_view",method = RequestMethod.POST)
-    public String reserve_view (@RequestParam(value = "tag", required = false) String tagValue,
+    public String reserve_view (@RequestParam(value = "page_num", required = false) String page_num,
                                 @RequestBody ParamPageListFilteredVO param,
                                 ModelMap model,
                                 @CookieValue(name = "access_token",required = false) String access_token){
@@ -2325,7 +2497,7 @@ public class IndexController extends BaseController {
 
     //시스템 코드 관리
     @RequestMapping(value = "/h11_write_sms",method = RequestMethod.POST)
-    public String h11_write_sms(@RequestParam(value = "tag", required = false) String tagValue,
+    public String h11_write_sms(@RequestParam(value = "page_num", required = false) String page_num,
                                 ModelMap model,
                                 @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -2342,11 +2514,11 @@ public class IndexController extends BaseController {
         }
 
 
-        return "h11_write_sms";
+        return "/h_comm/h11_write_sms";
     }
     //시스템 코드 관리
     @RequestMapping(value = "/h12_auto_sms_mng",method = RequestMethod.POST)
-    public String h20_auto_sms_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String h20_auto_sms_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                    ModelMap model,
                                    @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -2362,11 +2534,11 @@ public class IndexController extends BaseController {
             return "redirect:/login";
         }
 
-        return "h12_auto_sms_mng";
+        return "/h_comm/h12_auto_sms_mng";
     }
     //시스템 코드 관리
     @RequestMapping(value = "/h13_reserved_sms_list",method = RequestMethod.POST)
-    public String h13_reserved_sms_list(@RequestParam(value = "tag", required = false) String tagValue,
+    public String h13_reserved_sms_list(@RequestParam(value = "page_num", required = false) String page_num,
                                         ModelMap model,
                                         @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -2384,11 +2556,11 @@ public class IndexController extends BaseController {
 
         ArrayList<SmsSendVO> smsReservearr = smsSendService.selectReserveMessage();
         model.addAttribute("reserveSms",smsReservearr);
-        return "h13_reserved_sms_list";
+        return "/h_comm/h13_reserved_sms_list";
     }
     //시스템 코드 관리
     @RequestMapping(value = "/h14_sent_sms_list",method = RequestMethod.POST)
-    public String h14_sent_sms_list(@RequestParam(value = "tag", required = false) String tagValue,
+    public String h14_sent_sms_list(@RequestParam(value = "page_num", required = false) String page_num,
                                     ModelMap model,
                                     @RequestBody ParamPageListFilteredVO param,
                                     @CookieValue(name = "access_token",required = false) String access_token){
@@ -2418,10 +2590,10 @@ public class IndexController extends BaseController {
         List<SmsSentVO> smsList = smsSendService.selectSentmeesage1(param.getPage_num(), param.getAmount());
         model.addAttribute("sentSms",smsList);
         model.addAttribute("page_num", param.getPage_num());
-        return "h14_sent_sms_list";
+        return "/h_comm/h14_sent_sms_list";
     }
     @RequestMapping(value = "/h21_write_mail",method = RequestMethod.POST)
-    public String h21_write_mail(@RequestParam(value = "tag", required = false) String tagValue,
+    public String h21_write_mail(@RequestParam(value = "page_num", required = false) String page_num,
                                  ModelMap model,
                                  @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -2438,11 +2610,11 @@ public class IndexController extends BaseController {
         }
 
 
-        return "h21_write_mail";
+        return "/h_comm/h21_write_mail";
     }
     //시스템 코드 관리
     @RequestMapping(value = "/h22_auto_email_mng",method = RequestMethod.POST)
-    public String h22_auto_email_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String h22_auto_email_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                      ModelMap model,
                                      @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -2459,11 +2631,11 @@ public class IndexController extends BaseController {
         }
 
 
-        return "h22_auto_email_mng";
+        return "/h_comm/h22_auto_email_mng";
     }
     //시스템 코드 관리
     @RequestMapping(value = "/h23_reserved_email_list",method = RequestMethod.POST)
-    public String h23_reserved_email_list(@RequestParam(value = "tag", required = false) String tagValue,
+    public String h23_reserved_email_list(@RequestParam(value = "page_num", required = false) String page_num,
                                           ModelMap model,
                                           @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -2480,20 +2652,20 @@ public class IndexController extends BaseController {
         }
 
         ArrayList<ReservedMailVO> resultArr;
-        if(tagValue == null){
+        if(page_num == null){
             resultArr = mailService.getReservedMail("1");
         } else {
-            resultArr = mailService.getReservedMail(tagValue);
+            resultArr = mailService.getReservedMail(page_num);
         }
 
         model.addAttribute("reservedMails", resultArr);
-        return "h23_reserved_email_list";
+        return "/h_comm/h23_reserved_email_list";
     }
 
 
     //시스템 코드 관리
     @RequestMapping(value = "/h24_sent_email_list",method = RequestMethod.POST)
-    public String h24_sent_email_list(@RequestParam(value = "tag", required = false) String tagValue,
+    public String h24_sent_email_list(@RequestParam(value = "page_num", required = false) String page_num,
                                       ModelMap model) throws MessagingException, IOException {
 /*
 
@@ -2548,7 +2720,7 @@ public class IndexController extends BaseController {
 
 
 
-        return "h24_sent_email_list";
+        return "/h_comm/h24_sent_email_list";
     }
 
     //시스템 코드 관리
@@ -2570,11 +2742,11 @@ public class IndexController extends BaseController {
             return "redirect:/login";
         }
         model.addAttribute("allCount", userService.getAllUserListCount());
-        return "i11_user_mng";
+        return "/i_human/i11_user_mng";
     }
 
     @RequestMapping(value = "/user_index",method = RequestMethod.POST)
-    public String user_index(@RequestParam(value = "tag", required = false) String tagValue,
+    public String user_index(@RequestParam(value = "page_num", required = false) String page_num,
                              @RequestBody ParamPageListFilteredVO param,
                              ModelMap model,
                              @CookieValue(name = "access_token",required = false) String access_token){
@@ -2612,7 +2784,7 @@ public class IndexController extends BaseController {
 
     //시스템 코드 관리
     @RequestMapping(value = "/i12_dormant_user_mng",method = RequestMethod.POST)
-    public String i12_dormant_user_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String i12_dormant_user_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                        ModelMap model,
                                        @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -2628,11 +2800,11 @@ public class IndexController extends BaseController {
             return "redirect:/login";
         }
 
-        return "i12_dormant_user_mng";
+        return "/i_human/i12_dormant_user_mng";
     }
 
     @RequestMapping(value = "/dormant_user_index",method = RequestMethod.POST)
-    public String dormant_user_index(@RequestParam(value = "tag", required = false) String tagValue,
+    public String dormant_user_index(@RequestParam(value = "page_num", required = false) String page_num,
                                      @RequestBody ParamPageListFilteredVO param,
                                      ModelMap model,
                                      @CookieValue(name = "access_token",required = false) String access_token){
@@ -2670,7 +2842,7 @@ public class IndexController extends BaseController {
 
     //시스템 코드 관리
     @RequestMapping(value = "/i21_admin_mng" ,method = RequestMethod.POST)
-    public String i21_admin_mng(@RequestParam(value = "page_num", required = false) String tagValue,
+    public String i21_admin_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                 @RequestBody ParamPageListFilteredVO param,
                                 ModelMap model,
                                 @CookieValue(name = "access_token",required = false) String access_token){
@@ -2706,11 +2878,11 @@ public class IndexController extends BaseController {
         model.addAttribute("centerAdminCount", adminService.selectCount(1));
         model.addAttribute("localAdminCount", adminService.selectCount(2));
 
-        return "i21_admin_mng";
+        return "/i_human/i21_admin_mng";
     }
 
     @RequestMapping(value = "/admin_corporate" ,method = RequestMethod.POST)
-    public String admin_corporate(@RequestParam(value = "page_num", required = false) String tagValue,
+    public String admin_corporate(@RequestParam(value = "page_num", required = false) String page_num,
                                 @RequestBody ParamPageListFilteredVO param,
                                   ModelMap model,
                                   @CookieValue(name = "access_token",required = false) String access_token){
@@ -2746,7 +2918,7 @@ public class IndexController extends BaseController {
     /*
     //시스템 코드 관리
     @RequestMapping(value = "/j10_file_mng",method = RequestMethod.POST)
-    public String j10_file_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String j10_file_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                ModelMap model){
 
 
@@ -2754,7 +2926,7 @@ public class IndexController extends BaseController {
     }
     //시스템 코드 관리
     @RequestMapping(value = "/j20_sms_mng",method = RequestMethod.POST)
-    public String j20_sms_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String j20_sms_mng(@RequestParam(value = "page_num", required = false) String page_num,
                               ModelMap model){
 
 
@@ -2763,7 +2935,7 @@ public class IndexController extends BaseController {
 
     //시스템 코드 관리
     @RequestMapping(value = "/j30_email_mng",method = RequestMethod.POST)
-    public String j30_email_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String j30_email_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                 ModelMap model){
 
 
@@ -2771,7 +2943,7 @@ public class IndexController extends BaseController {
     }*/
     //시스템 코드 관리
     @RequestMapping(value = "/k11_system_authority_mng",method = RequestMethod.POST)
-    public String k11_system_authority_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String k11_system_authority_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                            ModelMap model,
                                            @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -2788,12 +2960,12 @@ public class IndexController extends BaseController {
         }
 
 
-        return "k11_system_authority_mng";
+        return "/k_system/k11_system_authority_mng";
     }
 
     //시스템 코드 관리
     @RequestMapping(value = "/k21_admin_dashboad_mng",method = RequestMethod.POST)
-    public String k21_admin_dashboad_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String k21_admin_dashboad_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                          ModelMap model,
                                          @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -2810,11 +2982,11 @@ public class IndexController extends BaseController {
         }
 
 
-        return "k21_admin_dashboad_mng";
+        return "/k_system/k21_admin_dashboad_mng";
     }
     //시스템 코드 관리
     @RequestMapping(value = "/k31_console_dashboad_mng",method = RequestMethod.POST)
-    public String k31_console_dashboad_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String k31_console_dashboad_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                            ModelMap model,
                                            @CookieValue(name = "access_token",required = false) String access_token){
         AdminVO adminVO = null;
@@ -2831,11 +3003,11 @@ public class IndexController extends BaseController {
         }
 
 
-        return "k31_console_dashboad_mng";
+        return "/k_system/k31_console_dashboad_mng";
     }
    /* //시스템 코드 관리
     @RequestMapping(value = "/k14_system_role_list",method = RequestMethod.POST)
-    public String k14_system_role_list(@RequestParam(value = "tag", required = false) String tagValue,
+    public String k14_system_role_list(@RequestParam(value = "page_num", required = false) String page_num,
                                        ModelMap model){
 
 
@@ -2843,7 +3015,7 @@ public class IndexController extends BaseController {
     }
     //시스템 코드 관리
     @RequestMapping(value = "/k15_system_role_menu_mng",method = RequestMethod.POST)
-    public String k15_system_role_menu_mng(@RequestParam(value = "tag", required = false) String tagValue,
+    public String k15_system_role_menu_mng(@RequestParam(value = "page_num", required = false) String page_num,
                                            ModelMap model){
 
 
@@ -2919,7 +3091,7 @@ public class IndexController extends BaseController {
         model.addAttribute("page_amount",page_amount);
 
 
-        return "l11_document_form_mng";
+        return "/m_code/l11_document_form_mng";
     }
     @RequestMapping(value = "/l12_document_rule_mng",method = RequestMethod.POST)
     public String l12_document_rule_mng(@RequestBody ParamPageListFilteredVO param,
@@ -2990,7 +3162,7 @@ public class IndexController extends BaseController {
         model.addAttribute("page_amount",page_amount);
 
 
-        return "l12_document_rule_mng";
+        return "/m_code/l12_document_rule_mng";
     }
     //시스템 코드 관리
     @RequestMapping(value = "/l20_code_mng",method = RequestMethod.POST)
@@ -3064,7 +3236,7 @@ public class IndexController extends BaseController {
         model.addAttribute("list_amount",list_amount);
         model.addAttribute("page_amount",page_amount);
 
-        return "l20_code_mng";
+        return "/m_code/l20_code_mng";
     }
     private void setProfile(ModelMap model) {
         String[] activeProfiles = env.getActiveProfiles();

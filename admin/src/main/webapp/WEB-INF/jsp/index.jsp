@@ -149,9 +149,7 @@
 
 
 <script>
-    let _pageReload = '${pageOnLoad}';
-    let curMyIdx = ${admin.idx_admin};
-
+/*=== lnb active 처리 ====*/
     $("li.sidenav-item").on('click',function(){
         if( $("li.sidenav-item").has('a')!=null){
             $(this).addClass("active");
@@ -165,27 +163,26 @@
         });
 
     });
+
+/*==== 글로벌 데이터 ========*/
+    let _pageReload = '${pageOnLoad}';
+    let curMyIdx = ${admin.idx_admin};
+
+
+/*==== page load 처리 ========*/
     var cur = "";
-
-
-
-
-
-    //int page_num;
-    //int filter1;
-    //int filter2;
-    //long idx;
-    //int amount;
-    //String order_field;
-
     let filter1 = null;
     let filter2 = null;
-    function pageLoad(url, param, title, usage){
-/*      State : 브라우저 이동 시 넘겨줄 데이터 (popstate 에서 받아서 원하는 처리를 해줄 수 있음)
-        Title : 변경할 브라우저 제목 (변경 원치 않으면 null)
-        Url : 변경할 주소*/
+
+    function pageLoad(url, param=null, title="실증단지 웹 어드민", usage=null){
+
+/*  url : 로딩할 주소,
+    param : 페이지 로딩 시 전달할 파라미터
+    title : 브라우저 타이틀
+    usage : .html로 대치할 선택자
+*/
         if(param==null) {
-            param = {'page_num':1};
+            param = {};
             filter1 = null;
             filter2 = null;
         }else{
@@ -207,8 +204,19 @@
             }
         }
 
-        if(cur !== url+param['page_num'] || usage === "asset_list" || usage==='site_adver_mng' || usage==='site_event_mng' || usage==='pr_contents' || usage==='event_contents'){
+        if(cur === url+param['page_num']){
+            return;
+        }
+
+        if(cur !== url+param['page_num'] && usage==null)
+        {
+            history.pushState(param, title, url);
+        }
+
+/*
+        if(cur !== url+param['page_num']/!* || usage === "asset_list" || usage==='site_adver_mng' || usage==='site_event_mng' || usage==='pr_contents' || usage==='event_contents'*!/){
             cur = url+param['page_num'];
+
             if(url.indexOf('cur_asset_index') === -1
                 && url.indexOf('user_index') === -1
                 && url.indexOf('dormant_user_index') === -1
@@ -220,6 +228,10 @@
                 ) {
                 history.pushState(param, title, url);
             }
+*/
+
+        if(usage==null)
+            usage="#contents";
 
             var request = $.ajax({
                 url: url,
@@ -228,6 +240,8 @@
                 contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
                 dataType:'html',//받는 데이터 타입
                 success:function(result){
+                    $(usage).html(result);
+                    /*
                     if(usage === "admin"){
                         $("#admin_index").html(result);
                     } else if(usage === "user"){
@@ -256,12 +270,15 @@
                         $("#site_event_mng").html(result);
                     } else if(usage === '#dashboard_calendar_view'){
                         $(usage).html(result);
+                    } else if(usage === '#appl_contents'){
+                        $(usage).html(result);
                     } else{
                         $("#contents").html(result);
-                    }
+                    }*/
                 },
                 fail:function(xhr,status,err){
-                    $("#contents").html("Request failed: " + status);
+
+                    $(usage).html("<div class='row'><div class='align-items-center'>"+"Page:"+url+"     Request failed: " + status +"</div></div>");
                 }
 
             });
@@ -277,12 +294,12 @@
             //$("#contents").load(a,{"tag":a} ,function(){
                 //alert(a);
 
-        }else{//현재 주소 클릭시 변화 없음
+/*        }else{//현재 주소 클릭시 변화 없음
             return false;
-        }
+        }*/
     }
 
-    //뒤로가기 했을 때 처리
+/*==========    브라우저 뒤로가기 했을 때 처리    ==============*/
     (function() {
         // There's nothing to do for older browsers ;)
         if (!window.addEventListener)
@@ -290,10 +307,10 @@
         //window 내 mouse 위치 여부를 체크하기 위한 변수
         window.innerDoc = false; //mouseover Event Listener
         window.addEventListener('mouseover', function(event) { window.innerDoc = true; });
-        // mouseout Event Listener
         window.addEventListener('mouseout', function(event) { window.innerDoc = false; });
 
         var blockPopstateEvent = document.readyState!="complete";
+
         window.addEventListener("load", function() {
             // The timeout ensures that popstate-events will be unblocked right
             // after the load event occured, but not in the same event-loop cycle.
@@ -306,23 +323,30 @@
             }
             if (!window.innerDoc) {
 
-                $("#contents").load(evt.state.url,evt.state.title ,function(){
+/*                $("#contents").load(evt.state.url,evt.state.title ,function(){
                     //alert(a);
                     //lng 하이라이트 바꿔줘야 함
-                });
+                });*/
+
+                pageLoad(evt.state.url,{page_num:1},evt.state.title);
             }
         }, false);
 
 
     })();
+
+
+
     $(document).ready(function() {
         //ajax로 호출되는 첫번째 페이지
         if(_pageReload !== ''){
             pageLoad('${path}', null);
         }else{
-            pageLoad('a10_dashboard','{tag:1}','대시보드');
+            pageLoad('a10_dashboard',{page_num:1},'대시보드');
         }
     });
+
+
 </script>
 <style>
     #loading_symbol{

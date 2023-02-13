@@ -44,4 +44,5 @@ public interface UserDemoBsMapper {
     int submitUserDemoBs(@Param("idx_user_demo_bs") long idx_user_demo_bs);
 
     void updateUserDemoBsStatus(UserDemoBsVO userDemoBsVO);
+    List<UserDemoBsVO> getUserDemoBsPagingListByFiltered(long idx, int page_num,int amount,String order_field, int filter1, int filter2);
 }

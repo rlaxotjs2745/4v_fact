@@ -3,7 +3,7 @@
 <!-- Layout navbar -->
 <nav class="layout-navbar navbar navbar-expand-lg align-items-lg-center bg-white container-p-x" id="layout-navbar">
 
-    <!-- Brand demo (see assets/css/demo/demo.css) -->
+
     <a href="home" class="navbar-brand app-brand demo d-lg-none py-0 mr-4">
             <span class="app-brand-logo demo bg-primary">
               <svg viewBox="0 0 148 80" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><linearGradient id="a" x1="46.49" x2="62.46" y1="53.39" y2="48.2" gradientUnits="userSpaceOnUse"><stop stop-opacity=".25" offset="0"></stop><stop stop-opacity=".1" offset=".3"></stop><stop stop-opacity="0" offset=".9"></stop></linearGradient><linearGradient id="e" x1="76.9" x2="92.64" y1="26.38" y2="31.49" xlink:href="#a"></linearGradient><linearGradient id="d" x1="107.12" x2="122.74" y1="53.41" y2="48.33" xlink:href="#a"></linearGradient></defs><path style="fill: #fff;" transform="translate(-.1)" d="M121.36,0,104.42,45.08,88.71,3.28A5.09,5.09,0,0,0,83.93,0H64.27A5.09,5.09,0,0,0,59.5,3.28L43.79,45.08,26.85,0H.1L29.43,76.74A5.09,5.09,0,0,0,34.19,80H53.39a5.09,5.09,0,0,0,4.77-3.26L74.1,35l16,41.74A5.09,5.09,0,0,0,94.82,80h18.95a5.09,5.09,0,0,0,4.76-3.24L148.1,0Z"></path><path transform="translate(-.1)" d="M52.19,22.73l-8.4,22.35L56.51,78.94a5,5,0,0,0,1.64-2.19l7.34-19.2Z" fill="url(#a)"></path><path transform="translate(-.1)" d="M95.73,22l-7-18.69a5,5,0,0,0-1.64-2.21L74.1,35l8.33,21.79Z" fill="url(#e)"></path><path transform="translate(-.1)" d="M112.73,23l-8.31,22.12,12.66,33.7a5,5,0,0,0,1.45-2l7.3-18.93Z" fill="url(#d)"></path></svg>
@@ -11,7 +11,6 @@
         <span class="app-brand-text demo font-weight-normal ml-2">스마트팜</span>
     </a>
 
-    <!-- Sidenav toggle (see assets/css/demo/demo.css) -->
     <div class="layout-sidenav-toggle navbar-nav d-lg-none align-items-lg-center mr-auto">
         <a class="nav-item nav-link px-0 mr-lg-4" href="javascript:void(0)">
             <i class="ion ion-md-menu text-large align-middle"></i>
@@ -28,10 +27,9 @@
 
         <div class="navbar-nav align-items-lg-center navbar-weather">
             <!-- Welcome Board -->
-            <span id="now-date-nav">2021.00.00.(월) 오전 10:15</span><span class="nav-link">|</span>
-            <span><strong id="now-temp-nav">22</strong><span id="now-weather-nav">℃ 구름조금</span>          <strong id="now-rainper-nav"></strong></span><span class="nav-link">|</span>
-            <span>미세먼지  </span>
-            <strong class="text-info now-dust-nav"> 매우 좋음 </strong><i class="now-dust-img-nav far fa-smile"></i><span class="nav-link"></span>
+            <span id="now-date-nav">2021.00.00.(월) 오전 10:15</span><span class="nav-span" style="display: inline-block;text-align: center;">|</span>
+            <span>날씨:&ensp;<strong id="now-temp-nav">22</strong> ℃ <span id="now-weather-nav">구름조금</span><strong id="now-rainper-nav"></strong></span><span class="nav-span" style="display: inline-block;text-align: center;">|</span>
+            <span>미세먼지:&ensp;</span><strong class="text-info now-dust-nav">매우 좋음 &nbsp;&nbsp;<i class="now-dust-img-nav far fa-smile"></i></strong><%--<span class="nav-span"></span>--%>
             <!--<strong class="text-success">좋음 <i class="far fa-laugh"></i></strong>-->
             <%--                <strong class="text-warning">나쁨 <i class="far fa-tired"></i></strong>--%>
             <!--<strong class="text-danger">매우 나쁨<i class="far fa-frown"></i></strong>-->
@@ -166,7 +164,7 @@
             <div class="nav-item d-none d-lg-block text-big font-weight-light line-height-1 opacity-25 mr-3 ml-1">|</div>
 
             <div class="demo-navbar-user nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown">
                   <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
                     <img src="/resources/assets/img/avatars/1.png" alt class="d-block ui-w-30 rounded-circle">
                     <span class="px-1 mr-lg-2 ml-2 ml-lg-0">${admin.admin_name}</span>
@@ -431,10 +429,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script>
-    if("${admin.auth_status}" == "0"){
-        $("#modals-pw-modify-first").addClass("show").css("display", "block");
-        $(".modal-backdrop").addClass("show").css("display", "block");
-    }
+
 
     var regax = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
 
@@ -475,20 +470,14 @@
     })
 
     $("#mod-pw-submit").click(() => {
-        // if($("#mod-pwcf-guide").text() == "" || $("#mod-pw-guide").text() == ""){
-        //     alert("변경할 비밀번호가 올바르지 않습니다.");
-        //     return;
-        // }
         if($("#cur-pw").val() == $("#mod-pw").val()){
             alert("변경할 비밀번호와 기존비밀번호가 같습니다.")
             return;
         }
-
         if($("#cur-pw").val() == "" || $("#mod-pw").val() == "" || $("#mod-pwcf").val() == ""){
             alert("비밀번호 변경에 필요한 정보가 모두 입력되지 않았습니다.");
             return;
         }
-
         var newPw = {
             curPw : $("#cur-pw").val(),
             modPW : $("#mod-pw").val(),
@@ -509,7 +498,6 @@
                     $(".modal-backdrop").removeClass("show").css("display", "none");
                 }
                 else {
-
                     <c:if test="${login_from == 'gimje-prod'}">
                     location.replace('https://innovalley.smartfarmkorea.net/gimje/Demonstration/admin/login');
                     </c:if>
@@ -527,7 +515,7 @@
                 return;
             }
         })
-    })
+    });
 
     $("#mod-pw-submit-first").click(() => {
         // if($("#mod-pwcf-guide").text() == "" || $("#mod-pw-guide").text() == ""){
@@ -583,15 +571,11 @@
                 window.location.href = "/logout";
             }
         })
-    })
-
-
+    });
 
     $('#btn_myinfo_edit_save').click( function(){
-
         $('.myinfo-view').removeClass('d-none');
         $('.myinfo-edit').addClass('d-none');
-
     });
 
     $('#btn_myinfo_edit').click( function(){
@@ -610,119 +594,6 @@
         $('.myinfo-edit').addClass('d-none');
 
     });
-
-
-    // <div class="navbar-nav align-items-lg-center navbar-weather">
-    //     <!-- Welcome Board -->
-    //     <span id="now-date-nav">2021.00.00.(월) 오전 10:15</span><span class="nav-link">|</span>
-    //     <span><strong id="now-temp-nav">22</strong><span id="now-weather-nav">℃ 구름조금</span> 어제보다 2℃ 높음 강수확률 <strong id="now-rainper-nav">10</strong>%</span><span class="nav-link">|</span>
-    //     <span>미세먼지 </span>
-    //     <strong class="text-info now-dust-nav"> 매우 좋음<i class="far fa-smile"></i></strong><span class="nav-link">|</span>
-    //     <!--<strong class="text-success">좋음<i class="far fa-laugh"></i></strong>-->
-    //     <span>오존</span>
-    //     <strong class="text-warning"> 나쁨<i class="far fa-tired"></i></strong>
-    //     <!--<strong class="text-danger">매우 나쁨<i class="far fa-frown"></i></strong>-->
-    //     </div>
-
-    var gimje = {
-        weather: "https://api.openweathermap.org/data/2.5/weather?q=gimje&appid=53adfc8e9ffcbf891a9be91b9e312c01",
-        dust: "https://api.airvisual.com/v2/city?city=gunsan&state=jeollabuk-do&country=south-korea&key=3a760b19-7b72-40b9-860a-4ac383bdee39"
-    }
-
-    var sangju = {
-        weather: "https://api.openweathermap.org/data/2.5/weather?q=sangju&appid=53adfc8e9ffcbf891a9be91b9e312c01",
-        dust: "https://api.airvisual.com/v2/city?city=sangju&state=gyeongsangbuk-do&country=south-korea&key=3a760b19-7b72-40b9-860a-4ac383bdee39"
-    }
-    nowDateTime();
-    setInterval(nowDateTime, 1000)
-    if("${profile}" == 'sangju-prod'){
-        nowWeatherAndDust(sangju);
-    }
-    else{
-        nowWeatherAndDust(gimje);
-    }
-
-    function nowDateTime(){
-        $('#now-date-nav').text(new Date().toLocaleString().slice(0,14) + new Date().getHours() + ':' + new Date().getMinutes());
-    }
-
-    function nowWeatherAndDust(location) {
-        fetch(location.weather) //weather
-            .then(res => res.json())
-            .then(json => {
-                $('.navbar-weather #now-temp-nav').text((json.main.temp - 273.15 + '').length > 4 ? (json.main.temp - 273.15 + '').slice(0, 4) : json.main.temp - 273.15 + '');
-                switch (json.weather[0].icon) {
-                    case '01d' || '01n':
-                        $('#now-weather-nav').text('℃ 맑음');
-                        break;
-                    case '02d' || '02n':
-                        $('#now-weather-nav').text('℃ 구름 조금');
-                        break;
-                    case '03d' || '03n':
-                        $('#now-weather-nav').text('℃ 흐림');
-                        break;
-                    case '04d' || '04n':
-                        $('#now-weather-nav').text('℃ 구름 많음');
-                        break;
-                    case '09d' || '09n':
-                        $('#now-weather-nav').text('℃ 소나기');
-                        break;
-                    case '10d' || '10n':
-                        $('#now-weather-nav').text('℃ 비');
-                        break;
-                    case '11d' || '11n':
-                        $('#now-weather-nav').text('℃ 뇌우');
-                        break;
-                    case '13d' || '13n':
-                        $('#now-weather-nav').text('℃ 눈');
-                        break;
-                    case '50d' || '50n':
-                        $('#now-weather-nav').text('℃ 안개');
-                        break;
-                    default:
-                        $('#now-weather-nav').text('℃ 날씨');
-                }
-            })
-
-
-        var requestOptions = {
-            method: 'GET',
-            redirect: 'follow'
-        };
-
-        fetch(location.dust, requestOptions) //dust
-            .then(response => response.json())
-            .then(res => {
-                $('.now-dust-img-nav').removeClass('fa-laugh').removeClass('fa-tired').removeClass('fa-frown').removeClass('fa-smile');
-                $('.now-dust-nav').removeClass('text-info').removeClass('text-warning').removeClass('text-success').removeClass('text-danger').text('');
-                if(res.status!='fail') {
-                    switch (res.data.current.pollution.mainus) {
-                        case 'p1':
-                            $('.now-dust-img-nav').addClass('fa-smile');
-                            $('.now-dust-nav').addClass('text-info').text(' 매우 좋음 ');
-                            break;
-                        case 'p2':
-                            $('.now-dust-img-nav').addClass('fa-laugh');
-                            $('.now-dust-nav').addClass('text-success').text(' 보통 ');
-                            break;
-                        case 'p3':
-                            $('.now-dust-img-nav').addClass('fa-tired');
-                            $('.now-dust-nav').addClass('text-warning').text(' 나쁨 ');
-                            break;
-                        case 'p4':
-                            $('.now-dust-img-nav').addClass('fa-frown');
-                            $('.now-dust-nav').addClass('text-danger').text(' 매우 나쁨 ')
-                            break;
-                        default:
-                            $('.now-dust-img-nav').addClass('fa-frown');
-                            $('.now-dust-nav').addClass('text-danger').text(' 매우 나쁨 ')
-                            break;
-                    }
-                }
-            })
-        // setTimeout(nowWeatherAndDust(location), 600000);
-    }
-
     $("#btn_logout").click(function(){
 
         var param = {
@@ -764,9 +635,110 @@
             }
         });
     });
-    // console.log(weather);
 
+    var gimje = {
+        weather: "https://api.openweathermap.org/data/2.5/weather?q=gimje&appid=53adfc8e9ffcbf891a9be91b9e312c01",
+        dust: "https://api.airvisual.com/v2/city?city=gunsan&state=jeollabuk-do&country=south-korea&key=3a760b19-7b72-40b9-860a-4ac383bdee39"
+    }
 
+    var sangju = {
+        weather: "https://api.openweathermap.org/data/2.5/weather?q=sangju&appid=53adfc8e9ffcbf891a9be91b9e312c01",
+        dust: "https://api.airvisual.com/v2/city?city=sangju&state=gyeongsangbuk-do&country=south-korea&key=3a760b19-7b72-40b9-860a-4ac383bdee39"
+    }
+     var weadtherProfile= gimje;
+
+    $(document).ready(function(){
+
+        if("${profile}" == 'sangju-prod'){
+            weadtherProfile = sangju;
+        }
+        else{
+            weadtherProfile = gimje;
+        }
+        nowDateTime();
+        nowWeatherAndDust(weadtherProfile);
+
+        if("${admin.auth_status}" == "0"){
+            $("#modals-pw-modify-first").addClass("show").css("display", "block");
+            $(".modal-backdrop").addClass("show").css("display", "block");
+        }
+    });
+
+    const timeUpdateId = setInterval(nowDateTime, 1000);
+    function nowDateTime(){
+        var options = { year: "numeric", month: "long", day: "numeric", weekday: "long" };
+        var today = new Date();
+        $('#now-date-nav').text(today.toLocaleDateString("ko-KR", options) + " " + today.toLocaleTimeString());
+    }
+
+    const weatherUpdateId = setInterval(nowWeatherAndDust, 600000,weadtherProfile);
+
+    function nowWeatherAndDust(location) {
+        fetch(location.weather) //weather
+        .then(res => res.json())
+        .then(json => {
+
+            $('.navbar-weather #now-temp-nav').text((json.main.temp - 273.15 + '').length > 4 ? (json.main.temp - 273.15 + '').slice(0, 4) : json.main.temp - 273.15 + '');
+
+            if(json.weather[0].icon=="01d" ||json.weather[0].icon=="01n")
+                $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-sun'></i> &nbsp;맑음</span>");
+            else if(json.weather[0].icon=="02d" ||json.weather[0].icon=="02n")
+                $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-cloud-sun'></i>&nbsp;구름 조금</span>");//.text('구름 조금');
+            else if(json.weather[0].icon=="03d" ||json.weather[0].icon=="03n")
+                $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-cloud'></i>&nbsp;흐림</span>");//.text('흐림');
+            else if(json.weather[0].icon=="04d" ||json.weather[0].icon=="04n")
+                $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='oi oi-cloudy'></i>&nbsp;구름 많음</span>");//.text('구름 많음');
+            else if(json.weather[0].icon=="09d" ||json.weather[0].icon=="09n")
+                $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-cloud-rain'></i>&nbsp;소나기</span>");//.text('소나기');
+            else if(json.weather[0].icon=="10d" ||json.weather[0].icon=="10n")
+                $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-cloud-rain'></i>&nbsp;비</span>");//.text('비');
+            else if(json.weather[0].icon=="11d" ||json.weather[0].icon=="11n")
+                $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='ion ion-ios-thunderstorm'></i>&nbsp;뇌우</span>");//.text('뇌우');
+            else if(json.weather[0].icon=="13d" ||json.weather[0].icon=="13n")
+                $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='far fa-snowflake'></i>&nbsp;눈</span>");//.text('눈');
+            else if(json.weather[0].icon=="50d" ||json.weather[0].icon=="50n")
+                $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-smog'></i>&nbsp;안개</span>");//.text('안개');
+            else
+                $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-cloud'></i>&nbsp;...</span>");//.text('℃ ...');
+
+        });
+
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+
+        fetch(location.dust, requestOptions) //dust
+        .then(response => response.json())
+        .then(res => {
+            $('.now-dust-img-nav').removeClass('fa-laugh').removeClass('fa-tired').removeClass('fa-frown').removeClass('fa-smile');
+            $('.now-dust-nav').removeClass('text-info').removeClass('text-warning').removeClass('text-success').removeClass('text-danger').text('');
+            if(res.status!='fail') {
+                switch (res.data.current.pollution.mainus) {
+                    case 'p1':
+                        $('.now-dust-img-nav').addClass('fa-smile');
+                        $('.now-dust-nav').addClass('text-info').text(' 매우 좋음 ');
+                        break;
+                    case 'p2':
+                        $('.now-dust-img-nav').addClass('fa-laugh');
+                        $('.now-dust-nav').addClass('text-success').text(' 보통 ');
+                        break;
+                    case 'p3':
+                        $('.now-dust-img-nav').addClass('fa-tired');
+                        $('.now-dust-nav').addClass('text-warning').text(' 나쁨 ');
+                        break;
+                    case 'p4':
+                        $('.now-dust-img-nav').addClass('fa-frown');
+                        $('.now-dust-nav').addClass('text-danger').text(' 매우 나쁨 ')
+                        break;
+                    default:
+                        $('.now-dust-img-nav').addClass('fa-frown');
+                        $('.now-dust-nav').addClass('text-danger').text(' 매우 나쁨 ')
+                        break;
+                }
+            }
+        });
+    };
 
 </script>
 
