@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="resources/assets/vendor/css/rtl/colors.css" class="theme-settings-colors-css">
     <link rel="stylesheet" href="resources/assets/vendor/css/rtl/uikit.css">
 
+
     <!-- Load polyfills -->
     <script src="resources/assets/vendor/js/polyfills.js"></script>
     <script>document['documentMode']===10&&document.write('<script src="https://polyfill.io/v3/polyfill.min.js?features=Intl.~locale.en"><\/script>')</script>
@@ -43,6 +44,7 @@
 
     <!-- Libs -->
     <link rel="stylesheet" href="resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="resources/assets/vendor/libs/spinkit/spinkit.css">
     <link rel="stylesheet" href="resources/assets/vendor/libs/datatables/datatables.css">
     <link rel="stylesheet" href="resources/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css">
     <link rel="stylesheet" href="resources/assets/vendor/libs/flatpickr/flatpickr.css">
@@ -142,13 +144,30 @@
 <script src="resources/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.ko.js"></script>
 <script src="resources/assets/vendor/libs/flatpickr/flatpickr.js"></script>
 <script src="resources/assets/vendor/libs/fullcalendar/fullcalendar.js"></script>
-
+<script src="resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="resources/assets/vendor/libs/block-ui/block-ui.js"></script>
 <!-- Demo -->
 <script src="resources/assets/vendor/libs/summernote/summernote.js"></script>
 <script src="resources/assets/js/demo.js"></script>
 
 
 <script>
+    $.blockUI({
+        message: '<div class="sk-fold sk-primary mx-auto mb-4"><div class="sk-fold-cube"></div><div class="sk-fold-cube"></div><div class="sk-fold-cube"></div><div class="sk-fold-cube"></div></div><h5 class="text-body">LOADING...</h5>',
+        css: {
+            backgroundColor: 'rgba(0,0,0,0.0)',
+            border: '0',
+            color: '#000000',
+            zIndex: 9999999
+        },
+        overlayCSS:  {
+            backgroundColor: '#fff',
+            opacity: 0.3,
+            zIndex: 9999990
+        }
+    });
+    $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+
 /*=== lnb active 처리 ====*/
     $("li.sidenav-item").on('click',function(){
         if( $("li.sidenav-item").has('a')!=null){
@@ -168,7 +187,7 @@
     let _pageReload = '${pageOnLoad}';
     let curMyIdx = ${admin.idx_admin};
 
-
+console.log("path="+'${path}');
 /*==== page load 처리 ========*/
     var cur = "";
     let filter1 = null;
@@ -183,39 +202,39 @@
 */
         if(param==null) {
             param = {};
-            filter1 = null;
-            filter2 = null;
+            filter1 = 9999;
+            filter2 = 9998;
         }else{
-            if (param['page_num'] == null) {
-                param['page_num'] = 1;
+            if (param['cur_page'] == null) {
+                param['cur_page'] = 1;
             }
-            if (param['fil1'] == null && filter1 != null) {
-                param['fil1'] = filter1;
+            if (param['filter1'] == null && filter1 != null) {
+                param['filter1'] = filter1;
             }
-            if (param['fil2'] == null && filter2 != null) {
-                param['fil2'] = filter2;
+            if (param['filter2'] == null && filter2 != null) {
+                param['filter2'] = filter2;
             }
 
-            if (param['fil1'] != null) {
-                filter1 = param['fil1'];
+            if (param['filter1'] != null) {
+                filter1 = param['filter1'];
             }
-            if (param['fil2'] != null) {
-                filter2 = param['fil2'];
+            if (param['filter2'] != null) {
+                filter2 = param['filter2'];
             }
         }
 
-        if(cur === url+param['page_num']){
+        if(cur === url+param['cur_page']){
             return;
         }
 
-        if(cur !== url+param['page_num'] && usage==null)
+        if(cur !== url+param['cur_page'] && usage==null)
         {
             history.pushState(param, title, url);
         }
 
 /*
-        if(cur !== url+param['page_num']/!* || usage === "asset_list" || usage==='site_adver_mng' || usage==='site_event_mng' || usage==='pr_contents' || usage==='event_contents'*!/){
-            cur = url+param['page_num'];
+        if(cur !== url+param['cur_page']/!* || usage === "asset_list" || usage==='site_adver_mng' || usage==='site_event_mng' || usage==='pr_contents' || usage==='event_contents'*!/){
+            cur = url+param['cur_page'];
 
             if(url.indexOf('cur_asset_index') === -1
                 && url.indexOf('user_index') === -1
@@ -241,6 +260,8 @@
                 dataType:'html',//받는 데이터 타입
                 success:function(result){
                     $(usage).html(result);
+
+
                     /*
                     if(usage === "admin"){
                         $("#admin_index").html(result);
@@ -275,6 +296,7 @@
                     } else{
                         $("#contents").html(result);
                     }*/
+
                 },
                 fail:function(xhr,status,err){
 
@@ -328,7 +350,7 @@
                     //lng 하이라이트 바꿔줘야 함
                 });*/
 
-                pageLoad(evt.state.url,{page_num:1},evt.state.title);
+                pageLoad(evt.state.url,{cur_page:1},evt.state.title);
             }
         }, false);
 
@@ -342,7 +364,7 @@
         if(_pageReload !== ''){
             pageLoad('${path}', null);
         }else{
-            pageLoad('a10_dashboard',{page_num:1},'대시보드');
+            pageLoad('dashboard',{cur_page:1},'대시보드');
         }
     });
 

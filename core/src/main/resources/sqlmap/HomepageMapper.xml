@@ -56,7 +56,7 @@
             EMAIL,
             REG_DATE
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
                         ,IDX_HOMEPAGE_INFO,
                         HOMEPAGE_ADMIN,
                         HOMEPAGE_ADMIN_PNUM,
@@ -68,9 +68,9 @@
                           WHERE IS_CURRENT = 0 OR IS_CURRENT = 1
                           order by IDX_HOMEPAGE_INFO desc
                       )
-                 WHERE ROWNUM <![CDATA[<=]]> #{filter1}*#{amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{filter1}*#{list_amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{filter1} -1)*#{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{filter1} -1)*#{list_amount}
 
     </select>
 

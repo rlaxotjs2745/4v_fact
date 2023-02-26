@@ -27,7 +27,7 @@
             FILE_PATH,
             FILE_NAME
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
                 ,IDX_POPUP_IMG,
                         SUBJECT,
                         CONTENTS_TYPE,
@@ -50,9 +50,9 @@
                             AND C.FILE_TYPE = 6
                           order by IDX_POPUP_IMG desc
                       )
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
     </select>
 
     <insert id="insertPopupContent" parameterType="kr.or.fact.core.model.DTO.WebMainPopupVO">
@@ -183,7 +183,7 @@
             FILE_PATH,
             FILE_NAME
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by STARTDATE DESC) AS row_num
+                 SELECT ROW_NUMBER() OVER(ORDER by STARTDATE DESC) AS ROW_NUM
                 ,IDX_POPUP_IMG,
                         SUBJECT,
                         CONTENTS_TYPE,
@@ -199,8 +199,8 @@
                         FILE_NAME
                  FROM (
                           SELECT A.*, B.admin_name, C.FILE_PATH, C.FILE_NAME FROM TB_WEB_MAIN_POPUP A
-                                                                                      INNER JOIN TB_ADMIN B ON A.IDX_ADMIN = B.IDX_ADMIN
-                                                                                      INNER JOIN TB_FILE_INFO C ON A.IDX_FILE_INFO = C.IDX_FILE_INFO
+                              INNER JOIN TB_ADMIN B ON A.IDX_ADMIN = B.IDX_ADMIN
+                              INNER JOIN TB_FILE_INFO C ON A.IDX_FILE_INFO = C.IDX_FILE_INFO
                           WHERE A.IS_SHOW = 1
                             AND A.CONTENTS_TYPE = 1
                             AND C.FILE_TYPE = 6

@@ -1,18 +1,27 @@
 package kr.or.fact.core.service;
 
-import kr.or.fact.core.model.DTO.AdminApplDemoBsHeaderListVO;
-import kr.or.fact.core.model.DTO.AdminApplHeaderListVO;
-import kr.or.fact.core.model.DTO.DemoBSApplicationVO;
-import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
+import kr.or.fact.core.model.DTO.*;
 
 import java.util.HashMap;
 import java.util.List;
 
 public interface DemoBsApplicationService {
+    int getDemobsForEvalTotalCount();
+//선정 업무를 위한
+    DemoBSForEvalVO getDemobsForEvalByIdx(long idx_demo_business);
+    List<DemoBSForEvalVO> getDemobsForEvalPagedList(ParamPageListFilteredVO paramPageListFilteredVO);
 
-    //신청접수
+
+
+
+
+
+
+    //신청접수 업무
     DemoBSApplicationVO getDemoBsApplByIdx(long idx_user_demo_bs);
+
     int getAvailableDemoBsApplTotalCount();
+
     List<AdminApplDemoBsHeaderListVO> getAvailableDemoBsApplPagingList(ParamPageListFilteredVO paramPageListFilteredVO);
     List<AdminApplHeaderListVO> getApplPagingFilteredList(ParamPageListFilteredVO paramPageListFilteredVO);
 

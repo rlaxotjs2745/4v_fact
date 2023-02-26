@@ -1,9 +1,6 @@
 package kr.or.fact.core.service.impl;
 
-import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
-import kr.or.fact.core.model.DTO.VisitDataVO;
-import kr.or.fact.core.model.DTO.VisitDateVO;
-import kr.or.fact.core.model.DTO.VisitReqVO;
+import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.model.VisitMapper;
 import kr.or.fact.core.service.VisitService;
 import org.apache.ibatis.annotations.Param;
@@ -71,8 +68,8 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public int getVisitReqCount(ParamPageListFilteredVO paramVo) {
-        return visitMapper.getVisitReqCount(paramVo);
+    public VisitReqCountVO getVisitReqCount() {
+        return visitMapper.getVisitReqCount();
     }
 
     @Override

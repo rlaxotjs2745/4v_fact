@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 public class EventContentVO {
-    int idx_row_num;
+    int row_num;
 
     long idx_event_content;//	number	32			◯		인덱스	auto increase
     String event_content_code;//	varchar2	100					발행 코드	서브 타이틀 역할도 함

@@ -12,6 +12,6 @@ public interface QnaMapper {
     int getWebpageMyQnaCount(@Param("idx_user") long idx_user);
     int getAdminQnaCount(@Param("idx_admin") long idx_admin);
 
-    List<DemoBsQnaVO> getUserQnaList(@Param("idx_user") long idx_user,@Param("page_num") int page_num, @Param("amount") int amount,@Param("order_field") String order_field);
-    List<DemoBsQnaVO> getAdminQnaList(@Param("idx_admin") long idx_admin,@Param("page_num") int page_num, @Param("amount") int amount,@Param("order_field") String order_field);
+    List<DemoBsQnaVO> getUserQnaList(@Param("idx_user") long idx_user,@Param("cur_page") int cur_page, @Param("list_amount") int list_amount,@Param("order_field") String order_field);
+    List<DemoBsQnaVO> getAdminQnaList(@Param("idx_admin") long idx_admin,@Param("cur_page") int cur_page, @Param("list_amount") int list_amount,@Param("order_field") String order_field);
 }

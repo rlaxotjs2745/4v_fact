@@ -31,7 +31,9 @@ public class DemoBusinessVO {
     int recruit_count_limit;//	number	10		99999999			모집 수
     String memo;//	varchar2	1000					메모
     long idx_admin;//	number	32				◯	작성자	idx_admin index pk
+    String admin_name;
     long idx_conform_admin;//	NUMBER	32		0		◯	승인자	IDX_ADMIN Index PK
+    String confirm_admin;
     int is_announce;//	NUMBER	4					게시 여부	0:아니오, 1:예
     Date reg_date;//	date						최초 등록 일시
     Date last_upd_date;//	DATE						최종 수정 일시

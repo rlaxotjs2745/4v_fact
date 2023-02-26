@@ -3,6 +3,14 @@
 
 <mapper namespace="kr.or.fact.core.model.CorpMapper">
 
+    <select id="getCorpFilteredCount" resultType="kr.or.fact.core.model.DTO.CorpFilteredCountVO">
+        SELECT (SELECT COUNT(*) FROM TB_CORP_INFO ) AS TOT_COUNT,
+               (SELECT COUNT(*) FROM TB_CORP_INFO WHERE IS_APPLICANT = 0) AS NORMAL_COUNT,
+               (SELECT COUNT(*) FROM TB_CORP_INFO WHERE IS_APPLICANT = 1) AS APPLICANT_COUNT
+        FROM TB_DEMO_BS_CONSULTING WHERE ROWNUM = 1
+    </select>
+
+
     <select id="getCorpInfoByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.CorpInfoVO">
         SELECT * FROM TB_CORP_INFO  WHERE IDX_CORP_INFO=#{idx_corp_info}
     </select>

@@ -42,15 +42,15 @@ public class ConsultingServiceImpl implements ConsultingService {
         }
         else if(type == CONSTANT.admin_idx)
         {
-            demoBsConsultingVOList = consultingMapper.getAdminConsultingList(paramPageListFilteredVO);
+            demoBsConsultingVOList = consultingMapper.getConsultingList(paramPageListFilteredVO);
         }
         return demoBsConsultingVOList;
     }
 
-    @Override
+/*    @Override
     public List<DemoBsConsultingVO> getCunsultingList1(int page, int list_amount) {
         return consultingMapper.getCunsultingList1(page,list_amount);
-    }
+    }*/
 
 
     @Override
@@ -59,7 +59,7 @@ public class ConsultingServiceImpl implements ConsultingService {
     }
 
     @Override
-    public int getCountConsulting(DemoBsConsultingVO param) {
+    public int getCountConsulting(ParamPageListFilteredVO param) {
         return consultingMapper.getCountConsulting(param);
     }
 

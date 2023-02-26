@@ -68,11 +68,11 @@
                     <ul class="pagination">
                         <li class="paginate_button page-item previous" id="article-list_previous"><a aria-controls="article-list" data-dt-idx="0" tabindex="0" id="article-list_previous_btn" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
                         <li class="paginate_button page-item previous" id="article-list_previous-one"><a aria-controls="article-list" data-dt-idx="0" tabindex="0" id="article-list_previous-one_btn" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li>
-                        <%--                        <li class="paginate_button page-item " id="page1-button"><a href="javascript:pageLoad('asset_reservation_list',{page_num:'${adminList[0].page + pageBool - 4}'},'대시보드');" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">${adminList[0].page + pageBool - 4}</a></li>--%>
-                        <%--                        <li class="paginate_button page-item " id="page2-button"><a href="javascript:pageLoad('asset_reservation_list',{page_num:'${adminList[0].page + pageBool - 3}'},'대시보드');" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">${adminList[0].page + pageBool - 3}</a></li>--%>
-                        <%--                        <li class="paginate_button page-item " id="page3-button"><a href="javascript:pageLoad('asset_reservation_list',{page_num:'${adminList[0].page + pageBool - 2}'},'대시보드');" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">${adminList[0].page + pageBool - 2}</a></li>--%>
-                        <%--                        <li class="paginate_button page-item " id="page4-button"><a href="javascript:pageLoad('asset_reservation_list',{page_num:'${adminList[0].page + pageBool - 1}'},'대시보드');" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">${adminList[0].page + pageBool - 1}</a></li>--%>
-                        <%--                        <li class="paginate_button page-item " id="page5-button"><a href="javascript:pageLoad('asset_reservation_list',{page_num:'${adminList[0].page + pageBool}'},'대시보드');" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">${adminList[0].page + pageBool}</a></li>--%>
+                        <%--                        <li class="paginate_button page-item " id="page1-button"><a href="javascript:pageLoad('asset_reservation_list',{cur_page:'${adminList[0].page + pageBool - 4}'},'대시보드');" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">${adminList[0].page + pageBool - 4}</a></li>--%>
+                        <%--                        <li class="paginate_button page-item " id="page2-button"><a href="javascript:pageLoad('asset_reservation_list',{cur_page:'${adminList[0].page + pageBool - 3}'},'대시보드');" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">${adminList[0].page + pageBool - 3}</a></li>--%>
+                        <%--                        <li class="paginate_button page-item " id="page3-button"><a href="javascript:pageLoad('asset_reservation_list',{cur_page:'${adminList[0].page + pageBool - 2}'},'대시보드');" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">${adminList[0].page + pageBool - 2}</a></li>--%>
+                        <%--                        <li class="paginate_button page-item " id="page4-button"><a href="javascript:pageLoad('asset_reservation_list',{cur_page:'${adminList[0].page + pageBool - 1}'},'대시보드');" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">${adminList[0].page + pageBool - 1}</a></li>--%>
+                        <%--                        <li class="paginate_button page-item " id="page5-button"><a href="javascript:pageLoad('asset_reservation_list',{cur_page:'${adminList[0].page + pageBool}'},'대시보드');" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">${adminList[0].page + pageBool}</a></li>--%>
                         <li class="paginate_button page-item next" id="article-list_next-one"><a aria-controls="article-list" data-dt-idx="6" tabindex="0" id="article-list_next-one_btn" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li>
                         <li class="paginate_button page-item next" id="article-list_next"><a aria-controls="article-list" data-dt-idx="6" tabindex="0" id="article-list_next_btn" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
                     </ul>
@@ -106,26 +106,26 @@
             page: "${as.page}"
         })
     </c:forEach>
-    console.log("page: " + ${page_num} + ", curStatus: " + ${curStatus});
+    console.log("cur_page: " + ${cur_page} + ", curStatus: " + ${curStatus});
 
 
-    if("${page_num}" == "1" && "${maxvalue}" == "${page_num}"){
+    if("${cur_page}" == "1" && "${maxvalue}" == "${cur_page}"){
         $("#article-list_previous, #article-list_previous-one, #article-list_next, #article-list_next-one").addClass("disabled");
-    } else if("${page_num}" == "1"){
+    } else if("${cur_page}" == "1"){
         $("#article-list_previous, #article-list_previous-one").addClass("disabled");
-    } else if("${maxvalue}" == "${page_num}"){
+    } else if("${maxvalue}" == "${cur_page}"){
         $("#article-list_next, #article-list_next-one").addClass("disabled");
     }
 
     $(".page-link").click(function (){
         if($(this).attr("id") == "article-list_next-one_btn"){
-            pageLoad('asset_reservation_list',{page_num: '${page_num + 1}', filter1: ${curStatus}},'대시보드', "asset_reservation_list");
+            pageLoad('asset_reservation_list',{cur_page: '${cur_page + 1}', filter1: ${curStatus}},'대시보드', "asset_reservation_list");
         } else if($(this).attr("id") == "article-list_next_btn"){
-            pageLoad('asset_reservation_list',{page_num: '${maxvalue}', filter1: ${curStatus}},'대시보드', "asset_reservation_list");
+            pageLoad('asset_reservation_list',{cur_page: '${maxvalue}', filter1: ${curStatus}},'대시보드', "asset_reservation_list");
         } else if($(this).attr("id") == "article-list_previous_btn"){
-            pageLoad('asset_reservation_list',{page_num:1, filter1: ${curStatus}},'대시보드', "asset_reservation_list");
+            pageLoad('asset_reservation_list',{cur_page:1, filter1: ${curStatus}},'대시보드', "asset_reservation_list");
         } else if($(this).attr("id") == "article-list_previous-one_btn"){
-            pageLoad('asset_reservation_list',{page_num: '${page_num - 1}', filter1: ${curStatus}},'대시보드', "asset_reservation_list");
+            pageLoad('asset_reservation_list',{cur_page: '${cur_page - 1}', filter1: ${curStatus}},'대시보드', "asset_reservation_list");
         }
     })
 

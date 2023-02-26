@@ -3,19 +3,182 @@
 
 <mapper namespace="kr.or.fact.core.model.DemoBsApplicationMapper">
 
+    <!--실증 사업 중 모집 및 평가중인 사업-->
+    <select id="getDemobsForEvalTotalCount" resultType="int">
+        SELECT COUNT (*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS <![CDATA[>]]> 2 AND DEMO_BS_STATUS <![CDATA[<=]]> 10
+    </select>
+
+    <select id="getDemoBsApplFilteredCount" resultType="kr.or.fact.core.model.DTO.DemoBsApplFilteredCountVO">
+        SELECT
+               (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION WHERE APPLICANT_STATUS <![CDATA[>=]]> 4) AS TOT_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION WHERE APPLICANT_STATUS = 4 ) AS APPL_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION WHERE APPLICANT_STATUS = 5) AS REVIEW_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION WHERE APPLICANT_STATUS = 6 OR APPLICANT_STATUS = 7) AS DOC_REQ_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION WHERE APPLICANT_STATUS = 8) AS CHECK_DONE_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION WHERE APPLICANT_STATUS = 9) AS REJECT_COUNT
+        FROM TB_DEMO_BS_APPLICAION WHERE ROWNUM = 1
+    </select>
+
+    <select id="getDemoBsEvalFilteredCount" resultType="kr.or.fact.core.model.DTO.CorpFilteredCountVO">
+        SELECT (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION_EVALUATE WHERE C.EVALUATE_STATUS <![CDATA[>=]]> 10) AS TOT_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION_EVALUATE WHERE EVALUATE_STATUS = 10) AS REVIEW_COUNT,
+              (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION_EVALUATE WHERE EVALUATE_STATUS = 11) AS DONE_COUNT,
+              (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION_EVALUATE WHERE EVALUATE_STATUS = 12) AS PENDING_COUNT,
+              (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION_EVALUATE WHERE EVALUATE_STATUS = 13) AS REJECT_COUNT
+        FROM TB_DEMO_BS_APPLICAION_EVALUATE WHERE ROWNUM = 1
+    </select>
+
+    <select id="getDemoBsCnotractFilteredCount" resultType="kr.or.fact.core.model.DTO.DemoBsCnotractFilteredCountVO">
+        SELECT (SELECT COUNT(*) FROM TB_DEMO_BS_CONTRACT WHERE D.CONTRACT_STATUS <![CDATA[>=]]> 33) AS TOT_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_CONTRACT WHERE D.CONTRACT_STATUS = 33) AS REVIEW_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_CONTRACT WHERE D.CONTRACT_STATUS = 31) AS REQ_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_CONTRACT WHERE D.CONTRACT_STATUS = 34) AS DONE_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_CONTRACT WHERE D.CONTRACT_STATUS = 35) AS PENDING_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_CONTRACT WHERE D.CONTRACT_STATUS = 36) AS REJECT_COUNT
+        FROM TB_DEMO_BS_CONTRACT WHERE ROWNUM = 1
+    </select>
+
+
+
+    <select id="getDemobsForEvalByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.DemoBSForEvalVO">
+        SELECT A.IDX_DEMO_BUSINESS,
+               A.DEMO_BS_CODE,
+               A.DEMO_SUBJECT,
+               A.DEMO_BS_CONTENTS,
+               A.DEMO_BS_MAIN_TYPE,
+               A.DEMO_BS_SUB_TYPE,
+               A.DEMO_BS_DETAIL_TYPE,
+               A.DEMO_BS_STATUS,
+               A.APPLICANT_COUNT,
+               A.APPLICANT_COUNT_LIMIT,
+               A.START_DATE,
+               A.END_DATE,
+               A.RECRUIT_START_DATE,
+               A.RECRUIT_END_DATE,
+               A.RECRUIT_COUNT_LIMIT,
+               A.EXAM_START,
+               A.EXAM_END,
+               A.PLAN_REVIEW_START,
+               A.PLAN_REVIEW_END,
+               A.CONVENTION_START,
+               A.CONVENTION_END,
+               A.MEMO,
+               A.IDX_ADMIN,
+               A.IDX_CONFORM_ADMIN,
+               A.IS_ANNOUNCE,
+               A.REG_DATE,
+               A.LAST_UPD_DATE,
+
+               (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION WHERE B.APPLICANT_STATUS <![CDATA[>=]]> 4) AS APPL_TOTAL_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION WHERE B.APPLICANT_STATUS = 4) AS APPL_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION WHERE B.APPLICANT_STATUS = 5) AS APPL_REVIEW_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION WHERE B.APPLICANT_STATUS = 6 OR B.APPLICANT_STATUS = 7) AS APPL_DOC_REQ_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION WHERE B.APPLICANT_STATUS = 8) AS APPL_CHECK_DONE_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION WHERE B.APPLICANT_STATUS = 9) AS APPL_REJECT_COUNT,
+
+               (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION_EVALUATE WHERE C.EVALUATE_STATUS <![CDATA[>=]]> 10) AS EVAL_TOTAL_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION_EVALUATE WHERE C.EVALUATE_STATUS = 10) AS EVAL_REVIEW_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION_EVALUATE WHERE C.EVALUATE_STATUS = 11) AS EVAL_DONE_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION_EVALUATE WHERE C.EVALUATE_STATUS = 12) AS EVAL_PENDING_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION_EVALUATE WHERE C.EVALUATE_STATUS = 13) AS EVAL_REJECT_COUNT,
+
+               (SELECT COUNT(*) FROM TB_DEMO_BS_CONTRACT WHERE D.CONTRACT_STATUS <![CDATA[>=]]> 33) AS CONTRACT_TOTAL_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_CONTRACT WHERE D.CONTRACT_STATUS = 33) AS CONTRACT_REVIEW_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_CONTRACT WHERE D.CONTRACT_STATUS = 31) AS CONTRACT_REQ_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_CONTRACT WHERE D.CONTRACT_STATUS = 34) AS CONTRACT_DONE_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_CONTRACT WHERE D.CONTRACT_STATUS = 35) AS CONTRACT_PENDING_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BS_CONTRACT WHERE D.CONTRACT_STATUS = 36) AS CONTRACT_REJECT_COUNT
+
+        FROM TB_DEMO_BUSINESS A
+            JOIN TB_DEMO_BS_APPLICAION B ON A.IDX_DEMO_BUSINESS = B.IDX_DEMO_BUSINESS
+            LEFT OUTER JOIN TB_DEMO_BS_APPLICAION_EVALUATE C ON A.IDX_DEMO_BUSINESS = C.IDX_DEMO_BUSINESS
+            LEFT OUTER JOIN TB_DEMO_BS_CONTRACT D ON A.IDX_DEMO_BUSINESS = D.IDX_DEMO_BUSINESS
+        WHERE A.IDX_DEMO_BUSINESS = #{idx_demo_business}
+    </select>
+<!--        int appl_review_count; //지원서 검토중인 수
+    int appl_doc_req_count; //지원서 보완요청 수
+    int appl_check_done_count; //지원서 검토 완료 수
+    int appl_reject_count; //지원서 검토 후 거절 수
+
+    int eval_review_count; //심사 중 수
+    int eval_done_count; //심사 완료 수
+    int eval_pending_count; //심사 보류 수
+    int eval_reject_count; //심사 불합격 수
+
+    int contract_review_count; //협약 중 수
+    int contract_req_count; //협약 보완요청 수
+    int contract_done_count; //협약 완료 수
+    int contract_pending_count; //협약 보류 수
+    int contract_reject_count; //협약 불합격 수-->
+
+
+    <select id="getDemobsForEvalPagedList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.DemoBSForEvalVO">
+        SELECT *
+        FROM (
+            SELECT ROW_NUMBER() OVER(ORDER BY #{order_field} DESC) AS ROW_NUM,
+            IDX_DEMO_BUSINESS,
+            DEMO_BS_CODE,
+            DEMO_SUBJECT,
+            DEMO_BS_STATUS,
+            APPLICANT_COUNT,
+            RECRUIT_COUNT_LIMIT,
+            START_DATE,
+            END_DATE,
+            RECRUIT_START_DATE,
+            RECRUIT_END_DATE,
+            EXAM_START,
+            EXAM_END,
+            CONVENTION_START,
+            CONVENTION_END,
+            IS_ANNOUNCE,
+            REG_DATE,
+            LAST_UPD_DATE
+                 FROM (
+                          SELECT A.IDX_DEMO_BUSINESS AS IDX_DEMO_BUSINESS,
+                                 A.DEMO_BS_CODE AS DEMO_BS_CODE,
+                                 A.DEMO_SUBJECT AS DEMO_SUBJECT,
+                                 A.DEMO_BS_STATUS AS DEMO_BS_STATUS,
+                                 (SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION D WHERE A.IDX_DEMO_BUSINESS = D.IDX_DEMO_BUSINESS) AS APPLICANT_COUNT,
+                                 A.RECRUIT_COUNT_LIMIT AS RECRUIT_COUNT_LIMIT,
+                                 A.START_DATE AS START_DATE,
+                                 A.END_DATE AS END_DATE,
+                                 A.RECRUIT_START_DATE AS RECRUIT_START_DATE,
+                                 A.RECRUIT_END_DATE AS RECRUIT_END_DATE,
+                                 A.EXAM_START AS EXAM_START,
+                                 A.EXAM_END AS EXAM_END,
+                                 A.CONVENTION_START AS CONVENTION_START,
+                                 A.CONVENTION_END AS CONVENTION_END,
+                                 A.IS_ANNOUNCE AS IS_ANNOUNCE,
+                                 A.REG_DATE AS REG_DATE,
+                                 A.LAST_UPD_DATE AS LAST_UPD_DATE
+                          FROM TB_DEMO_BUSINESS A
+                               LEFT OUTER JOIN TB_DEMO_BS_APPLICAION B ON A.IDX_DEMO_BUSINESS = B.IDX_DEMO_BUSINESS
+                          WHERE A.DEMO_BS_STATUS <![CDATA[>]]> 2
+                          ORDER BY IDX_DEMO_BUSINESS DESC
+                      )
+                 WHERE ROWNUM <![CDATA[<=]]> #{cur_page} * #{list_amount}
+             )
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} - 1) * #{list_amount}
+
+
+    </select>
+
+
+
+
     <select id="getDemoBsApplByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.DemoBSApplicationVO">
         SELECT * FROM TB_DEMO_BS_APPLICAION WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
     </select>
 
     <select id="getAvailableDemoBsApplTotalCount" resultType="int">
-        SELECT COUNT (*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS > 2
+        SELECT COUNT (*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS <![CDATA[>]]> 2 AND DEMO_BS_STATUS <![CDATA[<]]> 11
     </select>
 
 
     <select id="getAvailableDemoBsApplPagingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.AdminApplDemoBsHeaderListVO">
         SELECT *
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER BY #{order_field} DESC) AS row_num,
+                 SELECT ROW_NUMBER() OVER(ORDER BY #{order_field} DESC) AS ROW_NUM,
                          IDX_DEMO_BUSINESS,
                         DEMO_BS_CODE,
                         DEMO_SUBJECT,
@@ -43,12 +206,12 @@
                                                    ON A.IDX_DEMO_BUSINESS = B.IDX_DEMO_BUSINESS
                                    LEFT OUTER JOIN TB_DEMO_BS_APPLICAION C
                                                    ON A.IDX_DEMO_BUSINESS = C.IDX_DEMO_BUSINESS
-                          WHERE A.DEMO_BS_STATUS > 2
+                          WHERE A.DEMO_BS_STATUS <![CDATA[>]]> 2
                           ORDER BY IDX_DEMO_BUSINESS DESC
                       )
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num} * #{amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{cur_page} * #{list_amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{page_num} - 1) * #{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} - 1) * #{list_amount}
 
 
     </select>
@@ -57,7 +220,7 @@
         SELECT
         *
         FROM (
-        SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num,
+        SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM,
         IDX_DEMO_BS_APPLICAION,
         IDX_USER_DEMO_BS,
         IDX_DEMO_BUSINESS,
@@ -108,9 +271,9 @@
         </if>
         )
 
-        WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+        WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
         )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
 
     </select>
 
@@ -120,14 +283,14 @@
     </select>
 
     <select id="getAvailableDemoBsEvalTotalCount" resultType="int">
-        SELECT COUNT (*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS > 5
+        SELECT COUNT (*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS <![CDATA[>]]> 5
     </select>
 
 
     <select id="getAvailableDemoBsEvalPagingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.AdminApplDemoBsHeaderListVO">
         SELECT *
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER BY #{order_field} DESC) AS row_num,
+                 SELECT ROW_NUMBER() OVER(ORDER BY #{order_field} DESC) AS ROW_NUM,
                          IDX_DEMO_BUSINESS,
                         DEMO_BS_CODE,
                         DEMO_SUBJECT,
@@ -155,12 +318,12 @@
                                                    ON A.IDX_DEMO_BUSINESS = B.IDX_DEMO_BUSINESS
                                    LEFT OUTER  JOIN TB_DEMO_BS_APPLICAION C
                                                     ON A.IDX_DEMO_BUSINESS = C.IDX_DEMO_BUSINESS
-                          WHERE A.DEMO_BS_STATUS > 2
+                          WHERE A.DEMO_BS_STATUS <![CDATA[>]]> 2
                           ORDER BY IDX_DEMO_BUSINESS DESC
                       )
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num} * #{amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{cur_page} * #{list_amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{page_num} - 1) * #{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} - 1) * #{list_amount}
 
 
     </select>
@@ -169,7 +332,7 @@
         SELECT
         *
         FROM (
-        SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num,
+        SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM,
         IDX_DEMO_BS_APPLICAION,
         IDX_USER_DEMO_BS,
         IDX_DEMO_BUSINESS,
@@ -220,9 +383,9 @@
         </if>
         )
 
-        WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+        WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
         )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
     </select>
 
 
@@ -231,14 +394,14 @@
     </select>
 
     <select id="getAvailableDemoBsConsultTotalCount" resultType="int">
-        SELECT COUNT (*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS > 2
+        SELECT COUNT (*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS <![CDATA[>]]> 2
     </select>
 
 
     <select id="getAvailableDemoBsConsultPagingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.AdminApplDemoBsHeaderListVO">
         SELECT *
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER BY #{order_field} DESC) AS row_num,
+                 SELECT ROW_NUMBER() OVER(ORDER BY #{order_field} DESC) AS ROW_NUM,
                          IDX_DEMO_BUSINESS,
                         DEMO_BS_CODE,
                         DEMO_SUBJECT,
@@ -266,11 +429,11 @@
                                               ON A.IDX_DEMO_BUSINESS = B.IDX_DEMO_BUSINESS
                                    LEFT OUTER  JOIN TB_DEMO_BS_APPLICAION C
                                                     ON A.IDX_DEMO_BUSINESS = C.IDX_DEMO_BUSINESS
-                          WHERE A.DEMO_BS_STATUS > 2
+                          WHERE A.DEMO_BS_STATUS <![CDATA[>]]> 2
                       )
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num} * #{amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{cur_page} * #{list_amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{page_num} - 1) * #{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} - 1) * #{list_amount}
 
 
     </select>
@@ -279,7 +442,7 @@
         SELECT
         *
         FROM (
-        SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num,
+        SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM,
         IDX_DEMO_BS_APPLICAION,
         IDX_USER_DEMO_BS,
         IDX_DEMO_BUSINESS,
@@ -330,9 +493,9 @@
         </if>
         )
 
-        WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+        WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
         )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
 
     </select>
 

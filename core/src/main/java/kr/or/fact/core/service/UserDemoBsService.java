@@ -34,10 +34,10 @@ public interface UserDemoBsService {
 
     int submitUserDemoBs(long idx_user_demo_bs);
 
-    List<UserDemoBsVO> getUserDemoBsPagingList(int page_num, int amount, String order_field, int filter1, int filter2);
+    List<UserDemoBsVO> getUserDemoBsPagingList(ParamPageListFilteredVO param);
 
     void updateUserDemoBsStatus(long user_demobs_idx, int status);
-    List<UserDemoBsVO> getUserDemoBsPagingListByFiltered(long idx, int page_num,int amount,String order_field, int filter1, int filter2);
+    List<UserDemoBsVO> getUserDemoBsPagingListByFiltered(ParamPageListFilteredVO param);
 }
 
 

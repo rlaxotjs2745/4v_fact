@@ -8,7 +8,7 @@
 <div class="container-fluid flex-grow-1 container-p-y">
 
     <h5 class="d-flex justify-content-between align-items-center w-100 mt-2">
-        <div><i class="pe-7s-box1 text-success-custom"></i> 모집 및 선정관리</div>
+        <div><i class="pe-7s-box1 text-success-custom"></i>&nbsp;&nbsp;모집 및 선정관리</div>
     </h5>
 
     <div class="card">
@@ -22,66 +22,72 @@
                         <table class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
                             <thead class="bg-light-dark text-white font-weight-bold">
                                 <tr role="row">
-                                    <th class="text-center px-2" style="width:60px">No</th>
-                                    <th class="text-center px-2" style="width:100px">심사 종료 예정일</th>
-                                    <!--
-                                       <th class="text-center sorting" style="width:100px">공고문 번호</th>
-                                    -->
-                                    <th class="text-center sorting" style="width:100px">지원 사업명</th>
-                                    <th class="text-center sorting" style="width:300px">제목</th>
-                                    <th class="text-center px-2" style="width:110px">지원 수/ 모집 수</th>
-                                    <th class="text-center px-2" style="width:110px">경쟁률</th>
-                                    <th class="text-center px-2" style="width:110px">보완요청 건</th>
-                                    <th class="text-center px-2" style="width:110px">검토완료</th>
-                                    <th class="text-center px-2" style="width:110px">공고문 보기</th>
+                                    <th class="text-center px-2" style="width:8%">No</th>
+                                    <th class="text-center" style="width:10%">사업번호</th>
+                                    <th class="text-center" style="width:26%">사업제목</th>
+                                    <th class="text-center" style="width:8%">단계</th>
+                                    <th class="text-center" style="width:14%">지원 수/모집 수(경쟁률)</th>
+                                    <th class="text-center" style="width:14%">모집기간</th>
+                                    <th class="text-center" style="width:14%">사업기간</th>
+                                    <th class="text-center" style="width:6%">모집공고문</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <c:if test="${total_count eq 0}">
-                                <tr class="">
-                                    <td class="text-center" colspan="7" rowspan="3">내용이 없습니다</td>
-                                </tr>
-                                <tr class="">
-                                </tr>
-                                <tr class="">
-                                </tr>
-                                <tr class="">
-                                </tr>
-                            </c:if>
-                            <c:if test="${total_count ne 0}">
-                                <c:forEach items="${adminApplHeaderListVOS}" var="item" varStatus="status">
+                        <c:choose>
+                            <c:when test="${demobsForEvalPagedList eq null or demobsForEvalPagedList.size() eq 0}">
+
+                                <c:forEach var = "i" begin = "1" end = "1">
+                                    <tr><td class="text-center empty-list" colspan="8"></td></tr>
+                                </c:forEach>
+                                <tr class=""><td class="text-center empty" colspan="8">내용이 없습니다</td></tr>
+                                <c:forEach var = "i" begin = "1" end = "1">
+                                    <tr><td class="text-center empty-list" colspan="8"></td></tr>
+                                </c:forEach>
+
+                            </c:when>
+                            <c:otherwise>
+                                <c:forEach items="${demobsForEvalPagedList}" var="item" varStatus="status">
 
                                 <tr class="" onclick="demoBsItemClick(${item.idx_demo_business},1)">
-                                    <td class="text-center">${cur_page > 1 ? 5 * (cur_page - 1) + status.count : status.count}</td>
-                                    <fmt:formatDate value="${item.exam_end}" var="pend_date" pattern="yyyy-MM-dd"/>
-                                    <td class="text-center">${pend_date}</td>
-                                    <td class="">${item.demo_bs_code}</td>
+                                    <td class="text-center">${item.idx_demo_business}</td>
+                                    <td class="text-center">${item.demo_bs_code}</td>
                                     <td class="">${item.demo_subject}</td>
-                                    <td class="text-right">${item.applicant_count} / ${item.recruit_count_limit}</td>
-                                    <!-- 포맷 수정필요 -->
-                                    <!--
-                                <td class="text-right"><fmt:formatNumber value="${item.applicant_count / item.recruit_count_limit}" pattern="#.##"/>  : 1</td>
-                                -->
+                                <c:choose>
+                                    <c:when test="${item.demo_bs_status eq 0}"><td class="text-center">임시</td></c:when>
+                                    <c:when test="${item.demo_bs_status eq 1}"><td class="text-center">작성완료</td></c:when>
+                                    <c:when test="${item.demo_bs_status eq 2}"><td class="text-center">승인완료</td></c:when>
+                                    <c:when test="${item.demo_bs_status eq 3}"><td class="text-center">모집중</td></c:when>
+                                    <c:when test="${item.demo_bs_status eq 4}"><td class="text-center">모집 종료</td></c:when>
+                                    <c:when test="${item.demo_bs_status eq 5}"><td class="text-center">심사중</td></c:when>
+                                    <c:when test="${item.demo_bs_status eq 6}"><td class="text-center">심사완료</td></c:when>
+                                    <c:when test="${item.demo_bs_status eq 7}"><td class="text-center">이용계획 조정</td></c:when>
+                                    <c:when test="${item.demo_bs_status eq 8}"><td class="text-center">이용계획 확정</td></c:when>
+                                    <c:when test="${item.demo_bs_status eq 9}"><td class="text-center">협약중</td></c:when>
+                                    <c:when test="${item.demo_bs_status eq 10}"><td class="text-center">협약완료</td></c:when>
+                                    <c:when test="${item.demo_bs_status eq 11}"><td class="text-center">사업 시작</td></c:when>
+                                    <c:when test="${item.demo_bs_status eq 12}"><td class="text-center">사업 종료</td></c:when>
+                                    <c:when test="${item.demo_bs_status eq 13}"><td class="text-center">결산중</td></c:when>
+                                    <c:when test="${item.demo_bs_status eq 14}"><td class="text-center">결산 완료</td></c:when>
+                                </c:choose>
+
+                                    <td class="text-center">${item.applicant_count} / ${item.recruit_count_limit}(<c:if test="${item.recruit_count_limit ne 0}">
+                                        <fmt:formatNumber value="${item.applicant_count / item.recruit_count_limit}" pattern="#.##"/> : 1</c:if>)</td>
+                                    
+                                    <fmt:formatDate value="${item.recruit_start_date}" var="appl_start" pattern="yyyy-MM-dd"/>
+                                    <fmt:formatDate value="${item.recruit_end_date}" var="apple_end" pattern="yyyy-MM-dd"/>
+                                    <td class="text-center">${appl_start} ~ ${apple_end}</td>
+
+                                    <fmt:formatDate value="${item.recruit_start_date}" var="demo_statr" pattern="yyyy-MM-dd"/>
+                                    <fmt:formatDate value="${item.recruit_end_date}" var="demo_end" pattern="yyyy-MM-dd"/>
+                                    <td class="text-center">${demo_statr} ~ ${demo_end}</td>
                                     <c:choose>
-                                        <c:when test="${item.recruit_count_limit == 0 }">
-                                            <td class="text-right">0 : 1</td>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <td class="text-right"><fmt:formatNumber
-                                                    value="${item.applicant_count / item.recruit_count_limit}"
-                                                    pattern="#.##"/> : 1
-                                            </td>
-                                        </c:otherwise>
+                                        <c:when test="${profile == 'sangju-prod'}"><td class="text-center"><a target="_blank" href="https://innovalley.smartfarmkorea.net/sangju/Demonstration/brd_announce_detail?idx=${item.idx_demo_business}" class="btn btn-underline">보기</a></td></c:when>
+                                        <c:otherwise><td class="text-center"><a target="_blank" href="https://innovalley.smartfarmkorea.net/gimje/Demonstration/brd_announce_detail?idx=${item.idx_demo_business}" class="btn btn-underline">보기</a></td></c:otherwise>
                                     </c:choose>
-
-                                    <td class="text-right">${item.appl_recomm}</td>
-                                    <td class="text-right">${item.appl_review_done}</td>
-                                    <td class="text-center"><a target="_blank" href="https://innovalley.smartfarmkorea.net/gimje/Demonstration/brd_announce_detail?idx=${item.idx_demo_business}" class="btn btn-underline">보기</a>
-                                    </td>
                                 </tr>
-
                                 </c:forEach>
-                            </c:if>
+                            </c:otherwise>
+                        </c:choose>
                             </tbody>
                         </table>
                     </div>
@@ -89,52 +95,23 @@
             <c:if test="${total_count ne 0}">
                 <div class="row">
                     <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${total_count}개
+                        <div class="dataTables_info" role="status" aria-live="polite">총 ${total_count}개
                             중 ${list_amount*(cur_page-1)+1}에서 <c:choose><c:when
-                                    test="${(list_amount*(cur_page-1)+5)>total_count}">${total_count}</c:when><c:otherwise>${list_amount*(cur_page-1)+5}</c:otherwise></c:choose>까지
+                                    test="${(list_amount*(cur_page-1)+list_amount)>total_count}">${total_count}</c:when><c:otherwise>${(list_amount*(cur_page-1)+list_amount)}</c:otherwise></c:choose>까지
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-7">
-                        <div class="dataTables_paginate paging_simple_numbers">
+                        <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                             <ul class="pagination">
+                                <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('demobs_appl',{cur_page:1,filter1:'${filter1}', filter2:'${filter2}'},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('demobs_appl',{cur_page:'${cur_page-1}',filter1:'${filter1}',filter2:'${filter2}'},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
 
-                                <c:set var="name" value="${total_count/amount}"/>
-
-
-                                <c:if test="${is_past eq true}">
-                                    <li class="paginate_button page-item previous"><a
-                                            href="javascript:getDemoBsListPaged(1);"
-                                            aria-controls="article-list" data-dt-idx="0" tabindex="0"
-                                            class="page-link"><i class="fas fa-angle-double-left d-block"></i></a>
-                                    </li>
-                                </c:if>
-                                <c:if test="${is_prev eq true}">
-                                    <li class="paginate_button page-item previous"><a
-                                            href="javascript:getDemoBsListPaged(${cur_page-1});"
-                                            aria-controls="article-list" data-dt-idx="0" tabindex="0"
-                                            class="page-link"><i class="fas fa-angle-left d-block"></i></a></li>
-                                </c:if>
-
-
-                                <c:forEach var="i" begin="1" end="${page_amount}">
-                                    <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>">
-                                        <a href="javascript:getDemoBsListPaged(${(cur_sector-1)*page_amount+i});"
-                                           class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
+                                <c:forEach var="i" begin="1" end="${remain_page}">
+                                    <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('demobs_appl',{cur_page:'${(cur_sector-1)*page_amount+i}',filter1:'${filter1}',filter2:'${filter2}'},'사업공고문 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
                                 </c:forEach>
 
-                                <c:if test="${is_next eq true}">
-                                    <li class="paginate_button page-item next"><a
-                                            href="javascript:getDemoBsListPaged(${cur_page+1});"
-                                            aria-controls="article-list" data-dt-idx="6" tabindex="0"
-                                            class="page-link"><i class="fas fa-angle-right d-block"></i></a></li>
-                                </c:if>
-                                <c:if test="${is_last eq true}">
-                                    <li class="paginate_button page-item next"><a
-                                            href="javascript:getDemoBsListPaged(${tot_page});"
-                                            aria-controls="article-list" data-dt-idx="6" tabindex="0"
-                                            class="page-link"><i class="fas fa-angle-double-right d-block"></i></a>
-                                    </li>
-                                </c:if>
+                                <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('demobs_appl',{cur_page:'${cur_page+1}',filter1:'${filter1}',filter2:'${filter2}'},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('demobs_appl',{cur_page:'${tot_page}',filter1:'${filter1}',filter2:'${filter2}'},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
                             </ul>
                         </div>
                     </div>
@@ -157,16 +134,6 @@
     <div class="nav-plane">
         <div id="tab_contents" class="card">
 
-
-            <%--<div class="card-header font-weight-bold with-elements">
-                <div class="card-header-elements ml-auto">
-
-                </div>
-            </div>
-            <div id="tab_contents" class="">
-
-            </div>
---%>
         </div>
     </div>
 </div>
@@ -271,7 +238,7 @@
 
     var cur_tab_mode = 0; //0.info 1.appl 신청접수 2.eval 선정 3.contract 협약
     var cur_idx_demobs = 0;
-    var cur_page_num = 1;
+    var cur_cur_page = 1;
     var cur_filter1 = 9999;//필터 안쓸때
     var cur_filter2 = 9998;//필터 안쓸때
 
@@ -340,12 +307,12 @@
         }); //ajax 끝
     }
 
-    function getUserDemoBsFilteredList(idx, page_num){
+    function getUserDemoBsFilteredList(idx, cur_page){
 
         let param = {
             idx: idx,
-            page_num: page_num,
-            amount: 5,
+            cur_page: cur_page,
+            list_amount: 5,
             order_field: "IDX_USER_DEMO_BS",
             filter1: cur_filter1,
             filter2: cur_filter2
@@ -377,7 +344,7 @@
 
     function getDemoBsListPaged(cur_page){
 
-        pageLoad('demobs_appl',{page_num:cur_page+1},'신청접수 관리');
+
     }
 
 
@@ -390,18 +357,18 @@
 
         $('#plz_option_input').hide();
 
-        getDemoBsInfo(cur_idx_demobs);
+        //getDemoBsInfo(cur_idx_demobs);
 
     });
 
-    function demoBsItemClick(idx, page_num) {
+    function demoBsItemClick(idx, cur_page) {
 
         if(cur_tab_mode!=0){
             cur_tab_mode = 0;
         }
 
         cur_idx_demobs = idx;
-        cur_page_num = page_num;
+        cur_cur_page = cur_page;
 
         $('.nav-link').removeClass("active");
         if(!$('.nav-link').hasClass("disabled"))$('.nav-link').addClass("disabled");
@@ -464,7 +431,7 @@
                     alert(result.result_str);
                     if(result.result_code == 'SUCCESS'){
 
-                        pageLoad('b21_demo_bs_appl_mng',{page_num:1},'신규신청 접수');
+                        pageLoad('b21_demo_bs_appl_mng',{cur_page:1},'신규신청 접수');
                     }
                 }
             })
@@ -482,7 +449,7 @@
                     alert(result.result_str);
                     if(result.result_code == 'SUCCESS'){
                         console.log(111)
-                        pageLoad('b21_demo_bs_appl_mng',{page_num:1},'신규신청 접수');
+                        pageLoad('b21_demo_bs_appl_mng',{cur_page:1},'신규신청 접수');
                     }
                 }
             })

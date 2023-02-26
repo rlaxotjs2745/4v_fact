@@ -34,12 +34,12 @@ $(function() {
 
 // noUiSlider
 $(function() {
-  var isRtl = $('body').attr('dir') === 'rtl' || $('html').attr('dir') === 'rtl';
+  //var isRtl = $('body').attr('dir') === 'rtl' || $('html').attr('dir') === 'rtl';
 
   noUiSlider.create(document.getElementById('nouislider-1'), {
     start: [ 80 ],
     connect: [true, false],
-    direction: isRtl ? 'rtl' : 'ltr',
+    direction: 'ltr',
     range: {
       'min': 0,
       'max': 100,
@@ -71,7 +71,7 @@ $(function() {
     start: [ 4000, 8000 ],
     step: 1000,
     connect: true,
-    direction: isRtl ? 'rtl' : 'ltr',
+    direction: 'ltr',
     range: {
       'min': [  2000 ],
       'max': [ 10000 ]
@@ -95,7 +95,7 @@ $(function() {
       stepped: true,
       density: 4
     },
-    direction: isRtl ? 'rtl' : 'ltr',
+    direction: 'ltr',
   });
 
   var slider2 = document.getElementById('nouislider-5');
@@ -147,7 +147,7 @@ $(function() {
       stepped: true,
       density: 4
     },
-    direction: isRtl ? 'rtl' : 'ltr'
+    direction: 'ltr'
   };
 
   noUiSlider.create(slider3, options);

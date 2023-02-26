@@ -270,15 +270,15 @@
 
 <!-- / Page content -->
 <script>
-    pageLoad("get_asset_list", {page_num: 1, filter1: 100}, "자산 현황 보드", "asset_list");
-    pageLoad("asset_reservation_list", {page_num: 1, filter1: 100}, "자산 예약 보드", "asset_reservation_list");
+    pageLoad("get_asset_list", {cur_page: 1, filter1: 100}, "자산 현황 보드", "asset_list");
+    pageLoad("asset_reservation_list", {cur_page: 1, filter1: 100}, "자산 예약 보드", "asset_reservation_list");
 
     var checkedIdxArr = [];
     var reservationStatus = "100";
 
     $('input[name="btn-radio-status"]').click(function () {
         var param = {
-            page_num: 1,
+            cur_page: 1,
             filter1: null
         }
         switch ($(this).val()) {
@@ -309,10 +309,10 @@
     })
 
     $(function () {
-        var isRtl = $('html').attr('dir') === 'rtl';
+
 
         $('#datepicker-show,#datepicker-open').datepicker({
-            orientation: isRtl ? 'auto right' : 'auto left',
+            orientation: 'auto left',
             format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
             startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
             language: "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
@@ -396,7 +396,7 @@
                     if (result.result_code == "SUCCESS") {
                         $("#modals-reserve-write").modal("hide");
                         $(".modal-backdrop").css("display", "none");
-                        pageLoad('g20_asset_booking', {page_num: 1}, '자원예약관리');
+                        pageLoad('g20_asset_booking', {cur_page: 1}, '자원예약관리');
                     }
                 }
             })
@@ -408,7 +408,7 @@
 
     function modalClose() {
         $("#modals-reserve-view").modal("hide");
-        pageLoad("asset_reservation_list", {page_num: 1, filter1: 100}, "자산 예약 보드", "asset_reservation_list");
+        pageLoad("asset_reservation_list", {cur_page: 1, filter1: 100}, "자산 예약 보드", "asset_reservation_list");
     }
 
 </script>

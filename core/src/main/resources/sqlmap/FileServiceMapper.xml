@@ -121,9 +121,9 @@
                     JOIN TB_FILE_INFO B
                         ON A.IDX_FILE_INFO = B.IDX_FILE_INFO AND B.FILE_TYPE = 4 AND B.FILE_STATUS=0
                      )
-                WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+                WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
                 )
-        WHERE ROW_NUM <![CDATA[>]]> (#{page_num} -1)*#{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
 
     </select>
 
@@ -204,9 +204,9 @@
                                             JOIN TB_FILE_INFO B
                                                  ON A.IDX_FILE_INFO = B.IDX_FILE_INFO AND B.FILE_TYPE = 5 AND B.FILE_STATUS=0
                                )
-                          WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+                          WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
                       )
-        WHERE ROW_NUM <![CDATA[>]]> (#{page_num} -1)*#{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
 
     </select>
 

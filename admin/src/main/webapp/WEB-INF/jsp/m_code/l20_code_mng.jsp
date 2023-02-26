@@ -58,13 +58,13 @@
                             <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                                 <ul class="pagination">
                                     <c:set var="name" value="${total_count/list_amount}" />
-                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('l20_code_mng',{page_num:1},'시스템 코드 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
-                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('l20_code_mng',{page_num:${cur_page-1}},'시스템 코드 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('l20_code_mng',{cur_page:1},'시스템 코드 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('l20_code_mng',{cur_page:${cur_page-1}},'시스템 코드 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
                                     <c:forEach var="i" begin="1" end="${page_amount}">
-                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('l20_code_mng',{page_num:${(cur_sector-1)*page_amount+i}},'시스템 코드 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
+                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('l20_code_mng',{cur_page:${(cur_sector-1)*page_amount+i}},'시스템 코드 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
                                     </c:forEach>
-                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('l20_code_mng',{page_num:${cur_page+1}},'시스템 코드 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
-                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('l20_code_mng',{page_num:${tot_page}},'시스템 코드 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('l20_code_mng',{cur_page:${cur_page+1}},'시스템 코드 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('l20_code_mng',{cur_page:${tot_page}},'시스템 코드 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
                                 </ul>
                             </div>
                         </div>
@@ -147,7 +147,7 @@
                     $('body').css('padding-right', '');
                     $("#modals-code-new").modal("hide");
                     $(".modal-backdrop").removeClass();
-                    pageLoad('l20_code_mng',{page_num:1},'시스템 코드 관리');
+                    pageLoad('l20_code_mng',{cur_page:1},'시스템 코드 관리');
                 }
                 else {
 

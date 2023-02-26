@@ -3,6 +3,15 @@
 
 <mapper namespace="kr.or.fact.core.model.AdminMapper">
 
+    <select id="getAdminFilteredCount" resultType="kr.or.fact.core.model.DTO.AdminFilteredCountVO">
+        SELECT (SELECT COUNT(*) FROM TB_ADMIN ) AS TOT_COUNT,
+               (SELECT COUNT(*) FROM TB_ADMIN WHERE ADMIN_TYPE <![CDATA[<]]>  2 ) AS CONSOLE_USER_COUNT,
+               (SELECT COUNT(*) FROM TB_ADMIN WHERE ADMIN_TYPE <![CDATA[<]]>  8 AND  ADMIN_TYPE <![CDATA[>=]]>  2 )AS CONSOLE_ADMIN_COUNT,
+               (SELECT COUNT(*) FROM TB_ADMIN WHERE ADMIN_TYPE <![CDATA[<]]>  16 AND  ADMIN_TYPE <![CDATA[>=]]>  8 )AS ADMIN_USER_COUNT,
+               (SELECT COUNT(*) FROM TB_ADMIN WHERE ADMIN_TYPE <![CDATA[>=]]>  16  ) AS SUPER_ADMIN_COUNT
+        FROM TB_ADMIN WHERE ROWNUM = 1
+    </select>
+
     <select id="getAdminInfoById" parameterType="String" resultType="kr.or.fact.core.model.DTO.AdminVO">
         SELECT *
         FROM TB_ADMIN
@@ -40,28 +49,28 @@
 
     <select id="getAdminSpecialInfoPagingList" parameterType="hashmap"
             resultType="kr.or.fact.core.model.DTO.PagedAdminListVO">
-        SELECT admin_id
-             , admin_name
-             , mphone_num
+        SELECT ADMIN_ID
+             ,ADMIN_NAME
+             ,MPHONE_NUM
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
-              ,admin_id
-                      , admin_name
-                      , mphone_num
-                 FROM TB_ADMIN
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num} * #{amount}
+            SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
+                ,ADMIN_ID
+                ,ADMIN_NAME
+                ,MPHONE_NUM
+             FROM TB_ADMIN
+             WHERE ROWNUM <![CDATA[<=]]> #{cur_page} * #{list_amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{page_num} - 1) * #{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} - 1) * #{list_amount}
     </select>
     <select id="getAdminPagingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.AdminVO">
         SELECT *
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
                 t.*
                  FROM TB_ADMIN t
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num} * #{amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{cur_page} * #{list_amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{page_num} - 1) * #{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} - 1) * #{list_amount}
     </select>
 
     <select id="getAdminCount" parameterType="int" resultType="int">
@@ -184,13 +193,13 @@
         SELECT * FROM (
         SELECT A.*, FLOOR((ROWNUM - 1)/#{count} + 1) PAGE, (
         SELECT MAX(FLOOR((ROWNUM - 1)/#{count} + 1)) FROM TB_ADMIN
-        WHERE IDX_ADMIN >= 1
+        WHERE IDX_ADMIN <![CDATA[>=]]> 1
           <if test="corporate neq 100">
             AND CORPORATE = #{corporate}
           </if>
         ) MAXVALUE FROM (
         SELECT TB_ADMIN.* FROM TB_ADMIN
-        WHERE IDX_ADMIN >= 1
+        WHERE IDX_ADMIN <![CDATA[>=]]> 1
         <if test="corporate neq 100">
             AND CORPORATE = #{corporate}
         </if>

@@ -37,8 +37,8 @@ public class MobileIndexController {
     @Resource(name = "noticeService")
     NoticeService noticeService;
 
-    @Resource(name = "prContentService")
-    PRContentsService prContentService;
+    @Resource(name = "prContentsService")
+    PRContentsService prContentsService;
 
     @Resource(name = "consultingService")
     ConsultingService consultingService;
@@ -157,7 +157,7 @@ public class MobileIndexController {
         model.addAttribute("announceList",announcementVOList);
 
         model.addAttribute("cur_page",page);
-        model.addAttribute("amount",list_amount);
+        model.addAttribute("list_amount",list_amount);
 
         int tot_page = annouceCount/list_amount+1;
         if(annouceCount%list_amount==0) tot_page-=1;
@@ -254,7 +254,7 @@ public class MobileIndexController {
         model.addAttribute("eventContentVOList", eventContentVOList);
 
         model.addAttribute("cur_page", page);
-        model.addAttribute("amount", list_amount);
+        model.addAttribute("list_amount", list_amount);
 
         int tot_page = eventCount / list_amount + 1;
         if (eventCount % list_amount == 0) tot_page -= 1;
@@ -331,12 +331,16 @@ public class MobileIndexController {
         if(noticeCount==0){
             return "brd_notice_blank";
         }
+        ParamPageListFilteredVO param = new ParamPageListFilteredVO();
+        param.setList_amount(list_amount);
+        param.setCur_page(page);
+
         model.addAttribute("total_count",noticeCount);
-        List<NoticeVO> noticeList = noticeService.getNoticeWebList(page,list_amount);
+        List<NoticeVO> noticeList = noticeService.getNoticeWebList(param);
         model.addAttribute("noticeList",noticeList);
 
         model.addAttribute("cur_page",page);
-        model.addAttribute("amount",list_amount);
+        model.addAttribute("list_amount",list_amount);
 
         int tot_page = noticeCount/list_amount+1;
         if(noticeCount%list_amount==0) tot_page-=1;
@@ -403,16 +407,16 @@ public class MobileIndexController {
         int list_amount = 10;
         int page_amount = 10;
 
-        int promotionCount = prContentService.getWebpagePRContentCount();
+        int promotionCount = prContentsService.getWebpagePRContentCount();
         if(promotionCount==0){
             return "brd_announce_blank";
         }
         model.addAttribute("total_count",promotionCount);
-        List<PRContentVO> prContentList = prContentService.getPRContentList(param);
+        List<PRContentVO> prContentList = prContentsService.getPRContentList(param);
         model.addAttribute("prContentList",prContentList);
-        int page = param.getPage_num();
+        int page = param.getCur_page();
         model.addAttribute("cur_page",page);
-        model.addAttribute("amount",list_amount);
+        model.addAttribute("list_amount",list_amount);
 
         int tot_page = promotionCount/list_amount+1;
         if(promotionCount%list_amount==0) tot_page-=1;
@@ -757,7 +761,7 @@ public class MobileIndexController {
 
                 model.addAttribute("demoBsQnaVOList",demoBsQnaVOList);
                 model.addAttribute("cur_page",page);
-                model.addAttribute("amount",list_amount);
+                model.addAttribute("list_amount",list_amount);
 
                 int tot_page = qnaCount/list_amount+1;
                 if(qnaCount%list_amount==0) tot_page-=1;

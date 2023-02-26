@@ -1,9 +1,6 @@
 package kr.or.fact.core.service;
 
-import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
-import kr.or.fact.core.model.DTO.VisitDataVO;
-import kr.or.fact.core.model.DTO.VisitDateVO;
-import kr.or.fact.core.model.DTO.VisitReqVO;
+import kr.or.fact.core.model.DTO.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -19,7 +16,7 @@ public interface VisitService {
 
     List<VisitReqVO> getMonthlyVisitReq();
     List<VisitReqVO> getUserVisitReq(long idx_user,int page,int list_amount);
-    int getVisitReqCount(ParamPageListFilteredVO paramVo);
+    VisitReqCountVO getVisitReqCount();
     long saveVisitData(VisitDataVO visitDataVO);
     void updateVisitData(VisitDataVO visitDataVO);
     void deleteVisitData(@Param("idx_visit_data") long idx_visit_data);

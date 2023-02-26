@@ -170,7 +170,7 @@
                                                             final FileInfoVO attachment = (FileInfoVO) pageContext.getAttribute("attachment");
                                                             if (attachment.getFile_name() != null) { // 임시
                                                                 final String[] split = attachment.getFile_name().split("\\.");
-                                                                System.out.println(split.length);
+                                                                //System.out.println(split.length);
                                                                 if (split.length >= 2) {
                                                                     extension = split[split.length - 1];
                                                                 }

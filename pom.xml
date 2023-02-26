@@ -11,10 +11,6 @@
         <module>web</module>
         <module>web_mobile</module>
         <module>api</module>
-        <module>web_gimje</module>
-        <module>web_sangju</module>
-        <module>web_mobile_gimje</module>
-        <module>web_mobile_sangju</module>
     </modules>
 
     <parent>

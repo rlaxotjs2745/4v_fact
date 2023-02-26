@@ -93,19 +93,19 @@
                 <c:if test="${hi_total_count ne 0}">
                     <div class="row">
                         <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${hi_total_count}개 중 ${hi_list_amount*(hi_cur_page-1)+1}에서 ${hi_total_count}까지</div>
+                            <div class="dataTables_info" role="status" aria-live="polite">총 ${total_count}개 중 ${hi_list_amount*(cur_page-1)+1}에서 ${total_count}까지</div>
                         </div>
                         <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
+                            <div class="dataTables_paginate paging_simple_numbers" >
                                 <ul class="pagination">
-                                    <c:set var="name" value="${hi_total_count/hi_list_amount}" />
-                                    <c:if test="${hi_is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{page_num:1+100000, filter1:1, filter2:${cw_cur_page}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
-                                    <c:if test="${hi_is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{page_num:${hi_cur_page-1}+100000, filter1:${hi_cur_page-1}, filter2:${cw_cur_page}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
-                                    <c:forEach var="i" begin="1" end="${hi_page_amount}">
-                                        <li class="paginate_button page-item <c:if test="${(hi_cur_sector-1)*hi_page_amount+i eq hi_cur_page}">active</c:if>"><a href="javascript:pageLoad('c80_site_mng',{page_num:${(hi_cur_sector-1)*hi_page_amount+i}+100000, filter1:${(hi_cur_sector-1)*hi_page_amount+i}, filter2:${cw_cur_page}},'홈페이지 정보 관리');" class="page-link">${(hi_cur_sector-1)*hi_page_amount+i}</a></li>
+                                    <c:set var="name" value="${total_count/list_amount}" />
+                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{cur_page:1, filter1:1, filter2:'${cur_page}'},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{cur_page:${cur_page-1}, filter1:'${cur_page-1}', filter2:${cur_page}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+                                    <c:forEach var="i" begin="1" end="${page_amount}">
+                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('c80_site_mng',{cur_page:'${(cur_sector-1)*page_amount+i}', filter1:'${(cur_sector-1)*page_amount+i}', filter2:'${cur_page}'},'홈페이지 정보 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
                                     </c:forEach>
-                                    <c:if test="${hi_is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c80_site_mng',{page_num:${hi_cur_page+1}+100000, filter1:${hi_cur_page+1}, filter2:${cw_cur_page}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
-                                    <c:if test="${hi_is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c80_site_mng',{page_num:${hi_tot_page}+100000, filter1:${hi_tot_page}, filter2:${cw_cur_page}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c80_site_mng',{cur_page:'${cur_page+1}', filter1:'${cur_page+1}', filter2:'${cur_page}'},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c80_site_mng',{cur_page:'${tot_page}', filter1:'${tot_page}', filter2:'${cur_page}'},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
                                 </ul>
                             </div>
                         </div>
@@ -196,13 +196,13 @@
                         <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                             <ul class="pagination">
                                 <c:set var="name" value="${cw_total_count/cw_list_amount}" />
-                                <c:if test="${cw_is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{page_num:1+200000, filter1:${hi_cur_page}, filter2:1},'홈페이지 조직도');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
-                                <c:if test="${cw_is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{page_num:${cw_cur_page-1}+200000, filter1:${hi_cur_page}, filter2:${cw_cur_page-1}},'홈페이지 정보 조직도');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+                                <c:if test="${cw_is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{cur_page:1+200000, filter1:${hi_cur_page}, filter2:1},'홈페이지 조직도');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                <c:if test="${cw_is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{cur_page:${cw_cur_page-1}+200000, filter1:${hi_cur_page}, filter2:${cw_cur_page-1}},'홈페이지 정보 조직도');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
                                 <c:forEach var="i" begin="1" end="${cw_page_amount}">
-                                    <li class="paginate_button page-item <c:if test="${(cw_cur_sector-1)*cw_page_amount+i eq cw_cur_page}">active</c:if>"><a href="javascript:pageLoad('c80_site_mng',{page_num:${(cw_cur_sector-1)*cw_page_amount+i}+200000, filter1:${hi_cur_page}, filter2:${(cw_cur_sector-1)*cw_page_amount+i}},'홈페이지 조직도');" class="page-link">${(cw_cur_sector-1)*cw_page_amount+i}</a></li>
+                                    <li class="paginate_button page-item <c:if test="${(cw_cur_sector-1)*cw_page_amount+i eq cw_cur_page}">active</c:if>"><a href="javascript:pageLoad('c80_site_mng',{cur_page:${(cw_cur_sector-1)*cw_page_amount+i}+200000, filter1:${hi_cur_page}, filter2:${(cw_cur_sector-1)*cw_page_amount+i}},'홈페이지 조직도');" class="page-link">${(cw_cur_sector-1)*cw_page_amount+i}</a></li>
                                 </c:forEach>
-                                <c:if test="${cw_is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c80_site_mng',{page_num:${cw_cur_page+1}+200000, filter1:${hi_cur_page}, filter2:${cw_cur_page+1}},'홈페이지 조직도');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
-                                <c:if test="${cw_is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c80_site_mng',{page_num:${cw_tot_page}+200000, filter1:${hi_cur_page}, filter2:${cw_tot_page}},'홈페이지 조직도');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+                                <c:if test="${cw_is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c80_site_mng',{cur_page:${cw_cur_page+1}+200000, filter1:${hi_cur_page}, filter2:${cw_cur_page+1}},'홈페이지 조직도');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                <c:if test="${cw_is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c80_site_mng',{cur_page:${cw_tot_page}+200000, filter1:${hi_cur_page}, filter2:${cw_tot_page}},'홈페이지 조직도');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
                             </ul>
                         </div>
                     </div>
@@ -699,7 +699,7 @@
                     $("#homepage_admin").val('')
                     $("#homepage_admin_pnum").val('')
                     $("#email").val('')
-                    pageLoad('c80_site_mng',{page_num:ranN, filter1:1, filter2:1},'사이트 정보관리');
+                    pageLoad('c80_site_mng',{cur_page:ranN, filter1:1, filter2:1},'사이트 정보관리');
                 }
                 else {
 
@@ -831,7 +831,7 @@
                 console.log(result)
                 if (result.result_code === "SUCCESS") {
                     // alert("상태 변경에 성공하였습니다");
-                    pageLoad('c80_site_mng',{page_num:ranN, filter1:1, filter2:1},'사이트 정보관리');
+                    pageLoad('c80_site_mng',{cur_page:ranN, filter1:1, filter2:1},'사이트 정보관리');
                     $('body').removeClass('modal-open');
                     $('body').css('padding-right', '');
                     $('#modals-modify').modal("hide")
@@ -947,7 +947,7 @@
                 console.log(result)
                 if (result.result_code === "SUCCESS") {
                     alert(result.result_str);
-                    pageLoad('c80_site_mng',{page_num:ranN, filter1:1, filter2:1},'사이트 정보관리');
+                    pageLoad('c80_site_mng',{cur_page:ranN, filter1:1, filter2:1},'사이트 정보관리');
                     $('body').removeClass('modal-open');
                     $('body').css('padding-right', '');
                     $('#modals-modify').modal("hide")
@@ -983,7 +983,7 @@
                 console.log(result)
                 if (result.result_code === "SUCCESS") {
                     alert(result.result_str);
-                    pageLoad('c80_site_mng',{page_num:ranN, filter1:1, filter2:1},'사이트 정보관리');
+                    pageLoad('c80_site_mng',{cur_page:ranN, filter1:1, filter2:1},'사이트 정보관리');
                 } else {
                     // alert("상태 변경에 실패하였습니다")
                     console.log(result)

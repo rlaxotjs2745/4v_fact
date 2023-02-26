@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Data
 public class DemoBsConsultingVO {
-    int idx_row_num;
+    int row_num;
     long idx_demo_bs_consulting;//	number	32			◯		인덱스	auto increase
     int consulting_num;//	NUMBER	20					상담번호	1시작 1증가
     long idx_demo_bs_applicaion;//	number	32				◯	지원번호
@@ -15,7 +15,7 @@ public class DemoBsConsultingVO {
     long idx_user;//	NUMBER	32				◯	상담 등록자
     int consulting_type;//	number	4		0			상담 종류	0:지원 상담, 1:평가 상담, 2:사업계획 상담, 3:협약 상담, 4:실증수행상담, 5:정산 상담, 99:기타
     String consult_type_etc_str;//	varchar2	100					기타 상담타입 내역
-    int consulting_status;//	number	4		0			상담 상황	0:상담요청등록, 1:상담자 지정, 2:상담 계획 보냄, 3: 상담계획 변경, 4:상담완료, 99:상담불가
+    int consulting_status;//	number	4		0			상담 상황	0:상담요청등록, 1:상담자 지정, 2:상담 계획 보냄, 3:상담완료, 99:상담불가
     String consulting_goal;//	varchar2	100					상담 목표
     Date req_date;//	date						요청 등록일
     Date resulvation_date;//	date						상담 예정일

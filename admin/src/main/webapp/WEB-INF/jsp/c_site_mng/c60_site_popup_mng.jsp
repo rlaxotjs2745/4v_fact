@@ -75,13 +75,13 @@
                                 <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                                     <ul class="pagination">
                                         <c:set var="name" value="${pop_total_count/pop_list_amount}" />
-                                        <c:if test="${pop_is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c60_site_popup_mng',{page_num:1},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
-                                        <c:if test="${pop_is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c60_site_popup_mng',{page_num:${cur_page-1}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+                                        <c:if test="${pop_is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c60_site_popup_mng',{cur_page:1},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                        <c:if test="${pop_is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c60_site_popup_mng',{cur_page:${cur_page-1}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
                                         <c:forEach var="i" begin="1" end="${pop_page_amount}">
-                                            <li class="paginate_button page-item <c:if test="${(pop_cur_sector-1)*pop_page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('c60_site_popup_mng',{page_num:${(pop_cur_sector-1)*pop_page_amount+i}},'홈페이지 정보 관리');" class="page-link">${(pop_cur_sector-1)*pop_page_amount+i}</a></li>
+                                            <li class="paginate_button page-item <c:if test="${(pop_cur_sector-1)*pop_page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('c60_site_popup_mng',{cur_page:${(pop_cur_sector-1)*pop_page_amount+i}},'홈페이지 정보 관리');" class="page-link">${(pop_cur_sector-1)*pop_page_amount+i}</a></li>
                                         </c:forEach>
-                                        <c:if test="${pop_is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c60_site_popup_mng',{page_num:${cur_page+1}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
-                                        <c:if test="${pop_is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c60_site_popup_mng',{page_num:${pop_tot_page}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+                                        <c:if test="${pop_is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c60_site_popup_mng',{cur_page:${cur_page+1}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                        <c:if test="${pop_is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c60_site_popup_mng',{cur_page:${pop_tot_page}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
                                     </ul>
                                 </div>
                             </div>
@@ -432,9 +432,9 @@
 
 
     $(function() {
-        var isRtl = $('html').attr('dir') === 'rtl';
+        //var isRtl = $('html').attr('dir') === 'rtl';
         $('#datepicker-show,#datepicker-open').datepicker({
-            orientation: isRtl ? 'auto right' : 'auto left',
+            orientation: 'auto left',
             format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
             startDate: '-10d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
             language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.

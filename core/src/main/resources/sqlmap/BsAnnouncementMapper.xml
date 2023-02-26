@@ -3,6 +3,14 @@
 
 <mapper namespace="kr.or.fact.core.model.BsAnnouncementMapper">
 
+    <select id="getDemoBsAnnouncementFilteredCount" resultType="kr.or.fact.core.model.DTO.DemoBsAnnounceFilteredCountVO">
+        SELECT (SELECT COUNT(*) FROM TB_BS_ANNOUNCEMENT ) AS ANNOUNCE_TOT,
+               (SELECT COUNT(*) FROM TB_BS_ANNOUNCEMENT WHERE ANNOUNCE_STATUS = 3) AS STATUS_ON_COUNT,
+               (SELECT COUNT(*) FROM TB_BS_ANNOUNCEMENT WHERE ANNOUNCE_STATUS = 1 OR ANNOUNCE_STATUS = 2) AS WAIT_COUNT,
+               (SELECT COUNT(*) FROM TB_BS_ANNOUNCEMENT WHERE ANNOUNCE_STATUS = 4) AS PAUSE_COUNT
+        FROM TB_BS_ANNOUNCEMENT WHERE ROWNUM = 1
+    </select>
+
     <select id="getMainBsAnnouncementCount" resultType="int">
         SELECT COUNT(*) FROM TB_BS_ANNOUNCEMENT  WHERE IS_MAIN_PAGE=1
     </select>
@@ -44,47 +52,44 @@
     </select>
      
     <select id="getOpenBsAnnouncementWebList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
-        SELECT
-            *
+        SELECT *
         FROM (
-            SELECT
-                ROW_NUMBER() OVER(ORDER by POSTING_START_DATE DESC) AS row_num
-                ,IDX_BS_ANNOUNCEMENT
-                ,ANNOUNCE_NUM
-                ,SUBJECT
-                ,ANNOUNCE_STATUS
-                ,IS_FILE
-                ,IS_NEW
-                ,AUTHOR
-                ,POSTING_START_DATE
-                ,VIEW_COUNT
-            FROM TB_BS_ANNOUNCEMENT
-            WHERE IS_SHOW=1
-                AND POSTING_START_DATE <![CDATA[<=]]> SYSDATE AND POSTING_END_DATE <![CDATA[>=]]> SYSDATE
-                <include refid="searchAnnouncementCondition"></include>
-        )
-        WHERE row_num BETWEEN #{count} * (#{page} - 1) + 1 AND #{count} * #{page}
+                 SELECT ROW_NUMBER() OVER(ORDER by POSTING_START_DATE DESC) AS ROW_NUM
+                    ,IDX_BS_ANNOUNCEMENT
+                      , ANNOUNCE_NUM
+                      , SUBJECT
+                      , ANNOUNCE_STATUS
+                      , IS_FILE
+                      , IS_NEW
+                      , AUTHOR
+                      , POSTING_START_DATE
+                      , VIEW_COUNT
+                 FROM (
+                          SELECT * FROM TB_BS_ANNOUNCEMENT WHERE IS_SHOW=1
+                    AND POSTING_START_DATE <![CDATA[<=]]> SYSDATE AND POSTING_END_DATE <![CDATA[>=]]> SYSDATE
+                      ) WHERE ROWNUM <![CDATA[<=]]> #{cur_page} * #{list_amount}
+             ) WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} - 1) * #{list_amount}
     </select>
 
     <select id="getBsAnnouncementWebList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
-        SELECT
-            *
+        SELECT *
         FROM (
-            SELECT
-                ROW_NUMBER() OVER(ORDER by ${order_field} DESC) AS row_num
+                 SELECT ROW_NUMBER() OVER(ORDER by ${order_field} DESC) AS ROW_NUM
                 ,IDX_BS_ANNOUNCEMENT
-                ,ANNOUNCE_NUM
-                ,SUBJECT
-                ,ANNOUNCE_STATUS
-                ,IS_FILE
-                ,IS_NEW
-                ,AUTHOR
-                ,POSTING_START_DATE
-                ,VIEW_COUNT
-            FROM TB_BS_ANNOUNCEMENT
-            WHERE IS_SHOW=1 AND ANNOUNCE_STATUS=3
-        )
-        WHERE row_num BETWEEN #{amount} * (#{page_num} - 1) + 1 AND #{amount} * #{page_num}
+                      , ANNOUNCE_NUM
+                      , SUBJECT
+                      , ANNOUNCE_STATUS
+                      , IS_FILE
+                      , IS_NEW
+                      , AUTHOR
+                      , POSTING_START_DATE
+                      , VIEW_COUNT
+                 FROM (SELECT *
+                       FROM TB_BS_ANNOUNCEMENT
+                       WHERE IS_SHOW = 1
+                         AND ANNOUNCE_STATUS = 3
+             ) WHERE ROWNUM <![CDATA[<=]]> #{cur_page} * #{list_amount}
+            ) WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} - 1) * #{list_amount}
     </select>
 
     <select id="getMainBsAnnouncementList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
@@ -117,7 +122,7 @@
              ,POSTING_START_DATE
              ,VIEW_COUNT
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
         ,IDX_BS_ANNOUNCEMENT
                       ,ANNOUNCE_NUM
                       ,SUBJECT
@@ -131,9 +136,9 @@
                           SELECT * FROM TB_BS_ANNOUNCEMENT
                       )
 
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
     </select>
 
     <select id="getBsAnnouncementListByFilter" parameterType="int" resultType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
@@ -231,18 +236,12 @@
         DELETE FROM TB_BS_ANNOUNCEMENT WHERE IDX_DEMO_BUSINESS = #{idx_demo_business}
     </delete>
 
-    <select id="getAdminBsAnnouncementFilter" resultType="kr.or.fact.core.model.DTO.AdminAnnounceFilterVO">
-        SELECT (SELECT COUNT(*) FROM TB_BS_ANNOUNCEMENT ) AS ANNOUNCE_TOT,
-               (SELECT COUNT(*) FROM TB_BS_ANNOUNCEMENT WHERE ANNOUNCE_STATUS = 3) AS STATUS_ON_COUNT,
-               (SELECT COUNT(*) FROM TB_BS_ANNOUNCEMENT WHERE ANNOUNCE_STATUS = 1 OR ANNOUNCE_STATUS = 2) AS WAIT_COUNT,
-               (SELECT COUNT(*) FROM TB_BS_ANNOUNCEMENT WHERE ANNOUNCE_STATUS = 4) AS PAUSE_COUNT
-        FROM TB_BS_ANNOUNCEMENT WHERE ROWNUM = 1
-    </select>
+
 
     <select id="getBsAnnounceVOPagingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.BsAnnouncementVO">
         SELECT *
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER BY #{order_field} DESC) AS row_num,
+                 SELECT ROW_NUMBER() OVER(ORDER BY #{order_field} DESC) AS ROW_NUM,
         IDX_BS_ANNOUNCEMENT,
         BS_ANNOUNCEMENT_CODE,
         ANNOUNCE_NUM,
@@ -263,6 +262,9 @@
         SEARCH_TAG,
         AUTHOR,
         IDX_DEMO_BUSINESS,
+        DEMO_BS_STATUS,
+        RECRUIT_START_DATE,
+        RECRUIT_END_DATE,
         CONFIRM_ADMIN_IDX,
         IDX_ADMIN,
         REG_DATE,
@@ -288,11 +290,15 @@
                                 A.SEARCH_TAG,
                                 A.AUTHOR,
                                 A.IDX_DEMO_BUSINESS,
+                                B.DEMO_BS_STATUS,
+                                B.RECRUIT_START_DATE,
+                                B.RECRUIT_END_DATE,
                                 A.CONFIRM_ADMIN_IDX,
                                 A.IDX_ADMIN,
                                 A.REG_DATE,
                                 A.LAST_UPD_DATE
                           FROM TB_BS_ANNOUNCEMENT A
+                          JOIN TB_DEMO_BUSINESS B ON A.IDX_DEMO_BUSINESS = B.IDX_DEMO_BUSINESS
                                         <if test="filter1 != 9999">
                                             WHERE A.ANNOUNCE_STATUS = #{filter1}
                                         </if>
@@ -301,9 +307,9 @@
                                         </if>
                          ORDER BY REG_DATE DESC
                       )
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num} * #{amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{cur_page} * #{list_amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{page_num} - 1) * #{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} - 1) * #{list_amount}
 
 
     </select>

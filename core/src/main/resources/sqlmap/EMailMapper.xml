@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.fact.core.model.EMailMapper">
+
+    <select id="getEmailFilteredCount" resultType="kr.or.fact.core.model.DTO.EmailFilteredCountVO">
+        SELECT (SELECT COUNT(*) FROM TB_EMAIL ) AS TOT_COUNT,
+               (SELECT COUNT(*) FROM TB_EMAIL WHERE EMAIL_STATUS = 0 ) AS HOLD_COUNT,
+               (SELECT COUNT(*) FROM TB_EMAIL WHERE EMAIL_STATUS = 1 ) AS RSERV_COUNT,
+               (SELECT COUNT(*) FROM TB_EMAIL WHERE EMAIL_STATUS = 2 )  AS SENT_COUNT
+        FROM TB_EMAIL WHERE ROWNUM = 1
+    </select>
+
+    <select id="getEmailTemplateFilteredCount" resultType="kr.or.fact.core.model.DTO.EmailTemplateFilteredCountVO">
+        SELECT (SELECT COUNT(*) FROM TB_EMAIL_TEMPLATE ) AS TOT_COUNT
+        FROM TB_EMAIL_TEMPLATE WHERE ROWNUM = 1
+    </select>
+
+    <select id="getReservedMail" resultType="kr.or.fact.core.model.DTO.EMailItemVO">
+        SELECT * FROM (
+            SELECT A.*, FLOOR((ROWNUM - 1)/10 + 1) PAGE, (
+                SELECT MAX(FLOOR((ROWNUM - 1)/10 + 1)) FROM TB_MAIL_RESERVED
+                WHERE IDX_MAIL_RESERVED <![CDATA[>=]]> #{tag} * 10 - 9) MAXVALUE FROM (
+                    SELECT TB_MAIL_RESERVED.* FROM TB_MAIL_RESERVED
+                    WHERE IDX_MAIL_RESERVED <![CDATA[>=]]> #{tag} * 10 - 9 ORDER BY IDX_MAIL_RESERVED ASC
+                )
+            A)
+        WHERE PAGE = #{tag}
+    </select>
+
+    <insert id="insertPWEmail" parameterType="kr.or.fact.core.model.DTO.EMailItemVO">
+        insert into TB_MAIL_RESERVED (
+            IDX_MAIL_RESERVED,
+            RECEIVER,
+            STATUS,
+            SENDTIME,
+            TITLE,
+            CONTENT
+        ) values (
+            SEQ_MAIL_RESERVED.NEXTVAL,
+            #{receiver},
+            'send',
+            TO_DATE(#{sendTime}, 'yyyy-MM-dd HH24:mi:ss'),
+            #{title},
+            #{content}
+        )
+    </insert>
+
+
+    <select id="getEmailList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.EMailItemVO">
+        SELECT * FROM(
+                         SELECT ROW_NUMBER() OVER(ORDER by SEND_DATE DESC) AS ROW_NUM,
+                                 A.*
+                         FROM(
+
+                                 SELECT
+                                     *
+                                 FROM TB_EMAIL
+
+                                <if test='filter1 != 9999' > WHERE EMAIL_STATUS =#{filter1} </if>
+                             ) A
+                         WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
+                     )
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
+    </select>
+
+
+    <select id="selectEmailItemByIdx" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.EMailItemVO">
+        SELECT * FROM TB_EMAIL WHERE IDX_EMAIL=#{IDX_EMAIL}
+    </select>
+
+    <insert id="insertEmailItem" parameterType="kr.or.fact.core.model.DTO.EMailItemVO">
+    INSERT INTO TB_EMAIL(
+        IDX_EMAIL,
+            EMAIL_TYPE,
+            SCHEDULE_TYPE,
+            SUBJECT,
+            CONTENT,
+            SENDER,
+            SEND_DATE,
+            RECIPIENT_COUNT,
+            IS_GROUP,
+            RECIPIENT,
+            EMAIL_STATUS,
+            MEMO,
+            HAS_FILE,
+            IDX_EMAIL_TEMPLATE,
+            IDX_ADMIN,
+            REG_DATE,
+            LAST_UPD_DATE
+    ) VALUES(
+                SEQ_EMAIL.NEXTVAL,
+                #{email_type},
+                #{schedule_type},
+                #{subject},
+                #{content},
+                #{sender},
+                #{send_date},
+                #{recipient_count},
+                #{is_group},
+                #{recipient},
+                #{email_status},
+                #{memo},
+                #{has_file},
+                #{idx_email_template},
+                #{idx_admin},
+                SYSDATE,
+                SYSDATE
+            )
+    </insert>
+
+    <select id="getEmailTemplateList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.EmailTemplateVO">
+    SELECT * FROM (
+                      SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
+            ,A.*
+                      FROM (
+                               SELECT
+                                   *
+                               FROM TB_EMAIL_TEMPLATE
+                               ORDER BY IDX_EMAIL_TEMPLATE ASC
+                           ) A
+                      WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
+                  )
+    WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
+    </select>
+
+    <select id="getEmailTemplateByIdx" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.EmailTemplateVO">
+    SELECT * FROM TB_EMAIL_TEMPLATE WHERE IDX_EMAIL_TEMPLATE = #{idx_email_template}
+    </select>
+
+    <insert id="insertEmailTemplate" parameterType="kr.or.fact.core.model.DTO.EmailTemplateVO">
+    INSERT INTO TB_EMAIL_TEMPLATE
+    (
+        IDX_EMAIL_TEMPLATE,
+        EMAIL_TYPE,
+        SCHEDULE_TYPE,
+        SUBJECT,
+        CONTENT,
+        SENDER,
+        SEND_DATE,
+        RECIPIENT_COUNT,
+        IS_GROUP,
+        RECIPIENT,
+        EMAIL_STATUS,
+        MEMO,
+        HAS_FILE,
+        IDX_ADMIN,
+        REG_DATE,
+        LAST_UPD_DATE
+    ) VALUES(
+                SEQ_EMAIL_TEMPLATE.NEXTVAL,
+                #{email_type},
+                #{schedule_type},
+                #{subject},
+                #{content},
+                #{sender},
+                #{send_date},
+                #{recipient_count},
+                #{is_group},
+                #{recipient},
+                #{email_status},
+                #{memo},
+                #{has_file},
+                #{idx_admin},
+                SYSDATE,
+                SYSDATE
+            )
+
+    </insert>
+
+    <update id="updateEmailTemplate" parameterType="kr.or.fact.core.model.DTO.EmailTemplateVO">
+    UPDATE TB_SMS_TEMPLATE SET
+                               EMAIL_TYPE= #{email_type},
+                               SCHEDULE_TYPE= #{schedule_type},
+                               SUBJECT= #{subject},
+                               CONTENT= #{content},
+                               SENDER= #{sender},
+                               SEND_DATE= #{send_date},
+                               RECIPIENT_COUNT= #{recipient_count},
+                               IS_GROUP= #{is_group},
+                               RECIPIENT= #{recipient},
+                               EMAIL_STATUS= #{email_status},
+                               MEMO= #{memo},
+                               HAS_FILE= #{has_file},
+                               IDX_ADMIN= #{idx_admin},
+                               LAST_UPD_DATE= #{last_upd_date}
+    WHERE
+        IDX_EMAIL_TEMPLATE = #{idx_email_template}
+    </update>
+
+</mapper>

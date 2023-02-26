@@ -1,9 +1,6 @@
 package kr.or.fact.core.model;
 
-import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
-import kr.or.fact.core.model.DTO.VisitDataVO;
-import kr.or.fact.core.model.DTO.VisitDateVO;
-import kr.or.fact.core.model.DTO.VisitReqVO;
+import kr.or.fact.core.model.DTO.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,7 +16,7 @@ public interface VisitMapper {
     List<VisitDataVO> getDurationVisitData(VisitDateVO visitDateVO);
 
     List<VisitReqVO> getMonthlyVisitReq();
-    List<VisitReqVO> getUserVisitReq(@Param("idx_user") long idx_user,@Param("page_num") int page_num, @Param("amount") int amount,@Param("order_field") String order_field);
+    List<VisitReqVO> getUserVisitReq(@Param("idx_user") long idx_user,@Param("cur_page") int cur_page, @Param("list_amount") int list_amount,@Param("order_field") String order_field);
 
     long saveVisitData(VisitDataVO visitDataVO);
     void updateVisitData(VisitDataVO visitDataVO);
@@ -27,7 +24,7 @@ public interface VisitMapper {
     void deleteVisitData(@Param("idx_visit_data") long idx_visit_data);
 int updateVisitReq(VisitReqVO visitReqVO);
     void saveVisitReq(VisitReqVO visitReqVO);
-    int getVisitReqCount(ParamPageListFilteredVO paramVo);
+    VisitReqCountVO getVisitReqCount();
     VisitReqVO getVisitReqByIdx(@Param("idx_visit_req") long idx_visit_req);
     void deleteVisitReq(@Param("idx_visit_req") long idx_visit_req);
 

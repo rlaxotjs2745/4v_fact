@@ -45,7 +45,7 @@
             EXTENTION,
             FILE_PATH
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
                         ,IDX_RULE_FILE_INFO,
                         SUBJECT,
                         USAGE_DETAIL,
@@ -65,9 +65,9 @@
                           WHERE C.FILE_TYPE = 5
                           order by IDX_RULE_FILE_INFO desc
                       )
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
     </select>
 
 </mapper>

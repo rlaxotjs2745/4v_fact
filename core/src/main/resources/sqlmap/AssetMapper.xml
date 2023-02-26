@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.fact.core.model.AssetMapper">
+
+    <select id="getAssetFilteredCount" resultType="kr.or.fact.core.model.DTO.AssetFilteredCountVO">
+        SELECT (SELECT COUNT(*) FROM TB_ASSET ) AS TOT_COUNT,
+               (SELECT COUNT(*) FROM TB_ASSET WHERE ASSET_STATUS = 0 ) AS NEW_COUNT,
+               (SELECT COUNT(*) FROM TB_ASSET WHERE ASSET_STATUS = 1 ) AS AVAILABLE_COUNT,
+               (SELECT COUNT(*) FROM TB_ASSET WHERE ASSET_STATUS = 2 ) AS OCCUPIED_COUNT,
+               (SELECT COUNT(*) FROM TB_ASSET WHERE ASSET_STATUS = 3 ) AS FIXING_COUNT,
+               (SELECT COUNT(*) FROM TB_ASSET WHERE ASSET_STATUS = 4 ) AS DISCARD_COUNT,
+               (SELECT COUNT(*) FROM TB_ASSET WHERE ASSET_STATUS = 5 ) AS LOST_COUNT
+        FROM TB_ASSET WHERE ROWNUM = 1
+    </select>
+
     <insert id="registerAsset" parameterType="kr.or.fact.core.model.DTO.AssetVO">
         INSERT INTO TB_ASSET (IDX_ASSET,
                               ASSET_CODE,
@@ -87,7 +99,7 @@
                 #{asset_code},
                 #{idx_asset_reservation},
                 #{idx_asset_manage},
-                #{amount},
+                #{list_amount},
                 #{reservation_item_status},
                 SYSDATE,
                 SYSDATE)
@@ -98,7 +110,7 @@
         SELECT * FROM (
         SELECT A.*, FLOOR((ROWNUM - 1)/10 + 1) PAGE, (
         SELECT MAX(FLOOR((ROWNUM - 1)/10 + 1)) FROM TB_ASSET
-        WHERE IDX_ASSET >= 1
+        WHERE IDX_ASSET <![CDATA[>=]]> 1
         <if test='filter1 != 100'>
             AND ASSET_MAIN_CATEGORY_CODE = #{filter1}
         </if>
@@ -110,7 +122,7 @@
         </if>
         ) MAXVALUE FROM (
         SELECT TB_ASSET.* FROM TB_ASSET
-        WHERE IDX_ASSET >= 1
+        WHERE IDX_ASSET <![CDATA[>=]]> 1
         <if test='filter1 != 100'>
             AND ASSET_MAIN_CATEGORY_CODE = #{filter1}
         </if>
@@ -122,8 +134,8 @@
         </if>
         )
         A)
-        <if test='page_num != 0'>
-            WHERE PAGE = #{page_num}
+        <if test='cur_page != 0'>
+            WHERE PAGE = #{cur_page}
         </if>
     </select>
 
@@ -138,14 +150,14 @@
 
         ) MAXVALUE FROM (
         SELECT TB_ASSET_RESERVATION.* FROM TB_ASSET_RESERVATION
-        WHERE IDX_ASSET_RESERVATION >= 1
+        WHERE IDX_ASSET_RESERVATION <![CDATA[>=]]> 1
         <if test='filter1 != 100'>
             AND RESERVAION_STATUS = #{filter1}
         </if>
         )
         A)
-        <if test='page_num != 0'>
-            WHERE PAGE = #{page_num}
+        <if test='cur_page != 0'>
+            WHERE PAGE = #{cur_page}
         </if>
     </select>
 

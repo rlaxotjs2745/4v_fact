@@ -12,88 +12,84 @@
 
     <select id="getUserQnaList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.DemoBsQnaVO">
         SELECT
-            IDX_DEMO_BS_QNA
-             ,BS_QNA_NUM
-             ,DEMO_BS_QNA_PARENT_IDX
-             ,QNA_TYPE
-             ,QNA_STATUS
-             ,IDX_USER
-             ,QNA_SUBJECT
-             ,QNA_CONTENTS
-             ,ANSWER_CONTENTS
-             ,ANSWER_DATE
-             ,IS_ANSWER
-             ,IS_PRIVACY_ACCEPT
-             ,MEMO
-             ,IDX_ADMIN
-             ,REG_DATE
+            *
+            /*IDX_DEMO_BS_QNA
+            ,BS_QNA_NUM
+            ,DEMO_BS_QNA_PARENT_IDX
+            ,QNA_TYPE
+            ,QNA_STATUS
+            ,IDX_USER
+            ,QNA_SUBJECT
+            ,QNA_CONTENTS
+            ,ANSWER_CONTENTS
+            ,ANSWER_DATE
+            ,IS_ANSWER
+            ,IS_PRIVACY_ACCEPT
+            ,MEMO
+            ,IDX_ADMIN
+            ,REG_DATE*/
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
-            ,IDX_DEMO_BS_QNA
-             ,BS_QNA_NUM
-                      ,DEMO_BS_QNA_PARENT_IDX
-                      ,QNA_TYPE
-                      ,QNA_STATUS
-                      ,IDX_USER
-                      ,QNA_SUBJECT
-                      ,QNA_CONTENTS
-                      ,ANSWER_CONTENTS
-                      ,ANSWER_DATE
-                      ,IS_ANSWER
-                      ,IS_PRIVACY_ACCEPT
-                      ,MEMO
-                      ,IDX_ADMIN
-                      ,REG_DATE
-                 FROM (
-                          SELECT * FROM TB_DEMO_BS_QNA  WHERE IDX_USER=#{idx_user}
-                      )
-
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
-             )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+            SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
+                ,IDX_DEMO_BS_QNA
+                ,BS_QNA_NUM
+                ,DEMO_BS_QNA_PARENT_IDX
+                ,QNA_TYPE
+                ,QNA_STATUS
+                ,IDX_USER
+                ,QNA_SUBJECT
+                ,QNA_CONTENTS
+                ,ANSWER_CONTENTS
+                ,ANSWER_DATE
+                ,IS_ANSWER
+                ,IS_PRIVACY_ACCEPT
+                ,MEMO
+                ,IDX_ADMIN
+                ,REG_DATE
+             FROM (
+                      SELECT * FROM TB_DEMO_BS_QNA  WHERE IDX_USER=#{idx_user}
+                  ) WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
+             ) WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
     </select>
 
     <select id="getAdminQnaList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.DemoBsQnaVO">
         SELECT
             IDX_DEMO_BS_QNA
-             ,BS_QNA_NUM
-             ,DEMO_BS_QNA_PARENT_IDX
-             ,QNA_TYPE
-             ,QNA_STATUS
-             ,IDX_USER
-             ,QNA_SUBJECT
-             ,QNA_CONTENTS
-             ,ANSWER_CONTENTS
-             ,ANSWER_DATE
-             ,IS_ANSWER
-             ,IS_PRIVACY_ACCEPT
-             ,MEMO
-             ,IDX_ADMIN
-        ,REG_DATE
+            ,BS_QNA_NUM
+            ,DEMO_BS_QNA_PARENT_IDX
+            ,QNA_TYPE
+            ,QNA_STATUS
+            ,IDX_USER
+            ,QNA_SUBJECT
+            ,QNA_CONTENTS
+            ,ANSWER_CONTENTS
+            ,ANSWER_DATE
+            ,IS_ANSWER
+            ,IS_PRIVACY_ACCEPT
+            ,MEMO
+            ,IDX_ADMIN
+            ,REG_DATE
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
-            ,IDX_DEMO_BS_QNA
-             ,BS_QNA_NUM
-                      ,DEMO_BS_QNA_PARENT_IDX
-                      ,QNA_TYPE
-                      ,QNA_STATUS
-                      ,IDX_USER
-                      ,QNA_SUBJECT
-                      ,QNA_CONTENTS
-                      ,ANSWER_CONTENTS
-                      ,ANSWER_DATE
-                      ,IS_ANSWER
-                      ,IS_PRIVACY_ACCEPT
-                      ,MEMO
-                      ,IDX_ADMIN
-                      ,REG_DATE
-                 FROM (
-                          SELECT * FROM TB_DEMO_BS_QNA  WHERE ADMIN_IDX=#{admin_idx}
-                      )
-
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
-             )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+            SELECT
+                ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
+                ,IDX_DEMO_BS_QNA
+                ,BS_QNA_NUM
+                ,DEMO_BS_QNA_PARENT_IDX
+                ,QNA_TYPE
+                ,QNA_STATUS
+                ,IDX_USER
+                ,QNA_SUBJECT
+                ,QNA_CONTENTS
+                ,ANSWER_CONTENTS
+                ,ANSWER_DATE
+                ,IS_ANSWER
+                ,IS_PRIVACY_ACCEPT
+                ,MEMO
+                ,IDX_ADMIN
+                ,REG_DATE
+             FROM (
+                      SELECT * FROM TB_DEMO_BS_QNA  WHERE ADMIN_IDX=#{admin_idx}
+                  ) WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
+             ) WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
     </select>
 
 

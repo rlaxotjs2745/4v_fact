@@ -14,35 +14,9 @@
 
     <select id="getDemoBsPagingList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
         SELECT
-        IDX_DEMO_BUSINESS
-        ,DEMO_BS_CODE
-        ,DEMO_SUBJECT
-        ,DEMO_BS_CONTENTS
-        ,DEMO_BS_MAIN_TYPE
-        ,DEMO_BS_SUB_TYPE
-        ,DEMO_BS_DETAIL_TYPE
-        ,DEMO_BS_STATUS
-        ,APPLICANT_COUNT
-        ,APPLICANT_COUNT_LIMIT
-        ,START_DATE
-        ,END_DATE
-        ,RECRUIT_START_DATE
-        ,RECRUIT_END_DATE
-        ,RECRUIT_COUNT_LIMIT
-        ,MEMO
-        ,IDX_ADMIN
-        ,REG_DATE
-        ,LAST_UPD_DATE
-        ,IDX_CONFORM_ADMIN
-        ,IS_ANNOUNCE
-        ,EXAM_START
-        ,EXAM_END
-        ,PLAN_REVIEW_START
-        ,PLAN_REVIEW_END
-        ,CONVENTION_START
-        ,CONVENTION_END
+        *
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
         ,IDX_DEMO_BUSINESS
         ,DEMO_BS_CODE
         ,DEMO_SUBJECT
@@ -60,9 +34,11 @@
         ,RECRUIT_COUNT_LIMIT
         ,MEMO
         ,IDX_ADMIN
+      ,ADMIN_NAME
         ,REG_DATE
         ,LAST_UPD_DATE
         ,IDX_CONFORM_ADMIN
+                      ,CONFIRM_ADMIN
         ,IS_ANNOUNCE
         ,EXAM_START
         ,EXAM_END
@@ -71,18 +47,50 @@
         ,CONVENTION_START
         ,CONVENTION_END
                  FROM (
-                          SELECT * FROM TB_DEMO_BUSINESS
-                        <if test="filter1 != 9999">
-                            WHERE DEMO_BS_STATUS = #{filter1}
-                        </if>
-                        <if test="filter2 != 9998">
-                            OR DEMO_BS_STATUS = #{filter2}
-                        </if>
+                          SELECT
+                                 A.IDX_DEMO_BUSINESS
+                                ,A.DEMO_BS_CODE
+                                ,A.DEMO_SUBJECT
+                                ,A.DEMO_BS_CONTENTS
+                                ,A.DEMO_BS_MAIN_TYPE
+                                ,A.DEMO_BS_SUB_TYPE
+                                ,A.DEMO_BS_DETAIL_TYPE
+                                ,A.DEMO_BS_STATUS
+                                ,A.APPLICANT_COUNT
+                                ,A.APPLICANT_COUNT_LIMIT
+                                ,A.START_DATE
+                                ,A.END_DATE
+                                ,A.RECRUIT_START_DATE
+                                ,A.RECRUIT_END_DATE
+                                ,A.RECRUIT_COUNT_LIMIT
+                                ,A.MEMO
+                                ,A.IDX_ADMIN
+                               ,(SELECT B.ADMIN_NAME FROM TB_ADMIN B WHERE A.IDX_ADMIN = B.IDX_ADMIN AND ROWNUM = 1) AS ADMIN_NAME
+                                ,A.REG_DATE
+                                ,A.LAST_UPD_DATE
+                                ,A.IDX_CONFORM_ADMIN
+                               ,(SELECT C.ADMIN_NAME FROM TB_ADMIN C WHERE A.IDX_CONFORM_ADMIN = C.IDX_ADMIN AND ROWNUM = 1) AS CONFIRM_ADMIN
+                                ,A.IS_ANNOUNCE
+                                ,A.EXAM_START
+                                ,A.EXAM_END
+                                ,A.PLAN_REVIEW_START
+                                ,A.PLAN_REVIEW_END
+                                ,A.CONVENTION_START
+                                ,A.CONVENTION_END
+                          FROM TB_DEMO_BUSINESS A
+
+                        <if test='filter1 gte 0 and filter1 lt  3' > WHERE DEMO_BS_STATUS <![CDATA[>=]]> 0 AND DEMO_BS_STATUS <![CDATA[<]]> 3 </if>
+                        <if test='filter1 gte 3 and filter1 lt  5' > WHERE DEMO_BS_STATUS <![CDATA[>=]]> 3 AND DEMO_BS_STATUS <![CDATA[<]]> 5 </if>
+                        <if test='filter1 gte 5 and filter1 lt  7' > WHERE DEMO_BS_STATUS <![CDATA[>=]]> 5 AND DEMO_BS_STATUS <![CDATA[<]]> 7 </if>
+                        <if test='filter1 gte 7 and filter1 lt  11' > WHERE DEMO_BS_STATUS <![CDATA[>=]]> 7 AND DEMO_BS_STATUS <![CDATA[<]]> 11 </if>
+                        <if test='filter1 eq 11'> WHERE DEMO_BS_STATUS = 11 </if>
+                        <if test='filter1 gte 12 and filter1 lt  15'> WHERE DEMO_BS_STATUS <![CDATA[>=]]> 12 AND DEMO_BS_STATUS <![CDATA[<]]> 15 </if>
+
                         ORDER BY IDX_DEMO_BUSINESS DESC
                       )
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
     </select>
 
     <select id="isValidCode" parameterType="String" resultType="String">
@@ -95,7 +103,39 @@
     </select>
 
     <select id="getDemoBsByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.DemoBusinessVO">
-        SELECT * FROM TB_DEMO_BUSINESS  WHERE IDX_DEMO_BUSINESS = #{idx}
+        SELECT
+            IDX_DEMO_BUSINESS
+             ,DEMO_BS_CODE
+             ,DEMO_SUBJECT
+             ,DEMO_BS_CONTENTS
+             ,DEMO_BS_MAIN_TYPE
+             ,DEMO_BS_SUB_TYPE
+             ,DEMO_BS_DETAIL_TYPE
+             ,DEMO_BS_STATUS
+             ,(SELECT COUNT(*) FROM TB_DEMO_BS_APPLICAION D WHERE A.IDX_DEMO_BUSINESS = D.IDX_DEMO_BUSINESS) AS APPLICANT_COUNT
+             ,APPLICANT_COUNT_LIMIT
+             ,START_DATE
+             ,END_DATE
+             ,RECRUIT_START_DATE
+             ,RECRUIT_END_DATE
+             ,RECRUIT_COUNT_LIMIT
+             ,MEMO
+             ,IDX_ADMIN
+             ,(SELECT B.ADMIN_NAME FROM TB_ADMIN B WHERE A.IDX_ADMIN = B.IDX_ADMIN AND ROWNUM = 1) AS ADMIN_NAME
+             ,REG_DATE
+             ,LAST_UPD_DATE
+             ,IDX_CONFORM_ADMIN
+             ,(SELECT C.ADMIN_NAME FROM TB_ADMIN C WHERE A.IDX_CONFORM_ADMIN = C.IDX_ADMIN AND ROWNUM = 1) AS CONFIRM_ADMIN
+             ,IS_ANNOUNCE
+             ,EXAM_START
+             ,EXAM_END
+             ,PLAN_REVIEW_START
+             ,PLAN_REVIEW_END
+             ,CONVENTION_START
+             ,CONVENTION_END
+        FROM TB_DEMO_BUSINESS A
+        WHERE IDX_DEMO_BUSINESS = #{idx}
+
     </select>
 
     <insert id="saveDemoBs" parameterType="kr.or.fact.core.model.DTO.DemoBusinessVO">
@@ -225,13 +265,14 @@
         DELETE FROM TB_DEMO_BUSINESS WHERE IDX_DEMO_BUSINESS = #{idx_demo_business}
     </delete>
 
-    <select id="getAdminDemoBsFilter" resultType="kr.or.fact.core.model.DTO.AdminDemoBSFilterVO">
+    <select id="getAdminDemoBsFilteredCount" resultType="kr.or.fact.core.model.DTO.DemoBSFilteredCountVO">
         SELECT (SELECT COUNT(*) FROM TB_DEMO_BUSINESS ) AS TOT_COUNT,
-               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS = 3 OR DEMO_BS_STATUS = 4) AS APPL_COUNT,
-               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS = 5 OR DEMO_BS_STATUS = 6)  AS REVUIEW_COUNT,
-               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS = 7 OR DEMO_BS_STATUS = 8) AS AGREE_COUNT,
-               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS = 9 OR DEMO_BS_STATUS = 10) AS DEMO_COUNT,
-               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS = 11 OR DEMO_BS_STATUS = 12) AS RESULT_COUNT
+               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS <![CDATA[>=]]> 0 AND DEMO_BS_STATUS <![CDATA[<]]> 3) AS WRITE_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS <![CDATA[>=]]> 3 AND DEMO_BS_STATUS <![CDATA[<]]> 5) AS APPL_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS <![CDATA[>=]]> 5 AND DEMO_BS_STATUS <![CDATA[<]]> 7)  AS REVIEW_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS <![CDATA[>=]]> 7 AND DEMO_BS_STATUS <![CDATA[<]]> 11) AS AGREE_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS = 11) AS DEMO_COUNT,
+               (SELECT COUNT(*) FROM TB_DEMO_BUSINESS WHERE DEMO_BS_STATUS <![CDATA[>=]]> 12 AND DEMO_BS_STATUS <![CDATA[<]]> 15) AS RESULT_COUNT
         FROM TB_DEMO_BUSINESS WHERE ROWNUM = 1
     </select>
 

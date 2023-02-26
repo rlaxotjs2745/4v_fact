@@ -13,7 +13,7 @@ import java.util.List;
 public interface AssetMapper {
     int registerAsset(AssetVO assetVO);
 
-    List<AssetVO> getAssetList(@Param("filter1") int filter1, @Param("filter2") int filter2, @Param("filter3") int filter3, @Param("page_num") int page_num);
+    List<AssetVO> getAssetList(@Param("filter1") int filter1, @Param("filter2") int filter2, @Param("filter3") int filter3, @Param("cur_page") int cur_page);
 
     int getCount(@Param("filter1") int filter1, @Param("filter2") int filter2, @Param("filter3") int filter3);
 
@@ -23,11 +23,11 @@ public interface AssetMapper {
             @Param("asset_code") String asset_code,
             @Param("idx_asset_reservation") long idx_asset_reservation,
             @Param("idx_asset_manage") long idx_asset_manage,
-            @Param("amount") int amount,
+            @Param("list_amount") int list_amount,
             @Param("reservation_item_status") int reservation_item_status
             );
 
-    List<AssetReservationVO> getAssetReservationList(@Param("filter1") int filter1, @Param("page_num") int page_num);
+    List<AssetReservationVO> getAssetReservationList(@Param("filter1") int filter1, @Param("cur_page") int cur_page);
 
     int getAssetReservationCount(@Param("filter1") int filter1);
 

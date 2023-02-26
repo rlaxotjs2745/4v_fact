@@ -28,6 +28,9 @@ public class BsAnnouncementVO {
     long search_tag;//	number	32					검색 태그
     String author;//	varchar2	20					작성자 이름	관리자와 등록자를 다르게 하기 때문
     long idx_demo_business;//	number	32				◯	사업 연결	idx_demo_business index pk
+    int demo_bs_status;
+    Date recruit_start_date;
+    Date recruit_end_date;
     long confirm_admin_idx;//	number	32				◯	허가자
     long idx_admin;//	number	32				◯	입력자	idx_admin index pk
     Date reg_date;//	date						최초 등록 일시

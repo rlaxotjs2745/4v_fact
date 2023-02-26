@@ -28,8 +28,8 @@ public class AssetServiceImpl implements AssetService {
         int filter1 = param.getFilter1();
         int filter2 = param.getFilter2();
         int filter3 = param.getFilter3();
-        int page_num = param.getPage_num();
-        return assetMapper.getAssetList(filter1, filter2, filter3, page_num);
+        int cur_page = param.getCur_page();
+        return assetMapper.getAssetList(filter1, filter2, filter3, cur_page);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class AssetServiceImpl implements AssetService {
 
     @Override
     public List<AssetReservationVO> getAssetReservationList(ParamPageListFilteredVO param){
-        return assetMapper.getAssetReservationList(param.getFilter1(), param.getPage_num());
+        return assetMapper.getAssetReservationList(param.getFilter1(), param.getCur_page());
     }
 
     @Override

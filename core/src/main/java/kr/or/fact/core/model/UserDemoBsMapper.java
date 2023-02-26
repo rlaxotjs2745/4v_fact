@@ -39,10 +39,10 @@ public interface UserDemoBsMapper {
     void saveUserDemoBsDetail(UserDemoBsDetailVO userDemoBsDetailVO);
     void updateUserDemoBsDetail(UserDemoBsDetailVO userDemoBsDetailVO);
 
-    List<UserDemoBsVO> getUserDemoBsPagingList(@Param("page_num") int page_num, @Param("amount") int amount,@Param("order_field")String order_field,@Param("filter1") int filter1, @Param("filter2") int filter2);
+    List<UserDemoBsVO> getUserDemoBsPagingList(ParamPageListFilteredVO param);
 
     int submitUserDemoBs(@Param("idx_user_demo_bs") long idx_user_demo_bs);
 
     void updateUserDemoBsStatus(UserDemoBsVO userDemoBsVO);
-    List<UserDemoBsVO> getUserDemoBsPagingListByFiltered(long idx, int page_num,int amount,String order_field, int filter1, int filter2);
+    List<UserDemoBsVO> getUserDemoBsPagingListByFiltered(ParamPageListFilteredVO param);
 }

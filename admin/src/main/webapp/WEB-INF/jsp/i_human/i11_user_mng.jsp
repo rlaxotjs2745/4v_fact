@@ -285,7 +285,7 @@
             .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
     }
 
-    pageLoad("user_index", {page_num: 1, filter1: 100}, "유저 보드", "user");
+    pageLoad("user_index", {cur_page: 1, filter1: 100}, "유저 보드", "user");
 
     $("#addr_search, #user_addr_mod").click(function() {
         new daum.Postcode({
@@ -303,54 +303,54 @@
 
     $(".category_change").click(function(){
         var param = {
-            page_num: null,
+            cur_page: null,
             filter1: null
         }
         switch($(this).attr("id")){
             case "all":
-                param.page_num = 1;
+                param.cur_page = 1;
                 param.filter1 = 100;
                 curCate = 100;
                 break;
             case "web_memb":
-                param.page_num = 1;
+                param.cur_page = 1;
                 param.filter1 = 0;
                 curCate = 0;
                 break;
             case "mobile_memb":
-                param.page_num = 1;
+                param.cur_page = 1;
                 param.filter1 = 1;
                 curCate = 1;
                 break;
             case "center_memb":
-                param.page_num = 1;
+                param.cur_page = 1;
                 param.filter1 = 2;
                 curCate = 2;
                 break;
             case "corp_memb":
-                param.page_num = 1;
+                param.cur_page = 1;
                 param.filter1 = 3;
                 curCate = 3;
                 break;
             case "local_memb":
-                param.page_num = 1;
+                param.cur_page = 1;
                 param.filter1 = 4;
                 curCate = 4;
                 break;
             case "article-list_previous":
-                param.page_num = 1;
+                param.cur_page = 1;
                 param.filter1 = curCate;
                 break;
             case "article-list_previous-one":
-                param.page_num = curPage - 1;
+                param.cur_page = curPage - 1;
                 param.filter1 = curCate;
                 break;
             case "article-list_next-one":
-                param.page_num = curPage + 1;
+                param.cur_page = curPage + 1;
                 param.filter1 = curCate;
                 break;
             case "article-list_next":
-                param.page_num = maxvalue;
+                param.cur_page = maxvalue;
                 param.filter1 = curCate;
                 break;
         }
@@ -421,7 +421,7 @@
                 alert(result.result_str);
                 $("#modal-person-modify").modal("hide");
                 $("#modal-person-view").modal("hide");
-                pageLoad('i11_user_mng',{page_num:curPage, filter1: curCate},'고객 관리');
+                pageLoad('i11_user_mng',{cur_page:curPage, filter1: curCate},'고객 관리');
             },
             error:function(){
                 //에러가 났을 경우 실행시킬 코드
@@ -447,7 +447,7 @@
                     //작업이 성공적으로 발생했을 경우
                     alert(result.result_str);
                     $("#modal-person-modify").modal("hide");
-                    pageLoad('i11_user_mng',{page_num:curPage, filter1: curCate},'고객 관리');
+                    pageLoad('i11_user_mng',{cur_page:curPage, filter1: curCate},'고객 관리');
                 },
                 error:function(){
                     //에러가 났을 경우 실행시킬 코드
@@ -469,7 +469,7 @@
                     //작업이 성공적으로 발생했을 경우
                     alert(result.result_str);
                     $("#modal-person-modify").modal("hide");
-                    pageLoad('i11_user_mng', {page_num:curPage, filter1: curCate},'고객 관리');
+                    pageLoad('i11_user_mng', {cur_page:curPage, filter1: curCate},'고객 관리');
                 },
                 error:function(){
                     //에러가 났을 경우 실행시킬 코드

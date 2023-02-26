@@ -140,17 +140,6 @@
             PRIZE3_DATE,
             PRIZE3_ORG,
             PRIZE3_ETC,
-
-
-
-
-
-
-
-
-
-
-
             REG_DATE,
             LAST_UPD_DATE
         ) VALUES (
@@ -351,9 +340,6 @@
             MAN_OFFICER_COUNT	= #{man_officer_count},
             MAN_LAB_COUNT	= #{man_lab_count},
             MAN_ETC_COUNT	= #{man_etc_count},
-
-
-
             LAST_UPD_DATE = SYSDATE
           WHERE IDX_USER_DEMO_BS = #{idx_user_demo_bs}
     </update>
@@ -437,8 +423,6 @@
               LAB_EST_DATE = #{lab_est_date},
               RND_RATE = #{rnd_rate},
               CONSOLIDATED_COMPANY = #{consolidated_company},
-
-
               HISTORY1 = #{history1},
               HISTORY1_DATE = #{history1_date},
               HISTORY2 = #{history2},
@@ -1068,7 +1052,7 @@
              ,POSTING_START_DATE
              ,VIEW_COUNT
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
         ,IDX_BS_ANNOUNCEMENT
                       ,ANNOUNCE_NUM
                       ,SUBJECT
@@ -1089,9 +1073,9 @@
                         </if>
                      )
 
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
     </select>
 
     <update id="submitUserDemoBs" parameterType="long">
@@ -1133,7 +1117,7 @@
         ,REG_DATE
         ,LAST_UPD_DATE
         FROM (
-        SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+        SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
         ,A.*
 
         FROM (
@@ -1147,9 +1131,9 @@
         </if>
         ) A
 
-        WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+        WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
         )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
     </select>
 
 

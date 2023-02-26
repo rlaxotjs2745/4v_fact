@@ -3,4 +3,60 @@
 
 <mapper namespace="kr.or.fact.core.model.SchedulerMapper">
 
+    <select id="getYearlyScheduleList" parameterType="kr.or.fact.core.model.DTO.ParamSchedulerVO" resultType="kr.or.fact.core.model.DTO.ScheduleItemVO">
+        SELECT * FROM TB_SCHEDULE_ITEM WHERE IDX_ADMIN = #{idx}  OR  IDX_ADMIN = 0
+    </select>
+    <select id="getScheduleItemByIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.ScheduleItemVO">
+        SELECT * FROM TB_SCHEDULE_ITEM WHERE IDX_SCHEDULE_ITEM = #{idx_schedule_item}
+    </select>
+
+    <insert id="insertScheduleData" parameterType="kr.or.fact.core.model.DTO.ScheduleItemVO">
+        INSERT INTO TB_SCHEDULE_ITEM (
+                                      IDX_SCHEDULE_ITEM,
+                                      START_DATE,
+                                      END_DATE,
+                                      SCHEDULE_TYPE,
+                                      NOTI_TYPE,
+                                      NOTI_DATE,
+                                      SHOW_TYPE,
+                                      GRADE,
+                                      COLOR_CODE,
+                                      CONTENTS,
+                                      IDX_ADMIN,
+                                      REG_DATE
+                                      ) VALUES (SEQ_SCHEDULE_ITEM.NEXTVAL,
+                                                #{start_date},
+                                                #{end_date},
+                                                #{schedule_type},
+                                                #{noti_type},
+                                                #{noti_date},
+                                                #{show_type},
+                                                #{grade},
+                                                #{color_code},
+                                                #{contents},
+                                                #{idx_admin},
+                                                SYSDATE )
+
+    </insert>
+
+    <update id="updateScheduleData" parameterType="kr.or.fact.core.model.DTO.ScheduleItemVO">
+    UPDATE TB_SCHEDULE_ITEM SET START_DATE = #{start_date},
+                                END_DATE = #{end_date},
+                                SCHEDULE_TYPE = #{schedule_type},
+                                NOTI_TYPE = #{noti_type},
+                                NOTI_DATE = #{noti_date},
+                                SHOW_TYPE = #{show_type},
+                                GRADE = #{grade},
+                                COLOR_CODE = #{color_code},
+                                CONTENTS = #{contents},
+                                IDX_ADMIN = #{idx_admin},
+                                LAST_UPD_DATE = SYSDATE
+WHERE IDX_SCHEDULE_ITEM = #{idx_schedule_item}
+
+    </update>
+    <delete id="deleteScheduleData" parameterType="long">
+        DELETE FROM TB_SCHEDULE_ITEM WHERE IDX_SCHEDULE_ITEM = #{idx_schedule_item}
+    </delete>
+
+
 </mapper>

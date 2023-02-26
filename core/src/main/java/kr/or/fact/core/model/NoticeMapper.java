@@ -1,6 +1,7 @@
 package kr.or.fact.core.model;
 
 import kr.or.fact.core.model.DTO.NoticeVO;
+import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,9 +11,9 @@ import java.util.List;
 public interface NoticeMapper {
     int getMainNoticeCount();
     int getWebpageNoticeCount();
-    int getOpenNoticeCount(@Param("filter") String filter, @Param("query") String query);
-    List<NoticeVO> getOpenNoticeList(@Param("page") int page, @Param("count") int count, @Param("filter") String filter, @Param("query") String query);
-    List<NoticeVO> getNoticeWebList(@Param("page_num") int page_num, @Param("amount") int amount, @Param("order_field") String order_field);
+    int getOpenNoticeCount(ParamPageListFilteredVO param);
+    List<NoticeVO> getOpenNoticeList(ParamPageListFilteredVO param);
+    List<NoticeVO> getNoticeWebList(ParamPageListFilteredVO param);
     List<NoticeVO> getMainNoticeList();
     public int insertNotice(NoticeVO noticeVO);
     int deleteNotice(@Param("idx_notice")int idx_notice);

@@ -36,6 +36,8 @@
     <link rel="stylesheet" href="resources/assets/vendor/css/rtl/theme-corporate-dark.css" class="theme-settings-theme-css">
     <link rel="stylesheet" href="resources/assets/vendor/css/rtl/colors-dark.css" class="theme-settings-colors-css">
     <link rel="stylesheet" href="resources/assets/vendor/css/rtl/uikit.css">
+    <%--<link rel="stylesheet" href="resources/assets/vendor/libs/spinkit/spinkit.css">--%>
+
     <link rel="stylesheet" href="resources/assets/css/demo.css">
 
     <!-- Load polyfills -->
@@ -56,7 +58,8 @@
     <link rel="stylesheet" href="resources/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
     <link rel="stylesheet" href="resources/assets/vendor/libs/fullcalendar/fullcalendar.css">
     <link rel="stylesheet" href="resources/assets/vendor/libs/flot/flot.css">
-
+    <link rel="stylesheet" href="resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="resources/assets/vendor/libs/spinkit/spinkit.css">
 
 </head>
 
@@ -107,11 +110,13 @@
 <script src="resources/assets/vendor/libs/fullcalendar/fullcalendar.js"></script>
 <script src="resources/assets/vendor/libs/flot/flot.js"></script>
 <script src="resources/assets/vendor/libs/flot/jquery.flot.time.js"></script>
-
+<script src="resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="resources/assets/vendor/libs/block-ui/block-ui.js"></script>
 <!-- Demo -->
 <script src="resources/assets/js/demo.js"></script>
 
 <script>
+    $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 
     $("li.sidenav-item").on('click',function(){
         if( $("li.sidenav-item").has('a')!=null){
@@ -144,10 +149,10 @@
 
 
         if(param==null)
-            param={page_num:1};
+            param={cur_page:1};
 
-        if(cur!=url+param.page_num || usage == "asset_list"){
-            cur = url+param.page_num;
+        if(cur!=url+param.cur_page || usage == "asset_list"){
+            cur = url+param.cur_page;
             history.pushState(url, title,url);
 
             $.ajaxSetup({
@@ -195,21 +200,11 @@
 
             });
 
-            /*            request.done(function(msg) {
-                            $("#contents").html(msg);
-                        });
-
-                        request.fail(function(jqXHR, textStatus) {
-                            $("#contents").html("Request failed: " + textStatus);
-                        });*/
-
-            //$("#contents").load(a,{"tag":a} ,function(){
-            //alert(a);
-
         }else{//현재 주소 클릭시 변화 없음
 
-            return;
+
         }
+        return true;
     }
     //문서 로드 완료 후 이벤트 처리
     (function() {
@@ -236,7 +231,7 @@
             if (!window.innerDoc) {
 
                 console.log(evt);
-                pageLoad(evt.state,{page_num:1},"");
+                pageLoad(evt.state,{cur_page:1},"");
 
             }
         }, false);
@@ -246,7 +241,7 @@
 
     $(document).ready(function() {
         //ajax로 호출되는 첫번째 페이지
-        pageLoad('dashboard',{page_num:1},'대시보드');
+        pageLoad('dashboard',{cur_page:1},'대시보드');
 
     });
 

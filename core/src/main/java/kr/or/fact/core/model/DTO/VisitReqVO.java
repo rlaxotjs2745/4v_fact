@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Data
 public class VisitReqVO {
-    int idx_row_num;
+    int row_num;
     long idx_visit_req;//	number	32			◯		인덱스	auto increase
     int visit_req_num;//	number	20					방문 요청번호	1시작 1증가
     String group_name;//	varchar2	40					단체이름

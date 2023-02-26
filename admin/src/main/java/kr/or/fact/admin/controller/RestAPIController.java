@@ -13,8 +13,8 @@ import java.util.*;
 
 @RestController
 public class RestAPIController extends BaseController {
-    @Resource(name = "prContentService")
-    public PRContentsService prContentService;
+    @Resource(name = "prContentsService")
+    public PRContentsService prContentsService;
 
     @Resource(name = "eventContentService")
     public EventContentService eventContentService;
@@ -41,9 +41,9 @@ public class RestAPIController extends BaseController {
 
         try {
             if(paramVo!=null){
-                PRContentVO rs = prContentService.getPRContentFileJoin(paramVo.getIdx_pr_content());
+                PRContentVO rs = prContentsService.getPRContentFileJoin(paramVo.getIdx_pr_content());
                 if(rs!=null) {
-                    PRContentVO thumb = prContentService.getThumbFile(paramVo);
+                    PRContentVO thumb = prContentsService.getThumbFile(paramVo);
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREAN);
                     if(rs.getShow_start_date()!=null) {
                         String sDate = dateFormat.format(rs.getShow_start_date());

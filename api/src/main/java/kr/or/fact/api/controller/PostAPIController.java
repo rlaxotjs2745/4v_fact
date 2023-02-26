@@ -20,7 +20,7 @@ public class PostAPIController {
     public @ResponseBody
     ResultVO insertActuatorGreenhouseComplexGimje(@RequestBody ActuatorGreenhouseComplexGimjeVO actuatorGreenhouseComplexGimjeVO){
         ResultVO result = new ResultVO();
-        System.out.println(actuatorGreenhouseComplexGimjeVO.getIncurtain());
+        //System.out.println(actuatorGreenhouseComplexGimjeVO.getIncurtain());
         if(     actuatorGreenhouseComplexGimjeVO == null ||
                 actuatorGreenhouseComplexGimjeVO.getDaqtime() == null
         ){

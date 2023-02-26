@@ -130,22 +130,22 @@
                         <div class="col-sm-12 col-md-7">
                             <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                                 <ul class="pagination">
-                                    <c:if test="${page_num == 1}">
-                                        <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="javascript:pageLoad('c71_site_form_doc_mng',{page_num: '${page_num - 1}'},'상담');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li>
+                                    <c:if test="${cur_page == 1}">
+                                        <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="javascript:pageLoad('c71_site_form_doc_mng',{cur_page: '${cur_page - 1}'},'상담');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li>
                                     </c:if>
-                                    <c:if test="${page_num != 1}">
-                                        <li class="paginate_button page-item previous" id="article-list_previous"><a href="javascript:pageLoad('c71_site_form_doc_mng',{page_num: '${page_num - 1}'},'상담');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li>
+                                    <c:if test="${cur_page != 1}">
+                                        <li class="paginate_button page-item previous" id="article-list_previous"><a href="javascript:pageLoad('c71_site_form_doc_mng',{cur_page: '${cur_page - 1}'},'상담');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li>
                                     </c:if>
 <%--                                    <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>--%>
 <%--                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>--%>
 <%--                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>--%>
 <%--                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>--%>
 <%--                                    <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>--%>
-                                    <c:if test="${page_num < max_page_num / 10}">
-                                        <li class="paginate_button page-item next" id="article-list_next"><a href="javascript:pageLoad('c71_site_form_doc_mng',{page_num: '${page_num + 1}'},'상담');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li>
+                                    <c:if test="${cur_page < max_cur_page / 10}">
+                                        <li class="paginate_button page-item next" id="article-list_next"><a href="javascript:pageLoad('c71_site_form_doc_mng',{cur_page: '${cur_page + 1}'},'상담');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li>
                                     </c:if>
-                                    <c:if test="${page_num >= max_page_num / 10}">
-                                        <li class="paginate_button page-item next disabled" id="article-list_next"><a href="javascript:pageLoad('c71_site_form_doc_mng',{page_num: '${page_num + 1}'},'상담');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li>
+                                    <c:if test="${cur_page >= max_cur_page / 10}">
+                                        <li class="paginate_button page-item next disabled" id="article-list_next"><a href="javascript:pageLoad('c71_site_form_doc_mng',{cur_page: '${cur_page + 1}'},'상담');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li>
                                     </c:if>
                                 </ul>
                             </div>
@@ -289,7 +289,7 @@
                 result = JSON.parse(result);
                 alert(result.result_str);
                 if(result.result_code === 'SUCCESS'){
-                    pageLoad('c71_site_form_doc_mng',{page_num:1},'상담');
+                    pageLoad('c71_site_form_doc_mng',{cur_page:1},'상담');
                 }
                 //STATUS_001 :
             },
@@ -328,7 +328,7 @@
             success: function(result){
                 alert(result.result_str);
                 if(result.result_code === 'SUCCESS'){
-                    pageLoad('c71_site_form_doc_mng',{page_num:1},'상담');
+                    pageLoad('c71_site_form_doc_mng',{cur_page:1},'상담');
                 }
             },
             error:function(err){

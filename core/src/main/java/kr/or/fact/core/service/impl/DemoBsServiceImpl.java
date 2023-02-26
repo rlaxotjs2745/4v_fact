@@ -1,12 +1,14 @@
 package kr.or.fact.core.service.impl;
 
-import kr.or.fact.core.model.DTO.AdminDemoBSFilterVO;
+import kr.or.fact.core.model.DTO.DemoBSFilteredCountVO;
 import kr.or.fact.core.model.DTO.DemoBusinessVO;
 import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 import kr.or.fact.core.model.DemoBsMapper;
 import kr.or.fact.core.service.DemoBsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -46,17 +48,19 @@ public class DemoBsServiceImpl implements DemoBsService {
         demoBsMapper.saveDemoBs(demoBusinessVO);
     }
     @Override
+    @Transactional(propagation= Propagation.REQUIRED)
     public void updateDemoBs(DemoBusinessVO demoBusinessVO){
         demoBsMapper.updateDemoBs(demoBusinessVO);
     }
     @Override
+    @Transactional(propagation= Propagation.REQUIRED)
     public void deleteDemoBs(long idx_demo_business){
         demoBsMapper.deleteDemoBs(idx_demo_business);
     }
 
     @Override
-    public AdminDemoBSFilterVO getAdminDemoBsFilter(){
-        return demoBsMapper.getAdminDemoBsFilter();
+    public DemoBSFilteredCountVO getAdminDemoBsFilteredCount(){
+        return demoBsMapper.getAdminDemoBsFilteredCount();
     }
 
     @Override
@@ -79,11 +83,13 @@ public class DemoBsServiceImpl implements DemoBsService {
     }
 
     @Override
+    @Transactional(propagation= Propagation.REQUIRED)
     public void updateBsApproval(DemoBusinessVO demoBusinessVO) {
         demoBsMapper.updateBsApproval(demoBusinessVO);
     }
 
     @Override
+    @Transactional(propagation= Propagation.REQUIRED)
     public void updateBsContent(DemoBusinessVO demoBusinessVO) {
         demoBsMapper.updateBsContent(demoBusinessVO);
     }

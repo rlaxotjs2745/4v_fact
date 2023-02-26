@@ -24,7 +24,7 @@
             COWORKER_NAME,
             CO_WORKER_ODER
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
                 ,IDX_CO_WORKER,
                         DEVISION,
                         DEPARTMENT,
@@ -43,9 +43,9 @@
                           WHERE IS_SHOW = 0 OR IS_SHOW = 1
                           order by CO_WORKER_ODER asc
                       )
-                 WHERE ROWNUM <![CDATA[<=]]> #{filter2}*#{amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{filter2}*#{list_amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{filter2} -1)*#{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{filter2} -1)*#{list_amount}
 
     </select>
 

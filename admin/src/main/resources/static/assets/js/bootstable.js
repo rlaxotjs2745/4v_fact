@@ -130,19 +130,19 @@ function rowAcep(but) {
 
     if(!namePattern.test($cols[0].textContent)){
         alert("담당자 이름 형식을 확인해주세요. 담당자 이름은 특수문자가 포함되지 않은 두글자 이상이여야 합니다.");
-        pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
+        pageLoad('c80_site_mng',{cur_page:1},'사이트 정보관리');
         return;
     }
 
     if(!phonePattern.test($cols[1].textContent)){
         alert("담당자 연락처 형식을 확인해주세요 예)010-1234-5678");
-        pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
+        pageLoad('c80_site_mng',{cur_page:1},'사이트 정보관리');
         return;
     }
 
     if(!emailPattern.test($cols[2].textContent)){
         alert("담당자 이메일 형식을 확인해주세요 예)smartFarm@smartFarm.com");
-        pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
+        pageLoad('c80_site_mng',{cur_page:1},'사이트 정보관리');
         return;
     }
 
@@ -160,7 +160,7 @@ function rowAcep(but) {
 
             if (result.result_code === "SUCCESS") {
                 alert(result.result_str);
-                pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
+                pageLoad('c80_site_mng',{cur_page:1},'사이트 정보관리');
             }
             else {
 
@@ -215,7 +215,7 @@ function rowElim(but) {  //Elimina la fila actual
             console.log(result);
             if (result.result_code === "SUCCESS") {
                 alert(result.result_str);
-                pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
+                pageLoad('c80_site_mng',{cur_page:1},'사이트 정보관리');
                 // params.onBeforeDelete($row);
                 // $row.remove();
                 // params.onDelete();
@@ -255,7 +255,7 @@ function rowApllySet(but) {  //Elimina la fila actual
             console.log(result);
             if (result.result_code === "SUCCESS") {
                 alert(result.result_str);
-                pageLoad('c80_site_mng',{page_num:1},'사이트 정보관리');
+                pageLoad('c80_site_mng',{cur_page:1},'사이트 정보관리');
                 // params.onBeforeDelete($row);
                 // $row.remove();
                 // params.onDelete();

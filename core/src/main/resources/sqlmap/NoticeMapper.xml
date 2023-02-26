@@ -14,19 +14,19 @@
     <sql id="searchNoticeCondition">
         <if test='query != null and query != ""'>
             <choose>
-                <when test='filter == null or filter == ""'>
+                <when test='filter1 == null or filter1 == ""'>
                     AND SUBJECT LIKE '%' || #{query} || '%'
                 </when>
-                <when test='filter == "t"'>
+                <when test='filter1 == "t"'>
                     AND SUBJECT LIKE '%' || #{query} || '%'
                 </when>
-                <when test='filter == "w"'>
+                <when test='filter1 == "w"'>
                     AND AUTHOR LIKE '%' || #{query} || '%'
                 </when>
-                <when test='filter == "c"'>
+                <when test='filter1 == "c"'>
                     AND NOTICE_CONTENTS LIKE '%' || #{query} || '%'
                 </when>
-                <when test='filter == "tc"'>
+                <when test='filter1 == "tc"'>
                     AND (SUBJECT LIKE '%' || #{query} || '%' OR NOTICE_CONTENTS LIKE '%' || #{query} || '%')
                 </when>
                 <otherwise>
@@ -35,19 +35,20 @@
             </choose>
         </if>
     </sql>
-    <select id="getOpenNoticeCount" resultType="int">
+
+    <select id="getOpenNoticeCount" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="int">
         SELECT COUNT(*) FROM TB_NOTICE
         WHERE IS_SHOW=1
             AND POSTING_START_DATE <![CDATA[<=]]> SYSDATE AND POSTING_END_DATE <![CDATA[>=]]> SYSDATE
-            <include refid="searchNoticeCondition"></include>
+            <!--<include refid="searchNoticeCondition"></include>-->
     </select>
 
-    <select id="getOpenNoticeList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.NoticeVO">
+    <select id="getOpenNoticeList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.NoticeVO">
         SELECT
             *
         FROM (
             SELECT
-                ROW_NUMBER() OVER(ORDER by POSTING_START_DATE DESC) AS row_num,
+                ROW_NUMBER() OVER(ORDER by POSTING_START_DATE DESC) AS ROW_NUM,
                 IDX_NOTICE,
                 NOTICE_CODE,
                 NOTICE_NUM,
@@ -70,20 +71,21 @@
                 CONFIRM_ADMIN_IDX,
                 REG_DATE,
                 LAST_UPD_DATE
-            FROM TB_NOTICE
+            FROM SELECT * FROM TB_NOTICE
             WHERE IS_SHOW=1
                 AND POSTING_START_DATE <![CDATA[<=]]> SYSDATE AND POSTING_END_DATE <![CDATA[>=]]> SYSDATE
-                <include refid="searchNoticeCondition"></include>
-        )
-        WHERE row_num BETWEEN #{count} * (#{page} - 1) + 1 AND #{count} * #{page}
+             )
+        WHERE ROWNUM <![CDATA[<=]]> #{filter1}*#{list_amount}
+            )
+        WHERE ROW_NUM <![CDATA[>]]> (#{filter1} -1)*#{list_amount}
     </select>
 
-    <select id="getNoticeWebList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.NoticeVO">
+    <select id="getNoticeWebList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.NoticeVO">
         SELECT
             *
         FROM (
             SELECT
-                ROW_NUMBER() OVER(ORDER by ${order_field} DESC) AS row_num,
+                ROW_NUMBER() OVER(ORDER by ${order_field} DESC) AS ROW_NUM,
                 IDX_NOTICE,
                 NOTICE_CODE,
                 NOTICE_NUM,
@@ -106,39 +108,63 @@
                 CONFIRM_ADMIN_IDX,
                 REG_DATE,
                 LAST_UPD_DATE
-            FROM TB_NOTICE
-            WHERE IS_SHOW=1
-                AND NOTICE_STATUS=1
-            order by IDX_NOTICE desc
-        )
-        WHERE row_num BETWEEN #{amount} * (#{page_num} - 1) + 1 AND #{amount} * #{page_num}
+            FROM (SELECT
+                      IDX_NOTICE,
+                      NOTICE_CODE,
+                      NOTICE_NUM,
+                      SUBJECT,
+                      NOTICE_CONTENTS,
+                      IS_FILE,
+                      IS_NEW,
+                      IS_MAIN_PAGE,
+                      IS_IMPORTANT,
+                      IS_SHOW,
+                      VIEW_COUNT,
+                      NOTICE_STATUS,
+                      POSTING_START_DATE,
+                      POSTING_END_DATE,
+                      DOC_VERSION,
+                      MEMO,
+                      SEARCH_TAG,
+                      AUTHOR,
+                      IDX_ADMIN,
+                      CONFIRM_ADMIN_IDX,
+                      REG_DATE,
+                      LAST_UPD_DATE
+                FROM TB_NOTICE
+                  ORDER BY IDX_NOTICE DESC
+
+             )
+        WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
+            )
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
     </select>
 
 <insert id="insertNotice" parameterType="kr.or.fact.core.model.DTO.NoticeVO">
     INSERT INTO TB_NOTICE(
-IDX_NOTICE,
-NOTICE_CODE,
-NOTICE_NUM,
-SUBJECT,
-NOTICE_CONTENTS,
-IS_FILE,
-IS_NEW,
-IS_MAIN_PAGE,
-IS_IMPORTANT,
-IS_SHOW,
-VIEW_COUNT,
-NOTICE_STATUS,
-POSTING_START_DATE,
-POSTING_END_DATE,
-DOC_VERSION,
-MEMO,
-SEARCH_TAG,
-AUTHOR,
-IDX_ADMIN,
-CONFIRM_ADMIN_IDX,
-REG_DATE,
-LAST_UPD_DATE
-    )VALUES (
+            IDX_NOTICE,
+            NOTICE_CODE,
+            NOTICE_NUM,
+            SUBJECT,
+            NOTICE_CONTENTS,
+            IS_FILE,
+            IS_NEW,
+            IS_MAIN_PAGE,
+            IS_IMPORTANT,
+            IS_SHOW,
+            VIEW_COUNT,
+            NOTICE_STATUS,
+            POSTING_START_DATE,
+            POSTING_END_DATE,
+            DOC_VERSION,
+            MEMO,
+            SEARCH_TAG,
+            AUTHOR,
+            IDX_ADMIN,
+            CONFIRM_ADMIN_IDX,
+            REG_DATE,
+            LAST_UPD_DATE
+                )VALUES (
                     SEQ_NOTICE.NEXTVAL,
                 #{notice_code},
                 #{notice_num},

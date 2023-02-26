@@ -6,51 +6,203 @@
     <select id="getEnvDataTotalCount" resultType="int">
         SELECT COUNT (*) FROM TB_ENV_DATA
     </select>
+    <select id="getEachGHEnvDataTotalCount" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="int">
+        SELECT COUNT (*) FROM TB_ENV_DATA WHERE GUYOK=#{filter1}
+    </select>
 
-    <select id="getExternalEnvData" resultType="kr.or.fact.core.model.DTO.ExternalEnvVO">
+    <select id="getEnvData" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.FarmVO">
+        SELECT
+            *
+        FROM (
+                 SELECT ROW_NUMBER() OVER(ORDER by IDX_TB_ENV_DATA DESC) AS ROW_NUM
+        ,A.*
+                 FROM (
+                          SELECT * FROM TB_ENV_DATA
+                          WHERE GUYOK=#{filter1}
+
+                          ORDER BY IDX_TB_ENV_DATA DESC
+                      ) A
+                 WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
+             )
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
+    </select>
+
+    <select id="getEachGHEnvData" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.FarmVO">
+        SELECT
+            *
+        FROM (
+                 SELECT ROW_NUMBER() OVER(ORDER by IDX_TB_ENV_DATA DESC) AS ROW_NUM
+        ,A.*
+                 FROM (
+                          SELECT * FROM TB_ENV_DATA
+                          WHERE GUYOK=#{filter1}
+
+                          ORDER BY IDX_TB_ENV_DATA DESC
+                      ) A
+                 WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
+             )
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
+    </select>
+
+    <select id="getExternalEnvData" parameterType="kr.or.fact.core.model.DTO.RangeVO" resultType="kr.or.fact.core.model.DTO.ExternalEnvVO">
         SELECT
         *
         FROM (
-        SELECT ROW_NUMBER() OVER(ORDER by IDX_TB_ENV_DATA DESC) AS row_num
+        SELECT ROW_NUMBER() OVER(ORDER by IDX_TB_ENV_DATA DESC) AS ROW_NUM
         ,IDX_TB_ENV_DATA,YMDTIME,XOUTTEMP,XWINDDIREC,XRAIN
         FROM (
         SELECT * FROM TB_ENV_DATA
 
         ORDER BY IDX_TB_ENV_DATA DESC
         )
-        WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+        WHERE ROWNUM <![CDATA[<=]]> #{start}*#{amount}
         )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{start} -1)*#{amount}
     </select>
-    <select id="getRootZoneEnvData" resultType="kr.or.fact.core.model.DTO.RootZoneEnvVO">
+    <select id="getRootZoneEnvData" parameterType="kr.or.fact.core.model.DTO.RangeVO" resultType="kr.or.fact.core.model.DTO.RootZoneEnvVO">
         SELECT
             *
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by IDX_TB_ENV_DATA DESC) AS row_num
+                 SELECT ROW_NUMBER() OVER(ORDER by IDX_TB_ENV_DATA DESC) AS ROW_NUM
         ,IDX_TB_ENV_DATA,FARM_CD,YMDTIME,XCO2,XGNDTEMP,XGNDHUM,XPH1,XPH2,XEC1,XEC2
                  FROM (
                           SELECT * FROM TB_ENV_DATA
 
                           ORDER BY IDX_TB_ENV_DATA DESC
                       )
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{start}*#{amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{start} -1)*#{amount}
     </select>
-    <select id="getInternalEnvData" resultType="kr.or.fact.core.model.DTO.InternalEnvVO">
+    <select id="getInternalEnvData" parameterType="kr.or.fact.core.model.DTO.RangeVO" resultType="kr.or.fact.core.model.DTO.InternalEnvVO">
         SELECT
             *
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by IDX_TB_ENV_DATA DESC) AS row_num
+                 SELECT ROW_NUMBER() OVER(ORDER by IDX_TB_ENV_DATA DESC) AS ROW_NUM
         ,IDX_TB_ENV_DATA,FARM_CD,GUYOK,YMDTIME,XINTEMP1,XINTEMP2,XINTEMP3,XABHUM,XINHUM1,XINHUM2,XINHUM3,XCO2,XSUNVOL,XDHUM
                  FROM (
                           SELECT * FROM TB_ENV_DATA
 
                           ORDER BY IDX_TB_ENV_DATA DESC
                       )
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{start}*#{amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{start} -1)*#{amount}
     </select>
+
+    <select id="getGuyokDataFromEnvData" resultType="kr.or.fact.core.model.DTO.FarmVO">
+        SELECT
+            *
+        FROM TB_ENV_DATA
+        WHERE (GUYOK, IDX_TB_ENV_DATA) IN (
+            SELECT GUYOK, MAX(IDX_TB_ENV_DATA) AS IDX_TB_ENV_DATA
+            FROM TB_ENV_DATA A GROUP BY GUYOK
+        )
+        ORDER BY GUYOK ASC
+    </select>
+    <select id="getGuyokData" resultType="kr.or.fact.core.model.DTO.FarmVO">
+        SELECT
+            *
+        FROM TB_ENV_DATA
+        WHERE (GUYOK, IDX_TB_ENV_DATA) IN (
+            SELECT GUYOK, MAX(IDX_TB_ENV_DATA) AS IDX_TB_ENV_DATA
+            FROM TB_ENV_DATA A GROUP BY GUYOK
+        )
+        ORDER BY GUYOK ASC
+    </select>
+
+    <update id="updateGuyokData" parameterType="kr.or.fact.core.model.DTO.FarmVO">
+        UPDATE TB_FARM SET
+                              FARM_CD = #{farm_cd},
+                              YMDTIME_DT = #{ymdtime_dt},
+                              XINTEMP = #{xintemp},
+                              XINTEMP1 = #{xintemp1},
+                              XINTEMP2 = #{xintemp2},
+                              XINTEMP3 = #{xintemp3},
+                              XINHUM = #{xinhum},
+                              XINHUM1 = #{xinhum1},
+                              XINHUM2 = #{xinhum2},
+                              XINHUM3 = #{xinhum3},
+                              XGNDTEMP = #{xgndtemp},
+                              XGNDHUM = #{xgndhum},
+                              XWATERTEMP = #{xwatertemp},
+                              XDHUM = #{xdhum},
+                              XCO2 = #{xco2},
+                              XOUTTEMP = #{xouttemp},
+                              XWINDDIREC = #{xwinddirec},
+                              XWINDSP = #{xwindsp},
+                              XSUNVOL = #{xsunvol},
+                              XSUNADD = #{xsunadd},
+                              XRAIN = #{xrain},
+                              XVENTTEMP = #{xventtemp},
+                              XHEATTEMP = #{xheattemp},
+                              XSTHUM = #{xsthum},
+                              XABHUM = #{xabhum},
+                              XHUMLACK = #{xhumlack},
+                              XVENTTEMP2 = #{xventtemp2},
+                              XCO2SET = #{xco2set},
+                              XVENTCONT = #{xventcont},
+                              XHEATCONT = #{xheatcont},
+                              XSKYVOL1 = #{xskyvol1},
+                              XSKYVOL2 = #{xskyvol2},
+                              XDUALVOL1 = #{xdualvol1},
+                              XDUALVOL2 = #{xdualvol2},
+                              XSIDEVOL1 = #{xsidevol1},
+                              XSIDEVOL2 = #{xsidevol2},
+                              XCUR1VOL = #{xcur1vol},
+                              XCUR2VOL = #{xcur2vol},
+                              XCUR3VOL = #{xcur3vol},
+                              XCUR4VOL = #{xcur4vol},
+                              X3WAY1VOL = #{x3way1vol},
+                              X3WAY2VOL = #{x3way2vol},
+                              XSKYAUTO = #{xskyauto},
+                              XDUALAUTO = #{xdualauto},
+                              XSIDEAUTO = #{xsideauto},
+                              XCUR1AUTO = #{xcur1auto},
+                              XCUR2AUTO = #{xcur2auto},
+                              XCUR3AUTO = #{xcur3auto},
+                              XCUR4AUTO = #{xcur4auto},
+                              X3WAY1AUTO = #{x3way1auto},
+                              X3WAY2AUTO = #{x3way2auto},
+                              XSPRAYAUTO = #{xsprayauto},
+                              XCO2AUTO = #{xco2auto},
+                              XSPAUTO = #{xspauto},
+                              XHEATERAUTO = #{xheaterauto},
+                              XLIGHTAUTO = #{xlightauto},
+                              XHUNAUTO = #{xhunauto},
+                              XBOAUTO = #{xboauto},
+                              XPUMPAUTO = #{xpumpauto},
+                              XFAN1AUTO = #{xfan1auto},
+                              XFAN2AUTO = #{xfan2auto},
+                              XSPRAYRUN = #{xsprayrun},
+                              XCO2RUN = #{xco2run},
+                              XSPRUN = #{xsprun},
+                              XHEATERRUN = #{xheaterrun},
+                              XLIGHTRUN = #{xlightrun},
+                              XHUNRUN = #{xhunrun},
+                              XBORUN = #{xborun},
+                              XPUMPRUN = #{xpumprun},
+                              XFAN1RUN = #{xfan1run},
+                              XFAN2RUN = #{xfan2run},
+                              XVENTCONT2 = #{xventcont2},
+                              XVENTRST = #{xventrst},
+                              XVENT2RST = #{xvent2rst},
+                              XHEATRST = #{xheatrst},
+                              XWATERTEMP2 = #{xwatertemp2},
+                              XJUNGJUN = #{xjungjun},
+                              XLOGON = #{xlogon},
+                              XRETURN1 = #{xreturn1},
+                              XRETURN2 = #{xreturn2},
+                              XEC1 = #{xec1},
+                              XEC2 = #{xec2},
+                              XPH1 = #{xph1},
+                              XPH2 = #{xph2},
+                              GUYOK = #{guyok},
+                              HITEMP = #{hitemp},
+                              LOTEMP = #{lotemp},
+                              LAST_UPD_DATE = SYSDATE
+
+                WHERE IDX_FARM = #{idx_farm}
+    </update>
 
 </mapper>

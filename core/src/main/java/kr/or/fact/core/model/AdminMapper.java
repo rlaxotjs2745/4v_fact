@@ -15,8 +15,8 @@ public interface AdminMapper {
     AdminVO getAdminInfoByNameAndMPhoneNum(@Param("admin_name") String admin_name,@Param("mphone_num") String mphone_num);
 
     List<AdminVO> getAllAdminList();
-    List<AdminVO> getAdminPagingList(@Param("page_num") int page_num, @Param("amount") int amount, @Param("order_field") String order_field);
-    List<PagedAdminListVO> getAdminSpecialInfoPagingList(@Param("page_num") int page_num, @Param("amount") int amount, @Param("order_field") String order_field);
+    List<AdminVO> getAdminPagingList(@Param("cur_page") int cur_page, @Param("list_amount") int list_amount, @Param("order_field") String order_field);
+    List<PagedAdminListVO> getAdminSpecialInfoPagingList(@Param("cur_page") int cur_page, @Param("list_amount") int list_amount, @Param("order_field") String order_field);
     int getAdminCount(@Param("admin_type") int admin_type);//99 모든 유저
 
 long insertAdminInfo(AdminVO adminVO);

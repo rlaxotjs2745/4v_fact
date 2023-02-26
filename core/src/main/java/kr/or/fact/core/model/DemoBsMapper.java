@@ -1,10 +1,9 @@
 package kr.or.fact.core.model;
 
-import kr.or.fact.core.model.DTO.AdminDemoBSFilterVO;
+import kr.or.fact.core.model.DTO.DemoBSFilteredCountVO;
 import kr.or.fact.core.model.DTO.DemoBusinessVO;
 import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ public interface DemoBsMapper {
     void deleteDemoBs(long idx_demo_business);
 
 
-    AdminDemoBSFilterVO getAdminDemoBsFilter();
+    DemoBSFilteredCountVO getAdminDemoBsFilteredCount();
     List<DemoBusinessVO> getAvailibleDemoBs();
 
     List<String> isValidCode(String code);

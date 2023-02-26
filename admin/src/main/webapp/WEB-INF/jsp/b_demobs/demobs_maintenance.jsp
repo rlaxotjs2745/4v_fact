@@ -91,7 +91,7 @@
                         <div class="col-sm-12 col-md-5">
                             <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${total_count}개
                                 중 ${list_amount*(cur_page-1)+1}에서 <c:choose><c:when
-                                        test="${(list_amount*(cur_page-1)+5)>total_count}">${total_count}</c:when><c:otherwise>${list_amount*(cur_page-1)+5}</c:otherwise></c:choose>까지
+                                        test="${(list_amount*(cur_page-1)+page_amount)>total_count}">${total_count}</c:when><c:otherwise>${list_amount*(cur_page-1)+page_amount}</c:otherwise></c:choose>까지
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-7">
@@ -103,14 +103,14 @@
 
                                     <c:if test="${is_past eq true}">
                                         <li class="paginate_button page-item previous"><a
-                                                href="javascript:pageLoad('b21_demo_bs_appl_mng',{page_num:1},'신청접수 관리');"
+                                                href="javascript:pageLoad('b21_demo_bs_appl_mng',{cur_page:1},'신청접수 관리');"
                                                 aria-controls="article-list" data-dt-idx="0" tabindex="0"
                                                 class="page-link"><i class="fas fa-angle-double-left d-block"></i></a>
                                         </li>
                                     </c:if>
                                     <c:if test="${is_prev eq true}">
                                         <li class="paginate_button page-item previous"><a
-                                                href="javascript:pageLoad('b21_demo_bs_appl_mng',{page_num:${cur_page-1}},'신청접수 관리');"
+                                                href="javascript:pageLoad('b21_demo_bs_appl_mng',{cur_page:${cur_page-1}},'신청접수 관리');"
                                                 aria-controls="article-list" data-dt-idx="0" tabindex="0"
                                                 class="page-link"><i class="fas fa-angle-left d-block"></i></a></li>
                                     </c:if>
@@ -118,19 +118,19 @@
 
                                     <c:forEach var="i" begin="1" end="${page_amount}">
                                         <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>">
-                                            <a href="javascript:pageLoad('b21_demo_bs_appl_mng',{page_num:${(cur_sector-1)*page_amount+i}},'신청접수 관리');"
+                                            <a href="javascript:pageLoad('b21_demo_bs_appl_mng',{cur_page:${(cur_sector-1)*page_amount+i}},'신청접수 관리');"
                                                class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
                                     </c:forEach>
 
                                     <c:if test="${is_next eq true}">
                                         <li class="paginate_button page-item next"><a
-                                                href="javascript:pageLoad('b21_demo_bs_appl_mng',{page_num:${cur_page+1}},'신청접수 관리');"
+                                                href="javascript:pageLoad('b21_demo_bs_appl_mng',{cur_page:${cur_page+1}},'신청접수 관리');"
                                                 aria-controls="article-list" data-dt-idx="6" tabindex="0"
                                                 class="page-link"><i class="fas fa-angle-right d-block"></i></a></li>
                                     </c:if>
                                     <c:if test="${is_last eq true}">
                                         <li class="paginate_button page-item next"><a
-                                                href="javascript:pageLoad('b21_demo_bs_appl_mng',{page_num:${tot_page}},'신청접수 관리');"
+                                                href="javascript:pageLoad('b21_demo_bs_appl_mng',{cur_page:${tot_page}},'신청접수 관리');"
                                                 aria-controls="article-list" data-dt-idx="6" tabindex="0"
                                                 class="page-link"><i class="fas fa-angle-double-right d-block"></i></a>
                                         </li>
@@ -323,7 +323,7 @@
                     alert(result.result_str);
                     if(result.result_code == 'SUCCESS'){
 
-                        pageLoad('b21_demo_bs_appl_mng',{page_num:1},'신규신청 접수');
+                        pageLoad('b21_demo_bs_appl_mng',{cur_page:1},'신규신청 접수');
                     }
                 }
             })
@@ -341,7 +341,7 @@
                     alert(result.result_str);
                     if(result.result_code == 'SUCCESS'){
                         console.log(111)
-                        pageLoad('b21_demo_bs_appl_mng',{page_num:1},'신규신청 접수');
+                        pageLoad('b21_demo_bs_appl_mng',{cur_page:1},'신규신청 접수');
                     }
                 }
             })
@@ -415,11 +415,11 @@
     });
 
 
-    function getUserApplList(idx, page_num, filter) {
+    function getUserApplList(idx, cur_page, filter) {
 
         let param = {
-            page_num: page_num,
-            amount: 5,
+            cur_page: cur_page,
+            list_amount: 5,
             order_field: "IDX_DEMO_BUSINESS",
             filter1: filter,
             filter2: 9998,

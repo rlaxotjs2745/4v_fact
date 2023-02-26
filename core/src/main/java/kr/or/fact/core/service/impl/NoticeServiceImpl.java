@@ -1,6 +1,7 @@
 package kr.or.fact.core.service.impl;
 
 import kr.or.fact.core.model.DTO.NoticeVO;
+import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
 import kr.or.fact.core.model.NoticeMapper;
 import kr.or.fact.core.service.NoticeService;
 import org.apache.ibatis.session.SqlSession;
@@ -39,18 +40,18 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public int getOpenNoticeCount(String filter, String query) {
-        return noticeMapper.getOpenNoticeCount(filter, query);
+    public int getOpenNoticeCount(ParamPageListFilteredVO param) {
+        return noticeMapper.getOpenNoticeCount(param);
     }
 
     @Override
-    public List<NoticeVO> getOpenNoticeList(int page, int count, String filter, String query) {
-        return noticeMapper.getOpenNoticeList(page, count, filter, query);
+    public List<NoticeVO> getOpenNoticeList(ParamPageListFilteredVO param) {
+        return noticeMapper.getOpenNoticeList(param);
     }
 
     @Override
-    public List<NoticeVO> getNoticeWebList(int page, int list_amount){
-        return noticeMapper.getNoticeWebList(page,list_amount,"IDX_NOTICE");
+    public List<NoticeVO> getNoticeWebList(ParamPageListFilteredVO param){
+        return noticeMapper.getNoticeWebList(param);
     }
     @Override
     public List<NoticeVO> getMainNoticeList(){

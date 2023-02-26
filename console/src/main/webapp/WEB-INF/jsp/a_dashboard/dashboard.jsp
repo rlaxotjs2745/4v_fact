@@ -69,7 +69,7 @@
                                     <span class="switcher-label">Valid</span>
                                 </label>
                             </div>--%>
-                            <button onclick="pageLoad('gh_total_monitor',{page_num:1},'온실전채 현황');" type="button" class="btn btn-default btn-xs md-btn-flat">Show more</button>
+                            <button onclick="pageLoad('gh_total_monitor',{cur_page:1},'온실전채 현황');" type="button" class="btn btn-default btn-xs md-btn-flat">Show more</button>
                         </div>
 
                     </h6>

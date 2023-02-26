@@ -1,6 +1,6 @@
 $(function() {
-  var overlayBg = themeSettings.isDarkStyle() ?
-    '#22252B' :
+  var overlayBg =
+    /*'#22252B' */
     '#fff';
 
   $('#block-ui-block-page').click(function() {

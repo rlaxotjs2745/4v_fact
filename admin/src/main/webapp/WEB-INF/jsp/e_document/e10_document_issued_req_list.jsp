@@ -15,7 +15,7 @@
                         <div class="display-4"><img src="resources/assets/img/img_business_all.png" alt=""></div>
                         <div class="ml-3">
                             <div class="text-muted small">전체</div>
-                            <div class="text-large">${adminAnnounceFilterVO.announce_tot}</div>
+                            <div class="text-large">${announce_tot}</div>
                         </div>
                     </div>
                 </button>
@@ -28,7 +28,7 @@
                         <div class="display-4"><img src="resources/assets/img/img_business_on.png" alt=""></div>
                         <div class="ml-3">
                             <div class="text-muted small">전시중</div>
-                            <div class="text-large">${adminAnnounceFilterVO.status_on_count}</div>
+                            <div class="text-large">${status_on_count}</div>
                         </div>
                     </div>
                 </button>
@@ -41,7 +41,7 @@
                         <div class="display-4"><img src="resources/assets/img/img_business_week.png" alt=""></div>
                         <div class="ml-3">
                             <div class="text-muted small">대기중</div>
-                            <div class="text-large">${adminAnnounceFilterVO.wait_count}</div>
+                            <div class="text-large">${wait_count}</div>
                         </div>
                     </div>
                 </button>
@@ -54,7 +54,7 @@
                         <div class="display-4"><img src="resources/assets/img/img_business_off.png" alt=""></div>
                         <div class="ml-3">
                             <div class="text-muted small">일시 중지 중</div>
-                            <div class="text-large">${adminAnnounceFilterVO.pause_count}</div>
+                            <div class="text-large">${pause_count}</div>
                         </div>
                     </div>
                 </button>
@@ -143,17 +143,17 @@
                                     <c:set var="name" value="${total_count/amount}" />
 
 
-                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{page_num:1,filter1:${filter1},filter2:${filter2}},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
-                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{page_num:${cur_page-1},filter1:${filter1},filter2:${filter2}},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{cur_page:1,filter1:${filter1},filter2:${filter2}},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{cur_page:${cur_page-1},filter1:${filter1},filter2:${filter2}},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
 
 
 
                                     <c:forEach var="i" begin="1" end="${page_amount}">
-                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{page_num:${(cur_sector-1)*page_amount+i},filter1:${filter1},filter2:${filter2}},'사업공고문 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
+                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{cur_page:${(cur_sector-1)*page_amount+i},filter1:${filter1},filter2:${filter2}},'사업공고문 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
                                     </c:forEach>
 
-                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{page_num:${cur_page+1},filter1:${filter1},filter2:${filter2}},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
-                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{page_num:${tot_page},filter1:${filter1},filter2:${filter2}},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{cur_page:${cur_page+1},filter1:${filter1},filter2:${filter2}},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('b10_demo_bs_announce_doc_mng',{cur_page:${tot_page},filter1:${filter1},filter2:${filter2}},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
                                 </ul>
                             </div>
                         </div>

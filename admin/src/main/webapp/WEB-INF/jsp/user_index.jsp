@@ -126,13 +126,13 @@
 
     $(".page-link").click(function (){
         if($(this).attr("id") == "article-list_next-one_btn"){
-            pageLoad('user_index',{page_num: page + 1, filter1: curCategory},'대시보드', "user");
+            pageLoad('user_index',{cur_page: page + 1, filter1: curCategory},'대시보드', "user");
         } else if($(this).attr("id") == "article-list_next_btn"){
-            pageLoad('user_index',{page_num: maxValue, filter1: curCategory},'대시보드', "user");
+            pageLoad('user_index',{cur_page: maxValue, filter1: curCategory},'대시보드', "user");
         } else if($(this).attr("id") == "article-list_previous_btn"){
-            pageLoad('user_index',{page_num:1, filter1: curCategory},'대시보드', "user");
+            pageLoad('user_index',{cur_page:1, filter1: curCategory},'대시보드', "user");
         } else if($(this).attr("id") == "article-list_previous-one_btn"){
-            pageLoad('user_index',{page_num: page - 1, filter1: curCategory},'대시보드', "user");
+            pageLoad('user_index',{cur_page: page - 1, filter1: curCategory},'대시보드', "user");
         }
     })
 

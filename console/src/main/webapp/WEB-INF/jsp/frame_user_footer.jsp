@@ -42,21 +42,21 @@
 <script src="resources/assets/vendor/libs/fullcalendar/fullcalendar.js"></script>
 <script>
     $(function() {
-        var isRtl = $('html').attr('dir') === 'rtl';
+
         $('#datepicker-start').datepicker({
-            orientation: isRtl ? 'auto right' : 'auto left'
+            orientation: 'auto left'
         });
         $('#datepicker-end').datepicker({
-            orientation: isRtl ? 'auto right' : 'auto left'
+            orientation: 'auto left'
         });
     });
 
     $('#modals-default').on('show.modal', function () {
         $('#datepicker-start').datepicker({
-            orientation: isRtl ? 'auto right' : 'auto left'
+            orientation: 'auto left'
         });
         $('#datepicker-end').datepicker({
-            orientation: isRtl ? 'auto right' : 'auto left'
+            orientation: 'auto left'
         });
     });
 

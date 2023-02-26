@@ -125,19 +125,19 @@ function rowAcep(but) {
 
     if($cols[1].textContent == ''){
         alert("코드 이름을 입력해주세요.");
-        pageLoad('l20_code_mng',{page_num:1},'시스템 코드관리');
+        pageLoad('l20_code_mng',{cur_page:1},'시스템 코드관리');
         return;
     }
 
     if($cols[2].textContent == ''){
         alert("코드값을 입력해주세요.");
-        pageLoad('l20_code_mng',{page_num:1},'시스템 코드관리');
+        pageLoad('l20_code_mng',{cur_page:1},'시스템 코드관리');
         return;
     }
 
     // if($cols[3].textContent == ''){
     //     alert("코드 설명을 입력해주세요.");
-    //     pageLoad('l20_code_mng',{page_num:1},'시스템 코드관리');
+    //     pageLoad('l20_code_mng',{cur_page:1},'시스템 코드관리');
     //     return;
     // }
 
@@ -155,7 +155,7 @@ function rowAcep(but) {
 
             if (result.result_code === "SUCCESS") {
                 alert(result.result_str);
-                pageLoad('l20_code_mng',{page_num:1},'시스템 코드관리');
+                pageLoad('l20_code_mng',{cur_page:1},'시스템 코드관리');
             }
             else {
 
@@ -210,7 +210,7 @@ function rowElim(but) {  //Elimina la fila actual
             console.log(result);
             if (result.result_code === "SUCCESS") {
                 alert(result.result_str);
-                pageLoad('l20_code_mng',{page_num:1},'시스템 코드관리');
+                pageLoad('l20_code_mng',{cur_page:1},'시스템 코드관리');
                 // params.onBeforeDelete($row);
                 // $row.remove();
                 // params.onDelete();

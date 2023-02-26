@@ -1,9 +1,6 @@
 package kr.or.fact.core.service.impl;
 
-import kr.or.fact.core.model.DTO.AdminApplDemoBsHeaderListVO;
-import kr.or.fact.core.model.DTO.AdminApplHeaderListVO;
-import kr.or.fact.core.model.DTO.DemoBSApplicationVO;
-import kr.or.fact.core.model.DTO.ParamPageListFilteredVO;
+import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.model.DemoBsApplicationMapper;
 import kr.or.fact.core.service.DemoBsApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +15,24 @@ public class DemoBsApplicationServiceImpl implements DemoBsApplicationService {
 
     @Autowired
     public DemoBsApplicationServiceImpl(DemoBsApplicationMapper demoBsApplicationMapper){this.demoBsApplicationMapper=demoBsApplicationMapper;}
+
+    @Override
+    public int getDemobsForEvalTotalCount(){
+
+        return demoBsApplicationMapper.getDemobsForEvalTotalCount();
+    }
+
+    @Override
+    public DemoBSForEvalVO getDemobsForEvalByIdx(long idx_demo_business){
+        return demoBsApplicationMapper.getDemobsForEvalByIdx(idx_demo_business);
+
+    }
+    @Override
+    public List<DemoBSForEvalVO> getDemobsForEvalPagedList(ParamPageListFilteredVO paramPageListFilteredVO){
+
+        return demoBsApplicationMapper.getDemobsForEvalPagedList(paramPageListFilteredVO);
+    }
+
 
     @Override
     public DemoBSApplicationVO getDemoBsApplByIdx(long idx_user_demo_bs){

@@ -6,13 +6,11 @@ import kr.or.fact.core.util.CONSTANT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -194,13 +192,15 @@ public class ConsoleIndexController {
         else {
             return "redirect:/login";
         }
+        RangeVO rangeVO = new RangeVO();
+        rangeVO.setStart(1);
+        rangeVO.setAmount(200);
+        List<ExternalEnvVO> externalEnvVOs = envDataService.getExternalEnvData(rangeVO);;
+        List<RootZoneEnvVO> rootZoneEnvVOs = envDataService.getRootZoneEnvData(rangeVO);
 
-        List<ExternalEnvVO> externalEnvVOs = envDataService.getExternalEnvData(1,200);;
-        List<RootZoneEnvVO> rootZoneEnvVOs = envDataService.getRootZoneEnvData(1,200);
 
 
-
-        List<InternalEnvVO> internalEnvVOs = envDataService.getInternalEnvData(1,200);
+        List<InternalEnvVO> internalEnvVOs = envDataService.getInternalEnvData(rangeVO);
 
         List<InternalEnvVO> internalEnvVOs_1 = new ArrayList<InternalEnvVO>();
         List<InternalEnvVO> internalEnvVOs_2 = new ArrayList<InternalEnvVO>();
@@ -394,33 +394,38 @@ public class ConsoleIndexController {
             return "redirect:/login";
         }
 
-        int list_amount = 10;;
+        if(param.getList_amount()==0) param.setList_amount(3);
+        int list_amount = 3;
         int page_amount = 10;
+        if(param.getCur_page()==0) param.setCur_page(1);
+        int cur_page = param.getCur_page();
 
-        param.setAmount(10);
-        int page = param.getPage_num();
+        int filter1 = param.getFilter1();
+        int filter2 = param.getFilter2();
 
-        AdminDemoBSFilterVO adminDemoBSFilterVO = demoBsService.getAdminDemoBsFilter();  // 사업 상태별 카운트
+
+
+        DemoBSFilteredCountVO demoBSFilteredCountVO = demoBsService.getAdminDemoBsFilteredCount();  // 사업 상태별 카운트
         //리스트 총갯수를 이때 빼야 함
-        int filtered_item_total = adminDemoBSFilterVO.getTot_count();
+        int filtered_item_total = demoBSFilteredCountVO.getTot_count();
 
         if(param.getFilter1()==CONSTANT.DEMOBS_FILTER_APPL)
-            filtered_item_total = adminDemoBSFilterVO.getAppl_count();
+            filtered_item_total = demoBSFilteredCountVO.getAppl_count();
         else if(param.getFilter1()==CONSTANT.DEMOBS_FILTER_REVUIEW)
-            filtered_item_total = adminDemoBSFilterVO.getRevuiew_count();
+            filtered_item_total = demoBSFilteredCountVO.getReview_count();
         else if(param.getFilter1()==CONSTANT.DEMOBS_FILTER_AGREE)
-            filtered_item_total = adminDemoBSFilterVO.getAgree_count();
+            filtered_item_total = demoBSFilteredCountVO.getAgree_count();
         else if(param.getFilter1()==CONSTANT.DEMOBS_FILTER_DEMO)
-            filtered_item_total = adminDemoBSFilterVO.getDemo_count();
+            filtered_item_total = demoBSFilteredCountVO.getDemo_count();
         else if(param.getFilter1()==CONSTANT.DEMOBS_FILTER_RESULT)
-            filtered_item_total = adminDemoBSFilterVO.getResult_count();
+            filtered_item_total = demoBSFilteredCountVO.getResult_count();
 
         model.addAttribute("total_count",filtered_item_total);
-        model.addAttribute("adminDemoBsFilter",adminDemoBSFilterVO);
+        model.addAttribute("adminDemoBsFilter", demoBSFilteredCountVO);
 
         param.setOrder_field("IDX_DEMO_BUSINESS");
 /*        ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
-        listPagingParamVO.setPage_num(page);
+        listPagingParamVO.setCur_page(page);
         listPagingParamVO.setAmount(list_amount);
         listPagingParamVO.setFilter1(filter1);
         listPagingParamVO.setFilter2(filter2);
@@ -431,13 +436,13 @@ public class ConsoleIndexController {
         for(int i = 0; i < demoBusinessVOList.size(); i++){
             if(demoBusinessVOList.get(i).getDemo_bs_contents() != null){
                 demoBusinessVOList.get(i).setDemo_bs_contents(demoBusinessVOList.get(i).getDemo_bs_contents().replaceAll("(\t)", "  ").replaceAll("(\r\n|\r|\n|\n\r)", "<br/>"));
-                System.out.println(demoBusinessVOList.get(i).getDemo_bs_contents());
+                //System.out.println(demoBusinessVOList.get(i).getDemo_bs_contents());
             }
         }
         model.addAttribute("demoBusinessVOList",demoBusinessVOList);
 //        model.addAttribute("admin_idx", );
-        model.addAttribute("cur_page",page);
-        model.addAttribute("amount",list_amount);
+        model.addAttribute("cur_page",cur_page);
+        model.addAttribute("list_amount",list_amount);
 
         int tot_page = filtered_item_total/list_amount+1;
         if(filtered_item_total%list_amount==0) tot_page-=1;
@@ -445,8 +450,8 @@ public class ConsoleIndexController {
         int tot_sector = tot_page/page_amount+1;
         if(tot_page%page_amount==0) tot_sector-=1;
 
-        int cur_sector = page/page_amount+1;
-        if(page%page_amount==0) cur_sector-=1;
+        int cur_sector = cur_page/page_amount+1;
+        if(cur_page%page_amount==0) cur_sector-=1;
 
         boolean is_past = false;
         boolean is_prev = false;
@@ -454,9 +459,9 @@ public class ConsoleIndexController {
         boolean is_last = false;
         boolean is_active = false;
 
-        if(page!=tot_page && tot_page>1) is_next = true;
+        if(cur_page!=tot_page && tot_page>1) is_next = true;
 
-        if(page!=1 && tot_page>1) is_prev = true;
+        if(cur_page!=1 && tot_page>1) is_prev = true;
 
         if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
 
@@ -1215,7 +1220,7 @@ public class ConsoleIndexController {
         model.addAttribute("filter1", param.getFilter1());
         model.addAttribute("filter2", param.getFilter2());
         model.addAttribute("filter3", param.getFilter3());
-        model.addAttribute("page_num", param.getPage_num());
+        model.addAttribute("cur_page", param.getCur_page());
         model.addAttribute("count", assetService.getCount(param));
         model.addAttribute("maxvalue", assetVOList.get(0).getMaxvalue());
         model.addAttribute("systemCodeList",systemCodeList);
@@ -1424,7 +1429,7 @@ public class ConsoleIndexController {
 
 
     @RequestMapping(value = "/admin_corporate" ,method = RequestMethod.POST)
-    public String admin_corporate(@RequestParam(value = "page_num", required = false) String tagValue,
+    public String admin_corporate(@RequestParam(value = "cur_page", required = false) String tagValue,
                                   @RequestBody ParamPageListFilteredVO param,
                                   HttpServletRequest req,
                                   ModelMap model,
@@ -1456,7 +1461,7 @@ public class ConsoleIndexController {
         resultArray = corpService.selectCorpInfo();
 
         int pageBool = 4;
-        List<AdminResVO> adminVOList = adminService.selectAdminbyIdx(param.getPage_num() != 0 ? param.getPage_num() + "" : "1", param.getCorp());
+        List<AdminResVO> adminVOList = adminService.selectAdminbyIdx(param.getCur_page() != 0 ? param.getCur_page() + "" : "1", param.getCorp());
         if(adminVOList.size() != 0 && adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage() < 4){
             pageBool = adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage();
         }

@@ -191,7 +191,7 @@
                     // if (result.result_code == "SUCCESS") {
                     //     $("#modals-reserve-write").modal("hide");
                     //     $(".modal-backdrop").css("display", "none");
-                    //     pageLoad('g30_asset_book_mng', {page_num: 1}, '자원예약관리');
+                    //     pageLoad('g30_asset_book_mng', {cur_page: 1}, '자원예약관리');
                     // }
                 }
             })
@@ -224,7 +224,7 @@
                     modalClose();
                     // $("#modals-reserve-write").modal("hide");
                     // $(".modal-backdrop").css("display", "none");
-                    // pageLoad('g30_asset_book_mng', {page_num: 1}, '자원예약관리');
+                    // pageLoad('g30_asset_book_mng', {cur_page: 1}, '자원예약관리');
                 } else {
                 }
             }

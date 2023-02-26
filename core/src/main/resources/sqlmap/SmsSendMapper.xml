@@ -3,6 +3,63 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.fact.core.model.SmsSendMapper">
+
+    <select id="getSMSReservedFilteredCount" resultType="kr.or.fact.core.model.DTO.EmailFilteredCountVO">
+        SELECT (SELECT COUNT(*) FROM SDK_SMS_SEND ) AS TOT_COUNT,
+               (SELECT COUNT(*) FROM SDK_SMS_SEND WHERE SMS_STATUS = 0 ) AS HOLD_COUNT,
+               (SELECT COUNT(*) FROM SDK_SMS_SEND WHERE SMS_STATUS = 1 ) AS RSERV_COUNT,
+               (SELECT COUNT(*) FROM SDK_SMS_SEND WHERE SMS_STATUS = 2 )  AS SENT_COUNT
+        FROM SDK_SMS_SEND WHERE ROWNUM = 1
+    </select>
+    <select id="getSMSSentFilteredCount" resultType="kr.or.fact.core.model.DTO.EmailFilteredCountVO">
+        SELECT (SELECT COUNT(*) FROM SDK_SMS_REPORT ) AS TOT_COUNT,
+               (SELECT COUNT(*) FROM SDK_SMS_REPORT WHERE SMS_STATUS = 0 ) AS HOLD_COUNT,
+               (SELECT COUNT(*) FROM SDK_SMS_REPORT WHERE SMS_STATUS = 1 ) AS RSERV_COUNT,
+               (SELECT COUNT(*) FROM SDK_SMS_REPORT WHERE SMS_STATUS = 2 )  AS SENT_COUNT
+        FROM SDK_SMS_REPORT WHERE ROWNUM = 1
+    </select>
+
+    <select id="getSmsCount" resultType="int">
+        SELECT COUNT(*) FROM SDK_SMS_SEND
+    </select>
+
+    <select id="getReservedSMSList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.SmsItemVO">
+        SELECT * FROM(
+             SELECT ROW_NUMBER() OVER(ORDER by SEND_DATE DESC) AS ROW_NUM,
+                     A.*
+             FROM(
+
+                    SELECT
+                        *
+                    FROM SDK_SMS_SEND
+            ) A
+        WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
+            )
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
+    </select>
+    <select id="getSentSMSList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.SmsItemVO">
+        SELECT * FROM(
+                         SELECT ROW_NUMBER() OVER(ORDER by SEND_DATE DESC) AS ROW_NUM,
+                                 A.*
+                         FROM(
+
+                                 SELECT
+                                     *
+                                 FROM SDK_SMS_REPORT
+                             ) A
+                         WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
+                     )
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
+    </select>
+
+
+
+
+
+    <select id="selectReserveMessage" resultType="kr.or.fact.core.model.DTO.SmsSendVO">
+        SELECT * FROM SDK_SMS_SEND ORDER BY msg_id DESC
+    </select>
+
     <insert id="insertSmsMessage" parameterType="kr.or.fact.core.model.DTO.SmsSendVO">
         INSERT INTO SDK_SMS_SEND(
             MSG_ID,
@@ -26,21 +83,98 @@
                 #{dest_info}
    )
     </insert>
-    <select id="selectSentmeesage1" resultType="kr.or.fact.core.model.DTO.SmsSentVO">
-                SELECT
-                  ROW_NUMBER() OVER(ORDER by SEND_DATE DESC) AS ROW_NUM,
-                  MSG_ID,
-                  SCHEDULE_TYPE,
-                  SUBJECT,
-                  SEND_DATE,
-                  CALLBACK,
-                  DEST_COUNT,
-                  DEST_INFO,
-                  SMS_MSG
-                FROM SDK_SMS_REPORT
-            WHERE ROW_NUM <![CDATA[<=]]> #{page_num}*#{amount}
+
+
+    <select id="getSmsTemplateList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.SmsTemplateVO">
+        SELECT * FROM (
+        SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
+        ,A.*
+        FROM (
+        SELECT
+            *
+        FROM TB_SMS_TEMPLATE
+        ORDER BY IDX_SMS_TEMPLATE DESC
+        ) A
+        WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
+        )
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
     </select>
-    <select id="selectReserveMessage" resultType="kr.or.fact.core.model.DTO.SmsSendVO">
-        SELECT * FROM SDK_SMS_SEND ORDER BY msg_id DESC
+
+    <select id="getSmsTemplateByIdx" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.SmsTemplateVO">
+        SELECT * FROM TB_SMS_TEMPLATE WHERE IDX_SMS_TEMPLATE = #{idx_sms_template}
     </select>
+
+    <insert id="insertSmsTemplate" parameterType="kr.or.fact.core.model.DTO.SmsTemplateVO">
+        INSERT INTO TB_SMS_TEMPLATE
+        (
+            IDX_SMS_TEMPLATE,
+                USER_ID,
+                SMS_TYPE,
+                SCHEDULE_TYPE,
+                SUBJECT,
+                SMS_MSG,
+                CALLBACK_URL,
+                NOW_DATE,
+                SEND_DATE,
+                CALLBACK,
+                DEST_TYPE,
+                DEST_COUNT,
+                IS_GROUP,
+                DEST_INFO,
+                SMS_STATUS,
+                MEMO,
+                IDX_ADMIN,
+                REG_DATE,
+                LAST_UPD_DATE
+                ) VALUES(
+                SEQ_SMS_TEMPLETE.NEXTVAL,
+                #{user_id},
+                #{sms_type},
+                #{schedule_type},
+                #{subject},
+                #{sms_msg},
+                #{callback_url},
+                #{now_date},
+                #{send_date},
+                #{callback},
+                #{dest_type},
+                #{dest_count},
+                #{is_group},
+                #{dest_info},
+                #{sms_status},
+                #{memo},
+                #{idx_admin},
+                SYSDATE,
+                SYSDATE
+            )
+
+    </insert>
+
+    <update id="updateSmsTemplate" parameterType="kr.or.fact.core.model.DTO.SmsTemplateVO">
+        UPDATE TB_SMS_TEMPLETE SET
+            SMS_TYPE = #{sms_type},
+            SCHEDULE_TYPE = #{schedule_type},
+            SUBJECT = #{subject},
+            SMS_MSG = #{sms_msg},
+            NOW_DATE = #{now_date},
+            SEND_DATE = #{send_date},
+            CALLBACK = #{callback},
+            DEST_TYPE = #{dest_type},
+            DEST_COUNT = #{dest_count},
+            IS_GROUP = #{is_group},
+            DEST_INFO = #{dest_info},
+            SMS_STATUS = #{sms_status},
+            MEMO = #{memo},
+            IDX_ADMIN = #{idx_admin},
+            SMS_CONTENTS= #{sms_contents},
+            SMS_STATUS= #{sms_status},
+            IDX_ADMIN= #{idx_admin},
+            LAST_UPD_DATE = SYSDATE
+        WHERE
+            IDX_SMS_TEMPLETE = #{idx_sms_templete}
+
+    </update>
+
+
+
 </mapper>

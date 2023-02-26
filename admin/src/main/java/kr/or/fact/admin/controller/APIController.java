@@ -41,8 +41,8 @@ public class APIController {
     @Resource(name = "demoBsService")
     DemoBsService demoBsService;
 
-    @Resource(name = "mailService")
-    MailService mailService;
+    @Resource(name = "emailService")
+    EMailService emailService;
 
     @Resource(name = "smsService")
     public SmsSendService smsSendService;
@@ -77,8 +77,8 @@ public class APIController {
     @Resource(name = "eventContentService")
     public EventContentService eventContentService;
 
-    @Resource(name = "prContentService")
-    public  PRContentsService prContentService;
+    @Resource(name = "prContentsService")
+    public  PRContentsService prContentsService;
 
     @Resource(name = "coWorkerNService")
     public CoWorkerNService coWorkerNService;
@@ -100,6 +100,10 @@ public class APIController {
 
     @Resource(name = "bsAnnouncementService")
     public BsAnnouncementService bsAnnouncementService;
+
+    @Resource(name = "schedulerService")
+    public SchedulerService schedulerService;
+
 
     @RequestMapping(value = "/empty",method = RequestMethod.POST)
     public String empty(HttpSession session){
@@ -303,7 +307,7 @@ public class APIController {
 
         int filterType = sing.getInt_param();
 
-        demoBsService.getAdminDemoBsFilter();
+        demoBsService.getAdminDemoBsFilteredCount();
 
         return "pages/demoBsListByFilter";
     }
@@ -364,7 +368,15 @@ public class APIController {
 
         model.addAttribute("demoBusinessVO",demoBusinessVO);
 
-        List<UserDemoBsVO> userDemoBsVOList = userDemoBsService.getUserDemoBsPagingListByFiltered(demoBusinessVO.getIdx_demo_business(),1,10000,"IDX_USER_DEMO_BS",0,99);
+        ParamPageListFilteredVO pagedParam = new ParamPageListFilteredVO();
+        pagedParam.setIdx(demoBusinessVO.getIdx_demo_business());
+        pagedParam.setCur_page(1);
+        pagedParam.setList_amount(10);
+        pagedParam.setOrder_field("IDX_USER_DEMO_BS");
+        pagedParam.setFilter1(0);
+        pagedParam.setFilter2(99);
+
+        List<UserDemoBsVO> userDemoBsVOList = userDemoBsService.getUserDemoBsPagingListByFiltered(pagedParam);
 
         int appl_count = 0;//0:이용 신청서 작성, 1: 실증계획서 작성, 2:개인수집 동의서 작성, 3: 기타서류 등록, 4: 신청함, 5:서류 검토 중 , 6:신청서 보완요청, 7:서류 보완 중, 8:서류접수완료, 9:서류 부적격,
         int eval_count = 0;// 10:서류 평가 심사 중 11:서류 심사통과, 12:서류 심사보류, 13:서류심사심사 부적격, 14:제안서 요청, 15:제안서 접수, 16:발표 요청, 17:발표 완료, 18:발표평가중, 19:발표 합격
@@ -410,8 +422,8 @@ public class APIController {
             return "page/empty";
 
         long idx_user_demobs = param.getIdx();
-        int page = param.getPage_num();
-        int list_amount = param.getAmount();
+        int cur_page = param.getCur_page();
+        int list_amount = param.getList_amount();
         String order_field = param.getOrder_field();
         int filter1 = param.getFilter1();
         int filter2 = param.getFilter2(); // default:9998
@@ -419,9 +431,15 @@ public class APIController {
 
         int page_amount = 5;//아래 내비게에션에 표시할 페이지의 갯수
 
-        System.out.println(filter2);//9998
-
-        List<UserDemoBsVO> userDemoBsVOList = userDemoBsService.getUserDemoBsPagingListByFiltered(idx_user_demobs,page,list_amount,order_field,filter1,filter2);
+        //System.out.println(filter2);//9998
+        ParamPageListFilteredVO pagedParam = new ParamPageListFilteredVO();
+        pagedParam.setIdx(idx_user_demobs);
+        pagedParam.setCur_page(1);
+        pagedParam.setList_amount(10);
+        pagedParam.setOrder_field("IDX_USER_DEMO_BS");
+        pagedParam.setFilter1(0);
+        pagedParam.setFilter2(99);
+        List<UserDemoBsVO> userDemoBsVOList = userDemoBsService.getUserDemoBsPagingListByFiltered(pagedParam);
 
         int appl_count = 0;//0:이용 신청서 작성, 1: 실증계획서 작성, 2:개인수집 동의서 작성, 3: 기타서류 등록, 4: 신청함, 5:서류 검토 중 , 6:신청서 보완요청, 7:서류 보완 중, 8:서류접수완료, 9:서류 부적격,
         int eval_count = 0;// 10:서류 평가 심사 중 11:서류 심사통과, 12:서류 심사보류, 13:서류심사심사 부적격, 14:제안서 요청, 15:제안서 접수, 16:발표 요청, 17:발표 완료, 18:발표평가중, 19:발표 합격
@@ -455,7 +473,7 @@ public class APIController {
 
         param.setOrder_field("IDX_DEMO_BUSINESS");
 /*      ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
-        listPagingParamVO.setPage_num(page);
+        listPagingParamVO.setCur_page(page);
         listPagingParamVO.setAmount(list_amount);
         listPagingParamVO.setFilter1(filter1);
         listPagingParamVO.setFilter2(filter2);
@@ -473,8 +491,8 @@ public class APIController {
         model.addAttribute("filter1",filter1);
         model.addAttribute("filter2",filter2);
 
-        model.addAttribute("cur_page",page);
-        model.addAttribute("amount",list_amount);
+        model.addAttribute("cur_page",cur_page);
+        model.addAttribute("list_amount",list_amount);
 
         int tot_page = filtered_item_total/list_amount+1;
         if(filtered_item_total%list_amount==0) tot_page-=1;
@@ -482,12 +500,12 @@ public class APIController {
         int tot_sector = tot_page/page_amount+1;
         if(tot_page%page_amount==0) tot_sector-=1;
 
-        int cur_sector = page/page_amount+1;
-        if(page%page_amount==0) cur_sector-=1;
+        int cur_sector = cur_page/page_amount+1;
+        if(cur_page%page_amount==0) cur_sector-=1;
 
         boolean is_past = (cur_sector!=1 && tot_sector>1 )?true:false;
-        boolean is_prev = (page!=1 && tot_page>1)?true:false;
-        boolean is_next = (page!=tot_page && tot_page>1)?true:false;
+        boolean is_prev = (cur_page!=1 && tot_page>1)?true:false;
+        boolean is_next = (cur_page!=tot_page && tot_page>1)?true:false;
         boolean is_last = (cur_sector!=tot_sector && tot_sector>1 )?true:false;
         //boolean is_active = false;
 
@@ -519,19 +537,6 @@ public class APIController {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     @RequestMapping(value = "/send_mail",method = RequestMethod.POST)
     public ResultVO send_mail(@ModelAttribute MailVO mailVO, HttpSession session, HttpServletRequest request) throws Exception, IOException {
 //        System.out.println(session.getAttribute("admin_id"));
@@ -545,15 +550,15 @@ public class APIController {
         int fileLength = Integer.parseInt(mailVO.getFileLength());
         File[] files = new File[5];
         if(fileLength > 0){
-            files[0] = mailService.convertMultipartToFile(mailVO.getFiles1());
+            files[0] = emailService.convertMultipartToFile(mailVO.getFiles1());
             if(fileLength >= 2){
-                files[1] = mailService.convertMultipartToFile(mailVO.getFiles2());
+                files[1] = emailService.convertMultipartToFile(mailVO.getFiles2());
                 if(fileLength >= 3){
-                    files[2] = mailService.convertMultipartToFile(mailVO.getFiles3());
+                    files[2] = emailService.convertMultipartToFile(mailVO.getFiles3());
                     if(fileLength >= 4){
-                        files[3] = mailService.convertMultipartToFile(mailVO.getFiles4());
+                        files[3] = emailService.convertMultipartToFile(mailVO.getFiles4());
                         if(fileLength == 5){
-                            files[4] = mailService.convertMultipartToFile(mailVO.getFiles5());
+                            files[4] = emailService.convertMultipartToFile(mailVO.getFiles5());
 
                         }
                     }
@@ -579,11 +584,11 @@ public class APIController {
 //            for(int i = 0; i < fileLength; i++){
 //                files[i].delete();
 //            }
-            System.out.println("전송 완료");
+            //System.out.println("전송 완료");
             return resultVO;
         } catch (Exception e){
-            System.out.println("전송 실패");
-            System.out.println(e);
+            //System.out.println("전송 실패");
+            //System.out.println(e);
             for(int i = 0; i < fileLength; i++){
                 files[i].delete();
             }
@@ -604,8 +609,8 @@ public class APIController {
 
 //    @RequestMapping(value = "/sent_sms", method = RequestMethod.GET)
 //    public @ResponseBody
-//    List<SmsSentVO> selectSentmeesage1(){
-//        return smsSendService.selectSentmeesage1();
+//    List<SmsSentVO> getReservedSMSList(){
+//        return smsSendService.getReservedSMSList();
 //    }
 
     @RequestMapping(value = "/reserve_sms", method = RequestMethod.GET)
@@ -620,7 +625,7 @@ public class APIController {
     ResultVO  get_user_demo_bs_info(HttpSession session,
                            @RequestBody ParamUserDemoBSInfoVO userDemoBSInfoVO){
 
-        System.out.println("idx_user_demo_bs :" + userDemoBSInfoVO.getIdx_user_demo_bs());
+        //System.out.println("idx_user_demo_bs :" + userDemoBSInfoVO.getIdx_user_demo_bs());
 
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("성공");
@@ -654,7 +659,7 @@ public class APIController {
 
         /*
         DemoBSApplicationVO demoBSApplicationVO = demoBsApplicationService.getDemoBsApplByIdx(userDemoBsVO.getIdx_user_demo_bs());
-        System.out.println(demoBSApplicationVO.getDemo_bs_applicaion_code());
+        //System.out.println(demoBSApplicationVO.getDemo_bs_applicaion_code());
 
         userDemoBsVO.setDemo_bs_applicaion_code(demoBSApplicationVO.getDemo_bs_applicaion_code());
         userDemoBsVO.setDemo_bs_applicaion_code(demoBSApplicationVO.getDemo_bs_applicaion_code()==null?"":demoBSApplicationVO.getDemo_bs_applicaion_code());
@@ -736,8 +741,8 @@ public class APIController {
 
         int idx =param.get("idx");
         int optionVal=param.get("optionVal");
-        System.out.println("idx : " + idx);
-        System.out.println("optionVal : " + optionVal);
+        //System.out.println("idx : " + idx);
+        //System.out.println("optionVal : " + optionVal);
 
         demoBsApplicationService.updateDemoBsApplicantStatus(param);
 
@@ -758,7 +763,7 @@ public class APIController {
         try {
             userDemoBsService.updateUserDemoBsStatus(userDemoBsVO.getIdx_user_demo_bs(), userDemoBsVO.getUser_demobs_status());
         } catch (Exception e){
-            System.out.println(e);
+            //System.out.println(e);
             resultVO.setResult_str("신청서 접수 처리에 실패했습니다.");
             resultVO.setResult_code("ERROR_1100");
         }
@@ -891,7 +896,7 @@ public class APIController {
     ResultVO get_visit_data_byGroupIdx(HttpSession session,
                                        @RequestBody VisitDataVO visitDataVO){
 
-        System.out.println("group_idx : " + visitDataVO.getGroup_idx());
+        //System.out.println("group_idx : " + visitDataVO.getGroup_idx());
 
         ResultVO resultVO = new ResultVO();
         resultVO.setResult_str("성공");
@@ -1290,7 +1295,7 @@ public class APIController {
             mailHelper.setText("안녕하세요. " + adminVO.getAdmin_name() + "님. 스마트팜 혁신밸리 관리자 사이트의 변경된 비밀번호는 " + newPw + " 입니다.");
             mailSender.send(mail);
 
-            System.out.println("전송 완료");
+            //System.out.println("전송 완료");
             resultVO.setResult_str("비밀번호 변경에 성공하였습니다. \n변경된 비밀번호는 해당 아이디 이메일로 전송되었습니다.");
             resultVO.setResult_code("SUCCESS");
         } catch (Exception e){
@@ -1376,7 +1381,7 @@ public class APIController {
             mailHelper.setText("안녕하세요. " + userVO.getUser_name() + "님. 스마트팜 혁신밸리 관리자 사이트의 변경된 비밀번호는 " + newPw + " 입니다.");
             mailSender.send(mail);
 
-            System.out.println("전송 완료");
+            //System.out.println("전송 완료");
             resultVO.setResult_str("비밀번호 변경에 성공하였습니다. \n변경된 비밀번호는 해당 아이디 이메일로 전송되었습니다.");
             resultVO.setResult_code("SUCCESS");
         } catch (Exception e){
@@ -1652,7 +1657,7 @@ public class APIController {
         File[] files = new File[5];
         try {
             if(prcontensVO.getFiles1() == null && prcontensVO.getFiles2() == null){
-                int rs = prContentService.insertPRContent(prcontensVO);
+                int rs = prContentsService.insertPRContent(prcontensVO);
                 if(rs == 1) {
                     resultVO.setResult_str("등록이 완료되었습니다.");
                     resultVO.setResult_code("SUCCESS");
@@ -1687,12 +1692,12 @@ public class APIController {
                 Long __File1 = thumFileInfoVO.getIdx_file_info();
 
                 prcontensVO.setThumb_img_file_idx(__File1);
-                int rs = prContentService.insertPRContent(prcontensVO);
+                int rs = prContentsService.insertPRContent(prcontensVO);
                 if(rs == 1) {
                     FileInfoVO fInfoVO = new FileInfoVO();
                     fInfoVO.setIdx_file_info(__File0);
                     fInfoVO.setIdx_pr_content(prcontensVO.getIdx_pr_content());
-                    prContentService.insertPRContentFileJoin(fInfoVO);
+                    prContentsService.insertPRContentFileJoin(fInfoVO);
                     resultVO.setResult_str("등록이 완료되었습니다.");
                     resultVO.setResult_code("SUCCESS");
                 }
@@ -1900,7 +1905,7 @@ public class APIController {
         resultVO.setResult_code("ERROR_1000");
         resultVO.setResult_str("삭제 실패");
         try {
-            prContentService.deletePR(idx_pr_content);
+            prContentsService.deletePR(idx_pr_content);
             resultVO.setResult_code("SUCCESS");
             resultVO.setResult_str("삭제가 완료되었습니다.");
         } catch (Exception e){
@@ -2102,12 +2107,12 @@ public class APIController {
 
         try {
             if(prcontensVO.getFiles1() == null && prcontensVO.getFiles2() == null){
-                prContentService.updatePrContent(prcontensVO);
+                prContentsService.updatePrContent(prcontensVO);
                 resultVO.setResult_code("SUCCESS");
                 resultVO.setResult_str("수정을 완료하였습니다.");
             }else {
                 // 파일삭제
-                PRContentFileJoinVO _file0 = prContentService.getPRContentFile(prcontensVO);
+                PRContentFileJoinVO _file0 = prContentsService.getPRContentFile(prcontensVO);
                 if(_file0!=null) {
                     FileInfoVO _fileinfo0 = fileService.getFileInfo(_file0.getIdx_file_info());
                     if (_fileinfo0 != null) {
@@ -2136,7 +2141,7 @@ public class APIController {
                     __File0 = fileInfoVO.getIdx_file_info();
                 }
 
-                PRContentVO _file1 = prContentService.getPRContentThumbFile(prcontensVO);
+                PRContentVO _file1 = prContentsService.getPRContentThumbFile(prcontensVO);
                 if(_file1!=null) {
                     FileInfoVO _fileinfo1 = fileService.getFileInfo(_file1.getThumb_img_file_idx());
                     if (_fileinfo1 != null) {
@@ -2174,9 +2179,9 @@ public class APIController {
                     FileInfoVO fInfoVO = new FileInfoVO();
                     fInfoVO.setIdx_file_info(__File0);
                     fInfoVO.setIdx_pr_content(prcontensVO.getIdx_pr_content());
-                    prContentService.insertPRContentFileJoin(fInfoVO);
+                    prContentsService.insertPRContentFileJoin(fInfoVO);
                 }
-                prContentService.updatePrContent(prcontensVO);
+                prContentsService.updatePrContent(prcontensVO);
                 resultVO.setResult_code("SUCCESS");
                 resultVO.setResult_str("수정을 완료하였습니다.");
             }
@@ -2393,7 +2398,7 @@ public class APIController {
     public @ResponseBody
     ResultVO delete_rule_file(@RequestBody RuleFileInfoVO ruleFileInfoVO){
         ResultVO resultVO = new ResultVO();
-        System.out.println(ruleFileInfoVO);
+        //System.out.println(ruleFileInfoVO);
 
         resultVO.setResult_code("SUCCESS");
         resultVO.setResult_str("규정 제거를 완료했습니다.");
@@ -2410,7 +2415,25 @@ public class APIController {
     }
 
 
+    @RequestMapping(value ="/insert_scheule_item",method = RequestMethod.POST)
+    public @ResponseBody
+    ResultVO insert_scheule_item(@RequestBody ScheduleItemVO scheduleItemVO){
+        ResultVO resultVO = new ResultVO();
+        //System.out.println(ruleFileInfoVO);
 
+        resultVO.setResult_code("SUCCESS");
+        resultVO.setResult_str("일정을 등록했습니다");
+
+        try {
+            schedulerService.insertScheduleData(scheduleItemVO);
+        } catch (Exception e){
+            System.out.println(e);
+            resultVO.setResult_code("ERROR_1000");
+            resultVO.setResult_str("일정등록에 실패하였습니다.");
+        }
+
+        return resultVO;
+    }
 
 
 }

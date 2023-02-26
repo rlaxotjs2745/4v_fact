@@ -1,6 +1,6 @@
 // Growl
 $(function() {
-  var isRtl = $('body').attr('dir') === 'rtl' || $('html').attr('dir') === 'rtl';
+  //var isRtl = $('body').attr('dir') === 'rtl' || $('html').attr('dir') === 'rtl';
 
   $('.bs4-toast').toast({
     autohide: false
@@ -10,28 +10,28 @@ $(function() {
     $.growl({
       title:    'Growl',
       message:  'The kitten is awake!',
-      location: isRtl ? 'tl' : 'tr'
+      location: 'tr'
     });
   });
 
   $('#growl-notice').click(function() {
     $.growl.notice({
       message:  'The kitten is cute!',
-      location: isRtl ? 'tl' : 'tr'
+      location: 'tr'
     });
   });
 
   $('#growl-warning').click(function() {
     $.growl.warning({
       message:  'The kitten is ugly!',
-      location: isRtl ? 'tl' : 'tr'
+      location: 'tr'
     });
   });
 
   $('#growl-error').click(function() {
     $.growl.error({
       message:  'The kitten is attacking!',
-      location: isRtl ? 'tl' : 'tr'
+      location: 'tr'
     });
   });
 
@@ -40,7 +40,7 @@ $(function() {
       title:    'Growl',
       message:  'The kitten is awake!',
       duration: 9999 * 9999,
-      location: isRtl ? 'tl' : 'tr'
+      location: 'tr'
     });
   });
 
@@ -49,7 +49,7 @@ $(function() {
       title:   'Growl',
       message: 'The kitten is awake!',
       size:    'small',
-      location: isRtl ? 'tl' : 'tr'
+      location: 'tr'
     });
   });
 
@@ -58,7 +58,7 @@ $(function() {
       title:   'Growl',
       message: 'The kitten is awake!',
       size:    'large',
-      location: isRtl ? 'tl' : 'tr'
+      location: 'tr'
     });
   });
 });

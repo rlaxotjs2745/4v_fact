@@ -21,20 +21,20 @@
                     <div class="col-sm-12">
                         <table class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
                             <thead class="bg-light-dark text-white font-weight-bold">
-                            <tr role="row">
-                                <th class="text-center px-2" style="width:60px">No</th>
-                                <th class="text-center px-2" style="width:100px">심사 종료 예정일</th>
-                                <!--
-                                   <th class="text-center sorting" style="width:100px">공고문 번호</th>
-                                -->
-                                <th class="text-center sorting" style="width:100px">지원 사업명</th>
-                                <th class="text-center sorting" style="width:300px">제목</th>
-                                <th class="text-center px-2" style="width:110px">지원 수/ 모집 수</th>
-                                <th class="text-center px-2" style="width:110px">경쟁률</th>
-                                <th class="text-center px-2" style="width:110px">보완요청 건</th>
-                                <th class="text-center px-2" style="width:110px">검토완료</th>
-                                <th class="text-center px-2" style="width:110px">공고문 보기</th>
-                            </tr>
+                                <tr role="row">
+                                    <th class="text-center px-2" style="width:60px">No</th>
+                                    <th class="text-center px-2" style="width:100px">심사 종료 예정일</th>
+                                    <!--
+                                       <th class="text-center sorting" style="width:100px">공고문 번호</th>
+                                    -->
+                                    <th class="text-center sorting" style="width:100px">지원 사업명</th>
+                                    <th class="text-center sorting" style="width:300px">제목</th>
+                                    <th class="text-center px-2" style="width:110px">지원 수/ 모집 수</th>
+                                    <th class="text-center px-2" style="width:110px">경쟁률</th>
+                                    <th class="text-center px-2" style="width:110px">보완요청 건</th>
+                                    <th class="text-center px-2" style="width:110px">검토완료</th>
+                                    <th class="text-center px-2" style="width:110px">공고문 보기</th>
+                                </tr>
                             </thead>
                             <tbody>
                             <c:if test="${total_count eq 0}">
@@ -49,38 +49,38 @@
                                 </tr>
                             </c:if>
                             <c:if test="${total_count ne 0}">
-                                <c:forEach items="${adminApplHeaderListVOS}" var="item" varStatus="status">
+                            <c:forEach items="${adminApplHeaderListVOS}" var="item" varStatus="status">
 
-                                    <tr class="" onclick="getUserApplList(${item.idx_demo_business},1,  9999)">
-                                        <td class="text-center">${cur_page > 1 ? 5 * (cur_page - 1) + status.count : status.count}</td>
-                                        <fmt:formatDate value="${item.exam_end}" var="pend_date" pattern="yyyy-MM-dd"/>
-                                        <td class="text-center">${pend_date}</td>
-                                        <td class="">${item.demo_bs_code}</td>
-                                        <td class="">${item.demo_subject}</td>
-                                        <td class="text-right">${item.applicant_count} / ${item.recruit_count_limit}</td>
-                                        <!-- 포맷 수정필요 -->
-                                        <!--
-                                    <td class="text-right"><fmt:formatNumber value="${item.applicant_count / item.recruit_count_limit}" pattern="#.##"/>  : 1</td>
-                                    -->
-                                        <c:choose>
-                                            <c:when test="${item.recruit_count_limit == 0 }">
-                                                <td class="text-right">0 : 1</td>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <td class="text-right"><fmt:formatNumber
-                                                        value="${item.applicant_count / item.recruit_count_limit}"
-                                                        pattern="#.##"/> : 1
-                                                </td>
-                                            </c:otherwise>
-                                        </c:choose>
+                                <tr class="" onclick="getUserApplList(${item.idx_demo_business},1,  9999)">
+                                    <td class="text-center">${cur_page > 1 ? 5 * (cur_page - 1) + status.count : status.count}</td>
+                                    <fmt:formatDate value="${item.exam_end}" var="pend_date" pattern="yyyy-MM-dd"/>
+                                    <td class="text-center">${pend_date}</td>
+                                    <td class="">${item.demo_bs_code}</td>
+                                    <td class="">${item.demo_subject}</td>
+                                    <td class="text-right">${item.applicant_count} / ${item.recruit_count_limit}</td>
+                                    <!-- 포맷 수정필요 -->
+                                    <!--
+                        <td class="text-right"><fmt:formatNumber value="${item.applicant_count / item.recruit_count_limit}" pattern="#.##"/>  : 1</td>
+                        -->
+                            <c:choose>
+                                <c:when test="${item.recruit_count_limit == 0 }">
+                                    <td class="text-right">0 : 1</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td class="text-right"><fmt:formatNumber
+                                            value="${item.applicant_count / item.recruit_count_limit}"
+                                            pattern="#.##"/> : 1
+                                    </td>
+                                </c:otherwise>
+                            </c:choose>
 
-                                        <td class="text-right">${item.appl_recomm}</td>
-                                        <td class="text-right">${item.appl_review_done}</td>
-                                        <td class="text-center"><a target="_blank" href="https://innovalley.smartfarmkorea.net/gimje/Demonstration/brd_announce_detail?idx=${item.idx_demo_business}" class="btn btn-underline">보기</a>
-                                        </td>
-                                    </tr>
+                                    <td class="text-right">${item.appl_recomm}</td>
+                                    <td class="text-right">${item.appl_review_done}</td>
+                                    <td class="text-center"><a target="_blank" href="https://innovalley.smartfarmkorea.net/gimje/Demonstration/brd_announce_detail?idx=${item.idx_demo_business}" class="btn btn-underline">보기</a>
+                                    </td>
+                                </tr>
 
-                                </c:forEach>
+                            </c:forEach>
                             </c:if>
                             </tbody>
                         </table>
@@ -91,7 +91,7 @@
                     <div class="col-sm-12 col-md-5">
                         <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${total_count}개
                             중 ${list_amount*(cur_page-1)+1}에서 <c:choose><c:when
-                                    test="${(list_amount*(cur_page-1)+5)>total_count}">${total_count}</c:when><c:otherwise>${list_amount*(cur_page-1)+5}</c:otherwise></c:choose>까지
+                                    test="${(list_amount*(cur_page-1)+page_amount)>total_count}">${total_count}</c:when><c:otherwise>${list_amount*(cur_page-1)+page_amount}</c:otherwise></c:choose>까지
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-7">
@@ -103,14 +103,14 @@
 
                                 <c:if test="${is_past eq true}">
                                     <li class="paginate_button page-item previous"><a
-                                            href="javascript:pageLoad('b21_demo_bs_appl_mng',{page_num:1},'신청접수 관리');"
+                                            href="javascript:pageLoad('b21_demo_bs_appl_mng',{cur_page:1},'신청접수 관리');"
                                             aria-controls="article-list" data-dt-idx="0" tabindex="0"
                                             class="page-link"><i class="fas fa-angle-double-left d-block"></i></a>
                                     </li>
                                 </c:if>
                                 <c:if test="${is_prev eq true}">
                                     <li class="paginate_button page-item previous"><a
-                                            href="javascript:pageLoad('b21_demo_bs_appl_mng',{page_num:${cur_page-1}},'신청접수 관리');"
+                                            href="javascript:pageLoad('b21_demo_bs_appl_mng',{cur_page:${cur_page-1}},'신청접수 관리');"
                                             aria-controls="article-list" data-dt-idx="0" tabindex="0"
                                             class="page-link"><i class="fas fa-angle-left d-block"></i></a></li>
                                 </c:if>
@@ -118,19 +118,19 @@
 
                                 <c:forEach var="i" begin="1" end="${page_amount}">
                                     <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>">
-                                        <a href="javascript:pageLoad('b21_demo_bs_appl_mng',{page_num:${(cur_sector-1)*page_amount+i}},'신청접수 관리');"
+                                        <a href="javascript:pageLoad('b21_demo_bs_appl_mng',{cur_page:${(cur_sector-1)*page_amount+i}},'신청접수 관리');"
                                            class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
                                 </c:forEach>
 
                                 <c:if test="${is_next eq true}">
                                     <li class="paginate_button page-item next"><a
-                                            href="javascript:pageLoad('b21_demo_bs_appl_mng',{page_num:${cur_page+1}},'신청접수 관리');"
+                                            href="javascript:pageLoad('b21_demo_bs_appl_mng',{cur_page:${cur_page+1}},'신청접수 관리');"
                                             aria-controls="article-list" data-dt-idx="6" tabindex="0"
                                             class="page-link"><i class="fas fa-angle-right d-block"></i></a></li>
                                 </c:if>
                                 <c:if test="${is_last eq true}">
                                     <li class="paginate_button page-item next"><a
-                                            href="javascript:pageLoad('b21_demo_bs_appl_mng',{page_num:${tot_page}},'신청접수 관리');"
+                                            href="javascript:pageLoad('b21_demo_bs_appl_mng',{cur_page:${tot_page}},'신청접수 관리');"
                                             aria-controls="article-list" data-dt-idx="6" tabindex="0"
                                             class="page-link"><i class="fas fa-angle-double-right d-block"></i></a>
                                     </li>
@@ -144,121 +144,73 @@
             </div>
         </div>
 
+    </div>
 
-        <hr>
-        <ul class="nav nav-tabs">
-            <li class="nav-item"><a class="nav-link active" href="#">사업 관리</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">위탁기업 관리</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">자율기업 관리</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">이용료 관리</a></li>
-        </ul>
+    <hr>
 
-        <div id="appl_contents" class="nav-plane">
-    <%--
+    <ul class="nav nav-tabs">
+        <li class="nav-item"><a class="nav-link active" href="#">사업 관리</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">위탁기업 관리</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">자율기업 관리</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">이용료 관리</a></li>
+    </ul>
 
-            <div class="row">
-                <div class="col-sm-6 col-xl-3">
-                    <div class="card mb-3">
-                        <div class="card-slim-body active">
-                            <div class="d-flex justify-content-between">
-                                <div class="text-muted small mt-2">전체</div>
-                                <!-- 값 세팅필요-->
-                                <div class="text-large">34</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="card mb-3">
-                        <div class="card-slim-body">
-                            <div class="d-flex justify-content-between">
-                                <div class="text-muted small mt-2">검토 필요</div>
-                                <!-- 값 세팅필요-->
-                                <div class="text-large">7</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="card mb-3">
-                        <div class="card-slim-body">
-                            <div class="d-flex justify-content-between">
-                                <div class="text-muted small mt-2">검토 보류</div>
-                                <!-- 값 세팅필요-->
-                                <div class="text-large">0</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="card mb-3">
-                        <div class="card-slim-body">
-                            <div class="d-flex justify-content-between">
-                                <div class="text-muted small mt-2">검토 완료</div>
-                                <!-- 값 세팅필요-->
-                                <div class="text-large">27</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>--%>
-            <div id="appl_list" class="card">
+    <div id="appl_contents" class="nav-plane">
+        <div class="nav-plane">
+            <div id="tab_contents" class="card">
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal template -->
+<div class="modal fade" id="modals-application-view">
+    <div class="modal-dialog modal-xl modal-content modal-dialog-scrollable">
+
+        <div class="modal-header bg-success">
+            <h5 class="modal-title text-white font-weight-bold mode-new">신청서 접수 관리</h5>
+            <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">
+                ×
+            </button>
+        </div>
+        <div class="modal-body">
+            <ul class="nav nav-sm nav-tabs">
+                <li class="nav-item btn-outline-primary"><a class="nav-link font-weight-bold active"
+                                                            data-toggle="tab" href="#navs-tap1">이용신청서</a>
+                </li>
+                <li class="nav-item btn-outline-primary"><a class="nav-link font-weight-bold" data-toggle="tab"
+                                                            href="#navs-tap2">실증계획서</a>
+                </li>
+            </ul>
+            <input id="idx_corp_info" value="0" hidden>
+            <input id="is_saved" value="0" hidden>
+            <div class="tab-content" id="b21_modal" >
 
             </div>
         </div>
-
-
-
-
-
-
-    <!-- Modal template -->
-    <div class="modal fade" id="modals-application-view">
-        <div class="modal-dialog modal-xl modal-content modal-dialog-scrollable">
-
-            <div class="modal-header bg-success">
-                <h5 class="modal-title text-white font-weight-bold mode-new">신청서 접수 관리</h5>
-                <button type="button" class="close text-white font-weight-bold" data-dismiss="modal" aria-label="Close">
-                    ×
-                </button>
-            </div>
-            <div class="modal-body">
-                <ul class="nav nav-sm nav-tabs">
-                    <li class="nav-item btn-outline-primary"><a class="nav-link font-weight-bold active"
-                                                                data-toggle="tab" href="#navs-tap1">이용신청서</a>
-                    </li>
-                    <li class="nav-item btn-outline-primary"><a class="nav-link font-weight-bold" data-toggle="tab"
-                                                                href="#navs-tap2">실증계획서</a>
-                    </li>
-                </ul>
-                <input id="idx_corp_info" value="0" hidden>
-                <input id="is_saved" value="0" hidden>
-                <div class="tab-content" id="b21_modal" >
-
+        <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+            <div>
+                <span id="plz_option_input">
+                    <input type="file" class="custom-file is_empty_sppl" id="req_supple_file">
+                    <small class="form-text mb-2 text-muted is_empty_sppl">신청서 보완 요청서 등록이 필요합니다.</small>
+                    <a href="#none" class="btn btn-underline" id="sppl_download">보완 요청서 다운로드</a>
+                </span>
+                <div class="btn-group btn-group btn-group-toggle ml-2" data-toggle="buttons">
+                    <label class="btn btn-secondary application_confirm" id="confirm_plz">
+                        <input type="radio" name="btn-radio" value="9999"  >신청서 보완 요청
+                    </label>
+                    <label class="btn btn-secondary application_confirm" id="confirm_fin" >
+                        <input type="radio" name="btn-radio" value="0" >신청서 접수 완료
+                    </label>
                 </div>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                <div>
-                    <span id="plz_option_input">
-                        <input type="file" class="custom-file is_empty_sppl" id="req_supple_file">
-                        <small class="form-text mb-2 text-muted is_empty_sppl">신청서 보완 요청서 등록이 필요합니다.</small>
-                        <a href="#none" class="btn btn-underline" id="sppl_download">보완 요청서 다운로드</a>
-                    </span>
-                    <div class="btn-group btn-group btn-group-toggle ml-2" data-toggle="buttons">
-                        <label class="btn btn-secondary application_confirm" id="confirm_plz">
-                            <input type="radio" name="btn-radio" value="9999"  >신청서 보완 요청
-                        </label>
-                        <label class="btn btn-secondary application_confirm" id="confirm_fin" >
-                            <input type="radio" name="btn-radio" value="0" >신청서 접수 완료
-                        </label>
-                    </div>
-                    <button type="button" class="btn btn-primary" onclick="changeConfirmStatus()" style="margin-left: 20px">저장하기</button>
-                </div>
+                <button type="button" class="btn btn-primary" onclick="changeConfirmStatus()" style="margin-left: 20px">저장하기</button>
             </div>
         </div>
     </div>
 </div>
+
 
 
 
@@ -321,7 +273,7 @@
                     alert(result.result_str);
                     if(result.result_code == 'SUCCESS'){
 
-                        pageLoad('b21_demo_bs_appl_mng',{page_num:1},'신규신청 접수');
+                        pageLoad('b21_demo_bs_appl_mng',{cur_page:1},'신규신청 접수');
                     }
                 }
             })
@@ -339,7 +291,7 @@
                     alert(result.result_str);
                     if(result.result_code == 'SUCCESS'){
                         console.log(111)
-                        pageLoad('b21_demo_bs_appl_mng',{page_num:1},'신규신청 접수');
+                        pageLoad('b21_demo_bs_appl_mng',{cur_page:1},'신규신청 접수');
                     }
                 }
             })
@@ -413,11 +365,11 @@
     });
 
 
-    function getUserApplList(idx, page_num, filter) {
+    function getUserApplList(idx, cur_page, filter) {
 
         let param = {
-            page_num: page_num,
-            amount: 5,
+            cur_page: cur_page,
+            list_amount: 5,
             order_field: "IDX_DEMO_BUSINESS",
             filter1: filter,
             filter2: 9998,

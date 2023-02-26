@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class SmsSendVO {
+    long row_num;
     String user_id;//agent_testO
     int schedule_type;
     String subject;//제목O

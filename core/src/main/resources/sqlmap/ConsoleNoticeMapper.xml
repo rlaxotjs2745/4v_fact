@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.fact.core.model.ConsoleNoticeMapper">
+
+    <select id="getConsoleNoticeFilteredCount" resultType="kr.or.fact.core.model.DTO.ConsoleNoticeFilteredCountVO">
+        SELECT (SELECT COUNT(*) FROM TB_CONSOLE_NOTICE ) AS TOT_COUNT,
+               (SELECT COUNT(*) FROM TB_CONSOLE_NOTICE WHERE ASSET_STATUS = 0) AS WAIT_COUNT,
+               (SELECT COUNT(*) FROM TB_CONSOLE_NOTICE WHERE ASSET_STATUS = 1) AS ON_COUNT,
+               (SELECT COUNT(*) FROM TB_CONSOLE_NOTICE WHERE ASSET_STATUS = 2) AS RE_ON_COUNT,
+               (SELECT COUNT(*) FROM TB_CONSOLE_NOTICE WHERE ASSET_STATUS = 3) AS OFF_COUNT,
+               (SELECT COUNT(*) FROM TB_CONSOLE_NOTICE WHERE ASSET_STATUS = 99) AS ETC_COUNT
+        FROM TB_CONSOLE_NOTICE WHERE ROWNUM = 1
+    </select>
+
     <select id="getConsoleNoticeByUserIdx" parameterType="long" resultType="kr.or.fact.core.model.DTO.ConsoleNoticeVO">
         SELECT
             *
@@ -12,19 +23,19 @@
         SELECT
             *
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
               ,t.*
                  FROM TB_CONSOLE_NOTICE t
-                 WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
              )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
     </select>
 
     <select id="getConsoleNoticeFilteredList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.ConsoleNoticeVO">
         SELECT
         *
         FROM (
-        SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS row_num
+        SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
         t.*
         FROM (
         SELECT * FROM TB_CONSOLE_NOTICE
@@ -35,9 +46,9 @@
             WHERE NOTICE_TYPE == 1
         </if>
         ) t
-        WHERE ROWNUM <![CDATA[<=]]> #{page_num}*#{amount}
+        WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
         )
-        WHERE row_num <![CDATA[>]]> (#{page_num} -1)*#{amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
     </select>
 
     <insert id="insertConsoleNotice" parameterType="kr.or.fact.core.model.DTO.ConsoleNoticeVO">

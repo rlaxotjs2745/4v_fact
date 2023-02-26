@@ -327,7 +327,7 @@
     var curPage = "${adminList[0].page}";
     var curUser;
 
-    pageLoad("admin_corporate", {page_num: 1, corp: 100}, "어드민 보드", "admin");
+    pageLoad("admin_corporate", {cur_page: 1, corp: 100}, "어드민 보드", "admin");
 
     if(curPage != "1"){
         $("#article-list_previous").removeClass("disabled");
@@ -689,7 +689,7 @@
 
     $('input[name="corporate"]').change(function(){
         var corpClass = $('input[name="corporate"]:checked').val();
-        pageLoad("admin_corporate", {page_num: 1, corp: parseInt(corpClass)}, "어드민 보드", true);
+        pageLoad("admin_corporate", {cur_page: 1, corp: parseInt(corpClass)}, "어드민 보드", true);
     })
 
 

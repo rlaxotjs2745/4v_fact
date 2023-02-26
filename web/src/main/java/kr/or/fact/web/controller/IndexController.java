@@ -38,8 +38,8 @@ public class IndexController {
     @Resource(name = "noticeService")
     NoticeService noticeService;
 
-    @Resource(name = "prContentService")
-    PRContentsService prContentService;
+    @Resource(name = "prContentsService")
+    PRContentsService prContentsService;
 
     @Resource(name = "consultingService")
     ConsultingService consultingService;
@@ -781,7 +781,7 @@ public class IndexController {
         model.addAttribute("announceList", announcementVOList);
 
         model.addAttribute("cur_page", page);
-        model.addAttribute("amount", list_amount);
+        model.addAttribute("list_amount", list_amount);
 
         int tot_page = annouceCount / list_amount + 1;
         if (annouceCount % list_amount == 0) tot_page -= 1;
@@ -893,7 +893,7 @@ public class IndexController {
         model.addAttribute("eventContentVOList", eventContentVOList);
 
         model.addAttribute("cur_page", page);
-        model.addAttribute("amount", list_amount);
+        model.addAttribute("list_amount", list_amount);
 
         int tot_page = eventCount / list_amount + 1;
         if (eventCount % list_amount == 0) tot_page -= 1;
@@ -995,34 +995,33 @@ public class IndexController {
 
 
     @RequestMapping("/brd_notice")
-    public String brd_notice(@RequestParam(value = "page", required = false) Integer page,
-                             @RequestParam(name = "filter", required = false) String filter,
-                             @RequestParam(name = "query", required = false) String query,
+    public String brd_notice(@RequestBody ParamPageListFilteredVO param,
                              Model model) {
-        if (page == null || page <= 0) {
-            page = 1;
-        }
-
+        if(param.getList_amount()==0) param.setList_amount(10);
         int list_amount = 10;
         int page_amount = 10;
+        if(param.getCur_page()==0) param.setCur_page(1);
+        int cur_page = param.getCur_page();
 
-        query = decodeUrlValue(query);
+        int filter1 = param.getFilter1();
+        int filter2 = param.getFilter2();
 
-        model.addAttribute("page", page);
-        model.addAttribute("filter", filter);
+        String query = decodeUrlValue(param.getQuery());
+
+        model.addAttribute("page", param.getCur_page());
+        model.addAttribute("filter", param.getFilter1());
         model.addAttribute("query", query);
 
-        int noticeCount = noticeService.getOpenNoticeCount(filter, query);
+        int noticeCount = noticeService.getOpenNoticeCount(param);
         if (noticeCount == 0) {
             setProfile(model);
             return "brd_notice_blank";
         }
         model.addAttribute("total_count", noticeCount);
-        List<NoticeVO> noticeList = noticeService.getOpenNoticeList(page, list_amount, filter, query);
+        List<NoticeVO> noticeList = noticeService.getOpenNoticeList(param);
         model.addAttribute("noticeList", noticeList);
 
-        model.addAttribute("cur_page", page);
-        model.addAttribute("amount", list_amount);
+        model.addAttribute("cur_page", param.getCur_page());
 
         int tot_page = noticeCount / list_amount + 1;
         if (noticeCount % list_amount == 0) tot_page -= 1;
@@ -1030,8 +1029,8 @@ public class IndexController {
         int tot_sector = tot_page / page_amount + 1;
         if (tot_page % page_amount == 0) tot_sector -= 1;
 
-        int cur_sector = page / page_amount + 1;
-        if (page % page_amount == 0) cur_sector -= 1;
+        int cur_sector = cur_page / page_amount + 1;
+        if (cur_page % page_amount == 0) cur_sector -= 1;
 
         boolean is_past = false;
         boolean is_prev = false;
@@ -1039,9 +1038,9 @@ public class IndexController {
         boolean is_last = false;
         boolean is_active = false;
 
-        if (page != tot_page && tot_page > 1) is_next = true;
+        if (cur_page != tot_page && tot_page > 1) is_next = true;
 
-        if (page != 1 && tot_page > 1) is_prev = true;
+        if (cur_page != 1 && tot_page > 1) is_prev = true;
 
         if (cur_sector != tot_sector && tot_sector > 1) is_last = true;
 
@@ -1133,17 +1132,17 @@ public class IndexController {
         model.addAttribute("filter", filter);
         model.addAttribute("query", query);
 
-        int promotionCount = prContentService.getOpenPRContentCount(filter, query);
+        int promotionCount = prContentsService.getOpenPRContentCount(filter, query);
         if (promotionCount == 0) {
             setProfile(model);
             return "brd_promotion_blank";
         }
         model.addAttribute("total_count", promotionCount);
-        List<PRContentVO> prContentList = prContentService.getOpenPRContentList(page, list_amount, filter, query);
+        List<PRContentVO> prContentList = prContentsService.getOpenPRContentList(page, list_amount, filter, query);
         model.addAttribute("prContentList", prContentList);
 
         model.addAttribute("cur_page", page);
-        model.addAttribute("amount", list_amount);
+        model.addAttribute("list_amount", list_amount);
 
         int tot_page = promotionCount / list_amount + 1;
         if (promotionCount % list_amount == 0) tot_page -= 1;
@@ -1193,11 +1192,11 @@ public class IndexController {
     public String brd_promotion_detail(@RequestParam("idx") int idx,
                                        Model model) {
 
-        int view = prContentService.getPrViewCount(idx);
+        int view = prContentsService.getPrViewCount(idx);
         PRContentVO prContentVO2 = new PRContentVO();
         prContentVO2.setIdx_pr_content(idx);
-        prContentService.updatePrViewCount(prContentVO2);
-        PRContentVO prContentVO1 = prContentService.getPRContentFileJoin(idx);
+        prContentsService.updatePrViewCount(prContentVO2);
+        PRContentVO prContentVO1 = prContentsService.getPRContentFileJoin(idx);
         model.addAttribute("pr", prContentVO1);
 
         getHomepageInfo(model);
@@ -1496,7 +1495,7 @@ public class IndexController {
                         newCorpUserVOArrayList.add(corpUserVOArrayList.get(i));
                     }
                 }
-                System.out.println(newCorpUserVOArrayList);
+                //System.out.println(newCorpUserVOArrayList);
                 model.addAttribute("corpUser", newCorpUserVOArrayList);
             }
 
@@ -1829,7 +1828,7 @@ return "spt_visit";
         String[] activeProfiles = env.getActiveProfiles();
         if (activeProfiles.length != 0) {
             String activeProfile = activeProfiles[0];
-            System.out.println(activeProfile);
+            //System.out.println(activeProfile);
             if (activeProfile.equals("local")) {
                 model.addAttribute("profile", "gimje-prod");
             } else {

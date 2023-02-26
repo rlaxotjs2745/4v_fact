@@ -5,7 +5,6 @@ import kr.or.fact.core.service.*;
 import kr.or.fact.core.util.CONSTANT;
 import kr.or.fact.web.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -56,8 +54,8 @@ public class WebAPIController {
     @Resource(name = "eventContentService")
     EventContentService eventContentService;
 
-    @Resource(name = "prContentService")
-    PRContentsService prContentService;
+    @Resource(name = "prContentsService")
+    PRContentsService prContentsService;
 
     @Resource(name = "consoleService")
     ConsoleService consoleService;
@@ -66,7 +64,7 @@ public class WebAPIController {
     AuthService authService;
 
     @Resource(name = "mailService")
-    MailService mailService;
+    EMailService mailService;
 
     @Resource(name = "userPwHistoryService")
     UserPwHistoryService userPwHistoryService;
@@ -179,7 +177,7 @@ public class WebAPIController {
                     String secure_code=Utils.generateAuthNo();
                     String smsMessage = "비밀번호찾기 인증번호 ["+secure_code+"]";
 
-                    ReservedMailVO mailSendVO = new ReservedMailVO();
+                    EMailItemVO mailSendVO = new EMailItemVO();
                     mailSendVO.setReceiver(resultUserVO.getUser_id());
                     mailSendVO.setTitle("[농업기술진흥원] 인증번호");
                     mailSendVO.setContent(smsMessage);
@@ -1221,8 +1219,8 @@ public class WebAPIController {
             possible_count_pm=Integer.parseInt(str_possible_count.substring(0,pos_length-3));
         }
 
-        System.out.println("possible_count _ am : " +possible_count_am); //견학 가능수 오전
-        System.out.println("possible_count _ pm : " +possible_count_pm); //견학 가능수 오후
+        //System.out.println("possible_count _ am : " +possible_count_am); //견학 가능수 오전
+        //System.out.println("possible_count _ pm : " +possible_count_pm); //견학 가능수 오후
 
 
         int resulvation_count= visitDataVO.getResulvation_count(); //예약수
@@ -1239,8 +1237,8 @@ public class WebAPIController {
             resulvation_count_pm=Integer.parseInt(str_resulvation_count.substring(0,res_length-3));
         }
 
-        System.out.println(" resulvation_count_am : " + resulvation_count_am); //예약수 오전
-        System.out.println(" resulvation_count_pm: " + resulvation_count_pm); //예약수 오후
+        //System.out.println(" resulvation_count_am : " + resulvation_count_am); //예약수 오전
+        //System.out.println(" resulvation_count_pm: " + resulvation_count_pm); //예약수 오후
 
         if(visitReqVO.getIs_duration()==1) { //오전 신청
 
@@ -1255,7 +1253,7 @@ public class WebAPIController {
 
             //tb_visit_data에 resulvation_count +1 해줘야함
             visitDataVO.setResulvation_count(resulvation_count + 1);
-            System.out.println("증가된 예약수 getResulvation_count : " + visitDataVO.getResulvation_count());
+            //System.out.println("증가된 예약수 getResulvation_count : " + visitDataVO.getResulvation_count());
             visitService.updateVisitData(visitDataVO); 
 
             if(possible_count_am == resulvation_count_am + 1 ){ // 오전 신청 가능수 == 1증가된 오전 예약가능수
@@ -1285,7 +1283,7 @@ public class WebAPIController {
 
 
             visitDataVO.setResulvation_count(resulvation_count + 1000);
-            System.out.println("증가된 예약수 getResulvation_count : " + visitDataVO.getResulvation_count());
+            //System.out.println("증가된 예약수 getResulvation_count : " + visitDataVO.getResulvation_count());
             visitService.updateVisitData(visitDataVO);
 
             if(possible_count_pm == resulvation_count_pm + 1){ // 오후 신청 가능수 == 증가된 오후 예약가능수
@@ -1334,7 +1332,7 @@ public class WebAPIController {
 
             model.addAttribute("visitReqVOS",visitReqVOS);
             model.addAttribute("cur_page",page);
-            model.addAttribute("amount",list_amount);
+            model.addAttribute("list_amount",list_amount);
 
             int tot_page = visitReqCount/list_amount+1;
             if(visitReqCount%list_amount==0) tot_page-=1;
@@ -1394,9 +1392,9 @@ public class WebAPIController {
             //int page = paramVisitReqVO.getVisit_req_list_page();
 
             ParamPageListFilteredVO paramPageListFilteredVO = new ParamPageListFilteredVO();
-            paramPageListFilteredVO.setPage_num(1);
+            paramPageListFilteredVO.setCur_page(1);
             paramPageListFilteredVO.setIdx(idx_user);
-            paramPageListFilteredVO.setAmount(5);
+            paramPageListFilteredVO.setList_amount(5);
             paramPageListFilteredVO.setOrder_field("");
 
             int myConsultCount = consultingService.getConsultingCount(CONSTANT.user_idx,idx_user);
@@ -1414,7 +1412,7 @@ public class WebAPIController {
 
 
             model.addAttribute("cur_page",page);
-            model.addAttribute("amount",list_amount);
+            model.addAttribute("list_amount",list_amount);
 
             int tot_page = myConsultCount/list_amount+1;
             if(myConsultCount%list_amount==0) tot_page-=1;
@@ -1567,7 +1565,7 @@ public class WebAPIController {
 
         int count = 10;
 
-        return prContentService.getOpenPRContentList(request.getPage(), count, request.getFilter(), request.getQuery());
+        return prContentsService.getOpenPRContentList(request.getPage(), count, request.getFilter(), request.getQuery());
     }
 
     @PostMapping("/console_login")

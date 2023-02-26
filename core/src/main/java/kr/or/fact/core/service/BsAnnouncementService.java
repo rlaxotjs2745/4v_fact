@@ -2,7 +2,6 @@ package kr.or.fact.core.service;
 
 import kr.or.fact.core.model.DTO.*;
 import kr.or.fact.core.model.DTO.BsAnnouncementVO;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -34,7 +33,7 @@ public interface BsAnnouncementService {
 
     //List<BsAnnouncementVO> getAvailibleBsAnnouncement();
     //admin
-    AdminAnnounceFilterVO getAdminBsAnnouncementFilter();
+    DemoBsAnnounceFilteredCountVO getDemoBsAnnouncementFilteredCount();
     List<BsAnnouncementVO> getBsAnnounceVOPagingList(ParamPageListFilteredVO paramPageListFilteredVO);
 
     int addNewbsAnnouncement(BsAnnouncementVO bsAnnouncementVO);

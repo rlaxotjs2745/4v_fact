@@ -15,7 +15,7 @@ public class ConsoleNoticeVO {
     int is_new;//	number	4		0			신규등록여부	0:신규아님 1:신규
     int is_important;//	number	4		0			공지사항 제일 처음부분에 고정	0:고정안함 1:고정
     int view_count;//	number	20					조회수
-    int notice_status;//	number	4		0			공지사항 게시 프로세스 상태	0:임시저장, 1:허락, 2:수정 발행, 3:게시 종료, 99:기타
+    int notice_status;//	number	4		0			공지사항 게시 프로세스 상태	0:저장, 1:공지함, 2:수정 공지, 3:공지 종료, 99:기타
     Date posting_start_date;//	date						게시 시작 일시분초
     Date posting_end_date;//	date						게시 종료 일시분초
     int doc_version;//	number	4		1			공지 버전	default:1, increase 1

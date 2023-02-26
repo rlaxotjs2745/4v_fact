@@ -144,10 +144,10 @@
 
 
         if(param==null)
-            param={page_num:1};
+            param={cur_page:1};
 
-        if(cur!=url+param.page_num || usage == "asset_list"){
-            cur = url+param.page_num;
+        if(cur!=url+param.cur_page || usage == "asset_list"){
+            cur = url+param.cur_page;
             history.pushState(url, title,url);
 
             $.ajaxSetup({
@@ -236,7 +236,7 @@
             if (!window.innerDoc) {
 
                 console.log(evt);
-                pageLoad(evt.state,{page_num:1},"");
+                pageLoad(evt.state,{cur_page:1},"");
 
             }
         }, false);
@@ -246,7 +246,7 @@
 
     $(document).ready(function() {
         //ajax로 호출되는 첫번째 페이지
-        pageLoad('dashboard',{page_num:1},'대시보드');
+        pageLoad('dashboard',{cur_page:1},'대시보드');
 
     });
 

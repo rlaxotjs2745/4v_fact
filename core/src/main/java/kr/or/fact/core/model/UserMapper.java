@@ -20,7 +20,7 @@ public  interface UserMapper {
 
     List<UserVO> getAllUserList();
     List<UserVO> getUserPagingList(ParamPageListFilteredVO paramPageListFilteredVO);
-    List<PagedUserListVO> getUserSpecialInfoPagingList(@Param("page_num") int page_num, @Param("amount") int amount, @Param("order_field") String order_field);
+    List<PagedUserListVO> getUserSpecialInfoPagingList(@Param("cur_page") int cur_page, @Param("list_amount") int list_amount, @Param("order_field") String order_field);
 
     int getUserCount(@Param("user_type") int user_type);//99 모든 유저
 

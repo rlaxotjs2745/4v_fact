@@ -224,7 +224,7 @@
 <script>
     var reservation;
     $().ready(function(){
-        pageLoad("cur_asset_index", {page_num: 1, filter1: 100}, "자산 현황 보드", "cur_asset_index");
+        pageLoad("cur_asset_index", {cur_page: 1, filter1: 100}, "자산 현황 보드", "cur_asset_index");
     });
 
     $('input[name="reservation"]').change(function(){
@@ -293,7 +293,7 @@
 
     $("#inqure_asset").click(function (){
         pageLoad("cur_asset_index", {
-            page_num: 1,
+            cur_page: 1,
             filter1: parseInt($("#asset_main_code").val()),
             filter2: parseInt($("#asset_sub_code").val()),
             filter3: parseInt($("#asset_detail_code").val()),
@@ -342,7 +342,7 @@
                 $("#asset_loc").text("");
                 $("#representative_use").text("");
                 $("#memo").text("");
-                pageLoad("cur_asset_index", {page_num: 1, filter1: 100}, "자산 현황 보드", "cur_asset_index");
+                pageLoad("cur_asset_index", {cur_page: 1, filter1: 100}, "자산 현황 보드", "cur_asset_index");
             }
         })
     })
