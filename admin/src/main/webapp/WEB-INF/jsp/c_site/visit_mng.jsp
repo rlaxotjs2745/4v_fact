@@ -16,6 +16,7 @@
             <div id="fullcalendar-default-view" style="min-height: 500px;"></div>
         </div>
     </div>
+
     <div class="modal fade" id="modifyOrDeleteVisitData">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -142,15 +143,16 @@
                     </form>
                 </div>
 
-                <div class="modal-footer justify-content-between">
-                    <div>
-                        <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
-                    </div>
-                    <div>
 
-                        <button id="btn_delete_new" type="button" class="btn btn-primary">삭제</button>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <div>
+                    <button type="button" class="btn btn-outline-dark mr-2" data-dismiss="modal">취소</button>
+                </div>
+                <div>
 
-                    </div>
+                    <button id="btn_delete_new" type="button" class="btn btn-primary">삭제</button>
+
                 </div>
             </div>
         </div>

@@ -3,18 +3,42 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!-- Page content -->
-<div class="container-fluid flex-grow-1 container-p-y">
+    <div class="container-fluid flex-grow-1 container-p-y">
 
-    <h4 class="d-flex justify-content-between align-items-center w-100 mt-4">
-        <div>&nbsp;&nbsp;일정 관리</div>
-    </h4>
+        <h4 class="d-flex justify-content-between align-items-center w-100 mt-4">
+            <div>&nbsp;&nbsp;일정 관리</div>
+        </h4>
 
-    <!-- Event modal -->
-    <form class="modal modal-top fade" id="fullcalendar-default-view-modal">
+
+
+        <!-- / Event modal -->
+
+
+        <div id="list_calendar" class="card mb-4" style="display:none;">
+            <div class="card-body">
+                <div id="fullcalendar-list-view"></div>
+            </div>
+        </div>
+
+
+        <!--//-->
+
+        <div id="month_calendar" class="card mb-4">
+            <div class="card-body">
+                <div id="fullcalendar-default-view"></div>
+            </div>
+        </div>
+
+    </div>
+<!-- Event modal -->
+
+    <div class="modal modal fade" id="fullcalendar-default-view-modal">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">일정추가</h5>
+            <form class="modal-content">
+
+
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title text-white font-weight-bold">일정추가</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                 </div>
                 <div class="modal-body">
@@ -149,31 +173,9 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
                     <button id="demo_new_submit" type="submit" class="btn btn-primary">저장</button>
                 </div>
-            </div>
-        </div>
-    </form>
-    <!-- / Event modal -->
-
-
-    <div id="list_calendar" class="card mb-4" style="display:none;">
-        <div class="card-body">
-            <div id="fullcalendar-list-view"></div>
+            </form>
         </div>
     </div>
-
-
-    <!--//-->
-
-    <div id="month_calendar" class="card mb-4">
-        <div class="card-body">
-            <div id="fullcalendar-default-view"></div>
-        </div>
-    </div>
-
-
-
-</div>
-
 <!-- Layout footer -->
 <%@include file ="../layouts/frame_footer.jsp" %>
 <!-- / Layout footer -->

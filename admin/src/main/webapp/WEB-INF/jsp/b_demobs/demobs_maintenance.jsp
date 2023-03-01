@@ -51,7 +51,7 @@
                             <c:if test="${total_count ne 0}">
                                 <c:forEach items="${adminApplHeaderListVOS}" var="item" varStatus="status">
 
-                                    <tr class="" onclick="getUserApplList(${item.idx_demo_business},1,  9999)">
+                                    <tr class="" onclick="demoBsItemClick(${item.idx_demo_business},1,  9999)">
                                         <td class="text-center">${cur_page > 1 ? 5 * (cur_page - 1) + status.count : status.count}</td>
                                         <fmt:formatDate value="${item.exam_end}" var="pend_date" pattern="yyyy-MM-dd"/>
                                         <td class="text-center">${pend_date}</td>
@@ -147,64 +147,18 @@
 
     <hr>
     <ul class="nav nav-tabs">
-        <li class="nav-item"><a class="nav-link active" href="#">사업 정보</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">정산 업무</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">실증 결과</a></li>
+        <li class="nav-item"><button id="btn_tab_getinfo" class="nav-link active">사업 정보</button></li>
+        <li class="nav-item"><button id="btn_tab_appl" class="nav-link">정산 업무</button></li>
+        <li class="nav-item"><button id="btn_tab_eval" class="nav-link">실증 결과 </button></li>
     </ul>
+
     <div id="appl_contents" class="nav-plane">
-<%--
+        <div class="nav-plane">
+            <div id="tab_contents" class="card">
 
-        <div class="row">
-            <div class="col-sm-6 col-xl-3">
-                <div class="card mb-3">
-                    <div class="card-slim-body active">
-                        <div class="d-flex justify-content-between">
-                            <div class="text-muted small mt-2">전체</div>
-                            <!-- 값 세팅필요-->
-                            <div class="text-large">34</div>
-                        </div>
-                    </div>
-                </div>
             </div>
-            <div class="col-sm-6 col-xl-3">
-                <div class="card mb-3">
-                    <div class="card-slim-body">
-                        <div class="d-flex justify-content-between">
-                            <div class="text-muted small mt-2">검토 필요</div>
-                            <!-- 값 세팅필요-->
-                            <div class="text-large">7</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-xl-3">
-                <div class="card mb-3">
-                    <div class="card-slim-body">
-                        <div class="d-flex justify-content-between">
-                            <div class="text-muted small mt-2">검토 보류</div>
-                            <!-- 값 세팅필요-->
-                            <div class="text-large">0</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-xl-3">
-                <div class="card mb-3">
-                    <div class="card-slim-body">
-                        <div class="d-flex justify-content-between">
-                            <div class="text-muted small mt-2">검토 완료</div>
-                            <!-- 값 세팅필요-->
-                            <div class="text-large">27</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>--%>
-        <div id="appl_list" class="card">
-
         </div>
     </div>
-
 
 
 
@@ -268,12 +222,73 @@
 
 <script>
 
+
+    /*=========== UI Control Event ========>*/
+
     $('.nav-link').on('click', function(e){
-        if($(this).hasClass("active"))
+        if($(this).hasClass('active'))
             return;
-        $('.nav-link').removeClass("active");
-        $(this).addClass("active");
+
+        $('.nav-link').removeClass('active');
+        $(this).addClass('active');
+
+        if($(this).attr( 'id') == 'btn_tab_getinfo'){
+            cur_tab_mode = 0;
+            getDemoBsInfo(cur_idx_demobs);
+        }
+        else if($(this).attr( 'id') == 'btn_tab_appl'){
+            cur_tab_mode = 1;
+            cur_filter1 = 4;
+            cur_filter2 = 10;
+            getUserDemoBsFilteredList(cur_idx_demobs, 1);
+        }
+        else if($(this).attr( 'id') == 'btn_tab_eval'){
+            cur_tab_mode = 2;
+            cur_filter1 = 10;
+            cur_filter2 = 30;
+            getUserDemoBsFilteredList(cur_idx_demobs, 1);
+        }
+        else if($(this).attr( 'id') == 'btn_tab_contract'){
+            cur_tab_mode = 3;
+            cur_filter1 = 30;
+            cur_filter2 = 40;
+            getUserDemoBsFilteredList(cur_idx_demobs, 1);
+        }
+
     });
+
+    function updateTabBtn(type){
+
+        if(type==0) {
+            $('#btn_tab_getinfo').removeClass('disabled');
+            $('#btn_tab_getinfo').addClass('active');
+        }
+        else if(type==1) {
+            $('#btn_tab_getinfo').removeClass('disabled');
+            $('#btn_tab_appl').removeClass('disabled');
+            $('#btn_tab_getinfo').addClass('active');
+        }
+        else if(type==2) {
+            $('#btn_tab_getinfo').removeClass('disabled');
+            $('#btn_tab_appl').removeClass('disabled');
+            $('#btn_tab_eval').removeClass('disabled');
+
+            $('#btn_tab_getinfo').addClass('active');
+        }
+        else if(type==3) {
+            $('#btn_tab_getinfo').removeClass('disabled');
+            $('#btn_tab_appl').removeClass('disabled');
+            $('#btn_tab_eval').removeClass('disabled');
+            $('#btn_tab_contract').removeClass('disabled');
+
+            $('#btn_tab_getinfo').addClass('active');
+        }
+    }
+    var cur_tab_mode = 0; //0.info 1.appl 신청접수 2.eval 선정 3.contract 협약
+    var cur_idx_demobs = 0;
+    var cur_cur_page = 1;
+    var cur_filter1 = 9999;//필터 안쓸때
+    var cur_filter2 = 9998;//필터 안쓸때
 
     $('#plz_option_input').hide();
 
@@ -519,6 +534,103 @@
         // alert('모달창닫힘');
     });
 
+
+
+
+    function getDemoBsInfo(idx){
+        let param = {
+            idx_demo_business: idx
+        }
+
+        $.ajax({
+            type: 'post',
+            url: 'get_demobs_info', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(param),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'json',//받는 데이터 타입
+            success: function (result) {
+                //작업이 성공적으로 발생했을 경우
+                if(result.result_code=="SUCCESS"){
+                    //0:임시, 1:작성완료, 2:승인완료, 3:모집중, 4:모집 종료, 5:심사중, 6:심사완료, 7:이용계획 조정, 8:이용계획 확정,9:협약중, 10:협약완료, 11:사업 시작, 12:사업 종료, 13:결산중, 14:결산 완료
+                    var demobs_status= result.element.demo_bs_status;
+                    console.log(result.element);
+
+                    if(demobs_status<3)
+                        updateTabBtn(0);
+                    else if(demobs_status>=3 ||demobs_status<5)
+                        updateTabBtn(1);
+                    else if(demobs_status>=5 ||demobs_status<7)
+                        updateTabBtn(2);
+                    else if(demobs_status>=7 ||demobs_status<11)
+                        updateTabBtn(3);
+                }
+                pageLoad('get_demobs_info_page', param, 'title', '#tab_contents');
+            },
+            error: function () {
+                updateTabBtn(0);
+                pageLoad('empty', param, 'title', '#tab_contents');
+                //에러가 났을 경우 실행시킬 코드
+            }
+        }); //ajax 끝
+    }
+
+    function getUserDemoBsFilteredList(idx, cur_page){
+
+        let param = {
+            idx: idx,
+            cur_page: cur_page,
+            list_amount: 5,
+            order_field: "IDX_USER_DEMO_BS",
+            filter1: cur_filter1,
+            filter2: cur_filter2
+        }
+
+        $.ajax({
+            type: 'post',
+            url: 'get_user_demobs_list_filtered', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(param),//보내는 데이터
+            contentType: "application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType: 'text',//받는 데이터 타입
+            success: function (result) {
+                //작업이 성공적으로 발생했을 경우
+
+                $("#tab_contents").html(result);
+                //STATUS_001 :
+            },
+            error: function () {
+                //에러가 났을 경우 실행시킬 코드
+
+            }
+        }); //ajax 끝
+
+    }
+
+
+
+
+
+    function getDemoBsListPaged(cur_page){
+
+
+    }
+
+
+    function demoBsItemClick(idx, cur_page) {
+
+        if(cur_tab_mode!=0){
+            cur_tab_mode = 0;
+        }
+
+        cur_idx_demobs = idx;
+        cur_cur_page = cur_page;
+
+        $('.nav-link').removeClass("active");
+        if(!$('.nav-link').hasClass("disabled"))$('.nav-link').addClass("disabled");
+
+        getDemoBsInfo(idx);
+
+
+    }
 
 </script>
 

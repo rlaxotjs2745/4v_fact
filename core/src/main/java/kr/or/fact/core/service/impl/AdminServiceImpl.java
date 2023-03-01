@@ -35,6 +35,37 @@ public class AdminServiceImpl implements AdminService {
         this.adminMapper = adminMapper;
     }
 
+
+    @Override
+    public AdminFilteredCountVO getAdminFilteredCount(ParamPageListFilteredVO param){
+        return adminMapper.getAdminFilteredCount(param);
+
+    }
+
+    @Override
+    public int getAdminFilteredEachCount(ParamPageListFilteredVO param){
+        int total_count = 0;
+        AdminFilteredCountVO adminFilteredCount = adminMapper.getAdminFilteredCount(param);
+        if(param.getFilter1() == 9999)
+            total_count = adminFilteredCount.getTot_count();
+        else if (param.getFilter1() == 0)
+            total_count = adminFilteredCount.getConsole_user_count();
+        else if (param.getFilter1() == 1)
+            total_count = adminFilteredCount.getConsole_user_count();
+        else if (param.getFilter1() == 2)
+            total_count = adminFilteredCount.getConsole_admin_count();
+        else if (param.getFilter1() == 3)
+            total_count = adminFilteredCount.getAdmin_user_count();
+        else if (param.getFilter1() == 4)
+            total_count = adminFilteredCount.getSuper_admin_count();
+        return total_count;
+
+    }
+    @Override
+    public List<AdminVO> getAdminPagingList(ParamPageListFilteredVO param){
+        return adminMapper.getAdminPagingList(param);
+
+    }
     @Override
     public AdminVO getAuthAdmin(String admin_id, String admin_pw){
         AdminVO findAdmin = adminMapper.getAuthAdmin( admin_id,admin_pw);

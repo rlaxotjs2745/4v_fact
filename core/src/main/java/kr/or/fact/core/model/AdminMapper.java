@@ -8,6 +8,10 @@ import java.util.List;
 
 @Mapper
 public interface AdminMapper {
+
+    AdminFilteredCountVO getAdminFilteredCount(ParamPageListFilteredVO param);
+    List<AdminVO> getAdminPagingList(ParamPageListFilteredVO param);
+
     AdminVO getAdminInfoById(@Param("admin_id") String admin_id);
     AdminVO getAdminInfoByIdx(@Param("idx_admin") long idx_admin);
     AdminVO getAuthAdmin(@Param("admin_id") String admin_id,@Param("admin_pw") String admin_pw);

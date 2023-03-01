@@ -92,7 +92,7 @@
                                         <div>실증사업 수행관리</div>
                                     </a>
                                 </li>
-                                <li class="sidenav-item">
+                                <%--<li class="sidenav-item">
                                     <a href="javascript:pageLoad('b70_demo_bs_usage_pee_mng',{cur_page:1},'현황보고서 작성');" class="sidenav-link">
                                         <div>이용료 관리</div>
                                     </a>
@@ -111,7 +111,7 @@
                                     <a href="javascript:pageLoad('b30_demo_bs_usage_ext_mng','연장 신청 접수');" class="sidenav-link">
                                         <div>연장 신청 접수</div>
                                     </a>
-                                </li>
+                                </li>--%>
                             </ul>
 
                         </li>
@@ -128,7 +128,7 @@
                             </ul>
                         </li>
 
-                        <li class="sidenav-item active">
+                        <%--<li class="sidenav-item active">
                             <a href="javascript:pageLoad('b50_demo_bs_corp_cur_list',{cur_page:1},'분야별 기업현황');" class="sidenav-link">
                                 <div>사업별 기업현황</div>
                             </a>
@@ -138,7 +138,7 @@
                             <a href="javascript:pageLoad('b90_demo_bs_cert_mng',{cur_page:1},'실증성적서');" class="sidenav-link">
                                 <div>실증성적서</div>
                             </a>
-                        </li>
+                        </li>--%>
 
                     </ul>
                 </li>
@@ -214,7 +214,7 @@
 <%--                        </li>--%>
 </c:if>
                         <li class="sidenav-item<c:if test="${path == '/c60_site_popup_mng'}"> active</c:if>">
-                            <a href="javascript:pageLoad('c60_site_popup_mng',{cur_page:1},'자원예약관리');" class="sidenav-link">
+                            <a href="javascript:pageLoad('popup_mng',{cur_page:1},'포털 팝업 관리');" class="sidenav-link">
                                 <div>포털 팝업 관리</div>
                             </a>
                         </li>
@@ -224,19 +224,19 @@
                             </a>
                             <ul class="sidenav-menu">
                                 <li class="sidenav-item<c:if test="${path == '/c71_site_form_doc_mng'}"> active</c:if>">
-                                    <a href="javascript:pageLoad('c71_site_form_doc_mng',{cur_page:1},'상담');" class="sidenav-link">
+                                    <a href="javascript:pageLoad('c71_site_form_doc_mng',{cur_page:1},'관련양식 관리');" class="sidenav-link">
                                         <div>관련양식 관리</div>
                                     </a>
                                 </li>
                                 <li class="sidenav-item<c:if test="${path == '/c72_site_rule_doc_mng'}"> active</c:if>">
-                                    <a href="javascript:pageLoad('c72_site_rule_doc_mng',{cur_page:1},'1:1문의');" class="sidenav-link">
+                                    <a href="javascript:pageLoad('c72_site_rule_doc_mng',{cur_page:1},'관련규정 관리');" class="sidenav-link">
                                         <div>관련규정 관리</div>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="sidenav-item<c:if test="${path == '/c80_site_mng'}"> active</c:if>">
-                            <a href="javascript:pageLoad('c80_site_mng',{cur_page:1},'사이트 정보관리');" class="sidenav-link">
+                        <li class="sidenav-item<c:if test="${path == '/site_mng'}"> active</c:if>">
+                            <a href="javascript:pageLoad('site_mng',{cur_page:1},'사이트 정보관리');" class="sidenav-link">
                                 <div>사이트 정보 관리</div>
                             </a>
                         </li>
@@ -283,7 +283,7 @@
                                 <div>시설관련 데이터</div>
                             </a>
                         </li>
-                        <li class="sidenav-item">
+<%--                        <li class="sidenav-item">
                             <a href="javascript:pageLoad('assetdata_mng',{cur_page:1},'장비관련 데이터');" class="sidenav-link">
                                 <div>장비관련 데이터</div>
                             </a>
@@ -292,13 +292,11 @@
                             <a href="javascript:pageLoad('datareq_history',{cur_page:1},'데이터 전송 이력');" class="sidenav-link">
                                 <div>데이터 전송 이력</div>
                             </a>
-                        </li>
+                        </li>--%>
                     </ul>
                 </li>
 
-                <li class="sidenav-item<c:if test="${
-                path == '/g10_cur_asset_mng'
-                }"> active open</c:if>">
+                <%--<li class="sidenav-item<c:if test="${ path == '/g10_cur_asset_mng'}"> active open</c:if>">
                     <a href="javascript:void(0)" class="sidenav-link sidenav-toggle"><i class="sidenav-icon fas fa-calculator"></i>
                         <div>자산 관리</div>
                     </a>
@@ -322,7 +320,7 @@
                         </li>
 
                     </ul>
-                </li>
+                </li>--%>
                 <!--//-->
                 <li class="sidenav-item<c:if test="${
                 path == '/h11_write_sms' || path == '/h21_write_mail'
@@ -403,18 +401,23 @@
                     </a>
 
                     <ul class="sidenav-menu">
-                        <li class="sidenav-item<c:if test="${
-                        path == '/i11_user_mng' || path == '/i12_dormant_user_mng'
-                        }"> active open</c:if>">
+                        <li class="sidenav-item<c:if test="${path == '/i11_user_mng'}"> active</c:if>">
+                            <a href="javascript:pageLoad('user_mng',{cur_page:1},'고객관리');" class="sidenav-link">
+                                <div>고객관리</div>
+                            </a>
+                        </li>
+                        <li class="sidenav-item<c:if test="${path == '/i21_admin_mng'}"> active</c:if>">
+                            <a href="javascript:pageLoad('admin_mng',{cur_page:1},'직원 관리');" class="sidenav-link">
+                                <div>직원 관리</div>
+                            </a>
+                        </li>
+
+                        <%--<li class="sidenav-item<c:if test="${ path == '/user_mng' || path == '/admin_mng' }"> active open</c:if>">
                             <a href="#none" class="sidenav-link sidenav-toggle">
                                 <div>고객관리</div>
                             </a>
                             <ul class="sidenav-menu">
-                                <li class="sidenav-item<c:if test="${path == '/i11_user_mng'}"> active</c:if>">
-                                    <a href="javascript:pageLoad('i11_user_mng',{cur_page:1},'고객관리');" class="sidenav-link">
-                                        <div>고객관리</div>
-                                    </a>
-                                </li>
+
                                 <li class="sidenav-item<c:if test="${path == '/i12_dormant_user_mng'}"> active</c:if>">
                                     <a href="javascript:pageLoad('i12_dormant_user_mng',{cur_page:1},'휴면/제거 회원');" class="sidenav-link">
                                         <div>휴면/제거 회원</div>
@@ -428,23 +431,9 @@
                                 <div>직원관리</div>
                             </a>
                             <ul class="sidenav-menu">
-                                <li class="sidenav-item<c:if test="${path == '/i21_admin_mng'}"> active</c:if>">
-                                    <a href="javascript:pageLoad('i21_admin_mng',{cur_page:1},'직원 관리');" class="sidenav-link">
-                                        <div>직원 관리</div>
-                                    </a>
-                                </li>
-                                <%--<li class="sidenav-item">
-                                    <a href="javascript:pageLoad('i40_admin_mng','실증담당자 관리');" class="sidenav-link">
-                                        <div>실증담당자 관리</div>
-                                    </a>
-                                </li>
-                                <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('i50_admin_mng','재배사 관리');" class="sidenav-link">
-                                        <div>재배사 관리</div>
-                                    </a>
-                                </li>--%>
+
                             </ul>
-                        </li>
+                        </li>--%>
                     </ul>
                 </li>
                 <!--//-->
@@ -472,6 +461,7 @@
                     </ul>
                 </li>--%>
                 <!--//-->
+<%--
 
                 <li class="sidenav-item">
                     <a href="javascript:void(0);" class="sidenav-link sidenav-toggle"><i class="sidenav-icon ion ion-md-desktop"></i>
@@ -485,39 +475,20 @@
                             </a>
                             <ul class="sidenav-menu">
                                 <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('k11_system_authority_mng',{cur_page:1},'권한 관리');" class="sidenav-link">
-                                        <div>권한 관리</div>
+                                    <a href="javascript:pageLoad('admin_auth',{cur_page:1},'이드민 권한 관리');" class="sidenav-link">
+                                        <div>어드민 권한 관리</div>
                                     </a>
                                 </li>
-                            </ul>
-                        </li>
-                        <li class="sidenav-item">
-                            <a href="#none" class="sidenav-link sidenav-toggle">
-                                <div>관리자페이지 관리</div>
-                            </a>
-                            <ul class="sidenav-menu">
                                 <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('k21_admin_dashboad_mng',{cur_page:1},'대시보드 관리');" class="sidenav-link">
-                                        <div>대시보드 관리</div>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </li>
-                        <li class="sidenav-item">
-                            <a href="#none" class="sidenav-link sidenav-toggle">
-                                <div>콘솔페이지 관리</div>
-                            </a>
-                            <ul class="sidenav-menu">
-                                <li class="sidenav-item">
-                                    <a href="javascript:pageLoad('k31_console_dashboad_mng',{cur_page:1},'대시보드 관리');" class="sidenav-link">
-                                        <div>대시보드 관리</div>
+                                    <a href="javascript:pageLoad('console_auth',{cur_page:1},'콘솔 권한 관리');" class="sidenav-link">
+                                        <div>콘솔 권한 관리</div>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </li>
+--%>
 
                 <!--//-->
                 <li class="sidenav-item<c:if test="${
@@ -527,26 +498,26 @@
                         <div>기초자료관리</div>
                     </a>
                     <ul class="sidenav-menu">
-                        <li class="sidenav-item<c:if test="${path == '/l11_document_form_mng' || path == '/l12_document_rule_mng'}"> active open</c:if>">
+                        <li class="sidenav-item<c:if test="${path == '/form_mng' || path == '/rule_mng'}"> active open</c:if>">
                             <a href="#none" class="sidenav-link sidenav-toggle">
                                 <div>서식 관리</div>
                             </a>
                             <ul class="sidenav-menu">
-                                <li class="sidenav-item<c:if test="${path == '/l11_document_form_mng'}"> active</c:if>">
-                                    <a href="javascript:pageLoad('l11_document_form_mng',{cur_page:1},'양식문서관리');" class="sidenav-link">
+                                <li class="sidenav-item<c:if test="${path == '/doc_form_mng'}"> active</c:if>">
+                                    <a href="javascript:pageLoad('form_mng',{cur_page:1},'양식문서관리');" class="sidenav-link">
                                         <div>양식문서 관리</div>
                                     </a>
                                 </li>
-                                <li class="sidenav-item<c:if test="${path == '/l12_document_rule_mng'}"> active</c:if>">
-                                    <a href="javascript:pageLoad('l12_document_rule_mng',{cur_page:1},'규정문서관리');" class="sidenav-link">
+                                <li class="sidenav-item<c:if test="${path == '/doc_rule_mng'}"> active</c:if>">
+                                    <a href="javascript:pageLoad('rule_mng',{cur_page:1},'규정문서관리');" class="sidenav-link">
                                         <div>규정문서 관리</div>
                                     </a>
                                 </li>
                             </ul>
                         </li>
 
-                        <li class="sidenav-item<c:if test="${path == '/l20_code_mng'}"> active</c:if>">
-                            <a href="javascript:pageLoad('l20_code_mng',{cur_page:1},'시스템코드 관리')" class="sidenav-link">
+                        <li class="sidenav-item<c:if test="${path == '/code_mng'}"> active</c:if>">
+                            <a href="javascript:pageLoad('code_mng',{cur_page:1},'시스템코드 관리')" class="sidenav-link">
                                 <div>시스템코드 관리</div>
                             </a>
                         </li>

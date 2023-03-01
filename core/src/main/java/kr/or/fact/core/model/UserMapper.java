@@ -12,6 +12,8 @@ import java.util.List;
 @Mapper
 public  interface UserMapper {
 
+    UserFilteredCountVO getUserFilteredCount(ParamPageListFilteredVO param);
+
     UserVO getUserInfoById(@Param("user_id") String user_id);
     UserVO getUserInfoByIdx(@Param("idx_user") long idx_user);
     UserVO getAuthUser(@Param("user_id") String user_id,@Param("user_pw") String user_pw);
@@ -19,7 +21,9 @@ public  interface UserMapper {
     UserVO getUserInfoByNameAndMPhoneNum(@Param("user_name") String user_name,@Param("mphone_num") String mphone_num);
 
     List<UserVO> getAllUserList();
-    List<UserVO> getUserPagingList(ParamPageListFilteredVO paramPageListFilteredVO);
+
+    List<UserVO> getUserFilteredList(ParamPageListFilteredVO paramPageListFilteredVO);
+
     List<PagedUserListVO> getUserSpecialInfoPagingList(@Param("cur_page") int cur_page, @Param("list_amount") int list_amount, @Param("order_field") String order_field);
 
     int getUserCount(@Param("user_type") int user_type);//99 모든 유저

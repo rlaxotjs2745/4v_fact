@@ -2,9 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Page content -->
 <div class="container-fluid flex-grow-1 container-p-y">
-    <h4 class="font-weight-bold py-3 mb-4">권한 목록</h4>
+    <h4 class="font-weight-bold py-3 mb-4">시스템 권한 관리</h4>
 </div>
 <!-- Layout footer -->
-<%@include file ="layouts/frame_footer.jsp" %>
+<%@include file ="../layouts/frame_footer.jsp" %>
 <!-- / Layout footer -->
 <!-- / Page content -->

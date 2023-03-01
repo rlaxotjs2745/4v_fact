@@ -3,6 +3,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.fact.core.model.UserMapper">
+    <!--0:일반회원, 1:휴면회원, 2:탈퇴회원, 3:임의탈퇴-->
+    <select id="getUserFilteredCount" resultType="kr.or.fact.core.model.DTO.UserFilteredCountVO">
+        SELECT (SELECT COUNT(*) FROM TB_USER ) AS TOT_COUNT,
+               (SELECT COUNT(*) FROM TB_USER WHERE USER_TYPE = 0 ) AS NOMAL_COUNT,
+               (SELECT COUNT(*) FROM TB_USER WHERE USER_TYPE = 1 ) AS DORMANCY_COUNT,
+               (SELECT COUNT(*) FROM TB_USER WHERE USER_TYPE = 2 ) AS LEAVE_COUNT,
+                (SELECT COUNT(*) FROM TB_USER WHERE USER_TYPE = 3 ) AS BAN_COUNT
+        FROM SDK_SMS_SEND WHERE ROWNUM = 1
+    </select>
 
     <select id="getUserInfoById" parameterType="String" resultType="kr.or.fact.core.model.DTO.UserVO">
         SELECT * FROM TB_USER  WHERE user_id=#{user_id,jdbcType=VARCHAR}
@@ -45,21 +54,19 @@
     </select>
 
 
-    <select id="getUserPagingList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.UserVO">
+    <select id="getUserFilteredList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.UserVO">
         SELECT
                 *
         FROM (
-            SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
-                t.*
+            SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM,
+        A.*
             FROM (
                 SELECT * FROM TB_USER
-                    <if test="filter1 == 0">
-                        WHERE USER_TYPE != 1
+                    <if test="filter1 != 9999">
+                        WHERE USER_TYPE != #{filter1}
                     </if>
-                    <if test="filter1 == 1">
-                        WHERE USER_TYPE == 1
-                    </if>
-                     ) t
+
+                     ) A
             WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
             )
         WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}

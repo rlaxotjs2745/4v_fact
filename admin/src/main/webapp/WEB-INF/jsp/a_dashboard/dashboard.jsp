@@ -86,6 +86,19 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+<c:choose>
+    <c:when test="${applicationList eq null or applicationList.size() eq 0}">
+
+        <c:forEach var = "i" begin = "1" end = "4">
+            <tr><td class="text-center empty-list" colspan="4"></td></tr>
+        </c:forEach>
+        <tr class=""><td class="text-center empty" colspan="4">내용이 없습니다</td></tr>
+        <c:forEach var = "i" begin = "1" end = "5">
+            <tr><td class="text-center empty-list" colspan="4"></td></tr>
+        </c:forEach>
+
+    </c:when>
+    <c:otherwise>
                                     <c:forEach items="${applicationList}" var="app">
                                         <tr class="">
                                             <td class="">${app.demo_bs_code}</td>
@@ -94,11 +107,16 @@
                                             <td class="text-right">${app.recruit_count_limit}</td>
                                         </tr>
                                     </c:forEach>
+        <c:forEach var = "i" begin = "${applicationList.size()}" end = "9">
+            <tr><td class="text-center empty-list" colspan="4"></td></tr>
+        </c:forEach>
+    </c:otherwise>
+</c:choose>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        <div class="row px-3">
+<%--                        <div class="row px-3">
                             <div class="col-sm-6">
                                 <div class="dataTables_info" id="article-list_info" role="status" aria-live="polite">총 ${total_count}개 중 ${list_amount*(cur_page-1)+1}에서 ${list_amount*page_amount}까지</div>
                             </div>
@@ -115,7 +133,7 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                     </div>
 
                 </div>
@@ -172,95 +190,6 @@
         </div>
     </div>
 
-<%--    <div class="row">--%>
-<%--        <div class="col-sm-4 col-xl-2">--%>
-<%--            <div class="card mb-3">--%>
-<%--                <div class="card-body">--%>
-<%--                    <div class="d-flex justify-content-between">--%>
-<%--                        <div class="text-muted small mt-2">시설자재</div>--%>
-<%--                        <div class="text-large">000</div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-
-<%--        <div class="col-sm-4 col-xl-2">--%>
-<%--            <div class="card mb-3">--%>
-<%--                <div class="card-body">--%>
-<%--                    <div class="d-flex justify-content-between">--%>
-<%--                        <div class="text-muted small mt-2">ICT 실증장비</div>--%>
-<%--                        <div class="text-large">000</div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div class="col-sm-4 col-xl-2">--%>
-<%--            <div class="card mb-3">--%>
-<%--                <div class="card-body">--%>
-<%--                    <div class="d-flex justify-content-between">--%>
-<%--                        <div class="text-muted small mt-2">작물보호제/비료</div>--%>
-<%--                        <div class="text-large">000</div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div class="col-sm-4 col-xl-2">--%>
-<%--            <div class="card mb-3">--%>
-<%--                <div class="card-body">--%>
-<%--                    <div class="d-flex justify-content-between">--%>
-<%--                        <div class="text-muted small mt-2">스마트팜SW</div>--%>
-<%--                        <div class="text-large">000</div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div class="col-sm-4 col-xl-2">--%>
-<%--            <div class="card mb-3">--%>
-<%--                <div class="card-body">--%>
-<%--                    <div class="d-flex justify-content-between">--%>
-<%--                        <div class="text-muted small mt-2">생육모델</div>--%>
-<%--                        <div class="text-large">000</div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div class="col-sm-4 col-xl-2">--%>
-<%--            <div class="card mb-3">--%>
-<%--                <div class="card-body">--%>
-<%--                    <div class="d-flex justify-content-between">--%>
-<%--                        <div class="text-muted small mt-2">로봇</div>--%>
-<%--                        <div class="text-large">000</div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--    <div class="row d-flex justify-content-center">--%>
-<%--        <div class="col-sm-6 col-xl-3">--%>
-<%--            <div class="btn btn-lg btn-block btn-success w-100">--%>
-<%--                현황보고서 작성--%>
-<%--                <span class="fas fa-arrow-right"></span>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div class="col-sm-6 col-xl-3">--%>
-<%--            <div class="btn btn-lg btn-block btn-success">--%>
-<%--                신청서 평가--%>
-<%--                <span class="fas fa-arrow-right"></span>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div class="col-sm-6 col-xl-3">--%>
-<%--            <div class="btn btn-lg btn-block btn-success">--%>
-<%--                실증성적서 발급--%>
-<%--                <span class="fas fa-arrow-right"></span>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div class="col-sm-6 col-xl-3">--%>
-<%--            <div class="btn btn-lg btn-block btn-success">--%>
-<%--                SMS 작성--%>
-<%--                <span class="fas fa-arrow-right"></span>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
 </div>
 
 

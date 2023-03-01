@@ -99,6 +99,9 @@
                                         <td class="text-center"><fmt:formatDate value="${item.reg_date}" pattern="yyyy-MM-dd HH:MM"/></td>
                                     </tr>
                                 </c:forEach>
+                                <c:forEach var = "i" begin = "${visitReqList.size()}" end = "9">
+                                    <tr><td class="text-center empty-list" colspan="4"></td></tr>
+                                </c:forEach>
                             </c:otherwise>
                         </c:choose>
                                 </tbody>
@@ -139,8 +142,9 @@
         <div class="modal fade" id="modals-counsel-view">
             <div class="modal-dialog modal-lg">
                 <form class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">견학신청 접수</h5>
+
+                    <div class="modal-header bg-success">
+                        <h5 class="modal-title text-white font-weight-bold">견학신청 접수</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
                     <div class="modal-body pb-2">

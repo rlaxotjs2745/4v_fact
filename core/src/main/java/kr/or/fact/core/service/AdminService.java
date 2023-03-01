@@ -7,8 +7,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import java.util.List;
 
 public interface AdminService extends UserDetailsService {
+    AdminFilteredCountVO getAdminFilteredCount(ParamPageListFilteredVO param);
+    int getAdminFilteredEachCount(ParamPageListFilteredVO param);
+
+    List<AdminVO> getAdminPagingList(ParamPageListFilteredVO param);
 
     public AdminVO getAuthAdmin(String admin_id, String admin_pw);
+
+
     public AdminVO getAdminInfo(long idx_admin);
 //    public AdminVO getAdminIdx();
     public AdminVO login(String admin_id, String user_pw);

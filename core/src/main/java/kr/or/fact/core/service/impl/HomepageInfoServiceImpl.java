@@ -6,6 +6,7 @@ import kr.or.fact.core.model.HomepageMapper;
 import kr.or.fact.core.service.HomepageInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,16 +21,20 @@ public class HomepageInfoServiceImpl implements HomepageInfoService {
     public HomepageInfoVO getHomepageInfo(){
         return homepageMapper.getHomepageInfo();
     }
+
     @Override
+    @Transactional
     public void updateHomepageInfo(HomepageInfoVO homepageInfoVO){
         homepageMapper.updateHomepageInfo(homepageInfoVO);
-
     }
     @Override
+    @Transactional
     public void insertHomepageInfo(HomepageInfoVO homepageInfoVO){
         homepageMapper.insertHomepageInfo(homepageInfoVO);
     }
+
     @Override
+    @Transactional
     public void deleteHomepageInfo(long idx){
         homepageMapper.deleteHomepageInfo(idx);
     }

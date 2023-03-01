@@ -974,23 +974,21 @@ public class APIController {
         resultVO.setResult_str("필수 데이터가 없습니다.");
         resultVO.setResult_code("ERROR001");
 
-        if(homepageInfoVO.getHomepage_admin() != null && homepageInfoVO.getHomepage_admin() != "" &&
-                homepageInfoVO.getHomepage_admin_pnum()!= null && homepageInfoVO.getHomepage_admin_pnum()!= "" &&
-                homepageInfoVO.getEmail()!= null && homepageInfoVO.getEmail()!= ""){
+        if(homepageInfoVO.getIdx_homepage_info() != 0
+                && !homepageInfoVO.getHomepage_admin().isEmpty()
+                && !homepageInfoVO.getHomepage_admin_pnum().isEmpty()
+                && !homepageInfoVO.getEmail().isEmpty()){
 
             HomepageInfoVO resultHomepageInfo = homepageInfoService.getHomepageInfo();
 
-            HomepageInfoVO newInfo = new HomepageInfoVO();
-            newInfo.setHomepage_admin(homepageInfoVO.getHomepage_admin());
-            newInfo.setHomepage_admin_pnum(homepageInfoVO.getHomepage_admin_pnum());
-            newInfo.setEmail(homepageInfoVO.getEmail());
-
             if(resultHomepageInfo==null){
-                newInfo.setIs_current(1);
-                homepageInfoService.insertHomepageInfo(newInfo);
-            } else {
-                newInfo.setIs_current(0);
-                homepageInfoService.insertHomepageInfo(newInfo);
+                homepageInfoVO.setIs_current(1);
+                homepageInfoService.insertHomepageInfo(homepageInfoVO);
+            }
+            else {
+                homepageInfoVO.setIdx_homepage_info(resultHomepageInfo.getIdx_homepage_info());
+                homepageInfoVO.setIs_current(1);
+                homepageInfoService.updateHomepageInfo(homepageInfoVO);
             }
 
             resultVO.setResult_str("저장했습니다");

@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface UserService {
 
+    UserFilteredCountVO getUserFilteredCount(ParamPageListFilteredVO param);
+    int getUserFilteredEachCount(ParamPageListFilteredVO param);
     UserVO getAuthUser(String user_id, String user_pw);
     UserVO getUserInfo(long idx_user);
 
@@ -34,6 +36,8 @@ public interface UserService {
     int getActiveUserTotalCount(int sign_in_type);//비 휴면회원 모두
 
     List<UserVO> getActiveUserList(ParamPageListFilteredVO paramPageListFilteredVO);
+
+    List<UserVO> getUserFilteredList(ParamPageListFilteredVO paramPageListFilteredVO);
 
     List<UserVO> selectUserbyPage(int sign_in_type, int page);
 

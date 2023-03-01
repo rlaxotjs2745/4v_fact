@@ -7,6 +7,7 @@ import java.util.Date;
 @Data
 public class UserVO {
 
+    int row_num;
     //int row_num;
     long idx_user;//number	32			◯		인덱스	auto increase
     String user_id;//	varchar2	255					유저 아이디	이메일 기본, 변경 가능

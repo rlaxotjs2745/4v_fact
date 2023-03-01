@@ -27,7 +27,6 @@
                                     HOMEPAGE_ADMIN_PNUM = #{homepage_admin_pnum},
                                     EMAIL=#{email}
         WHERE IDX_HOMEPAGE_INFO = #{idx_homepage_info}
-
     </update>
     <update id="deleteHomepageInfo" parameterType="long">
         UPDATE TB_HOMEPAGE_INFO SET
@@ -73,6 +72,7 @@
         WHERE ROW_NUM <![CDATA[>]]> (#{filter1} -1)*#{list_amount}
 
     </select>
+
 
     <select id="getHomepageInfoIdx" resultType="kr.or.fact.core.model.DTO.HomepageInfoVO">
         SELECT *

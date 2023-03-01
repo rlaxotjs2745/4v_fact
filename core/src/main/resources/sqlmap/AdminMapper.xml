@@ -47,8 +47,7 @@
         FROM TB_ADMIN
     </select>
 
-    <select id="getAdminSpecialInfoPagingList" parameterType="hashmap"
-            resultType="kr.or.fact.core.model.DTO.PagedAdminListVO">
+    <select id="getAdminSpecialInfoPagingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.PagedAdminListVO">
         SELECT ADMIN_ID
              ,ADMIN_NAME
              ,MPHONE_NUM
@@ -65,9 +64,13 @@
     <select id="getAdminPagingList" parameterType="hashmap" resultType="kr.or.fact.core.model.DTO.AdminVO">
         SELECT *
         FROM (
-                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
+                 SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM,
                 t.*
-                 FROM TB_ADMIN t
+                 FROM (
+                     SELECT * FROM TB_ADMIN
+                        <if test='filter1 != 9999' > WHERE ADMIN_TYPE = #{filter1} </if>
+                     )t
+
                  WHERE ROWNUM <![CDATA[<=]]> #{cur_page} * #{list_amount}
              )
         WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} - 1) * #{list_amount}
@@ -189,9 +192,10 @@
         WHERE ADMIN_ID = #{admin_id}
     </select>
 
-    <select id="selectAdminbyIdx" resultType="kr.or.fact.core.model.DTO.AdminResVO">
-        SELECT * FROM (
-        SELECT A.*, FLOOR((ROWNUM - 1)/#{count} + 1) PAGE, (
+    <select id="selectAdminbyIdx" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.AdminResVO">
+        SELECT * FROM
+                      (
+            SELECT A.*, FLOOR((ROWNUM - 1)/#{count} + 1) PAGE, (
         SELECT MAX(FLOOR((ROWNUM - 1)/#{count} + 1)) FROM TB_ADMIN
         WHERE IDX_ADMIN <![CDATA[>=]]> 1
           <if test="corporate neq 100">
@@ -203,8 +207,8 @@
         <if test="corporate neq 100">
             AND CORPORATE = #{corporate}
         </if>
-        )
-        A)
+        )        A
+                          )
         WHERE PAGE = #{pageNum}
     </select>
 

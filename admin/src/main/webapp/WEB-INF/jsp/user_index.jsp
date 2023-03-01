@@ -15,15 +15,7 @@
 </h6>
 
 <div class="card-datatable table-responsive py-2">
-    <div id="" class="dataTables_wrapper dt-bootstrap4 no-footer">
-<%--        <div class="row">--%>
-<%--            <div class="col-sm-12 col-md-6">--%>
-<%--                <label class="mr-3">총 : <strong>150</strong>명</label><label class="mr-3">위탁 : <strong>70</strong>명</label><label class="mr-3">자율 : <strong>80</strong>명</label>--%>
-<%--            </div>--%>
-<%--            <div class="col-sm-12 col-md-6">--%>
-<%--                <div id="" class="dataTables_filter"><label>찾기:<input type="search" class="form-control form-control-sm" placeholder="기업/기관명, 기업 대표자, 이름, 전화번호" aria-controls="article-list"></label></div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
+    <div class="dataTables_wrapper dt-bootstrap4 no-footer">
         <div class="row">
             <div class="col-sm-12">
                 <table id="" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">

@@ -128,8 +128,8 @@
         <div class="modal fade" id="modals-counsel-view">
             <div class="modal-dialog modal-lg">
                 <form class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">홍보자료 안내</h5>
+                    <div class="modal-header bg-success">
+                        <h5 class="modal-title text-white font-weight-bold">홍보자료 안내</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
                     <div class="modal-body pb-2">

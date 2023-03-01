@@ -8,44 +8,20 @@
         SELECT * FROM TB_CO_WORKER ORDER BY CO_WORKER_ODER ASC
     </select>
 
-    <select id="getCoWorkerListPage" resultType="kr.or.fact.core.model.DTO.CoWorkerVO">
+    <select id="getCoWorkerListPage" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.CoWorkerVO">
         SELECT
-            IDX_CO_WORKER,
-            DEVISION,
-            DEPARTMENT,
-            DEPARTMENT_SUB,
-            JOB_TITLE,
-            JOB_ROLE,
-            TEL_NUM,
-            MPHONE_NUM,
-            EMAIL,
-            IS_SHOW,
-            REG_DATE,
-            COWORKER_NAME,
-            CO_WORKER_ODER
+            *
         FROM (
                  SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
-                ,IDX_CO_WORKER,
-                        DEVISION,
-                        DEPARTMENT,
-                        DEPARTMENT_SUB,
-                        JOB_TITLE,
-                        JOB_ROLE,
-                        TEL_NUM,
-                        MPHONE_NUM,
-                        EMAIL,
-                        IS_SHOW,
-                        REG_DATE,
-                        COWORKER_NAME,
-                        CO_WORKER_ODER
+                ,A.*
                  FROM (
                           SELECT * FROM TB_CO_WORKER
                           WHERE IS_SHOW = 0 OR IS_SHOW = 1
                           order by CO_WORKER_ODER asc
-                      )
-                 WHERE ROWNUM <![CDATA[<=]]> #{filter2}*#{list_amount}
+                      ) A
+                 WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
              )
-        WHERE ROW_NUM <![CDATA[>]]> (#{filter2} -1)*#{list_amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
 
     </select>
 

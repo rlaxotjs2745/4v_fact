@@ -26,19 +26,39 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
 
-
-
-
-
     @Autowired
     public UserServiceImpl(UserMapper userMapper){
         this.userMapper = userMapper;
 
     }
-    @Autowired
-    private SqlSession sqlsession;
 
 
+    @Override
+    public UserFilteredCountVO getUserFilteredCount(ParamPageListFilteredVO param){
+
+        return userMapper.getUserFilteredCount(param);
+    }
+    @Override
+    public int getUserFilteredEachCount(ParamPageListFilteredVO param){
+        UserFilteredCountVO userFilteredCountVO = userMapper.getUserFilteredCount(param);
+        int total_count = 0;
+        if(param.getFilter1()==9999){
+            total_count = userFilteredCountVO.getTot_count();
+        }
+        else if(param.getFilter1()==0){
+            total_count = userFilteredCountVO.getNomal_count();
+        }
+        else if(param.getFilter1()==1){
+            total_count = userFilteredCountVO.getDormancy_count();
+        }
+        else if(param.getFilter1()==2){
+            total_count = userFilteredCountVO.getLeave_count();
+        }
+        else if(param.getFilter1()==3){
+            total_count = userFilteredCountVO.getBan_count();
+        }
+        return total_count;
+    }
 
     @Override
     public UserVO getAuthUser(String user_id, String user_pw){
@@ -192,9 +212,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserVO> getActiveUserList(ParamPageListFilteredVO paramPageListFilteredVO){
-        paramPageListFilteredVO.setFilter1(0);//0: user type=일반, 탈퇴, 임의 탈퇴
-        return userMapper.getUserPagingList(paramPageListFilteredVO);
+    public List<UserVO> getActiveUserList(ParamPageListFilteredVO param){
+        param.setFilter1(0);//0: user type=일반, 탈퇴, 임의 탈퇴
+        return userMapper.getUserFilteredList(param);
+    }
+
+    @Override
+    public List<UserVO> getUserFilteredList(ParamPageListFilteredVO param){
+        return userMapper.getUserFilteredList(param);
     }
 
     @Override

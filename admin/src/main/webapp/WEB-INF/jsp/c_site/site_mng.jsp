@@ -9,214 +9,149 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!-- Layout content -->
-<div class="container-fluid flex-grow-1 container-p-y">
+    <div class="container-fluid flex-grow-1 container-p-y">
 
-    <h5 class="d-flex justify-content-between align-items-center w-100 mt-2">
-        <div><i class="pe-7s-browser text-success-custom"></i>홈페이지 정보 관리</div>
-    </h5>
+        <h5 class="d-flex justify-content-between align-items-center w-100 mt-2">
+            <div><i class="pe-7s-browser text-success-custom"></i>&nbsp;&nbsp;홈페이지 정보 관리</div>
+        </h5>
 
-    <div class="card px-4 pt-4 mb-4">
-        <h6 class="with-elements">
-            <div class="card-header-title">푸터 정보 입력</div>
-        </h6>
-        <form>
-            <div class="form-group row mb-4">
-                <div class="col-md-3 ">
-                    <label class="form-label text-muted">담당자</label>
-                    <div class="">
-                        <input id="homepage_admin" type="text" class="form-control form-control-md" oninput="chkOnlyName(event)">
-<%--                        <input id="homepage_admin" type="text" class="form-control form-control-md" value="${homepageInfo.homepage_admin}">--%>
-                        <%--<input class="mr-sm-4 mb-2 mb-sm-0" value="${homepageInfo.homepage_admin}">--%>
-                    </div>
-                </div>
-                <div class="col-md-3 ">
-                    <label class="form-label text-muted">연락처</label>
-                    <div class="">
-                        <input id="homepage_admin_pnum" type="text" class="form-control form-control-md" oninput="autoHyphen2(this)" maxlength="13">
-<%--                        <input id="homepage_admin_pnum" type="text" class="form-control form-control-md" value="${homepageInfo.homepage_admin_pnum}">--%>
-                        <%--<input class="mr-sm-4 mb-2 mb-sm-0" value="${homepageInfo.homepage_admin_pnum}">--%>
-                    </div>
-                </div>
-                <div class="col-md-3 ">
-                    <label class="form-label text-muted">이메일</label>
-                    <div class="">
-                        <input id="email" type="text" class="form-control form-control-md" onkeyup="chkEmail(event)">
-<%--                        <input id="email" type="text" class="form-control form-control-md" value="${homepageInfo.email}">--%>
-                        <%--<input class="mr-sm-4 mb-2 mb-sm-0" value="${homepageInfo.homepage_admin_pnum}">--%>
-                    </div>
-                </div>
-                <div class="ml-auto">
-                    <%--<label class="form-label d-none d-md-block">&nbsp;</label>--%>
-                    <label class="form-label text-muted"></label>
-                    <div class="card-header-elements ml-auto">
-                        <button id="btn_save_homepage_info" type="button" class="btn btn-success float-right">저장</button>
-                    </div>
-
-                </div>
+        <div class="card mt-2">
+            <div class="card-header font-weight-bold with-elements text-white bg-success">
+                <div>푸터 정보 입력</div>
             </div>
-        </form>
-        <div class="card-datatable table-responsive pt-0 pb-3">
-            <div id="table-list" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <table id="" class="table table-striped table-bordered dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="" data-minimum-count-columns="10" >
-                            <thead class="bg-success text-white font-weight-bold">
-                            <tr role="row">
-                                <th class="text-center sorting" style="width:10%">성명</th>
-                                <th class="text-center sorting" style="width:20%">전화번호</th>
-                                <th class="text-center sorting" style="width:auto">이메일</th>
-<%--                                <th class="text-center sorting" style="width:10%">변경</th>--%>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:choose>
-                                <c:when test="${fn:length(homepageInfoList)>0}">
-                                    <c:forEach items = "${homepageInfoList}" var ="homepageinfo">
-                                        <tr class="homepageinfo_entity_${homepageinfo.is_current}" data-idx="${homepageinfo.idx_homepage_info}">
-                                            <td class="text-center">${homepageinfo.homepage_admin}</td>
-                                            <td class="text-center">${homepageinfo.homepage_admin_pnum}</td>
-                                            <td class="text-center">${homepageinfo.email}</td>
-<%--                                            <td data-name="button" class="text-center"><button data-type="button" onclick="rowApllySet(this)" class="btn btn-success" data-idx="${homepageinfo.idx_homepage_info}">적용</button></td>--%>
-                                        </tr>
-                                    </c:forEach>
-                                </c:when>
-                                <c:otherwise>
-                                    <tr class="no_data">
-                                        <td colspan="8" class="text-center">등록된 푸터의 내용이 없습니다.</td>
-                                    </tr>
-                                </c:otherwise>
-                            </c:choose>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <c:if test="${hi_total_count ne 0}">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" role="status" aria-live="polite">총 ${total_count}개 중 ${hi_list_amount*(cur_page-1)+1}에서 ${total_count}까지</div>
-                        </div>
-                        <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers" >
-                                <ul class="pagination">
-                                    <c:set var="name" value="${total_count/list_amount}" />
-                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{cur_page:1, filter1:1, filter2:'${cur_page}'},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
-                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{cur_page:${cur_page-1}, filter1:'${cur_page-1}', filter2:${cur_page}},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
-                                    <c:forEach var="i" begin="1" end="${page_amount}">
-                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('c80_site_mng',{cur_page:'${(cur_sector-1)*page_amount+i}', filter1:'${(cur_sector-1)*page_amount+i}', filter2:'${cur_page}'},'홈페이지 정보 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
-                                    </c:forEach>
-                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c80_site_mng',{cur_page:'${cur_page+1}', filter1:'${cur_page+1}', filter2:'${cur_page}'},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
-                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c80_site_mng',{cur_page:'${tot_page}', filter1:'${tot_page}', filter2:'${cur_page}'},'홈페이지 정보 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
-                                </ul>
-                            </div>
+            <form>
+                <div class="form-row mb-4">
+                    <div class="col-md-3 ">
+                        <input type="hidden" id="idx_homepage_info" value="${homepageInfo.idx_homepage_info}">
+                        <label class="form-label text-muted">담당자</label>
+                        <div class="">
+                            <input id="homepage_admin" type="text" class="form-control form-control-md" oninput="chkOnlyName(event)" value="${homepageInfo.homepage_admin}">
                         </div>
                     </div>
-                </c:if>
-            </div>
+                    <div class="col-md-3 ">
+                        <label class="form-label text-muted">연락처</label>
+                        <div class="">
+                            <input id="homepage_admin_pnum" type="text" class="form-control form-control-md" oninput="autoHyphen2(this)" maxlength="13" value="${homepageInfo.homepage_admin_pnum}">
+                        </div>
+                    </div>
+                    <div class="col-md-3 ">
+                        <label class="form-label text-muted">이메일</label>
+                        <div class="">
+                            <input id="email" type="text" class="form-control form-control-md" onkeyup="chkEmail(event)" value="${homepageInfo.email}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-muted"></label>
+                        <div class="card-header-elements ml-auto">
+                            <button id="btn_save_homepage_info" type="button" class="btn btn-outline-success font-weight-bold">저장</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-    </div>
 
-    <hr class="container-m-nx mt-4 mb-4 ml-2 mr-2">
+        <hr class="container-m-nx mt-4 mb-4 ml-2 mr-2">
 
-    <div class="card">
-        <h6 class="card-header with-elements">
-            <div class="card-header-title">홈페이지 조직도에 표시할 직원 목록</div>
-            <div class="card-header-elements ml-auto">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modals-default">+ 직원 등록</button>
+        <div class="card">
+            <div class="card-header font-weight-bold with-elements text-white bg-success">
+                <div class="card-header-title">홈페이지 조직도에 표시할 직원 목록</div>
+                <div class="card-header-elements ml-auto">
+                    <button type="button" class="btn btn-sm btn-outline-white font-weight-bold" data-toggle="modal" data-target="#modals-default">+ 직원 등록</button>
+                </div>
             </div>
-        </h6>
-        <div class="card-datatable table-responsive pt-0 pb-3">
-            <div id="table-list" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <table id="" class="table table-striped table-bordered dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="" data-minimum-count-columns="10" >
-                            <thead class="bg-success text-white font-weight-bold">
-                            <tr role="row">
-                                <th class="text-center px-2" style="width:6%">순서</th>
-                                <th class="text-center sorting" style="width:10%">소속</th>
-                                <th class="text-center sorting" style="width:10%">성명</th>
-                                <th class="text-center sorting" style="width:auto">담당 업무</th>
-                                <th class="text-center sorting" style="width:10%">직위</th>
-                                <th class="text-center sorting" style="width:16%">전화번호</th>
-                                <th class="text-center px-2" style="width:16%">이메일</th>
-                                <th class="text-center px-2" style="width:10%">변경</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+            <div class="card-datatable table-responsive pt-0 pb-3">
+                <div class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="table_demo_bs" class="table table-striped table-bordered dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
+                                <thead class="bg-light-dark text-white font-weight-bold">
+                                    <tr role="row">
+                                        <th class="text-center px-2" style="width:6%">순서</th>
+                                        <th class="text-center sorting" style="width:10%">소속</th>
+                                        <th class="text-center sorting" style="width:10%">성명</th>
+                                        <th class="text-center sorting" style="width:auto">담당 업무</th>
+                                        <th class="text-center sorting" style="width:10%">직위</th>
+                                        <th class="text-center sorting" style="width:12%">전화번호</th>
+                                        <th class="text-center px-2" style="width:14%">이메일</th>
+                                        <th class="text-center px-2" style="width:6%">표시함</th>
+                                        <th class="text-center px-2" style="width:10%">변경</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                             <c:choose>
-                                <c:when test="${fn:length(coWorkerVOList)>0}">
-                                    <c:forEach items = "${coWorkerVOList}" var ="coworker">
-                                        <tr class="coworker-entity <c:if test="${coworker.is_show eq 1}">checked_show</c:if>" id="${coworker.idx_co_worker}">
-                                            <td class="text-center">${coworker.co_worker_oder}</td>
-<%--                                            <td class="text-center" name="checkbox">--%>
-<%--                                                <label class="form-check">--%>
-<%--                                                    <input type="checkbox" class="form-check-input" <c:if test="${coworker.is_show eq 1}">checked</c:if>>--%>
-<%--                                                </label>--%>
-<%--                                            </td>--%>
-                                            <td class="text-center">${coworker.devision}</td>
-                                            <td class="text-center">${coworker.coworker_name}</td>
-                                            <td class="text-center">${coworker.job_role}</td>
-                                            <td class="text-center">${coworker.job_title}</td>
-                                            <td class="text-center">${coworker.tel_num}</td>
-                                            <td class="text-center">${coworker.email}</td>
-                                            <td class="text-center">
-                                                <div class="btn-group">
-                                                    <button class="btn btn-sm btn-default" data-toggle="modal" data-target="#modals-modify"><span class="fas fa-pen" > </span></button>
-                                                    <button onclick="organizationDelete(this)" class="btn btn-sm btn-default"><span class="fas fa-trash-alt" > </span></button>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                <c:when test="${coWorkerVOList eq null or coWorkerVOList.size() eq 0}">
+                                    <c:forEach var = "i" begin = "1" end = "4">
+                                    <tr><td class="text-center empty-list" colspan="9"></td></tr>
+                                    </c:forEach>
+                                    <tr class=""><td class="text-center empty" colspan="9">내용이 없습니다</td></tr>
+                                    <c:forEach var = "i" begin = "1" end = "5">
+                                    <tr><td class="text-center empty-list" colspan="9"></td></tr>
                                     </c:forEach>
                                 </c:when>
                                 <c:otherwise>
-
-                                    <tr class="">
-                                        <td colspan="8" class="text-center">등록된 조직도의 내용이 없습니다.</td>
+                                    <c:forEach items = "${coWorkerVOList}" var ="coworker">
+                                    <tr class="coworker-entity id="${coworker.idx_co_worker}">
+                                        <td class="text-center">${coworker.co_worker_oder}</td>
+                                        <td class="text-center">${coworker.devision}</td>
+                                        <td class="text-center">${coworker.coworker_name}</td>
+                                        <td class="text-center">${coworker.job_role}</td>
+                                        <td class="text-center">${coworker.job_title}</td>
+                                        <td class="text-center">${coworker.tel_num}</td>
+                                        <td class="text-center">${coworker.email}</td>
+                                        <td class="text-center"><c:if test="${coworker.is_show eq 1}">표시</c:if><c:if test="${coworker.is_show eq 0}">표시안함</c:if></td>
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                <button class="btn btn-sm btn-default" data-toggle="modal" data-target="#modals-modify"><span class="fas fa-pen" > </span></button>
+                                                <button onclick="organizationDelete(this)" class="btn btn-sm btn-default"><span class="fas fa-trash-alt" > </span></button>
+                                            </div>
+                                        </td>
                                     </tr>
-
-
-
+                                    </c:forEach>
+                                    <c:forEach var = "i" begin = "${coWorkerVOList.size()}" end = "9">
+                                    <tr><td class="text-center empty-list" colspan="9"></td></tr>
+                                    </c:forEach>
                                 </c:otherwise>
-
-
-
-
                             </c:choose>
-
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <c:if test="${cw_total_count ne 0}">
+            <c:if test="${total_count ne 0}">
                 <div class="row">
                     <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="" role="status" aria-live="polite">총 ${cw_total_count}개 중 ${cw_list_amount*(cw_cur_page-1)+1}에서 ${cw_total_count}까지</div>
+                        <div class="dataTables_info" role="status" aria-live="polite">총 ${total_count}개
+                            중 ${list_amount*(cur_page-1)+1}에서 <c:choose><c:when
+                                    test="${(list_amount*(cur_page-1)+list_amount)>total_count}">${total_count}</c:when><c:otherwise>${(list_amount*(cur_page-1)+list_amount)}</c:otherwise></c:choose>까지
+                        </div>
                     </div>
                     <div class="col-sm-12 col-md-7">
                         <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
                             <ul class="pagination">
-                                <c:set var="name" value="${cw_total_count/cw_list_amount}" />
-                                <c:if test="${cw_is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{cur_page:1+200000, filter1:${hi_cur_page}, filter2:1},'홈페이지 조직도');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
-                                <c:if test="${cw_is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('c80_site_mng',{cur_page:${cw_cur_page-1}+200000, filter1:${hi_cur_page}, filter2:${cw_cur_page-1}},'홈페이지 정보 조직도');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
-                                <c:forEach var="i" begin="1" end="${cw_page_amount}">
-                                    <li class="paginate_button page-item <c:if test="${(cw_cur_sector-1)*cw_page_amount+i eq cw_cur_page}">active</c:if>"><a href="javascript:pageLoad('c80_site_mng',{cur_page:${(cw_cur_sector-1)*cw_page_amount+i}+200000, filter1:${hi_cur_page}, filter2:${(cw_cur_sector-1)*cw_page_amount+i}},'홈페이지 조직도');" class="page-link">${(cw_cur_sector-1)*cw_page_amount+i}</a></li>
+
+                                <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('site_mng',{cur_page:1,filter1:'${filter1}', filter2:'${filter2}'},'시스템코드 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('site_mng',{cur_page:'${cur_page-1}',filter1:'${filter1}',filter2:'${filter2}'},'시스템코드 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+
+                                <c:forEach var="i" begin="1" end="${remain_page}">
+                                    <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('site_mng',{cur_page:'${(cur_sector-1)*page_amount+i}',filter1:'${filter1}',filter2:'${filter2}'},'시스템코드 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
                                 </c:forEach>
-                                <c:if test="${cw_is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c80_site_mng',{cur_page:${cw_cur_page+1}+200000, filter1:${hi_cur_page}, filter2:${cw_cur_page+1}},'홈페이지 조직도');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
-                                <c:if test="${cw_is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('c80_site_mng',{cur_page:${cw_tot_page}+200000, filter1:${hi_cur_page}, filter2:${cw_tot_page}},'홈페이지 조직도');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+
+                                <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('site_mng',{cur_page:'${cur_page+1}',filter1:'${filter1}',filter2:'${filter2}'},'시스템코드 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('site_mng',{cur_page:'${tot_page}',filter1:'${filter1}',filter2:'${filter2}'},'시스템코드 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
                             </ul>
                         </div>
                     </div>
                 </div>
             </c:if>
+            </div>
         </div>
     </div>
-
     <div class="modal fade" id="modals-default">
         <div class="modal-dialog modal-lg">
             <form class="modal-content"  action="insert_coworker" method="post">
-                <div class="modal-header">
-                    <h5 class="modal-title">직원 정보 등록</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title text-white font-weight-bold">직원 정보 등록</h5>
+                    <button type="button text-white font-weight-bold" class="close" data-dismiss="modal" aria-label="Close">×</button>
                 </div>
                 <div class="modal-body pb-2">
                     <div class="form-row">
@@ -232,12 +167,14 @@
                                 </tr>
                                 <tr>
                                     <th class="text-center bg-light">휴대폰 번호</th>
+
                                     <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="mphone_num" oninput="autoHyphen2(this)" maxlength="13"></td>
                                     <th class="text-center bg-light">순서 번호</th>
                                     <td class="text-center">
                                         <input type="text" class="form-control form-control-sm" value="" id="co_worker_oder">
                                     </td>
                                 </tr>
+
 
                                 <tr>
                                     <th class="text-center bg-light">직책</th>
@@ -247,12 +184,14 @@
                                 </tr>
 
                                 <tr>
+
                                     <th class="text-center bg-light">소속정보</th>
                                     <th class="text-center bg-light">부서</th>
                                     <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="devision"></td>
                                     <th class="text-center bg-light">소속</th>
                                     <td class="text-center"><input type="text" class="form-control form-control-sm" value="" id="department"></td>
                                 </tr>
+
                                 <tr>
                                     <th class="text-center bg-light">센터정보</th>
                                     <th class="text-center bg-light">소속부서</th>
@@ -281,7 +220,7 @@
                                         </select>
 
                                         <br>
-                                        <small id="web_id_guide"></small>
+                                        <%--<small id="web_id_guide"></small>--%>
                                     </td>
                                     <%--                                    <th class="text-center bg-light" style="width:13%">비밀번호</th>--%>
                                     <%--                                    <td class="" colspan="2" style="width:34%"><small>등록한 이메일로 초기 비밀번호가 발송됩니다.</small></td>--%>
@@ -299,7 +238,6 @@
                             </table>
                         </div>
                     </div>
-
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
@@ -339,9 +277,6 @@
             </form>
         </div>
     </div>
-
-
-
 
     <%--  모달 수정 팝업  --%>
     <div class="modal fade" id="modals-modify">
@@ -449,7 +384,8 @@
         </div>
     </div>
 
-</div>
+
+
 <!-- Layout footer -->
 
 <%@include file ="../layouts/frame_footer.jsp" %>
@@ -603,22 +539,7 @@
 
     $(function() {
 
-        /*$('#btn_mode_new').on('click', function() {
 
-            if($('.mode-view').hasClass('d-non') === false){
-                $('.mode-view').addClass('d-non');
-            }
-            if($('.mode-edit').hasClass('d-non') === false){
-                $('.mode-edit').addClass('d-non');
-            }
-            if($('.mode-new').hasClass('d-non') === true){
-                $('.mode-new').removeClass('d-non');
-            }
-
-            $('#modals-business').modal('show');
-
-
-        });*/
 
         // 모달 팝업 띄울 시 발생하는 이벤트 (이벤트명 : show.bs.modal)
         $('#modals-business').on('show.bs.modal', function (event) {
@@ -654,17 +575,6 @@
 
     });
 
-    const autoHyphen = (target) => {
-        target.value = target.value
-            .replace(/[^0-9]/g, '')
-            .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
-    }
-
-    const autoHyphen2 = (target) => {
-        target.value = target.value
-            .replace(/[^0-9]/g, '')
-            .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
-    }
 
     $('#btn_save_homepage_info').on('click', function() {
         const namePattern = /^[가-힣]{2,}$/;
@@ -681,10 +591,14 @@
         }
 
 
-        var param = {homepage_admin:$("#homepage_admin").val(),
+        var param = {
+            idx_homepage_info:0+$("#idx_homepage_info").val(),
+            homepage_admin:$("#homepage_admin").val(),
             homepage_admin_pnum:$("#homepage_admin_pnum").val(),
             email:$("#email").val()};
+
         console.log(param);
+
         $.ajax({
             type: 'post',
             url :'save_homepage_info', //데이터를 주고받을 파일 주소 입력
@@ -696,10 +610,6 @@
                 console.log(result);
                 if (result.result_code === "SUCCESS") {
                     alert(result.result_str);
-                    $("#homepage_admin").val('')
-                    $("#homepage_admin_pnum").val('')
-                    $("#email").val('')
-                    pageLoad('c80_site_mng',{cur_page:ranN, filter1:1, filter2:1},'사이트 정보관리');
                 }
                 else {
 
