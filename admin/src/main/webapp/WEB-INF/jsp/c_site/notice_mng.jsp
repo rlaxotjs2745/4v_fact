@@ -13,7 +13,7 @@
             <div><i class="pe-7s-comment text-success-custom"></i>&nbsp;&nbsp;공지사항 관리</div>
         </h5>
 
-        <div class="card px-4 pt-2 mb-2 bg-">
+        <div class="card px-4 pt-2 mb-2">
             <div class="form-row mb-4">
 
                 <div class="col-md-5 ">

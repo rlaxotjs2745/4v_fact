@@ -67,9 +67,9 @@
                           WHERE IS_CURRENT = 0 OR IS_CURRENT = 1
                           order by IDX_HOMEPAGE_INFO desc
                       )
-                 WHERE ROWNUM <![CDATA[<=]]> #{filter1}*#{list_amount}
+                 WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
              )
-        WHERE ROW_NUM <![CDATA[>]]> (#{filter1} -1)*#{list_amount}
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
 
     </select>
 

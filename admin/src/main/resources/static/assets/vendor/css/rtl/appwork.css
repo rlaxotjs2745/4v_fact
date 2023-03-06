@@ -4886,13 +4886,14 @@ html:not([dir=rtl]) .input-group-prepend>.btn-group:last-child>.btn:not(.btn-def
     line-height: 1.28;
     width: 14rem;
 }
+
 .nav-link.disabled {
     /*border-color: transparent !important;*/
     background: transparent !important;
     color: #d1d2d3 !important
 }
 
-nav .nav-item,.nav .nav-link,
+.nav .nav-item,.nav .nav-link,
 .tab-pane,
 .tab-pane .card-body {
     outline: none !important

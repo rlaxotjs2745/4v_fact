@@ -114,7 +114,6 @@ public class IndexController extends BaseController {
         }else{
             _uri = "redirect:/login";
         }
-//        System.out.println("_path:"+_path);
 
         String _srv = "";
         String[] activeProfiles = env.getActiveProfiles();
@@ -122,13 +121,7 @@ public class IndexController extends BaseController {
             String activeProfile = activeProfiles[0];
             if (activeProfile.equals("local")) {
                 model.addAttribute("pageOnLoad", 1);
-//                _srv = "gimje";
                 model.addAttribute("path", _path);
-//            } else {
-//                if(_path.indexOf("emonstration")==-1) {
-//                    _path = "/"+_srv+"/Demonstration/admin" + _path;
-//                }
-//                _srv = "sangju";
             }
         }
         return _uri;
@@ -231,8 +224,6 @@ public class IndexController extends BaseController {
         model.addAttribute("consultingCount", consultingCount);
 
         VisitReqCountVO visitReqCountVO = visitService.getVisitReqCount();
-
-        //model.addAttribute("visitCount", visitReqCountVO.getCount_new());
 
         return "a_dashboard/dashboard";
     }
@@ -436,13 +427,6 @@ public class IndexController extends BaseController {
         int total_count = demoBsApplicationService.getAvailableDemoBsApplTotalCount();
 
         param.setOrder_field("IDX_DEMO_BUSINESS");
-        /*ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
-        listPagingParamVO.setCur_page(page);
-        listPagingParamVO.setAmount(list_amount);
-        listPagingParamVO.setFilter1(CONSTANT.FILTER_NOT_USED);
-        listPagingParamVO.setFilter2(CONSTANT.FILTER_NOT_USED);
-        listPagingParamVO.setOrder_field("IDX_DEMO_BUSINESS");*/
-
 
         List<AdminApplDemoBsHeaderListVO>  adminApplHeaderListVOS = demoBsApplicationService.getAvailableDemoBsApplPagingList(param);
         //System.out.println(adminApplHeaderListVOS);
@@ -484,13 +468,6 @@ public class IndexController extends BaseController {
         int total_count = demoBsApplicationService.getAvailableDemoBsApplTotalCount();
 
         param.setOrder_field("IDX_DEMO_BUSINESS");
-        /*ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
-        listPagingParamVO.setCur_page(page);
-        listPagingParamVO.setAmount(list_amount);
-        listPagingParamVO.setFilter1(CONSTANT.FILTER_NOT_USED);
-        listPagingParamVO.setFilter2(CONSTANT.FILTER_NOT_USED);
-        listPagingParamVO.setOrder_field("IDX_DEMO_BUSINESS");*/
-
 
         List<AdminApplDemoBsHeaderListVO>  adminApplHeaderListVOS = demoBsApplicationService.getAvailableDemoBsApplPagingList(param);
         //System.out.println(adminApplHeaderListVOS);
@@ -533,14 +510,6 @@ public class IndexController extends BaseController {
         int total_count = demoBsApplicationService.getAvailableDemoBsEvalTotalCount();
 
         param.setOrder_field("IDX_DEMO_BUSINESS");
-/*
-        ListPagingParamVO listPagingParamVO = new ListPagingParamVO();
-        listPagingParamVO.setCur_page(page);
-        listPagingParamVO.setAmount(list_amount);
-        listPagingParamVO.setFilter1(CONSTANT.FILTER_NOT_USED);
-        listPagingParamVO.setFilter2(CONSTANT.FILTER_NOT_USED);
-        listPagingParamVO.setOrder_field("IDX_DEMO_BUSINESS");
-*/
 
         List<AdminApplDemoBsHeaderListVO>  adminApplHeaderListVOS = demoBsApplicationService.getAvailableDemoBsEvalPagingList(param);
 
@@ -750,9 +719,6 @@ public class IndexController extends BaseController {
         int filter1 = param.getFilter1();
         int filter2 = param.getFilter2();
         
-        /*DemoBsConsultingVO param0 = new DemoBsConsultingVO();
-        param0.setConsulting_status(-1);*/
-        
         int total_count = consultingService.getCountConsulting(param);
 
         param.setOrder_field("CONSULTING_STATUS");
@@ -841,9 +807,6 @@ public class IndexController extends BaseController {
             return "redirect:/login";
         }
 
-
-
-
         return "c_site/visit_mng";
     }
 
@@ -905,48 +868,6 @@ public class IndexController extends BaseController {
         model.addAttribute("filter2", param.getFilter2());
 
         makePagedItem(model,total_count,list_amount,page_amount,cur_page);
-/*
-        model.addAttribute("cur_page",page);
-        model.addAttribute("list_amount",list_amount);
-
-        int tot_page = total_count/list_amount+1;
-        if(total_count%list_amount==0) tot_page-=1;
-
-        int tot_sector = tot_page/page_amount+1;
-        if(tot_page%page_amount==0) tot_sector-=1;
-
-        int cur_sector = page/page_amount+1;
-        if(page%page_amount==0) cur_sector-=1;
-
-        boolean is_past = false;
-        boolean is_prev = false;
-        boolean is_next = false;
-        boolean is_last = false;
-        boolean is_active = false;
-
-        if(page!=tot_page && tot_page>1) is_next = true;
-
-        if(page!=1 && tot_page>1) is_prev = true;
-
-        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
-
-        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
-
-        if(tot_page<=page_amount){
-            is_past = false;
-            is_last = false;
-            page_amount = tot_page;
-        }
-
-        model.addAttribute("tot_page",tot_page);
-        model.addAttribute("tot_sector",tot_sector);
-        model.addAttribute("cur_sector",cur_sector);
-        model.addAttribute("is_past",is_past);
-        model.addAttribute("is_prev",is_prev);
-        model.addAttribute("is_next",is_next);
-        model.addAttribute("is_last",is_last);
-        model.addAttribute("list_amount",list_amount);
-        model.addAttribute("page_amount",page_amount);*/
 
         return "c_site/notice_mng";
     }
@@ -987,101 +908,11 @@ public class IndexController extends BaseController {
         model.addAttribute("filter2", param.getFilter2());
 
         makePagedItem(model,total_count,list_amount,page_amount,cur_page);
-        /*
 
 
-        model.addAttribute("cur_page",page);
-        model.addAttribute("list_amount",list_amount);
-
-        int tot_page = total_count/list_amount+1;
-        if(total_count%list_amount==0) tot_page-=1;
-
-        int tot_sector = tot_page/page_amount+1;
-        if(tot_page%page_amount==0) tot_sector-=1;
-
-        int cur_sector = page/page_amount+1;
-        if(page%page_amount==0) cur_sector-=1;
-
-        boolean is_past = false;
-        boolean is_prev = false;
-        boolean is_next = false;
-        boolean is_last = false;
-        boolean is_active = false;
-
-        if(page!=tot_page && tot_page>1) is_next = true;
-
-        if(page!=1 && tot_page>1) is_prev = true;
-
-        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
-
-        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
-
-        if(tot_page<=page_amount){
-            is_past = false;
-            is_last = false;
-            page_amount = tot_page;
-        }
-        model.addAttribute("tot_page",tot_page);
-        model.addAttribute("tot_sector",tot_sector);
-        model.addAttribute("cur_sector",cur_sector);
-        model.addAttribute("is_past",is_past);
-        model.addAttribute("is_prev",is_prev);
-        model.addAttribute("is_next",is_next);
-        model.addAttribute("is_last",is_last);
-        model.addAttribute("list_amount",list_amount);
-        model.addAttribute("page_amount",page_amount);
-
-        model.addAttribute("filter1",param.getFilter1());
-        model.addAttribute("filter2",param.getFilter2());
-
-        param.setFilter1(1);
-        param.setFilter2(9998);
-        int count_req = eventContentMapper.getEventContentCount2(param);
-        model.addAttribute("count_req",count_req);
-
-        param.setFilter1(0);
-        int count_comp = eventContentMapper.getEventContentCount2(param);
-        model.addAttribute("count_comp",count_comp);*/
-
-        return "c_site_mng/event_mng";
+        return "c_site/event_mng";
     }
-/*
-    @RequestMapping(value = "/c421_site_event_mng",method = RequestMethod.POST)
-    public String c421_site_event_mng(@RequestBody ParamPageListFilteredVO param,
-                                     Model model,
-                                     @CookieValue(name = "access_token",required = false) String access_token){
-        AdminVO adminVO = null;
-        if(access_token!=null){
-            adminVO = getVerityAuth(access_token);
-            if(adminVO==null || adminVO.is_expired())
-            {
-                return "redirect:/login";
-            }
-            model.addAttribute("admin", adminVO);
-            setProfile(model);
-        }else{
-            return "redirect:/login";
-        }
 
-        if(param.getList_amount()==0) param.setList_amount(10);
-        int list_amount = 10;
-        int page_amount = 10;
-        if(param.getCur_page()==0) param.setCur_page(1);
-        int cur_page = param.getCur_page();
-
-        int filter1 = param.getFilter1();
-        int filter2 = param.getFilter2();
-        int total_count = eventContentMapper.getEventContentCount2(param);
-
-        List<EventContentVO> eventContentList = eventContentService.getEventContentList(param);
-        model.addAttribute("eventContentList",eventContentList);
-        model.addAttribute("filter1", param.getFilter1());
-        model.addAttribute("filter2", param.getFilter2());
-
-        makePagedItem(model,total_count,list_amount,page_amount,cur_page);
-
-        return "event_mng";
-    }*/
 
     @RequestMapping(value = "/adver_mng" ,method = RequestMethod.POST)
     public String adver_mng(@RequestBody ParamPageListFilteredVO param,
@@ -1116,62 +947,6 @@ public class IndexController extends BaseController {
         model.addAttribute("filter2", param.getFilter2());
 
         makePagedItem(model,total_count,list_amount,page_amount,cur_page);
-
-
-/*
-        model.addAttribute("cur_page",page);
-        model.addAttribute("list_amount",list_amount);
-
-        int tot_page = total_count/list_amount+1;
-        if(total_count%list_amount==0) tot_page-=1;
-
-        int tot_sector = tot_page/page_amount+1;
-        if(tot_page%page_amount==0) tot_sector-=1;
-
-        int cur_sector = page/page_amount+1;
-        if(page%page_amount==0) cur_sector-=1;
-
-        boolean is_past = false;
-        boolean is_prev = false;
-        boolean is_next = false;
-        boolean is_last = false;
-        boolean is_active = false;
-
-        if(page!=tot_page && tot_page>1) is_next = true;
-
-        if(page!=1 && tot_page>1) is_prev = true;
-
-        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
-
-        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
-
-        if(tot_page<=page_amount){
-            is_past = false;
-            is_last = false;
-            page_amount = tot_page;
-        }
-
-        model.addAttribute("tot_page",tot_page);
-        model.addAttribute("tot_sector",tot_sector);
-        model.addAttribute("cur_sector",cur_sector);
-        model.addAttribute("is_past",is_past);
-        model.addAttribute("is_prev",is_prev);
-        model.addAttribute("is_next",is_next);
-        model.addAttribute("is_last",is_last);
-        model.addAttribute("list_amount",list_amount);
-        model.addAttribute("page_amount",page_amount);
-
-        model.addAttribute("filter1",param.getFilter1());
-        model.addAttribute("filter2",param.getFilter2());
-
-        param.setFilter1(1);
-        param.setFilter2(9998);
-        int count_req = prContentsMapper.getPRContentCount2(param);
-        model.addAttribute("count_req",count_req);
-
-        param.setFilter1(0);
-        int count_comp = prContentsMapper.getPRContentCount2(param);
-        model.addAttribute("count_comp",count_comp);*/
 
         return "c_site/adver_mng";
     }
@@ -1265,49 +1040,6 @@ public class IndexController extends BaseController {
         model.addAttribute("filter2", param.getFilter2());
 
         makePagedItem(model,total_count,list_amount,page_amount,cur_page);
-        /*
-        int pop_tot_page = total_count/list_amount+1;
-        if(total_count%list_amount==0) pop_tot_page-=1;
-
-        int pop_tot_sector = pop_tot_page/page_amount+1;
-        if(pop_tot_page%page_amount==0) pop_tot_sector-=1;
-
-        boolean pop_is_past = false;
-        boolean pop_is_prev = false;
-        boolean pop_is_next = false;
-        boolean pop_is_last = false;
-        boolean is_active = false;
-
-        if(page!=pop_tot_page && pop_tot_page>1) pop_is_next = true;
-
-        if(page!=1 && pop_tot_page>1) pop_is_prev = true;
-
-        if(cur_sector!=pop_tot_sector && pop_tot_sector>1 ) pop_is_last = true;
-
-        if(cur_sector!=1 && pop_tot_sector>1 ) pop_is_past = true;
-
-        if(pop_tot_page<=page_amount){
-            pop_is_past = false;
-            pop_is_last = false;
-            page_amount = pop_tot_page;
-        }
-
-        model.addAttribute("pop_tot_page",pop_tot_page);
-        model.addAttribute("pop_tot_sector",pop_tot_sector);
-        model.addAttribute("pop_cur_sector",cur_sector);
-        model.addAttribute("pop_is_past",pop_is_past);
-        model.addAttribute("pop_is_prev",pop_is_prev);
-        model.addAttribute("pop_is_next",pop_is_next);
-        model.addAttribute("pop_is_last",pop_is_last);
-        model.addAttribute("pop_list_amount",list_amount);
-        model.addAttribute("pop_page_amount",page_amount);
-
-        //배너 정보
-        int bannerInfoCount = webMainPopupService.getWebMainBannerCount();
-        model.addAttribute("banner_total_count", bannerInfoCount);
-
-        List<WebMainPopupVO> webMainBannerList = webMainPopupService.getWebMainBannerList();
-        model.addAttribute("webMainBannerList", webMainBannerList);*/
 
         return "c_site/popup_mng";
     }
@@ -1347,13 +1079,6 @@ public class IndexController extends BaseController {
 
         makePagedItem(model,total_count,list_amount,page_amount,cur_page);
 
-        /*
-        model.addAttribute("cur_page", param.getCur_page());
-
-
-        Integer maxPageNum = formFileMapper.getFormFileCount();
-        model.addAttribute("max_cur_page", maxPageNum);*/
-
         return "c_site/c71_site_form_doc_mng";
     }
 
@@ -1390,12 +1115,7 @@ public class IndexController extends BaseController {
         model.addAttribute("filter2", param.getFilter2());
 
         makePagedItem(model,total_count,list_amount,page_amount,cur_page);
-        /*
-        model.addAttribute("rulefilelist",ruleFileList);
-        model.addAttribute("cur_page", param.getCur_page());
 
-        Integer maxPageNum = ruleFileMapper.getRuleFileCount();
-        model.addAttribute("max_cur_page", maxPageNum);*/
         return "c_site/c72_site_rule_doc_mng";
     }
 
@@ -1440,95 +1160,6 @@ public class IndexController extends BaseController {
         model.addAttribute("filter2", param.getFilter2());
 
         makePagedItem(model,total_count,list_amount,page_amount,cur_page);
-
-/*
-
-        int hi_tot_page = total_count/list_amount+1;
-        if(total_count%list_amount==0) hi_tot_page-=1;
-
-        int hi_tot_sector = hi_tot_page/page_amount+1;
-        if(hi_tot_page%page_amount==0) hi_tot_sector-=1;
-
-        boolean hi_is_past = false;
-        boolean hi_is_prev = false;
-        boolean hi_is_next = false;
-        boolean hi_is_last = false;
-        boolean is_active = false;
-
-        if(hi_page!=hi_tot_page && hi_tot_page>1) hi_is_next = true;
-
-        if(hi_page!=1 && hi_tot_page>1) hi_is_prev = true;
-
-        if(hi_cur_sector!=hi_tot_sector && hi_tot_sector>1 ) hi_is_last = true;
-
-        if(hi_cur_sector!=1 && hi_tot_sector>1 ) hi_is_past = true;
-
-        if(hi_tot_page<=page_amount){
-            hi_is_past = false;
-            hi_is_last = false;
-            page_amount = hi_tot_page;
-        }
-
-        model.addAttribute("hi_tot_page",hi_tot_page);
-        model.addAttribute("hi_tot_sector",hi_tot_sector);
-        model.addAttribute("hi_cur_sector",hi_cur_sector);
-        model.addAttribute("hi_is_past",hi_is_past);
-        model.addAttribute("hi_is_prev",hi_is_prev);
-        model.addAttribute("hi_is_next",hi_is_next);
-        model.addAttribute("hi_is_last",hi_is_last);
-        model.addAttribute("hi_list_amount",list_amount);
-        model.addAttribute("hi_page_amount",page_amount);
-
-        //조직도, 직원 정보
-        page_amount = 10;
-        int cw_page = param.getFilter2();
-
-        model.addAttribute("cw_cur_page",cw_page);
-
-        int cw_cur_sector = cw_page/page_amount+1;
-        if(cw_page%page_amount==0) cw_cur_sector-=1;
-
-        int coWorkerCount = coWorkerNService.getCoWorkerCount();
-        model.addAttribute("cw_total_count", coWorkerCount);
-
-        List<CoWorkerVO> coWorkerVOList = coWorkerNService.getCoWorkerListPage(param);
-        model.addAttribute("coWorkerVOList",coWorkerVOList);
-
-        int cw_tot_page = coWorkerCount/list_amount+1;
-        if(coWorkerCount%list_amount==0) cw_tot_page-=1;
-
-        int cw_tot_sector = cw_tot_page/page_amount+1;
-        if(cw_tot_page%page_amount==0) cw_tot_sector-=1;
-
-        boolean cw_is_past = false;
-        boolean cw_is_prev = false;
-        boolean cw_is_next = false;
-        boolean cw_is_last = false;
-
-        if(cw_page!=cw_tot_page && cw_tot_page>1) cw_is_next = true;
-
-        if(cw_page!=1 && cw_tot_page>1) cw_is_prev = true;
-
-        if(cw_cur_sector!=cw_tot_sector && cw_tot_sector>1 ) cw_is_last = true;
-
-        if(cw_cur_sector!=1 && cw_tot_sector>1 ) cw_is_past = true;
-
-        if(cw_tot_page<=page_amount){
-            cw_is_past = false;
-            cw_is_last = false;
-            page_amount = cw_tot_page;
-        }
-
-        model.addAttribute("cw_tot_page",cw_tot_page);
-        model.addAttribute("cw_tot_sector",cw_tot_sector);
-        model.addAttribute("cw_cur_sector",cw_cur_sector);
-        model.addAttribute("cw_is_past",cw_is_past);
-        model.addAttribute("cw_is_prev",cw_is_prev);
-        model.addAttribute("cw_is_next",cw_is_next);
-        model.addAttribute("cw_is_last",cw_is_last);
-        model.addAttribute("cw_list_amount",list_amount);
-        model.addAttribute("cw_page_amount",page_amount);
-*/
 
         return "c_site/site_mng";
     }
@@ -1628,13 +1259,6 @@ public class IndexController extends BaseController {
         return "/e_document/e30_document_issued_history";
     }
 
-    // 이메일 작성
-/*    @RequestMapping(value = "/f21_write_email",method = RequestMethod.POST)
-    public String f21_write_email(@RequestParam(value = "cur_page", required = false) String cur_page){
-
-        return "f21_write_email";
-    }*/
-
     //예약된 이메일
     @RequestMapping(value = "/ghdata_mng",method = RequestMethod.POST)
     public String ghdata_mng(@RequestBody ParamPageListFilteredVO param,
@@ -1706,10 +1330,6 @@ public class IndexController extends BaseController {
         model.addAttribute("filter2", param.getFilter2());
 
         makePagedItem(model,total_count,list_amount,page_amount,cur_page);
-
-
-
-
 
         return "f_data/ghdata_mng";
     }
@@ -1790,10 +1410,6 @@ public class IndexController extends BaseController {
             return "redirect:/login";
         }
 
-
-
-
-
         List<SystemCodeVO> systemCodeVOList = systemService.getAllSystemCodeList();
         List<SystemCodeVO> mainAssetCodeList = new ArrayList<>();
         List<SystemCodeVO> subAssetCodeList = new ArrayList<>();
@@ -1811,9 +1427,6 @@ public class IndexController extends BaseController {
                 }
             }
         });
-
-
-
 
         model.addAttribute("adminList", adminService.getAdminList());
         model.addAttribute("main_cate", mainAssetCodeList);
@@ -1864,15 +1477,6 @@ public class IndexController extends BaseController {
 
         makePagedItem(model,total_count,list_amount,page_amount,cur_page);
 
-        /*
-
-        model.addAttribute("maxvalue", maxValue);
-        model.addAttribute("assetResList", assetReservationVOList);
-        model.addAttribute("count", count);
-        model.addAttribute("cur_page", param.getCur_page());
-        model.addAttribute("curStatus", param.getFilter1());
-        model.addAttribute("proto_page", param.getFilter2());
-*/
         return "asset_reservation_list";
     }
 
@@ -2590,32 +2194,12 @@ public class IndexController extends BaseController {
         ArrayList<CorpInfoVO> resultArray;
         resultArray = corpService.selectCorpInfo();
 
-        //int pageBool = 4;
-        //List<AdminResVO> adminVOList = adminService.selectAdminbyIdx(param.getCur_page() != 0 ? param.getCur_page() + "" : "1", 100);
-
-        //System.out.println(adminVOList);
- /*       if(adminVOList.size() != 0){
-            if(adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage() < 4){
-                pageBool = adminVOList.get(0).getMaxvalue() - adminVOList.get(0).getPage();
-            }
-        }*/
-/*        model.addAttribute("pageBool", pageBool);*/
-
 
         List<AdminVO> adminVOList = adminService.getAdminPagingList(param);
 
         int total_count = adminService.getAdminFilteredEachCount(param);
         model.addAttribute("adminVOList", adminVOList);
         model.addAttribute("corps", resultArray);
-/*        model.addAttribute("adminCount", adminService.selectCount(100));
-        model.addAttribute("otherAdminCount", adminService.selectCount(99));
-        model.addAttribute("mngAdminCount", adminService.selectCount(0));
-        model.addAttribute("centerAdminCount", adminService.selectCount(1));
-        model.addAttribute("localAdminCount", adminService.selectCount(2));*/
-
-
-
-        //model.addAttribute("userVOList",userVOList);
 
         model.addAttribute("filter1", param.getFilter1());
         model.addAttribute("filter2", param.getFilter2());
@@ -2659,32 +2243,7 @@ public class IndexController extends BaseController {
 
         return "admin_index";
     }
-    /*
-    //시스템 코드 관리
-    @RequestMapping(value = "/j10_file_mng",method = RequestMethod.POST)
-    public String j10_file_mng(
-                               Model model){
 
-
-        return "_j10_file_mng";
-    }
-    //시스템 코드 관리
-    @RequestMapping(value = "/j20_sms_mng",method = RequestMethod.POST)
-    public String j20_sms_mng(
-                              Model model){
-
-
-        return "_j20_sms_mng";
-    }
-
-    //시스템 코드 관리
-    @RequestMapping(value = "/j30_email_mng",method = RequestMethod.POST)
-    public String j30_email_mng(
-                                Model model){
-
-
-        return "_j30_email_mng";
-    }*/
     //시스템 코드 관리
     @RequestMapping(value = "/admin_auth",method = RequestMethod.POST)
     public String admin_auth(@RequestBody(required = false) ParamPageListFilteredVO param,

@@ -229,8 +229,7 @@ public class MobileIndexController {
 
 
     @RequestMapping("/brd_event")
-    public String brd_event(@RequestParam(name = "filter", required = false) String filter,
-                            @RequestParam(name = "query", required = false) String query,
+    public String brd_event(@RequestBody ParamPageListFilteredVO param,
                             Model model) {
 
         int page = 1;
@@ -238,19 +237,18 @@ public class MobileIndexController {
         int list_amount = 10;
         int page_amount = 10;
 
-        query = decodeUrlValue(query);
+
 
         model.addAttribute("page", page);
-        model.addAttribute("filter", filter);
-        model.addAttribute("query", query);
 
-        int eventCount = eventContentService.getOpenEventContentCount(filter, query);
+
+        int eventCount = 0;
         if (eventCount == 0) {
             //setProfile(model);
             return "brd_event_blank";
         }
         model.addAttribute("total_count", eventCount);
-        List<EventContentVO> eventContentVOList = eventContentService.getOpenEventContentList(page, list_amount, filter, query);
+        List<EventContentVO> eventContentVOList = eventContentService.getOpenEventContentList(param);
         model.addAttribute("eventContentVOList", eventContentVOList);
 
         model.addAttribute("cur_page", page);

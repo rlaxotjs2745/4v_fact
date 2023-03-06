@@ -14,7 +14,7 @@ public interface PRContentsMapper {
     int getMainPRContentCount();
     int getWebpagePRContentCount();
     int getOpenPRContentCount(@Param("filter") String filter, @Param("query") String query);
-    List<PRContentVO> getOpenPRContentList(@Param("page") int page, @Param("count") int count, @Param("filter") String filter, @Param("query") String query);
+    List<PRContentVO> getOpenPRContentList(ParamPageListFilteredVO param);
 
     int getPRContentCount(ParamPageListFilteredVO paramVo);
 

@@ -7,9 +7,13 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @SpringBootApplication
+@EnableScheduling
+@EnableAsync
 @EnableConfigurationProperties({
         FACTConfig.class
 })

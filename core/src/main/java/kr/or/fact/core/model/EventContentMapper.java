@@ -10,7 +10,7 @@ public interface EventContentMapper {
     int getMainEventContentCount();
     int getWebpageEventContentCount();
     int getOpenEventContentCount(@Param("filter") String filter, @Param("query") String query);
-    List<EventContentVO> getOpenEventContentList(@Param("page") int page, @Param("count") int count, @Param("filter") String filter, @Param("query") String query);
+    List<EventContentVO> getOpenEventContentList(ParamPageListFilteredVO param);
     List<EventContentVO> getEventContentList(ParamPageListFilteredVO paramVo);
     List<EventContentVO> getMainEventContentList();
     List<EventContentVO> getEventList();

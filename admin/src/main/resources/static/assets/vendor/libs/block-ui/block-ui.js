@@ -89,7 +89,7 @@
                     },
                     overlayCSS: {
                         backgroundColor: '#fff',
-                        opacity: .6,
+                        opacity: .1,
                         cursor: "wait"
                     },
                     cursorReset: "default",
@@ -100,7 +100,7 @@
                         right: "10px",
                         border: "none",
                         padding: "5px",
-                        opacity: .6,
+                        opacity: .4,
                         cursor: "default",
                         color: "#fff",
                         backgroundColor: "#000",

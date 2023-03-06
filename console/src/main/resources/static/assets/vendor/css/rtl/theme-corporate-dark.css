@@ -159,8 +159,8 @@ button.list-group-item-primary.active {
 
 .callout-primary {
     border-color: #00c300 !important;
-    background-color: #a6d1e7;
-    color: #42545c
+    background-color: #303337;
+    color: #fff
 }
 
 .callout-primary .callout-link {

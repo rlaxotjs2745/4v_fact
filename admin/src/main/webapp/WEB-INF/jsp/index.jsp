@@ -232,23 +232,6 @@ console.log("path="+'${path}');
             history.pushState(param, title, url);
         }
 
-/*
-        if(cur !== url+param['cur_page']/!* || usage === "asset_list" || usage==='site_adver_mng' || usage==='site_event_mng' || usage==='pr_contents' || usage==='event_contents'*!/){
-            cur = url+param['cur_page'];
-
-            if(url.indexOf('cur_asset_index') === -1
-                && url.indexOf('user_index') === -1
-                && url.indexOf('dormant_user_index') === -1
-                && url.indexOf('admin_corporate') === -1
-                && url.indexOf('c431_site_adver_mng') === -1
-                && url.indexOf('c421_site_event_mng') === -1
-                && url.indexOf('pr_contents') === -1
-                && url.indexOf('event_contents') === -1
-                ) {
-                history.pushState(param, title, url);
-            }
-*/
-
         if(usage==null)
             usage="#contents";
 
@@ -260,43 +243,6 @@ console.log("path="+'${path}');
                 dataType:'html',//받는 데이터 타입
                 success:function(result){
                     $(usage).html(result);
-
-
-                    /*
-                    if(usage === "admin"){
-                        $("#admin_index").html(result);
-                    } else if(usage === "user"){
-                        $("#user_index").html(result);
-                    } else if(usage === "dormant_user"){
-                        $("#dormant_user_index").html(result);
-                    } else if(usage === "cur_asset_index"){
-                        $("#cur_asset_index").html(result);
-                    } else if(usage === "codeSelect"){
-                        $("#code_select").append(result);
-                    } else if(usage === "asset_list"){
-                        $("#asset_list").html(result);
-                    } else if(usage === "asset_reservation_list"){
-                        $("#asset_reservation_list").html(result);
-                    } else if(usage === "asset_reservation_items_list"){
-                        $("#asset_reservation_items_list").html(result);
-                    } else if(usage === "pr_contents"){
-                        $("#modals-content").html(result);
-                    } else if(usage === "event_contents"){
-                        $("#modals-content").html(result);
-                    } else if(usage === "reserve_view") {
-                        $("#reserve_view_comp").html(result);
-                    } else if(usage === 'site_adver_mng'){
-                        $("#site_adver_mng").html(result);
-                    } else if(usage === 'site_event_mng'){
-                        $("#site_event_mng").html(result);
-                    } else if(usage === '#dashboard_calendar_view'){
-                        $(usage).html(result);
-                    } else if(usage === '#appl_contents'){
-                        $(usage).html(result);
-                    } else{
-                        $("#contents").html(result);
-                    }*/
-
                 },
                 fail:function(xhr,status,err){
 
@@ -304,21 +250,6 @@ console.log("path="+'${path}');
                 }
 
             });
-
-/*            request.done(function(msg) {
-                $("#contents").html(msg);
-            });
-
-            request.fail(function(jqXHR, textStatus) {
-                $("#contents").html("Request failed: " + textStatus);
-            });*/
-
-            //$("#contents").load(a,{"tag":a} ,function(){
-                //alert(a);
-
-/*        }else{//현재 주소 클릭시 변화 없음
-            return false;
-        }*/
     }
 
 /*==========    브라우저 뒤로가기 했을 때 처리    ==============*/

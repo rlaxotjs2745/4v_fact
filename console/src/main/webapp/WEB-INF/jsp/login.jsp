@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 
 <html lang="kor" class="dark-style">
@@ -68,6 +69,36 @@
     <link rel="stylesheet" href="resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css">
     <!-- Page -->
     <link rel="stylesheet" href="resources/assets/vendor/css/pages/authentication.css">
+
+    <sec:authorize access="isAuthenticated()">
+        <!-- csrf 처리 -->
+        <sec:csrfMetaTags />
+        <script>
+            try {
+                let csrfParameter = $("meta[name='_csrf_parameter']").attr("content");
+                let csrfHeader = $("meta[name='_csrf_header']").attr("content");
+                let csrfToken = $("meta[name='_csrf']").attr("content");
+
+                // ajax가 호출 되는 전역
+                $.ajaxSetup({
+                    beforeSend: function(xhr, settings) {
+                        if (!/^(GET|HEAD|OPTIONS)$/i.test(settings.type) && !this.crossDomain) {
+                            xhr.setRequestHeader(csrfHeader, csrfToken)
+                        }
+                    }
+                });
+
+                // form
+                $("form").each(function() {
+                    let input = $("<input/>").attr({name:csrfParameter, type:"hidden", value:csrfToken});
+                    $(this).append(input);
+                });
+            } catch(e) {
+                console.log(e);
+            }
+        </script>
+        <!-- csrf 처리 -->
+    </sec:authorize>
 </head>
 
 <body>
@@ -168,6 +199,7 @@
                     $.cookie('console_token', result.element.console_token, { expires: 1, path: '/' });
                     $.cookie('console_refresh_token', result.element.console_refresh_token, { expires: 365, path: '/' });
 
+                    console.log(""+'${login_from}');
                     <c:if test="${login_from == 'gimje-prod'}">
                     location.replace('https://innovalley.smartfarmkorea.net/gimje/Demonstration/console');
                     </c:if>

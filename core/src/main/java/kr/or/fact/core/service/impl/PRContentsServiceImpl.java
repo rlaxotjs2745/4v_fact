@@ -37,8 +37,8 @@ public class PRContentsServiceImpl implements PRContentsService {
     }
 
     @Override
-    public List<PRContentVO> getOpenPRContentList(Integer page, int count, String filter, String query) {
-        List<PRContentVO> prContentList= prContentsMapper.getOpenPRContentList(page, count, filter, query);
+    public List<PRContentVO> getOpenPRContentList(ParamPageListFilteredVO param) {
+        List<PRContentVO> prContentList= prContentsMapper.getOpenPRContentList(param);
         List<PRContentVO> thumbList = prContentsMapper.getThumb();
 
         for (int i = 0; i < prContentList.size(); i++){

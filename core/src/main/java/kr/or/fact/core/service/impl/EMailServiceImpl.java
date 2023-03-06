@@ -59,18 +59,21 @@ public class EMailServiceImpl implements EMailService {
 
         EmailFilteredCountVO emailFilteredCount = mailMapper.getEmailFilteredCount();
         int total_count = 0;
-        if(param.getFilter1() == 9999){
-            total_count = emailFilteredCount.getTot_count();
+        if(emailFilteredCount!=null){
+            if(param.getFilter1() == 9999){
+                total_count = emailFilteredCount.getTot_count();
+            }
+            else if(param.getFilter1() == 0){
+                total_count = emailFilteredCount.getHold_count();
+            }
+            else if(param.getFilter1() == 1){
+                total_count = emailFilteredCount.getRserv_count();
+            }
+            else if(param.getFilter1() == 2){
+                total_count = emailFilteredCount.getSent_count();
+            }
         }
-        else if(param.getFilter1() == 0){
-            total_count = emailFilteredCount.getHold_count();
-        }
-        else if(param.getFilter1() == 1){
-            total_count = emailFilteredCount.getRserv_count();
-        }
-        else if(param.getFilter1() == 2){
-            total_count = emailFilteredCount.getSent_count();
-        }
+
         return total_count;
     }
     @Override
@@ -82,9 +85,12 @@ public class EMailServiceImpl implements EMailService {
 
         EmailTemplateFilteredCountVO emailFilteredCount = mailMapper.getEmailTemplateFilteredCount();
         int total_count = 0;
-        if(param.getFilter1() == 9999){
-            total_count = emailFilteredCount.getTot_count();
+        if(emailFilteredCount!=null){
+            if(param.getFilter1() == 9999){
+                total_count = emailFilteredCount.getTot_count();
+            }
         }
+
 
         return total_count;
     }

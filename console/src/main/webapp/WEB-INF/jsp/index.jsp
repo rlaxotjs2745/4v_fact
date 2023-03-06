@@ -112,10 +112,25 @@
 <script src="resources/assets/vendor/libs/flot/jquery.flot.time.js"></script>
 <script src="resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 <script src="resources/assets/vendor/libs/block-ui/block-ui.js"></script>
+<script src="resources/assets/vendor/js/dropdown-hover.js"></script>
 <!-- Demo -->
 <script src="resources/assets/js/demo.js"></script>
 
 <script>
+    $.blockUI({
+        message: '<div class="sk-fold sk-primary mx-auto mb-4"><div class="sk-fold-cube"></div><div class="sk-fold-cube"></div><div class="sk-fold-cube"></div><div class="sk-fold-cube"></div></div><h5 class="text-body">LOADING...</h5>',
+        css: {
+            backgroundColor: 'rgba(0,0,0,0.0)',
+            border: '0',
+            color: '#000000',
+            zIndex: 9999999
+        },
+        overlayCSS:  {
+            backgroundColor: '#fff',
+            opacity: 0.3,
+            zIndex: 9999990
+        }
+    });
     $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 
     $("li.sidenav-item").on('click',function(){
@@ -139,72 +154,71 @@
     var cur = "";
 
 
-    function pageLoad(url,param,title,usage){
-        /*      State : 브라우저 이동 시 넘겨줄 데이터 (popstate 에서 받아서 원하는 처리를 해줄 수 있음)
-                Title : 변경할 브라우저 제목 (변경 원치 않으면 null)
-                Url : 변경할 주소*/
+    /*==== 글로벌 데이터 ========*/
+    let _pageReload = '${pageOnLoad}';
+    let curMyIdx = ${consoleUser.idx_console_user};
 
+    var cur = "";
+    let filter1 = null;
+    let filter2 = null;
 
-         console.log(param)
+    function pageLoad(url, param=null, title="실증단지 콘솔 어드민", usage=null){
 
+        /*  url : 로딩할 주소,
+            param : 페이지 로딩 시 전달할 파라미터
+            title : 브라우저 타이틀
+            usage : .html로 대치할 선택자
+        */
+        if(param==null) {
+            param = {};
+            filter1 = 9999;
+            filter2 = 9998;
+        }else{
+            if (param['cur_page'] == null) {
+                param['cur_page'] = 9999;
+            }
+            if (param['filter1'] == null && filter1 != null) {
+                param['filter1'] = filter1;
+            }
+            if (param['filter2'] == null && filter2 != null) {
+                param['filter2'] = filter2;
+            }
 
-        if(param==null)
-            param={cur_page:1};
-
-        if(cur!=url+param.cur_page || usage == "asset_list"){
-            cur = url+param.cur_page;
-            history.pushState(url, title,url);
-
-            $.ajaxSetup({
-                headers:
-                    { 'X-CSRF-TOKEN': csrfToken }
-            });
-            var request = $.ajax({
-                url: url,
-                method: 'post',
-                data: JSON.stringify(param),//보내는 데이터
-                contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
-                dataType:'html',//받는 데이터 타입
-                success:function(result){
-                    if(usage == "admin"){
-                        $("#admin_index").html(result);
-                    } else if(usage == "user"){
-                        $("#user_index").html(result);
-                    } else if(usage == "dormant_user"){
-                        $("#dormant_user_index").html(result);
-                    } else if(usage == "cur_asset_index"){
-                        $("#cur_asset_index").html(result);
-                    } else if(usage == "codeSelect"){
-                        $("#code_select").append(result);
-                    } else if(usage == "asset_list"){
-                        $("#asset_list").html(result);
-                    } else if(usage == "asset_reservation_list"){
-                        $("#asset_reservation_list").html(result);
-                    } else if(usage == "asset_reservation_items_list"){
-                        $("#asset_reservation_items_list").html(result);
-                    } else if(usage == "pr_contents"){
-                        $("#modals-content").html(result);
-                    } else if(usage == "reserve_view"){
-                        $("#reserve_view_comp").html(result);
-                    }
-
-                    else{
-                        $("#contents").html(result);
-
-
-                    }
-                },
-                fail:function(xhr,status,err){
-                    $("#contents").html("Request failed: " + status);
-                }
-
-            });
-
-        }else{//현재 주소 클릭시 변화 없음
-
-
+            if (param['filter1'] != null) {
+                filter1 = param['filter1'];
+            }
+            if (param['filter2'] != null) {
+                filter2 = param['filter2'];
+            }
         }
-        return true;
+
+        if(cur === url+param['cur_page']){
+            return;
+        }
+
+        if(cur !== url+param['cur_page'] && usage==null)
+        {
+            history.pushState(param, title, url);
+        }
+
+        if(usage==null)
+            usage="#contents";
+
+        var request = $.ajax({
+            url: url,
+            method: 'post',
+            data: JSON.stringify(param),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'html',//받는 데이터 타입
+            success:function(result){
+                $(usage).html(result);
+            },
+            fail:function(xhr,status,err){
+
+                $(usage).html("<div class='row'><div class='align-items-center'>"+"Page:"+url+"     Request failed: " + status +"</div></div>");
+            }
+
+        });
     }
     //문서 로드 완료 후 이벤트 처리
     (function() {
@@ -231,7 +245,7 @@
             if (!window.innerDoc) {
 
                 console.log(evt);
-                pageLoad(evt.state,{cur_page:1},"");
+                pageLoad(evt.state.url,{cur_page:1},evt.state.title);
 
             }
         }, false);
@@ -241,9 +255,24 @@
 
     $(document).ready(function() {
         //ajax로 호출되는 첫번째 페이지
-        pageLoad('dashboard',{cur_page:1},'대시보드');
+        if(_pageReload !== ''){
+            pageLoad('${path}', null);
+        }else{
+            pageLoad('dashboard',{cur_page:1},'대시보드');
+        }
 
     });
+    const autoHyphen = (target) => {
+        target.value = target.value
+            .replace(/[^0-9]/g, '')
+            .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+    }
+
+    const autoHyphen2 = (target) => {
+        target.value = target.value
+            .replace(/[^0-9]/g, '')
+            .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+    }
 
 </script>
 </body>

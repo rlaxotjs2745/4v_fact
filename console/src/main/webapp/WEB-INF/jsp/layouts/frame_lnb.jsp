@@ -49,8 +49,13 @@
                             </a>
                         </li>
                         <li class="sidenav-item">
-                            <a href="javascript:pageLoad('bm_demo_corp_cur',{cur_page:1},'실증사업 현황');" class="sidenav-link">
-                                <div>실증사업 현황</div>
+                            <a href="javascript:pageLoad('corp_cur',{cur_page:1,filter1:9999},'실증사업 현황');" class="sidenav-link">
+                                <div>구역별 운영현황</div>
+                            </a>
+                        </li>
+                        <li class="sidenav-item">
+                            <a href="javascript:pageLoad('corp_list',{cur_page:1,filter1:9999},'실증사업 현황');" class="sidenav-link">
+                                <div>업체별 현황</div>
                             </a>
                         </li>
                     </ul>

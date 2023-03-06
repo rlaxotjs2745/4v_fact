@@ -39,4 +39,7 @@ public class UserVO {
     Date last_upd_date;//	date						최종 수정 일시
     int maxvalue;
     int page;
+    String corporate_name;
+    String job_title;
+
 }

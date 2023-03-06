@@ -4776,22 +4776,111 @@ html:not([dir=rtl]) .input-group-prepend>.btn-group:last-child>.btn:not(.btn-def
     }
 }
 
+
+/*abeki*/
+[dir=rtl] .fact-nav {
+    padding-right: 0
+}
+
+
+.fact-nav-link {
+    line-height: 1.54;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+    border-color: #8c8b8b;
+}
+
+.fact-nav-link.active {
+    background-color: #1b4f2d;
+    color: #ffffff;
+}
+
+.fact-nav-link.disabled {
+    border-color: transparent !important;
+    background: transparent !important;
+    color: #8c8b8b !important
+}
+
+.fact-nav .fact-nav-item,
+.fact-nav .fact-nav-link,
+.fact-tab-pane,
+.fact-pane .card-body {
+    outline:0.5rem solid #1b4f2d ;
+}
+
+.nav-tabs .nav-link:not(.active),
+.nav-pills .nav-link:not(.active) {
+    color: #8c8e90
+}
+
+.nav-tabs .nav-link:not(.active):hover,
+.nav-tabs .nav-link:not(.active):focus,
+.nav-pills .nav-link:not(.active):hover,
+.nav-pills .nav-link:not(.active):focus {
+    color: #4E5155
+}
+
+.nav-tabs:not(.nav-fill):not(.nav-justified) .nav-link,
+.nav-pills:not(.nav-fill):not(.nav-justified) .nav-link {
+    margin-right: .125rem
+}
+
+[dir=rtl] .nav-tabs:not(.nav-fill):not(.nav-justified) .nav-link,
+[dir=rtl] .nav-pills:not(.nav-fill):not(.nav-justified) .nav-link {
+    margin-right: 0;
+    margin-left: .125rem
+}
+
+.nav-tabs .nav-link .badge,
+.nav-pills .nav-link .badge {
+    position: relative;
+    top: -1px
+}
+
+.nav-tabs .nav-item.show .nav-link:not(.active),
+.nav-pills .nav-item.show .nav-link:not(.active) {
+    background-color: transparent
+}
+
+.nav-tabs .nav-link {
+    background-clip: padding-box
+}
+
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:focus {
+    border-bottom-color: transparent
+}
+
+.nav-tabs .nav-link.active {
+    border-bottom-color: #37ab6f
+}
+
+
+.nav-span {
+    line-height: 1.28;
+    width: 2rem;
+    background-clip: padding-box;
+    background: transparent !important;
+    color: #76ee00 !important;
+    outline: none !important;
+}
+
 [dir=rtl] .nav {
     padding-right: 0
 }
 
 .nav-link {
-    line-height: 1.54
+    line-height: 1.28;
+    width: 14rem;
 }
 
 .nav-link.disabled {
-    border-color: transparent !important;
+    /*border-color: transparent !important;*/
     background: transparent !important;
     color: #d1d2d3 !important
 }
 
-.nav .nav-item,
-.nav .nav-link,
+.nav .nav-item,.nav .nav-link,
 .tab-pane,
 .tab-pane .card-body {
     outline: none !important
@@ -10618,7 +10707,7 @@ html:not(.layout-footer-fixed) .layout-content {
 }
 
 .callout {
-    padding: 1rem;
+    /*padding: 1rem;*/
     font-size: .894rem;
     border-left: 3px solid
 }
@@ -10636,7 +10725,7 @@ html:not(.layout-footer-fixed) .layout-content {
 }
 
 .callout-sm {
-    padding: .75rem;
+    /*padding: .75rem;*/
     font-size: .75rem;
     border-left: 2px solid
 }

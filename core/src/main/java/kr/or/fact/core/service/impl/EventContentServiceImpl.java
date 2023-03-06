@@ -16,14 +16,12 @@ import java.util.List;
 @Service("eventContentService")
 public class EventContentServiceImpl implements EventContentService {
 
-    private final EventContentMapper eventContentMapper;
     @Autowired
+    private final EventContentMapper eventContentMapper;
+
     public EventContentServiceImpl(EventContentMapper eventContentMapper ){
         this.eventContentMapper = eventContentMapper;
     }
-    @Autowired
-    private SqlSession sqlsession;
-
 
 
     @Override
@@ -41,8 +39,8 @@ public class EventContentServiceImpl implements EventContentService {
     }
 
     @Override
-    public List<EventContentVO> getOpenEventContentList(int page, int count, String filter, String query) {
-        List<EventContentVO> eventContentVOList = eventContentMapper.getOpenEventContentList(page, count, filter, query);
+    public List<EventContentVO> getOpenEventContentList(ParamPageListFilteredVO param) {
+        List<EventContentVO> eventContentVOList = eventContentMapper.getOpenEventContentList(param);
 
         List<EventContentVO> thumbList = eventContentMapper.getThum();
 

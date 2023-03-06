@@ -3396,7 +3396,7 @@ label.btn {
 .btn-secondary.active,
 .show>.btn-secondary.dropdown-toggle {
     border-color: rgba(0, 0, 0, 0);
-    background: #768394;
+    background: #00c300;;
     box-shadow: none
 }
 
@@ -4788,8 +4788,19 @@ html:not([dir=rtl]) .input-group-prepend>.btn-group:last-child>.btn:not(.btn-def
     padding-right: 0
 }
 
+.nav-span {
+    line-height: 1.28;
+    width: 2rem;
+    background-clip: padding-box;
+    background: transparent !important;
+    color: #76ee00 !important;
+    outline: none !important;
+}
+
+
 .nav-link {
-    line-height: 1.54
+    line-height: 0.9;
+    width: 10rem;
 }
 
 .nav-link.disabled {
@@ -4807,7 +4818,7 @@ html:not([dir=rtl]) .input-group-prepend>.btn-group:last-child>.btn:not(.btn-def
 
 .nav-tabs .nav-link:not(.active),
 .nav-pills .nav-link:not(.active) {
-    color: #a8a9ab
+    color: #4d4d4d
 }
 
 .nav-tabs .nav-link:not(.active):hover,
@@ -10665,62 +10676,62 @@ html:not(.layout-footer-fixed) .layout-content {
 
 .callout-secondary {
     border-color: #8897AA !important;
-    background-color: #c4c8ce;
-    color: #4e5052
+    background-color: #303337;
+    color: #ffffff
 }
 
 .callout-secondary .callout-link {
-    color: #4e5052
+    color: #82b4a8
 }
 
 .callout-success {
     border-color: #02BC77 !important;
-    background-color: #9bd3be;
-    color: #3e544c
+    background-color: #303337;
+    color: #ffffff
 }
 
 .callout-success .callout-link {
-    color: #3e544c
+    color: #82b4a8
 }
 
 .callout-info {
     border-color: #28c3d7 !important;
-    background-color: #a7d5db;
-    color: #435558
+    background-color: #303337;
+    color: #ffffff
 }
 
 .callout-info .callout-link {
-    color: #435558
+    color: #82b4a8
 }
 
 .callout-warning {
     border-color: #FFD950 !important;
-    background-color: #e7dcb3;
-    color: #5c5848
+    background-color: #303337;
+    color: #ffffff
 }
 
 .callout-warning .callout-link {
-    color: #5c5848
+    color: #82b4a8
 }
 
 .callout-danger {
     border-color: #d9534f !important;
-    background-color: #dcb4b2;
-    color: #584847
+    background-color: #303337;
+    color: #ffffff
 }
 
 .callout-danger .callout-link {
-    color: #584847
+    color: #82b4a8
 }
 
 .callout-dark {
-    border-color: #fff !important;
-    background-color: #e7e7e7;
-    color: #5c5c5c
+    border-color: #a8a8a8 !important;
+    background-color: #303337;
+    color: #ffffff
 }
 
 .callout-dark .callout-link {
-    color: #5c5c5c
+    color: #82b4a8
 }
 
 [dir=rtl] .callout {

@@ -42,21 +42,24 @@ public class UserServiceImpl implements UserService {
     public int getUserFilteredEachCount(ParamPageListFilteredVO param){
         UserFilteredCountVO userFilteredCountVO = userMapper.getUserFilteredCount(param);
         int total_count = 0;
-        if(param.getFilter1()==9999){
-            total_count = userFilteredCountVO.getTot_count();
+        if(userFilteredCountVO!=null){
+            if(param.getFilter1()==9999){
+                total_count = userFilteredCountVO.getTot_count();
+            }
+            else if(param.getFilter1()==0){
+                total_count = userFilteredCountVO.getNomal_count();
+            }
+            else if(param.getFilter1()==1){
+                total_count = userFilteredCountVO.getDormancy_count();
+            }
+            else if(param.getFilter1()==2){
+                total_count = userFilteredCountVO.getLeave_count();
+            }
+            else if(param.getFilter1()==3){
+                total_count = userFilteredCountVO.getBan_count();
+            }
         }
-        else if(param.getFilter1()==0){
-            total_count = userFilteredCountVO.getNomal_count();
-        }
-        else if(param.getFilter1()==1){
-            total_count = userFilteredCountVO.getDormancy_count();
-        }
-        else if(param.getFilter1()==2){
-            total_count = userFilteredCountVO.getLeave_count();
-        }
-        else if(param.getFilter1()==3){
-            total_count = userFilteredCountVO.getBan_count();
-        }
+
         return total_count;
     }
 

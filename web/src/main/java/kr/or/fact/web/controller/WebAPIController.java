@@ -63,8 +63,8 @@ public class WebAPIController {
     @Resource(name = "authService")
     AuthService authService;
 
-    @Resource(name = "mailService")
-    EMailService mailService;
+    @Resource(name = "emailService")
+    EMailService emailService;
 
     @Resource(name = "userPwHistoryService")
     UserPwHistoryService userPwHistoryService;
@@ -187,7 +187,7 @@ public class WebAPIController {
                     String now_date = fm.format(time.getTime());
                     mailSendVO.setSendTime(now_date);
 
-                    mailService.insertPasswdEmail(mailSendVO);
+                    emailService.insertPasswdEmail(mailSendVO);
 
                     UserSecretCodeVO userSecretCodeVO = new UserSecretCodeVO();
                     userSecretCodeVO.setIdx_user(resultUserVO.getIdx_user());
@@ -1544,28 +1544,25 @@ public class WebAPIController {
     }
     @RequestMapping("/plus_event")
     @ResponseBody
-    public List<EventContentVO> brd_event(@RequestBody BrdCardRequestVO request){
+    public List<EventContentVO> brd_event(@RequestBody ParamPageListFilteredVO param){
 
-        if (request.getPage() == null || request.getPage() <= 0) {
+/*        if (param.getCur_page() == null || param.getCur_page() <= 0) {
             throw new RuntimeException("invalid page");
-        }
+        }*/
 
         int count = 10;
 
-        return eventContentService.getOpenEventContentList(request.getPage(), count, request.getFilter(), request.getQuery());
+        return eventContentService.getOpenEventContentList(param);
     }
 
     @RequestMapping("/plus_pr")
     @ResponseBody
-    public List<PRContentVO> brd_promotion(@RequestBody BrdCardRequestVO request){
+    public List<PRContentVO> brd_promotion(@RequestBody ParamPageListFilteredVO param){
 
-        if (request.getPage() == null || request.getPage() <= 0) {
-            throw new RuntimeException("invalid page");
-        }
 
         int count = 10;
 
-        return prContentsService.getOpenPRContentList(request.getPage(), count, request.getFilter(), request.getQuery());
+        return prContentsService.getOpenPRContentList(param);
     }
 
     @PostMapping("/console_login")

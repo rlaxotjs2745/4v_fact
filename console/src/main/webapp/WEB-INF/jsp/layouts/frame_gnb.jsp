@@ -28,10 +28,9 @@
 
         <div class="navbar-nav align-items-lg-center navbar-weather">
             <!-- Welcome Board -->
-            <span id="now-date-nav">2021.00.00.(월) 오전 10:15</span><span class="nav-link">|</span>
-            <span><strong id="now-temp-nav">22</strong><span id="now-weather-nav">℃ 구름조금</span>          <strong id="now-rainper-nav"></strong></span><span class="nav-link">|</span>
-            <span>미세먼지  </span>
-            <strong class="text-info now-dust-nav"> 매우 좋음 </strong><i class="now-dust-img-nav far fa-smile"></i><span class="nav-link"></span>
+            <span id="now-date-nav">2021.00.00.(월) 오전 10:15</span><span class="nav-span" style="display: inline-block;text-align: center;">|</span>
+            <span>날씨:&ensp;<strong id="now-temp-nav">22</strong> ℃ <span id="now-weather-nav">구름조금</span><strong id="now-rainper-nav"></strong></span><span class="nav-span" style="display: inline-block;text-align: center;">|</span>
+            <span>미세먼지:&ensp;</span><strong class="text-info now-dust-nav">매우 좋음 &nbsp;&nbsp;<i class="now-dust-img-nav far fa-smile"></i></strong><%--<span class="nav-span"></span>--%>
             <!--<strong class="text-success">좋음 <i class="far fa-laugh"></i></strong>-->
             <%--                <strong class="text-warning">나쁨 <i class="far fa-tired"></i></strong>--%>
             <!--<strong class="text-danger">매우 나쁨<i class="far fa-frown"></i></strong>-->
@@ -169,7 +168,7 @@
                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
                   <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
                     <img src="/resources/assets/img/avatars/1.png" alt class="d-block ui-w-30 rounded-circle">
-                    <span class="px-1 mr-lg-2 ml-2 ml-lg-0">${user.user_name}</span>
+                    <span class="px-1 mr-lg-2 ml-2 ml-lg-0">${consoleUser.user_name}</span>
                   </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
@@ -201,7 +200,7 @@
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">아이디</label>
 
                         <div class="col-md-10">
-                            <div class="form-control-plaintext">${user.user_id}</div>
+                            <div class="form-control-plaintext">${consoleUser.user_id}</div>
                         </div>
                     </div>
                     <hr>
@@ -212,14 +211,14 @@
                     <div class="form-group row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">이름</label>
                         <div class="col-md-10">
-                            <div class="form-control-plaintext">${user.user_name}</div>
+                            <div class="form-control-plaintext">${consoleUser.user_name}</div>
                         </div>
                     </div>
                     <!-- 휴대폰 번호 -->
                     <div class="form-group row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">휴대폰 번호</label>
                         <div class="col-md-4">
-                            <div class="form-control-plaintext myinfo-view">${user.mphone_num}</div>
+                            <div class="form-control-plaintext myinfo-view">${consoleUser.mphone_num}</div>
                             <input type="text" class="form-control form-control-md myinfo-edit d-none" placeholder="000-0000-0000">
                         </div>
                     </div>
@@ -228,7 +227,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">이메일</label>
                         <div class="col-md-10">
-                            <div class="form-control-plaintext myinfo-view">${user.user_id}</div>
+                            <div class="form-control-plaintext myinfo-view">${consoleUser.user_id}</div>
                             <input type="text" class="form-control form-control-md myinfo-edit d-none" placeholder="xxxx@xxxxx.xxx">
                         </div>
                     </div>
@@ -240,7 +239,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">단체명</label>
                         <div class="col-md-4">
-                            <div class="form-control-plaintext myinfo-view">${user.corporate_name}</div>
+                            <div class="form-control-plaintext myinfo-view">${consoleUser.corporate_name}</div>
                             <input type="text" class="form-control form-control-md myinfo-edit d-none" placeholder="단체명...">
                         </div>
                     </div>
@@ -248,7 +247,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">직위</label>
                         <div class="col-md-4">
-                            <div class="form-control-plaintext myinfo-view">${user.job_title}</div>
+                            <div class="form-control-plaintext myinfo-view">${consoleUser.job_title}</div>
                             <input type="text" class="form-control form-control-md myinfo-edit d-none" placeholder="직위명...">
                         </div>
                     </div>
@@ -256,7 +255,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-form-label-md col-md-2 text-md-right font-weight-bold">전화 번호</label>
                         <div class="col-md-4">
-                            <div class="form-control-plaintext myinfo-view">${user.tel_num}</div>
+                            <div class="form-control-plaintext myinfo-view">${consoleUser.tel_num}</div>
                             <input type="text" class="form-control form-control-md myinfo-edit d-none" placeholder="000-0000-0000">
                         </div>
                     </div>
@@ -304,30 +303,27 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script>
-    if("${user.auth_status}" == "0"){
-        $("#modals-pw-modify-first").addClass("show").css("display", "block");
-        $(".modal-backdrop").addClass("show").css("display", "block");
-    }
+
 
     var regax = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
 
-/*    $("#mod-pw").on("change focus blur",() => {
+    $("#mod-pw").on("change focus blur",() => {
         if(!regax.test($("#mod-pw").val())){
             $("#mod-pw-guide").text("비밀번호 규칙에 맞지 않습니다.");
         }else{
             $("#mod-pw-guide").text("");
         }
-    })*/
+    })
 
-    /*$("#mod-pw-first").on("change focus blur",() => {
+    $("#mod-pw-first").on("change focus blur",() => {
         if(!regax.test($("#mod-pw-first").val())){
             $("#mod-pw-guide-first").text("비밀번호 규칙에 맞지 않습니다.");
         }else{
             $("#mod-pw-guide-first").text("");
         }
-    })*/
+    })
 
-    /*$("#mod-pwcf").on("change focus blur",() => {
+    $("#mod-pwcf").on("change focus blur",() => {
         if(!regax.test($("#mod-pwcf").val())){
             $("#mod-pwcf-guide").text("비밀번호 규칙에 맞지 않습니다.");
         }else if($("#mod-pwcf").val() != $("#mod-pw").val()){
@@ -335,9 +331,9 @@
         }else{
             $("#mod-pwcf-guide").text("");
         }
-    })*/
+    })
 
-    /*$("#mod-pwcf-first").on("change focus blur",() => {
+    $("#mod-pwcf-first").on("change focus blur",() => {
         if(!regax.test($("#mod-pwcf-first").val())){
             $("#mod-pwcf-guide-first").text("비밀번호 규칙에 맞지 않습니다.");
         }else if($("#mod-pwcf-first").val() != $("#mod-pw-first").val()){
@@ -345,112 +341,137 @@
         }else{
             $("#mod-pwcf-guide-first").text("");
         }
-    })*/
+    })
 
-
-
-
-    var gimje = {
-        weather: "https://api.openweathermap.org/data/2.5/weather?q=gimje&appid=53adfc8e9ffcbf891a9be91b9e312c01",
-        dust: "https://api.airvisual.com/v2/city?city=gunsan&state=jeollabuk-do&country=south-korea&key=3a760b19-7b72-40b9-860a-4ac383bdee39"
-    }
-
-    var sangju = {
-        weather: "https://api.openweathermap.org/data/2.5/weather?q=sangju&appid=53adfc8e9ffcbf891a9be91b9e312c01",
-        dust: "https://api.airvisual.com/v2/city?city=sangju&state=gyeongsangbuk-do&country=south-korea&key=3a760b19-7b72-40b9-860a-4ac383bdee39"
-    }
-    nowDateTime();
-    setInterval(nowDateTime, 1000)
-    if("${profile}" == 'sangju-prod'){
-        nowWeatherAndDust(sangju);
-    }
-    else{
-        nowWeatherAndDust(gimje);
-    }
-
-    function nowDateTime(){
-        $('#now-date-nav').text(new Date().toLocaleString().slice(0,14) + new Date().getHours() + ':' + new Date().getMinutes());
-    }
-
-    function nowWeatherAndDust(location) {
-        fetch(location.weather) //weather
-            .then(res => res.json())
-            .then(json => {
-                $('.navbar-weather #now-temp-nav').text((json.main.temp - 273.15 + '').length > 4 ? (json.main.temp - 273.15 + '').slice(0, 4) : json.main.temp - 273.15 + '');
-                switch (json.weather[0].icon) {
-                    case '01d' || '01n':
-                        $('#now-weather-nav').text('℃ 맑음');
-                        break;
-                    case '02d' || '02n':
-                        $('#now-weather-nav').text('℃ 구름 조금');
-                        break;
-                    case '03d' || '03n':
-                        $('#now-weather-nav').text('℃ 흐림');
-                        break;
-                    case '04d' || '04n':
-                        $('#now-weather-nav').text('℃ 구름 많음');
-                        break;
-                    case '09d' || '09n':
-                        $('#now-weather-nav').text('℃ 소나기');
-                        break;
-                    case '10d' || '10n':
-                        $('#now-weather-nav').text('℃ 비');
-                        break;
-                    case '11d' || '11n':
-                        $('#now-weather-nav').text('℃ 뇌우');
-                        break;
-                    case '13d' || '13n':
-                        $('#now-weather-nav').text('℃ 눈');
-                        break;
-                    case '50d' || '50n':
-                        $('#now-weather-nav').text('℃ 안개');
-                        break;
-                    default:
-                        $('#now-weather-nav').text('℃ 날씨');
+    $("#mod-pw-submit").click(() => {
+        if($("#cur-pw").val() == $("#mod-pw").val()){
+            alert("변경할 비밀번호와 기존비밀번호가 같습니다.")
+            return;
+        }
+        if($("#cur-pw").val() == "" || $("#mod-pw").val() == "" || $("#mod-pwcf").val() == ""){
+            alert("비밀번호 변경에 필요한 정보가 모두 입력되지 않았습니다.");
+            return;
+        }
+        var newPw = {
+            curPw : $("#cur-pw").val(),
+            modPW : $("#mod-pw").val(),
+            modPwCf :$("#mod-pwcf").val(),
+            adminId : "${admin.admin_id}"
+        }
+        $.ajax({
+            type: 'post',
+            url :'changePw', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(newPw),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'json',//받는 데이터 타입
+            success: function(result){
+                //작업이 성공적으로 발생했을 경우
+                if(result.result_code=="SUCCESS"){
+                    alert("비밀번호 변경이 완료되었습니다.");
+                    $("#modals-pw-edit").removeClass("show").css("display", "none");
+                    $(".modal-backdrop").removeClass("show").css("display", "none");
                 }
-            })
-
-
-        var requestOptions = {
-            method: 'GET',
-            redirect: 'follow'
-        };
-
-        fetch(location.dust, requestOptions) //dust
-            .then(response => response.json())
-            .then(res => {
-                $('.now-dust-img-nav').removeClass('fa-laugh').removeClass('fa-tired').removeClass('fa-frown').removeClass('fa-smile');
-                $('.now-dust-nav').removeClass('text-info').removeClass('text-warning').removeClass('text-success').removeClass('text-danger').text('');
-                switch (res.data.current.pollution.mainus) {
-                    case 'p1':
-                        $('.now-dust-img-nav').addClass('fa-smile');
-                        $('.now-dust-nav').addClass('text-info').text(' 매우 좋음 ');
-                        break;
-                    case 'p2':
-                        $('.now-dust-img-nav').addClass('fa-laugh');
-                        $('.now-dust-nav').addClass('text-success').text(' 보통 ');
-                        break;
-                    case 'p3':
-                        $('.now-dust-img-nav').addClass('fa-tired');
-                        $('.now-dust-nav').addClass('text-warning').text(' 나쁨 ');
-                        break;
-                    case 'p4':
-                        $('.now-dust-img-nav').addClass('fa-frown');
-                        $('.now-dust-nav').addClass('text-danger').text(' 매우 나쁨 ')
-                        break;
-                    default:
-                        $('.now-dust-img-nav').addClass('fa-frown');
-                        $('.now-dust-nav').addClass('text-danger').text(' 매우 나쁨 ')
-                        break;
+                else {
+                    <c:if test="${login_from == 'gimje-prod'}">
+                    location.replace('https://innovalley.smartfarmkorea.net/gimje/Demonstration/admin/login');
+                    </c:if>
+                    <c:if test="${login_from == 'sangju-prod'}">
+                    location.replace('https://innovalley.smartfarmkorea.net/sangju/Demonstration/admin/login');
+                    </c:if>
+                    <c:if test="${login_from == 'local'}">
+                    location.replace('/login');
+                    </c:if>
                 }
-            })
-        // setTimeout(nowWeatherAndDust(location), 600000);
-    }
+            },
+            error:function(){
+                //에러가 났을 경우 실행시킬 코드
+                alert("에러발생");
+                return;
+            }
+        })
+    });
 
+    $("#mod-pw-submit-first").click(() => {
+        // if($("#mod-pwcf-guide").text() == "" || $("#mod-pw-guide").text() == ""){
+        //     alert("변경할 비밀번호가 올바르지 않습니다.");
+        //     return;
+        // }
+        if($("#cur-pw-first").val() == $("#mod-pw-first").val()){
+            alert("변경할 비밀번호와 기존비밀번호가 같습니다.")
+            return;
+        }
+
+        if($("#cur-pw-first").val() == "" || $("#mod-pw-first").val() == "" || $("#mod-pwcf-first").val() == ""){
+            alert("비밀번호 변경에 필요한 정보가 모두 입력되지 않았습니다.");
+            return;
+        }
+
+        var newPw = {
+            curPw : $("#cur-pw-first").val(),
+            modPW : $("#mod-pw-first").val(),
+            modPwCf :$("#mod-pwcf-first").val(),
+            adminId : "${admin.admin_id}"
+        }
+        $.ajax({
+            type: 'post',
+            url :'changePw', //데이터를 주고받을 파일 주소 입력
+            data: JSON.stringify(newPw),//보내는 데이터
+            contentType:"application/json; charset=utf-8;",//보내는 데이터 타입
+            dataType:'json',//받는 데이터 타입
+            success: function(result){
+                //작업이 성공적으로 발생했을 경우
+                if(result.result_code=="SUCCESS"){
+                    alert("비밀번호 변경이 완료되었습니다.");
+                    $("#modals-pw-modify-first").removeClass("show").css("display", "none");
+                    $(".modal-backdrop").removeClass("show").css("display", "none");
+                }
+                else {
+                    alert(result.result_str);
+
+                    <c:if test="${login_from == 'gimje-prod'}">
+                    location.replace('https://innovalley.smartfarmkorea.net/gimje/Demonstration/admin/login');
+                    </c:if>
+                    <c:if test="${login_from == 'sangju-prod'}">
+                    location.replace('https://innovalley.smartfarmkorea.net/sangju/Demonstration/admin/login');
+                    </c:if>
+                    <c:if test="${login_from == 'local'}">
+                    location.replace('/login');
+                    </c:if>
+                    //기존 비밀번호와 변경할 비밀번호가 같습니다.
+                }
+            },
+            error:function(){
+                //에러가 났을 경우 실행시킬 코드
+                window.location.href = "/logout";
+            }
+        })
+    });
+
+    $('#btn_myinfo_edit_save').click( function(){
+        $('.myinfo-view').removeClass('d-none');
+        $('.myinfo-edit').addClass('d-none');
+    });
+
+    $('#btn_myinfo_edit').click( function(){
+        $('.myinfo-edit').removeClass('d-none');
+        $('.myinfo-view').addClass('d-none');
+    });
+
+    $('#btn_myinfo_edit_cancel').click( function(){
+        $('.myinfo-view').removeClass('d-none');
+        $('.myinfo-edit').addClass('d-none');
+    });
+
+    $('#btn_myinfo_edit_save').click( function(){
+
+        $('.myinfo-view').removeClass('d-none');
+        $('.myinfo-edit').addClass('d-none');
+
+    });
     $("#btn_logout").click(function(){
 
         var param = {
-            "user_id":'${user.user_id}'
+            "admin_id":'${admin.admin_id}'
         };
 
         $.ajax({
@@ -462,18 +483,18 @@
             success: function(result){
                 if(result.result_code=="SUCCESS"){
                     //access_token을 받았으니 사용해야지
-                    if($.cookie('console_token')!='undefined')
+                    if($.cookie('access_token')!='undefined')
                     {
-                        $.removeCookie('console_token', { path: '/' }); // => true
-                        $.removeCookie('console_refresh_token', { path: '/' }); // => true
+                        $.removeCookie('access_token', { path: '/' }); // => true
+                        $.removeCookie('refresh_token', { path: '/' }); // => true
                     }
                     alert(result.result_str);
 
                     <c:if test="${login_from == 'gimje-prod'}">
-                    location.replace('https://innovalley.smartfarmkorea.net/gimje/Demonstration/console/login');
+                    location.replace('https://innovalley.smartfarmkorea.net/gimje/Demonstration/admin/login');
                     </c:if>
                     <c:if test="${login_from == 'sangju-prod'}">
-                    location.replace('https://innovalley.smartfarmkorea.net/sangju/Demonstration/console/login');
+                    location.replace('https://innovalley.smartfarmkorea.net/sangju/Demonstration/admin/login');
                     </c:if>
                     <c:if test="${login_from == 'local'}">
                     location.replace('/login');
@@ -488,9 +509,110 @@
             }
         });
     });
-    // console.log(weather);
 
+    var gimje = {
+        weather: "https://api.openweathermap.org/data/2.5/weather?q=gimje&appid=53adfc8e9ffcbf891a9be91b9e312c01",
+        dust: "https://api.airvisual.com/v2/city?city=gunsan&state=jeollabuk-do&country=south-korea&key=3a760b19-7b72-40b9-860a-4ac383bdee39"
+    }
+
+    var sangju = {
+        weather: "https://api.openweathermap.org/data/2.5/weather?q=sangju&appid=53adfc8e9ffcbf891a9be91b9e312c01",
+        dust: "https://api.airvisual.com/v2/city?city=sangju&state=gyeongsangbuk-do&country=south-korea&key=3a760b19-7b72-40b9-860a-4ac383bdee39"
+    }
+    var weadtherProfile= gimje;
+
+    $(document).ready(function(){
+
+        if("${profile}" == 'sangju-prod'){
+            weadtherProfile = sangju;
+        }
+        else{
+            weadtherProfile = gimje;
+        }
+        nowDateTime();
+        nowWeatherAndDust(weadtherProfile);
+
+        if("${admin.auth_status}" == "0"){
+            $("#modals-pw-modify-first").addClass("show").css("display", "block");
+            $(".modal-backdrop").addClass("show").css("display", "block");
+        }
+    });
+
+    const timeUpdateId = setInterval(nowDateTime, 1000);
+    function nowDateTime(){
+        var options = { year: "numeric", month: "long", day: "numeric", weekday: "long" };
+        var today = new Date();
+        $('#now-date-nav').text(today.toLocaleDateString("ko-KR", options) + " " + today.toLocaleTimeString());
+    }
+
+    const weatherUpdateId = setInterval(nowWeatherAndDust, 600000,weadtherProfile);
+
+    function nowWeatherAndDust(location) {
+        fetch(location.weather) //weather
+            .then(res => res.json())
+            .then(json => {
+
+                $('.navbar-weather #now-temp-nav').text((json.main.temp - 273.15 + '').length > 4 ? (json.main.temp - 273.15 + '').slice(0, 4) : json.main.temp - 273.15 + '');
+
+                if(json.weather[0].icon=="01d" ||json.weather[0].icon=="01n")
+                    $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-sun'></i> &nbsp;맑음</span>");
+                else if(json.weather[0].icon=="02d" ||json.weather[0].icon=="02n")
+                    $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-cloud-sun'></i>&nbsp;구름 조금</span>");//.text('구름 조금');
+                else if(json.weather[0].icon=="03d" ||json.weather[0].icon=="03n")
+                    $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-cloud'></i>&nbsp;흐림</span>");//.text('흐림');
+                else if(json.weather[0].icon=="04d" ||json.weather[0].icon=="04n")
+                    $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='oi oi-cloudy'></i>&nbsp;구름 많음</span>");//.text('구름 많음');
+                else if(json.weather[0].icon=="09d" ||json.weather[0].icon=="09n")
+                    $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-cloud-rain'></i>&nbsp;소나기</span>");//.text('소나기');
+                else if(json.weather[0].icon=="10d" ||json.weather[0].icon=="10n")
+                    $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-cloud-rain'></i>&nbsp;비</span>");//.text('비');
+                else if(json.weather[0].icon=="11d" ||json.weather[0].icon=="11n")
+                    $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='ion ion-ios-thunderstorm'></i>&nbsp;뇌우</span>");//.text('뇌우');
+                else if(json.weather[0].icon=="13d" ||json.weather[0].icon=="13n")
+                    $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='far fa-snowflake'></i>&nbsp;눈</span>");//.text('눈');
+                else if(json.weather[0].icon=="50d" ||json.weather[0].icon=="50n")
+                    $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-smog'></i>&nbsp;안개</span>");//.text('안개');
+                else
+                    $('#now-weather-nav').html("<span class=''>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-cloud'></i>&nbsp;...</span>");//.text('℃ ...');
+
+            });
+
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+
+        fetch(location.dust, requestOptions) //dust
+            .then(response => response.json())
+            .then(res => {
+                $('.now-dust-img-nav').removeClass('fa-laugh').removeClass('fa-tired').removeClass('fa-frown').removeClass('fa-smile');
+                $('.now-dust-nav').removeClass('text-info').removeClass('text-warning').removeClass('text-success').removeClass('text-danger').text('');
+                if(res.status!='fail') {
+                    switch (res.data.current.pollution.mainus) {
+                        case 'p1':
+                            $('.now-dust-img-nav').addClass('fa-smile');
+                            $('.now-dust-nav').addClass('text-info').text(' 매우 좋음 ');
+                            break;
+                        case 'p2':
+                            $('.now-dust-img-nav').addClass('fa-laugh');
+                            $('.now-dust-nav').addClass('text-success').text(' 보통 ');
+                            break;
+                        case 'p3':
+                            $('.now-dust-img-nav').addClass('fa-tired');
+                            $('.now-dust-nav').addClass('text-warning').text(' 나쁨 ');
+                            break;
+                        case 'p4':
+                            $('.now-dust-img-nav').addClass('fa-frown');
+                            $('.now-dust-nav').addClass('text-danger').text(' 매우 나쁨 ')
+                            break;
+                        default:
+                            $('.now-dust-img-nav').addClass('fa-frown');
+                            $('.now-dust-nav').addClass('text-danger').text(' 매우 나쁨 ')
+                            break;
+                    }
+                }
+            });
+    };
 
 </script>
-
 <!-- / Layout navbar -->

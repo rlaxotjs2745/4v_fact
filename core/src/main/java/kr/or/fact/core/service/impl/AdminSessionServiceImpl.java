@@ -11,6 +11,7 @@ import java.util.List;
 
 @Service("adminSessionService")
 public class AdminSessionServiceImpl implements AdminSessionService {
+
     private final AdminSessionMapper adminSessionMapper;
 
     @Autowired

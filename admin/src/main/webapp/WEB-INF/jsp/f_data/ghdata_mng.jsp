@@ -125,7 +125,7 @@
 
                                 <tr class="">
                                     <td class="text-center align-middle"><c:choose><c:when test="${filter1 ne 9999}">${item.row_num}</c:when><c:otherwise>${item.guyok}</c:otherwise></c:choose></td>
-                                    <td class="text-center align-middle"><fmt:formatDate value="${item.ymdtime_dt}" var="ymdtime" pattern="yyyy-MM-dd hh:mm:ss"/>${ymdtime}</td>
+                                    <td class="text-center align-middle"><fmt:formatDate value="${item.ymdtime_dt}" var="ymdtime" pattern="yyyy-MM-dd HH:mm:ss"/>${ymdtime}</td>
                                     <td class="text-center align-middle">${item.xintemp1}</td>
                                     <td class="text-center align-middle">${item.xinhum1}</td>
                                     <td class="text-center align-middle">${item.xco2}</td>
@@ -198,19 +198,19 @@
         flatpickr("#dateSelector",{
             maxDate:"today",
             dateFormat: "Y-m-d",
-            defaultDate:formatDate('<fmt:formatDate value="${end_dt}" var="enddt" pattern="yyyy-MM-dd hh:mm:ss"/>${enddt}')
+            defaultDate:formatDate('<fmt:formatDate value="${end_dt}" var="enddt" pattern="yyyy-MM-dd HH:mm:ss"/>${enddt}')
         });
         flatpickr("#startTimeSelect",{
             enableTime: true,
             noCalendar: true,
             dateFormat: "H:i",
-            defaultDate: getHMtoDate('<fmt:formatDate value="${start_dt}" var="startdt" pattern="yyyy-MM-dd hh:mm:ss"/>${startdt}')
+            defaultDate: getHMtoDate('<fmt:formatDate value="${start_dt}" var="startdt" pattern="yyyy-MM-dd HH:mm:ss"/>${startdt}')
         });
         flatpickr("#endTimeSelect",{
             enableTime: true,
             noCalendar: true,
             dateFormat: "H:i",
-            defaultDate: getHMtoDate('<fmt:formatDate value="${end_dt}" var="enddt" pattern="yyyy-MM-dd hh:mm:ss"/>${enddt}')
+            defaultDate: getHMtoDate('<fmt:formatDate value="${end_dt}" var="enddt" pattern="yyyy-MM-dd HH:mm:ss"/>${enddt}')
         });
 
     });

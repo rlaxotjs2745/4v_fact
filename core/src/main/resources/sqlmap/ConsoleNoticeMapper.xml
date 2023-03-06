@@ -3,13 +3,11 @@
 
 <mapper namespace="kr.or.fact.core.model.ConsoleNoticeMapper">
 
-    <select id="getConsoleNoticeFilteredCount" resultType="kr.or.fact.core.model.DTO.ConsoleNoticeFilteredCountVO">
+    <select id="getConsoleNoticeCount" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.ConsoleNoticeFilteredCountVO">
         SELECT (SELECT COUNT(*) FROM TB_CONSOLE_NOTICE ) AS TOT_COUNT,
-               (SELECT COUNT(*) FROM TB_CONSOLE_NOTICE WHERE ASSET_STATUS = 0) AS WAIT_COUNT,
-               (SELECT COUNT(*) FROM TB_CONSOLE_NOTICE WHERE ASSET_STATUS = 1) AS ON_COUNT,
-               (SELECT COUNT(*) FROM TB_CONSOLE_NOTICE WHERE ASSET_STATUS = 2) AS RE_ON_COUNT,
-               (SELECT COUNT(*) FROM TB_CONSOLE_NOTICE WHERE ASSET_STATUS = 3) AS OFF_COUNT,
-               (SELECT COUNT(*) FROM TB_CONSOLE_NOTICE WHERE ASSET_STATUS = 99) AS ETC_COUNT
+               (SELECT COUNT(*) FROM TB_CONSOLE_NOTICE WHERE NOTICE_TYPE = 0) AS COMMON_COUNT,
+               (SELECT COUNT(*) FROM TB_CONSOLE_NOTICE WHERE NOTICE_TYPE = 1) AS INDIVIDUAL_COUNT,
+               (SELECT COUNT(*) FROM TB_CONSOLE_NOTICE WHERE NOTICE_TYPE = 99) AS ETC_COUNT
         FROM TB_CONSOLE_NOTICE WHERE ROWNUM = 1
     </select>
 
@@ -35,18 +33,15 @@
         SELECT
         *
         FROM (
-        SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM
-        t.*
-        FROM (
-        SELECT * FROM TB_CONSOLE_NOTICE
-        <if test="filter1 == 0">
-            WHERE NOTICE_TYPE != 1
-        </if>
-        <if test="filter1 == 1">
-            WHERE NOTICE_TYPE == 1
-        </if>
-        ) t
-        WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
+            SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM,
+            t.*
+            FROM (
+                SELECT * FROM TB_CONSOLE_NOTICE
+                <if test="filter1 != 9999">
+                    WHERE NOTICE_TYPE != #{filter1}
+                </if>
+            ) t
+            WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
         )
         WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
     </select>

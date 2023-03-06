@@ -7,7 +7,13 @@ import java.text.ParseException;
 import java.util.List;
 
 public interface EnvDataService {
+
+    List<FarmVO> getGuyokDataForConsoleDashboard(ParamEnvQueryVO param);
+    List<FarmVO> getGuyokAVGDataEachTenMin(ParamEnvQueryVO param);
+
+
     int getEnvDataTotalCount();
+
 
     List<FarmVO> getEachGHEnvData(ParamPageListFilteredVO param) throws ParseException;
     int getEachGHEnvDataTotalCount(ParamPageListFilteredVO param);

@@ -23,4 +23,6 @@ public class ParamPageListFilteredVO {
     Date start_dt;
     Date end_dt;
 
+    int type;
+
 }

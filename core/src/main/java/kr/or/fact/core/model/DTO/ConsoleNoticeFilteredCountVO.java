@@ -5,9 +5,7 @@ import lombok.Data;
 @Data
 public class ConsoleNoticeFilteredCountVO {
     int tot_count;
-    int wait_count;
-    int on_count;
-    int re_on_count;
-    int off_count;
+    int common_count;
+    int individual_count;
     int etc_count;
 }

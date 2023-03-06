@@ -31,8 +31,8 @@ public class BsAnnouncementServiceImpl implements BsAnnouncementService {
     }
 
     @Override
-    public List<BsAnnouncementVO> getOpenBsAnnouncementWebList(int page, int count, String filter, String query) {
-        return bsAnnouncementMapper.getOpenBsAnnouncementWebList(page, count,filter, query);
+    public List<BsAnnouncementVO> getOpenBsAnnouncementWebList(ParamPageListFilteredVO param) {
+        return bsAnnouncementMapper.getOpenBsAnnouncementWebList(param);
     }
 
     @Override

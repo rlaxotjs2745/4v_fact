@@ -758,12 +758,25 @@ public class IndexController {
                                @RequestParam(name = "filter", required = false) String filter,
                                @RequestParam(name = "query", required = false) String query,
                                Model model) {
+
         if (page == null || page <= 0) {
             page = 1;
         }
+        ParamPageListFilteredVO param = new ParamPageListFilteredVO();
+        param.setCur_page(page);
+
+        //param.setFilter1(filter);
+
+        //if(param.getList_amount()==0) param.setList_amount(10);
 
         int list_amount = 10;
         int page_amount = 10;
+        if(param.getCur_page()==0) param.setCur_page(1);
+        if(param.getList_amount()==0) param.setList_amount(list_amount);
+        int cur_page = param.getCur_page();
+
+        int filter1 = param.getFilter1();
+        int filter2 = param.getFilter2();
 
         query = decodeUrlValue(query);
 
@@ -776,10 +789,19 @@ public class IndexController {
             setProfile(model);
             return "brd_announce_blank";
         }
+
+        int total_count = annouceCount;
+
         model.addAttribute("total_count", annouceCount);
-        List<BsAnnouncementVO> announcementVOList = bsAnnouncementService.getOpenBsAnnouncementWebList(page, list_amount, filter, query);
+        List<BsAnnouncementVO> announcementVOList = bsAnnouncementService.getOpenBsAnnouncementWebList(param);
         model.addAttribute("announceList", announcementVOList);
 
+        model.addAttribute("filter1", param.getFilter1());
+        model.addAttribute("filter2", param.getFilter2());
+
+        makePagedItem(model,total_count,list_amount,page_amount,cur_page);
+
+        /*
         model.addAttribute("cur_page", page);
         model.addAttribute("list_amount", list_amount);
 
@@ -820,7 +842,9 @@ public class IndexController {
         model.addAttribute("is_next", is_next);
         model.addAttribute("is_last", is_last);
         model.addAttribute("list_amount", list_amount);
-        model.addAttribute("page_amount", page_amount);
+        model.addAttribute("page_amount", page_amount);*/
+        
+        
         getHomepageInfo(model);
         setProfile(model);
         return "brd_announce";
@@ -874,8 +898,19 @@ public class IndexController {
 
         int page = 1;
 
+        ParamPageListFilteredVO param = new ParamPageListFilteredVO();
+        param.setCur_page(page);
+
+        if(param.getList_amount()==0) param.setList_amount(10);
         int list_amount = 10;
         int page_amount = 10;
+        if(param.getCur_page()==0) param.setCur_page(1);
+        int cur_page = param.getCur_page();
+
+        int filter1 = param.getFilter1();
+        int filter2 = param.getFilter2();
+
+
 
         query = decodeUrlValue(query);
 
@@ -884,16 +919,25 @@ public class IndexController {
         model.addAttribute("query", query);
 
         int eventCount = eventContentService.getOpenEventContentCount(filter, query);
+        int total_count = eventCount;
+
         if (eventCount == 0) {
             setProfile(model);
             return "brd_event_blank";
         }
         model.addAttribute("total_count", eventCount);
-        List<EventContentVO> eventContentVOList = eventContentService.getOpenEventContentList(page, list_amount, filter, query);
+        List<EventContentVO> eventContentVOList = eventContentService.getOpenEventContentList(param);
         model.addAttribute("eventContentVOList", eventContentVOList);
 
         model.addAttribute("cur_page", page);
         model.addAttribute("list_amount", list_amount);
+
+        model.addAttribute("filter1", param.getFilter1());
+        model.addAttribute("filter2", param.getFilter2());
+
+        makePagedItem(model,total_count,list_amount,page_amount,cur_page);
+        
+        /*
 
         int tot_page = eventCount / list_amount + 1;
         if (eventCount % list_amount == 0) tot_page -= 1;
@@ -932,7 +976,7 @@ public class IndexController {
         model.addAttribute("is_next", is_next);
         model.addAttribute("is_last", is_last);
         model.addAttribute("list_amount", list_amount);
-        model.addAttribute("page_amount", page_amount);
+        model.addAttribute("page_amount", page_amount);*/
 
         getHomepageInfo(model);
         setProfile(model);
@@ -995,8 +1039,11 @@ public class IndexController {
 
 
     @RequestMapping("/brd_notice")
-    public String brd_notice(@RequestBody ParamPageListFilteredVO param,
+    public String brd_notice(@RequestParam(value = "page", required = false) Integer page,
                              Model model) {
+
+        ParamPageListFilteredVO param = new ParamPageListFilteredVO();
+        param.setCur_page(page);
         if(param.getList_amount()==0) param.setList_amount(10);
         int list_amount = 10;
         int page_amount = 10;
@@ -1006,6 +1053,7 @@ public class IndexController {
         int filter1 = param.getFilter1();
         int filter2 = param.getFilter2();
 
+
         String query = decodeUrlValue(param.getQuery());
 
         model.addAttribute("page", param.getCur_page());
@@ -1013,6 +1061,7 @@ public class IndexController {
         model.addAttribute("query", query);
 
         int noticeCount = noticeService.getOpenNoticeCount(param);
+        int total_count = noticeCount;
         if (noticeCount == 0) {
             setProfile(model);
             return "brd_notice_blank";
@@ -1021,6 +1070,11 @@ public class IndexController {
         List<NoticeVO> noticeList = noticeService.getOpenNoticeList(param);
         model.addAttribute("noticeList", noticeList);
 
+        model.addAttribute("filter1", param.getFilter1());
+        model.addAttribute("filter2", param.getFilter2());
+
+        makePagedItem(model,total_count,list_amount,page_amount,cur_page);
+        /*
         model.addAttribute("cur_page", param.getCur_page());
 
         int tot_page = noticeCount / list_amount + 1;
@@ -1060,7 +1114,7 @@ public class IndexController {
         model.addAttribute("is_next", is_next);
         model.addAttribute("is_last", is_last);
         model.addAttribute("list_amount", list_amount);
-        model.addAttribute("page_amount", page_amount);
+        model.addAttribute("page_amount", page_amount);*/
 
 //        getHomepageInfo(model);
         setProfile(model);
@@ -1121,10 +1175,20 @@ public class IndexController {
     public String brd_promotion(@RequestParam(name = "filter", required = false) String filter,
                                 @RequestParam(name = "query", required = false) String query,
                                 Model model) {
+
         int page = 1;
+        ParamPageListFilteredVO param = new ParamPageListFilteredVO();
+        param.setCur_page(page);
 
         int list_amount = 10;
         int page_amount = 10;
+        if(param.getCur_page()==0) param.setCur_page(1);
+        if(param.getList_amount()==0) param.setList_amount(list_amount);
+        int cur_page = param.getCur_page();
+
+        int filter1 = param.getFilter1();
+        int filter2 = param.getFilter2();
+
 
         query = decodeUrlValue(query);
 
@@ -1133,13 +1197,21 @@ public class IndexController {
         model.addAttribute("query", query);
 
         int promotionCount = prContentsService.getOpenPRContentCount(filter, query);
+        int total_count = promotionCount;
         if (promotionCount == 0) {
             setProfile(model);
             return "brd_promotion_blank";
         }
         model.addAttribute("total_count", promotionCount);
-        List<PRContentVO> prContentList = prContentsService.getOpenPRContentList(page, list_amount, filter, query);
+        List<PRContentVO> prContentList = prContentsService.getOpenPRContentList(param);
         model.addAttribute("prContentList", prContentList);
+
+        model.addAttribute("filter1", param.getFilter1());
+        model.addAttribute("filter2", param.getFilter2());
+
+        makePagedItem(model,total_count,list_amount,page_amount,cur_page);
+
+        /*
 
         model.addAttribute("cur_page", page);
         model.addAttribute("list_amount", list_amount);
@@ -1181,7 +1253,7 @@ public class IndexController {
         model.addAttribute("is_next", is_next);
         model.addAttribute("is_last", is_last);
         model.addAttribute("list_amount", list_amount);
-        model.addAttribute("page_amount", page_amount);
+        model.addAttribute("page_amount", page_amount);*/
 
         getHomepageInfo(model);
         setProfile(model);
@@ -1848,5 +1920,57 @@ return "spt_visit";
         } catch (UnsupportedEncodingException e) {
             throw new IllegalArgumentException(e);
         }
+    }
+
+    private void makePagedItem(Model model,int total_count,int list_amount,int page_amount,int cur_page){
+
+        int tot_page = (total_count/list_amount)+1;
+        if(total_count%list_amount==0) tot_page-=1;
+
+        int tot_sector = tot_page/page_amount+1;
+        if(tot_page%page_amount==0) tot_sector-=1;
+
+        int cur_sector = cur_page/page_amount+1;
+        if(cur_page%page_amount==0) cur_sector-=1;
+
+        boolean is_past = false;
+        boolean is_prev = false;
+        boolean is_next = false;
+        boolean is_last = false;
+        boolean is_active = false;
+
+        if(cur_page!=tot_page && tot_page>1) is_next = true;
+
+        if(cur_page!=1 && tot_page>1) is_prev = true;
+
+        if(cur_sector!=tot_sector && tot_sector>1 ) is_last = true;
+
+        if(cur_sector!=1 && tot_sector>1 ) is_past = true;
+
+        int remain_page = page_amount;
+
+        if(cur_sector*page_amount>tot_page)
+            remain_page =tot_page%page_amount;
+
+        if(tot_page<=page_amount){
+            is_past = false;
+            is_last = false;
+            //page_amount = tot_page;
+        }
+
+        model.addAttribute("total_count",total_count);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("cur_page",cur_page);
+        model.addAttribute("page_amount",page_amount);
+        model.addAttribute("tot_page",tot_page);
+        model.addAttribute("tot_sector",tot_sector);
+        model.addAttribute("cur_sector",cur_sector);
+        model.addAttribute("is_past",is_past);
+        model.addAttribute("is_prev",is_prev);
+        model.addAttribute("is_next",is_next);
+        model.addAttribute("is_last",is_last);
+        model.addAttribute("list_amount",list_amount);
+        model.addAttribute("remain_page",remain_page);
+
     }
 }

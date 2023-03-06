@@ -109,7 +109,7 @@
 
                     <c:if test="${is_past eq true}"><a href="brd_notice?page=1&filter=${filter}&query=${query}" class="paging__prev2"><img src="resources/assets/image/ico_paging_prev_02.png" alt=""></a></c:if>
                     <c:if test="${is_prev eq true}"><a href="brd_notice?page=${cur_page-1}&filter=${filter}&query=${query}" class="paging__prev"><img src="resources/assets/image/ico_paging_prev.png" alt=""></a></c:if>
-                    <c:forEach var="i" begin="1" end="${page_amount}">
+                    <c:forEach var="i" begin="1" end="${remain_page}">
                         <a href="brd_notice?page=${(cur_sector-1)*page_amount+i}&filter=${filter}&query=${query}" <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">class="is-active"</c:if>>${(cur_sector-1)*page_amount+i}</a>
                     </c:forEach>
                     <c:if test="${is_next eq true}"><a href="brd_notice?page=${cur_page+1}&filter=${filter}&query=${query}" class="paging__next"><img src="resources/assets/image/ico_paging_next.png" alt=""></a></c:if>

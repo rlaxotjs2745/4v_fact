@@ -3641,13 +3641,16 @@ input[type="button"].btn-block {
 
 .nav-link:hover,
 .nav-link:focus {
-    text-decoration: none
+    /*text-decoration: none;*/
+    color: #3bbb78;
 }
 
 .nav-link.disabled {
     color: #66696d;
     pointer-events: none;
-    cursor: default
+    cursor: default;
+    text-align: center;
+    border: 1px solid #a4a4a4;
 }
 
 .nav-tabs {
@@ -3656,9 +3659,11 @@ input[type="button"].btn-block {
 
 .nav-tabs .nav-link {
     margin-bottom: -1px;
+    background-color: #c5c5c9;
+    color: rgba(255, 255, 255, 0.48);
     border: 1px solid transparent;
-    border-top-left-radius: .25rem;
-    border-top-right-radius: .25rem
+    border-top-left-radius: .4rem;
+    border-top-right-radius: .4rem
 }
 
 .nav-tabs .nav-link:hover,
@@ -3674,8 +3679,8 @@ input[type="button"].btn-block {
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-    color: #fff;
-    background-color: #32353b;
+    color: #ffffff;
+    background-color: #3bbb78;
     border-color: #32353b
 }
 
@@ -3718,6 +3723,26 @@ input[type="button"].btn-block {
 .tab-content>.active {
     display: block
 }
+
+.nav-card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #32353b;
+    background-clip: border-box;
+    border-left: 1px solid #696972;
+    border-top: 1px solid #696972;
+    border-right: 1px solid #696972;
+    border-bottom: 1px solid #696972;
+    /*border: 1px solid #32353b;*/
+    border-radius: 0.25rem;
+}
+
+
 
 .navbar {
     position: relative;
@@ -4298,7 +4323,7 @@ input[type="button"].btn-block {
 }
 
 .card-header {
-    padding: .875rem 1.5rem;
+    padding: .875rem 1rem;
     margin-bottom: 0;
     background-color: rgba(0, 0, 0, 0);
     border-bottom: 1px solid #32353b
@@ -5237,7 +5262,7 @@ a.close.disabled {
     align-items: flex-start;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    padding: 1.25rem 1.5625rem;
+    padding: 0.8rem 1.5625rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.09);
     border-top-left-radius: calc(.25rem - 0px);
     border-top-right-radius: calc(.25rem - 0px)

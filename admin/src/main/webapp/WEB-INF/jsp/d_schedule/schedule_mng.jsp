@@ -197,8 +197,8 @@
 <c:forEach items="${scheduleItemVOList}" var="item" varStatus="status">
             {
                 title: '${item.contents}',
-                start: '<fmt:formatDate value="${item.start_date}" pattern="yyyy-MM-dd hh:mm:ss" />',
-                end: '<fmt:formatDate value="${item.end_date}" pattern="yyyy-MM-dd hh:mm:ss" />',
+                start: '<fmt:formatDate value="${item.start_date}" pattern="yyyy-MM-dd HH:mm:ss" />',
+                end: '<fmt:formatDate value="${item.end_date}" pattern="yyyy-MM-dd HH:mm:ss" />',
                 classNames: '${item.grade eq 0 ? 'fc-event-success' : item.grade eq 1 ? 'fc-event-warning' : item.grade eq 2 ? 'fc-event-dark': item.grade eq 3 ?'fc-event-secondary': item.grade eq 4 ? 'fc-event-info' : 'fc-event-warning'}'
             },
             </c:forEach>

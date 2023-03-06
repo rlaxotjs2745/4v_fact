@@ -20,6 +20,16 @@ public class EnvDataServiceImpl implements EnvDataService {
     @Autowired
     public EnvDataServiceImpl(EnvDataMapper envDataMapper){this.envDataMapper=envDataMapper;}
 
+    @Override
+    public List<FarmVO> getGuyokDataForConsoleDashboard(ParamEnvQueryVO param){
+        return envDataMapper.getGuyokDataForConsoleDashboard(param);
+
+    }
+    @Override
+    public List<FarmVO> getGuyokAVGDataEachTenMin(ParamEnvQueryVO param){
+
+        return envDataMapper.getGuyokAVGDataEachTenMin(param);
+    }
 
     @Override
     public int getEnvDataTotalCount(){

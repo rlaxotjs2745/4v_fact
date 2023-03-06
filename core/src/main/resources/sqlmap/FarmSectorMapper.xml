@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.fact.core.model.FarmSectorMapper">
+
+    <select id="getFarmSectorFilteredCount" resultType="kr.or.fact.core.model.DTO.FarmSectorFilteredCountVO">
+        SELECT (SELECT COUNT(*) FROM TB_FARM_SECTOR ) AS TOT_COUNT,
+               (SELECT COUNT(*) FROM TB_FARM_SECTOR WHERE USER_DEMO_TYPE = 0 ) AS SELF_COUNT,
+               (SELECT COUNT(*) FROM TB_FARM_SECTOR WHERE USER_DEMO_TYPE = 1 ) AS CONS_COUNT
+        FROM SDK_SMS_SEND WHERE ROWNUM = 1
+    </select>
+
+    <select id="getFarmSectorCount" resultType="int">
+        SELECT COUNT(*) FROM SDK_SMS_SEND
+    </select>
+
+    <select id="getAllFarmSectorList" resultType="kr.or.fact.core.model.DTO.FarmSectorVO">
+        SELECT
+        *
+        FROM TB_FARM_SECTOR
+        WHERE IS_CURRENT = 1
+        ORDER BY GUYOK ASC
+    </select>
+
+    <select id="getFarmSectorFilteredList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.FarmSectorVO">
+        SELECT * FROM(
+             SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM,
+                 A.*
+             FROM(
+                    SELECT
+                    *
+                    FROM TB_FARM_SECTOR SECTR
+                    INNER JOIN TB_USER_DEMO_BS DEMO ON SECTR.IDX_USER_DEMO_BS = DEMO.IDX_USER_DEMO_BS
+                    WHERE DEMO.USER_DEMOBS_STATUS <![CDATA[>=]]> 40 AND DEMO.USER_DEMOBS_STATUS <![CDATA[<=]]> 50
+                    <if test="filter1 != 9999">
+                        AND SECTR.USER_DEMO_TYPE != #{filter1}
+                    </if>
+                    ORDER BY SECTR.IDX_USER_DEMO_BS DESC
+
+                 ) A
+             WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
+         )
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
+    </select>
+
+    <select id="getActiveFarmSectorList" parameterType="kr.or.fact.core.model.DTO.ParamPageListFilteredVO" resultType="kr.or.fact.core.model.DTO.UserDemoFarmSectorVO">
+        SELECT * FROM(
+             SELECT ROW_NUMBER() OVER(ORDER by #{order_field} DESC) AS ROW_NUM,
+                     A.*
+             FROM(
+                 SELECT
+                    *
+                 FROM TB_FARM_SECTOR SECTR
+                 INNER JOIN TB_USER_DEMO_BS DEMO ON SECTR.IDX_USER_DEMO_BS = DEMO.IDX_USER_DEMO_BS
+                 WHERE DEMO.USER_DEMOBS_STATUS <![CDATA[>=]]> 40 AND DEMO.USER_DEMOBS_STATUS <![CDATA[<=]]> 50
+                 ORDER BY SECTR.GUYOK ASC
+                 ) A
+             WHERE ROWNUM <![CDATA[<=]]> #{cur_page}*#{list_amount}
+         )
+        WHERE ROW_NUM <![CDATA[>]]> (#{cur_page} -1)*#{list_amount}
+    </select>
+
+    <insert id="insertFarmSectorInfo" parameterType="kr.or.fact.core.model.DTO.FarmSectorVO">
+        INSERT INTO TB_FARM_SECTOR(
+            IDX_FARM_SECTOR,
+            IDX_USER_DEMOBS,
+            SECTOR_STATUS,
+            IS_CURRENT,
+            CORP_NAME,
+            CORP_NUM,
+            CEO_NAME,
+            USER_DEMO_TYPE,
+            USER_DEMO_FACILITY,
+            USER_DEMO_WAY,
+            USER_DEMO_REPEAT,
+            USER_DEMO_REPEAT_COUNT,
+            USER_DEMO_GOAL,
+            USER_DEMO_OPTION,
+            USER_DEMO_CROPS,
+            CULTURE_SOIL,
+            DEMO_TYPE,
+            USER_DEMO_IS_CROPS,
+            DEMO_START_DATE,
+            DEMO_END_DATE,
+            FARMING_START_DATE,
+            FARMING_END_DATE,
+            FARMING_REPEAT,
+            SECTOR_TITLE,
+            REG_DATE,
+            LAST_UPD_DATE
+        ) VALUES(
+            SEQ_FARM_SECTOR.NEXT_VAL,
+            #{idx_user_demobs},
+            #{sector_status},
+            #{is_current},
+            #{corp_name},
+            #{corp_num},
+            #{ceo_name},
+            #{user_demo_type},
+            #{user_demo_facility},
+            #{user_demo_way},
+            #{user_demo_repeat},
+            #{user_demo_repeat_count},
+            #{user_demo_goal},
+            #{user_demo_option},
+            #{user_demo_crops},
+            #{culture_soil},
+            #{demo_type},
+            #{user_demo_is_crops},
+            #{demo_start_date},
+            #{demo_end_date},
+            #{farming_start_date},
+            #{farming_end_date},
+            #{farming_repeat},
+            #{sector_title},
+            SYSDATE,
+            SYSDATE
+
+        )
+    </insert>
+
+    <update id="updateFarmSectorInfo" parameterType="kr.or.fact.core.model.DTO.FarmSectorVO">
+        UPDATE TB_SMS_TEMPLETE SET
+               IDX_FARM_SECTOR=#{idx_farm_sector},
+               IDX_USER_DEMOBS=#{idx_user_demobs},
+               SECTOR_STATUS=#{sector_status},
+               IS_CURRENT=#{is_current},
+               CORP_NAME=#{corp_name},
+               CORP_NUM=#{corp_num},
+               CEO_NAME=#{ceo_name},
+               USER_DEMO_TYPE=#{user_demo_type},
+               USER_DEMO_FACILITY=#{user_demo_facility},
+               USER_DEMO_WAY=#{user_demo_way},
+               USER_DEMO_REPEAT=#{user_demo_repeat},
+               USER_DEMO_REPEAT_COUNT=#{user_demo_repeat_count},
+               USER_DEMO_GOAL=#{user_demo_goal},
+               USER_DEMO_OPTION=#{user_demo_option},
+               USER_DEMO_CROPS=#{user_demo_crops},
+               CULTURE_SOIL=#{culture_soil},
+               DEMO_TYPE=#{demo_type},
+               USER_DEMO_IS_CROPS=#{user_demo_is_crops},
+               DEMO_START_DATE=#{demo_start_date},
+               DEMO_END_DATE=#{demo_end_date},
+               FARMING_START_DATE=#{farming_start_date},
+               FARMING_END_DATE=#{farming_end_date},
+               FARMING_REPEAT=#{farming_repeat},
+               FARMING_REPEAT=#{SECTOR_TITLE},
+               LAST_UPD_DATE=SYSDATE
+        WHERE
+            IDX_FARM_SECTOR = #{idx_farm_sector}
+
+    </update>
+
+
+
+
+</mapper>

@@ -8,6 +8,8 @@ import java.util.List;
 
 @Mapper
 public interface EnvDataMapper {
+    List<FarmVO> getGuyokDataForConsoleDashboard(ParamEnvQueryVO param);
+    List<FarmVO> getGuyokAVGDataEachTenMin(ParamEnvQueryVO param);
     int getEnvDataTotalCount();
     List<FarmVO> getEachGHEnvData(ParamPageListFilteredVO param);
     int getEachGHEnvDataTotalCount(ParamPageListFilteredVO param);

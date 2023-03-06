@@ -316,20 +316,104 @@ html:not(.material-style) .material-style-only {
   color:#ee2438;
 }
 
-.greenhouse-area{
-/*  background-image: url('../image/img_company-map_dark.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center center;*/
+.fill {
+  object-fit: fill;
+}
+
+.contain {
+  object-fit: contain;
+}
+
+.cover {
+  object-fit: cover;
+}
+
+.none {
+  object-fit: none;
+}
+
+.scale-down {
+  object-fit: scale-down;
+}
+
+.greenhouse-area {
   position: relative;
   width: 100%;
   height: 800px;
-
+}
+.width-800{
+  width : 800px;
 }
 
+.width-1000{
+  width : 1000px;
+}
+
+.width-1200{
+  width : 1200px;
+}
+.nav-item .active{
+  background-color : #0a9f0a;
+}
 .greenhouse-area-txt1{
   position: absolute;
   top: 20px;
   left: 20px;
   color: white;
+}
+.text-success-custom {
+  color: #008956 !important;}
+
+.uploaded-file-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.uploaded-file-list span {
+
+}
+.empty-list{
+  height: 1.32rem;
+}
+
+.my_div {
+  width: 500px;
+  height: 500px;
+  border: solid;
+}
+
+
+.gh_bg{
+  width: 900px;
+  height: 800px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  /*border:1px solid black;*/
+  background-image: url("../img/gh_bg.png");
+}
+
+.card-empty {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: transparent;
+  background-clip: border-box;
+
+
+}
+
+.dark-style .legendLayer .background {
+  fill: #2c2e341f !important;
+}
+
+.card-body-slim {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1.0rem;
 }

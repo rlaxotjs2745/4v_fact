@@ -10,7 +10,7 @@
 
 <!-- Page content -->
 <div class="container-fluid flex-grow-1 container-p-y">
-    <h4 class="font-weight-bold py-3 mb-4">실증사업 공지 사항</h4>
+   <%-- <h4 class="font-weight-bold py-3 mb-4">실증사업 공지 사항</h4>
 
     <div class="card px-4 pt-4 mb-4">
         <div class="form-row mb-4">
@@ -45,122 +45,65 @@
                 </form>
             </div>
         </div>
+    </div>--%>
+
+    <h5 class="d-flex justify-content-between align-items-center w-100 mt-2">
+        <div><i class="pe-7s-comment text-white"></i>&nbsp;&nbsp;공지사항 관리</div>
+    </h5>
+
+    <div class="card px-4 pt-2 mb-2 bg-">
+        <div class="form-row mb-4">
+
+            <div class="col-md-5 ">
+                <label class="form-label text-body">공지사항 상태별 보기</label>
+
+                <div class="form-inline">
+                    <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons" id="category_change">
+                        <label class="btn btn-secondary <c:if test="${filter1 eq 9999}">active</c:if>">
+                            <input type="radio" name="btn-radio" class="category_change" value='9999' checked onclick="javascript:pageLoad('notice',{cur_page:1,list_amount:10,filter1:9999,filter2:9998},'공지사항');">전체
+                        </label>
+                        <label class="btn btn-secondary <c:if test="${filter1 eq 0}">active</c:if>">
+                            <input type="radio" name="btn-radio" class="category_change" value='0' onclick="javascript:pageLoad('notice',{cur_page:1,list_amount:10,filter1:0,filter2:9998},'공지사항');">전체 공지
+                        </label>
+                        <label class="btn btn-secondary <c:if test="${filter1 eq 1}">active</c:if>">
+                            <input type="radio" name="btn-radio" class="category_change" value='1' onclick="javascript:pageLoad('notice',{cur_page:1,list_amount:10,filter1:1,filter2:9998},'공지사항');">개인별 공지
+                        </label>
+                        <label class="btn btn-secondary <c:if test="${filter1 eq 2}">active</c:if>">
+                            <input type="radio" name="btn-radio" class="category_change" value='2' onclick="javascript:pageLoad('notice',{cur_page:1,list_amount:10,filter1:2,filter2:9998},'공지사항');">기타
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
-    <hr>
-
     <div class="card">
-        <h6 class="card-header with-elements">
+        <h6 class="card-header with-elements bg-success">
             <div class="card-header-title">공지사항 목록</div>
             <div class="card-header-elements ml-auto">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modals-souce-write">+ 공지사항 등록</button>
-
+                <button type="button" class="btn btn-outline-white text-white" data-toggle="modal" data-target="#modals-souce-write">+ 공지사항 등록</button>
             </div>
         </h6>
 
         <div class="card-datatable table-responsive pt-0 pb-3">
             <div class="dataTables_wrapper dt-bootstrap4 no-footer">
-                <div class="row p-3">
-                    <div class="col-sm-12 col-md-12">
-                        <label class="mr-3  mb-0">총 : <strong>999</strong>개</label>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <table id="tb_console_notice" class="table table-bordered table-hover dataTable no-footer mt-0" role="grid" aria-describedby="article-list_info" style="">
-                            <thead class="bg-success">
-                            <tr role="row">
-                                <th class="text-center px-2" style="width:8%">No</th>
-                                <th class="text-center px-2" style="width:10%">종류</th>
-                                <th class="text-center px-2" style="width:40%">제목</th>
-                                <th class="text-center px-2" style="width:10%">파일 첨부</th>
-                                <th class="text-center px-2" style="width:12%">등록일</th>
-                                <th class="text-center px-2" style="width:10%">조회수</th>
-                                <th class="text-center px-2" style="width:10%">담당자</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="">
-                                <td class="text-center align-middle">1</td>
-                                <td class="text-center align-middle">중요</td>
-                                <td class="text-center"><a href="#none" data-toggle="modal" data-target="#modals-console-notice-detail" data-what="mode-view">새로 오픈되었어요 1</a></td>
-                                <td class="text-center align-middle"><span class="fas fa-file-powerpoint"/>  <span class="fas fa-file-pdf"/></td>
-                                <td class="text-center">2021-12-11 12:20:20</td>
-                                <td class="text-center">01</td>
-                                <td class="text-center">admin</td>
-                            </tr>
-                            <tr class="">
-                                <td class="text-center align-middle">2</td>
-                                <td class="text-center align-middle">중요</td>
-                                <td class="text-center"><a href="#none" data-toggle="modal" data-target="#modals-console-notice-detail" data-what="mode-view">새로 오픈되었어요 2</a></td>
-                                <td class="text-center align-middle"><span class="fas fa-file-powerpoint"/>  <span class="fas fa-file-pdf"/></td>
-                                <td class="text-center">2021-12-11 12:20:20</td>
-                                <td class="text-center">01</td>
-                                <td class="text-center">admin</td>
-                            </tr>
-                            <tr class="">
-                                <td class="text-center align-middle">3</td>
-                                <td class="text-center align-middle"></td>
-                                <td class="text-center"><a href="#none" data-toggle="modal" data-target="#modals-console-notice-detail" data-what="mode-view">새로 오픈되었어요 3</a></td>
-                                <td class="text-center align-middle"><span class="fas fa-file-powerpoint"/>  <span class="fas fa-file-pdf"/></td>
-                                <td class="text-center">2021-12-11 12:20:20</td>
-                                <td class="text-center">01</td>
-                                <td class="text-center">admin</td>
-                            </tr>
-                            <tr class="">
-                                <td class="text-center align-middle">4</td>
-                                <td class="text-center align-middle">업체별</td>
-                                <td class="text-center"><a href="#none" data-toggle="modal" data-target="#modals-console-notice-detail" data-what="mode-view">새로 오픈되었어요 4</a></td>
-                                <td class="text-center align-middle"><span class="fas fa-file-powerpoint"/>  <span class="fas fa-file-pdf"/></td>
-                                <td class="text-center">2021-12-11 12:20:20</td>
-                                <td class="text-center">01</td>
-                                <td class="text-center">admin</td>
-                            </tr>
-                            <tr class="">
-                                <td class="text-center align-middle">5</td>
-                                <td class="text-center align-middle"></td>
-                                <td class="text-center"><a href="#none" data-toggle="modal" data-target="#modals-console-notice-detail" data-what="mode-view">새로 오픈되었어요 5</a></td>
-                                <td class="text-center align-middle"><span class="fas fa-file-powerpoint"/>  <span class="fas fa-file-pdf"/></td>
-                                <td class="text-center">2021-12-11 12:20:20</td>
-                                <td class="text-center">01</td>
-                                <td class="text-center">admin</td>
-                            </tr>
-                            <tr class="">
-                                <td class="text-center align-middle">6</td>
-                                <td class="text-center align-middle">업체별</td>
-                                <td class="text-center"><a href="#none" data-toggle="modal" data-target="#modals-console-notice-detail" data-what="mode-view">새로 오픈되었어요 6</a></td>
-                                <td class="text-center align-middle"><span class="fas fa-file-powerpoint"/>  <span class="fas fa-file-pdf"/></td>
-                                <td class="text-center">2021-12-11 12:20:20</td>
-                                <td class="text-center">01</td>
-                                <td class="text-center">admin</td>
-                            </tr>
-                            <tr class="">
-                                <td class="text-center align-middle">7</td>
-                                <td class="text-center align-middle"></td>
-                                <td class="text-center"><a href="#none" data-toggle="modal" data-target="#modals-console-notice-detail" data-what="mode-view">새로 오픈되었어요 7</a></td>
-                                <td class="text-center align-middle"><span class="fas fa-file-powerpoint"/>  <span class="fas fa-file-pdf"/></td>
-                                <td class="text-center">2021-12-11 12:20:20</td>
-                                <td class="text-center">01</td>
-                                <td class="text-center">admin</td>
-                            </tr>
-                            <tr class="">
-                                <td class="text-center align-middle">8</td>
-                                <td class="text-center align-middle"></td>
-                                <td class="text-center"><a href="#none" data-toggle="modal" data-target="#modals-console-notice-detail" data-what="mode-view">새로 오픈되었어요 8</a></td>
-                                <td class="text-center align-middle"><span class="fas fa-file-powerpoint"/>  <span class="fas fa-file-pdf"/></td>
-                                <td class="text-center">2021-12-11 12:20:20</td>
-                                <td class="text-center">01</td>
-                                <td class="text-center">admin</td>
-                            </tr>
-                            <tr class="">
-                                <td class="text-center align-middle">9</td>
-                                <td class="text-center align-middle"></td>
-                                <td class="text-center"><a href="#none" data-toggle="modal" data-target="#modals-console-notice-detail" data-what="mode-view">새로 오픈되었어요 9</a></td>
-                                <td class="text-center align-middle"><span class="fas fa-file-powerpoint"/>  <span class="fas fa-file-pdf"/></td>
-                                <td class="text-center">2021-12-11 12:20:20</td>
-                                <td class="text-center">01</td>
-                                <td class="text-center">admin</td>
-                            </tr>
+                            <thead class="bg-dark">
+<c:choose>
+    <c:when test="${coWorkerVOList eq null or coWorkerVOList.size() eq 0}">
+        <c:forEach var = "i" begin = "1" end = "4">
+            <tr><td class="text-center empty-list" colspan="9"></td></tr>
+        </c:forEach>
+        <tr class=""><td class="text-center empty" colspan="9">내용이 없습니다</td></tr>
+        <c:forEach var = "i" begin = "1" end = "5">
+            <tr><td class="text-center empty-list" colspan="9"></td></tr>
+        </c:forEach>
+    </c:when>
+    <c:otherwise>
+        <c:forEach items="${noticeList}" var="notice" varStatus="status">
                             <tr class="">
                                 <td class="text-center align-middle">10</td>
                                 <td class="text-center align-middle"></td>
@@ -170,28 +113,42 @@
                                 <td class="text-center">01</td>
                                 <td class="text-center">admin</td>
                             </tr>
+</c:forEach>
+<c:forEach var = "i" begin = "${coWorkerVOList.size()}" end = "9">
+<tr><td class="text-center empty-list" colspan="9"></td></tr>
+</c:forEach>
+</c:otherwise>
+</c:choose>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
-                    </div>
-                    <div class="col-sm-12 col-md-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button page-item previous disabled" id="article-list_previous"><a href="#" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li>
-                                <li class="paginate_button page-item active"><a href="#" aria-controls="article-list" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="article-list" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                <li class="paginate_button page-item next" id="article-list_next"><a href="#" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li>
-                            </ul>
+                <c:if test="${total_count ne 0}">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5">
+                            <div class="dataTables_info" role="status" aria-live="polite">총 ${total_count}개
+                                중 ${list_amount*(cur_page-1)+1}에서 <c:choose><c:when
+                                        test="${(list_amount*(cur_page-1)+page_amount)>total_count}">${total_count}</c:when><c:otherwise>${list_amount*(cur_page-1)+page_amount}</c:otherwise></c:choose>까지
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="article-list_paginate">
+                                <ul class="pagination">
+
+                                    <c:if test="${is_past eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('notice',{cur_page:1,filter1:'${filter1}', filter2:'${filter2}'},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-double-left d-block"></i></a></li></c:if>
+                                    <c:if test="${is_prev eq true}"><li class="paginate_button page-item previous"><a href="javascript:pageLoad('notice',{cur_page:'${cur_page-1}',filter1:'${filter1}',filter2:'${filter2}'},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="0" tabindex="0" class="page-link"><i class="fas fa-angle-left d-block"></i></a></li></c:if>
+
+                                    <c:forEach var="i" begin="1" end="${remain_page}">
+                                        <li class="paginate_button page-item <c:if test="${(cur_sector-1)*page_amount+i eq cur_page}">active</c:if>"><a href="javascript:pageLoad('notice',{cur_page:'${(cur_sector-1)*page_amount+i}',filter1:'${filter1}',filter2:'${filter2}'},'사업공고문 관리');" class="page-link">${(cur_sector-1)*page_amount+i}</a></li>
+                                    </c:forEach>
+
+                                    <c:if test="${is_next eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('notice',{cur_page:'${cur_page+1}',filter1:'${filter1}',filter2:'${filter2}'},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-right d-block"></i></a></li></c:if>
+                                    <c:if test="${is_last eq true}"><li class="paginate_button page-item next"><a href="javascript:pageLoad('notice',{cur_page:'${tot_page}',filter1:'${filter1}',filter2:'${filter2}'},'사업공고문 관리');" aria-controls="article-list" data-dt-idx="6" tabindex="0" class="page-link"><i class="fas fa-angle-double-right d-block"></i></a></li></c:if>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </c:if>
             </div>
         </div>
     </div>

@@ -9,7 +9,7 @@ public interface EventContentService {
     public int getMainEventContentCount();
     public int getWebpageEventContentCount();
     public int getOpenEventContentCount(String filter, String query);
-    List<EventContentVO> getOpenEventContentList(int page, int count, String filter, String query);
+    List<EventContentVO> getOpenEventContentList(ParamPageListFilteredVO param);
     List<EventContentVO> getEventContentList(ParamPageListFilteredVO paramVo);
     public List<EventContentVO> getMainEventContentList();
     List<EventContentVO> getEventList();

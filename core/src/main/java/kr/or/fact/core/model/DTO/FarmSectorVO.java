@@ -1,10 +1,13 @@
 package kr.or.fact.core.model.DTO;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class FarmSectorVO {
     long idx_farm_sector;//	number	32			◯		인덱스	auto increase
-    long idx_user_demobs;//	varchar2	100					구역 이용 정보	푸터 담당자 이름( 부서)
+    long idx_user_demo_bs;//	varchar2	100					구역 이용 정보	푸터 담당자 이름( 부서)
     int sector_status;//	number	4		0			홈페이지 정보 담당자 연락처	연락처(내선번호)
     int is_current;//	number	4		0			현재 이용 유무	0:이용중이 아님, 1:이용 중
     String corp_name;//	varchar2	100					회사이름
@@ -27,6 +30,9 @@ public class FarmSectorVO {
     Date farming_end_date;//	date						경작종료
     int farming_repeat;//	number	4					경작주기
     int guyok;//            number(10,4)        구역정보
+    String sector_title;
     Date reg_date;//	date						등록일
     Date last_upd_date;//	date						마지막 업데이트
+
+    int user_demobs_status;
 }
